@@ -13,8 +13,8 @@
 "operatingSystem": "Android",
 "applicationCategory": "GameEngine",
 "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-"description": "A 100% free, no-code 2D game engine running natively in Java on Android tablets. Standalone APK export included.",
-"features": ["No-code node editor", "Integrated physics engine", "Inventory system", "APK export", "100% Free"]
+"description": "A 100% free, no-code 2D game engine running natively in Java on Android tablets. Standalone APK export included. Works 100% offline.",
+"features": ["No-code verbose node editor", "Integrated physics engine", "Inventory system", "APK export", "Dialogues & Tags", "HUD & Joystick", "100% Free", "Offline capable"]
 }
 </script>
 <style>
@@ -32,7 +32,7 @@ header h1 { font-size: 3rem; margin: 0 0 0.5rem 0; }
 header p { font-size: 1.25rem; max-width: 600px; margin: 0 auto; opacity: 0.9; }
 .btn-download { display: inline-block; background: var(--accent-color); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-size: 1.25rem; font-weight: bold; margin-top: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; }
 .install-note { max-width: 450px; margin: 1.5rem auto 0; font-size: 0.9rem; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: left; border-left: 4px solid var(--accent-color); }
-.lang-badge { display: block; width: fit-content; background: rgba(255,255,255,0.2); padding: 0.5rem 1.5rem; border-radius: 30px; font-weight: bold; margin: 2rem auto 0 auto; font-size: 0.9rem;}
+.lang-badge { display: block; width: fit-content; background: rgba(255,255,255,0.2); padding: 0.5rem 1.5rem; border-radius: 30px; font-weight: bold; margin: 2rem auto 0 auto; font-size: 0.9rem; text-align: center; line-height: 1.4;}
 main { max-width: 1000px; margin: 0 auto; padding: 2rem 1rem; }
 section { margin-bottom: 4rem; }
 h2 { font-size: 2rem; color: var(--primary-color); border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
@@ -53,34 +53,28 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 <h1>Yop2D</h1>
 <p>The first 100% free and no-code 2D game engine, designed and built exclusively for Android tablets.</p>
 
-<!-- ============================================================================== -->
-<!-- ⚠️ MODIFIER LE LIEN DE TÉLÉCHARGEMENT DE L'APK ICI ⚠️ -->
-<!-- Remplacez le nom du fichier à la fin de l'URL par votre nouvelle version. -->
-<!-- Exemple actuel : Yop2D_v1.518.apk -->
-<!-- ============================================================================== -->
 <a href="https://github.com/zinzin66/Ludexav4/releases/download/v1.0.0/Yop2D_v1.542.apk" class="btn-download">⬇️ Download Latest APK</a>
-
 
 <div class="install-note">
 <strong>⚠️ Installation Note:</strong> Because Yop2D is downloaded outside the Play Store, Android may show a "Play Protect" or "Unknown app" warning. Tap <em>More details</em>, then select <em>Install anyway</em> to continue safely.
 </div>
-<div class="lang-badge">🌍 Interface in English, French, Spanish, Portuguese, and Russian</div>
+<div class="lang-badge">🌍 Interface in English, French, Spanish, Portuguese, Russian,<br>German, Italian, Simplified Chinese, and Japanese</div>
 </header>
 <main>
 <section class="showcase">
 <h2>Project Management & Export</h2>
 <img src="interface_demarage.png" alt="Yop2D startup and project management screen" class="screenshot">
-<p>From the startup screen, keep an eye on your creations with auto-generated thumbnails. Explore the provided example projects to learn quickly. Yop2D handles the entire process: with a single click, build and export your game as a standalone APK file, without needing any third-party tools.</p>
+<p>From the startup screen, keep an eye on your creations with auto-generated thumbnails. Explore the provided example projects to learn quickly. Yop2D handles the entire process: with a single click, build and export your game as a standalone Java APK file, without needing any third-party tools.</p>
 </section>
 <section class="showcase">
 <h2>Visual Level Editor</h2>
 <img src="interface_editeur.png" alt="Yop2D game editor interface" class="screenshot">
-<p>Enjoy an interface inspired by industry standards (like Godot), but streamlined and fully optimized for tablet ergonomics. The editor is packed with detailed settings to facilitate level design. Whether you want to design a fast-paced action game or a complex Escape Game, you have all the tools at your fingertips.</p>
+<p>Enjoy an interface inspired by industry standards, but streamlined and fully optimized for tablet ergonomics. The editor is packed with detailed settings to facilitate level design. Whether you want to design a fast-paced action game or a complex Escape Game, you have all the tools at your fingertips.</p>
 </section>
 <section class="showcase">
 <h2>Blueprint System</h2>
 <img src="interface_noeuds.png" alt="Tablet Blueprint system interface" class="screenshot">
-<p>Forget lines of code. Yop2D's Blueprint interface is designed for touch. Assemble your logic visually and collapse entire series of nodes to keep your workspace clear and readable. The action library is vast and grows regularly with each update.</p>
+<p>Forget lines of code. Yop2D's Blueprint interface is designed for touch. Our highly verbose and descriptive nodes make game logic accessible to everyone, especially beginners or brands who struggle to memorize Java syntax. Assemble your logic visually and collapse entire series of nodes to keep your workspace clear.</p>
 </section>
 <section class="showcase">
 <h2>The Brain of Your Games</h2>
@@ -102,6 +96,18 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 <h3>Inventory & Progression</h3>
 <p>Create deep mechanics using variables, check inventory items, and manage complete save points (checkpoints).</p>
 </div>
+<div class="card">
+<h3>Tags & Interaction</h3>
+<p>Easily manage groups of objects using a robust Tag system, streamlining your collisions and events.</p>
+</div>
+<div class="card">
+<h3>HUD & Joysticks</h3>
+<p>Quickly implement virtual joysticks, action buttons, and Heads-Up Displays (HUD) overlaying your active scenes.</p>
+</div>
+<div class="card">
+<h3>Rich Dialogues</h3>
+<p>Utilize built-in list formats to manage and display complex text dialogues for your adventure games effortlessly.</p>
+</div>
 </div>
 </section>
 <section id="faq">
@@ -115,12 +121,24 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 <p>Yop2D is 100% free! You can create, build, and export your games without any hidden fees or subscriptions.</p>
 </div>
 <div class="faq-item">
-<h3>Do I need to know Java or another language?</h3>
-<p>Absolutely not. Everything has been designed to replace code with graphical interfaces and an extremely comprehensive node system (variables, lists, local functions).</p>
+<h3>Do I need a PC or an internet connection to create games?</h3>
+<p>No! Yop2D is designed to be fully autonomous. You can build, test, and export your game entirely on an Android tablet or smartphone, 100% offline.</p>
+</div>
+<div class="faq-item">
+<h3>I can't remember Java syntax, is that a problem?</h3>
+<p>Not at all. While the games you export are built natively in Java, the engine replaces traditional coding with highly descriptive, verbose visual nodes. It's perfectly suited for beginners, kids, or anyone who struggles with raw code syntax.</p>
+</div>
+<div class="faq-item">
+<h3>Can I make 3D games with Yop2D?</h3>
+<p>No, Yop2D is strictly optimized for 2D game development to provide the best possible performance, accessibility, and simplicity on mobile devices.</p>
+</div>
+<div class="faq-item">
+<h3>Can I write text scripts for my game logic?</h3>
+<p>Text scripts in Yop2D are exclusively used for managing dialogue lists and translations. All interactive game mechanics and logic must be handled visually through the Blueprint node system.</p>
 </div>
 <div class="faq-item">
 <h3>How do I share my game once it's finished?</h3>
-<p>The engine compiles your project and generates a true standalone APK file that you can share with friends or publish on app stores, all directly from your tablet.</p>
+<p>The engine compiles your project and generates a true standalone APK file that you can share with friends or publish on app stores, all directly from your device.</p>
 </div>
 </section>
 </main>
