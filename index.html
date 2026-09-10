@@ -44,6 +44,17 @@ h2 { font-size: 2rem; color: var(--primary-color); border-bottom: 2px solid #e2e
 .card h3 { color: var(--secondary-color); margin-top: 0; }
 .faq-item { margin-bottom: 1rem; border-left: 4px solid var(--primary-color); border-radius: 8px; }
 .faq-item h3 { margin-top: 0; margin-bottom: 0.5rem; }
+
+/* Styles pour la section Dictionnaire de Noeuds */
+.nodes-container { max-width: 850px; margin: 0 auto; }
+h3.node-category { color: var(--primary-color); margin-top: 2rem; border-bottom: 1px solid #cbd5e1; padding-bottom: 0.5rem; }
+details.node-item { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-left: 4px solid var(--accent-color); transition: all 0.2s ease; }
+details.node-item summary { font-weight: bold; cursor: pointer; color: var(--secondary-color); outline: none; list-style: none; display: flex; align-items: center; }
+details.node-item summary::-webkit-details-marker { display: none; }
+details.node-item summary::before { content: '➕'; margin-right: 0.75rem; font-size: 0.9rem; opacity: 0.7; }
+details.node-item[open] summary::before { content: '➖'; }
+details.node-item p { margin-top: 0.75rem; margin-bottom: 0; font-size: 0.95rem; line-height: 1.5; }
+
 footer { text-align: center; padding: 2rem; background: var(--text-dark); color: white; margin-top: auto; }
 </style>
 </head>
@@ -54,10 +65,9 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 <p>The first 100% free and no-code 2D game engine, designed and built exclusively for Android tablets.</p>
 
 <a href="https://github.com/zinzin66/yop2d/releases/download/v1.0.0/Yop2D_v1.693.apk" class="btn-download">⬇️ Download Latest APK</a>
+<br><br>
 <img src="https://img.shields.io/github/downloads/zinzin66/yop2d/total?style=for-the-badge&color=blue" alt="Total des téléchargements Yop2D">
   
-
-
 <div class="install-note">
 <strong>⚠️ Installation Note:</strong> Because Yop2D is downloaded outside the Play Store, Android may show a "Play Protect" or "Unknown app" warning. Tap <em>More details</em>, then select <em>Install anyway</em> to continue safely.
 </div>
@@ -113,6 +123,68 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 </div>
 </div>
 </section>
+
+<!-- NOUVELLE SECTION : Dictionnaire des Noeuds optimisé pour le SEO -->
+<section id="nodes-dictionary">
+<h2>Blueprint Nodes Library</h2>
+<p>Yop2D includes a vast library of ready-to-use logical nodes. Here is a glimpse of the tools at your disposal to build your game logic visually, directly on your Android tablet.</p>
+
+<div class="nodes-container">
+    
+    <h3 class="node-category">🔴 Events & Triggers</h3>
+    <details class="node-item">
+      <summary>Lifecycle & Touch Events (Start, Click, Drag)</summary>
+      <p>Trigger logic chains as soon as the scene boots, on every frame update, or precisely when a player taps, holds, or drags an object on the touchscreen.</p>
+    </details>
+    <details class="node-item">
+      <summary>Collisions & Zones (Hit, Enter/Exit)</summary>
+      <p>Easily detect when two physical objects collide, or track when an entity enters or exits a specific logical zone without complex math.</p>
+    </details>
+
+    <h3 class="node-category">⚙️ Logic & Flow Control</h3>
+    <details class="node-item">
+      <summary>Sequence (y) Node</summary>
+      <p><strong>What it does:</strong> Organizes visual logic by grouping multiple actions sequentially.</p>
+      <p><strong>The Yop2D Advantage:</strong> Say goodbye to spaghetti code! This node drastically reduces the need for scattered connectors, keeping your visual scripting readable, scalable, and beautifully structured.</p>
+    </details>
+    <details class="node-item">
+      <summary>Variables & Checkpoints</summary>
+      <p>Compare dynamic values, perform math operations, manage player inventory items (Add/Remove), and trigger full game save states (Checkpoints) with a single node.</p>
+    </details>
+
+    <h3 class="node-category">👾 Appearance, Animations & UI</h3>
+    <details class="node-item">
+      <summary>Real-Time Animation Previews</summary>
+      <p><strong>What it does:</strong> Allows you to create and preview 2D animation cycles instantly.</p>
+      <p><strong>The Yop2D Advantage:</strong> The animation UI gives you a clear thumbnail view of imported frames and lets you preview your character's walk cycles or effects in real-time, right inside the engine.</p>
+    </details>
+    <details class="node-item">
+      <summary>Title & Text Effects Component</summary>
+      <p><strong>What it does:</strong> Renders beautiful, stylized titles directly in the game UI.</p>
+      <p><strong>The Yop2D Advantage:</strong> Stop wasting time creating heavy PNG text files in external editors. Generate dynamic, lightweight text directly in the engine, saving hours of work and drastically reducing your final APK file size.</p>
+    </details>
+    <details class="node-item">
+      <summary>Spawners & Object Manipulation</summary>
+      <p>Clone objects dynamically (Spawner), change Z-Orders, modify colors/opacity, apply parallax scrolling effects, and safely destroy entities when they leave the screen.</p>
+    </details>
+
+    <h3 class="node-category">🚀 Scene, Physics & AI</h3>
+    <details class="node-item">
+      <summary>Scene Management & Prefabs</summary>
+      <p>Switch smoothly between scenes, reload levels, open/close HUD overlays, and instantiate complete Prefab structures on the fly.</p>
+    </details>
+    <details class="node-item">
+      <summary>Camera & Physics Engine</summary>
+      <p>Add juice to your game with Camera Shakes and Elastic tracking. Use the physics nodes to apply directional impulses, change bounce rates, and detect ground collisions.</p>
+    </details>
+    <details class="node-item">
+      <summary>Movement & AI Logic</summary>
+      <p>Command objects to move continuously, orient themselves towards the closest entity, or set up automatic "Chase" and "Flee" behaviors to build instant enemy AI.</p>
+    </details>
+
+</div>
+</section>
+
 <section id="faq">
 <h2>Frequently Asked Questions</h2>
 <div class="faq-item">
@@ -120,28 +192,28 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 <p>Yop2D is a 2D game engine exclusive to Android. It allows anyone to create a complete video game through a visual interface (Blueprint), without any programming knowledge.</p>
 </div>
 <div class="faq-item">
-<h3>How much does Yop2D cost?</h3>
-<p>Yop2D is 100% free! You can create, build, and export your games without any hidden fees or subscriptions.</p>
+<h3>Do I need a PC or an internet connection to build the APK?</h3>
+<p>No! Yop2D is a fully standalone engine. You can build, test, and export your final Android game (APK) directly on your tablet, 100% offline. No cloud compilation required.</p>
 </div>
 <div class="faq-item">
-<h3>Do I need a PC or an internet connection to create games?</h3>
-<p>No! Yop2D is designed to be fully autonomous. You can build, test, and export your game entirely on an Android tablet or smartphone, 100% offline.</p>
+<h3>Is Yop2D a good alternative to Godot for Android?</h3>
+<p>Yes. While Godot is powerful, its mobile version can feel overwhelming on a touchscreen. Yop2D is built from the ground up for tablets. If you want a purely visual, no-code alternative to easily build 2D Android games on the go, Yop2D is designed for you.</p>
 </div>
 <div class="faq-item">
 <h3>I can't remember Java syntax, is that a problem?</h3>
-<p>Not at all. While the games you export are built natively in Java, the engine replaces traditional coding with highly descriptive, verbose visual nodes. It's perfectly suited for beginners, kids, or anyone who struggles with raw code syntax.</p>
+<p>Not at all. The engine entirely replaces traditional coding with highly descriptive visual nodes (Visual Scripting). It's perfectly suited for beginners or creators who want to focus on game design rather than debugging code syntax.</p>
+</div>
+<div class="faq-item">
+<h3>Can I create stylized text or animations in the engine?</h3>
+<p>Yes. Yop2D includes an integrated real-time animation editor and a dynamic Title Component. You can preview animations instantly and create text effects directly within the engine, without importing heavy external image files.</p>
 </div>
 <div class="faq-item">
 <h3>Can I make 3D games with Yop2D?</h3>
 <p>No, Yop2D is strictly optimized for 2D game development to provide the best possible performance, accessibility, and simplicity on mobile devices.</p>
 </div>
 <div class="faq-item">
-<h3>Can I write text scripts for my game logic?</h3>
-<p>Text scripts in Yop2D are exclusively used for managing dialogue lists and translations. All interactive game mechanics and logic must be handled visually through the Blueprint node system.</p>
-</div>
-<div class="faq-item">
-<h3>How do I share my game once it's finished?</h3>
-<p>The engine compiles your project and generates a true standalone APK file that you can share with friends or publish on app stores, all directly from your device.</p>
+<h3>How much does Yop2D cost?</h3>
+<p>Yop2D is 100% free! You can create, build, and export your games without any hidden fees or subscriptions.</p>
 </div>
 </section>
 </main>
@@ -150,5 +222,3 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 </footer>
 </body>
 </html>
-
-
