@@ -14,7 +14,7 @@
 "applicationCategory": "GameEngine",
 "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
 "description": "A 100% free, no-code 2D game engine running natively in Java on Android tablets. Standalone APK export included. Works 100% offline.",
-"features": ["No-code verbose node editor", "Integrated physics engine", "Inventory system", "APK export", "Dialogues & Tags", "HUD & Joystick", "100% Free", "Offline capable"]
+"features": ["No-code verbose node editor", "Integrated physics engine", "Inventory system", "APK export", "Dialogues & Tags", "HUD & Joystick", "100% Free", "Offline capable", "Prefabs Support"]
 }
 </script>
 <style>
@@ -22,6 +22,7 @@
 --primary-color: #2563eb;
 --secondary-color: #1e40af;
 --accent-color: #f59e0b;
+--youtube-color: #dc2626;
 --background: #f8fafc;
 --text-dark: #0f172a;
 }
@@ -30,7 +31,14 @@ header { background: linear-gradient(135deg, var(--primary-color), var(--seconda
 .logo { max-width: 120px; border-radius: 20%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-bottom: 1rem; }
 header h1 { font-size: 3rem; margin: 0 0 0.5rem 0; }
 header p { font-size: 1.25rem; max-width: 600px; margin: 0 auto; opacity: 0.9; }
-.btn-download { display: inline-block; background: var(--accent-color); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-size: 1.25rem; font-weight: bold; margin-top: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; }
+
+/* Styles des boutons de l'en-tête */
+.header-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; margin-bottom: 1.5rem; }
+.btn-download, .btn-youtube { display: inline-block; color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-size: 1.25rem; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; }
+.btn-download { background: var(--accent-color); }
+.btn-youtube { background: var(--youtube-color); }
+.btn-download:hover, .btn-youtube:hover { transform: translateY(-3px); }
+
 .install-note { max-width: 450px; margin: 1.5rem auto 0; font-size: 0.9rem; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: left; border-left: 4px solid var(--accent-color); }
 .lang-badge { display: block; width: fit-content; background: rgba(255,255,255,0.2); padding: 0.5rem 1.5rem; border-radius: 30px; font-weight: bold; margin: 2rem auto 0 auto; font-size: 0.9rem; text-align: center; line-height: 1.4;}
 main { max-width: 1000px; margin: 0 auto; padding: 2rem 1rem; }
@@ -56,6 +64,8 @@ details.node-item[open] summary::before { content: '➖'; }
 details.node-item p { margin-top: 0.75rem; margin-bottom: 0; font-size: 0.95rem; line-height: 1.5; }
 
 footer { text-align: center; padding: 2rem; background: var(--text-dark); color: white; margin-top: auto; }
+footer a { color: var(--accent-color); text-decoration: none; font-weight: bold; }
+footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -64,8 +74,11 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 <h1>Yop2D</h1>
 <p>The first 100% free and no-code 2D game engine, designed and built exclusively for Android tablets.</p>
 
-<a href="https://github.com/zinzin66/yop2d/releases/download/v1.0.0/Yop2D_v1.693.apk" class="btn-download">⬇️ Download Latest APK</a>
-<br><br>
+<div class="header-buttons">
+    <a href="https://github.com/zinzin66/yop2d/releases/download/v1.0.0/Yop2D_v1.693.apk" class="btn-download">⬇️ Download Latest APK</a>
+    <a href="https://youtube.com/@yop2d?si=4gO1mxt9rm6K6_LM" target="_blank" class="btn-youtube">📺 YouTube Tutorials</a>
+</div>
+
 <img src="https://img.shields.io/github/downloads/zinzin66/yop2d/total?style=for-the-badge&color=blue" alt="Total des téléchargements Yop2D">
   
 <div class="install-note">
@@ -84,6 +97,20 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 <img src="interface_editeur.png" alt="Yop2D game editor interface" class="screenshot">
 <p>Enjoy an interface inspired by industry standards, but streamlined and fully optimized for tablet ergonomics. The editor is packed with detailed settings to facilitate level design. Whether you want to design a fast-paced action game or a complex Escape Game, you have all the tools at your fingertips.</p>
 </section>
+
+<!-- NOUVELLES SECTIONS INTERFACES (Titre & Animation) -->
+<section class="showcase">
+<h2>Real-Time Animation Editor</h2>
+<img src="interfaceAnimation.jpg" alt="Yop2D real-time animation interface" class="screenshot">
+<p>Forget guessing how your sprites will move. The integrated animation workspace lets you view your imported image thumbnails at a glance and preview your 2D animations in real-time directly on your tablet, without compiling.</p>
+</section>
+<section class="showcase">
+<h2>Built-in Title & Effects UI</h2>
+<img src="interfaceTitre.jpg" alt="Yop2D title component with effects" class="screenshot">
+<p>Stop relying on external apps to generate heavy PNG files for your text. Create beautiful, stylized titles with dynamic effects natively in the engine. This saves you hours of development time and keeps your final Android APK incredibly lightweight.</p>
+</section>
+<!-- FIN NOUVELLES SECTIONS -->
+
 <section class="showcase">
 <h2>Blueprint System</h2>
 <img src="interface_noeuds.png" alt="Tablet Blueprint system interface" class="screenshot">
@@ -94,9 +121,14 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 <img src="interface_editeur_noeuds.png" alt="Detailed node configuration" class="screenshot">
 <p>When you select a node, this dedicated window opens to configure it without ever touching Java code. This is the true brain of Yop2D: link your objects, adjust your variables, trigger your custom functions, and manage your HUD, lists, and tags with ease.</p>
 </section>
+
 <section id="features">
 <h2>Engine Capabilities</h2>
 <div class="grid">
+<div class="card">
+<h3>Scene as Object (Prefabs)</h3>
+<p>A philosophy familiar to Godot users: any scene can be instanced as an independent object inside another scene, making complex game structures incredibly simple to build.</p>
+</div>
 <div class="card">
 <h3>Logic & Events</h3>
 <p>Trigger actions on every frame, handle complex collisions, and listen to zone entries or exits.</p>
@@ -124,7 +156,6 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 </div>
 </section>
 
-<!-- NOUVELLE SECTION : Dictionnaire des Noeuds optimisé pour le SEO -->
 <section id="nodes-dictionary">
 <h2>Blueprint Nodes Library</h2>
 <p>Yop2D includes a vast library of ready-to-use logical nodes. Here is a glimpse of the tools at your disposal to build your game logic visually, directly on your Android tablet.</p>
@@ -197,7 +228,7 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 </div>
 <div class="faq-item">
 <h3>Is Yop2D a good alternative to Godot for Android?</h3>
-<p>Yes. While Godot is powerful, its mobile version can feel overwhelming on a touchscreen. Yop2D is built from the ground up for tablets. If you want a purely visual, no-code alternative to easily build 2D Android games on the go, Yop2D is designed for you.</p>
+<p>Yes. While Godot is powerful, its mobile version can feel overwhelming on a touchscreen. Yop2D is built from the ground up for tablets. Furthermore, Yop2D shares Godot's powerful "Scene = Object" (Prefab) philosophy, allowing you to instantiate complete scenes within other scenes effortlessly. If you want a purely visual, no-code alternative, Yop2D is designed for you.</p>
 </div>
 <div class="faq-item">
 <h3>I can't remember Java syntax, is that a problem?</h3>
@@ -218,7 +249,7 @@ footer { text-align: center; padding: 2rem; background: var(--text-dark); color:
 </section>
 </main>
 <footer>
-<p>© 2026 Yop2D. The Free No-Code 2D Engine for Android.</p>
+<p>© 2026 Yop2D. The Free No-Code 2D Engine for Android. | <a href="https://youtube.com/@yop2d" target="_blank">YouTube Channel</a></p>
 </footer>
 </body>
 </html>
