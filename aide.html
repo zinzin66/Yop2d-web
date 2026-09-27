@@ -47,12 +47,30 @@ footer { text-align: center; padding: 1.5rem; color: var(--text-dim); font-size:
 footer a { color: var(--accent-color); }
 
 @media (max-width: 480px) { header h1 { font-size: 1.2rem; } }
+header { position: relative; }
+.langue { position: absolute; top: 0.6rem; right: 0.6rem; }
+.langue select { background: rgba(15,23,42,0.35); color: white; border: 1px solid rgba(255,255,255,0.4); border-radius: 6px; padding: 0.3rem 0.4rem; font-size: 0.9rem; }
+.langue option { color: #0f172a; background: white; }
+@media (max-width: 480px) { header { padding-top: 2.6rem; } }
 </style>
 </head>
 <body>
 <header>
-<h1>Aide Yop2D</h1>
-<p style="margin:0;opacity:0.9;font-size:0.9rem;">Documentation des nœuds et guides</p>
+<div class="langue">
+<select id="choix-langue" aria-label="Langue / Language" onchange="changerLangue(this.value)">
+<option value="fr">🇫🇷 Français</option>
+<option value="en">🇬🇧 English</option>
+<option value="es">🇪🇸 Español</option>
+<option value="de">🇩🇪 Deutsch</option>
+<option value="it">🇮🇹 Italiano</option>
+<option value="pt">🇵🇹 Português</option>
+<option value="ru">🇷🇺 Русский</option>
+<option value="zh">🇨🇳 中文</option>
+<option value="ja">🇯🇵 日本語</option>
+</select>
+</div>
+<h1 id="txt-titre">Aide Yop2D</h1>
+<p id="txt-sous-titre" style="margin:0;opacity:0.9;font-size:0.9rem;">Documentation des nœuds et guides</p>
 </header>
 <main>
 
@@ -62,7 +80,7 @@ footer a { color: var(--accent-color); }
 </div>
 
 <div class="tab-content active" id="tab-noeuds">
-<p style="color:var(--text-dim);font-size:0.9rem;">Chaque nœud est un bloc que tu peux brancher dans le Blueprint. Les <b>entrées</b> sont ce que tu configures ou branches avant, la <b>sortie</b> est la suite de l'action.</p>
+<p id="txt-intro" style="color:var(--text-dim);font-size:0.9rem;">Chaque nœud est un bloc que tu peux brancher dans le Blueprint. Les <b>entrées</b> sont ce que tu configures ou branches avant, la <b>sortie</b> est la suite de l'action.</p>
 <div id="contenu-noeuds"><p class="message">Chargement...</p></div>
 </div>
 
@@ -72,11 +90,89 @@ footer a { color: var(--accent-color); }
 
 </main>
 <footer>
-<p>Yop2D · <a href="index.html">Site officiel</a></p>
+<p>Yop2D · <a href="index.html" id="txt-site">Site officiel</a></p>
 </footer>
 
 <script>
 const DEPOT = "zinzin66/Yop2d-web";
+const LANGUES = ["fr", "en", "es", "de", "it", "pt", "ru", "zh", "ja"];
+
+// Textes de la page dans chaque langue
+const TEXTES = {
+  fr: { titre: "Aide Yop2D", sousTitre: "Documentation des nœuds et guides", noeuds: "Nœuds", guides: "Guides",
+        intro: "Chaque nœud est un bloc que tu peux brancher dans le Blueprint. Les <b>entrées</b> sont ce que tu configures ou branches avant, la <b>sortie</b> est la suite de l'action.",
+        chargement: "Chargement...", exemple: "Exemple :", aucunNoeud: "Aucune documentation pour l'instant.", aucunGuide: "Aucun guide pour l'instant.",
+        erreurNoeuds: "Impossible de charger la documentation. Vérifie ta connexion internet.", erreurGuides: "Impossible de charger les guides. Vérifie ta connexion internet.", site: "Site officiel" },
+  en: { titre: "Yop2D Help", sousTitre: "Node documentation and guides", noeuds: "Nodes", guides: "Guides",
+        intro: "Each node is a block you can plug into the Blueprint. The <b>inputs</b> are what you set up or connect before, the <b>output</b> is what happens next.",
+        chargement: "Loading...", exemple: "Example:", aucunNoeud: "No documentation yet.", aucunGuide: "No guides yet.",
+        erreurNoeuds: "Could not load the documentation. Check your internet connection.", erreurGuides: "Could not load the guides. Check your internet connection.", site: "Official website" },
+  es: { titre: "Ayuda Yop2D", sousTitre: "Documentación de nodos y guías", noeuds: "Nodos", guides: "Guías",
+        intro: "Cada nodo es un bloque que puedes conectar en el Blueprint. Las <b>entradas</b> son lo que configuras o conectas antes, la <b>salida</b> es la continuación de la acción.",
+        chargement: "Cargando...", exemple: "Ejemplo:", aucunNoeud: "Aún no hay documentación.", aucunGuide: "Aún no hay guías.",
+        erreurNoeuds: "No se pudo cargar la documentación. Comprueba tu conexión a internet.", erreurGuides: "No se pudieron cargar las guías. Comprueba tu conexión a internet.", site: "Sitio oficial" },
+  de: { titre: "Yop2D-Hilfe", sousTitre: "Dokumentation der Knoten und Anleitungen", noeuds: "Knoten", guides: "Anleitungen",
+        intro: "Jeder Knoten ist ein Block, den du in den Blueprint einbauen kannst. Die <b>Eingänge</b> stellst du vorher ein oder verbindest sie, der <b>Ausgang</b> ist die Fortsetzung der Aktion.",
+        chargement: "Wird geladen...", exemple: "Beispiel:", aucunNoeud: "Noch keine Dokumentation.", aucunGuide: "Noch keine Anleitungen.",
+        erreurNoeuds: "Die Dokumentation konnte nicht geladen werden. Prüfe deine Internetverbindung.", erreurGuides: "Die Anleitungen konnten nicht geladen werden. Prüfe deine Internetverbindung.", site: "Offizielle Website" },
+  it: { titre: "Aiuto Yop2D", sousTitre: "Documentazione dei nodi e guide", noeuds: "Nodi", guides: "Guide",
+        intro: "Ogni nodo è un blocco che puoi collegare nel Blueprint. Gli <b>ingressi</b> sono ciò che configuri o colleghi prima, l'<b>uscita</b> è il seguito dell'azione.",
+        chargement: "Caricamento...", exemple: "Esempio:", aucunNoeud: "Nessuna documentazione per ora.", aucunGuide: "Nessuna guida per ora.",
+        erreurNoeuds: "Impossibile caricare la documentazione. Controlla la connessione internet.", erreurGuides: "Impossibile caricare le guide. Controlla la connessione internet.", site: "Sito ufficiale" },
+  pt: { titre: "Ajuda Yop2D", sousTitre: "Documentação dos nós e guias", noeuds: "Nós", guides: "Guias",
+        intro: "Cada nó é um bloco que você pode conectar no Blueprint. As <b>entradas</b> são o que você configura ou conecta antes, a <b>saída</b> é a continuação da ação.",
+        chargement: "Carregando...", exemple: "Exemplo:", aucunNoeud: "Ainda não há documentação.", aucunGuide: "Ainda não há guias.",
+        erreurNoeuds: "Não foi possível carregar a documentação. Verifique sua conexão com a internet.", erreurGuides: "Não foi possível carregar os guias. Verifique sua conexão com a internet.", site: "Site oficial" },
+  ru: { titre: "Справка Yop2D", sousTitre: "Описание узлов и руководства", noeuds: "Узлы", guides: "Руководства",
+        intro: "Каждый узел — это блок, который можно подключить в Blueprint. <b>Входы</b> — то, что ты настраиваешь или подключаешь заранее, <b>выход</b> — продолжение действия.",
+        chargement: "Загрузка...", exemple: "Пример:", aucunNoeud: "Пока нет документации.", aucunGuide: "Пока нет руководств.",
+        erreurNoeuds: "Не удалось загрузить документацию. Проверь подключение к интернету.", erreurGuides: "Не удалось загрузить руководства. Проверь подключение к интернету.", site: "Официальный сайт" },
+  zh: { titre: "Yop2D 帮助", sousTitre: "节点说明与教程", noeuds: "节点", guides: "教程",
+        intro: "每个节点都是一个可以接入 Blueprint 的积木块。<b>输入</b>是你事先设置或连接的内容，<b>输出</b>是动作的后续。",
+        chargement: "加载中...", exemple: "示例：", aucunNoeud: "暂无说明。", aucunGuide: "暂无教程。",
+        erreurNoeuds: "无法加载说明，请检查网络连接。", erreurGuides: "无法加载教程，请检查网络连接。", site: "官方网站" },
+  ja: { titre: "Yop2D ヘルプ", sousTitre: "ノードの説明とガイド", noeuds: "ノード", guides: "ガイド",
+        intro: "各ノードは Blueprint につなげるブロックです。<b>入力</b>は前もって設定・接続するもの、<b>出力</b>はアクションの続きです。",
+        chargement: "読み込み中...", exemple: "例：", aucunNoeud: "まだ説明はありません。", aucunGuide: "まだガイドはありません。",
+        erreurNoeuds: "説明を読み込めませんでした。インターネット接続を確認してください。", erreurGuides: "ガイドを読み込めませんでした。インターネット接続を確認してください。", site: "公式サイト" }
+};
+
+// Choix de la langue : 1) ?lang= dans l'adresse (envoyé par le moteur), 2) dernier choix, 3) langue du téléphone, 4) français
+function langueDeDepart() {
+  const depuisAdresse = new URLSearchParams(window.location.search).get('lang');
+  if (depuisAdresse && LANGUES.includes(depuisAdresse.slice(0, 2).toLowerCase())) return depuisAdresse.slice(0, 2).toLowerCase();
+  try {
+    const memorisee = localStorage.getItem('yop2d-aide-langue');
+    if (memorisee && LANGUES.includes(memorisee)) return memorisee;
+  } catch (e) {}
+  const telephone = (navigator.language || 'fr').slice(0, 2).toLowerCase();
+  return LANGUES.includes(telephone) ? telephone : 'fr';
+}
+
+let langue = langueDeDepart();
+
+function t(cle) { return (TEXTES[langue] || TEXTES.fr)[cle]; }
+
+function changerLangue(nouvelle) {
+  langue = nouvelle;
+  try { localStorage.setItem('yop2d-aide-langue', langue); } catch (e) {}
+  const adresse = new URL(window.location.href);
+  adresse.searchParams.set('lang', langue);
+  history.replaceState(null, '', adresse);
+  toutAfficher();
+}
+
+function traduirePage() {
+  document.documentElement.lang = langue;
+  document.title = t('titre');
+  document.getElementById('choix-langue').value = langue;
+  document.getElementById('txt-titre').textContent = t('titre');
+  document.getElementById('txt-sous-titre').textContent = t('sousTitre');
+  document.getElementById('btn-noeuds').textContent = t('noeuds');
+  document.getElementById('btn-guides').textContent = t('guides');
+  document.getElementById('txt-intro').innerHTML = t('intro');
+  document.getElementById('txt-site').textContent = t('site');
+}
 
 function ouvrirOnglet(nom) {
   document.getElementById('tab-noeuds').classList.toggle('active', nom === 'noeuds');
@@ -101,11 +197,23 @@ async function listerFichiers(dossier) {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
+// Cherche les fichiers dans le dossier de la langue ; s'il est vide ou absent, prend le français
+async function listerFichiersLangue(dossier) {
+  if (langue !== 'fr') {
+    try {
+      const fichiers = await listerFichiers(`${dossier}/${langue}`);
+      if (fichiers.length > 0) return fichiers;
+    } catch (e) {}
+  }
+  return listerFichiers(`${dossier}/fr`);
+}
+
 async function chargerNoeuds() {
   const conteneur = document.getElementById('contenu-noeuds');
+  conteneur.innerHTML = `<p class="message">${echapper(t('chargement'))}</p>`;
   try {
-    const fichiers = await listerFichiers('aide/noeuds');
-    if (fichiers.length === 0) { conteneur.innerHTML = '<p class="message">Aucune documentation pour l\'instant.</p>'; return; }
+    const fichiers = await listerFichiersLangue('aide/noeuds');
+    if (fichiers.length === 0) { conteneur.innerHTML = `<p class="message">${echapper(t('aucunNoeud'))}</p>`; return; }
     conteneur.innerHTML = '';
     for (const [index, fichier] of fichiers.entries()) {
       const data = await (await fetch(fichier.download_url)).json();
@@ -124,7 +232,7 @@ async function chargerNoeuds() {
           <div class="noeud-nom">${echapper(n.nom)}</div>
           ${n.schema ? `<div class="schema">${n.schema}</div>` : ''}
           ${n.role ? `<div class="role">${echapper(n.role)}</div>` : ''}
-          ${n.exemple ? `<div class="exemple"><b>Exemple :</b> ${echapper(n.exemple)}</div>` : ''}
+          ${n.exemple ? `<div class="exemple"><b>${echapper(t('exemple'))}</b> ${echapper(n.exemple)}</div>` : ''}
         `;
         body.appendChild(div);
       });
@@ -132,15 +240,16 @@ async function chargerNoeuds() {
       conteneur.appendChild(details);
     }
   } catch (e) {
-    conteneur.innerHTML = '<p class="message">Impossible de charger la documentation. Vérifie ta connexion internet.</p>';
+    conteneur.innerHTML = `<p class="message">${echapper(t('erreurNoeuds'))}</p>`;
   }
 }
 
 async function chargerGuides() {
   const conteneur = document.getElementById('contenu-guides');
+  conteneur.innerHTML = `<p class="message">${echapper(t('chargement'))}</p>`;
   try {
-    const fichiers = await listerFichiers('aide/guides');
-    if (fichiers.length === 0) { conteneur.innerHTML = '<p class="message">Aucun guide pour l\'instant.</p>'; return; }
+    const fichiers = await listerFichiersLangue('aide/guides');
+    if (fichiers.length === 0) { conteneur.innerHTML = `<p class="message">${echapper(t('aucunGuide'))}</p>`; return; }
     conteneur.innerHTML = '';
     for (const fichier of fichiers) {
       const data = await (await fetch(fichier.download_url)).json();
@@ -151,12 +260,17 @@ async function chargerGuides() {
       conteneur.appendChild(a);
     }
   } catch (e) {
-    conteneur.innerHTML = '<p class="message">Impossible de charger les guides. Vérifie ta connexion internet.</p>';
+    conteneur.innerHTML = `<p class="message">${echapper(t('erreurGuides'))}</p>`;
   }
 }
 
-chargerNoeuds();
-chargerGuides();
+function toutAfficher() {
+  traduirePage();
+  chargerNoeuds();
+  chargerGuides();
+}
+
+toutAfficher();
 </script>
 </body>
 </html>
