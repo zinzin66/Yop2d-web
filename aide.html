@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aide Yop2D</title>
+<meta name="description" content="Documentation des nœuds et guides d'utilisation de Yop2D, moteur de jeu 2D sans code pour Android.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/aide.html">
+<style>
+:root { --primary-color: #2563eb; --secondary-color: #1e40af; --accent-color: #f59e0b; --background: #0f172a; --card: #1e293b; --text: #e2e8f0; --text-dim: #94a3b8; }
+* { box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: var(--text); background: var(--background); margin: 0; }
+header { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 1.25rem 1rem; text-align: center; }
+header h1 { font-size: 1.4rem; margin: 0.3rem 0; }
+main { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+.tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; position: sticky; top: 0; background: var(--background); padding: 0.5rem 0; z-index: 5; }
+.tab-btn { flex: 1; padding: 0.7rem; border: none; border-radius: 8px; background: var(--card); color: var(--text-dim); font-size: 1rem; font-weight: bold; cursor: pointer; }
+.tab-btn.active { background: var(--primary-color); color: white; }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.categorie { background: var(--card); border-radius: 10px; margin-bottom: 0.75rem; overflow: hidden; }
+.categorie > summary { padding: 0.9rem 1rem; font-weight: bold; color: var(--accent-color); cursor: pointer; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.categorie > summary::-webkit-details-marker { display: none; }
+.categorie > summary::after { content: "+"; font-size: 1.3rem; color: var(--text-dim); }
+.categorie[open] > summary::after { content: "−"; }
+.categorie-body { padding: 0 1rem 0.5rem 1rem; }
+
+.noeud { border-top: 1px solid #334155; padding: 0.9rem 0; }
+.noeud:first-child { border-top: none; }
+.noeud-nom { color: white; font-weight: bold; font-size: 1rem; margin-bottom: 0.35rem; }
+.schema { font-size: 0.85rem; color: var(--text-dim); background: #0f172a; border-radius: 6px; padding: 0.5rem 0.7rem; margin-bottom: 0.5rem; }
+.schema b { color: #cbd5e1; }
+.role { margin: 0.3rem 0; }
+.exemple { color: var(--text-dim); font-size: 0.95rem; }
+.exemple b { color: #cbd5e1; }
+
+.guide-item { display: block; background: var(--card); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; text-decoration: none; color: var(--text); }
+.guide-item .titre { color: white; font-weight: bold; display: block; margin-bottom: 0.25rem; }
+.guide-item .desc { color: var(--text-dim); font-size: 0.9rem; }
+
+.message { text-align: center; color: var(--text-dim); padding: 1.5rem; font-style: italic; }
+
+footer { text-align: center; padding: 1.5rem; color: var(--text-dim); font-size: 0.85rem; }
+footer a { color: var(--accent-color); }
+
+@media (max-width: 480px) { header h1 { font-size: 1.2rem; } }
+</style>
+</head>
+<body>
+<header>
+<h1>Aide Yop2D</h1>
+<p style="margin:0;opacity:0.9;font-size:0.9rem;">Documentation des nœuds et guides</p>
+</header>
+<main>
+
+<div class="tabs">
+<button class="tab-btn active" id="btn-noeuds" onclick="ouvrirOnglet('noeuds')">Nœuds</button>
+<button class="tab-btn" id="btn-guides" onclick="ouvrirOnglet('guides')">Guides</button>
+</div>
+
+<div class="tab-content active" id="tab-noeuds">
+<p style="color:var(--text-dim);font-size:0.9rem;">Chaque nœud est un bloc que tu peux brancher dans le Blueprint. Les <b>entrées</b> sont ce que tu configures ou branches avant, la <b>sortie</b> est la suite de l'action.</p>
+<div id="contenu-noeuds"><p class="message">Chargement...</p></div>
+</div>
+
+<div class="tab-content" id="tab-guides">
+<div id="contenu-guides"><p class="message">Chargement...</p></div>
+</div>
+
+</main>
+<footer>
+<p>Yop2D · <a href="index.html">Site officiel</a></p>
+</footer>
+
+<script>
+const DEPOT = "zinzin66/Yop2d-web";
+
+function ouvrirOnglet(nom) {
+  document.getElementById('tab-noeuds').classList.toggle('active', nom === 'noeuds');
+  document.getElementById('tab-guides').classList.toggle('active', nom === 'guides');
+  document.getElementById('btn-noeuds').classList.toggle('active', nom === 'noeuds');
+  document.getElementById('btn-guides').classList.toggle('active', nom === 'guides');
+}
+if (window.location.hash === '#guides') { ouvrirOnglet('guides'); }
+
+function echapper(txt) {
+  const d = document.createElement('div');
+  d.textContent = txt || '';
+  return d.innerHTML;
+}
+
+async function listerFichiers(dossier) {
+  const reponse = await fetch(`https://api.github.com/repos/${DEPOT}/contents/${dossier}`);
+  if (!reponse.ok) throw new Error("dossier introuvable");
+  const liste = await reponse.json();
+  return liste
+    .filter(f => f.type === 'file' && f.name.endsWith('.json'))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+async function chargerNoeuds() {
+  const conteneur = document.getElementById('contenu-noeuds');
+  try {
+    const fichiers = await listerFichiers('aide/noeuds');
+    if (fichiers.length === 0) { conteneur.innerHTML = '<p class="message">Aucune documentation pour l\'instant.</p>'; return; }
+    conteneur.innerHTML = '';
+    for (const [index, fichier] of fichiers.entries()) {
+      const data = await (await fetch(fichier.download_url)).json();
+      const details = document.createElement('details');
+      details.className = 'categorie';
+      if (index === 0) details.open = true;
+      const summary = document.createElement('summary');
+      summary.textContent = data.categorie || fichier.name;
+      details.appendChild(summary);
+      const body = document.createElement('div');
+      body.className = 'categorie-body';
+      (data.noeuds || []).forEach(n => {
+        const div = document.createElement('div');
+        div.className = 'noeud';
+        div.innerHTML = `
+          <div class="noeud-nom">${echapper(n.nom)}</div>
+          ${n.schema ? `<div class="schema">${n.schema}</div>` : ''}
+          ${n.role ? `<div class="role">${echapper(n.role)}</div>` : ''}
+          ${n.exemple ? `<div class="exemple"><b>Exemple :</b> ${echapper(n.exemple)}</div>` : ''}
+        `;
+        body.appendChild(div);
+      });
+      details.appendChild(body);
+      conteneur.appendChild(details);
+    }
+  } catch (e) {
+    conteneur.innerHTML = '<p class="message">Impossible de charger la documentation. Vérifie ta connexion internet.</p>';
+  }
+}
+
+async function chargerGuides() {
+  const conteneur = document.getElementById('contenu-guides');
+  try {
+    const fichiers = await listerFichiers('aide/guides');
+    if (fichiers.length === 0) { conteneur.innerHTML = '<p class="message">Aucun guide pour l\'instant.</p>'; return; }
+    conteneur.innerHTML = '';
+    for (const fichier of fichiers) {
+      const data = await (await fetch(fichier.download_url)).json();
+      const a = document.createElement('a');
+      a.className = 'guide-item';
+      a.href = data.lien;
+      a.innerHTML = `<span class="titre">${echapper(data.titre)}</span><span class="desc">${echapper(data.description)}</span>`;
+      conteneur.appendChild(a);
+    }
+  } catch (e) {
+    conteneur.innerHTML = '<p class="message">Impossible de charger les guides. Vérifie ta connexion internet.</p>';
+  }
+}
+
+chargerNoeuds();
+chargerGuides();
+</script>
+</body>
+</html>
