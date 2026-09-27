@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie sammle ich Münzen und zähle Punkte in Yop2D? | Yop2D-Anleitung</title>
+<meta name="description" content="Münzen sammeln und Punkte anzeigen in Yop2D, ohne Code: ein Tag, eine Variable und die Knoten „Wenn Objekt Tag berührt“, „Objekt zerstören“, „Zu Variable hinzufügen“ und „Text ändern“.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/pieces-score.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pieces-score.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pieces-score.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pieces-score.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pieces-score.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pieces-score.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pieces-score.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pieces-score.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pieces-score.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pieces-score.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie sammle ich Münzen und zähle Punkte?",
+ "description": "Münzen sammeln und Punkte anzeigen in Yop2D, ohne Code: ein Tag, eine Variable und die Knoten „Wenn Objekt Tag berührt“, „Objekt zerstören“, „Zu Variable hinzufügen“ und „Text ändern“.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Den Münzen einen Tag geben",
+   "text": "Schreibe piece in das Feld Tag (Etikett) jeder Münze."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Die Variable score anlegen",
+   "text": "Bereich Variablen: score, Ganze Zahl, 0."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Die Knoten verbinden",
+   "text": "Wenn Objekt Tag berührt (player, piece) → Objekt zerstören → Zu Variable hinzufügen (score, 1) → Text ändern (scoreText)."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Wie sammle ich Münzen und zähle Punkte?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../pieces-score.html" hreflang="fr">Français</a> · <a href="../en/pieces-score.html" hreflang="en">English</a> · <a href="../es/pieces-score.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/pieces-score.html" hreflang="it">Italiano</a> · <a href="../pt/pieces-score.html" hreflang="pt">Português</a> · <a href="../ru/pieces-score.html" hreflang="ru">Русский</a> · <a href="../zh/pieces-score.html" hreflang="zh">中文</a> · <a href="../ja/pieces-score.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Wenn der Spieler eine Münze berührt, wollen wir drei Dinge: Die Münze <strong>verschwindet</strong>, der <strong>Punktestand steigt</strong> um 1, und der neue Punktestand <strong>erscheint</strong> auf dem Bildschirm.</p>
+<div class="besoin">
+<b>Du brauchst:</b>
+<ul><li>eine Figur namens <strong>player</strong>, die sich bewegen kann (siehe <a href="../de/deplacer-personnage.html">Eine Figur bewegen</a>);</li><li>ein paar Münzen: Objekte <strong>Kreis</strong> (oder Bilder), zum Beispiel <strong>coin1</strong>, <strong>coin2</strong>, <strong>coin3</strong>;</li><li>ein Objekt <strong>Text</strong> namens <strong>scoreText</strong>, oben auf dem Bildschirm, mit dem Text „Punkte: 0“.</li></ul>
+</div>
+<h2>Schritt 1: allen Münzen denselben Tag geben</h2>
+<div class="method">
+<p>Ein <strong>Tag</strong> ist ein Etikett. Dank ihm funktioniert ein einziges Stück Blueprint für alle Münzen, selbst wenn du 50 hinzufügst.</p>
+<ol><li>Wähle eine Münze aus.</li><li>Schreibe im Inspektor, Feld <strong>„Tag (Etikett)“</strong>, <strong>piece</strong>.</li><li>Mach dasselbe bei jeder Münze (die Taste <strong>„Liste“</strong> neben dem Feld zeigt die schon benutzten Tags).</li></ol>
+</div>
+<h2>Schritt 2: die Variable „score“ anlegen</h2>
+<div class="method">
+<p>Eine <strong>Variable</strong> ist ein Kästchen, das sich im Spiel eine Zahl merkt.</p>
+<ol><li>Öffne im linken Bereich <strong>Variablen</strong> und lege eine Variable an.</li><li>Name: <strong>score</strong> · Gültigkeit: <strong>Lokal</strong> · Typ: <strong>Ganze Zahl</strong> · Startwert: <strong>0</strong>.</li></ol>
+<div class="tip">👉 <strong>Lokal</strong> = die Variable gibt es nur in dieser Szene. Wähle <strong>Global</strong>, wenn der Punktestand im nächsten Level weitergehen soll (siehe <a href="../de/niveau-suivant.html">Zum nächsten Level</a>).</div>
+</div>
+<h2>Schritt 3: der Blueprint</h2>
+<div class="method">
+<ol><li>Öffne den <strong>Blueprint</strong> der Szene.</li><li>Füge das Ereignis <strong>„Wenn Objekt Tag berührt“</strong> hinzu: Ziel <strong>player</strong>, Tag <strong>piece</strong>.</li><li>Füge <strong>„Objekt zerstören“</strong> hinzu. Wähle als Ziel <strong>Das beteiligte Objekt</strong>: Das ist die Münze, die der Spieler gerade berührt hat.</li><li>Füge <strong>„Zu Variable hinzufügen“</strong> hinzu: Variable <strong>score</strong>, <strong>Hinzuzufügender Wert = 1</strong>.</li><li>Füge <strong>„Text ändern“</strong> hinzu: Ziel <strong>scoreText</strong>, <strong>Neuer Text</strong> = <code>="Punkte: " + score</code></li><li>Verbinde die vier Knoten der Reihe nach, Ausgang mit Eingang.</li><li>Speichere, starte das Spiel und berühre eine Münze.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Wenn Objekt Tag berührt</b><span>Ziel: player · Tag: piece</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Objekt zerstören</b><span>Impliziertes Objekt</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Zu Variable hinzufügen</b><span>score · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Text ändern</b><span>scoreText</span></div>
+</div>
+<div class="tip">👉 <strong>Das Zeichen = am Anfang des Textes</strong> sagt Yop2D, dass es den Text <strong>berechnen</strong> soll, statt ihn so hinzuschreiben. Ohne es würde der Bildschirm wörtlich <code>"Punkte: " + score</code> zeigen. Die Anführungszeichen umschließen den Teil, der sich nicht ändert.</div>
+<div class="tip">👉 Das Ereignis läuft nur <strong>einmal pro Berührung</strong>: Wer auf einer Münze stehen bleibt, bekommt nicht mehrere Punkte.</div>
+</div>
+<h2>Bonus: gewinnen, wenn man alle Münzen hat</h2>
+<div class="method">
+<ol><li>Füge nach „Text ändern“ den Knoten <strong>„Bedingung“</strong> hinzu, mit <strong>Bedingung</strong> = <code>=score &gt;= 3</code> (3 = Anzahl der Münzen).</li><li>Verbinde seinen Ausgang <strong>Wahr</strong> mit einem Knoten <strong>„Toast“</strong> mit der Nachricht <strong>Gewonnen!</strong> oder mit <strong>„Nächste Szene“</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Text ändern</b><span>scoreText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Bedingung</b><span>=score &gt;= 3</span></div>
+<div class="fleche"><em>Wahr</em> →</div>
+<div class="noeud"><b>Toast</b><span>Gewonnen!</span></div>
+</div>
+</div>
+<h2>Wenn es nicht klappt</h2>
+<ul><li><strong>Die Münze verschwindet nicht:</strong> Prüfe, ob der Tag überall gleich geschrieben ist (piece) und ob das Ziel von „Objekt zerstören“ das beteiligte Objekt ist.</li><li><strong>Der Text zeigt die Formel:</strong> Das <strong>=</strong> am Anfang fehlt.</li><li><strong>Der Punktestand bleibt bei 0:</strong> Prüfe, ob „Zu Variable hinzufügen“ die Variable <strong>score</strong> benutzt.</li><li><strong>Zum Vergleich</strong> öffne das Beispielspiel <strong>„Plattform“</strong>, das mit Yop2D kommt: Es sammelt Münzen genau so.</li></ul>
+
+<div class="nav">
+<a href="../de/sauter.html">← Eine Figur springen lassen</a>
+<a href="../de/vie-game-over.html">Nächste Anleitung: Leben verlieren und Game Over →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../index.html">Offizielle Website</a></p>
+</footer>
+</body>
+</html>

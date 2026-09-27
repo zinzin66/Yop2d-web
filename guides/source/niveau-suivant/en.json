@@ -1,0 +1,144 @@
+{
+  "titre_page": "How to go to the next level in Yop2D? | Yop2D Guide",
+  "description": "Make several levels in Yop2D, without code: one scene per level, a finish zone, the [[NoeudEventCollisionAB]] and [[scene_suivante]] nodes, and a score that carries on with a global variable.",
+  "h1": "How to go to the next level?",
+  "carte": [
+    "Go to the next level",
+    "One scene per level, a finish zone and a score that carries on."
+  ],
+  "etapes": [
+    [
+      "One scene per level",
+      "{{lang:panneau_ress_scenes}} section: Level1 then Level2, in that order."
+    ],
+    [
+      "A finish zone",
+      "In Level1, a {{lang:obj_prefix_zone}} object named finish at the end of the level."
+    ],
+    [
+      "Link the nodes",
+      "{{NoeudEventCollisionAB}} (player, finish) → {{scene_suivante}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "In Yop2D, **each level is a scene**. When the player reaches the end of the level, they touch an invisible finish zone, and the game moves on to the next scene."
+    ],
+    [
+      "besoin",
+      [
+        "a first level that works, with a character named **player** that can move;",
+        "a second level (we create it in step 1)."
+      ]
+    ],
+    [
+      "h2",
+      "Step 1: one scene per level"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "In the left panel, open the **{{lang:panneau_ress_scenes}}** section.",
+            "Rename your current scene **Level1**, then create a new scene **Level2**.",
+            "Build level 2: floor, platforms, and again the **player** character with its buttons."
+          ]
+        ],
+        [
+          "attention",
+          "**Each scene has its own objects and its own Blueprint.** The buttons and character of level 1 do not exist in level 2: you have to add them there, and redo their nodes in level 2's Blueprint."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 2: the finish zone"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Go back to **Level1**.",
+            "Add a **{{lang:obj_prefix_zone}}** object (category {{lang:cat_formes_base}}) and name it **finish**.",
+            "Put it at the end of the level, where the player must arrive. A zone is **invisible** during the game: put a flag or a door in the same place so the player can see it."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 3: level 1's Blueprint"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Open the **{{lang:titre_blueprint}}** of **Level1**.",
+            "Add the **[[NoeudEventCollisionAB]]** event: {{lang:noeud_cible_objet_a}} **player**, {{lang:noeud_cible_objet_b}} **finish**.",
+            "Add the **[[scene_suivante]]** node (category {{lang:cat_scene_hud}}) and link it to the **{{lang:port_evt_collision}}** output.",
+            "Save, start the game and go to the zone."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "A: player · B: finish"
+            ],
+            [
+              "→",
+              "{{lang:port_evt_collision}}"
+            ],
+            [
+              "n",
+              "{{scene_suivante}}",
+              ""
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**[[scene_suivante]]** follows the order of the scene list: Level1, then Level2, then Level3… To go to a specific scene (a « Well done! » screen for example), use **[[changer_scene]]** instead and choose the scene as its target."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Keep the score from one level to the next"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "A **{{lang:var_scope_locale}}** variable starts again from zero in each scene. For the score to carry on in level 2, create the **score** variable with the **{{lang:var_scope_globale}}** scope ({{lang:panneau_ress_variables}} section). All levels then use the same one."
+        ],
+        [
+          "tip",
+          "In level 2, remember to show the score right from the start: **[[NoeudEventStart]]** → **[[modifier_texte]]** (scoreText) with `=\"Score: \" + score`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "If it doesn't work"
+    ],
+    [
+      "ul",
+      [
+        "**Nothing happens in the zone:** check the names **player** and **finish** in [[NoeudEventCollisionAB]], and that the zone is really on the player's path.",
+        "**The game doesn't change scene:** Level1 must come **before** Level2 in the scene list. If there is no scene after it, [[scene_suivante]] does nothing.",
+        "**Level 2 doesn't react:** its nodes are in its own Blueprint; open Level2's Blueprint to add them."
+      ]
+    ]
+  ]
+}

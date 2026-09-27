@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como pegar moedas e contar pontos no Yop2D? | Guia Yop2D</title>
+<meta name="description" content="Pegar moedas e mostrar a pontuação no Yop2D, sem código: uma tag, uma variável e os nós “Se o objeto tocar no Tag”, “Destruir Objeto”, “Adicionar à Variável” e “Modificar Texto”.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pieces-score.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pieces-score.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pieces-score.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pieces-score.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pieces-score.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pieces-score.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pieces-score.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pieces-score.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pieces-score.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pieces-score.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Como pegar moedas e contar pontos?",
+ "description": "Pegar moedas e mostrar a pontuação no Yop2D, sem código: uma tag, uma variável e os nós “Se o objeto tocar no Tag”, “Destruir Objeto”, “Adicionar à Variável” e “Modificar Texto”.",
+ "inLanguage": "pt",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de jogos 2D sem código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Dar uma tag às moedas",
+   "text": "Escreva piece no campo Tag (Rótulo) de cada moeda."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Criar a variável score",
+   "text": "Seção Variáveis: score, Inteiro, 0."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Ligar os nós",
+   "text": "Se o objeto tocar no Tag (player, piece) → Destruir Objeto → Adicionar à Variável (score, 1) → Modificar Texto (scoreText)."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Como pegar moedas e contar pontos?</h1>
+<p>Guia para iniciantes · sem código</p>
+<p class="langues"><a href="../pieces-score.html" hreflang="fr">Français</a> · <a href="../en/pieces-score.html" hreflang="en">English</a> · <a href="../es/pieces-score.html" hreflang="es">Español</a> · <a href="../de/pieces-score.html" hreflang="de">Deutsch</a> · <a href="../it/pieces-score.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="../ru/pieces-score.html" hreflang="ru">Русский</a> · <a href="../zh/pieces-score.html" hreflang="zh">中文</a> · <a href="../ja/pieces-score.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Quando o jogador toca uma moeda, queremos três coisas: que a moeda <strong>suma</strong>, que a <strong>pontuação suba</strong> 1 e que a nova pontuação <strong>apareça</strong> na tela.</p>
+<div class="besoin">
+<b>Você precisa de:</b>
+<ul><li>um personagem chamado <strong>player</strong> que possa se mover (veja <a href="../pt/deplacer-personnage.html">Mover um personagem</a>);</li><li>algumas moedas: objetos <strong>Circulo</strong> (ou imagens), por exemplo <strong>coin1</strong>, <strong>coin2</strong>, <strong>coin3</strong>;</li><li>um objeto <strong>Texto</strong> chamado <strong>scoreText</strong>, no alto da tela, com o texto “Pontos: 0”.</li></ul>
+</div>
+<h2>Passo 1: dar a mesma tag a todas as moedas</h2>
+<div class="method">
+<p>Uma <strong>tag</strong> é uma etiqueta. Graças a ela, um único pedaço de Blueprint funciona para todas as moedas, mesmo que você coloque 50.</p>
+<ol><li>Selecione uma moeda.</li><li>No inspetor, campo <strong>“Tag (Rótulo)”</strong>, escreva <strong>piece</strong>.</li><li>Faça o mesmo em cada moeda (o botão <strong>“Lista”</strong> ao lado do campo sugere as tags já usadas).</li></ol>
+</div>
+<h2>Passo 2: criar a variável “score”</h2>
+<div class="method">
+<p>Uma <strong>variável</strong> é uma caixinha que guarda um número na memória durante o jogo.</p>
+<ol><li>No painel da esquerda, abra a seção <strong>Variáveis</strong> e crie uma variável.</li><li>Nome: <strong>score</strong> · Escopo: <strong>Local</strong> · Tipo: <strong>Inteiro</strong> · Valor inicial: <strong>0</strong>.</li></ol>
+<div class="tip">👉 <strong>Local</strong> = a variável só existe nesta cena. Escolha <strong>Global</strong> se a pontuação precisar continuar na próxima fase (veja <a href="../pt/niveau-suivant.html">Passar para a próxima fase</a>).</div>
+</div>
+<h2>Passo 3: o Blueprint</h2>
+<div class="method">
+<ol><li>Abra o <strong>Blueprint</strong> da cena.</li><li>Adicione o evento <strong>“Se o objeto tocar no Tag”</strong>: alvo <strong>player</strong>, Tag <strong>piece</strong>.</li><li>Adicione <strong>“Destruir Objeto”</strong>. Como alvo, escolha <strong>O objeto implicado no evento</strong>: é a moeda que o jogador acabou de tocar.</li><li>Adicione <strong>“Adicionar à Variável”</strong>: variável <strong>score</strong>, <strong>Valor a adicionar = 1</strong>.</li><li>Adicione <strong>“Modificar Texto”</strong>: alvo <strong>scoreText</strong>, <strong>Novo texto</strong> = <code>="Pontos: " + score</code></li><li>Ligue os quatro nós em ordem, saída na entrada.</li><li>Salve, comece o jogo e vá tocar uma moeda.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Se o objeto tocar no Tag</b><span>alvo: player · Tag: piece</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Destruir Objeto</b><span>Objeto Implicado</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Adicionar à Variável</b><span>score · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Texto</b><span>scoreText</span></div>
+</div>
+<div class="tip">👉 <strong>O sinal = no começo do texto</strong> diz ao Yop2D para <strong>calcular</strong> o texto em vez de escrevê-lo do jeito que está. Sem ele, a tela mostraria ao pé da letra <code>"Pontos: " + score</code>. As aspas cercam a parte que não muda.</div>
+<div class="tip">👉 O evento só roda <strong>uma vez por contato</strong>: ficar em cima de uma moeda não conta vários pontos.</div>
+</div>
+<h2>Bônus: ganhar quando pegar todas as moedas</h2>
+<div class="method">
+<ol><li>Depois de “Modificar Texto”, adicione o nó <strong>“Condição”</strong> com <strong>Condição</strong> = <code>=score &gt;= 3</code> (3 = o número de moedas).</li><li>Ligue a saída <strong>Verdadeiro</strong> dele a um nó <strong>“Mensagem Toast”</strong> com a mensagem <strong>Você venceu!</strong>, ou a <strong>“Cena seguinte”</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Modificar Texto</b><span>scoreText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condição</b><span>=score &gt;= 3</span></div>
+<div class="fleche"><em>Verdadeiro</em> →</div>
+<div class="noeud"><b>Mensagem Toast</b><span>Você venceu!</span></div>
+</div>
+</div>
+<h2>Se não funcionar</h2>
+<ul><li><strong>A moeda não some:</strong> verifique se a tag está escrita igual em todo lugar (piece) e se o alvo de “Destruir Objeto” é o objeto envolvido.</li><li><strong>O texto mostra a fórmula:</strong> falta o <strong>=</strong> no começo.</li><li><strong>A pontuação fica em 0:</strong> verifique se “Adicionar à Variável” usa a variável <strong>score</strong>.</li><li><strong>Para comparar</strong>, abra o jogo de exemplo <strong>“Plataforma”</strong> que vem com o Yop2D: ele pega moedas exatamente assim.</li></ul>
+
+<div class="nav">
+<a href="../pt/sauter.html">← Fazer um personagem pular</a>
+<a href="../pt/vie-game-over.html">Próximo guia: Perder vida e Game Over →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de jogos 2D gratuito e sem código para Android · <a href="../../index.html">Site oficial</a></p>
+</footer>
+</body>
+</html>

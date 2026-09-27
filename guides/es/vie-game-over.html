@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Cómo hacer que el jugador pierda vida en Yop2D? | Guía Yop2D</title>
+<meta name="description" content="Gestionar la vida del jugador en Yop2D, sin código: una variable de vida, una barra de vida y los nodos «Añadir a Variable», «Definir el Progreso», «Condición» y «Reiniciar la escena».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/es/vie-game-over.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/vie-game-over.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/vie-game-over.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/vie-game-over.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/vie-game-over.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/vie-game-over.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/vie-game-over.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/vie-game-over.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/vie-game-over.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/vie-game-over.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "¿Cómo hacer que el jugador pierda vida?",
+ "description": "Gestionar la vida del jugador en Yop2D, sin código: una variable de vida, una barra de vida y los nodos «Añadir a Variable», «Definir el Progreso», «Condición» y «Reiniciar la escena».",
+ "inLanguage": "es",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de juegos 2D sin código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Crear la variable de vida y la barra",
+   "text": "Variable vie (Entero, 3) y barra healthBar con Valor Máximo = 3."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Perder un punto",
+   "text": "Si el objeto toca el Tag (player, danger) → Añadir a Variable (vie, -1) → Definir el Progreso (healthBar, =vie)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Game Over",
+   "text": "Condición (=vie <= 0) → Verdadero → Reiniciar la escena."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>¿Cómo hacer que el jugador pierda vida?</h1>
+<p>Guía para principiantes · sin código</p>
+<p class="langues"><a href="../vie-game-over.html" hreflang="fr">Français</a> · <a href="../en/vie-game-over.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="../de/vie-game-over.html" hreflang="de">Deutsch</a> · <a href="../it/vie-game-over.html" hreflang="it">Italiano</a> · <a href="../pt/vie-game-over.html" hreflang="pt">Português</a> · <a href="../ru/vie-game-over.html" hreflang="ru">Русский</a> · <a href="../zh/vie-game-over.html" hreflang="zh">中文</a> · <a href="../ja/vie-game-over.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>El jugador empieza con <strong>3 vidas</strong>. Cada vez que toca un peligro (pinchos, un enemigo…), pierde una y la <strong>barra de vida</strong> baja. En 0, es <strong>Game Over</strong>: el nivel vuelve a empezar.</p>
+<div class="besoin">
+<b>Necesitas:</b>
+<ul><li>un personaje llamado <strong>player</strong> que pueda moverse (mira <a href="../es/deplacer-personnage.html">Mover un personaje</a>);</li><li>uno o varios peligros, por ejemplo cuadrados rojos llamados <strong>spikes1</strong>, <strong>spikes2</strong>…;</li><li>una barra de vida: un objeto <strong>BarraProgreso</strong> (barra de progreso) llamado <strong>healthBar</strong>, arriba de la pantalla.</li></ul>
+</div>
+<h2>Paso 1: preparar los peligros y la barra</h2>
+<div class="method">
+<ol><li>Selecciona cada peligro y escribe <strong>danger</strong> en su campo <strong>«Tag (Etiqueta)»</strong>.</li><li>Selecciona <strong>healthBar</strong>. En la sección <strong>«BARRA DE PROGRESO»</strong> del inspector: <strong>Valor Mínimo = 0</strong>, <strong>Valor Máximo = 3</strong>, <strong>Valor Actual = 3</strong>.</li></ol>
+</div>
+<h2>Paso 2: crear la variable «vie»</h2>
+<div class="method">
+<ol><li>En el panel de la izquierda, sección <strong>Variables</strong>, crea una variable.</li><li>Nombre: <strong>vie</strong> (vida) · Alcance: <strong>Local</strong> · Tipo: <strong>Entero</strong> · Valor inicial: <strong>3</strong>.</li></ol>
+</div>
+<h2>Paso 3: perder una vida</h2>
+<div class="method">
+<ol><li>Abre el <strong>Blueprint</strong> de la escena.</li><li>Añade el evento <strong>«Si el objeto toca el Tag»</strong>: objetivo <strong>player</strong>, Tag <strong>danger</strong>.</li><li>Añade <strong>«Añadir a Variable»</strong>: variable <strong>vie</strong>, <strong>Valor a añadir = -1</strong> (con el signo menos, para restar).</li><li>Añade <strong>«Definir el Progreso»</strong>: objetivo <strong>healthBar</strong>, <strong>Nuevo progreso</strong> = <code>=vie</code></li><li>Une los tres nodos en orden.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Si el objeto toca el Tag</b><span>objetivo: player · Tag: danger</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Añadir a Variable</b><span>vie · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Definir el Progreso</b><span>healthBar · =vie</span></div>
+</div>
+<div class="tip">👉 Escribir <code>=vie</code> en «Nuevo progreso» quiere decir: «usa el valor de la variable vie». Así la barra sigue siempre el número de vidas.</div>
+</div>
+<h2>Paso 4: el Game Over</h2>
+<div class="method">
+<ol><li>Después de «Definir el Progreso», añade el nodo <strong>«Condición»</strong> con <strong>Condición</strong> = <code>=vie &lt;= 0</code> («vie menor o igual que 0»).</li><li>Une su salida <strong>Verdadero</strong> al nodo <strong>«Reiniciar la escena»</strong> (categoría Escena y HUD).</li><li>Guarda, lanza el juego y toca un peligro tres veces.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Definir el Progreso</b><span>healthBar</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condición</b><span>=vie &lt;= 0</span></div>
+<div class="fleche"><em>Verdadero</em> →</div>
+<div class="noeud"><b>Reiniciar la escena</b></div>
+</div>
+<div class="tip">👉 «Reiniciar la escena» lo deja todo como al principio: los objetos en su sitio y las variables <strong>Local</strong> (así que vie = 3) con su valor inicial.</div>
+<div class="tip">👉 <strong>¿Quieres una pantalla de fin de verdad?</strong> En lugar de reiniciar enseguida, une la salida Verdadero a <strong>«Modificar Texto»</strong> (un texto «¡Perdiste!»), luego <strong>«Esperar»</strong> (2 segundos) y luego <strong>«Reiniciar la escena»</strong>.</div>
+</div>
+<h2>Extra: caer al vacío</h2>
+<div class="method">
+<p>Para un juego de plataformas, pon un objeto <strong>Zona</strong> abajo del todo de la escena, llamado <strong>fallZone</strong> (una zona es invisible durante el juego). Luego:</p>
+<div class="chaine">
+<div class="noeud evenement"><b>Colisión A/B</b><span>Objeto A: player · Objeto B: fallZone</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Reiniciar la escena</b></div>
+</div>
+</div>
+<h2>Si no funciona</h2>
+<ul><li><strong>La vida no baja:</strong> comprueba el tag <strong>danger</strong> en cada peligro y el signo menos en <strong>-1</strong>.</li><li><strong>La barra no se mueve:</strong> el objetivo de «Definir el Progreso» debe ser una <strong>barra de progreso</strong>, con un máximo de 3.</li><li><strong>El juego no se reinicia:</strong> la condición debe estar unida por su salida <strong>Verdadero</strong>.</li></ul>
+
+<div class="nav">
+<a href="../es/pieces-score.html">← Recoger monedas y contar los puntos</a>
+<a href="../es/niveau-suivant.html">Siguiente guía: Pasar al nivel siguiente →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de juegos 2D gratuito y sin código para Android · <a href="../../index.html">Sitio oficial</a></p>
+</footer>
+</body>
+</html>

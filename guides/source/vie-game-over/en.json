@@ -1,0 +1,213 @@
+{
+  "titre_page": "How to make the player lose health in Yop2D? | Yop2D Guide",
+  "description": "Handle the player's health in Yop2D, without code: a health variable, a health bar and the [[ajouter_variable]], [[modifier_progression]], [[condition]] and [[recommencer_scene]] nodes.",
+  "h1": "How to make the player lose health?",
+  "carte": [
+    "Lose health and Game Over",
+    "A health variable, a health bar and back to the start when health reaches 0."
+  ],
+  "etapes": [
+    [
+      "Create the health variable and the bar",
+      "Variable vie ({{lang:var_type_entier}}, 3) and bar healthBar with {{lang:insp_label_prog_max}} = 3."
+    ],
+    [
+      "Lose a point",
+      "{{NoeudEventCollisionTag}} (player, danger) → {{ajouter_variable}} (vie, -1) → {{modifier_progression}} (healthBar, =vie)."
+    ],
+    [
+      "Game Over",
+      "{{condition}} (=vie <= 0) → {{lang:port_vrai}} → {{recommencer_scene}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "The player starts with **3 lives**. Each time they touch a danger (spikes, an enemy…), they lose one and the **health bar** goes down. At 0, it's **Game Over**: the level starts again."
+    ],
+    [
+      "besoin",
+      [
+        "a character named **player** that can move (see [Move a character](guide:deplacer-personnage));",
+        "one or more dangers, for example red squares named **spikes1**, **spikes2**…;",
+        "a health bar: a **{{lang:obj_prefix_barre_progression}}** object (progress bar) named **healthBar**, at the top of the screen."
+      ]
+    ],
+    [
+      "h2",
+      "Step 1: prepare the dangers and the bar"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Select each danger and type **danger** in its **[[lang:insp_label_tag]]** field.",
+            "Select **healthBar**. In the inspector's **[[lang:insp_sep_progression]]** section: **{{lang:insp_label_prog_min}} = 0**, **{{lang:insp_label_prog_max}} = 3**, **{{lang:insp_label_prog_actuelle}} = 3**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 2: create the « vie » variable"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "In the left panel, **{{lang:panneau_ress_variables}}** section, create a variable.",
+            "Name: **vie** (health) · Scope: **{{lang:var_scope_locale}}** · Type: **{{lang:var_type_entier}}** · Starting value: **3**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 3: lose a life"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Open the scene's **{{lang:titre_blueprint}}**.",
+            "Add the **[[NoeudEventCollisionTag]]** event: target **player**, {{lang:Tag}} **danger**.",
+            "Add **[[ajouter_variable]]**: variable **vie**, **{{lang:ajouter_variable.valeur}} = -1** (with the minus sign, to subtract).",
+            "Add **[[modifier_progression]]**: target **healthBar**, **{{lang:modifier_progression.valeur}}** = `=vie`",
+            "Link the three nodes in order."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "target: player · {{lang:Tag}}: danger"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "vie · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_progression}}",
+              "healthBar · =vie"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "Writing `=vie` in [[lang:modifier_progression.valeur]] means: « take the value of the vie variable ». So the bar always follows the number of lives."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 4: Game Over"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "After [[modifier_progression]], add the **[[condition]]** node with **{{lang:condition.condition}}** = `=vie <= 0` (« vie smaller than or equal to 0 »).",
+            "Link its **{{lang:port_vrai}}** output to the **[[recommencer_scene]]** node (category {{lang:cat_scene_hud}}).",
+            "Save, start the game and touch a danger three times."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_progression}}",
+              "healthBar"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=vie <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[recommencer_scene]] puts everything back as it was: objects in their place, and **{{lang:var_scope_locale}}** variables (so vie = 3) back to their starting value."
+        ],
+        [
+          "tip",
+          "**Want a real end screen?** Instead of restarting straight away, link the {{lang:port_vrai}} output to **[[modifier_texte]]** (a « You lose! » text), then **[[attendre]]** (2 seconds), then **[[recommencer_scene]]**."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Bonus: falling into the void"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "For a platform game, put a **{{lang:obj_prefix_zone}}** object at the very bottom of the scene, named **fallZone** (a zone is invisible during the game). Then:"
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "{{lang:noeud_cible_objet_a}}: player · {{lang:noeud_cible_objet_b}}: fallZone"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "If it doesn't work"
+    ],
+    [
+      "ul",
+      [
+        "**Health doesn't go down:** check the **danger** tag on each danger, and the minus sign in **-1**.",
+        "**The bar doesn't move:** the target of [[modifier_progression]] must be a **progress bar**, with a maximum of 3.",
+        "**The game doesn't restart:** the condition must be linked through its **{{lang:port_vrai}}** output."
+      ]
+    ]
+  ]
+}

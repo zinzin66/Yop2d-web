@@ -1,0 +1,213 @@
+{
+  "titre_page": "Yop2D でプレイヤーの体力を減らすには？| Yop2D ガイド",
+  "description": "Yop2D でコードを書かずにプレイヤーの体力を管理する：体力の変数、体力バー、そして [[ajouter_variable]]、[[modifier_progression]]、[[condition]]、[[recommencer_scene]] ノード。",
+  "h1": "プレイヤーの体力を減らすには？",
+  "carte": [
+    "体力を減らして Game Over",
+    "体力の変数と体力バー、体力が 0 になったら最初から。"
+  ],
+  "etapes": [
+    [
+      "体力の変数とバーを作る",
+      "変数 vie（{{lang:var_type_entier}}、3）と、{{lang:insp_label_prog_max}} = 3 のバー healthBar。"
+    ],
+    [
+      "1 ポイント減らす",
+      "{{NoeudEventCollisionTag}}（player、danger）→ {{ajouter_variable}}（vie、-1）→ {{modifier_progression}}（healthBar、=vie）。"
+    ],
+    [
+      "Game Over",
+      "{{condition}}（=vie <= 0）→ {{lang:port_vrai}} → {{recommencer_scene}}。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "プレイヤーは**ライフ 3** でスタートします。危ないもの（トゲ、敵など）に触れるたびに 1 つ減り、**体力バー**が下がります。0 になると **Game Over**：ステージが最初から始まります。"
+    ],
+    [
+      "besoin",
+      [
+        "動かせる **player** という名前のキャラクター（[キャラクターを動かす](guide:deplacer-personnage) を参照）；",
+        "危ないものを 1 つ以上、たとえば **spikes1**、**spikes2**… という名前の赤い四角形；",
+        "体力バー：画面の上にある **healthBar** という名前の **{{lang:obj_prefix_barre_progression}}** オブジェクト（プログレスバー）。"
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 1：危ないものとバーを準備する"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "危ないものをそれぞれ選び、**[[lang:insp_label_tag]]** 欄に **danger** と書きます。",
+            "**healthBar** を選びます。インスペクターの **[[lang:insp_sep_progression]]** で：**{{lang:insp_label_prog_min}} = 0**、**{{lang:insp_label_prog_max}} = 3**、**{{lang:insp_label_prog_actuelle}} = 3**。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 2：変数「vie」を作る"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "左のパネルの **{{lang:panneau_ress_variables}}** の欄で、変数を作ります。",
+            "名前：**vie**（体力）· 範囲：**{{lang:var_scope_locale}}** · 型：**{{lang:var_type_entier}}** · 最初の値：**3**。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 3：ライフを 1 つ減らす"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "シーンの **{{lang:titre_blueprint}}** を開きます。",
+            "**[[NoeudEventCollisionTag]]** イベントを追加します：ターゲット **player**、{{lang:Tag}} **danger**。",
+            "**[[ajouter_variable]]** を追加します：変数 **vie**、**{{lang:ajouter_variable.valeur}} = -1**（マイナスをつけて減らします）。",
+            "**[[modifier_progression]]** を追加します：ターゲット **healthBar**、**{{lang:modifier_progression.valeur}}** = `=vie`",
+            "3 つのノードを順番につなぎます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "ターゲット：player · {{lang:Tag}}：danger"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "vie · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_progression}}",
+              "healthBar · =vie"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[lang:modifier_progression.valeur]] に `=vie` と書くと、「変数 vie の値を使う」という意味になります。だからバーはいつもライフの数と同じになります。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 4：Game Over"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "[[modifier_progression]] のあとに **[[condition]]** ノードを追加し、**{{lang:condition.condition}}** = `=vie <= 0`（「vie が 0 以下」）にします。",
+            "その **{{lang:port_vrai}}** 出力を **[[recommencer_scene]]** ノード（カテゴリー {{lang:cat_scene_hud}}）につなぎます。",
+            "保存してゲームを開始し、危ないものに 3 回触れてみます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_progression}}",
+              "healthBar"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=vie <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[recommencer_scene]] はすべてを最初の状態に戻します：オブジェクトは元の場所に、範囲が **[[lang:var_scope_locale]]** の変数（つまり vie = 3）は最初の値に戻ります。"
+        ],
+        [
+          "tip",
+          "**ちゃんとした終了画面を出したい？** すぐにやり直す代わりに、{{lang:port_vrai}} 出力を **[[modifier_texte]]**（「負け！」という文字）、次に **[[attendre]]**（2 秒）、次に **[[recommencer_scene]]** につなぎます。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "おまけ：穴に落ちる"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "アクションゲームなら、シーンのいちばん下に **fallZone** という名前の **{{lang:obj_prefix_zone}}** オブジェクトを置きます（ゾーンはゲーム中は見えません）。そして："
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "{{lang:noeud_cible_objet_a}}：player · {{lang:noeud_cible_objet_b}}：fallZone"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "うまくいかないとき"
+    ],
+    [
+      "ul",
+      [
+        "**体力が減らない：** 危ないものそれぞれに **danger** タグがあるか、**-1** にマイナスがついているか確認してください。",
+        "**バーが動かない：** [[modifier_progression]] のターゲットは、最大値 3 の**プログレスバー**でなければなりません。",
+        "**ゲームがやり直しにならない：** 条件は **{{lang:port_vrai}}** 出力でつながっている必要があります。"
+      ]
+    ]
+  ]
+}

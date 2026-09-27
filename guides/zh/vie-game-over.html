@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何在 Yop2D 中让玩家掉血？| Yop2D 教程</title>
+<meta name="description" content="在 Yop2D 中无需代码管理玩家的生命值：生命变量、生命条，以及 “增加变量值”、“设置进度”、“条件” 和 “重新开始场景” 节点。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/vie-game-over.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/vie-game-over.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/vie-game-over.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/vie-game-over.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/vie-game-over.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/vie-game-over.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/vie-game-over.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/vie-game-over.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/vie-game-over.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/vie-game-over.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何让玩家掉血？",
+ "description": "在 Yop2D 中无需代码管理玩家的生命值：生命变量、生命条，以及 “增加变量值”、“设置进度”、“条件” 和 “重新开始场景” 节点。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "创建生命变量和生命条",
+   "text": "变量 vie（整数，3）和生命条 healthBar，最大值 = 3。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "扣一点血",
+   "text": "如果对象碰到标签（player，danger）→ 增加变量值（vie，-1）→ 设置进度（healthBar，=vie）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Game Over",
+   "text": "条件（=vie <= 0）→ 真 → 重新开始场景。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>如何让玩家掉血？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../vie-game-over.html" hreflang="fr">Français</a> · <a href="../en/vie-game-over.html" hreflang="en">English</a> · <a href="../es/vie-game-over.html" hreflang="es">Español</a> · <a href="../de/vie-game-over.html" hreflang="de">Deutsch</a> · <a href="../it/vie-game-over.html" hreflang="it">Italiano</a> · <a href="../pt/vie-game-over.html" hreflang="pt">Português</a> · <a href="../ru/vie-game-over.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/vie-game-over.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>玩家一开始有 <strong>3 条命</strong>。每碰到一次危险（尖刺、敌人……），就会少一条命，<strong>生命条</strong>也会下降。到 0 就是 <strong>Game Over</strong>：关卡重新开始。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>一个名为 <strong>player</strong> 的、可以移动的角色（见 <a href="../zh/deplacer-personnage.html">移动角色</a>）；</li><li>一个或多个危险物，比如名为 <strong>spikes1</strong>、<strong>spikes2</strong>……的红色方块；</li><li>一个生命条：一个名为 <strong>healthBar</strong> 的 <strong>进度条</strong> 对象（进度条），放在屏幕上方。</li></ul>
+</div>
+<h2>第 1 步：准备危险物和生命条</h2>
+<div class="method">
+<ol><li>选中每个危险物，在它的 <strong>“标签 (Tag)”</strong> 栏中输入 <strong>danger</strong>。</li><li>选中 <strong>healthBar</strong>。在检查器的 <strong>“进度条”</strong> 区域：<strong>最小值 = 0</strong>，<strong>最大值 = 3</strong>，<strong>当前值 = 3</strong>。</li></ol>
+</div>
+<h2>第 2 步：创建“vie”变量</h2>
+<div class="method">
+<ol><li>在左侧面板的 <strong>变量</strong> 区域创建一个变量。</li><li>名称：<strong>vie</strong>（生命）· 作用域：<strong>局部</strong> · 类型：<strong>整数</strong> · 初始值：<strong>3</strong>。</li></ol>
+</div>
+<h2>第 3 步：少一条命</h2>
+<div class="method">
+<ol><li>打开场景的 <strong>蓝图</strong>。</li><li>添加 <strong>“如果对象碰到标签”</strong> 事件：目标 <strong>player</strong>，标签 <strong>danger</strong>。</li><li>添加 <strong>“增加变量值”</strong>：变量 <strong>vie</strong>，<strong>要增加的值 = -1</strong>（带负号，表示减去）。</li><li>添加 <strong>“设置进度”</strong>：目标 <strong>healthBar</strong>，<strong>新进度</strong> = <code>=vie</code></li><li>按顺序把三个节点连起来。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>如果对象碰到标签</b><span>目标：player · 标签：danger</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>增加变量值</b><span>vie · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>设置进度</b><span>healthBar · =vie</span></div>
+</div>
+<div class="tip">👉 在 “新进度” 中写 <code>=vie</code> 的意思是：“取变量 vie 的值”。这样生命条就会一直跟着命数变化。</div>
+</div>
+<h2>第 4 步：Game Over</h2>
+<div class="method">
+<ol><li>在 “设置进度” 之后，添加 <strong>“条件”</strong> 节点，<strong>条件</strong> = <code>=vie &lt;= 0</code>（“vie 小于或等于 0”）。</li><li>把它的 <strong>真</strong> 输出连到 <strong>“重新开始场景”</strong> 节点（类别 场景与 HUD）。</li><li>保存，开始游戏，碰三次危险物。</li></ol>
+<div class="chaine">
+<div class="noeud"><b>设置进度</b><span>healthBar</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>条件</b><span>=vie &lt;= 0</span></div>
+<div class="fleche"><em>真</em> →</div>
+<div class="noeud"><b>重新开始场景</b></div>
+</div>
+<div class="tip">👉 “重新开始场景” 会让一切回到开始时的样子：对象回到原位，作用域为 <strong>“局部”</strong> 的变量（也就是 vie = 3）恢复初始值。</div>
+<div class="tip">👉 <strong>想要一个真正的结束画面？</strong>不要马上重来，而是把 真 输出连到 <strong>“修改文本”</strong>（文字“你输了！”），然后 <strong>“等待”</strong>（2 秒），再接 <strong>“重新开始场景”</strong>。</div>
+</div>
+<h2>附加：掉进深渊</h2>
+<div class="method">
+<p>做平台游戏时，在场景最底部放一个名为 <strong>fallZone</strong> 的 <strong>区域</strong> 对象（区域在游戏中是看不见的）。然后：</p>
+<div class="chaine">
+<div class="noeud evenement"><b>碰撞 A/B</b><span>对象 A：player · 对象 B：fallZone</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>重新开始场景</b></div>
+</div>
+</div>
+<h2>如果不起作用</h2>
+<ul><li><strong>生命没有减少：</strong>检查每个危险物上的 <strong>danger</strong> 标签，以及 <strong>-1</strong> 里的负号。</li><li><strong>生命条不动：</strong>“设置进度” 的目标必须是<strong>进度条</strong>，最大值为 3。</li><li><strong>游戏没有重来：</strong>条件必须通过它的 <strong>真</strong> 输出连接。</li></ul>
+
+<div class="nav">
+<a href="../zh/pieces-score.html">← 收集金币并计分</a>
+<a href="../zh/niveau-suivant.html">下一篇： 进入下一关 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../index.html">官方网站</a></p>
+</footer>
+</body>
+</html>

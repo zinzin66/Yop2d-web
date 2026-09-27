@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как собирать монеты и считать очки в Yop2D? | Руководство Yop2D</title>
+<meta name="description" content="Собирать монеты и показывать счёт в Yop2D без кода: тег, переменная и узлы «Если объект касается тега», «Уничтожить объект», «Добавить к переменной» и «Изменить текст».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pieces-score.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pieces-score.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pieces-score.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pieces-score.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pieces-score.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pieces-score.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pieces-score.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pieces-score.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pieces-score.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pieces-score.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Как собирать монеты и считать очки?",
+ "description": "Собирать монеты и показывать счёт в Yop2D без кода: тег, переменная и узлы «Если объект касается тега», «Уничтожить объект», «Добавить к переменной» и «Изменить текст».",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Дать монетам тег",
+   "text": "Впиши piece в поле Тег (Метка) каждой монеты."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Создать переменную score",
+   "text": "Раздел Переменные: score, Целое, 0."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Соединить узлы",
+   "text": "Если объект касается тега (player, piece) → Уничтожить объект → Добавить к переменной (score, 1) → Изменить текст (scoreText)."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Как собирать монеты и считать очки?</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../pieces-score.html" hreflang="fr">Français</a> · <a href="../en/pieces-score.html" hreflang="en">English</a> · <a href="../es/pieces-score.html" hreflang="es">Español</a> · <a href="../de/pieces-score.html" hreflang="de">Deutsch</a> · <a href="../it/pieces-score.html" hreflang="it">Italiano</a> · <a href="../pt/pieces-score.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/pieces-score.html" hreflang="zh">中文</a> · <a href="../ja/pieces-score.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Когда игрок касается монеты, нужно три вещи: монета <strong>исчезает</strong>, <strong>счёт растёт</strong> на 1, а новый счёт <strong>появляется</strong> на экране.</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>персонаж с именем <strong>player</strong>, который умеет двигаться (см. <a href="../ru/deplacer-personnage.html">Как двигать персонажа</a>);</li><li>несколько монет: объекты <strong>Круг</strong> (или картинки), например <strong>coin1</strong>, <strong>coin2</strong>, <strong>coin3</strong>;</li><li>объект <strong>Текст</strong> с именем <strong>scoreText</strong> вверху экрана, с текстом «Счёт: 0».</li></ul>
+</div>
+<h2>Шаг 1: дать всем монетам один тег</h2>
+<div class="method">
+<p><strong>Тег</strong> — это метка. Благодаря ему один кусочек Blueprint работает для всех монет, даже если их 50.</p>
+<ol><li>Выбери монету.</li><li>В инспекторе, поле <strong>«Тег (Метка)»</strong>, впиши <strong>piece</strong>.</li><li>Сделай так для каждой монеты (кнопка <strong>«Список»</strong> рядом с полем предлагает уже использованные теги).</li></ol>
+</div>
+<h2>Шаг 2: создать переменную «score»</h2>
+<div class="method">
+<p><strong>Переменная</strong> — это ячейка, которая хранит число во время игры.</p>
+<ol><li>На левой панели открой раздел <strong>Переменные</strong> и создай переменную.</li><li>Имя: <strong>score</strong> · Область: <strong>Локальная</strong> · Тип: <strong>Целое</strong> · Начальное значение: <strong>0</strong>.</li></ol>
+<div class="tip">👉 <strong>Локальная</strong> — переменная есть только в этой сцене. Выбери <strong>Глобальная</strong>, если счёт должен сохраняться на следующем уровне (см. <a href="../ru/niveau-suivant.html">Как перейти на следующий уровень</a>).</div>
+</div>
+<h2>Шаг 3: Blueprint</h2>
+<div class="method">
+<ol><li>Открой <strong>Blueprint</strong> сцены.</li><li>Добавь событие <strong>«Если объект касается тега»</strong>: цель <strong>player</strong>, Тег <strong>piece</strong>.</li><li>Добавь <strong>«Уничтожить объект»</strong>. В качестве цели выбери <strong>Объект, участвующий в событии</strong>: это монета, которой только что коснулся игрок.</li><li>Добавь <strong>«Добавить к переменной»</strong>: переменная <strong>score</strong>, <strong>Добавляемое значение = 1</strong>.</li><li>Добавь <strong>«Изменить текст»</strong>: цель <strong>scoreText</strong>, <strong>Новый текст</strong> = <code>="Счёт: " + score</code></li><li>Соедини четыре узла по порядку, выход со входом.</li><li>Сохрани, запусти игру и коснись монеты.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Если объект касается тега</b><span>цель: player · Тег: piece</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Уничтожить объект</b><span>Подразумеваемый объект</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Добавить к переменной</b><span>score · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить текст</b><span>scoreText</span></div>
+</div>
+<div class="tip">👉 <strong>Знак = в начале текста</strong> говорит Yop2D <strong>вычислить</strong> текст, а не написать его как есть. Без него на экране будет дословно <code>"Счёт: " + score</code>. В кавычках — часть, которая не меняется.</div>
+<div class="tip">👉 Событие срабатывает <strong>один раз за касание</strong>: если стоять на монете, очки не накручиваются.</div>
+</div>
+<h2>Бонус: победа, когда собраны все монеты</h2>
+<div class="method">
+<ol><li>После «Изменить текст» добавь узел <strong>«Условие»</strong> с <strong>Условие</strong> = <code>=score &gt;= 3</code> (3 — число монет).</li><li>Соедини его выход <strong>Истина</strong> с узлом <strong>«Тост (Toast)»</strong> с сообщением <strong>Победа!</strong> или с <strong>«Следующая сцена»</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Изменить текст</b><span>scoreText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Условие</b><span>=score &gt;= 3</span></div>
+<div class="fleche"><em>Истина</em> →</div>
+<div class="noeud"><b>Тост (Toast)</b><span>Победа!</span></div>
+</div>
+</div>
+<h2>Если не работает</h2>
+<ul><li><strong>Монета не исчезает:</strong> проверь, что тег везде написан одинаково (piece) и что цель «Уничтожить объект» — задетый объект.</li><li><strong>Текст показывает формулу:</strong> не хватает <strong>=</strong> в начале.</li><li><strong>Счёт остаётся 0:</strong> проверь, что «Добавить к переменной» использует переменную <strong>score</strong>.</li><li><strong>Для сравнения</strong> открой пример <strong>«Платформер»</strong>, который идёт с Yop2D: он собирает монеты именно так.</li></ul>
+
+<div class="nav">
+<a href="../ru/sauter.html">← Прыжок персонажа</a>
+<a href="../ru/vie-game-over.html">Следующее руководство: Потеря здоровья и Game Over →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../index.html">Официальный сайт</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2D で次のステージに進むには？| Yop2D ガイド</title>
+<meta name="description" content="Yop2D でコードを書かずにいくつものステージを作る：1 ステージに 1 シーン、ゴールゾーン、「衝突 A/B」 と 「次のシーン」 ノード、そしてグローバル変数で続くスコア。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/niveau-suivant.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/niveau-suivant.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/niveau-suivant.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/niveau-suivant.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/niveau-suivant.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/niveau-suivant.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/niveau-suivant.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/niveau-suivant.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/niveau-suivant.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/niveau-suivant.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "次のステージに進むには？",
+ "description": "Yop2D でコードを書かずにいくつものステージを作る：1 ステージに 1 シーン、ゴールゾーン、「衝突 A/B」 と 「次のシーン」 ノード、そしてグローバル変数で続くスコア。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "1 ステージに 1 シーン",
+   "text": "シーン の欄：Level1、次に Level2 の順番で。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ゴールゾーン",
+   "text": "Level1 のステージの終わりに、finish という名前の ゾーン オブジェクト。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ノードをつなぐ",
+   "text": "衝突 A/B（player、finish）→ 次のシーン。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>次のステージに進むには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../niveau-suivant.html" hreflang="fr">Français</a> · <a href="../en/niveau-suivant.html" hreflang="en">English</a> · <a href="../es/niveau-suivant.html" hreflang="es">Español</a> · <a href="../de/niveau-suivant.html" hreflang="de">Deutsch</a> · <a href="../it/niveau-suivant.html" hreflang="it">Italiano</a> · <a href="../pt/niveau-suivant.html" hreflang="pt">Português</a> · <a href="../ru/niveau-suivant.html" hreflang="ru">Русский</a> · <a href="../zh/niveau-suivant.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>Yop2D では、<strong>ステージ 1 つが 1 つのシーン</strong>です。プレイヤーがステージの終わりに着くと、見えないゴールゾーンに触れて、ゲームが次のシーンに進みます。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>ちゃんと動く最初のステージと、動かせる <strong>player</strong> という名前のキャラクター；</li><li>2 つ目のステージ（ステップ 1 で作ります）。</li></ul>
+</div>
+<h2>ステップ 1：1 ステージに 1 シーン</h2>
+<div class="method">
+<ol><li>左のパネルで <strong>シーン</strong> の欄を開きます。</li><li>今のシーンの名前を <strong>Level1</strong> に変え、新しいシーン <strong>Level2</strong> を作ります。</li><li>ステージ 2 を作ります：地面、足場、そしてもう一度ボタンつきのキャラクター <strong>player</strong>。</li></ol>
+<div class="tip attention">⚠️ <strong>シーンごとに、オブジェクトと Blueprint は別々です。</strong> ステージ 1 のボタンやキャラクターはステージ 2 にはありません：そこに追加して、ステージ 2 の Blueprint でノードを作り直す必要があります。</div>
+</div>
+<h2>ステップ 2：ゴールゾーン</h2>
+<div class="method">
+<ol><li><strong>Level1</strong> に戻ります。</li><li><strong>ゾーン</strong> オブジェクト（カテゴリー 基本図形とビジュアル）を追加し、名前を <strong>finish</strong> にします。</li><li>プレイヤーがたどり着く、ステージの終わりに置きます。ゾーンはゲーム中は<strong>見えません</strong>：プレイヤーにわかるように、同じ場所に旗やドアを置きましょう。</li></ol>
+</div>
+<h2>ステップ 3：ステージ 1 の Blueprint</h2>
+<div class="method">
+<ol><li><strong>Level1</strong> の <strong>ブループリント</strong> を開きます。</li><li><strong>「衝突 A/B」</strong> イベントを追加します：オブジェクト A <strong>player</strong>、オブジェクト B <strong>finish</strong>。</li><li><strong>「次のシーン」</strong> ノード（カテゴリー シーンとHUD）を追加し、<strong>衝突</strong> 出力につなぎます。</li><li>保存してゲームを開始し、ゾーンまで行きます。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>衝突 A/B</b><span>A：player · B：finish</span></div>
+<div class="fleche"><em>衝突</em> →</div>
+<div class="noeud"><b>次のシーン</b></div>
+</div>
+<div class="tip">👉 <strong>「次のシーン」</strong> はシーン一覧の順番に進みます：Level1、Level2、Level3…。決まったシーン（たとえば「よくできました！」画面）に行きたいときは、<strong>「シーンを切り替える」</strong> を使い、ターゲットにそのシーンを選びます。</div>
+</div>
+<h2>ステージをまたいでスコアを残す</h2>
+<div class="method">
+<p>範囲が <strong>「ローカル」</strong> の変数は、シーンごとに 0 から始まります。スコアをステージ 2 でも続けるには、変数 <strong>score</strong> を範囲 <strong>「グローバル」</strong> で作ります（変数 の欄）。すると、すべてのステージが同じ変数を使います。</p>
+<div class="tip">👉 ステージ 2 では、最初からスコアを表示しましょう：<strong>「起動時」</strong> → <strong>「テキストを変更」</strong>（scoreText）に <code>="スコア：" + score</code>。</div>
+</div>
+<h2>うまくいかないとき</h2>
+<ul><li><strong>ゾーンで何も起きない：</strong> 「衝突 A/B」 の名前 <strong>player</strong> と <strong>finish</strong>、そしてゾーンが本当にプレイヤーの通り道にあるか確認してください。</li><li><strong>シーンが変わらない：</strong> シーン一覧で Level1 が Level2 より<strong>前</strong>にある必要があります。次のシーンがないと、「次のシーン」 は何もしません。</li><li><strong>ステージ 2 が反応しない：</strong> ノードはそれぞれのシーンの Blueprint にあります。Level2 の Blueprint を開いて追加してください。</li></ul>
+
+<div class="nav">
+<a href="../ja/vie-game-over.html">← 体力を減らして Game Over</a>
+<a href="../../index.html#guides">すべてのガイド →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../index.html">公式サイト</a></p>
+</footer>
+</body>
+</html>

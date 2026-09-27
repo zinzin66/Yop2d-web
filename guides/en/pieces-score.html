@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to collect coins and count the score in Yop2D? | Yop2D Guide</title>
+<meta name="description" content="Collect coins and show a score in Yop2D, without code: a tag, a variable and the “If object touches Tag”, “Destroy Object”, “Add to Variable” and “Modify Text” nodes.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/pieces-score.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pieces-score.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pieces-score.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pieces-score.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pieces-score.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pieces-score.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pieces-score.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pieces-score.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pieces-score.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pieces-score.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to collect coins and count the score?",
+ "description": "Collect coins and show a score in Yop2D, without code: a tag, a variable and the “If object touches Tag”, “Destroy Object”, “Add to Variable” and “Modify Text” nodes.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Give the coins a tag",
+   "text": "Type piece in the Tag (Label) field of each coin."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Create the score variable",
+   "text": "Variables section: score, Integer, 0."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Link the nodes",
+   "text": "If object touches Tag (player, piece) → Destroy Object → Add to Variable (score, 1) → Modify Text (scoreText)."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to collect coins and count the score?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../pieces-score.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/pieces-score.html" hreflang="es">Español</a> · <a href="../de/pieces-score.html" hreflang="de">Deutsch</a> · <a href="../it/pieces-score.html" hreflang="it">Italiano</a> · <a href="../pt/pieces-score.html" hreflang="pt">Português</a> · <a href="../ru/pieces-score.html" hreflang="ru">Русский</a> · <a href="../zh/pieces-score.html" hreflang="zh">中文</a> · <a href="../ja/pieces-score.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>When the player touches a coin, we want three things: the coin <strong>disappears</strong>, the <strong>score goes up</strong> by 1, and the new score <strong>shows</strong> on the screen.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a character named <strong>player</strong> that can move (see <a href="../en/deplacer-personnage.html">Move a character</a>);</li><li>a few coins: <strong>Circle</strong> objects (or images), for example <strong>coin1</strong>, <strong>coin2</strong>, <strong>coin3</strong>;</li><li>a <strong>Text</strong> object named <strong>scoreText</strong>, at the top of the screen, with the text “Score: 0”.</li></ul>
+</div>
+<h2>Step 1: give all coins the same tag</h2>
+<div class="method">
+<p>A <strong>tag</strong> is a label. Thanks to it, one single piece of Blueprint works for every coin, even if you add 50 of them.</p>
+<ol><li>Select a coin.</li><li>In the inspector, field <strong>“Tag (Label)”</strong>, type <strong>piece</strong>.</li><li>Do the same for each coin (the <strong>“List”</strong> button next to the field shows the tags already used).</li></ol>
+</div>
+<h2>Step 2: create the “score” variable</h2>
+<div class="method">
+<p>A <strong>variable</strong> is a box that keeps a number in memory during the game.</p>
+<ol><li>In the left panel, open the <strong>Variables</strong> section and create a variable.</li><li>Name: <strong>score</strong> · Scope: <strong>Local</strong> · Type: <strong>Integer</strong> · Starting value: <strong>0</strong>.</li></ol>
+<div class="tip">👉 <strong>Local</strong> = the variable only exists in this scene. Choose <strong>Global</strong> if the score must carry on to the next level (see <a href="../en/niveau-suivant.html">Go to the next level</a>).</div>
+</div>
+<h2>Step 3: the Blueprint</h2>
+<div class="method">
+<ol><li>Open the scene's <strong>Blueprint</strong>.</li><li>Add the <strong>“If object touches Tag”</strong> event: target <strong>player</strong>, Tag <strong>piece</strong>.</li><li>Add <strong>“Destroy Object”</strong>. As its target, choose <strong>The object involved in the event</strong>: that is the coin the player just touched.</li><li>Add <strong>“Add to Variable”</strong>: variable <strong>score</strong>, <strong>Value to add = 1</strong>.</li><li>Add <strong>“Modify Text”</strong>: target <strong>scoreText</strong>, <strong>New text</strong> = <code>="Score: " + score</code></li><li>Link the four nodes in order, output to input.</li><li>Save, then start the game and go touch a coin.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>If object touches Tag</b><span>target: player · Tag: piece</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Destroy Object</b><span>Implied Object</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Add to Variable</b><span>score · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Text</b><span>scoreText</span></div>
+</div>
+<div class="tip">👉 <strong>The = sign at the start of the text</strong> tells Yop2D to <strong>calculate</strong> the text instead of writing it as it is. Without it, the screen would show <code>"Score: " + score</code> word for word. The quotes surround the part that does not change.</div>
+<div class="tip">👉 The event only runs <strong>once per contact</strong>: staying on a coin does not count several points.</div>
+</div>
+<h2>Bonus: win when you have all the coins</h2>
+<div class="method">
+<ol><li>After “Modify Text”, add the <strong>“Condition”</strong> node with <strong>Condition</strong> = <code>=score &gt;= 3</code> (3 = the number of coins).</li><li>Link its <strong>True</strong> output to a <strong>“Toast”</strong> node with the message <strong>You win!</strong>, or to <strong>“Next scene”</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Modify Text</b><span>scoreText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condition</b><span>=score &gt;= 3</span></div>
+<div class="fleche"><em>True</em> →</div>
+<div class="noeud"><b>Toast</b><span>You win!</span></div>
+</div>
+</div>
+<h2>If it doesn't work</h2>
+<ul><li><strong>The coin doesn't disappear:</strong> check that the tag is spelled the same everywhere (piece) and that the target of “Destroy Object” is the involved object.</li><li><strong>The text shows the formula:</strong> the <strong>=</strong> at the start is missing.</li><li><strong>The score stays at 0:</strong> check that “Add to Variable” targets the <strong>score</strong> variable.</li><li><strong>To compare</strong>, open the <strong>“Platform”</strong> example game that comes with Yop2D: it collects coins exactly like this.</li></ul>
+
+<div class="nav">
+<a href="../en/sauter.html">← Make a character jump</a>
+<a href="../en/vie-game-over.html">Next guide: Lose health and Game Over →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,144 @@
+{
+  "titre_page": "Wie komme ich in Yop2D zum nächsten Level? | Yop2D-Anleitung",
+  "description": "Mehrere Level in Yop2D ohne Code bauen: eine Szene pro Level, eine Zielzone, die Knoten [[NoeudEventCollisionAB]] und [[scene_suivante]] und ein Punktestand, der mit einer globalen Variable weiterläuft.",
+  "h1": "Wie komme ich zum nächsten Level?",
+  "carte": [
+    "Zum nächsten Level",
+    "Eine Szene pro Level, eine Zielzone und ein Punktestand, der weiterläuft."
+  ],
+  "etapes": [
+    [
+      "Eine Szene pro Level",
+      "Bereich {{lang:panneau_ress_scenes}}: Level1, dann Level2, in dieser Reihenfolge."
+    ],
+    [
+      "Eine Zielzone",
+      "In Level1 ein Objekt {{lang:obj_prefix_zone}} namens finish am Ende des Levels."
+    ],
+    [
+      "Die Knoten verbinden",
+      "{{NoeudEventCollisionAB}} (player, finish) → {{scene_suivante}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "In Yop2D ist **jedes Level eine Szene**. Erreicht der Spieler das Ende des Levels, berührt er eine unsichtbare Zielzone, und das Spiel wechselt zur nächsten Szene."
+    ],
+    [
+      "besoin",
+      [
+        "ein erstes Level, das funktioniert, mit einer Figur namens **player**, die sich bewegen kann;",
+        "ein zweites Level (wir legen es in Schritt 1 an)."
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 1: eine Szene pro Level"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Öffne im linken Bereich **{{lang:panneau_ress_scenes}}**.",
+            "Benenne deine aktuelle Szene in **Level1** um und lege eine neue Szene **Level2** an.",
+            "Baue Level 2: Boden, Plattformen und wieder die Figur **player** mit ihren Tasten."
+          ]
+        ],
+        [
+          "attention",
+          "**Jede Szene hat eigene Objekte und einen eigenen Blueprint.** Die Tasten und die Figur aus Level 1 gibt es in Level 2 nicht: Du musst sie dort hinzufügen und ihre Knoten im Blueprint von Level 2 neu bauen."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 2: die Zielzone"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Geh zurück zu **Level1**.",
+            "Füge ein Objekt **{{lang:obj_prefix_zone}}** hinzu (Kategorie {{lang:cat_formes_base}}) und nenne es **finish**.",
+            "Setze es ans Ende des Levels, dorthin, wo der Spieler ankommen soll. Eine Zone ist im Spiel **unsichtbar**: Stell eine Fahne oder eine Tür an dieselbe Stelle, damit der Spieler sie sieht."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 3: der Blueprint von Level 1"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Öffne den **{{lang:titre_blueprint}}** von **Level1**.",
+            "Füge das Ereignis **[[NoeudEventCollisionAB]]** hinzu: {{lang:noeud_cible_objet_a}} **player**, {{lang:noeud_cible_objet_b}} **finish**.",
+            "Füge den Knoten **[[scene_suivante]]** hinzu (Kategorie {{lang:cat_scene_hud}}) und verbinde ihn mit dem Ausgang **{{lang:port_evt_collision}}**.",
+            "Speichere, starte das Spiel und lauf bis zur Zone."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "A: player · B: finish"
+            ],
+            [
+              "→",
+              "{{lang:port_evt_collision}}"
+            ],
+            [
+              "n",
+              "{{scene_suivante}}",
+              ""
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**[[scene_suivante]]** folgt der Reihenfolge der Szenenliste: Level1, dann Level2, dann Level3… Um zu einer bestimmten Szene zu gehen (zum Beispiel einem Bildschirm « Bravo! »), nutze stattdessen **[[changer_scene]]** und wähle die Szene als Ziel."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Den Punktestand von Level zu Level behalten"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Eine Variable mit der Gültigkeit **[[lang:var_scope_locale]]** beginnt in jeder Szene wieder bei null. Damit der Punktestand in Level 2 weiterläuft, lege die Variable **score** mit der Gültigkeit **{{lang:var_scope_globale}}** an (Bereich {{lang:panneau_ress_variables}}). Dann nutzen alle Level dieselbe."
+        ],
+        [
+          "tip",
+          "Denk daran, in Level 2 den Punktestand gleich zu Beginn anzuzeigen: **[[NoeudEventStart]]** → **[[modifier_texte]]** (scoreText) mit `=\"Punkte: \" + score`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Wenn es nicht klappt"
+    ],
+    [
+      "ul",
+      [
+        "**In der Zone passiert nichts:** Prüfe die Namen **player** und **finish** in [[NoeudEventCollisionAB]] und ob die Zone wirklich auf dem Weg des Spielers liegt.",
+        "**Das Spiel wechselt die Szene nicht:** Level1 muss in der Szenenliste **vor** Level2 stehen. Gibt es danach keine Szene, macht [[scene_suivante]] nichts.",
+        "**Level 2 reagiert nicht:** Seine Knoten gehören in seinen eigenen Blueprint; öffne den Blueprint von Level2, um sie hinzuzufügen."
+      ]
+    ]
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "titre_page": "Wie lasse ich eine Figur in Yop2D springen? | Yop2D-Anleitung",
+  "description": "Eine Figur in Yop2D ohne Code springen lassen: Schwerkraft, fester Boden, Sprungtaste und die Knoten [[si_au_sol]] und [[impulsion]].",
+  "h1": "Wie lasse ich eine Figur springen?",
+  "carte": [
+    "Eine Figur springen lassen",
+    "Schwerkraft, fester Boden und Sprungtaste, ohne Springen in der Luft."
+  ],
+  "etapes": [
+    [
+      "Der Figur Schwerkraft geben",
+      "Setze das Häkchen bei {{lang:insp_cb_physique}} und wechsle zu {{lang:insp_btn_physique_dynamique}}."
+    ],
+    [
+      "Einen festen Boden legen",
+      "Füge einen Boden mit {{lang:insp_cb_physique}} hinzu, auf {{lang:insp_btn_physique_statique}} gelassen."
+    ],
+    [
+      "Die Sprungtaste verbinden",
+      "{{NoeudEventClicObjet}} (btnJump) → {{si_au_sol}} (player) → {{lang:port_vrai}} → {{impulsion}} (player, -15)."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Damit eine Figur springt, braucht es drei Dinge: Sie muss **fallen** (Schwerkraft), einen **Boden** zum Landen haben und eine **Taste**, die sie nach oben stößt, aber nur, wenn sie steht."
+    ],
+    [
+      "besoin",
+      [
+        "eine Figur namens **player** (ein {{lang:obj_prefix_carre}} oder ein {{lang:obj_prefix_image}});",
+        "einen Boden: ein breites, flaches {{lang:obj_prefix_carre}} namens **floor**, unten in der Szene;",
+        "eine Taste namens **btnJump** (ein {{lang:obj_prefix_bouton}} oder ein {{lang:obj_prefix_carre}}), unten rechts auf dem Bildschirm."
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 1: der Figur Schwerkraft geben"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Wähle **player** aus.",
+            "Setze im Inspektor, Bereich **[[lang:insp_sep_physique]]**, das Häkchen bei **[[lang:insp_cb_physique]]**.",
+            "Tippe auf die Taste **[[lang:insp_btn_physique_statique]]**, damit sie zu **[[lang:insp_btn_physique_dynamique]]** wird. « Dynamisch » heißt, dass das Objekt fällt."
+          ]
+        ],
+        [
+          "tip",
+          "Die Einstellung **[[lang:insp_label_gravite]]** ändert, wie schnell es fällt: 0.5 für langsames Fallen, 2 für schnelles Fallen."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 2: einen festen Boden legen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Wähle **floor** aus.",
+            "Setze auch hier das Häkchen bei **[[lang:insp_cb_physique]]**, aber **lass es auf [[lang:insp_btn_physique_statique]]**: Ein statisches Objekt bewegt sich nicht und hält Objekte auf, die darauf fallen.",
+            "Setze **player** etwas oberhalb des Bodens."
+          ]
+        ],
+        [
+          "tip",
+          "Plattformen baust du genauso: statische Quadrate, die höher liegen."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 3: die Sprungtaste"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Öffne den **{{lang:titre_blueprint}}** der Szene.",
+            "Füge das Ereignis **[[NoeudEventClicObjet]]** hinzu und wähle **btnJump** als Ziel.",
+            "Füge den Knoten **[[si_au_sol]]** hinzu (Kategorie {{lang:cat_logique_conditions}}) und wähle **player** als Ziel.",
+            "Füge den Knoten **[[impulsion]]** hinzu (Kategorie {{lang:cat_mouvements_ia}}): Ziel **player**, **{{lang:impulsion.force}} = -15**.",
+            "Verbinde den Ausgang von [[NoeudEventClicObjet]] mit dem Eingang von [[si_au_sol]], dann den Ausgang **{{lang:port_vrai}}** von [[si_au_sol]] mit dem Eingang von [[impulsion]].",
+            "Speichere, starte das Spiel und tippe auf die Taste."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventClicObjet}}",
+              "Ziel: btnJump"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{si_au_sol}}",
+              "Ziel: player"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{impulsion}}",
+              "Ziel: player · -15"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Warum [[si_au_sol]]?** Ohne ihn könnte der Spieler mitten in der Luft noch einmal springen und durch mehrfaches Tippen davonfliegen."
+        ],
+        [
+          "tip",
+          "**Negativ = nach oben.** In Yop2D werden Y-Zahlen nach unten hin größer. -15 ergibt einen kleinen Sprung, -20 einen großen."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Und um beim Springen zu laufen?"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Füge die Tasten links und rechts aus der Anleitung [Eine Figur bewegen](guide:deplacer-personnage) hinzu (Methode 1). Du kannst einen Finger auf « rechts » lassen und mit einem anderen Finger « Sprung » tippen."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Wenn es nicht klappt"
+    ],
+    [
+      "ul",
+      [
+        "**Die Figur fällt nicht:** Prüfe, ob sie auf [[lang:insp_btn_physique_dynamique]] steht.",
+        "**Sie fällt durch den Boden:** Beim Boden muss [[lang:insp_cb_physique]] angehakt sein, und er muss statisch bleiben.",
+        "**Beim Tippen passiert nichts:** Prüfe, ob die Verbindungen stehen und ob der Ausgang **{{lang:port_vrai}}** benutzt wird. Denk daran, vor dem Start zu speichern.",
+        "**Zum Vergleich** öffne das Beispielspiel **« Plattform »**, das mit Yop2D kommt: Es nutzt genau diesen Aufbau."
+      ]
+    ]
+  ]
+}

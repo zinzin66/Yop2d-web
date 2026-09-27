@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2D でコインを集めてスコアを数えるには？| Yop2D ガイド</title>
+<meta name="description" content="Yop2D でコードを書かずにコインを集めてスコアを表示する：タグ、変数、そして 「オブジェクトがタグに触れた場合」、「オブジェクトを破壊」、「変数に加算」、「テキストを変更」 ノード。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pieces-score.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pieces-score.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pieces-score.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pieces-score.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pieces-score.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pieces-score.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pieces-score.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pieces-score.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pieces-score.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pieces-score.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "コインを集めてスコアを数えるには？",
+ "description": "Yop2D でコードを書かずにコインを集めてスコアを表示する：タグ、変数、そして 「オブジェクトがタグに触れた場合」、「オブジェクトを破壊」、「変数に加算」、「テキストを変更」 ノード。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "コインにタグをつける",
+   "text": "それぞれのコインの タグ (ラベル) 欄に piece と書きます。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "変数 score を作る",
+   "text": "変数 の欄：score、整数、0。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ノードをつなぐ",
+   "text": "オブジェクトがタグに触れた場合（player、piece）→ オブジェクトを破壊 → 変数に加算（score、1）→ テキストを変更（scoreText）。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>コインを集めてスコアを数えるには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../pieces-score.html" hreflang="fr">Français</a> · <a href="../en/pieces-score.html" hreflang="en">English</a> · <a href="../es/pieces-score.html" hreflang="es">Español</a> · <a href="../de/pieces-score.html" hreflang="de">Deutsch</a> · <a href="../it/pieces-score.html" hreflang="it">Italiano</a> · <a href="../pt/pieces-score.html" hreflang="pt">Português</a> · <a href="../ru/pieces-score.html" hreflang="ru">Русский</a> · <a href="../zh/pieces-score.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>プレイヤーがコインに触れたら、3 つのことをします：コインが<strong>消える</strong>、<strong>スコアが</strong> 1 <strong>増える</strong>、新しいスコアが画面に<strong>表示される</strong>。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>動かせる <strong>player</strong> という名前のキャラクター（<a href="../ja/deplacer-personnage.html">キャラクターを動かす</a> を参照）；</li><li>コインをいくつか：<strong>円</strong> オブジェクト（または画像）、たとえば <strong>coin1</strong>、<strong>coin2</strong>、<strong>coin3</strong>；</li><li>画面の上にある <strong>scoreText</strong> という名前の <strong>テキスト</strong> オブジェクト。文字は「スコア：0」。</li></ul>
+</div>
+<h2>ステップ 1：すべてのコインに同じタグをつける</h2>
+<div class="method">
+<p><strong>タグ</strong>はラベルのようなものです。タグがあれば、コインを 50 個置いても、1 つの Blueprint ですべてのコインに対応できます。</p>
+<ol><li>コインを 1 つ選びます。</li><li>インスペクターの <strong>「タグ (ラベル)」</strong> 欄に <strong>piece</strong> と書きます。</li><li>ほかのコインにも同じようにします（欄の横の <strong>「リスト」</strong> ボタンで、使ったことのあるタグを選べます）。</li></ol>
+</div>
+<h2>ステップ 2：変数「score」を作る</h2>
+<div class="method">
+<p><strong>変数</strong>は、ゲーム中に数を覚えておく箱のようなものです。</p>
+<ol><li>左のパネルで <strong>変数</strong> の欄を開き、変数を作ります。</li><li>名前：<strong>score</strong> · 範囲：<strong>ローカル</strong> · 型：<strong>整数</strong> · 最初の値：<strong>0</strong>。</li></ol>
+<div class="tip">👉 <strong>ローカル</strong> = 変数はこのシーンの中だけにあります。スコアを次のステージに持ちこしたいときは <strong>グローバル</strong> を選びます（<a href="../ja/niveau-suivant.html">次のステージに進む</a> を参照）。</div>
+</div>
+<h2>ステップ 3：Blueprint</h2>
+<div class="method">
+<ol><li>シーンの <strong>ブループリント</strong> を開きます。</li><li><strong>「オブジェクトがタグに触れた場合」</strong> イベントを追加します：ターゲット <strong>player</strong>、タグ <strong>piece</strong>。</li><li><strong>「オブジェクトを破壊」</strong> を追加します。ターゲットには <strong>イベントに関与するオブジェクト</strong> を選びます：プレイヤーがちょうど触れたコインのことです。</li><li><strong>「変数に加算」</strong> を追加します：変数 <strong>score</strong>、<strong>加算する値 = 1</strong>。</li><li><strong>「テキストを変更」</strong> を追加します：ターゲット <strong>scoreText</strong>、<strong>新しいテキスト</strong> = <code>="スコア：" + score</code></li><li>4 つのノードを順番に、出力から入力へつなぎます。</li><li>保存してゲームを開始し、コインに触れてみます。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>オブジェクトがタグに触れた場合</b><span>ターゲット：player · タグ：piece</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>オブジェクトを破壊</b><span>関連オブジェクト</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数に加算</b><span>score · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>テキストを変更</b><span>scoreText</span></div>
+</div>
+<div class="tip">👉 <strong>文字の最初の = 記号</strong>は、文字をそのまま書くのではなく<strong>計算する</strong>ように Yop2D に伝えます。これがないと、画面に <code>"スコア：" + score</code> がそのまま表示されます。引用符（" "）の中は変わらない部分です。</div>
+<div class="tip">👉 このイベントは<strong>接触ごとに 1 回だけ</strong>動きます：コインの上にいても、何点も入ることはありません。</div>
+</div>
+<h2>おまけ：コインを全部集めたら勝ち</h2>
+<div class="method">
+<ol><li>「テキストを変更」 のあとに <strong>「条件」</strong> ノードを追加し、<strong>条件</strong> = <code>=score &gt;= 3</code>（3 = コインの数）にします。</li><li>その <strong>真</strong> 出力を、メッセージ <strong>勝ち！</strong> の <strong>「トースト (Toast)」</strong> ノード、または <strong>「次のシーン」</strong> につなぎます。</li></ol>
+<div class="chaine">
+<div class="noeud"><b>テキストを変更</b><span>scoreText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>条件</b><span>=score &gt;= 3</span></div>
+<div class="fleche"><em>真</em> →</div>
+<div class="noeud"><b>トースト (Toast)</b><span>勝ち！</span></div>
+</div>
+</div>
+<h2>うまくいかないとき</h2>
+<ul><li><strong>コインが消えない：</strong> タグがどこでも同じ書き方か（piece）、「オブジェクトを破壊」 のターゲットが関連オブジェクトになっているか確認してください。</li><li><strong>数式がそのまま表示される：</strong> 最初の <strong>=</strong> が抜けています。</li><li><strong>スコアが 0 のまま：</strong> 「変数に加算」 が変数 <strong>score</strong> を使っているか確認してください。</li><li><strong>見比べるには</strong>、Yop2D に入っているサンプルゲーム<strong>「プラットフォーム」</strong>を開いてください。まさにこの方法でコインを集めています。</li></ul>
+
+<div class="nav">
+<a href="../ja/sauter.html">← キャラクターをジャンプさせる</a>
+<a href="../ja/vie-game-over.html">次のガイド： 体力を減らして Game Over →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../index.html">公式サイト</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{
+  "titre_page": "Comment faire bouger un personnage dans Yop2D ? | Guide Yop2D",
+  "description": "Trois façons simples de faire bouger un personnage dans Yop2D, sans code : boutons à l'écran, joystick virtuel, ou glisser avec le doigt.",
+  "h1": "Comment faire bouger un personnage ?",
+  "carte": ["Déplacer un personnage", "Faire bouger un objet avec des boutons, le joystick ou le doigt."],
+  "etapes": [
+    ["Avec des boutons à l'écran", "Relie l'événement {{NoeudEventMaintenuObjet}} de chaque bouton au nœud {{pousser}} avec {{lang:pousser.x}} = -5 ou 5."],
+    ["Avec un joystick virtuel", "Ajoute un objet {{lang:obj_prefix_joystick}} et choisis le personnage dans {{lang:insp_label_cible_joystick}}. Aucun nœud n'est nécessaire."],
+    ["En le faisant glisser au doigt", "Coche {{lang:insp_cb_deplacable}} dans l'inspecteur de l'objet."]
+  ],
+  "blocs": [
+    ["p", "Dans Yop2D, il existe trois façons simples de faire bouger un personnage, sans écrire de code. Choisis celle qui correspond à ton jeu."],
+    ["h2", "Méthode 1 : avec des boutons à l'écran (gauche / droite)"],
+    ["bloc", [
+      ["p", "Idéal pour un jeu de plateforme ou un jeu où le personnage se déplace sur une ligne."],
+      ["ol", [
+        "Dans ta scène, ajoute ton personnage (un **{{lang:obj_prefix_carre}}** ou une **{{lang:obj_prefix_image}}**) et nomme-le **player**.",
+        "Ajoute deux objets qui serviront de boutons, par exemple deux **{{lang:obj_prefix_bouton}}** (ou deux carrés) nommés **btnGauche** et **btnDroite**. Place-les en bas de l'écran.",
+        "Ouvre le **{{lang:titre_blueprint}}** de la scène.",
+        "Ajoute l'événement **[[NoeudEventMaintenuObjet]]** et choisis **btnGauche** comme cible.",
+        "Ajoute un nœud **[[pousser]]** : cible **player**, **{{lang:pousser.x}} = -5**, **{{lang:pousser.y}} = 0**.",
+        "Relie la sortie de l'événement à l'entrée de [[pousser]].",
+        "Fais la même chose pour **btnDroite**, avec **{{lang:pousser.x}} = 5**.",
+        "Sauvegarde, puis lance le jeu : tant que tu gardes le doigt sur un bouton, le personnage avance."
+      ]],
+      ["chaine", [["ev", "{{NoeudEventMaintenuObjet}}", "cible : btnGauche"], ["→"], ["n", "{{pousser}}", "cible : player · {{lang:pousser.x}} = -5"]]],
+      ["tip", "[[NoeudEventMaintenuObjet]] se répète à chaque image tant que le doigt reste sur le bouton : c'est pour ça que le personnage avance en continu. Pour aller plus vite, augmente la valeur (par exemple 8 ou 10)."]
+    ]],
+    ["h2", "Méthode 2 : avec un joystick virtuel"],
+    ["bloc", [
+      ["p", "Idéal pour un jeu vu de dessus, où le personnage se déplace dans toutes les directions. **Aucun nœud n'est nécessaire.**"],
+      ["ol", [
+        "Ajoute un objet **{{lang:obj_prefix_joystick}}** à ta scène (catégorie **{{lang:cat_interactifs}}**) et place-le en bas à gauche.",
+        "Sélectionne le joystick. Dans l'inspecteur, section **[[lang:insp_sep_joystick]]**, touche le bouton de **[[lang:insp_label_cible_joystick]]** et choisis ton personnage.",
+        "Sauvegarde, puis lance le jeu : le personnage suit la direction du joystick."
+      ]],
+      ["tip", "**Raccourci :** si tu donnes le tag **Joueur** (ou **Player**) à ton personnage, le joystick le déplace automatiquement, même sans rien choisir dans [[lang:insp_label_cible_joystick]]. Attention : ce tag passe avant le choix de l'inspecteur."],
+      ["tip", "**Pour aller plus loin :** les formules `joystick.x` et `joystick.y` donnent la direction (entre -1 et 1). Tu peux les utiliser dans un nœud [[pousser]] relié à [[NoeudEventChaqueImage]], par exemple `=joystick.x * 5`. Le nœud **[[si_joystick]]** a aussi des sorties {{lang:port_haut}}, {{lang:port_bas}}, {{lang:port_gauche}}, {{lang:port_droite}} et {{lang:port_repos}}."]
+    ]],
+    ["h2", "Méthode 3 : le faire glisser avec le doigt"],
+    ["bloc", [
+      ["p", "Idéal pour un puzzle, un jeu de cartes ou un jeu où l'on déplace des pièces."],
+      ["ol", [
+        "Sélectionne ton objet dans l'éditeur de scène.",
+        "Dans l'inspecteur, coche **[[lang:insp_cb_deplacable]]**.",
+        "Lance le jeu : tu peux faire glisser l'objet avec le doigt."
+      ]],
+      ["tip", "Pour réagir au moment où le joueur lâche l'objet (par exemple pour vérifier s'il est bien placé), utilise l'événement **[[NoeudEventFinGlisser]]**."],
+      ["tip", "Pour autoriser ou interdire le glissement pendant le jeu (une pièce de puzzle bien placée, par exemple), utilise le nœud **[[modifier_deplacable]]**."]
+    ]],
+    ["h2", "Astuces"],
+    ["ul", [
+      "**Pour faire sauter le personnage**, suis le guide [Faire sauter un personnage](guide:sauter).",
+      "**Le jeu d'exemple « Plateforme »** fourni avec Yop2D utilise la méthode 1 : ouvre-le pour voir un Blueprint complet qui fonctionne.",
+      "**Une question ?** Viens en parler sur [Discord](https://discord.gg/nHqCcqHZNQ) ou [Telegram](https://t.me/+7PQ9WKw7n645Y2Zk)."
+    ]]
+  ]
+}

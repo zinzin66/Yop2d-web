@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie lasse ich eine Figur in Yop2D springen? | Yop2D-Anleitung</title>
+<meta name="description" content="Eine Figur in Yop2D ohne Code springen lassen: Schwerkraft, fester Boden, Sprungtaste und die Knoten „Wenn am Boden“ und „Impuls (Sprung)“.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/sauter.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/sauter.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/sauter.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/sauter.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/sauter.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/sauter.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/sauter.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/sauter.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/sauter.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/sauter.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie lasse ich eine Figur springen?",
+ "description": "Eine Figur in Yop2D ohne Code springen lassen: Schwerkraft, fester Boden, Sprungtaste und die Knoten „Wenn am Boden“ und „Impuls (Sprung)“.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Der Figur Schwerkraft geben",
+   "text": "Setze das Häkchen bei Kollisionskörper aktivieren und wechsle zu Physik: Dynamisch ▼."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Einen festen Boden legen",
+   "text": "Füge einen Boden mit Kollisionskörper aktivieren hinzu, auf Physik: Statisch ► gelassen."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Die Sprungtaste verbinden",
+   "text": "Bei Objektklick (btnJump) → Wenn am Boden (player) → Wahr → Impuls (Sprung) (player, -15)."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Wie lasse ich eine Figur springen?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../sauter.html" hreflang="fr">Français</a> · <a href="../en/sauter.html" hreflang="en">English</a> · <a href="../es/sauter.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/sauter.html" hreflang="it">Italiano</a> · <a href="../pt/sauter.html" hreflang="pt">Português</a> · <a href="../ru/sauter.html" hreflang="ru">Русский</a> · <a href="../zh/sauter.html" hreflang="zh">中文</a> · <a href="../ja/sauter.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Damit eine Figur springt, braucht es drei Dinge: Sie muss <strong>fallen</strong> (Schwerkraft), einen <strong>Boden</strong> zum Landen haben und eine <strong>Taste</strong>, die sie nach oben stößt, aber nur, wenn sie steht.</p>
+<div class="besoin">
+<b>Du brauchst:</b>
+<ul><li>eine Figur namens <strong>player</strong> (ein Quadrat oder ein Bild);</li><li>einen Boden: ein breites, flaches Quadrat namens <strong>floor</strong>, unten in der Szene;</li><li>eine Taste namens <strong>btnJump</strong> (ein Button oder ein Quadrat), unten rechts auf dem Bildschirm.</li></ul>
+</div>
+<h2>Schritt 1: der Figur Schwerkraft geben</h2>
+<div class="method">
+<ol><li>Wähle <strong>player</strong> aus.</li><li>Setze im Inspektor, Bereich <strong>„Physik &amp; Umgebung“</strong>, das Häkchen bei <strong>„Kollisionskörper aktivieren“</strong>.</li><li>Tippe auf die Taste <strong>„Physik: Statisch ►“</strong>, damit sie zu <strong>„Physik: Dynamisch ▼“</strong> wird. „Dynamisch“ heißt, dass das Objekt fällt.</li></ol>
+<div class="tip">👉 Die Einstellung <strong>„Schwerkraft (Bsp: 1.0)“</strong> ändert, wie schnell es fällt: 0.5 für langsames Fallen, 2 für schnelles Fallen.</div>
+</div>
+<h2>Schritt 2: einen festen Boden legen</h2>
+<div class="method">
+<ol><li>Wähle <strong>floor</strong> aus.</li><li>Setze auch hier das Häkchen bei <strong>„Kollisionskörper aktivieren“</strong>, aber <strong>lass es auf „Physik: Statisch ►“</strong>: Ein statisches Objekt bewegt sich nicht und hält Objekte auf, die darauf fallen.</li><li>Setze <strong>player</strong> etwas oberhalb des Bodens.</li></ol>
+<div class="tip">👉 Plattformen baust du genauso: statische Quadrate, die höher liegen.</div>
+</div>
+<h2>Schritt 3: die Sprungtaste</h2>
+<div class="method">
+<ol><li>Öffne den <strong>Blueprint</strong> der Szene.</li><li>Füge das Ereignis <strong>„Bei Objektklick“</strong> hinzu und wähle <strong>btnJump</strong> als Ziel.</li><li>Füge den Knoten <strong>„Wenn am Boden“</strong> hinzu (Kategorie Logik &amp; Bedingungen) und wähle <strong>player</strong> als Ziel.</li><li>Füge den Knoten <strong>„Impuls (Sprung)“</strong> hinzu (Kategorie Bewegung &amp; KI): Ziel <strong>player</strong>, <strong>Vertikale Kraft (negativ = hoch) = -15</strong>.</li><li>Verbinde den Ausgang von „Bei Objektklick“ mit dem Eingang von „Wenn am Boden“, dann den Ausgang <strong>Wahr</strong> von „Wenn am Boden“ mit dem Eingang von „Impuls (Sprung)“.</li><li>Speichere, starte das Spiel und tippe auf die Taste.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Bei Objektklick</b><span>Ziel: btnJump</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Wenn am Boden</b><span>Ziel: player</span></div>
+<div class="fleche"><em>Wahr</em> →</div>
+<div class="noeud"><b>Impuls (Sprung)</b><span>Ziel: player · -15</span></div>
+</div>
+<div class="tip">👉 <strong>Warum „Wenn am Boden“?</strong> Ohne ihn könnte der Spieler mitten in der Luft noch einmal springen und durch mehrfaches Tippen davonfliegen.</div>
+<div class="tip">👉 <strong>Negativ = nach oben.</strong> In Yop2D werden Y-Zahlen nach unten hin größer. -15 ergibt einen kleinen Sprung, -20 einen großen.</div>
+</div>
+<h2>Und um beim Springen zu laufen?</h2>
+<div class="method">
+<p>Füge die Tasten links und rechts aus der Anleitung <a href="../de/deplacer-personnage.html">Eine Figur bewegen</a> hinzu (Methode 1). Du kannst einen Finger auf „rechts“ lassen und mit einem anderen Finger „Sprung“ tippen.</p>
+</div>
+<h2>Wenn es nicht klappt</h2>
+<ul><li><strong>Die Figur fällt nicht:</strong> Prüfe, ob sie auf „Physik: Dynamisch ▼“ steht.</li><li><strong>Sie fällt durch den Boden:</strong> Beim Boden muss „Kollisionskörper aktivieren“ angehakt sein, und er muss statisch bleiben.</li><li><strong>Beim Tippen passiert nichts:</strong> Prüfe, ob die Verbindungen stehen und ob der Ausgang <strong>Wahr</strong> benutzt wird. Denk daran, vor dem Start zu speichern.</li><li><strong>Zum Vergleich</strong> öffne das Beispielspiel <strong>„Plattform“</strong>, das mit Yop2D kommt: Es nutzt genau diesen Aufbau.</li></ul>
+
+<div class="nav">
+<a href="../de/deplacer-personnage.html">← Eine Figur bewegen</a>
+<a href="../de/pieces-score.html">Nächste Anleitung: Münzen sammeln und Punkte zählen →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../index.html">Offizielle Website</a></p>
+</footer>
+</body>
+</html>

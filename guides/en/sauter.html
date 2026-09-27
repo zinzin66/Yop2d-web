@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to make a character jump in Yop2D? | Yop2D Guide</title>
+<meta name="description" content="Make a character jump in Yop2D, without code: gravity, a solid floor, a jump button and the “If on ground” and “Impulse (jump)” nodes.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/sauter.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/sauter.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/sauter.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/sauter.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/sauter.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/sauter.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/sauter.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/sauter.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/sauter.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/sauter.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to make a character jump?",
+ "description": "Make a character jump in Yop2D, without code: gravity, a solid floor, a jump button and the “If on ground” and “Impulse (jump)” nodes.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Give the character gravity",
+   "text": "Tick Enable physics body (Collisions) and switch to Physics: Dynamic ▼."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Add a solid floor",
+   "text": "Add a floor with Enable physics body (Collisions), left as Physics: Static ►."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Link the jump button",
+   "text": "On Object Click (btnJump) → If on ground (player) → True → Impulse (jump) (player, -15)."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to make a character jump?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../sauter.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/sauter.html" hreflang="es">Español</a> · <a href="../de/sauter.html" hreflang="de">Deutsch</a> · <a href="../it/sauter.html" hreflang="it">Italiano</a> · <a href="../pt/sauter.html" hreflang="pt">Português</a> · <a href="../ru/sauter.html" hreflang="ru">Русский</a> · <a href="../zh/sauter.html" hreflang="zh">中文</a> · <a href="../ja/sauter.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>For a character to jump, you need three things: it must <strong>fall</strong> (gravity), a <strong>floor</strong> to land on, and a <strong>button</strong> that pushes it upwards, only when it is standing on something.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a character named <strong>player</strong> (a Square or an Image);</li><li>a floor: a wide, flat Square named <strong>floor</strong>, at the bottom of the scene;</li><li>a button named <strong>btnJump</strong> (a Button or a Square), at the bottom right of the screen.</li></ul>
+</div>
+<h2>Step 1: give the character gravity</h2>
+<div class="method">
+<ol><li>Select <strong>player</strong>.</li><li>In the inspector, section <strong>“Physics &amp; Environment”</strong>, tick <strong>“Enable physics body (Collisions)”</strong>.</li><li>Tap the <strong>“Physics: Static ►”</strong> button so that it becomes <strong>“Physics: Dynamic ▼”</strong>. “Dynamic” means the object falls.</li></ol>
+<div class="tip">👉 The <strong>“Gravity (ex: 1.0)”</strong> setting changes how fast it falls: 0.5 to fall slowly, 2 to fall fast.</div>
+</div>
+<h2>Step 2: add a solid floor</h2>
+<div class="method">
+<ol><li>Select <strong>floor</strong>.</li><li>Tick <strong>“Enable physics body (Collisions)”</strong> too, but <strong>leave it as “Physics: Static ►”</strong>: a static object does not move and stops objects that fall on it.</li><li>Put <strong>player</strong> a little above the floor.</li></ol>
+<div class="tip">👉 You can make platforms the same way: static squares placed higher up.</div>
+</div>
+<h2>Step 3: the jump button</h2>
+<div class="method">
+<ol><li>Open the scene's <strong>Blueprint</strong>.</li><li>Add the <strong>“On Object Click”</strong> event and choose <strong>btnJump</strong> as its target.</li><li>Add the <strong>“If on ground”</strong> node (category Logic &amp; Conditions) and choose <strong>player</strong> as its target.</li><li>Add the <strong>“Impulse (jump)”</strong> node (category Movements &amp; AI): target <strong>player</strong>, <strong>Vertical force (negative = up) = -15</strong>.</li><li>Link the output of “On Object Click” to the input of “If on ground”, then the <strong>True</strong> output of “If on ground” to the input of “Impulse (jump)”.</li><li>Save, then start the game and tap the button.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>On Object Click</b><span>target: btnJump</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>If on ground</b><span>target: player</span></div>
+<div class="fleche"><em>True</em> →</div>
+<div class="noeud"><b>Impulse (jump)</b><span>target: player · -15</span></div>
+</div>
+<div class="tip">👉 <strong>Why “If on ground”?</strong> Without it, the player could jump again in mid-air and fly away by tapping the button several times.</div>
+<div class="tip">👉 <strong>Negative = upwards.</strong> In Yop2D, Y numbers grow towards the bottom of the screen. -15 makes a small jump, -20 a big one.</div>
+</div>
+<h2>What about moving while jumping?</h2>
+<div class="method">
+<p>Add the left and right buttons from the guide <a href="../en/deplacer-personnage.html">Move a character</a> (method 1). You can keep one finger on “right” and tap “jump” with another finger.</p>
+</div>
+<h2>If it doesn't work</h2>
+<ul><li><strong>The character doesn't fall:</strong> check that it is set to “Physics: Dynamic ▼”.</li><li><strong>It goes through the floor:</strong> the floor must have “Enable physics body (Collisions)” ticked, and stay static.</li><li><strong>Nothing happens when you tap:</strong> check that the wires are linked, and that the output used is <strong>True</strong>. Remember to save before starting the game.</li><li><strong>To compare</strong>, open the <strong>“Platform”</strong> example game that comes with Yop2D: it uses exactly this setup.</li></ul>
+
+<div class="nav">
+<a href="../en/deplacer-personnage.html">← Move a character</a>
+<a href="../en/pieces-score.html">Next guide: Collect coins and count the score →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a></p>
+</footer>
+</body>
+</html>

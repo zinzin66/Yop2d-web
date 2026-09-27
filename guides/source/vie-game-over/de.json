@@ -1,0 +1,213 @@
+{
+  "titre_page": "Wie verliert der Spieler Leben in Yop2D? | Yop2D-Anleitung",
+  "description": "Das Leben des Spielers in Yop2D ohne Code verwalten: eine Lebensvariable, eine Lebensleiste und die Knoten [[ajouter_variable]], [[modifier_progression]], [[condition]] und [[recommencer_scene]].",
+  "h1": "Wie verliert der Spieler Leben?",
+  "carte": [
+    "Leben verlieren und Game Over",
+    "Eine Lebensvariable, eine Lebensleiste und zurück zum Start, wenn das Leben auf 0 fällt."
+  ],
+  "etapes": [
+    [
+      "Lebensvariable und Leiste anlegen",
+      "Variable vie ({{lang:var_type_entier}}, 3) und Leiste healthBar mit {{lang:insp_label_prog_max}} = 3."
+    ],
+    [
+      "Einen Punkt verlieren",
+      "{{NoeudEventCollisionTag}} (player, danger) → {{ajouter_variable}} (vie, -1) → {{modifier_progression}} (healthBar, =vie)."
+    ],
+    [
+      "Game Over",
+      "{{condition}} (=vie <= 0) → {{lang:port_vrai}} → {{recommencer_scene}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Der Spieler startet mit **3 Leben**. Jedes Mal, wenn er eine Gefahr berührt (Stacheln, einen Gegner…), verliert er eines, und die **Lebensleiste** sinkt. Bei 0 heißt es **Game Over**: Das Level beginnt von vorn."
+    ],
+    [
+      "besoin",
+      [
+        "eine Figur namens **player**, die sich bewegen kann (siehe [Eine Figur bewegen](guide:deplacer-personnage));",
+        "eine oder mehrere Gefahren, zum Beispiel rote Quadrate namens **spikes1**, **spikes2**…;",
+        "eine Lebensleiste: ein Objekt **{{lang:obj_prefix_barre_progression}}** (Fortschrittsbalken) namens **healthBar**, oben auf dem Bildschirm."
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 1: Gefahren und Leiste vorbereiten"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Wähle jede Gefahr aus und schreibe **danger** in ihr Feld **[[lang:insp_label_tag]]**.",
+            "Wähle **healthBar** aus. Im Bereich **[[lang:insp_sep_progression]]** des Inspektors: **{{lang:insp_label_prog_min}} = 0**, **{{lang:insp_label_prog_max}} = 3**, **{{lang:insp_label_prog_actuelle}} = 3**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 2: die Variable « vie » anlegen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Lege im linken Bereich **{{lang:panneau_ress_variables}}** eine Variable an.",
+            "Name: **vie** (Leben) · Gültigkeit: **{{lang:var_scope_locale}}** · Typ: **{{lang:var_type_entier}}** · Startwert: **3**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 3: ein Leben verlieren"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Öffne den **{{lang:titre_blueprint}}** der Szene.",
+            "Füge das Ereignis **[[NoeudEventCollisionTag]]** hinzu: Ziel **player**, {{lang:Tag}} **danger**.",
+            "Füge **[[ajouter_variable]]** hinzu: Variable **vie**, **{{lang:ajouter_variable.valeur}} = -1** (mit Minuszeichen, zum Abziehen).",
+            "Füge **[[modifier_progression]]** hinzu: Ziel **healthBar**, **{{lang:modifier_progression.valeur}}** = `=vie`",
+            "Verbinde die drei Knoten der Reihe nach."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "Ziel: player · {{lang:Tag}}: danger"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "vie · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_progression}}",
+              "healthBar · =vie"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "`=vie` in [[lang:modifier_progression.valeur]] bedeutet: « nimm den Wert der Variable vie ». So folgt die Leiste immer der Zahl der Leben."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 4: das Game Over"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge nach [[modifier_progression]] den Knoten **[[condition]]** hinzu, mit **{{lang:condition.condition}}** = `=vie <= 0` (« vie kleiner oder gleich 0 »).",
+            "Verbinde seinen Ausgang **{{lang:port_vrai}}** mit dem Knoten **[[recommencer_scene]]** (Kategorie {{lang:cat_scene_hud}}).",
+            "Speichere, starte das Spiel und berühre dreimal eine Gefahr."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_progression}}",
+              "healthBar"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=vie <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[recommencer_scene]] setzt alles auf den Anfang zurück: die Objekte an ihren Platz und die Variablen mit der Gültigkeit **[[lang:var_scope_locale]]** (also vie = 3) auf ihren Startwert."
+        ],
+        [
+          "tip",
+          "**Lust auf einen echten Endbildschirm?** Statt sofort neu zu starten, verbinde den Ausgang {{lang:port_vrai}} mit **[[modifier_texte]]** (ein Text « Verloren! »), dann **[[attendre]]** (2 Sekunden), dann **[[recommencer_scene]]**."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Bonus: in die Tiefe fallen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Setze bei einem Jump'n'Run ein Objekt **{{lang:obj_prefix_zone}}** ganz unten in die Szene, namens **fallZone** (eine Zone ist im Spiel unsichtbar). Dann:"
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "{{lang:noeud_cible_objet_a}}: player · {{lang:noeud_cible_objet_b}}: fallZone"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Wenn es nicht klappt"
+    ],
+    [
+      "ul",
+      [
+        "**Das Leben sinkt nicht:** Prüfe den Tag **danger** bei jeder Gefahr und das Minuszeichen in **-1**.",
+        "**Die Leiste bewegt sich nicht:** Das Ziel von [[modifier_progression]] muss ein **Fortschrittsbalken** sein, mit einem Maximum von 3.",
+        "**Das Spiel startet nicht neu:** Die Bedingung muss über ihren Ausgang **{{lang:port_vrai}}** verbunden sein."
+      ]
+    ]
+  ]
+}

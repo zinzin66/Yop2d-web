@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2D でキャラクターをジャンプさせるには？| Yop2D ガイド</title>
+<meta name="description" content="Yop2D でコードを書かずにキャラクターをジャンプさせる：重力、固い地面、ジャンプボタン、そして 「地面にいるなら」 と 「インパルス（ジャンプ）」 ノード。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/sauter.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/sauter.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/sauter.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/sauter.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/sauter.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/sauter.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/sauter.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/sauter.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/sauter.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/sauter.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "キャラクターをジャンプさせるには？",
+ "description": "Yop2D でコードを書かずにキャラクターをジャンプさせる：重力、固い地面、ジャンプボタン、そして 「地面にいるなら」 と 「インパルス（ジャンプ）」 ノード。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "キャラクターに重力を与える",
+   "text": "物理ボディを有効にする (衝突) にチェックを入れ、物理: 動的 ▼ に切りかえます。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "固い地面を置く",
+   "text": "地面を追加して 物理ボディを有効にする (衝突) にチェックを入れ、物理: 静的 ► のままにします。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ジャンプボタンをつなぐ",
+   "text": "オブジェクトクリック時（btnJump）→ 地面にいるなら（player）→ 真 → インパルス（ジャンプ）（player、-15）。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>キャラクターをジャンプさせるには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../sauter.html" hreflang="fr">Français</a> · <a href="../en/sauter.html" hreflang="en">English</a> · <a href="../es/sauter.html" hreflang="es">Español</a> · <a href="../de/sauter.html" hreflang="de">Deutsch</a> · <a href="../it/sauter.html" hreflang="it">Italiano</a> · <a href="../pt/sauter.html" hreflang="pt">Português</a> · <a href="../ru/sauter.html" hreflang="ru">Русский</a> · <a href="../zh/sauter.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>キャラクターがジャンプするには 3 つ必要です：<strong>落ちる</strong>こと（重力）、着地する<strong>地面</strong>、そして地面に立っているときだけ上に押し上げる<strong>ボタン</strong>です。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li><strong>player</strong> という名前のキャラクター（四角形 または 画像）；</li><li>地面：シーンの下にある、横に広くて平たい <strong>floor</strong> という名前の 四角形；</li><li>画面の右下にある、<strong>btnJump</strong> という名前のボタン（ボタン または 四角形）。</li></ul>
+</div>
+<h2>ステップ 1：キャラクターに重力を与える</h2>
+<div class="method">
+<ol><li><strong>player</strong> を選びます。</li><li>インスペクターの <strong>「物理と環境」</strong> で、<strong>「物理ボディを有効にする (衝突)」</strong> にチェックを入れます。</li><li><strong>「物理: 静的 ►」</strong> ボタンをタップして <strong>「物理: 動的 ▼」</strong> にします。「動的」はオブジェクトが落ちるという意味です。</li></ol>
+<div class="tip">👉 <strong>「重力 (例: 1.0)」</strong> の設定で落ちる速さが変わります：0.5 でゆっくり、2 で速く落ちます。</div>
+</div>
+<h2>ステップ 2：固い地面を置く</h2>
+<div class="method">
+<ol><li><strong>floor</strong> を選びます。</li><li>こちらも <strong>「物理ボディを有効にする (衝突)」</strong> にチェックを入れますが、<strong>「物理: 静的 ►」 のままにします</strong>：静的なオブジェクトは動かず、上に落ちてきたオブジェクトを受け止めます。</li><li><strong>player</strong> を地面の少し上に置きます。</li></ol>
+<div class="tip">👉 足場も同じように作れます：高いところに置いた静的な四角形です。</div>
+</div>
+<h2>ステップ 3：ジャンプボタン</h2>
+<div class="method">
+<ol><li>シーンの <strong>ブループリント</strong> を開きます。</li><li><strong>「オブジェクトクリック時」</strong> イベントを追加し、ターゲットに <strong>btnJump</strong> を選びます。</li><li><strong>「地面にいるなら」</strong> ノード（カテゴリー ロジックと条件）を追加し、ターゲットに <strong>player</strong> を選びます。</li><li><strong>「インパルス（ジャンプ）」</strong> ノード（カテゴリー 移動とAI）を追加します：ターゲット <strong>player</strong>、<strong>縦方向の力（マイナス = 上） = -15</strong>。</li><li>「オブジェクトクリック時」 の出力を 「地面にいるなら」 の入力に、次に 「地面にいるなら」 の <strong>真</strong> 出力を 「インパルス（ジャンプ）」 の入力につなぎます。</li><li>保存してゲームを開始し、ボタンをタップします。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>オブジェクトクリック時</b><span>ターゲット：btnJump</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>地面にいるなら</b><span>ターゲット：player</span></div>
+<div class="fleche"><em>真</em> →</div>
+<div class="noeud"><b>インパルス（ジャンプ）</b><span>ターゲット：player · -15</span></div>
+</div>
+<div class="tip">👉 <strong>なぜ 「地面にいるなら」 が必要？</strong> これがないと、空中でもう一度ジャンプできてしまい、ボタンを何回もタップすると飛んでいってしまいます。</div>
+<div class="tip">👉 <strong>マイナス = 上向き。</strong> Yop2D では、Y の数は画面の下に行くほど大きくなります。-15 は小さなジャンプ、-20 は大きなジャンプです。</div>
+</div>
+<h2>ジャンプ中に進むには？</h2>
+<div class="method">
+<p>ガイド <a href="../ja/deplacer-personnage.html">キャラクターを動かす</a>（方法 1）の左右のボタンを追加します。1 本の指で「右」を押したまま、別の指で「ジャンプ」をタップできます。</p>
+</div>
+<h2>うまくいかないとき</h2>
+<ul><li><strong>キャラクターが落ちない：</strong> 「物理: 動的 ▼」 になっているか確認してください。</li><li><strong>地面をすり抜ける：</strong> 地面は 「物理ボディを有効にする (衝突)」 にチェックを入れ、静的のままにする必要があります。</li><li><strong>タップしても何も起きない：</strong> 線がつながっているか、使っている出力が <strong>真</strong> か確認してください。ゲームを始める前に保存するのを忘れずに。</li><li><strong>見比べるには</strong>、Yop2D に入っているサンプルゲーム<strong>「プラットフォーム」</strong>を開いてください。まさにこの組み方を使っています。</li></ul>
+
+<div class="nav">
+<a href="../ja/deplacer-personnage.html">← キャラクターを動かす</a>
+<a href="../ja/pieces-score.html">次のガイド： コインを集めてスコアを数える →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../index.html">公式サイト</a></p>
+</footer>
+</body>
+</html>

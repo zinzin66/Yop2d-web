@@ -1,0 +1,160 @@
+{
+  "titre_page": "如何在 Yop2D 中让角色跳跃？| Yop2D 教程",
+  "description": "在 Yop2D 中无需代码让角色跳跃：重力、坚固的地面、跳跃按钮，以及 [[si_au_sol]] 和 [[impulsion]] 节点。",
+  "h1": "如何让角色跳跃？",
+  "carte": [
+    "让角色跳跃",
+    "重力、坚固的地面和跳跃按钮，不能在空中连跳。"
+  ],
+  "etapes": [
+    [
+      "给角色加上重力",
+      "勾选 {{lang:insp_cb_physique}}，并切换到 {{lang:insp_btn_physique_dynamique}}。"
+    ],
+    [
+      "放一块坚固的地面",
+      "添加一块地面，勾选 {{lang:insp_cb_physique}}，保持 {{lang:insp_btn_physique_statique}}。"
+    ],
+    [
+      "连接跳跃按钮",
+      "{{NoeudEventClicObjet}}（btnJump）→ {{si_au_sol}}（player）→ {{lang:port_vrai}} → {{impulsion}}（player，-15）。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "要让角色跳跃，需要三样东西：它会**下落**（重力），有一块可以站立的**地面**，还有一个**按钮**，只在它站稳时把它向上推。"
+    ],
+    [
+      "besoin",
+      [
+        "一个名为 **player** 的角色（一个 {{lang:obj_prefix_carre}} 或一张 {{lang:obj_prefix_image}}）；",
+        "一块地面：一个又宽又扁的 {{lang:obj_prefix_carre}}，命名为 **floor**，放在场景底部；",
+        "一个名为 **btnJump** 的按钮（一个 {{lang:obj_prefix_bouton}} 或一个 {{lang:obj_prefix_carre}}），放在屏幕右下角。"
+      ]
+    ],
+    [
+      "h2",
+      "第 1 步：给角色加上重力"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "选中 **player**。",
+            "在检查器的 **[[lang:insp_sep_physique]]** 区域，勾选 **[[lang:insp_cb_physique]]**。",
+            "点击 **[[lang:insp_btn_physique_statique]]** 按钮，让它变成 **[[lang:insp_btn_physique_dynamique]]**。“动态”表示对象会下落。"
+          ]
+        ],
+        [
+          "tip",
+          "**[[lang:insp_label_gravite]]** 设置决定下落的快慢：0.5 慢慢落下，2 快速落下。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 2 步：放一块坚固的地面"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "选中 **floor**。",
+            "同样勾选 **[[lang:insp_cb_physique]]**，但**保持 [[lang:insp_btn_physique_statique]]**：静态对象不会移动，会挡住落在上面的对象。",
+            "把 **player** 放在地面稍上方。"
+          ]
+        ],
+        [
+          "tip",
+          "平台也可以这样做：把静态方块放高一些。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 3 步：跳跃按钮"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "打开场景的 **{{lang:titre_blueprint}}**。",
+            "添加 **[[NoeudEventClicObjet]]** 事件，选择 **btnJump** 作为目标。",
+            "添加 **[[si_au_sol]]** 节点（类别 {{lang:cat_logique_conditions}}），选择 **player** 作为目标。",
+            "添加 **[[impulsion]]** 节点（类别 {{lang:cat_mouvements_ia}}）：目标 **player**，**{{lang:impulsion.force}} = -15**。",
+            "把 [[NoeudEventClicObjet]] 的输出连到 [[si_au_sol]] 的输入，再把 [[si_au_sol]] 的 **{{lang:port_vrai}}** 输出连到 [[impulsion]] 的输入。",
+            "保存，开始游戏，然后点击按钮。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventClicObjet}}",
+              "目标：btnJump"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{si_au_sol}}",
+              "目标：player"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{impulsion}}",
+              "目标：player · -15"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**为什么要 [[si_au_sol]]？**没有它，玩家可以在空中再次起跳，多点几次按钮就会飞走。"
+        ],
+        [
+          "tip",
+          "**负数 = 向上。**在 Yop2D 中，Y 数值越往屏幕下方越大。-15 是小跳，-20 是大跳。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "跳跃时怎么前进？"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "加上教程 [移动角色](guide:deplacer-personnage)（方法 1）里的左右按钮。你可以一根手指按住“右”，另一根手指点“跳”。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "如果不起作用"
+    ],
+    [
+      "ul",
+      [
+        "**角色不下落：**检查它是否为 [[lang:insp_btn_physique_dynamique]]。",
+        "**它穿过了地面：**地面必须勾选 [[lang:insp_cb_physique]]，并保持静态。",
+        "**点击后没有反应：**检查连线是否连好，使用的输出是否为 **{{lang:port_vrai}}**。开始游戏前记得先保存。",
+        "**想对照一下**，打开 Yop2D 自带的示例游戏**“平台”**：它用的正是这套做法。"
+      ]
+    ]
+  ]
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何在 Yop2D 中收集金币并计分？| Yop2D 教程</title>
+<meta name="description" content="在 Yop2D 中无需代码收集金币并显示分数：标签、变量，以及 “如果对象碰到标签”、“销毁对象”、“增加变量值” 和 “修改文本” 节点。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pieces-score.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pieces-score.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pieces-score.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pieces-score.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pieces-score.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pieces-score.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pieces-score.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pieces-score.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pieces-score.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pieces-score.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何收集金币并计分？",
+ "description": "在 Yop2D 中无需代码收集金币并显示分数：标签、变量，以及 “如果对象碰到标签”、“销毁对象”、“增加变量值” 和 “修改文本” 节点。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "给金币加标签",
+   "text": "在每个金币的 标签 (Tag) 栏中输入 piece。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "创建 score 变量",
+   "text": "变量 区域：score，整数，0。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "连接节点",
+   "text": "如果对象碰到标签（player，piece）→ 销毁对象 → 增加变量值（score，1）→ 修改文本（scoreText）。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>如何收集金币并计分？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../pieces-score.html" hreflang="fr">Français</a> · <a href="../en/pieces-score.html" hreflang="en">English</a> · <a href="../es/pieces-score.html" hreflang="es">Español</a> · <a href="../de/pieces-score.html" hreflang="de">Deutsch</a> · <a href="../it/pieces-score.html" hreflang="it">Italiano</a> · <a href="../pt/pieces-score.html" hreflang="pt">Português</a> · <a href="../ru/pieces-score.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/pieces-score.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>玩家碰到金币时，我们想要三件事：金币<strong>消失</strong>，<strong>分数加</strong> 1，新的分数<strong>显示</strong>在屏幕上。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>一个名为 <strong>player</strong> 的、可以移动的角色（见 <a href="../zh/deplacer-personnage.html">移动角色</a>）；</li><li>几枚金币：<strong>圆形</strong> 对象（或图片），比如 <strong>coin1</strong>、<strong>coin2</strong>、<strong>coin3</strong>；</li><li>一个名为 <strong>scoreText</strong> 的 <strong>文本</strong> 对象，放在屏幕上方，文字为“分数：0”。</li></ul>
+</div>
+<h2>第 1 步：给所有金币同一个标签</h2>
+<div class="method">
+<p><strong>标签</strong>就是一个记号。有了它，一段 Blueprint 就能对所有金币生效，哪怕你放了 50 个。</p>
+<ol><li>选中一枚金币。</li><li>在检查器的 <strong>“标签 (Tag)”</strong> 栏中输入 <strong>piece</strong>。</li><li>对每枚金币都这样做（栏旁边的 <strong>“列表”</strong> 按钮会列出已经用过的标签）。</li></ol>
+</div>
+<h2>第 2 步：创建“score”变量</h2>
+<div class="method">
+<p><strong>变量</strong>就像一个小格子，在游戏中记住一个数字。</p>
+<ol><li>在左侧面板打开 <strong>变量</strong> 区域，创建一个变量。</li><li>名称：<strong>score</strong> · 作用域：<strong>局部</strong> · 类型：<strong>整数</strong> · 初始值：<strong>0</strong>。</li></ol>
+<div class="tip">👉 <strong>局部</strong> = 变量只在这个场景里存在。如果分数要带到下一关，请选 <strong>全局</strong>（见 <a href="../zh/niveau-suivant.html">进入下一关</a>）。</div>
+</div>
+<h2>第 3 步：Blueprint</h2>
+<div class="method">
+<ol><li>打开场景的 <strong>蓝图</strong>。</li><li>添加 <strong>“如果对象碰到标签”</strong> 事件：目标 <strong>player</strong>，标签 <strong>piece</strong>。</li><li>添加 <strong>“销毁对象”</strong>。目标选择 <strong>事件中涉及的对象</strong>：也就是玩家刚刚碰到的那枚金币。</li><li>添加 <strong>“增加变量值”</strong>：变量 <strong>score</strong>，<strong>要增加的值 = 1</strong>。</li><li>添加 <strong>“修改文本”</strong>：目标 <strong>scoreText</strong>，<strong>新文本</strong> = <code>="分数：" + score</code></li><li>按顺序把四个节点连起来，输出连输入。</li><li>保存，开始游戏，然后去碰一枚金币。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>如果对象碰到标签</b><span>目标：player · 标签：piece</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>销毁对象</b><span>相关对象</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>增加变量值</b><span>score · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改文本</b><span>scoreText</span></div>
+</div>
+<div class="tip">👉 <strong>文字开头的 = 号</strong>告诉 Yop2D 要<strong>计算</strong>这段文字，而不是原样写出。没有它，屏幕会原封不动地显示 <code>"分数：" + score</code>。引号里是不会变的那部分。</div>
+<div class="tip">👉 这个事件<strong>每次接触只触发一次</strong>：站在金币上不会重复加分。</div>
+</div>
+<h2>附加：收集全部金币就获胜</h2>
+<div class="method">
+<ol><li>在 “修改文本” 之后，添加 <strong>“条件”</strong> 节点，<strong>条件</strong> = <code>=score &gt;= 3</code>（3 = 金币数量）。</li><li>把它的 <strong>真</strong> 输出连到 <strong>“提示消息 (Toast)”</strong> 节点，消息为 <strong>你赢了！</strong>，或者连到 <strong>“下一个场景”</strong>。</li></ol>
+<div class="chaine">
+<div class="noeud"><b>修改文本</b><span>scoreText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>条件</b><span>=score &gt;= 3</span></div>
+<div class="fleche"><em>真</em> →</div>
+<div class="noeud"><b>提示消息 (Toast)</b><span>你赢了！</span></div>
+</div>
+</div>
+<h2>如果不起作用</h2>
+<ul><li><strong>金币没有消失：</strong>检查标签是否处处写得一样（piece），以及 “销毁对象” 的目标是否为相关对象。</li><li><strong>文字显示的是公式：</strong>开头少了 <strong>=</strong>。</li><li><strong>分数一直是 0：</strong>检查 “增加变量值” 用的是否是 <strong>score</strong> 变量。</li><li><strong>想对照一下</strong>，打开 Yop2D 自带的示例游戏<strong>“平台”</strong>：它正是这样收集金币的。</li></ul>
+
+<div class="nav">
+<a href="../zh/sauter.html">← 让角色跳跃</a>
+<a href="../zh/vie-game-over.html">下一篇： 掉血与 Game Over →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../index.html">官方网站</a></p>
+</footer>
+</body>
+</html>

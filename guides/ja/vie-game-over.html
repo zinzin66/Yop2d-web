@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2D でプレイヤーの体力を減らすには？| Yop2D ガイド</title>
+<meta name="description" content="Yop2D でコードを書かずにプレイヤーの体力を管理する：体力の変数、体力バー、そして 「変数に加算」、「進捗を設定」、「条件」、「シーンをやり直す」 ノード。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/vie-game-over.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/vie-game-over.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/vie-game-over.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/vie-game-over.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/vie-game-over.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/vie-game-over.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/vie-game-over.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/vie-game-over.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/vie-game-over.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/vie-game-over.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "プレイヤーの体力を減らすには？",
+ "description": "Yop2D でコードを書かずにプレイヤーの体力を管理する：体力の変数、体力バー、そして 「変数に加算」、「進捗を設定」、「条件」、「シーンをやり直す」 ノード。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "体力の変数とバーを作る",
+   "text": "変数 vie（整数、3）と、最大値 = 3 のバー healthBar。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "1 ポイント減らす",
+   "text": "オブジェクトがタグに触れた場合（player、danger）→ 変数に加算（vie、-1）→ 進捗を設定（healthBar、=vie）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Game Over",
+   "text": "条件（=vie <= 0）→ 真 → シーンをやり直す。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>プレイヤーの体力を減らすには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../vie-game-over.html" hreflang="fr">Français</a> · <a href="../en/vie-game-over.html" hreflang="en">English</a> · <a href="../es/vie-game-over.html" hreflang="es">Español</a> · <a href="../de/vie-game-over.html" hreflang="de">Deutsch</a> · <a href="../it/vie-game-over.html" hreflang="it">Italiano</a> · <a href="../pt/vie-game-over.html" hreflang="pt">Português</a> · <a href="../ru/vie-game-over.html" hreflang="ru">Русский</a> · <a href="../zh/vie-game-over.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>プレイヤーは<strong>ライフ 3</strong> でスタートします。危ないもの（トゲ、敵など）に触れるたびに 1 つ減り、<strong>体力バー</strong>が下がります。0 になると <strong>Game Over</strong>：ステージが最初から始まります。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>動かせる <strong>player</strong> という名前のキャラクター（<a href="../ja/deplacer-personnage.html">キャラクターを動かす</a> を参照）；</li><li>危ないものを 1 つ以上、たとえば <strong>spikes1</strong>、<strong>spikes2</strong>… という名前の赤い四角形；</li><li>体力バー：画面の上にある <strong>healthBar</strong> という名前の <strong>プログレスバー</strong> オブジェクト（プログレスバー）。</li></ul>
+</div>
+<h2>ステップ 1：危ないものとバーを準備する</h2>
+<div class="method">
+<ol><li>危ないものをそれぞれ選び、<strong>「タグ (ラベル)」</strong> 欄に <strong>danger</strong> と書きます。</li><li><strong>healthBar</strong> を選びます。インスペクターの <strong>「プログレスバー」</strong> で：<strong>最小値 = 0</strong>、<strong>最大値 = 3</strong>、<strong>現在値 = 3</strong>。</li></ol>
+</div>
+<h2>ステップ 2：変数「vie」を作る</h2>
+<div class="method">
+<ol><li>左のパネルの <strong>変数</strong> の欄で、変数を作ります。</li><li>名前：<strong>vie</strong>（体力）· 範囲：<strong>ローカル</strong> · 型：<strong>整数</strong> · 最初の値：<strong>3</strong>。</li></ol>
+</div>
+<h2>ステップ 3：ライフを 1 つ減らす</h2>
+<div class="method">
+<ol><li>シーンの <strong>ブループリント</strong> を開きます。</li><li><strong>「オブジェクトがタグに触れた場合」</strong> イベントを追加します：ターゲット <strong>player</strong>、タグ <strong>danger</strong>。</li><li><strong>「変数に加算」</strong> を追加します：変数 <strong>vie</strong>、<strong>加算する値 = -1</strong>（マイナスをつけて減らします）。</li><li><strong>「進捗を設定」</strong> を追加します：ターゲット <strong>healthBar</strong>、<strong>新しい進捗</strong> = <code>=vie</code></li><li>3 つのノードを順番につなぎます。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>オブジェクトがタグに触れた場合</b><span>ターゲット：player · タグ：danger</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数に加算</b><span>vie · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>進捗を設定</b><span>healthBar · =vie</span></div>
+</div>
+<div class="tip">👉 「新しい進捗」 に <code>=vie</code> と書くと、「変数 vie の値を使う」という意味になります。だからバーはいつもライフの数と同じになります。</div>
+</div>
+<h2>ステップ 4：Game Over</h2>
+<div class="method">
+<ol><li>「進捗を設定」 のあとに <strong>「条件」</strong> ノードを追加し、<strong>条件</strong> = <code>=vie &lt;= 0</code>（「vie が 0 以下」）にします。</li><li>その <strong>真</strong> 出力を <strong>「シーンをやり直す」</strong> ノード（カテゴリー シーンとHUD）につなぎます。</li><li>保存してゲームを開始し、危ないものに 3 回触れてみます。</li></ol>
+<div class="chaine">
+<div class="noeud"><b>進捗を設定</b><span>healthBar</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>条件</b><span>=vie &lt;= 0</span></div>
+<div class="fleche"><em>真</em> →</div>
+<div class="noeud"><b>シーンをやり直す</b></div>
+</div>
+<div class="tip">👉 「シーンをやり直す」 はすべてを最初の状態に戻します：オブジェクトは元の場所に、範囲が <strong>「ローカル」</strong> の変数（つまり vie = 3）は最初の値に戻ります。</div>
+<div class="tip">👉 <strong>ちゃんとした終了画面を出したい？</strong> すぐにやり直す代わりに、真 出力を <strong>「テキストを変更」</strong>（「負け！」という文字）、次に <strong>「待つ」</strong>（2 秒）、次に <strong>「シーンをやり直す」</strong> につなぎます。</div>
+</div>
+<h2>おまけ：穴に落ちる</h2>
+<div class="method">
+<p>アクションゲームなら、シーンのいちばん下に <strong>fallZone</strong> という名前の <strong>ゾーン</strong> オブジェクトを置きます（ゾーンはゲーム中は見えません）。そして：</p>
+<div class="chaine">
+<div class="noeud evenement"><b>衝突 A/B</b><span>オブジェクト A：player · オブジェクト B：fallZone</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>シーンをやり直す</b></div>
+</div>
+</div>
+<h2>うまくいかないとき</h2>
+<ul><li><strong>体力が減らない：</strong> 危ないものそれぞれに <strong>danger</strong> タグがあるか、<strong>-1</strong> にマイナスがついているか確認してください。</li><li><strong>バーが動かない：</strong> 「進捗を設定」 のターゲットは、最大値 3 の<strong>プログレスバー</strong>でなければなりません。</li><li><strong>ゲームがやり直しにならない：</strong> 条件は <strong>真</strong> 出力でつながっている必要があります。</li></ul>
+
+<div class="nav">
+<a href="../ja/pieces-score.html">← コインを集めてスコアを数える</a>
+<a href="../ja/niveau-suivant.html">次のガイド： 次のステージに進む →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../index.html">公式サイト</a></p>
+</footer>
+</body>
+</html>

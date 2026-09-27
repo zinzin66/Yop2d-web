@@ -1,0 +1,201 @@
+{
+  "titre_page": "How to collect coins and count the score in Yop2D? | Yop2D Guide",
+  "description": "Collect coins and show a score in Yop2D, without code: a tag, a variable and the [[NoeudEventCollisionTag]], [[detruire_objet]], [[ajouter_variable]] and [[modifier_texte]] nodes.",
+  "h1": "How to collect coins and count the score?",
+  "carte": [
+    "Collect coins and count the score",
+    "A tag, a score variable and a text that shows the points."
+  ],
+  "etapes": [
+    [
+      "Give the coins a tag",
+      "Type piece in the {{lang:insp_label_tag}} field of each coin."
+    ],
+    [
+      "Create the score variable",
+      "{{lang:panneau_ress_variables}} section: score, {{lang:var_type_entier}}, 0."
+    ],
+    [
+      "Link the nodes",
+      "{{NoeudEventCollisionTag}} (player, piece) → {{detruire_objet}} → {{ajouter_variable}} (score, 1) → {{modifier_texte}} (scoreText)."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "When the player touches a coin, we want three things: the coin **disappears**, the **score goes up** by 1, and the new score **shows** on the screen."
+    ],
+    [
+      "besoin",
+      [
+        "a character named **player** that can move (see [Move a character](guide:deplacer-personnage));",
+        "a few coins: **{{lang:obj_prefix_rond}}** objects (or images), for example **coin1**, **coin2**, **coin3**;",
+        "a **{{lang:obj_prefix_texte}}** object named **scoreText**, at the top of the screen, with the text « Score: 0 »."
+      ]
+    ],
+    [
+      "h2",
+      "Step 1: give all coins the same tag"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "A **tag** is a label. Thanks to it, one single piece of Blueprint works for every coin, even if you add 50 of them."
+        ],
+        [
+          "ol",
+          [
+            "Select a coin.",
+            "In the inspector, field **[[lang:insp_label_tag]]**, type **piece**.",
+            "Do the same for each coin (the **[[lang:insp_btn_tags_liste]]** button next to the field shows the tags already used)."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 2: create the « score » variable"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "A **variable** is a box that keeps a number in memory during the game."
+        ],
+        [
+          "ol",
+          [
+            "In the left panel, open the **{{lang:panneau_ress_variables}}** section and create a variable.",
+            "Name: **score** · Scope: **{{lang:var_scope_locale}}** · Type: **{{lang:var_type_entier}}** · Starting value: **0**."
+          ]
+        ],
+        [
+          "tip",
+          "**{{lang:var_scope_locale}}** = the variable only exists in this scene. Choose **{{lang:var_scope_globale}}** if the score must carry on to the next level (see [Go to the next level](guide:niveau-suivant))."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 3: the Blueprint"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Open the scene's **{{lang:titre_blueprint}}**.",
+            "Add the **[[NoeudEventCollisionTag]]** event: target **player**, {{lang:Tag}} **piece**.",
+            "Add **[[detruire_objet]]**. As its target, choose **{{lang:noeud_objet_implique_long}}**: that is the coin the player just touched.",
+            "Add **[[ajouter_variable]]**: variable **score**, **{{lang:ajouter_variable.valeur}} = 1**.",
+            "Add **[[modifier_texte]]**: target **scoreText**, **{{lang:modifier_texte.valeur}}** = `=\"Score: \" + score`",
+            "Link the four nodes in order, output to input.",
+            "Save, then start the game and go touch a coin."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "target: player · {{lang:Tag}}: piece"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "score · + 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**The = sign at the start of the text** tells Yop2D to **calculate** the text instead of writing it as it is. Without it, the screen would show `\"Score: \" + score` word for word. The quotes surround the part that does not change."
+        ],
+        [
+          "tip",
+          "The event only runs **once per contact**: staying on a coin does not count several points."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Bonus: win when you have all the coins"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "After [[modifier_texte]], add the **[[condition]]** node with **{{lang:condition.condition}}** = `=score >= 3` (3 = the number of coins).",
+            "Link its **{{lang:port_vrai}}** output to a **[[toast]]** node with the message **You win!**, or to **[[scene_suivante]]**."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=score >= 3"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "You win!"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "If it doesn't work"
+    ],
+    [
+      "ul",
+      [
+        "**The coin doesn't disappear:** check that the tag is spelled the same everywhere (piece) and that the target of [[detruire_objet]] is the involved object.",
+        "**The text shows the formula:** the **=** at the start is missing.",
+        "**The score stays at 0:** check that [[ajouter_variable]] targets the **score** variable.",
+        "**To compare**, open the **« Platform »** example game that comes with Yop2D: it collects coins exactly like this."
+      ]
+    ]
+  ]
+}

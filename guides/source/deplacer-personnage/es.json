@@ -1,0 +1,147 @@
+{
+  "titre_page": "¿Cómo mover un personaje en Yop2D? | Guía Yop2D",
+  "description": "Tres formas sencillas de mover un personaje en Yop2D, sin código: botones en pantalla, joystick virtual o arrastrar con el dedo.",
+  "h1": "¿Cómo mover un personaje?",
+  "carte": [
+    "Mover un personaje",
+    "Mover un objeto con botones, el joystick o el dedo."
+  ],
+  "etapes": [
+    [
+      "Con botones en pantalla",
+      "Une el evento {{NoeudEventMaintenuObjet}} de cada botón a un nodo {{pousser}} con {{lang:pousser.x}} = -5 o 5."
+    ],
+    [
+      "Con un joystick virtual",
+      "Añade un objeto {{lang:obj_prefix_joystick}} y elige el personaje en {{lang:insp_label_cible_joystick}}. No hace falta ningún nodo."
+    ],
+    [
+      "Arrastrándolo con el dedo",
+      "Marca {{lang:insp_cb_deplacable}} en el inspector del objeto."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "En Yop2D hay tres formas sencillas de mover un personaje, sin escribir código. Elige la que mejor encaje con tu juego."
+    ],
+    [
+      "h2",
+      "Método 1: con botones en pantalla (izquierda / derecha)"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Ideal para un juego de plataformas o un juego en el que el personaje se mueve en línea."
+        ],
+        [
+          "ol",
+          [
+            "En tu escena, añade tu personaje (un **{{lang:obj_prefix_carre}}** o una **{{lang:obj_prefix_image}}**) y llámalo **player**.",
+            "Añade dos objetos que harán de botones, por ejemplo dos **{{lang:obj_prefix_bouton}}** (o dos cuadrados) llamados **btnLeft** y **btnRight**. Colócalos en la parte baja de la pantalla.",
+            "Abre el **{{lang:titre_blueprint}}** de la escena.",
+            "Añade el evento **[[NoeudEventMaintenuObjet]]** y elige **btnLeft** como objetivo.",
+            "Añade un nodo **[[pousser]]**: objetivo **player**, **{{lang:pousser.x}} = -5**, **{{lang:pousser.y}} = 0**.",
+            "Une la salida del evento a la entrada de [[pousser]].",
+            "Haz lo mismo con **btnRight**, con **{{lang:pousser.x}} = 5**.",
+            "Guarda y lanza el juego: mientras mantengas el dedo sobre un botón, el personaje avanza."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventMaintenuObjet}}",
+              "objetivo: btnLeft"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{pousser}}",
+              "objetivo: player · {{lang:pousser.x}} = -5"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[NoeudEventMaintenuObjet]] se repite en cada fotograma mientras el dedo siga sobre el botón: por eso el personaje avanza sin parar. Para ir más rápido, sube el valor (por ejemplo 8 o 10)."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Método 2: con un joystick virtual"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Ideal para un juego visto desde arriba, en el que el personaje se mueve en todas las direcciones. **No hace falta ningún nodo.**"
+        ],
+        [
+          "ol",
+          [
+            "Añade un objeto **{{lang:obj_prefix_joystick}}** a tu escena (categoría **{{lang:cat_interactifs}}**) y colócalo abajo a la izquierda.",
+            "Selecciona el joystick. En el inspector, sección **[[lang:insp_sep_joystick]]**, toca el botón de **[[lang:insp_label_cible_joystick]]** y elige tu personaje.",
+            "Guarda y lanza el juego: el personaje sigue la dirección del joystick."
+          ]
+        ],
+        [
+          "tip",
+          "**Atajo:** si le das a tu personaje el tag **Player** (o **Joueur**), el joystick lo mueve automáticamente, aunque no elijas nada en [[lang:insp_label_cible_joystick]]. Cuidado: este tag tiene prioridad sobre lo elegido en el inspector."
+        ],
+        [
+          "tip",
+          "**Para ir más lejos:** las fórmulas `joystick.x` y `joystick.y` dan la dirección (entre -1 y 1). Puedes usarlas en un nodo [[pousser]] unido a [[NoeudEventChaqueImage]], por ejemplo `=joystick.x * 5`. El nodo **[[si_joystick]]** también tiene las salidas {{lang:port_haut}}, {{lang:port_bas}}, {{lang:port_gauche}}, {{lang:port_droite}} y {{lang:port_repos}}."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Método 3: arrastrarlo con el dedo"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Ideal para un puzle, un juego de cartas o un juego en el que se mueven piezas."
+        ],
+        [
+          "ol",
+          [
+            "Selecciona tu objeto en el editor de escena.",
+            "En el inspector, marca **[[lang:insp_cb_deplacable]]**.",
+            "Lanza el juego: puedes arrastrar el objeto con el dedo."
+          ]
+        ],
+        [
+          "tip",
+          "Para reaccionar cuando el jugador suelta el objeto (por ejemplo, para comprobar si está bien colocado), usa el evento **[[NoeudEventFinGlisser]]**."
+        ],
+        [
+          "tip",
+          "Para permitir o impedir arrastrar durante el juego (una pieza de puzle bien colocada, por ejemplo), usa el nodo **[[modifier_deplacable]]**."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Consejos"
+    ],
+    [
+      "ul",
+      [
+        "**Para hacer saltar al personaje**, sigue la guía [Hacer saltar a un personaje](guide:sauter).",
+        "**El juego de ejemplo « Plataforma »** incluido con Yop2D usa el método 1: ábrelo para ver un Blueprint completo que funciona.",
+        "**¿Alguna pregunta?** Ven a hablar de ello en [Discord](https://discord.gg/nHqCcqHZNQ) o [Telegram](https://t.me/+7PQ9WKw7n645Y2Zk)."
+      ]
+    ]
+  ]
+}

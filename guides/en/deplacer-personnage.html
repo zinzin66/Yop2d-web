@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to move a character in Yop2D? | Yop2D Guide</title>
+<meta name="description" content="Three simple ways to move a character in Yop2D, without code: on-screen buttons, virtual joystick, or dragging with your finger.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/deplacer-personnage.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/deplacer-personnage.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/deplacer-personnage.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/deplacer-personnage.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/deplacer-personnage.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/deplacer-personnage.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deplacer-personnage.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deplacer-personnage.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/deplacer-personnage.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deplacer-personnage.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to move a character?",
+ "description": "Three simple ways to move a character in Yop2D, without code: on-screen buttons, virtual joystick, or dragging with your finger.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "With on-screen buttons",
+   "text": "Link the Object Held Down event of each button to a Push object node with Add X = -5 or 5."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "With a virtual joystick",
+   "text": "Add a Joystick object and choose the character in Object to move. No node needed."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "By dragging it with your finger",
+   "text": "Tick Movable (draggable in Play mode) in the object's inspector."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to move a character?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../deplacer-personnage.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/deplacer-personnage.html" hreflang="es">Español</a> · <a href="../de/deplacer-personnage.html" hreflang="de">Deutsch</a> · <a href="../it/deplacer-personnage.html" hreflang="it">Italiano</a> · <a href="../pt/deplacer-personnage.html" hreflang="pt">Português</a> · <a href="../ru/deplacer-personnage.html" hreflang="ru">Русский</a> · <a href="../zh/deplacer-personnage.html" hreflang="zh">中文</a> · <a href="../ja/deplacer-personnage.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>In Yop2D, there are three simple ways to move a character, without writing code. Pick the one that fits your game.</p>
+<h2>Method 1: with on-screen buttons (left / right)</h2>
+<div class="method">
+<p>Great for a platform game, or a game where the character moves along a line.</p>
+<ol><li>In your scene, add your character (a <strong>Square</strong> or an <strong>Image</strong>) and name it <strong>player</strong>.</li><li>Add two objects to use as buttons, for example two <strong>Button</strong> objects (or two squares) named <strong>btnLeft</strong> and <strong>btnRight</strong>. Put them at the bottom of the screen.</li><li>Open the scene's <strong>Blueprint</strong>.</li><li>Add the <strong>“Object Held Down”</strong> event and choose <strong>btnLeft</strong> as its target.</li><li>Add a <strong>“Push object”</strong> node: target <strong>player</strong>, <strong>Add X = -5</strong>, <strong>Add Y = 0</strong>.</li><li>Link the event's output to the input of “Push object”.</li><li>Do the same for <strong>btnRight</strong>, with <strong>Add X = 5</strong>.</li><li>Save, then start the game: as long as your finger stays on a button, the character moves.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Object Held Down</b><span>target: btnLeft</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Push object</b><span>target: player · Add X = -5</span></div>
+</div>
+<div class="tip">👉 “Object Held Down” repeats on every frame while the finger stays on the button: that is why the character keeps moving. To go faster, raise the value (for example 8 or 10).</div>
+</div>
+<h2>Method 2: with a virtual joystick</h2>
+<div class="method">
+<p>Great for a top-down game, where the character moves in every direction. <strong>No node needed.</strong></p>
+<ol><li>Add a <strong>Joystick</strong> object to your scene (category <strong>Interactives</strong>) and put it at the bottom left.</li><li>Select the joystick. In the inspector, section <strong>“Joystick Control”</strong>, tap the <strong>“Object to move”</strong> button and choose your character.</li><li>Save, then start the game: the character follows the joystick.</li></ol>
+<div class="tip">👉 <strong>Shortcut:</strong> if you give your character the tag <strong>Player</strong> (or <strong>Joueur</strong>), the joystick moves it automatically, even if nothing is chosen in “Object to move”. Careful: this tag wins over the inspector's choice.</div>
+<div class="tip">👉 <strong>Going further:</strong> the formulas <code>joystick.x</code> and <code>joystick.y</code> give the direction (between -1 and 1). You can use them in a “Push object” node linked to “Every frame”, for example <code>=joystick.x * 5</code>. The <strong>“If joystick”</strong> node also has Up, Down, Left, Right and Idle outputs.</div>
+</div>
+<h2>Method 3: drag it with your finger</h2>
+<div class="method">
+<p>Great for a puzzle, a card game or any game where you move pieces around.</p>
+<ol><li>Select your object in the scene editor.</li><li>In the inspector, tick <strong>“Movable (draggable in Play mode)”</strong>.</li><li>Start the game: you can drag the object with your finger.</li></ol>
+<div class="tip">👉 To react when the player lets go of the object (for example to check it is in the right place), use the <strong>“Drag End”</strong> event.</div>
+<div class="tip">👉 To allow or block dragging during the game (a puzzle piece in the right place, for example), use the <strong>“Set draggable”</strong> node.</div>
+</div>
+<h2>Tips</h2>
+<ul><li><strong>To make the character jump</strong>, follow the guide <a href="../en/sauter.html">Make a character jump</a>.</li><li><strong>The “Platform” example game</strong> that comes with Yop2D uses method 1: open it to see a complete Blueprint that works.</li><li><strong>A question?</strong> Come and talk about it on <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> or <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li></ul>
+
+<div class="nav">
+<a href="../../index.html#guides">← All guides</a>
+<a href="../en/sauter.html">Next guide: Make a character jump →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a></p>
+</footer>
+</body>
+</html>

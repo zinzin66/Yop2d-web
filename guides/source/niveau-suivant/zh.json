@@ -1,0 +1,144 @@
+{
+  "titre_page": "如何在 Yop2D 中进入下一关？| Yop2D 教程",
+  "description": "在 Yop2D 中无需代码制作多个关卡：每关一个场景、一个终点区域、[[NoeudEventCollisionAB]] 和 [[scene_suivante]] 节点，以及用全局变量延续的分数。",
+  "h1": "如何进入下一关？",
+  "carte": [
+    "进入下一关",
+    "每关一个场景、一个终点区域，分数可以延续。"
+  ],
+  "etapes": [
+    [
+      "每关一个场景",
+      "{{lang:panneau_ress_scenes}} 区域：先 Level1，再 Level2，按这个顺序。"
+    ],
+    [
+      "一个终点区域",
+      "在 Level1 的关卡尽头放一个名为 finish 的 {{lang:obj_prefix_zone}} 对象。"
+    ],
+    [
+      "连接节点",
+      "{{NoeudEventCollisionAB}}（player，finish）→ {{scene_suivante}}。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "在 Yop2D 中，**每一关就是一个场景**。玩家走到关卡尽头时，会碰到一个看不见的终点区域，游戏就进入下一个场景。"
+    ],
+    [
+      "besoin",
+      [
+        "一个能正常运行的第一关，里面有一个名为 **player** 的、可以移动的角色；",
+        "第二关（我们在第 1 步创建）。"
+      ]
+    ],
+    [
+      "h2",
+      "第 1 步：每关一个场景"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "在左侧面板打开 **{{lang:panneau_ress_scenes}}** 区域。",
+            "把当前场景重命名为 **Level1**，然后新建一个场景 **Level2**。",
+            "搭建第 2 关：地面、平台，还有带按钮的角色 **player**。"
+          ]
+        ],
+        [
+          "attention",
+          "**每个场景都有自己的对象和自己的 Blueprint。**第 1 关的按钮和角色在第 2 关里并不存在：需要在那里重新添加，并在第 2 关的 Blueprint 中重新连好它们的节点。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 2 步：终点区域"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "回到 **Level1**。",
+            "添加一个 **{{lang:obj_prefix_zone}}** 对象（类别 {{lang:cat_formes_base}}），命名为 **finish**。",
+            "把它放在关卡尽头、玩家要到达的地方。区域在游戏中是**看不见的**：在同一位置放一面旗子或一扇门，让玩家能看到。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 3 步：第 1 关的 Blueprint"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "打开 **Level1** 的 **{{lang:titre_blueprint}}**。",
+            "添加 **[[NoeudEventCollisionAB]]** 事件：{{lang:noeud_cible_objet_a}} **player**，{{lang:noeud_cible_objet_b}} **finish**。",
+            "添加 **[[scene_suivante]]** 节点（类别 {{lang:cat_scene_hud}}），把它连到 **{{lang:port_evt_collision}}** 输出。",
+            "保存，开始游戏，走到区域那里。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "A：player · B：finish"
+            ],
+            [
+              "→",
+              "{{lang:port_evt_collision}}"
+            ],
+            [
+              "n",
+              "{{scene_suivante}}",
+              ""
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**[[scene_suivante]]** 按场景列表的顺序前进：Level1、Level2、Level3……如果要去某个特定场景（比如“太棒了！”画面），请改用 **[[changer_scene]]**，并选择那个场景作为目标。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "在关卡之间保留分数"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "作用域为 **[[lang:var_scope_locale]]** 的变量在每个场景都会从零开始。要让分数带到第 2 关，请把 **score** 变量的作用域设为 **[[lang:var_scope_globale]]**（{{lang:panneau_ress_variables}} 区域）。这样所有关卡用的就是同一个变量。"
+        ],
+        [
+          "tip",
+          "在第 2 关，记得一开始就显示分数：**[[NoeudEventStart]]** → **[[modifier_texte]]**（scoreText），内容为 `=\"分数：\" + score`。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "如果不起作用"
+    ],
+    [
+      "ul",
+      [
+        "**在区域里没有反应：**检查 [[NoeudEventCollisionAB]] 中的名称 **player** 和 **finish**，并确认区域确实在玩家的路线上。",
+        "**游戏没有换场景：**在场景列表中，Level1 必须排在 Level2 **前面**。如果后面没有场景，[[scene_suivante]] 什么也不会做。",
+        "**第 2 关没有反应：**它的节点在它自己的 Blueprint 里；打开 Level2 的 Blueprint 添加它们。"
+      ]
+    ]
+  ]
+}

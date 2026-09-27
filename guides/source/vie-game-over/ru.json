@@ -1,0 +1,213 @@
+{
+  "titre_page": "Как игроку терять здоровье в Yop2D? | Руководство Yop2D",
+  "description": "Здоровье игрока в Yop2D без кода: переменная здоровья, полоска здоровья и узлы [[ajouter_variable]], [[modifier_progression]], [[condition]] и [[recommencer_scene]].",
+  "h1": "Как игроку терять здоровье?",
+  "carte": [
+    "Потеря здоровья и Game Over",
+    "Переменная здоровья, полоска здоровья и возврат к началу, когда здоровье падает до 0."
+  ],
+  "etapes": [
+    [
+      "Создать переменную здоровья и полоску",
+      "Переменная vie ({{lang:var_type_entier}}, 3) и полоска healthBar с {{lang:insp_label_prog_max}} = 3."
+    ],
+    [
+      "Потерять очко",
+      "{{NoeudEventCollisionTag}} (player, danger) → {{ajouter_variable}} (vie, -1) → {{modifier_progression}} (healthBar, =vie)."
+    ],
+    [
+      "Game Over",
+      "{{condition}} (=vie <= 0) → {{lang:port_vrai}} → {{recommencer_scene}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Игрок начинает с **3 жизнями**. Каждый раз, когда он касается опасности (шипы, враг…), он теряет одну, и **полоска здоровья** уменьшается. На 0 — **Game Over**: уровень начинается заново."
+    ],
+    [
+      "besoin",
+      [
+        "персонаж с именем **player**, который умеет двигаться (см. [Как двигать персонажа](guide:deplacer-personnage));",
+        "одна или несколько опасностей, например красные квадраты **spikes1**, **spikes2**…;",
+        "полоска здоровья: объект **{{lang:obj_prefix_barre_progression}}** (полоса прогресса) с именем **healthBar** вверху экрана."
+      ]
+    ],
+    [
+      "h2",
+      "Шаг 1: подготовить опасности и полоску"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Выбери каждую опасность и впиши **danger** в её поле **[[lang:insp_label_tag]]**.",
+            "Выбери **healthBar**. В разделе **[[lang:insp_sep_progression]]** инспектора: **{{lang:insp_label_prog_min}} = 0**, **{{lang:insp_label_prog_max}} = 3**, **{{lang:insp_label_prog_actuelle}} = 3**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Шаг 2: создать переменную « vie »"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "На левой панели, раздел **{{lang:panneau_ress_variables}}**, создай переменную.",
+            "Имя: **vie** (здоровье) · Область: **{{lang:var_scope_locale}}** · Тип: **{{lang:var_type_entier}}** · Начальное значение: **3**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Шаг 3: потерять жизнь"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Открой **{{lang:titre_blueprint}}** сцены.",
+            "Добавь событие **[[NoeudEventCollisionTag]]**: цель **player**, {{lang:Tag}} **danger**.",
+            "Добавь **[[ajouter_variable]]**: переменная **vie**, **{{lang:ajouter_variable.valeur}} = -1** (со знаком минус, чтобы отнять).",
+            "Добавь **[[modifier_progression]]**: цель **healthBar**, **{{lang:modifier_progression.valeur}}** = `=vie`",
+            "Соедини три узла по порядку."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "цель: player · {{lang:Tag}}: danger"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "vie · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_progression}}",
+              "healthBar · =vie"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "`=vie` в [[lang:modifier_progression.valeur]] значит: « возьми значение переменной vie ». Так полоска всегда показывает число жизней."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Шаг 4: Game Over"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "После [[modifier_progression]] добавь узел **[[condition]]** с **{{lang:condition.condition}}** = `=vie <= 0` (« vie меньше или равно 0 »).",
+            "Соедини его выход **{{lang:port_vrai}}** с узлом **[[recommencer_scene]]** (категория {{lang:cat_scene_hud}}).",
+            "Сохрани, запусти игру и коснись опасности три раза."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_progression}}",
+              "healthBar"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=vie <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[recommencer_scene]] возвращает всё как было: объекты на свои места, а переменные с областью **[[lang:var_scope_locale]]** (значит, vie = 3) — к начальному значению."
+        ],
+        [
+          "tip",
+          "**Хочешь настоящий экран конца игры?** Вместо немедленного перезапуска соедини выход {{lang:port_vrai}} с **[[modifier_texte]]** (текст « Проигрыш! »), потом **[[attendre]]** (2 секунды), потом **[[recommencer_scene]]**."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Бонус: падение в пропасть"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "В платформере поставь объект **{{lang:obj_prefix_zone}}** в самом низу сцены и назови его **fallZone** (зона невидима во время игры). Затем:"
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "{{lang:noeud_cible_objet_a}}: player · {{lang:noeud_cible_objet_b}}: fallZone"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Если не работает"
+    ],
+    [
+      "ul",
+      [
+        "**Здоровье не уменьшается:** проверь тег **danger** у каждой опасности и минус в **-1**.",
+        "**Полоска не двигается:** цель [[modifier_progression]] должна быть **полосой прогресса** с максимумом 3.",
+        "**Игра не перезапускается:** условие должно быть соединено через выход **{{lang:port_vrai}}**."
+      ]
+    ]
+  ]
+}

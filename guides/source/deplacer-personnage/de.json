@@ -1,0 +1,147 @@
+{
+  "titre_page": "Wie bewege ich eine Figur in Yop2D? | Yop2D-Anleitung",
+  "description": "Drei einfache Wege, eine Figur in Yop2D ohne Code zu bewegen: Tasten auf dem Bildschirm, virtueller Joystick oder mit dem Finger ziehen.",
+  "h1": "Wie bewege ich eine Figur?",
+  "carte": [
+    "Eine Figur bewegen",
+    "Ein Objekt mit Tasten, dem Joystick oder dem Finger bewegen."
+  ],
+  "etapes": [
+    [
+      "Mit Tasten auf dem Bildschirm",
+      "Verbinde das Ereignis {{NoeudEventMaintenuObjet}} jeder Taste mit einem Knoten {{pousser}} mit {{lang:pousser.x}} = -5 oder 5."
+    ],
+    [
+      "Mit einem virtuellen Joystick",
+      "Füge ein Objekt {{lang:obj_prefix_joystick}} hinzu und wähle die Figur bei {{lang:insp_label_cible_joystick}}. Kein Knoten nötig."
+    ],
+    [
+      "Mit dem Finger ziehen",
+      "Setze im Inspektor des Objekts das Häkchen bei {{lang:insp_cb_deplacable}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "In Yop2D gibt es drei einfache Wege, eine Figur ohne Code zu bewegen. Wähle den, der zu deinem Spiel passt."
+    ],
+    [
+      "h2",
+      "Methode 1: mit Tasten auf dem Bildschirm (links / rechts)"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Ideal für ein Jump'n'Run oder ein Spiel, in dem sich die Figur auf einer Linie bewegt."
+        ],
+        [
+          "ol",
+          [
+            "Füge in deiner Szene deine Figur hinzu (ein **{{lang:obj_prefix_carre}}** oder ein **{{lang:obj_prefix_image}}**) und nenne sie **player**.",
+            "Füge zwei Objekte als Tasten hinzu, zum Beispiel zwei **{{lang:obj_prefix_bouton}}** (oder zwei Quadrate) namens **btnLeft** und **btnRight**. Setze sie unten auf den Bildschirm.",
+            "Öffne den **{{lang:titre_blueprint}}** der Szene.",
+            "Füge das Ereignis **[[NoeudEventMaintenuObjet]]** hinzu und wähle **btnLeft** als Ziel.",
+            "Füge einen Knoten **[[pousser]]** hinzu: Ziel **player**, **{{lang:pousser.x}} = -5**, **{{lang:pousser.y}} = 0**.",
+            "Verbinde den Ausgang des Ereignisses mit dem Eingang von [[pousser]].",
+            "Mach dasselbe für **btnRight**, mit **{{lang:pousser.x}} = 5**.",
+            "Speichere und starte das Spiel: Solange dein Finger auf einer Taste bleibt, läuft die Figur."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventMaintenuObjet}}",
+              "Ziel: btnLeft"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{pousser}}",
+              "Ziel: player · {{lang:pousser.x}} = -5"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[NoeudEventMaintenuObjet]] wiederholt sich bei jedem Bild, solange der Finger auf der Taste bleibt: Deshalb läuft die Figur ununterbrochen. Für mehr Tempo erhöhe den Wert (zum Beispiel 8 oder 10)."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Methode 2: mit einem virtuellen Joystick"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Ideal für ein Spiel von oben, in dem sich die Figur in alle Richtungen bewegt. **Kein Knoten nötig.**"
+        ],
+        [
+          "ol",
+          [
+            "Füge deiner Szene ein Objekt **{{lang:obj_prefix_joystick}}** hinzu (Kategorie **{{lang:cat_interactifs}}**) und setze es unten links hin.",
+            "Wähle den Joystick aus. Tippe im Inspektor, Bereich **[[lang:insp_sep_joystick]]**, auf die Taste bei **[[lang:insp_label_cible_joystick]]** und wähle deine Figur.",
+            "Speichere und starte das Spiel: Die Figur folgt dem Joystick."
+          ]
+        ],
+        [
+          "tip",
+          "**Abkürzung:** Gibst du deiner Figur den Tag **Player** (oder **Joueur**), bewegt der Joystick sie automatisch, auch ohne Auswahl bei [[lang:insp_label_cible_joystick]]. Achtung: Dieser Tag hat Vorrang vor der Auswahl im Inspektor."
+        ],
+        [
+          "tip",
+          "**Für Fortgeschrittene:** Die Formeln `joystick.x` und `joystick.y` geben die Richtung an (zwischen -1 und 1). Du kannst sie in einem Knoten [[pousser]] nutzen, der mit [[NoeudEventChaqueImage]] verbunden ist, zum Beispiel `=joystick.x * 5`. Der Knoten **[[si_joystick]]** hat außerdem die Ausgänge {{lang:port_haut}}, {{lang:port_bas}}, {{lang:port_gauche}}, {{lang:port_droite}} und {{lang:port_repos}}."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Methode 3: mit dem Finger ziehen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Ideal für ein Puzzle, ein Kartenspiel oder ein Spiel, in dem man Teile verschiebt."
+        ],
+        [
+          "ol",
+          [
+            "Wähle dein Objekt im Szeneneditor aus.",
+            "Setze im Inspektor das Häkchen bei **[[lang:insp_cb_deplacable]]**.",
+            "Starte das Spiel: Du kannst das Objekt mit dem Finger ziehen."
+          ]
+        ],
+        [
+          "tip",
+          "Um zu reagieren, wenn der Spieler das Objekt loslässt (zum Beispiel um zu prüfen, ob es richtig liegt), nutze das Ereignis **[[NoeudEventFinGlisser]]**."
+        ],
+        [
+          "tip",
+          "Um das Ziehen im Spiel zu erlauben oder zu sperren (zum Beispiel bei einem richtig gelegten Puzzleteil), nutze den Knoten **[[modifier_deplacable]]**."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Tipps"
+    ],
+    [
+      "ul",
+      [
+        "**Damit die Figur springt**, folge der Anleitung [Eine Figur springen lassen](guide:sauter).",
+        "**Das Beispielspiel « Plattform »**, das mit Yop2D kommt, nutzt Methode 1: Öffne es, um einen vollständigen, funktionierenden Blueprint zu sehen.",
+        "**Eine Frage?** Sprich darüber auf [Discord](https://discord.gg/nHqCcqHZNQ) oder [Telegram](https://t.me/+7PQ9WKw7n645Y2Zk)."
+      ]
+    ]
+  ]
+}
