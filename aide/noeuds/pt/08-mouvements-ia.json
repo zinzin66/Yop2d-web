@@ -1,0 +1,83 @@
+{
+  "categorie": "Movimentos e IA",
+  "noeuds": [
+    {
+      "nom": "Parar o objeto",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Para o objeto na hora: sem velocidade, empurrão, pulo ou movimento automático.",
+      "exemple": "congelar um inimigo atingido por um feitiço de gelo."
+    },
+    {
+      "nom": "Parar movimentos",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Desliga os movimentos automáticos do objeto: avançar sem parar, perseguir e fugir.",
+      "exemple": "o inimigo para de perseguir quando o jogador se esconde."
+    },
+    {
+      "nom": "Avançar continuamente",
+      "schema": "<b>Entradas:</b> Objeto, Velocidade",
+      "role": "O objeto anda sozinho, na direção para onde está virado, na velocidade escolhida.",
+      "exemple": "uma bala ou um carro andando."
+    },
+    {
+      "nom": "Perseguir um objeto",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Velocidade",
+      "role": "O objeto A anda sozinho em direção ao objeto B, na velocidade escolhida.",
+      "exemple": "um fantasma que segue o jogador."
+    },
+    {
+      "nom": "Fugir de um objeto",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Velocidade",
+      "role": "O objeto A se afasta sozinho do objeto B, na velocidade escolhida.",
+      "exemple": "uma galinha fugindo do jogador."
+    },
+    {
+      "nom": "Mudar o quique",
+      "schema": "<b>Entradas:</b> Objeto, Quique (0 a 1)",
+      "role": "Ajusta o quique de um objeto com física: 0 = não quica, 1 = quica muito.",
+      "exemple": "0.8 para uma bola saltitante."
+    },
+    {
+      "nom": "Empurrar em um ângulo",
+      "schema": "<b>Entradas:</b> Objeto, Ângulo (0 = direita, 90 = baixo), Força",
+      "role": "Empurra o objeto numa direção (em graus: 0 = direita, 90 = baixo, 180 = esquerda, 270 = cima) com a força escolhida.",
+      "exemple": "uma mola que joga o jogador na diagonal."
+    },
+    {
+      "nom": "Impulso (salto)",
+      "schema": "<b>Entradas:</b> Objeto, Força vertical (negativo = sobe)",
+      "role": "Lança o objeto para cima (número negativo) ou para baixo (positivo), e dá física a ele para que caia de volta.",
+      "exemple": "um pulo: força -15."
+    },
+    {
+      "nom": "Ativar a física",
+      "schema": "<b>Entradas:</b> Objeto, Cai (true / false)",
+      "role": "Dá física ao objeto: com true, ele cai com a gravidade; com false, fica parado como um chão.",
+      "exemple": "uma plataforma que desaba quando você pisa nela."
+    },
+    {
+      "nom": "Tornar arrastável",
+      "schema": "<b>Entradas:</b> Objeto, Arrastável com o dedo (true / false)",
+      "role": "Permite (true) ou proíbe (false) arrastar o objeto com o dedo durante o jogo.",
+      "exemple": "travar uma peça de quebra-cabeça bem encaixada."
+    },
+    {
+      "nom": "Saltitar",
+      "schema": "<b>Entradas:</b> Objeto, Intensidade (0 = parar), Duração (ms), Continua enquanto se move (true / false)",
+      "role": "Faz o objeto dar pulinhos (pequeno quique visual) com a intensidade e a duração escolhidas. 0 para. Pode continuar enquanto o objeto se mexe.",
+      "exemple": "um personagem que dá pulinhos ao andar."
+    },
+    {
+      "nom": "Virar para",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Deslocamento de ângulo (graus)",
+      "role": "Vira o objeto A para o objeto B. A compensação corrige o sentido da imagem (0 = a imagem olha para a direita).",
+      "exemple": "uma torre que mira no jogador."
+    },
+    {
+      "nom": "Deslizar para",
+      "schema": "<b>Entradas:</b> Objeto, Posição X, Posição Y, Duração (segundos)",
+      "role": "Move o objeto suavemente até a posição X, Y no tempo escolhido (segundos). O resto continua sem esperar.",
+      "exemple": "uma plataforma que se move ou um menu que entra na tela."
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "categorie": "Apparence & Objets",
+  "noeuds": [
+    {
+      "nom": "Déplacer Objet",
+      "schema": "<b>Entrées :</b> Objet, X, Y",
+      "role": "Place l'objet directement à la position X, Y (téléportation).",
+      "exemple": "remettre le joueur au point de départ."
+    },
+    {
+      "nom": "Pousser objet",
+      "schema": "<b>Entrées :</b> Objet, Ajout X, Ajout Y",
+      "role": "Déplace l'objet de la distance donnée à partir de sa position actuelle. Un objet physique est arrêté par les murs.",
+      "exemple": "relié à « Maintenu sur Objet » : « Ajout X » = 5 fait avancer vers la droite."
+    },
+    {
+      "nom": "Modifier une propriété",
+      "schema": "<b>Entrées :</b> Objet, Propriété, Valeur",
+      "role": "Change une propriété de l'objet choisie dans une liste (x, y, rotation, opacité, texte…).",
+      "exemple": "mettre la rotation d'une aiguille à =temps * 90."
+    },
+    {
+      "nom": "Rotation",
+      "schema": "<b>Entrées :</b> Objet, Angle (degrés)",
+      "role": "Tourne l'objet à l'angle donné, en degrés.",
+      "exemple": "=roue.rotation + 5 relié à « À chaque image » fait tourner l'objet « roue » en continu."
+    },
+    {
+      "nom": "Modifier l'Opacité (Alpha)",
+      "schema": "<b>Entrées :</b> Objet, Opacité (0 à 1)",
+      "role": "Règle la transparence de l'objet : 0 = invisible, 1 = opaque.",
+      "exemple": "0.5 pour un fantôme à moitié transparent."
+    },
+    {
+      "nom": "Visibilité",
+      "schema": "<b>Entrées :</b> Objet, Visible (true / false)",
+      "role": "Montre (true) ou cache (false) l'objet.",
+      "exemple": "afficher un message « Gagné ! » caché au départ."
+    },
+    {
+      "nom": "Définir le Tag",
+      "schema": "<b>Entrées :</b> Objet, Tag",
+      "role": "Donne un nouveau tag (étiquette) à l'objet.",
+      "exemple": "un ennemi vaincu prend le tag « inoffensif »."
+    },
+    {
+      "nom": "Changer Z-Order",
+      "schema": "<b>Entrées :</b> Objet, Z",
+      "role": "Change le calque de l'objet : plus le nombre est grand, plus l'objet passe devant les autres.",
+      "exemple": "faire passer le joueur devant un décor."
+    },
+    {
+      "nom": "Définir la taille (Scale)",
+      "schema": "<b>Entrées :</b> Objet, Scale X, Scale Y",
+      "role": "Change la taille de l'objet : 1 = normal, 2 = deux fois plus grand, 0.5 = moitié.",
+      "exemple": "le joueur grandit après avoir mangé un champignon."
+    },
+    {
+      "nom": "Détruire Objet",
+      "schema": "<b>Entrée :</b> Objet",
+      "role": "Supprime l'objet choisi de la scène.",
+      "exemple": "choisir « Objet Impliqué » pour détruire la pièce que le joueur vient de toucher."
+    },
+    {
+      "nom": "Détruire par Tag",
+      "schema": "<b>Entrée :</b> Tag à détruire",
+      "role": "Supprime tous les objets qui portent ce tag.",
+      "exemple": "une bombe détruit tous les objets « Ennemi »."
+    },
+    {
+      "nom": "Changer Image",
+      "schema": "<b>Entrées :</b> Objet, Image",
+      "role": "Remplace l'image de l'objet par une autre image des Assets. Vide = pas d'image.",
+      "exemple": "le personnage regarde à gauche ou à droite selon le bouton."
+    },
+    {
+      "nom": "Modifier Couleur",
+      "schema": "<b>Entrées :</b> Objet, Couleur",
+      "role": "Change la couleur de l'objet.",
+      "exemple": "un bouton devient vert quand la réponse est bonne."
+    },
+    {
+      "nom": "Générer un clone (Spawner)",
+      "schema": "<b>Entrées :</b> Objet A, Objet B",
+      "role": "Crée une copie de l'objet B (le modèle) à l'endroit de l'objet A (le point d'apparition).",
+      "exemple": "un canon (A) qui fait apparaître des boulets (B)."
+    },
+    {
+      "nom": "Filtre Couleur",
+      "schema": "<b>Entrées :</b> Objet, Filtre",
+      "role": "Applique un filtre à l'objet : Noir et Blanc, Sépia, Inversion, ou Aucun pour l'enlever.",
+      "exemple": "passer en noir et blanc pendant un souvenir."
+    },
+    {
+      "nom": "Mode de fusion (Effet)",
+      "schema": "<b>Entrées :</b> Objet, Filtre",
+      "role": "Change la façon dont l'objet se mélange avec ce qu'il y a derrière (Additif, Multiplicatif, Écran, Inversion).",
+      "exemple": "Additif pour une lumière ou une flamme qui brille."
+    },
+    {
+      "nom": "Effet Miroir / Inverser",
+      "schema": "<b>Entrées :</b> Objet, Axe",
+      "role": "Retourne l'objet : Horizontal (gauche / droite) ou Vertical (haut / bas).",
+      "exemple": "le personnage regarde du côté où il marche."
+    },
+    {
+      "nom": "Modifier Verrouillage",
+      "schema": "<b>Entrées :</b> Objet, Verrouillé (true / false)",
+      "role": "Verrouille ou déverrouille l'objet dans l'éditeur (le cadenas). N'a aucun effet pendant le jeu : pour empêcher de faire glisser un objet, utilise « Rendre déplaçable »."
+    },
+    {
+      "nom": "Facteur de Parallaxe",
+      "schema": "<b>Entrées :</b> Objet, Facteur (ex : 0.5)",
+      "role": "Règle la vitesse de défilement de l'objet quand la caméra bouge : 1 = normal, 0.5 = deux fois plus lent (effet de profondeur).",
+      "exemple": "des montagnes au fond qui défilent lentement."
+    },
+    {
+      "nom": "Lier deux objets",
+      "schema": "<b>Entrées :</b> Objet A, Objet B",
+      "role": "Attache l'objet A (l'enfant) à l'objet B (le parent) : A suit B quand il bouge.",
+      "exemple": "une épée qui suit la main du personnage."
+    },
+    {
+      "nom": "Surbrillance (Glow)",
+      "schema": "<b>Entrées :</b> Objet, État, Couleur",
+      "role": "Active ou désactive un halo de couleur autour de l'objet.",
+      "exemple": "montrer l'objet qu'on peut ramasser."
+    },
+    {
+      "nom": "Clignotement (Blink)",
+      "schema": "<b>Entrées :</b> Objet, État, Vitesse (ms), Durée (ms, 0 = infini)",
+      "role": "Fait clignoter l'objet à la vitesse choisie (ms), pendant une durée (ms, 0 = sans fin), ou arrête le clignotement.",
+      "exemple": "le joueur clignote 1 seconde après avoir été touché."
+    },
+    {
+      "nom": "Générer clone (Position X/Y)",
+      "schema": "<b>Entrées :</b> Objet B, X, Y",
+      "role": "Crée une copie de l'objet B (le modèle) à la position X, Y. La copie devient l'« Objet Impliqué ».",
+      "exemple": "faire tomber une pierre à une position au hasard : X = random(0, 800)."
+    },
+    {
+      "nom": "Tirer un objet",
+      "schema": "<b>Entrées :</b> Objet A, Objet B, Nom du modèle, Direction, Vitesse",
+      "role": "Crée un projectile (l'objet nommé dans « Nom du modèle ») à l'endroit de l'objet A, et le lance à la vitesse choisie : 0°, 90°, 180°, 270°, vers l'objet B (« Vers la cible ») ou selon l'angle de A.",
+      "exemple": "un vaisseau qui tire des lasers vers le haut (270)."
+    },
+    {
+      "nom": "Définir la Progression",
+      "schema": "<b>Entrées :</b> Objet, Nouvelle progression",
+      "role": "Règle le remplissage d'une barre de progression, entre son minimum et son maximum.",
+      "exemple": "« Nouvelle progression » = vie, pour une barre de vie."
+    },
+    {
+      "nom": "Traverser l'écran",
+      "schema": "<b>Entrée :</b> Objet",
+      "role": "Ce qui sort d'un côté de l'écran réapparaît du côté opposé (effet Pac-Man).",
+      "exemple": "un astéroïde qui sort à droite et revient à gauche."
+    },
+    {
+      "nom": "Garder dans l'écran",
+      "schema": "<b>Entrées :</b> Objet, Marge",
+      "role": "Empêche l'objet de sortir de l'écran. La marge l'arrête un peu avant le bord.",
+      "exemple": "le vaisseau du joueur reste toujours visible."
+    },
+    {
+      "nom": "Créer un objet",
+      "schema": "<b>Entrées :</b> Objet, Position X, Position Y",
+      "role": "Crée une copie de l'objet choisi (le modèle) à la position X, Y.",
+      "exemple": "ajouter une caisse à un endroit précis."
+    },
+    {
+      "nom": "Fondu",
+      "schema": "<b>Entrées :</b> Objet, Opacité cible (0 à 1), Durée (secondes)",
+      "role": "Change doucement l'opacité de l'objet jusqu'à la valeur cible, pendant la durée choisie (secondes). La suite continue sans attendre.",
+      "exemple": "faire disparaître un titre en 1 seconde (opacité cible 0)."
+    }
+  ]
+}

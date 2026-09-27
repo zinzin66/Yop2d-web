@@ -1,0 +1,71 @@
+{
+  "categorie": "Logik & Bedingungen",
+  "noeuds": [
+    {
+      "nom": "Bedingung",
+      "schema": "<b>Eingang:</b> Bedingung &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch / Danach",
+      "role": "Prüft eine Bedingung: folgt „Wahr“, wenn sie stimmt, sonst „Falsch“. „Danach“ läuft danach, in beiden Fällen.",
+      "exemple": "score >= 10 → wahr → nächste Szene."
+    },
+    {
+      "nom": "Wenn Joystick",
+      "schema": "<b>Ausgänge:</b> Oben / Unten / Links / Rechts / Ruhe / Danach",
+      "role": "Folgt dem Ausgang zur Richtung des Joysticks: „Oben“, „Unten“, „Links“, „Rechts“ oder „Ruhe“, wenn er nicht berührt wird.",
+      "exemple": "verbunden mit „Jeden Frame“, um die Laufanimation in die richtige Richtung abzuspielen."
+    },
+    {
+      "nom": "Wenn am Boden",
+      "schema": "<b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch / Danach",
+      "role": "„Wahr“, wenn die Unterseite des Objekts auf einem festen, sichtbaren Objekt steht (Boden, Plattform), sonst „Falsch“.",
+      "exemple": "Springen nur erlauben, wenn der Spieler am Boden ist."
+    },
+    {
+      "nom": "Wenn in Bewegung",
+      "schema": "<b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch / Danach",
+      "role": "„Wahr“, wenn sich das Objekt seit dem letzten Bild bewegt hat, sonst „Falsch“.",
+      "exemple": "die Laufanimation nur abspielen, wenn sich die Figur bewegt."
+    },
+    {
+      "nom": "Funktion aufrufen",
+      "schema": "<b>Eingang:</b> Funktion",
+      "role": "Führt eine Funktion aus (einen Blueprint aus dem Bereich Funktionen) und macht dann weiter. Nicht unter „Jeden Frame“ setzen.",
+      "exemple": "eine Funktion „LebenVerlieren“, die von mehreren Gegnern genutzt wird."
+    },
+    {
+      "nom": "Ereignis aufrufen",
+      "schema": "<b>Eingang:</b> Ereignisname",
+      "role": "Startet das „Lokales Ereignis“ mit diesem Namen im selben Blueprint und macht dann weiter.",
+      "exemple": "„GameOver“ vom Sturz und vom Timer aus aufrufen."
+    },
+    {
+      "nom": "Sequenz",
+      "schema": "<b>Ausgänge:</b> 1 / 2 / 3 / 4",
+      "role": "Startet seine Ausgänge nacheinander: 1, dann 2, dann 3, dann 4. Ein Ausgang ohne Verbindung wird übersprungen.",
+      "exemple": "beim Start: 1 = Spieler platzieren, 2 = Musik starten, 3 = Punktestand anzeigen."
+    },
+    {
+      "nom": "Abklingzeit",
+      "schema": "<b>Eingänge:</b> Objekt, Verzögerung (Sekunden) &nbsp;→&nbsp; <b>Ausgänge:</b> Bereit / Noch nicht",
+      "role": "Lässt höchstens einmal pro Wartezeit (in Sekunden) über „Bereit“ durch; sonst geht es über „Noch nicht“. Mit gewähltem Objekt hat jedes Objekt seine eigene Wartezeit.",
+      "exemple": "höchstens einmal alle 0.5 Sekunden schießen."
+    },
+    {
+      "nom": "Wenn außerhalb des Bildschirms",
+      "schema": "<b>Eingänge:</b> Objekt, Rand (Pixel) &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch / Danach",
+      "role": "„Wahr“, wenn das Objekt ganz außerhalb des Bildschirms ist (plus Rand), sonst „Falsch“.",
+      "exemple": "Kugeln zerstören, die den Bildschirm verlassen."
+    },
+    {
+      "nom": "Wenn / Sonst",
+      "schema": "<b>Eingänge:</b> Wenn (Bedingung), Sonst wenn (Bedingung) &nbsp;→&nbsp; <b>Ausgänge:</b> Wenn / Sonst wenn / Sonst / Danach",
+      "role": "Prüft die erste Bedingung, dann die zweite: folgt „Wenn“, „Sonst wenn“ oder „Sonst“. „Danach“ läuft danach.",
+      "exemple": "wenn score >= 100 → Gold, sonst wenn score >= 50 → Silber, sonst → Bronze."
+    },
+    {
+      "nom": "Je nach Wert",
+      "schema": "<b>Eingänge:</b> Zu prüfender Wert, Fall 1, Fall 2, Fall 3, Fall 4, Fall 5, Fall 6 &nbsp;→&nbsp; <b>Ausgänge:</b> 1 / 2 / 3 / 4 / 5 / 6 / Keiner / Danach",
+      "role": "Vergleicht den Wert mit den Fällen 1 bis 6 und folgt dem Ausgang des ersten gleichen Falls; „Keiner“, wenn nichts passt. Ein leerer Fall wird übersprungen.",
+      "exemple": "je nach „waffe“: 1 = Schwert, 2 = Bogen, 3 = Zauberstab."
+    }
+  ]
+}

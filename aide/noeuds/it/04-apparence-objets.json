@@ -1,0 +1,178 @@
+{
+  "categorie": "Aspetto e Oggetti",
+  "noeuds": [
+    {
+      "nom": "Sposta Oggetto",
+      "schema": "<b>Ingressi:</b> Oggetto, X, Y",
+      "role": "Mette l'oggetto direttamente alla posizione X, Y (teletrasporto).",
+      "exemple": "riportare il giocatore alla partenza."
+    },
+    {
+      "nom": "Spingi l'oggetto",
+      "schema": "<b>Ingressi:</b> Oggetto, Aggiungi X, Aggiungi Y",
+      "role": "Sposta l'oggetto della distanza indicata a partire da dov'è. Un oggetto fisico viene fermato dai muri.",
+      "exemple": "collegato a «Oggetto Tenuto Premuto»: «Aggiungi X» = 5 va verso destra."
+    },
+    {
+      "nom": "Modifica una proprietà",
+      "schema": "<b>Ingressi:</b> Oggetto, Proprietà, Valore",
+      "role": "Cambia una proprietà dell'oggetto scelta da un elenco (x, y, rotazione, opacità, testo…).",
+      "exemple": "impostare la rotazione di una lancetta a =temps * 90."
+    },
+    {
+      "nom": "Rotazione",
+      "schema": "<b>Ingressi:</b> Oggetto, Angolo (gradi)",
+      "role": "Ruota l'oggetto all'angolo indicato, in gradi.",
+      "exemple": "=ruota.rotation + 5 collegato a «Ogni frame» fa girare di continuo l'oggetto «ruota»."
+    },
+    {
+      "nom": "Modifica l'Opacità (Alpha)",
+      "schema": "<b>Ingressi:</b> Oggetto, Opacità (da 0 a 1)",
+      "role": "Regola la trasparenza dell'oggetto: 0 = invisibile, 1 = pieno.",
+      "exemple": "0.5 per un fantasma mezzo trasparente."
+    },
+    {
+      "nom": "Visibilità",
+      "schema": "<b>Ingressi:</b> Oggetto, Visibile (true / false)",
+      "role": "Mostra (true) o nasconde (false) l'oggetto.",
+      "exemple": "mostrare un messaggio «Hai vinto!» nascosto all'inizio."
+    },
+    {
+      "nom": "Imposta Tag",
+      "schema": "<b>Ingressi:</b> Oggetto, Tag",
+      "role": "Dà un nuovo tag (etichetta) all'oggetto.",
+      "exemple": "un nemico sconfitto prende il tag «innocuo»."
+    },
+    {
+      "nom": "Cambia Z-Order",
+      "schema": "<b>Ingressi:</b> Oggetto, Z",
+      "role": "Cambia il livello dell'oggetto: più il numero è alto, più l'oggetto sta davanti agli altri.",
+      "exemple": "mettere il giocatore davanti a un elemento di scenario."
+    },
+    {
+      "nom": "Imposta dimensione (Scala)",
+      "schema": "<b>Ingressi:</b> Oggetto, Scale X, Scale Y",
+      "role": "Cambia la dimensione dell'oggetto: 1 = normale, 2 = il doppio, 0.5 = la metà.",
+      "exemple": "il giocatore cresce dopo aver mangiato un fungo."
+    },
+    {
+      "nom": "Distruggi Oggetto",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Elimina l'oggetto scelto dalla scena.",
+      "exemple": "scegliere «Oggetto Implicato» per distruggere la moneta appena toccata dal giocatore."
+    },
+    {
+      "nom": "Distruggi tramite Tag",
+      "schema": "<b>Ingresso:</b> Tag da distruggere",
+      "role": "Elimina tutti gli oggetti con questo tag.",
+      "exemple": "una bomba distrugge tutti gli oggetti «Nemico»."
+    },
+    {
+      "nom": "Cambia Immagine",
+      "schema": "<b>Ingressi:</b> Oggetto, Immagine",
+      "role": "Sostituisce l'immagine dell'oggetto con un'altra degli Assets. Vuoto = nessuna immagine.",
+      "exemple": "il personaggio guarda a sinistra o a destra a seconda del pulsante."
+    },
+    {
+      "nom": "Modifica Colore",
+      "schema": "<b>Ingressi:</b> Oggetto, Colore",
+      "role": "Cambia il colore dell'oggetto.",
+      "exemple": "un pulsante diventa verde quando la risposta è giusta."
+    },
+    {
+      "nom": "Genera clone (Spawner)",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B",
+      "role": "Crea una copia dell'oggetto B (il modello) al posto dell'oggetto A (il punto di comparsa).",
+      "exemple": "un cannone (A) che fa apparire palle (B)."
+    },
+    {
+      "nom": "Filtro Colore",
+      "schema": "<b>Ingressi:</b> Oggetto, Filtro",
+      "role": "Applica un filtro all'oggetto: Bianco e nero, Seppia, Inverti, o Nessuno per toglierlo.",
+      "exemple": "passare al bianco e nero durante un ricordo."
+    },
+    {
+      "nom": "Metodo di fusione (Effetto)",
+      "schema": "<b>Ingressi:</b> Oggetto, Filtro",
+      "role": "Cambia come l'oggetto si mescola con ciò che ha dietro (Additivo, Moltiplica, Scherma, Inverti).",
+      "exemple": "Additivo per una luce o una fiamma che brilla."
+    },
+    {
+      "nom": "Effetto Specchio / Inverti",
+      "schema": "<b>Ingressi:</b> Oggetto, Asse",
+      "role": "Capovolge l'oggetto: Orizzontale (sinistra / destra) o Verticale (su / giù).",
+      "exemple": "il personaggio guarda dove cammina."
+    },
+    {
+      "nom": "Modifica Blocco",
+      "schema": "<b>Ingressi:</b> Oggetto, Bloccato (true / false)",
+      "role": "Blocca o sblocca l'oggetto nell'editor (il lucchetto). Non ha alcun effetto durante il gioco: per impedire di trascinare un oggetto, usa «Rendi trascinabile»."
+    },
+    {
+      "nom": "Fattore di Parallasse",
+      "schema": "<b>Ingressi:</b> Oggetto, Fattore (es. 0.5)",
+      "role": "Regola la velocità con cui l'oggetto scorre quando la telecamera si muove: 1 = normale, 0.5 = la metà (effetto profondità).",
+      "exemple": "montagne sullo sfondo che scorrono lentamente."
+    },
+    {
+      "nom": "Collega due oggetti",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B",
+      "role": "Attacca l'oggetto A (il figlio) all'oggetto B (il genitore): A segue B quando si muove.",
+      "exemple": "una spada che segue la mano del personaggio."
+    },
+    {
+      "nom": "Bagliore (Glow)",
+      "schema": "<b>Ingressi:</b> Oggetto, Stato, Colore",
+      "role": "Attiva o disattiva un alone colorato intorno all'oggetto.",
+      "exemple": "mostrare l'oggetto che si può raccogliere."
+    },
+    {
+      "nom": "Lampeggio (Blink)",
+      "schema": "<b>Ingressi:</b> Oggetto, Stato, Velocità (ms), Durata (ms, 0 = infinito)",
+      "role": "Fa lampeggiare l'oggetto alla velocità scelta (ms), per una durata (ms, 0 = senza fine), o ferma il lampeggio.",
+      "exemple": "il giocatore lampeggia 1 secondo dopo essere stato colpito."
+    },
+    {
+      "nom": "Genera clone (Posizione X/Y)",
+      "schema": "<b>Ingressi:</b> Oggetto B, X, Y",
+      "role": "Crea una copia dell'oggetto B (il modello) alla posizione X, Y. La copia diventa l'«Oggetto Implicato».",
+      "exemple": "far cadere un sasso in una posizione a caso: X = random(0, 800)."
+    },
+    {
+      "nom": "Spara un oggetto",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Nome del modello, Direzione, Velocità",
+      "role": "Crea un proiettile (l'oggetto indicato in «Nome del modello») nel punto dell'oggetto A e lo lancia alla velocità scelta: 0°, 90°, 180°, 270°, verso l'oggetto B («Verso il bersaglio») o secondo l'angolo di A.",
+      "exemple": "un'astronave che spara laser verso l'alto (270)."
+    },
+    {
+      "nom": "Imposta Progresso",
+      "schema": "<b>Ingressi:</b> Oggetto, Nuovo progresso",
+      "role": "Regola il riempimento di una barra di avanzamento, tra il suo minimo e il suo massimo.",
+      "exemple": "«Nuovo progresso» = vie, per una barra della vita."
+    },
+    {
+      "nom": "Attraversa schermo",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Ciò che esce da un lato dello schermo ricompare dal lato opposto (effetto Pac-Man).",
+      "exemple": "un asteroide che esce a destra e rientra a sinistra."
+    },
+    {
+      "nom": "Mantieni nello schermo",
+      "schema": "<b>Ingressi:</b> Oggetto, Margine",
+      "role": "Impedisce all'oggetto di uscire dallo schermo. Il margine lo ferma poco prima del bordo.",
+      "exemple": "l'astronave del giocatore resta sempre visibile."
+    },
+    {
+      "nom": "Crea oggetto",
+      "schema": "<b>Ingressi:</b> Oggetto, Posizione X, Posizione Y",
+      "role": "Crea una copia dell'oggetto scelto (il modello) alla posizione X, Y.",
+      "exemple": "aggiungere una cassa in un punto preciso."
+    },
+    {
+      "nom": "Dissolvenza",
+      "schema": "<b>Ingressi:</b> Oggetto, Opacità finale (0-1), Durata (secondi)",
+      "role": "Cambia dolcemente l'opacità dell'oggetto fino al valore finale, nel tempo scelto (secondi). Il seguito continua senza aspettare.",
+      "exemple": "far sparire un titolo in 1 secondo (opacità finale 0)."
+    }
+  ]
+}

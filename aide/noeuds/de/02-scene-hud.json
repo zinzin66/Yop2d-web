@@ -1,0 +1,110 @@
+{
+  "categorie": "Szene & HUD",
+  "noeuds": [
+    {
+      "nom": "Zur Szene wechseln",
+      "schema": "<b>Eingang:</b> Szene &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)",
+      "role": "Verlässt die aktuelle Szene und geht zur gewählten Szene. Dieser Knoten beendet das Skript.",
+      "exemple": "nach dem letzten Level zum Bildschirm „Bravo!“ gehen."
+    },
+    {
+      "nom": "Zur Szene (nach Name)",
+      "schema": "<b>Eingang:</b> Name der Szene &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)",
+      "role": "Geht zur Szene, deren Namen du schreibst (oder eine Formel, die diesen Namen ergibt). Dieser Knoten beendet das Skript.",
+      "exemple": "eine Formel wie =\"Level\" + level, um das Level mit einer Variable zu wählen."
+    },
+    {
+      "nom": "Nächste Szene",
+      "schema": "<b>Ausgang:</b> keiner (Ende des Skripts)",
+      "role": "Geht zur Szene, die in der Szenenliste direkt danach kommt. Dieser Knoten beendet das Skript.",
+      "exemple": "der Spieler erreicht das Ziel → nächstes Level."
+    },
+    {
+      "nom": "Vorherige Szene",
+      "schema": "<b>Ausgang:</b> keiner (Ende des Skripts)",
+      "role": "Geht zur Szene, die in der Szenenliste direkt davor kommt. Dieser Knoten beendet das Skript.",
+      "exemple": "eine Taste „Zurück“ in einem Menü."
+    },
+    {
+      "nom": "Szene neu starten",
+      "schema": "<b>Ausgang:</b> keiner (Ende des Skripts)",
+      "role": "Startet die Szene von vorn: Objekte an ihrem Platz und lokale Variablen auf ihrem Startwert. Globale Variablen ändern sich nicht.",
+      "exemple": "Game Over, wenn das Leben auf 0 fällt."
+    },
+    {
+      "nom": "HUD öffnen",
+      "schema": "<b>Eingang:</b> Szene",
+      "role": "Zeigt eine andere Szene über dem Spiel an, wie eine Ebene (HUD), mit eigenem Blueprint.",
+      "exemple": "ein Pausenmenü oder ein Inventar."
+    },
+    {
+      "nom": "HUD schließen",
+      "role": "Schließt das geöffnete HUD.",
+      "exemple": "die Taste „Schließen“ im Pausenmenü."
+    },
+    {
+      "nom": "Kopie einer Szene platzieren",
+      "schema": "<b>Eingänge:</b> Szene, X-Position, Y-Position",
+      "role": "Setzt eine Kopie der gewählten Szene (Prefab) an die Position X, Y ins Spiel.",
+      "exemple": "eine in einer anderen Szene vorbereitete Gegnergruppe erscheinen lassen."
+    },
+    {
+      "nom": "Kopien einer Szene zerstören",
+      "schema": "<b>Eingang:</b> Szene",
+      "role": "Entfernt alle Kopien der gewählten Szene aus dem Spiel.",
+      "exemple": "am Ende einer Welle alle Gegnergruppen löschen."
+    },
+    {
+      "nom": "Spiel beenden",
+      "schema": "<b>Ausgang:</b> keiner (Ende des Skripts)",
+      "role": "Schließt das exportierte Spiel. Im Editor wird nichts geschlossen: nutze die Stopp-Taste.",
+      "exemple": "eine Taste „Beenden“ im Hauptmenü."
+    },
+    {
+      "nom": "Toast",
+      "schema": "<b>Eingang:</b> Nachricht",
+      "role": "Zeigt ein paar Sekunden lang eine kleine Nachricht unten auf dem Bildschirm. Beginne mit =, um eine Rechnung anzuzeigen.",
+      "exemple": "=\"Punkte: \" + score"
+    },
+    {
+      "nom": "In das Protokoll schreiben",
+      "schema": "<b>Eingang:</b> Nachricht",
+      "role": "Schreibt eine Nachricht ins Projektprotokoll (Diagnosedatei), ohne im Spiel etwas anzuzeigen. Beginne mit =, um eine Rechnung zu schreiben.",
+      "exemple": "=\"Leben = \" + vie, um beim Testen einen Wert zu prüfen."
+    },
+    {
+      "nom": "Kamera fixieren",
+      "schema": "<b>Eingänge:</b> Objekt, X folgen (true / false), Y folgen (true / false), Parallaxe nur X (true / false)",
+      "role": "Die Kamera folgt dem gewählten Objekt, auf Wunsch nur waagerecht oder nur senkrecht. Ohne Objekt folgt die Kamera nichts mehr.",
+      "exemple": "dem Spieler durch ein großes Plattform-Level folgen."
+    },
+    {
+      "nom": "Kamera-Glättung",
+      "schema": "<b>Eingang:</b> Folgegeschwindigkeit (0.01 bis 1)",
+      "role": "Legt fest, wie schnell die Kamera das verfolgte Objekt einholt: 0.01 = sehr weich, 1 = klebt am Objekt.",
+      "exemple": "0.1 für eine sanfte Kamera, die leicht verzögert folgt."
+    },
+    {
+      "nom": "Kamera-Wackeln",
+      "schema": "<b>Eingänge:</b> Stärke, Dauer (ms)",
+      "role": "Schüttelt den Bildschirm mit der gewählten Stärke und Dauer (in Millisekunden).",
+      "exemple": "eine Explosion: Intensität 15, Dauer 400."
+    },
+    {
+      "nom": "Vibration",
+      "schema": "<b>Eingang:</b> Dauer (ms)",
+      "role": "Lässt das Handy für die gewählte Dauer (in Millisekunden) vibrieren. Ohne Vibrationsmotor passiert nichts.",
+      "exemple": "100 ms, wenn der Spieler getroffen wird."
+    },
+    {
+      "nom": "Zustand speichern",
+      "role": "Merkt sich den Zustand der Szene (Objekte und Variablen) und die globalen Variablen, wie ein Speicherpunkt.",
+      "exemple": "eine Checkpoint-Fahne mitten im Level."
+    },
+    {
+      "nom": "Zustand wiederherstellen",
+      "role": "Stellt die Szene wie beim letzten „Zustand speichern“ wieder her. Gibt es noch keinen, ändert sich nichts.",
+      "exemple": "nach einem Sturz am Checkpoint weitermachen."
+    }
+  ]
+}

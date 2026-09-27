@@ -3,81 +3,106 @@
   "noeuds": [
     {
       "nom": "All'Avvio",
-      "schema": "<b>Uscita:</b> Esegui",
-      "role": "Si esegue automaticamente e una sola volta appena la scena è caricata sullo schermo.",
-      "exemple": "posizionare i nemici al punto di partenza, o impostare la vita del giocatore a 100."
+      "role": "Si avvia una sola volta, appena la scena comincia.",
+      "exemple": "posizionare i nemici, mostrare il punteggio iniziale o far partire la musica."
     },
     {
-      "nom": "Ogni Frame",
-      "schema": "<b>Uscita:</b> Esegui (in ciclo)",
-      "role": "Si esegue di continuo, a ogni aggiornamento dello schermo.",
-      "exemple": "far ruotare un oggetto su sé stesso all'infinito, o aggiornare un punteggio."
+      "nom": "Ogni frame",
+      "role": "Si avvia di continuo, a ogni fotogramma del gioco (circa 60 volte al secondo).",
+      "exemple": "seguire il dito o controllare una condizione in ogni momento. Evita di metterci sotto «Riproduci musica» o «Chiama funzione»."
     },
     {
-      "nom": "Al Clic su Oggetto",
-      "schema": "<b>Ingresso:</b> Bersaglio &nbsp;→&nbsp; <b>Uscita:</b> Esegui",
-      "role": "Si attiva quando il dito del giocatore tocca l'oggetto indicato.",
-      "exemple": "aprire un forziere, premere un pulsante o avviare un dialogo."
+      "nom": "Fine del Clic",
+      "role": "Si avvia quando il giocatore solleva il dito dallo schermo, in qualsiasi punto.",
+      "exemple": "smettere di sparare quando si lascia lo schermo."
     },
     {
-      "nom": "Fine Clic",
-      "schema": "<b>Uscita:</b> Esegui",
-      "role": "Si attiva quando il giocatore solleva il dito dallo schermo, in qualsiasi punto.",
-      "exemple": "smettere di sparare quando si solleva il dito."
+      "nom": "Al Clic sull'Oggetto",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Si avvia quando il dito tocca l'oggetto scelto.",
+      "exemple": "un pulsante «Salta», aprire un forziere, scegliere una risposta."
     },
     {
-      "nom": "Inizio / Fine Trascinamento",
-      "schema": "<b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscita:</b> Esegui",
-      "role": "Si attivano quando il giocatore inizia a trascinare un oggetto trascinabile e quando lo rilascia.",
-      "exemple": "rilasciare una chiave su una porta per aprirla."
+      "nom": "Fine del Clic su Oggetto",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Si avvia quando il dito si solleva sopra l'oggetto scelto.",
+      "exemple": "confermare un pulsante solo quando lo si rilascia."
+    },
+    {
+      "nom": "Oggetto Tenuto Premuto",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Si ripete a ogni fotogramma finché il dito resta sull'oggetto scelto.",
+      "exemple": "pulsanti sinistra / destra: finché li premi, il personaggio avanza."
+    },
+    {
+      "nom": "Dito premuto",
+      "role": "Si ripete a ogni fotogramma finché un dito è appoggiato sullo schermo, in qualsiasi punto.",
+      "exemple": "far salire un'astronave finché si preme (usa doigt.x e doigt.y nelle formule)."
+    },
+    {
+      "nom": "Inizio Trascinamento",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Si avvia quando il giocatore comincia a trascinare l'oggetto scelto (deve essere «Mobile (trascinabile con il dito)»).",
+      "exemple": "ingrandire una carta quando la si prende."
+    },
+    {
+      "nom": "Fine Trascinamento",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Si avvia quando il giocatore lascia l'oggetto che stava trascinando.",
+      "exemple": "controllare se un pezzo del puzzle è al posto giusto."
     },
     {
       "nom": "Collisione A/B",
-      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B &nbsp;→&nbsp; <b>Uscita:</b> Esegui",
-      "role": "Si attiva nel momento esatto in cui l'oggetto A tocca fisicamente l'oggetto B.",
-      "exemple": "quando \"Giocatore\" tocca \"Moneta\" → riprodurre un suono e distruggere la moneta."
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B",
+      "role": "Si avvia una volta, quando l'oggetto A comincia a toccare l'oggetto B. Devono separarsi prima che si riavvii. È anche l'evento da usare per «entrare in una zona».",
+      "exemple": "il giocatore tocca la zona di arrivo → livello successivo."
     },
     {
-      "nom": "Se l'oggetto tocca Tag",
-      "schema": "<b>Ingressi:</b> Oggetto, Testo Tag &nbsp;→&nbsp; <b>Uscita:</b> Esegui",
-      "role": "Si attiva quando l'oggetto indicato urta un qualsiasi oggetto con l'etichetta (Tag) indicata.",
-      "exemple": "quando \"Missile\" tocca un oggetto con il tag \"Nemico\" → esplosione."
+      "nom": "Esci dalla Zona",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B",
+      "role": "Si avvia una volta, quando l'oggetto A smette di toccare l'oggetto B (esce dalla zona).",
+      "exemple": "richiudere una porta quando il giocatore si allontana."
     },
     {
-      "nom": "Entrata / Uscita da zona",
-      "schema": "<b>Ingressi:</b> Oggetto A, Zona B &nbsp;→&nbsp; <b>Uscita:</b> Esegui",
-      "role": "Si attiva quando un oggetto entra o esce da una zona definita (ideale per inneschi invisibili).",
-      "exemple": "il giocatore entra nella zona \"Trappola\" → spuntano delle punte dal suolo."
+      "nom": "Al Passaggio del Mouse",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Si avvia quando il dito, scorrendo sullo schermo, arriva sull'oggetto scelto.",
+      "exemple": "illuminare un pulsante quando il dito ci passa sopra."
     },
     {
-      "nom": "Al Passaggio / Fine Passaggio",
-      "schema": "<b>Ingresso:</b> Bersaglio &nbsp;→&nbsp; <b>Uscita:</b> Esegui",
-      "role": "Gestisce il passaggio del dito o di un puntatore sopra un oggetto, senza bisogno di cliccare.",
-      "exemple": "evidenziare un pulsante quando ci si passa sopra."
+      "nom": "Fine Passaggio del Mouse",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Si avvia quando il dito lascia l'oggetto su cui passava.",
+      "exemple": "spegnere l'evidenziazione di un pulsante."
     },
     {
       "nom": "All'Impatto (Fisica)",
-      "schema": "<b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscita:</b> Esegui",
-      "role": "Rileva quando l'oggetto rimbalza o colpisce un elemento solido con la gravità attiva.",
-      "exemple": "fare un rumore di sasso quando la pietra cade a terra."
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Si avvia quando l'oggetto scelto (fisica dinamica) atterra su un pavimento o rimbalza.",
+      "exemple": "riprodurre un rumore di atterraggio o scuotere la telecamera."
     },
     {
-      "nom": "Quando Variabile Cambia",
-      "schema": "<b>Ingresso:</b> Variabile &nbsp;→&nbsp; <b>Uscita:</b> Esegui",
-      "role": "Sorveglia di continuo una variabile. Appena il suo valore cambia, questo nodo avvia il seguito.",
-      "exemple": "se la vita cambia, si aggiorna la barra della vita."
+      "nom": "Quando la Variabile Cambia",
+      "schema": "<b>Ingresso:</b> Variabile",
+      "role": "Si avvia ogni volta che cambia il valore della variabile scelta.",
+      "exemple": "quando «vie» (vita) cambia, aggiornare la barra della vita."
     },
     {
       "nom": "Evento Locale",
-      "schema": "<b>Ingresso:</b> Nome Evento &nbsp;→&nbsp; <b>Uscita:</b> Esegui",
-      "role": "Un evento personalizzato che puoi attivare a distanza con il nodo \"Chiama Evento Locale\".",
-      "exemple": "raggruppare la logica di \"Game Over\" per richiamarla da più punti."
+      "schema": "<b>Ingresso:</b> Nome dell'evento",
+      "role": "Un evento tutto tuo, con il nome che scegli. Si avvia con il nodo «Chiama evento» nello stesso Blueprint.",
+      "exemple": "un evento «GameOver» chiamato da più punti."
     },
     {
       "nom": "Al Clic Azione (Avventura)",
-      "schema": "<b>Uscita:</b> Esegui",
-      "role": "Si attiva proprio quando viene premuto il pulsante virtuale \"AZIONE\" dell'interfaccia.",
-      "exemple": "parlare con un PNG o leggere un cartello davanti a sé."
+      "role": "Si avvia quando il giocatore preme l'oggetto «BtnAzione» (pulsante azione) della scena.",
+      "exemple": "parlare con un personaggio o aprire una porta in un gioco d'avventura."
+    },
+    {
+      "nom": "Se l'oggetto tocca il Tag",
+      "schema": "<b>Ingressi:</b> Oggetto, Tag",
+      "role": "Si avvia una volta per contatto quando l'oggetto scelto tocca un oggetto con questo tag. L'oggetto toccato diventa l'«Oggetto Implicato».",
+      "exemple": "il giocatore tocca una moneta (tag «piece») → distruggere l'oggetto coinvolto e aggiungere 1 al punteggio."
     }
   ]
 }

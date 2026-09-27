@@ -1,0 +1,83 @@
+{
+  "categorie": "Movimientos e IA",
+  "noeuds": [
+    {
+      "nom": "Detener el objeto",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Detiene en seco el objeto: sin velocidad, empuje, salto ni movimiento automático.",
+      "exemple": "congelar a un enemigo alcanzado por un hechizo de hielo."
+    },
+    {
+      "nom": "Detener movimientos",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Corta los movimientos automáticos del objeto: avanzar sin parar, perseguir y huir.",
+      "exemple": "el enemigo deja de perseguir cuando el jugador se esconde."
+    },
+    {
+      "nom": "Avanzar continuamente",
+      "schema": "<b>Entradas:</b> Objeto, Velocidad",
+      "role": "El objeto avanza solo, en la dirección hacia la que mira, a la velocidad elegida.",
+      "exemple": "una bala o un coche en marcha."
+    },
+    {
+      "nom": "Perseguir un objeto",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Velocidad",
+      "role": "El objeto A avanza solo hacia el objeto B, a la velocidad elegida.",
+      "exemple": "un fantasma que sigue al jugador."
+    },
+    {
+      "nom": "Huir de un objeto",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Velocidad",
+      "role": "El objeto A se aleja solo del objeto B, a la velocidad elegida.",
+      "exemple": "una gallina que huye del jugador."
+    },
+    {
+      "nom": "Cambiar el rebote",
+      "schema": "<b>Entradas:</b> Objeto, Rebote (0 a 1)",
+      "role": "Ajusta el rebote de un objeto físico: 0 = no rebota, 1 = rebota mucho.",
+      "exemple": "0.8 para una pelota que bota."
+    },
+    {
+      "nom": "Empujar según un ángulo",
+      "schema": "<b>Entradas:</b> Objeto, Ángulo (0 = derecha, 90 = abajo), Fuerza",
+      "role": "Empuja el objeto en una dirección (en grados: 0 = derecha, 90 = abajo, 180 = izquierda, 270 = arriba) con la fuerza elegida.",
+      "exemple": "un muelle que lanza al jugador en diagonal."
+    },
+    {
+      "nom": "Impulso (salto)",
+      "schema": "<b>Entradas:</b> Objeto, Fuerza vertical (negativo = sube)",
+      "role": "Lanza el objeto hacia arriba (número negativo) o hacia abajo (positivo), y le da física para que vuelva a caer.",
+      "exemple": "un salto: fuerza -15."
+    },
+    {
+      "nom": "Activar la física",
+      "schema": "<b>Entradas:</b> Objeto, Cae (true / false)",
+      "role": "Da física al objeto: con true, cae con la gravedad; con false, queda fijo como un suelo.",
+      "exemple": "una plataforma que se derrumba cuando la pisas."
+    },
+    {
+      "nom": "Hacer arrastrable",
+      "schema": "<b>Entradas:</b> Objeto, Arrastrable con el dedo (true / false)",
+      "role": "Permite (true) o prohíbe (false) arrastrar el objeto con el dedo durante el juego.",
+      "exemple": "bloquear una pieza de puzle bien colocada."
+    },
+    {
+      "nom": "Saltar",
+      "schema": "<b>Entradas:</b> Objeto, Intensidad (0 = parar), Duración (ms), Continúa mientras se mueve (true / false)",
+      "role": "Hace dar saltitos al objeto (pequeño rebote visual) con la intensidad y la duración elegidas. 0 lo detiene. Puede seguir mientras el objeto se mueva.",
+      "exemple": "un personaje que da saltitos al caminar."
+    },
+    {
+      "nom": "Orientar hacia",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Desfase de ángulo (grados)",
+      "role": "Gira el objeto A hacia el objeto B. El desfase corrige la dirección de la imagen (0 = la imagen mira a la derecha).",
+      "exemple": "una torreta que apunta al jugador."
+    },
+    {
+      "nom": "Deslizar hacia",
+      "schema": "<b>Entradas:</b> Objeto, Posición X, Posición Y, Duración (segundos)",
+      "role": "Mueve el objeto suavemente hasta la posición X, Y durante el tiempo elegido (segundos). Lo siguiente continúa sin esperar.",
+      "exemple": "una plataforma que se mueve o un menú que entra en pantalla."
+    }
+  ]
+}

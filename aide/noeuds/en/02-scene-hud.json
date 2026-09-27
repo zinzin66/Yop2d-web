@@ -1,0 +1,110 @@
+{
+  "categorie": "Scene & HUD",
+  "noeuds": [
+    {
+      "nom": "Go to scene",
+      "schema": "<b>Input:</b> Scene &nbsp;→&nbsp; <b>Output:</b> none (end of script)",
+      "role": "Leaves the current scene and goes to the chosen scene. This node ends the script.",
+      "exemple": "go to the “Well done!” screen after the last level."
+    },
+    {
+      "nom": "Go to scene (by name)",
+      "schema": "<b>Input:</b> Scene name &nbsp;→&nbsp; <b>Output:</b> none (end of script)",
+      "role": "Goes to the scene whose name you type (or a formula giving that name). This node ends the script.",
+      "exemple": "a formula like =\"Level\" + level to choose the level with a variable."
+    },
+    {
+      "nom": "Next scene",
+      "schema": "<b>Output:</b> none (end of script)",
+      "role": "Goes to the scene placed just after in the scene list. This node ends the script.",
+      "exemple": "the player reaches the finish → next level."
+    },
+    {
+      "nom": "Previous scene",
+      "schema": "<b>Output:</b> none (end of script)",
+      "role": "Goes to the scene placed just before in the scene list. This node ends the script.",
+      "exemple": "a “Back” button in a menu."
+    },
+    {
+      "nom": "Restart the scene",
+      "schema": "<b>Output:</b> none (end of script)",
+      "role": "Restarts the scene from the beginning: objects back in place and local variables back to their starting value. Global variables do not change.",
+      "exemple": "Game Over when health reaches 0."
+    },
+    {
+      "nom": "Open a HUD",
+      "schema": "<b>Input:</b> Scene",
+      "role": "Shows another scene on top of the game, like a layer (HUD), with its own Blueprint.",
+      "exemple": "a pause menu or an inventory."
+    },
+    {
+      "nom": "Close the HUD",
+      "role": "Closes the open HUD.",
+      "exemple": "the “Close” button of the pause menu."
+    },
+    {
+      "nom": "Place a copy of a scene",
+      "schema": "<b>Inputs:</b> Scene, X position, Y position",
+      "role": "Places a copy of the chosen scene (prefab) in the game, at position X, Y.",
+      "exemple": "spawn a group of enemies prepared in another scene."
+    },
+    {
+      "nom": "Destroy the copies of a scene",
+      "schema": "<b>Input:</b> Scene",
+      "role": "Removes all copies of the chosen scene placed in the game.",
+      "exemple": "clear all enemy groups at the end of a wave."
+    },
+    {
+      "nom": "Quit the game",
+      "schema": "<b>Output:</b> none (end of script)",
+      "role": "Closes the exported game. In the editor, nothing closes: use the stop button.",
+      "exemple": "a “Quit” button in the main menu."
+    },
+    {
+      "nom": "Toast",
+      "schema": "<b>Input:</b> Message",
+      "role": "Shows a small message at the bottom of the screen for a few seconds. Start with = to show a calculation.",
+      "exemple": "=\"Score: \" + score"
+    },
+    {
+      "nom": "Write to log",
+      "schema": "<b>Input:</b> Message",
+      "role": "Writes a message in the project log (diagnostic file), without showing anything in the game. Start with = to write a calculation.",
+      "exemple": "=\"health = \" + vie, to check a value while testing."
+    },
+    {
+      "nom": "Follow with camera",
+      "schema": "<b>Inputs:</b> Object, Follow X (true / false), Follow Y (true / false), Parallax X only (true / false)",
+      "role": "The camera follows the chosen object. You can make it follow only horizontally or vertically. With no object, the camera stops following.",
+      "exemple": "follow the player through a big platform level."
+    },
+    {
+      "nom": "Camera smoothing",
+      "schema": "<b>Input:</b> Follow speed (0.01 to 1)",
+      "role": "Sets how fast the camera catches up with the followed object: 0.01 = very soft, 1 = stuck to the object.",
+      "exemple": "0.1 for a smooth camera that follows with a slight delay."
+    },
+    {
+      "nom": "Camera shake",
+      "schema": "<b>Inputs:</b> Strength, Duration (ms)",
+      "role": "Shakes the screen with the chosen strength and duration (in milliseconds).",
+      "exemple": "an explosion: intensity 15, duration 400."
+    },
+    {
+      "nom": "Vibration",
+      "schema": "<b>Input:</b> Duration (ms)",
+      "role": "Makes the phone vibrate for the chosen duration (in milliseconds). Without a vibration motor, nothing happens.",
+      "exemple": "100 ms when the player gets hit."
+    },
+    {
+      "nom": "Save state",
+      "role": "Remembers the state of the scene (objects and variables) and the global variables, like a save point.",
+      "exemple": "a checkpoint flag in the middle of the level."
+    },
+    {
+      "nom": "Restore state",
+      "role": "Puts the scene back as it was at the last “Save state”. If there is no save yet, nothing changes.",
+      "exemple": "start again from the checkpoint after a fall."
+    }
+  ]
+}

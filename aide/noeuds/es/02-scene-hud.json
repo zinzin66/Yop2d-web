@@ -1,0 +1,110 @@
+{
+  "categorie": "Escena y HUD",
+  "noeuds": [
+    {
+      "nom": "Ir a la escena",
+      "schema": "<b>Entrada:</b> Escena &nbsp;→&nbsp; <b>Salida:</b> ninguna (fin del script)",
+      "role": "Sale de la escena actual y va a la escena elegida. Este nodo termina el script.",
+      "exemple": "ir a la pantalla «¡Bravo!» después del último nivel."
+    },
+    {
+      "nom": "Ir a la escena (por nombre)",
+      "schema": "<b>Entrada:</b> Nombre de la escena &nbsp;→&nbsp; <b>Salida:</b> ninguna (fin del script)",
+      "role": "Va a la escena cuyo nombre escribes (o una fórmula que dé ese nombre). Este nodo termina el script.",
+      "exemple": "una fórmula como =\"Nivel\" + nivel para elegir el nivel con una variable."
+    },
+    {
+      "nom": "Escena siguiente",
+      "schema": "<b>Salida:</b> ninguna (fin del script)",
+      "role": "Va a la escena que está justo después en la lista de escenas. Este nodo termina el script.",
+      "exemple": "el jugador llega a la meta → nivel siguiente."
+    },
+    {
+      "nom": "Escena anterior",
+      "schema": "<b>Salida:</b> ninguna (fin del script)",
+      "role": "Va a la escena que está justo antes en la lista de escenas. Este nodo termina el script.",
+      "exemple": "un botón «Volver» en un menú."
+    },
+    {
+      "nom": "Reiniciar la escena",
+      "schema": "<b>Salida:</b> ninguna (fin del script)",
+      "role": "Reinicia la escena desde el principio: objetos en su sitio y variables locales con su valor inicial. Las variables globales no cambian.",
+      "exemple": "Game Over cuando la vida llega a 0."
+    },
+    {
+      "nom": "Abrir un HUD",
+      "schema": "<b>Entrada:</b> Escena",
+      "role": "Muestra otra escena encima del juego, como una capa (HUD), con su propio Blueprint.",
+      "exemple": "un menú de pausa o un inventario."
+    },
+    {
+      "nom": "Cerrar el HUD",
+      "role": "Cierra el HUD abierto.",
+      "exemple": "el botón «Cerrar» del menú de pausa."
+    },
+    {
+      "nom": "Colocar una copia de una escena",
+      "schema": "<b>Entradas:</b> Escena, Posición X, Posición Y",
+      "role": "Coloca una copia de la escena elegida (prefab) en el juego, en la posición X, Y.",
+      "exemple": "hacer aparecer un grupo de enemigos preparado en otra escena."
+    },
+    {
+      "nom": "Destruir las copias de una escena",
+      "schema": "<b>Entrada:</b> Escena",
+      "role": "Elimina todas las copias de la escena elegida colocadas en el juego.",
+      "exemple": "borrar todos los grupos de enemigos al final de una oleada."
+    },
+    {
+      "nom": "Salir del juego",
+      "schema": "<b>Salida:</b> ninguna (fin del script)",
+      "role": "Cierra el juego exportado. En el editor no cierra nada: usa el botón de parada.",
+      "exemple": "un botón «Salir» en el menú principal."
+    },
+    {
+      "nom": "Mensaje Toast",
+      "schema": "<b>Entrada:</b> Mensaje",
+      "role": "Muestra un mensajito en la parte baja de la pantalla durante unos segundos. Empieza por = para mostrar un cálculo.",
+      "exemple": "=\"Puntos: \" + score"
+    },
+    {
+      "nom": "Escribir en el registro",
+      "schema": "<b>Entrada:</b> Mensaje",
+      "role": "Escribe un mensaje en el registro del proyecto (archivo de diagnóstico), sin mostrar nada en el juego. Empieza por = para escribir un cálculo.",
+      "exemple": "=\"vida = \" + vie, para comprobar un valor durante una prueba."
+    },
+    {
+      "nom": "Fijar la cámara",
+      "schema": "<b>Entradas:</b> Objeto, Seguir en X (true / false), Seguir en Y (true / false), Paralaje solo en X (true / false)",
+      "role": "La cámara sigue al objeto elegido. Puedes hacer que siga solo en horizontal o en vertical. Sin objeto, la cámara deja de seguir.",
+      "exemple": "seguir al jugador en un gran nivel de plataformas."
+    },
+    {
+      "nom": "Suavizado de cámara",
+      "schema": "<b>Entrada:</b> Velocidad de seguimiento (0.01 a 1)",
+      "role": "Ajusta la rapidez con la que la cámara alcanza al objeto seguido: 0.01 = muy suave, 1 = pegada al objeto.",
+      "exemple": "0.1 para una cámara suave que sigue con un ligero retraso."
+    },
+    {
+      "nom": "Temblor de cámara",
+      "schema": "<b>Entradas:</b> Intensidad, Duración (ms)",
+      "role": "Sacude la pantalla con la fuerza y la duración elegidas (en milisegundos).",
+      "exemple": "una explosión: intensidad 15, duración 400."
+    },
+    {
+      "nom": "Vibración",
+      "schema": "<b>Entrada:</b> Duración (ms)",
+      "role": "Hace vibrar el teléfono durante el tiempo elegido (en milisegundos). Sin vibrador, no pasa nada.",
+      "exemple": "100 ms cuando golpean al jugador."
+    },
+    {
+      "nom": "Guardar estado",
+      "role": "Guarda el estado de la escena (objetos y variables) y las variables globales, como un punto de guardado.",
+      "exemple": "una bandera de checkpoint a mitad del nivel."
+    },
+    {
+      "nom": "Restaurar estado",
+      "role": "Deja la escena como en el último «Guardar estado». Si todavía no hay ninguno, no cambia nada.",
+      "exemple": "volver al checkpoint después de una caída."
+    }
+  ]
+}

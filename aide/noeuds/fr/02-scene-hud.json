@@ -1,0 +1,110 @@
+{
+  "categorie": "Scène & HUD",
+  "noeuds": [
+    {
+      "nom": "Changer de scène",
+      "schema": "<b>Entrée :</b> Scène &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)",
+      "role": "Quitte la scène actuelle et va à la scène choisie. Ce nœud termine le script.",
+      "exemple": "aller à l'écran « Bravo ! » après le dernier niveau."
+    },
+    {
+      "nom": "Aller à la scène (par son nom)",
+      "schema": "<b>Entrée :</b> Nom de la scène &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)",
+      "role": "Va à la scène dont tu écris le nom (ou une formule qui donne ce nom). Ce nœud termine le script.",
+      "exemple": "une formule comme =\"Niveau\" + niveau pour choisir le niveau avec une variable."
+    },
+    {
+      "nom": "Scène suivante",
+      "schema": "<b>Sortie :</b> aucune (fin du script)",
+      "role": "Va à la scène placée juste après dans la liste des scènes. Ce nœud termine le script.",
+      "exemple": "le joueur atteint l'arrivée → niveau suivant."
+    },
+    {
+      "nom": "Scène précédente",
+      "schema": "<b>Sortie :</b> aucune (fin du script)",
+      "role": "Va à la scène placée juste avant dans la liste des scènes. Ce nœud termine le script.",
+      "exemple": "un bouton « Retour » dans un menu."
+    },
+    {
+      "nom": "Recommencer la scène",
+      "schema": "<b>Sortie :</b> aucune (fin du script)",
+      "role": "Relance la scène depuis le début : objets à leur place et variables locales remises à leur valeur de départ. Les variables globales ne changent pas.",
+      "exemple": "Game Over quand la vie tombe à 0."
+    },
+    {
+      "nom": "Ouvrir un HUD",
+      "schema": "<b>Entrée :</b> Scène",
+      "role": "Affiche une autre scène par-dessus le jeu, comme un calque (HUD), avec son propre Blueprint.",
+      "exemple": "un menu de pause ou un inventaire."
+    },
+    {
+      "nom": "Fermer le HUD",
+      "role": "Ferme le HUD ouvert.",
+      "exemple": "le bouton « Fermer » du menu de pause."
+    },
+    {
+      "nom": "Placer une copie d'une scène",
+      "schema": "<b>Entrées :</b> Scène, Position X, Position Y",
+      "role": "Place une copie de la scène choisie (prefab) dans le jeu, à la position X, Y.",
+      "exemple": "faire apparaître un groupe d'ennemis préparé dans une autre scène."
+    },
+    {
+      "nom": "Détruire les copies d'une scène",
+      "schema": "<b>Entrée :</b> Scène",
+      "role": "Supprime toutes les copies de la scène choisie placées dans le jeu.",
+      "exemple": "effacer tous les groupes d'ennemis à la fin d'une vague."
+    },
+    {
+      "nom": "Quitter le jeu",
+      "schema": "<b>Sortie :</b> aucune (fin du script)",
+      "role": "Ferme le jeu exporté. Dans l'éditeur, il ne ferme rien : utilise le bouton stop.",
+      "exemple": "un bouton « Quitter » dans le menu principal."
+    },
+    {
+      "nom": "Toast",
+      "schema": "<b>Entrée :</b> Message",
+      "role": "Affiche un petit message en bas de l'écran pendant quelques secondes. Commence par = pour afficher un calcul.",
+      "exemple": "=\"Score : \" + score"
+    },
+    {
+      "nom": "Écrire dans le journal",
+      "schema": "<b>Entrée :</b> Message",
+      "role": "Écrit un message dans le journal du projet (fichier de diagnostic), sans rien afficher dans le jeu. Commence par = pour écrire un calcul.",
+      "exemple": "=\"vie = \" + vie, pour vérifier une valeur pendant un test."
+    },
+    {
+      "nom": "Fixer la caméra",
+      "schema": "<b>Entrées :</b> Objet, Suivre en X (true / false), Suivre en Y (true / false), Parallaxe en X seulement (true / false)",
+      "role": "La caméra suit l'objet choisi. Tu peux la faire suivre seulement à l'horizontale ou à la verticale. Sans objet, la caméra ne suit plus rien.",
+      "exemple": "suivre le joueur dans un grand niveau de plateforme."
+    },
+    {
+      "nom": "Élasticité de la caméra",
+      "schema": "<b>Entrée :</b> Vitesse de suivi (0.01 à 1)",
+      "role": "Règle la vitesse à laquelle la caméra rattrape l'objet suivi : 0.01 = très souple, 1 = collée à l'objet.",
+      "exemple": "0.1 pour une caméra douce qui suit avec un léger retard."
+    },
+    {
+      "nom": "Tremblement de la caméra",
+      "schema": "<b>Entrées :</b> Intensité, Durée (ms)",
+      "role": "Secoue l'écran avec la force et la durée choisies (en millisecondes).",
+      "exemple": "une explosion : intensité 15, durée 400."
+    },
+    {
+      "nom": "Vibration",
+      "schema": "<b>Entrée :</b> Durée (ms)",
+      "role": "Fait vibrer le téléphone pendant la durée choisie (en millisecondes). Sans vibreur, il ne se passe rien.",
+      "exemple": "100 ms quand le joueur est touché."
+    },
+    {
+      "nom": "Sauvegarder l'état",
+      "role": "Mémorise l'état de la scène (objets et variables) et les variables globales, comme un point de sauvegarde.",
+      "exemple": "un drapeau de checkpoint au milieu du niveau."
+    },
+    {
+      "nom": "Restaurer l'état",
+      "role": "Remet la scène comme au dernier « Sauvegarder l'état ». S'il n'y a pas encore de sauvegarde, rien ne change.",
+      "exemple": "repartir du checkpoint après une chute."
+    }
+  ]
+}

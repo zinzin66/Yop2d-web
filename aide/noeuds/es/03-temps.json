@@ -1,0 +1,45 @@
+{
+  "categorie": "Tiempo",
+  "noeuds": [
+    {
+      "nom": "Esperar",
+      "schema": "<b>Entrada:</b> Duración (segundos)",
+      "role": "Espera el tiempo elegido, en segundos, y luego continúa. El resto del juego sigue funcionando durante la espera.",
+      "exemple": "mostrar «¡Perdiste!», esperar 2 segundos y reiniciar la escena."
+    },
+    {
+      "nom": "Repetir",
+      "schema": "<b>Entradas:</b> Cada (segundos), Número de veces (0 = sin fin), Nombre del temporizador (opcional) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Cada vez / Terminado",
+      "role": "Lanza la salida «Cada vez» cada X segundos, un número de veces (0 = sin fin), y luego «Terminado». «Enseguida» sale al principio. Si ya está funcionando, no vuelve a empezar.",
+      "exemple": "hacer aparecer un enemigo cada 3 segundos."
+    },
+    {
+      "nom": "Cuenta atrás",
+      "schema": "<b>Entradas:</b> Objeto, Variable, Valor inicial (opcional), Nombre del temporizador (opcional) &nbsp;→&nbsp; <b>Salidas:</b> Cada segundo / Terminado",
+      "role": "Resta 1 a la variable elegida (un número) cada segundo hasta 0. «Cada segundo» se lanza en cada tic, «Terminado» al llegar a 0. «Valor inicial (opcional)» da el valor inicial.",
+      "exemple": "un cronómetro de 60 segundos: en 0, Game Over."
+    },
+    {
+      "nom": "Detener un temporizador",
+      "schema": "<b>Entrada:</b> Nombre (vacío = todos)",
+      "role": "Detiene el temporizador (Repetir o Cuenta atrás) con ese nombre, o todos si el nombre está vacío.",
+      "exemple": "parar el cronómetro cuando el jugador gana."
+    },
+    {
+      "nom": "Velocidad del juego (cámara lenta)",
+      "schema": "<b>Entrada:</b> Velocidad (1 = normal, 0.5 = lento)",
+      "role": "Cambia la velocidad de todo el juego: 1 = normal, 0.5 = cámara lenta, 2 = acelerado (de 0 a 4).",
+      "exemple": "un efecto de cámara lenta durante 2 segundos."
+    },
+    {
+      "nom": "Pausar el juego",
+      "role": "Pone el juego en pausa: los movimientos y los temporizadores se detienen.",
+      "exemple": "abrir el menú de pausa."
+    },
+    {
+      "nom": "Reanudar el juego",
+      "role": "Reanuda el juego después de una pausa.",
+      "exemple": "el botón «Continuar» del menú de pausa."
+    }
+  ]
+}

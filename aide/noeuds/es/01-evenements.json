@@ -3,81 +3,106 @@
   "noeuds": [
     {
       "nom": "Al Iniciar",
-      "schema": "<b>Salida:</b> Ejecutar",
-      "role": "Se ejecuta automáticamente y una sola vez en cuanto la escena se carga en pantalla.",
-      "exemple": "colocar a los enemigos en su posición inicial, o poner la vida del jugador a 100."
+      "role": "Se ejecuta una sola vez, en cuanto empieza la escena.",
+      "exemple": "colocar a los enemigos, mostrar la puntuación inicial o poner la música."
     },
     {
-      "nom": "Cada Fotograma",
-      "schema": "<b>Salida:</b> Ejecutar (en bucle)",
-      "role": "Se ejecuta continuamente, en cada actualización de la pantalla.",
-      "exemple": "hacer girar un objeto sobre sí mismo sin fin, o actualizar una puntuación."
-    },
-    {
-      "nom": "Al Hacer Clic en Objeto",
-      "schema": "<b>Entrada:</b> Objetivo &nbsp;→&nbsp; <b>Salida:</b> Ejecutar",
-      "role": "Se activa cuando el dedo del jugador toca el objeto indicado.",
-      "exemple": "abrir un cofre, pulsar un botón o iniciar un diálogo."
+      "nom": "Cada fotograma",
+      "role": "Se ejecuta sin parar, en cada fotograma del juego (unas 60 veces por segundo).",
+      "exemple": "seguir el dedo o comprobar una condición todo el tiempo. Evita poner debajo «Reproducir música» o «Llamar función»."
     },
     {
       "nom": "Fin de Clic",
-      "schema": "<b>Salida:</b> Ejecutar",
-      "role": "Se activa cuando el jugador levanta el dedo de la pantalla, en cualquier lugar.",
-      "exemple": "dejar de disparar al levantar el dedo."
+      "role": "Se ejecuta cuando el jugador levanta el dedo de la pantalla, en cualquier sitio.",
+      "exemple": "dejar de disparar al soltar la pantalla."
     },
     {
-      "nom": "Inicio / Fin de Arrastre",
-      "schema": "<b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Salida:</b> Ejecutar",
-      "role": "Se activan cuando el jugador empieza a arrastrar un objeto arrastrable y cuando lo suelta.",
-      "exemple": "soltar una llave sobre una puerta para abrirla."
+      "nom": "Al Clic en Objeto",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Se ejecuta cuando el dedo toca el objeto elegido.",
+      "exemple": "un botón «Saltar», abrir un cofre, elegir una respuesta."
+    },
+    {
+      "nom": "Fin de Clic en Objeto",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Se ejecuta cuando el dedo se levanta encima del objeto elegido.",
+      "exemple": "validar un botón solo al soltarlo."
+    },
+    {
+      "nom": "Objeto Mantenido Pulsado",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Se repite en cada fotograma mientras el dedo siga sobre el objeto elegido.",
+      "exemple": "botones izquierda / derecha: mientras se pulsan, el personaje avanza."
+    },
+    {
+      "nom": "Dedo presionado",
+      "role": "Se repite en cada fotograma mientras haya un dedo en la pantalla, en cualquier sitio.",
+      "exemple": "hacer subir una nave mientras se pulsa (usa doigt.x y doigt.y en las fórmulas)."
+    },
+    {
+      "nom": "Inicio de Arrastre",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Se ejecuta cuando el jugador empieza a arrastrar el objeto elegido (debe ser «Movible (arrastrable al Jugar)»).",
+      "exemple": "agrandar una carta al cogerla."
+    },
+    {
+      "nom": "Fin de Arrastre",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Se ejecuta cuando el jugador suelta el objeto que arrastraba.",
+      "exemple": "comprobar si una pieza de puzle está en su sitio."
     },
     {
       "nom": "Colisión A/B",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B &nbsp;→&nbsp; <b>Salida:</b> Ejecutar",
-      "role": "Se activa en el momento exacto en que el objeto A entra en contacto físico con el objeto B.",
-      "exemple": "cuando \"Jugador\" toca \"Moneda\" → reproducir un sonido y destruir la moneda."
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B",
+      "role": "Se ejecuta una vez, cuando el objeto A empieza a tocar el objeto B. Tienen que separarse para que vuelva a ejecutarse. También es el evento que se usa para «entrar en una zona».",
+      "exemple": "el jugador toca la zona de llegada → nivel siguiente."
     },
     {
-      "nom": "Si el objeto toca Tag",
-      "schema": "<b>Entradas:</b> Objeto, Texto Tag &nbsp;→&nbsp; <b>Salida:</b> Ejecutar",
-      "role": "Se activa cuando el objeto indicado choca con cualquier objeto que lleve la etiqueta (Tag) indicada.",
-      "exemple": "cuando \"Misil\" toca un objeto con el tag \"Enemigo\" → explosión."
+      "nom": "Salida de zona",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B",
+      "role": "Se ejecuta una vez, cuando el objeto A deja de tocar el objeto B (sale de la zona).",
+      "exemple": "cerrar una puerta cuando el jugador se aleja."
     },
     {
-      "nom": "Entrada / Salida de zona",
-      "schema": "<b>Entradas:</b> Objeto A, Zona B &nbsp;→&nbsp; <b>Salida:</b> Ejecutar",
-      "role": "Se activa cuando un objeto entra o sale de una zona definida (ideal para disparadores invisibles).",
-      "exemple": "el jugador entra en la zona \"Trampa\" → salen pinchos del suelo."
+      "nom": "Al Pasar por Encima",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Se ejecuta cuando el dedo, deslizándose por la pantalla, llega al objeto elegido.",
+      "exemple": "iluminar un botón cuando el dedo pasa por encima."
     },
     {
-      "nom": "Al Pasar por encima / Fin",
-      "schema": "<b>Entrada:</b> Objetivo &nbsp;→&nbsp; <b>Salida:</b> Ejecutar",
-      "role": "Gestiona el paso del dedo o de un puntero por encima de un objeto, sin necesidad de tocarlo.",
-      "exemple": "resaltar un botón cuando se pasa por encima."
+      "nom": "Fin de Pasar por Encima",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Se ejecuta cuando el dedo sale del objeto por el que pasaba.",
+      "exemple": "apagar el resaltado de un botón."
     },
     {
       "nom": "Al Impacto (Física)",
-      "schema": "<b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Salida:</b> Ejecutar",
-      "role": "Detecta cuando el objeto rebota o golpea un elemento sólido con la gravedad activada.",
-      "exemple": "hacer un ruido de piedra cuando la roca cae al suelo."
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Se ejecuta cuando el objeto elegido (física dinámica) cae sobre un suelo o rebota.",
+      "exemple": "reproducir un ruido de aterrizaje o sacudir la cámara."
     },
     {
       "nom": "Cuando Variable Cambia",
-      "schema": "<b>Entrada:</b> Variable &nbsp;→&nbsp; <b>Salida:</b> Ejecutar",
-      "role": "Vigila una variable todo el tiempo. En cuanto su valor cambia, este nodo lanza lo que sigue.",
-      "exemple": "si la vida cambia, se actualiza la barra de vida visual."
+      "schema": "<b>Entrada:</b> Variable",
+      "role": "Se ejecuta cada vez que cambia el valor de la variable elegida.",
+      "exemple": "cuando «vie» (vida) cambia, actualizar la barra de vida."
     },
     {
       "nom": "Evento Local",
-      "schema": "<b>Entrada:</b> Nombre Evento &nbsp;→&nbsp; <b>Salida:</b> Ejecutar",
-      "role": "Un evento personalizado que puedes activar a distancia con el nodo \"Llamar Evento Local\".",
-      "exemple": "agrupar la lógica de \"Game Over\" para llamarla desde varios sitios."
+      "schema": "<b>Entrada:</b> Nombre del evento",
+      "role": "Un evento propio, con el nombre que elijas. Se lanza con el nodo «Llamar evento» colocado en el mismo Blueprint.",
+      "exemple": "un evento «GameOver» llamado desde varios sitios."
     },
     {
       "nom": "Al Clic Acción (Aventura)",
-      "schema": "<b>Salida:</b> Ejecutar",
-      "role": "Se activa específicamente cuando se pulsa el botón virtual \"ACCIÓN\" de la interfaz.",
-      "exemple": "hablar con un PNJ o leer un cartel que tienes delante."
+      "role": "Se ejecuta cuando el jugador pulsa el objeto «BtnAccion» (botón de acción) de la escena.",
+      "exemple": "hablar con un personaje o abrir una puerta en un juego de aventura."
+    },
+    {
+      "nom": "Si el objeto toca el Tag",
+      "schema": "<b>Entradas:</b> Objeto, Tag",
+      "role": "Se ejecuta una vez por contacto cuando el objeto elegido toca un objeto con esta etiqueta (tag). El objeto tocado pasa a ser el «Objeto Implicado».",
+      "exemple": "el jugador toca una moneda (tag «piece») → destruir el objeto implicado y sumar 1 a la puntuación."
     }
   ]
 }

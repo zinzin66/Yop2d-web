@@ -1,0 +1,71 @@
+{
+  "categorie": "Logica e Condizioni",
+  "noeuds": [
+    {
+      "nom": "Condizione",
+      "schema": "<b>Ingresso:</b> Condizione &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso / Poi",
+      "role": "Verifica una condizione: segue «Vero» se è giusta, altrimenti «Falso». «Poi» si avvia dopo, in entrambi i casi.",
+      "exemple": "score >= 10 → vero → scena successiva."
+    },
+    {
+      "nom": "Se joystick",
+      "schema": "<b>Uscite:</b> Su / Giù / Sinistra / Destra / Riposo / Poi",
+      "role": "Segue l'uscita della direzione del joystick: «Su», «Giù», «Sinistra», «Destra», o «Riposo» se non è toccato.",
+      "exemple": "collegato a «Ogni frame» per animare la camminata nella direzione giusta."
+    },
+    {
+      "nom": "Se è a terra",
+      "schema": "<b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso / Poi",
+      "role": "«Vero» se la parte bassa dell'oggetto poggia su un oggetto fisso e visibile (pavimento, piattaforma), altrimenti «Falso».",
+      "exemple": "permettere il salto solo se il giocatore è a terra."
+    },
+    {
+      "nom": "Se in movimento",
+      "schema": "<b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso / Poi",
+      "role": "«Vero» se l'oggetto si è mosso dal fotogramma precedente, altrimenti «Falso».",
+      "exemple": "animare la camminata solo quando il personaggio si muove."
+    },
+    {
+      "nom": "Chiama funzione",
+      "schema": "<b>Ingresso:</b> Funzione",
+      "role": "Esegue una funzione (un Blueprint creato nella sezione Funzioni), poi continua. Da non mettere sotto «Ogni frame».",
+      "exemple": "una funzione «PerdiVita» usata da più nemici."
+    },
+    {
+      "nom": "Chiama evento",
+      "schema": "<b>Ingresso:</b> Nome dell'evento",
+      "role": "Avvia l'«Evento Locale» con questo nome, nello stesso Blueprint, poi continua.",
+      "exemple": "chiamare «GameOver» dalla caduta e dal cronometro."
+    },
+    {
+      "nom": "Sequenza",
+      "schema": "<b>Uscite:</b> 1 / 2 / 3 / 4",
+      "role": "Avvia le sue uscite una dopo l'altra: 1, poi 2, poi 3, poi 4. Un'uscita senza collegamento viene saltata.",
+      "exemple": "all'avvio: 1 = posizionare il giocatore, 2 = far partire la musica, 3 = mostrare il punteggio."
+    },
+    {
+      "nom": "Ricarica",
+      "schema": "<b>Ingressi:</b> Oggetto, Ritardo (secondi) &nbsp;→&nbsp; <b>Uscite:</b> Pronto / Non ancora",
+      "role": "Lascia passare da «Pronto» al massimo una volta per intervallo (in secondi); altrimenti va su «Non ancora». Con un oggetto scelto, ogni oggetto ha il suo intervallo.",
+      "exemple": "sparare al massimo una volta ogni 0.5 secondi."
+    },
+    {
+      "nom": "Se fuori schermo",
+      "schema": "<b>Ingressi:</b> Oggetto, Margine (pixel) &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso / Poi",
+      "role": "«Vero» se l'oggetto è uscito del tutto dallo schermo (più il margine), altrimenti «Falso».",
+      "exemple": "distruggere i proiettili che escono dallo schermo."
+    },
+    {
+      "nom": "Se / Altrimenti",
+      "schema": "<b>Ingressi:</b> Se (condizione), Altrimenti se (condizione) &nbsp;→&nbsp; <b>Uscite:</b> Se / Altrimenti se / Altrimenti / Poi",
+      "role": "Verifica la prima condizione, poi la seconda: segue «Se», «Altrimenti se» o «Altrimenti». «Poi» si avvia dopo.",
+      "exemple": "se score >= 100 → oro, altrimenti se score >= 50 → argento, altrimenti → bronzo."
+    },
+    {
+      "nom": "In base al valore",
+      "schema": "<b>Ingressi:</b> Valore da verificare, Caso 1, Caso 2, Caso 3, Caso 4, Caso 5, Caso 6 &nbsp;→&nbsp; <b>Uscite:</b> 1 / 2 / 3 / 4 / 5 / 6 / Nessuno / Poi",
+      "role": "Confronta il valore con i casi da 1 a 6 e segue l'uscita del primo caso uguale; «Nessuno» se nessuno corrisponde. Un caso vuoto viene saltato.",
+      "exemple": "secondo «arma»: 1 = spada, 2 = arco, 3 = bacchetta."
+    }
+  ]
+}

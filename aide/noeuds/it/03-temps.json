@@ -1,0 +1,45 @@
+{
+  "categorie": "Tempo",
+  "noeuds": [
+    {
+      "nom": "Attendere",
+      "schema": "<b>Ingresso:</b> Durata (secondi)",
+      "role": "Aspetta il tempo scelto, in secondi, poi continua. Il resto del gioco va avanti durante l'attesa.",
+      "exemple": "mostrare «Hai perso!», aspettare 2 secondi, poi riavviare la scena."
+    },
+    {
+      "nom": "Ripetere",
+      "schema": "<b>Ingressi:</b> Ogni (secondi), Numero di volte (0 = senza fine), Nome del timer (facoltativo) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Ogni volta / Terminato",
+      "role": "Avvia l'uscita «Ogni volta» ogni X secondi, per un certo numero di volte (0 = senza fine), poi «Terminato». «Subito» parte subito. Se è già in corso, non riparte.",
+      "exemple": "far apparire un nemico ogni 3 secondi."
+    },
+    {
+      "nom": "Conto alla rovescia",
+      "schema": "<b>Ingressi:</b> Oggetto, Variabile, Valore iniziale (facoltativo), Nome del timer (facoltativo) &nbsp;→&nbsp; <b>Uscite:</b> Ogni secondo / Terminato",
+      "role": "Toglie 1 alla variabile scelta (un numero) ogni secondo fino a 0. «Ogni secondo» si avvia a ogni scatto, «Terminato» a 0. «Valore iniziale (facoltativo)» dà il valore iniziale.",
+      "exemple": "un cronometro di 60 secondi: a 0, Game Over."
+    },
+    {
+      "nom": "Ferma un timer",
+      "schema": "<b>Ingresso:</b> Nome (vuoto = tutti)",
+      "role": "Ferma il timer (Ripeti o Conto alla rovescia) con questo nome, o tutti i timer se il nome è vuoto.",
+      "exemple": "fermare il cronometro quando il giocatore vince."
+    },
+    {
+      "nom": "Velocità del gioco (rallentatore)",
+      "schema": "<b>Ingresso:</b> Velocità (1 = normale, 0.5 = lenta)",
+      "role": "Cambia la velocità di tutto il gioco: 1 = normale, 0.5 = rallentatore, 2 = accelerato (da 0 a 4).",
+      "exemple": "un effetto rallentatore per 2 secondi."
+    },
+    {
+      "nom": "Metti in pausa il gioco",
+      "role": "Mette in pausa il gioco: movimenti e timer si fermano.",
+      "exemple": "aprire il menu di pausa."
+    },
+    {
+      "nom": "Riprendi il gioco",
+      "role": "Riprende il gioco dopo una pausa.",
+      "exemple": "il pulsante «Continua» del menu di pausa."
+    }
+  ]
+}
