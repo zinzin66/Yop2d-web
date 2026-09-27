@@ -7,50 +7,51 @@
 <meta name="description" content="Documentation des nœuds et guides d'utilisation de Yop2D, moteur de jeu 2D sans code pour Android.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/aide.html">
 <style>
-:root { --primary-color: #2563eb; --secondary-color: #1e40af; --accent-color: #f59e0b; --background: #0f172a; --card: #1e293b; --text: #e2e8f0; --text-dim: #94a3b8; }
+/* Palette du moteur Yop2D (Palette.java) */
+:root { --background: #1A1F26; --entete: #242A33; --card: #252B33; --survol: #2F3B45; --bordure: #3A4048; --fond-sombre: #161A20; --text: #ECEEF0; --text-dim: #9AA0A8; --teal: #5DCAA5; --bleu: #85B7EB; --ambre: #FAC775; }
 * { box-sizing: border-box; }
 body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: var(--text); background: var(--background); margin: 0; }
-header { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 1.25rem 1rem; text-align: center; }
+header { background: var(--entete); border-bottom: 1px solid var(--bordure); color: white; padding: 1.25rem 1rem; text-align: center; }
 header h1 { font-size: 1.4rem; margin: 0.3rem 0; }
 main { max-width: 800px; margin: 0 auto; padding: 1rem; }
 
 .tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; position: sticky; top: 0; background: var(--background); padding: 0.5rem 0; z-index: 5; }
-.tab-btn { flex: 1; padding: 0.7rem; border: none; border-radius: 8px; background: var(--card); color: var(--text-dim); font-size: 1rem; font-weight: bold; cursor: pointer; }
-.tab-btn.active { background: var(--primary-color); color: white; }
+.tab-btn { flex: 1; padding: 0.7rem; border: 1px solid var(--bordure); border-radius: 8px; background: var(--card); color: var(--text-dim); font-size: 1rem; font-weight: bold; cursor: pointer; }
+.tab-btn.active { background: var(--survol); color: var(--teal); border-color: var(--teal); }
 
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-.categorie { background: var(--card); border-radius: 10px; margin-bottom: 0.75rem; overflow: hidden; }
-.categorie > summary { padding: 0.9rem 1rem; font-weight: bold; color: var(--accent-color); cursor: pointer; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.categorie { background: var(--card); border: 1px solid var(--bordure); border-radius: 10px; margin-bottom: 0.75rem; overflow: hidden; }
+.categorie > summary { padding: 0.9rem 1rem; font-weight: bold; color: var(--ambre); cursor: pointer; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; align-items: center; }
 .categorie > summary::-webkit-details-marker { display: none; }
 .categorie > summary::after { content: "+"; font-size: 1.3rem; color: var(--text-dim); }
 .categorie[open] > summary::after { content: "−"; }
 .categorie-body { padding: 0 1rem 0.5rem 1rem; }
 
-.noeud { border-top: 1px solid #334155; padding: 0.9rem 0; }
+.noeud { border-top: 1px solid var(--bordure); padding: 0.9rem 0; }
 .noeud:first-child { border-top: none; }
 .noeud-nom { color: white; font-weight: bold; font-size: 1rem; margin-bottom: 0.35rem; }
-.schema { font-size: 0.85rem; color: var(--text-dim); background: #0f172a; border-radius: 6px; padding: 0.5rem 0.7rem; margin-bottom: 0.5rem; }
-.schema b { color: #cbd5e1; }
+.schema { font-size: 0.85rem; color: var(--text-dim); background: var(--fond-sombre); border-radius: 6px; padding: 0.5rem 0.7rem; margin-bottom: 0.5rem; }
+.schema b { color: var(--bleu); }
 .role { margin: 0.3rem 0; }
 .exemple { color: var(--text-dim); font-size: 0.95rem; }
-.exemple b { color: #cbd5e1; }
+.exemple b { color: var(--teal); }
 
-.guide-item { display: block; background: var(--card); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; text-decoration: none; color: var(--text); }
+.guide-item { display: block; background: var(--card); border: 1px solid var(--bordure); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; text-decoration: none; color: var(--text); }
 .guide-item .titre { color: white; font-weight: bold; display: block; margin-bottom: 0.25rem; }
 .guide-item .desc { color: var(--text-dim); font-size: 0.9rem; }
 
 .message { text-align: center; color: var(--text-dim); padding: 1.5rem; font-style: italic; }
 
 footer { text-align: center; padding: 1.5rem; color: var(--text-dim); font-size: 0.85rem; }
-footer a { color: var(--accent-color); }
+footer a { color: var(--teal); }
 
 @media (max-width: 480px) { header h1 { font-size: 1.2rem; } }
 header { position: relative; }
 .langue { position: absolute; top: 0.6rem; right: 0.6rem; }
-.langue select { background: rgba(15,23,42,0.35); color: white; border: 1px solid rgba(255,255,255,0.4); border-radius: 6px; padding: 0.3rem 0.4rem; font-size: 0.9rem; }
-.langue option { color: #0f172a; background: white; }
+.langue select { background: var(--card); color: var(--text); border: 1px solid var(--bordure); border-radius: 6px; padding: 0.3rem 0.4rem; font-size: 0.9rem; }
+.langue option { color: var(--text); background: var(--card); }
 @media (max-width: 480px) { header { padding-top: 2.6rem; } }
 </style>
 </head>
