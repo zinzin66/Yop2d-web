@@ -63,7 +63,7 @@
 <li>Ouvre le <strong>Blueprint</strong> de la scène.</li>
 <li>Ajoute l'événement <strong>« Si objet touche Tag »</strong> : cible <strong>player</strong>, Tag <strong>danger</strong>.</li>
 <li>Ajoute <strong>« Ajouter à Variable »</strong> : variable <strong>vie</strong>, <strong>Valeur à ajouter = -1</strong> (avec le signe moins, pour retirer).</li>
-<li>Ajoute <strong>« Définir la Progression »</strong> : cible <strong>barreVie</strong>, <strong>Nouvelle progression</strong> = <code>vie</code></li>
+<li>Ajoute <strong>« Définir la Progression »</strong> : cible <strong>barreVie</strong>, <strong>Nouvelle progression</strong> = <code>=vie</code></li>
 <li>Relie les trois nœuds dans l'ordre.</li>
 </ol>
 <div class="chaine">
@@ -71,22 +71,22 @@
 <div class="fleche">→</div>
 <div class="noeud"><b>Ajouter à Variable</b><span>vie · - 1</span></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>Définir la Progression</b><span>barreVie · vie</span></div>
+<div class="noeud"><b>Définir la Progression</b><span>barreVie · =vie</span></div>
 </div>
-<div class="tip">👉 Écrire <code>vie</code> dans « Nouvelle progression » veut dire : « prends la valeur de la variable vie ». La barre suit donc toujours le nombre de vies.</div>
+<div class="tip">👉 Écrire <code>=vie</code> dans « Nouvelle progression » veut dire : « prends la valeur de la variable vie ». La barre suit donc toujours le nombre de vies.</div>
 </div>
 
 <h2>Étape 4 : le Game Over</h2>
 <div class="method">
 <ol>
-<li>Après « Définir la Progression », ajoute le nœud <strong>« Condition »</strong> avec <strong>Condition</strong> = <code>vie &lt;= 0</code> (« vie plus petite ou égale à 0 »).</li>
+<li>Après « Définir la Progression », ajoute le nœud <strong>« Condition »</strong> avec <strong>Condition</strong> = <code>=vie &lt;= 0</code> (« vie plus petite ou égale à 0 »).</li>
 <li>Relie sa sortie <strong>Vrai</strong> au nœud <strong>« Recommencer la scène »</strong> (catégorie Scène &amp; HUD).</li>
 <li>Appuie sur <strong>Sauvegarde</strong>, lance le jeu et touche un danger trois fois.</li>
 </ol>
 <div class="chaine">
 <div class="noeud"><b>Définir la Progression</b><span>barreVie</span></div>
 <div class="fleche">→</div>
-<div class="noeud condition"><b>Condition</b><span>vie &lt;= 0</span></div>
+<div class="noeud condition"><b>Condition</b><span>=vie &lt;= 0</span></div>
 <div class="fleche"><em>Vrai</em> →</div>
 <div class="noeud"><b>Recommencer la scène</b></div>
 </div>
