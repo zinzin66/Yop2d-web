@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment faire sauter un personnage dans Yop2D ? | Guide Yop2D</title>
+<meta name="description" content="Faire sauter un personnage dans Yop2D, sans code : gravité, sol solide, bouton de saut et nœuds « Si au sol » et « Impulsion (saut) ».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/sauter.html">
+<link rel="stylesheet" href="guide.css">
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "HowTo",
+"name": "Comment faire sauter un personnage dans Yop2D",
+"description": "Donner la gravité au personnage, poser un sol solide et relier un bouton de saut aux nœuds « Si au sol » et « Impulsion (saut) ».",
+"inLanguage": "fr",
+"tool": [{ "@type": "HowToTool", "name": "Yop2D (moteur de jeu 2D sans code pour Android)" }],
+"step": [
+ { "@type": "HowToStep", "name": "Donner la gravité au personnage", "text": "Dans l'inspecteur du personnage, coche « Activer le corps physique » et passe-le en « Physique : Dynamique »." },
+ { "@type": "HowToStep", "name": "Poser un sol solide", "text": "Ajoute un carré sol, coche « Activer le corps physique » et laisse-le en « Physique : Statique »." },
+ { "@type": "HowToStep", "name": "Relier le bouton de saut", "text": "Au Clic sur Objet (btnSaut) → Si au sol (player) → sortie Vrai → Impulsion (saut) (player, force -15)." }
+]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../index.html">← Yop2D</a>
+<h1>Comment faire sauter un personnage ?</h1>
+<p>Guide débutant · sans code</p>
+</header>
+<main>
+<p>Pour qu'un personnage saute, il faut trois choses : qu'il <strong>tombe</strong> (la gravité), un <strong>sol</strong> sur lequel il se pose, et un <strong>bouton</strong> qui le propulse vers le haut, seulement s'il est bien posé.</p>
+
+<div class="besoin">
+<b>Il te faut :</b>
+<ul>
+<li>un personnage nommé <strong>player</strong> (un Carré ou une Image) ;</li>
+<li>un sol : un Carré large et plat nommé <strong>sol</strong>, en bas de la scène ;</li>
+<li>un bouton nommé <strong>btnSaut</strong> (un Bouton ou un Carré), en bas à droite de l'écran.</li>
+</ul>
+</div>
+
+<h2>Étape 1 : donner la gravité au personnage</h2>
+<div class="method">
+<ol>
+<li>Sélectionne <strong>player</strong>.</li>
+<li>Dans l'inspecteur, section <strong>« Physique &amp; Environnement »</strong>, coche <strong>« Activer le corps physique (Collisions) »</strong>.</li>
+<li>Touche le bouton <strong>« Physique : Statique ► »</strong> pour qu'il devienne <strong>« Physique : Dynamique ▼ »</strong>. « Dynamique » veut dire que l'objet tombe.</li>
+</ol>
+<div class="tip">👉 Le réglage <strong>« Gravité »</strong> (1.0 par défaut) change la vitesse de chute : 0.5 pour tomber doucement, 2 pour tomber vite.</div>
+</div>
+
+<h2>Étape 2 : poser un sol solide</h2>
+<div class="method">
+<ol>
+<li>Sélectionne <strong>sol</strong>.</li>
+<li>Coche aussi <strong>« Activer le corps physique (Collisions) »</strong>, mais <strong>laisse-le en « Physique : Statique »</strong> : un objet statique ne bouge pas et bloque les objets qui tombent dessus.</li>
+<li>Place <strong>player</strong> un peu au-dessus du sol.</li>
+</ol>
+<div class="tip">👉 Tu peux faire des plateformes de la même façon : des carrés statiques placés en hauteur.</div>
+</div>
+
+<h2>Étape 3 : le bouton de saut</h2>
+<div class="method">
+<ol>
+<li>Ouvre le <strong>Blueprint</strong> de la scène.</li>
+<li>Ajoute l'événement <strong>« Au Clic sur Objet »</strong> et choisis <strong>btnSaut</strong> comme cible.</li>
+<li>Ajoute le nœud <strong>« Si au sol »</strong> (catégorie Logique &amp; Conditions) et choisis <strong>player</strong> comme cible.</li>
+<li>Ajoute le nœud <strong>« Impulsion (saut) »</strong> (catégorie Mouvements &amp; IA) : cible <strong>player</strong>, <strong>Force verticale = -15</strong>.</li>
+<li>Relie la sortie de « Au Clic sur Objet » à l'entrée de « Si au sol », puis la sortie <strong>Vrai</strong> de « Si au sol » à l'entrée de « Impulsion (saut) ».</li>
+<li>Appuie sur <strong>Sauvegarde</strong>, puis lance le jeu et touche le bouton.</li>
+</ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Au Clic sur Objet</b><span>cible : btnSaut</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Si au sol</b><span>cible : player</span></div>
+<div class="fleche"><em>Vrai</em> →</div>
+<div class="noeud"><b>Impulsion (saut)</b><span>cible : player · force -15</span></div>
+</div>
+<div class="tip">👉 <strong>Pourquoi « Si au sol » ?</strong> Sans lui, le joueur pourrait sauter à nouveau en plein vol et s'envoler en touchant le bouton plusieurs fois.</div>
+<div class="tip">👉 <strong>Négatif = vers le haut.</strong> Dans Yop2D, les nombres Y grandissent vers le bas de l'écran. -15 fait un petit saut, -20 un grand saut.</div>
+</div>
+
+<h2>Et pour avancer pendant le saut ?</h2>
+<div class="method">
+<p>Ajoute les boutons gauche et droite du guide <a href="deplacer-personnage.html">Faire bouger un personnage</a> (méthode 1). Tu peux garder un doigt sur « droite » et toucher « saut » avec un autre doigt.</p>
+</div>
+
+<h2>Si ça ne marche pas</h2>
+<ul>
+<li><strong>Le personnage ne tombe pas :</strong> vérifie qu'il est en « Physique : Dynamique ».</li>
+<li><strong>Il traverse le sol :</strong> le sol doit avoir « Activer le corps physique » coché, en « Statique ».</li>
+<li><strong>Rien ne se passe au toucher :</strong> vérifie que les fils sont bien reliés, et que la sortie utilisée est <strong>Vrai</strong>. Pense à appuyer sur <strong>Sauvegarde</strong> avant de lancer le jeu.</li>
+<li><strong>Pour comparer</strong>, ouvre le jeu d'exemple <strong>« Plateforme »</strong> fourni avec Yop2D : il utilise exactement ce montage.</li>
+</ul>
+
+<div class="nav">
+<a href="deplacer-personnage.html">← Faire bouger un personnage</a>
+<a href="pieces-score.html">Guide suivant : pièces et score →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="../index.html">Site officiel</a></p>
+</footer>
+</body>
+</html>
