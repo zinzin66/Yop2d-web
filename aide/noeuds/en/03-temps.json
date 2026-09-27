@@ -1,0 +1,45 @@
+{
+  "categorie": "Time",
+  "noeuds": [
+    {
+      "nom": "Wait",
+      "schema": "<b>Input:</b> Duration (seconds)",
+      "role": "Waits for the chosen time, in seconds, then continues. The rest of the game keeps running during the wait.",
+      "exemple": "show “You lose!”, wait 2 seconds, then restart the scene."
+    },
+    {
+      "nom": "Repeat",
+      "schema": "<b>Inputs:</b> Every (seconds), Number of times (0 = endless), Timer name (optional) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Each time / Finished",
+      "role": "Runs the “Each time” output every X seconds, a number of times (0 = forever), then “Finished”. “Right away” runs at the start. If it is already running, it does not start again.",
+      "exemple": "spawn an enemy every 3 seconds."
+    },
+    {
+      "nom": "Countdown",
+      "schema": "<b>Inputs:</b> Object, Variable, Start value (optional), Timer name (optional) &nbsp;→&nbsp; <b>Outputs:</b> Every second / Finished",
+      "role": "Removes 1 from the chosen variable (a number) every second until 0. “Every second” runs on each tick, “Finished” at 0. “Start value (optional)” sets the starting value.",
+      "exemple": "a 60-second timer: at 0, Game Over."
+    },
+    {
+      "nom": "Stop a timer",
+      "schema": "<b>Input:</b> Timer name (empty = all)",
+      "role": "Stops the timer (Repeat or Countdown) with this name, or all timers if the name is empty.",
+      "exemple": "stop the timer when the player wins."
+    },
+    {
+      "nom": "Game speed (slow motion)",
+      "schema": "<b>Input:</b> Speed (1 = normal, 0.5 = slow)",
+      "role": "Changes the speed of the whole game: 1 = normal, 0.5 = slow motion, 2 = fast (from 0 to 4).",
+      "exemple": "a slow-motion effect for 2 seconds."
+    },
+    {
+      "nom": "Pause the game",
+      "role": "Pauses the game: movements and timers stop.",
+      "exemple": "open the pause menu."
+    },
+    {
+      "nom": "Resume the game",
+      "role": "Resumes the game after a pause.",
+      "exemple": "the “Continue” button of the pause menu."
+    }
+  ]
+}

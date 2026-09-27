@@ -1,0 +1,71 @@
+{
+  "categorie": "Lógica e Condições",
+  "noeuds": [
+    {
+      "nom": "Condição",
+      "schema": "<b>Entrada:</b> Condição &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso / Depois",
+      "role": "Testa uma condição: segue “Verdadeiro” se ela for certa, senão “Falso”. “Depois” roda depois, nos dois casos.",
+      "exemple": "score >= 10 → verdadeiro → próxima cena."
+    },
+    {
+      "nom": "Se joystick",
+      "schema": "<b>Saídas:</b> Cima / Baixo / Esquerda / Direita / Repouso / Depois",
+      "role": "Segue a saída da direção do joystick: “Cima”, “Baixo”, “Esquerda”, “Direita”, ou “Repouso” se ninguém mexer nele.",
+      "exemple": "ligado a “A cada frame” para tocar a animação de andar na direção certa."
+    },
+    {
+      "nom": "Se está no chão",
+      "schema": "<b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso / Depois",
+      "role": "“Verdadeiro” se a parte de baixo do objeto está apoiada num objeto fixo e visível (chão, plataforma), senão “Falso”.",
+      "exemple": "só deixar pular se o jogador estiver no chão."
+    },
+    {
+      "nom": "Se está em movimento",
+      "schema": "<b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso / Depois",
+      "role": "“Verdadeiro” se o objeto se mexeu desde o quadro anterior, senão “Falso”.",
+      "exemple": "tocar a animação de andar só quando o personagem se mexe."
+    },
+    {
+      "nom": "Chamar função",
+      "schema": "<b>Entrada:</b> Função",
+      "role": "Roda uma função (um Blueprint criado na seção Funções) e depois continua. Não coloque embaixo de “A cada frame”.",
+      "exemple": "uma função “PerderVida” usada por vários inimigos."
+    },
+    {
+      "nom": "Chamar evento",
+      "schema": "<b>Entrada:</b> Nome do evento",
+      "role": "Inicia o “Evento Local” com este nome, no mesmo Blueprint, e depois continua.",
+      "exemple": "chamar “GameOver” a partir da queda e do cronômetro."
+    },
+    {
+      "nom": "Sequência",
+      "schema": "<b>Saídas:</b> 1 / 2 / 3 / 4",
+      "role": "Roda suas saídas uma depois da outra: 1, depois 2, depois 3, depois 4. Uma saída sem ligação é pulada.",
+      "exemple": "no início: 1 = posicionar o jogador, 2 = tocar a música, 3 = mostrar a pontuação."
+    },
+    {
+      "nom": "Recarga",
+      "schema": "<b>Entradas:</b> Objeto, Atraso (segundos) &nbsp;→&nbsp; <b>Saídas:</b> Pronto / Ainda não",
+      "role": "Deixa passar por “Pronto” no máximo uma vez por intervalo (em segundos); senão, vai por “Ainda não”. Com um objeto escolhido, cada objeto tem seu próprio intervalo.",
+      "exemple": "atirar no máximo uma vez a cada 0.5 segundo."
+    },
+    {
+      "nom": "Se fora da tela",
+      "schema": "<b>Entradas:</b> Objeto, Margem (pixels) &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso / Depois",
+      "role": "“Verdadeiro” se o objeto saiu totalmente da tela (mais a margem), senão “Falso”.",
+      "exemple": "destruir as balas que saem da tela."
+    },
+    {
+      "nom": "Se / Senão",
+      "schema": "<b>Entradas:</b> Se (condição), Senão se (condição) &nbsp;→&nbsp; <b>Saídas:</b> Se / Senão se / Senão / Depois",
+      "role": "Testa a primeira condição, depois a segunda: segue “Se”, “Senão se” ou “Senão”. “Depois” roda depois.",
+      "exemple": "se score >= 100 → ouro, senão se score >= 50 → prata, senão → bronze."
+    },
+    {
+      "nom": "Conforme o valor",
+      "schema": "<b>Entradas:</b> Valor a testar, Caso 1, Caso 2, Caso 3, Caso 4, Caso 5, Caso 6 &nbsp;→&nbsp; <b>Saídas:</b> 1 / 2 / 3 / 4 / 5 / 6 / Nenhum / Depois",
+      "role": "Compara o valor com os casos 1 a 6 e segue a saída do primeiro caso igual; “Nenhum” se nenhum combinar. Um caso vazio é pulado.",
+      "exemple": "conforme “arma”: 1 = espada, 2 = arco, 3 = varinha."
+    }
+  ]
+}

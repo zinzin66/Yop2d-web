@@ -1,0 +1,71 @@
+{
+  "categorie": "Logic & Conditions",
+  "noeuds": [
+    {
+      "nom": "Condition",
+      "schema": "<b>Input:</b> Condition &nbsp;→&nbsp; <b>Outputs:</b> True / False / Then",
+      "role": "Tests a condition: follows the True output if it is right, False otherwise. “Then” runs afterwards, in both cases.",
+      "exemple": "score >= 10 → True → next scene."
+    },
+    {
+      "nom": "If joystick",
+      "schema": "<b>Outputs:</b> Up / Down / Left / Right / Idle / Then",
+      "role": "Follows the output matching the joystick direction: Up, Down, Left, Right, or Idle when it is not touched.",
+      "exemple": "linked to “Every frame” to play the walking animation in the right direction."
+    },
+    {
+      "nom": "If on ground",
+      "schema": "<b>Input:</b> Object &nbsp;→&nbsp; <b>Outputs:</b> True / False / Then",
+      "role": "True if the bottom of the object is standing on a fixed, visible object (floor, platform), False otherwise.",
+      "exemple": "only allow jumping when the player is on the ground."
+    },
+    {
+      "nom": "If moving",
+      "schema": "<b>Input:</b> Object &nbsp;→&nbsp; <b>Outputs:</b> True / False / Then",
+      "role": "True if the object moved since the previous frame, False otherwise.",
+      "exemple": "play the walking animation only when the character moves."
+    },
+    {
+      "nom": "Call function",
+      "schema": "<b>Input:</b> Function",
+      "role": "Runs a function (a Blueprint created in the Functions section), then continues. Do not put it under “Every frame”.",
+      "exemple": "a “LoseLife” function used by several enemies."
+    },
+    {
+      "nom": "Call event",
+      "schema": "<b>Input:</b> Event name",
+      "role": "Runs the “Local Event” with this name, in the same Blueprint, then continues.",
+      "exemple": "call “GameOver” from the fall and from the timer."
+    },
+    {
+      "nom": "Sequence",
+      "schema": "<b>Outputs:</b> 1 / 2 / 3 / 4",
+      "role": "Runs its outputs one after the other: 1, then 2, then 3, then 4. An output with no link is skipped.",
+      "exemple": "at start: 1 = place the player, 2 = start the music, 3 = show the score."
+    },
+    {
+      "nom": "Cooldown",
+      "schema": "<b>Inputs:</b> Object, Delay (seconds) &nbsp;→&nbsp; <b>Outputs:</b> Ready / Not yet",
+      "role": "Lets things through “Ready” at most once per delay (in seconds); otherwise it is “Not yet”. With an object chosen, each object has its own delay.",
+      "exemple": "shoot at most once every 0.5 second."
+    },
+    {
+      "nom": "If off-screen",
+      "schema": "<b>Inputs:</b> Object, Margin (pixels) &nbsp;→&nbsp; <b>Outputs:</b> True / False / Then",
+      "role": "True if the object is completely off the screen (plus the margin), False otherwise.",
+      "exemple": "destroy bullets that leave the screen."
+    },
+    {
+      "nom": "If / Else",
+      "schema": "<b>Inputs:</b> If (condition), Else if (condition) &nbsp;→&nbsp; <b>Outputs:</b> If / Else if / Else / Then",
+      "role": "Tests the first condition, then the second: follows “If”, “Else if” or “Else”. “Then” runs afterwards.",
+      "exemple": "if score >= 100 → gold, else if score >= 50 → silver, else → bronze."
+    },
+    {
+      "nom": "By value",
+      "schema": "<b>Inputs:</b> Value to test, Case 1, Case 2, Case 3, Case 4, Case 5, Case 6 &nbsp;→&nbsp; <b>Outputs:</b> 1 / 2 / 3 / 4 / 5 / 6 / None / Then",
+      "role": "Compares the value to test with cases 1 to 6 and follows the output of the first matching case; “None” if nothing matches. An empty case is skipped.",
+      "exemple": "depending on “weapon”: 1 = sword, 2 = bow, 3 = wand."
+    }
+  ]
+}

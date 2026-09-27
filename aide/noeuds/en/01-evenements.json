@@ -3,81 +3,106 @@
   "noeuds": [
     {
       "nom": "On Start",
-      "schema": "<b>Output:</b> Execute",
-      "role": "Runs automatically, only once, as soon as the scene is loaded on screen.",
-      "exemple": "place enemies at their starting position, or set the player's health to 100."
+      "role": "Runs only once, as soon as the scene starts.",
+      "exemple": "place the enemies, show the starting score or start the music."
     },
     {
-      "nom": "Every Frame",
-      "schema": "<b>Output:</b> Execute (loop)",
-      "role": "Runs continuously, at every screen refresh.",
-      "exemple": "spin an object forever, or update a score."
+      "nom": "Every frame",
+      "role": "Runs over and over, on every frame of the game (about 60 times per second).",
+      "exemple": "follow the finger or check a condition all the time. Avoid putting “Play music” or “Call function” under it."
     },
     {
-      "nom": "On Click on Object",
-      "schema": "<b>Input:</b> Target &nbsp;→&nbsp; <b>Output:</b> Execute",
-      "role": "Triggers when the player's finger touches the targeted object.",
-      "exemple": "open a chest, press a button, or start a dialogue."
+      "nom": "End of Click",
+      "role": "Runs when the player lifts their finger from the screen, anywhere.",
+      "exemple": "stop shooting when the screen is released."
     },
     {
-      "nom": "On Click End",
-      "schema": "<b>Output:</b> Execute",
-      "role": "Triggers when the player lifts their finger from the screen, anywhere.",
-      "exemple": "stop shooting when the finger is lifted."
+      "nom": "On Object Click",
+      "schema": "<b>Input:</b> Object",
+      "role": "Runs when the finger touches the chosen object.",
+      "exemple": "a “Jump” button, opening a chest, picking an answer."
     },
     {
-      "nom": "Drag Start / End",
-      "schema": "<b>Input:</b> Object &nbsp;→&nbsp; <b>Output:</b> Execute",
-      "role": "Trigger when the player starts dragging a draggable object, and when they drop it.",
-      "exemple": "drop a key on a door to open it."
+      "nom": "Object Released",
+      "schema": "<b>Input:</b> Object",
+      "role": "Runs when the finger is lifted above the chosen object.",
+      "exemple": "confirm a button only when it is released."
+    },
+    {
+      "nom": "Object Held Down",
+      "schema": "<b>Input:</b> Object",
+      "role": "Repeats on every frame as long as the finger stays on the chosen object.",
+      "exemple": "left / right buttons: while you hold them, the character moves."
+    },
+    {
+      "nom": "Finger held down",
+      "role": "Repeats on every frame as long as a finger is on the screen, anywhere.",
+      "exemple": "make a ship climb while the screen is held (use doigt.x and doigt.y in formulas)."
+    },
+    {
+      "nom": "Drag Start",
+      "schema": "<b>Input:</b> Object",
+      "role": "Runs when the player starts dragging the chosen object (it must be “Movable (draggable in Play mode)”).",
+      "exemple": "enlarge a card when it is picked up."
+    },
+    {
+      "nom": "Drag End",
+      "schema": "<b>Input:</b> Object",
+      "role": "Runs when the player drops the object they were dragging.",
+      "exemple": "check whether a puzzle piece is in the right place."
     },
     {
       "nom": "Collision A/B",
-      "schema": "<b>Inputs:</b> Object A, Object B &nbsp;→&nbsp; <b>Output:</b> Execute",
-      "role": "Triggers at the exact moment object A physically touches object B.",
-      "exemple": "when \"Player\" touches \"Coin\" → play a sound and destroy the coin."
+      "schema": "<b>Inputs:</b> Object A, Object B",
+      "role": "Runs once, when object A starts touching object B. They must separate before it can run again. This is also the event to use for “entering a zone”.",
+      "exemple": "the player touches the finish zone → next level."
     },
     {
-      "nom": "If Object Touches Tag",
-      "schema": "<b>Inputs:</b> Object, Tag text &nbsp;→&nbsp; <b>Output:</b> Execute",
-      "role": "Triggers when the targeted object collides with any object carrying the given label (Tag).",
-      "exemple": "when \"Missile\" touches an object tagged \"Enemy\" → explosion."
+      "nom": "Exit Zone",
+      "schema": "<b>Inputs:</b> Object A, Object B",
+      "role": "Runs once, when object A stops touching object B (it leaves the zone).",
+      "exemple": "close a door when the player walks away."
     },
     {
-      "nom": "Area Enter / Exit",
-      "schema": "<b>Inputs:</b> Object A, Zone B &nbsp;→&nbsp; <b>Output:</b> Execute",
-      "role": "Activates when an object enters or leaves a defined zone (ideal for invisible triggers).",
-      "exemple": "the player walks into the \"Trap\" zone → spikes come out of the ground."
+      "nom": "On Hover",
+      "schema": "<b>Input:</b> Object",
+      "role": "Runs when the finger, sliding across the screen, reaches the chosen object.",
+      "exemple": "light up a button when the finger passes over it."
     },
     {
-      "nom": "On Hover / End Hover",
-      "schema": "<b>Input:</b> Target &nbsp;→&nbsp; <b>Output:</b> Execute",
-      "role": "Handles a finger or pointer passing over an object, without needing to click.",
-      "exemple": "highlight a button when passing over it."
+      "nom": "End of Hover",
+      "schema": "<b>Input:</b> Object",
+      "role": "Runs when the finger leaves the object it was over.",
+      "exemple": "turn off a button's highlight."
     },
     {
       "nom": "On Impact (Physics)",
-      "schema": "<b>Input:</b> Object &nbsp;→&nbsp; <b>Output:</b> Execute",
-      "role": "Detects when the object bounces or hits something solid with gravity enabled.",
-      "exemple": "play a pebble sound when the stone falls to the ground."
+      "schema": "<b>Input:</b> Object",
+      "role": "Runs when the chosen object (dynamic physics) lands on a floor or bounces.",
+      "exemple": "play a landing sound or shake the camera."
     },
     {
       "nom": "When Variable Changes",
-      "schema": "<b>Input:</b> Variable &nbsp;→&nbsp; <b>Output:</b> Execute",
-      "role": "Constantly watches a variable. As soon as its value changes, this node runs what follows.",
-      "exemple": "if health changes, update the visual health bar."
+      "schema": "<b>Input:</b> Variable",
+      "role": "Runs every time the value of the chosen variable changes.",
+      "exemple": "when “vie” (health) changes, update the health bar."
     },
     {
       "nom": "Local Event",
-      "schema": "<b>Input:</b> Event name &nbsp;→&nbsp; <b>Output:</b> Execute",
-      "role": "A custom event you can trigger from elsewhere with the \"Call Local Event\" node.",
-      "exemple": "group the \"Game Over\" logic so you can call it from several places."
+      "schema": "<b>Input:</b> Event name",
+      "role": "Your own event, with the name you choose. It is started by the “Call event” node in the same Blueprint.",
+      "exemple": "a “GameOver” event called from several places."
     },
     {
       "nom": "On Action Click (Adventure)",
-      "schema": "<b>Output:</b> Execute",
-      "role": "Triggers specifically when the interface's virtual \"ACTION\" button is pressed.",
-      "exemple": "talk to an NPC or read a sign in front of you."
+      "role": "Runs when the player presses the scene's “BtnAction” object (action button).",
+      "exemple": "talk to a character or open a door in an adventure game."
+    },
+    {
+      "nom": "If object touches Tag",
+      "schema": "<b>Inputs:</b> Object, Tag",
+      "role": "Runs once per contact when the chosen object touches an object with this tag. The touched object becomes the “Implied Object”.",
+      "exemple": "the player touches a coin (tag “piece”) → destroy the involved object and add 1 to the score."
     }
   ]
 }

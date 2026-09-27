@@ -1,0 +1,45 @@
+{
+  "categorie": "Temps",
+  "noeuds": [
+    {
+      "nom": "Attendre",
+      "schema": "<b>Entrée :</b> Durée (secondes)",
+      "role": "Attend la durée choisie, en secondes, puis continue avec la suite. Le reste du jeu continue pendant l'attente.",
+      "exemple": "afficher « Perdu ! », attendre 2 secondes, puis recommencer la scène."
+    },
+    {
+      "nom": "Répéter",
+      "schema": "<b>Entrées :</b> Toutes les (secondes), Nombre de fois (0 = sans fin), Nom du minuteur (facultatif) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / À chaque fois / Terminé",
+      "role": "Lance la sortie « À chaque fois » toutes les X secondes, un certain nombre de fois (0 = sans fin), puis « Terminé ». « Tout de suite » part dès le début. S'il tourne déjà, il ne se relance pas.",
+      "exemple": "faire apparaître un ennemi toutes les 3 secondes."
+    },
+    {
+      "nom": "Compte à rebours",
+      "schema": "<b>Entrées :</b> Objet, Variable, Départ (facultatif), Nom du minuteur (facultatif) &nbsp;→&nbsp; <b>Sorties :</b> Chaque seconde / Terminé",
+      "role": "Enlève 1 à la variable choisie (un nombre) chaque seconde jusqu'à 0. « Chaque seconde » se lance à chaque tic, « Terminé » à 0. « Départ (facultatif) » donne la valeur de départ.",
+      "exemple": "un chrono de 60 secondes : à 0, Game Over."
+    },
+    {
+      "nom": "Arrêter un minuteur",
+      "schema": "<b>Entrée :</b> Nom du minuteur (vide = tous)",
+      "role": "Arrête le minuteur (Répéter ou Compte à rebours) qui porte ce nom, ou tous les minuteurs si le nom est vide.",
+      "exemple": "arrêter le chrono quand le joueur gagne."
+    },
+    {
+      "nom": "Vitesse du jeu (ralenti)",
+      "schema": "<b>Entrée :</b> Vitesse (1 = normal, 0.5 = ralenti)",
+      "role": "Change la vitesse de tout le jeu : 1 = normal, 0.5 = ralenti, 2 = accéléré (de 0 à 4).",
+      "exemple": "un effet ralenti pendant 2 secondes."
+    },
+    {
+      "nom": "Mettre le jeu en pause",
+      "role": "Met le jeu en pause : les mouvements et les minuteurs s'arrêtent.",
+      "exemple": "ouvrir le menu de pause."
+    },
+    {
+      "nom": "Reprendre le jeu",
+      "role": "Relance le jeu après une pause.",
+      "exemple": "le bouton « Continuer » du menu de pause."
+    }
+  ]
+}

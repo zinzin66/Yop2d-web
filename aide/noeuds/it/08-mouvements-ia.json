@@ -1,0 +1,83 @@
+{
+  "categorie": "Movimenti e IA",
+  "noeuds": [
+    {
+      "nom": "Ferma l'oggetto",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Ferma di colpo l'oggetto: niente più velocità, spinta, salto o movimento automatico.",
+      "exemple": "congelare un nemico colpito da un incantesimo di ghiaccio."
+    },
+    {
+      "nom": "Ferma i movimenti",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Spegne i movimenti automatici dell'oggetto: avanzare di continuo, inseguire e fuggire.",
+      "exemple": "il nemico smette di inseguire quando il giocatore si nasconde."
+    },
+    {
+      "nom": "Avanza continuamente",
+      "schema": "<b>Ingressi:</b> Oggetto, Velocità",
+      "role": "L'oggetto avanza da solo, nella direzione in cui è girato, alla velocità scelta.",
+      "exemple": "un proiettile o un'auto in corsa."
+    },
+    {
+      "nom": "Insegui un oggetto",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Velocità",
+      "role": "L'oggetto A avanza da solo verso l'oggetto B, alla velocità scelta.",
+      "exemple": "un fantasma che segue il giocatore."
+    },
+    {
+      "nom": "Fuggi da un oggetto",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Velocità",
+      "role": "L'oggetto A si allontana da solo dall'oggetto B, alla velocità scelta.",
+      "exemple": "una gallina che scappa dal giocatore."
+    },
+    {
+      "nom": "Cambia il rimbalzo",
+      "schema": "<b>Ingressi:</b> Oggetto, Rimbalzo (da 0 a 1)",
+      "role": "Regola il rimbalzo di un oggetto fisico: 0 = non rimbalza, 1 = rimbalza molto.",
+      "exemple": "0.8 per una palla che rimbalza."
+    },
+    {
+      "nom": "Spingi con un angolo",
+      "schema": "<b>Ingressi:</b> Oggetto, Angolo (0 = destra, 90 = giù), Forza",
+      "role": "Spinge l'oggetto in una direzione (in gradi: 0 = destra, 90 = giù, 180 = sinistra, 270 = su) con la forza scelta.",
+      "exemple": "una molla che lancia il giocatore in diagonale."
+    },
+    {
+      "nom": "Impulso (salto)",
+      "schema": "<b>Ingressi:</b> Oggetto, Forza verticale (negativo = sale)",
+      "role": "Lancia l'oggetto verso l'alto (numero negativo) o verso il basso (positivo), e gli dà la fisica perché ricada.",
+      "exemple": "un salto: forza -15."
+    },
+    {
+      "nom": "Attiva la fisica",
+      "schema": "<b>Ingressi:</b> Oggetto, Cade (true / false)",
+      "role": "Dà la fisica all'oggetto: con true cade con la gravità; con false resta fermo come un pavimento.",
+      "exemple": "una piattaforma che crolla quando ci si cammina sopra."
+    },
+    {
+      "nom": "Rendi trascinabile",
+      "schema": "<b>Ingressi:</b> Oggetto, Trascinabile col dito (true / false)",
+      "role": "Permette (true) o vieta (false) di trascinare l'oggetto col dito durante il gioco.",
+      "exemple": "bloccare un pezzo del puzzle messo al posto giusto."
+    },
+    {
+      "nom": "Saltellare",
+      "schema": "<b>Ingressi:</b> Oggetto, Intensità (0 = ferma), Durata (ms), Continua finché si muove (true / false)",
+      "role": "Fa saltellare l'oggetto (piccolo rimbalzo visivo) con l'intensità e la durata scelte. 0 lo ferma. Può continuare finché l'oggetto si muove.",
+      "exemple": "un personaggio che saltella camminando."
+    },
+    {
+      "nom": "Orienta verso",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Scarto d'angolo (gradi)",
+      "role": "Gira l'oggetto A verso l'oggetto B. Lo scarto corregge il verso dell'immagine (0 = l'immagine guarda a destra).",
+      "exemple": "una torretta che mira al giocatore."
+    },
+    {
+      "nom": "Scivola verso",
+      "schema": "<b>Ingressi:</b> Oggetto, Posizione X, Posizione Y, Durata (secondi)",
+      "role": "Sposta dolcemente l'oggetto fino alla posizione X, Y nel tempo scelto (secondi). Il seguito continua senza aspettare.",
+      "exemple": "una piattaforma mobile o un menu che entra nello schermo."
+    }
+  ]
+}

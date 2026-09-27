@@ -1,0 +1,462 @@
+{
+  "NoeudEventStart": [
+    "Läuft nur einmal, sobald die Szene startet.",
+    "Gegner platzieren, den Startpunktestand anzeigen oder die Musik starten."
+  ],
+  "NoeudEventChaqueImage": [
+    "Läuft ständig, bei jedem Bild des Spiels (etwa 60-mal pro Sekunde).",
+    "dem Finger folgen oder dauernd eine Bedingung prüfen. Setze [[jouer_musique]] oder [[appeler_fonction]] nicht darunter."
+  ],
+  "NoeudEventFinClic": [
+    "Läuft, wenn der Spieler den Finger irgendwo vom Bildschirm hebt.",
+    "aufhören zu schießen, wenn der Bildschirm losgelassen wird."
+  ],
+  "NoeudEventClicObjet": [
+    "Läuft, wenn der Finger das gewählte Objekt berührt.",
+    "eine Taste « Springen », eine Truhe öffnen, eine Antwort wählen."
+  ],
+  "NoeudEventFinClicObjet": [
+    "Läuft, wenn der Finger über dem gewählten Objekt angehoben wird.",
+    "eine Taste erst beim Loslassen bestätigen."
+  ],
+  "NoeudEventMaintenuObjet": [
+    "Wiederholt sich bei jedem Bild, solange der Finger auf dem gewählten Objekt bleibt.",
+    "Tasten links / rechts: solange man drückt, läuft die Figur."
+  ],
+  "NoeudEventDoigtAppuye": [
+    "Wiederholt sich bei jedem Bild, solange ein Finger irgendwo auf dem Bildschirm liegt.",
+    "ein Raumschiff steigen lassen, solange man drückt (nutze doigt.x und doigt.y in Formeln)."
+  ],
+  "NoeudEventDebutGlisser": [
+    "Läuft, wenn der Spieler beginnt, das gewählte Objekt zu ziehen (es muss [[lang:insp_cb_deplacable]] sein).",
+    "eine Karte vergrößern, wenn man sie nimmt."
+  ],
+  "NoeudEventFinGlisser": [
+    "Läuft, wenn der Spieler das gezogene Objekt loslässt.",
+    "prüfen, ob ein Puzzleteil an der richtigen Stelle liegt."
+  ],
+  "NoeudEventCollisionAB": [
+    "Läuft einmal, sobald Objekt A beginnt, Objekt B zu berühren. Sie müssen sich trennen, bevor es wieder läuft. Das ist auch das Ereignis für « eine Zone betreten ».",
+    "der Spieler berührt die Zielzone → nächstes Level."
+  ],
+  "NoeudEventSortieZone": [
+    "Läuft einmal, sobald Objekt A Objekt B nicht mehr berührt (es verlässt die Zone).",
+    "eine Tür schließen, wenn der Spieler weggeht."
+  ],
+  "NoeudEventSurvolObjet": [
+    "Läuft, wenn der Finger beim Wischen über den Bildschirm das gewählte Objekt erreicht.",
+    "eine Taste aufleuchten lassen, wenn der Finger darüberfährt."
+  ],
+  "NoeudEventFinSurvol": [
+    "Läuft, wenn der Finger das Objekt verlässt, über dem er war.",
+    "die Hervorhebung einer Taste ausschalten."
+  ],
+  "NoeudEventChoc": [
+    "Läuft, wenn das gewählte Objekt (dynamische Physik) auf einem Boden landet oder abprallt.",
+    "ein Landegeräusch abspielen oder die Kamera wackeln lassen."
+  ],
+  "NoeudEventVariableChange": [
+    "Läuft jedes Mal, wenn sich der Wert der gewählten Variable ändert.",
+    "wenn sich « vie » (Leben) ändert, die Lebensleiste aktualisieren."
+  ],
+  "NoeudEventPersonnalise": [
+    "Ein eigenes Ereignis mit einem Namen deiner Wahl. Es wird vom Knoten [[appeler_evenement]] im selben Blueprint gestartet.",
+    "ein Ereignis « GameOver », das von mehreren Stellen aufgerufen wird."
+  ],
+  "NoeudEventBoutonAction": [
+    "Läuft, wenn der Spieler das Objekt [[lang:obj_prefix_btnaction]] (Aktionstaste) der Szene drückt.",
+    "mit einer Figur sprechen oder eine Tür in einem Abenteuerspiel öffnen."
+  ],
+  "NoeudEventCollisionTag": [
+    "Läuft einmal pro Berührung, wenn das gewählte Objekt ein Objekt mit diesem Tag berührt. Das berührte Objekt wird zum [[lang:noeud_objet_implique]].",
+    "der Spieler berührt eine Münze (Tag « piece ») → das beteiligte Objekt zerstören und 1 zum Punktestand addieren."
+  ],
+  "changer_scene": [
+    "Verlässt die aktuelle Szene und geht zur gewählten Szene. Dieser Knoten beendet das Skript.",
+    "nach dem letzten Level zum Bildschirm « Bravo! » gehen."
+  ],
+  "aller_scene_nom": [
+    "Geht zur Szene, deren Namen du schreibst (oder eine Formel, die diesen Namen ergibt). Dieser Knoten beendet das Skript.",
+    "eine Formel wie =\"Level\" + level, um das Level mit einer Variable zu wählen."
+  ],
+  "scene_suivante": [
+    "Geht zur Szene, die in der Szenenliste direkt danach kommt. Dieser Knoten beendet das Skript.",
+    "der Spieler erreicht das Ziel → nächstes Level."
+  ],
+  "scene_precedente": [
+    "Geht zur Szene, die in der Szenenliste direkt davor kommt. Dieser Knoten beendet das Skript.",
+    "eine Taste « Zurück » in einem Menü."
+  ],
+  "recommencer_scene": [
+    "Startet die Szene von vorn: Objekte an ihrem Platz und lokale Variablen auf ihrem Startwert. Globale Variablen ändern sich nicht.",
+    "Game Over, wenn das Leben auf 0 fällt."
+  ],
+  "ouvrir_hud": [
+    "Zeigt eine andere Szene über dem Spiel an, wie eine Ebene (HUD), mit eigenem Blueprint.",
+    "ein Pausenmenü oder ein Inventar."
+  ],
+  "fermer_hud": [
+    "Schließt das geöffnete HUD.",
+    "die Taste « Schließen » im Pausenmenü."
+  ],
+  "placer_copie_scene": [
+    "Setzt eine Kopie der gewählten Szene (Prefab) an die Position X, Y ins Spiel.",
+    "eine in einer anderen Szene vorbereitete Gegnergruppe erscheinen lassen."
+  ],
+  "detruire_copies_scene": [
+    "Entfernt alle Kopien der gewählten Szene aus dem Spiel.",
+    "am Ende einer Welle alle Gegnergruppen löschen."
+  ],
+  "quitter_jeu": [
+    "Schließt das exportierte Spiel. Im Editor wird nichts geschlossen: nutze die Stopp-Taste.",
+    "eine Taste « Beenden » im Hauptmenü."
+  ],
+  "toast": [
+    "Zeigt ein paar Sekunden lang eine kleine Nachricht unten auf dem Bildschirm. Beginne mit =, um eine Rechnung anzuzeigen.",
+    "=\"Punkte: \" + score"
+  ],
+  "journal": [
+    "Schreibt eine Nachricht ins Projektprotokoll (Diagnosedatei), ohne im Spiel etwas anzuzeigen. Beginne mit =, um eine Rechnung zu schreiben.",
+    "=\"Leben = \" + vie, um beim Testen einen Wert zu prüfen."
+  ],
+  "fixer_camera": [
+    "Die Kamera folgt dem gewählten Objekt, auf Wunsch nur waagerecht oder nur senkrecht. Ohne Objekt folgt die Kamera nichts mehr.",
+    "dem Spieler durch ein großes Plattform-Level folgen."
+  ],
+  "elasticite_camera": [
+    "Legt fest, wie schnell die Kamera das verfolgte Objekt einholt: 0.01 = sehr weich, 1 = klebt am Objekt.",
+    "0.1 für eine sanfte Kamera, die leicht verzögert folgt."
+  ],
+  "tremblement_camera": [
+    "Schüttelt den Bildschirm mit der gewählten Stärke und Dauer (in Millisekunden).",
+    "eine Explosion: Intensität 15, Dauer 400."
+  ],
+  "vibration": [
+    "Lässt das Handy für die gewählte Dauer (in Millisekunden) vibrieren. Ohne Vibrationsmotor passiert nichts.",
+    "100 ms, wenn der Spieler getroffen wird."
+  ],
+  "sauvegarder_etat": [
+    "Merkt sich den Zustand der Szene (Objekte und Variablen) und die globalen Variablen, wie ein Speicherpunkt.",
+    "eine Checkpoint-Fahne mitten im Level."
+  ],
+  "restaurer_etat": [
+    "Stellt die Szene wie beim letzten [[sauvegarder_etat]] wieder her. Gibt es noch keinen, ändert sich nichts.",
+    "nach einem Sturz am Checkpoint weitermachen."
+  ],
+  "attendre": [
+    "Wartet die gewählte Zeit in Sekunden und macht dann weiter. Der Rest des Spiels läuft während des Wartens weiter.",
+    "« Verloren! » anzeigen, 2 Sekunden warten, dann die Szene neu starten."
+  ],
+  "repeter": [
+    "Startet den Ausgang [[lang:port_a_chaque_fois]] alle X Sekunden, eine bestimmte Anzahl Male (0 = endlos), dann [[lang:port_termine]]. [[lang:port_tout_de_suite]] läuft gleich zu Beginn. Läuft er schon, startet er nicht noch einmal.",
+    "alle 3 Sekunden einen Gegner erscheinen lassen."
+  ],
+  "compte_a_rebours": [
+    "Zieht jede Sekunde 1 von der gewählten Variable (eine Zahl) ab, bis 0. [[lang:port_chaque_seconde]] läuft bei jedem Tick, [[lang:port_termine]] bei 0. [[lang:compte_a_rebours.depart]] legt den Startwert fest.",
+    "ein 60-Sekunden-Timer: bei 0 Game Over."
+  ],
+  "arreter_minuteur": [
+    "Stoppt den Timer (Wiederholen oder Countdown) mit diesem Namen, oder alle Timer, wenn der Name leer ist.",
+    "den Timer stoppen, wenn der Spieler gewinnt."
+  ],
+  "vitesse_jeu": [
+    "Ändert das Tempo des ganzen Spiels: 1 = normal, 0.5 = Zeitlupe, 2 = schneller (von 0 bis 4).",
+    "ein Zeitlupeneffekt für 2 Sekunden."
+  ],
+  "pause_jeu": [
+    "Pausiert das Spiel: Bewegungen und Timer halten an.",
+    "das Pausenmenü öffnen."
+  ],
+  "reprendre_jeu": [
+    "Setzt das Spiel nach einer Pause fort.",
+    "die Taste « Weiter » im Pausenmenü."
+  ],
+  "deplacer": [
+    "Setzt das Objekt direkt an die Position X, Y (Teleport).",
+    "den Spieler zum Start zurücksetzen."
+  ],
+  "pousser": [
+    "Bewegt das Objekt um die angegebene Strecke von seiner aktuellen Position aus. Ein Physikobjekt wird von Wänden gestoppt.",
+    "verbunden mit [[NoeudEventMaintenuObjet]]: [[lang:pousser.x]] = 5 bewegt nach rechts."
+  ],
+  "modifier_propriete": [
+    "Ändert eine Eigenschaft des Objekts aus einer Liste (x, y, Drehung, Deckkraft, Text…).",
+    "die Drehung eines Uhrzeigers auf =temps * 90 setzen."
+  ],
+  "rotation": [
+    "Dreht das Objekt auf den angegebenen Winkel in Grad.",
+    "=rad.rotation + 5 verbunden mit [[NoeudEventChaqueImage]] dreht das Objekt « rad » ständig."
+  ],
+  "opacite": [
+    "Stellt die Transparenz des Objekts ein: 0 = unsichtbar, 1 = deckend.",
+    "0.5 für einen halb durchsichtigen Geist."
+  ],
+  "visibilite": [
+    "Zeigt (true) oder versteckt (false) das Objekt.",
+    "eine anfangs versteckte Nachricht « Gewonnen! » anzeigen."
+  ],
+  "definir_tag": [
+    "Gibt dem Objekt einen neuen Tag (Etikett).",
+    "ein besiegter Gegner bekommt den Tag « harmlos »."
+  ],
+  "changer_zorder": [
+    "Ändert die Ebene des Objekts: je größer die Zahl, desto weiter vorn liegt das Objekt.",
+    "den Spieler vor eine Dekoration setzen."
+  ],
+  "modifier_taille": [
+    "Ändert die Größe des Objekts: 1 = normal, 2 = doppelt so groß, 0.5 = halb so groß.",
+    "der Spieler wächst, nachdem er einen Pilz gegessen hat."
+  ],
+  "detruire_objet": [
+    "Entfernt das gewählte Objekt aus der Szene.",
+    "[[lang:noeud_objet_implique]] wählen, um die gerade berührte Münze zu zerstören."
+  ],
+  "detruire_par_tag": [
+    "Entfernt alle Objekte mit diesem Tag.",
+    "eine Bombe zerstört alle Objekte « Gegner »."
+  ],
+  "changer_image": [
+    "Ersetzt das Bild des Objekts durch ein anderes Bild aus den Assets. Leer = kein Bild.",
+    "die Figur schaut je nach Taste nach links oder rechts."
+  ],
+  "modifier_couleur": [
+    "Ändert die Farbe des Objekts.",
+    "eine Taste wird grün, wenn die Antwort richtig ist."
+  ],
+  "generer_clone": [
+    "Erstellt eine Kopie von Objekt B (der Vorlage) an der Stelle von Objekt A (dem Erscheinungspunkt).",
+    "eine Kanone (A), die Kugeln (B) erscheinen lässt."
+  ],
+  "filtre_couleur": [
+    "Legt einen Filter auf das Objekt: Schwarzweiß, Sepia, Invertieren oder Keiner zum Entfernen.",
+    "während einer Erinnerung auf Schwarzweiß schalten."
+  ],
+  "mode_affichage": [
+    "Ändert, wie sich das Objekt mit dem Hintergrund mischt (Additiv, Multiplizieren, Bildschirm, Invertieren).",
+    "Additiv für ein leuchtendes Licht oder eine Flamme."
+  ],
+  "miroir": [
+    "Spiegelt das Objekt: Horizontal (links / rechts) oder Vertikal (oben / unten).",
+    "die Figur schaut in Laufrichtung."
+  ],
+  "modifier_verrouillage": [
+    "Sperrt oder entsperrt das Objekt im Editor (das Schloss). Im Spiel hat das keine Wirkung: Um das Ziehen eines Objekts zu verhindern, nutze [[modifier_deplacable]].",
+    null
+  ],
+  "parallaxe": [
+    "Legt fest, wie schnell das Objekt mitscrollt, wenn sich die Kamera bewegt: 1 = normal, 0.5 = halb so schnell (Tiefeneffekt).",
+    "Berge im Hintergrund, die langsam vorbeiziehen."
+  ],
+  "lier_objets": [
+    "Hängt Objekt A (das Kind) an Objekt B (die Eltern): A folgt B, wenn es sich bewegt.",
+    "ein Schwert, das der Hand der Figur folgt."
+  ],
+  "surbrillance": [
+    "Schaltet einen farbigen Schein um das Objekt ein oder aus.",
+    "zeigen, welches Objekt man aufheben kann."
+  ],
+  "clignotement": [
+    "Lässt das Objekt mit der gewählten Geschwindigkeit (ms) blinken, für eine Dauer (ms, 0 = endlos), oder stoppt das Blinken.",
+    "der Spieler blinkt 1 Sekunde, nachdem er getroffen wurde."
+  ],
+  "generer_clone_position": [
+    "Erstellt eine Kopie von Objekt B (der Vorlage) an der Position X, Y. Die Kopie wird zum [[lang:noeud_objet_implique]].",
+    "einen Stein an zufälliger Stelle fallen lassen: X = random(0, 800)."
+  ],
+  "tirer": [
+    "Erstellt ein Geschoss (das Objekt aus [[lang:tirer.modele]]) bei Objekt A und schießt es mit der gewählten Geschwindigkeit ab: 0°, 90°, 180°, 270°, zu Objekt B ([[lang:option.Vers la cible]]) oder im Winkel von A.",
+    "ein Raumschiff, das Laser nach oben schießt (270)."
+  ],
+  "modifier_progression": [
+    "Stellt die Füllung eines Fortschrittsbalkens zwischen Minimum und Maximum ein.",
+    "[[lang:modifier_progression.valeur]] = vie, für eine Lebensleiste."
+  ],
+  "traverser_ecran": [
+    "Was eine Bildschirmseite verlässt, erscheint auf der gegenüberliegenden Seite wieder (Pac-Man-Effekt).",
+    "ein Asteroid, der rechts verschwindet und links wiederkommt."
+  ],
+  "garder_dans_ecran": [
+    "Verhindert, dass das Objekt den Bildschirm verlässt. Der Rand hält es kurz vor der Kante an.",
+    "das Raumschiff des Spielers bleibt immer sichtbar."
+  ],
+  "creer_objet": [
+    "Erstellt eine Kopie des gewählten Objekts (der Vorlage) an der Position X, Y.",
+    "eine Kiste an eine genaue Stelle setzen."
+  ],
+  "fondu": [
+    "Ändert die Deckkraft des Objekts sanft bis zum Zielwert, in der gewählten Zeit (Sekunden). Das Folgende läuft ohne zu warten weiter.",
+    "einen Titel in 1 Sekunde ausblenden (Ziel-Deckkraft 0)."
+  ],
+  "modifier_variable": [
+    "Gibt der Variable einen neuen Wert (eine Zahl, einen Text, true / false oder eine Rechnung).",
+    "« score » wieder auf 0 setzen."
+  ],
+  "ajouter_variable": [
+    "Addiert den Wert zur Variable (eine negative Zahl zieht ab). Bei einer Textvariable wird der Text hinten angehängt.",
+    "score + 1 pro Münze, Leben - 1 pro Treffer."
+  ],
+  "limiter_valeur": [
+    "Hält die Variable (eine Zahl) zwischen einem Minimum und einem Maximum.",
+    "das Leben geht nie über 100."
+  ],
+  "nombre_aleatoire": [
+    "Legt eine Zufallszahl in die Variable. random(1, 6) ergibt eine Zahl von 1 bis 6.",
+    "ein Würfelwurf."
+  ],
+  "ajouter_inventaire": [
+    "Legt das Objekt ins Inventar (eine Variable vom Typ Inventarliste). Es wird nur einmal hinzugefügt.",
+    "einen Schlüssel aufheben."
+  ],
+  "retirer_inventaire": [
+    "Nimmt das Objekt aus dem Inventar.",
+    "den Schlüssel benutzen, um die Tür zu öffnen."
+  ],
+  "si_dans_inventaire": [
+    "Folgt dem Ausgang [[lang:port_vrai]], wenn das Objekt im Inventar ist, sonst [[lang:port_faux]].",
+    "die Tür öffnet sich nur, wenn der Schlüssel im Inventar ist."
+  ],
+  "combinaison": [
+    "Ersetzt die Objekte A und B durch eine Kopie des Objekts, dessen Namen du schreibst, an der Stelle von A. Gibt es diese Vorlage nicht, ändert sich nichts.",
+    "Stock + Tuch = Fackel."
+  ],
+  "condition": [
+    "Prüft eine Bedingung: folgt [[lang:port_vrai]], wenn sie stimmt, sonst [[lang:port_faux]]. [[lang:port_ensuite]] läuft danach, in beiden Fällen.",
+    "score >= 10 → wahr → nächste Szene."
+  ],
+  "si_joystick": [
+    "Folgt dem Ausgang zur Richtung des Joysticks: [[lang:port_haut]], [[lang:port_bas]], [[lang:port_gauche]], [[lang:port_droite]] oder [[lang:port_repos]], wenn er nicht berührt wird.",
+    "verbunden mit [[NoeudEventChaqueImage]], um die Laufanimation in die richtige Richtung abzuspielen."
+  ],
+  "si_au_sol": [
+    "[[lang:port_vrai]], wenn die Unterseite des Objekts auf einem festen, sichtbaren Objekt steht (Boden, Plattform), sonst [[lang:port_faux]].",
+    "Springen nur erlauben, wenn der Spieler am Boden ist."
+  ],
+  "si_en_mouvement": [
+    "[[lang:port_vrai]], wenn sich das Objekt seit dem letzten Bild bewegt hat, sonst [[lang:port_faux]].",
+    "die Laufanimation nur abspielen, wenn sich die Figur bewegt."
+  ],
+  "appeler_fonction": [
+    "Führt eine Funktion aus (einen Blueprint aus dem Bereich Funktionen) und macht dann weiter. Nicht unter [[NoeudEventChaqueImage]] setzen.",
+    "eine Funktion « LebenVerlieren », die von mehreren Gegnern genutzt wird."
+  ],
+  "appeler_evenement": [
+    "Startet das [[NoeudEventPersonnalise]] mit diesem Namen im selben Blueprint und macht dann weiter.",
+    "« GameOver » vom Sturz und vom Timer aus aufrufen."
+  ],
+  "sequence": [
+    "Startet seine Ausgänge nacheinander: 1, dann 2, dann 3, dann 4. Ein Ausgang ohne Verbindung wird übersprungen.",
+    "beim Start: 1 = Spieler platzieren, 2 = Musik starten, 3 = Punktestand anzeigen."
+  ],
+  "cooldown": [
+    "Lässt höchstens einmal pro Wartezeit (in Sekunden) über [[lang:port_pret]] durch; sonst geht es über [[lang:port_attente]]. Mit gewähltem Objekt hat jedes Objekt seine eigene Wartezeit.",
+    "höchstens einmal alle 0.5 Sekunden schießen."
+  ],
+  "si_hors_ecran": [
+    "[[lang:port_vrai]], wenn das Objekt ganz außerhalb des Bildschirms ist (plus Rand), sonst [[lang:port_faux]].",
+    "Kugeln zerstören, die den Bildschirm verlassen."
+  ],
+  "si_sinon": [
+    "Prüft die erste Bedingung, dann die zweite: folgt [[lang:port_si]], [[lang:port_sinon_si]] oder [[lang:port_sinon]]. [[lang:port_ensuite]] läuft danach.",
+    "wenn score >= 100 → Gold, sonst wenn score >= 50 → Silber, sonst → Bronze."
+  ],
+  "selon_valeur": [
+    "Vergleicht den Wert mit den Fällen 1 bis 6 und folgt dem Ausgang des ersten gleichen Falls; [[lang:port_aucun]], wenn nichts passt. Ein leerer Fall wird übersprungen.",
+    "je nach « waffe »: 1 = Schwert, 2 = Bogen, 3 = Zauberstab."
+  ],
+  "modifier_texte": [
+    "Ersetzt den Text eines Textobjekts. Beginne mit =, um eine Rechnung anzuzeigen.",
+    "=\"Punkte: \" + score"
+  ],
+  "afficher_dialogue": [
+    "Schreibt den Satz zum Schlüssel aus der Dialogdatei (dialogues.txt) in das Textobjekt.",
+    "der Schlüssel « hallo_haendler » zeigt den Satz des Händlers."
+  ],
+  "ajouter_au_texte": [
+    "Hängt Text an das Ende einer Variable vom Typ Text an.",
+    "ein Passwort Buchstabe für Buchstabe eingeben."
+  ],
+  "arreter": [
+    "Stoppt das Objekt sofort: keine Geschwindigkeit, kein Schub, kein Sprung und keine automatische Bewegung mehr.",
+    "einen Gegner einfrieren, den ein Eiszauber trifft."
+  ],
+  "stopper_mouvements": [
+    "Schaltet die automatischen Bewegungen des Objekts ab: ständig vorwärts, verfolgen und fliehen.",
+    "der Gegner hört auf zu verfolgen, wenn sich der Spieler versteckt."
+  ],
+  "avancer_continu": [
+    "Das Objekt bewegt sich von selbst in Blickrichtung, mit der gewählten Geschwindigkeit.",
+    "eine Kugel oder ein fahrendes Auto."
+  ],
+  "poursuivre": [
+    "Objekt A bewegt sich von selbst auf Objekt B zu, mit der gewählten Geschwindigkeit.",
+    "ein Geist, der dem Spieler folgt."
+  ],
+  "fuir": [
+    "Objekt A entfernt sich von selbst von Objekt B, mit der gewählten Geschwindigkeit.",
+    "ein Huhn, das vor dem Spieler wegläuft."
+  ],
+  "changer_rebond": [
+    "Stellt ein, wie stark ein Physikobjekt abprallt: 0 = gar nicht, 1 = stark.",
+    "0.8 für einen Flummi."
+  ],
+  "force_angle": [
+    "Schiebt das Objekt in eine Richtung (in Grad: 0 = rechts, 90 = unten, 180 = links, 270 = oben) mit der gewählten Kraft.",
+    "eine Feder, die den Spieler schräg wegschleudert."
+  ],
+  "impulsion": [
+    "Schleudert das Objekt nach oben (negative Zahl) oder nach unten (positiv) und gibt ihm Physik, damit es wieder fällt.",
+    "ein Sprung: Kraft -15."
+  ],
+  "activer_physique": [
+    "Gibt dem Objekt Physik: bei true fällt es mit der Schwerkraft; bei false bleibt es fest wie ein Boden.",
+    "eine Plattform, die einstürzt, wenn man darauf tritt."
+  ],
+  "modifier_deplacable": [
+    "Erlaubt (true) oder verbietet (false), das Objekt im Spiel mit dem Finger zu ziehen.",
+    "ein richtig gelegtes Puzzleteil festhalten."
+  ],
+  "sautiller": [
+    "Lässt das Objekt hüpfen (kleiner optischer Sprung) mit der gewählten Intensität und Dauer. 0 stoppt es. Es kann weitermachen, solange sich das Objekt bewegt.",
+    "eine Figur, die beim Laufen hüpft."
+  ],
+  "orienter_vers": [
+    "Dreht Objekt A zu Objekt B. Der Versatz korrigiert die Richtung des Bildes (0 = das Bild schaut nach rechts).",
+    "ein Geschützturm, der auf den Spieler zielt."
+  ],
+  "glisser_vers": [
+    "Bewegt das Objekt sanft zur Position X, Y in der gewählten Zeit (Sekunden). Das Folgende läuft ohne zu warten weiter.",
+    "eine bewegliche Plattform oder ein Menü, das ins Bild gleitet."
+  ],
+  "jouer_animation": [
+    "Spielt eine Animation des Objekts mit der gewählten Geschwindigkeit (Bilder pro Sekunde), in Schleife oder einmal. Läuft sie schon, geht sie weiter, ohne neu zu starten.",
+    "die Animation « laufen », wenn sich die Figur bewegt."
+  ],
+  "arreter_animation": [
+    "Stoppt die Animation und geht zu ihrem ersten Bild zurück.",
+    "die Figur hört auf zu laufen."
+  ],
+  "pause_animation": [
+    "Pausiert die Animation beim aktuellen Bild.",
+    "die Figur während der Pause einfrieren."
+  ],
+  "reprendre_animation": [
+    "Setzt die Animation dort fort, wo sie pausiert wurde.",
+    "nach der Pause."
+  ],
+  "vitesse_animation": [
+    "Ändert die Geschwindigkeit der Animation (Bilder pro Sekunde), ohne sie neu zu starten.",
+    "schneller rennen = schnellere Animation."
+  ],
+  "jouer_son": [
+    "Spielt einen Soundeffekt. Mehrere Sounds können gleichzeitig laufen.",
+    "ein « Pling », wenn man eine Münze aufhebt."
+  ],
+  "jouer_musique": [
+    "Startet eine Musik, die die aktuelle ersetzt. Nicht unter [[NoeudEventChaqueImage]] setzen (sie würde ständig neu beginnen).",
+    "die Level-Musik beim Start."
+  ],
+  "arreter_musique": [
+    "Stoppt die aktuelle Musik.",
+    "Stille auf dem Game-Over-Bildschirm."
+  ]
+}

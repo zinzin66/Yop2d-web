@@ -1,0 +1,178 @@
+{
+  "categorie": "Aussehen & Objekte",
+  "noeuds": [
+    {
+      "nom": "Objekt bewegen",
+      "schema": "<b>Eingänge:</b> Objekt, X, Y",
+      "role": "Setzt das Objekt direkt an die Position X, Y (Teleport).",
+      "exemple": "den Spieler zum Start zurücksetzen."
+    },
+    {
+      "nom": "Objekt schieben",
+      "schema": "<b>Eingänge:</b> Objekt, X hinzufügen, Y hinzufügen",
+      "role": "Bewegt das Objekt um die angegebene Strecke von seiner aktuellen Position aus. Ein Physikobjekt wird von Wänden gestoppt.",
+      "exemple": "verbunden mit „Objekt gehalten“: „X hinzufügen“ = 5 bewegt nach rechts."
+    },
+    {
+      "nom": "Eigenschaft ändern",
+      "schema": "<b>Eingänge:</b> Objekt, Eigenschaft, Wert",
+      "role": "Ändert eine Eigenschaft des Objekts aus einer Liste (x, y, Drehung, Deckkraft, Text…).",
+      "exemple": "die Drehung eines Uhrzeigers auf =temps * 90 setzen."
+    },
+    {
+      "nom": "Rotation",
+      "schema": "<b>Eingänge:</b> Objekt, Winkel (Grad)",
+      "role": "Dreht das Objekt auf den angegebenen Winkel in Grad.",
+      "exemple": "=rad.rotation + 5 verbunden mit „Jeden Frame“ dreht das Objekt „rad“ ständig."
+    },
+    {
+      "nom": "Deckkraft ändern (Alpha)",
+      "schema": "<b>Eingänge:</b> Objekt, Deckkraft (0 bis 1)",
+      "role": "Stellt die Transparenz des Objekts ein: 0 = unsichtbar, 1 = deckend.",
+      "exemple": "0.5 für einen halb durchsichtigen Geist."
+    },
+    {
+      "nom": "Sichtbarkeit",
+      "schema": "<b>Eingänge:</b> Objekt, Sichtbar (true / false)",
+      "role": "Zeigt (true) oder versteckt (false) das Objekt.",
+      "exemple": "eine anfangs versteckte Nachricht „Gewonnen!“ anzeigen."
+    },
+    {
+      "nom": "Tag setzen",
+      "schema": "<b>Eingänge:</b> Objekt, Tag",
+      "role": "Gibt dem Objekt einen neuen Tag (Etikett).",
+      "exemple": "ein besiegter Gegner bekommt den Tag „harmlos“."
+    },
+    {
+      "nom": "Z-Order ändern",
+      "schema": "<b>Eingänge:</b> Objekt, Z",
+      "role": "Ändert die Ebene des Objekts: je größer die Zahl, desto weiter vorn liegt das Objekt.",
+      "exemple": "den Spieler vor eine Dekoration setzen."
+    },
+    {
+      "nom": "Größe festlegen (Scale)",
+      "schema": "<b>Eingänge:</b> Objekt, Scale X, Scale Y",
+      "role": "Ändert die Größe des Objekts: 1 = normal, 2 = doppelt so groß, 0.5 = halb so groß.",
+      "exemple": "der Spieler wächst, nachdem er einen Pilz gegessen hat."
+    },
+    {
+      "nom": "Objekt zerstören",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Entfernt das gewählte Objekt aus der Szene.",
+      "exemple": "„Impliziertes Objekt“ wählen, um die gerade berührte Münze zu zerstören."
+    },
+    {
+      "nom": "Zerstören nach Tag",
+      "schema": "<b>Eingang:</b> Zu zerstörender Tag",
+      "role": "Entfernt alle Objekte mit diesem Tag.",
+      "exemple": "eine Bombe zerstört alle Objekte „Gegner“."
+    },
+    {
+      "nom": "Bild ändern",
+      "schema": "<b>Eingänge:</b> Objekt, Bild",
+      "role": "Ersetzt das Bild des Objekts durch ein anderes Bild aus den Assets. Leer = kein Bild.",
+      "exemple": "die Figur schaut je nach Taste nach links oder rechts."
+    },
+    {
+      "nom": "Farbe ändern",
+      "schema": "<b>Eingänge:</b> Objekt, Farbe",
+      "role": "Ändert die Farbe des Objekts.",
+      "exemple": "eine Taste wird grün, wenn die Antwort richtig ist."
+    },
+    {
+      "nom": "Klon erzeugen (Spawner)",
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B",
+      "role": "Erstellt eine Kopie von Objekt B (der Vorlage) an der Stelle von Objekt A (dem Erscheinungspunkt).",
+      "exemple": "eine Kanone (A), die Kugeln (B) erscheinen lässt."
+    },
+    {
+      "nom": "Farbfilter",
+      "schema": "<b>Eingänge:</b> Objekt, Filter",
+      "role": "Legt einen Filter auf das Objekt: Schwarzweiß, Sepia, Invertieren oder Keiner zum Entfernen.",
+      "exemple": "während einer Erinnerung auf Schwarzweiß schalten."
+    },
+    {
+      "nom": "Mischmodus (Effekt)",
+      "schema": "<b>Eingänge:</b> Objekt, Filter",
+      "role": "Ändert, wie sich das Objekt mit dem Hintergrund mischt (Additiv, Multiplizieren, Bildschirm, Invertieren).",
+      "exemple": "Additiv für ein leuchtendes Licht oder eine Flamme."
+    },
+    {
+      "nom": "Spiegeleffekt / Umkehren",
+      "schema": "<b>Eingänge:</b> Objekt, Achse",
+      "role": "Spiegelt das Objekt: Horizontal (links / rechts) oder Vertikal (oben / unten).",
+      "exemple": "die Figur schaut in Laufrichtung."
+    },
+    {
+      "nom": "Sperre ändern",
+      "schema": "<b>Eingänge:</b> Objekt, Gesperrt (true / false)",
+      "role": "Sperrt oder entsperrt das Objekt im Editor (das Schloss). Im Spiel hat das keine Wirkung: Um das Ziehen eines Objekts zu verhindern, nutze „Verschiebbar machen“."
+    },
+    {
+      "nom": "Parallaxen-Faktor",
+      "schema": "<b>Eingänge:</b> Objekt, Faktor (z. B. 0.5)",
+      "role": "Legt fest, wie schnell das Objekt mitscrollt, wenn sich die Kamera bewegt: 1 = normal, 0.5 = halb so schnell (Tiefeneffekt).",
+      "exemple": "Berge im Hintergrund, die langsam vorbeiziehen."
+    },
+    {
+      "nom": "Zwei Objekte verknüpfen",
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B",
+      "role": "Hängt Objekt A (das Kind) an Objekt B (die Eltern): A folgt B, wenn es sich bewegt.",
+      "exemple": "ein Schwert, das der Hand der Figur folgt."
+    },
+    {
+      "nom": "Leuchten (Glow)",
+      "schema": "<b>Eingänge:</b> Objekt, Zustand, Farbe",
+      "role": "Schaltet einen farbigen Schein um das Objekt ein oder aus.",
+      "exemple": "zeigen, welches Objekt man aufheben kann."
+    },
+    {
+      "nom": "Blinken (Blink)",
+      "schema": "<b>Eingänge:</b> Objekt, Zustand, Geschwindigkeit (ms), Dauer (ms, 0 = unendlich)",
+      "role": "Lässt das Objekt mit der gewählten Geschwindigkeit (ms) blinken, für eine Dauer (ms, 0 = endlos), oder stoppt das Blinken.",
+      "exemple": "der Spieler blinkt 1 Sekunde, nachdem er getroffen wurde."
+    },
+    {
+      "nom": "Klon erzeugen (X/Y-Position)",
+      "schema": "<b>Eingänge:</b> Objekt B, X, Y",
+      "role": "Erstellt eine Kopie von Objekt B (der Vorlage) an der Position X, Y. Die Kopie wird zum „Impliziertes Objekt“.",
+      "exemple": "einen Stein an zufälliger Stelle fallen lassen: X = random(0, 800)."
+    },
+    {
+      "nom": "Ein Objekt abfeuern",
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit",
+      "role": "Erstellt ein Geschoss (das Objekt aus „Modellname“) bei Objekt A und schießt es mit der gewählten Geschwindigkeit ab: 0°, 90°, 180°, 270°, zu Objekt B („Zum Ziel“) oder im Winkel von A.",
+      "exemple": "ein Raumschiff, das Laser nach oben schießt (270)."
+    },
+    {
+      "nom": "Fortschritt festlegen",
+      "schema": "<b>Eingänge:</b> Objekt, Neuer Fortschritt",
+      "role": "Stellt die Füllung eines Fortschrittsbalkens zwischen Minimum und Maximum ein.",
+      "exemple": "„Neuer Fortschritt“ = vie, für eine Lebensleiste."
+    },
+    {
+      "nom": "Bildschirm durchqueren",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Was eine Bildschirmseite verlässt, erscheint auf der gegenüberliegenden Seite wieder (Pac-Man-Effekt).",
+      "exemple": "ein Asteroid, der rechts verschwindet und links wiederkommt."
+    },
+    {
+      "nom": "Im Bildschirm behalten",
+      "schema": "<b>Eingänge:</b> Objekt, Rand",
+      "role": "Verhindert, dass das Objekt den Bildschirm verlässt. Der Rand hält es kurz vor der Kante an.",
+      "exemple": "das Raumschiff des Spielers bleibt immer sichtbar."
+    },
+    {
+      "nom": "Objekt erstellen",
+      "schema": "<b>Eingänge:</b> Objekt, X-Position, Y-Position",
+      "role": "Erstellt eine Kopie des gewählten Objekts (der Vorlage) an der Position X, Y.",
+      "exemple": "eine Kiste an eine genaue Stelle setzen."
+    },
+    {
+      "nom": "Überblendung",
+      "schema": "<b>Eingänge:</b> Objekt, Zielopazität (0 bis 1), Dauer (Sekunden)",
+      "role": "Ändert die Deckkraft des Objekts sanft bis zum Zielwert, in der gewählten Zeit (Sekunden). Das Folgende läuft ohne zu warten weiter.",
+      "exemple": "einen Titel in 1 Sekunde ausblenden (Ziel-Deckkraft 0)."
+    }
+  ]
+}

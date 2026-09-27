@@ -3,81 +3,106 @@
   "noeuds": [
     {
       "nom": "Ao Iniciar",
-      "schema": "<b>Saída:</b> Executar",
-      "role": "É executado automaticamente e uma única vez assim que a cena é carregada na tela.",
-      "exemple": "colocar os inimigos na posição inicial, ou definir a vida do jogador em 100."
+      "role": "Roda uma única vez, assim que a cena começa.",
+      "exemple": "posicionar os inimigos, mostrar a pontuação inicial ou tocar a música."
     },
     {
-      "nom": "A Cada Quadro",
-      "schema": "<b>Saída:</b> Executar (em loop)",
-      "role": "É executado continuamente, a cada atualização da tela.",
-      "exemple": "fazer um objeto girar sem parar, ou atualizar uma pontuação."
+      "nom": "A cada frame",
+      "role": "Roda sem parar, a cada quadro do jogo (cerca de 60 vezes por segundo).",
+      "exemple": "seguir o dedo ou verificar uma condição o tempo todo. Evite colocar “Tocar música” ou “Chamar função” embaixo dele."
+    },
+    {
+      "nom": "Fim de Clique",
+      "role": "Roda quando o jogador tira o dedo da tela, em qualquer lugar.",
+      "exemple": "parar de atirar ao soltar a tela."
     },
     {
       "nom": "Ao Clicar no Objeto",
-      "schema": "<b>Entrada:</b> Alvo &nbsp;→&nbsp; <b>Saída:</b> Executar",
-      "role": "É acionado quando o dedo do jogador toca o objeto indicado.",
-      "exemple": "abrir um baú, apertar um botão ou iniciar um diálogo."
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Roda quando o dedo toca o objeto escolhido.",
+      "exemple": "um botão “Pular”, abrir um baú, escolher uma resposta."
     },
     {
-      "nom": "Fim do Clique",
-      "schema": "<b>Saída:</b> Executar",
-      "role": "É acionado quando o jogador tira o dedo da tela, em qualquer lugar.",
-      "exemple": "parar de atirar quando o dedo é levantado."
+      "nom": "Fim do Clique no Objeto",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Roda quando o dedo é levantado em cima do objeto escolhido.",
+      "exemple": "confirmar um botão só quando ele é solto."
     },
     {
-      "nom": "Início / Fim de Arrastar",
-      "schema": "<b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saída:</b> Executar",
-      "role": "São acionados quando o jogador começa a arrastar um objeto arrastável e quando o solta.",
-      "exemple": "soltar uma chave sobre uma porta para abri-la."
+      "nom": "Objeto Mantido Pressionado",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Repete a cada quadro enquanto o dedo continuar sobre o objeto escolhido.",
+      "exemple": "botões esquerda / direita: enquanto você aperta, o personagem anda."
+    },
+    {
+      "nom": "Dedo pressionado",
+      "role": "Repete a cada quadro enquanto houver um dedo na tela, em qualquer lugar.",
+      "exemple": "fazer uma nave subir enquanto se aperta (use doigt.x e doigt.y nas fórmulas)."
+    },
+    {
+      "nom": "Início de Arrastar",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Roda quando o jogador começa a arrastar o objeto escolhido (ele precisa ser “Movível (arrastável ao Jogar)”).",
+      "exemple": "aumentar uma carta quando ela é pega."
+    },
+    {
+      "nom": "Fim de Arrastar",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Roda quando o jogador solta o objeto que estava arrastando.",
+      "exemple": "verificar se uma peça do quebra-cabeça está no lugar certo."
     },
     {
       "nom": "Colisão A/B",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B &nbsp;→&nbsp; <b>Saída:</b> Executar",
-      "role": "É acionado no momento exato em que o objeto A toca fisicamente o objeto B.",
-      "exemple": "quando \"Jogador\" toca \"Moeda\" → tocar um som e destruir a moeda."
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B",
+      "role": "Roda uma vez, quando o objeto A começa a tocar o objeto B. Eles precisam se separar para rodar de novo. Também é o evento usado para “entrar numa zona”.",
+      "exemple": "o jogador toca a zona de chegada → próxima fase."
     },
     {
-      "nom": "Se o objeto tocar Tag",
-      "schema": "<b>Entradas:</b> Objeto, Texto Tag &nbsp;→&nbsp; <b>Saída:</b> Executar",
-      "role": "É acionado quando o objeto indicado colide com qualquer objeto que tenha a etiqueta (Tag) indicada.",
-      "exemple": "quando \"Míssil\" toca um objeto com o tag \"Inimigo\" → explosão."
+      "nom": "Saída de zona",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B",
+      "role": "Roda uma vez, quando o objeto A deixa de tocar o objeto B (sai da zona).",
+      "exemple": "fechar uma porta quando o jogador se afasta."
     },
     {
-      "nom": "Entrada / Saída de zona",
-      "schema": "<b>Entradas:</b> Objeto A, Zona B &nbsp;→&nbsp; <b>Saída:</b> Executar",
-      "role": "É ativado quando um objeto entra ou sai de uma zona definida (ideal para gatilhos invisíveis).",
-      "exemple": "o jogador entra na zona \"Armadilha\" → espinhos saem do chão."
+      "nom": "Ao Passar o Mouse",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Roda quando o dedo, deslizando pela tela, chega ao objeto escolhido.",
+      "exemple": "acender um botão quando o dedo passa por cima."
     },
     {
-      "nom": "Ao Passar o mouse / Fim",
-      "schema": "<b>Entrada:</b> Alvo &nbsp;→&nbsp; <b>Saída:</b> Executar",
-      "role": "Gerencia a passagem do dedo ou de um ponteiro por cima de um objeto, sem precisar tocar.",
-      "exemple": "destacar um botão quando se passa por cima dele."
+      "nom": "Fim de Passar o Mouse",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Roda quando o dedo sai do objeto por onde passava.",
+      "exemple": "apagar o destaque de um botão."
     },
     {
       "nom": "Ao Impacto (Física)",
-      "schema": "<b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saída:</b> Executar",
-      "role": "Detecta quando o objeto quica ou bate em algo sólido com a gravidade ativada.",
-      "exemple": "fazer um som de pedra quando a rocha cai no chão."
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Roda quando o objeto escolhido (física dinâmica) cai num chão ou quica.",
+      "exemple": "tocar um som de aterrissagem ou tremer a câmera."
     },
     {
       "nom": "Quando Variável Muda",
-      "schema": "<b>Entrada:</b> Variável &nbsp;→&nbsp; <b>Saída:</b> Executar",
-      "role": "Vigia uma variável o tempo todo. Assim que o valor dela muda, este nó executa a continuação.",
-      "exemple": "se a vida mudar, atualizar a barra de vida."
+      "schema": "<b>Entrada:</b> Variável",
+      "role": "Roda sempre que o valor da variável escolhida muda.",
+      "exemple": "quando “vie” (vida) muda, atualizar a barra de vida."
     },
     {
       "nom": "Evento Local",
-      "schema": "<b>Entrada:</b> Nome do Evento &nbsp;→&nbsp; <b>Saída:</b> Executar",
-      "role": "Um evento personalizado que você pode acionar à distância com o nó \"Chamar Evento Local\".",
-      "exemple": "agrupar a lógica de \"Game Over\" para chamá-la de vários lugares."
+      "schema": "<b>Entrada:</b> Nome do evento",
+      "role": "Um evento seu, com o nome que você escolher. Ele é iniciado pelo nó “Chamar evento” no mesmo Blueprint.",
+      "exemple": "um evento “GameOver” chamado de vários lugares."
     },
     {
-      "nom": "Ao Clique Ação (Aventura)",
-      "schema": "<b>Saída:</b> Executar",
-      "role": "É acionado especificamente quando o botão virtual \"AÇÃO\" da interface é pressionado.",
-      "exemple": "falar com um NPC ou ler uma placa à sua frente."
+      "nom": "Ao Clicar Ação (Aventura)",
+      "role": "Roda quando o jogador aperta o objeto “BtnAcao” (botão de ação) da cena.",
+      "exemple": "falar com um personagem ou abrir uma porta num jogo de aventura."
+    },
+    {
+      "nom": "Se o objeto tocar no Tag",
+      "schema": "<b>Entradas:</b> Objeto, Tag",
+      "role": "Roda uma vez por contato quando o objeto escolhido toca um objeto com esta tag. O objeto tocado vira o “Objeto Implicado”.",
+      "exemple": "o jogador toca uma moeda (tag “piece”) → destruir o objeto envolvido e somar 1 à pontuação."
     }
   ]
 }

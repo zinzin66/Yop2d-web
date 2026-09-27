@@ -3,81 +3,106 @@
   "noeuds": [
     {
       "nom": "Beim Start",
-      "schema": "<b>Ausgang:</b> Ausführen",
-      "role": "Wird automatisch und nur einmal ausgeführt, sobald die Szene auf dem Bildschirm geladen ist.",
-      "exemple": "Gegner auf ihre Startposition setzen oder das Leben des Spielers auf 100 setzen."
+      "role": "Läuft nur einmal, sobald die Szene startet.",
+      "exemple": "Gegner platzieren, den Startpunktestand anzeigen oder die Musik starten."
     },
     {
       "nom": "Jeden Frame",
-      "schema": "<b>Ausgang:</b> Ausführen (Schleife)",
-      "role": "Wird ständig ausgeführt, bei jeder Aktualisierung des Bildschirms.",
-      "exemple": "ein Objekt endlos um sich selbst drehen oder einen Punktestand aktualisieren."
+      "role": "Läuft ständig, bei jedem Bild des Spiels (etwa 60-mal pro Sekunde).",
+      "exemple": "dem Finger folgen oder dauernd eine Bedingung prüfen. Setze „Musik abspielen“ oder „Funktion aufrufen“ nicht darunter."
     },
     {
-      "nom": "Bei Klick auf Objekt",
-      "schema": "<b>Eingang:</b> Ziel &nbsp;→&nbsp; <b>Ausgang:</b> Ausführen",
-      "role": "Wird ausgelöst, wenn der Finger des Spielers das Zielobjekt berührt.",
-      "exemple": "eine Truhe öffnen, einen Knopf drücken oder einen Dialog starten."
+      "nom": "Ende des Klicks",
+      "role": "Läuft, wenn der Spieler den Finger irgendwo vom Bildschirm hebt.",
+      "exemple": "aufhören zu schießen, wenn der Bildschirm losgelassen wird."
     },
     {
-      "nom": "Klick-Ende",
-      "schema": "<b>Ausgang:</b> Ausführen",
-      "role": "Wird ausgelöst, wenn der Spieler den Finger irgendwo vom Bildschirm hebt.",
-      "exemple": "aufhören zu schießen, wenn der Finger gehoben wird."
+      "nom": "Bei Objektklick",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Läuft, wenn der Finger das gewählte Objekt berührt.",
+      "exemple": "eine Taste „Springen“, eine Truhe öffnen, eine Antwort wählen."
     },
     {
-      "nom": "Ziehen Start / Ende",
-      "schema": "<b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgang:</b> Ausführen",
-      "role": "Werden ausgelöst, wenn der Spieler beginnt, ein ziehbares Objekt zu ziehen, und wenn er es loslässt.",
-      "exemple": "einen Schlüssel auf einer Tür loslassen, um sie zu öffnen."
+      "nom": "Klick auf Objekt beendet",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Läuft, wenn der Finger über dem gewählten Objekt angehoben wird.",
+      "exemple": "eine Taste erst beim Loslassen bestätigen."
+    },
+    {
+      "nom": "Objekt gehalten",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Wiederholt sich bei jedem Bild, solange der Finger auf dem gewählten Objekt bleibt.",
+      "exemple": "Tasten links / rechts: solange man drückt, läuft die Figur."
+    },
+    {
+      "nom": "Finger gedrückt",
+      "role": "Wiederholt sich bei jedem Bild, solange ein Finger irgendwo auf dem Bildschirm liegt.",
+      "exemple": "ein Raumschiff steigen lassen, solange man drückt (nutze doigt.x und doigt.y in Formeln)."
+    },
+    {
+      "nom": "Drag Start",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Läuft, wenn der Spieler beginnt, das gewählte Objekt zu ziehen (es muss „Beweglich (mit Finger ziehbar)“ sein).",
+      "exemple": "eine Karte vergrößern, wenn man sie nimmt."
+    },
+    {
+      "nom": "Drag Ende",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Läuft, wenn der Spieler das gezogene Objekt loslässt.",
+      "exemple": "prüfen, ob ein Puzzleteil an der richtigen Stelle liegt."
     },
     {
       "nom": "Kollision A/B",
-      "schema": "<b>Eingänge:</b> Objekt A, Objekt B &nbsp;→&nbsp; <b>Ausgang:</b> Ausführen",
-      "role": "Wird genau in dem Moment ausgelöst, in dem Objekt A Objekt B physisch berührt.",
-      "exemple": "wenn \"Spieler\" \"Münze\" berührt → Ton abspielen und die Münze zerstören."
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B",
+      "role": "Läuft einmal, sobald Objekt A beginnt, Objekt B zu berühren. Sie müssen sich trennen, bevor es wieder läuft. Das ist auch das Ereignis für „eine Zone betreten“.",
+      "exemple": "der Spieler berührt die Zielzone → nächstes Level."
     },
     {
-      "nom": "Wenn Objekt Tag berührt",
-      "schema": "<b>Eingänge:</b> Objekt, Tag-Text &nbsp;→&nbsp; <b>Ausgang:</b> Ausführen",
-      "role": "Wird ausgelöst, wenn das Zielobjekt mit einem beliebigen Objekt kollidiert, das die angegebene Markierung (Tag) trägt.",
-      "exemple": "wenn \"Rakete\" ein Objekt mit dem Tag \"Gegner\" berührt → Explosion."
+      "nom": "Zone verlassen",
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B",
+      "role": "Läuft einmal, sobald Objekt A Objekt B nicht mehr berührt (es verlässt die Zone).",
+      "exemple": "eine Tür schließen, wenn der Spieler weggeht."
     },
     {
-      "nom": "Zone betreten / verlassen",
-      "schema": "<b>Eingänge:</b> Objekt A, Zone B &nbsp;→&nbsp; <b>Ausgang:</b> Ausführen",
-      "role": "Wird aktiv, wenn ein Objekt eine festgelegte Zone betritt oder verlässt (ideal für unsichtbare Auslöser).",
-      "exemple": "der Spieler betritt die Zone \"Falle\" → Stacheln kommen aus dem Boden."
+      "nom": "Beim Hovern",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Läuft, wenn der Finger beim Wischen über den Bildschirm das gewählte Objekt erreicht.",
+      "exemple": "eine Taste aufleuchten lassen, wenn der Finger darüberfährt."
     },
     {
-      "nom": "Beim Darüberfahren / Ende",
-      "schema": "<b>Eingang:</b> Ziel &nbsp;→&nbsp; <b>Ausgang:</b> Ausführen",
-      "role": "Reagiert, wenn ein Finger oder Zeiger über ein Objekt fährt, ohne dass geklickt werden muss.",
-      "exemple": "einen Knopf hervorheben, wenn man darüber fährt."
+      "nom": "Hover Ende",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Läuft, wenn der Finger das Objekt verlässt, über dem er war.",
+      "exemple": "die Hervorhebung einer Taste ausschalten."
     },
     {
       "nom": "Bei Aufprall (Physik)",
-      "schema": "<b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgang:</b> Ausführen",
-      "role": "Erkennt, wenn das Objekt bei aktivierter Schwerkraft abprallt oder gegen etwas Festes stößt.",
-      "exemple": "ein Steingeräusch abspielen, wenn der Stein auf den Boden fällt."
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Läuft, wenn das gewählte Objekt (dynamische Physik) auf einem Boden landet oder abprallt.",
+      "exemple": "ein Landegeräusch abspielen oder die Kamera wackeln lassen."
     },
     {
-      "nom": "Wenn Variable sich ändert",
-      "schema": "<b>Eingang:</b> Variable &nbsp;→&nbsp; <b>Ausgang:</b> Ausführen",
-      "role": "Überwacht ständig eine Variable. Sobald sich ihr Wert ändert, startet dieser Knoten die Fortsetzung.",
-      "exemple": "wenn sich das Leben ändert, die sichtbare Lebensleiste aktualisieren."
+      "nom": "Wenn Variable ändert",
+      "schema": "<b>Eingang:</b> Variable",
+      "role": "Läuft jedes Mal, wenn sich der Wert der gewählten Variable ändert.",
+      "exemple": "wenn sich „vie“ (Leben) ändert, die Lebensleiste aktualisieren."
     },
     {
       "nom": "Lokales Ereignis",
-      "schema": "<b>Eingang:</b> Ereignisname &nbsp;→&nbsp; <b>Ausgang:</b> Ausführen",
-      "role": "Ein eigenes Ereignis, das du mit dem Knoten \"Lokales Ereignis aufrufen\" aus der Ferne auslösen kannst.",
-      "exemple": "die \"Game Over\"-Logik bündeln, um sie von mehreren Stellen aus aufzurufen."
+      "schema": "<b>Eingang:</b> Name des Ereignisses",
+      "role": "Ein eigenes Ereignis mit einem Namen deiner Wahl. Es wird vom Knoten „Ereignis aufrufen“ im selben Blueprint gestartet.",
+      "exemple": "ein Ereignis „GameOver“, das von mehreren Stellen aufgerufen wird."
     },
     {
-      "nom": "Bei Aktionsklick (Abenteuer)",
-      "schema": "<b>Ausgang:</b> Ausführen",
-      "role": "Wird speziell ausgelöst, wenn die virtuelle Taste \"AKTION\" der Oberfläche gedrückt wird.",
-      "exemple": "mit einem NPC sprechen oder ein Schild vor dir lesen."
+      "nom": "Bei Klick auf Aktion (Adventure)",
+      "role": "Läuft, wenn der Spieler das Objekt „BtnAktion“ (Aktionstaste) der Szene drückt.",
+      "exemple": "mit einer Figur sprechen oder eine Tür in einem Abenteuerspiel öffnen."
+    },
+    {
+      "nom": "Wenn Objekt Tag berührt",
+      "schema": "<b>Eingänge:</b> Objekt, Tag",
+      "role": "Läuft einmal pro Berührung, wenn das gewählte Objekt ein Objekt mit diesem Tag berührt. Das berührte Objekt wird zum „Impliziertes Objekt“.",
+      "exemple": "der Spieler berührt eine Münze (Tag „piece“) → das beteiligte Objekt zerstören und 1 zum Punktestand addieren."
     }
   ]
 }

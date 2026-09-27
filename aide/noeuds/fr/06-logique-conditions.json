@@ -1,0 +1,71 @@
+{
+  "categorie": "Logique & Conditions",
+  "noeuds": [
+    {
+      "nom": "Condition",
+      "schema": "<b>Entrée :</b> Condition &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux / Ensuite",
+      "role": "Teste une condition : suit la sortie Vrai si elle est juste, Faux sinon. « Ensuite » se lance après, dans les deux cas.",
+      "exemple": "score >= 10 → Vrai → scène suivante."
+    },
+    {
+      "nom": "Si joystick",
+      "schema": "<b>Sorties :</b> Haut / Bas / Gauche / Droite / Repos / Ensuite",
+      "role": "Suit la sortie qui correspond à la direction du joystick : Haut, Bas, Gauche, Droite, ou Repos s'il n'est pas touché.",
+      "exemple": "relié à « À chaque image » pour jouer l'animation de marche dans la bonne direction."
+    },
+    {
+      "nom": "Si au sol",
+      "schema": "<b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux / Ensuite",
+      "role": "Vrai si le bas de l'objet est posé sur un objet fixe et visible (sol, plateforme), Faux sinon.",
+      "exemple": "n'autoriser le saut que si le joueur est au sol."
+    },
+    {
+      "nom": "Si en mouvement",
+      "schema": "<b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux / Ensuite",
+      "role": "Vrai si l'objet a bougé depuis l'image précédente, Faux sinon.",
+      "exemple": "jouer l'animation de marche seulement quand le personnage bouge."
+    },
+    {
+      "nom": "Appeler une fonction",
+      "schema": "<b>Entrée :</b> Fonction",
+      "role": "Lance une fonction (un Blueprint créé dans la section Fonctions), puis continue. À ne pas mettre sous « À chaque image ».",
+      "exemple": "une fonction « PerdreVie » utilisée par plusieurs ennemis."
+    },
+    {
+      "nom": "Appeler un événement",
+      "schema": "<b>Entrée :</b> Nom de l'événement",
+      "role": "Lance l'« Événement Local » qui porte ce nom, dans le même Blueprint, puis continue.",
+      "exemple": "appeler « GameOver » depuis la chute et depuis le chrono."
+    },
+    {
+      "nom": "Séquence",
+      "schema": "<b>Sorties :</b> 1 / 2 / 3 / 4",
+      "role": "Lance ses sorties l'une après l'autre : 1, puis 2, puis 3, puis 4. Une sortie sans lien est ignorée.",
+      "exemple": "au démarrage : 1 = placer le joueur, 2 = lancer la musique, 3 = afficher le score."
+    },
+    {
+      "nom": "Cooldown",
+      "schema": "<b>Entrées :</b> Objet, Délai (secondes) &nbsp;→&nbsp; <b>Sorties :</b> Prêt / Pas encore",
+      "role": "Laisse passer par « Prêt » au maximum une fois par délai (en secondes) ; sinon, c'est « Pas encore ». Avec un objet choisi, chaque objet a son propre délai.",
+      "exemple": "tirer au maximum une fois toutes les 0.5 seconde."
+    },
+    {
+      "nom": "Si hors écran",
+      "schema": "<b>Entrées :</b> Objet, Marge (pixels) &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux / Ensuite",
+      "role": "Vrai si l'objet est entièrement sorti de l'écran (plus la marge), Faux sinon.",
+      "exemple": "détruire les balles qui sortent de l'écran."
+    },
+    {
+      "nom": "Si / Sinon",
+      "schema": "<b>Entrées :</b> Si (condition), Sinon si (condition) &nbsp;→&nbsp; <b>Sorties :</b> Si / Sinon si / Sinon / Ensuite",
+      "role": "Teste la première condition, puis la deuxième : suit « Si », « Sinon si » ou « Sinon ». « Ensuite » se lance après.",
+      "exemple": "si score >= 100 → or, sinon si score >= 50 → argent, sinon → bronze."
+    },
+    {
+      "nom": "Selon la valeur",
+      "schema": "<b>Entrées :</b> Valeur à tester, Cas 1, Cas 2, Cas 3, Cas 4, Cas 5, Cas 6 &nbsp;→&nbsp; <b>Sorties :</b> 1 / 2 / 3 / 4 / 5 / 6 / Aucun / Ensuite",
+      "role": "Compare la valeur à tester avec les cas 1 à 6 et suit la sortie du premier cas identique ; « Aucun » si rien ne correspond. Un cas vide est ignoré.",
+      "exemple": "selon « arme » : 1 = épée, 2 = arc, 3 = baguette."
+    }
+  ]
+}

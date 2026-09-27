@@ -1,0 +1,53 @@
+{
+  "categorie": "Variables & Inventory",
+  "noeuds": [
+    {
+      "nom": "Modify Variable",
+      "schema": "<b>Inputs:</b> Object, Variable, Value",
+      "role": "Gives the variable a new value (a number, a text, true / false or a calculation).",
+      "exemple": "set “score” back to 0."
+    },
+    {
+      "nom": "Add to Variable",
+      "schema": "<b>Inputs:</b> Object, Variable, Value to add",
+      "role": "Adds the value to the variable (a negative number subtracts). For a text variable, adds the text at the end.",
+      "exemple": "score + 1 for each coin, health - 1 for each hit."
+    },
+    {
+      "nom": "Limit Value (Clamp)",
+      "schema": "<b>Inputs:</b> Object, Variable, Minimum, Maximum",
+      "role": "Keeps the variable (a number) between a minimum and a maximum.",
+      "exemple": "health never goes above 100."
+    },
+    {
+      "nom": "Random number",
+      "schema": "<b>Inputs:</b> Object, Variable, Value: random(min, max)",
+      "role": "Puts a random number in the variable. random(1, 6) gives a number from 1 to 6.",
+      "exemple": "a dice roll."
+    },
+    {
+      "nom": "Add to inventory",
+      "schema": "<b>Inputs:</b> Object, Variable",
+      "role": "Puts the object in the inventory (a variable of type Inventory List). It is only added once.",
+      "exemple": "pick up a key."
+    },
+    {
+      "nom": "Remove from inventory",
+      "schema": "<b>Inputs:</b> Object, Variable",
+      "role": "Removes the object from the inventory.",
+      "exemple": "use the key to open the door."
+    },
+    {
+      "nom": "If in inventory",
+      "schema": "<b>Inputs:</b> Object, Variable &nbsp;→&nbsp; <b>Outputs:</b> True / False / Then",
+      "role": "Follows the True output if the object is in the inventory, False otherwise.",
+      "exemple": "the door only opens if the key is in the inventory."
+    },
+    {
+      "nom": "Combine objects",
+      "schema": "<b>Inputs:</b> Object A, Object B, Result object name",
+      "role": "Replaces objects A and B with a copy of the object whose name you type, at A's place. If that model does not exist, nothing changes.",
+      "exemple": "stick + cloth = torch."
+    }
+  ]
+}

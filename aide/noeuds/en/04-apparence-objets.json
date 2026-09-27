@@ -1,0 +1,178 @@
+{
+  "categorie": "Appearance & Objects",
+  "noeuds": [
+    {
+      "nom": "Move Object",
+      "schema": "<b>Inputs:</b> Object, X, Y",
+      "role": "Puts the object directly at position X, Y (teleport).",
+      "exemple": "put the player back at the start."
+    },
+    {
+      "nom": "Push object",
+      "schema": "<b>Inputs:</b> Object, Add X, Add Y",
+      "role": "Moves the object by the given distance from where it is now. A physics object is stopped by walls.",
+      "exemple": "linked to “Object Held Down”: “Add X” = 5 moves right."
+    },
+    {
+      "nom": "Set a property",
+      "schema": "<b>Inputs:</b> Object, Property, Value",
+      "role": "Changes an object property chosen from a list (x, y, rotation, opacity, text…).",
+      "exemple": "set the rotation of a clock hand to =temps * 90."
+    },
+    {
+      "nom": "Rotation",
+      "schema": "<b>Inputs:</b> Object, Angle (degrees)",
+      "role": "Turns the object to the given angle, in degrees.",
+      "exemple": "=wheel.rotation + 5 linked to “Every frame” keeps the object “wheel” spinning."
+    },
+    {
+      "nom": "Modify Opacity (Alpha)",
+      "schema": "<b>Inputs:</b> Object, Opacity (0 to 1)",
+      "role": "Sets the object's transparency: 0 = invisible, 1 = solid.",
+      "exemple": "0.5 for a half-transparent ghost."
+    },
+    {
+      "nom": "Visibility",
+      "schema": "<b>Inputs:</b> Object, Visible (true / false)",
+      "role": "Shows (true) or hides (false) the object.",
+      "exemple": "show a “You win!” message hidden at the start."
+    },
+    {
+      "nom": "Set Tag",
+      "schema": "<b>Inputs:</b> Object, Tag",
+      "role": "Gives the object a new tag (label).",
+      "exemple": "a defeated enemy gets the tag “harmless”."
+    },
+    {
+      "nom": "Change Z-Order",
+      "schema": "<b>Inputs:</b> Object, Z",
+      "role": "Changes the object's layer: the bigger the number, the more the object is in front of others.",
+      "exemple": "put the player in front of a decoration."
+    },
+    {
+      "nom": "Set size (Scale)",
+      "schema": "<b>Inputs:</b> Object, Scale X, Scale Y",
+      "role": "Changes the object's size: 1 = normal, 2 = twice as big, 0.5 = half.",
+      "exemple": "the player grows after eating a mushroom."
+    },
+    {
+      "nom": "Destroy Object",
+      "schema": "<b>Input:</b> Object",
+      "role": "Removes the chosen object from the scene.",
+      "exemple": "choose “Implied Object” to destroy the coin the player just touched."
+    },
+    {
+      "nom": "Destroy by Tag",
+      "schema": "<b>Input:</b> Tag to destroy",
+      "role": "Removes all objects with this tag.",
+      "exemple": "a bomb destroys every “Enemy” object."
+    },
+    {
+      "nom": "Change Image",
+      "schema": "<b>Inputs:</b> Object, Image",
+      "role": "Replaces the object's image with another image from the Assets. Empty = no image.",
+      "exemple": "the character looks left or right depending on the button."
+    },
+    {
+      "nom": "Modify Color",
+      "schema": "<b>Inputs:</b> Object, Color",
+      "role": "Changes the object's color.",
+      "exemple": "a button turns green when the answer is right."
+    },
+    {
+      "nom": "Generate clone (Spawner)",
+      "schema": "<b>Inputs:</b> Object A, Object B",
+      "role": "Creates a copy of object B (the model) at the place of object A (the spawn point).",
+      "exemple": "a cannon (A) that spawns cannonballs (B)."
+    },
+    {
+      "nom": "Color Filter",
+      "schema": "<b>Inputs:</b> Object, Filter",
+      "role": "Applies a filter to the object: Black and White, Sepia, Invert, or None to remove it.",
+      "exemple": "switch to black and white during a flashback."
+    },
+    {
+      "nom": "Blend mode (Effect)",
+      "schema": "<b>Inputs:</b> Object, Filter",
+      "role": "Changes how the object blends with what is behind it (Additive, Multiply, Screen, Invert).",
+      "exemple": "Additive for a glowing light or flame."
+    },
+    {
+      "nom": "Mirror Effect / Invert",
+      "schema": "<b>Inputs:</b> Object, Axis",
+      "role": "Flips the object: Horizontal (left / right) or Vertical (up / down).",
+      "exemple": "the character faces the way it walks."
+    },
+    {
+      "nom": "Modify Locked",
+      "schema": "<b>Inputs:</b> Object, Locked (true / false)",
+      "role": "Locks or unlocks the object in the editor (the padlock). It has no effect during the game: to stop an object from being dragged, use “Set draggable”."
+    },
+    {
+      "nom": "Parallax Factor",
+      "schema": "<b>Inputs:</b> Object, Factor (e.g. 0.5)",
+      "role": "Sets how fast the object scrolls when the camera moves: 1 = normal, 0.5 = half as fast (depth effect).",
+      "exemple": "mountains in the background that scroll slowly."
+    },
+    {
+      "nom": "Link two objects",
+      "schema": "<b>Inputs:</b> Object A, Object B",
+      "role": "Attaches object A (the child) to object B (the parent): A follows B when it moves.",
+      "exemple": "a sword that follows the character's hand."
+    },
+    {
+      "nom": "Glow",
+      "schema": "<b>Inputs:</b> Object, State, Color",
+      "role": "Turns a colored glow around the object on or off.",
+      "exemple": "show which object can be picked up."
+    },
+    {
+      "nom": "Blink",
+      "schema": "<b>Inputs:</b> Object, State, Speed (ms), Duration (ms, 0 = infinite)",
+      "role": "Makes the object blink at the chosen speed (ms), for a duration (ms, 0 = forever), or stops the blinking.",
+      "exemple": "the player blinks for 1 second after being hit."
+    },
+    {
+      "nom": "Spawn clone (X/Y Position)",
+      "schema": "<b>Inputs:</b> Object B, X, Y",
+      "role": "Creates a copy of object B (the model) at position X, Y. The copy becomes the “Implied Object”.",
+      "exemple": "drop a rock at a random position: X = random(0, 800)."
+    },
+    {
+      "nom": "Shoot an object",
+      "schema": "<b>Inputs:</b> Object A, Object B, Model name, Direction, Speed",
+      "role": "Creates a projectile (the object named in “Model name”) at object A, and launches it at the chosen speed: 0°, 90°, 180°, 270°, towards object B (“Toward target”) or along A's angle.",
+      "exemple": "a ship firing lasers upwards (270)."
+    },
+    {
+      "nom": "Set Progress",
+      "schema": "<b>Inputs:</b> Object, New progress",
+      "role": "Sets how full a progress bar is, between its minimum and maximum.",
+      "exemple": "“New progress” = vie (health), for a health bar."
+    },
+    {
+      "nom": "Screen wrap",
+      "schema": "<b>Input:</b> Object",
+      "role": "Whatever leaves one side of the screen comes back on the opposite side (Pac-Man effect).",
+      "exemple": "an asteroid that leaves on the right and comes back on the left."
+    },
+    {
+      "nom": "Clamp to screen",
+      "schema": "<b>Inputs:</b> Object, Margin",
+      "role": "Stops the object from leaving the screen. The margin stops it a little before the edge.",
+      "exemple": "the player's ship always stays visible."
+    },
+    {
+      "nom": "Create object",
+      "schema": "<b>Inputs:</b> Object, X position, Y position",
+      "role": "Creates a copy of the chosen object (the model) at position X, Y.",
+      "exemple": "add a crate at an exact spot."
+    },
+    {
+      "nom": "Fade",
+      "schema": "<b>Inputs:</b> Object, Target opacity (0 to 1), Duration (seconds)",
+      "role": "Smoothly changes the object's opacity to the target value, over the chosen time (seconds). The next nodes run without waiting.",
+      "exemple": "fade out a title in 1 second (target opacity 0)."
+    }
+  ]
+}

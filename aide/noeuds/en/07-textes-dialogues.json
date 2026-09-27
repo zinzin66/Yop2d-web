@@ -1,15 +1,23 @@
 {
-  "categorie": "Texts & dialogues",
+  "categorie": "Texts & Dialogues",
   "noeuds": [
     {
-      "nom": "Modify / Append Text",
-      "schema": "<b>Input:</b> Text",
-      "role": "Fully replaces an existing Text object, or adds words at its end."
+      "nom": "Modify Text",
+      "schema": "<b>Inputs:</b> Object, New text",
+      "role": "Replaces the text of a Text object. Start with = to show a calculation.",
+      "exemple": "=\"Score: \" + score"
     },
     {
-      "nom": "Show Dialogue",
-      "schema": "<b>Input:</b> Dictionary key",
-      "role": "Reads a sentence from the dialogue file and shows it on screen."
+      "nom": "Show dialogue",
+      "schema": "<b>Inputs:</b> Object, Dialogue key",
+      "role": "Writes into the Text object the sentence matching the key, from the dialogue file (dialogues.txt).",
+      "exemple": "the key “hello_merchant” shows the merchant's line."
+    },
+    {
+      "nom": "Append to text",
+      "schema": "<b>Inputs:</b> Object, Variable, Text to add",
+      "role": "Adds text at the end of a variable of type Text.",
+      "exemple": "type a password letter by letter."
     }
   ]
 }

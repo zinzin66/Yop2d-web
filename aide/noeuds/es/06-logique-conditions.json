@@ -1,0 +1,71 @@
+{
+  "categorie": "Lógica y Condiciones",
+  "noeuds": [
+    {
+      "nom": "Condición",
+      "schema": "<b>Entrada:</b> Condición &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso / Después",
+      "role": "Comprueba una condición: sigue la salida «Verdadero» si se cumple, «Falso» si no. «Después» se lanza después, en los dos casos.",
+      "exemple": "score >= 10 → verdadero → escena siguiente."
+    },
+    {
+      "nom": "Si joystick",
+      "schema": "<b>Salidas:</b> Arriba / Abajo / Izquierda / Derecha / Reposo / Después",
+      "role": "Sigue la salida que corresponde a la dirección del joystick: «Arriba», «Abajo», «Izquierda», «Derecha», o «Reposo» si no se toca.",
+      "exemple": "unido a «Cada fotograma» para reproducir la animación de caminar en la dirección correcta."
+    },
+    {
+      "nom": "Si está en el suelo",
+      "schema": "<b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso / Después",
+      "role": "«Verdadero» si la parte de abajo del objeto está apoyada sobre un objeto fijo y visible (suelo, plataforma), «Falso» si no.",
+      "exemple": "solo permitir el salto si el jugador está en el suelo."
+    },
+    {
+      "nom": "Si se mueve",
+      "schema": "<b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso / Después",
+      "role": "«Verdadero» si el objeto se ha movido desde el fotograma anterior, «Falso» si no.",
+      "exemple": "reproducir la animación de caminar solo cuando el personaje se mueve."
+    },
+    {
+      "nom": "Llamar función",
+      "schema": "<b>Entrada:</b> Función",
+      "role": "Ejecuta una función (un Blueprint creado en la sección Funciones) y luego continúa. No lo pongas debajo de «Cada fotograma».",
+      "exemple": "una función «PerderVida» usada por varios enemigos."
+    },
+    {
+      "nom": "Llamar evento",
+      "schema": "<b>Entrada:</b> Nombre del evento",
+      "role": "Lanza el «Evento Local» que tiene ese nombre, en el mismo Blueprint, y luego continúa.",
+      "exemple": "llamar a «GameOver» desde la caída y desde el cronómetro."
+    },
+    {
+      "nom": "Secuencia",
+      "schema": "<b>Salidas:</b> 1 / 2 / 3 / 4",
+      "role": "Lanza sus salidas una tras otra: 1, luego 2, luego 3, luego 4. Una salida sin conexión se ignora.",
+      "exemple": "al empezar: 1 = colocar al jugador, 2 = poner la música, 3 = mostrar la puntuación."
+    },
+    {
+      "nom": "Enfriamiento",
+      "schema": "<b>Entradas:</b> Objeto, Retraso (segundos) &nbsp;→&nbsp; <b>Salidas:</b> Listo / Aún no",
+      "role": "Deja pasar por «Listo» como mucho una vez por intervalo (en segundos); si no, va por «Aún no». Con un objeto elegido, cada objeto tiene su propio intervalo.",
+      "exemple": "disparar como mucho una vez cada 0.5 segundos."
+    },
+    {
+      "nom": "Si fuera de pantalla",
+      "schema": "<b>Entradas:</b> Objeto, Margen (píxeles) &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso / Después",
+      "role": "«Verdadero» si el objeto ha salido del todo de la pantalla (más el margen), «Falso» si no.",
+      "exemple": "destruir las balas que salen de la pantalla."
+    },
+    {
+      "nom": "Si / Si no",
+      "schema": "<b>Entradas:</b> Si (condición), Si no, si (condición) &nbsp;→&nbsp; <b>Salidas:</b> Si / Si no, si / Si no / Después",
+      "role": "Comprueba la primera condición y luego la segunda: sigue «Si», «Si no, si» o «Si no». «Después» se lanza después.",
+      "exemple": "si score >= 100 → oro, si no, si score >= 50 → plata, si no → bronce."
+    },
+    {
+      "nom": "Según el valor",
+      "schema": "<b>Entradas:</b> Valor a probar, Caso 1, Caso 2, Caso 3, Caso 4, Caso 5, Caso 6 &nbsp;→&nbsp; <b>Salidas:</b> 1 / 2 / 3 / 4 / 5 / 6 / Ninguno / Después",
+      "role": "Compara el valor con los casos 1 a 6 y sigue la salida del primer caso igual; «Ninguno» si ninguno coincide. Un caso vacío se ignora.",
+      "exemple": "según «arma»: 1 = espada, 2 = arco, 3 = varita."
+    }
+  ]
+}
