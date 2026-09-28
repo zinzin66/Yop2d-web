@@ -106,6 +106,10 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 28/09/2026 (soir) : chantier « effets visuels » du moteur (branche Yop2d-animation) :
   8 nouveaux nœuds décrits en 9 langues (123 nœuds), guide « particules-effets »
   (6e guide), carte « Particules et effets d'écran » sur l'accueil.
+- 28/09/2026 (nuit) : aide mise à jour pour « Tirer » (détruire hors de l'écran) et
+  « Afficher un dialogue » (dialogues en plusieurs langues : `cle.fr = ...`, variable `langue`).
+  Nouvel exemple du moteur « Lost on the moon » (quiz angoissant en 9 langues). L'utilisateur
+  prévoit 1 ou 2 exemples de plus avant de publier une nouvelle version du moteur.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
