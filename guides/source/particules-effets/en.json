@@ -1,0 +1,209 @@
+{
+  "titre_page": "How to add particles and effects in Yop2D? | Yop2D Guide",
+  "description": "Explosions, fire, smoke, a ship's wake, flash and fade: add visual effects in Yop2D without code, with the Particles object and the [[effet_particules]], [[flash_ecran]] and [[fondu_ecran]] nodes.",
+  "h1": "How to add particles and effects?",
+  "carte": [
+    "Particles and effects",
+    "An explosion when you touch an enemy, a trail behind the ship, a screen flash and a fade."
+  ],
+  "etapes": [
+    [
+      "An explosion",
+      "{{NoeudEventCollisionTag}} → {{effet_particules}} ({{lang:option.Explosion}}) → {{detruire_objet}}."
+    ],
+    [
+      "A trail",
+      "A {{lang:obj_prefix_particules}} object ({{lang:option.Sillage}}) attached to the character."
+    ],
+    [
+      "Screen effects",
+      "{{flash_ecran}} when you get hit, {{fondu_ecran}} between two levels."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Yop2D makes particles in two ways: the **[[effet_particules]]** node fires a burst all at once (perfect for an explosion), and the **{{lang:obj_prefix_particules}}** object produces them non-stop (fire, smoke, rain, trail…). Other nodes add effects over the whole screen: flash, tint, vignette and fade."
+    ],
+    [
+      "besoin",
+      [
+        "a working game, with a character named **player** that can move;",
+        "enemies with the tag **ennemi**."
+      ]
+    ],
+    [
+      "tip",
+      "To see all these effects in action, open the **Neon shooter** example on the Yop2D home screen."
+    ],
+    [
+      "h2",
+      "Step 1: an explosion when you touch an enemy"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Open the scene's **{{lang:titre_blueprint}}**.",
+            "Add the **[[NoeudEventCollisionTag]]** event: target **player**, {{lang:Tag}} **ennemi**.",
+            "Add **[[effet_particules]]**. As the target, choose **{{lang:noeud_objet_implique_long}}**: it is the enemy the player just touched. {{lang:effet_particules.modele}}: **{{lang:option.Explosion}}**.",
+            "Add **[[detruire_objet]]**, with the same target **{{lang:noeud_objet_implique_long}}**.",
+            "Link the three nodes in order, then start the game and touch an enemy: it explodes before disappearing."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "target: player · {{lang:Tag}}: ennemi"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{effet_particules}}",
+              "{{lang:noeud_objet_implique}} · {{lang:option.Explosion}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ]
+          ]
+        ],
+        [
+          "attention",
+          "**Order matters:** [[effet_particules]] must come **before** [[detruire_objet]]. Once the enemy is destroyed, there is no object left to place the explosion on."
+        ],
+        [
+          "tip",
+          "You can change the **color** (for example `#FF40D0` for a magenta explosion) and the **size** (2 = twice as big). Also try {{lang:option.Etincelles}}, {{lang:option.Confettis}} or {{lang:option.Fumee}}."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 2: a trail behind the character"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Add an object: in the **{{lang:cat_effets}}** category, choose **{{lang:obj_prefix_particules}}**. In the editor it shows as a dotted orange area; in the game it is invisible.",
+            "In the inspector, **{{lang:insp_sep_particules}}** section, tap **{{lang:insp_btn_modele_particules}}** and choose **{{lang:option.Sillage}}**.",
+            "Still in the inspector, tap the **{{lang:insp_btn_parent_aucun}}** button and choose **player**: the object will follow the character everywhere.",
+            "Place it just behind the character, then start the game and move: a long glowing trail follows the character."
+          ]
+        ],
+        [
+          "tip",
+          "Nothing to add in the Blueprint: a {{lang:obj_prefix_particules}} object works on its own as long as **{{lang:insp_cb_particules_actives}}** is checked. To turn it on or off during the game, use the **[[particules_marche]]** node."
+        ],
+        [
+          "ul",
+          [
+            "**{{lang:option.Feu}}**: a torch or a campfire.",
+            "**{{lang:option.Fumee}}**: above a chimney.",
+            "**{{lang:option.Pluie}}** or **{{lang:option.Neige}}**: stretch the object across the whole top of the screen.",
+            "**{{lang:option.Hyperespace}}** and **{{lang:option.LignesVitesse}}**: to give a feeling of great speed."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 3: effects over the whole screen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ul",
+          [
+            "**[[flash_ecran]]**: a flash of color. For example red, 0.5 seconds, right after the player gets hit.",
+            "**[[teinte_ecran]]**: a color over the whole game. Dark blue at 55% for night, and intensity 0 to go back to daytime.",
+            "**[[bords_assombris]]**: the edges of the screen get darker, like in a movie.",
+            "**[[fondu_ecran]]**: the screen goes black, then comes back."
+          ]
+        ],
+        [
+          "p",
+          "To move to the next level smoothly (see [the levels guide](guide:niveau-suivant)):"
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{fondu_ecran}}",
+              "{{lang:option.Disparaitre}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{scene_suivante}}"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "Then, in the next level:"
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{fondu_ecran}}",
+              "{{lang:option.Apparaitre}}"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "The tint and the vignette stay **under the HUD**: the score and the buttons stay easy to read. The flash and the fade cover the whole screen."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "If it doesn't work"
+    ],
+    [
+      "ul",
+      [
+        "**The explosion doesn't show:** check that [[effet_particules]] is placed **before** [[detruire_objet]].",
+        "**The trail doesn't follow the character:** check that the {{lang:obj_prefix_particules}} object has **player** as its parent, and that {{lang:insp_cb_particules_actives}} is checked.",
+        "**The particles have the wrong color:** the color “{{lang:insp_couleur_aucune}}” keeps the preset colors; choose a real color to change them.",
+        "**The screen stays black:** after a [[fondu_ecran]] {{lang:option.Disparaitre}}, you need a [[fondu_ecran]] {{lang:option.Apparaitre}}."
+      ]
+    ]
+  ]
+}

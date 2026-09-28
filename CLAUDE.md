@@ -17,7 +17,7 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
 - Accueil (présentation, comparatif avec d'autres moteurs, FAQ) en 9 langues,
   **généré** par `python3 outils/generer_accueil.py` depuis `outils/accueil/<langue>.json`.
   Anglais : `index.html` (racine) ; autres : `<langue>/index.html` (ex. `/fr/`).
-  Dans les textes, `@/` = racine du site. La racine envoie vers `/<langue>/` si
+  Dans les textes, `@/` = racine du site ; `{nb_noeuds}` = nombre de nœuds de l'aide (calculé). La racine envoie vers `/<langue>/` si
   `?lang=xx` ou si le visiteur a déjà choisi une langue (clé `yop2d-langue`),
   sinon propose la langue du téléphone dans un bandeau. Captures : liste `IMAGES`
   du script ; `interface_tuiles.png`, `exemples_jeux.png`, `interface_telephone.png`
@@ -35,7 +35,7 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
   `?lang=<langue du moteur>`.
   `confidentialite.html` : confidentialité.
 - `aide.html` : aide ouverte depuis le moteur dans une WebView.
-- `guides/` : 5 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
+- `guides/` : 6 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
   Français : `guides/<guide>.html` ; autres langues : `guides/<langue>/<guide>.html`.
   Page « Tous les guides » (générée aussi) : `guides/index.html` (fr), `guides/<langue>/index.html` ;
   textes dans `TOUS` de `generer_guides.py`. Accueil et `llms.txt` y renvoient.
@@ -102,7 +102,10 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   catalogue du moteur (115 nœuds, 9 langues) ; guides traduits en 9 langues ;
   page testeurs en 9 langues ; pages `noeuds/<langue>.html` pour le référencement ;
   accueil + comparatif + FAQ (19 questions) en 9 langues ; `llms.txt` ;
-  page « Tous les guides » en 9 langues.
+  page « Tous les guides » en 9 langues ; Yandex, Google et Bing (voir plus bas).
+- 28/09/2026 (soir) : chantier « effets visuels » du moteur (branche Yop2d-animation) :
+  8 nouveaux nœuds décrits en 9 langues (123 nœuds), guide « particules-effets »
+  (6e guide), carte « Particules et effets d'écran » sur l'accueil.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
@@ -121,3 +124,6 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   `Doc/MEMO_NOEUDS.md` du moteur : bouton `{ }` du Blueprint et import de zip).
 - Idées de guides suivants : caméra qui suit, sons et musique, animations,
   ennemi qui poursuit, tirer, apparitions d'ennemis, dialogue, clé et porte.
+- Les nœuds d'effets (particules, écran) n'existent que dans les versions du moteur
+  construites depuis `Yop2d-animation` (0.1.908 et après) : vérifier qu'elles sont
+  publiées avant d'en faire la promotion.

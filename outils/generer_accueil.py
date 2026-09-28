@@ -181,6 +181,17 @@ def sans_balises(texte):
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", texte))).strip()
 
 
+def nombre_noeuds():
+    """Nombre de nœuds de l'aide (tous les fichiers aide/noeuds/en/*.json) : remplace {nb_noeuds} dans les textes."""
+    dossier = os.path.join(RACINE, "aide", "noeuds", "en")
+    total = 0
+    for nom in os.listdir(dossier):
+        if nom.endswith(".json"):
+            with open(os.path.join(dossier, nom), encoding="utf-8") as f:
+                total += len(json.load(f)["noeuds"])
+    return total
+
+
 def cartes_guides(langue):
     dossier = os.path.join(RACINE, "aide", "guides", langue)
     cartes = []
@@ -485,7 +496,7 @@ def llms(t):
 def main():
     for langue in LANGUES:
         with open(os.path.join(RACINE, "outils", "accueil", f"{langue}.json"), encoding="utf-8") as f:
-            t = json.load(f)
+            t = json.loads(f.read().replace("{nb_noeuds}", str(nombre_noeuds())))
         assert len(t["vitrine"]) == len(IMAGES), f"{langue} : {len(t['vitrine'])} blocs vitrine au lieu de {len(IMAGES)}"
         chemin = os.path.join(RACINE, adresse_accueil(langue), "index.html")
         os.makedirs(os.path.dirname(chemin), exist_ok=True)

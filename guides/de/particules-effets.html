@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie fügt man in Yop2D Partikel und Effekte hinzu? | Yop2D-Anleitung</title>
+<meta name="description" content="Explosionen, Feuer, Rauch, der Schweif eines Raumschiffs, Blitz und Überblendung: visuelle Effekte in Yop2D ohne Code, mit dem Partikel-Objekt und den Nodes „Partikeleffekt“, „Bildschirmblitz“ und „Bildschirmüberblendung“.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/particules-effets.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/particules-effets.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/particules-effets.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/particules-effets.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/particules-effets.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/particules-effets.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/particules-effets.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/particules-effets.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/particules-effets.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/particules-effets.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie fügt man Partikel und Effekte hinzu?",
+ "description": "Explosionen, Feuer, Rauch, der Schweif eines Raumschiffs, Blitz und Überblendung: visuelle Effekte in Yop2D ohne Code, mit dem Partikel-Objekt und den Nodes „Partikeleffekt“, „Bildschirmblitz“ und „Bildschirmüberblendung“.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Eine Explosion",
+   "text": "Wenn Objekt Tag berührt → Partikeleffekt (Explosion) → Objekt zerstören."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Ein Schweif",
+   "text": "Ein Partikel-Objekt (Schweif), das an der Figur hängt."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Bildschirmeffekte",
+   "text": "Bildschirmblitz, wenn man getroffen wird, Bildschirmüberblendung zwischen zwei Levels."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../de/index.html">← Yop2D</a>
+<h1>Wie fügt man Partikel und Effekte hinzu?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../particules-effets.html" hreflang="fr">Français</a> · <a href="../en/particules-effets.html" hreflang="en">English</a> · <a href="../es/particules-effets.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/particules-effets.html" hreflang="it">Italiano</a> · <a href="../pt/particules-effets.html" hreflang="pt">Português</a> · <a href="../ru/particules-effets.html" hreflang="ru">Русский</a> · <a href="../zh/particules-effets.html" hreflang="zh">中文</a> · <a href="../ja/particules-effets.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Yop2D erzeugt Partikel auf zwei Arten: Der Node <strong>„Partikeleffekt“</strong> stößt auf einmal einen Schwall aus (perfekt für eine Explosion), und das Objekt <strong>Partikel</strong> erzeugt sie ohne Pause (Feuer, Rauch, Regen, Spur…). Weitere Nodes fügen Effekte auf dem ganzen Bildschirm hinzu: Blitz, Tönung, abgedunkelte Ränder und Überblendung.</p>
+<div class="besoin">
+<b>Du brauchst:</b>
+<ul><li>ein funktionierendes Spiel mit einer Figur namens <strong>player</strong>, die sich bewegen kann;</li><li>Gegner mit dem Tag <strong>ennemi</strong>.</li></ul>
+</div>
+<div class="tip">👉 Um alle diese Effekte in Aktion zu sehen, öffne das Beispiel <strong>Neon shooter</strong> auf dem Startbildschirm von Yop2D.</div>
+<h2>Schritt 1: eine Explosion, wenn man einen Gegner berührt</h2>
+<div class="method">
+<ol><li>Öffne den <strong>Blueprint</strong> der Szene.</li><li>Füge das Ereignis <strong>„Wenn Objekt Tag berührt“</strong> hinzu: Ziel <strong>player</strong>, Tag <strong>ennemi</strong>.</li><li>Füge <strong>„Partikeleffekt“</strong> hinzu. Wähle als Ziel <strong>Das beteiligte Objekt</strong>: Das ist der Gegner, den der Spieler gerade berührt hat. Vorlage: <strong>Explosion</strong>.</li><li>Füge <strong>„Objekt zerstören“</strong> hinzu, mit demselben Ziel <strong>Das beteiligte Objekt</strong>.</li><li>Verbinde die drei Nodes der Reihe nach, starte dann das Spiel und berühre einen Gegner: Er explodiert, bevor er verschwindet.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Wenn Objekt Tag berührt</b><span>Ziel: player · Tag: ennemi</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Partikeleffekt</b><span>Impliziertes Objekt · Explosion</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Objekt zerstören</b><span>Impliziertes Objekt</span></div>
+</div>
+<div class="tip attention">⚠️ <strong>Die Reihenfolge zählt:</strong> „Partikeleffekt“ muss <strong>vor</strong> „Objekt zerstören“ kommen. Sobald der Gegner zerstört ist, gibt es kein Objekt mehr, an dem die Explosion erscheinen kann.</div>
+<div class="tip">👉 Du kannst die <strong>Farbe</strong> ändern (zum Beispiel <code>#FF40D0</code> für eine magentafarbene Explosion) und die <strong>Größe</strong> (2 = doppelt so groß). Probiere auch Funken, Konfetti oder Rauch.</div>
+</div>
+<h2>Schritt 2: ein Schweif hinter der Figur</h2>
+<div class="method">
+<ol><li>Füge ein Objekt hinzu: Wähle in der Kategorie <strong>Effekte</strong> den Eintrag <strong>Partikel</strong>. Im Editor erscheint es als orange gestrichelter Bereich, im Spiel ist es unsichtbar.</li><li>Tippe im Inspektor, Bereich <strong>PARTIKEL</strong>, auf <strong>Vorlage:</strong> und wähle <strong>Schweif</strong>.</li><li>Tippe ebenfalls im Inspektor auf die Schaltfläche <strong>Parent: Keine</strong> und wähle <strong>player</strong>: Das Objekt folgt der Figur überallhin.</li><li>Setze es direkt hinter die Figur, starte dann das Spiel und bewege dich: Ein langer leuchtender Schweif folgt der Figur.</li></ol>
+<div class="tip">👉 Im Blueprint ist nichts nötig: Ein Partikel-Objekt arbeitet von selbst, solange <strong>Aktiv ab Spielbeginn</strong> angehakt ist. Um es während des Spiels ein- oder auszuschalten, nutze den Node <strong>„Partikel ein / aus“</strong>.</div>
+<ul><li><strong>Feuer</strong>: eine Fackel oder ein Lagerfeuer.</li><li><strong>Rauch</strong>: über einem Schornstein.</li><li><strong>Regen</strong> oder <strong>Schnee</strong>: Ziehe das Objekt über den ganzen oberen Bildschirmrand.</li><li><strong>Hyperraum</strong> und <strong>Geschwindigkeitslinien</strong>: für ein Gefühl von hoher Geschwindigkeit.</li></ul>
+</div>
+<h2>Schritt 3: Effekte auf dem ganzen Bildschirm</h2>
+<div class="method">
+<ul><li><strong>„Bildschirmblitz“</strong>: ein farbiger Blitz. Zum Beispiel rot, 0,5 Sekunden, direkt nachdem der Spieler getroffen wurde.</li><li><strong>„Bildschirmtönung“</strong>: eine Farbe über dem ganzen Spiel. Dunkelblau mit 55 % für die Nacht, und Stärke 0, um zum Tag zurückzukehren.</li><li><strong>„Abgedunkelte Ränder“</strong>: Die Bildschirmränder werden dunkler, wie im Kino.</li><li><strong>„Bildschirmüberblendung“</strong>: Der Bildschirm wird schwarz und erscheint dann wieder.</li></ul>
+<p>Um sanft ins nächste Level zu wechseln (siehe <a href="../de/niveau-suivant.html">die Anleitung zu Levels</a>):</p>
+<div class="chaine">
+<div class="noeud"><b>Bildschirmüberblendung</b><span>Ausblenden (zur Farbe)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Warten</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Nächste Szene</b></div>
+</div>
+<p>Dann im nächsten Level:</p>
+<div class="chaine">
+<div class="noeud evenement"><b>Beim Start</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Bildschirmüberblendung</b><span>Einblenden (aus der Farbe)</span></div>
+</div>
+<div class="tip">👉 Tönung und abgedunkelte Ränder bleiben <strong>unter dem HUD</strong>: Punkte und Knöpfe bleiben gut lesbar. Blitz und Überblendung bedecken den ganzen Bildschirm.</div>
+</div>
+<h2>Wenn es nicht funktioniert</h2>
+<ul><li><strong>Die Explosion erscheint nicht:</strong> Prüfe, dass „Partikeleffekt“ <strong>vor</strong> „Objekt zerstören“ steht.</li><li><strong>Der Schweif folgt der Figur nicht:</strong> Prüfe, dass das Partikel-Objekt <strong>player</strong> als Eltern-Objekt hat und dass Aktiv ab Spielbeginn angehakt ist.</li><li><strong>Die Partikel haben die falsche Farbe:</strong> Die Farbe „Keine“ behält die Farben der Vorlage; wähle eine echte Farbe, um sie zu ändern.</li><li><strong>Der Bildschirm bleibt schwarz:</strong> Nach einem „Bildschirmüberblendung“ Ausblenden (zur Farbe) braucht es ein „Bildschirmüberblendung“ Einblenden (aus der Farbe).</li></ul>
+
+<div class="nav">
+<a href="../de/niveau-suivant.html">← Zum nächsten Level</a>
+<a href="index.html">Alle Anleitungen →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../de/index.html">Offizielle Website</a> · <a href="../../noeuds/de.html">Knotenreferenz</a></p>
+</footer>
+</body>
+</html>

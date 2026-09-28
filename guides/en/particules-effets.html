@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to add particles and effects in Yop2D? | Yop2D Guide</title>
+<meta name="description" content="Explosions, fire, smoke, a ship&#x27;s wake, flash and fade: add visual effects in Yop2D without code, with the Particles object and the “Particle effect”, “Screen flash” and “Screen fade” nodes.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/particules-effets.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/particules-effets.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/particules-effets.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/particules-effets.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/particules-effets.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/particules-effets.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/particules-effets.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/particules-effets.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/particules-effets.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/particules-effets.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to add particles and effects?",
+ "description": "Explosions, fire, smoke, a ship's wake, flash and fade: add visual effects in Yop2D without code, with the Particles object and the “Particle effect”, “Screen flash” and “Screen fade” nodes.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "An explosion",
+   "text": "If object touches Tag → Particle effect (Explosion) → Destroy Object."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "A trail",
+   "text": "A Particles object (Wake trail) attached to the character."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Screen effects",
+   "text": "Screen flash when you get hit, Screen fade between two levels."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to add particles and effects?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../particules-effets.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/particules-effets.html" hreflang="es">Español</a> · <a href="../de/particules-effets.html" hreflang="de">Deutsch</a> · <a href="../it/particules-effets.html" hreflang="it">Italiano</a> · <a href="../pt/particules-effets.html" hreflang="pt">Português</a> · <a href="../ru/particules-effets.html" hreflang="ru">Русский</a> · <a href="../zh/particules-effets.html" hreflang="zh">中文</a> · <a href="../ja/particules-effets.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Yop2D makes particles in two ways: the <strong>“Particle effect”</strong> node fires a burst all at once (perfect for an explosion), and the <strong>Particles</strong> object produces them non-stop (fire, smoke, rain, trail…). Other nodes add effects over the whole screen: flash, tint, vignette and fade.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a working game, with a character named <strong>player</strong> that can move;</li><li>enemies with the tag <strong>ennemi</strong>.</li></ul>
+</div>
+<div class="tip">👉 To see all these effects in action, open the <strong>Neon shooter</strong> example on the Yop2D home screen.</div>
+<h2>Step 1: an explosion when you touch an enemy</h2>
+<div class="method">
+<ol><li>Open the scene's <strong>Blueprint</strong>.</li><li>Add the <strong>“If object touches Tag”</strong> event: target <strong>player</strong>, Tag <strong>ennemi</strong>.</li><li>Add <strong>“Particle effect”</strong>. As the target, choose <strong>The object involved in the event</strong>: it is the enemy the player just touched. Preset: <strong>Explosion</strong>.</li><li>Add <strong>“Destroy Object”</strong>, with the same target <strong>The object involved in the event</strong>.</li><li>Link the three nodes in order, then start the game and touch an enemy: it explodes before disappearing.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>If object touches Tag</b><span>target: player · Tag: ennemi</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Particle effect</b><span>Implied Object · Explosion</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Destroy Object</b><span>Implied Object</span></div>
+</div>
+<div class="tip attention">⚠️ <strong>Order matters:</strong> “Particle effect” must come <strong>before</strong> “Destroy Object”. Once the enemy is destroyed, there is no object left to place the explosion on.</div>
+<div class="tip">👉 You can change the <strong>color</strong> (for example <code>#FF40D0</code> for a magenta explosion) and the <strong>size</strong> (2 = twice as big). Also try Sparks, Confetti or Smoke.</div>
+</div>
+<h2>Step 2: a trail behind the character</h2>
+<div class="method">
+<ol><li>Add an object: in the <strong>Effects</strong> category, choose <strong>Particles</strong>. In the editor it shows as a dotted orange area; in the game it is invisible.</li><li>In the inspector, <strong>PARTICLES</strong> section, tap <strong>Preset:</strong> and choose <strong>Wake trail</strong>.</li><li>Still in the inspector, tap the <strong>Parent: None</strong> button and choose <strong>player</strong>: the object will follow the character everywhere.</li><li>Place it just behind the character, then start the game and move: a long glowing trail follows the character.</li></ol>
+<div class="tip">👉 Nothing to add in the Blueprint: a Particles object works on its own as long as <strong>Active when the game starts</strong> is checked. To turn it on or off during the game, use the <strong>“Particles on / off”</strong> node.</div>
+<ul><li><strong>Fire</strong>: a torch or a campfire.</li><li><strong>Smoke</strong>: above a chimney.</li><li><strong>Rain</strong> or <strong>Snow</strong>: stretch the object across the whole top of the screen.</li><li><strong>Hyperspace</strong> and <strong>Speed lines</strong>: to give a feeling of great speed.</li></ul>
+</div>
+<h2>Step 3: effects over the whole screen</h2>
+<div class="method">
+<ul><li><strong>“Screen flash”</strong>: a flash of color. For example red, 0.5 seconds, right after the player gets hit.</li><li><strong>“Screen tint”</strong>: a color over the whole game. Dark blue at 55% for night, and intensity 0 to go back to daytime.</li><li><strong>“Vignette”</strong>: the edges of the screen get darker, like in a movie.</li><li><strong>“Screen fade”</strong>: the screen goes black, then comes back.</li></ul>
+<p>To move to the next level smoothly (see <a href="../en/niveau-suivant.html">the levels guide</a>):</p>
+<div class="chaine">
+<div class="noeud"><b>Screen fade</b><span>Fade out (to the color)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Wait</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Next scene</b></div>
+</div>
+<p>Then, in the next level:</p>
+<div class="chaine">
+<div class="noeud evenement"><b>On Start</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Screen fade</b><span>Fade in (from the color)</span></div>
+</div>
+<div class="tip">👉 The tint and the vignette stay <strong>under the HUD</strong>: the score and the buttons stay easy to read. The flash and the fade cover the whole screen.</div>
+</div>
+<h2>If it doesn't work</h2>
+<ul><li><strong>The explosion doesn't show:</strong> check that “Particle effect” is placed <strong>before</strong> “Destroy Object”.</li><li><strong>The trail doesn't follow the character:</strong> check that the Particles object has <strong>player</strong> as its parent, and that Active when the game starts is checked.</li><li><strong>The particles have the wrong color:</strong> the color “None” keeps the preset colors; choose a real color to change them.</li><li><strong>The screen stays black:</strong> after a “Screen fade” Fade out (to the color), you need a “Screen fade” Fade in (from the color).</li></ul>
+
+<div class="nav">
+<a href="../en/niveau-suivant.html">← Go to the next level</a>
+<a href="index.html">All guides →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>

@@ -26,7 +26,7 @@ import sys
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://zinzin66.github.io/Yop2d-web/"
-GUIDES = ["deplacer-personnage", "sauter", "pieces-score", "vie-game-over", "niveau-suivant"]
+GUIDES = ["deplacer-personnage", "sauter", "pieces-score", "vie-game-over", "niveau-suivant", "particules-effets"]
 
 spec = importlib.util.spec_from_file_location("gen", os.path.join(RACINE, "outils", "generer_aide_noeuds.py"))
 gen = importlib.util.module_from_spec(spec)

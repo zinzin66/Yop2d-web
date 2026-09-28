@@ -122,9 +122,33 @@
     },
     {
       "nom": "Glow",
-      "schema": "<b>Inputs:</b> Object, State, Color",
-      "role": "Turns a colored glow around the object on or off.",
-      "exemple": "show which object can be picked up."
+      "schema": "<b>Inputs:</b> Object, State, Color, Glow size",
+      "role": "Surrounds the object with a soft glow of the chosen color and size (it follows the shape of images), or removes it.",
+      "exemple": "a bonus that glows yellow, size 20."
+    },
+    {
+      "nom": "Particle effect",
+      "schema": "<b>Inputs:</b> Object, Preset, Count (0 = preset's), Color (empty = preset's), Size (1 = normal)",
+      "role": "Fires a burst of particles on the object: explosion, sparks, dust, smoke, fire, rain, snow, confetti, trail, wake trail, hyperspace or speed lines. Count, color and size can be set.",
+      "exemple": "a hit enemy explodes in magenta: Explosion preset, color #FF40D0."
+    },
+    {
+      "nom": "Particles on / off",
+      "schema": "<b>Inputs:</b> Object, State",
+      "role": "Turns a “Particles” object on or off: it emits continuously or stops (particles already fired finish their life).",
+      "exemple": "turn the engine exhaust on when the ship moves."
+    },
+    {
+      "nom": "Particle burst",
+      "schema": "<b>Inputs:</b> Object, Number of particles",
+      "role": "Fires many particles at once from a “Particles” object, with its settings (preset, color, size).",
+      "exemple": "80 confetti when the level is won."
+    },
+    {
+      "nom": "Change particle preset",
+      "schema": "<b>Inputs:</b> Object, Preset",
+      "role": "Changes the preset of a “Particles” object during the game.",
+      "exemple": "a fire that turns into smoke when it is put out."
     },
     {
       "nom": "Blink",

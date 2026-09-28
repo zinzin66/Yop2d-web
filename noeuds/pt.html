@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos os nós do Yop2D (115) | Referência</title>
-<meta name="description" content="Lista completa dos 115 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
+<title>Todos os nós do Yop2D (123) | Referência</title>
+<meta name="description" content="Lista completa dos 123 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/pt.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 115 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
+<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 123 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
 <p><strong>Categorias</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-cena-e-hud">Cena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aparência-e-objetos">Aparência e Objetos</a><a href="#c5-variáveis-e-inventário">Variáveis e Inventário</a><a href="#c6-lógica-e-condições">Lógica e Condições</a><a href="#c7-textos-e-diálogos">Textos e Diálogos</a><a href="#c8-movimentos-e-ia">Movimentos e IA</a><a href="#c9-animações">Animações</a><a href="#c10-áudio">Áudio</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -198,6 +198,26 @@
 <p>Ajusta a rapidez com que a câmera alcança o objeto seguido: 0.01 = bem suave, 1 = grudada no objeto.</p>
 <p class="exemple"><b>Exemplo:</b> 0.1 para uma câmera suave que segue com um pequeno atraso.</p>
 </div>
+<div class="fiche"><h3>Flash da tela</h3>
+<div class="schema"><b>Entradas:</b> Cor, Intensidade (%, 0 = nenhuma), Duração (segundos)</div>
+<p>Faz um clarão de cor na tela inteira, que some em um instante (intensidade em %, duração em segundos).</p>
+<p class="exemple"><b>Exemplo:</b> um clarão vermelho de 0,5 segundo quando o jogador é atingido.</p>
+</div>
+<div class="fiche"><h3>Tonalidade da tela</h3>
+<div class="schema"><b>Entradas:</b> Cor, Intensidade (%, 0 = nenhuma), Transição (segundos)</div>
+<p>Coloca uma cor sobre todo o jogo (abaixo do HUD), com uma transição suave. Intensidade 0 para remover.</p>
+<p class="exemple"><b>Exemplo:</b> a noite cai: azul-escuro, intensidade 55, transição de 2 segundos.</p>
+</div>
+<div class="fiche"><h3>Bordas escurecidas</h3>
+<div class="schema"><b>Entradas:</b> Cor, Intensidade (%, 0 = nenhuma), Transição (segundos)</div>
+<p>Escurece suavemente as bordas da tela, como no cinema (abaixo do HUD). Intensidade 0 para remover.</p>
+<p class="exemple"><b>Exemplo:</b> um clima tenso numa caverna: intensidade 75.</p>
+</div>
+<div class="fiche"><h3>Esmaecimento da tela</h3>
+<div class="schema"><b>Entradas:</b> Sentido, Cor, Duração (segundos)</div>
+<p>Faz a tela inteira sumir para uma cor, ou reaparecer a partir dela. O esmaecimento continua de uma cena para outra.</p>
+<p class="exemple"><b>Exemplo:</b> “Esmaecimento da tela” (desaparecer), “Esperar” 1 segundo, “Ir para a cena” e depois “Esmaecimento da tela” (aparecer) no início da próxima fase.</p>
+</div>
 <div class="fiche"><h3>Tremor da câmera</h3>
 <div class="schema"><b>Entradas:</b> Intensidade, Duração (ms)</div>
 <p>Sacode a tela com a força e a duração escolhidas (em milissegundos).</p>
@@ -355,9 +375,29 @@
 <p class="exemple"><b>Exemplo:</b> uma espada que segue a mão do personagem.</p>
 </div>
 <div class="fiche"><h3>Brilho (Glow)</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Estado, Cor</div>
-<p>Liga ou desliga um brilho colorido em volta do objeto.</p>
-<p class="exemple"><b>Exemplo:</b> mostrar o objeto que pode ser pego.</p>
+<div class="schema"><b>Entradas:</b> Objeto, Estado, Cor, Tamanho do brilho</div>
+<p>Envolve o objeto com um brilho suave da cor e do tamanho escolhidos (segue a forma das imagens), ou o remove.</p>
+<p class="exemple"><b>Exemplo:</b> um bônus que brilha em amarelo, tamanho 20.</p>
+</div>
+<div class="fiche"><h3>Efeito de partículas</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Modelo, Quantidade (0 = a do modelo), Cor (vazio = a do modelo), Tamanho (1 = normal)</div>
+<p>Lança uma rajada de partículas no objeto: explosão, faíscas, poeira, fumaça, fogo, chuva, neve, confete, rastro, rastro longo, hiperespaço ou linhas de velocidade. Quantidade, cor e tamanho ajustáveis.</p>
+<p class="exemple"><b>Exemplo:</b> um inimigo atingido explode em magenta: modelo Explosão, cor #FF40D0.</p>
+</div>
+<div class="fiche"><h3>Ligar / desligar partículas</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Estado</div>
+<p>Liga ou desliga um objeto “Partículas”: ele emite sem parar ou para (as partículas já lançadas terminam a vida).</p>
+<p class="exemple"><b>Exemplo:</b> ligar o propulsor quando a nave avança.</p>
+</div>
+<div class="fiche"><h3>Rajada de partículas</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Número de partículas</div>
+<p>Lança de uma vez várias partículas a partir de um objeto “Partículas”, com as configurações dele (modelo, cor, tamanho).</p>
+<p class="exemple"><b>Exemplo:</b> 80 confetes quando a fase é vencida.</p>
+</div>
+<div class="fiche"><h3>Mudar o modelo de partículas</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Modelo</div>
+<p>Muda o modelo de um objeto “Partículas” durante o jogo.</p>
+<p class="exemple"><b>Exemplo:</b> um fogo que vira fumaça quando é apagado.</p>
 </div>
 <div class="fiche"><h3>Piscar (Blink)</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Estado, Velocidade (ms), Duração (ms, 0 = infinito)</div>

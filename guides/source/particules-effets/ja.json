@@ -1,0 +1,209 @@
+{
+  "titre_page": "Yop2D でパーティクルとエフェクトを追加するには？| Yop2D ガイド",
+  "description": "爆発、炎、煙、宇宙船の軌跡、フラッシュ、フェード：「パーティクル」オブジェクトと [[effet_particules]]、[[flash_ecran]]、[[fondu_ecran]] ノードを使って、コードなしで Yop2D に視覚エフェクトを追加します。",
+  "h1": "パーティクルとエフェクトを追加するには？",
+  "carte": [
+    "パーティクルとエフェクト",
+    "敵に触れたときの爆発、宇宙船の後ろの軌跡、画面のフラッシュとフェード。"
+  ],
+  "etapes": [
+    [
+      "爆発",
+      "{{NoeudEventCollisionTag}} → {{effet_particules}} ({{lang:option.Explosion}}) → {{detruire_objet}}."
+    ],
+    [
+      "軌跡",
+      "キャラクターにつけた {{lang:obj_prefix_particules}} オブジェクト（{{lang:option.Sillage}}）。"
+    ],
+    [
+      "画面エフェクト",
+      "攻撃されたときに {{flash_ecran}}、ステージの切り替えに {{fondu_ecran}}。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Yop2D ではパーティクルを 2 つの方法で作れます。**[[effet_particules]]** ノードは一度にまとめて放ち（爆発にぴったり）、**{{lang:obj_prefix_particules}}** オブジェクトは出し続けます（炎、煙、雨、軌跡など）。ほかのノードで画面全体にエフェクトもかけられます：フラッシュ、色合い、周辺減光、フェード。"
+    ],
+    [
+      "besoin",
+      [
+        "動くゲームと、移動できる **player** という名前のキャラクター；",
+        "タグ **ennemi** のついた敵。"
+      ]
+    ],
+    [
+      "tip",
+      "これらのエフェクトの実際の動きを見るには、Yop2D のホーム画面でサンプル **Neon shooter** を開いてください。"
+    ],
+    [
+      "h2",
+      "ステップ 1：敵に触れたら爆発"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "シーンの **{{lang:titre_blueprint}}** を開きます。",
+            "イベント **[[NoeudEventCollisionTag]]** を追加：対象 **player**、{{lang:Tag}} **ennemi**。",
+            "**[[effet_particules]]** を追加します。対象には **{{lang:noeud_objet_implique_long}}** を選びます。プレイヤーが今触れた敵のことです。{{lang:effet_particules.modele}}：**{{lang:option.Explosion}}**。",
+            "**[[detruire_objet]]** を追加し、対象は同じく **{{lang:noeud_objet_implique_long}}** にします。",
+            "3 つのノードを順番につなぎ、ゲームを始めて敵に触れてみましょう。敵は爆発してから消えます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "対象：player · {{lang:Tag}}：ennemi"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{effet_particules}}",
+              "{{lang:noeud_objet_implique}} · {{lang:option.Explosion}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ]
+          ]
+        ],
+        [
+          "attention",
+          "**順番が大事：** [[effet_particules]] は [[detruire_objet]] の**前**に置きます。敵が消えたあとでは、爆発を出すオブジェクトがもうありません。"
+        ],
+        [
+          "tip",
+          "**色**（たとえばマゼンタの爆発なら `#FF40D0`）や **大きさ**（2 = 2 倍の大きさ）も変えられます。{{lang:option.Etincelles}}、{{lang:option.Confettis}}、{{lang:option.Fumee}} も試してみてください。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 2：キャラクターの後ろに軌跡"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "オブジェクトを追加：**{{lang:cat_effets}}** カテゴリーで **{{lang:obj_prefix_particules}}** を選びます。エディターではオレンジの点線の枠で表示され、ゲーム中は見えません。",
+            "インスペクターの **{{lang:insp_sep_particules}}** の欄で **{{lang:insp_btn_modele_particules}}** をタップし、**{{lang:option.Sillage}}** を選びます。",
+            "同じくインスペクターで **{{lang:insp_btn_parent_aucun}}** ボタンをタップし、**player** を選びます。オブジェクトはどこでもキャラクターについていきます。",
+            "キャラクターのすぐ後ろに置き、ゲームを始めて動いてみましょう。長く光る軌跡がキャラクターを追いかけます。"
+          ]
+        ],
+        [
+          "tip",
+          "ブループリントには何も要りません。**{{lang:insp_cb_particules_actives}}** にチェックが入っていれば、{{lang:obj_prefix_particules}} オブジェクトは自動で動きます。ゲーム中にオン／オフするには **[[particules_marche]]** ノードを使います。"
+        ],
+        [
+          "ul",
+          [
+            "**{{lang:option.Feu}}**：たいまつやキャンプファイヤー。",
+            "**{{lang:option.Fumee}}**：煙突の上。",
+            "**{{lang:option.Pluie}}** や **{{lang:option.Neige}}**：オブジェクトを画面の上端いっぱいに広げます。",
+            "**{{lang:option.Hyperespace}}** と **{{lang:option.LignesVitesse}}**：ものすごいスピード感を出せます。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 3：画面全体のエフェクト"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ul",
+          [
+            "**[[flash_ecran]]**：色のフラッシュ。たとえばプレイヤーが攻撃された直後に、赤で 0.5 秒。",
+            "**[[teinte_ecran]]**：ゲーム全体に色を重ねます。夜は濃い青を 55 %、昼に戻すには 強さを 0 に。",
+            "**[[bords_assombris]]**：映画のように画面の端が暗くなります。",
+            "**[[fondu_ecran]]**：画面が黒くなり、また現れます。"
+          ]
+        ],
+        [
+          "p",
+          "次のステージへなめらかに移るには（[ステージのガイド](guide:niveau-suivant)も参照）："
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{fondu_ecran}}",
+              "{{lang:option.Disparaitre}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{scene_suivante}}"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "そして、次のステージで："
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{fondu_ecran}}",
+              "{{lang:option.Apparaitre}}"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "色合いと周辺減光は **HUD の下**にかかるので、スコアやボタンは読みやすいままです。フラッシュとフェードは画面全体を覆います。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "うまくいかないとき"
+    ],
+    [
+      "ul",
+      [
+        "**爆発が出ない：** [[effet_particules]] が [[detruire_objet]] の**前**にあるか確認します。",
+        "**軌跡がキャラクターについてこない：** {{lang:obj_prefix_particules}} オブジェクトの親が **player** になっているか、{{lang:insp_cb_particules_actives}} にチェックが入っているか確認します。",
+        "**パーティクルの色が違う：** 色「{{lang:insp_couleur_aucune}}」はプリセットの色のままです。色を変えるには本当の色を選びます。",
+        "**画面が黒いまま：** [[fondu_ecran]] {{lang:option.Disparaitre}} のあとには、[[fondu_ecran]] {{lang:option.Apparaitre}} が必要です。"
+      ]
+    ]
+  ]
+}
