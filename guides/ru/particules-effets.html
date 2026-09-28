@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как добавить частицы и эффекты в Yop2D? | Руководство Yop2D</title>
+<meta name="description" content="Взрывы, огонь, дым, шлейф корабля, вспышка и затемнение: визуальные эффекты в Yop2D без кода с помощью объекта «Частицы» и узлов «Эффект частиц», «Вспышка экрана» и «Затемнение экрана».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/particules-effets.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/particules-effets.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/particules-effets.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/particules-effets.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/particules-effets.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/particules-effets.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/particules-effets.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/particules-effets.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/particules-effets.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/particules-effets.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Как добавить частицы и эффекты?",
+ "description": "Взрывы, огонь, дым, шлейф корабля, вспышка и затемнение: визуальные эффекты в Yop2D без кода с помощью объекта «Частицы» и узлов «Эффект частиц», «Вспышка экрана» и «Затемнение экрана».",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Взрыв",
+   "text": "Если объект касается тега → Эффект частиц (Взрыв) → Уничтожить объект."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Шлейф",
+   "text": "Объект Частицы (Длинный шлейф), прикреплённый к персонажу."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Эффекты экрана",
+   "text": "Вспышка экрана, когда тебя ранят, Затемнение экрана между двумя уровнями."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ru/index.html">← Yop2D</a>
+<h1>Как добавить частицы и эффекты?</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../particules-effets.html" hreflang="fr">Français</a> · <a href="../en/particules-effets.html" hreflang="en">English</a> · <a href="../es/particules-effets.html" hreflang="es">Español</a> · <a href="../de/particules-effets.html" hreflang="de">Deutsch</a> · <a href="../it/particules-effets.html" hreflang="it">Italiano</a> · <a href="../pt/particules-effets.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/particules-effets.html" hreflang="zh">中文</a> · <a href="../ja/particules-effets.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Yop2D создаёт частицы двумя способами: узел <strong>«Эффект частиц»</strong> выпускает залп сразу (идеально для взрыва), а объект <strong>Частицы</strong> выпускает их непрерывно (огонь, дым, дождь, шлейф…). Другие узлы добавляют эффекты на весь экран: вспышку, оттенок, затемнение краёв и затемнение экрана.</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>работающая игра с персонажем по имени <strong>player</strong>, который умеет двигаться;</li><li>враги с тегом <strong>ennemi</strong>.</li></ul>
+</div>
+<div class="tip">👉 Чтобы увидеть все эти эффекты в действии, откройте пример <strong>Effects showcase</strong> на главном экране Yop2D: по кнопке на каждый эффект и название нужного узла.</div>
+<h2>Шаг 1: взрыв при касании врага</h2>
+<div class="method">
+<ol><li>Открой <strong>Blueprint</strong> сцены.</li><li>Добавь событие <strong>«Если объект касается тега»</strong>: цель <strong>player</strong>, Тег <strong>ennemi</strong>.</li><li>Добавь <strong>«Эффект частиц»</strong>. В качестве цели выбери <strong>Объект, участвующий в событии</strong>: это враг, которого только что коснулся игрок. Шаблон: <strong>Взрыв</strong>.</li><li>Добавь <strong>«Уничтожить объект»</strong> с той же целью <strong>Объект, участвующий в событии</strong>.</li><li>Соедини три узла по порядку, запусти игру и коснись врага: он взорвётся, прежде чем исчезнуть.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Если объект касается тега</b><span>цель: player · Тег: ennemi</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Эффект частиц</b><span>Подразумеваемый объект · Взрыв</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Уничтожить объект</b><span>Подразумеваемый объект</span></div>
+</div>
+<div class="tip attention">⚠️ <strong>Порядок важен:</strong> «Эффект частиц» должен стоять <strong>перед</strong> «Уничтожить объект». Когда враг уничтожен, взрыв уже не на чем показать.</div>
+<div class="tip">👉 Можно изменить <strong>цвет</strong> (например, <code>#FF40D0</code> для пурпурного взрыва) и <strong>размер</strong> (2 = в два раза больше). Попробуй также Искры, Конфетти или Дым.</div>
+</div>
+<h2>Шаг 2: шлейф за персонажем</h2>
+<div class="method">
+<ol><li>Добавь объект: в категории <strong>Эффекты</strong> выбери <strong>Частицы</strong>. В редакторе он выглядит как оранжевая пунктирная область, а в игре невидим.</li><li>В инспекторе, раздел <strong>ЧАСТИЦЫ</strong>, нажми <strong>Шаблон:</strong> и выбери <strong>Длинный шлейф</strong>.</li><li>Там же в инспекторе нажми кнопку <strong>Родитель: Нет</strong> и выбери <strong>player</strong>: объект будет всюду следовать за персонажем.</li><li>Поставь его сразу за персонажем, запусти игру и двигайся: за персонажем тянется длинный светящийся шлейф.</li></ol>
+<div class="tip">👉 В Blueprint ничего добавлять не нужно: объект Частицы работает сам, пока отмечен флажок <strong>Активен с начала игры</strong>. Чтобы включать и выключать его во время игры, используй узел <strong>«Включить / выключить частицы»</strong>.</div>
+<ul><li><strong>Огонь</strong>: факел или костёр.</li><li><strong>Дым</strong>: над трубой.</li><li><strong>Дождь</strong> или <strong>Снег</strong>: растяни объект по всему верху экрана.</li><li><strong>Гиперпространство</strong> и <strong>Линии скорости</strong>: чтобы создать ощущение огромной скорости.</li></ul>
+</div>
+<h2>Шаг 3: эффекты на весь экран</h2>
+<div class="method">
+<ul><li><strong>«Вспышка экрана»</strong>: цветная вспышка. Например, красная на 0,5 секунды сразу после того, как игрока ранили.</li><li><strong>«Оттенок экрана»</strong>: цвет поверх всей игры. Тёмно-синий на 55 % для ночи и интенсивность 0, чтобы вернуть день.</li><li><strong>«Затемнение краёв»</strong>: края экрана темнеют, как в кино.</li><li><strong>«Затемнение экрана»</strong>: экран становится чёрным, а потом появляется снова.</li></ul>
+<p>Чтобы плавно перейти на следующий уровень (смотри <a href="../ru/niveau-suivant.html">руководство по уровням</a>):</p>
+<div class="chaine">
+<div class="noeud"><b>Затемнение экрана</b><span>Исчезнуть (в цвет)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Ждать</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Следующая сцена</b></div>
+</div>
+<p>Затем, на следующем уровне:</p>
+<div class="chaine">
+<div class="noeud evenement"><b>При старте</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Затемнение экрана</b><span>Появиться (из цвета)</span></div>
+</div>
+<div class="tip">👉 Оттенок и затемнение краёв остаются <strong>под HUD</strong>: очки и кнопки хорошо видны. Вспышка и затемнение экрана закрывают весь экран.</div>
+</div>
+<h2>Шаг 4: удар током и стоп-кадр</h2>
+<ul><li><strong>«Удар током»</strong>: вокруг объекта трещат молнии, он мигает и дрожит. Длительность <strong>0</strong> = бесконечно: идеально для электрической ловушки, которая предупреждает игрока.</li><li><strong>«Стоп-кадр при ударе»</strong>: очень короткое замедление (0,08 секунды) в момент удара придаёт взрыву мощи.</li></ul>
+<h2>Если не работает</h2>
+<ul><li><strong>Взрыв не появляется:</strong> проверь, что «Эффект частиц» стоит <strong>перед</strong> «Уничтожить объект».</li><li><strong>Шлейф не следует за персонажем:</strong> проверь, что у объекта Частицы родитель — <strong>player</strong>, и что флажок Активен с начала игры отмечен.</li><li><strong>У частиц не тот цвет:</strong> цвет «Нет» сохраняет цвета шаблона; выбери настоящий цвет, чтобы их изменить.</li><li><strong>Экран остаётся чёрным:</strong> после «Затемнение экрана» Исчезнуть (в цвет) нужен «Затемнение экрана» Появиться (из цвета).</li></ul>
+
+<div class="nav">
+<a href="../ru/niveau-suivant.html">← Переход на следующий уровень</a>
+<a href="index.html">Все руководства →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../ru/index.html">Официальный сайт</a> · <a href="../../noeuds/ru.html">Справочник узлов</a></p>
+</footer>
+</body>
+</html>

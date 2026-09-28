@@ -122,9 +122,33 @@
     },
     {
       "nom": "Bagliore (Glow)",
-      "schema": "<b>Ingressi:</b> Oggetto, Stato, Colore",
-      "role": "Attiva o disattiva un alone colorato intorno all'oggetto.",
-      "exemple": "mostrare l'oggetto che si può raccogliere."
+      "schema": "<b>Ingressi:</b> Oggetto, Stato, Colore, Dimensione del bagliore",
+      "role": "Circonda l'oggetto con un bagliore morbido del colore e della dimensione scelti (segue la forma delle immagini), oppure lo toglie.",
+      "exemple": "un bonus che brilla di giallo, dimensione 20."
+    },
+    {
+      "nom": "Effetto particellare",
+      "schema": "<b>Ingressi:</b> Oggetto, Modello, Quantità (0 = quella del modello), Colore (vuoto = quello del modello), Dimensione (1 = normale)",
+      "role": "Lancia una raffica di particelle sull'oggetto: esplosione, scintille, polvere, fumo, fuoco, pioggia, neve, coriandoli, scia, scia lunga, iperspazio o linee di velocità. Numero, colore e dimensione regolabili.",
+      "exemple": "un nemico colpito esplode in magenta: modello Esplosione, colore #FF40D0."
+    },
+    {
+      "nom": "Accendi / spegni particelle",
+      "schema": "<b>Ingressi:</b> Oggetto, Stato",
+      "role": "Accende o spegne un oggetto «Particelle»: emette di continuo oppure si ferma (le particelle già lanciate finiscono la loro vita).",
+      "exemple": "accendere il reattore quando la nave avanza."
+    },
+    {
+      "nom": "Raffica di particelle",
+      "schema": "<b>Ingressi:</b> Oggetto, Numero di particelle",
+      "role": "Lancia in un colpo molte particelle da un oggetto «Particelle», con le sue impostazioni (modello, colore, dimensione).",
+      "exemple": "80 coriandoli quando il livello è vinto."
+    },
+    {
+      "nom": "Cambia il modello di particelle",
+      "schema": "<b>Ingressi:</b> Oggetto, Modello",
+      "role": "Cambia il modello di un oggetto «Particelle» durante il gioco.",
+      "exemple": "un fuoco che diventa fumo quando lo si spegne."
     },
     {
       "nom": "Lampeggio (Blink)",
@@ -140,7 +164,7 @@
     },
     {
       "nom": "Spara un oggetto",
-      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Nome del modello, Direzione, Velocità",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Nome del modello, Direzione, Velocità, Distruggi fuori dallo schermo (true / false)",
       "role": "Crea un proiettile (l'oggetto indicato in «Nome del modello») nel punto dell'oggetto A e lo lancia alla velocità scelta: 0°, 90°, 180°, 270°, verso l'oggetto B («Verso il bersaglio») o secondo l'angolo di A.",
       "exemple": "un'astronave che spara laser verso l'alto (270)."
     },
@@ -161,6 +185,18 @@
       "schema": "<b>Ingressi:</b> Oggetto, Margine",
       "role": "Impedisce all'oggetto di uscire dallo schermo. Il margine lo ferma poco prima del bordo.",
       "exemple": "l'astronave del giocatore resta sempre visibile."
+    },
+    {
+      "nom": "Folgorazione",
+      "schema": "<b>Ingressi:</b> Oggetto, Colore dei fulmini, Durata (secondi, 0 = infinita), Intensità (0 = ferma, da 1 a 3)",
+      "role": "Fulmini crepitano intorno all'oggetto: lampeggia del colore del fulmine, trema e lancia scintille. Durata 0 = infinita (recinto elettrico); intensità 0 = ferma.",
+      "exemple": "il mago tocca una trappola: «Folgorazione» sul mago (1 secondo), «Attendere» 1 secondo, poi «Ricomincia la scena»."
+    },
+    {
+      "nom": "Scia dell'oggetto",
+      "schema": "<b>Ingressi:</b> Oggetto, Modello, Colore (vuoto = quello del modello), Dimensione (1 = normale)",
+      "role": "L'oggetto lascia dietro di sé una scia di particelle quando si muove (modello, colore e dimensione a scelta). Messa sul modello di un colpo, ogni colpo la eredita. Modello «Nessuno» per toglierla.",
+      "exemple": "colpi che lasciano una scia luminosa: bersaglio = il modello del colpo, modello Scia."
     },
     {
       "nom": "Crea oggetto",

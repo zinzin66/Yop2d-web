@@ -1,0 +1,220 @@
+{
+  "titre_page": "如何在 Yop2D 中添加粒子和特效？| Yop2D 教程",
+  "description": "爆炸、火焰、烟雾、飞船拖尾、闪光和淡入淡出：无需代码，用“粒子”对象和 [[effet_particules]]、[[flash_ecran]]、[[fondu_ecran]] 节点为 Yop2D 游戏添加视觉特效。",
+  "h1": "如何添加粒子和特效？",
+  "carte": [
+    "粒子和特效",
+    "碰到敌人时爆炸，飞船后面的拖尾，屏幕闪光和淡入淡出。"
+  ],
+  "etapes": [
+    [
+      "爆炸",
+      "{{NoeudEventCollisionTag}} → {{effet_particules}} ({{lang:option.Explosion}}) → {{detruire_objet}}."
+    ],
+    [
+      "拖尾",
+      "一个挂在角色身上的 {{lang:obj_prefix_particules}} 对象（{{lang:option.Sillage}}）。"
+    ],
+    [
+      "屏幕特效",
+      "被击中时用 {{flash_ecran}}，两关之间用 {{fondu_ecran}}。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Yop2D 有两种方式产生粒子：**[[effet_particules]]** 节点一次性喷出一阵粒子（非常适合爆炸），**{{lang:obj_prefix_particules}}** 对象则不停地产生粒子（火焰、烟雾、雨、拖尾……）。另外还有一些节点可以为整个屏幕添加特效：闪光、色调、暗角和淡入淡出。"
+    ],
+    [
+      "besoin",
+      [
+        "一个能运行的游戏，里面有一个名为 **player**、可以移动的角色；",
+        "带有标签 **ennemi** 的敌人。"
+      ]
+    ],
+    [
+      "tip",
+      "想看到所有这些效果的实际表现，请在 Yop2D 主屏幕打开示例 **Effects showcase**：每个效果一个按钮，并显示要使用的节点名称。"
+    ],
+    [
+      "h2",
+      "第 1 步：碰到敌人时爆炸"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "打开场景的 **{{lang:titre_blueprint}}**。",
+            "添加事件 **[[NoeudEventCollisionTag]]**：目标 **player**，{{lang:Tag}} **ennemi**。",
+            "添加 **[[effet_particules]]**。目标选择 **{{lang:noeud_objet_implique_long}}**：也就是玩家刚刚碰到的敌人。{{lang:effet_particules.modele}}：**{{lang:option.Explosion}}**。",
+            "添加 **[[detruire_objet]]**，目标同样是 **{{lang:noeud_objet_implique_long}}**。",
+            "按顺序连接这三个节点，然后启动游戏去碰一个敌人：它会先爆炸再消失。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "目标：player · {{lang:Tag}}：ennemi"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{effet_particules}}",
+              "{{lang:noeud_objet_implique}} · {{lang:option.Explosion}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ]
+          ]
+        ],
+        [
+          "attention",
+          "**顺序很重要：** [[effet_particules]] 必须放在 [[detruire_objet]] **之前**。敌人被销毁后，就没有对象可以显示爆炸了。"
+        ],
+        [
+          "tip",
+          "你可以修改 **颜色**（例如 `#FF40D0` 做出品红色的爆炸）和 **大小**（2 = 两倍大）。也可以试试 {{lang:option.Etincelles}}、{{lang:option.Confettis}} 或 {{lang:option.Fumee}}。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 2 步：角色身后的拖尾"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "添加一个对象：在 **{{lang:cat_effets}}** 类别中选择 **{{lang:obj_prefix_particules}}**。它在编辑器里显示为橙色虚线区域，在游戏中不可见。",
+            "在检查器的 **{{lang:insp_sep_particules}}** 部分，点按 **{{lang:insp_btn_modele_particules}}** 并选择 **{{lang:option.Sillage}}**。",
+            "同样在检查器里，点按 **{{lang:insp_btn_parent_aucun}}** 按钮并选择 **player**：这个对象会一直跟着角色。",
+            "把它放在角色正后方，然后启动游戏并移动：角色身后会跟着一条长长的发光拖尾。"
+          ]
+        ],
+        [
+          "tip",
+          "蓝图里什么都不用加：只要勾选了 **{{lang:insp_cb_particules_actives}}**，{{lang:obj_prefix_particules}} 对象就会自己工作。想在游戏中开启或关闭它，请使用 **[[particules_marche]]** 节点。"
+        ],
+        [
+          "ul",
+          [
+            "**{{lang:option.Feu}}**：火把或篝火。",
+            "**{{lang:option.Fumee}}**：烟囱上方。",
+            "**{{lang:option.Pluie}}** 或 **{{lang:option.Neige}}**：把对象拉宽，铺满屏幕的整个顶部。",
+            "**{{lang:option.Hyperespace}}** 和 **{{lang:option.LignesVitesse}}**：营造高速飞行的感觉。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 3 步：整个屏幕的特效"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ul",
+          [
+            "**[[flash_ecran]]**：一次颜色闪光。例如在玩家被击中后立刻闪红光 0.5 秒。",
+            "**[[teinte_ecran]]**：给整个游戏蒙上一层颜色。夜晚用 55% 的深蓝色，强度设为 0 就回到白天。",
+            "**[[bords_assombris]]**：屏幕四周变暗，就像看电影一样。",
+            "**[[fondu_ecran]]**：屏幕变黑，然后重新出现。"
+          ]
+        ],
+        [
+          "p",
+          "想平滑地进入下一关（参见[关卡教程](guide:niveau-suivant)）："
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{fondu_ecran}}",
+              "{{lang:option.Disparaitre}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{scene_suivante}}"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "然后，在下一关里："
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{fondu_ecran}}",
+              "{{lang:option.Apparaitre}}"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "色调和暗角位于 **HUD 之下**：分数和按钮依然清晰可读。闪光和淡入淡出则会覆盖整个屏幕。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 4 步：触电和定格"
+    ],
+    [
+      "ul",
+      [
+        "**[[electrocution]]**：闪电在对象周围噼啪作响，对象闪烁并抖动。持续时间 **0** = 无限：非常适合提醒玩家危险的电击陷阱。",
+        "**[[arret_sur_image]]**：在撞击瞬间来一段极短的慢动作（0.08 秒），让爆炸更有冲击力。"
+      ]
+    ],
+    [
+      "h2",
+      "如果不起作用"
+    ],
+    [
+      "ul",
+      [
+        "**爆炸没有出现：** 检查 [[effet_particules]] 是否放在 [[detruire_objet]] **之前**。",
+        "**拖尾没有跟着角色：** 检查 {{lang:obj_prefix_particules}} 对象的父对象是否是 **player**，以及 {{lang:insp_cb_particules_actives}} 是否已勾选。",
+        "**粒子颜色不对：** 颜色“{{lang:insp_couleur_aucune}}”会保留预设的颜色；选择一种真正的颜色才能改变它们。",
+        "**屏幕一直是黑的：** 在 [[fondu_ecran]] {{lang:option.Disparaitre}} 之后，还需要一个 [[fondu_ecran]] {{lang:option.Apparaitre}}。"
+      ]
+    ]
+  ]
+}

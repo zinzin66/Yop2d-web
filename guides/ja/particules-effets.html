@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2D でパーティクルとエフェクトを追加するには？| Yop2D ガイド</title>
+<meta name="description" content="爆発、炎、煙、宇宙船の軌跡、フラッシュ、フェード：「パーティクル」オブジェクトと 「パーティクル効果」、「画面フラッシュ」、「画面フェード」 ノードを使って、コードなしで Yop2D に視覚エフェクトを追加します。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/particules-effets.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/particules-effets.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/particules-effets.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/particules-effets.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/particules-effets.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/particules-effets.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/particules-effets.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/particules-effets.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/particules-effets.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/particules-effets.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "パーティクルとエフェクトを追加するには？",
+ "description": "爆発、炎、煙、宇宙船の軌跡、フラッシュ、フェード：「パーティクル」オブジェクトと 「パーティクル効果」、「画面フラッシュ」、「画面フェード」 ノードを使って、コードなしで Yop2D に視覚エフェクトを追加します。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "爆発",
+   "text": "オブジェクトがタグに触れた場合 → パーティクル効果 (爆発) → オブジェクトを破壊."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "軌跡",
+   "text": "キャラクターにつけた パーティクル オブジェクト（長い軌跡）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "画面エフェクト",
+   "text": "攻撃されたときに 画面フラッシュ、ステージの切り替えに 画面フェード。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>パーティクルとエフェクトを追加するには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../particules-effets.html" hreflang="fr">Français</a> · <a href="../en/particules-effets.html" hreflang="en">English</a> · <a href="../es/particules-effets.html" hreflang="es">Español</a> · <a href="../de/particules-effets.html" hreflang="de">Deutsch</a> · <a href="../it/particules-effets.html" hreflang="it">Italiano</a> · <a href="../pt/particules-effets.html" hreflang="pt">Português</a> · <a href="../ru/particules-effets.html" hreflang="ru">Русский</a> · <a href="../zh/particules-effets.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>Yop2D ではパーティクルを 2 つの方法で作れます。<strong>「パーティクル効果」</strong> ノードは一度にまとめて放ち（爆発にぴったり）、<strong>パーティクル</strong> オブジェクトは出し続けます（炎、煙、雨、軌跡など）。ほかのノードで画面全体にエフェクトもかけられます：フラッシュ、色合い、周辺減光、フェード。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>動くゲームと、移動できる <strong>player</strong> という名前のキャラクター；</li><li>タグ <strong>ennemi</strong> のついた敵。</li></ul>
+</div>
+<div class="tip">👉 これらのエフェクトを実際に見るには、Yop2D のホーム画面で例 <strong>Effects showcase</strong> を開こう。エフェクトごとにボタンがあり、使うノードの名前も表示されます。</div>
+<h2>ステップ 1：敵に触れたら爆発</h2>
+<div class="method">
+<ol><li>シーンの <strong>ブループリント</strong> を開きます。</li><li>イベント <strong>「オブジェクトがタグに触れた場合」</strong> を追加：対象 <strong>player</strong>、タグ <strong>ennemi</strong>。</li><li><strong>「パーティクル効果」</strong> を追加します。対象には <strong>イベントに関与するオブジェクト</strong> を選びます。プレイヤーが今触れた敵のことです。プリセット：<strong>爆発</strong>。</li><li><strong>「オブジェクトを破壊」</strong> を追加し、対象は同じく <strong>イベントに関与するオブジェクト</strong> にします。</li><li>3 つのノードを順番につなぎ、ゲームを始めて敵に触れてみましょう。敵は爆発してから消えます。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>オブジェクトがタグに触れた場合</b><span>対象：player · タグ：ennemi</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>パーティクル効果</b><span>関連オブジェクト · 爆発</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>オブジェクトを破壊</b><span>関連オブジェクト</span></div>
+</div>
+<div class="tip attention">⚠️ <strong>順番が大事：</strong> 「パーティクル効果」 は 「オブジェクトを破壊」 の<strong>前</strong>に置きます。敵が消えたあとでは、爆発を出すオブジェクトがもうありません。</div>
+<div class="tip">👉 <strong>色</strong>（たとえばマゼンタの爆発なら <code>#FF40D0</code>）や <strong>大きさ</strong>（2 = 2 倍の大きさ）も変えられます。火花、紙吹雪、煙 も試してみてください。</div>
+</div>
+<h2>ステップ 2：キャラクターの後ろに軌跡</h2>
+<div class="method">
+<ol><li>オブジェクトを追加：<strong>エフェクト</strong> カテゴリーで <strong>パーティクル</strong> を選びます。エディターではオレンジの点線の枠で表示され、ゲーム中は見えません。</li><li>インスペクターの <strong>パーティクル</strong> の欄で <strong>プリセット：</strong> をタップし、<strong>長い軌跡</strong> を選びます。</li><li>同じくインスペクターで <strong>親: なし</strong> ボタンをタップし、<strong>player</strong> を選びます。オブジェクトはどこでもキャラクターについていきます。</li><li>キャラクターのすぐ後ろに置き、ゲームを始めて動いてみましょう。長く光る軌跡がキャラクターを追いかけます。</li></ol>
+<div class="tip">👉 ブループリントには何も要りません。<strong>ゲーム開始時から有効</strong> にチェックが入っていれば、パーティクル オブジェクトは自動で動きます。ゲーム中にオン／オフするには <strong>「パーティクルのオン / オフ」</strong> ノードを使います。</div>
+<ul><li><strong>炎</strong>：たいまつやキャンプファイヤー。</li><li><strong>煙</strong>：煙突の上。</li><li><strong>雨</strong> や <strong>雪</strong>：オブジェクトを画面の上端いっぱいに広げます。</li><li><strong>ハイパースペース</strong> と <strong>スピードライン</strong>：ものすごいスピード感を出せます。</li></ul>
+</div>
+<h2>ステップ 3：画面全体のエフェクト</h2>
+<div class="method">
+<ul><li><strong>「画面フラッシュ」</strong>：色のフラッシュ。たとえばプレイヤーが攻撃された直後に、赤で 0.5 秒。</li><li><strong>「画面の色合い」</strong>：ゲーム全体に色を重ねます。夜は濃い青を 55 %、昼に戻すには 強さを 0 に。</li><li><strong>「周辺減光」</strong>：映画のように画面の端が暗くなります。</li><li><strong>「画面フェード」</strong>：画面が黒くなり、また現れます。</li></ul>
+<p>次のステージへなめらかに移るには（<a href="../ja/niveau-suivant.html">ステージのガイド</a>も参照）：</p>
+<div class="chaine">
+<div class="noeud"><b>画面フェード</b><span>フェードアウト（色へ）</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>待つ</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>次のシーン</b></div>
+</div>
+<p>そして、次のステージで：</p>
+<div class="chaine">
+<div class="noeud evenement"><b>起動時</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>画面フェード</b><span>フェードイン（色から）</span></div>
+</div>
+<div class="tip">👉 色合いと周辺減光は <strong>HUD の下</strong>にかかるので、スコアやボタンは読みやすいままです。フラッシュとフェードは画面全体を覆います。</div>
+</div>
+<h2>ステップ4：感電とヒットストップ</h2>
+<ul><li><strong>「感電」</strong>：オブジェクトのまわりで稲妻がはじけ、点滅して震えます。時間 <strong>0</strong> = 無限：プレイヤーに危険を知らせる電気の罠にぴったり。</li><li><strong>「ヒットストップ」</strong>：衝突の瞬間にごく短いスローモーション（0.08秒）を入れると、爆発に迫力が出ます。</li></ul>
+<h2>うまくいかないとき</h2>
+<ul><li><strong>爆発が出ない：</strong> 「パーティクル効果」 が 「オブジェクトを破壊」 の<strong>前</strong>にあるか確認します。</li><li><strong>軌跡がキャラクターについてこない：</strong> パーティクル オブジェクトの親が <strong>player</strong> になっているか、ゲーム開始時から有効 にチェックが入っているか確認します。</li><li><strong>パーティクルの色が違う：</strong> 色「なし」はプリセットの色のままです。色を変えるには本当の色を選びます。</li><li><strong>画面が黒いまま：</strong> 「画面フェード」 フェードアウト（色へ） のあとには、「画面フェード」 フェードイン（色から） が必要です。</li></ul>
+
+<div class="nav">
+<a href="../ja/niveau-suivant.html">← 次のステージに進む</a>
+<a href="index.html">すべてのガイド →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

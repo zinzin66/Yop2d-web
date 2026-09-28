@@ -1,0 +1,220 @@
+{
+  "titre_page": "Como adicionar partículas e efeitos no Yop2D? | Guia Yop2D",
+  "description": "Explosões, fogo, fumaça, o rastro de uma nave, flash e esmaecimento: adicione efeitos visuais no Yop2D sem código, com o objeto Partículas e os nós [[effet_particules]], [[flash_ecran]] e [[fondu_ecran]].",
+  "h1": "Como adicionar partículas e efeitos?",
+  "carte": [
+    "Partículas e efeitos",
+    "Uma explosão ao tocar um inimigo, um rastro atrás da nave, um flash e um esmaecimento da tela."
+  ],
+  "etapes": [
+    [
+      "Uma explosão",
+      "{{NoeudEventCollisionTag}} → {{effet_particules}} ({{lang:option.Explosion}}) → {{detruire_objet}}."
+    ],
+    [
+      "Um rastro",
+      "Um objeto {{lang:obj_prefix_particules}} ({{lang:option.Sillage}}) preso ao personagem."
+    ],
+    [
+      "Efeitos de tela",
+      "{{flash_ecran}} quando você é atingido, {{fondu_ecran}} entre duas fases."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "O Yop2D faz partículas de duas maneiras: o nó **[[effet_particules]]** lança uma rajada de uma vez (perfeito para uma explosão), e o objeto **{{lang:obj_prefix_particules}}** as produz sem parar (fogo, fumaça, chuva, rastro…). Outros nós adicionam efeitos na tela inteira: flash, tonalidade, bordas escurecidas e esmaecimento."
+    ],
+    [
+      "besoin",
+      [
+        "um jogo que funcione, com um personagem chamado **player** que pode se mover;",
+        "inimigos com a tag **ennemi**."
+      ]
+    ],
+    [
+      "tip",
+      "Para ver todos estes efeitos em ação, abra o exemplo **Effects showcase** no ecrã inicial do Yop2D: um botão por efeito, com o nome do nó a usar."
+    ],
+    [
+      "h2",
+      "Passo 1: uma explosão ao tocar um inimigo"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Abra o **{{lang:titre_blueprint}}** da cena.",
+            "Adicione o evento **[[NoeudEventCollisionTag]]**: alvo **player**, {{lang:Tag}} **ennemi**.",
+            "Adicione **[[effet_particules]]**. Como alvo, escolha **{{lang:noeud_objet_implique_long}}**: é o inimigo que o jogador acabou de tocar. {{lang:effet_particules.modele}}: **{{lang:option.Explosion}}**.",
+            "Adicione **[[detruire_objet]]**, com o mesmo alvo **{{lang:noeud_objet_implique_long}}**.",
+            "Ligue os três nós em ordem, depois inicie o jogo e toque um inimigo: ele explode antes de sumir."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "alvo: player · {{lang:Tag}}: ennemi"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{effet_particules}}",
+              "{{lang:noeud_objet_implique}} · {{lang:option.Explosion}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ]
+          ]
+        ],
+        [
+          "attention",
+          "**A ordem importa:** [[effet_particules]] precisa vir **antes** de [[detruire_objet]]. Depois que o inimigo é destruído, não há mais objeto onde colocar a explosão."
+        ],
+        [
+          "tip",
+          "Você pode mudar a **cor** (por exemplo `#FF40D0` para uma explosão magenta) e o **tamanho** (2 = duas vezes maior). Experimente também {{lang:option.Etincelles}}, {{lang:option.Confettis}} ou {{lang:option.Fumee}}."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 2: um rastro atrás do personagem"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Adicione um objeto: na categoria **{{lang:cat_effets}}**, escolha **{{lang:obj_prefix_particules}}**. No editor ele aparece como uma área laranja pontilhada; no jogo ele é invisível.",
+            "No inspetor, seção **{{lang:insp_sep_particules}}**, toque em **{{lang:insp_btn_modele_particules}}** e escolha **{{lang:option.Sillage}}**.",
+            "Ainda no inspetor, toque no botão **{{lang:insp_btn_parent_aucun}}** e escolha **player**: o objeto vai seguir o personagem por toda parte.",
+            "Coloque-o logo atrás do personagem, depois inicie o jogo e mova-se: um longo rastro luminoso segue o personagem."
+          ]
+        ],
+        [
+          "tip",
+          "Nada a colocar no Blueprint: um objeto {{lang:obj_prefix_particules}} funciona sozinho enquanto **{{lang:insp_cb_particules_actives}}** estiver marcado. Para ligá-lo ou desligá-lo durante o jogo, use o nó **[[particules_marche]]**."
+        ],
+        [
+          "ul",
+          [
+            "**{{lang:option.Feu}}**: uma tocha ou uma fogueira.",
+            "**{{lang:option.Fumee}}**: acima de uma chaminé.",
+            "**{{lang:option.Pluie}}** ou **{{lang:option.Neige}}**: estique o objeto por toda a parte de cima da tela.",
+            "**{{lang:option.Hyperespace}}** e **{{lang:option.LignesVitesse}}**: para dar uma sensação de grande velocidade."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 3: efeitos na tela inteira"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ul",
+          [
+            "**[[flash_ecran]]**: um clarão de cor. Por exemplo vermelho, 0,5 segundo, logo depois que o jogador é atingido.",
+            "**[[teinte_ecran]]**: uma cor sobre todo o jogo. Azul-escuro a 55 % para a noite, e intensidade 0 para voltar ao dia.",
+            "**[[bords_assombris]]**: as bordas da tela escurecem, como no cinema.",
+            "**[[fondu_ecran]]**: a tela fica preta e depois reaparece."
+          ]
+        ],
+        [
+          "p",
+          "Para passar à próxima fase com suavidade (veja [o guia das fases](guide:niveau-suivant)):"
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{fondu_ecran}}",
+              "{{lang:option.Disparaitre}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{scene_suivante}}"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "Depois, na próxima fase:"
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{fondu_ecran}}",
+              "{{lang:option.Apparaitre}}"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "A tonalidade e as bordas escurecidas ficam **abaixo do HUD**: a pontuação e os botões continuam fáceis de ler. O flash e o esmaecimento cobrem a tela inteira."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 4: eletrocussão e congelamento de imagem"
+    ],
+    [
+      "ul",
+      [
+        "**[[electrocution]]**: raios estalam em volta de um objeto, que pisca e treme. Duração **0** = sem fim: perfeito para uma armadilha elétrica que avisa o jogador.",
+        "**[[arret_sur_image]]**: uma câmara lenta muito curta (0,08 segundos) no momento do impacto dá muita força a uma explosão."
+      ]
+    ],
+    [
+      "h2",
+      "Se não funcionar"
+    ],
+    [
+      "ul",
+      [
+        "**A explosão não aparece:** verifique se [[effet_particules]] está **antes** de [[detruire_objet]].",
+        "**O rastro não segue o personagem:** verifique se o objeto {{lang:obj_prefix_particules}} tem **player** como pai e se {{lang:insp_cb_particules_actives}} está marcado.",
+        "**As partículas estão com a cor errada:** a cor «{{lang:insp_couleur_aucune}}» mantém as cores do modelo; escolha uma cor de verdade para mudá-las.",
+        "**A tela fica preta:** depois de um [[fondu_ecran]] {{lang:option.Disparaitre}}, é preciso um [[fondu_ecran]] {{lang:option.Apparaitre}}."
+      ]
+    ]
+  ]
+}

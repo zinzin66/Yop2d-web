@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Come aggiungere particelle ed effetti in Yop2D? | Guida Yop2D</title>
+<meta name="description" content="Esplosioni, fuoco, fumo, la scia di un&#x27;astronave, flash e dissolvenza: aggiungi effetti visivi in Yop2D senza codice, con l&#x27;oggetto Particelle e i nodi «Effetto particellare», «Flash dello schermo» e «Dissolvenza dello schermo».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/it/particules-effets.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/particules-effets.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/particules-effets.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/particules-effets.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/particules-effets.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/particules-effets.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/particules-effets.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/particules-effets.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/particules-effets.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/particules-effets.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Come aggiungere particelle ed effetti?",
+ "description": "Esplosioni, fuoco, fumo, la scia di un'astronave, flash e dissolvenza: aggiungi effetti visivi in Yop2D senza codice, con l'oggetto Particelle e i nodi «Effetto particellare», «Flash dello schermo» e «Dissolvenza dello schermo».",
+ "inLanguage": "it",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motore di gioco 2D senza codice per Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Un'esplosione",
+   "text": "Se l'oggetto tocca il Tag → Effetto particellare (Esplosione) → Distruggi Oggetto."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Una scia",
+   "text": "Un oggetto Particelle (Scia lunga) agganciato al personaggio."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Effetti dello schermo",
+   "text": "Flash dello schermo quando vieni colpito, Dissolvenza dello schermo tra due livelli."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../it/index.html">← Yop2D</a>
+<h1>Come aggiungere particelle ed effetti?</h1>
+<p>Guida per principianti · senza codice</p>
+<p class="langues"><a href="../particules-effets.html" hreflang="fr">Français</a> · <a href="../en/particules-effets.html" hreflang="en">English</a> · <a href="../es/particules-effets.html" hreflang="es">Español</a> · <a href="../de/particules-effets.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="../pt/particules-effets.html" hreflang="pt">Português</a> · <a href="../ru/particules-effets.html" hreflang="ru">Русский</a> · <a href="../zh/particules-effets.html" hreflang="zh">中文</a> · <a href="../ja/particules-effets.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Yop2D crea particelle in due modi: il nodo <strong>«Effetto particellare»</strong> lancia una raffica tutta insieme (perfetto per un'esplosione), e l'oggetto <strong>Particelle</strong> le produce senza sosta (fuoco, fumo, pioggia, scia…). Altri nodi aggiungono effetti su tutto lo schermo: flash, tinta, bordi scuriti e dissolvenza.</p>
+<div class="besoin">
+<b>Ti serve:</b>
+<ul><li>un gioco che funziona, con un personaggio chiamato <strong>player</strong> che può muoversi;</li><li>nemici con il tag <strong>ennemi</strong>.</li></ul>
+</div>
+<div class="tip">👉 Per vedere tutti questi effetti in azione, apri l'esempio <strong>Effects showcase</strong> nella schermata iniziale di Yop2D: un pulsante per effetto, con il nome del nodo da usare.</div>
+<h2>Passo 1: un'esplosione quando tocchi un nemico</h2>
+<div class="method">
+<ol><li>Apri il <strong>Blueprint</strong> della scena.</li><li>Aggiungi l'evento <strong>«Se l'oggetto tocca il Tag»</strong>: bersaglio <strong>player</strong>, Tag <strong>ennemi</strong>.</li><li>Aggiungi <strong>«Effetto particellare»</strong>. Come bersaglio scegli <strong>L'oggetto implicato nell'evento</strong>: è il nemico appena toccato dal giocatore. Modello: <strong>Esplosione</strong>.</li><li>Aggiungi <strong>«Distruggi Oggetto»</strong>, con lo stesso bersaglio <strong>L'oggetto implicato nell'evento</strong>.</li><li>Collega i tre nodi in ordine, poi avvia il gioco e tocca un nemico: esplode prima di sparire.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Se l'oggetto tocca il Tag</b><span>bersaglio: player · Tag: ennemi</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Effetto particellare</b><span>Oggetto Implicato · Esplosione</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Distruggi Oggetto</b><span>Oggetto Implicato</span></div>
+</div>
+<div class="tip attention">⚠️ <strong>L'ordine conta:</strong> «Effetto particellare» deve venire <strong>prima</strong> di «Distruggi Oggetto». Una volta distrutto il nemico, non c'è più un oggetto su cui mettere l'esplosione.</div>
+<div class="tip">👉 Puoi cambiare il <strong>colore</strong> (per esempio <code>#FF40D0</code> per un'esplosione magenta) e la <strong>dimensione</strong> (2 = grande il doppio). Prova anche Scintille, Coriandoli o Fumo.</div>
+</div>
+<h2>Passo 2: una scia dietro il personaggio</h2>
+<div class="method">
+<ol><li>Aggiungi un oggetto: nella categoria <strong>Effetti</strong>, scegli <strong>Particelle</strong>. Nell'editor appare come una zona arancione tratteggiata; nel gioco è invisibile.</li><li>Nell'ispettore, sezione <strong>PARTICELLE</strong>, tocca <strong>Modello:</strong> e scegli <strong>Scia lunga</strong>.</li><li>Sempre nell'ispettore, tocca il pulsante <strong>Genitore: Nessuno</strong> e scegli <strong>player</strong>: l'oggetto seguirà il personaggio ovunque.</li><li>Mettilo proprio dietro il personaggio, poi avvia il gioco e muoviti: una lunga scia luminosa segue il personaggio.</li></ol>
+<div class="tip">👉 Non serve niente nel Blueprint: un oggetto Particelle funziona da solo finché la casella <strong>Attivo dall'inizio del gioco</strong> è spuntata. Per accenderlo o spegnerlo durante il gioco, usa il nodo <strong>«Accendi / spegni particelle»</strong>.</div>
+<ul><li><strong>Fuoco</strong>: una torcia o un fuoco da campo.</li><li><strong>Fumo</strong>: sopra un camino.</li><li><strong>Pioggia</strong> o <strong>Neve</strong>: allunga l'oggetto su tutta la parte alta dello schermo.</li><li><strong>Iperspazio</strong> e <strong>Linee di velocità</strong>: per dare una sensazione di grande velocità.</li></ul>
+</div>
+<h2>Passo 3: effetti su tutto lo schermo</h2>
+<div class="method">
+<ul><li><strong>«Flash dello schermo»</strong>: un lampo di colore. Per esempio rosso, 0,5 secondi, subito dopo che il giocatore è stato colpito.</li><li><strong>«Tinta dello schermo»</strong>: un colore su tutto il gioco. Blu scuro al 55 % per la notte, e intensità 0 per tornare al giorno.</li><li><strong>«Bordi scuriti»</strong>: i bordi dello schermo si scuriscono, come al cinema.</li><li><strong>«Dissolvenza dello schermo»</strong>: lo schermo diventa nero, poi riappare.</li></ul>
+<p>Per passare al livello successivo con dolcezza (vedi <a href="../it/niveau-suivant.html">la guida dei livelli</a>):</p>
+<div class="chaine">
+<div class="noeud"><b>Dissolvenza dello schermo</b><span>Scomparire (verso il colore)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Attendere</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Scena successiva</b></div>
+</div>
+<p>Poi, nel livello successivo:</p>
+<div class="chaine">
+<div class="noeud evenement"><b>All'Avvio</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Dissolvenza dello schermo</b><span>Apparire (dal colore)</span></div>
+</div>
+<div class="tip">👉 La tinta e i bordi scuriti restano <strong>sotto l'HUD</strong>: il punteggio e i pulsanti restano ben leggibili. Il flash e la dissolvenza coprono tutto lo schermo.</div>
+</div>
+<h2>Passo 4: folgorazione e fermo immagine</h2>
+<ul><li><strong>«Folgorazione»</strong>: fulmini crepitano intorno a un oggetto, che lampeggia e trema. Durata <strong>0</strong> = infinita: perfetto per una trappola elettrica che avvisa il giocatore.</li><li><strong>«Pausa d'impatto»</strong>: un rallentatore brevissimo (0,08 secondi) al momento dell'impatto dà molta potenza a un'esplosione.</li></ul>
+<h2>Se non funziona</h2>
+<ul><li><strong>L'esplosione non appare:</strong> controlla che «Effetto particellare» sia <strong>prima</strong> di «Distruggi Oggetto».</li><li><strong>La scia non segue il personaggio:</strong> controlla che l'oggetto Particelle abbia <strong>player</strong> come genitore e che la casella Attivo dall'inizio del gioco sia spuntata.</li><li><strong>Le particelle hanno il colore sbagliato:</strong> il colore «Nessuno» mantiene i colori del modello; scegli un colore vero per cambiarli.</li><li><strong>Lo schermo resta nero:</strong> dopo un «Dissolvenza dello schermo» Scomparire (verso il colore), serve un «Dissolvenza dello schermo» Apparire (dal colore).</li></ul>
+
+<div class="nav">
+<a href="../it/niveau-suivant.html">← Passare al livello successivo</a>
+<a href="index.html">Tutte le guide →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motore di gioco 2D gratuito e senza codice per Android · <a href="../../it/index.html">Sito ufficiale</a> · <a href="../../noeuds/it.html">Riferimento dei nodi</a></p>
+</footer>
+</body>
+</html>

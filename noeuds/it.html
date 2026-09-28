@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutti i nodi di Yop2D (115) | Riferimento</title>
-<meta name="description" content="Elenco completo dei 115 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
+<title>Tutti i nodi di Yop2D (127) | Riferimento</title>
+<meta name="description" content="Elenco completo dei 127 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 115 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
+<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 127 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
 <p><strong>Categorie</strong></p>
 <nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-animazioni">Animazioni</a><a href="#c10-audio">Audio</a></nav>
 <h2 id="c1-eventi">Eventi</h2>
@@ -193,10 +193,35 @@
 <p>La telecamera segue l'oggetto scelto, anche solo in orizzontale o in verticale. Senza oggetto, la telecamera non segue più niente.</p>
 <p class="exemple"><b>Esempio:</b> seguire il giocatore in un grande livello a piattaforme.</p>
 </div>
+<div class="fiche"><h3>Limiti della telecamera</h3>
+<div class="schema"><b>Ingressi:</b> X minimo (bordo sinistro del livello), X massimo (bordo destro), Y minimo (alto), Y massimo (basso; tutto a 0 = nessun limite)</div>
+<p>Impedisce alla telecamera di uscire dai bordi del livello: non mostra mai il vuoto oltre. Tutto a 0 = nessun limite.</p>
+<p class="exemple"><b>Esempio:</b> livello largo 6480 pixel: X minimo 0, X massimo 6480, Y minimo 0, Y massimo 1080, con «Fissa la camera» sul giocatore.</p>
+</div>
 <div class="fiche"><h3>Morbidezza della camera</h3>
 <div class="schema"><b>Ingresso:</b> Velocità di inseguimento (da 0.01 a 1)</div>
 <p>Regola la velocità con cui la telecamera raggiunge l'oggetto seguito: 0.01 = molto morbida, 1 = attaccata all'oggetto.</p>
 <p class="exemple"><b>Esempio:</b> 0.1 per una telecamera morbida che segue con un leggero ritardo.</p>
+</div>
+<div class="fiche"><h3>Flash dello schermo</h3>
+<div class="schema"><b>Ingressi:</b> Colore, Intensità (%, 0 = nessuna), Durata (secondi)</div>
+<p>Fa un lampo di colore su tutto lo schermo, che svanisce in un attimo (intensità in %, durata in secondi).</p>
+<p class="exemple"><b>Esempio:</b> un lampo rosso di 0,5 secondi quando il giocatore viene colpito.</p>
+</div>
+<div class="fiche"><h3>Tinta dello schermo</h3>
+<div class="schema"><b>Ingressi:</b> Colore, Intensità (%, 0 = nessuna), Transizione (secondi)</div>
+<p>Posa un colore su tutto il gioco (sotto l'HUD), con una transizione morbida. Intensità 0 per toglierlo.</p>
+<p class="exemple"><b>Esempio:</b> cala la notte: blu scuro, intensità 55, transizione di 2 secondi.</p>
+</div>
+<div class="fiche"><h3>Bordi scuriti</h3>
+<div class="schema"><b>Ingressi:</b> Colore, Intensità (%, 0 = nessuna), Transizione (secondi)</div>
+<p>Scurisce dolcemente i bordi dello schermo, come al cinema (sotto l'HUD). Intensità 0 per toglierlo.</p>
+<p class="exemple"><b>Esempio:</b> un'atmosfera inquietante in una grotta: intensità 75.</p>
+</div>
+<div class="fiche"><h3>Dissolvenza dello schermo</h3>
+<div class="schema"><b>Ingressi:</b> Verso, Colore, Durata (secondi)</div>
+<p>Fa scomparire tutto lo schermo verso un colore, o lo fa riapparire da esso. La dissolvenza continua da una scena all'altra.</p>
+<p class="exemple"><b>Esempio:</b> «Dissolvenza dello schermo» (scomparire), «Attendere» 1 secondo, «Vai alla scena», poi «Dissolvenza dello schermo» (apparire) all'inizio del livello successivo.</p>
 </div>
 <div class="fiche"><h3>Tremolio della camera</h3>
 <div class="schema"><b>Ingressi:</b> Intensità, Durata (ms)</div>
@@ -251,6 +276,11 @@
 <div class="fiche"><h3>Riprendi il gioco</h3>
 <p>Riprende il gioco dopo una pausa.</p>
 <p class="exemple"><b>Esempio:</b> il pulsante «Continua» del menu di pausa.</p>
+</div>
+<div class="fiche"><h3>Pausa d'impatto</h3>
+<div class="schema"><b>Ingressi:</b> Durata (secondi), Velocità durante la pausa (0 = fermo)</div>
+<p>Rallenta tutto il gioco quasi fino a fermarlo per un istante brevissimo (in secondi reali), poi il gioco riprende la sua velocità. Dà più forza agli impatti.</p>
+<p class="exemple"><b>Esempio:</b> quando esplode un nemico: durata 0,06, velocità 0,05.</p>
 </div>
 </div>
 <h2 id="c4-aspetto-e-oggetti">Aspetto e Oggetti</h2>
@@ -355,9 +385,29 @@
 <p class="exemple"><b>Esempio:</b> una spada che segue la mano del personaggio.</p>
 </div>
 <div class="fiche"><h3>Bagliore (Glow)</h3>
-<div class="schema"><b>Ingressi:</b> Oggetto, Stato, Colore</div>
-<p>Attiva o disattiva un alone colorato intorno all'oggetto.</p>
-<p class="exemple"><b>Esempio:</b> mostrare l'oggetto che si può raccogliere.</p>
+<div class="schema"><b>Ingressi:</b> Oggetto, Stato, Colore, Dimensione del bagliore</div>
+<p>Circonda l'oggetto con un bagliore morbido del colore e della dimensione scelti (segue la forma delle immagini), oppure lo toglie.</p>
+<p class="exemple"><b>Esempio:</b> un bonus che brilla di giallo, dimensione 20.</p>
+</div>
+<div class="fiche"><h3>Effetto particellare</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Modello, Quantità (0 = quella del modello), Colore (vuoto = quello del modello), Dimensione (1 = normale)</div>
+<p>Lancia una raffica di particelle sull'oggetto: esplosione, scintille, polvere, fumo, fuoco, pioggia, neve, coriandoli, scia, scia lunga, iperspazio o linee di velocità. Numero, colore e dimensione regolabili.</p>
+<p class="exemple"><b>Esempio:</b> un nemico colpito esplode in magenta: modello Esplosione, colore #FF40D0.</p>
+</div>
+<div class="fiche"><h3>Accendi / spegni particelle</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Stato</div>
+<p>Accende o spegne un oggetto «Particelle»: emette di continuo oppure si ferma (le particelle già lanciate finiscono la loro vita).</p>
+<p class="exemple"><b>Esempio:</b> accendere il reattore quando la nave avanza.</p>
+</div>
+<div class="fiche"><h3>Raffica di particelle</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Numero di particelle</div>
+<p>Lancia in un colpo molte particelle da un oggetto «Particelle», con le sue impostazioni (modello, colore, dimensione).</p>
+<p class="exemple"><b>Esempio:</b> 80 coriandoli quando il livello è vinto.</p>
+</div>
+<div class="fiche"><h3>Cambia il modello di particelle</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Modello</div>
+<p>Cambia il modello di un oggetto «Particelle» durante il gioco.</p>
+<p class="exemple"><b>Esempio:</b> un fuoco che diventa fumo quando lo si spegne.</p>
 </div>
 <div class="fiche"><h3>Lampeggio (Blink)</h3>
 <div class="schema"><b>Ingressi:</b> Oggetto, Stato, Velocità (ms), Durata (ms, 0 = infinito)</div>
@@ -370,7 +420,7 @@
 <p class="exemple"><b>Esempio:</b> far cadere un sasso in una posizione a caso: X = random(0, 800).</p>
 </div>
 <div class="fiche"><h3>Spara un oggetto</h3>
-<div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B, Nome del modello, Direzione, Velocità</div>
+<div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B, Nome del modello, Direzione, Velocità, Distruggi fuori dallo schermo (true / false)</div>
 <p>Crea un proiettile (l'oggetto indicato in «Nome del modello») nel punto dell'oggetto A e lo lancia alla velocità scelta: 0°, 90°, 180°, 270°, verso l'oggetto B («Verso il bersaglio») o secondo l'angolo di A.</p>
 <p class="exemple"><b>Esempio:</b> un'astronave che spara laser verso l'alto (270).</p>
 </div>
@@ -388,6 +438,16 @@
 <div class="schema"><b>Ingressi:</b> Oggetto, Margine</div>
 <p>Impedisce all'oggetto di uscire dallo schermo. Il margine lo ferma poco prima del bordo.</p>
 <p class="exemple"><b>Esempio:</b> l'astronave del giocatore resta sempre visibile.</p>
+</div>
+<div class="fiche"><h3>Folgorazione</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Colore dei fulmini, Durata (secondi, 0 = infinita), Intensità (0 = ferma, da 1 a 3)</div>
+<p>Fulmini crepitano intorno all'oggetto: lampeggia del colore del fulmine, trema e lancia scintille. Durata 0 = infinita (recinto elettrico); intensità 0 = ferma.</p>
+<p class="exemple"><b>Esempio:</b> il mago tocca una trappola: «Folgorazione» sul mago (1 secondo), «Attendere» 1 secondo, poi «Ricomincia la scena».</p>
+</div>
+<div class="fiche"><h3>Scia dell'oggetto</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Modello, Colore (vuoto = quello del modello), Dimensione (1 = normale)</div>
+<p>L'oggetto lascia dietro di sé una scia di particelle quando si muove (modello, colore e dimensione a scelta). Messa sul modello di un colpo, ogni colpo la eredita. Modello «Nessuno» per toglierla.</p>
+<p class="exemple"><b>Esempio:</b> colpi che lasciano una scia luminosa: bersaglio = il modello del colpo, modello Scia.</p>
 </div>
 <div class="fiche"><h3>Crea oggetto</h3>
 <div class="schema"><b>Ingressi:</b> Oggetto, Posizione X, Posizione Y</div>
@@ -510,7 +570,7 @@
 </div>
 <div class="fiche"><h3>Mostra dialogo</h3>
 <div class="schema"><b>Ingressi:</b> Oggetto, Chiave del dialogo</div>
-<p>Scrive nell'oggetto Testo la frase che corrisponde alla chiave, dal file dei dialoghi (dialogues.txt).</p>
+<p>Scrive nell'oggetto Testo la frase che corrisponde alla chiave, dal file dei dialoghi (dialogues.txt). Più lingue: scrivi «ciao.it = Ciao», «ciao.en = Hello»…; il gioco usa la lingua della variabile «langue», altrimenti quella del telefono. «\n» = a capo.</p>
 <p class="exemple"><b>Esempio:</b> la chiave «ciao_mercante» mostra la battuta del mercante.</p>
 </div>
 <div class="fiche"><h3>Aggiungi al testo</h3>
@@ -618,12 +678,12 @@
 <h2 id="c10-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Riproduci suono</h3>
-<div class="schema"><b>Ingresso:</b> File audio</div>
+<div class="schema"><b>Ingressi:</b> File audio, Volume (%, 100 = pieno)</div>
 <p>Riproduce un effetto sonoro. Più suoni possono sentirsi insieme.</p>
 <p class="exemple"><b>Esempio:</b> un «bling» quando si raccoglie una moneta.</p>
 </div>
 <div class="fiche"><h3>Riproduci musica</h3>
-<div class="schema"><b>Ingressi:</b> File musicale, In loop (true / false)</div>
+<div class="schema"><b>Ingressi:</b> File musicale, In loop (true / false), Volume (%, 100 = pieno)</div>
 <p>Avvia una musica, che sostituisce quella in corso. Da non mettere sotto «Ogni frame» (ricomincerebbe di continuo).</p>
 <p class="exemple"><b>Esempio:</b> la musica del livello, all'avvio.</p>
 </div>

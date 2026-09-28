@@ -79,10 +79,40 @@
       "exemple": "seguir al jugador en un gran nivel de plataformas."
     },
     {
+      "nom": "Límites de la cámara",
+      "schema": "<b>Entradas:</b> X mínimo (borde izquierdo del nivel), X máximo (borde derecho), Y mínimo (arriba), Y máximo (abajo; todo a 0 = sin límites)",
+      "role": "Impide que la cámara salga de los bordes del nivel: nunca muestra el vacío de más allá. Todo a 0 = sin límites.",
+      "exemple": "nivel de 6480 píxeles de ancho: X mínimo 0, X máximo 6480, Y mínimo 0, Y máximo 1080, con «Fijar la cámara» sobre el jugador."
+    },
+    {
       "nom": "Suavizado de cámara",
       "schema": "<b>Entrada:</b> Velocidad de seguimiento (0.01 a 1)",
       "role": "Ajusta la rapidez con la que la cámara alcanza al objeto seguido: 0.01 = muy suave, 1 = pegada al objeto.",
       "exemple": "0.1 para una cámara suave que sigue con un ligero retraso."
+    },
+    {
+      "nom": "Destello de pantalla",
+      "schema": "<b>Entradas:</b> Color, Intensidad (%, 0 = ninguna), Duración (segundos)",
+      "role": "Hace un destello de color en toda la pantalla, que se desvanece en un instante (intensidad en %, duración en segundos).",
+      "exemple": "un destello rojo de 0,5 segundos cuando golpean al jugador."
+    },
+    {
+      "nom": "Tinte de pantalla",
+      "schema": "<b>Entradas:</b> Color, Intensidad (%, 0 = ninguna), Transición (segundos)",
+      "role": "Pone un color sobre todo el juego (bajo el HUD), con una transición suave. Intensidad 0 para quitarlo.",
+      "exemple": "cae la noche: azul oscuro, intensidad 55, transición de 2 segundos."
+    },
+    {
+      "nom": "Bordes oscurecidos",
+      "schema": "<b>Entradas:</b> Color, Intensidad (%, 0 = ninguna), Transición (segundos)",
+      "role": "Oscurece suavemente los bordes de la pantalla, como en el cine (bajo el HUD). Intensidad 0 para quitarlo.",
+      "exemple": "un ambiente inquietante en una cueva: intensidad 75."
+    },
+    {
+      "nom": "Fundido de pantalla",
+      "schema": "<b>Entradas:</b> Sentido, Color, Duración (segundos)",
+      "role": "Hace desaparecer toda la pantalla hacia un color, o la hace aparecer desde él. El fundido continúa de una escena a otra.",
+      "exemple": "«Fundido de pantalla» (desaparecer), «Esperar» 1 segundo, «Ir a la escena», y luego «Fundido de pantalla» (aparecer) al empezar el siguiente nivel."
     },
     {
       "nom": "Temblor de cámara",

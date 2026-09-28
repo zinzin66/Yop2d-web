@@ -122,9 +122,33 @@
     },
     {
       "nom": "Surbrillance (Glow)",
-      "schema": "<b>Entrées :</b> Objet, État, Couleur",
-      "role": "Active ou désactive un halo de couleur autour de l'objet.",
-      "exemple": "montrer l'objet qu'on peut ramasser."
+      "schema": "<b>Entrées :</b> Objet, État, Couleur, Taille du halo",
+      "role": "Entoure l'objet d'un halo lumineux doux, de la couleur et de la taille choisies (il suit la forme des images), ou l'enlève.",
+      "exemple": "un bonus qui brille en jaune, taille 20."
+    },
+    {
+      "nom": "Effet de particules",
+      "schema": "<b>Entrées :</b> Objet, Modèle, Nombre (0 = celui du modèle), Couleur (vide = celle du modèle), Taille (1 = normale)",
+      "role": "Lance une gerbe de particules sur l'objet : explosion, étincelles, poussière, fumée, feu, pluie, neige, confettis, traînée, sillage, hyperespace ou lignes de vitesse. Nombre, couleur et taille réglables.",
+      "exemple": "un ennemi touché explose en magenta : modèle Explosion, couleur #FF40D0."
+    },
+    {
+      "nom": "Allumer / éteindre les particules",
+      "schema": "<b>Entrées :</b> Objet, État",
+      "role": "Allume ou éteint un objet « Particules » : il émet en continu ou s'arrête (les particules déjà lancées finissent leur vie).",
+      "exemple": "allumer le réacteur quand le vaisseau avance."
+    },
+    {
+      "nom": "Salve de particules",
+      "schema": "<b>Entrées :</b> Objet, Nombre de particules",
+      "role": "Lance d'un coup un nombre de particules depuis un objet « Particules », avec ses réglages (modèle, couleur, taille).",
+      "exemple": "80 confettis quand le niveau est gagné."
+    },
+    {
+      "nom": "Changer le modèle de particules",
+      "schema": "<b>Entrées :</b> Objet, Modèle",
+      "role": "Change le modèle d'un objet « Particules » pendant le jeu.",
+      "exemple": "un feu qui devient de la fumée quand on l'éteint."
     },
     {
       "nom": "Clignotement (Blink)",
@@ -140,7 +164,7 @@
     },
     {
       "nom": "Tirer un objet",
-      "schema": "<b>Entrées :</b> Objet A, Objet B, Nom du modèle, Direction, Vitesse",
+      "schema": "<b>Entrées :</b> Objet A, Objet B, Nom du modèle, Direction, Vitesse, Détruire hors de l'écran (true / false)",
       "role": "Crée un projectile (l'objet nommé dans « Nom du modèle ») à l'endroit de l'objet A, et le lance à la vitesse choisie : 0°, 90°, 180°, 270°, vers l'objet B (« Vers la cible ») ou selon l'angle de A.",
       "exemple": "un vaisseau qui tire des lasers vers le haut (270)."
     },
@@ -161,6 +185,18 @@
       "schema": "<b>Entrées :</b> Objet, Marge",
       "role": "Empêche l'objet de sortir de l'écran. La marge l'arrête un peu avant le bord.",
       "exemple": "le vaisseau du joueur reste toujours visible."
+    },
+    {
+      "nom": "Électrocution",
+      "schema": "<b>Entrées :</b> Objet, Couleur des éclairs, Durée (secondes, 0 = sans fin), Intensité (0 = arrêter, 1 à 3)",
+      "role": "Des éclairs crépitent autour de l'objet : il clignote dans la couleur de l'éclair, tremble et lâche des étincelles. Durée 0 = sans fin (clôture électrique) ; intensité 0 = arrêter.",
+      "exemple": "le magicien touche un piège : « Électrocution » sur le magicien (1 seconde), « Attendre » 1 seconde, puis « Recommencer la scène »."
+    },
+    {
+      "nom": "Traînée derrière l'objet",
+      "schema": "<b>Entrées :</b> Objet, Modèle, Couleur (vide = celle du modèle), Taille (1 = normale)",
+      "role": "L'objet laisse une traînée de particules derrière lui quand il bouge (modèle, couleur, taille au choix). Posée sur le modèle d'un tir, chaque tir en hérite. Modèle « Aucun » pour l'enlever.",
+      "exemple": "des tirs qui laissent une traînée lumineuse : cible = le modèle du tir, modèle Traînée."
     },
     {
       "nom": "Créer un objet",

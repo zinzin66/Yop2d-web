@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Cómo añadir partículas y efectos en Yop2D? | Guía de Yop2D</title>
+<meta name="description" content="Explosiones, fuego, humo, estela de nave, destello y fundido: añade efectos visuales en Yop2D sin código, con el objeto Partículas y los nodos «Efecto de partículas», «Destello de pantalla» y «Fundido de pantalla».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/es/particules-effets.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/particules-effets.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/particules-effets.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/particules-effets.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/particules-effets.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/particules-effets.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/particules-effets.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/particules-effets.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/particules-effets.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/particules-effets.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "¿Cómo añadir partículas y efectos?",
+ "description": "Explosiones, fuego, humo, estela de nave, destello y fundido: añade efectos visuales en Yop2D sin código, con el objeto Partículas y los nodos «Efecto de partículas», «Destello de pantalla» y «Fundido de pantalla».",
+ "inLanguage": "es",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de juegos 2D sin código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Una explosión",
+   "text": "Si el objeto toca el Tag → Efecto de partículas (Explosión) → Destruir Objeto."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Una estela",
+   "text": "Un objeto Partículas (Estela larga) unido al personaje."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Efectos de pantalla",
+   "text": "Destello de pantalla cuando te golpean, Fundido de pantalla entre dos niveles."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../es/index.html">← Yop2D</a>
+<h1>¿Cómo añadir partículas y efectos?</h1>
+<p>Guía para principiantes · sin código</p>
+<p class="langues"><a href="../particules-effets.html" hreflang="fr">Français</a> · <a href="../en/particules-effets.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="../de/particules-effets.html" hreflang="de">Deutsch</a> · <a href="../it/particules-effets.html" hreflang="it">Italiano</a> · <a href="../pt/particules-effets.html" hreflang="pt">Português</a> · <a href="../ru/particules-effets.html" hreflang="ru">Русский</a> · <a href="../zh/particules-effets.html" hreflang="zh">中文</a> · <a href="../ja/particules-effets.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Yop2D crea partículas de dos maneras: el nodo <strong>«Efecto de partículas»</strong> lanza una ráfaga de golpe (perfecto para una explosión), y el objeto <strong>Partículas</strong> las produce sin parar (fuego, humo, lluvia, estela…). Otros nodos añaden efectos a toda la pantalla: destello, tinte, bordes oscurecidos y fundido.</p>
+<div class="besoin">
+<b>Necesitas:</b>
+<ul><li>un juego que funcione, con un personaje llamado <strong>player</strong> que pueda moverse;</li><li>enemigos con la etiqueta <strong>ennemi</strong>.</li></ul>
+</div>
+<div class="tip">👉 Para ver todos estos efectos en acción, abre el ejemplo <strong>Effects showcase</strong> en la pantalla de inicio de Yop2D: un botón por efecto, con el nombre del nodo que hay que usar.</div>
+<h2>Paso 1: una explosión al tocar a un enemigo</h2>
+<div class="method">
+<ol><li>Abre el <strong>Blueprint</strong> de la escena.</li><li>Añade el evento <strong>«Si el objeto toca el Tag»</strong>: objetivo <strong>player</strong>, Tag <strong>ennemi</strong>.</li><li>Añade <strong>«Efecto de partículas»</strong>. Como objetivo, elige <strong>El objeto implicado en el evento</strong>: es el enemigo que el jugador acaba de tocar. Modelo: <strong>Explosión</strong>.</li><li>Añade <strong>«Destruir Objeto»</strong>, con el mismo objetivo <strong>El objeto implicado en el evento</strong>.</li><li>Conecta los tres nodos en orden, luego inicia el juego y toca a un enemigo: explota antes de desaparecer.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Si el objeto toca el Tag</b><span>objetivo: player · Tag: ennemi</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Efecto de partículas</b><span>Objeto Implicado · Explosión</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Destruir Objeto</b><span>Objeto Implicado</span></div>
+</div>
+<div class="tip attention">⚠️ <strong>El orden importa:</strong> «Efecto de partículas» debe ir <strong>antes</strong> de «Destruir Objeto». Una vez destruido el enemigo, ya no hay objeto donde colocar la explosión.</div>
+<div class="tip">👉 Puedes cambiar el <strong>color</strong> (por ejemplo <code>#FF40D0</code> para una explosión magenta) y el <strong>tamaño</strong> (2 = el doble de grande). Prueba también Chispas, Confeti o Humo.</div>
+</div>
+<h2>Paso 2: una estela detrás del personaje</h2>
+<div class="method">
+<ol><li>Añade un objeto: en la categoría <strong>Efectos</strong>, elige <strong>Partículas</strong>. En el editor aparece como una zona naranja punteada; en el juego es invisible.</li><li>En el inspector, sección <strong>PARTÍCULAS</strong>, toca <strong>Modelo:</strong> y elige <strong>Estela larga</strong>.</li><li>Todavía en el inspector, toca el botón <strong>Padre: Ninguno</strong> y elige <strong>player</strong>: el objeto seguirá al personaje a todas partes.</li><li>Colócalo justo detrás del personaje, luego inicia el juego y muévete: una larga estela luminosa sigue al personaje.</li></ol>
+<div class="tip">👉 No hay nada que poner en el Blueprint: un objeto Partículas funciona solo mientras la casilla <strong>Activo desde el inicio del juego</strong> esté marcada. Para encenderlo o apagarlo durante el juego, usa el nodo <strong>«Encender / apagar partículas»</strong>.</div>
+<ul><li><strong>Fuego</strong>: una antorcha o una fogata.</li><li><strong>Humo</strong>: encima de una chimenea.</li><li><strong>Lluvia</strong> o <strong>Nieve</strong>: estira el objeto por toda la parte superior de la pantalla.</li><li><strong>Hiperespacio</strong> y <strong>Líneas de velocidad</strong>: para dar una sensación de gran velocidad.</li></ul>
+</div>
+<h2>Paso 3: efectos en toda la pantalla</h2>
+<div class="method">
+<ul><li><strong>«Destello de pantalla»</strong>: un destello de color. Por ejemplo rojo, 0,5 segundos, justo después de que golpeen al jugador.</li><li><strong>«Tinte de pantalla»</strong>: un color sobre todo el juego. Azul oscuro al 55 % para la noche, y intensidad 0 para volver al día.</li><li><strong>«Bordes oscurecidos»</strong>: los bordes de la pantalla se oscurecen, como en el cine.</li><li><strong>«Fundido de pantalla»</strong>: la pantalla se vuelve negra y luego reaparece.</li></ul>
+<p>Para pasar al siguiente nivel con suavidad (mira <a href="../es/niveau-suivant.html">la guía de niveles</a>):</p>
+<div class="chaine">
+<div class="noeud"><b>Fundido de pantalla</b><span>Desaparecer (hacia el color)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Esperar</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Escena siguiente</b></div>
+</div>
+<p>Después, en el siguiente nivel:</p>
+<div class="chaine">
+<div class="noeud evenement"><b>Al Iniciar</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Fundido de pantalla</b><span>Aparecer (desde el color)</span></div>
+</div>
+<div class="tip">👉 El tinte y los bordes oscurecidos quedan <strong>debajo del HUD</strong>: la puntuación y los botones se leen bien. El destello y el fundido cubren toda la pantalla.</div>
+</div>
+<h2>Paso 4: electrocución y congelado de imagen</h2>
+<ul><li><strong>«Electrocución»</strong>: rayos chisporrotean alrededor de un objeto, que parpadea y tiembla. Duración <strong>0</strong> = sin fin: perfecto para una trampa eléctrica que avisa al jugador.</li><li><strong>«Pausa de impacto»</strong>: una cámara lenta muy corta (0,08 segundos) en el momento del impacto da mucha fuerza a una explosión.</li></ul>
+<h2>Si no funciona</h2>
+<ul><li><strong>La explosión no aparece:</strong> comprueba que «Efecto de partículas» esté <strong>antes</strong> de «Destruir Objeto».</li><li><strong>La estela no sigue al personaje:</strong> comprueba que el objeto Partículas tenga a <strong>player</strong> como padre y que la casilla Activo desde el inicio del juego esté marcada.</li><li><strong>Las partículas no tienen el color correcto:</strong> el color «Ninguno» mantiene los colores del modelo; elige un color real para cambiarlos.</li><li><strong>La pantalla se queda negra:</strong> después de un «Fundido de pantalla» Desaparecer (hacia el color), hace falta un «Fundido de pantalla» Aparecer (desde el color).</li></ul>
+
+<div class="nav">
+<a href="../es/niveau-suivant.html">← Pasar al nivel siguiente</a>
+<a href="index.html">Todas las guías →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de juegos 2D gratuito y sin código para Android · <a href="../../es/index.html">Sitio oficial</a> · <a href="../../noeuds/es.html">Referencia de nodos</a></p>
+</footer>
+</body>
+</html>

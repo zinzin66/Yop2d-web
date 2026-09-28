@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何在 Yop2D 中添加粒子和特效？| Yop2D 教程</title>
+<meta name="description" content="爆炸、火焰、烟雾、飞船拖尾、闪光和淡入淡出：无需代码，用“粒子”对象和 “粒子效果”、“屏幕闪光”、“屏幕淡入淡出” 节点为 Yop2D 游戏添加视觉特效。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/particules-effets.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/particules-effets.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/particules-effets.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/particules-effets.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/particules-effets.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/particules-effets.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/particules-effets.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/particules-effets.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/particules-effets.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/particules-effets.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何添加粒子和特效？",
+ "description": "爆炸、火焰、烟雾、飞船拖尾、闪光和淡入淡出：无需代码，用“粒子”对象和 “粒子效果”、“屏幕闪光”、“屏幕淡入淡出” 节点为 Yop2D 游戏添加视觉特效。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "爆炸",
+   "text": "如果对象碰到标签 → 粒子效果 (爆炸) → 销毁对象."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "拖尾",
+   "text": "一个挂在角色身上的 粒子 对象（长拖尾）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "屏幕特效",
+   "text": "被击中时用 屏幕闪光，两关之间用 屏幕淡入淡出。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>如何添加粒子和特效？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../particules-effets.html" hreflang="fr">Français</a> · <a href="../en/particules-effets.html" hreflang="en">English</a> · <a href="../es/particules-effets.html" hreflang="es">Español</a> · <a href="../de/particules-effets.html" hreflang="de">Deutsch</a> · <a href="../it/particules-effets.html" hreflang="it">Italiano</a> · <a href="../pt/particules-effets.html" hreflang="pt">Português</a> · <a href="../ru/particules-effets.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/particules-effets.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Yop2D 有两种方式产生粒子：<strong>“粒子效果”</strong> 节点一次性喷出一阵粒子（非常适合爆炸），<strong>粒子</strong> 对象则不停地产生粒子（火焰、烟雾、雨、拖尾……）。另外还有一些节点可以为整个屏幕添加特效：闪光、色调、暗角和淡入淡出。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>一个能运行的游戏，里面有一个名为 <strong>player</strong>、可以移动的角色；</li><li>带有标签 <strong>ennemi</strong> 的敌人。</li></ul>
+</div>
+<div class="tip">👉 想看到所有这些效果的实际表现，请在 Yop2D 主屏幕打开示例 <strong>Effects showcase</strong>：每个效果一个按钮，并显示要使用的节点名称。</div>
+<h2>第 1 步：碰到敌人时爆炸</h2>
+<div class="method">
+<ol><li>打开场景的 <strong>蓝图</strong>。</li><li>添加事件 <strong>“如果对象碰到标签”</strong>：目标 <strong>player</strong>，标签 <strong>ennemi</strong>。</li><li>添加 <strong>“粒子效果”</strong>。目标选择 <strong>事件中涉及的对象</strong>：也就是玩家刚刚碰到的敌人。预设：<strong>爆炸</strong>。</li><li>添加 <strong>“销毁对象”</strong>，目标同样是 <strong>事件中涉及的对象</strong>。</li><li>按顺序连接这三个节点，然后启动游戏去碰一个敌人：它会先爆炸再消失。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>如果对象碰到标签</b><span>目标：player · 标签：ennemi</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>粒子效果</b><span>相关对象 · 爆炸</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>销毁对象</b><span>相关对象</span></div>
+</div>
+<div class="tip attention">⚠️ <strong>顺序很重要：</strong> “粒子效果” 必须放在 “销毁对象” <strong>之前</strong>。敌人被销毁后，就没有对象可以显示爆炸了。</div>
+<div class="tip">👉 你可以修改 <strong>颜色</strong>（例如 <code>#FF40D0</code> 做出品红色的爆炸）和 <strong>大小</strong>（2 = 两倍大）。也可以试试 火花、彩纸 或 烟雾。</div>
+</div>
+<h2>第 2 步：角色身后的拖尾</h2>
+<div class="method">
+<ol><li>添加一个对象：在 <strong>特效</strong> 类别中选择 <strong>粒子</strong>。它在编辑器里显示为橙色虚线区域，在游戏中不可见。</li><li>在检查器的 <strong>粒子</strong> 部分，点按 <strong>预设：</strong> 并选择 <strong>长拖尾</strong>。</li><li>同样在检查器里，点按 <strong>父对象：无</strong> 按钮并选择 <strong>player</strong>：这个对象会一直跟着角色。</li><li>把它放在角色正后方，然后启动游戏并移动：角色身后会跟着一条长长的发光拖尾。</li></ol>
+<div class="tip">👉 蓝图里什么都不用加：只要勾选了 <strong>游戏开始时启用</strong>，粒子 对象就会自己工作。想在游戏中开启或关闭它，请使用 <strong>“开启 / 关闭粒子”</strong> 节点。</div>
+<ul><li><strong>火焰</strong>：火把或篝火。</li><li><strong>烟雾</strong>：烟囱上方。</li><li><strong>雨</strong> 或 <strong>雪</strong>：把对象拉宽，铺满屏幕的整个顶部。</li><li><strong>超空间</strong> 和 <strong>速度线</strong>：营造高速飞行的感觉。</li></ul>
+</div>
+<h2>第 3 步：整个屏幕的特效</h2>
+<div class="method">
+<ul><li><strong>“屏幕闪光”</strong>：一次颜色闪光。例如在玩家被击中后立刻闪红光 0.5 秒。</li><li><strong>“屏幕色调”</strong>：给整个游戏蒙上一层颜色。夜晚用 55% 的深蓝色，强度设为 0 就回到白天。</li><li><strong>“暗角”</strong>：屏幕四周变暗，就像看电影一样。</li><li><strong>“屏幕淡入淡出”</strong>：屏幕变黑，然后重新出现。</li></ul>
+<p>想平滑地进入下一关（参见<a href="../zh/niveau-suivant.html">关卡教程</a>）：</p>
+<div class="chaine">
+<div class="noeud"><b>屏幕淡入淡出</b><span>淡出（变为该颜色）</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>等待</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>下一个场景</b></div>
+</div>
+<p>然后，在下一关里：</p>
+<div class="chaine">
+<div class="noeud evenement"><b>启动时</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>屏幕淡入淡出</b><span>淡入（从该颜色）</span></div>
+</div>
+<div class="tip">👉 色调和暗角位于 <strong>HUD 之下</strong>：分数和按钮依然清晰可读。闪光和淡入淡出则会覆盖整个屏幕。</div>
+</div>
+<h2>第 4 步：触电和定格</h2>
+<ul><li><strong>“触电”</strong>：闪电在对象周围噼啪作响，对象闪烁并抖动。持续时间 <strong>0</strong> = 无限：非常适合提醒玩家危险的电击陷阱。</li><li><strong>“打击停顿”</strong>：在撞击瞬间来一段极短的慢动作（0.08 秒），让爆炸更有冲击力。</li></ul>
+<h2>如果不起作用</h2>
+<ul><li><strong>爆炸没有出现：</strong> 检查 “粒子效果” 是否放在 “销毁对象” <strong>之前</strong>。</li><li><strong>拖尾没有跟着角色：</strong> 检查 粒子 对象的父对象是否是 <strong>player</strong>，以及 游戏开始时启用 是否已勾选。</li><li><strong>粒子颜色不对：</strong> 颜色“无”会保留预设的颜色；选择一种真正的颜色才能改变它们。</li><li><strong>屏幕一直是黑的：</strong> 在 “屏幕淡入淡出” 淡出（变为该颜色） 之后，还需要一个 “屏幕淡入淡出” 淡入（从该颜色）。</li></ul>
+
+<div class="nav">
+<a href="../zh/niveau-suivant.html">← 进入下一关</a>
+<a href="index.html">全部教程 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>

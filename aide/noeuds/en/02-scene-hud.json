@@ -79,10 +79,40 @@
       "exemple": "follow the player through a big platform level."
     },
     {
+      "nom": "Camera limits",
+      "schema": "<b>Inputs:</b> Minimum X (left edge of the level), Maximum X (right edge), Minimum Y (top), Maximum Y (bottom; all 0 = no limits)",
+      "role": "Keeps the camera inside the level edges: it never shows the empty space beyond. All 0 = no limits.",
+      "exemple": "a level 6480 pixels wide: minimum X 0, maximum X 6480, minimum Y 0, maximum Y 1080, with “Follow with camera” on the player."
+    },
+    {
       "nom": "Camera smoothing",
       "schema": "<b>Input:</b> Follow speed (0.01 to 1)",
       "role": "Sets how fast the camera catches up with the followed object: 0.01 = very soft, 1 = stuck to the object.",
       "exemple": "0.1 for a smooth camera that follows with a slight delay."
+    },
+    {
+      "nom": "Screen flash",
+      "schema": "<b>Inputs:</b> Color, Intensity (%, 0 = none), Duration (seconds)",
+      "role": "Flashes a color over the whole screen, fading out in a moment (intensity in %, duration in seconds).",
+      "exemple": "a 0.5-second red flash when the player is hit."
+    },
+    {
+      "nom": "Screen tint",
+      "schema": "<b>Inputs:</b> Color, Intensity (%, 0 = none), Transition (seconds)",
+      "role": "Lays a color over the whole game (under the HUD), with a smooth transition. Intensity 0 removes it.",
+      "exemple": "night falls: dark blue, intensity 55, 2-second transition."
+    },
+    {
+      "nom": "Vignette",
+      "schema": "<b>Inputs:</b> Color, Intensity (%, 0 = none), Transition (seconds)",
+      "role": "Gently darkens the edges of the screen, like in a movie (under the HUD). Intensity 0 removes it.",
+      "exemple": "a scary mood in a cave: intensity 75."
+    },
+    {
+      "nom": "Screen fade",
+      "schema": "<b>Inputs:</b> Direction, Color, Duration (seconds)",
+      "role": "Fades the whole screen out to a color, or back in from it. The fade carries over from one scene to the next.",
+      "exemple": "“Screen fade” (fade out), “Wait” 1 second, “Go to scene”, then “Screen fade” (fade in) when the next level starts."
     },
     {
       "nom": "Camera shake",

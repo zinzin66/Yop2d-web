@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D の全ノード（115 個）| リファレンス</title>
-<meta name="description" content="Android 向けコード不要 2D ゲームエンジン Yop2D の 115 個のビジュアルノードの一覧：各ノードの役割、設定、出力、使用例。">
+<title>Yop2D の全ノード（127 個）| リファレンス</title>
+<meta name="description" content="Android 向けコード不要 2D ゲームエンジン Yop2D の 127 個のビジュアルノードの一覧：各ノードの役割、設定、出力、使用例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/ja.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
 </header>
 <main>
-<p>Yop2D は、Android 向けの無料・コード不要の 2D ゲームエンジンです。ゲームのロジックは、Blueprint の中でつないだノード（ビジュアルブロック）で作ります。イベントがつながりを始め、そのあとにアクションや条件が続きます。このページでは、エディターの 115 個のノードを、設定（入力）と出力とともに説明します。</p>
+<p>Yop2D は、Android 向けの無料・コード不要の 2D ゲームエンジンです。ゲームのロジックは、Blueprint の中でつないだノード（ビジュアルブロック）で作ります。イベントがつながりを始め、そのあとにアクションや条件が続きます。このページでは、エディターの 127 個のノードを、設定（入力）と出力とともに説明します。</p>
 <p><strong>カテゴリー</strong></p>
 <nav class="sommaire"><a href="#c1-イベント">イベント</a><a href="#c2-シーンとhud">シーンとHUD</a><a href="#c3-時間">時間</a><a href="#c4-外観とオブジェクト">外観とオブジェクト</a><a href="#c5-変数とインベントリ">変数とインベントリ</a><a href="#c6-ロジックと条件">ロジックと条件</a><a href="#c7-テキストとダイアログ">テキストとダイアログ</a><a href="#c8-移動とai">移動とAI</a><a href="#c9-アニメーション">アニメーション</a><a href="#c10-オーディオ">オーディオ</a></nav>
 <h2 id="c1-イベント">イベント</h2>
@@ -193,10 +193,35 @@
 <p>カメラが選んだオブジェクトを追いかけます。横だけ、縦だけにもできます。オブジェクトがないと、カメラは何も追いかけません。</p>
 <p class="exemple"><b>例：</b> 大きなアクションステージでプレイヤーを追う。</p>
 </div>
+<div class="fiche"><h3>カメラの範囲</h3>
+<div class="schema"><b>入力：</b> 最小X（レベルの左端）, 最大X（右端）, 最小Y（上端）, 最大Y（下端、すべて0 = 制限なし）</div>
+<p>カメラがレベルの端から出ないようにします：外側の何もない所は映りません。すべて0 = 制限なし。</p>
+<p class="exemple"><b>例：</b> 幅6480ピクセルのレベル：最小X 0、最大X 6480、最小Y 0、最大Y 1080、プレイヤーに 「カメラを固定」 と一緒に使う。</p>
+</div>
 <div class="fiche"><h3>カメラの滑らかさ</h3>
 <div class="schema"><b>入力：</b> 追従速度（0.01〜1）</div>
 <p>カメラが追いかけるオブジェクトに追いつく速さを決めます。0.01 = とてもゆるやか、1 = ぴったりくっつく。</p>
 <p class="exemple"><b>例：</b> 0.1 で、少し遅れてなめらかについてくるカメラ。</p>
+</div>
+<div class="fiche"><h3>画面フラッシュ</h3>
+<div class="schema"><b>入力：</b> 色, 強さ（%、0 = なし）, 時間（秒）</div>
+<p>画面全体を一瞬ある色で光らせ、すぐに消します（強さは %、時間は秒）。</p>
+<p class="exemple"><b>例：</b> プレイヤーが攻撃されたときに 0.5 秒の赤いフラッシュ。</p>
+</div>
+<div class="fiche"><h3>画面の色合い</h3>
+<div class="schema"><b>入力：</b> 色, 強さ（%、0 = なし）, 切り替え（秒）</div>
+<p>ゲーム全体（HUD の下）に色を重ね、なめらかに切り替えます。強さ 0 で消えます。</p>
+<p class="exemple"><b>例：</b> 夜になる：濃い青、強さ 55、切り替え 2 秒。</p>
+</div>
+<div class="fiche"><h3>周辺減光</h3>
+<div class="schema"><b>入力：</b> 色, 強さ（%、0 = なし）, 切り替え（秒）</div>
+<p>映画のように画面の端をやわらかく暗くします（HUD の下）。強さ 0 で消えます。</p>
+<p class="exemple"><b>例：</b> 洞窟の不気味な雰囲気：強さ 75。</p>
+</div>
+<div class="fiche"><h3>画面フェード</h3>
+<div class="schema"><b>入力：</b> 方向, 色, 時間（秒）</div>
+<p>画面全体をある色へフェードアウト、またはその色からフェードインします。フェードはシーンが変わっても続きます。</p>
+<p class="exemple"><b>例：</b> 「画面フェード」（フェードアウト）、「待つ」 1 秒、「シーンを切り替える」、次のステージの開始時に 「画面フェード」（フェードイン）。</p>
 </div>
 <div class="fiche"><h3>カメラの振動</h3>
 <div class="schema"><b>入力：</b> 強さ, 長さ（ミリ秒）</div>
@@ -251,6 +276,11 @@
 <div class="fiche"><h3>ゲームを再開</h3>
 <p>一時停止のあと、ゲームを再開します。</p>
 <p class="exemple"><b>例：</b> ポーズメニューの「つづける」ボタン。</p>
+</div>
+<div class="fiche"><h3>ヒットストップ</h3>
+<div class="schema"><b>入力：</b> 時間（秒）, 止まっている間の速さ（0 = 静止）</div>
+<p>ほんの一瞬（実際の秒数）ゲーム全体をほぼ止め、そのあと元の速さに戻します。当たったときの手ごたえが出ます。</p>
+<p class="exemple"><b>例：</b> 敵が爆発したとき：時間 0.06、速さ 0.05。</p>
 </div>
 </div>
 <h2 id="c4-外観とオブジェクト">外観とオブジェクト</h2>
@@ -355,9 +385,29 @@
 <p class="exemple"><b>例：</b> キャラクターの手についていく剣。</p>
 </div>
 <div class="fiche"><h3>発光 (Glow)</h3>
-<div class="schema"><b>入力：</b> オブジェクト, 状態, 色</div>
-<p>オブジェクトのまわりの色つきの光を、オン・オフします。</p>
-<p class="exemple"><b>例：</b> 拾えるアイテムを目立たせる。</p>
+<div class="schema"><b>入力：</b> オブジェクト, 状態, 色, 光の大きさ</div>
+<p>選んだ色と大きさの、やわらかい光でオブジェクトを包みます（画像の形に沿います）。または光を消します。</p>
+<p class="exemple"><b>例：</b> 黄色く光るボーナス、大きさ 20。</p>
+</div>
+<div class="fiche"><h3>パーティクル効果</h3>
+<div class="schema"><b>入力：</b> オブジェクト, プリセット, 数（0 = プリセットのまま）, 色（空 = プリセットの色）, 大きさ（1 = 標準）</div>
+<p>オブジェクトからパーティクルを一度に放ちます：爆発、火花、砂ぼこり、煙、炎、雨、雪、紙吹雪、軌跡、長い軌跡、ハイパースペース、スピードライン。数・色・大きさを設定できます。</p>
+<p class="exemple"><b>例：</b> 撃たれた敵がマゼンタで爆発：プリセット「爆発」、色 #FF40D0。</p>
+</div>
+<div class="fiche"><h3>パーティクルのオン / オフ</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 状態</div>
+<p>「パーティクル」オブジェクトをオン／オフします。オンの間は出し続け、オフで止まります（出たパーティクルは最後まで残ります）。</p>
+<p class="exemple"><b>例：</b> 宇宙船が進むときにエンジンの炎をつける。</p>
+</div>
+<div class="fiche"><h3>パーティクル一斉放出</h3>
+<div class="schema"><b>入力：</b> オブジェクト, パーティクルの数</div>
+<p>「パーティクル」オブジェクトから、その設定（プリセット・色・大きさ）で一度にたくさんのパーティクルを出します。</p>
+<p class="exemple"><b>例：</b> ステージクリアで紙吹雪 80 個。</p>
+</div>
+<div class="fiche"><h3>パーティクルのプリセットを変更</h3>
+<div class="schema"><b>入力：</b> オブジェクト, プリセット</div>
+<p>ゲーム中に「パーティクル」オブジェクトのプリセットを変えます。</p>
+<p class="exemple"><b>例：</b> 消した火が煙に変わる。</p>
 </div>
 <div class="fiche"><h3>点滅 (Blink)</h3>
 <div class="schema"><b>入力：</b> オブジェクト, 状態, 速度（ms）, 継続時間（ms、0 = 無限）</div>
@@ -370,7 +420,7 @@
 <p class="exemple"><b>例：</b> ランダムな位置に石を落とす：X = random(0, 800)。</p>
 </div>
 <div class="fiche"><h3>オブジェクトを発射</h3>
-<div class="schema"><b>入力：</b> オブジェクト A, オブジェクト B, モデル名, 方向, 速度</div>
+<div class="schema"><b>入力：</b> オブジェクト A, オブジェクト B, モデル名, 方向, 速度, 画面外で消す（true / false）</div>
 <p>オブジェクト A の場所に弾（「モデル名」 に書いたオブジェクト）を作り、選んだ速さで飛ばします。向きは 0°、90°、180°、270°、オブジェクト B の方向（「ターゲットへ」）、または A の角度。</p>
 <p class="exemple"><b>例：</b> 上向き（270）にレーザーを撃つ宇宙船。</p>
 </div>
@@ -388,6 +438,16 @@
 <div class="schema"><b>入力：</b> オブジェクト, 余白</div>
 <p>オブジェクトが画面の外に出ないようにします。余白を決めると、端の少し手前で止まります。</p>
 <p class="exemple"><b>例：</b> プレイヤーの宇宙船がいつも見えるようにする。</p>
+</div>
+<div class="fiche"><h3>感電</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 稲妻の色, 時間（秒、0 = 無限）, 強さ（0 = 停止、1〜3）</div>
+<p>オブジェクトのまわりで稲妻がはじける：稲妻の色で点滅し、震えて火花を散らします。時間 0 = 無限（電気柵）、強さ 0 = 停止。</p>
+<p class="exemple"><b>例：</b> 魔法使いが罠に触れる：魔法使いに 「感電」（1秒）、「待つ」 1秒、そのあと 「シーンをやり直す」。</p>
+</div>
+<div class="fiche"><h3>オブジェクトの軌跡</h3>
+<div class="schema"><b>入力：</b> オブジェクト, プリセット, 色（空 = プリセットの色）, 大きさ（1 = 標準）</div>
+<p>オブジェクトが動くと、後ろにパーティクルの軌跡を残します（プリセット・色・大きさを選べます）。弾のもとになるオブジェクトに設定すると、すべての弾に軌跡がつきます。プリセット「なし」で消えます。</p>
+<p class="exemple"><b>例：</b> 光る軌跡を残す弾：対象 = 弾のもと、プリセット「軌跡」。</p>
 </div>
 <div class="fiche"><h3>オブジェクトを作成</h3>
 <div class="schema"><b>入力：</b> オブジェクト, X位置, Y位置</div>
@@ -510,7 +570,7 @@
 </div>
 <div class="fiche"><h3>ダイアログを表示</h3>
 <div class="schema"><b>入力：</b> オブジェクト, ダイアログのキー</div>
-<p>会話ファイル（dialogues.txt）から、キーに合った文をテキストオブジェクトに書きます。</p>
+<p>会話ファイル（dialogues.txt）から、キーに合った文をテキストオブジェクトに書きます。 複数の言語：「konnichiwa.ja = こんにちは」、「konnichiwa.en = Hello」… と書く。ゲームは変数 「langue」 の言語を使い、なければスマホの言語を使います。「\n」 = 改行。</p>
 <p class="exemple"><b>例：</b> キー「konnichiwa_shounin」で商人のセリフを表示する。</p>
 </div>
 <div class="fiche"><h3>テキストに追加</h3>
@@ -618,12 +678,12 @@
 <h2 id="c10-オーディオ">オーディオ</h2>
 <div class="method">
 <div class="fiche"><h3>効果音を再生</h3>
-<div class="schema"><b>入力：</b> 音声ファイル</div>
+<div class="schema"><b>入力：</b> 音声ファイル, 音量（%、100 = 最大）</div>
 <p>効果音を鳴らします。いくつかの音を同時に鳴らせます。</p>
 <p class="exemple"><b>例：</b> コインを拾ったときの「チャリン」。</p>
 </div>
 <div class="fiche"><h3>音楽を再生</h3>
-<div class="schema"><b>入力：</b> 音楽ファイル, ループ（true / false）</div>
+<div class="schema"><b>入力：</b> 音楽ファイル, ループ（true / false）, 音量（%、100 = 最大）</div>
 <p>音楽を流します。今流れている音楽と入れかわります。「毎フレーム」 の下には置かないでください（ずっと最初からやり直しになります）。</p>
 <p class="exemple"><b>例：</b> ステージの音楽を開始時に流す。</p>
 </div>

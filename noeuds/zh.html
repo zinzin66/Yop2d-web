@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D 全部节点（115 个）| 参考</title>
-<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 115 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<title>Yop2D 全部节点（127 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 127 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 115 个节点，以及它们的设置（输入）和输出。</p>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 127 个节点，以及它们的设置（输入）和输出。</p>
 <p><strong>分类</strong></p>
 <nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-动画">动画</a><a href="#c10-音频">音频</a></nav>
 <h2 id="c1-事件">事件</h2>
@@ -193,10 +193,35 @@
 <p>摄像机跟随所选对象，也可以只水平或只垂直跟随。没有选择对象时，摄像机不再跟随。</p>
 <p class="exemple"><b>示例：</b> 在大型平台关卡中跟随玩家。</p>
 </div>
+<div class="fiche"><h3>相机边界</h3>
+<div class="schema"><b>输入：</b> 最小 X（关卡左边缘）, 最大 X（右边缘）, 最小 Y（顶部）, 最大 Y（底部；全为 0 = 无边界）</div>
+<p>让相机不超出关卡边缘：永远不会显示外面的空白。全部为 0 = 无边界。</p>
+<p class="exemple"><b>示例：</b> 宽 6480 像素的关卡：最小 X 0，最大 X 6480，最小 Y 0，最大 Y 1080，并对玩家使用 “锁定相机”。</p>
+</div>
 <div class="fiche"><h3>相机平滑</h3>
 <div class="schema"><b>输入：</b> 跟随速度（0.01 到 1）</div>
 <p>设置摄像机追上被跟随对象的速度：0.01 = 非常柔和，1 = 紧贴对象。</p>
 <p class="exemple"><b>示例：</b> 0.1：稍微延迟、平滑跟随的摄像机。</p>
+</div>
+<div class="fiche"><h3>屏幕闪光</h3>
+<div class="schema"><b>输入：</b> 颜色, 强度（%，0 = 无）, 持续时间（秒）</div>
+<p>让整个屏幕闪出一种颜色，并很快消失（强度用 %，持续时间用秒）。</p>
+<p class="exemple"><b>示例：</b> 玩家被击中时闪一下红光，持续 0.5 秒。</p>
+</div>
+<div class="fiche"><h3>屏幕色调</h3>
+<div class="schema"><b>输入：</b> 颜色, 强度（%，0 = 无）, 过渡（秒）</div>
+<p>给整个游戏（HUD 之下）蒙上一层颜色，平滑过渡。强度为 0 时移除。</p>
+<p class="exemple"><b>示例：</b> 夜幕降临：深蓝色，强度 55，过渡 2 秒。</p>
+</div>
+<div class="fiche"><h3>暗角</h3>
+<div class="schema"><b>输入：</b> 颜色, 强度（%，0 = 无）, 过渡（秒）</div>
+<p>像电影一样柔和地压暗屏幕四周（在 HUD 之下）。强度为 0 时移除。</p>
+<p class="exemple"><b>示例：</b> 洞穴中的紧张气氛：强度 75。</p>
+</div>
+<div class="fiche"><h3>屏幕淡入淡出</h3>
+<div class="schema"><b>输入：</b> 方向, 颜色, 持续时间（秒）</div>
+<p>让整个屏幕淡出为某种颜色，或从该颜色淡入。切换场景时淡入淡出会继续。</p>
+<p class="exemple"><b>示例：</b> “屏幕淡入淡出”（淡出），“等待” 1 秒，“切换场景”，然后在下一关开始时 “屏幕淡入淡出”（淡入）。</p>
 </div>
 <div class="fiche"><h3>相机抖动</h3>
 <div class="schema"><b>输入：</b> 强度, 持续时间（毫秒）</div>
@@ -251,6 +276,11 @@
 <div class="fiche"><h3>继续游戏</h3>
 <p>暂停后继续游戏。</p>
 <p class="exemple"><b>示例：</b> 暂停菜单里的“继续”按钮。</p>
+</div>
+<div class="fiche"><h3>打击停顿</h3>
+<div class="schema"><b>输入：</b> 持续时间（秒）, 停顿时的速度（0 = 定格）</div>
+<p>让整个游戏在极短的时间内（真实秒数）几乎停住，然后恢复原来的速度。让打击更有力度。</p>
+<p class="exemple"><b>示例：</b> 敌人爆炸时：持续 0.06 秒，速度 0.05。</p>
 </div>
 </div>
 <h2 id="c4-外观与对象">外观与对象</h2>
@@ -355,9 +385,29 @@
 <p class="exemple"><b>示例：</b> 跟随角色手部的剑。</p>
 </div>
 <div class="fiche"><h3>发光 (Glow)</h3>
-<div class="schema"><b>输入：</b> 对象, 状态, 颜色</div>
-<p>打开或关闭对象周围的彩色光晕。</p>
-<p class="exemple"><b>示例：</b> 提示可以捡起的物品。</p>
+<div class="schema"><b>输入：</b> 对象, 状态, 颜色, 光晕大小</div>
+<p>在对象周围加上所选颜色和大小的柔和光晕（会贴合图片的形状），或将其移除。</p>
+<p class="exemple"><b>示例：</b> 一个发出黄光的奖励道具，大小 20。</p>
+</div>
+<div class="fiche"><h3>粒子效果</h3>
+<div class="schema"><b>输入：</b> 对象, 预设, 数量（0 = 预设值）, 颜色（留空 = 预设颜色）, 大小（1 = 正常）</div>
+<p>在对象上喷出一阵粒子：爆炸、火花、灰尘、烟雾、火焰、雨、雪、彩纸、拖尾、长拖尾、超空间或速度线。可设置数量、颜色和大小。</p>
+<p class="exemple"><b>示例：</b> 被击中的敌人炸成品红色：预设“爆炸”，颜色 #FF40D0。</p>
+</div>
+<div class="fiche"><h3>开启 / 关闭粒子</h3>
+<div class="schema"><b>输入：</b> 对象, 状态</div>
+<p>开启或关闭一个“粒子”对象：让它持续喷出粒子或停止（已经喷出的粒子会自然消失）。</p>
+<p class="exemple"><b>示例：</b> 飞船前进时点燃推进器。</p>
+</div>
+<div class="fiche"><h3>粒子爆发</h3>
+<div class="schema"><b>输入：</b> 对象, 粒子数量</div>
+<p>让“粒子”对象一次性喷出大量粒子，使用它自己的设置（预设、颜色、大小）。</p>
+<p class="exemple"><b>示例：</b> 通关时喷出 80 片彩纸。</p>
+</div>
+<div class="fiche"><h3>更改粒子预设</h3>
+<div class="schema"><b>输入：</b> 对象, 预设</div>
+<p>在游戏中更改“粒子”对象的预设。</p>
+<p class="exemple"><b>示例：</b> 火被扑灭后变成烟。</p>
 </div>
 <div class="fiche"><h3>闪烁 (Blink)</h3>
 <div class="schema"><b>输入：</b> 对象, 状态, 速度（毫秒）, 持续时间（毫秒，0 = 无限）</div>
@@ -370,7 +420,7 @@
 <p class="exemple"><b>示例：</b> 在随机位置落下石头：X = random(0, 800)。</p>
 </div>
 <div class="fiche"><h3>发射对象</h3>
-<div class="schema"><b>输入：</b> 对象 A, 对象 B, 模型名称, 方向, 速度</div>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B, 模型名称, 方向, 速度, 离开屏幕后销毁（true / false）</div>
 <p>在对象 A 处创建一个投射物（“模型名称” 里写的对象），并按所选速度发射：0°、90°、180°、270°、朝向对象 B（“朝向目标”）或按 A 的角度。</p>
 <p class="exemple"><b>示例：</b> 向上发射激光的飞船（270）。</p>
 </div>
@@ -388,6 +438,16 @@
 <div class="schema"><b>输入：</b> 对象, 边距</div>
 <p>不让对象离开屏幕。边距会让它在边缘前一点停下。</p>
 <p class="exemple"><b>示例：</b> 玩家的飞船始终可见。</p>
+</div>
+<div class="fiche"><h3>触电</h3>
+<div class="schema"><b>输入：</b> 对象, 闪电颜色, 持续时间（秒，0 = 无限）, 强度（0 = 停止，1 到 3）</div>
+<p>闪电在对象周围噼啪作响：它以闪电颜色闪烁、抖动并迸出火花。持续时间 0 = 无限（电网）；强度 0 = 停止。</p>
+<p class="exemple"><b>示例：</b> 法师碰到陷阱：对法师使用 “触电”（1 秒），“等待” 1 秒，然后 “重新开始场景”。</p>
+</div>
+<div class="fiche"><h3>对象拖尾</h3>
+<div class="schema"><b>输入：</b> 对象, 预设, 颜色（留空 = 预设颜色）, 大小（1 = 正常）</div>
+<p>对象移动时会在身后留下一道粒子拖尾（可选择预设、颜色和大小）。设置在子弹的模板上，每发子弹都会带有拖尾。选“无”即可移除。</p>
+<p class="exemple"><b>示例：</b> 带发光拖尾的子弹：目标 = 子弹模板，预设“拖尾”。</p>
 </div>
 <div class="fiche"><h3>创建对象</h3>
 <div class="schema"><b>输入：</b> 对象, X 位置, Y 位置</div>
@@ -510,7 +570,7 @@
 </div>
 <div class="fiche"><h3>显示对话</h3>
 <div class="schema"><b>输入：</b> 对象, 对话键</div>
-<p>从对话文件（dialogues.txt）中找到这个键对应的句子，写进文本对象。</p>
+<p>从对话文件（dialogues.txt）中找到这个键对应的句子，写进文本对象。 多种语言：写 “nihao.zh = 你好”、“nihao.en = Hello”……；游戏使用变量 “langue” 中的语言，否则使用手机语言。“\n” = 换行。</p>
 <p class="exemple"><b>示例：</b> 键“nihao_shangren”显示商人的台词。</p>
 </div>
 <div class="fiche"><h3>追加到文本</h3>
@@ -618,12 +678,12 @@
 <h2 id="c10-音频">音频</h2>
 <div class="method">
 <div class="fiche"><h3>播放音效</h3>
-<div class="schema"><b>输入：</b> 音效文件</div>
+<div class="schema"><b>输入：</b> 音效文件, 音量（%，100 = 最大）</div>
 <p>播放一个音效。可以同时播放多个音效。</p>
 <p class="exemple"><b>示例：</b> 捡到金币时的“叮”声。</p>
 </div>
 <div class="fiche"><h3>播放音乐</h3>
-<div class="schema"><b>输入：</b> 音乐文件, 循环（true / false）</div>
+<div class="schema"><b>输入：</b> 音乐文件, 循环（true / false）, 音量（%，100 = 最大）</div>
 <p>播放一段音乐，替换当前的音乐。不要放在 “每帧” 下面（它会不停地从头开始）。</p>
 <p class="exemple"><b>示例：</b> 开始时播放关卡音乐。</p>
 </div>

@@ -1,4 +1,6 @@
 {
+  "limites_camera": ["Impede a câmera de sair das bordas do nível: nunca mostra o vazio além. Tudo 0 = sem limites.", "nível com 6480 pixels de largura: X mínimo 0, X máximo 6480, Y mínimo 0, Y máximo 1080, com [[fixer_camera]] no jogador."],
+  "electrocution": ["Raios estalam em volta do objeto: ele pisca na cor do raio, treme e solta faíscas. Duração 0 = sem fim (cerca elétrica); intensidade 0 = parar.", "o mago toca numa armadilha: [[electrocution]] no mago (1 segundo), [[attendre]] 1 segundo, depois [[recommencer_scene]]."],
   "NoeudEventStart": [
     "Roda uma única vez, assim que a cena começa.",
     "posicionar os inimigos, mostrar a pontuação inicial ou tocar a música."
@@ -252,8 +254,8 @@
     "uma espada que segue a mão do personagem."
   ],
   "surbrillance": [
-    "Liga ou desliga um brilho colorido em volta do objeto.",
-    "mostrar o objeto que pode ser pego."
+    "Envolve o objeto com um brilho suave da cor e do tamanho escolhidos (segue a forma das imagens), ou o remove.",
+    "um bônus que brilha em amarelo, tamanho 20."
   ],
   "clignotement": [
     "Faz o objeto piscar na velocidade escolhida (ms), por um tempo (ms, 0 = sem fim), ou para de piscar.",
@@ -368,7 +370,7 @@
     "=\"Pontos: \" + score"
   ],
   "afficher_dialogue": [
-    "Escreve no objeto Texto a frase da chave, tirada do arquivo de diálogos (dialogues.txt).",
+    "Escreve no objeto Texto a frase da chave, tirada do arquivo de diálogos (dialogues.txt). Vários idiomas: escreva « ola.pt = Olá », « ola.en = Hello »…; o jogo usa o idioma da variável « langue », senão o do telefone. « \\n » = quebra de linha.",
     "a chave « ola_mercador » mostra a fala do mercador."
   ],
   "ajouter_au_texte": [
@@ -458,5 +460,45 @@
   "arreter_musique": [
     "Para a música atual.",
     "silêncio na tela de Game Over."
+  ],
+  "effet_particules": [
+    "Lança uma rajada de partículas no objeto: explosão, faíscas, poeira, fumaça, fogo, chuva, neve, confete, rastro, rastro longo, hiperespaço ou linhas de velocidade. Quantidade, cor e tamanho ajustáveis.",
+    "um inimigo atingido explode em magenta: modelo Explosão, cor #FF40D0."
+  ],
+  "particules_marche": [
+    "Liga ou desliga um objeto «Partículas»: ele emite sem parar ou para (as partículas já lançadas terminam a vida).",
+    "ligar o propulsor quando a nave avança."
+  ],
+  "salve_particules": [
+    "Lança de uma vez várias partículas a partir de um objeto «Partículas», com as configurações dele (modelo, cor, tamanho).",
+    "80 confetes quando a fase é vencida."
+  ],
+  "changer_modele_particules": [
+    "Muda o modelo de um objeto «Partículas» durante o jogo.",
+    "um fogo que vira fumaça quando é apagado."
+  ],
+  "flash_ecran": [
+    "Faz um clarão de cor na tela inteira, que some em um instante (intensidade em %, duração em segundos).",
+    "um clarão vermelho de 0,5 segundo quando o jogador é atingido."
+  ],
+  "teinte_ecran": [
+    "Coloca uma cor sobre todo o jogo (abaixo do HUD), com uma transição suave. Intensidade 0 para remover.",
+    "a noite cai: azul-escuro, intensidade 55, transição de 2 segundos."
+  ],
+  "bords_assombris": [
+    "Escurece suavemente as bordas da tela, como no cinema (abaixo do HUD). Intensidade 0 para remover.",
+    "um clima tenso numa caverna: intensidade 75."
+  ],
+  "fondu_ecran": [
+    "Faz a tela inteira sumir para uma cor, ou reaparecer a partir dela. O esmaecimento continua de uma cena para outra.",
+    "[[fondu_ecran]] (desaparecer), [[attendre]] 1 segundo, [[changer_scene]] e depois [[fondu_ecran]] (aparecer) no início da próxima fase."
+  ],
+  "trainee_objet": [
+    "O objeto deixa um rastro de partículas ao se mover (modelo, cor e tamanho à escolha). Colocado no modelo de um tiro, cada tiro o herda. Modelo «Nenhum» para removê-lo.",
+    "tiros que deixam um rastro luminoso: alvo = o modelo do tiro, modelo Rastro."
+  ],
+  "arret_sur_image": [
+    "Deixa o jogo inteiro quase parado por um instante bem curto (em segundos reais) e depois o jogo volta à velocidade normal. Dá «impacto» aos golpes.",
+    "quando um inimigo explode: duração 0,06, velocidade 0,05."
   ]
 }

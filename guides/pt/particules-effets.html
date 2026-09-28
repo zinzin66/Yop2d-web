@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como adicionar partículas e efeitos no Yop2D? | Guia Yop2D</title>
+<meta name="description" content="Explosões, fogo, fumaça, o rastro de uma nave, flash e esmaecimento: adicione efeitos visuais no Yop2D sem código, com o objeto Partículas e os nós “Efeito de partículas”, “Flash da tela” e “Esmaecimento da tela”.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/pt/particules-effets.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/particules-effets.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/particules-effets.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/particules-effets.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/particules-effets.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/particules-effets.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/particules-effets.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/particules-effets.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/particules-effets.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/particules-effets.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Como adicionar partículas e efeitos?",
+ "description": "Explosões, fogo, fumaça, o rastro de uma nave, flash e esmaecimento: adicione efeitos visuais no Yop2D sem código, com o objeto Partículas e os nós “Efeito de partículas”, “Flash da tela” e “Esmaecimento da tela”.",
+ "inLanguage": "pt",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de jogos 2D sem código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Uma explosão",
+   "text": "Se o objeto tocar no Tag → Efeito de partículas (Explosão) → Destruir Objeto."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Um rastro",
+   "text": "Um objeto Partículas (Rastro longo) preso ao personagem."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Efeitos de tela",
+   "text": "Flash da tela quando você é atingido, Esmaecimento da tela entre duas fases."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../pt/index.html">← Yop2D</a>
+<h1>Como adicionar partículas e efeitos?</h1>
+<p>Guia para iniciantes · sem código</p>
+<p class="langues"><a href="../particules-effets.html" hreflang="fr">Français</a> · <a href="../en/particules-effets.html" hreflang="en">English</a> · <a href="../es/particules-effets.html" hreflang="es">Español</a> · <a href="../de/particules-effets.html" hreflang="de">Deutsch</a> · <a href="../it/particules-effets.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="../ru/particules-effets.html" hreflang="ru">Русский</a> · <a href="../zh/particules-effets.html" hreflang="zh">中文</a> · <a href="../ja/particules-effets.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>O Yop2D faz partículas de duas maneiras: o nó <strong>“Efeito de partículas”</strong> lança uma rajada de uma vez (perfeito para uma explosão), e o objeto <strong>Partículas</strong> as produz sem parar (fogo, fumaça, chuva, rastro…). Outros nós adicionam efeitos na tela inteira: flash, tonalidade, bordas escurecidas e esmaecimento.</p>
+<div class="besoin">
+<b>Você precisa de:</b>
+<ul><li>um jogo que funcione, com um personagem chamado <strong>player</strong> que pode se mover;</li><li>inimigos com a tag <strong>ennemi</strong>.</li></ul>
+</div>
+<div class="tip">👉 Para ver todos estes efeitos em ação, abra o exemplo <strong>Effects showcase</strong> no ecrã inicial do Yop2D: um botão por efeito, com o nome do nó a usar.</div>
+<h2>Passo 1: uma explosão ao tocar um inimigo</h2>
+<div class="method">
+<ol><li>Abra o <strong>Blueprint</strong> da cena.</li><li>Adicione o evento <strong>“Se o objeto tocar no Tag”</strong>: alvo <strong>player</strong>, Tag <strong>ennemi</strong>.</li><li>Adicione <strong>“Efeito de partículas”</strong>. Como alvo, escolha <strong>O objeto implicado no evento</strong>: é o inimigo que o jogador acabou de tocar. Modelo: <strong>Explosão</strong>.</li><li>Adicione <strong>“Destruir Objeto”</strong>, com o mesmo alvo <strong>O objeto implicado no evento</strong>.</li><li>Ligue os três nós em ordem, depois inicie o jogo e toque um inimigo: ele explode antes de sumir.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Se o objeto tocar no Tag</b><span>alvo: player · Tag: ennemi</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Efeito de partículas</b><span>Objeto Implicado · Explosão</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Destruir Objeto</b><span>Objeto Implicado</span></div>
+</div>
+<div class="tip attention">⚠️ <strong>A ordem importa:</strong> “Efeito de partículas” precisa vir <strong>antes</strong> de “Destruir Objeto”. Depois que o inimigo é destruído, não há mais objeto onde colocar a explosão.</div>
+<div class="tip">👉 Você pode mudar a <strong>cor</strong> (por exemplo <code>#FF40D0</code> para uma explosão magenta) e o <strong>tamanho</strong> (2 = duas vezes maior). Experimente também Faíscas, Confete ou Fumaça.</div>
+</div>
+<h2>Passo 2: um rastro atrás do personagem</h2>
+<div class="method">
+<ol><li>Adicione um objeto: na categoria <strong>Efeitos</strong>, escolha <strong>Partículas</strong>. No editor ele aparece como uma área laranja pontilhada; no jogo ele é invisível.</li><li>No inspetor, seção <strong>PARTÍCULAS</strong>, toque em <strong>Modelo:</strong> e escolha <strong>Rastro longo</strong>.</li><li>Ainda no inspetor, toque no botão <strong>Pai: Nenhum</strong> e escolha <strong>player</strong>: o objeto vai seguir o personagem por toda parte.</li><li>Coloque-o logo atrás do personagem, depois inicie o jogo e mova-se: um longo rastro luminoso segue o personagem.</li></ol>
+<div class="tip">👉 Nada a colocar no Blueprint: um objeto Partículas funciona sozinho enquanto <strong>Ativo desde o início do jogo</strong> estiver marcado. Para ligá-lo ou desligá-lo durante o jogo, use o nó <strong>“Ligar / desligar partículas”</strong>.</div>
+<ul><li><strong>Fogo</strong>: uma tocha ou uma fogueira.</li><li><strong>Fumaça</strong>: acima de uma chaminé.</li><li><strong>Chuva</strong> ou <strong>Neve</strong>: estique o objeto por toda a parte de cima da tela.</li><li><strong>Hiperespaço</strong> e <strong>Linhas de velocidade</strong>: para dar uma sensação de grande velocidade.</li></ul>
+</div>
+<h2>Passo 3: efeitos na tela inteira</h2>
+<div class="method">
+<ul><li><strong>“Flash da tela”</strong>: um clarão de cor. Por exemplo vermelho, 0,5 segundo, logo depois que o jogador é atingido.</li><li><strong>“Tonalidade da tela”</strong>: uma cor sobre todo o jogo. Azul-escuro a 55 % para a noite, e intensidade 0 para voltar ao dia.</li><li><strong>“Bordas escurecidas”</strong>: as bordas da tela escurecem, como no cinema.</li><li><strong>“Esmaecimento da tela”</strong>: a tela fica preta e depois reaparece.</li></ul>
+<p>Para passar à próxima fase com suavidade (veja <a href="../pt/niveau-suivant.html">o guia das fases</a>):</p>
+<div class="chaine">
+<div class="noeud"><b>Esmaecimento da tela</b><span>Desaparecer (para a cor)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Esperar</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Cena seguinte</b></div>
+</div>
+<p>Depois, na próxima fase:</p>
+<div class="chaine">
+<div class="noeud evenement"><b>Ao Iniciar</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Esmaecimento da tela</b><span>Aparecer (a partir da cor)</span></div>
+</div>
+<div class="tip">👉 A tonalidade e as bordas escurecidas ficam <strong>abaixo do HUD</strong>: a pontuação e os botões continuam fáceis de ler. O flash e o esmaecimento cobrem a tela inteira.</div>
+</div>
+<h2>Passo 4: eletrocussão e congelamento de imagem</h2>
+<ul><li><strong>“Eletrocussão”</strong>: raios estalam em volta de um objeto, que pisca e treme. Duração <strong>0</strong> = sem fim: perfeito para uma armadilha elétrica que avisa o jogador.</li><li><strong>“Pausa de impacto”</strong>: uma câmara lenta muito curta (0,08 segundos) no momento do impacto dá muita força a uma explosão.</li></ul>
+<h2>Se não funcionar</h2>
+<ul><li><strong>A explosão não aparece:</strong> verifique se “Efeito de partículas” está <strong>antes</strong> de “Destruir Objeto”.</li><li><strong>O rastro não segue o personagem:</strong> verifique se o objeto Partículas tem <strong>player</strong> como pai e se Ativo desde o início do jogo está marcado.</li><li><strong>As partículas estão com a cor errada:</strong> a cor “Nenhuma” mantém as cores do modelo; escolha uma cor de verdade para mudá-las.</li><li><strong>A tela fica preta:</strong> depois de um “Esmaecimento da tela” Desaparecer (para a cor), é preciso um “Esmaecimento da tela” Aparecer (a partir da cor).</li></ul>
+
+<div class="nav">
+<a href="../pt/niveau-suivant.html">← Passar para a próxima fase</a>
+<a href="index.html">Todos os guias →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de jogos 2D gratuito e sem código para Android · <a href="../../pt/index.html">Site oficial</a> · <a href="../../noeuds/pt.html">Referência de nós</a></p>
+</footer>
+</body>
+</html>

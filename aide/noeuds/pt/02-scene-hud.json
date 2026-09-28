@@ -79,10 +79,40 @@
       "exemple": "seguir o jogador numa fase grande de plataforma."
     },
     {
+      "nom": "Limites da câmera",
+      "schema": "<b>Entradas:</b> X mínimo (borda esquerda do nível), X máximo (borda direita), Y mínimo (topo), Y máximo (fundo; tudo 0 = sem limites)",
+      "role": "Impede a câmera de sair das bordas do nível: nunca mostra o vazio além. Tudo 0 = sem limites.",
+      "exemple": "nível com 6480 pixels de largura: X mínimo 0, X máximo 6480, Y mínimo 0, Y máximo 1080, com “Fixar a câmera” no jogador."
+    },
+    {
       "nom": "Suavização da câmera",
       "schema": "<b>Entrada:</b> Velocidade de seguimento (0.01 a 1)",
       "role": "Ajusta a rapidez com que a câmera alcança o objeto seguido: 0.01 = bem suave, 1 = grudada no objeto.",
       "exemple": "0.1 para uma câmera suave que segue com um pequeno atraso."
+    },
+    {
+      "nom": "Flash da tela",
+      "schema": "<b>Entradas:</b> Cor, Intensidade (%, 0 = nenhuma), Duração (segundos)",
+      "role": "Faz um clarão de cor na tela inteira, que some em um instante (intensidade em %, duração em segundos).",
+      "exemple": "um clarão vermelho de 0,5 segundo quando o jogador é atingido."
+    },
+    {
+      "nom": "Tonalidade da tela",
+      "schema": "<b>Entradas:</b> Cor, Intensidade (%, 0 = nenhuma), Transição (segundos)",
+      "role": "Coloca uma cor sobre todo o jogo (abaixo do HUD), com uma transição suave. Intensidade 0 para remover.",
+      "exemple": "a noite cai: azul-escuro, intensidade 55, transição de 2 segundos."
+    },
+    {
+      "nom": "Bordas escurecidas",
+      "schema": "<b>Entradas:</b> Cor, Intensidade (%, 0 = nenhuma), Transição (segundos)",
+      "role": "Escurece suavemente as bordas da tela, como no cinema (abaixo do HUD). Intensidade 0 para remover.",
+      "exemple": "um clima tenso numa caverna: intensidade 75."
+    },
+    {
+      "nom": "Esmaecimento da tela",
+      "schema": "<b>Entradas:</b> Sentido, Cor, Duração (segundos)",
+      "role": "Faz a tela inteira sumir para uma cor, ou reaparecer a partir dela. O esmaecimento continua de uma cena para outra.",
+      "exemple": "“Esmaecimento da tela” (desaparecer), “Esperar” 1 segundo, “Ir para a cena” e depois “Esmaecimento da tela” (aparecer) no início da próxima fase."
     },
     {
       "nom": "Tremor da câmera",

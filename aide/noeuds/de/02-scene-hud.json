@@ -79,10 +79,40 @@
       "exemple": "dem Spieler durch ein großes Plattform-Level folgen."
     },
     {
+      "nom": "Kameragrenzen",
+      "schema": "<b>Eingänge:</b> Minimales X (linker Levelrand), Maximales X (rechter Rand), Minimales Y (oben), Maximales Y (unten; alles 0 = keine Grenzen)",
+      "role": "Hält die Kamera innerhalb der Levelränder: Sie zeigt nie die Leere dahinter. Alles 0 = keine Grenzen.",
+      "exemple": "Level mit 6480 Pixel Breite: minimales X 0, maximales X 6480, minimales Y 0, maximales Y 1080, mit „Kamera fixieren“ auf dem Spieler."
+    },
+    {
       "nom": "Kamera-Glättung",
       "schema": "<b>Eingang:</b> Folgegeschwindigkeit (0.01 bis 1)",
       "role": "Legt fest, wie schnell die Kamera das verfolgte Objekt einholt: 0.01 = sehr weich, 1 = klebt am Objekt.",
       "exemple": "0.1 für eine sanfte Kamera, die leicht verzögert folgt."
+    },
+    {
+      "nom": "Bildschirmblitz",
+      "schema": "<b>Eingänge:</b> Farbe, Stärke (%, 0 = keine), Dauer (Sekunden)",
+      "role": "Lässt den ganzen Bildschirm kurz in einer Farbe aufblitzen, die schnell verblasst (Stärke in %, Dauer in Sekunden).",
+      "exemple": "ein roter Blitz von 0,5 Sekunden, wenn der Spieler getroffen wird."
+    },
+    {
+      "nom": "Bildschirmtönung",
+      "schema": "<b>Eingänge:</b> Farbe, Stärke (%, 0 = keine), Übergang (Sekunden)",
+      "role": "Legt eine Farbe über das ganze Spiel (unter dem HUD), mit sanftem Übergang. Stärke 0 entfernt sie.",
+      "exemple": "die Nacht bricht herein: Dunkelblau, Stärke 55, Übergang 2 Sekunden."
+    },
+    {
+      "nom": "Abgedunkelte Ränder",
+      "schema": "<b>Eingänge:</b> Farbe, Stärke (%, 0 = keine), Übergang (Sekunden)",
+      "role": "Dunkelt die Bildschirmränder sanft ab, wie im Kino (unter dem HUD). Stärke 0 entfernt es.",
+      "exemple": "eine unheimliche Stimmung in einer Höhle: Stärke 75."
+    },
+    {
+      "nom": "Bildschirmüberblendung",
+      "schema": "<b>Eingänge:</b> Richtung, Farbe, Dauer (Sekunden)",
+      "role": "Blendet den ganzen Bildschirm zu einer Farbe aus oder aus ihr wieder ein. Die Überblendung läuft über den Szenenwechsel hinweg weiter.",
+      "exemple": "„Bildschirmüberblendung“ (ausblenden), „Warten“ 1 Sekunde, „Zur Szene wechseln“, dann „Bildschirmüberblendung“ (einblenden) beim Start des nächsten Levels."
     },
     {
       "nom": "Kamera-Wackeln",

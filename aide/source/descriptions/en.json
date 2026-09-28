@@ -1,4 +1,6 @@
 {
+  "limites_camera": ["Keeps the camera inside the level edges: it never shows the empty space beyond. All 0 = no limits.", "a level 6480 pixels wide: minimum X 0, maximum X 6480, minimum Y 0, maximum Y 1080, with [[fixer_camera]] on the player."],
+  "electrocution": ["Lightning crackles around the object: it flashes in the lightning color, shakes and throws sparks. Duration 0 = endless (electric fence); intensity 0 = stop.", "the wizard touches a trap: [[electrocution]] on the wizard (1 second), [[attendre]] 1 second, then [[recommencer_scene]]."],
   "NoeudEventStart": [
     "Runs only once, as soon as the scene starts.",
     "place the enemies, show the starting score or start the music."
@@ -252,8 +254,8 @@
     "a sword that follows the character's hand."
   ],
   "surbrillance": [
-    "Turns a colored glow around the object on or off.",
-    "show which object can be picked up."
+    "Surrounds the object with a soft glow of the chosen color and size (it follows the shape of images), or removes it.",
+    "a bonus that glows yellow, size 20."
   ],
   "clignotement": [
     "Makes the object blink at the chosen speed (ms), for a duration (ms, 0 = forever), or stops the blinking.",
@@ -368,7 +370,7 @@
     "=\"Score: \" + score"
   ],
   "afficher_dialogue": [
-    "Writes into the Text object the sentence matching the key, from the dialogue file (dialogues.txt).",
+    "Writes into the Text object the sentence matching the key, from the dialogue file (dialogues.txt). Several languages: write « hello.en = Hello », « hello.fr = Bonjour »…; the game uses the language in the « langue » variable, otherwise the phone language. « \\n » = new line.",
     "the key « hello_merchant » shows the merchant's line."
   ],
   "ajouter_au_texte": [
@@ -458,5 +460,45 @@
   "arreter_musique": [
     "Stops the current music.",
     "silence on the Game Over screen."
+  ],
+  "effet_particules": [
+    "Fires a burst of particles on the object: explosion, sparks, dust, smoke, fire, rain, snow, confetti, trail, wake trail, hyperspace or speed lines. Count, color and size can be set.",
+    "a hit enemy explodes in magenta: Explosion preset, color #FF40D0."
+  ],
+  "particules_marche": [
+    "Turns a “Particles” object on or off: it emits continuously or stops (particles already fired finish their life).",
+    "turn the engine exhaust on when the ship moves."
+  ],
+  "salve_particules": [
+    "Fires many particles at once from a “Particles” object, with its settings (preset, color, size).",
+    "80 confetti when the level is won."
+  ],
+  "changer_modele_particules": [
+    "Changes the preset of a “Particles” object during the game.",
+    "a fire that turns into smoke when it is put out."
+  ],
+  "flash_ecran": [
+    "Flashes a color over the whole screen, fading out in a moment (intensity in %, duration in seconds).",
+    "a 0.5-second red flash when the player is hit."
+  ],
+  "teinte_ecran": [
+    "Lays a color over the whole game (under the HUD), with a smooth transition. Intensity 0 removes it.",
+    "night falls: dark blue, intensity 55, 2-second transition."
+  ],
+  "bords_assombris": [
+    "Gently darkens the edges of the screen, like in a movie (under the HUD). Intensity 0 removes it.",
+    "a scary mood in a cave: intensity 75."
+  ],
+  "fondu_ecran": [
+    "Fades the whole screen out to a color, or back in from it. The fade carries over from one scene to the next.",
+    "[[fondu_ecran]] (fade out), [[attendre]] 1 second, [[changer_scene]], then [[fondu_ecran]] (fade in) when the next level starts."
+  ],
+  "trainee_objet": [
+    "The object leaves a trail of particles behind it when it moves (preset, color and size of your choice). Set on a shot's model, every shot inherits it. Preset “None” removes it.",
+    "shots that leave a glowing trail: target = the shot's model, Trail preset."
+  ],
+  "arret_sur_image": [
+    "Slows the whole game almost to a stop for a very short moment (in real seconds), then the game goes back to its speed. It gives “punch” to impacts.",
+    "when an enemy explodes: duration 0.06, speed 0.05."
   ]
 }

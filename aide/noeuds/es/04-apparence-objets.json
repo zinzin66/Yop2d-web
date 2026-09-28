@@ -122,9 +122,33 @@
     },
     {
       "nom": "Resplandor (Glow)",
-      "schema": "<b>Entradas:</b> Objeto, Estado, Color",
-      "role": "Activa o desactiva un halo de color alrededor del objeto.",
-      "exemple": "señalar el objeto que se puede recoger."
+      "schema": "<b>Entradas:</b> Objeto, Estado, Color, Tamaño del halo",
+      "role": "Rodea el objeto con un halo luminoso suave del color y tamaño elegidos (sigue la forma de las imágenes), o lo quita.",
+      "exemple": "un bonus que brilla en amarillo, tamaño 20."
+    },
+    {
+      "nom": "Efecto de partículas",
+      "schema": "<b>Entradas:</b> Objeto, Modelo, Cantidad (0 = la del modelo), Color (vacío = el del modelo), Tamaño (1 = normal)",
+      "role": "Lanza una ráfaga de partículas sobre el objeto: explosión, chispas, polvo, humo, fuego, lluvia, nieve, confeti, estela, estela larga, hiperespacio o líneas de velocidad. Cantidad, color y tamaño ajustables.",
+      "exemple": "un enemigo alcanzado explota en magenta: modelo Explosión, color #FF40D0."
+    },
+    {
+      "nom": "Encender / apagar partículas",
+      "schema": "<b>Entradas:</b> Objeto, Estado",
+      "role": "Enciende o apaga un objeto «Partículas»: emite sin parar o se detiene (las partículas ya lanzadas terminan su vida).",
+      "exemple": "encender el reactor cuando la nave avanza."
+    },
+    {
+      "nom": "Ráfaga de partículas",
+      "schema": "<b>Entradas:</b> Objeto, Número de partículas",
+      "role": "Lanza de golpe varias partículas desde un objeto «Partículas», con sus ajustes (modelo, color, tamaño).",
+      "exemple": "80 confetis al ganar el nivel."
+    },
+    {
+      "nom": "Cambiar el modelo de partículas",
+      "schema": "<b>Entradas:</b> Objeto, Modelo",
+      "role": "Cambia el modelo de un objeto «Partículas» durante el juego.",
+      "exemple": "un fuego que se convierte en humo al apagarlo."
     },
     {
       "nom": "Parpadeo (Blink)",
@@ -140,7 +164,7 @@
     },
     {
       "nom": "Disparar un objeto",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nombre del modelo, Dirección, Velocidad",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nombre del modelo, Dirección, Velocidad, Destruir fuera de la pantalla (true / false)",
       "role": "Crea un proyectil (el objeto indicado en «Nombre del modelo») en el sitio del objeto A y lo lanza a la velocidad elegida: 0°, 90°, 180°, 270°, hacia el objeto B («Hacia el objetivo») o según el ángulo de A.",
       "exemple": "una nave que dispara láseres hacia arriba (270)."
     },
@@ -161,6 +185,18 @@
       "schema": "<b>Entradas:</b> Objeto, Margen",
       "role": "Impide que el objeto salga de la pantalla. El margen lo detiene un poco antes del borde.",
       "exemple": "la nave del jugador siempre queda visible."
+    },
+    {
+      "nom": "Electrocución",
+      "schema": "<b>Entradas:</b> Objeto, Color de los rayos, Duración (segundos, 0 = sin fin), Intensidad (0 = detener, 1 a 3)",
+      "role": "Rayos chisporrotean alrededor del objeto: parpadea con el color del rayo, tiembla y suelta chispas. Duración 0 = sin fin (valla eléctrica); intensidad 0 = detener.",
+      "exemple": "el mago toca una trampa: «Electrocución» sobre el mago (1 segundo), «Esperar» 1 segundo y luego «Reiniciar la escena»."
+    },
+    {
+      "nom": "Estela del objeto",
+      "schema": "<b>Entradas:</b> Objeto, Modelo, Color (vacío = el del modelo), Tamaño (1 = normal)",
+      "role": "El objeto deja una estela de partículas detrás al moverse (modelo, color y tamaño a elegir). Puesta en el modelo de un disparo, cada disparo la hereda. Modelo «Ninguno» para quitarla.",
+      "exemple": "disparos que dejan una estela luminosa: objetivo = el modelo del disparo, modelo Estela."
     },
     {
       "nom": "Crear objeto",

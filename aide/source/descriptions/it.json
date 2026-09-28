@@ -1,4 +1,6 @@
 {
+  "limites_camera": ["Impedisce alla telecamera di uscire dai bordi del livello: non mostra mai il vuoto oltre. Tutto a 0 = nessun limite.", "livello largo 6480 pixel: X minimo 0, X massimo 6480, Y minimo 0, Y massimo 1080, con [[fixer_camera]] sul giocatore."],
+  "electrocution": ["Fulmini crepitano intorno all'oggetto: lampeggia del colore del fulmine, trema e lancia scintille. Durata 0 = infinita (recinto elettrico); intensità 0 = ferma.", "il mago tocca una trappola: [[electrocution]] sul mago (1 secondo), [[attendre]] 1 secondo, poi [[recommencer_scene]]."],
   "NoeudEventStart": [
     "Si avvia una sola volta, appena la scena comincia.",
     "posizionare i nemici, mostrare il punteggio iniziale o far partire la musica."
@@ -252,8 +254,8 @@
     "una spada che segue la mano del personaggio."
   ],
   "surbrillance": [
-    "Attiva o disattiva un alone colorato intorno all'oggetto.",
-    "mostrare l'oggetto che si può raccogliere."
+    "Circonda l'oggetto con un bagliore morbido del colore e della dimensione scelti (segue la forma delle immagini), oppure lo toglie.",
+    "un bonus che brilla di giallo, dimensione 20."
   ],
   "clignotement": [
     "Fa lampeggiare l'oggetto alla velocità scelta (ms), per una durata (ms, 0 = senza fine), o ferma il lampeggio.",
@@ -368,7 +370,7 @@
     "=\"Punti: \" + score"
   ],
   "afficher_dialogue": [
-    "Scrive nell'oggetto Testo la frase che corrisponde alla chiave, dal file dei dialoghi (dialogues.txt).",
+    "Scrive nell'oggetto Testo la frase che corrisponde alla chiave, dal file dei dialoghi (dialogues.txt). Più lingue: scrivi « ciao.it = Ciao », « ciao.en = Hello »…; il gioco usa la lingua della variabile « langue », altrimenti quella del telefono. « \\n » = a capo.",
     "la chiave « ciao_mercante » mostra la battuta del mercante."
   ],
   "ajouter_au_texte": [
@@ -458,5 +460,45 @@
   "arreter_musique": [
     "Ferma la musica in corso.",
     "silenzio nella schermata di Game Over."
+  ],
+  "effet_particules": [
+    "Lancia una raffica di particelle sull'oggetto: esplosione, scintille, polvere, fumo, fuoco, pioggia, neve, coriandoli, scia, scia lunga, iperspazio o linee di velocità. Numero, colore e dimensione regolabili.",
+    "un nemico colpito esplode in magenta: modello Esplosione, colore #FF40D0."
+  ],
+  "particules_marche": [
+    "Accende o spegne un oggetto «Particelle»: emette di continuo oppure si ferma (le particelle già lanciate finiscono la loro vita).",
+    "accendere il reattore quando la nave avanza."
+  ],
+  "salve_particules": [
+    "Lancia in un colpo molte particelle da un oggetto «Particelle», con le sue impostazioni (modello, colore, dimensione).",
+    "80 coriandoli quando il livello è vinto."
+  ],
+  "changer_modele_particules": [
+    "Cambia il modello di un oggetto «Particelle» durante il gioco.",
+    "un fuoco che diventa fumo quando lo si spegne."
+  ],
+  "flash_ecran": [
+    "Fa un lampo di colore su tutto lo schermo, che svanisce in un attimo (intensità in %, durata in secondi).",
+    "un lampo rosso di 0,5 secondi quando il giocatore viene colpito."
+  ],
+  "teinte_ecran": [
+    "Posa un colore su tutto il gioco (sotto l'HUD), con una transizione morbida. Intensità 0 per toglierlo.",
+    "cala la notte: blu scuro, intensità 55, transizione di 2 secondi."
+  ],
+  "bords_assombris": [
+    "Scurisce dolcemente i bordi dello schermo, come al cinema (sotto l'HUD). Intensità 0 per toglierlo.",
+    "un'atmosfera inquietante in una grotta: intensità 75."
+  ],
+  "fondu_ecran": [
+    "Fa scomparire tutto lo schermo verso un colore, o lo fa riapparire da esso. La dissolvenza continua da una scena all'altra.",
+    "[[fondu_ecran]] (scomparire), [[attendre]] 1 secondo, [[changer_scene]], poi [[fondu_ecran]] (apparire) all'inizio del livello successivo."
+  ],
+  "trainee_objet": [
+    "L'oggetto lascia dietro di sé una scia di particelle quando si muove (modello, colore e dimensione a scelta). Messa sul modello di un colpo, ogni colpo la eredita. Modello «Nessuno» per toglierla.",
+    "colpi che lasciano una scia luminosa: bersaglio = il modello del colpo, modello Scia."
+  ],
+  "arret_sur_image": [
+    "Rallenta tutto il gioco quasi fino a fermarlo per un istante brevissimo (in secondi reali), poi il gioco riprende la sua velocità. Dà più forza agli impatti.",
+    "quando esplode un nemico: durata 0,06, velocità 0,05."
   ]
 }

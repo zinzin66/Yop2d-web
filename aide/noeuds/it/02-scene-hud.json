@@ -79,10 +79,40 @@
       "exemple": "seguire il giocatore in un grande livello a piattaforme."
     },
     {
+      "nom": "Limiti della telecamera",
+      "schema": "<b>Ingressi:</b> X minimo (bordo sinistro del livello), X massimo (bordo destro), Y minimo (alto), Y massimo (basso; tutto a 0 = nessun limite)",
+      "role": "Impedisce alla telecamera di uscire dai bordi del livello: non mostra mai il vuoto oltre. Tutto a 0 = nessun limite.",
+      "exemple": "livello largo 6480 pixel: X minimo 0, X massimo 6480, Y minimo 0, Y massimo 1080, con «Fissa la camera» sul giocatore."
+    },
+    {
       "nom": "Morbidezza della camera",
       "schema": "<b>Ingresso:</b> Velocità di inseguimento (da 0.01 a 1)",
       "role": "Regola la velocità con cui la telecamera raggiunge l'oggetto seguito: 0.01 = molto morbida, 1 = attaccata all'oggetto.",
       "exemple": "0.1 per una telecamera morbida che segue con un leggero ritardo."
+    },
+    {
+      "nom": "Flash dello schermo",
+      "schema": "<b>Ingressi:</b> Colore, Intensità (%, 0 = nessuna), Durata (secondi)",
+      "role": "Fa un lampo di colore su tutto lo schermo, che svanisce in un attimo (intensità in %, durata in secondi).",
+      "exemple": "un lampo rosso di 0,5 secondi quando il giocatore viene colpito."
+    },
+    {
+      "nom": "Tinta dello schermo",
+      "schema": "<b>Ingressi:</b> Colore, Intensità (%, 0 = nessuna), Transizione (secondi)",
+      "role": "Posa un colore su tutto il gioco (sotto l'HUD), con una transizione morbida. Intensità 0 per toglierlo.",
+      "exemple": "cala la notte: blu scuro, intensità 55, transizione di 2 secondi."
+    },
+    {
+      "nom": "Bordi scuriti",
+      "schema": "<b>Ingressi:</b> Colore, Intensità (%, 0 = nessuna), Transizione (secondi)",
+      "role": "Scurisce dolcemente i bordi dello schermo, come al cinema (sotto l'HUD). Intensità 0 per toglierlo.",
+      "exemple": "un'atmosfera inquietante in una grotta: intensità 75."
+    },
+    {
+      "nom": "Dissolvenza dello schermo",
+      "schema": "<b>Ingressi:</b> Verso, Colore, Durata (secondi)",
+      "role": "Fa scomparire tutto lo schermo verso un colore, o lo fa riapparire da esso. La dissolvenza continua da una scena all'altra.",
+      "exemple": "«Dissolvenza dello schermo» (scomparire), «Attendere» 1 secondo, «Vai alla scena», poi «Dissolvenza dello schermo» (apparire) all'inizio del livello successivo."
     },
     {
       "nom": "Tremolio della camera",

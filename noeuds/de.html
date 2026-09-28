@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (115) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 115 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (127) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 127 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 115 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 127 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
 <nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-animationen">Animationen</a><a href="#c10-audio">Audio</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
@@ -193,10 +193,35 @@
 <p>Die Kamera folgt dem gewählten Objekt, auf Wunsch nur waagerecht oder nur senkrecht. Ohne Objekt folgt die Kamera nichts mehr.</p>
 <p class="exemple"><b>Beispiel:</b> dem Spieler durch ein großes Plattform-Level folgen.</p>
 </div>
+<div class="fiche"><h3>Kameragrenzen</h3>
+<div class="schema"><b>Eingänge:</b> Minimales X (linker Levelrand), Maximales X (rechter Rand), Minimales Y (oben), Maximales Y (unten; alles 0 = keine Grenzen)</div>
+<p>Hält die Kamera innerhalb der Levelränder: Sie zeigt nie die Leere dahinter. Alles 0 = keine Grenzen.</p>
+<p class="exemple"><b>Beispiel:</b> Level mit 6480 Pixel Breite: minimales X 0, maximales X 6480, minimales Y 0, maximales Y 1080, mit „Kamera fixieren“ auf dem Spieler.</p>
+</div>
 <div class="fiche"><h3>Kamera-Glättung</h3>
 <div class="schema"><b>Eingang:</b> Folgegeschwindigkeit (0.01 bis 1)</div>
 <p>Legt fest, wie schnell die Kamera das verfolgte Objekt einholt: 0.01 = sehr weich, 1 = klebt am Objekt.</p>
 <p class="exemple"><b>Beispiel:</b> 0.1 für eine sanfte Kamera, die leicht verzögert folgt.</p>
+</div>
+<div class="fiche"><h3>Bildschirmblitz</h3>
+<div class="schema"><b>Eingänge:</b> Farbe, Stärke (%, 0 = keine), Dauer (Sekunden)</div>
+<p>Lässt den ganzen Bildschirm kurz in einer Farbe aufblitzen, die schnell verblasst (Stärke in %, Dauer in Sekunden).</p>
+<p class="exemple"><b>Beispiel:</b> ein roter Blitz von 0,5 Sekunden, wenn der Spieler getroffen wird.</p>
+</div>
+<div class="fiche"><h3>Bildschirmtönung</h3>
+<div class="schema"><b>Eingänge:</b> Farbe, Stärke (%, 0 = keine), Übergang (Sekunden)</div>
+<p>Legt eine Farbe über das ganze Spiel (unter dem HUD), mit sanftem Übergang. Stärke 0 entfernt sie.</p>
+<p class="exemple"><b>Beispiel:</b> die Nacht bricht herein: Dunkelblau, Stärke 55, Übergang 2 Sekunden.</p>
+</div>
+<div class="fiche"><h3>Abgedunkelte Ränder</h3>
+<div class="schema"><b>Eingänge:</b> Farbe, Stärke (%, 0 = keine), Übergang (Sekunden)</div>
+<p>Dunkelt die Bildschirmränder sanft ab, wie im Kino (unter dem HUD). Stärke 0 entfernt es.</p>
+<p class="exemple"><b>Beispiel:</b> eine unheimliche Stimmung in einer Höhle: Stärke 75.</p>
+</div>
+<div class="fiche"><h3>Bildschirmüberblendung</h3>
+<div class="schema"><b>Eingänge:</b> Richtung, Farbe, Dauer (Sekunden)</div>
+<p>Blendet den ganzen Bildschirm zu einer Farbe aus oder aus ihr wieder ein. Die Überblendung läuft über den Szenenwechsel hinweg weiter.</p>
+<p class="exemple"><b>Beispiel:</b> „Bildschirmüberblendung“ (ausblenden), „Warten“ 1 Sekunde, „Zur Szene wechseln“, dann „Bildschirmüberblendung“ (einblenden) beim Start des nächsten Levels.</p>
 </div>
 <div class="fiche"><h3>Kamera-Wackeln</h3>
 <div class="schema"><b>Eingänge:</b> Stärke, Dauer (ms)</div>
@@ -251,6 +276,11 @@
 <div class="fiche"><h3>Spiel fortsetzen</h3>
 <p>Setzt das Spiel nach einer Pause fort.</p>
 <p class="exemple"><b>Beispiel:</b> die Taste „Weiter“ im Pausenmenü.</p>
+</div>
+<div class="fiche"><h3>Trefferstopp</h3>
+<div class="schema"><b>Eingänge:</b> Dauer (Sekunden), Tempo während des Stopps (0 = eingefroren)</div>
+<p>Bremst das ganze Spiel für einen sehr kurzen Moment (in echten Sekunden) fast bis zum Stillstand, dann läuft es normal weiter. Gibt Treffern mehr Wucht.</p>
+<p class="exemple"><b>Beispiel:</b> wenn ein Gegner explodiert: Dauer 0,06, Tempo 0,05.</p>
 </div>
 </div>
 <h2 id="c4-aussehen-objekte">Aussehen &amp; Objekte</h2>
@@ -355,9 +385,29 @@
 <p class="exemple"><b>Beispiel:</b> ein Schwert, das der Hand der Figur folgt.</p>
 </div>
 <div class="fiche"><h3>Leuchten (Glow)</h3>
-<div class="schema"><b>Eingänge:</b> Objekt, Zustand, Farbe</div>
-<p>Schaltet einen farbigen Schein um das Objekt ein oder aus.</p>
-<p class="exemple"><b>Beispiel:</b> zeigen, welches Objekt man aufheben kann.</p>
+<div class="schema"><b>Eingänge:</b> Objekt, Zustand, Farbe, Größe des Leuchtens</div>
+<p>Umgibt das Objekt mit einem weichen Leuchten in der gewählten Farbe und Größe (folgt der Form von Bildern) oder entfernt es.</p>
+<p class="exemple"><b>Beispiel:</b> ein Bonus, der gelb leuchtet, Größe 20.</p>
+</div>
+<div class="fiche"><h3>Partikeleffekt</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Vorlage, Anzahl (0 = wie Vorlage), Farbe (leer = wie Vorlage), Größe (1 = normal)</div>
+<p>Lässt am Objekt einen Partikelstoß los: Explosion, Funken, Staub, Rauch, Feuer, Regen, Schnee, Konfetti, Spur, Schweif, Hyperraum oder Geschwindigkeitslinien. Anzahl, Farbe und Größe einstellbar.</p>
+<p class="exemple"><b>Beispiel:</b> ein getroffener Gegner explodiert in Magenta: Vorlage Explosion, Farbe #FF40D0.</p>
+</div>
+<div class="fiche"><h3>Partikel ein / aus</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Zustand</div>
+<p>Schaltet ein „Partikel“-Objekt ein oder aus: Es sprüht dauerhaft oder hört auf (schon ausgestoßene Partikel leben zu Ende).</p>
+<p class="exemple"><b>Beispiel:</b> das Triebwerk einschalten, wenn das Raumschiff fliegt.</p>
+</div>
+<div class="fiche"><h3>Partikelstoß</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Anzahl der Partikel</div>
+<p>Stößt aus einem „Partikel“-Objekt auf einmal viele Partikel aus, mit dessen Einstellungen (Vorlage, Farbe, Größe).</p>
+<p class="exemple"><b>Beispiel:</b> 80 Konfetti, wenn das Level gewonnen ist.</p>
+</div>
+<div class="fiche"><h3>Partikelvorlage ändern</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Vorlage</div>
+<p>Ändert während des Spiels die Vorlage eines „Partikel“-Objekts.</p>
+<p class="exemple"><b>Beispiel:</b> ein Feuer, das beim Löschen zu Rauch wird.</p>
 </div>
 <div class="fiche"><h3>Blinken (Blink)</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Zustand, Geschwindigkeit (ms), Dauer (ms, 0 = unendlich)</div>
@@ -370,7 +420,7 @@
 <p class="exemple"><b>Beispiel:</b> einen Stein an zufälliger Stelle fallen lassen: X = random(0, 800).</p>
 </div>
 <div class="fiche"><h3>Ein Objekt abfeuern</h3>
-<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit</div>
+<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit, Außerhalb des Bildschirms zerstören (true / false)</div>
 <p>Erstellt ein Geschoss (das Objekt aus „Modellname“) bei Objekt A und schießt es mit der gewählten Geschwindigkeit ab: 0°, 90°, 180°, 270°, zu Objekt B („Zum Ziel“) oder im Winkel von A.</p>
 <p class="exemple"><b>Beispiel:</b> ein Raumschiff, das Laser nach oben schießt (270).</p>
 </div>
@@ -388,6 +438,16 @@
 <div class="schema"><b>Eingänge:</b> Objekt, Rand</div>
 <p>Verhindert, dass das Objekt den Bildschirm verlässt. Der Rand hält es kurz vor der Kante an.</p>
 <p class="exemple"><b>Beispiel:</b> das Raumschiff des Spielers bleibt immer sichtbar.</p>
+</div>
+<div class="fiche"><h3>Stromschlag</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Blitzfarbe, Dauer (Sekunden, 0 = endlos), Stärke (0 = stoppen, 1 bis 3)</div>
+<p>Blitze knistern um das Objekt: Es blinkt in der Blitzfarbe, zittert und sprüht Funken. Dauer 0 = endlos (Elektrozaun); Stärke 0 = stoppen.</p>
+<p class="exemple"><b>Beispiel:</b> der Zauberer berührt eine Falle: „Stromschlag“ auf den Zauberer (1 Sekunde), „Warten“ 1 Sekunde, dann „Szene neu starten“.</p>
+</div>
+<div class="fiche"><h3>Objektspur</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Vorlage, Farbe (leer = wie Vorlage), Größe (1 = normal)</div>
+<p>Das Objekt zieht beim Bewegen eine Partikelspur hinter sich her (Vorlage, Farbe und Größe wählbar). Auf die Vorlage eines Schusses gesetzt, erbt jeder Schuss sie. Vorlage „Keiner“ entfernt sie.</p>
+<p class="exemple"><b>Beispiel:</b> Schüsse mit leuchtender Spur: Ziel = die Vorlage des Schusses, Vorlage Spur.</p>
 </div>
 <div class="fiche"><h3>Objekt erstellen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, X-Position, Y-Position</div>
@@ -510,7 +570,7 @@
 </div>
 <div class="fiche"><h3>Dialog anzeigen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Dialogschlüssel</div>
-<p>Schreibt den Satz zum Schlüssel aus der Dialogdatei (dialogues.txt) in das Textobjekt.</p>
+<p>Schreibt den Satz zum Schlüssel aus der Dialogdatei (dialogues.txt) in das Textobjekt. Mehrere Sprachen: „hallo.de = Hallo“, „hallo.en = Hello“… schreiben; das Spiel nimmt die Sprache der Variable „langue“, sonst die des Telefons. „\n“ = Zeilenumbruch.</p>
 <p class="exemple"><b>Beispiel:</b> der Schlüssel „hallo_haendler“ zeigt den Satz des Händlers.</p>
 </div>
 <div class="fiche"><h3>Text anhängen</h3>
@@ -618,12 +678,12 @@
 <h2 id="c10-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Sound abspielen</h3>
-<div class="schema"><b>Eingang:</b> Sounddatei</div>
+<div class="schema"><b>Eingänge:</b> Sounddatei, Lautstärke (%, 100 = voll)</div>
 <p>Spielt einen Soundeffekt. Mehrere Sounds können gleichzeitig laufen.</p>
 <p class="exemple"><b>Beispiel:</b> ein „Pling“, wenn man eine Münze aufhebt.</p>
 </div>
 <div class="fiche"><h3>Musik abspielen</h3>
-<div class="schema"><b>Eingänge:</b> Musikdatei, Wiederholen (true / false)</div>
+<div class="schema"><b>Eingänge:</b> Musikdatei, Wiederholen (true / false), Lautstärke (%, 100 = voll)</div>
 <p>Startet eine Musik, die die aktuelle ersetzt. Nicht unter „Jeden Frame“ setzen (sie würde ständig neu beginnen).</p>
 <p class="exemple"><b>Beispiel:</b> die Level-Musik beim Start.</p>
 </div>

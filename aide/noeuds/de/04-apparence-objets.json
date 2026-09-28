@@ -122,9 +122,33 @@
     },
     {
       "nom": "Leuchten (Glow)",
-      "schema": "<b>Eingänge:</b> Objekt, Zustand, Farbe",
-      "role": "Schaltet einen farbigen Schein um das Objekt ein oder aus.",
-      "exemple": "zeigen, welches Objekt man aufheben kann."
+      "schema": "<b>Eingänge:</b> Objekt, Zustand, Farbe, Größe des Leuchtens",
+      "role": "Umgibt das Objekt mit einem weichen Leuchten in der gewählten Farbe und Größe (folgt der Form von Bildern) oder entfernt es.",
+      "exemple": "ein Bonus, der gelb leuchtet, Größe 20."
+    },
+    {
+      "nom": "Partikeleffekt",
+      "schema": "<b>Eingänge:</b> Objekt, Vorlage, Anzahl (0 = wie Vorlage), Farbe (leer = wie Vorlage), Größe (1 = normal)",
+      "role": "Lässt am Objekt einen Partikelstoß los: Explosion, Funken, Staub, Rauch, Feuer, Regen, Schnee, Konfetti, Spur, Schweif, Hyperraum oder Geschwindigkeitslinien. Anzahl, Farbe und Größe einstellbar.",
+      "exemple": "ein getroffener Gegner explodiert in Magenta: Vorlage Explosion, Farbe #FF40D0."
+    },
+    {
+      "nom": "Partikel ein / aus",
+      "schema": "<b>Eingänge:</b> Objekt, Zustand",
+      "role": "Schaltet ein „Partikel“-Objekt ein oder aus: Es sprüht dauerhaft oder hört auf (schon ausgestoßene Partikel leben zu Ende).",
+      "exemple": "das Triebwerk einschalten, wenn das Raumschiff fliegt."
+    },
+    {
+      "nom": "Partikelstoß",
+      "schema": "<b>Eingänge:</b> Objekt, Anzahl der Partikel",
+      "role": "Stößt aus einem „Partikel“-Objekt auf einmal viele Partikel aus, mit dessen Einstellungen (Vorlage, Farbe, Größe).",
+      "exemple": "80 Konfetti, wenn das Level gewonnen ist."
+    },
+    {
+      "nom": "Partikelvorlage ändern",
+      "schema": "<b>Eingänge:</b> Objekt, Vorlage",
+      "role": "Ändert während des Spiels die Vorlage eines „Partikel“-Objekts.",
+      "exemple": "ein Feuer, das beim Löschen zu Rauch wird."
     },
     {
       "nom": "Blinken (Blink)",
@@ -140,7 +164,7 @@
     },
     {
       "nom": "Ein Objekt abfeuern",
-      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit",
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit, Außerhalb des Bildschirms zerstören (true / false)",
       "role": "Erstellt ein Geschoss (das Objekt aus „Modellname“) bei Objekt A und schießt es mit der gewählten Geschwindigkeit ab: 0°, 90°, 180°, 270°, zu Objekt B („Zum Ziel“) oder im Winkel von A.",
       "exemple": "ein Raumschiff, das Laser nach oben schießt (270)."
     },
@@ -161,6 +185,18 @@
       "schema": "<b>Eingänge:</b> Objekt, Rand",
       "role": "Verhindert, dass das Objekt den Bildschirm verlässt. Der Rand hält es kurz vor der Kante an.",
       "exemple": "das Raumschiff des Spielers bleibt immer sichtbar."
+    },
+    {
+      "nom": "Stromschlag",
+      "schema": "<b>Eingänge:</b> Objekt, Blitzfarbe, Dauer (Sekunden, 0 = endlos), Stärke (0 = stoppen, 1 bis 3)",
+      "role": "Blitze knistern um das Objekt: Es blinkt in der Blitzfarbe, zittert und sprüht Funken. Dauer 0 = endlos (Elektrozaun); Stärke 0 = stoppen.",
+      "exemple": "der Zauberer berührt eine Falle: „Stromschlag“ auf den Zauberer (1 Sekunde), „Warten“ 1 Sekunde, dann „Szene neu starten“."
+    },
+    {
+      "nom": "Objektspur",
+      "schema": "<b>Eingänge:</b> Objekt, Vorlage, Farbe (leer = wie Vorlage), Größe (1 = normal)",
+      "role": "Das Objekt zieht beim Bewegen eine Partikelspur hinter sich her (Vorlage, Farbe und Größe wählbar). Auf die Vorlage eines Schusses gesetzt, erbt jeder Schuss sie. Vorlage „Keiner“ entfernt sie.",
+      "exemple": "Schüsse mit leuchtender Spur: Ziel = die Vorlage des Schusses, Vorlage Spur."
     },
     {
       "nom": "Objekt erstellen",

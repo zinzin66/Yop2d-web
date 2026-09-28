@@ -122,9 +122,33 @@
     },
     {
       "nom": "Brilho (Glow)",
-      "schema": "<b>Entradas:</b> Objeto, Estado, Cor",
-      "role": "Liga ou desliga um brilho colorido em volta do objeto.",
-      "exemple": "mostrar o objeto que pode ser pego."
+      "schema": "<b>Entradas:</b> Objeto, Estado, Cor, Tamanho do brilho",
+      "role": "Envolve o objeto com um brilho suave da cor e do tamanho escolhidos (segue a forma das imagens), ou o remove.",
+      "exemple": "um bônus que brilha em amarelo, tamanho 20."
+    },
+    {
+      "nom": "Efeito de partículas",
+      "schema": "<b>Entradas:</b> Objeto, Modelo, Quantidade (0 = a do modelo), Cor (vazio = a do modelo), Tamanho (1 = normal)",
+      "role": "Lança uma rajada de partículas no objeto: explosão, faíscas, poeira, fumaça, fogo, chuva, neve, confete, rastro, rastro longo, hiperespaço ou linhas de velocidade. Quantidade, cor e tamanho ajustáveis.",
+      "exemple": "um inimigo atingido explode em magenta: modelo Explosão, cor #FF40D0."
+    },
+    {
+      "nom": "Ligar / desligar partículas",
+      "schema": "<b>Entradas:</b> Objeto, Estado",
+      "role": "Liga ou desliga um objeto “Partículas”: ele emite sem parar ou para (as partículas já lançadas terminam a vida).",
+      "exemple": "ligar o propulsor quando a nave avança."
+    },
+    {
+      "nom": "Rajada de partículas",
+      "schema": "<b>Entradas:</b> Objeto, Número de partículas",
+      "role": "Lança de uma vez várias partículas a partir de um objeto “Partículas”, com as configurações dele (modelo, cor, tamanho).",
+      "exemple": "80 confetes quando a fase é vencida."
+    },
+    {
+      "nom": "Mudar o modelo de partículas",
+      "schema": "<b>Entradas:</b> Objeto, Modelo",
+      "role": "Muda o modelo de um objeto “Partículas” durante o jogo.",
+      "exemple": "um fogo que vira fumaça quando é apagado."
     },
     {
       "nom": "Piscar (Blink)",
@@ -140,7 +164,7 @@
     },
     {
       "nom": "Disparar um objeto",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade, Destruir fora da tela (true / false)",
       "role": "Cria um projétil (o objeto indicado em “Nome do modelo”) no lugar do objeto A e o lança na velocidade escolhida: 0°, 90°, 180°, 270°, na direção do objeto B (“Em direção ao alvo”) ou no ângulo de A.",
       "exemple": "uma nave que atira lasers para cima (270)."
     },
@@ -161,6 +185,18 @@
       "schema": "<b>Entradas:</b> Objeto, Margem",
       "role": "Impede o objeto de sair da tela. A margem o para um pouco antes da borda.",
       "exemple": "a nave do jogador fica sempre visível."
+    },
+    {
+      "nom": "Eletrocussão",
+      "schema": "<b>Entradas:</b> Objeto, Cor dos raios, Duração (segundos, 0 = sem fim), Intensidade (0 = parar, 1 a 3)",
+      "role": "Raios estalam em volta do objeto: ele pisca na cor do raio, treme e solta faíscas. Duração 0 = sem fim (cerca elétrica); intensidade 0 = parar.",
+      "exemple": "o mago toca numa armadilha: “Eletrocussão” no mago (1 segundo), “Esperar” 1 segundo, depois “Reiniciar a cena”."
+    },
+    {
+      "nom": "Rastro do objeto",
+      "schema": "<b>Entradas:</b> Objeto, Modelo, Cor (vazio = a do modelo), Tamanho (1 = normal)",
+      "role": "O objeto deixa um rastro de partículas ao se mover (modelo, cor e tamanho à escolha). Colocado no modelo de um tiro, cada tiro o herda. Modelo “Nenhum” para removê-lo.",
+      "exemple": "tiros que deixam um rastro luminoso: alvo = o modelo do tiro, modelo Rastro."
     },
     {
       "nom": "Criar objeto",

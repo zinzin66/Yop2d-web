@@ -1,4 +1,6 @@
 {
+  "limites_camera": ["Hält die Kamera innerhalb der Levelränder: Sie zeigt nie die Leere dahinter. Alles 0 = keine Grenzen.", "Level mit 6480 Pixel Breite: minimales X 0, maximales X 6480, minimales Y 0, maximales Y 1080, mit [[fixer_camera]] auf dem Spieler."],
+  "electrocution": ["Blitze knistern um das Objekt: Es blinkt in der Blitzfarbe, zittert und sprüht Funken. Dauer 0 = endlos (Elektrozaun); Stärke 0 = stoppen.", "der Zauberer berührt eine Falle: [[electrocution]] auf den Zauberer (1 Sekunde), [[attendre]] 1 Sekunde, dann [[recommencer_scene]]."],
   "NoeudEventStart": [
     "Läuft nur einmal, sobald die Szene startet.",
     "Gegner platzieren, den Startpunktestand anzeigen oder die Musik starten."
@@ -252,8 +254,8 @@
     "ein Schwert, das der Hand der Figur folgt."
   ],
   "surbrillance": [
-    "Schaltet einen farbigen Schein um das Objekt ein oder aus.",
-    "zeigen, welches Objekt man aufheben kann."
+    "Umgibt das Objekt mit einem weichen Leuchten in der gewählten Farbe und Größe (folgt der Form von Bildern) oder entfernt es.",
+    "ein Bonus, der gelb leuchtet, Größe 20."
   ],
   "clignotement": [
     "Lässt das Objekt mit der gewählten Geschwindigkeit (ms) blinken, für eine Dauer (ms, 0 = endlos), oder stoppt das Blinken.",
@@ -368,7 +370,7 @@
     "=\"Punkte: \" + score"
   ],
   "afficher_dialogue": [
-    "Schreibt den Satz zum Schlüssel aus der Dialogdatei (dialogues.txt) in das Textobjekt.",
+    "Schreibt den Satz zum Schlüssel aus der Dialogdatei (dialogues.txt) in das Textobjekt. Mehrere Sprachen: « hallo.de = Hallo », « hallo.en = Hello »… schreiben; das Spiel nimmt die Sprache der Variable « langue », sonst die des Telefons. « \\n » = Zeilenumbruch.",
     "der Schlüssel « hallo_haendler » zeigt den Satz des Händlers."
   ],
   "ajouter_au_texte": [
@@ -458,5 +460,45 @@
   "arreter_musique": [
     "Stoppt die aktuelle Musik.",
     "Stille auf dem Game-Over-Bildschirm."
+  ],
+  "effet_particules": [
+    "Lässt am Objekt einen Partikelstoß los: Explosion, Funken, Staub, Rauch, Feuer, Regen, Schnee, Konfetti, Spur, Schweif, Hyperraum oder Geschwindigkeitslinien. Anzahl, Farbe und Größe einstellbar.",
+    "ein getroffener Gegner explodiert in Magenta: Vorlage Explosion, Farbe #FF40D0."
+  ],
+  "particules_marche": [
+    "Schaltet ein „Partikel“-Objekt ein oder aus: Es sprüht dauerhaft oder hört auf (schon ausgestoßene Partikel leben zu Ende).",
+    "das Triebwerk einschalten, wenn das Raumschiff fliegt."
+  ],
+  "salve_particules": [
+    "Stößt aus einem „Partikel“-Objekt auf einmal viele Partikel aus, mit dessen Einstellungen (Vorlage, Farbe, Größe).",
+    "80 Konfetti, wenn das Level gewonnen ist."
+  ],
+  "changer_modele_particules": [
+    "Ändert während des Spiels die Vorlage eines „Partikel“-Objekts.",
+    "ein Feuer, das beim Löschen zu Rauch wird."
+  ],
+  "flash_ecran": [
+    "Lässt den ganzen Bildschirm kurz in einer Farbe aufblitzen, die schnell verblasst (Stärke in %, Dauer in Sekunden).",
+    "ein roter Blitz von 0,5 Sekunden, wenn der Spieler getroffen wird."
+  ],
+  "teinte_ecran": [
+    "Legt eine Farbe über das ganze Spiel (unter dem HUD), mit sanftem Übergang. Stärke 0 entfernt sie.",
+    "die Nacht bricht herein: Dunkelblau, Stärke 55, Übergang 2 Sekunden."
+  ],
+  "bords_assombris": [
+    "Dunkelt die Bildschirmränder sanft ab, wie im Kino (unter dem HUD). Stärke 0 entfernt es.",
+    "eine unheimliche Stimmung in einer Höhle: Stärke 75."
+  ],
+  "fondu_ecran": [
+    "Blendet den ganzen Bildschirm zu einer Farbe aus oder aus ihr wieder ein. Die Überblendung läuft über den Szenenwechsel hinweg weiter.",
+    "[[fondu_ecran]] (ausblenden), [[attendre]] 1 Sekunde, [[changer_scene]], dann [[fondu_ecran]] (einblenden) beim Start des nächsten Levels."
+  ],
+  "trainee_objet": [
+    "Das Objekt zieht beim Bewegen eine Partikelspur hinter sich her (Vorlage, Farbe und Größe wählbar). Auf die Vorlage eines Schusses gesetzt, erbt jeder Schuss sie. Vorlage „Keiner“ entfernt sie.",
+    "Schüsse mit leuchtender Spur: Ziel = die Vorlage des Schusses, Vorlage Spur."
+  ],
+  "arret_sur_image": [
+    "Bremst das ganze Spiel für einen sehr kurzen Moment (in echten Sekunden) fast bis zum Stillstand, dann läuft es normal weiter. Gibt Treffern mehr Wucht.",
+    "wenn ein Gegner explodiert: Dauer 0,06, Tempo 0,05."
   ]
 }

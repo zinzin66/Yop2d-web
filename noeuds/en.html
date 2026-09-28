@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (115) | Reference</title>
-<meta name="description" content="Complete list of the 115 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (127) | Reference</title>
+<meta name="description" content="Complete list of the 127 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 115 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 127 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-animations">Animations</a><a href="#c10-audio">Audio</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -193,10 +193,35 @@
 <p>The camera follows the chosen object. You can make it follow only horizontally or vertically. With no object, the camera stops following.</p>
 <p class="exemple"><b>Example:</b> follow the player through a big platform level.</p>
 </div>
+<div class="fiche"><h3>Camera limits</h3>
+<div class="schema"><b>Inputs:</b> Minimum X (left edge of the level), Maximum X (right edge), Minimum Y (top), Maximum Y (bottom; all 0 = no limits)</div>
+<p>Keeps the camera inside the level edges: it never shows the empty space beyond. All 0 = no limits.</p>
+<p class="exemple"><b>Example:</b> a level 6480 pixels wide: minimum X 0, maximum X 6480, minimum Y 0, maximum Y 1080, with “Follow with camera” on the player.</p>
+</div>
 <div class="fiche"><h3>Camera smoothing</h3>
 <div class="schema"><b>Input:</b> Follow speed (0.01 to 1)</div>
 <p>Sets how fast the camera catches up with the followed object: 0.01 = very soft, 1 = stuck to the object.</p>
 <p class="exemple"><b>Example:</b> 0.1 for a smooth camera that follows with a slight delay.</p>
+</div>
+<div class="fiche"><h3>Screen flash</h3>
+<div class="schema"><b>Inputs:</b> Color, Intensity (%, 0 = none), Duration (seconds)</div>
+<p>Flashes a color over the whole screen, fading out in a moment (intensity in %, duration in seconds).</p>
+<p class="exemple"><b>Example:</b> a 0.5-second red flash when the player is hit.</p>
+</div>
+<div class="fiche"><h3>Screen tint</h3>
+<div class="schema"><b>Inputs:</b> Color, Intensity (%, 0 = none), Transition (seconds)</div>
+<p>Lays a color over the whole game (under the HUD), with a smooth transition. Intensity 0 removes it.</p>
+<p class="exemple"><b>Example:</b> night falls: dark blue, intensity 55, 2-second transition.</p>
+</div>
+<div class="fiche"><h3>Vignette</h3>
+<div class="schema"><b>Inputs:</b> Color, Intensity (%, 0 = none), Transition (seconds)</div>
+<p>Gently darkens the edges of the screen, like in a movie (under the HUD). Intensity 0 removes it.</p>
+<p class="exemple"><b>Example:</b> a scary mood in a cave: intensity 75.</p>
+</div>
+<div class="fiche"><h3>Screen fade</h3>
+<div class="schema"><b>Inputs:</b> Direction, Color, Duration (seconds)</div>
+<p>Fades the whole screen out to a color, or back in from it. The fade carries over from one scene to the next.</p>
+<p class="exemple"><b>Example:</b> “Screen fade” (fade out), “Wait” 1 second, “Go to scene”, then “Screen fade” (fade in) when the next level starts.</p>
 </div>
 <div class="fiche"><h3>Camera shake</h3>
 <div class="schema"><b>Inputs:</b> Strength, Duration (ms)</div>
@@ -251,6 +276,11 @@
 <div class="fiche"><h3>Resume the game</h3>
 <p>Resumes the game after a pause.</p>
 <p class="exemple"><b>Example:</b> the “Continue” button of the pause menu.</p>
+</div>
+<div class="fiche"><h3>Hit stop</h3>
+<div class="schema"><b>Inputs:</b> Duration (seconds), Speed during the stop (0 = frozen)</div>
+<p>Slows the whole game almost to a stop for a very short moment (in real seconds), then the game goes back to its speed. It gives “punch” to impacts.</p>
+<p class="exemple"><b>Example:</b> when an enemy explodes: duration 0.06, speed 0.05.</p>
 </div>
 </div>
 <h2 id="c4-appearance-objects">Appearance &amp; Objects</h2>
@@ -355,9 +385,29 @@
 <p class="exemple"><b>Example:</b> a sword that follows the character's hand.</p>
 </div>
 <div class="fiche"><h3>Glow</h3>
-<div class="schema"><b>Inputs:</b> Object, State, Color</div>
-<p>Turns a colored glow around the object on or off.</p>
-<p class="exemple"><b>Example:</b> show which object can be picked up.</p>
+<div class="schema"><b>Inputs:</b> Object, State, Color, Glow size</div>
+<p>Surrounds the object with a soft glow of the chosen color and size (it follows the shape of images), or removes it.</p>
+<p class="exemple"><b>Example:</b> a bonus that glows yellow, size 20.</p>
+</div>
+<div class="fiche"><h3>Particle effect</h3>
+<div class="schema"><b>Inputs:</b> Object, Preset, Count (0 = preset's), Color (empty = preset's), Size (1 = normal)</div>
+<p>Fires a burst of particles on the object: explosion, sparks, dust, smoke, fire, rain, snow, confetti, trail, wake trail, hyperspace or speed lines. Count, color and size can be set.</p>
+<p class="exemple"><b>Example:</b> a hit enemy explodes in magenta: Explosion preset, color #FF40D0.</p>
+</div>
+<div class="fiche"><h3>Particles on / off</h3>
+<div class="schema"><b>Inputs:</b> Object, State</div>
+<p>Turns a “Particles” object on or off: it emits continuously or stops (particles already fired finish their life).</p>
+<p class="exemple"><b>Example:</b> turn the engine exhaust on when the ship moves.</p>
+</div>
+<div class="fiche"><h3>Particle burst</h3>
+<div class="schema"><b>Inputs:</b> Object, Number of particles</div>
+<p>Fires many particles at once from a “Particles” object, with its settings (preset, color, size).</p>
+<p class="exemple"><b>Example:</b> 80 confetti when the level is won.</p>
+</div>
+<div class="fiche"><h3>Change particle preset</h3>
+<div class="schema"><b>Inputs:</b> Object, Preset</div>
+<p>Changes the preset of a “Particles” object during the game.</p>
+<p class="exemple"><b>Example:</b> a fire that turns into smoke when it is put out.</p>
 </div>
 <div class="fiche"><h3>Blink</h3>
 <div class="schema"><b>Inputs:</b> Object, State, Speed (ms), Duration (ms, 0 = infinite)</div>
@@ -370,7 +420,7 @@
 <p class="exemple"><b>Example:</b> drop a rock at a random position: X = random(0, 800).</p>
 </div>
 <div class="fiche"><h3>Shoot an object</h3>
-<div class="schema"><b>Inputs:</b> Object A, Object B, Model name, Direction, Speed</div>
+<div class="schema"><b>Inputs:</b> Object A, Object B, Model name, Direction, Speed, Destroy off screen (true / false)</div>
 <p>Creates a projectile (the object named in “Model name”) at object A, and launches it at the chosen speed: 0°, 90°, 180°, 270°, towards object B (“Toward target”) or along A's angle.</p>
 <p class="exemple"><b>Example:</b> a ship firing lasers upwards (270).</p>
 </div>
@@ -388,6 +438,16 @@
 <div class="schema"><b>Inputs:</b> Object, Margin</div>
 <p>Stops the object from leaving the screen. The margin stops it a little before the edge.</p>
 <p class="exemple"><b>Example:</b> the player's ship always stays visible.</p>
+</div>
+<div class="fiche"><h3>Electrocution</h3>
+<div class="schema"><b>Inputs:</b> Object, Lightning color, Duration (seconds, 0 = endless), Intensity (0 = stop, 1 to 3)</div>
+<p>Lightning crackles around the object: it flashes in the lightning color, shakes and throws sparks. Duration 0 = endless (electric fence); intensity 0 = stop.</p>
+<p class="exemple"><b>Example:</b> the wizard touches a trap: “Electrocution” on the wizard (1 second), “Wait” 1 second, then “Restart the scene”.</p>
+</div>
+<div class="fiche"><h3>Object trail</h3>
+<div class="schema"><b>Inputs:</b> Object, Preset, Color (empty = preset's), Size (1 = normal)</div>
+<p>The object leaves a trail of particles behind it when it moves (preset, color and size of your choice). Set on a shot's model, every shot inherits it. Preset “None” removes it.</p>
+<p class="exemple"><b>Example:</b> shots that leave a glowing trail: target = the shot's model, Trail preset.</p>
 </div>
 <div class="fiche"><h3>Create object</h3>
 <div class="schema"><b>Inputs:</b> Object, X position, Y position</div>
@@ -510,7 +570,7 @@
 </div>
 <div class="fiche"><h3>Show dialogue</h3>
 <div class="schema"><b>Inputs:</b> Object, Dialogue key</div>
-<p>Writes into the Text object the sentence matching the key, from the dialogue file (dialogues.txt).</p>
+<p>Writes into the Text object the sentence matching the key, from the dialogue file (dialogues.txt). Several languages: write “hello.en = Hello”, “hello.fr = Bonjour”…; the game uses the language in the “langue” variable, otherwise the phone language. “\n” = new line.</p>
 <p class="exemple"><b>Example:</b> the key “hello_merchant” shows the merchant's line.</p>
 </div>
 <div class="fiche"><h3>Append to text</h3>
@@ -618,12 +678,12 @@
 <h2 id="c10-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Play sound</h3>
-<div class="schema"><b>Input:</b> Sound file</div>
+<div class="schema"><b>Inputs:</b> Sound file, Volume (%, 100 = full)</div>
 <p>Plays a sound effect. Several sounds can play at the same time.</p>
 <p class="exemple"><b>Example:</b> a “bling” when a coin is picked up.</p>
 </div>
 <div class="fiche"><h3>Play music</h3>
-<div class="schema"><b>Inputs:</b> Music file, Loop (true / false)</div>
+<div class="schema"><b>Inputs:</b> Music file, Loop (true / false), Volume (%, 100 = full)</div>
 <p>Starts a music track, replacing the current one. Do not put it under “Every frame” (it would restart all the time).</p>
 <p class="exemple"><b>Example:</b> the level music, at start.</p>
 </div>

@@ -17,7 +17,7 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
 - Accueil (présentation, comparatif avec d'autres moteurs, FAQ) en 9 langues,
   **généré** par `python3 outils/generer_accueil.py` depuis `outils/accueil/<langue>.json`.
   Anglais : `index.html` (racine) ; autres : `<langue>/index.html` (ex. `/fr/`).
-  Dans les textes, `@/` = racine du site. La racine envoie vers `/<langue>/` si
+  Dans les textes, `@/` = racine du site ; `{nb_noeuds}` = nombre de nœuds de l'aide (calculé). La racine envoie vers `/<langue>/` si
   `?lang=xx` ou si le visiteur a déjà choisi une langue (clé `yop2d-langue`),
   sinon propose la langue du téléphone dans un bandeau. Captures : liste `IMAGES`
   du script ; `interface_tuiles.png`, `exemples_jeux.png`, `interface_telephone.png`
@@ -35,7 +35,7 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
   `?lang=<langue du moteur>`.
   `confidentialite.html` : confidentialité.
 - `aide.html` : aide ouverte depuis le moteur dans une WebView.
-- `guides/` : 5 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
+- `guides/` : 6 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
   Français : `guides/<guide>.html` ; autres langues : `guides/<langue>/<guide>.html`.
   Page « Tous les guides » (générée aussi) : `guides/index.html` (fr), `guides/<langue>/index.html` ;
   textes dans `TOUS` de `generer_guides.py`. Accueil et `llms.txt` y renvoient.
@@ -102,7 +102,18 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   catalogue du moteur (115 nœuds, 9 langues) ; guides traduits en 9 langues ;
   page testeurs en 9 langues ; pages `noeuds/<langue>.html` pour le référencement ;
   accueil + comparatif + FAQ (19 questions) en 9 langues ; `llms.txt` ;
-  page « Tous les guides » en 9 langues.
+  page « Tous les guides » en 9 langues ; Yandex, Google et Bing (voir plus bas).
+- 28/09/2026 (soir) : chantier « effets visuels » du moteur (branche Yop2d-animation) :
+  8 nouveaux nœuds décrits en 9 langues (123 nœuds), guide « particules-effets »
+  (6e guide), carte « Particules et effets d'écran » sur l'accueil.
+- 28/09/2026 (nuit) : aide mise à jour pour « Tirer » (détruire hors de l'écran) et
+  « Afficher un dialogue » (dialogues en plusieurs langues : `cle.fr = ...`, variable `langue`).
+  Nouvel exemple du moteur « Lost on the moon » (quiz angoissant en 9 langues). L'utilisateur
+  prévoit 1 ou 2 exemples de plus avant de publier une nouvelle version du moteur.
+- 29/09/2026 : nœuds « Électrocution » et « Limites de la caméra » (127 nœuds) ; accueil : 5 exemples
+  (Neon shooter, Neon jump, Lost on the moon, Effects showcase, Parallaxe), carte « Jeux en plusieurs
+  langues », cartes particules et caméra mises à jour ; guide particules-effets : étape 4 (électrocution,
+  arrêt sur image) et renvoi vers l'exemple Effects showcase. Moteur validé : build 921.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
@@ -113,6 +124,10 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   (GitHub bloque son robot).
 
 ## Reste à faire
+- Idée validée pour plus tard (29/09/2026) : exemples téléchargeables depuis le site. Dossier `exemples/`
+  (zip + vignettes) + `exemples/exemples.json` (nom et description en 9 langues, taille, version minimale
+  du moteur) ; le moteur lit la liste au démarrage, garde 1 ou 2 exemples intégrés pour le hors-ligne,
+  télécharge les autres à la demande et les garde. Page « Exemples » sur le site (référencement).
 - Référencement (objectif : faire connaître Yop2D partout, y compris Russie et
   Chine) : aide pour les messages de forums et vidéos. itch.io :
   https://yop2d-dev.itch.io/yop2d-no-code-game-engine
@@ -121,3 +136,6 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   `Doc/MEMO_NOEUDS.md` du moteur : bouton `{ }` du Blueprint et import de zip).
 - Idées de guides suivants : caméra qui suit, sons et musique, animations,
   ennemi qui poursuit, tirer, apparitions d'ennemis, dialogue, clé et porte.
+- Version 0.1.921 publiée par l'utilisateur sur GitHub et itch.io (29/09/2026) : effets, nouveaux
+  nœuds et 5 exemples disponibles pour tous ; on peut en faire la promotion. Captures à faire par
+  l'utilisateur (vitrine des effets, Neon jump) pour l'accueil et les vidéos.
