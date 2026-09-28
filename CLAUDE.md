@@ -120,6 +120,10 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   (GitHub bloque son robot).
 
 ## Reste à faire
+- Idée validée pour plus tard (29/09/2026) : exemples téléchargeables depuis le site. Dossier `exemples/`
+  (zip + vignettes) + `exemples/exemples.json` (nom et description en 9 langues, taille, version minimale
+  du moteur) ; le moteur lit la liste au démarrage, garde 1 ou 2 exemples intégrés pour le hors-ligne,
+  télécharge les autres à la demande et les garde. Page « Exemples » sur le site (référencement).
 - Référencement (objectif : faire connaître Yop2D partout, y compris Russie et
   Chine) : aide pour les messages de forums et vidéos. itch.io :
   https://yop2d-dev.itch.io/yop2d-no-code-game-engine
