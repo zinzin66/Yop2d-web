@@ -136,6 +136,6 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   `Doc/MEMO_NOEUDS.md` du moteur : bouton `{ }` du Blueprint et import de zip).
 - Idées de guides suivants : caméra qui suit, sons et musique, animations,
   ennemi qui poursuit, tirer, apparitions d'ennemis, dialogue, clé et porte.
-- Les nœuds d'effets (particules, écran) n'existent que dans les versions du moteur
-  construites depuis `Yop2d-animation` (0.1.908 et après) : vérifier qu'elles sont
-  publiées avant d'en faire la promotion.
+- Version 0.1.921 publiée par l'utilisateur sur GitHub et itch.io (29/09/2026) : effets, nouveaux
+  nœuds et 5 exemples disponibles pour tous ; on peut en faire la promotion. Captures à faire par
+  l'utilisateur (vitrine des effets, Neon jump) pour l'accueil et les vidéos.
