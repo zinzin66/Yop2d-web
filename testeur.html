@@ -1,39 +1,60 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Devenir testeur de Yop2D | Become a Yop2D tester</title>
-<meta name="description" content="Aidez Yop2D, moteur de jeu 2D sans code pour Android, à arriver sur le Google Play Store : rejoignez le test fermé en deux étapes.">
+<title>Become a Yop2D tester | Devenir testeur | Стань тестировщиком | 成为测试者</title>
+<meta name="description" content="Help Yop2D, the free no-code 2D game engine for Android, get onto the Google Play Store: join the closed test in 2 minutes.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/testeur.html">
 <style>
-:root { --primary-color: #2563eb; --secondary-color: #1e40af; --accent-color: #f59e0b; --background: #f8fafc; --text-dark: #0f172a; }
-body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.7; color: var(--text-dark); background: var(--background); margin: 0; }
-header { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 2.5rem 1rem; text-align: center; }
-header a { color: white; opacity: 0.9; }
-header h1 { font-size: 2rem; margin: 0.5rem 0; }
-main { max-width: 820px; margin: 0 auto; padding: 2rem 1rem; }
-h2 { color: var(--primary-color); border-bottom: 2px solid #e2e8f0; padding-bottom: 0.4rem; margin-top: 2.5rem; }
-section.lang { background: white; padding: 1.25rem 1.5rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); margin-bottom: 2rem; }
+/* Couleurs du moteur (Palette.java) */
+:root { --background: #1A1F26; --entete: #242A33; --card: #252B33; --bordure: #3A4048; --fond-sombre: #161A20; --text: #ECEEF0; --text-dim: #9AA0A8; --teal: #5DCAA5; --ambre: #FAC775; }
+* { box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.7; color: var(--text); background: var(--background); margin: 0; }
+header { background: var(--entete); border-bottom: 1px solid var(--bordure); padding: 2rem 1rem; text-align: center; }
+header a { color: var(--teal); }
+header h1 { font-size: 1.8rem; margin: 0.5rem 0; color: white; }
+header p { margin: 0; color: var(--text-dim); }
+.barre { display: flex; justify-content: space-between; align-items: center; max-width: 820px; margin: 0 auto; gap: 1rem; }
+select { background: var(--card); color: var(--text); border: 1px solid var(--bordure); border-radius: 6px; padding: 0.3rem 0.4rem; font-size: 0.95rem; }
+main { max-width: 820px; margin: 0 auto; padding: 1.5rem 1rem 2rem; }
+h2 { color: var(--ambre); border-bottom: 1px solid var(--bordure); padding-bottom: 0.4rem; margin-top: 2rem; font-size: 1.3rem; }
+a { color: var(--teal); }
+strong { color: white; }
+section.lang { background: var(--card); border: 1px solid var(--bordure); padding: 1rem 1.25rem; border-radius: 10px; margin-bottom: 2rem; }
 .etape { display: flex; gap: 1rem; align-items: flex-start; margin: 1.25rem 0; }
-.num { flex: 0 0 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--primary-color); color: white; font-weight: bold; display: flex; align-items: center; justify-content: center; }
-.btn { display: inline-block; color: white; background: var(--accent-color); padding: 0.75rem 1.4rem; border-radius: 50px; text-decoration: none; font-weight: bold; margin-top: 0.4rem; }
-.attention { background: #fffbeb; border-left: 4px solid var(--accent-color); padding: 0.75rem 1rem; border-radius: 6px; }
-footer { text-align: center; padding: 1.5rem; background: var(--text-dark); color: white; }
-footer a { color: var(--accent-color); }
-.langs { font-size: 0.95rem; }
-@media (max-width: 600px) { header h1 { font-size: 1.5rem; } }
+.num { flex: 0 0 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--teal); color: var(--fond-sombre); font-weight: bold; display: flex; align-items: center; justify-content: center; }
+.btn { display: inline-block; color: var(--fond-sombre); background: var(--ambre); padding: 0.7rem 1.4rem; border-radius: 50px; text-decoration: none; font-weight: bold; margin-top: 0.4rem; }
+.attention { background: var(--fond-sombre); border-left: 4px solid var(--ambre); padding: 0.75rem 1rem; border-radius: 6px; }
+.pied { color: var(--text-dim); font-size: 0.9rem; text-align: center; margin-top: 2rem; }
+/* Quand le script choisit une langue, les autres sont cachées et le titre de la section fait doublon */
+body.une-langue section.lang { display: none; }
+body.une-langue section.lang.active { display: block; }
+body.une-langue .titre-langue { display: none; }
+@media (max-width: 600px) { header h1 { font-size: 1.4rem; } }
 </style>
 </head>
 <body>
 <header>
-<div class="langs"><a href="index.html">← Yop2D</a> · <a href="#english">English</a> · <a href="#espanol">Español</a> · <a href="#portugues">Português</a></div>
-<h1>Devenir testeur de Yop2D</h1>
-<p>Aidez Yop2D à arriver sur le Google Play Store</p>
+<div class="barre"><a href="index.html">← Yop2D</a>
+<select id="choix-langue" aria-label="Language" onchange="choisir(this.value, true)">
+<option value="fr">Français</option>
+<option value="en">English</option>
+<option value="es">Español</option>
+<option value="de">Deutsch</option>
+<option value="it">Italiano</option>
+<option value="pt">Português</option>
+<option value="ru">Русский</option>
+<option value="zh">中文</option>
+<option value="ja">日本語</option>
+</select></div>
+<h1 id="titre">Become a Yop2D tester</h1>
+<p id="sous">Help Yop2D get onto the Google Play Store</p>
 </header>
 <main>
 
-<section class="lang" lang="fr">
+<section class="lang" lang="fr" id="fr">
+<h2 class="titre-langue">Devenir testeur de Yop2D</h2>
 <p>Pour publier Yop2D sur le Play Store, Google demande qu'au moins 12 personnes le testent pendant 14 jours. En devenant testeur, vous aidez Yop2D à être disponible pour tout le monde, avec des mises à jour automatiques.</p>
 
 <h2>Comment faire (2 minutes)</h2>
@@ -60,11 +81,12 @@ footer a { color: var(--accent-color); }
 <li>L'utiliser vraiment : ouvrir un jeu d'exemple, le modifier, créer un petit jeu.</li>
 <li>Signaler les bugs et vos idées sur <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> ou <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li>
 </ul>
-<p>Si le lien d'inscription affiche une erreur, le test n'est pas encore ouvert : revenez dans quelques jours. Merci pour votre aide !</p>
+<p>Si le lien d'inscription affiche une erreur, réessayez un peu plus tard. Merci pour votre aide !</p>
+<p class="pied">Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="index.html">Site officiel</a></p>
 </section>
 
-<section class="lang" lang="en" id="english">
-<h2>Become a Yop2D tester</h2>
+<section class="lang" lang="en" id="en">
+<h2 class="titre-langue">Become a Yop2D tester</h2>
 <p>To publish Yop2D on the Play Store, Google requires at least 12 people to test it for 14 days. By becoming a tester, you help make Yop2D available to everyone, with automatic updates.</p>
 
 <h2>How to join (2 minutes)</h2>
@@ -91,11 +113,12 @@ footer a { color: var(--accent-color); }
 <li>Really use it: open an example game, change it, make a small game.</li>
 <li>Report bugs and ideas on <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> or <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li>
 </ul>
-<p>If the sign-up link shows an error, the test is not open yet: please come back in a few days. Thank you for your help!</p>
+<p>If the sign-up link shows an error, please try again a little later. Thank you for your help!</p>
+<p class="pied">Yop2D, free no-code 2D game engine for Android · <a href="index.html">Official website</a></p>
 </section>
 
-<section class="lang" lang="es" id="espanol">
-<h2>Conviértete en tester de Yop2D</h2>
+<section class="lang" lang="es" id="es">
+<h2 class="titre-langue">Conviértete en tester de Yop2D</h2>
 <p>Para publicar Yop2D en la Play Store, Google pide que al menos 12 personas lo prueben durante 14 días. Al ser tester, ayudas a que Yop2D esté disponible para todos, con actualizaciones automáticas.</p>
 
 <h2>Cómo hacerlo (2 minutos)</h2>
@@ -122,11 +145,76 @@ footer a { color: var(--accent-color); }
 <li>Usarlo de verdad: abrir un juego de ejemplo, modificarlo, crear un pequeño juego.</li>
 <li>Reportar errores e ideas en <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> o <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li>
 </ul>
-<p>Si el enlace de registro muestra un error, la prueba aún no está abierta: vuelve en unos días. ¡Gracias por tu ayuda!</p>
+<p>Si el enlace de registro muestra un error, vuelve a intentarlo un poco más tarde. ¡Gracias por tu ayuda!</p>
+<p class="pied">Yop2D, motor de juegos 2D gratuito y sin código para Android · <a href="index.html">Sitio oficial</a></p>
 </section>
 
-<section class="lang" lang="pt" id="portugues">
-<h2>Torne-se testador do Yop2D</h2>
+<section class="lang" lang="de" id="de">
+<h2 class="titre-langue">Werde Yop2D-Tester</h2>
+<p>Um Yop2D im Play Store zu veröffentlichen, verlangt Google, dass mindestens 12 Personen es 14 Tage lang testen. Als Tester hilfst du, dass Yop2D für alle verfügbar wird, mit automatischen Updates.</p>
+
+<h2>So machst du mit (2 Minuten)</h2>
+
+<div class="etape"><div class="num">1</div><div>
+<strong>Tritt der Testergruppe bei.</strong> Du musst mit deinem Google-Konto angemeldet sein (dem deines Android-Geräts). Deine Adresse ist für andere Mitglieder nicht sichtbar, und du bekommst keine E-Mails.<br>
+<a class="btn" href="https://groups.google.com/g/yop2d-testeurs">Der Gruppe beitreten</a>
+</div></div>
+
+<div class="etape"><div class="num">2</div><div>
+<strong>Melde dich zum Test an</strong>, mit demselben Google-Konto.<br>
+<a class="btn" href="https://play.google.com/apps/testing/com.ludexa.moteur">Am Test teilnehmen</a>
+</div></div>
+
+<div class="etape"><div class="num">3</div><div>
+<strong>Installiere Yop2D aus dem Play Store.</strong> Nach der Anmeldung zeigt dir die Testseite den Link zum Play Store.
+</div></div>
+
+<p class="attention"><strong>Du hast Yop2D schon (itch.io oder GitHub)?</strong> Android kann sich weigern, die Play-Store-Version darüber zu installieren. Bevor du die alte Version deinstallierst, <strong>exportiere deine Projekte als .zip</strong> (Taste Exportieren auf dem Startbildschirm), denn beim Deinstallieren werden sie gelöscht. Importiere sie danach in die Play-Store-Version.</p>
+
+<h2>Was wir uns wünschen</h2>
+<ul>
+<li>Yop2D mindestens 14 Tage lang installiert lassen.</li>
+<li>Es wirklich benutzen: ein Beispielspiel öffnen, verändern, ein kleines Spiel bauen.</li>
+<li>Fehler und Ideen auf <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> oder <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a> melden.</li>
+</ul>
+<p>Wenn der Anmeldelink einen Fehler zeigt, versuche es etwas später noch einmal. Danke für deine Hilfe!</p>
+<p class="pied">Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="index.html">Offizielle Website</a></p>
+</section>
+
+<section class="lang" lang="it" id="it">
+<h2 class="titre-langue">Diventa tester di Yop2D</h2>
+<p>Per pubblicare Yop2D sul Play Store, Google chiede che almeno 12 persone lo provino per 14 giorni. Diventando tester, aiuti Yop2D a essere disponibile per tutti, con aggiornamenti automatici.</p>
+
+<h2>Come partecipare (2 minuti)</h2>
+
+<div class="etape"><div class="num">1</div><div>
+<strong>Entra nel gruppo dei tester.</strong> Devi essere connesso con il tuo account Google (quello del tuo dispositivo Android). Il tuo indirizzo non è visibile agli altri membri e non riceverai nessuna e-mail.<br>
+<a class="btn" href="https://groups.google.com/g/yop2d-testeurs">Entra nel gruppo</a>
+</div></div>
+
+<div class="etape"><div class="num">2</div><div>
+<strong>Iscriviti al test</strong>, con lo stesso account Google.<br>
+<a class="btn" href="https://play.google.com/apps/testing/com.ludexa.moteur">Iscriviti al test</a>
+</div></div>
+
+<div class="etape"><div class="num">3</div><div>
+<strong>Installa Yop2D dal Play Store.</strong> Dopo l'iscrizione, la pagina del test ti propone il link al Play Store.
+</div></div>
+
+<p class="attention"><strong>Hai già Yop2D (itch.io o GitHub)?</strong> Android potrebbe rifiutare di installare sopra la versione del Play Store. Prima di disinstallare la vecchia versione, <strong>esporta i tuoi progetti in .zip</strong> (pulsante Esporta nella schermata iniziale), perché la disinstallazione li cancella. Poi reimportali nella versione del Play Store.</p>
+
+<h2>Cosa ti chiediamo</h2>
+<ul>
+<li>Tenere Yop2D installato per almeno 14 giorni.</li>
+<li>Usarlo davvero: aprire un gioco di esempio, modificarlo, creare un piccolo gioco.</li>
+<li>Segnalare bug e idee su <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> o <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li>
+</ul>
+<p>Se il link di iscrizione mostra un errore, riprova un po' più tardi. Grazie per il tuo aiuto!</p>
+<p class="pied">Yop2D, motore di gioco 2D gratuito e senza codice per Android · <a href="index.html">Sito ufficiale</a></p>
+</section>
+
+<section class="lang" lang="pt" id="pt">
+<h2 class="titre-langue">Torne-se testador do Yop2D</h2>
 <p>Para publicar o Yop2D na Play Store, o Google exige que pelo menos 12 pessoas o testem durante 14 dias. Ao se tornar testador, você ajuda o Yop2D a ficar disponível para todos, com atualizações automáticas.</p>
 
 <h2>Como participar (2 minutos)</h2>
@@ -151,14 +239,130 @@ footer a { color: var(--accent-color); }
 <ul>
 <li>Manter o Yop2D instalado por pelo menos 14 dias.</li>
 <li>Usá-lo de verdade: abrir um jogo de exemplo, modificá-lo, criar um jogo pequeno.</li>
-<li>Reportar bugs e ideias no <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> ou <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li>
+<li>Reportar bugs e ideias no <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> ou no <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li>
 </ul>
-<p>Se o link de inscrição mostrar um erro, o teste ainda não está aberto: volte em alguns dias. Obrigado pela sua ajuda!</p>
+<p>Se o link de inscrição mostrar um erro, tente de novo um pouco mais tarde. Obrigado pela sua ajuda!</p>
+<p class="pied">Yop2D, motor de jogos 2D gratuito e sem código para Android · <a href="index.html">Site oficial</a></p>
+</section>
+
+<section class="lang" lang="ru" id="ru">
+<h2 class="titre-langue">Стань тестировщиком Yop2D</h2>
+<p>Чтобы опубликовать Yop2D в Google Play, Google требует, чтобы минимум 12 человек тестировали его 14 дней. Став тестировщиком, ты помогаешь сделать Yop2D доступным для всех, с автоматическими обновлениями.</p>
+
+<h2>Как присоединиться (2 минуты)</h2>
+
+<div class="etape"><div class="num">1</div><div>
+<strong>Вступи в группу тестировщиков.</strong> Нужно войти в свой аккаунт Google (тот, что на твоём Android-устройстве). Твой адрес не виден другим участникам, и писем ты получать не будешь.<br>
+<a class="btn" href="https://groups.google.com/g/yop2d-testeurs">Вступить в группу</a>
+</div></div>
+
+<div class="etape"><div class="num">2</div><div>
+<strong>Запишись на тест</strong> с тем же аккаунтом Google.<br>
+<a class="btn" href="https://play.google.com/apps/testing/com.ludexa.moteur">Записаться на тест</a>
+</div></div>
+
+<div class="etape"><div class="num">3</div><div>
+<strong>Установи Yop2D из Google Play.</strong> После записи страница теста даст ссылку на Google Play.
+</div></div>
+
+<p class="attention"><strong>У тебя уже есть Yop2D (itch.io или GitHub)?</strong> Android может не установить версию из Google Play поверх старой. Перед удалением старой версии <strong>экспортируй свои проекты в .zip</strong> (кнопка «Экспорт» на главном экране), потому что при удалении они стираются. Затем импортируй их в версию из Google Play.</p>
+
+<h2>Что мы просим</h2>
+<ul>
+<li>Не удалять Yop2D минимум 14 дней.</li>
+<li>Действительно им пользоваться: открыть пример игры, изменить его, сделать маленькую игру.</li>
+<li>Сообщать об ошибках и идеях в <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> или <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li>
+</ul>
+<p>Если ссылка для записи показывает ошибку, попробуй чуть позже. Спасибо за помощь!</p>
+<p class="pied">Yop2D — бесплатный 2D-движок без кода для Android · <a href="index.html">Официальный сайт</a></p>
+</section>
+
+<section class="lang" lang="zh" id="zh">
+<h2 class="titre-langue">成为 Yop2D 测试者</h2>
+<p>要在 Play 商店发布 Yop2D，Google 要求至少 12 个人连续测试 14 天。成为测试者，你就能帮助 Yop2D 向所有人开放，并获得自动更新。</p>
+
+<h2>如何参加（2 分钟）</h2>
+
+<div class="etape"><div class="num">1</div><div>
+<strong>加入测试者群组。</strong> 需要登录你的 Google 账号（就是你安卓设备上的那个）。其他成员看不到你的邮箱地址，你也不会收到任何邮件。<br>
+<a class="btn" href="https://groups.google.com/g/yop2d-testeurs">加入群组</a>
+</div></div>
+
+<div class="etape"><div class="num">2</div><div>
+<strong>报名参加测试</strong>，使用同一个 Google 账号。<br>
+<a class="btn" href="https://play.google.com/apps/testing/com.ludexa.moteur">参加测试</a>
+</div></div>
+
+<div class="etape"><div class="num">3</div><div>
+<strong>从 Play 商店安装 Yop2D。</strong> 报名后，测试页面会给出 Play 商店的链接。
+</div></div>
+
+<p class="attention"><strong>你已经装了 Yop2D（itch.io 或 GitHub 版本）？</strong> 安卓可能无法在它上面直接安装 Play 商店版本。卸载旧版本之前， <strong>请把你的项目导出为 .zip</strong> （主界面上的“导出”按钮），因为卸载会删除它们。之后再把它们导入 Play 商店版本。</p>
+
+<h2>我们希望你</h2>
+<ul>
+<li>让 Yop2D 保持安装至少 14 天。</li>
+<li>真正用起来：打开一个示例游戏，改一改，做一个小游戏。</li>
+<li>在 <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> 或 <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a> 反馈错误和想法。</li>
+</ul>
+<p>如果报名链接显示错误，请稍后再试。谢谢你的帮助！</p>
+<p class="pied">Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="index.html">官方网站</a></p>
+</section>
+
+<section class="lang" lang="ja" id="ja">
+<h2 class="titre-langue">Yop2D のテスターになる</h2>
+<p>Yop2D を Play ストアで公開するには、12 人以上が 14 日間テストすることを Google が求めています。テスターになると、Yop2D を誰でも使えるようにする手助けになり、アップデートも自動で届きます。</p>
+
+<h2>参加のしかた（2 分）</h2>
+
+<div class="etape"><div class="num">1</div><div>
+<strong>テスターのグループに参加します。</strong> Google アカウント（Android 端末で使っているもの）でログインしている必要があります。あなたのアドレスはほかのメンバーには見えず、メールが届くこともありません。<br>
+<a class="btn" href="https://groups.google.com/g/yop2d-testeurs">グループに参加</a>
+</div></div>
+
+<div class="etape"><div class="num">2</div><div>
+<strong>テストに登録します</strong>（同じ Google アカウントで）。<br>
+<a class="btn" href="https://play.google.com/apps/testing/com.ludexa.moteur">テストに登録</a>
+</div></div>
+
+<div class="etape"><div class="num">3</div><div>
+<strong>Play ストアから Yop2D をインストールします。</strong> 登録すると、テストのページに Play ストアへのリンクが表示されます。
+</div></div>
+
+<p class="attention"><strong>すでに Yop2D（itch.io または GitHub 版）を使っていますか？</strong> Android が Play ストア版を上からインストールできないことがあります。古いバージョンをアンインストールする前に、 <strong>プロジェクトを .zip で書き出してください</strong> （ホーム画面の「書き出し」ボタン）。アンインストールすると消えてしまうからです。そのあと Play ストア版に読み込みます。</p>
+
+<h2>お願いしたいこと</h2>
+<ul>
+<li>Yop2D を 14 日以上インストールしたままにする。</li>
+<li>実際に使う：サンプルゲームを開いて、少し変えて、小さなゲームを作る。</li>
+<li>バグやアイデアを <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> や <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a> で知らせる。</li>
+</ul>
+<p>登録リンクでエラーが出たときは、少し時間をおいてもう一度お試しください。ご協力ありがとうございます！</p>
+<p class="pied">Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="index.html">公式サイト</a></p>
 </section>
 
 </main>
-<footer>
-<p>Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="index.html">Site officiel</a></p>
-</footer>
+<script>
+const TEXTES = {"fr": {"titre": "Devenir testeur de Yop2D", "sous": "Aidez Yop2D à arriver sur le Google Play Store"}, "en": {"titre": "Become a Yop2D tester", "sous": "Help Yop2D get onto the Google Play Store"}, "es": {"titre": "Conviértete en tester de Yop2D", "sous": "Ayuda a Yop2D a llegar a Google Play Store"}, "de": {"titre": "Werde Yop2D-Tester", "sous": "Hilf Yop2D in den Google Play Store"}, "it": {"titre": "Diventa tester di Yop2D", "sous": "Aiuta Yop2D ad arrivare sul Google Play Store"}, "pt": {"titre": "Torne-se testador do Yop2D", "sous": "Ajude o Yop2D a chegar à Google Play Store"}, "ru": {"titre": "Стань тестировщиком Yop2D", "sous": "Помоги Yop2D попасть в Google Play"}, "zh": {"titre": "成为 Yop2D 测试者", "sous": "帮助 Yop2D 登上 Google Play 商店"}, "ja": {"titre": "Yop2D のテスターになる", "sous": "Yop2D を Google Play ストアに届けるために"}};
+function choisir(l, memoriser) {
+  if (!TEXTES[l]) l = "en";
+  document.body.classList.add("une-langue");
+  document.querySelectorAll("section.lang").forEach(s => s.classList.toggle("active", s.id === l));
+  document.documentElement.lang = l;
+  document.getElementById("titre").textContent = TEXTES[l].titre;
+  document.getElementById("sous").textContent = TEXTES[l].sous;
+  document.title = TEXTES[l].titre + " | Yop2D";
+  document.getElementById("choix-langue").value = l;
+  if (memoriser) { try { localStorage.setItem("yop2d-langue", l); } catch (e) {} }
+}
+(function () {
+  let l = new URLSearchParams(location.search).get("lang");
+  const ancres = { "#english": "en", "#espanol": "es", "#portugues": "pt" };  // anciennes adresses
+  if (!l && location.hash) l = ancres[location.hash] || (location.hash.length === 3 ? location.hash.slice(1) : null);
+  if (!l) { try { l = localStorage.getItem("yop2d-langue"); } catch (e) {} }
+  if (!l) l = (navigator.language || "en").slice(0, 2);
+  choisir(l.slice(0, 2).toLowerCase(), false);
+})();
+</script>
 </body>
 </html>

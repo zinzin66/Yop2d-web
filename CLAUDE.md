@@ -14,7 +14,10 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
   l'utilisateur la valide avec « Merge ». Le site est à jour 1 à 2 minutes après.
 
 ## Pages
-- `index.html` : accueil. `testeur.html` : page testeurs.
+- `index.html` : accueil. `testeur.html` : page testeurs en 9 langues, **générée**
+  par `python3 outils/generer_testeur.py` (textes dans le script ; une seule langue
+  affichée selon `?lang=`, le dernier choix ou le téléphone). Le moteur l'ouvre avec
+  `?lang=<langue du moteur>`.
   `confidentialite.html` : confidentialité.
 - `aide.html` : aide ouverte depuis le moteur dans une WebView.
 - `guides/` : 5 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
