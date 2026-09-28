@@ -26,6 +26,9 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
   (donner, vendre), aucun logo/filigrane dans les jeux, Android 7+, hors ligne,
   APK mais pas encore AAB, statistiques Aptabase anonymes désactivables,
   « développeur indépendant » (jamais de nationalité).
+- `llms.txt` : résumé en anglais pour les IA (faits, liens, liste des nœuds,
+  comparatif, FAQ), **généré** en même temps que l'accueil par `generer_accueil.py`.
+  Relancer ce script après un changement des guides ou des nœuds.
 - `testeur.html` : page testeurs en 9 langues, **générée**
   par `python3 outils/generer_testeur.py` (textes dans le script ; une seule langue
   affichée selon `?lang=`, le dernier choix ou le téléphone). Le moteur l'ouvre avec
@@ -99,7 +102,7 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 
 ## Reste à faire
 - Référencement (objectif : faire connaître Yop2D partout, y compris Russie et
-  Chine) : `llms.txt` ; page « Tous les guides » ; inscription Yandex et Baidu ;
+  Chine) : page « Tous les guides » ; inscription Yandex et Baidu ;
   aide pour les messages de forums et vidéos. itch.io :
   https://yop2d-dev.itch.io/yop2d-no-code-game-engine
 - Ajouter les 3 captures manquantes de l'accueil (voir « Pages »).

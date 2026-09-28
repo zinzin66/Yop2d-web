@@ -4,7 +4,8 @@
 Textes : outils/accueil/<langue>.json (une langue par fichier).
 Pages produites :
   - anglais  : index.html (racine du site, langue par défaut) ;
-  - autres   : <langue>/index.html (ex. fr/index.html → https://…/Yop2d-web/fr/).
+  - autres   : <langue>/index.html (ex. fr/index.html → https://…/Yop2d-web/fr/) ;
+  - llms.txt : résumé en anglais pour les IA, tiré des textes anglais.
 
 Dans les textes, « @/ » au début d'un lien désigne la racine du site
 (ex. "@/testeur.html?lang=fr") : le script le remplace par le bon chemin.
@@ -408,6 +409,76 @@ def page(langue, t):
 """
 
 
+def llms(t):
+    """Résumé en texte simple pour les IA (format llms.txt, https://llmstxt.org)."""
+    faq = t["faq"]["questions"]
+    comp = t["comparatif"]
+    lignes = [
+        "# Yop2D",
+        "",
+        f"> {t['description']}",
+        "",
+        "Yop2D is made by an independent developer. The interface, built-in help, guides and "
+        "node reference are available in 9 languages: " + ", ".join(NOMS_LANGUES[l] for l in LANGUES) + ".",
+        "",
+        "Key facts:",
+        "",
+    ]
+    lignes += [f"- {p}" for p in t["points"]]
+    lignes += [
+        "- Runs on Android 7.0 or newer, tablets and phones (landscape). No iPhone, iPad or computer version.",
+        "- Exports games as standalone Android APK files, built on the device itself, offline.",
+        "- No AAB export yet (needed for Google Play); planned for a later version.",
+        "- 2D only. Closed source. In closed testing on Google Play.",
+        "",
+        "## Download",
+        "",
+        f"- [Latest APK]({APK}): direct download from GitHub releases",
+        f"- [itch.io page]({ITCH}): Yop2D on itch.io",
+        f"- [Become a tester]({SITE}testeur.html): join the closed test on Google Play",
+        "",
+        "## Home page in each language",
+        "",
+    ]
+    lignes += [f"- [{NOMS_LANGUES[l]}]({SITE}{adresse_accueil(l)})" for l in LANGUES]
+    lignes += ["", "## Beginner guides", ""]
+    for c in cartes_guides("en"):
+        lignes.append(f"- [{c['titre']}]({SITE}{c['lien']}): {c['description']}")
+    lignes.append("")
+    lignes.append("Guides also exist in the other 8 languages: French at guides/<guide>.html, "
+                  "others at guides/<language code>/<guide>.html.")
+    lignes += ["", "## Node reference", ""]
+    lignes += [f"- [All nodes, {NOMS_LANGUES[l]}]({SITE}noeuds/{l}.html)" for l in LANGUES]
+    dossier = os.path.join(RACINE, "aide", "noeuds", "en")
+    lignes += ["", "Node categories and node names (as shown in the English editor):", ""]
+    for nom in sorted(os.listdir(dossier)):
+        if nom.endswith(".json"):
+            with open(os.path.join(dossier, nom), encoding="utf-8") as f:
+                cat = json.load(f)
+            lignes.append(f"- {cat['categorie']}: " + "; ".join(n["nom"] for n in cat["noeuds"]))
+    lignes += ["", "## Comparison with other engines", "", comp["intro"], ""]
+    for ligne in comp["lignes"]:
+        lignes.append(f"- {ligne[0]}: " + "; ".join(f"{c}: {v}" for c, v in zip(comp["colonnes"][1:], ligne[1:])))
+    lignes += ["", comp["note"], "", comp["limites_titre"] + ":", ""]
+    lignes += [f"- {sans_balises(x)}" for x in comp["limites"]]
+    lignes += ["", comp["autres_titre"] + ":", ""]
+    lignes += [f"- {sans_balises(x)}" for x in comp["autres"]]
+    lignes += ["", "## FAQ", ""]
+    for q, r in faq:
+        lignes += [f"### {q}", "", sans_balises(r), ""]
+    lignes += [
+        "## Optional",
+        "",
+        f"- [Privacy policy]({SITE}confidentialite.html): anonymous statistics, opt-out, nothing sent by exported games",
+        f"- [YouTube]({YOUTUBE}): video tutorials",
+        f"- [Discord]({DISCORD}): community",
+        f"- [Telegram]({TELEGRAM}): community",
+        f"- [GitHub]({GITHUB}): releases",
+        "",
+    ]
+    return "\n".join(lignes)
+
+
 def main():
     for langue in LANGUES:
         with open(os.path.join(RACINE, "outils", "accueil", f"{langue}.json"), encoding="utf-8") as f:
@@ -418,6 +489,10 @@ def main():
         with open(chemin, "w", encoding="utf-8") as f:
             f.write(page(langue, t))
         print(f"{langue} : {os.path.relpath(chemin, RACINE)} ({len(t['faq']['questions'])} questions)")
+        if langue == "en":
+            with open(os.path.join(RACINE, "llms.txt"), "w", encoding="utf-8") as f:
+                f.write(llms(t))
+            print("llms.txt")
 
 
 if __name__ == "__main__":
