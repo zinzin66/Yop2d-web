@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (123) | Reference</title>
-<meta name="description" content="Complete list of the 123 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (125) | Reference</title>
+<meta name="description" content="Complete list of the 125 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 123 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 125 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-animations">Animations</a><a href="#c10-audio">Audio</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -272,6 +272,11 @@
 <p>Resumes the game after a pause.</p>
 <p class="exemple"><b>Example:</b> the “Continue” button of the pause menu.</p>
 </div>
+<div class="fiche"><h3>Hit stop</h3>
+<div class="schema"><b>Inputs:</b> Duration (seconds), Speed during the stop (0 = frozen)</div>
+<p>Slows the whole game almost to a stop for a very short moment (in real seconds), then the game goes back to its speed. It gives “punch” to impacts.</p>
+<p class="exemple"><b>Example:</b> when an enemy explodes: duration 0.06, speed 0.05.</p>
+</div>
 </div>
 <h2 id="c4-appearance-objects">Appearance &amp; Objects</h2>
 <div class="method">
@@ -428,6 +433,11 @@
 <div class="schema"><b>Inputs:</b> Object, Margin</div>
 <p>Stops the object from leaving the screen. The margin stops it a little before the edge.</p>
 <p class="exemple"><b>Example:</b> the player's ship always stays visible.</p>
+</div>
+<div class="fiche"><h3>Object trail</h3>
+<div class="schema"><b>Inputs:</b> Object, Preset, Color (empty = preset's), Size (1 = normal)</div>
+<p>The object leaves a trail of particles behind it when it moves (preset, color and size of your choice). Set on a shot's model, every shot inherits it. Preset “None” removes it.</p>
+<p class="exemple"><b>Example:</b> shots that leave a glowing trail: target = the shot's model, Trail preset.</p>
 </div>
 <div class="fiche"><h3>Create object</h3>
 <div class="schema"><b>Inputs:</b> Object, X position, Y position</div>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (123) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 123 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (125) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 125 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 123 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 125 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
 <nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-animationen">Animationen</a><a href="#c10-audio">Audio</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
@@ -272,6 +272,11 @@
 <p>Setzt das Spiel nach einer Pause fort.</p>
 <p class="exemple"><b>Beispiel:</b> die Taste „Weiter“ im Pausenmenü.</p>
 </div>
+<div class="fiche"><h3>Trefferstopp</h3>
+<div class="schema"><b>Eingänge:</b> Dauer (Sekunden), Tempo während des Stopps (0 = eingefroren)</div>
+<p>Bremst das ganze Spiel für einen sehr kurzen Moment (in echten Sekunden) fast bis zum Stillstand, dann läuft es normal weiter. Gibt Treffern mehr Wucht.</p>
+<p class="exemple"><b>Beispiel:</b> wenn ein Gegner explodiert: Dauer 0,06, Tempo 0,05.</p>
+</div>
 </div>
 <h2 id="c4-aussehen-objekte">Aussehen &amp; Objekte</h2>
 <div class="method">
@@ -428,6 +433,11 @@
 <div class="schema"><b>Eingänge:</b> Objekt, Rand</div>
 <p>Verhindert, dass das Objekt den Bildschirm verlässt. Der Rand hält es kurz vor der Kante an.</p>
 <p class="exemple"><b>Beispiel:</b> das Raumschiff des Spielers bleibt immer sichtbar.</p>
+</div>
+<div class="fiche"><h3>Objektspur</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Vorlage, Farbe (leer = wie Vorlage), Größe (1 = normal)</div>
+<p>Das Objekt zieht beim Bewegen eine Partikelspur hinter sich her (Vorlage, Farbe und Größe wählbar). Auf die Vorlage eines Schusses gesetzt, erbt jeder Schuss sie. Vorlage „Keiner“ entfernt sie.</p>
+<p class="exemple"><b>Beispiel:</b> Schüsse mit leuchtender Spur: Ziel = die Vorlage des Schusses, Vorlage Spur.</p>
 </div>
 <div class="fiche"><h3>Objekt erstellen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, X-Position, Y-Position</div>

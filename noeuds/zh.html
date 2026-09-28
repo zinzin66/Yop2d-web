@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D 全部节点（123 个）| 参考</title>
-<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 123 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<title>Yop2D 全部节点（125 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 125 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 123 个节点，以及它们的设置（输入）和输出。</p>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 125 个节点，以及它们的设置（输入）和输出。</p>
 <p><strong>分类</strong></p>
 <nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-动画">动画</a><a href="#c10-音频">音频</a></nav>
 <h2 id="c1-事件">事件</h2>
@@ -272,6 +272,11 @@
 <p>暂停后继续游戏。</p>
 <p class="exemple"><b>示例：</b> 暂停菜单里的“继续”按钮。</p>
 </div>
+<div class="fiche"><h3>打击停顿</h3>
+<div class="schema"><b>输入：</b> 持续时间（秒）, 停顿时的速度（0 = 定格）</div>
+<p>让整个游戏在极短的时间内（真实秒数）几乎停住，然后恢复原来的速度。让打击更有力度。</p>
+<p class="exemple"><b>示例：</b> 敌人爆炸时：持续 0.06 秒，速度 0.05。</p>
+</div>
 </div>
 <h2 id="c4-外观与对象">外观与对象</h2>
 <div class="method">
@@ -428,6 +433,11 @@
 <div class="schema"><b>输入：</b> 对象, 边距</div>
 <p>不让对象离开屏幕。边距会让它在边缘前一点停下。</p>
 <p class="exemple"><b>示例：</b> 玩家的飞船始终可见。</p>
+</div>
+<div class="fiche"><h3>对象拖尾</h3>
+<div class="schema"><b>输入：</b> 对象, 预设, 颜色（留空 = 预设颜色）, 大小（1 = 正常）</div>
+<p>对象移动时会在身后留下一道粒子拖尾（可选择预设、颜色和大小）。设置在子弹的模板上，每发子弹都会带有拖尾。选“无”即可移除。</p>
+<p class="exemple"><b>示例：</b> 带发光拖尾的子弹：目标 = 子弹模板，预设“拖尾”。</p>
 </div>
 <div class="fiche"><h3>创建对象</h3>
 <div class="schema"><b>输入：</b> 对象, X 位置, Y 位置</div>
