@@ -83,6 +83,7 @@ header { position: relative; }
 <div class="tab-content active" id="tab-noeuds">
 <p id="txt-intro" style="color:var(--text-dim);font-size:0.9rem;">Chaque nœud est un bloc que tu peux brancher dans le Blueprint. Les <b>entrées</b> sont ce que tu configures ou branches avant, la <b>sortie</b> est la suite de l'action.</p>
 <div id="contenu-noeuds"><p class="message">Chargement...</p></div>
+<p style="text-align:center;margin-top:1rem;"><a id="lien-reference" href="noeuds/fr.html" style="color:var(--teal);">Voir tous les nœuds sur une seule page</a></p>
 </div>
 
 <div class="tab-content" id="tab-guides">
@@ -100,39 +101,39 @@ const LANGUES = ["fr", "en", "es", "de", "it", "pt", "ru", "zh", "ja"];
 
 // Textes de la page dans chaque langue
 const TEXTES = {
-  fr: { titre: "Aide Yop2D", sousTitre: "Documentation des nœuds et guides", noeuds: "Nœuds", guides: "Guides",
+  fr: { reference: "Voir tous les nœuds sur une seule page", titre: "Aide Yop2D", sousTitre: "Documentation des nœuds et guides", noeuds: "Nœuds", guides: "Guides",
         intro: "Chaque nœud est un bloc que tu peux brancher dans le Blueprint. Les <b>entrées</b> sont ce que tu configures ou branches avant, la <b>sortie</b> est la suite de l'action.",
         chargement: "Chargement...", exemple: "Exemple :", aucunNoeud: "Aucune documentation pour l'instant.", aucunGuide: "Aucun guide pour l'instant.",
         erreurNoeuds: "Impossible de charger la documentation. Vérifie ta connexion internet.", erreurGuides: "Impossible de charger les guides. Vérifie ta connexion internet.", site: "Site officiel" },
-  en: { titre: "Yop2D Help", sousTitre: "Node documentation and guides", noeuds: "Nodes", guides: "Guides",
+  en: { reference: "See all nodes on a single page", titre: "Yop2D Help", sousTitre: "Node documentation and guides", noeuds: "Nodes", guides: "Guides",
         intro: "Each node is a block you can plug into the Blueprint. The <b>inputs</b> are what you set up or connect before, the <b>output</b> is what happens next.",
         chargement: "Loading...", exemple: "Example:", aucunNoeud: "No documentation yet.", aucunGuide: "No guides yet.",
         erreurNoeuds: "Could not load the documentation. Check your internet connection.", erreurGuides: "Could not load the guides. Check your internet connection.", site: "Official website" },
-  es: { titre: "Ayuda Yop2D", sousTitre: "Documentación de nodos y guías", noeuds: "Nodos", guides: "Guías",
+  es: { reference: "Ver todos los nodos en una sola página", titre: "Ayuda Yop2D", sousTitre: "Documentación de nodos y guías", noeuds: "Nodos", guides: "Guías",
         intro: "Cada nodo es un bloque que puedes conectar en el Blueprint. Las <b>entradas</b> son lo que configuras o conectas antes, la <b>salida</b> es la continuación de la acción.",
         chargement: "Cargando...", exemple: "Ejemplo:", aucunNoeud: "Aún no hay documentación.", aucunGuide: "Aún no hay guías.",
         erreurNoeuds: "No se pudo cargar la documentación. Comprueba tu conexión a internet.", erreurGuides: "No se pudieron cargar las guías. Comprueba tu conexión a internet.", site: "Sitio oficial" },
-  de: { titre: "Yop2D-Hilfe", sousTitre: "Dokumentation der Knoten und Anleitungen", noeuds: "Knoten", guides: "Anleitungen",
+  de: { reference: "Alle Knoten auf einer Seite ansehen", titre: "Yop2D-Hilfe", sousTitre: "Dokumentation der Knoten und Anleitungen", noeuds: "Knoten", guides: "Anleitungen",
         intro: "Jeder Knoten ist ein Block, den du in den Blueprint einbauen kannst. Die <b>Eingänge</b> stellst du vorher ein oder verbindest sie, der <b>Ausgang</b> ist die Fortsetzung der Aktion.",
         chargement: "Wird geladen...", exemple: "Beispiel:", aucunNoeud: "Noch keine Dokumentation.", aucunGuide: "Noch keine Anleitungen.",
         erreurNoeuds: "Die Dokumentation konnte nicht geladen werden. Prüfe deine Internetverbindung.", erreurGuides: "Die Anleitungen konnten nicht geladen werden. Prüfe deine Internetverbindung.", site: "Offizielle Website" },
-  it: { titre: "Aiuto Yop2D", sousTitre: "Documentazione dei nodi e guide", noeuds: "Nodi", guides: "Guide",
+  it: { reference: "Vedi tutti i nodi in una sola pagina", titre: "Aiuto Yop2D", sousTitre: "Documentazione dei nodi e guide", noeuds: "Nodi", guides: "Guide",
         intro: "Ogni nodo è un blocco che puoi collegare nel Blueprint. Gli <b>ingressi</b> sono ciò che configuri o colleghi prima, l'<b>uscita</b> è il seguito dell'azione.",
         chargement: "Caricamento...", exemple: "Esempio:", aucunNoeud: "Nessuna documentazione per ora.", aucunGuide: "Nessuna guida per ora.",
         erreurNoeuds: "Impossibile caricare la documentazione. Controlla la connessione internet.", erreurGuides: "Impossibile caricare le guide. Controlla la connessione internet.", site: "Sito ufficiale" },
-  pt: { titre: "Ajuda Yop2D", sousTitre: "Documentação dos nós e guias", noeuds: "Nós", guides: "Guias",
+  pt: { reference: "Ver todos os nós numa só página", titre: "Ajuda Yop2D", sousTitre: "Documentação dos nós e guias", noeuds: "Nós", guides: "Guias",
         intro: "Cada nó é um bloco que você pode conectar no Blueprint. As <b>entradas</b> são o que você configura ou conecta antes, a <b>saída</b> é a continuação da ação.",
         chargement: "Carregando...", exemple: "Exemplo:", aucunNoeud: "Ainda não há documentação.", aucunGuide: "Ainda não há guias.",
         erreurNoeuds: "Não foi possível carregar a documentação. Verifique sua conexão com a internet.", erreurGuides: "Não foi possível carregar os guias. Verifique sua conexão com a internet.", site: "Site oficial" },
-  ru: { titre: "Справка Yop2D", sousTitre: "Описание узлов и руководства", noeuds: "Узлы", guides: "Руководства",
+  ru: { reference: "Все узлы на одной странице", titre: "Справка Yop2D", sousTitre: "Описание узлов и руководства", noeuds: "Узлы", guides: "Руководства",
         intro: "Каждый узел — это блок, который можно подключить в Blueprint. <b>Входы</b> — то, что ты настраиваешь или подключаешь заранее, <b>выход</b> — продолжение действия.",
         chargement: "Загрузка...", exemple: "Пример:", aucunNoeud: "Пока нет документации.", aucunGuide: "Пока нет руководств.",
         erreurNoeuds: "Не удалось загрузить документацию. Проверь подключение к интернету.", erreurGuides: "Не удалось загрузить руководства. Проверь подключение к интернету.", site: "Официальный сайт" },
-  zh: { titre: "Yop2D 帮助", sousTitre: "节点说明与教程", noeuds: "节点", guides: "教程",
+  zh: { reference: "在一个页面查看全部节点", titre: "Yop2D 帮助", sousTitre: "节点说明与教程", noeuds: "节点", guides: "教程",
         intro: "每个节点都是一个可以接入 Blueprint 的积木块。<b>输入</b>是你事先设置或连接的内容，<b>输出</b>是动作的后续。",
         chargement: "加载中...", exemple: "示例：", aucunNoeud: "暂无说明。", aucunGuide: "暂无教程。",
         erreurNoeuds: "无法加载说明，请检查网络连接。", erreurGuides: "无法加载教程，请检查网络连接。", site: "官方网站" },
-  ja: { titre: "Yop2D ヘルプ", sousTitre: "ノードの説明とガイド", noeuds: "ノード", guides: "ガイド",
+  ja: { reference: "すべてのノードを 1 ページで見る", titre: "Yop2D ヘルプ", sousTitre: "ノードの説明とガイド", noeuds: "ノード", guides: "ガイド",
         intro: "各ノードは Blueprint につなげるブロックです。<b>入力</b>は前もって設定・接続するもの、<b>出力</b>はアクションの続きです。",
         chargement: "読み込み中...", exemple: "例：", aucunNoeud: "まだ説明はありません。", aucunGuide: "まだガイドはありません。",
         erreurNoeuds: "説明を読み込めませんでした。インターネット接続を確認してください。", erreurGuides: "ガイドを読み込めませんでした。インターネット接続を確認してください。", site: "公式サイト" }
@@ -173,6 +174,8 @@ function traduirePage() {
   document.getElementById('btn-guides').textContent = t('guides');
   document.getElementById('txt-intro').innerHTML = t('intro');
   document.getElementById('txt-site').textContent = t('site');
+  document.getElementById('lien-reference').textContent = t('reference');
+  document.getElementById('lien-reference').href = 'noeuds/' + langue + '.html';
 }
 
 function ouvrirOnglet(nom) {

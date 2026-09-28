@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2D の全ノード（115 個）| リファレンス</title>
+<meta name="description" content="Android 向けコード不要 2D ゲームエンジン Yop2D の 115 個のビジュアルノードの一覧：各ノードの役割、設定、出力、使用例。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/ja.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/noeuds/pt.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/noeuds/ru.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/noeuds/ja.html">
+<link rel="stylesheet" href="../guides/guide.css">
+<style>
+.sommaire { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0; }
+.sommaire a { background: var(--card); border: 1px solid var(--bordure); border-radius: 20px; padding: 0.2rem 0.8rem; text-decoration: none; font-size: 0.9rem; }
+.fiche { border-top: 1px solid var(--bordure); padding: 0.8rem 0; }
+.fiche:first-of-type { border-top: none; }
+.fiche h3 { margin: 0 0 0.3rem; color: white; font-size: 1.05rem; }
+.schema { font-size: 0.88rem; color: var(--text-dim); background: var(--fond-sombre); border-radius: 6px; padding: 0.45rem 0.7rem; margin-bottom: 0.4rem; }
+.schema b { color: var(--bleu); }
+.exemple { color: var(--text-dim); }
+.exemple b { color: var(--teal); }
+.liens-bas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; margin-top: 2rem; font-weight: bold; }
+</style>
+</head>
+<body>
+<header>
+<a href="../index.html">← Yop2D</a>
+<h1>Yop2D ノードリファレンス</h1>
+<p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>Yop2D は、Android 向けの無料・コード不要の 2D ゲームエンジンです。ゲームのロジックは、Blueprint の中でつないだノード（ビジュアルブロック）で作ります。イベントがつながりを始め、そのあとにアクションや条件が続きます。このページでは、エディターの 115 個のノードを、設定（入力）と出力とともに説明します。</p>
+<p><strong>カテゴリー</strong></p>
+<nav class="sommaire"><a href="#c1-イベント">イベント</a><a href="#c2-シーンとhud">シーンとHUD</a><a href="#c3-時間">時間</a><a href="#c4-外観とオブジェクト">外観とオブジェクト</a><a href="#c5-変数とインベントリ">変数とインベントリ</a><a href="#c6-ロジックと条件">ロジックと条件</a><a href="#c7-テキストとダイアログ">テキストとダイアログ</a><a href="#c8-移動とai">移動とAI</a><a href="#c9-アニメーション">アニメーション</a><a href="#c10-オーディオ">オーディオ</a></nav>
+<h2 id="c1-イベント">イベント</h2>
+<div class="method">
+<div class="fiche"><h3>起動時</h3>
+<p>シーンが始まったとき、一度だけ動きます。</p>
+<p class="exemple"><b>例：</b> 敵を配置する、最初のスコアを表示する、音楽を流す。</p>
+</div>
+<div class="fiche"><h3>毎フレーム</h3>
+<p>ゲームの毎フレーム（1 秒に約 60 回）、ずっと動き続けます。</p>
+<p class="exemple"><b>例：</b> 指の位置を追う、条件をいつも確認する。この下に 「音楽を再生」 や 「関数を呼ぶ」 を置かないでください。</p>
+</div>
+<div class="fiche"><h3>クリック終了</h3>
+<p>プレイヤーが画面のどこかで指を離したときに動きます。</p>
+<p class="exemple"><b>例：</b> 画面から指を離したら射撃をやめる。</p>
+</div>
+<div class="fiche"><h3>オブジェクトクリック時</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>指が選んだオブジェクトに触れたときに動きます。</p>
+<p class="exemple"><b>例：</b> 「ジャンプ」ボタン、宝箱を開ける、答えを選ぶ。</p>
+</div>
+<div class="fiche"><h3>オブジェクトを離した時</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>選んだオブジェクトの上で指を離したときに動きます。</p>
+<p class="exemple"><b>例：</b> ボタンを離したときだけ決定する。</p>
+</div>
+<div class="fiche"><h3>オブジェクトを押している間</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>指が選んだオブジェクトに触れている間、毎フレームくり返し動きます。</p>
+<p class="exemple"><b>例：</b> 左 / 右ボタン：押している間、キャラクターが進む。</p>
+</div>
+<div class="fiche"><h3>指で押している間</h3>
+<p>画面のどこかに指が触れている間、毎フレームくり返し動きます。</p>
+<p class="exemple"><b>例：</b> 押している間、宇宙船を上昇させる（数式で doigt.x と doigt.y を使う）。</p>
+</div>
+<div class="fiche"><h3>ドラッグ開始</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>プレイヤーが選んだオブジェクトをドラッグし始めたときに動きます（オブジェクトは 「移動可能 (ドラッグ可能)」 である必要があります）。</p>
+<p class="exemple"><b>例：</b> カードを持ったら大きくする。</p>
+</div>
+<div class="fiche"><h3>ドラッグ終了</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>プレイヤーがドラッグしていたオブジェクトを離したときに動きます。</p>
+<p class="exemple"><b>例：</b> パズルのピースが正しい場所に置かれたか確認する。</p>
+</div>
+<div class="fiche"><h3>衝突 A/B</h3>
+<div class="schema"><b>入力：</b> オブジェクト A, オブジェクト B</div>
+<p>オブジェクト A がオブジェクト B に触れ始めた瞬間に一度だけ動きます。もう一度動くには、いったん離れる必要があります。「ゾーンに入る」にもこのイベントを使います。</p>
+<p class="exemple"><b>例：</b> プレイヤーがゴールゾーンに触れる → 次のステージ。</p>
+</div>
+<div class="fiche"><h3>ゾーンから出る</h3>
+<div class="schema"><b>入力：</b> オブジェクト A, オブジェクト B</div>
+<p>オブジェクト A がオブジェクト B から離れた（ゾーンから出た）瞬間に一度だけ動きます。</p>
+<p class="exemple"><b>例：</b> プレイヤーが離れたらドアを閉める。</p>
+</div>
+<div class="fiche"><h3>ホバー時</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>画面をなぞる指が、選んだオブジェクトの上に来たときに動きます。</p>
+<p class="exemple"><b>例：</b> 指が通ったらボタンを光らせる。</p>
+</div>
+<div class="fiche"><h3>ホバー終了</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>指がその上にあったオブジェクトから外れたときに動きます。</p>
+<p class="exemple"><b>例：</b> ボタンの光を消す。</p>
+</div>
+<div class="fiche"><h3>物理的な衝突時</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>選んだオブジェクト（動的な物理）が地面に着地したり、跳ね返ったりしたときに動きます。</p>
+<p class="exemple"><b>例：</b> 着地の音を鳴らす、カメラを揺らす。</p>
+</div>
+<div class="fiche"><h3>変数が変更された時</h3>
+<div class="schema"><b>入力：</b> 変数</div>
+<p>選んだ変数の値が変わるたびに動きます。</p>
+<p class="exemple"><b>例：</b> 「vie」（体力）が変わったら体力バーを更新する。</p>
+</div>
+<div class="fiche"><h3>ローカルイベント</h3>
+<div class="schema"><b>入力：</b> イベント名</div>
+<p>好きな名前をつけた、自分だけのイベントです。同じ Blueprint にある 「イベントを呼ぶ」 ノードで動かします。</p>
+<p class="exemple"><b>例：</b> いろいろな場所から呼び出す「GameOver」イベント。</p>
+</div>
+<div class="fiche"><h3>アクションボタンクリック時 (アドベンチャー)</h3>
+<p>プレイヤーがシーンの 「アクションボタン」 オブジェクト（アクションボタン）を押したときに動きます。</p>
+<p class="exemple"><b>例：</b> アドベンチャーゲームでキャラクターと話す、ドアを開ける。</p>
+</div>
+<div class="fiche"><h3>オブジェクトがタグに触れた場合</h3>
+<div class="schema"><b>入力：</b> オブジェクト, タグ</div>
+<p>選んだオブジェクトがこのタグを持つオブジェクトに触れたとき、接触ごとに一度だけ動きます。触れたオブジェクトは 「関連オブジェクト」 になります。</p>
+<p class="exemple"><b>例：</b> プレイヤーがコイン（タグ「piece」）に触れる → 関連オブジェクトを削除して、スコアを 1 増やす。</p>
+</div>
+</div>
+<h2 id="c2-シーンとhud">シーンとHUD</h2>
+<div class="method">
+<div class="fiche"><h3>シーンを切り替える</h3>
+<div class="schema"><b>入力：</b> シーン &nbsp;→&nbsp; <b>出力：</b> なし（スクリプト終了）</div>
+<p>今のシーンを出て、選んだシーンに移ります。このノードでスクリプトは終わります。</p>
+<p class="exemple"><b>例：</b> 最後のステージのあと「よくできました！」画面に移る。</p>
+</div>
+<div class="fiche"><h3>名前でシーンへ移動</h3>
+<div class="schema"><b>入力：</b> シーン名 &nbsp;→&nbsp; <b>出力：</b> なし（スクリプト終了）</div>
+<p>名前を書いたシーン（またはその名前になる数式）に移ります。このノードでスクリプトは終わります。</p>
+<p class="exemple"><b>例：</b> ="ステージ" + level のような数式で、変数を使ってステージを選ぶ。</p>
+</div>
+<div class="fiche"><h3>次のシーン</h3>
+<div class="schema"><b>出力：</b> なし（スクリプト終了）</div>
+<p>シーンの一覧で、すぐ次にあるシーンに移ります。このノードでスクリプトは終わります。</p>
+<p class="exemple"><b>例：</b> プレイヤーがゴールに着く → 次のステージ。</p>
+</div>
+<div class="fiche"><h3>前のシーン</h3>
+<div class="schema"><b>出力：</b> なし（スクリプト終了）</div>
+<p>シーンの一覧で、すぐ前にあるシーンに移ります。このノードでスクリプトは終わります。</p>
+<p class="exemple"><b>例：</b> メニューの「戻る」ボタン。</p>
+</div>
+<div class="fiche"><h3>シーンをやり直す</h3>
+<div class="schema"><b>出力：</b> なし（スクリプト終了）</div>
+<p>シーンを最初からやり直します。オブジェクトは元の場所に、ローカル変数は最初の値に戻ります。グローバル変数は変わりません。</p>
+<p class="exemple"><b>例：</b> 体力が 0 になったら Game Over。</p>
+</div>
+<div class="fiche"><h3>HUDを開く</h3>
+<div class="schema"><b>入力：</b> シーン</div>
+<p>別のシーンを、ゲームの上にレイヤー（HUD）として表示します。そのシーンには自分の Blueprint があります。</p>
+<p class="exemple"><b>例：</b> ポーズメニューやインベントリ。</p>
+</div>
+<div class="fiche"><h3>HUDを閉じる</h3>
+<p>開いている HUD を閉じます。</p>
+<p class="exemple"><b>例：</b> ポーズメニューの「閉じる」ボタン。</p>
+</div>
+<div class="fiche"><h3>シーンのコピーを配置</h3>
+<div class="schema"><b>入力：</b> シーン, X位置, Y位置</div>
+<p>選んだシーン（プレハブ）のコピーを、X, Y の位置でゲームに置きます。</p>
+<p class="exemple"><b>例：</b> 別のシーンで作った敵のグループを出現させる。</p>
+</div>
+<div class="fiche"><h3>シーンのコピーを破棄</h3>
+<div class="schema"><b>入力：</b> シーン</div>
+<p>ゲームに置いた、選んだシーンのコピーをすべて消します。</p>
+<p class="exemple"><b>例：</b> ウェーブの終わりに敵のグループをすべて消す。</p>
+</div>
+<div class="fiche"><h3>ゲームを終了</h3>
+<div class="schema"><b>出力：</b> なし（スクリプト終了）</div>
+<p>書き出したゲームを閉じます。エディターでは何も閉じません。停止ボタンを使ってください。</p>
+<p class="exemple"><b>例：</b> タイトルメニューの「終了」ボタン。</p>
+</div>
+<div class="fiche"><h3>トースト (Toast)</h3>
+<div class="schema"><b>入力：</b> メッセージ</div>
+<p>画面の下に短いメッセージを数秒間表示します。= で始めると計算結果を表示できます。</p>
+<p class="exemple"><b>例：</b> ="スコア：" + score</p>
+</div>
+<div class="fiche"><h3>ログに書き込む</h3>
+<div class="schema"><b>入力：</b> メッセージ</div>
+<p>プロジェクトのログ（診断ファイル）にメッセージを書きます。ゲームには何も表示されません。= で始めると計算結果を書けます。</p>
+<p class="exemple"><b>例：</b> ="体力 = " + vie で、テスト中に値を確認する。</p>
+</div>
+<div class="fiche"><h3>カメラを固定</h3>
+<div class="schema"><b>入力：</b> オブジェクト, Xを追う（true / false）, Yを追う（true / false）, X方向のみ視差（true / false）</div>
+<p>カメラが選んだオブジェクトを追いかけます。横だけ、縦だけにもできます。オブジェクトがないと、カメラは何も追いかけません。</p>
+<p class="exemple"><b>例：</b> 大きなアクションステージでプレイヤーを追う。</p>
+</div>
+<div class="fiche"><h3>カメラの滑らかさ</h3>
+<div class="schema"><b>入力：</b> 追従速度（0.01〜1）</div>
+<p>カメラが追いかけるオブジェクトに追いつく速さを決めます。0.01 = とてもゆるやか、1 = ぴったりくっつく。</p>
+<p class="exemple"><b>例：</b> 0.1 で、少し遅れてなめらかについてくるカメラ。</p>
+</div>
+<div class="fiche"><h3>カメラの振動</h3>
+<div class="schema"><b>入力：</b> 強さ, 長さ（ミリ秒）</div>
+<p>選んだ強さと時間（ミリ秒）で画面を揺らします。</p>
+<p class="exemple"><b>例：</b> 爆発：強さ 15、時間 400。</p>
+</div>
+<div class="fiche"><h3>バイブレーション</h3>
+<div class="schema"><b>入力：</b> 長さ（ミリ秒）</div>
+<p>選んだ時間（ミリ秒）だけスマホを振動させます。振動機能がない場合は何も起きません。</p>
+<p class="exemple"><b>例：</b> プレイヤーがダメージを受けたら 100 ミリ秒。</p>
+</div>
+<div class="fiche"><h3>状態を保存</h3>
+<p>シーンの状態（オブジェクトと変数）とグローバル変数を、セーブポイントのように覚えておきます。</p>
+<p class="exemple"><b>例：</b> ステージの途中にあるチェックポイントの旗。</p>
+</div>
+<div class="fiche"><h3>状態を復元</h3>
+<p>シーンを最後の 「状態を保存」 の状態に戻します。まだセーブがなければ何も変わりません。</p>
+<p class="exemple"><b>例：</b> 落ちたあとチェックポイントからやり直す。</p>
+</div>
+</div>
+<h2 id="c3-時間">時間</h2>
+<div class="method">
+<div class="fiche"><h3>待つ</h3>
+<div class="schema"><b>入力：</b> 時間（秒）</div>
+<p>選んだ時間（秒）だけ待ってから、続きを動かします。待っている間もゲームのほかの部分は動き続けます。</p>
+<p class="exemple"><b>例：</b> 「負け！」を表示して 2 秒待ち、シーンをやり直す。</p>
+</div>
+<div class="fiche"><h3>繰り返す</h3>
+<div class="schema"><b>入力：</b> 間隔（秒）, 回数（0 = 無限）, タイマー名（省略可） &nbsp;→&nbsp; <b>出力：</b> すぐに / 毎回 / 終了</div>
+<p>X 秒ごとに 「毎回」 の出力を、決めた回数（0 = ずっと）動かし、最後に 「終了」 を動かします。「すぐに」 は最初にすぐ動きます。すでに動いているときは、もう一度は始まりません。</p>
+<p class="exemple"><b>例：</b> 3 秒ごとに敵を出す。</p>
+</div>
+<div class="fiche"><h3>カウントダウン</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 変数, 開始値（省略可）, タイマー名（省略可） &nbsp;→&nbsp; <b>出力：</b> 毎秒 / 終了</div>
+<p>選んだ変数（数値）を 1 秒ごとに 1 ずつ減らし、0 まで数えます。毎回 「毎秒」 が動き、0 で 「終了」 が動きます。「開始値（省略可）」 で最初の値を決めます。</p>
+<p class="exemple"><b>例：</b> 60 秒のタイマー：0 で Game Over。</p>
+</div>
+<div class="fiche"><h3>タイマーを止める</h3>
+<div class="schema"><b>入力：</b> 名前（空 = すべて）</div>
+<p>この名前のタイマー（くり返し・カウントダウン）を止めます。名前が空なら、すべてのタイマーを止めます。</p>
+<p class="exemple"><b>例：</b> プレイヤーが勝ったらタイマーを止める。</p>
+</div>
+<div class="fiche"><h3>ゲーム速度（スロー）</h3>
+<div class="schema"><b>入力：</b> 速度（1 = 通常、0.5 = スロー）</div>
+<p>ゲーム全体の速さを変えます。1 = ふつう、0.5 = スローモーション、2 = 速い（0 から 4 まで）。</p>
+<p class="exemple"><b>例：</b> 2 秒間のスローモーション演出。</p>
+</div>
+<div class="fiche"><h3>ゲームを一時停止</h3>
+<p>ゲームを一時停止します。動きとタイマーが止まります。</p>
+<p class="exemple"><b>例：</b> ポーズメニューを開く。</p>
+</div>
+<div class="fiche"><h3>ゲームを再開</h3>
+<p>一時停止のあと、ゲームを再開します。</p>
+<p class="exemple"><b>例：</b> ポーズメニューの「つづける」ボタン。</p>
+</div>
+</div>
+<h2 id="c4-外観とオブジェクト">外観とオブジェクト</h2>
+<div class="method">
+<div class="fiche"><h3>オブジェクトを移動</h3>
+<div class="schema"><b>入力：</b> オブジェクト, X, Y</div>
+<p>オブジェクトを X, Y の位置にそのまま置きます（ワープ）。</p>
+<p class="exemple"><b>例：</b> プレイヤーをスタート地点に戻す。</p>
+</div>
+<div class="fiche"><h3>オブジェクトを押す</h3>
+<div class="schema"><b>入力：</b> オブジェクト, X を加算, Y を加算</div>
+<p>オブジェクトを今の場所から、指定した距離だけ動かします。物理オブジェクトは壁で止まります。</p>
+<p class="exemple"><b>例：</b> 「オブジェクトを押している間」 とつなぐ：「X を加算」 = 5 で右に進む。</p>
+</div>
+<div class="fiche"><h3>プロパティを変更</h3>
+<div class="schema"><b>入力：</b> オブジェクト, プロパティ, 値</div>
+<p>リストから選んだオブジェクトのプロパティ（x、y、回転、不透明度、テキスト…）を変えます。</p>
+<p class="exemple"><b>例：</b> 時計の針の回転を =temps * 90 にする。</p>
+</div>
+<div class="fiche"><h3>回転</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 角度（度）</div>
+<p>オブジェクトを指定した角度（度）に回します。</p>
+<p class="exemple"><b>例：</b> =kuruma.rotation + 5 を 「毎フレーム」 につなぐと、「kuruma」オブジェクトがずっと回る。</p>
+</div>
+<div class="fiche"><h3>不透明度を変更 (アルファ)</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 不透明度（0〜1）</div>
+<p>オブジェクトの透明度を決めます。0 = 見えない、1 = 不透明。</p>
+<p class="exemple"><b>例：</b> 0.5 で半透明のおばけ。</p>
+</div>
+<div class="fiche"><h3>可視性</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 表示（true / false）</div>
+<p>オブジェクトを表示（true）または非表示（false）にします。</p>
+<p class="exemple"><b>例：</b> 最初は隠してある「勝ち！」メッセージを表示する。</p>
+</div>
+<div class="fiche"><h3>タグを設定</h3>
+<div class="schema"><b>入力：</b> オブジェクト, タグ</div>
+<p>オブジェクトに新しいタグ（ラベル）をつけます。</p>
+<p class="exemple"><b>例：</b> 倒された敵にタグ「無害」をつける。</p>
+</div>
+<div class="fiche"><h3>Zオーダーを変更</h3>
+<div class="schema"><b>入力：</b> オブジェクト, Z</div>
+<p>オブジェクトのレイヤーを変えます。数字が大きいほど、ほかのオブジェクトより手前に表示されます。</p>
+<p class="exemple"><b>例：</b> プレイヤーを背景の飾りより手前にする。</p>
+</div>
+<div class="fiche"><h3>サイズを設定 (スケール)</h3>
+<div class="schema"><b>入力：</b> オブジェクト, Scale X, Scale Y</div>
+<p>オブジェクトの大きさを変えます。1 = ふつう、2 = 2 倍、0.5 = 半分。</p>
+<p class="exemple"><b>例：</b> キノコを食べたらプレイヤーが大きくなる。</p>
+</div>
+<div class="fiche"><h3>オブジェクトを破壊</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>選んだオブジェクトをシーンから消します。</p>
+<p class="exemple"><b>例：</b> 「関連オブジェクト」 を選んで、プレイヤーが触れたばかりのコインを消す。</p>
+</div>
+<div class="fiche"><h3>タグで破壊</h3>
+<div class="schema"><b>入力：</b> 破棄するタグ</div>
+<p>このタグを持つオブジェクトをすべて消します。</p>
+<p class="exemple"><b>例：</b> 爆弾で「敵」オブジェクトをすべて消す。</p>
+</div>
+<div class="fiche"><h3>画像を変更</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 画像</div>
+<p>オブジェクトの画像を、Assets の別の画像に変えます。空 = 画像なし。</p>
+<p class="exemple"><b>例：</b> 押したボタンによって、キャラクターが左や右を向く。</p>
+</div>
+<div class="fiche"><h3>色を変更</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 色</div>
+<p>オブジェクトの色を変えます。</p>
+<p class="exemple"><b>例：</b> 答えが正しいとボタンが緑になる。</p>
+</div>
+<div class="fiche"><h3>クローンを生成 (スポナー)</h3>
+<div class="schema"><b>入力：</b> オブジェクト A, オブジェクト B</div>
+<p>オブジェクト B（お手本）のコピーを、オブジェクト A（出現ポイント）の場所に作ります。</p>
+<p class="exemple"><b>例：</b> 大砲（A）から砲弾（B）を出す。</p>
+</div>
+<div class="fiche"><h3>カラーフィルター</h3>
+<div class="schema"><b>入力：</b> オブジェクト, フィルター</div>
+<p>オブジェクトにフィルターをかけます。白黒、セピア、反転、または「なし」で外します。</p>
+<p class="exemple"><b>例：</b> 思い出のシーンで白黒にする。</p>
+</div>
+<div class="fiche"><h3>ブレンドモード (効果)</h3>
+<div class="schema"><b>入力：</b> オブジェクト, フィルター</div>
+<p>オブジェクトと、その後ろにあるものとの混ざり方を変えます（加算、乗算、スクリーン、反転）。</p>
+<p class="exemple"><b>例：</b> 光る明かりや炎には「加算」。</p>
+</div>
+<div class="fiche"><h3>ミラー効果 / 反転</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 軸</div>
+<p>オブジェクトを反転します。水平（左右）または垂直（上下）。</p>
+<p class="exemple"><b>例：</b> キャラクターが歩く方向を向く。</p>
+</div>
+<div class="fiche"><h3>ロック状態を変更</h3>
+<div class="schema"><b>入力：</b> オブジェクト, ロック（true / false）</div>
+<p>エディターでオブジェクトをロック・ロック解除します（カギのマーク）。ゲーム中には何の効果もありません。オブジェクトをドラッグできないようにするには 「ドラッグ可能にする」 を使ってください。</p>
+</div>
+<div class="fiche"><h3>パララックス係数</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 係数（例：0.5）</div>
+<p>カメラが動いたときの、オブジェクトのスクロールの速さを決めます。1 = ふつう、0.5 = 半分の速さ（奥行きの演出）。</p>
+<p class="exemple"><b>例：</b> ゆっくり流れる背景の山。</p>
+</div>
+<div class="fiche"><h3>2つのオブジェクトをリンク</h3>
+<div class="schema"><b>入力：</b> オブジェクト A, オブジェクト B</div>
+<p>オブジェクト A（子）をオブジェクト B（親）にくっつけます。B が動くと A もついていきます。</p>
+<p class="exemple"><b>例：</b> キャラクターの手についていく剣。</p>
+</div>
+<div class="fiche"><h3>発光 (Glow)</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 状態, 色</div>
+<p>オブジェクトのまわりの色つきの光を、オン・オフします。</p>
+<p class="exemple"><b>例：</b> 拾えるアイテムを目立たせる。</p>
+</div>
+<div class="fiche"><h3>点滅 (Blink)</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 状態, 速度（ms）, 継続時間（ms、0 = 無限）</div>
+<p>選んだ速さ（ミリ秒）で、決めた時間（ミリ秒、0 = ずっと）オブジェクトを点滅させるか、点滅を止めます。</p>
+<p class="exemple"><b>例：</b> ダメージを受けたあと、プレイヤーが 1 秒点滅する。</p>
+</div>
+<div class="fiche"><h3>クローンを生成（X/Y座標）</h3>
+<div class="schema"><b>入力：</b> オブジェクト B, X, Y</div>
+<p>オブジェクト B（お手本）のコピーを X, Y の位置に作ります。コピーは 「関連オブジェクト」 になります。</p>
+<p class="exemple"><b>例：</b> ランダムな位置に石を落とす：X = random(0, 800)。</p>
+</div>
+<div class="fiche"><h3>オブジェクトを発射</h3>
+<div class="schema"><b>入力：</b> オブジェクト A, オブジェクト B, モデル名, 方向, 速度</div>
+<p>オブジェクト A の場所に弾（「モデル名」 に書いたオブジェクト）を作り、選んだ速さで飛ばします。向きは 0°、90°、180°、270°、オブジェクト B の方向（「ターゲットへ」）、または A の角度。</p>
+<p class="exemple"><b>例：</b> 上向き（270）にレーザーを撃つ宇宙船。</p>
+</div>
+<div class="fiche"><h3>進捗を設定</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 新しい進捗</div>
+<p>プログレスバーの量を、最小値と最大値のあいだで決めます。</p>
+<p class="exemple"><b>例：</b> 体力バーなら、「新しい進捗」 = vie。</p>
+</div>
+<div class="fiche"><h3>画面をループする</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>画面の端から出たものが、反対側から出てきます（パックマンの効果）。</p>
+<p class="exemple"><b>例：</b> 右から出て左から戻ってくる小惑星。</p>
+</div>
+<div class="fiche"><h3>画面内に収める</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 余白</div>
+<p>オブジェクトが画面の外に出ないようにします。余白を決めると、端の少し手前で止まります。</p>
+<p class="exemple"><b>例：</b> プレイヤーの宇宙船がいつも見えるようにする。</p>
+</div>
+<div class="fiche"><h3>オブジェクトを作成</h3>
+<div class="schema"><b>入力：</b> オブジェクト, X位置, Y位置</div>
+<p>選んだオブジェクト（お手本）のコピーを X, Y の位置に作ります。</p>
+<p class="exemple"><b>例：</b> 決まった場所に木箱を置く。</p>
+</div>
+<div class="fiche"><h3>フェード</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 目標の不透明度（0〜1）, 長さ（秒）</div>
+<p>選んだ時間（秒）で、オブジェクトの不透明度をなめらかに目標の値まで変えます。次のノードは待たずに動きます。</p>
+<p class="exemple"><b>例：</b> タイトルを 1 秒で消す（目標の不透明度 0）。</p>
+</div>
+</div>
+<h2 id="c5-変数とインベントリ">変数とインベントリ</h2>
+<div class="method">
+<div class="fiche"><h3>変数を変更</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 変数, 値</div>
+<p>変数に新しい値（数値、テキスト、true / false、または計算）を入れます。</p>
+<p class="exemple"><b>例：</b> 「score」を 0 に戻す。</p>
+</div>
+<div class="fiche"><h3>変数に加算</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 変数, 加算する値</div>
+<p>変数に値を足します（マイナスの数なら引きます）。テキストの変数なら、最後に文字を足します。</p>
+<p class="exemple"><b>例：</b> コインごとに score + 1、ダメージごとに体力 - 1。</p>
+</div>
+<div class="fiche"><h3>値を制限 (Clamp)</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 変数, 最小値, 最大値</div>
+<p>変数（数値）を最小値と最大値のあいだに保ちます。</p>
+<p class="exemple"><b>例：</b> 体力が 100 をこえないようにする。</p>
+</div>
+<div class="fiche"><h3>ランダムな数</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 変数, 値：random(min, max)</div>
+<p>変数にランダムな数を入れます。random(1, 6) は 1 から 6 の数になります。</p>
+<p class="exemple"><b>例：</b> サイコロをふる。</p>
+</div>
+<div class="fiche"><h3>インベントリに追加</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 変数</div>
+<p>オブジェクトをインベントリ（「インベントリリスト」型の変数）に入れます。同じものは一度しか入りません。</p>
+<p class="exemple"><b>例：</b> カギを拾う。</p>
+</div>
+<div class="fiche"><h3>インベントリから削除</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 変数</div>
+<p>オブジェクトをインベントリから取り出します。</p>
+<p class="exemple"><b>例：</b> カギを使ってドアを開ける。</p>
+</div>
+<div class="fiche"><h3>インベントリにあるなら</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 変数 &nbsp;→&nbsp; <b>出力：</b> 真 / 偽 / その後</div>
+<p>オブジェクトがインベントリにあれば 「真」、なければ 「偽」 の出力に進みます。</p>
+<p class="exemple"><b>例：</b> カギがインベントリにあるときだけドアが開く。</p>
+</div>
+<div class="fiche"><h3>オブジェクトを合成</h3>
+<div class="schema"><b>入力：</b> オブジェクト A, オブジェクト B, 結果オブジェクトの名前</div>
+<p>オブジェクト A と B を、名前を書いたオブジェクトのコピーに置きかえます（A の場所に置きます）。そのお手本がなければ何も変わりません。</p>
+<p class="exemple"><b>例：</b> 棒 + 布 = たいまつ。</p>
+</div>
+</div>
+<h2 id="c6-ロジックと条件">ロジックと条件</h2>
+<div class="method">
+<div class="fiche"><h3>条件</h3>
+<div class="schema"><b>入力：</b> 条件 &nbsp;→&nbsp; <b>出力：</b> 真 / 偽 / その後</div>
+<p>条件を調べます。正しければ 「真」、ちがえば 「偽」 に進みます。どちらの場合も、そのあと 「その後」 が動きます。</p>
+<p class="exemple"><b>例：</b> score &gt;= 10 → 真 → 次のシーン。</p>
+</div>
+<div class="fiche"><h3>ジョイスティックが</h3>
+<div class="schema"><b>出力：</b> 上 / 下 / 左 / 右 / 静止 / その後</div>
+<p>ジョイスティックの向きに合った出力に進みます。「上」、「下」、「左」、「右」、触れていないときは 「静止」。</p>
+<p class="exemple"><b>例：</b> 「毎フレーム」 とつないで、正しい向きの歩くアニメーションを流す。</p>
+</div>
+<div class="fiche"><h3>地面にいるなら</h3>
+<div class="schema"><b>入力：</b> オブジェクト &nbsp;→&nbsp; <b>出力：</b> 真 / 偽 / その後</div>
+<p>オブジェクトの下が、固定された見えるオブジェクト（地面、足場）の上にあれば 「真」、なければ 「偽」。</p>
+<p class="exemple"><b>例：</b> 地面にいるときだけジャンプできるようにする。</p>
+</div>
+<div class="fiche"><h3>動いているなら</h3>
+<div class="schema"><b>入力：</b> オブジェクト &nbsp;→&nbsp; <b>出力：</b> 真 / 偽 / その後</div>
+<p>前のフレームからオブジェクトが動いていれば 「真」、動いていなければ 「偽」。</p>
+<p class="exemple"><b>例：</b> キャラクターが動いているときだけ歩くアニメーションを流す。</p>
+</div>
+<div class="fiche"><h3>関数を呼ぶ</h3>
+<div class="schema"><b>入力：</b> 関数</div>
+<p>関数（「関数」の欄で作った Blueprint）を動かしてから、続きに進みます。「毎フレーム」 の下には置かないでください。</p>
+<p class="exemple"><b>例：</b> いろいろな敵が使う「ライフを減らす」関数。</p>
+</div>
+<div class="fiche"><h3>イベントを呼ぶ</h3>
+<div class="schema"><b>入力：</b> イベント名</div>
+<p>同じ Blueprint にある、この名前の 「ローカルイベント」 を動かしてから、続きに進みます。</p>
+<p class="exemple"><b>例：</b> 落下とタイマーの両方から「GameOver」を呼ぶ。</p>
+</div>
+<div class="fiche"><h3>シーケンス</h3>
+<div class="schema"><b>出力：</b> 1 / 2 / 3 / 4</div>
+<p>出力を順番に動かします。1、次に 2、次に 3、次に 4。つながっていない出力はとばします。</p>
+<p class="exemple"><b>例：</b> 開始時：1 = プレイヤーを置く、2 = 音楽を流す、3 = スコアを表示する。</p>
+</div>
+<div class="fiche"><h3>クールダウン</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 遅延（秒） &nbsp;→&nbsp; <b>出力：</b> 準備完了 / まだ</div>
+<p>決めた間隔（秒）に最大 1 回だけ 「準備完了」 を通します。それ以外は 「まだ」 に進みます。オブジェクトを選ぶと、オブジェクトごとに別の間隔になります。</p>
+<p class="exemple"><b>例：</b> 0.5 秒に 1 回までしか撃てないようにする。</p>
+</div>
+<div class="fiche"><h3>画面外にいるなら</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 余白（ピクセル） &nbsp;→&nbsp; <b>出力：</b> 真 / 偽 / その後</div>
+<p>オブジェクトが画面（と余白）から完全に出ていれば 「真」、そうでなければ 「偽」。</p>
+<p class="exemple"><b>例：</b> 画面の外に出た弾を消す。</p>
+</div>
+<div class="fiche"><h3>もし / それ以外</h3>
+<div class="schema"><b>入力：</b> もし（条件）, そうでなければもし（条件） &nbsp;→&nbsp; <b>出力：</b> もし / そうでなければもし / それ以外 / その後</div>
+<p>1 つ目の条件、次に 2 つ目の条件を調べて、「もし」、「そうでなければもし」、「それ以外」 のどれかに進みます。そのあと 「その後」 が動きます。</p>
+<p class="exemple"><b>例：</b> score &gt;= 100 なら金、そうでなく score &gt;= 50 なら銀、それ以外は銅。</p>
+</div>
+<div class="fiche"><h3>値によって</h3>
+<div class="schema"><b>入力：</b> 検査する値, ケース 1, ケース 2, ケース 3, ケース 4, ケース 5, ケース 6 &nbsp;→&nbsp; <b>出力：</b> 1 / 2 / 3 / 4 / 5 / 6 / なし / その後</div>
+<p>調べる値をケース 1 から 6 と比べて、最初に同じだったケースの出力に進みます。どれも同じでなければ 「なし」。空のケースはとばします。</p>
+<p class="exemple"><b>例：</b> 「武器」によって：1 = 剣、2 = 弓、3 = 杖。</p>
+</div>
+</div>
+<h2 id="c7-テキストとダイアログ">テキストとダイアログ</h2>
+<div class="method">
+<div class="fiche"><h3>テキストを変更</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 新しいテキスト</div>
+<p>テキストオブジェクトの文字を置きかえます。= で始めると計算結果を表示できます。</p>
+<p class="exemple"><b>例：</b> ="スコア：" + score</p>
+</div>
+<div class="fiche"><h3>ダイアログを表示</h3>
+<div class="schema"><b>入力：</b> オブジェクト, ダイアログのキー</div>
+<p>会話ファイル（dialogues.txt）から、キーに合った文をテキストオブジェクトに書きます。</p>
+<p class="exemple"><b>例：</b> キー「konnichiwa_shounin」で商人のセリフを表示する。</p>
+</div>
+<div class="fiche"><h3>テキストに追加</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 変数, 追加するテキスト</div>
+<p>テキスト型の変数の最後に文字を足します。</p>
+<p class="exemple"><b>例：</b> パスワードを 1 文字ずつ入力する。</p>
+</div>
+</div>
+<h2 id="c8-移動とai">移動とAI</h2>
+<div class="method">
+<div class="fiche"><h3>オブジェクトを停止</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>オブジェクトをその場でぴたっと止めます。速さ、押す力、ジャンプ、自動の動きがなくなります。</p>
+<p class="exemple"><b>例：</b> 氷の魔法が当たった敵を凍らせる。</p>
+</div>
+<div class="fiche"><h3>移動を停止</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>オブジェクトの自動の動き（前進し続ける、追いかける、逃げる）を止めます。</p>
+<p class="exemple"><b>例：</b> プレイヤーが隠れたら敵が追いかけるのをやめる。</p>
+</div>
+<div class="fiche"><h3>継続的に前進</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 速度</div>
+<p>オブジェクトが向いている方向に、選んだ速さで自分で進みます。</p>
+<p class="exemple"><b>例：</b> 弾や走っている車。</p>
+</div>
+<div class="fiche"><h3>オブジェクトを追跡</h3>
+<div class="schema"><b>入力：</b> オブジェクト A, オブジェクト B, 速度</div>
+<p>オブジェクト A が、選んだ速さでオブジェクト B に向かって自分で進みます。</p>
+<p class="exemple"><b>例：</b> プレイヤーを追いかけるおばけ。</p>
+</div>
+<div class="fiche"><h3>オブジェクトから逃げる</h3>
+<div class="schema"><b>入力：</b> オブジェクト A, オブジェクト B, 速度</div>
+<p>オブジェクト A が、選んだ速さでオブジェクト B から自分で離れます。</p>
+<p class="exemple"><b>例：</b> プレイヤーから逃げるニワトリ。</p>
+</div>
+<div class="fiche"><h3>バウンドを変更</h3>
+<div class="schema"><b>入力：</b> オブジェクト, バウンド（0〜1）</div>
+<p>物理オブジェクトのはね返りを決めます。0 = はねない、1 = よくはねる。</p>
+<p class="exemple"><b>例：</b> 0.8 でよくはねるボール。</p>
+</div>
+<div class="fiche"><h3>角度を付けて押す</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 角度（0 = 右、90 = 下）, 力</div>
+<p>選んだ力で、オブジェクトをある方向に押します（角度：0 = 右、90 = 下、180 = 左、270 = 上）。</p>
+<p class="exemple"><b>例：</b> プレイヤーをななめに飛ばすバネ。</p>
+</div>
+<div class="fiche"><h3>インパルス（ジャンプ）</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 縦方向の力（マイナス = 上）</div>
+<p>オブジェクトを上（マイナスの数）または下（プラスの数）に飛ばし、落ちてくるように物理を与えます。</p>
+<p class="exemple"><b>例：</b> ジャンプ：力 -15。</p>
+</div>
+<div class="fiche"><h3>物理を有効にする</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 落ちる（true / false）</div>
+<p>オブジェクトに物理を与えます。true なら重力で落ち、false なら地面のように固定されます。</p>
+<p class="exemple"><b>例：</b> 乗るとくずれる足場。</p>
+</div>
+<div class="fiche"><h3>ドラッグ可能にする</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 指でドラッグ可能（true / false）</div>
+<p>ゲーム中に指でオブジェクトをドラッグすることを、許可（true）または禁止（false）します。</p>
+<p class="exemple"><b>例：</b> 正しく置いたパズルのピースを固定する。</p>
+</div>
+<div class="fiche"><h3>ぴょんぴょん跳ねる</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 強さ（0 = 停止）, 長さ（ミリ秒）, 動いている間続ける（true / false）</div>
+<p>選んだ強さと時間で、オブジェクトをぴょんぴょん跳ねさせます（見た目だけの小さなはずみ）。0 で止まります。オブジェクトが動いている間、続けることもできます。</p>
+<p class="exemple"><b>例：</b> 歩きながらぴょんぴょん跳ねるキャラクター。</p>
+</div>
+<div class="fiche"><h3>向きを合わせる</h3>
+<div class="schema"><b>入力：</b> オブジェクト A, オブジェクト B, 角度のずれ（度）</div>
+<p>オブジェクト A をオブジェクト B の方へ向けます。角度のずれで画像の向きを直します（0 = 画像が右を向いている）。</p>
+<p class="exemple"><b>例：</b> プレイヤーをねらう砲台。</p>
+</div>
+<div class="fiche"><h3>スライド移動</h3>
+<div class="schema"><b>入力：</b> オブジェクト, X位置, Y位置, 長さ（秒）</div>
+<p>選んだ時間（秒）で、オブジェクトを X, Y の位置までなめらかに動かします。次のノードは待たずに動きます。</p>
+<p class="exemple"><b>例：</b> 動く足場や、画面に入ってくるメニュー。</p>
+</div>
+</div>
+<h2 id="c9-アニメーション">アニメーション</h2>
+<div class="method">
+<div class="fiche"><h3>アニメを再生</h3>
+<div class="schema"><b>入力：</b> オブジェクト, アニメーション, 速さ（コマ/秒）, ループ（true / false）</div>
+<p>オブジェクトのアニメーションを、選んだ速さ（1 秒あたりのコマ数）で、くり返しまたは 1 回だけ流します。すでに流れていれば、最初に戻らずにそのまま続きます。</p>
+<p class="exemple"><b>例：</b> キャラクターが進むとき「歩く」アニメーション。</p>
+</div>
+<div class="fiche"><h3>アニメを停止</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>アニメーションを止めて、最初のコマに戻します。</p>
+<p class="exemple"><b>例：</b> キャラクターが歩くのをやめる。</p>
+</div>
+<div class="fiche"><h3>アニメを一時停止</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>アニメーションを今のコマで一時停止します。</p>
+<p class="exemple"><b>例：</b> ポーズ中にキャラクターを止める。</p>
+</div>
+<div class="fiche"><h3>アニメを再開</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>一時停止したところからアニメーションを再開します。</p>
+<p class="exemple"><b>例：</b> ポーズのあと。</p>
+</div>
+<div class="fiche"><h3>アニメの速さ</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 速さ（コマ/秒）</div>
+<p>アニメーションの速さ（1 秒あたりのコマ数）を、最初からやり直さずに変えます。</p>
+<p class="exemple"><b>例：</b> 速く走る = 速いアニメーション。</p>
+</div>
+</div>
+<h2 id="c10-オーディオ">オーディオ</h2>
+<div class="method">
+<div class="fiche"><h3>効果音を再生</h3>
+<div class="schema"><b>入力：</b> 音声ファイル</div>
+<p>効果音を鳴らします。いくつかの音を同時に鳴らせます。</p>
+<p class="exemple"><b>例：</b> コインを拾ったときの「チャリン」。</p>
+</div>
+<div class="fiche"><h3>音楽を再生</h3>
+<div class="schema"><b>入力：</b> 音楽ファイル, ループ（true / false）</div>
+<p>音楽を流します。今流れている音楽と入れかわります。「毎フレーム」 の下には置かないでください（ずっと最初からやり直しになります）。</p>
+<p class="exemple"><b>例：</b> ステージの音楽を開始時に流す。</p>
+</div>
+<div class="fiche"><h3>音楽を停止</h3>
+<p>今流れている音楽を止めます。</p>
+<p class="exemple"><b>例：</b> Game Over 画面では静かにする。</p>
+</div>
+</div>
+<div class="liens-bas">
+<a href="../guides/ja/deplacer-personnage.html">初心者ガイド →</a>
+<a href="https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk">⬇️ Yop2D をダウンロード</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../index.html">公式サイト</a></p>
+</footer>
+</body>
+</html>

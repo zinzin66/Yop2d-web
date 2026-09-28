@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2D 全部节点（115 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 115 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/noeuds/pt.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/noeuds/ru.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/noeuds/ja.html">
+<link rel="stylesheet" href="../guides/guide.css">
+<style>
+.sommaire { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0; }
+.sommaire a { background: var(--card); border: 1px solid var(--bordure); border-radius: 20px; padding: 0.2rem 0.8rem; text-decoration: none; font-size: 0.9rem; }
+.fiche { border-top: 1px solid var(--bordure); padding: 0.8rem 0; }
+.fiche:first-of-type { border-top: none; }
+.fiche h3 { margin: 0 0 0.3rem; color: white; font-size: 1.05rem; }
+.schema { font-size: 0.88rem; color: var(--text-dim); background: var(--fond-sombre); border-radius: 6px; padding: 0.45rem 0.7rem; margin-bottom: 0.4rem; }
+.schema b { color: var(--bleu); }
+.exemple { color: var(--text-dim); }
+.exemple b { color: var(--teal); }
+.liens-bas { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; margin-top: 2rem; font-weight: bold; }
+</style>
+</head>
+<body>
+<header>
+<a href="../index.html">← Yop2D</a>
+<h1>Yop2D 节点参考</h1>
+<p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 115 个节点，以及它们的设置（输入）和输出。</p>
+<p><strong>分类</strong></p>
+<nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-动画">动画</a><a href="#c10-音频">音频</a></nav>
+<h2 id="c1-事件">事件</h2>
+<div class="method">
+<div class="fiche"><h3>启动时</h3>
+<p>场景一开始就运行，只运行一次。</p>
+<p class="exemple"><b>示例：</b> 摆放敌人、显示初始分数或播放音乐。</p>
+</div>
+<div class="fiche"><h3>每帧</h3>
+<p>在游戏的每一帧都运行（大约每秒 60 次）。</p>
+<p class="exemple"><b>示例：</b> 跟随手指或一直检查某个条件。不要在它下面放 “播放音乐” 或 “调用函数”。</p>
+</div>
+<div class="fiche"><h3>点击结束</h3>
+<p>玩家在屏幕任意位置抬起手指时运行。</p>
+<p class="exemple"><b>示例：</b> 松开屏幕时停止射击。</p>
+</div>
+<div class="fiche"><h3>点击对象时</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>手指碰到所选对象时运行。</p>
+<p class="exemple"><b>示例：</b> “跳跃”按钮、打开宝箱、选择答案。</p>
+</div>
+<div class="fiche"><h3>松开物体</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>手指在所选对象上方抬起时运行。</p>
+<p class="exemple"><b>示例：</b> 只在松开按钮时才确认。</p>
+</div>
+<div class="fiche"><h3>按住物体</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>只要手指一直按在所选对象上，每一帧都会重复运行。</p>
+<p class="exemple"><b>示例：</b> 左 / 右按钮：按住时角色一直走。</p>
+</div>
+<div class="fiche"><h3>手指按住</h3>
+<p>只要有手指按在屏幕任意位置，每一帧都会重复运行。</p>
+<p class="exemple"><b>示例：</b> 按住屏幕时让飞船上升（在公式里用 doigt.x 和 doigt.y）。</p>
+</div>
+<div class="fiche"><h3>开始拖拽</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>玩家开始拖动所选对象时运行（该对象必须勾选 “可移动 (拖拽)”）。</p>
+<p class="exemple"><b>示例：</b> 拿起卡牌时把它放大。</p>
+</div>
+<div class="fiche"><h3>结束拖拽</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>玩家松开正在拖动的对象时运行。</p>
+<p class="exemple"><b>示例：</b> 检查拼图块是否放对了位置。</p>
+</div>
+<div class="fiche"><h3>碰撞 A/B</h3>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B</div>
+<p>对象 A 开始碰到对象 B 的那一刻运行一次。两者分开后才会再次运行。“进入区域”也用这个事件。</p>
+<p class="exemple"><b>示例：</b> 玩家碰到终点区域 → 下一关。</p>
+</div>
+<div class="fiche"><h3>离开区域</h3>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B</div>
+<p>对象 A 不再碰到对象 B（离开区域）的那一刻运行一次。</p>
+<p class="exemple"><b>示例：</b> 玩家走开时关上门。</p>
+</div>
+<div class="fiche"><h3>鼠标悬停</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>手指在屏幕上滑动、到达所选对象时运行。</p>
+<p class="exemple"><b>示例：</b> 手指经过按钮时让它发亮。</p>
+</div>
+<div class="fiche"><h3>悬停结束</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>手指离开它刚经过的对象时运行。</p>
+<p class="exemple"><b>示例：</b> 关闭按钮的高亮。</p>
+</div>
+<div class="fiche"><h3>物理撞击</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>所选对象（动态物理）落到地面或弹起时运行。</p>
+<p class="exemple"><b>示例：</b> 播放落地音效或让摄像机震动。</p>
+</div>
+<div class="fiche"><h3>当变量改变时</h3>
+<div class="schema"><b>输入：</b> 变量</div>
+<p>所选变量的值每次改变时运行。</p>
+<p class="exemple"><b>示例：</b> “vie”（生命值）改变时，更新生命条。</p>
+</div>
+<div class="fiche"><h3>本地事件</h3>
+<div class="schema"><b>输入：</b> 事件名称</div>
+<p>你自己的事件，名字由你决定。用同一个 Blueprint 里的 “调用事件” 节点来触发它。</p>
+<p class="exemple"><b>示例：</b> 从多个地方调用的“GameOver”事件。</p>
+</div>
+<div class="fiche"><h3>点击操作按钮 (冒险)</h3>
+<p>玩家按下场景中的 “操作按钮” 对象（动作按钮）时运行。</p>
+<p class="exemple"><b>示例：</b> 在冒险游戏里和角色说话或开门。</p>
+</div>
+<div class="fiche"><h3>如果对象碰到标签</h3>
+<div class="schema"><b>输入：</b> 对象, 标签</div>
+<p>所选对象碰到带有该标签的对象时，每次接触运行一次。被碰到的对象成为 “相关对象”。</p>
+<p class="exemple"><b>示例：</b> 玩家碰到金币（标签“piece”）→ 销毁相关对象，分数加 1。</p>
+</div>
+</div>
+<h2 id="c2-场景与-hud">场景与 HUD</h2>
+<div class="method">
+<div class="fiche"><h3>切换场景</h3>
+<div class="schema"><b>输入：</b> 场景 &nbsp;→&nbsp; <b>输出：</b> 无（脚本结束）</div>
+<p>离开当前场景，前往所选场景。这个节点会结束脚本。</p>
+<p class="exemple"><b>示例：</b> 最后一关结束后前往“太棒了！”画面。</p>
+</div>
+<div class="fiche"><h3>按名称切换场景</h3>
+<div class="schema"><b>输入：</b> 场景名称 &nbsp;→&nbsp; <b>输出：</b> 无（脚本结束）</div>
+<p>前往你写下名字的场景（也可以用得出这个名字的公式）。这个节点会结束脚本。</p>
+<p class="exemple"><b>示例：</b> 用 ="关卡" + level 这样的公式，通过变量选择关卡。</p>
+</div>
+<div class="fiche"><h3>下一个场景</h3>
+<div class="schema"><b>输出：</b> 无（脚本结束）</div>
+<p>前往场景列表中紧接着的下一个场景。这个节点会结束脚本。</p>
+<p class="exemple"><b>示例：</b> 玩家到达终点 → 下一关。</p>
+</div>
+<div class="fiche"><h3>上一个场景</h3>
+<div class="schema"><b>输出：</b> 无（脚本结束）</div>
+<p>前往场景列表中紧挨着的上一个场景。这个节点会结束脚本。</p>
+<p class="exemple"><b>示例：</b> 菜单里的“返回”按钮。</p>
+</div>
+<div class="fiche"><h3>重新开始场景</h3>
+<div class="schema"><b>输出：</b> 无（脚本结束）</div>
+<p>从头重新开始场景：对象回到原位，局部变量恢复初始值。全局变量不变。</p>
+<p class="exemple"><b>示例：</b> 生命值降到 0 时 Game Over。</p>
+</div>
+<div class="fiche"><h3>打开 HUD</h3>
+<div class="schema"><b>输入：</b> 场景</div>
+<p>把另一个场景像图层（HUD）一样显示在游戏上方，它有自己的 Blueprint。</p>
+<p class="exemple"><b>示例：</b> 暂停菜单或物品栏。</p>
+</div>
+<div class="fiche"><h3>关闭 HUD</h3>
+<p>关闭打开的 HUD。</p>
+<p class="exemple"><b>示例：</b> 暂停菜单里的“关闭”按钮。</p>
+</div>
+<div class="fiche"><h3>放置场景副本</h3>
+<div class="schema"><b>输入：</b> 场景, X 位置, Y 位置</div>
+<p>把所选场景（预制体）的一份副本放进游戏，位置为 X, Y。</p>
+<p class="exemple"><b>示例：</b> 放出在另一个场景里准备好的一组敌人。</p>
+</div>
+<div class="fiche"><h3>销毁场景副本</h3>
+<div class="schema"><b>输入：</b> 场景</div>
+<p>删除游戏中所选场景的所有副本。</p>
+<p class="exemple"><b>示例：</b> 一波结束时清除所有敌人组。</p>
+</div>
+<div class="fiche"><h3>退出游戏</h3>
+<div class="schema"><b>输出：</b> 无（脚本结束）</div>
+<p>关闭导出的游戏。在编辑器里不会关闭任何东西：请用停止按钮。</p>
+<p class="exemple"><b>示例：</b> 主菜单里的“退出”按钮。</p>
+</div>
+<div class="fiche"><h3>提示消息 (Toast)</h3>
+<div class="schema"><b>输入：</b> 消息</div>
+<p>在屏幕底部显示几秒钟的小消息。以 = 开头可以显示计算结果。</p>
+<p class="exemple"><b>示例：</b> ="分数：" + score</p>
+</div>
+<div class="fiche"><h3>写入日志</h3>
+<div class="schema"><b>输入：</b> 消息</div>
+<p>把消息写进项目日志（诊断文件），游戏里不显示任何东西。以 = 开头可以写入计算结果。</p>
+<p class="exemple"><b>示例：</b> ="生命 = " + vie，测试时用来检查数值。</p>
+</div>
+<div class="fiche"><h3>锁定相机</h3>
+<div class="schema"><b>输入：</b> 对象, 跟随 X（true / false）, 跟随 Y（true / false）, 仅 X 视差（true / false）</div>
+<p>摄像机跟随所选对象，也可以只水平或只垂直跟随。没有选择对象时，摄像机不再跟随。</p>
+<p class="exemple"><b>示例：</b> 在大型平台关卡中跟随玩家。</p>
+</div>
+<div class="fiche"><h3>相机平滑</h3>
+<div class="schema"><b>输入：</b> 跟随速度（0.01 到 1）</div>
+<p>设置摄像机追上被跟随对象的速度：0.01 = 非常柔和，1 = 紧贴对象。</p>
+<p class="exemple"><b>示例：</b> 0.1：稍微延迟、平滑跟随的摄像机。</p>
+</div>
+<div class="fiche"><h3>相机抖动</h3>
+<div class="schema"><b>输入：</b> 强度, 持续时间（毫秒）</div>
+<p>按所选强度和时长（毫秒）晃动屏幕。</p>
+<p class="exemple"><b>示例：</b> 爆炸：强度 15，时长 400。</p>
+</div>
+<div class="fiche"><h3>振动</h3>
+<div class="schema"><b>输入：</b> 持续时间（毫秒）</div>
+<p>让手机振动所选时长（毫秒）。没有振动马达时不会有反应。</p>
+<p class="exemple"><b>示例：</b> 玩家受伤时振动 100 毫秒。</p>
+</div>
+<div class="fiche"><h3>保存状态</h3>
+<p>记住场景的状态（对象和变量）以及全局变量，就像存档点。</p>
+<p class="exemple"><b>示例：</b> 关卡中间的检查点旗帜。</p>
+</div>
+<div class="fiche"><h3>恢复状态</h3>
+<p>把场景恢复到上一次 “保存状态” 的样子。如果还没有存档，什么也不变。</p>
+<p class="exemple"><b>示例：</b> 掉下去后从检查点重新开始。</p>
+</div>
+</div>
+<h2 id="c3-时间">时间</h2>
+<div class="method">
+<div class="fiche"><h3>等待</h3>
+<div class="schema"><b>输入：</b> 时长（秒）</div>
+<p>等待所选的时间（秒），然后继续。等待期间游戏的其他部分照常运行。</p>
+<p class="exemple"><b>示例：</b> 显示“你输了！”，等待 2 秒，然后重新开始场景。</p>
+</div>
+<div class="fiche"><h3>重复</h3>
+<div class="schema"><b>输入：</b> 每隔（秒）, 次数（0 = 无限）, 计时器名称（可选） &nbsp;→&nbsp; <b>输出：</b> 立即 / 每次 / 完成</div>
+<p>每隔 X 秒运行一次 “每次” 输出，重复指定次数（0 = 无限），最后运行 “完成”。“立即” 在一开始就运行。如果它已经在运行，不会重复启动。</p>
+<p class="exemple"><b>示例：</b> 每 3 秒生成一个敌人。</p>
+</div>
+<div class="fiche"><h3>倒计时</h3>
+<div class="schema"><b>输入：</b> 对象, 变量, 起始值（可选）, 计时器名称（可选） &nbsp;→&nbsp; <b>输出：</b> 每秒 / 完成</div>
+<p>每秒把所选变量（数字）减 1，直到 0。每次计时运行 “每秒”，到 0 时运行 “完成”。“起始值（可选）” 设置起始值。</p>
+<p class="exemple"><b>示例：</b> 60 秒倒计时：到 0 时 Game Over。</p>
+</div>
+<div class="fiche"><h3>停止计时器</h3>
+<div class="schema"><b>输入：</b> 名称（留空 = 全部）</div>
+<p>停止这个名字的计时器（重复或倒计时）；名字为空时停止所有计时器。</p>
+<p class="exemple"><b>示例：</b> 玩家获胜时停止计时。</p>
+</div>
+<div class="fiche"><h3>游戏速度（慢动作）</h3>
+<div class="schema"><b>输入：</b> 速度（1 = 正常，0.5 = 慢）</div>
+<p>改变整个游戏的速度：1 = 正常，0.5 = 慢动作，2 = 加速（0 到 4）。</p>
+<p class="exemple"><b>示例：</b> 持续 2 秒的慢动作效果。</p>
+</div>
+<div class="fiche"><h3>暂停游戏</h3>
+<p>暂停游戏：移动和计时器都会停止。</p>
+<p class="exemple"><b>示例：</b> 打开暂停菜单。</p>
+</div>
+<div class="fiche"><h3>继续游戏</h3>
+<p>暂停后继续游戏。</p>
+<p class="exemple"><b>示例：</b> 暂停菜单里的“继续”按钮。</p>
+</div>
+</div>
+<h2 id="c4-外观与对象">外观与对象</h2>
+<div class="method">
+<div class="fiche"><h3>移动对象</h3>
+<div class="schema"><b>输入：</b> 对象, X, Y</div>
+<p>把对象直接放到位置 X, Y（瞬移）。</p>
+<p class="exemple"><b>示例：</b> 把玩家放回起点。</p>
+</div>
+<div class="fiche"><h3>推动对象</h3>
+<div class="schema"><b>输入：</b> 对象, 增加 X, 增加 Y</div>
+<p>让对象从当前位置移动指定的距离。有物理的对象会被墙挡住。</p>
+<p class="exemple"><b>示例：</b> 和 “按住物体” 连接：“增加 X” = 5 向右移动。</p>
+</div>
+<div class="fiche"><h3>修改属性</h3>
+<div class="schema"><b>输入：</b> 对象, 属性, 值</div>
+<p>修改对象的一个属性，从列表中选择（x、y、旋转、透明度、文本……）。</p>
+<p class="exemple"><b>示例：</b> 把指针的旋转设为 =temps * 90。</p>
+</div>
+<div class="fiche"><h3>旋转</h3>
+<div class="schema"><b>输入：</b> 对象, 角度（度）</div>
+<p>把对象转到指定角度（度）。</p>
+<p class="exemple"><b>示例：</b> =lunzi.rotation + 5 连接到 “每帧”，让“lunzi”对象一直旋转。</p>
+</div>
+<div class="fiche"><h3>修改不透明度 (Alpha)</h3>
+<div class="schema"><b>输入：</b> 对象, 不透明度（0到1）</div>
+<p>设置对象的透明度：0 = 看不见，1 = 不透明。</p>
+<p class="exemple"><b>示例：</b> 0.5：半透明的幽灵。</p>
+</div>
+<div class="fiche"><h3>可见性</h3>
+<div class="schema"><b>输入：</b> 对象, 可见（true / false）</div>
+<p>显示（true）或隐藏（false）对象。</p>
+<p class="exemple"><b>示例：</b> 显示一开始隐藏的“你赢了！”消息。</p>
+</div>
+<div class="fiche"><h3>设置标签</h3>
+<div class="schema"><b>输入：</b> 对象, 标签</div>
+<p>给对象一个新标签。</p>
+<p class="exemple"><b>示例：</b> 被打败的敌人获得标签“无害”。</p>
+</div>
+<div class="fiche"><h3>改变 Z 轴层级</h3>
+<div class="schema"><b>输入：</b> 对象, Z</div>
+<p>改变对象的图层：数字越大，对象越靠前。</p>
+<p class="exemple"><b>示例：</b> 让玩家显示在装饰物前面。</p>
+</div>
+<div class="fiche"><h3>设置大小 (缩放)</h3>
+<div class="schema"><b>输入：</b> 对象, Scale X, Scale Y</div>
+<p>改变对象的大小：1 = 正常，2 = 两倍大，0.5 = 一半。</p>
+<p class="exemple"><b>示例：</b> 玩家吃了蘑菇后变大。</p>
+</div>
+<div class="fiche"><h3>销毁对象</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>从场景中删除所选对象。</p>
+<p class="exemple"><b>示例：</b> 选择 “相关对象”，销毁玩家刚碰到的金币。</p>
+</div>
+<div class="fiche"><h3>按标签销毁</h3>
+<div class="schema"><b>输入：</b> 要销毁的标签</div>
+<p>删除所有带该标签的对象。</p>
+<p class="exemple"><b>示例：</b> 炸弹销毁所有“敌人”对象。</p>
+</div>
+<div class="fiche"><h3>更换图像</h3>
+<div class="schema"><b>输入：</b> 对象, 图像</div>
+<p>把对象的图片换成 Assets 里的另一张。留空 = 没有图片。</p>
+<p class="exemple"><b>示例：</b> 角色根据按下的按钮朝左或朝右看。</p>
+</div>
+<div class="fiche"><h3>修改颜色</h3>
+<div class="schema"><b>输入：</b> 对象, 颜色</div>
+<p>改变对象的颜色。</p>
+<p class="exemple"><b>示例：</b> 答案正确时按钮变绿。</p>
+</div>
+<div class="fiche"><h3>生成克隆 (生成器)</h3>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B</div>
+<p>在对象 A（出生点）的位置创建对象 B（模板）的副本。</p>
+<p class="exemple"><b>示例：</b> 大炮（A）发射炮弹（B）。</p>
+</div>
+<div class="fiche"><h3>颜色滤镜</h3>
+<div class="schema"><b>输入：</b> 对象, 滤镜</div>
+<p>给对象加滤镜：黑白、棕褐色、反色，或选“无”去掉滤镜。</p>
+<p class="exemple"><b>示例：</b> 回忆片段时切换成黑白。</p>
+</div>
+<div class="fiche"><h3>混合模式 (效果)</h3>
+<div class="schema"><b>输入：</b> 对象, 滤镜</div>
+<p>改变对象与背后内容的混合方式（叠加、正片叠底、滤色、反色）。</p>
+<p class="exemple"><b>示例：</b> 用“叠加”做发光的灯或火焰。</p>
+</div>
+<div class="fiche"><h3>镜像效果 / 翻转</h3>
+<div class="schema"><b>输入：</b> 对象, 轴</div>
+<p>翻转对象：水平（左 / 右）或垂直（上 / 下）。</p>
+<p class="exemple"><b>示例：</b> 角色面朝行走的方向。</p>
+</div>
+<div class="fiche"><h3>修改锁定状态</h3>
+<div class="schema"><b>输入：</b> 对象, 锁定（true / false）</div>
+<p>在编辑器中锁定或解锁对象（小锁图标）。在游戏中没有任何作用：要禁止拖动对象，请使用 “设为可拖动”。</p>
+</div>
+<div class="fiche"><h3>视差系数</h3>
+<div class="schema"><b>输入：</b> 对象, 系数（如 0.5）</div>
+<p>设置摄像机移动时对象的滚动速度：1 = 正常，0.5 = 慢一半（景深效果）。</p>
+<p class="exemple"><b>示例：</b> 背景里缓慢移动的山。</p>
+</div>
+<div class="fiche"><h3>链接两个对象</h3>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B</div>
+<p>把对象 A（子对象）绑到对象 B（父对象）上：B 移动时 A 跟着移动。</p>
+<p class="exemple"><b>示例：</b> 跟随角色手部的剑。</p>
+</div>
+<div class="fiche"><h3>发光 (Glow)</h3>
+<div class="schema"><b>输入：</b> 对象, 状态, 颜色</div>
+<p>打开或关闭对象周围的彩色光晕。</p>
+<p class="exemple"><b>示例：</b> 提示可以捡起的物品。</p>
+</div>
+<div class="fiche"><h3>闪烁 (Blink)</h3>
+<div class="schema"><b>输入：</b> 对象, 状态, 速度（毫秒）, 持续时间（毫秒，0 = 无限）</div>
+<p>让对象按所选速度（毫秒）闪烁一段时间（毫秒，0 = 一直闪），或停止闪烁。</p>
+<p class="exemple"><b>示例：</b> 玩家受伤后闪烁 1 秒。</p>
+</div>
+<div class="fiche"><h3>生成克隆（X/Y位置）</h3>
+<div class="schema"><b>输入：</b> 对象 B, X, Y</div>
+<p>在位置 X, Y 创建对象 B（模板）的副本。副本成为 “相关对象”。</p>
+<p class="exemple"><b>示例：</b> 在随机位置落下石头：X = random(0, 800)。</p>
+</div>
+<div class="fiche"><h3>发射对象</h3>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B, 模型名称, 方向, 速度</div>
+<p>在对象 A 处创建一个投射物（“模型名称” 里写的对象），并按所选速度发射：0°、90°、180°、270°、朝向对象 B（“朝向目标”）或按 A 的角度。</p>
+<p class="exemple"><b>示例：</b> 向上发射激光的飞船（270）。</p>
+</div>
+<div class="fiche"><h3>设置进度</h3>
+<div class="schema"><b>输入：</b> 对象, 新进度</div>
+<p>设置进度条的填充量，介于最小值和最大值之间。</p>
+<p class="exemple"><b>示例：</b> “新进度” = vie，用于生命条。</p>
+</div>
+<div class="fiche"><h3>屏幕穿透</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>从屏幕一边出去的东西会从另一边回来（吃豆人效果）。</p>
+<p class="exemple"><b>示例：</b> 从右边飞出、又从左边回来的小行星。</p>
+</div>
+<div class="fiche"><h3>保持在屏幕内</h3>
+<div class="schema"><b>输入：</b> 对象, 边距</div>
+<p>不让对象离开屏幕。边距会让它在边缘前一点停下。</p>
+<p class="exemple"><b>示例：</b> 玩家的飞船始终可见。</p>
+</div>
+<div class="fiche"><h3>创建对象</h3>
+<div class="schema"><b>输入：</b> 对象, X 位置, Y 位置</div>
+<p>在位置 X, Y 创建所选对象（模板）的副本。</p>
+<p class="exemple"><b>示例：</b> 在指定位置放一个箱子。</p>
+</div>
+<div class="fiche"><h3>淡入淡出</h3>
+<div class="schema"><b>输入：</b> 对象, 目标不透明度（0 到 1）, 持续时间（秒）</div>
+<p>在所选时间（秒）内，把对象的透明度平滑地变到目标值。后面的节点不会等待。</p>
+<p class="exemple"><b>示例：</b> 1 秒内淡出标题（目标透明度 0）。</p>
+</div>
+</div>
+<h2 id="c5-变量与背包">变量与背包</h2>
+<div class="method">
+<div class="fiche"><h3>修改变量</h3>
+<div class="schema"><b>输入：</b> 对象, 变量, 值</div>
+<p>给变量一个新值（数字、文本、true / false 或计算结果）。</p>
+<p class="exemple"><b>示例：</b> 把“score”重置为 0。</p>
+</div>
+<div class="fiche"><h3>增加变量值</h3>
+<div class="schema"><b>输入：</b> 对象, 变量, 要增加的值</div>
+<p>把数值加到变量上（负数就是减）。文本变量会把文字加到末尾。</p>
+<p class="exemple"><b>示例：</b> 每个金币 score + 1，每次受伤生命 - 1。</p>
+</div>
+<div class="fiche"><h3>限制值 (Clamp)</h3>
+<div class="schema"><b>输入：</b> 对象, 变量, 最小值, 最大值</div>
+<p>让变量（数字）保持在最小值和最大值之间。</p>
+<p class="exemple"><b>示例：</b> 生命值永远不超过 100。</p>
+</div>
+<div class="fiche"><h3>随机数</h3>
+<div class="schema"><b>输入：</b> 对象, 变量, 值：random(min, max)</div>
+<p>把一个随机数放进变量。random(1, 6) 得到 1 到 6 之间的数。</p>
+<p class="exemple"><b>示例：</b> 掷骰子。</p>
+</div>
+<div class="fiche"><h3>加入物品栏</h3>
+<div class="schema"><b>输入：</b> 对象, 变量</div>
+<p>把对象放进物品栏（类型为“物品栏列表”的变量）。同一个对象只会加入一次。</p>
+<p class="exemple"><b>示例：</b> 捡起钥匙。</p>
+</div>
+<div class="fiche"><h3>从物品栏移除</h3>
+<div class="schema"><b>输入：</b> 对象, 变量</div>
+<p>把对象从物品栏中移除。</p>
+<p class="exemple"><b>示例：</b> 用钥匙开门。</p>
+</div>
+<div class="fiche"><h3>如果在物品栏中</h3>
+<div class="schema"><b>输入：</b> 对象, 变量 &nbsp;→&nbsp; <b>输出：</b> 真 / 假 / 然后</div>
+<p>对象在物品栏里时走 “真” 输出，否则走 “假”。</p>
+<p class="exemple"><b>示例：</b> 只有钥匙在物品栏里时门才会打开。</p>
+</div>
+<div class="fiche"><h3>组合对象</h3>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B, 结果对象名称</div>
+<p>用你写下名字的那个对象的副本，替换对象 A 和 B，放在 A 的位置。如果这个模板不存在，什么也不变。</p>
+<p class="exemple"><b>示例：</b> 木棍 + 布 = 火把。</p>
+</div>
+</div>
+<h2 id="c6-逻辑与条件">逻辑与条件</h2>
+<div class="method">
+<div class="fiche"><h3>条件</h3>
+<div class="schema"><b>输入：</b> 条件 &nbsp;→&nbsp; <b>输出：</b> 真 / 假 / 然后</div>
+<p>检查一个条件：成立时走 “真”，否则走 “假”。之后两种情况都会运行 “然后”。</p>
+<p class="exemple"><b>示例：</b> score &gt;= 10 → 真 → 下一个场景。</p>
+</div>
+<div class="fiche"><h3>如果摇杆</h3>
+<div class="schema"><b>输出：</b> 上 / 下 / 左 / 右 / 静止 / 然后</div>
+<p>根据摇杆方向走对应的输出：“上”、“下”、“左”、“右”，没碰摇杆时走 “静止”。</p>
+<p class="exemple"><b>示例：</b> 连接到 “每帧”，朝正确方向播放行走动画。</p>
+</div>
+<div class="fiche"><h3>如果在地面</h3>
+<div class="schema"><b>输入：</b> 对象 &nbsp;→&nbsp; <b>输出：</b> 真 / 假 / 然后</div>
+<p>对象底部站在固定且可见的对象（地面、平台）上时为 “真”，否则为 “假”。</p>
+<p class="exemple"><b>示例：</b> 只允许玩家在地面上时跳跃。</p>
+</div>
+<div class="fiche"><h3>如果在移动</h3>
+<div class="schema"><b>输入：</b> 对象 &nbsp;→&nbsp; <b>输出：</b> 真 / 假 / 然后</div>
+<p>对象从上一帧起移动过时为 “真”，否则为 “假”。</p>
+<p class="exemple"><b>示例：</b> 只在角色移动时播放行走动画。</p>
+</div>
+<div class="fiche"><h3>调用函数</h3>
+<div class="schema"><b>输入：</b> 函数</div>
+<p>运行一个函数（在“函数”区域里创建的 Blueprint），然后继续。不要放在 “每帧” 下面。</p>
+<p class="exemple"><b>示例：</b> 多个敌人共用的“扣血”函数。</p>
+</div>
+<div class="fiche"><h3>调用事件</h3>
+<div class="schema"><b>输入：</b> 事件名称</div>
+<p>运行同一个 Blueprint 里这个名字的 “本地事件”，然后继续。</p>
+<p class="exemple"><b>示例：</b> 从掉落和计时两个地方调用“GameOver”。</p>
+</div>
+<div class="fiche"><h3>顺序</h3>
+<div class="schema"><b>输出：</b> 1 / 2 / 3 / 4</div>
+<p>按顺序依次运行它的输出：1，然后 2，然后 3，然后 4。没有连线的输出会被跳过。</p>
+<p class="exemple"><b>示例：</b> 开始时：1 = 放置玩家，2 = 播放音乐，3 = 显示分数。</p>
+</div>
+<div class="fiche"><h3>冷却</h3>
+<div class="schema"><b>输入：</b> 对象, 延迟（秒） &nbsp;→&nbsp; <b>输出：</b> 就绪 / 还没</div>
+<p>每个间隔（秒）内最多从 “就绪” 通过一次；否则走 “还没”。选择了对象时，每个对象有自己的间隔。</p>
+<p class="exemple"><b>示例：</b> 最多每 0.5 秒射击一次。</p>
+</div>
+<div class="fiche"><h3>如果在屏幕外</h3>
+<div class="schema"><b>输入：</b> 对象, 边距（像素） &nbsp;→&nbsp; <b>输出：</b> 真 / 假 / 然后</div>
+<p>对象完全离开屏幕（加上边距）时为 “真”，否则为 “假”。</p>
+<p class="exemple"><b>示例：</b> 销毁飞出屏幕的子弹。</p>
+</div>
+<div class="fiche"><h3>如果 / 否则</h3>
+<div class="schema"><b>输入：</b> 如果（条件）, 否则如果（条件） &nbsp;→&nbsp; <b>输出：</b> 如果 / 否则如果 / 否则 / 然后</div>
+<p>先检查第一个条件，再检查第二个：走 “如果”、“否则如果” 或 “否则”。之后运行 “然后”。</p>
+<p class="exemple"><b>示例：</b> 如果 score &gt;= 100 → 金牌，否则如果 score &gt;= 50 → 银牌，否则 → 铜牌。</p>
+</div>
+<div class="fiche"><h3>按值</h3>
+<div class="schema"><b>输入：</b> 要检测的值, 情况 1, 情况 2, 情况 3, 情况 4, 情况 5, 情况 6 &nbsp;→&nbsp; <b>输出：</b> 1 / 2 / 3 / 4 / 5 / 6 / 无 / 然后</div>
+<p>把要测试的值依次和情况 1 到 6 比较，走第一个相同情况的输出；都不相同时走 “无”。空着的情况会被跳过。</p>
+<p class="exemple"><b>示例：</b> 根据“武器”：1 = 剑，2 = 弓，3 = 魔杖。</p>
+</div>
+</div>
+<h2 id="c7-文本与对话">文本与对话</h2>
+<div class="method">
+<div class="fiche"><h3>修改文本</h3>
+<div class="schema"><b>输入：</b> 对象, 新文本</div>
+<p>替换文本对象的文字。以 = 开头可以显示计算结果。</p>
+<p class="exemple"><b>示例：</b> ="分数：" + score</p>
+</div>
+<div class="fiche"><h3>显示对话</h3>
+<div class="schema"><b>输入：</b> 对象, 对话键</div>
+<p>从对话文件（dialogues.txt）中找到这个键对应的句子，写进文本对象。</p>
+<p class="exemple"><b>示例：</b> 键“nihao_shangren”显示商人的台词。</p>
+</div>
+<div class="fiche"><h3>追加到文本</h3>
+<div class="schema"><b>输入：</b> 对象, 变量, 要追加的文本</div>
+<p>把文字加到文本类型变量的末尾。</p>
+<p class="exemple"><b>示例：</b> 一个字母一个字母地输入密码。</p>
+</div>
+</div>
+<h2 id="c8-移动与-ai">移动与 AI</h2>
+<div class="method">
+<div class="fiche"><h3>停止对象</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>让对象立刻停下：不再有速度、推力、跳跃或自动移动。</p>
+<p class="exemple"><b>示例：</b> 冻住被冰冻法术击中的敌人。</p>
+</div>
+<div class="fiche"><h3>停止移动</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>关闭对象的自动移动：持续前进、追逐和逃跑。</p>
+<p class="exemple"><b>示例：</b> 玩家躲起来时，敌人停止追逐。</p>
+</div>
+<div class="fiche"><h3>持续前进</h3>
+<div class="schema"><b>输入：</b> 对象, 速度</div>
+<p>对象按所选速度，朝它面对的方向自动前进。</p>
+<p class="exemple"><b>示例：</b> 子弹或行驶中的汽车。</p>
+</div>
+<div class="fiche"><h3>追踪对象</h3>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B, 速度</div>
+<p>对象 A 按所选速度自动朝对象 B 移动。</p>
+<p class="exemple"><b>示例：</b> 跟着玩家的幽灵。</p>
+</div>
+<div class="fiche"><h3>躲避对象</h3>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B, 速度</div>
+<p>对象 A 按所选速度自动远离对象 B。</p>
+<p class="exemple"><b>示例：</b> 躲着玩家跑的小鸡。</p>
+</div>
+<div class="fiche"><h3>设置弹跳</h3>
+<div class="schema"><b>输入：</b> 对象, 弹跳（0 到 1）</div>
+<p>设置物理对象的弹性：0 = 不弹，1 = 弹得很高。</p>
+<p class="exemple"><b>示例：</b> 0.8：弹力球。</p>
+</div>
+<div class="fiche"><h3>按角度推动</h3>
+<div class="schema"><b>输入：</b> 对象, 角度（0 = 右，90 = 下）, 力度</div>
+<p>按所选力度，把对象朝某个方向推（角度：0 = 右，90 = 下，180 = 左，270 = 上）。</p>
+<p class="exemple"><b>示例：</b> 把玩家斜着弹出去的弹簧。</p>
+</div>
+<div class="fiche"><h3>冲力（跳跃）</h3>
+<div class="schema"><b>输入：</b> 对象, 垂直力（负数 = 向上）</div>
+<p>把对象向上（负数）或向下（正数）弹出，并给它物理效果让它落回来。</p>
+<p class="exemple"><b>示例：</b> 跳跃：力度 -15。</p>
+</div>
+<div class="fiche"><h3>启用物理</h3>
+<div class="schema"><b>输入：</b> 对象, 会下落（true / false）</div>
+<p>给对象加上物理：true 时会随重力下落；false 时像地面一样固定不动。</p>
+<p class="exemple"><b>示例：</b> 有人站上去就会塌掉的平台。</p>
+</div>
+<div class="fiche"><h3>设为可拖动</h3>
+<div class="schema"><b>输入：</b> 对象, 可用手指拖动（true / false）</div>
+<p>允许（true）或禁止（false）在游戏中用手指拖动对象。</p>
+<p class="exemple"><b>示例：</b> 锁住已经放对位置的拼图块。</p>
+</div>
+<div class="fiche"><h3>蹦跳</h3>
+<div class="schema"><b>输入：</b> 对象, 强度（0 = 停止）, 持续时间（毫秒）, 移动时持续（true / false）</div>
+<p>让对象按所选强度和时长蹦跳（小小的视觉弹跳）。0 表示停止。可以设置成对象移动时一直蹦跳。</p>
+<p class="exemple"><b>示例：</b> 走路时一蹦一跳的角色。</p>
+</div>
+<div class="fiche"><h3>朝向</h3>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B, 角度偏移（度）</div>
+<p>让对象 A 转向对象 B。角度偏移用来修正图片朝向（0 = 图片朝右）。</p>
+<p class="exemple"><b>示例：</b> 瞄准玩家的炮塔。</p>
+</div>
+<div class="fiche"><h3>滑向</h3>
+<div class="schema"><b>输入：</b> 对象, X 位置, Y 位置, 持续时间（秒）</div>
+<p>在所选时间（秒）内把对象平滑地移动到位置 X, Y。后面的节点不会等待。</p>
+<p class="exemple"><b>示例：</b> 移动的平台，或滑入屏幕的菜单。</p>
+</div>
+</div>
+<h2 id="c9-动画">动画</h2>
+<div class="method">
+<div class="fiche"><h3>播放动画</h3>
+<div class="schema"><b>输入：</b> 对象, 动画, 速度（帧/秒）, 循环（true / false）</div>
+<p>按所选速度（每秒帧数）播放对象的某个动画，可以循环或只播一次。如果已经在播放，就继续播而不重新开始。</p>
+<p class="exemple"><b>示例：</b> 角色前进时播放“行走”动画。</p>
+</div>
+<div class="fiche"><h3>停止动画</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>停止动画并回到它的第一帧。</p>
+<p class="exemple"><b>示例：</b> 角色停止行走。</p>
+</div>
+<div class="fiche"><h3>暂停动画</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>把动画暂停在当前帧。</p>
+<p class="exemple"><b>示例：</b> 暂停时让角色定住。</p>
+</div>
+<div class="fiche"><h3>继续动画</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>从暂停的地方继续播放动画。</p>
+<p class="exemple"><b>示例：</b> 暂停结束后。</p>
+</div>
+<div class="fiche"><h3>动画速度</h3>
+<div class="schema"><b>输入：</b> 对象, 速度（帧/秒）</div>
+<p>改变动画速度（每秒帧数），不会重新开始播放。</p>
+<p class="exemple"><b>示例：</b> 跑得越快 = 动画越快。</p>
+</div>
+</div>
+<h2 id="c10-音频">音频</h2>
+<div class="method">
+<div class="fiche"><h3>播放音效</h3>
+<div class="schema"><b>输入：</b> 音效文件</div>
+<p>播放一个音效。可以同时播放多个音效。</p>
+<p class="exemple"><b>示例：</b> 捡到金币时的“叮”声。</p>
+</div>
+<div class="fiche"><h3>播放音乐</h3>
+<div class="schema"><b>输入：</b> 音乐文件, 循环（true / false）</div>
+<p>播放一段音乐，替换当前的音乐。不要放在 “每帧” 下面（它会不停地从头开始）。</p>
+<p class="exemple"><b>示例：</b> 开始时播放关卡音乐。</p>
+</div>
+<div class="fiche"><h3>停止音乐</h3>
+<p>停止当前的音乐。</p>
+<p class="exemple"><b>示例：</b> Game Over 画面保持安静。</p>
+</div>
+</div>
+<div class="liens-bas">
+<a href="../guides/zh/deplacer-personnage.html">新手教程 →</a>
+<a href="https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk">⬇️ 下载 Yop2D</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../index.html">官方网站</a></p>
+</footer>
+</body>
+</html>
