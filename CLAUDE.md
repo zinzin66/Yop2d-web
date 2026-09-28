@@ -110,6 +110,10 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   « Afficher un dialogue » (dialogues en plusieurs langues : `cle.fr = ...`, variable `langue`).
   Nouvel exemple du moteur « Lost on the moon » (quiz angoissant en 9 langues). L'utilisateur
   prévoit 1 ou 2 exemples de plus avant de publier une nouvelle version du moteur.
+- 29/09/2026 : nœuds « Électrocution » et « Limites de la caméra » (127 nœuds) ; accueil : 5 exemples
+  (Neon shooter, Neon jump, Lost on the moon, Effects showcase, Parallaxe), carte « Jeux en plusieurs
+  langues », cartes particules et caméra mises à jour ; guide particules-effets : étape 4 (électrocution,
+  arrêt sur image) et renvoi vers l'exemple Effects showcase. Moteur validé : build 921.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers

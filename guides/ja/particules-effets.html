@@ -62,7 +62,7 @@
 <b>用意するもの：</b>
 <ul><li>動くゲームと、移動できる <strong>player</strong> という名前のキャラクター；</li><li>タグ <strong>ennemi</strong> のついた敵。</li></ul>
 </div>
-<div class="tip">👉 これらのエフェクトの実際の動きを見るには、Yop2D のホーム画面でサンプル <strong>Neon shooter</strong> を開いてください。</div>
+<div class="tip">👉 これらのエフェクトを実際に見るには、Yop2D のホーム画面で例 <strong>Effects showcase</strong> を開こう。エフェクトごとにボタンがあり、使うノードの名前も表示されます。</div>
 <h2>ステップ 1：敵に触れたら爆発</h2>
 <div class="method">
 <ol><li>シーンの <strong>ブループリント</strong> を開きます。</li><li>イベント <strong>「オブジェクトがタグに触れた場合」</strong> を追加：対象 <strong>player</strong>、タグ <strong>ennemi</strong>。</li><li><strong>「パーティクル効果」</strong> を追加します。対象には <strong>イベントに関与するオブジェクト</strong> を選びます。プレイヤーが今触れた敵のことです。プリセット：<strong>爆発</strong>。</li><li><strong>「オブジェクトを破壊」</strong> を追加し、対象は同じく <strong>イベントに関与するオブジェクト</strong> にします。</li><li>3 つのノードを順番につなぎ、ゲームを始めて敵に触れてみましょう。敵は爆発してから消えます。</li></ol>
@@ -101,6 +101,8 @@
 </div>
 <div class="tip">👉 色合いと周辺減光は <strong>HUD の下</strong>にかかるので、スコアやボタンは読みやすいままです。フラッシュとフェードは画面全体を覆います。</div>
 </div>
+<h2>ステップ4：感電とヒットストップ</h2>
+<ul><li><strong>「感電」</strong>：オブジェクトのまわりで稲妻がはじけ、点滅して震えます。時間 <strong>0</strong> = 無限：プレイヤーに危険を知らせる電気の罠にぴったり。</li><li><strong>「ヒットストップ」</strong>：衝突の瞬間にごく短いスローモーション（0.08秒）を入れると、爆発に迫力が出ます。</li></ul>
 <h2>うまくいかないとき</h2>
 <ul><li><strong>爆発が出ない：</strong> 「パーティクル効果」 が 「オブジェクトを破壊」 の<strong>前</strong>にあるか確認します。</li><li><strong>軌跡がキャラクターについてこない：</strong> パーティクル オブジェクトの親が <strong>player</strong> になっているか、ゲーム開始時から有効 にチェックが入っているか確認します。</li><li><strong>パーティクルの色が違う：</strong> 色「なし」はプリセットの色のままです。色を変えるには本当の色を選びます。</li><li><strong>画面が黒いまま：</strong> 「画面フェード」 フェードアウト（色へ） のあとには、「画面フェード」 フェードイン（色から） が必要です。</li></ul>
 

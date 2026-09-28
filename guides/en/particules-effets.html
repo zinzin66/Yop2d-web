@@ -62,7 +62,7 @@
 <b>You need:</b>
 <ul><li>a working game, with a character named <strong>player</strong> that can move;</li><li>enemies with the tag <strong>ennemi</strong>.</li></ul>
 </div>
-<div class="tip">👉 To see all these effects in action, open the <strong>Neon shooter</strong> example on the Yop2D home screen.</div>
+<div class="tip">👉 To see all these effects in action, open the <strong>Effects showcase</strong> example on the Yop2D home screen: one button per effect, with the name of the node to use.</div>
 <h2>Step 1: an explosion when you touch an enemy</h2>
 <div class="method">
 <ol><li>Open the scene's <strong>Blueprint</strong>.</li><li>Add the <strong>“If object touches Tag”</strong> event: target <strong>player</strong>, Tag <strong>ennemi</strong>.</li><li>Add <strong>“Particle effect”</strong>. As the target, choose <strong>The object involved in the event</strong>: it is the enemy the player just touched. Preset: <strong>Explosion</strong>.</li><li>Add <strong>“Destroy Object”</strong>, with the same target <strong>The object involved in the event</strong>.</li><li>Link the three nodes in order, then start the game and touch an enemy: it explodes before disappearing.</li></ol>
@@ -101,6 +101,8 @@
 </div>
 <div class="tip">👉 The tint and the vignette stay <strong>under the HUD</strong>: the score and the buttons stay easy to read. The flash and the fade cover the whole screen.</div>
 </div>
+<h2>Step 4: electrocution and hit stop</h2>
+<ul><li><strong>“Electrocution”</strong>: lightning crackles around an object, which flashes and shakes. Duration <strong>0</strong> = endless: perfect for an electric trap that warns the player.</li><li><strong>“Hit stop”</strong>: a very short slow-motion (0.08 seconds) at the moment of impact gives an explosion a lot of punch.</li></ul>
 <h2>If it doesn't work</h2>
 <ul><li><strong>The explosion doesn't show:</strong> check that “Particle effect” is placed <strong>before</strong> “Destroy Object”.</li><li><strong>The trail doesn't follow the character:</strong> check that the Particles object has <strong>player</strong> as its parent, and that Active when the game starts is checked.</li><li><strong>The particles have the wrong color:</strong> the color “None” keeps the preset colors; choose a real color to change them.</li><li><strong>The screen stays black:</strong> after a “Screen fade” Fade out (to the color), you need a “Screen fade” Fade in (from the color).</li></ul>
 

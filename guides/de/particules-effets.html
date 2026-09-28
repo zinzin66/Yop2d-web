@@ -62,7 +62,7 @@
 <b>Du brauchst:</b>
 <ul><li>ein funktionierendes Spiel mit einer Figur namens <strong>player</strong>, die sich bewegen kann;</li><li>Gegner mit dem Tag <strong>ennemi</strong>.</li></ul>
 </div>
-<div class="tip">👉 Um alle diese Effekte in Aktion zu sehen, öffne das Beispiel <strong>Neon shooter</strong> auf dem Startbildschirm von Yop2D.</div>
+<div class="tip">👉 Um alle diese Effekte in Aktion zu sehen, öffne das Beispiel <strong>Effects showcase</strong> auf dem Startbildschirm von Yop2D: eine Taste pro Effekt, mit dem Namen des passenden Knotens.</div>
 <h2>Schritt 1: eine Explosion, wenn man einen Gegner berührt</h2>
 <div class="method">
 <ol><li>Öffne den <strong>Blueprint</strong> der Szene.</li><li>Füge das Ereignis <strong>„Wenn Objekt Tag berührt“</strong> hinzu: Ziel <strong>player</strong>, Tag <strong>ennemi</strong>.</li><li>Füge <strong>„Partikeleffekt“</strong> hinzu. Wähle als Ziel <strong>Das beteiligte Objekt</strong>: Das ist der Gegner, den der Spieler gerade berührt hat. Vorlage: <strong>Explosion</strong>.</li><li>Füge <strong>„Objekt zerstören“</strong> hinzu, mit demselben Ziel <strong>Das beteiligte Objekt</strong>.</li><li>Verbinde die drei Nodes der Reihe nach, starte dann das Spiel und berühre einen Gegner: Er explodiert, bevor er verschwindet.</li></ol>
@@ -101,6 +101,8 @@
 </div>
 <div class="tip">👉 Tönung und abgedunkelte Ränder bleiben <strong>unter dem HUD</strong>: Punkte und Knöpfe bleiben gut lesbar. Blitz und Überblendung bedecken den ganzen Bildschirm.</div>
 </div>
+<h2>Schritt 4: Stromschlag und Treffer-Standbild</h2>
+<ul><li><strong>„Stromschlag“</strong>: Blitze knistern um ein Objekt, das blinkt und zittert. Dauer <strong>0</strong> = endlos: ideal für eine elektrische Falle, die den Spieler warnt.</li><li><strong>„Trefferstopp“</strong>: eine sehr kurze Zeitlupe (0,08 Sekunden) im Moment des Treffers gibt einer Explosion richtig Wucht.</li></ul>
 <h2>Wenn es nicht funktioniert</h2>
 <ul><li><strong>Die Explosion erscheint nicht:</strong> Prüfe, dass „Partikeleffekt“ <strong>vor</strong> „Objekt zerstören“ steht.</li><li><strong>Der Schweif folgt der Figur nicht:</strong> Prüfe, dass das Partikel-Objekt <strong>player</strong> als Eltern-Objekt hat und dass Aktiv ab Spielbeginn angehakt ist.</li><li><strong>Die Partikel haben die falsche Farbe:</strong> Die Farbe „Keine“ behält die Farben der Vorlage; wähle eine echte Farbe, um sie zu ändern.</li><li><strong>Der Bildschirm bleibt schwarz:</strong> Nach einem „Bildschirmüberblendung“ Ausblenden (zur Farbe) braucht es ein „Bildschirmüberblendung“ Einblenden (aus der Farbe).</li></ul>
 

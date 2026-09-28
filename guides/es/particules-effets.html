@@ -62,7 +62,7 @@
 <b>Necesitas:</b>
 <ul><li>un juego que funcione, con un personaje llamado <strong>player</strong> que pueda moverse;</li><li>enemigos con la etiqueta <strong>ennemi</strong>.</li></ul>
 </div>
-<div class="tip">👉 Para ver todos estos efectos en acción, abre el ejemplo <strong>Neon shooter</strong> en la pantalla de inicio de Yop2D.</div>
+<div class="tip">👉 Para ver todos estos efectos en acción, abre el ejemplo <strong>Effects showcase</strong> en la pantalla de inicio de Yop2D: un botón por efecto, con el nombre del nodo que hay que usar.</div>
 <h2>Paso 1: una explosión al tocar a un enemigo</h2>
 <div class="method">
 <ol><li>Abre el <strong>Blueprint</strong> de la escena.</li><li>Añade el evento <strong>«Si el objeto toca el Tag»</strong>: objetivo <strong>player</strong>, Tag <strong>ennemi</strong>.</li><li>Añade <strong>«Efecto de partículas»</strong>. Como objetivo, elige <strong>El objeto implicado en el evento</strong>: es el enemigo que el jugador acaba de tocar. Modelo: <strong>Explosión</strong>.</li><li>Añade <strong>«Destruir Objeto»</strong>, con el mismo objetivo <strong>El objeto implicado en el evento</strong>.</li><li>Conecta los tres nodos en orden, luego inicia el juego y toca a un enemigo: explota antes de desaparecer.</li></ol>
@@ -101,6 +101,8 @@
 </div>
 <div class="tip">👉 El tinte y los bordes oscurecidos quedan <strong>debajo del HUD</strong>: la puntuación y los botones se leen bien. El destello y el fundido cubren toda la pantalla.</div>
 </div>
+<h2>Paso 4: electrocución y congelado de imagen</h2>
+<ul><li><strong>«Electrocución»</strong>: rayos chisporrotean alrededor de un objeto, que parpadea y tiembla. Duración <strong>0</strong> = sin fin: perfecto para una trampa eléctrica que avisa al jugador.</li><li><strong>«Pausa de impacto»</strong>: una cámara lenta muy corta (0,08 segundos) en el momento del impacto da mucha fuerza a una explosión.</li></ul>
 <h2>Si no funciona</h2>
 <ul><li><strong>La explosión no aparece:</strong> comprueba que «Efecto de partículas» esté <strong>antes</strong> de «Destruir Objeto».</li><li><strong>La estela no sigue al personaje:</strong> comprueba que el objeto Partículas tenga a <strong>player</strong> como padre y que la casilla Activo desde el inicio del juego esté marcada.</li><li><strong>Las partículas no tienen el color correcto:</strong> el color «Ninguno» mantiene los colores del modelo; elige un color real para cambiarlos.</li><li><strong>La pantalla se queda negra:</strong> después de un «Fundido de pantalla» Desaparecer (hacia el color), hace falta un «Fundido de pantalla» Aparecer (desde el color).</li></ul>
 

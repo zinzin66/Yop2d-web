@@ -62,7 +62,7 @@
 <b>Ti serve:</b>
 <ul><li>un gioco che funziona, con un personaggio chiamato <strong>player</strong> che può muoversi;</li><li>nemici con il tag <strong>ennemi</strong>.</li></ul>
 </div>
-<div class="tip">👉 Per vedere tutti questi effetti in azione, apri l'esempio <strong>Neon shooter</strong> nella schermata iniziale di Yop2D.</div>
+<div class="tip">👉 Per vedere tutti questi effetti in azione, apri l'esempio <strong>Effects showcase</strong> nella schermata iniziale di Yop2D: un pulsante per effetto, con il nome del nodo da usare.</div>
 <h2>Passo 1: un'esplosione quando tocchi un nemico</h2>
 <div class="method">
 <ol><li>Apri il <strong>Blueprint</strong> della scena.</li><li>Aggiungi l'evento <strong>«Se l'oggetto tocca il Tag»</strong>: bersaglio <strong>player</strong>, Tag <strong>ennemi</strong>.</li><li>Aggiungi <strong>«Effetto particellare»</strong>. Come bersaglio scegli <strong>L'oggetto implicato nell'evento</strong>: è il nemico appena toccato dal giocatore. Modello: <strong>Esplosione</strong>.</li><li>Aggiungi <strong>«Distruggi Oggetto»</strong>, con lo stesso bersaglio <strong>L'oggetto implicato nell'evento</strong>.</li><li>Collega i tre nodi in ordine, poi avvia il gioco e tocca un nemico: esplode prima di sparire.</li></ol>
@@ -101,6 +101,8 @@
 </div>
 <div class="tip">👉 La tinta e i bordi scuriti restano <strong>sotto l'HUD</strong>: il punteggio e i pulsanti restano ben leggibili. Il flash e la dissolvenza coprono tutto lo schermo.</div>
 </div>
+<h2>Passo 4: folgorazione e fermo immagine</h2>
+<ul><li><strong>«Folgorazione»</strong>: fulmini crepitano intorno a un oggetto, che lampeggia e trema. Durata <strong>0</strong> = infinita: perfetto per una trappola elettrica che avvisa il giocatore.</li><li><strong>«Pausa d'impatto»</strong>: un rallentatore brevissimo (0,08 secondi) al momento dell'impatto dà molta potenza a un'esplosione.</li></ul>
 <h2>Se non funziona</h2>
 <ul><li><strong>L'esplosione non appare:</strong> controlla che «Effetto particellare» sia <strong>prima</strong> di «Distruggi Oggetto».</li><li><strong>La scia non segue il personaggio:</strong> controlla che l'oggetto Particelle abbia <strong>player</strong> come genitore e che la casella Attivo dall'inizio del gioco sia spuntata.</li><li><strong>Le particelle hanno il colore sbagliato:</strong> il colore «Nessuno» mantiene i colori del modello; scegli un colore vero per cambiarli.</li><li><strong>Lo schermo resta nero:</strong> dopo un «Dissolvenza dello schermo» Scomparire (verso il colore), serve un «Dissolvenza dello schermo» Apparire (dal colore).</li></ul>
 

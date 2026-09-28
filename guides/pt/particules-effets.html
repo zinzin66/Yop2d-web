@@ -62,7 +62,7 @@
 <b>Você precisa de:</b>
 <ul><li>um jogo que funcione, com um personagem chamado <strong>player</strong> que pode se mover;</li><li>inimigos com a tag <strong>ennemi</strong>.</li></ul>
 </div>
-<div class="tip">👉 Para ver todos esses efeitos em ação, abra o exemplo <strong>Neon shooter</strong> na tela inicial do Yop2D.</div>
+<div class="tip">👉 Para ver todos estes efeitos em ação, abra o exemplo <strong>Effects showcase</strong> no ecrã inicial do Yop2D: um botão por efeito, com o nome do nó a usar.</div>
 <h2>Passo 1: uma explosão ao tocar um inimigo</h2>
 <div class="method">
 <ol><li>Abra o <strong>Blueprint</strong> da cena.</li><li>Adicione o evento <strong>“Se o objeto tocar no Tag”</strong>: alvo <strong>player</strong>, Tag <strong>ennemi</strong>.</li><li>Adicione <strong>“Efeito de partículas”</strong>. Como alvo, escolha <strong>O objeto implicado no evento</strong>: é o inimigo que o jogador acabou de tocar. Modelo: <strong>Explosão</strong>.</li><li>Adicione <strong>“Destruir Objeto”</strong>, com o mesmo alvo <strong>O objeto implicado no evento</strong>.</li><li>Ligue os três nós em ordem, depois inicie o jogo e toque um inimigo: ele explode antes de sumir.</li></ol>
@@ -101,6 +101,8 @@
 </div>
 <div class="tip">👉 A tonalidade e as bordas escurecidas ficam <strong>abaixo do HUD</strong>: a pontuação e os botões continuam fáceis de ler. O flash e o esmaecimento cobrem a tela inteira.</div>
 </div>
+<h2>Passo 4: eletrocussão e congelamento de imagem</h2>
+<ul><li><strong>“Eletrocussão”</strong>: raios estalam em volta de um objeto, que pisca e treme. Duração <strong>0</strong> = sem fim: perfeito para uma armadilha elétrica que avisa o jogador.</li><li><strong>“Pausa de impacto”</strong>: uma câmara lenta muito curta (0,08 segundos) no momento do impacto dá muita força a uma explosão.</li></ul>
 <h2>Se não funcionar</h2>
 <ul><li><strong>A explosão não aparece:</strong> verifique se “Efeito de partículas” está <strong>antes</strong> de “Destruir Objeto”.</li><li><strong>O rastro não segue o personagem:</strong> verifique se o objeto Partículas tem <strong>player</strong> como pai e se Ativo desde o início do jogo está marcado.</li><li><strong>As partículas estão com a cor errada:</strong> a cor “Nenhuma” mantém as cores do modelo; escolha uma cor de verdade para mudá-las.</li><li><strong>A tela fica preta:</strong> depois de um “Esmaecimento da tela” Desaparecer (para a cor), é preciso um “Esmaecimento da tela” Aparecer (a partir da cor).</li></ul>
 
