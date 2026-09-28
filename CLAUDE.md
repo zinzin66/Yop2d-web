@@ -14,7 +14,19 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
   l'utilisateur la valide avec « Merge ». Le site est à jour 1 à 2 minutes après.
 
 ## Pages
-- `index.html` : accueil. `testeur.html` : page testeurs en 9 langues, **générée**
+- Accueil (présentation, comparatif avec d'autres moteurs, FAQ) en 9 langues,
+  **généré** par `python3 outils/generer_accueil.py` depuis `outils/accueil/<langue>.json`.
+  Anglais : `index.html` (racine) ; autres : `<langue>/index.html` (ex. `/fr/`).
+  Dans les textes, `@/` = racine du site. La racine envoie vers `/<langue>/` si
+  `?lang=xx` ou si le visiteur a déjà choisi une langue (clé `yop2d-langue`),
+  sinon propose la langue du téléphone dans un bandeau. Captures : liste `IMAGES`
+  du script ; `interface_tuiles.png`, `exemples_jeux.png`, `interface_telephone.png`
+  manquent encore (masquées tant qu'elles ne sont pas ajoutées).
+  Faits à respecter : gratuit, jamais de pub, code source fermé, jeux libres
+  (donner, vendre), aucun logo/filigrane dans les jeux, Android 7+, hors ligne,
+  APK mais pas encore AAB, statistiques Aptabase anonymes désactivables,
+  « développeur indépendant » (jamais de nationalité).
+- `testeur.html` : page testeurs en 9 langues, **générée**
   par `python3 outils/generer_testeur.py` (textes dans le script ; une seule langue
   affichée selon `?lang=`, le dernier choix ou le téléphone). Le moteur l'ouvre avec
   `?lang=<langue du moteur>`.
@@ -82,16 +94,15 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   officiels des nœuds (PR #1 et #2).
 - 28/09/2026 : 4 guides débutant (fr) ; onglet Nœuds reconstruit depuis le
   catalogue du moteur (115 nœuds, 9 langues) ; guides traduits en 9 langues ;
-  page testeurs en 9 langues ; pages `noeuds/<langue>.html` pour le référencement.
+  page testeurs en 9 langues ; pages `noeuds/<langue>.html` pour le référencement ;
+  accueil + comparatif + FAQ (19 questions) en 9 langues.
 
 ## Reste à faire
 - Référencement (objectif : faire connaître Yop2D partout, y compris Russie et
-  Chine) : accueil + FAQ en 9 langues (gratuit, sans pub, code fermé, jeux
-  libres de droits, pas de logo dans les jeux exportés, Android 7+, hors ligne,
-  export APK mais pas encore AAB/Play Store, statistiques anonymes Aptabase
-  désactivables) ; comparatif honnête avec d'autres moteurs ; `llms.txt` ; page
-  « Tous les guides » ; Yandex et Baidu. Auteur : « développeur indépendant »,
-  sans nationalité. itch.io : https://yop2d-dev.itch.io/yop2d-no-code-game-engine
+  Chine) : `llms.txt` ; page « Tous les guides » ; inscription Yandex et Baidu ;
+  aide pour les messages de forums et vidéos. itch.io :
+  https://yop2d-dev.itch.io/yop2d-no-code-game-engine
+- Ajouter les 3 captures manquantes de l'accueil (voir « Pages »).
 - Faire tester les étapes des guides sur tablette (projets zip de test, voir
   `Doc/MEMO_NOEUDS.md` du moteur : bouton `{ }` du Blueprint et import de zip).
 - Idées de guides suivants : caméra qui suit, sons et musique, animations,

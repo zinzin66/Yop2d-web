@@ -106,6 +106,7 @@ def page(l, categories):
             f.append("</div>")
             fiches.append("\n".join(f))
         blocs.append(f'<h2 id="{a}">{e(c["categorie"])}</h2>\n<div class="method">\n' + "\n".join(fiches) + "\n</div>")
+    accueil = "../" + ("index.html" if l == "en" else f"{l}/index.html")
     guides = "../guides/deplacer-personnage.html" if l == "fr" else f"../guides/{l}/deplacer-personnage.html"
     return f"""<!DOCTYPE html>
 <html lang="{l}">
@@ -121,7 +122,7 @@ def page(l, categories):
 </head>
 <body>
 <header>
-<a href="../index.html">← Yop2D</a>
+<a href="{accueil}">← Yop2D</a>
 <h1>{e(ui["h1"])}</h1>
 <p class="langues">{langues}</p>
 </header>
@@ -136,7 +137,7 @@ def page(l, categories):
 </div>
 </main>
 <footer>
-<p>{e(ui["pied"])} · <a href="../index.html">{e(ui["site"])}</a></p>
+<p>{e(ui["pied"])} · <a href="{accueil}">{e(ui["site"])}</a></p>
 </footer>
 </body>
 </html>

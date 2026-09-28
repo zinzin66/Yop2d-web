@@ -150,6 +150,8 @@ class Rendu:
 def page(guide, langue, src, sources, r):
     ui = UI[langue]
     base = "" if langue == "fr" else "../"
+    # Page d'accueil dans la même langue (anglais : racine du site)
+    accueil = base + "../" + ("index.html" if langue == "en" else f"{langue}/index.html")
     alternates = "\n".join(
         f'<link rel="alternate" hreflang="{l}" href="{SITE}{chemin_page(guide, l)}">' for l in LANGUES if (guide, l) in sources)
     langues_liens = " · ".join(
@@ -168,12 +170,12 @@ def page(guide, langue, src, sources, r):
         p = GUIDES[i - 1]
         nav.append(f'<a href="{lien_relatif(langue, p, langue)}">{ui["precedent"]} {html.escape(r.brut(sources[(p, langue)]["carte"][0]))}</a>')
     else:
-        nav.append(f'<a href="{base}../index.html#guides">{ui["precedent"]} {ui["tous"]}</a>')
+        nav.append(f'<a href="{accueil}#guides">{ui["precedent"]} {ui["tous"]}</a>')
     if i + 1 < len(GUIDES) and (GUIDES[i + 1], langue) in sources:
         s = GUIDES[i + 1]
         nav.append(f'<a href="{lien_relatif(langue, s, langue)}">{ui["suivant"]} {html.escape(r.brut(sources[(s, langue)]["carte"][0]))} →</a>')
     else:
-        nav.append(f'<a href="{base}../index.html#guides">{ui["tous"]} →</a>')
+        nav.append(f'<a href="{accueil}#guides">{ui["tous"]} →</a>')
     return f"""<!DOCTYPE html>
 <html lang="{langue}">
 <head>
@@ -190,7 +192,7 @@ def page(guide, langue, src, sources, r):
 </head>
 <body>
 <header>
-<a href="{base}../index.html">← Yop2D</a>
+<a href="{accueil}">← Yop2D</a>
 <h1>{r.texte(src["h1"])}</h1>
 <p>{ui["sous_titre"]}</p>
 <p class="langues">{langues_liens}</p>
@@ -203,7 +205,7 @@ def page(guide, langue, src, sources, r):
 </div>
 </main>
 <footer>
-<p>{ui["pied"]} · <a href="{base}../index.html">{ui["site"]}</a> · <a href="{base}../noeuds/{langue}.html">{ui["noeuds"]}</a></p>
+<p>{ui["pied"]} · <a href="{accueil}">{ui["site"]}</a> · <a href="{base}../noeuds/{langue}.html">{ui["noeuds"]}</a></p>
 </footer>
 </body>
 </html>
