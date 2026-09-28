@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie bewege ich eine Figur in Yop2D? | Yop2D-Anleitung</title>
+<meta name="description" content="Drei einfache Wege, eine Figur in Yop2D ohne Code zu bewegen: Tasten auf dem Bildschirm, virtueller Joystick oder mit dem Finger ziehen.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/deplacer-personnage.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/deplacer-personnage.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/deplacer-personnage.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/deplacer-personnage.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/deplacer-personnage.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/deplacer-personnage.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deplacer-personnage.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deplacer-personnage.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/deplacer-personnage.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deplacer-personnage.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie bewege ich eine Figur?",
+ "description": "Drei einfache Wege, eine Figur in Yop2D ohne Code zu bewegen: Tasten auf dem Bildschirm, virtueller Joystick oder mit dem Finger ziehen.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Mit Tasten auf dem Bildschirm",
+   "text": "Verbinde das Ereignis Objekt gehalten jeder Taste mit einem Knoten Objekt schieben mit X hinzufügen = -5 oder 5."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Mit einem virtuellen Joystick",
+   "text": "Füge ein Objekt Joystick hinzu und wähle die Figur bei Zu bewegendes Objekt. Kein Knoten nötig."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Mit dem Finger ziehen",
+   "text": "Setze im Inspektor des Objekts das Häkchen bei Beweglich (mit Finger ziehbar)."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Wie bewege ich eine Figur?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../deplacer-personnage.html" hreflang="fr">Français</a> · <a href="../en/deplacer-personnage.html" hreflang="en">English</a> · <a href="../es/deplacer-personnage.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/deplacer-personnage.html" hreflang="it">Italiano</a> · <a href="../pt/deplacer-personnage.html" hreflang="pt">Português</a> · <a href="../ru/deplacer-personnage.html" hreflang="ru">Русский</a> · <a href="../zh/deplacer-personnage.html" hreflang="zh">中文</a> · <a href="../ja/deplacer-personnage.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>In Yop2D gibt es drei einfache Wege, eine Figur ohne Code zu bewegen. Wähle den, der zu deinem Spiel passt.</p>
+<h2>Methode 1: mit Tasten auf dem Bildschirm (links / rechts)</h2>
+<div class="method">
+<p>Ideal für ein Jump'n'Run oder ein Spiel, in dem sich die Figur auf einer Linie bewegt.</p>
+<ol><li>Füge in deiner Szene deine Figur hinzu (ein <strong>Quadrat</strong> oder ein <strong>Bild</strong>) und nenne sie <strong>player</strong>.</li><li>Füge zwei Objekte als Tasten hinzu, zum Beispiel zwei <strong>Button</strong> (oder zwei Quadrate) namens <strong>btnLeft</strong> und <strong>btnRight</strong>. Setze sie unten auf den Bildschirm.</li><li>Öffne den <strong>Blueprint</strong> der Szene.</li><li>Füge das Ereignis <strong>„Objekt gehalten“</strong> hinzu und wähle <strong>btnLeft</strong> als Ziel.</li><li>Füge einen Knoten <strong>„Objekt schieben“</strong> hinzu: Ziel <strong>player</strong>, <strong>X hinzufügen = -5</strong>, <strong>Y hinzufügen = 0</strong>.</li><li>Verbinde den Ausgang des Ereignisses mit dem Eingang von „Objekt schieben“.</li><li>Mach dasselbe für <strong>btnRight</strong>, mit <strong>X hinzufügen = 5</strong>.</li><li>Speichere und starte das Spiel: Solange dein Finger auf einer Taste bleibt, läuft die Figur.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Objekt gehalten</b><span>Ziel: btnLeft</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Objekt schieben</b><span>Ziel: player · X hinzufügen = -5</span></div>
+</div>
+<div class="tip">👉 „Objekt gehalten“ wiederholt sich bei jedem Bild, solange der Finger auf der Taste bleibt: Deshalb läuft die Figur ununterbrochen. Für mehr Tempo erhöhe den Wert (zum Beispiel 8 oder 10).</div>
+</div>
+<h2>Methode 2: mit einem virtuellen Joystick</h2>
+<div class="method">
+<p>Ideal für ein Spiel von oben, in dem sich die Figur in alle Richtungen bewegt. <strong>Kein Knoten nötig.</strong></p>
+<ol><li>Füge deiner Szene ein Objekt <strong>Joystick</strong> hinzu (Kategorie <strong>Interaktiv</strong>) und setze es unten links hin.</li><li>Wähle den Joystick aus. Tippe im Inspektor, Bereich <strong>„Joystick-Steuerung“</strong>, auf die Taste bei <strong>„Zu bewegendes Objekt“</strong> und wähle deine Figur.</li><li>Speichere und starte das Spiel: Die Figur folgt dem Joystick.</li></ol>
+<div class="tip">👉 <strong>Abkürzung:</strong> Gibst du deiner Figur den Tag <strong>Player</strong> (oder <strong>Joueur</strong>), bewegt der Joystick sie automatisch, auch ohne Auswahl bei „Zu bewegendes Objekt“. Achtung: Dieser Tag hat Vorrang vor der Auswahl im Inspektor.</div>
+<div class="tip">👉 <strong>Für Fortgeschrittene:</strong> Die Formeln <code>joystick.x</code> und <code>joystick.y</code> geben die Richtung an (zwischen -1 und 1). Du kannst sie in einem Knoten „Objekt schieben“ nutzen, der mit „Jeden Frame“ verbunden ist, zum Beispiel <code>=joystick.x * 5</code>. Der Knoten <strong>„Wenn Joystick“</strong> hat außerdem die Ausgänge Oben, Unten, Links, Rechts und Ruhe.</div>
+</div>
+<h2>Methode 3: mit dem Finger ziehen</h2>
+<div class="method">
+<p>Ideal für ein Puzzle, ein Kartenspiel oder ein Spiel, in dem man Teile verschiebt.</p>
+<ol><li>Wähle dein Objekt im Szeneneditor aus.</li><li>Setze im Inspektor das Häkchen bei <strong>„Beweglich (mit Finger ziehbar)“</strong>.</li><li>Starte das Spiel: Du kannst das Objekt mit dem Finger ziehen.</li></ol>
+<div class="tip">👉 Um zu reagieren, wenn der Spieler das Objekt loslässt (zum Beispiel um zu prüfen, ob es richtig liegt), nutze das Ereignis <strong>„Drag Ende“</strong>.</div>
+<div class="tip">👉 Um das Ziehen im Spiel zu erlauben oder zu sperren (zum Beispiel bei einem richtig gelegten Puzzleteil), nutze den Knoten <strong>„Verschiebbar machen“</strong>.</div>
+</div>
+<h2>Tipps</h2>
+<ul><li><strong>Damit die Figur springt</strong>, folge der Anleitung <a href="../de/sauter.html">Eine Figur springen lassen</a>.</li><li><strong>Das Beispielspiel „Plattform“</strong>, das mit Yop2D kommt, nutzt Methode 1: Öffne es, um einen vollständigen, funktionierenden Blueprint zu sehen.</li><li><strong>Eine Frage?</strong> Sprich darüber auf <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> oder <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li></ul>
+
+<div class="nav">
+<a href="../../index.html#guides">← Alle Anleitungen</a>
+<a href="../de/sauter.html">Nächste Anleitung: Eine Figur springen lassen →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../index.html">Offizielle Website</a></p>
+</footer>
+</body>
+</html>

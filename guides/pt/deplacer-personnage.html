@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como mover um personagem no Yop2D? | Guia Yop2D</title>
+<meta name="description" content="Três jeitos simples de mover um personagem no Yop2D, sem código: botões na tela, joystick virtual ou arrastar com o dedo.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deplacer-personnage.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/deplacer-personnage.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/deplacer-personnage.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/deplacer-personnage.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/deplacer-personnage.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/deplacer-personnage.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deplacer-personnage.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deplacer-personnage.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/deplacer-personnage.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deplacer-personnage.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Como mover um personagem?",
+ "description": "Três jeitos simples de mover um personagem no Yop2D, sem código: botões na tela, joystick virtual ou arrastar com o dedo.",
+ "inLanguage": "pt",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de jogos 2D sem código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Com botões na tela",
+   "text": "Ligue o evento Objeto Mantido Pressionado de cada botão a um nó Empurrar objeto com Adicionar X = -5 ou 5."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Com um joystick virtual",
+   "text": "Adicione um objeto Joystick e escolha o personagem em Objeto a mover. Nenhum nó necessário."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Arrastando com o dedo",
+   "text": "Marque Movível (arrastável ao Jogar) no inspetor do objeto."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Como mover um personagem?</h1>
+<p>Guia para iniciantes · sem código</p>
+<p class="langues"><a href="../deplacer-personnage.html" hreflang="fr">Français</a> · <a href="../en/deplacer-personnage.html" hreflang="en">English</a> · <a href="../es/deplacer-personnage.html" hreflang="es">Español</a> · <a href="../de/deplacer-personnage.html" hreflang="de">Deutsch</a> · <a href="../it/deplacer-personnage.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="../ru/deplacer-personnage.html" hreflang="ru">Русский</a> · <a href="../zh/deplacer-personnage.html" hreflang="zh">中文</a> · <a href="../ja/deplacer-personnage.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>No Yop2D existem três jeitos simples de mover um personagem, sem escrever código. Escolha o que combina com o seu jogo.</p>
+<h2>Método 1: com botões na tela (esquerda / direita)</h2>
+<div class="method">
+<p>Ideal para um jogo de plataforma ou um jogo em que o personagem anda em linha.</p>
+<ol><li>Na sua cena, adicione o personagem (um <strong>Quadrado</strong> ou uma <strong>Imagem</strong>) e dê o nome <strong>player</strong>.</li><li>Adicione dois objetos que servirão de botões, por exemplo dois <strong>Botao</strong> (ou dois quadrados) chamados <strong>btnLeft</strong> e <strong>btnRight</strong>. Coloque-os embaixo na tela.</li><li>Abra o <strong>Blueprint</strong> da cena.</li><li>Adicione o evento <strong>“Objeto Mantido Pressionado”</strong> e escolha <strong>btnLeft</strong> como alvo.</li><li>Adicione um nó <strong>“Empurrar objeto”</strong>: alvo <strong>player</strong>, <strong>Adicionar X = -5</strong>, <strong>Adicionar Y = 0</strong>.</li><li>Ligue a saída do evento à entrada de “Empurrar objeto”.</li><li>Faça o mesmo para <strong>btnRight</strong>, com <strong>Adicionar X = 5</strong>.</li><li>Salve e comece o jogo: enquanto você mantém o dedo num botão, o personagem anda.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Objeto Mantido Pressionado</b><span>alvo: btnLeft</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Empurrar objeto</b><span>alvo: player · Adicionar X = -5</span></div>
+</div>
+<div class="tip">👉 “Objeto Mantido Pressionado” se repete a cada quadro enquanto o dedo fica no botão: é por isso que o personagem anda sem parar. Para ir mais rápido, aumente o valor (por exemplo 8 ou 10).</div>
+</div>
+<h2>Método 2: com um joystick virtual</h2>
+<div class="method">
+<p>Ideal para um jogo visto de cima, em que o personagem anda em todas as direções. <strong>Nenhum nó necessário.</strong></p>
+<ol><li>Adicione um objeto <strong>Joystick</strong> à cena (categoria <strong>Interativos</strong>) e coloque-o embaixo à esquerda.</li><li>Selecione o joystick. No inspetor, seção <strong>“Controle Joystick”</strong>, toque no botão de <strong>“Objeto a mover”</strong> e escolha o seu personagem.</li><li>Salve e comece o jogo: o personagem segue a direção do joystick.</li></ol>
+<div class="tip">👉 <strong>Atalho:</strong> se você der ao personagem a tag <strong>Player</strong> (ou <strong>Joueur</strong>), o joystick o move sozinho, mesmo sem escolher nada em “Objeto a mover”. Atenção: essa tag vale mais que a escolha do inspetor.</div>
+<div class="tip">👉 <strong>Para ir além:</strong> as fórmulas <code>joystick.x</code> e <code>joystick.y</code> dão a direção (entre -1 e 1). Você pode usá-las num nó “Empurrar objeto” ligado a “A cada frame”, por exemplo <code>=joystick.x * 5</code>. O nó <strong>“Se joystick”</strong> também tem as saídas Cima, Baixo, Esquerda, Direita e Repouso.</div>
+</div>
+<h2>Método 3: arrastar com o dedo</h2>
+<div class="method">
+<p>Ideal para um quebra-cabeça, um jogo de cartas ou um jogo em que se movem peças.</p>
+<ol><li>Selecione o objeto no editor de cena.</li><li>No inspetor, marque <strong>“Movível (arrastável ao Jogar)”</strong>.</li><li>Comece o jogo: você pode arrastar o objeto com o dedo.</li></ol>
+<div class="tip">👉 Para reagir quando o jogador solta o objeto (por exemplo para verificar se está no lugar certo), use o evento <strong>“Fim de Arrastar”</strong>.</div>
+<div class="tip">👉 Para permitir ou bloquear o arraste durante o jogo (uma peça de quebra-cabeça bem encaixada, por exemplo), use o nó <strong>“Tornar arrastável”</strong>.</div>
+</div>
+<h2>Dicas</h2>
+<ul><li><strong>Para fazer o personagem pular</strong>, siga o guia <a href="../pt/sauter.html">Fazer um personagem pular</a>.</li><li><strong>O jogo de exemplo “Plataforma”</strong> que vem com o Yop2D usa o método 1: abra-o para ver um Blueprint completo que funciona.</li><li><strong>Alguma dúvida?</strong> Venha conversar no <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> ou no <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li></ul>
+
+<div class="nav">
+<a href="../../index.html#guides">← Todos os guias</a>
+<a href="../pt/sauter.html">Próximo guia: Fazer um personagem pular →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de jogos 2D gratuito e sem código para Android · <a href="../../index.html">Site oficial</a></p>
+</footer>
+</body>
+</html>

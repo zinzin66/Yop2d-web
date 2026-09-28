@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to make the player lose health in Yop2D? | Yop2D Guide</title>
+<meta name="description" content="Handle the player&#x27;s health in Yop2D, without code: a health variable, a health bar and the “Add to Variable”, “Set Progress”, “Condition” and “Restart the scene” nodes.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/vie-game-over.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/vie-game-over.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/vie-game-over.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/vie-game-over.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/vie-game-over.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/vie-game-over.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/vie-game-over.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/vie-game-over.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/vie-game-over.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/vie-game-over.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to make the player lose health?",
+ "description": "Handle the player's health in Yop2D, without code: a health variable, a health bar and the “Add to Variable”, “Set Progress”, “Condition” and “Restart the scene” nodes.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Create the health variable and the bar",
+   "text": "Variable vie (Integer, 3) and bar healthBar with Maximum Value = 3."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Lose a point",
+   "text": "If object touches Tag (player, danger) → Add to Variable (vie, -1) → Set Progress (healthBar, =vie)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Game Over",
+   "text": "Condition (=vie <= 0) → True → Restart the scene."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to make the player lose health?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../vie-game-over.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/vie-game-over.html" hreflang="es">Español</a> · <a href="../de/vie-game-over.html" hreflang="de">Deutsch</a> · <a href="../it/vie-game-over.html" hreflang="it">Italiano</a> · <a href="../pt/vie-game-over.html" hreflang="pt">Português</a> · <a href="../ru/vie-game-over.html" hreflang="ru">Русский</a> · <a href="../zh/vie-game-over.html" hreflang="zh">中文</a> · <a href="../ja/vie-game-over.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>The player starts with <strong>3 lives</strong>. Each time they touch a danger (spikes, an enemy…), they lose one and the <strong>health bar</strong> goes down. At 0, it's <strong>Game Over</strong>: the level starts again.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a character named <strong>player</strong> that can move (see <a href="../en/deplacer-personnage.html">Move a character</a>);</li><li>one or more dangers, for example red squares named <strong>spikes1</strong>, <strong>spikes2</strong>…;</li><li>a health bar: a <strong>ProgressBar</strong> object (progress bar) named <strong>healthBar</strong>, at the top of the screen.</li></ul>
+</div>
+<h2>Step 1: prepare the dangers and the bar</h2>
+<div class="method">
+<ol><li>Select each danger and type <strong>danger</strong> in its <strong>“Tag (Label)”</strong> field.</li><li>Select <strong>healthBar</strong>. In the inspector's <strong>“PROGRESS BAR”</strong> section: <strong>Minimum Value = 0</strong>, <strong>Maximum Value = 3</strong>, <strong>Current Value = 3</strong>.</li></ol>
+</div>
+<h2>Step 2: create the “vie” variable</h2>
+<div class="method">
+<ol><li>In the left panel, <strong>Variables</strong> section, create a variable.</li><li>Name: <strong>vie</strong> (health) · Scope: <strong>Local</strong> · Type: <strong>Integer</strong> · Starting value: <strong>3</strong>.</li></ol>
+</div>
+<h2>Step 3: lose a life</h2>
+<div class="method">
+<ol><li>Open the scene's <strong>Blueprint</strong>.</li><li>Add the <strong>“If object touches Tag”</strong> event: target <strong>player</strong>, Tag <strong>danger</strong>.</li><li>Add <strong>“Add to Variable”</strong>: variable <strong>vie</strong>, <strong>Value to add = -1</strong> (with the minus sign, to subtract).</li><li>Add <strong>“Set Progress”</strong>: target <strong>healthBar</strong>, <strong>New progress</strong> = <code>=vie</code></li><li>Link the three nodes in order.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>If object touches Tag</b><span>target: player · Tag: danger</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Add to Variable</b><span>vie · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Set Progress</b><span>healthBar · =vie</span></div>
+</div>
+<div class="tip">👉 Writing <code>=vie</code> in “New progress” means: “take the value of the vie variable”. So the bar always follows the number of lives.</div>
+</div>
+<h2>Step 4: Game Over</h2>
+<div class="method">
+<ol><li>After “Set Progress”, add the <strong>“Condition”</strong> node with <strong>Condition</strong> = <code>=vie &lt;= 0</code> (“vie smaller than or equal to 0”).</li><li>Link its <strong>True</strong> output to the <strong>“Restart the scene”</strong> node (category Scene &amp; HUD).</li><li>Save, start the game and touch a danger three times.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Set Progress</b><span>healthBar</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condition</b><span>=vie &lt;= 0</span></div>
+<div class="fleche"><em>True</em> →</div>
+<div class="noeud"><b>Restart the scene</b></div>
+</div>
+<div class="tip">👉 “Restart the scene” puts everything back as it was: objects in their place, and <strong>Local</strong> variables (so vie = 3) back to their starting value.</div>
+<div class="tip">👉 <strong>Want a real end screen?</strong> Instead of restarting straight away, link the True output to <strong>“Modify Text”</strong> (a “You lose!” text), then <strong>“Wait”</strong> (2 seconds), then <strong>“Restart the scene”</strong>.</div>
+</div>
+<h2>Bonus: falling into the void</h2>
+<div class="method">
+<p>For a platform game, put a <strong>Zone</strong> object at the very bottom of the scene, named <strong>fallZone</strong> (a zone is invisible during the game). Then:</p>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>Object A: player · Object B: fallZone</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Restart the scene</b></div>
+</div>
+</div>
+<h2>If it doesn't work</h2>
+<ul><li><strong>Health doesn't go down:</strong> check the <strong>danger</strong> tag on each danger, and the minus sign in <strong>-1</strong>.</li><li><strong>The bar doesn't move:</strong> the target of “Set Progress” must be a <strong>progress bar</strong>, with a maximum of 3.</li><li><strong>The game doesn't restart:</strong> the condition must be linked through its <strong>True</strong> output.</li></ul>
+
+<div class="nav">
+<a href="../en/pieces-score.html">← Collect coins and count the score</a>
+<a href="../en/niveau-suivant.html">Next guide: Go to the next level →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a></p>
+</footer>
+</body>
+</html>

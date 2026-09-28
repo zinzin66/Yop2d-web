@@ -1,0 +1,160 @@
+{
+  "titre_page": "¿Cómo hacer saltar a un personaje en Yop2D? | Guía Yop2D",
+  "description": "Hacer saltar a un personaje en Yop2D, sin código: gravedad, suelo sólido, botón de salto y los nodos [[si_au_sol]] e [[impulsion]].",
+  "h1": "¿Cómo hacer saltar a un personaje?",
+  "carte": [
+    "Hacer saltar a un personaje",
+    "Gravedad, suelo sólido y botón de salto, sin poder saltar en el aire."
+  ],
+  "etapes": [
+    [
+      "Dar gravedad al personaje",
+      "Marca {{lang:insp_cb_physique}} y cambia a {{lang:insp_btn_physique_dynamique}}."
+    ],
+    [
+      "Poner un suelo sólido",
+      "Añade un suelo con {{lang:insp_cb_physique}}, dejado en {{lang:insp_btn_physique_statique}}."
+    ],
+    [
+      "Unir el botón de salto",
+      "{{NoeudEventClicObjet}} (btnJump) → {{si_au_sol}} (player) → {{lang:port_vrai}} → {{impulsion}} (player, -15)."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Para que un personaje salte hacen falta tres cosas: que **caiga** (la gravedad), un **suelo** donde apoyarse y un **botón** que lo impulse hacia arriba, solo si está bien apoyado."
+    ],
+    [
+      "besoin",
+      [
+        "un personaje llamado **player** (un {{lang:obj_prefix_carre}} o una {{lang:obj_prefix_image}});",
+        "un suelo: un {{lang:obj_prefix_carre}} ancho y plano llamado **floor**, en la parte baja de la escena;",
+        "un botón llamado **btnJump** (un {{lang:obj_prefix_bouton}} o un {{lang:obj_prefix_carre}}), abajo a la derecha de la pantalla."
+      ]
+    ],
+    [
+      "h2",
+      "Paso 1: dar gravedad al personaje"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Selecciona **player**.",
+            "En el inspector, sección **[[lang:insp_sep_physique]]**, marca **[[lang:insp_cb_physique]]**.",
+            "Toca el botón **[[lang:insp_btn_physique_statique]]** para que se convierta en **[[lang:insp_btn_physique_dynamique]]**. « Dinámico » quiere decir que el objeto cae."
+          ]
+        ],
+        [
+          "tip",
+          "El ajuste **[[lang:insp_label_gravite]]** cambia la velocidad de caída: 0.5 para caer despacio, 2 para caer rápido."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 2: poner un suelo sólido"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Selecciona **floor**.",
+            "Marca también **[[lang:insp_cb_physique]]**, pero **déjalo en [[lang:insp_btn_physique_statique]]**: un objeto estático no se mueve y frena a los objetos que caen encima.",
+            "Coloca a **player** un poco por encima del suelo."
+          ]
+        ],
+        [
+          "tip",
+          "Puedes hacer plataformas igual: cuadrados estáticos colocados en alto."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 3: el botón de salto"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Abre el **{{lang:titre_blueprint}}** de la escena.",
+            "Añade el evento **[[NoeudEventClicObjet]]** y elige **btnJump** como objetivo.",
+            "Añade el nodo **[[si_au_sol]]** (categoría {{lang:cat_logique_conditions}}) y elige **player** como objetivo.",
+            "Añade el nodo **[[impulsion]]** (categoría {{lang:cat_mouvements_ia}}): objetivo **player**, **{{lang:impulsion.force}} = -15**.",
+            "Une la salida de [[NoeudEventClicObjet]] a la entrada de [[si_au_sol]], y luego la salida **{{lang:port_vrai}}** de [[si_au_sol]] a la entrada de [[impulsion]].",
+            "Guarda, lanza el juego y toca el botón."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventClicObjet}}",
+              "objetivo: btnJump"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{si_au_sol}}",
+              "objetivo: player"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{impulsion}}",
+              "objetivo: player · -15"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**¿Por qué [[si_au_sol]]?** Sin él, el jugador podría volver a saltar en pleno vuelo y salir volando tocando el botón varias veces."
+        ],
+        [
+          "tip",
+          "**Negativo = hacia arriba.** En Yop2D, los números Y crecen hacia abajo de la pantalla. -15 da un salto pequeño, -20 uno grande."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "¿Y para avanzar durante el salto?"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Añade los botones izquierda y derecha de la guía [Mover un personaje](guide:deplacer-personnage) (método 1). Puedes mantener un dedo en « derecha » y tocar « salto » con otro dedo."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Si no funciona"
+    ],
+    [
+      "ul",
+      [
+        "**El personaje no cae:** comprueba que está en [[lang:insp_btn_physique_dynamique]].",
+        "**Atraviesa el suelo:** el suelo debe tener marcado [[lang:insp_cb_physique]] y seguir estático.",
+        "**No pasa nada al tocar:** comprueba que los cables están unidos y que la salida usada es **{{lang:port_vrai}}**. Acuérdate de guardar antes de lanzar el juego.",
+        "**Para comparar**, abre el juego de ejemplo **« Plataforma »** incluido con Yop2D: usa exactamente este montaje."
+      ]
+    ]
+  ]
+}

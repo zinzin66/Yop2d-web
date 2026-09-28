@@ -1,0 +1,160 @@
+{
+  "titre_page": "Yop2D でキャラクターをジャンプさせるには？| Yop2D ガイド",
+  "description": "Yop2D でコードを書かずにキャラクターをジャンプさせる：重力、固い地面、ジャンプボタン、そして [[si_au_sol]] と [[impulsion]] ノード。",
+  "h1": "キャラクターをジャンプさせるには？",
+  "carte": [
+    "キャラクターをジャンプさせる",
+    "重力、固い地面、ジャンプボタン。空中ではジャンプできないようにします。"
+  ],
+  "etapes": [
+    [
+      "キャラクターに重力を与える",
+      "{{lang:insp_cb_physique}} にチェックを入れ、{{lang:insp_btn_physique_dynamique}} に切りかえます。"
+    ],
+    [
+      "固い地面を置く",
+      "地面を追加して {{lang:insp_cb_physique}} にチェックを入れ、{{lang:insp_btn_physique_statique}} のままにします。"
+    ],
+    [
+      "ジャンプボタンをつなぐ",
+      "{{NoeudEventClicObjet}}（btnJump）→ {{si_au_sol}}（player）→ {{lang:port_vrai}} → {{impulsion}}（player、-15）。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "キャラクターがジャンプするには 3 つ必要です：**落ちる**こと（重力）、着地する**地面**、そして地面に立っているときだけ上に押し上げる**ボタン**です。"
+    ],
+    [
+      "besoin",
+      [
+        "**player** という名前のキャラクター（{{lang:obj_prefix_carre}} または {{lang:obj_prefix_image}}）；",
+        "地面：シーンの下にある、横に広くて平たい **floor** という名前の {{lang:obj_prefix_carre}}；",
+        "画面の右下にある、**btnJump** という名前のボタン（{{lang:obj_prefix_bouton}} または {{lang:obj_prefix_carre}}）。"
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 1：キャラクターに重力を与える"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "**player** を選びます。",
+            "インスペクターの **[[lang:insp_sep_physique]]** で、**[[lang:insp_cb_physique]]** にチェックを入れます。",
+            "**[[lang:insp_btn_physique_statique]]** ボタンをタップして **[[lang:insp_btn_physique_dynamique]]** にします。「動的」はオブジェクトが落ちるという意味です。"
+          ]
+        ],
+        [
+          "tip",
+          "**[[lang:insp_label_gravite]]** の設定で落ちる速さが変わります：0.5 でゆっくり、2 で速く落ちます。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 2：固い地面を置く"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "**floor** を選びます。",
+            "こちらも **[[lang:insp_cb_physique]]** にチェックを入れますが、**[[lang:insp_btn_physique_statique]] のままにします**：静的なオブジェクトは動かず、上に落ちてきたオブジェクトを受け止めます。",
+            "**player** を地面の少し上に置きます。"
+          ]
+        ],
+        [
+          "tip",
+          "足場も同じように作れます：高いところに置いた静的な四角形です。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 3：ジャンプボタン"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "シーンの **{{lang:titre_blueprint}}** を開きます。",
+            "**[[NoeudEventClicObjet]]** イベントを追加し、ターゲットに **btnJump** を選びます。",
+            "**[[si_au_sol]]** ノード（カテゴリー {{lang:cat_logique_conditions}}）を追加し、ターゲットに **player** を選びます。",
+            "**[[impulsion]]** ノード（カテゴリー {{lang:cat_mouvements_ia}}）を追加します：ターゲット **player**、**{{lang:impulsion.force}} = -15**。",
+            "[[NoeudEventClicObjet]] の出力を [[si_au_sol]] の入力に、次に [[si_au_sol]] の **{{lang:port_vrai}}** 出力を [[impulsion]] の入力につなぎます。",
+            "保存してゲームを開始し、ボタンをタップします。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventClicObjet}}",
+              "ターゲット：btnJump"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{si_au_sol}}",
+              "ターゲット：player"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{impulsion}}",
+              "ターゲット：player · -15"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**なぜ [[si_au_sol]] が必要？** これがないと、空中でもう一度ジャンプできてしまい、ボタンを何回もタップすると飛んでいってしまいます。"
+        ],
+        [
+          "tip",
+          "**マイナス = 上向き。** Yop2D では、Y の数は画面の下に行くほど大きくなります。-15 は小さなジャンプ、-20 は大きなジャンプです。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ジャンプ中に進むには？"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "ガイド [キャラクターを動かす](guide:deplacer-personnage)（方法 1）の左右のボタンを追加します。1 本の指で「右」を押したまま、別の指で「ジャンプ」をタップできます。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "うまくいかないとき"
+    ],
+    [
+      "ul",
+      [
+        "**キャラクターが落ちない：** [[lang:insp_btn_physique_dynamique]] になっているか確認してください。",
+        "**地面をすり抜ける：** 地面は [[lang:insp_cb_physique]] にチェックを入れ、静的のままにする必要があります。",
+        "**タップしても何も起きない：** 線がつながっているか、使っている出力が **{{lang:port_vrai}}** か確認してください。ゲームを始める前に保存するのを忘れずに。",
+        "**見比べるには**、Yop2D に入っているサンプルゲーム**「プラットフォーム」**を開いてください。まさにこの組み方を使っています。"
+      ]
+    ]
+  ]
+}

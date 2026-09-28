@@ -1,0 +1,201 @@
+{
+  "titre_page": "Come raccogliere monete e contare i punti in Yop2D? | Guida Yop2D",
+  "description": "Raccogliere monete e mostrare un punteggio in Yop2D, senza codice: un tag, una variabile e i nodi [[NoeudEventCollisionTag]], [[detruire_objet]], [[ajouter_variable]] e [[modifier_texte]].",
+  "h1": "Come raccogliere monete e contare i punti?",
+  "carte": [
+    "Raccogliere monete e contare i punti",
+    "Un tag, una variabile per i punti e un testo che li mostra."
+  ],
+  "etapes": [
+    [
+      "Dare un tag alle monete",
+      "Scrivi piece nel campo {{lang:insp_label_tag}} di ogni moneta."
+    ],
+    [
+      "Creare la variabile score",
+      "Sezione {{lang:panneau_ress_variables}}: score, {{lang:var_type_entier}}, 0."
+    ],
+    [
+      "Collegare i nodi",
+      "{{NoeudEventCollisionTag}} (player, piece) → {{detruire_objet}} → {{ajouter_variable}} (score, 1) → {{modifier_texte}} (scoreText)."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Quando il giocatore tocca una moneta vogliamo tre cose: che la moneta **sparisca**, che il **punteggio salga** di 1 e che il nuovo punteggio **appaia** sullo schermo."
+    ],
+    [
+      "besoin",
+      [
+        "un personaggio chiamato **player** che può muoversi (vedi [Muovere un personaggio](guide:deplacer-personnage));",
+        "qualche moneta: oggetti **{{lang:obj_prefix_rond}}** (o immagini), per esempio **coin1**, **coin2**, **coin3**;",
+        "un oggetto **{{lang:obj_prefix_texte}}** chiamato **scoreText**, in alto sullo schermo, con il testo « Punti: 0 »."
+      ]
+    ],
+    [
+      "h2",
+      "Passo 1: dare lo stesso tag a tutte le monete"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Un **tag** è un'etichetta. Grazie a lui, un solo pezzo di Blueprint funziona per tutte le monete, anche se ne aggiungi 50."
+        ],
+        [
+          "ol",
+          [
+            "Seleziona una moneta.",
+            "Nell'ispettore, campo **[[lang:insp_label_tag]]**, scrivi **piece**.",
+            "Fai lo stesso per ogni moneta (il pulsante **[[lang:insp_btn_tags_liste]]** accanto al campo propone i tag già usati)."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 2: creare la variabile « score »"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Una **variabile** è una casella che tiene un numero in memoria durante il gioco."
+        ],
+        [
+          "ol",
+          [
+            "Nel pannello di sinistra, apri la sezione **{{lang:panneau_ress_variables}}** e crea una variabile.",
+            "Nome: **score** · Ambito: **{{lang:var_scope_locale}}** · Tipo: **{{lang:var_type_entier}}** · Valore iniziale: **0**."
+          ]
+        ],
+        [
+          "tip",
+          "**{{lang:var_scope_locale}}** = la variabile esiste solo in questa scena. Scegli **{{lang:var_scope_globale}}** se il punteggio deve continuare al livello successivo (vedi [Passare al livello successivo](guide:niveau-suivant))."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 3: il Blueprint"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Apri il **{{lang:titre_blueprint}}** della scena.",
+            "Aggiungi l'evento **[[NoeudEventCollisionTag]]**: bersaglio **player**, {{lang:Tag}} **piece**.",
+            "Aggiungi **[[detruire_objet]]**. Come bersaglio, scegli **{{lang:noeud_objet_implique_long}}**: è la moneta che il giocatore ha appena toccato.",
+            "Aggiungi **[[ajouter_variable]]**: variabile **score**, **{{lang:ajouter_variable.valeur}} = 1**.",
+            "Aggiungi **[[modifier_texte]]**: bersaglio **scoreText**, **{{lang:modifier_texte.valeur}}** = `=\"Punti: \" + score`",
+            "Collega i quattro nodi in ordine, uscita verso ingresso.",
+            "Salva, avvia il gioco e vai a toccare una moneta."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "bersaglio: player · {{lang:Tag}}: piece"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "score · + 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Il segno = all'inizio del testo** dice a Yop2D di **calcolare** il testo invece di scriverlo così com'è. Senza, lo schermo mostrerebbe parola per parola `\"Punti: \" + score`. Le virgolette racchiudono la parte che non cambia."
+        ],
+        [
+          "tip",
+          "L'evento parte solo **una volta per contatto**: restare su una moneta non conta più punti."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Bonus: vincere quando si hanno tutte le monete"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Dopo [[modifier_texte]], aggiungi il nodo **[[condition]]** con **{{lang:condition.condition}}** = `=score >= 3` (3 = il numero di monete).",
+            "Collega la sua uscita **{{lang:port_vrai}}** a un nodo **[[toast]]** con il messaggio **Hai vinto!**, oppure a **[[scene_suivante]]**."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=score >= 3"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "Hai vinto!"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Se non funziona"
+    ],
+    [
+      "ul",
+      [
+        "**La moneta non sparisce:** controlla che il tag sia scritto uguale ovunque (piece) e che il bersaglio di [[detruire_objet]] sia l'oggetto coinvolto.",
+        "**Il testo mostra la formula:** manca il **=** all'inizio.",
+        "**Il punteggio resta a 0:** controlla che [[ajouter_variable]] usi la variabile **score**.",
+        "**Per confrontare**, apri il gioco di esempio **« Piattaforma »** incluso in Yop2D: raccoglie monete esattamente così."
+      ]
+    ]
+  ]
+}

@@ -4,22 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Comment passer au niveau suivant dans Yop2D ? | Guide Yop2D</title>
-<meta name="description" content="Créer plusieurs niveaux dans Yop2D, sans code : une scène par niveau, une zone d'arrivée, les nœuds « Collision A/B », « Scène suivante » et « Changer de scène », et un score qui continue avec une variable globale.">
+<meta name="description" content="Créer plusieurs niveaux dans Yop2D, sans code : une scène par niveau, une zone d&#x27;arrivée, les nœuds « Collision A/B » et « Scène suivante », et un score qui continue avec une variable globale.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/niveau-suivant.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/niveau-suivant.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/niveau-suivant.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/niveau-suivant.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/niveau-suivant.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/niveau-suivant.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/niveau-suivant.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/niveau-suivant.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/niveau-suivant.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/niveau-suivant.html">
 <link rel="stylesheet" href="guide.css">
 <script type="application/ld+json">
 {
-"@context": "https://schema.org",
-"@type": "HowTo",
-"name": "Comment passer au niveau suivant dans Yop2D",
-"description": "Créer une scène par niveau, placer une zone d'arrivée et relier Collision A/B au nœud Scène suivante.",
-"inLanguage": "fr",
-"tool": [{ "@type": "HowToTool", "name": "Yop2D (moteur de jeu 2D sans code pour Android)" }],
-"step": [
- { "@type": "HowToStep", "name": "Une scène par niveau", "text": "Dans le panneau Scènes, crée les scènes Niveau1 et Niveau2, dans cet ordre." },
- { "@type": "HowToStep", "name": "Une zone d'arrivée", "text": "Dans Niveau1, place un objet Zone nommé arrivee au bout du niveau." },
- { "@type": "HowToStep", "name": "Relier les nœuds", "text": "Collision A/B (player, arrivee) → Scène suivante." }
-]
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Comment passer au niveau suivant ?",
+ "description": "Créer plusieurs niveaux dans Yop2D, sans code : une scène par niveau, une zone d'arrivée, les nœuds « Collision A/B » et « Scène suivante », et un score qui continue avec une variable globale.",
+ "inLanguage": "fr",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (moteur de jeu 2D sans code pour Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Une scène par niveau",
+   "text": "Section Scènes : Niveau1 puis Niveau2, dans cet ordre."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Une zone d'arrivée",
+   "text": "Dans Niveau1, un objet Zone nommé arrivee au bout du niveau."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Relier les nœuds",
+   "text": "Collision A/B (player, arrivee) → Scène suivante."
+  }
+ ]
 }
 </script>
 </head>
@@ -28,45 +54,26 @@
 <a href="../index.html">← Yop2D</a>
 <h1>Comment passer au niveau suivant ?</h1>
 <p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/niveau-suivant.html" hreflang="en">English</a> · <a href="es/niveau-suivant.html" hreflang="es">Español</a> · <a href="de/niveau-suivant.html" hreflang="de">Deutsch</a> · <a href="it/niveau-suivant.html" hreflang="it">Italiano</a> · <a href="pt/niveau-suivant.html" hreflang="pt">Português</a> · <a href="ru/niveau-suivant.html" hreflang="ru">Русский</a> · <a href="zh/niveau-suivant.html" hreflang="zh">中文</a> · <a href="ja/niveau-suivant.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
 <p>Dans Yop2D, <strong>chaque niveau est une scène</strong>. Quand le joueur arrive au bout du niveau, il touche une zone d'arrivée invisible, et le jeu passe à la scène suivante.</p>
-
 <div class="besoin">
 <b>Il te faut :</b>
-<ul>
-<li>un premier niveau qui marche, avec un personnage nommé <strong>player</strong> qui peut se déplacer ;</li>
-<li>un deuxième niveau (on le crée à l'étape 1).</li>
-</ul>
+<ul><li>un premier niveau qui marche, avec un personnage nommé <strong>player</strong> qui peut se déplacer ;</li><li>un deuxième niveau (on le crée à l'étape 1).</li></ul>
 </div>
-
 <h2>Étape 1 : une scène par niveau</h2>
 <div class="method">
-<ol>
-<li>Dans le panneau de gauche, ouvre la section <strong>Scènes</strong>.</li>
-<li>Renomme ta scène actuelle <strong>Niveau1</strong>, puis crée une nouvelle scène <strong>Niveau2</strong>.</li>
-<li>Construis le niveau 2 : sol, plateformes, et à nouveau le personnage <strong>player</strong> avec ses boutons.</li>
-</ol>
+<ol><li>Dans le panneau de gauche, ouvre la section <strong>Scènes</strong>.</li><li>Renomme ta scène actuelle <strong>Niveau1</strong>, puis crée une nouvelle scène <strong>Niveau2</strong>.</li><li>Construis le niveau 2 : sol, plateformes, et à nouveau le personnage <strong>player</strong> avec ses boutons.</li></ol>
 <div class="tip attention">⚠️ <strong>Chaque scène a ses propres objets et son propre Blueprint.</strong> Les boutons et le personnage du niveau 1 n'existent pas dans le niveau 2 : il faut les y ajouter, et refaire leurs nœuds dans le Blueprint du niveau 2.</div>
 </div>
-
 <h2>Étape 2 : la zone d'arrivée</h2>
 <div class="method">
-<ol>
-<li>Retourne dans <strong>Niveau1</strong>.</li>
-<li>Ajoute un objet <strong>Zone</strong> (catégorie Formes de base &amp; Visuels) et nomme-le <strong>arrivee</strong>.</li>
-<li>Place-le au bout du niveau, là où le joueur doit arriver. Une zone est <strong>invisible</strong> pendant le jeu : pense à mettre un drapeau ou une porte au même endroit pour que le joueur la voie.</li>
-</ol>
+<ol><li>Retourne dans <strong>Niveau1</strong>.</li><li>Ajoute un objet <strong>Zone</strong> (catégorie Formes de base &amp; Visuels) et nomme-le <strong>arrivee</strong>.</li><li>Place-le au bout du niveau, là où le joueur doit arriver. Une zone est <strong>invisible</strong> pendant le jeu : pense à mettre un drapeau ou une porte au même endroit pour que le joueur la voie.</li></ol>
 </div>
-
 <h2>Étape 3 : le Blueprint du niveau 1</h2>
 <div class="method">
-<ol>
-<li>Ouvre le <strong>Blueprint</strong> de <strong>Niveau1</strong>.</li>
-<li>Ajoute l'événement <strong>« Collision A/B »</strong> : Objet A <strong>player</strong>, Objet B <strong>arrivee</strong>.</li>
-<li>Ajoute le nœud <strong>« Scène suivante »</strong> (catégorie Scène &amp; HUD) et relie-le à la sortie <strong>Collision</strong>.</li>
-<li>Appuie sur <strong>Sauvegarde</strong>, lance le jeu et va jusqu'à la zone.</li>
-</ol>
+<ol><li>Ouvre le <strong>Blueprint</strong> de <strong>Niveau1</strong>.</li><li>Ajoute l'événement <strong>« Collision A/B »</strong> : Objet A <strong>player</strong>, Objet B <strong>arrivee</strong>.</li><li>Ajoute le nœud <strong>« Scène suivante »</strong> (catégorie Scène &amp; HUD) et relie-le à la sortie <strong>Collision</strong>.</li><li>Sauvegarde, lance le jeu et va jusqu'à la zone.</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>Collision A/B</b><span>A : player · B : arrivee</span></div>
 <div class="fleche"><em>Collision</em> →</div>
@@ -74,22 +81,16 @@
 </div>
 <div class="tip">👉 <strong>« Scène suivante »</strong> suit l'ordre de la liste des scènes : Niveau1, puis Niveau2, puis Niveau3… Pour aller à une scène précise (un écran « Bravo ! » par exemple), utilise plutôt <strong>« Changer de scène »</strong> et choisis la scène comme cible.</div>
 </div>
-
 <h2>Garder le score d'un niveau à l'autre</h2>
 <div class="method">
 <p>Une variable <strong>Locale</strong> repart de zéro dans chaque scène. Pour que le score continue au niveau 2, crée la variable <strong>score</strong> en portée <strong>Globale</strong> (section Variables). Tous les niveaux utilisent alors la même.</p>
 <div class="tip">👉 Dans le niveau 2, pense à afficher le score dès le départ : <strong>« Au Démarrage »</strong> → <strong>« Modifier Texte »</strong> (texteScore) avec <code>="Score : " + score</code>.</div>
 </div>
-
 <h2>Si ça ne marche pas</h2>
-<ul>
-<li><strong>Rien ne se passe dans la zone :</strong> vérifie les noms <strong>player</strong> et <strong>arrivee</strong> dans « Collision A/B », et que la zone est bien sur le chemin du joueur.</li>
-<li><strong>Le jeu ne change pas de scène :</strong> Niveau1 doit être <strong>avant</strong> Niveau2 dans la liste des scènes. S'il n'y a pas de scène après, « Scène suivante » ne fait rien.</li>
-<li><strong>Le niveau 2 ne réagit pas :</strong> ses nœuds sont dans son propre Blueprint ; ouvre le Blueprint de Niveau2 pour les ajouter.</li>
-</ul>
+<ul><li><strong>Rien ne se passe dans la zone :</strong> vérifie les noms <strong>player</strong> et <strong>arrivee</strong> dans « Collision A/B », et que la zone est bien sur le chemin du joueur.</li><li><strong>Le jeu ne change pas de scène :</strong> Niveau1 doit être <strong>avant</strong> Niveau2 dans la liste des scènes. S'il n'y a pas de scène après, « Scène suivante » ne fait rien.</li><li><strong>Le niveau 2 ne réagit pas :</strong> ses nœuds sont dans son propre Blueprint ; ouvre le Blueprint de Niveau2 pour les ajouter.</li></ul>
 
 <div class="nav">
-<a href="vie-game-over.html">← Vie et Game Over</a>
+<a href="vie-game-over.html">← Perdre de la vie et Game Over</a>
 <a href="../index.html#guides">Tous les guides →</a>
 </div>
 </main>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как заставить персонажа прыгать в Yop2D? | Руководство Yop2D</title>
+<meta name="description" content="Прыжок персонажа в Yop2D без кода: гравитация, твёрдый пол, кнопка прыжка и узлы «Если на земле» и «Импульс (прыжок)».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/sauter.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/sauter.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/sauter.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/sauter.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/sauter.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/sauter.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/sauter.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/sauter.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/sauter.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/sauter.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Как заставить персонажа прыгать?",
+ "description": "Прыжок персонажа в Yop2D без кода: гравитация, твёрдый пол, кнопка прыжка и узлы «Если на земле» и «Импульс (прыжок)».",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Дать персонажу гравитацию",
+   "text": "Отметь Включить физику (столкновения) и переключи на Физика: Динамика ▼."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Сделать твёрдый пол",
+   "text": "Добавь пол с Включить физику (столкновения), оставив Физика: Статика ►."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Соединить кнопку прыжка",
+   "text": "Клик по объекту (btnJump) → Если на земле (player) → Истина → Импульс (прыжок) (player, -15)."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Как заставить персонажа прыгать?</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../sauter.html" hreflang="fr">Français</a> · <a href="../en/sauter.html" hreflang="en">English</a> · <a href="../es/sauter.html" hreflang="es">Español</a> · <a href="../de/sauter.html" hreflang="de">Deutsch</a> · <a href="../it/sauter.html" hreflang="it">Italiano</a> · <a href="../pt/sauter.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/sauter.html" hreflang="zh">中文</a> · <a href="../ja/sauter.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Чтобы персонаж прыгал, нужны три вещи: он должен <strong>падать</strong> (гравитация), нужен <strong>пол</strong>, на который он встанет, и <strong>кнопка</strong>, которая подбросит его вверх, но только когда он стоит.</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>персонаж с именем <strong>player</strong> (Квадрат или Изображение);</li><li>пол: широкий плоский Квадрат с именем <strong>floor</strong> внизу сцены;</li><li>кнопка с именем <strong>btnJump</strong> (Кнопка или Квадрат) справа внизу экрана.</li></ul>
+</div>
+<h2>Шаг 1: дать персонажу гравитацию</h2>
+<div class="method">
+<ol><li>Выбери <strong>player</strong>.</li><li>В инспекторе, раздел <strong>«Физика»</strong>, отметь <strong>«Включить физику (столкновения)»</strong>.</li><li>Нажми кнопку <strong>«Физика: Статика ►»</strong>, чтобы она стала <strong>«Физика: Динамика ▼»</strong>. «Динамический» значит, что объект падает.</li></ol>
+<div class="tip">👉 Настройка <strong>«Гравитация (напр: 1.0)»</strong> меняет скорость падения: 0.5 — медленно, 2 — быстро.</div>
+</div>
+<h2>Шаг 2: сделать твёрдый пол</h2>
+<div class="method">
+<ol><li>Выбери <strong>floor</strong>.</li><li>Тоже отметь <strong>«Включить физику (столкновения)»</strong>, но <strong>оставь «Физика: Статика ►»</strong>: статический объект не двигается и останавливает падающие на него объекты.</li><li>Поставь <strong>player</strong> чуть выше пола.</li></ol>
+<div class="tip">👉 Платформы делаются так же: статические квадраты повыше.</div>
+</div>
+<h2>Шаг 3: кнопка прыжка</h2>
+<div class="method">
+<ol><li>Открой <strong>Blueprint</strong> сцены.</li><li>Добавь событие <strong>«Клик по объекту»</strong> и выбери цель <strong>btnJump</strong>.</li><li>Добавь узел <strong>«Если на земле»</strong> (категория Логика) и выбери цель <strong>player</strong>.</li><li>Добавь узел <strong>«Импульс (прыжок)»</strong> (категория Движение и ИИ): цель <strong>player</strong>, <strong>Вертикальная сила (минус = вверх) = -15</strong>.</li><li>Соедини выход «Клик по объекту» со входом «Если на земле», затем выход <strong>Истина</strong> узла «Если на земле» со входом «Импульс (прыжок)».</li><li>Сохрани, запусти игру и нажми кнопку.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Клик по объекту</b><span>цель: btnJump</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Если на земле</b><span>цель: player</span></div>
+<div class="fleche"><em>Истина</em> →</div>
+<div class="noeud"><b>Импульс (прыжок)</b><span>цель: player · -15</span></div>
+</div>
+<div class="tip">👉 <strong>Зачем «Если на земле»?</strong> Без него игрок мог бы прыгнуть ещё раз прямо в воздухе и улететь, нажимая кнопку несколько раз.</div>
+<div class="tip">👉 <strong>Минус = вверх.</strong> В Yop2D числа Y растут к низу экрана. -15 — маленький прыжок, -20 — большой.</div>
+</div>
+<h2>А как идти во время прыжка?</h2>
+<div class="method">
+<p>Добавь кнопки влево и вправо из руководства <a href="../ru/deplacer-personnage.html">Как двигать персонажа</a> (способ 1). Можно держать палец на «вправо» и нажимать «прыжок» другим пальцем.</p>
+</div>
+<h2>Если не работает</h2>
+<ul><li><strong>Персонаж не падает:</strong> проверь, что он в режиме «Физика: Динамика ▼».</li><li><strong>Он проваливается сквозь пол:</strong> у пола должно быть отмечено «Включить физику (столкновения)», и он должен оставаться статическим.</li><li><strong>При нажатии ничего не происходит:</strong> проверь, что провода соединены и используется выход <strong>Истина</strong>. Не забудь сохранить перед запуском игры.</li><li><strong>Для сравнения</strong> открой пример <strong>«Платформер»</strong>, который идёт с Yop2D: он устроен именно так.</li></ul>
+
+<div class="nav">
+<a href="../ru/deplacer-personnage.html">← Движение персонажа</a>
+<a href="../ru/pieces-score.html">Следующее руководство: Собирать монеты и считать очки →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../index.html">Официальный сайт</a></p>
+</footer>
+</body>
+</html>

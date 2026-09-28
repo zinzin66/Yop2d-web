@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何在 Yop2D 中进入下一关？| Yop2D 教程</title>
+<meta name="description" content="在 Yop2D 中无需代码制作多个关卡：每关一个场景、一个终点区域、“碰撞 A/B” 和 “下一个场景” 节点，以及用全局变量延续的分数。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/niveau-suivant.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/niveau-suivant.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/niveau-suivant.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/niveau-suivant.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/niveau-suivant.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/niveau-suivant.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/niveau-suivant.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/niveau-suivant.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/niveau-suivant.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/niveau-suivant.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何进入下一关？",
+ "description": "在 Yop2D 中无需代码制作多个关卡：每关一个场景、一个终点区域、“碰撞 A/B” 和 “下一个场景” 节点，以及用全局变量延续的分数。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "每关一个场景",
+   "text": "场景 区域：先 Level1，再 Level2，按这个顺序。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "一个终点区域",
+   "text": "在 Level1 的关卡尽头放一个名为 finish 的 区域 对象。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "连接节点",
+   "text": "碰撞 A/B（player，finish）→ 下一个场景。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>如何进入下一关？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../niveau-suivant.html" hreflang="fr">Français</a> · <a href="../en/niveau-suivant.html" hreflang="en">English</a> · <a href="../es/niveau-suivant.html" hreflang="es">Español</a> · <a href="../de/niveau-suivant.html" hreflang="de">Deutsch</a> · <a href="../it/niveau-suivant.html" hreflang="it">Italiano</a> · <a href="../pt/niveau-suivant.html" hreflang="pt">Português</a> · <a href="../ru/niveau-suivant.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/niveau-suivant.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>在 Yop2D 中，<strong>每一关就是一个场景</strong>。玩家走到关卡尽头时，会碰到一个看不见的终点区域，游戏就进入下一个场景。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>一个能正常运行的第一关，里面有一个名为 <strong>player</strong> 的、可以移动的角色；</li><li>第二关（我们在第 1 步创建）。</li></ul>
+</div>
+<h2>第 1 步：每关一个场景</h2>
+<div class="method">
+<ol><li>在左侧面板打开 <strong>场景</strong> 区域。</li><li>把当前场景重命名为 <strong>Level1</strong>，然后新建一个场景 <strong>Level2</strong>。</li><li>搭建第 2 关：地面、平台，还有带按钮的角色 <strong>player</strong>。</li></ol>
+<div class="tip attention">⚠️ <strong>每个场景都有自己的对象和自己的 Blueprint。</strong>第 1 关的按钮和角色在第 2 关里并不存在：需要在那里重新添加，并在第 2 关的 Blueprint 中重新连好它们的节点。</div>
+</div>
+<h2>第 2 步：终点区域</h2>
+<div class="method">
+<ol><li>回到 <strong>Level1</strong>。</li><li>添加一个 <strong>区域</strong> 对象（类别 基本形状与视觉效果），命名为 <strong>finish</strong>。</li><li>把它放在关卡尽头、玩家要到达的地方。区域在游戏中是<strong>看不见的</strong>：在同一位置放一面旗子或一扇门，让玩家能看到。</li></ol>
+</div>
+<h2>第 3 步：第 1 关的 Blueprint</h2>
+<div class="method">
+<ol><li>打开 <strong>Level1</strong> 的 <strong>蓝图</strong>。</li><li>添加 <strong>“碰撞 A/B”</strong> 事件：对象 A <strong>player</strong>，对象 B <strong>finish</strong>。</li><li>添加 <strong>“下一个场景”</strong> 节点（类别 场景与 HUD），把它连到 <strong>碰撞</strong> 输出。</li><li>保存，开始游戏，走到区域那里。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>碰撞 A/B</b><span>A：player · B：finish</span></div>
+<div class="fleche"><em>碰撞</em> →</div>
+<div class="noeud"><b>下一个场景</b></div>
+</div>
+<div class="tip">👉 <strong>“下一个场景”</strong> 按场景列表的顺序前进：Level1、Level2、Level3……如果要去某个特定场景（比如“太棒了！”画面），请改用 <strong>“切换场景”</strong>，并选择那个场景作为目标。</div>
+</div>
+<h2>在关卡之间保留分数</h2>
+<div class="method">
+<p>作用域为 <strong>“局部”</strong> 的变量在每个场景都会从零开始。要让分数带到第 2 关，请把 <strong>score</strong> 变量的作用域设为 <strong>“全局”</strong>（变量 区域）。这样所有关卡用的就是同一个变量。</p>
+<div class="tip">👉 在第 2 关，记得一开始就显示分数：<strong>“启动时”</strong> → <strong>“修改文本”</strong>（scoreText），内容为 <code>="分数：" + score</code>。</div>
+</div>
+<h2>如果不起作用</h2>
+<ul><li><strong>在区域里没有反应：</strong>检查 “碰撞 A/B” 中的名称 <strong>player</strong> 和 <strong>finish</strong>，并确认区域确实在玩家的路线上。</li><li><strong>游戏没有换场景：</strong>在场景列表中，Level1 必须排在 Level2 <strong>前面</strong>。如果后面没有场景，“下一个场景” 什么也不会做。</li><li><strong>第 2 关没有反应：</strong>它的节点在它自己的 Blueprint 里；打开 Level2 的 Blueprint 添加它们。</li></ul>
+
+<div class="nav">
+<a href="../zh/vie-game-over.html">← 掉血与 Game Over</a>
+<a href="../../index.html#guides">全部教程 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../index.html">官方网站</a></p>
+</footer>
+</body>
+</html>

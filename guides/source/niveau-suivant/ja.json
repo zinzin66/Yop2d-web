@@ -1,0 +1,144 @@
+{
+  "titre_page": "Yop2D で次のステージに進むには？| Yop2D ガイド",
+  "description": "Yop2D でコードを書かずにいくつものステージを作る：1 ステージに 1 シーン、ゴールゾーン、[[NoeudEventCollisionAB]] と [[scene_suivante]] ノード、そしてグローバル変数で続くスコア。",
+  "h1": "次のステージに進むには？",
+  "carte": [
+    "次のステージに進む",
+    "1 ステージに 1 シーン、ゴールゾーン、そして続くスコア。"
+  ],
+  "etapes": [
+    [
+      "1 ステージに 1 シーン",
+      "{{lang:panneau_ress_scenes}} の欄：Level1、次に Level2 の順番で。"
+    ],
+    [
+      "ゴールゾーン",
+      "Level1 のステージの終わりに、finish という名前の {{lang:obj_prefix_zone}} オブジェクト。"
+    ],
+    [
+      "ノードをつなぐ",
+      "{{NoeudEventCollisionAB}}（player、finish）→ {{scene_suivante}}。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Yop2D では、**ステージ 1 つが 1 つのシーン**です。プレイヤーがステージの終わりに着くと、見えないゴールゾーンに触れて、ゲームが次のシーンに進みます。"
+    ],
+    [
+      "besoin",
+      [
+        "ちゃんと動く最初のステージと、動かせる **player** という名前のキャラクター；",
+        "2 つ目のステージ（ステップ 1 で作ります）。"
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 1：1 ステージに 1 シーン"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "左のパネルで **{{lang:panneau_ress_scenes}}** の欄を開きます。",
+            "今のシーンの名前を **Level1** に変え、新しいシーン **Level2** を作ります。",
+            "ステージ 2 を作ります：地面、足場、そしてもう一度ボタンつきのキャラクター **player**。"
+          ]
+        ],
+        [
+          "attention",
+          "**シーンごとに、オブジェクトと Blueprint は別々です。** ステージ 1 のボタンやキャラクターはステージ 2 にはありません：そこに追加して、ステージ 2 の Blueprint でノードを作り直す必要があります。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 2：ゴールゾーン"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "**Level1** に戻ります。",
+            "**{{lang:obj_prefix_zone}}** オブジェクト（カテゴリー {{lang:cat_formes_base}}）を追加し、名前を **finish** にします。",
+            "プレイヤーがたどり着く、ステージの終わりに置きます。ゾーンはゲーム中は**見えません**：プレイヤーにわかるように、同じ場所に旗やドアを置きましょう。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 3：ステージ 1 の Blueprint"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "**Level1** の **{{lang:titre_blueprint}}** を開きます。",
+            "**[[NoeudEventCollisionAB]]** イベントを追加します：{{lang:noeud_cible_objet_a}} **player**、{{lang:noeud_cible_objet_b}} **finish**。",
+            "**[[scene_suivante]]** ノード（カテゴリー {{lang:cat_scene_hud}}）を追加し、**{{lang:port_evt_collision}}** 出力につなぎます。",
+            "保存してゲームを開始し、ゾーンまで行きます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "A：player · B：finish"
+            ],
+            [
+              "→",
+              "{{lang:port_evt_collision}}"
+            ],
+            [
+              "n",
+              "{{scene_suivante}}",
+              ""
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**[[scene_suivante]]** はシーン一覧の順番に進みます：Level1、Level2、Level3…。決まったシーン（たとえば「よくできました！」画面）に行きたいときは、**[[changer_scene]]** を使い、ターゲットにそのシーンを選びます。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステージをまたいでスコアを残す"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "範囲が **[[lang:var_scope_locale]]** の変数は、シーンごとに 0 から始まります。スコアをステージ 2 でも続けるには、変数 **score** を範囲 **[[lang:var_scope_globale]]** で作ります（{{lang:panneau_ress_variables}} の欄）。すると、すべてのステージが同じ変数を使います。"
+        ],
+        [
+          "tip",
+          "ステージ 2 では、最初からスコアを表示しましょう：**[[NoeudEventStart]]** → **[[modifier_texte]]**（scoreText）に `=\"スコア：\" + score`。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "うまくいかないとき"
+    ],
+    [
+      "ul",
+      [
+        "**ゾーンで何も起きない：** [[NoeudEventCollisionAB]] の名前 **player** と **finish**、そしてゾーンが本当にプレイヤーの通り道にあるか確認してください。",
+        "**シーンが変わらない：** シーン一覧で Level1 が Level2 より**前**にある必要があります。次のシーンがないと、[[scene_suivante]] は何もしません。",
+        "**ステージ 2 が反応しない：** ノードはそれぞれのシーンの Blueprint にあります。Level2 の Blueprint を開いて追加してください。"
+      ]
+    ]
+  ]
+}

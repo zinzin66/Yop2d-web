@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Come far saltare un personaggio in Yop2D? | Guida Yop2D</title>
+<meta name="description" content="Far saltare un personaggio in Yop2D, senza codice: gravità, pavimento solido, pulsante di salto e i nodi «Se è a terra» e «Impulso (salto)».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/it/sauter.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/sauter.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/sauter.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/sauter.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/sauter.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/sauter.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/sauter.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/sauter.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/sauter.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/sauter.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Come far saltare un personaggio?",
+ "description": "Far saltare un personaggio in Yop2D, senza codice: gravità, pavimento solido, pulsante di salto e i nodi «Se è a terra» e «Impulso (salto)».",
+ "inLanguage": "it",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motore di gioco 2D senza codice per Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Dare la gravità al personaggio",
+   "text": "Spunta Abilita corpo fisico (Collisioni) e passa a Fisica: Dinamica ▼."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Mettere un pavimento solido",
+   "text": "Aggiungi un pavimento con Abilita corpo fisico (Collisioni), lasciato su Fisica: Statica ►."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Collegare il pulsante di salto",
+   "text": "Al Clic sull'Oggetto (btnJump) → Se è a terra (player) → Vero → Impulso (salto) (player, -15)."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Come far saltare un personaggio?</h1>
+<p>Guida per principianti · senza codice</p>
+<p class="langues"><a href="../sauter.html" hreflang="fr">Français</a> · <a href="../en/sauter.html" hreflang="en">English</a> · <a href="../es/sauter.html" hreflang="es">Español</a> · <a href="../de/sauter.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="../pt/sauter.html" hreflang="pt">Português</a> · <a href="../ru/sauter.html" hreflang="ru">Русский</a> · <a href="../zh/sauter.html" hreflang="zh">中文</a> · <a href="../ja/sauter.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Perché un personaggio salti servono tre cose: che <strong>cada</strong> (la gravità), un <strong>pavimento</strong> su cui appoggiarsi e un <strong>pulsante</strong> che lo spinga in alto, solo se è ben appoggiato.</p>
+<div class="besoin">
+<b>Ti serve:</b>
+<ul><li>un personaggio chiamato <strong>player</strong> (un Quadrato o un'Immagine);</li><li>un pavimento: un Quadrato largo e piatto chiamato <strong>floor</strong>, in basso nella scena;</li><li>un pulsante chiamato <strong>btnJump</strong> (un Pulsante o un Quadrato), in basso a destra sullo schermo.</li></ul>
+</div>
+<h2>Passo 1: dare la gravità al personaggio</h2>
+<div class="method">
+<ol><li>Seleziona <strong>player</strong>.</li><li>Nell'ispettore, sezione <strong>«Fisica e Ambiente»</strong>, spunta <strong>«Abilita corpo fisico (Collisioni)»</strong>.</li><li>Tocca il pulsante <strong>«Fisica: Statica ►»</strong> perché diventi <strong>«Fisica: Dinamica ▼»</strong>. «Dinamico» vuol dire che l'oggetto cade.</li></ol>
+<div class="tip">👉 L'impostazione <strong>«Gravità (es: 1.0)»</strong> cambia la velocità di caduta: 0.5 per cadere piano, 2 per cadere veloce.</div>
+</div>
+<h2>Passo 2: mettere un pavimento solido</h2>
+<div class="method">
+<ol><li>Seleziona <strong>floor</strong>.</li><li>Spunta anche qui <strong>«Abilita corpo fisico (Collisioni)»</strong>, ma <strong>lascialo su «Fisica: Statica ►»</strong>: un oggetto statico non si muove e ferma gli oggetti che ci cadono sopra.</li><li>Metti <strong>player</strong> un po' sopra il pavimento.</li></ol>
+<div class="tip">👉 Puoi fare delle piattaforme allo stesso modo: quadrati statici messi più in alto.</div>
+</div>
+<h2>Passo 3: il pulsante di salto</h2>
+<div class="method">
+<ol><li>Apri il <strong>Blueprint</strong> della scena.</li><li>Aggiungi l'evento <strong>«Al Clic sull'Oggetto»</strong> e scegli <strong>btnJump</strong> come bersaglio.</li><li>Aggiungi il nodo <strong>«Se è a terra»</strong> (categoria Logica e Condizioni) e scegli <strong>player</strong> come bersaglio.</li><li>Aggiungi il nodo <strong>«Impulso (salto)»</strong> (categoria Movimenti e IA): bersaglio <strong>player</strong>, <strong>Forza verticale (negativo = sale) = -15</strong>.</li><li>Collega l'uscita di «Al Clic sull'Oggetto» all'ingresso di «Se è a terra», poi l'uscita <strong>Vero</strong> di «Se è a terra» all'ingresso di «Impulso (salto)».</li><li>Salva, avvia il gioco e tocca il pulsante.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Al Clic sull'Oggetto</b><span>bersaglio: btnJump</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Se è a terra</b><span>bersaglio: player</span></div>
+<div class="fleche"><em>Vero</em> →</div>
+<div class="noeud"><b>Impulso (salto)</b><span>bersaglio: player · -15</span></div>
+</div>
+<div class="tip">👉 <strong>Perché «Se è a terra»?</strong> Senza, il giocatore potrebbe saltare di nuovo a mezz'aria e volare via toccando il pulsante più volte.</div>
+<div class="tip">👉 <strong>Negativo = verso l'alto.</strong> In Yop2D i numeri Y crescono verso il basso dello schermo. -15 fa un piccolo salto, -20 un salto grande.</div>
+</div>
+<h2>E per avanzare durante il salto?</h2>
+<div class="method">
+<p>Aggiungi i pulsanti sinistra e destra della guida <a href="../it/deplacer-personnage.html">Muovere un personaggio</a> (metodo 1). Puoi tenere un dito su «destra» e toccare «salto» con un altro dito.</p>
+</div>
+<h2>Se non funziona</h2>
+<ul><li><strong>Il personaggio non cade:</strong> controlla che sia su «Fisica: Dinamica ▼».</li><li><strong>Attraversa il pavimento:</strong> il pavimento deve avere «Abilita corpo fisico (Collisioni)» spuntato e restare statico.</li><li><strong>Toccando non succede nulla:</strong> controlla che i fili siano collegati e che l'uscita usata sia <strong>Vero</strong>. Ricordati di salvare prima di avviare il gioco.</li><li><strong>Per confrontare</strong>, apri il gioco di esempio <strong>«Piattaforma»</strong> incluso in Yop2D: usa esattamente questo schema.</li></ul>
+
+<div class="nav">
+<a href="../it/deplacer-personnage.html">← Muovere un personaggio</a>
+<a href="../it/pieces-score.html">Guida successiva: Raccogliere monete e contare i punti →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motore di gioco 2D gratuito e senza codice per Android · <a href="../../index.html">Sito ufficiale</a></p>
+</footer>
+</body>
+</html>

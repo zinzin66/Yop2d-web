@@ -1,0 +1,213 @@
+{
+  "titre_page": "Comment faire perdre de la vie au joueur dans Yop2D ? | Guide Yop2D",
+  "description": "Gérer la vie du joueur dans Yop2D, sans code : variable vie, barre de vie, nœuds [[ajouter_variable]], [[modifier_progression]], [[condition]] et [[recommencer_scene]].",
+  "h1": "Comment faire perdre de la vie au joueur ?",
+  "carte": [
+    "Perdre de la vie et Game Over",
+    "Variable vie, barre de vie et retour au début quand la vie tombe à 0."
+  ],
+  "etapes": [
+    [
+      "Créer la variable vie et la barre",
+      "Variable vie ({{lang:var_type_entier}}, 3) et barre barreVie avec {{lang:insp_label_prog_max}} = 3."
+    ],
+    [
+      "Perdre un point",
+      "{{NoeudEventCollisionTag}} (player, danger) → {{ajouter_variable}} (vie, -1) → {{modifier_progression}} (barreVie, =vie)."
+    ],
+    [
+      "Game Over",
+      "{{condition}} (=vie <= 0) → {{lang:port_vrai}} → {{recommencer_scene}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Le joueur commence avec **3 vies**. À chaque fois qu'il touche un danger (des pics, un ennemi…), il en perd une et la **barre de vie** baisse. À 0, c'est **Game Over** : le niveau recommence."
+    ],
+    [
+      "besoin",
+      [
+        "un personnage nommé **player** qui peut se déplacer (voir [Faire bouger un personnage](guide:deplacer-personnage)) ;",
+        "un ou plusieurs dangers, par exemple des {{lang:obj_prefix_carre}}s rouges nommés **pics1**, **pics2**… ;",
+        "une barre de vie : un objet **{{lang:obj_prefix_barre_progression}}** (barre de progression) nommé **barreVie**, en haut de l'écran."
+      ]
+    ],
+    [
+      "h2",
+      "Étape 1 : préparer les dangers et la barre"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Sélectionne chaque danger et écris **danger** dans son champ **[[lang:insp_label_tag]]**.",
+            "Sélectionne **barreVie**. Dans la section **[[lang:insp_sep_progression]]** de l'inspecteur : **{{lang:insp_label_prog_min}} = 0**, **{{lang:insp_label_prog_max}} = 3**, **{{lang:insp_label_prog_actuelle}} = 3**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 2 : créer la variable « vie »"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Dans le panneau de gauche, section **{{lang:panneau_ress_variables}}**, crée une variable.",
+            "Nom : **vie** · Portée : **{{lang:var_scope_locale}}** · Type : **{{lang:var_type_entier}}** · Valeur initiale : **3**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 3 : perdre une vie"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Ouvre le **{{lang:titre_blueprint}}** de la scène.",
+            "Ajoute l'événement **[[NoeudEventCollisionTag]]** : cible **player**, {{lang:Tag}} **danger**.",
+            "Ajoute **[[ajouter_variable]]** : variable **vie**, **{{lang:ajouter_variable.valeur}} = -1** (avec le signe moins, pour retirer).",
+            "Ajoute **[[modifier_progression]]** : cible **barreVie**, **{{lang:modifier_progression.valeur}}** = `=vie`",
+            "Relie les trois nœuds dans l'ordre."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "cible : player · {{lang:Tag}} : danger"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "vie · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_progression}}",
+              "barreVie · =vie"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "Écrire `=vie` dans [[lang:modifier_progression.valeur]] veut dire : « prends la valeur de la variable vie ». La barre suit donc toujours le nombre de vies."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 4 : le Game Over"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Après [[modifier_progression]], ajoute le nœud **[[condition]]** avec **{{lang:condition.condition}}** = `=vie <= 0` (« vie plus petite ou égale à 0 »).",
+            "Relie sa sortie **{{lang:port_vrai}}** au nœud **[[recommencer_scene]]** (catégorie {{lang:cat_scene_hud}}).",
+            "Sauvegarde, lance le jeu et touche un danger trois fois."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_progression}}",
+              "barreVie"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=vie <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[recommencer_scene]] remet tout comme au début : les objets à leur place, et les variables **{{lang:var_scope_locale}}s** (donc vie = 3) à leur valeur de départ."
+        ],
+        [
+          "tip",
+          "**Envie d'un vrai écran de fin ?** Au lieu de recommencer tout de suite, relie la sortie {{lang:port_vrai}} à **[[modifier_texte]]** (un texte « Perdu ! »), puis **[[attendre]]** (2 secondes), puis **[[recommencer_scene]]**."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Bonus : tomber dans le vide"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Pour un jeu de plateforme, place un objet **{{lang:obj_prefix_zone}}** tout en bas de la scène, nommé **zoneChute** (une zone est invisible pendant le jeu). Puis :"
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "{{lang:noeud_cible_objet_a}} : player · {{lang:noeud_cible_objet_b}} : zoneChute"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Si ça ne marche pas"
+    ],
+    [
+      "ul",
+      [
+        "**La vie ne baisse pas :** vérifie le tag **danger** sur chaque danger, et le signe moins dans **-1**.",
+        "**La barre ne bouge pas :** la cible de [[modifier_progression]] doit être une **barre de progression**, avec un maximum de 3.",
+        "**Le jeu ne recommence pas :** la condition doit être reliée par sa sortie **{{lang:port_vrai}}**."
+      ]
+    ]
+  ]
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как перейти на следующий уровень в Yop2D? | Руководство Yop2D</title>
+<meta name="description" content="Несколько уровней в Yop2D без кода: одна сцена на уровень, зона финиша, узлы «Столкновение A/B» и «Следующая сцена» и счёт, который сохраняется в глобальной переменной.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/niveau-suivant.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/niveau-suivant.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/niveau-suivant.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/niveau-suivant.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/niveau-suivant.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/niveau-suivant.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/niveau-suivant.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/niveau-suivant.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/niveau-suivant.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/niveau-suivant.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Как перейти на следующий уровень?",
+ "description": "Несколько уровней в Yop2D без кода: одна сцена на уровень, зона финиша, узлы «Столкновение A/B» и «Следующая сцена» и счёт, который сохраняется в глобальной переменной.",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Одна сцена на уровень",
+   "text": "Раздел Сцены: Level1, затем Level2, именно в таком порядке."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Зона финиша",
+   "text": "В Level1 — объект Зона с именем finish в конце уровня."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Соединить узлы",
+   "text": "Столкновение A/B (player, finish) → Следующая сцена."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Как перейти на следующий уровень?</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../niveau-suivant.html" hreflang="fr">Français</a> · <a href="../en/niveau-suivant.html" hreflang="en">English</a> · <a href="../es/niveau-suivant.html" hreflang="es">Español</a> · <a href="../de/niveau-suivant.html" hreflang="de">Deutsch</a> · <a href="../it/niveau-suivant.html" hreflang="it">Italiano</a> · <a href="../pt/niveau-suivant.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/niveau-suivant.html" hreflang="zh">中文</a> · <a href="../ja/niveau-suivant.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>В Yop2D <strong>каждый уровень — это сцена</strong>. Когда игрок доходит до конца уровня, он касается невидимой зоны финиша, и игра переходит к следующей сцене.</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>первый уровень, который работает, с персонажем <strong>player</strong>, который умеет двигаться;</li><li>второй уровень (создадим его в шаге 1).</li></ul>
+</div>
+<h2>Шаг 1: одна сцена на уровень</h2>
+<div class="method">
+<ol><li>На левой панели открой раздел <strong>Сцены</strong>.</li><li>Переименуй текущую сцену в <strong>Level1</strong>, затем создай новую сцену <strong>Level2</strong>.</li><li>Построй уровень 2: пол, платформы и снова персонажа <strong>player</strong> с его кнопками.</li></ol>
+<div class="tip attention">⚠️ <strong>У каждой сцены свои объекты и свой Blueprint.</strong> Кнопок и персонажа уровня 1 на уровне 2 нет: их нужно добавить туда и заново собрать их узлы в Blueprint уровня 2.</div>
+</div>
+<h2>Шаг 2: зона финиша</h2>
+<div class="method">
+<ol><li>Вернись в <strong>Level1</strong>.</li><li>Добавь объект <strong>Зона</strong> (категория Базовые формы и визуал) и назови его <strong>finish</strong>.</li><li>Поставь его в конце уровня, куда должен прийти игрок. Зона <strong>невидима</strong> во время игры: поставь в то же место флаг или дверь, чтобы игрок её видел.</li></ol>
+</div>
+<h2>Шаг 3: Blueprint уровня 1</h2>
+<div class="method">
+<ol><li>Открой <strong>Blueprint</strong> сцены <strong>Level1</strong>.</li><li>Добавь событие <strong>«Столкновение A/B»</strong>: Объект A <strong>player</strong>, Объект B <strong>finish</strong>.</li><li>Добавь узел <strong>«Следующая сцена»</strong> (категория Сцена и HUD) и соедини его с выходом <strong>Столкновение</strong>.</li><li>Сохрани, запусти игру и дойди до зоны.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Столкновение A/B</b><span>A: player · B: finish</span></div>
+<div class="fleche"><em>Столкновение</em> →</div>
+<div class="noeud"><b>Следующая сцена</b></div>
+</div>
+<div class="tip">👉 <strong>«Следующая сцена»</strong> идёт по порядку списка сцен: Level1, потом Level2, потом Level3… Чтобы перейти к определённой сцене (например, к экрану «Браво!»), используй <strong>«Перейти к сцене»</strong> и выбери сцену как цель.</div>
+</div>
+<h2>Сохранять счёт между уровнями</h2>
+<div class="method">
+<p>Переменная с областью <strong>«Локальная»</strong> в каждой сцене начинается с нуля. Чтобы счёт продолжался на уровне 2, создай переменную <strong>score</strong> с областью <strong>«Глобальная»</strong> (раздел Переменные). Тогда все уровни используют одну и ту же.</p>
+<div class="tip">👉 На уровне 2 не забудь показать счёт с самого начала: <strong>«При старте»</strong> → <strong>«Изменить текст»</strong> (scoreText) с <code>="Счёт: " + score</code>.</div>
+</div>
+<h2>Если не работает</h2>
+<ul><li><strong>В зоне ничего не происходит:</strong> проверь имена <strong>player</strong> и <strong>finish</strong> в «Столкновение A/B» и что зона действительно на пути игрока.</li><li><strong>Игра не меняет сцену:</strong> Level1 должна стоять <strong>перед</strong> Level2 в списке сцен. Если после неё нет сцены, «Следующая сцена» ничего не делает.</li><li><strong>Уровень 2 не реагирует:</strong> его узлы — в его собственном Blueprint; открой Blueprint сцены Level2, чтобы их добавить.</li></ul>
+
+<div class="nav">
+<a href="../ru/vie-game-over.html">← Потеря здоровья и Game Over</a>
+<a href="../../index.html#guides">Все руководства →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../index.html">Официальный сайт</a></p>
+</footer>
+</body>
+</html>

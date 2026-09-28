@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как игроку терять здоровье в Yop2D? | Руководство Yop2D</title>
+<meta name="description" content="Здоровье игрока в Yop2D без кода: переменная здоровья, полоска здоровья и узлы «Добавить к переменной», «Задать прогресс», «Условие» и «Перезапустить сцену».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/vie-game-over.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/vie-game-over.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/vie-game-over.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/vie-game-over.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/vie-game-over.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/vie-game-over.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/vie-game-over.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/vie-game-over.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/vie-game-over.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/vie-game-over.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Как игроку терять здоровье?",
+ "description": "Здоровье игрока в Yop2D без кода: переменная здоровья, полоска здоровья и узлы «Добавить к переменной», «Задать прогресс», «Условие» и «Перезапустить сцену».",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Создать переменную здоровья и полоску",
+   "text": "Переменная vie (Целое, 3) и полоска healthBar с Максимальное значение = 3."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Потерять очко",
+   "text": "Если объект касается тега (player, danger) → Добавить к переменной (vie, -1) → Задать прогресс (healthBar, =vie)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Game Over",
+   "text": "Условие (=vie <= 0) → Истина → Перезапустить сцену."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Как игроку терять здоровье?</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../vie-game-over.html" hreflang="fr">Français</a> · <a href="../en/vie-game-over.html" hreflang="en">English</a> · <a href="../es/vie-game-over.html" hreflang="es">Español</a> · <a href="../de/vie-game-over.html" hreflang="de">Deutsch</a> · <a href="../it/vie-game-over.html" hreflang="it">Italiano</a> · <a href="../pt/vie-game-over.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/vie-game-over.html" hreflang="zh">中文</a> · <a href="../ja/vie-game-over.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Игрок начинает с <strong>3 жизнями</strong>. Каждый раз, когда он касается опасности (шипы, враг…), он теряет одну, и <strong>полоска здоровья</strong> уменьшается. На 0 — <strong>Game Over</strong>: уровень начинается заново.</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>персонаж с именем <strong>player</strong>, который умеет двигаться (см. <a href="../ru/deplacer-personnage.html">Как двигать персонажа</a>);</li><li>одна или несколько опасностей, например красные квадраты <strong>spikes1</strong>, <strong>spikes2</strong>…;</li><li>полоска здоровья: объект <strong>ИндикаторПрогресса</strong> (полоса прогресса) с именем <strong>healthBar</strong> вверху экрана.</li></ul>
+</div>
+<h2>Шаг 1: подготовить опасности и полоску</h2>
+<div class="method">
+<ol><li>Выбери каждую опасность и впиши <strong>danger</strong> в её поле <strong>«Тег (Метка)»</strong>.</li><li>Выбери <strong>healthBar</strong>. В разделе <strong>«ПОЛОСА ПРОГРЕССА»</strong> инспектора: <strong>Минимальное значение = 0</strong>, <strong>Максимальное значение = 3</strong>, <strong>Текущее значение = 3</strong>.</li></ol>
+</div>
+<h2>Шаг 2: создать переменную «vie»</h2>
+<div class="method">
+<ol><li>На левой панели, раздел <strong>Переменные</strong>, создай переменную.</li><li>Имя: <strong>vie</strong> (здоровье) · Область: <strong>Локальная</strong> · Тип: <strong>Целое</strong> · Начальное значение: <strong>3</strong>.</li></ol>
+</div>
+<h2>Шаг 3: потерять жизнь</h2>
+<div class="method">
+<ol><li>Открой <strong>Blueprint</strong> сцены.</li><li>Добавь событие <strong>«Если объект касается тега»</strong>: цель <strong>player</strong>, Тег <strong>danger</strong>.</li><li>Добавь <strong>«Добавить к переменной»</strong>: переменная <strong>vie</strong>, <strong>Добавляемое значение = -1</strong> (со знаком минус, чтобы отнять).</li><li>Добавь <strong>«Задать прогресс»</strong>: цель <strong>healthBar</strong>, <strong>Новый прогресс</strong> = <code>=vie</code></li><li>Соедини три узла по порядку.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Если объект касается тега</b><span>цель: player · Тег: danger</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Добавить к переменной</b><span>vie · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Задать прогресс</b><span>healthBar · =vie</span></div>
+</div>
+<div class="tip">👉 <code>=vie</code> в «Новый прогресс» значит: «возьми значение переменной vie». Так полоска всегда показывает число жизней.</div>
+</div>
+<h2>Шаг 4: Game Over</h2>
+<div class="method">
+<ol><li>После «Задать прогресс» добавь узел <strong>«Условие»</strong> с <strong>Условие</strong> = <code>=vie &lt;= 0</code> («vie меньше или равно 0»).</li><li>Соедини его выход <strong>Истина</strong> с узлом <strong>«Перезапустить сцену»</strong> (категория Сцена и HUD).</li><li>Сохрани, запусти игру и коснись опасности три раза.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Задать прогресс</b><span>healthBar</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Условие</b><span>=vie &lt;= 0</span></div>
+<div class="fleche"><em>Истина</em> →</div>
+<div class="noeud"><b>Перезапустить сцену</b></div>
+</div>
+<div class="tip">👉 «Перезапустить сцену» возвращает всё как было: объекты на свои места, а переменные с областью <strong>«Локальная»</strong> (значит, vie = 3) — к начальному значению.</div>
+<div class="tip">👉 <strong>Хочешь настоящий экран конца игры?</strong> Вместо немедленного перезапуска соедини выход Истина с <strong>«Изменить текст»</strong> (текст «Проигрыш!»), потом <strong>«Ждать»</strong> (2 секунды), потом <strong>«Перезапустить сцену»</strong>.</div>
+</div>
+<h2>Бонус: падение в пропасть</h2>
+<div class="method">
+<p>В платформере поставь объект <strong>Зона</strong> в самом низу сцены и назови его <strong>fallZone</strong> (зона невидима во время игры). Затем:</p>
+<div class="chaine">
+<div class="noeud evenement"><b>Столкновение A/B</b><span>Объект A: player · Объект B: fallZone</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Перезапустить сцену</b></div>
+</div>
+</div>
+<h2>Если не работает</h2>
+<ul><li><strong>Здоровье не уменьшается:</strong> проверь тег <strong>danger</strong> у каждой опасности и минус в <strong>-1</strong>.</li><li><strong>Полоска не двигается:</strong> цель «Задать прогресс» должна быть <strong>полосой прогресса</strong> с максимумом 3.</li><li><strong>Игра не перезапускается:</strong> условие должно быть соединено через выход <strong>Истина</strong>.</li></ul>
+
+<div class="nav">
+<a href="../ru/pieces-score.html">← Собирать монеты и считать очки</a>
+<a href="../ru/niveau-suivant.html">Следующее руководство: Переход на следующий уровень →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../index.html">Официальный сайт</a></p>
+</footer>
+</body>
+</html>

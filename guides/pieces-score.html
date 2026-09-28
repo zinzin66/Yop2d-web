@@ -4,22 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Comment ramasser des pièces et compter le score dans Yop2D ? | Guide Yop2D</title>
-<meta name="description" content="Ramasser des pièces et afficher un score dans Yop2D, sans code : tag, variable, nœuds « Si objet touche Tag », « Détruire Objet », « Ajouter à Variable » et « Modifier Texte ».">
+<meta name="description" content="Ramasser des pièces et afficher un score dans Yop2D, sans code : tag, variable et nœuds « Si objet touche Tag », « Détruire Objet », « Ajouter à Variable » et « Modifier Texte ».">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/pieces-score.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pieces-score.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pieces-score.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pieces-score.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pieces-score.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pieces-score.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pieces-score.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pieces-score.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pieces-score.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pieces-score.html">
 <link rel="stylesheet" href="guide.css">
 <script type="application/ld+json">
 {
-"@context": "https://schema.org",
-"@type": "HowTo",
-"name": "Comment ramasser des pièces et compter le score dans Yop2D",
-"description": "Donner le tag piece aux pièces, créer une variable score et relier Si objet touche Tag, Détruire Objet, Ajouter à Variable et Modifier Texte.",
-"inLanguage": "fr",
-"tool": [{ "@type": "HowToTool", "name": "Yop2D (moteur de jeu 2D sans code pour Android)" }],
-"step": [
- { "@type": "HowToStep", "name": "Donner un tag aux pièces", "text": "Donne le tag piece à chaque pièce dans l'inspecteur." },
- { "@type": "HowToStep", "name": "Créer la variable score", "text": "Dans le panneau Variables, crée une variable score de type Entier, valeur 0." },
- { "@type": "HowToStep", "name": "Relier les nœuds", "text": "Si objet touche Tag (player, piece) → Détruire Objet (objet impliqué) → Ajouter à Variable (score, 1) → Modifier Texte (texteScore)." }
-]
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Comment ramasser des pièces et compter le score ?",
+ "description": "Ramasser des pièces et afficher un score dans Yop2D, sans code : tag, variable et nœuds « Si objet touche Tag », « Détruire Objet », « Ajouter à Variable » et « Modifier Texte ».",
+ "inLanguage": "fr",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (moteur de jeu 2D sans code pour Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Donner un tag aux pièces",
+   "text": "Écris piece dans le champ Tag (Étiquette) de chaque pièce."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Créer la variable score",
+   "text": "Section Variables : score, Entier, 0."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Relier les nœuds",
+   "text": "Si objet touche Tag (player, piece) → Détruire Objet → Ajouter à Variable (score, 1) → Modifier Texte (texteScore)."
+  }
+ ]
 }
 </script>
 </head>
@@ -28,89 +54,57 @@
 <a href="../index.html">← Yop2D</a>
 <h1>Comment ramasser des pièces et compter le score ?</h1>
 <p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/pieces-score.html" hreflang="en">English</a> · <a href="es/pieces-score.html" hreflang="es">Español</a> · <a href="de/pieces-score.html" hreflang="de">Deutsch</a> · <a href="it/pieces-score.html" hreflang="it">Italiano</a> · <a href="pt/pieces-score.html" hreflang="pt">Português</a> · <a href="ru/pieces-score.html" hreflang="ru">Русский</a> · <a href="zh/pieces-score.html" hreflang="zh">中文</a> · <a href="ja/pieces-score.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
 <p>Quand le joueur touche une pièce, on veut trois choses : que la pièce <strong>disparaisse</strong>, que le <strong>score augmente</strong> de 1, et que le nouveau score <strong>s'affiche</strong> à l'écran.</p>
-
 <div class="besoin">
 <b>Il te faut :</b>
-<ul>
-<li>un personnage nommé <strong>player</strong> qui peut se déplacer (voir <a href="deplacer-personnage.html">Faire bouger un personnage</a>) ;</li>
-<li>quelques pièces : des objets <strong>Rond</strong> (ou des images), par exemple <strong>piece1</strong>, <strong>piece2</strong>, <strong>piece3</strong> ;</li>
-<li>un objet <strong>Texte</strong> nommé <strong>texteScore</strong>, en haut de l'écran, avec le texte « Score : 0 ».</li>
-</ul>
+<ul><li>un personnage nommé <strong>player</strong> qui peut se déplacer (voir <a href="deplacer-personnage.html">Faire bouger un personnage</a>) ;</li><li>quelques pièces : des objets <strong>Rond</strong> (ou des images), par exemple <strong>piece1</strong>, <strong>piece2</strong>, <strong>piece3</strong> ;</li><li>un objet <strong>Texte</strong> nommé <strong>texteScore</strong>, en haut de l'écran, avec le texte « Score : 0 ».</li></ul>
 </div>
-
 <h2>Étape 1 : donner le même tag à toutes les pièces</h2>
 <div class="method">
 <p>Un <strong>tag</strong> est une étiquette. Grâce à lui, un seul morceau de Blueprint marche pour toutes les pièces, même si tu en ajoutes 50.</p>
-<ol>
-<li>Sélectionne une pièce.</li>
-<li>Dans l'inspecteur, champ <strong>« Tag (Étiquette) »</strong>, écris <strong>piece</strong>.</li>
-<li>Fais pareil pour chaque pièce (le bouton <strong>« Liste »</strong> à côté du champ propose les tags déjà utilisés).</li>
-</ol>
+<ol><li>Sélectionne une pièce.</li><li>Dans l'inspecteur, champ <strong>« Tag (Étiquette) »</strong>, écris <strong>piece</strong>.</li><li>Fais pareil pour chaque pièce (le bouton <strong>« Liste »</strong> à côté du champ propose les tags déjà utilisés).</li></ol>
 </div>
-
 <h2>Étape 2 : créer la variable « score »</h2>
 <div class="method">
 <p>Une <strong>variable</strong> est une case qui garde un nombre en mémoire pendant le jeu.</p>
-<ol>
-<li>Dans le panneau de gauche, ouvre la section <strong>Variables</strong> et crée une variable.</li>
-<li>Nom : <strong>score</strong> · Portée : <strong>Locale</strong> · Type : <strong>Entier</strong> · Valeur initiale : <strong>0</strong>.</li>
-</ol>
+<ol><li>Dans le panneau de gauche, ouvre la section <strong>Variables</strong> et crée une variable.</li><li>Nom : <strong>score</strong> · Portée : <strong>Locale</strong> · Type : <strong>Entier</strong> · Valeur initiale : <strong>0</strong>.</li></ol>
 <div class="tip">👉 <strong>Locale</strong> = la variable existe seulement dans cette scène. Choisis <strong>Globale</strong> si le score doit continuer au niveau suivant (voir <a href="niveau-suivant.html">Passer au niveau suivant</a>).</div>
 </div>
-
 <h2>Étape 3 : le Blueprint</h2>
 <div class="method">
-<ol>
-<li>Ouvre le <strong>Blueprint</strong> de la scène.</li>
-<li>Ajoute l'événement <strong>« Si objet touche Tag »</strong> : cible <strong>player</strong>, Tag <strong>piece</strong>.</li>
-<li>Ajoute <strong>« Détruire Objet »</strong>. Comme cible, choisis <strong>« [ L'objet impliqué dans l'événement ] »</strong> : c'est la pièce que le joueur vient de toucher.</li>
-<li>Ajoute <strong>« Ajouter à Variable »</strong> : variable <strong>score</strong>, <strong>Valeur à ajouter = 1</strong>.</li>
-<li>Ajoute <strong>« Modifier Texte »</strong> : cible <strong>texteScore</strong>, <strong>Nouveau texte</strong> = <code>="Score : " + score</code></li>
-<li>Relie les quatre nœuds dans l'ordre, sortie vers entrée.</li>
-<li>Appuie sur <strong>Sauvegarde</strong>, puis lance le jeu et va toucher une pièce.</li>
-</ol>
+<ol><li>Ouvre le <strong>Blueprint</strong> de la scène.</li><li>Ajoute l'événement <strong>« Si objet touche Tag »</strong> : cible <strong>player</strong>, Tag <strong>piece</strong>.</li><li>Ajoute <strong>« Détruire Objet »</strong>. Comme cible, choisis <strong>L'objet impliqué dans l'événement</strong> : c'est la pièce que le joueur vient de toucher.</li><li>Ajoute <strong>« Ajouter à Variable »</strong> : variable <strong>score</strong>, <strong>Valeur à ajouter = 1</strong>.</li><li>Ajoute <strong>« Modifier Texte »</strong> : cible <strong>texteScore</strong>, <strong>Nouveau texte</strong> = <code>="Score : " + score</code></li><li>Relie les quatre nœuds dans l'ordre, sortie vers entrée.</li><li>Sauvegarde, puis lance le jeu et va toucher une pièce.</li></ol>
 <div class="chaine">
-<div class="noeud evenement"><b>Si objet touche Tag</b><span>cible : player · tag : piece</span></div>
+<div class="noeud evenement"><b>Si objet touche Tag</b><span>cible : player · Tag : piece</span></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>Détruire Objet</b><span>cible : objet impliqué</span></div>
+<div class="noeud"><b>Détruire Objet</b><span>Objet Impliqué</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Ajouter à Variable</b><span>score · + 1</span></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>Modifier Texte</b><span>texteScore · ="Score : " + score</span></div>
+<div class="noeud"><b>Modifier Texte</b><span>texteScore</span></div>
 </div>
 <div class="tip">👉 <strong>Le signe = au début du texte</strong> dit à Yop2D de <strong>calculer</strong> le texte au lieu de l'écrire tel quel. Sans lui, l'écran afficherait mot pour mot <code>"Score : " + score</code>. Les guillemets entourent la partie qui ne change pas.</div>
 <div class="tip">👉 L'événement ne se déclenche qu'<strong>une fois par contact</strong> : rester sur une pièce ne compte pas plusieurs points.</div>
 </div>
-
 <h2>Bonus : gagner quand on a toutes les pièces</h2>
 <div class="method">
-<ol>
-<li>Après « Modifier Texte », ajoute le nœud <strong>« Condition »</strong> avec <strong>Condition</strong> = <code>score >= 3</code> (3 = le nombre de pièces).</li>
-<li>Relie sa sortie <strong>Vrai</strong> à un nœud <strong>« Toast »</strong> avec le message <strong>Gagné !</strong>, ou à <strong>« Scène suivante »</strong>.</li>
-</ol>
+<ol><li>Après « Modifier Texte », ajoute le nœud <strong>« Condition »</strong> avec <strong>Condition</strong> = <code>=score &gt;= 3</code> (3 = le nombre de pièces).</li><li>Relie sa sortie <strong>Vrai</strong> à un nœud <strong>« Toast »</strong> avec le message <strong>Gagné !</strong>, ou à <strong>« Scène suivante »</strong>.</li></ol>
 <div class="chaine">
 <div class="noeud"><b>Modifier Texte</b><span>texteScore</span></div>
 <div class="fleche">→</div>
-<div class="noeud condition"><b>Condition</b><span>score >= 3</span></div>
+<div class="noeud condition"><b>Condition</b><span>=score &gt;= 3</span></div>
 <div class="fleche"><em>Vrai</em> →</div>
 <div class="noeud"><b>Toast</b><span>Gagné !</span></div>
 </div>
 </div>
-
 <h2>Si ça ne marche pas</h2>
-<ul>
-<li><strong>La pièce ne disparaît pas :</strong> vérifie que le tag est écrit pareil partout (piece, sans accent) et que la cible de « Détruire Objet » est bien l'objet impliqué.</li>
-<li><strong>Le texte affiche la formule :</strong> il manque le <strong>=</strong> au début.</li>
-<li><strong>Le score reste à 0 :</strong> vérifie que « Ajouter à Variable » vise bien la variable <strong>score</strong>.</li>
-<li><strong>Pour comparer</strong>, ouvre le jeu d'exemple <strong>« Plateforme »</strong> fourni avec Yop2D : il ramasse des pièces exactement comme ça.</li>
-</ul>
+<ul><li><strong>La pièce ne disparaît pas :</strong> vérifie que le tag est écrit pareil partout (piece, sans accent) et que la cible de « Détruire Objet » est bien l'objet impliqué.</li><li><strong>Le texte affiche la formule :</strong> il manque le <strong>=</strong> au début.</li><li><strong>Le score reste à 0 :</strong> vérifie que « Ajouter à Variable » vise bien la variable <strong>score</strong>.</li><li><strong>Pour comparer</strong>, ouvre le jeu d'exemple <strong>« Plateforme »</strong> fourni avec Yop2D : il ramasse des pièces exactement comme ça.</li></ul>
 
 <div class="nav">
 <a href="sauter.html">← Faire sauter un personnage</a>
-<a href="vie-game-over.html">Guide suivant : vie et game over →</a>
+<a href="vie-game-over.html">Guide suivant : Perdre de la vie et Game Over →</a>
 </div>
 </main>
 <footer>

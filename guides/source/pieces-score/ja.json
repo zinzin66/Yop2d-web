@@ -1,0 +1,201 @@
+{
+  "titre_page": "Yop2D でコインを集めてスコアを数えるには？| Yop2D ガイド",
+  "description": "Yop2D でコードを書かずにコインを集めてスコアを表示する：タグ、変数、そして [[NoeudEventCollisionTag]]、[[detruire_objet]]、[[ajouter_variable]]、[[modifier_texte]] ノード。",
+  "h1": "コインを集めてスコアを数えるには？",
+  "carte": [
+    "コインを集めてスコアを数える",
+    "タグ、スコアの変数、そしてポイントを表示するテキスト。"
+  ],
+  "etapes": [
+    [
+      "コインにタグをつける",
+      "それぞれのコインの {{lang:insp_label_tag}} 欄に piece と書きます。"
+    ],
+    [
+      "変数 score を作る",
+      "{{lang:panneau_ress_variables}} の欄：score、{{lang:var_type_entier}}、0。"
+    ],
+    [
+      "ノードをつなぐ",
+      "{{NoeudEventCollisionTag}}（player、piece）→ {{detruire_objet}} → {{ajouter_variable}}（score、1）→ {{modifier_texte}}（scoreText）。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "プレイヤーがコインに触れたら、3 つのことをします：コインが**消える**、**スコアが** 1 **増える**、新しいスコアが画面に**表示される**。"
+    ],
+    [
+      "besoin",
+      [
+        "動かせる **player** という名前のキャラクター（[キャラクターを動かす](guide:deplacer-personnage) を参照）；",
+        "コインをいくつか：**{{lang:obj_prefix_rond}}** オブジェクト（または画像）、たとえば **coin1**、**coin2**、**coin3**；",
+        "画面の上にある **scoreText** という名前の **{{lang:obj_prefix_texte}}** オブジェクト。文字は「スコア：0」。"
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 1：すべてのコインに同じタグをつける"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "**タグ**はラベルのようなものです。タグがあれば、コインを 50 個置いても、1 つの Blueprint ですべてのコインに対応できます。"
+        ],
+        [
+          "ol",
+          [
+            "コインを 1 つ選びます。",
+            "インスペクターの **[[lang:insp_label_tag]]** 欄に **piece** と書きます。",
+            "ほかのコインにも同じようにします（欄の横の **[[lang:insp_btn_tags_liste]]** ボタンで、使ったことのあるタグを選べます）。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 2：変数「score」を作る"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "**変数**は、ゲーム中に数を覚えておく箱のようなものです。"
+        ],
+        [
+          "ol",
+          [
+            "左のパネルで **{{lang:panneau_ress_variables}}** の欄を開き、変数を作ります。",
+            "名前：**score** · 範囲：**{{lang:var_scope_locale}}** · 型：**{{lang:var_type_entier}}** · 最初の値：**0**。"
+          ]
+        ],
+        [
+          "tip",
+          "**{{lang:var_scope_locale}}** = 変数はこのシーンの中だけにあります。スコアを次のステージに持ちこしたいときは **{{lang:var_scope_globale}}** を選びます（[次のステージに進む](guide:niveau-suivant) を参照）。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 3：Blueprint"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "シーンの **{{lang:titre_blueprint}}** を開きます。",
+            "**[[NoeudEventCollisionTag]]** イベントを追加します：ターゲット **player**、{{lang:Tag}} **piece**。",
+            "**[[detruire_objet]]** を追加します。ターゲットには **{{lang:noeud_objet_implique_long}}** を選びます：プレイヤーがちょうど触れたコインのことです。",
+            "**[[ajouter_variable]]** を追加します：変数 **score**、**{{lang:ajouter_variable.valeur}} = 1**。",
+            "**[[modifier_texte]]** を追加します：ターゲット **scoreText**、**{{lang:modifier_texte.valeur}}** = `=\"スコア：\" + score`",
+            "4 つのノードを順番に、出力から入力へつなぎます。",
+            "保存してゲームを開始し、コインに触れてみます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "ターゲット：player · {{lang:Tag}}：piece"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "score · + 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**文字の最初の = 記号**は、文字をそのまま書くのではなく**計算する**ように Yop2D に伝えます。これがないと、画面に `\"スコア：\" + score` がそのまま表示されます。引用符（\" \"）の中は変わらない部分です。"
+        ],
+        [
+          "tip",
+          "このイベントは**接触ごとに 1 回だけ**動きます：コインの上にいても、何点も入ることはありません。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "おまけ：コインを全部集めたら勝ち"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "[[modifier_texte]] のあとに **[[condition]]** ノードを追加し、**{{lang:condition.condition}}** = `=score >= 3`（3 = コインの数）にします。",
+            "その **{{lang:port_vrai}}** 出力を、メッセージ **勝ち！** の **[[toast]]** ノード、または **[[scene_suivante]]** につなぎます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=score >= 3"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "勝ち！"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "うまくいかないとき"
+    ],
+    [
+      "ul",
+      [
+        "**コインが消えない：** タグがどこでも同じ書き方か（piece）、[[detruire_objet]] のターゲットが関連オブジェクトになっているか確認してください。",
+        "**数式がそのまま表示される：** 最初の **=** が抜けています。",
+        "**スコアが 0 のまま：** [[ajouter_variable]] が変数 **score** を使っているか確認してください。",
+        "**見比べるには**、Yop2D に入っているサンプルゲーム**「プラットフォーム」**を開いてください。まさにこの方法でコインを集めています。"
+      ]
+    ]
+  ]
+}

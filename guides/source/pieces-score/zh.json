@@ -1,0 +1,201 @@
+{
+  "titre_page": "如何在 Yop2D 中收集金币并计分？| Yop2D 教程",
+  "description": "在 Yop2D 中无需代码收集金币并显示分数：标签、变量，以及 [[NoeudEventCollisionTag]]、[[detruire_objet]]、[[ajouter_variable]] 和 [[modifier_texte]] 节点。",
+  "h1": "如何收集金币并计分？",
+  "carte": [
+    "收集金币并计分",
+    "一个标签、一个分数变量和一段显示分数的文字。"
+  ],
+  "etapes": [
+    [
+      "给金币加标签",
+      "在每个金币的 {{lang:insp_label_tag}} 栏中输入 piece。"
+    ],
+    [
+      "创建 score 变量",
+      "{{lang:panneau_ress_variables}} 区域：score，{{lang:var_type_entier}}，0。"
+    ],
+    [
+      "连接节点",
+      "{{NoeudEventCollisionTag}}（player，piece）→ {{detruire_objet}} → {{ajouter_variable}}（score，1）→ {{modifier_texte}}（scoreText）。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "玩家碰到金币时，我们想要三件事：金币**消失**，**分数加** 1，新的分数**显示**在屏幕上。"
+    ],
+    [
+      "besoin",
+      [
+        "一个名为 **player** 的、可以移动的角色（见 [移动角色](guide:deplacer-personnage)）；",
+        "几枚金币：**{{lang:obj_prefix_rond}}** 对象（或图片），比如 **coin1**、**coin2**、**coin3**；",
+        "一个名为 **scoreText** 的 **{{lang:obj_prefix_texte}}** 对象，放在屏幕上方，文字为“分数：0”。"
+      ]
+    ],
+    [
+      "h2",
+      "第 1 步：给所有金币同一个标签"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "**标签**就是一个记号。有了它，一段 Blueprint 就能对所有金币生效，哪怕你放了 50 个。"
+        ],
+        [
+          "ol",
+          [
+            "选中一枚金币。",
+            "在检查器的 **[[lang:insp_label_tag]]** 栏中输入 **piece**。",
+            "对每枚金币都这样做（栏旁边的 **[[lang:insp_btn_tags_liste]]** 按钮会列出已经用过的标签）。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 2 步：创建“score”变量"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "**变量**就像一个小格子，在游戏中记住一个数字。"
+        ],
+        [
+          "ol",
+          [
+            "在左侧面板打开 **{{lang:panneau_ress_variables}}** 区域，创建一个变量。",
+            "名称：**score** · 作用域：**{{lang:var_scope_locale}}** · 类型：**{{lang:var_type_entier}}** · 初始值：**0**。"
+          ]
+        ],
+        [
+          "tip",
+          "**{{lang:var_scope_locale}}** = 变量只在这个场景里存在。如果分数要带到下一关，请选 **{{lang:var_scope_globale}}**（见 [进入下一关](guide:niveau-suivant)）。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 3 步：Blueprint"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "打开场景的 **{{lang:titre_blueprint}}**。",
+            "添加 **[[NoeudEventCollisionTag]]** 事件：目标 **player**，{{lang:Tag}} **piece**。",
+            "添加 **[[detruire_objet]]**。目标选择 **{{lang:noeud_objet_implique_long}}**：也就是玩家刚刚碰到的那枚金币。",
+            "添加 **[[ajouter_variable]]**：变量 **score**，**{{lang:ajouter_variable.valeur}} = 1**。",
+            "添加 **[[modifier_texte]]**：目标 **scoreText**，**{{lang:modifier_texte.valeur}}** = `=\"分数：\" + score`",
+            "按顺序把四个节点连起来，输出连输入。",
+            "保存，开始游戏，然后去碰一枚金币。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "目标：player · {{lang:Tag}}：piece"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "score · + 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**文字开头的 = 号**告诉 Yop2D 要**计算**这段文字，而不是原样写出。没有它，屏幕会原封不动地显示 `\"分数：\" + score`。引号里是不会变的那部分。"
+        ],
+        [
+          "tip",
+          "这个事件**每次接触只触发一次**：站在金币上不会重复加分。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "附加：收集全部金币就获胜"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "在 [[modifier_texte]] 之后，添加 **[[condition]]** 节点，**{{lang:condition.condition}}** = `=score >= 3`（3 = 金币数量）。",
+            "把它的 **{{lang:port_vrai}}** 输出连到 **[[toast]]** 节点，消息为 **你赢了！**，或者连到 **[[scene_suivante]]**。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=score >= 3"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "你赢了！"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "如果不起作用"
+    ],
+    [
+      "ul",
+      [
+        "**金币没有消失：**检查标签是否处处写得一样（piece），以及 [[detruire_objet]] 的目标是否为相关对象。",
+        "**文字显示的是公式：**开头少了 **=**。",
+        "**分数一直是 0：**检查 [[ajouter_variable]] 用的是否是 **score** 变量。",
+        "**想对照一下**，打开 Yop2D 自带的示例游戏**“平台”**：它正是这样收集金币的。"
+      ]
+    ]
+  ]
+}

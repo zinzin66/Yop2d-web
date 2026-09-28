@@ -1,0 +1,144 @@
+{
+  "titre_page": "Como passar para a próxima fase no Yop2D? | Guia Yop2D",
+  "description": "Criar várias fases no Yop2D, sem código: uma cena por fase, uma zona de chegada, os nós [[NoeudEventCollisionAB]] e [[scene_suivante]] e uma pontuação que continua com uma variável global.",
+  "h1": "Como passar para a próxima fase?",
+  "carte": [
+    "Passar para a próxima fase",
+    "Uma cena por fase, uma zona de chegada e uma pontuação que continua."
+  ],
+  "etapes": [
+    [
+      "Uma cena por fase",
+      "Seção {{lang:panneau_ress_scenes}}: Level1 e depois Level2, nessa ordem."
+    ],
+    [
+      "Uma zona de chegada",
+      "Em Level1, um objeto {{lang:obj_prefix_zone}} chamado finish no fim da fase."
+    ],
+    [
+      "Ligar os nós",
+      "{{NoeudEventCollisionAB}} (player, finish) → {{scene_suivante}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "No Yop2D, **cada fase é uma cena**. Quando o jogador chega ao fim da fase, toca numa zona de chegada invisível e o jogo passa para a próxima cena."
+    ],
+    [
+      "besoin",
+      [
+        "uma primeira fase que funcione, com um personagem chamado **player** que possa se mover;",
+        "uma segunda fase (vamos criá-la no passo 1)."
+      ]
+    ],
+    [
+      "h2",
+      "Passo 1: uma cena por fase"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "No painel da esquerda, abra a seção **{{lang:panneau_ress_scenes}}**.",
+            "Renomeie a cena atual para **Level1** e crie uma nova cena **Level2**.",
+            "Monte a fase 2: chão, plataformas e, de novo, o personagem **player** com os botões."
+          ]
+        ],
+        [
+          "attention",
+          "**Cada cena tem seus próprios objetos e seu próprio Blueprint.** Os botões e o personagem da fase 1 não existem na fase 2: é preciso adicioná-los lá e refazer os nós deles no Blueprint da fase 2."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 2: a zona de chegada"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Volte para **Level1**.",
+            "Adicione um objeto **{{lang:obj_prefix_zone}}** (categoria {{lang:cat_formes_base}}) e chame-o de **finish**.",
+            "Coloque-o no fim da fase, onde o jogador deve chegar. Uma zona é **invisível** durante o jogo: coloque uma bandeira ou uma porta no mesmo lugar para o jogador vê-la."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 3: o Blueprint da fase 1"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Abra o **{{lang:titre_blueprint}}** de **Level1**.",
+            "Adicione o evento **[[NoeudEventCollisionAB]]**: {{lang:noeud_cible_objet_a}} **player**, {{lang:noeud_cible_objet_b}} **finish**.",
+            "Adicione o nó **[[scene_suivante]]** (categoria {{lang:cat_scene_hud}}) e ligue-o à saída **{{lang:port_evt_collision}}**.",
+            "Salve, comece o jogo e vá até a zona."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "A: player · B: finish"
+            ],
+            [
+              "→",
+              "{{lang:port_evt_collision}}"
+            ],
+            [
+              "n",
+              "{{scene_suivante}}",
+              ""
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**[[scene_suivante]]** segue a ordem da lista de cenas: Level1, depois Level2, depois Level3… Para ir a uma cena específica (uma tela « Parabéns! », por exemplo), use **[[changer_scene]]** e escolha a cena como alvo."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Manter a pontuação de uma fase para a outra"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Uma variável **{{lang:var_scope_locale}}** volta a zero em cada cena. Para a pontuação continuar na fase 2, crie a variável **score** com escopo **{{lang:var_scope_globale}}** (seção {{lang:panneau_ress_variables}}). Assim todas as fases usam a mesma."
+        ],
+        [
+          "tip",
+          "Na fase 2, lembre-se de mostrar a pontuação logo no começo: **[[NoeudEventStart]]** → **[[modifier_texte]]** (scoreText) com `=\"Pontos: \" + score`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Se não funcionar"
+    ],
+    [
+      "ul",
+      [
+        "**Nada acontece na zona:** verifique os nomes **player** e **finish** em [[NoeudEventCollisionAB]] e se a zona está mesmo no caminho do jogador.",
+        "**O jogo não muda de cena:** Level1 precisa vir **antes** de Level2 na lista de cenas. Se não houver cena depois, [[scene_suivante]] não faz nada.",
+        "**A fase 2 não reage:** os nós dela ficam no Blueprint dela; abra o Blueprint de Level2 para adicioná-los."
+      ]
+    ]
+  ]
+}

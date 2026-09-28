@@ -1,0 +1,213 @@
+{
+  "titre_page": "如何在 Yop2D 中让玩家掉血？| Yop2D 教程",
+  "description": "在 Yop2D 中无需代码管理玩家的生命值：生命变量、生命条，以及 [[ajouter_variable]]、[[modifier_progression]]、[[condition]] 和 [[recommencer_scene]] 节点。",
+  "h1": "如何让玩家掉血？",
+  "carte": [
+    "掉血与 Game Over",
+    "生命变量、生命条，生命降到 0 时回到起点。"
+  ],
+  "etapes": [
+    [
+      "创建生命变量和生命条",
+      "变量 vie（{{lang:var_type_entier}}，3）和生命条 healthBar，{{lang:insp_label_prog_max}} = 3。"
+    ],
+    [
+      "扣一点血",
+      "{{NoeudEventCollisionTag}}（player，danger）→ {{ajouter_variable}}（vie，-1）→ {{modifier_progression}}（healthBar，=vie）。"
+    ],
+    [
+      "Game Over",
+      "{{condition}}（=vie <= 0）→ {{lang:port_vrai}} → {{recommencer_scene}}。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "玩家一开始有 **3 条命**。每碰到一次危险（尖刺、敌人……），就会少一条命，**生命条**也会下降。到 0 就是 **Game Over**：关卡重新开始。"
+    ],
+    [
+      "besoin",
+      [
+        "一个名为 **player** 的、可以移动的角色（见 [移动角色](guide:deplacer-personnage)）；",
+        "一个或多个危险物，比如名为 **spikes1**、**spikes2**……的红色方块；",
+        "一个生命条：一个名为 **healthBar** 的 **{{lang:obj_prefix_barre_progression}}** 对象（进度条），放在屏幕上方。"
+      ]
+    ],
+    [
+      "h2",
+      "第 1 步：准备危险物和生命条"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "选中每个危险物，在它的 **[[lang:insp_label_tag]]** 栏中输入 **danger**。",
+            "选中 **healthBar**。在检查器的 **[[lang:insp_sep_progression]]** 区域：**{{lang:insp_label_prog_min}} = 0**，**{{lang:insp_label_prog_max}} = 3**，**{{lang:insp_label_prog_actuelle}} = 3**。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 2 步：创建“vie”变量"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "在左侧面板的 **{{lang:panneau_ress_variables}}** 区域创建一个变量。",
+            "名称：**vie**（生命）· 作用域：**{{lang:var_scope_locale}}** · 类型：**{{lang:var_type_entier}}** · 初始值：**3**。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 3 步：少一条命"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "打开场景的 **{{lang:titre_blueprint}}**。",
+            "添加 **[[NoeudEventCollisionTag]]** 事件：目标 **player**，{{lang:Tag}} **danger**。",
+            "添加 **[[ajouter_variable]]**：变量 **vie**，**{{lang:ajouter_variable.valeur}} = -1**（带负号，表示减去）。",
+            "添加 **[[modifier_progression]]**：目标 **healthBar**，**{{lang:modifier_progression.valeur}}** = `=vie`",
+            "按顺序把三个节点连起来。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "目标：player · {{lang:Tag}}：danger"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "vie · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_progression}}",
+              "healthBar · =vie"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "在 [[lang:modifier_progression.valeur]] 中写 `=vie` 的意思是：“取变量 vie 的值”。这样生命条就会一直跟着命数变化。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 4 步：Game Over"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "在 [[modifier_progression]] 之后，添加 **[[condition]]** 节点，**{{lang:condition.condition}}** = `=vie <= 0`（“vie 小于或等于 0”）。",
+            "把它的 **{{lang:port_vrai}}** 输出连到 **[[recommencer_scene]]** 节点（类别 {{lang:cat_scene_hud}}）。",
+            "保存，开始游戏，碰三次危险物。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_progression}}",
+              "healthBar"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=vie <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[recommencer_scene]] 会让一切回到开始时的样子：对象回到原位，作用域为 **[[lang:var_scope_locale]]** 的变量（也就是 vie = 3）恢复初始值。"
+        ],
+        [
+          "tip",
+          "**想要一个真正的结束画面？**不要马上重来，而是把 {{lang:port_vrai}} 输出连到 **[[modifier_texte]]**（文字“你输了！”），然后 **[[attendre]]**（2 秒），再接 **[[recommencer_scene]]**。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "附加：掉进深渊"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "做平台游戏时，在场景最底部放一个名为 **fallZone** 的 **{{lang:obj_prefix_zone}}** 对象（区域在游戏中是看不见的）。然后："
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "{{lang:noeud_cible_objet_a}}：player · {{lang:noeud_cible_objet_b}}：fallZone"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "如果不起作用"
+    ],
+    [
+      "ul",
+      [
+        "**生命没有减少：**检查每个危险物上的 **danger** 标签，以及 **-1** 里的负号。",
+        "**生命条不动：**[[modifier_progression]] 的目标必须是**进度条**，最大值为 3。",
+        "**游戏没有重来：**条件必须通过它的 **{{lang:port_vrai}}** 输出连接。"
+      ]
+    ]
+  ]
+}

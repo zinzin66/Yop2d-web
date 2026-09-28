@@ -4,49 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Comment faire bouger un personnage dans Yop2D ? | Guide Yop2D</title>
-<meta name="description" content="Trois façons simples de faire bouger un personnage dans Yop2D, sans code : boutons à l'écran, joystick virtuel, ou glisser avec le doigt.">
+<meta name="description" content="Trois façons simples de faire bouger un personnage dans Yop2D, sans code : boutons à l&#x27;écran, joystick virtuel, ou glisser avec le doigt.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/deplacer-personnage.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/deplacer-personnage.html">
-<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/move-character.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/deplacer-personnage.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/deplacer-personnage.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/deplacer-personnage.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/deplacer-personnage.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deplacer-personnage.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deplacer-personnage.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/deplacer-personnage.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deplacer-personnage.html">
 <link rel="stylesheet" href="guide.css">
 <script type="application/ld+json">
 {
-"@context": "https://schema.org",
-"@type": "HowTo",
-"name": "Comment faire bouger un personnage dans Yop2D",
-"description": "Trois façons de faire bouger un personnage dans le moteur de jeu 2D sans code Yop2D pour Android : boutons, joystick virtuel, glisser au doigt.",
-"inLanguage": "fr",
-"tool": [{ "@type": "HowToTool", "name": "Yop2D (moteur de jeu 2D sans code pour Android)" }],
-"step": [
- { "@type": "HowToStep", "name": "Avec des boutons à l'écran", "text": "Crée un personnage player et deux boutons. Relie l'événement « Maintenu sur Objet » de chaque bouton au nœud « Pousser objet » avec Ajout X = -5 ou Ajout X = 5." },
- { "@type": "HowToStep", "name": "Avec un joystick virtuel", "text": "Ajoute un objet Joystick et choisis le personnage dans « Objet à déplacer » dans l'inspecteur. Aucun nœud n'est nécessaire." },
- { "@type": "HowToStep", "name": "En le faisant glisser au doigt", "text": "Coche « Déplaçable » dans l'inspecteur de l'objet : il peut être déplacé au doigt pendant le jeu." }
-]
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Comment faire bouger un personnage ?",
+ "description": "Trois façons simples de faire bouger un personnage dans Yop2D, sans code : boutons à l'écran, joystick virtuel, ou glisser avec le doigt.",
+ "inLanguage": "fr",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (moteur de jeu 2D sans code pour Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Avec des boutons à l'écran",
+   "text": "Relie l'événement Maintenu sur Objet de chaque bouton au nœud Pousser objet avec Ajout X = -5 ou 5."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Avec un joystick virtuel",
+   "text": "Ajoute un objet Joystick et choisis le personnage dans Objet à déplacer. Aucun nœud n'est nécessaire."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "En le faisant glisser au doigt",
+   "text": "Coche Déplaçable (glissable en mode Play) dans l'inspecteur de l'objet."
+  }
+ ]
 }
 </script>
 </head>
 <body>
 <header>
-<a href="../index.html">← Yop2D</a> · <a href="move-character.html" hreflang="en">English</a>
+<a href="../index.html">← Yop2D</a>
 <h1>Comment faire bouger un personnage ?</h1>
 <p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/deplacer-personnage.html" hreflang="en">English</a> · <a href="es/deplacer-personnage.html" hreflang="es">Español</a> · <a href="de/deplacer-personnage.html" hreflang="de">Deutsch</a> · <a href="it/deplacer-personnage.html" hreflang="it">Italiano</a> · <a href="pt/deplacer-personnage.html" hreflang="pt">Português</a> · <a href="ru/deplacer-personnage.html" hreflang="ru">Русский</a> · <a href="zh/deplacer-personnage.html" hreflang="zh">中文</a> · <a href="ja/deplacer-personnage.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
 <p>Dans Yop2D, il existe trois façons simples de faire bouger un personnage, sans écrire de code. Choisis celle qui correspond à ton jeu.</p>
-
 <h2>Méthode 1 : avec des boutons à l'écran (gauche / droite)</h2>
 <div class="method">
 <p>Idéal pour un jeu de plateforme ou un jeu où le personnage se déplace sur une ligne.</p>
-<ol>
-<li>Dans ta scène, ajoute ton personnage (un <strong>Carré</strong> ou une <strong>Image</strong>) et nomme-le <strong>player</strong>.</li>
-<li>Ajoute deux objets qui serviront de boutons, par exemple deux <strong>Bouton</strong> (ou deux carrés) nommés <strong>btnGauche</strong> et <strong>btnDroite</strong>. Place-les en bas de l'écran.</li>
-<li>Ouvre le <strong>Blueprint</strong> de la scène.</li>
-<li>Ajoute l'événement <strong>« Maintenu sur Objet »</strong> et choisis <strong>btnGauche</strong> comme cible.</li>
-<li>Ajoute un nœud <strong>« Pousser objet »</strong> : cible <strong>player</strong>, <strong>Ajout X = -5</strong>, <strong>Ajout Y = 0</strong>.</li>
-<li>Relie la sortie de l'événement à l'entrée de « Pousser objet ».</li>
-<li>Fais la même chose pour <strong>btnDroite</strong>, avec <strong>Ajout X = 5</strong>.</li>
-<li>Appuie sur <strong>Sauvegarde</strong>, puis lance le jeu : tant que tu gardes le doigt sur un bouton, le personnage avance.</li>
-</ol>
+<ol><li>Dans ta scène, ajoute ton personnage (un <strong>Carré</strong> ou une <strong>Image</strong>) et nomme-le <strong>player</strong>.</li><li>Ajoute deux objets qui serviront de boutons, par exemple deux <strong>Bouton</strong> (ou deux carrés) nommés <strong>btnGauche</strong> et <strong>btnDroite</strong>. Place-les en bas de l'écran.</li><li>Ouvre le <strong>Blueprint</strong> de la scène.</li><li>Ajoute l'événement <strong>« Maintenu sur Objet »</strong> et choisis <strong>btnGauche</strong> comme cible.</li><li>Ajoute un nœud <strong>« Pousser objet »</strong> : cible <strong>player</strong>, <strong>Ajout X = -5</strong>, <strong>Ajout Y = 0</strong>.</li><li>Relie la sortie de l'événement à l'entrée de « Pousser objet ».</li><li>Fais la même chose pour <strong>btnDroite</strong>, avec <strong>Ajout X = 5</strong>.</li><li>Sauvegarde, puis lance le jeu : tant que tu gardes le doigt sur un bouton, le personnage avance.</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>Maintenu sur Objet</b><span>cible : btnGauche</span></div>
 <div class="fleche">→</div>
@@ -54,41 +69,26 @@
 </div>
 <div class="tip">👉 « Maintenu sur Objet » se répète à chaque image tant que le doigt reste sur le bouton : c'est pour ça que le personnage avance en continu. Pour aller plus vite, augmente la valeur (par exemple 8 ou 10).</div>
 </div>
-
 <h2>Méthode 2 : avec un joystick virtuel</h2>
 <div class="method">
 <p>Idéal pour un jeu vu de dessus, où le personnage se déplace dans toutes les directions. <strong>Aucun nœud n'est nécessaire.</strong></p>
-<ol>
-<li>Ajoute un objet <strong>Joystick</strong> à ta scène (catégorie <strong>Interactifs</strong>) et place-le en bas à gauche.</li>
-<li>Sélectionne le joystick. Dans l'inspecteur, section <strong>« Contrôle Joystick »</strong>, touche le bouton de <strong>« Objet à déplacer »</strong> et choisis ton personnage.</li>
-<li>Appuie sur <strong>Sauvegarde</strong>, puis lance le jeu : le personnage suit la direction du joystick.</li>
-</ol>
+<ol><li>Ajoute un objet <strong>Joystick</strong> à ta scène (catégorie <strong>Interactifs</strong>) et place-le en bas à gauche.</li><li>Sélectionne le joystick. Dans l'inspecteur, section <strong>« Contrôle Joystick »</strong>, touche le bouton de <strong>« Objet à déplacer »</strong> et choisis ton personnage.</li><li>Sauvegarde, puis lance le jeu : le personnage suit la direction du joystick.</li></ol>
 <div class="tip">👉 <strong>Raccourci :</strong> si tu donnes le tag <strong>Joueur</strong> (ou <strong>Player</strong>) à ton personnage, le joystick le déplace automatiquement, même sans rien choisir dans « Objet à déplacer ». Attention : ce tag passe avant le choix de l'inspecteur.</div>
-<div class="tip">👉 <strong>Pour aller plus loin :</strong> les formules <code>joystick.x</code> et <code>joystick.y</code> donnent la direction (entre -1 et 1). Tu peux les utiliser dans un nœud « Pousser objet » relié à « À chaque image », par exemple <code>joystick.x * 5</code>. Le nœud <strong>« Si joystick »</strong> a aussi des sorties Haut, Bas, Gauche, Droite et Repos.</div>
+<div class="tip">👉 <strong>Pour aller plus loin :</strong> les formules <code>joystick.x</code> et <code>joystick.y</code> donnent la direction (entre -1 et 1). Tu peux les utiliser dans un nœud « Pousser objet » relié à « À chaque image », par exemple <code>=joystick.x * 5</code>. Le nœud <strong>« Si joystick »</strong> a aussi des sorties Haut, Bas, Gauche, Droite et Repos.</div>
 </div>
-
 <h2>Méthode 3 : le faire glisser avec le doigt</h2>
 <div class="method">
 <p>Idéal pour un puzzle, un jeu de cartes ou un jeu où l'on déplace des pièces.</p>
-<ol>
-<li>Sélectionne ton objet dans l'éditeur de scène.</li>
-<li>Dans l'inspecteur, coche <strong>« Déplaçable (glissable en mode Play) »</strong>.</li>
-<li>Lance le jeu : tu peux faire glisser l'objet avec le doigt.</li>
-</ol>
+<ol><li>Sélectionne ton objet dans l'éditeur de scène.</li><li>Dans l'inspecteur, coche <strong>« Déplaçable (glissable en mode Play) »</strong>.</li><li>Lance le jeu : tu peux faire glisser l'objet avec le doigt.</li></ol>
 <div class="tip">👉 Pour réagir au moment où le joueur lâche l'objet (par exemple pour vérifier s'il est bien placé), utilise l'événement <strong>« Fin de Glisser »</strong>.</div>
 <div class="tip">👉 Pour autoriser ou interdire le glissement pendant le jeu (une pièce de puzzle bien placée, par exemple), utilise le nœud <strong>« Rendre déplaçable »</strong>.</div>
 </div>
-
 <h2>Astuces</h2>
-<ul>
-<li><strong>Pour faire sauter le personnage</strong>, suis le guide <a href="sauter.html">Faire sauter un personnage</a>.</li>
-<li><strong>Le jeu d'exemple « Plateforme »</strong> fourni avec Yop2D utilise la méthode 1 : ouvre-le pour voir un Blueprint complet qui fonctionne.</li>
-<li><strong>Une question ?</strong> Viens en parler sur <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> ou <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li>
-</ul>
+<ul><li><strong>Pour faire sauter le personnage</strong>, suis le guide <a href="sauter.html">Faire sauter un personnage</a>.</li><li><strong>Le jeu d'exemple « Plateforme »</strong> fourni avec Yop2D utilise la méthode 1 : ouvre-le pour voir un Blueprint complet qui fonctionne.</li><li><strong>Une question ?</strong> Viens en parler sur <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> ou <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li></ul>
 
 <div class="nav">
 <a href="../index.html#guides">← Tous les guides</a>
-<a href="sauter.html">Guide suivant : sauter →</a>
+<a href="sauter.html">Guide suivant : Faire sauter un personnage →</a>
 </div>
 </main>
 <footer>

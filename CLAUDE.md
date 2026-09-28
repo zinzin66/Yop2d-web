@@ -17,9 +17,9 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
 - `index.html` : accueil. `testeur.html` : page testeurs.
   `confidentialite.html` : confidentialité.
 - `aide.html` : aide ouverte depuis le moteur dans une WebView.
-- `guides/*.html` : guides complets, style commun `guides/guide.css`
-  (`deplacer-personnage.html` et `move-character.html` en anglais, `sauter.html`,
-  `pieces-score.html`, `vie-game-over.html`, `niveau-suivant.html`).
+- `guides/` : 5 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
+  Français : `guides/<guide>.html` ; autres langues : `guides/<langue>/<guide>.html`.
+  `guides/move-character.html` = redirection vers `guides/en/deplacer-personnage.html`.
 
 ## Aide (aide.html)
 - Deux onglets : **Nœuds** et **Guides**.
@@ -51,6 +51,20 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
 - Nouveau nœud dans le moteur → relancer le script : il liste les descriptions
   manquantes (en attendant, il affiche l'anglais puis le français).
 
+## Guides : générés
+- Source : `guides/source/<guide>/<langue>.json` (titre, description, carte de
+  l'onglet Guides, étapes pour le référencement, blocs du texte). Mise en forme :
+  `**gras**`, `` `code` ``, `[texte](lien)`, `(guide:sauter)` pour un autre guide.
+  Noms du moteur : `{{id}}` / `{{lang:cle}}` sans guillemets, `[[id]]` /
+  `[[lang:cle]]` entre guillemets (mêmes repères que les descriptions des nœuds).
+- Générer : `python3 outils/generer_guides.py <clone de zinzin66/yop2d>` → pages
+  HTML + `aide/guides/<langue>/*.json`. Ordre des guides : liste `GUIDES` du script.
+- Traduire : `python3 outils/traduire_guides.py extraire <guide>` liste les phrases
+  de la version anglaise ; `appliquer <guide> <langue> fichier.txt` fabrique la
+  source d'une langue (une phrase traduite par ligne, même ordre).
+- Nouveau guide : écrire `fr.json` et `en.json`, l'ajouter à `GUIDES`, traduire,
+  générer, ajouter les pages au `sitemap.xml`.
+
 ## Tester
 Pas de GitHub Pages pour une branche : tester `aide.html` en local dans un
 navigateur (Playwright + Chromium préinstallé) en simulant l'API GitHub avec
@@ -60,9 +74,10 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 27/09/2026 : aide en 9 langues, menu de langue, palette du moteur, noms
   officiels des nœuds (PR #1 et #2).
 - 28/09/2026 : 4 guides débutant (fr) ; onglet Nœuds reconstruit depuis le
-  catalogue du moteur (115 nœuds, 9 langues).
+  catalogue du moteur (115 nœuds, 9 langues) ; guides traduits en 9 langues.
 
 ## Reste à faire
-- Traduire les guides (fr) dans les 8 autres langues, après test des étapes
-  sur tablette par l'utilisateur. Aujourd'hui : « Déplacer » existe en fr et en,
-  les 4 autres guides en fr seulement.
+- Faire tester les étapes des guides sur tablette (projets zip de test, voir
+  `Doc/MEMO_NOEUDS.md` du moteur : bouton `{ }` du Blueprint et import de zip).
+- Idées de guides suivants : caméra qui suit, sons et musique, animations,
+  ennemi qui poursuit, tirer, apparitions d'ennemis, dialogue, clé et porte.
