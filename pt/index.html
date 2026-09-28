@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2D | Motor de jogos 2D gratuito e sem código para Android</title>
+<meta name="description" content="Yop2D é um motor de jogos 2D gratuito e sem código para Android. Crie jogos no tablet ou celular com 115 nós visuais, física, tiles e animações, e exporte um APK offline. Sem anúncios, sem marca d&#x27;água.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/pt/">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/fr/">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/es/">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/de/">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/it/">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/pt/">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/ru/">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/zh/">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/ja/">
+<link rel="alternate" hreflang="x-default" href="https://zinzin66.github.io/Yop2d-web/">
+<link rel="icon" href="../logo_yop2d.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Yop2D">
+<meta property="og:title" content="Yop2D | Motor de jogos 2D gratuito e sem código para Android">
+<meta property="og:description" content="Yop2D é um motor de jogos 2D gratuito e sem código para Android. Crie jogos no tablet ou celular com 115 nós visuais, física, tiles e animações, e exporte um APK offline. Sem anúncios, sem marca d&#x27;água.">
+<meta property="og:url" content="https://zinzin66.github.io/Yop2d-web/pt/">
+<meta property="og:image" content="https://zinzin66.github.io/Yop2d-web/interface_editeur.png">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "SoftwareApplication",
+ "name": "Yop2D",
+ "url": "https://zinzin66.github.io/Yop2d-web/pt/",
+ "operatingSystem": "Android 7.0+",
+ "applicationCategory": "DeveloperApplication",
+ "applicationSubCategory": "2D Game Engine",
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "downloadUrl": "https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk",
+ "inLanguage": [
+  "en",
+  "fr",
+  "es",
+  "de",
+  "it",
+  "pt",
+  "ru",
+  "zh",
+  "ja"
+ ],
+ "image": "https://zinzin66.github.io/Yop2d-web/interface_editeur.png",
+ "description": "Yop2D é um motor de jogos 2D gratuito e sem código para Android. Crie jogos no tablet ou celular com 115 nós visuais, física, tiles e animações, e exporte um APK offline. Sem anúncios, sem marca d'água.",
+ "featureList": [
+  "Nós visuais sem código",
+  "Exportação de APK offline",
+  "Cenas como objetos (prefabs)",
+  "Seleção por tag",
+  "Física e comportamentos",
+  "Tiles",
+  "Variáveis, inventário e salvamento",
+  "Controles de toque",
+  "Pausa e câmera lenta",
+  "Diálogos, som e câmera"
+ ],
+ "sameAs": [
+  "https://youtube.com/@yop2d",
+  "https://discord.gg/nHqCcqHZNQ",
+  "https://t.me/+7PQ9WKw7n645Y2Zk",
+  "https://github.com/zinzin66/yop2d",
+  "https://yop2d-dev.itch.io/yop2d-no-code-game-engine"
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "inLanguage": "pt",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "O que é o Yop2D?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "O Yop2D é um motor de jogos 2D gratuito e sem código para Android. Ele permite que qualquer pessoa crie um videogame completo no tablet ou celular com nós visuais, sem saber programar, e exporte como APK direto no aparelho."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "O Yop2D é mesmo gratuito? Tem anúncios?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sim, o Yop2D é 100% gratuito: sem assinatura, sem compras no app, sem custos escondidos. Não há anúncios no Yop2D, e nunca haverá."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "De quem são os jogos que eu crio? Posso vendê-los?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Seus jogos pertencem a você. Você pode guardá-los, dar, compartilhar ou vender, sem pedir permissão e sem pagar nada ao Yop2D."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Meus jogos têm logotipo ou marca d'água do Yop2D?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Não. Os jogos que você exporta não têm logotipo, tela de abertura nem marca d'água do Yop2D."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "O Yop2D é de código aberto?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Não. O Yop2D é gratuito, mas seu código-fonte não é público. Isso não muda nada para seus jogos: eles são inteiramente seus."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Não sei programar. Isso é um problema?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "De jeito nenhum. O Yop2D substitui o código por nós visuais que você liga entre si. Ele é feito para iniciantes e para criadores que preferem se concentrar no jogo. Os guias para iniciantes mostram como fazer, passo a passo."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Em quais aparelhos o Yop2D funciona?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Em tablets e celulares com Android 7.0 ou mais recente. O tablet é o mais confortável; no celular, o Yop2D funciona na horizontal com uma interface compacta. Não existe versão para iPhone, iPad ou computador."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Preciso de computador ou de internet?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Não. O Yop2D cria e exporta seu jogo como APK independente direto no seu aparelho, 100% offline. Sem compilação na nuvem, sem conta."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Posso publicar meu jogo no Google Play?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Ainda não diretamente. O Yop2D exporta arquivos APK: você pode instalar, compartilhar ou publicar em sites que aceitam APK, como o itch.io. O Google Play exige o formato AAB assinado com sua própria chave: essa exportação está prevista para uma versão futura."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Posso jogar meu jogo do Yop2D no iPhone, na web ou no computador?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Não. Os jogos feitos com o Yop2D são apps Android. Se você precisa de outras plataformas, veja a comparação com os motores que as oferecem."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Que tipos de jogos posso fazer?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Jogos 2D: plataforma, aventura vista de cima, tiro, arcade, quebra-cabeça, quiz, histórias interativas… O editor de tiles, a física, as colisões, as animações, os diálogos, o inventário e o salvamento cobrem a maioria das necessidades. O Yop2D não faz jogos 3D."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Posso usar minhas próprias imagens, sons e músicas?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sim. Você importa suas próprias imagens, tilesets, quadros de animação, efeitos sonoros e músicas. Títulos e efeitos de texto são criados direto no motor."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Em quais idiomas o Yop2D está disponível?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A interface, a ajuda integrada, os guias e a referência dos nós existem em 9 idiomas: português, inglês, francês, espanhol, alemão, italiano, russo, chinês simplificado e japonês."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Como aprendo a usar o Yop2D?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Comece pelos três jogos de exemplo incluídos no motor e depois siga os guias para iniciantes. A referência dos nós explica os 115 nós, e o canal do YouTube, o Discord e o Telegram estão aí para ajudar."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Por que o Android mostra um aviso ao instalar o APK?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Porque o APK é baixado fora da Play Store. Toque em Mais detalhes e depois em Instalar assim mesmo. Você também pode entrar no teste fechado do Google Play: como ser testador."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "O Yop2D coleta dados?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "O Yop2D envia estatísticas de uso anônimas: abertura e fechamento, tempo de uso e relatórios de falha (só o tipo de erro), com a versão do app, a versão do Android e o idioma do aparelho. O país é estimado pela conexão, sem guardar o endereço IP. Nenhum dado pessoal e nada dos seus projetos. Você pode desativar na tela inicial, e os jogos exportados não enviam nada. Detalhes: privacidade (em inglês)."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "O Yop2D está pronto?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "O Yop2D está em desenvolvimento ativo e em teste fechado no Google Play. Ele já permite fazer jogos completos, mas podem ocorrer bugs: exporte seus projetos regularmente como cópia de segurança e relate os problemas no Discord ou no Telegram."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Quem faz o Yop2D?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "O Yop2D é criado por um desenvolvedor independente, com o retorno da sua comunidade de testadores."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Qual a diferença entre o Yop2D e o GDevelop, o Construct ou o Godot?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "O Yop2D foi pensado para funcionar inteiramente num tablet ou celular Android, sem código, sem internet e sem computador, e continua gratuito e sem anúncios. Em troca, ele só faz jogos 2D para Android. Veja a comparação detalhada."
+   }
+  }
+ ]
+}
+</script>
+<style>
+:root {
+--primary-color: #2563eb;
+--secondary-color: #1e40af;
+--accent-color: #f59e0b;
+--youtube-color: #dc2626;
+--discord-color: #5865f2;
+--telegram-color: #229ed9;
+--background: #f8fafc;
+--text-dark: #0f172a;
+}
+body { font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans", "PingFang SC", "Hiragino Sans", sans-serif; line-height: 1.6; color: var(--text-dark); background: var(--background); margin: 0; padding: 0; }
+.lang-bar { background: #0f172a; color: #cbd5e1; font-size: 0.9rem; padding: 0.5rem 1rem; text-align: center; line-height: 1.9; }
+.lang-bar a { color: #e2e8f0; text-decoration: none; margin: 0 0.35rem; white-space: nowrap; }
+.lang-bar a:hover { text-decoration: underline; }
+.lang-bar strong { color: var(--accent-color); margin: 0 0.35rem; white-space: nowrap; }
+.lang-suggest { display: none; background: var(--accent-color); color: #0f172a; text-align: center; padding: 0.6rem 1rem; font-weight: bold; }
+.lang-suggest a { color: #0f172a; }
+header { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 3.5rem 1rem 4rem; text-align: center; }
+.logo { max-width: 120px; border-radius: 20%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-bottom: 1rem; }
+header h1 { font-size: 3rem; margin: 0 0 0.5rem 0; }
+header p { font-size: 1.25rem; max-width: 680px; margin: 0 auto; opacity: 0.95; }
+.points { list-style: none; padding: 0; margin: 1.5rem auto 0; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; max-width: 820px; }
+.points li { background: rgba(255,255,255,0.15); border-radius: 30px; padding: 0.3rem 0.9rem; font-size: 0.95rem; }
+.header-buttons, .community-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; margin-bottom: 1.5rem; }
+.btn { display: inline-block; color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-size: 1.15rem; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; }
+.btn:hover { transform: translateY(-3px); }
+.btn-download { background: var(--accent-color); }
+.btn-itch { background: #fa5c5c; }
+.btn-play { background: #16a34a; }
+.btn-youtube { background: var(--youtube-color); }
+.btn-discord { background: var(--discord-color); }
+.btn-telegram { background: var(--telegram-color); }
+.install-note { max-width: 520px; margin: 1.5rem auto 0; font-size: 0.9rem; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: left; border-left: 4px solid var(--accent-color); }
+.install-note a { color: white; }
+.lang-badge { display: block; width: fit-content; max-width: 90%; background: rgba(255,255,255,0.2); padding: 0.5rem 1.5rem; border-radius: 30px; font-weight: bold; margin: 2rem auto 0 auto; font-size: 0.9rem; text-align: center; line-height: 1.4; }
+main { max-width: 1000px; margin: 0 auto; padding: 2rem 1rem; }
+section { margin-bottom: 4rem; }
+h2 { font-size: 2rem; color: var(--primary-color); border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+.showcase { text-align: center; margin-bottom: 5rem; }
+.showcase p { font-size: 1.1rem; text-align: left; background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.screenshot { width: 100%; max-width: 850px; height: auto; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); margin: 0 auto 1.5rem auto; display: block; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+.card h3 { color: var(--secondary-color); margin-top: 0; }
+.card a { color: var(--primary-color); font-weight: bold; }
+.bloc { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+.bloc a { color: var(--primary-color); }
+.table-wrap { overflow-x: auto; background: white; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.95rem; }
+th, td { padding: 0.75rem; text-align: left; vertical-align: top; border-bottom: 1px solid #e2e8f0; }
+thead th { background: #eff6ff; color: var(--secondary-color); }
+tbody th { color: var(--secondary-color); white-space: nowrap; }
+tr.nous { background: #fffbeb; }
+.note { font-size: 0.85rem; color: #475569; margin-top: 0.75rem; }
+.deux { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+.deux h3 { margin-top: 0; color: var(--secondary-color); }
+.deux ul { margin: 0; padding-left: 1.2rem; }
+.deux li { margin-bottom: 0.4rem; }
+details.faq-item { background: white; padding: 1rem 1.25rem; border-radius: 8px; margin-bottom: 0.75rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-left: 4px solid var(--primary-color); }
+details.faq-item summary { font-weight: bold; font-size: 1.05rem; cursor: pointer; color: var(--secondary-color); list-style: none; }
+details.faq-item summary::-webkit-details-marker { display: none; }
+details.faq-item summary::before { content: '➕'; margin-right: 0.6rem; font-size: 0.85rem; opacity: 0.7; }
+details.faq-item[open] summary::before { content: '➖'; }
+details.faq-item p { margin: 0.75rem 0 0; }
+details.faq-item a { color: var(--primary-color); }
+code { background: #e2e8f0; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+.community { text-align: center; background: white; padding: 2rem 1rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+footer { text-align: center; padding: 2rem 1rem; background: var(--text-dark); color: white; }
+footer a { color: var(--accent-color); text-decoration: none; font-weight: bold; }
+footer a:hover { text-decoration: underline; }
+@media (max-width: 600px) {
+  header { padding: 2.5rem 1rem 3rem; }
+  header h1 { font-size: 2.2rem; }
+  header p { font-size: 1.05rem; }
+  .btn { font-size: 1rem; padding: 0.85rem 1.5rem; }
+  h2 { font-size: 1.6rem; }
+  /* Comparatif : une carte par moteur sur téléphone */
+  table { min-width: 0; }
+  thead { display: none; }
+  tbody, tr, th, td { display: block; }
+  tr { border-bottom: 3px solid #e2e8f0; padding: 0.5rem 0; }
+  tbody th { font-size: 1.15rem; border: 0; padding-bottom: 0.25rem; }
+  td { border: 0; padding: 0.3rem 0.75rem; }
+  td::before { content: attr(data-label) ": "; font-weight: bold; color: var(--secondary-color); }
+  html[lang="fr"] td::before { content: attr(data-label) " : "; }
+  html[lang="zh"] td::before, html[lang="ja"] td::before { content: attr(data-label) "："; }
+}
+</style>
+</head>
+<body>
+<nav class="lang-bar" aria-label="Idioma">🌍 <a href="../index.html" hreflang="en" lang="en">English</a> <a href="../fr/" hreflang="fr" lang="fr">Français</a> <a href="../es/" hreflang="es" lang="es">Español</a> <a href="../de/" hreflang="de" lang="de">Deutsch</a> <a href="../it/" hreflang="it" lang="it">Italiano</a> <strong>Português</strong> <a href="../ru/" hreflang="ru" lang="ru">Русский</a> <a href="../zh/" hreflang="zh" lang="zh">中文</a> <a href="../ja/" hreflang="ja" lang="ja">日本語</a></nav>
+<div class="lang-suggest" id="lang-suggest"></div>
+<header>
+<img src="../logo_yop2d.png" alt="Logotipo do Yop2D" class="logo" width="120" height="120">
+<h1>Yop2D</h1>
+<p>Um motor de jogos 2D gratuito e sem código para criar seus jogos diretamente no Android, no tablet ou no celular.</p>
+<ul class="points">
+<li>100% gratuito</li>
+<li>Nunca terá anúncios</li>
+<li>Sem código</li>
+<li>Funciona offline</li>
+<li>Sem marca d&#x27;água nos seus jogos</li>
+<li>Seus jogos pertencem a você</li>
+</ul>
+
+<div class="header-buttons">
+    <a href="https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk" class="btn btn-download">⬇️ Baixar o APK</a>
+    <a href="https://yop2d-dev.itch.io/yop2d-no-code-game-engine" target="_blank" rel="noopener" class="btn btn-itch">🎮 Yop2D no itch.io</a>
+    <a href="../testeur.html?lang=pt" class="btn btn-play">▶️ Teste no Google Play</a>
+    <a href="https://youtube.com/@yop2d" target="_blank" rel="noopener" class="btn btn-youtube">📺 Tutoriais no YouTube</a>
+</div>
+
+<img src="https://img.shields.io/github/downloads/zinzin66/yop2d/total?style=for-the-badge&color=blue" alt="Total de downloads do Yop2D">
+
+<div class="install-note"><strong>⚠️ Na instalação:</strong> o APK é baixado fora da Play Store, então o Android pode mostrar um aviso do «Play Protect» ou de «App desconhecido». Toque em <em>Mais detalhes</em> e depois em <em>Instalar assim mesmo</em>. O Yop2D também está em teste fechado no Google Play: <a href="../testeur.html?lang=pt">seja testador</a>. Requer Android 7.0 ou mais recente.</div>
+<div class="lang-badge">🌍 Interface, ajuda e guias em português, inglês, francês, espanhol, alemão, italiano, russo, chinês simplificado e japonês</div>
+</header>
+<main>
+<section class="showcase">
+<h2>Projetos e exportação</h2>
+<img src="../interface_demarage.png" alt="Tela inicial do Yop2D com a lista de projetos, os jogos de exemplo e os botões de exportação" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>Na tela inicial, encontre seus projetos com as miniaturas e abra os jogos de exemplo para aprender rápido. Com um único botão, o Yop2D transforma seu jogo em um arquivo APK independente, direto no seu aparelho: sem computador, sem servidor, sem ferramentas externas.</p>
+</section>
+<section class="showcase">
+<h2>Editor visual de fases</h2>
+<img src="../interface_editeur.png" alt="Editor visual de cenas do Yop2D em um tablet Android" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>Uma interface inspirada nos motores profissionais, feita para telas sensíveis ao toque. Toque em um objeto para selecioná-lo, arraste para rolar a cena e use as alças para movê-lo, redimensioná-lo ou girá-lo. Oculte ou trave qualquer objeto com um toque para não movê-lo sem querer.</p>
+</section>
+<section class="showcase">
+<h2>Fases com tiles</h2>
+<img src="../interface_tuiles.png" alt="Editor de tiles do Yop2D: pintando uma fase bloco por bloco" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>Importe um tileset, pinte suas fases bloco por bloco e marque uma única vez quais blocos são sólidos. As colisões são automáticas, então jogos de plataforma e mapas vistos de cima ficam prontos rápido.</p>
+</section>
+<section class="showcase">
+<h2>Editor de animação em tempo real</h2>
+<img src="../interfaceAnimation.jpg" alt="Editor de animação do Yop2D com os quadros e a pré-visualização ao vivo" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>Veja num relance os quadros importados e pré-visualize suas animações 2D em tempo real, dentro do motor. No jogo, as animações seguem a pausa e a câmera lenta como todo o resto.</p>
+</section>
+<section class="showcase">
+<h2>Títulos e efeitos de texto integrados</h2>
+<img src="../interfaceTitre.jpg" alt="Título estilizado do Yop2D com degradê, contorno e efeito neon" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>Crie títulos estilizados (degradês, contornos, neon, sombras, relevo, texturas, curvas) diretamente no motor, em vez de gerar imagens de texto pesadas em outros apps. Seu APK final continua leve.</p>
+</section>
+<section class="showcase">
+<h2>Sistema de nós visuais</h2>
+<img src="../interface_noeuds.png" alt="Editor visual de nós do Yop2D (programação visual) em um tablet" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>Nenhum código para escrever: a lógica do jogo é montada com blocos visuais (nós) ligados entre si. 115 nós prontos para usar cobrem movimento, física, animações, som, diálogos, inventário, câmera, temporizadores e condições. Recolha cadeias inteiras de nós para manter a área de trabalho organizada.</p>
+</section>
+<section class="showcase">
+<h2>O cérebro dos seus jogos</h2>
+<img src="../interface_editeur_noeuds.png" alt="Janela de configurações de um nó no Yop2D" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>Selecione um nó para configurá-lo: escolha o objeto alvo, ajuste valores, escolha imagens, sons ou animações em listas. Fórmulas simples como <code>=score + 1</code> permitem usar em qualquer lugar variáveis, a posição do dedo, o joystick, o tempo ou as propriedades dos objetos.</p>
+</section>
+<section class="showcase">
+<h2>Jogos de exemplo incluídos</h2>
+<img src="../exemples_jeux.png" alt="Jogos de exemplo feitos com o Yop2D rodando no Android" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>O motor vem com três pequenos jogos de exemplo: um jogo de plataforma, um jogo de nave e uma cena com rolagem em paralaxe. Abra, jogue e depois modifique para entender como tudo funciona.</p>
+</section>
+<section class="showcase">
+<h2>No tablet e no celular</h2>
+<img src="../interface_telephone.png" alt="Editor do Yop2D em um celular Android na horizontal" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>O tablet é o mais confortável, mas o Yop2D também funciona em celulares Android na horizontal. Em telas pequenas, os painéis passam para um layout compacto para deixar o máximo de espaço para a cena.</p>
+</section>
+
+<section id="features">
+<h2>O que o motor sabe fazer</h2>
+<div class="grid">
+<div class="card">
+<h3>Nós visuais sem código</h3>
+<p>115 nós para montar a lógica do jogo ligando blocos, com fórmulas simples quando precisar.</p>
+</div>
+<div class="card">
+<h3>Exportação de APK offline</h3>
+<p>Seu jogo vira um app Android de verdade, criado no próprio tablet ou celular, mesmo sem internet.</p>
+</div>
+<div class="card">
+<h3>Cenas como objetos (prefabs)</h3>
+<p>Qualquer cena pode ser colocada como objeto dentro de outra: perfeito para uma fileira de inimigos iguais ou peças reutilizáveis.</p>
+</div>
+<div class="card">
+<h3>Seleção por tag</h3>
+<p>Dê uma tag aos objetos e um único nó age sobre todos de uma vez: mover todos os inimigos, destruir todas as moedas.</p>
+</div>
+<div class="card">
+<h3>Física e comportamentos</h3>
+<p>Gravidade, quiques, impulsos, colisões, detecção do chão, e comportamentos de perseguir e fugir para a IA dos inimigos.</p>
+</div>
+<div class="card">
+<h3>Tiles</h3>
+<p>Pinte fases com um tileset e marque uma vez os blocos sólidos: as colisões são automáticas.</p>
+</div>
+<div class="card">
+<h3>Variáveis, inventário e salvamento</h3>
+<p>Pontuação, vidas, listas de inventário, e salvar ou restaurar a partida a qualquer momento.</p>
+</div>
+<div class="card">
+<h3>Controles de toque</h3>
+<p>Joysticks virtuais, botões e HUD, com multitoque: andar e pular ao mesmo tempo.</p>
+</div>
+<div class="card">
+<h3>Pausa e câmera lenta</h3>
+<p>O jogo inteiro segue a pausa e a câmera lenta, enquanto seu menu de pausa continua funcionando.</p>
+</div>
+<div class="card">
+<h3>Diálogos, som e câmera</h3>
+<p>Diálogos de texto, efeitos sonoros, música, câmera que segue o jogador, tremor de câmera e vibração.</p>
+</div>
+</div>
+</section>
+
+<section id="guides">
+<h2>Guias para iniciantes</h2>
+<p>Respostas passo a passo às perguntas mais comuns dos iniciantes, escritas com os nós reais do motor. Você também pode lê-las dentro do Yop2D, na ajuda do editor de nós.</p>
+<div class="grid">
+<div class="card">
+<h3>Mover um personagem</h3>
+<p>Mover um objeto com botões, joystick ou o dedo.</p>
+<p><a href="../guides/pt/deplacer-personnage.html">Ler o guia →</a></p>
+</div>
+<div class="card">
+<h3>Fazer um personagem pular</h3>
+<p>Gravidade, chão sólido e botão de pulo, sem pular no ar.</p>
+<p><a href="../guides/pt/sauter.html">Ler o guia →</a></p>
+</div>
+<div class="card">
+<h3>Pegar moedas e contar pontos</h3>
+<p>Uma tag, uma variável de pontos e um texto que mostra os pontos.</p>
+<p><a href="../guides/pt/pieces-score.html">Ler o guia →</a></p>
+</div>
+<div class="card">
+<h3>Perder vida e Game Over</h3>
+<p>Uma variável de vida, uma barra de vida e volta ao início quando a vida chega a 0.</p>
+<p><a href="../guides/pt/vie-game-over.html">Ler o guia →</a></p>
+</div>
+<div class="card">
+<h3>Passar para a próxima fase</h3>
+<p>Uma cena por fase, uma zona de chegada e uma pontuação que continua.</p>
+<p><a href="../guides/pt/niveau-suivant.html">Ler o guia →</a></p>
+</div>
+</div>
+</section>
+
+<section id="nodes-dictionary">
+<h2>Referência dos nós</h2>
+<div class="bloc">
+<p>Todos os 115 nós do Yop2D numa só página: o que cada nó faz, suas configurações, suas saídas e um exemplo. Os nomes são exatamente os do editor de nós.</p>
+<p><a href="../noeuds/pt.html"><strong>Ver os 115 nós →</strong></a></p>
+</div>
+</section>
+
+<section id="comparison">
+<h2>Yop2D comparado a outros motores</h2>
+<p>Existem motores de jogo excelentes. Aqui vai uma comparação honesta para ajudar você a escolher, incluindo o que o Yop2D não faz.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th scope="col">Motor</th><th scope="col">Onde se cria</th><th scope="col">Como se programa</th><th scope="col">2D / 3D</th><th scope="col">Preço</th><th scope="col">O jogo roda em</th></tr></thead>
+<tbody>
+<tr class="nous"><th scope="row">Yop2D</th><td data-label="Onde se cria">App Android (tablet, celular), offline</td><td data-label="Como se programa">Nós visuais, sem código</td><td data-label="2D / 3D">2D</td><td data-label="Preço">Gratuito, sem anúncios</td><td data-label="O jogo roda em">Android (APK criado no aparelho)</td></tr>
+<tr><th scope="row">GDevelop</th><td data-label="Onde se cria">Computador, navegador, app para celular</td><td data-label="Como se programa">Eventos, sem código (JavaScript opcional)</td><td data-label="2D / 3D">2D e 3D</td><td data-label="Preço">Gratuito e de código aberto; planos pagos para mais serviços online</td><td data-label="O jogo roda em">Android, iOS, web, computador (versões móveis criadas online)</td></tr>
+<tr><th scope="row">Construct 3</th><td data-label="Onde se cria">Navegador (também em tablets)</td><td data-label="Como se programa">Folhas de eventos, sem código (JavaScript opcional)</td><td data-label="2D / 3D">Principalmente 2D</td><td data-label="Preço">Assinatura paga; versão gratuita limitada</td><td data-label="O jogo roda em">Android, iOS, web, computador (versões móveis criadas online)</td></tr>
+<tr><th scope="row">Godot</th><td data-label="Onde se cria">Computador, navegador, editor para Android</td><td data-label="Como se programa">Código (GDScript, C#)</td><td data-label="2D / 3D">2D e 3D</td><td data-label="Preço">Gratuito e de código aberto</td><td data-label="O jogo roda em">Android, iOS, web, computador</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">Resumo simplificado, setembro de 2026. Os motores mudam rápido: confira os detalhes no site de cada um.</p>
+<div class="deux">
+<div class="bloc">
+<h3>O Yop2D é para você se…</h3>
+<ul>
+<li>você só tem um tablet ou celular Android, sem computador;</li>
+<li>você quer criar em qualquer lugar, mesmo sem internet;</li>
+<li>você não quer aprender uma linguagem de programação;</li>
+<li>você quer uma ferramenta gratuita, sem anúncios, sem assinatura e sem marca d'água nos seus jogos;</li>
+<li>você quer compartilhar seus jogos como apps Android com amigos, família ou alunos.</li>
+</ul>
+</div>
+<div class="bloc">
+<h3>O que o Yop2D (ainda) não faz</h3>
+<ul>
+<li>Seus jogos rodam só no Android: não há versão para iPhone, web ou computador.</li>
+<li>Ainda não exporta em AAB, o formato exigido para publicar no Google Play. Está previsto para uma versão futura.</li>
+<li>Só 2D.</li>
+<li>É um motor jovem, em fase de testes: a comunidade e o número de tutoriais ainda são pequenos, e podem ocorrer bugs.</li>
+<li>Não há linguagem de script para programadores experientes: tudo é feito com nós.</li>
+<li>O motor é gratuito, mas seu código-fonte não é público.</li>
+</ul>
+</div>
+</div>
+<div class="bloc" style="margin-top:1.5rem">
+<h3 style="margin-top:0">Quando outro motor é a melhor escolha</h3>
+<ul>
+<li>Você precisa de versões do jogo para iPhone, web ou computador: GDevelop, Construct ou Godot.</li>
+<li>Você quer aprender programação de verdade ou fazer jogos 3D: Godot.</li>
+<li>Você trabalha no computador e quer um motor sem código com uma grande comunidade: GDevelop ou Construct.</li>
+</ul>
+</div>
+</section>
+
+<section id="faq">
+<h2>Perguntas frequentes</h2>
+<details class="faq-item">
+<summary>O que é o Yop2D?</summary>
+<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. Ele permite que qualquer pessoa crie um videogame completo no tablet ou celular com nós visuais, sem saber programar, e exporte como APK direto no aparelho.</p>
+</details>
+<details class="faq-item">
+<summary>O Yop2D é mesmo gratuito? Tem anúncios?</summary>
+<p>Sim, o Yop2D é 100% gratuito: sem assinatura, sem compras no app, sem custos escondidos. Não há anúncios no Yop2D, e nunca haverá.</p>
+</details>
+<details class="faq-item">
+<summary>De quem são os jogos que eu crio? Posso vendê-los?</summary>
+<p>Seus jogos pertencem a você. Você pode guardá-los, dar, compartilhar ou vender, sem pedir permissão e sem pagar nada ao Yop2D.</p>
+</details>
+<details class="faq-item">
+<summary>Meus jogos têm logotipo ou marca d&#x27;água do Yop2D?</summary>
+<p>Não. Os jogos que você exporta não têm logotipo, tela de abertura nem marca d'água do Yop2D.</p>
+</details>
+<details class="faq-item">
+<summary>O Yop2D é de código aberto?</summary>
+<p>Não. O Yop2D é gratuito, mas seu código-fonte não é público. Isso não muda nada para seus jogos: eles são inteiramente seus.</p>
+</details>
+<details class="faq-item">
+<summary>Não sei programar. Isso é um problema?</summary>
+<p>De jeito nenhum. O Yop2D substitui o código por nós visuais que você liga entre si. Ele é feito para iniciantes e para criadores que preferem se concentrar no jogo. Os <a href="#guides">guias para iniciantes</a> mostram como fazer, passo a passo.</p>
+</details>
+<details class="faq-item">
+<summary>Em quais aparelhos o Yop2D funciona?</summary>
+<p>Em tablets e celulares com Android 7.0 ou mais recente. O tablet é o mais confortável; no celular, o Yop2D funciona na horizontal com uma interface compacta. Não existe versão para iPhone, iPad ou computador.</p>
+</details>
+<details class="faq-item">
+<summary>Preciso de computador ou de internet?</summary>
+<p>Não. O Yop2D cria e exporta seu jogo como APK independente direto no seu aparelho, 100% offline. Sem compilação na nuvem, sem conta.</p>
+</details>
+<details class="faq-item">
+<summary>Posso publicar meu jogo no Google Play?</summary>
+<p>Ainda não diretamente. O Yop2D exporta arquivos APK: você pode instalar, compartilhar ou publicar em sites que aceitam APK, como o itch.io. O Google Play exige o formato AAB assinado com sua própria chave: essa exportação está prevista para uma versão futura.</p>
+</details>
+<details class="faq-item">
+<summary>Posso jogar meu jogo do Yop2D no iPhone, na web ou no computador?</summary>
+<p>Não. Os jogos feitos com o Yop2D são apps Android. Se você precisa de outras plataformas, veja a <a href="#comparison">comparação</a> com os motores que as oferecem.</p>
+</details>
+<details class="faq-item">
+<summary>Que tipos de jogos posso fazer?</summary>
+<p>Jogos 2D: plataforma, aventura vista de cima, tiro, arcade, quebra-cabeça, quiz, histórias interativas… O editor de tiles, a física, as colisões, as animações, os diálogos, o inventário e o salvamento cobrem a maioria das necessidades. O Yop2D não faz jogos 3D.</p>
+</details>
+<details class="faq-item">
+<summary>Posso usar minhas próprias imagens, sons e músicas?</summary>
+<p>Sim. Você importa suas próprias imagens, tilesets, quadros de animação, efeitos sonoros e músicas. Títulos e efeitos de texto são criados direto no motor.</p>
+</details>
+<details class="faq-item">
+<summary>Em quais idiomas o Yop2D está disponível?</summary>
+<p>A interface, a ajuda integrada, os guias e a referência dos nós existem em 9 idiomas: português, inglês, francês, espanhol, alemão, italiano, russo, chinês simplificado e japonês.</p>
+</details>
+<details class="faq-item">
+<summary>Como aprendo a usar o Yop2D?</summary>
+<p>Comece pelos três jogos de exemplo incluídos no motor e depois siga os <a href="#guides">guias para iniciantes</a>. A <a href="../noeuds/pt.html">referência dos nós</a> explica os 115 nós, e o canal do YouTube, o Discord e o Telegram estão aí para ajudar.</p>
+</details>
+<details class="faq-item">
+<summary>Por que o Android mostra um aviso ao instalar o APK?</summary>
+<p>Porque o APK é baixado fora da Play Store. Toque em <em>Mais detalhes</em> e depois em <em>Instalar assim mesmo</em>. Você também pode entrar no teste fechado do Google Play: <a href="../testeur.html?lang=pt">como ser testador</a>.</p>
+</details>
+<details class="faq-item">
+<summary>O Yop2D coleta dados?</summary>
+<p>O Yop2D envia estatísticas de uso anônimas: abertura e fechamento, tempo de uso e relatórios de falha (só o tipo de erro), com a versão do app, a versão do Android e o idioma do aparelho. O país é estimado pela conexão, sem guardar o endereço IP. Nenhum dado pessoal e nada dos seus projetos. Você pode desativar na tela inicial, e os jogos exportados não enviam nada. Detalhes: <a href="../confidentialite.html">privacidade</a> (em inglês).</p>
+</details>
+<details class="faq-item">
+<summary>O Yop2D está pronto?</summary>
+<p>O Yop2D está em desenvolvimento ativo e em teste fechado no Google Play. Ele já permite fazer jogos completos, mas podem ocorrer bugs: exporte seus projetos regularmente como cópia de segurança e relate os problemas no Discord ou no Telegram.</p>
+</details>
+<details class="faq-item">
+<summary>Quem faz o Yop2D?</summary>
+<p>O Yop2D é criado por um desenvolvedor independente, com o retorno da sua comunidade de testadores.</p>
+</details>
+<details class="faq-item">
+<summary>Qual a diferença entre o Yop2D e o GDevelop, o Construct ou o Godot?</summary>
+<p>O Yop2D foi pensado para funcionar inteiramente num tablet ou celular Android, sem código, sem internet e sem computador, e continua gratuito e sem anúncios. Em troca, ele só faz jogos 2D para Android. Veja a <a href="#comparison">comparação detalhada</a>.</p>
+</details>
+</section>
+
+<section id="community">
+<h2>Participe da comunidade</h2>
+<div class="community">
+<p>O Yop2D é um projeto independente em desenvolvimento ativo. Relate bugs, compartilhe seus jogos, sugira ideias ou ajude a melhorar as traduções.</p>
+<div class="community-buttons">
+    <a href="https://discord.gg/nHqCcqHZNQ" target="_blank" rel="noopener" class="btn btn-discord">💬 Discord</a>
+    <a href="https://t.me/+7PQ9WKw7n645Y2Zk" target="_blank" rel="noopener" class="btn btn-telegram">✈️ Telegram</a>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<p>© 2026 Yop2D · Motor de jogos 2D gratuito e sem código para Android.<br>
+<a href="../confidentialite.html">Privacidade</a> ·
+<a href="../testeur.html?lang=pt">Seja testador</a> ·
+<a href="https://youtube.com/@yop2d" target="_blank" rel="noopener">YouTube</a> ·
+<a href="https://discord.gg/nHqCcqHZNQ" target="_blank" rel="noopener">Discord</a> ·
+<a href="https://t.me/+7PQ9WKw7n645Y2Zk" target="_blank" rel="noopener">Telegram</a> ·
+<a href="https://yop2d-dev.itch.io/yop2d-no-code-game-engine" target="_blank" rel="noopener">itch.io</a> ·
+<a href="https://github.com/zinzin66/yop2d" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+<script>
+(function () {
+  var CLE = 'yop2d-langue';
+  var LANGUES = ["en", "fr", "es", "de", "it", "pt", "ru", "zh", "ja"];
+  var ICI = 'pt';
+  var SUGGESTIONS = {"fr": "Ce site existe en français", "es": "Este sitio está disponible en español", "de": "Diese Seite gibt es auch auf Deutsch", "it": "Questo sito è disponibile in italiano", "pt": "Este site está disponível em português", "ru": "Этот сайт есть на русском языке", "zh": "本网站提供中文版", "ja": "このサイトは日本語でもご覧いただけます"};
+  function lire() { try { return localStorage.getItem(CLE); } catch (e) { return null; } }
+  function ecrire(l) { try { localStorage.setItem(CLE, l); } catch (e) {} }
+  document.querySelectorAll('.lang-bar a[hreflang]').forEach(function (a) {
+    a.addEventListener('click', function () { ecrire(a.getAttribute('hreflang')); });
+  });
+  if (ICI !== 'en') return;
+  function adresse(l) { return l + '/'; }
+  var demande = new URLSearchParams(location.search).get('lang');
+  if (demande) {
+    demande = demande.slice(0, 2).toLowerCase();
+    if (demande !== 'en' && LANGUES.indexOf(demande) >= 0) { location.replace(adresse(demande) + location.hash); return; }
+    if (demande === 'en') { ecrire('en'); return; }
+  }
+  var choix = lire();
+  if (choix && choix !== 'en' && LANGUES.indexOf(choix) >= 0) { location.replace(adresse(choix) + location.hash); return; }
+  if (choix === 'en') return;
+  var tel = (navigator.language || '').slice(0, 2).toLowerCase();
+  if (tel !== 'en' && SUGGESTIONS[tel]) {
+    var b = document.getElementById('lang-suggest');
+    b.innerHTML = '🌍 <a href="' + adresse(tel) + '" hreflang="' + tel + '">' + SUGGESTIONS[tel] + '</a>';
+    b.querySelector('a').addEventListener('click', function () { ecrire(tel); });
+    b.style.display = 'block';
+  }
+})();
+</script>
+</body>
+</html>
