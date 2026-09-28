@@ -11,6 +11,7 @@ Mise en forme dans les textes : **gras**, `code`, [texte](lien) ; un lien (guide
 Résultat :
   - français : guides/<guide>.html ; autres langues : guides/<langue>/<guide>.html
   - aide/guides/<langue>/NN-<guide>.json (fiches de l'onglet Guides de aide.html)
+  - guides/index.html (français) et guides/<langue>/index.html : page « Tous les guides »
   - guides/move-character.html : redirection vers guides/en/deplacer-personnage.html
 
 Utilisation :
@@ -63,6 +64,50 @@ UI = {
                tous="すべてのガイド", pied="Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン", site="公式サイト",
                outil="Yop2D（Android 向けのコード不要 2D ゲームエンジン）"),
 }
+
+# Page « Tous les guides » : titre (balise title), introduction, bouton de lecture, téléchargement
+TOUS = {
+    "fr": ("Tous les guides Yop2D pour débuter | Créer un jeu sans code sur Android",
+           "Guides pas à pas pour créer ton premier jeu 2D avec Yop2D, sans code, sur tablette ou téléphone Android : déplacer un personnage, sauter, score, vies, niveaux.",
+           "Des guides pas à pas pour créer ton premier jeu avec Yop2D, sans écrire de code. Suis-les dans l'ordre : chaque guide réutilise ce que tu as appris dans le précédent.",
+           "Lire le guide", "Télécharger Yop2D"),
+    "en": ("All Yop2D beginner guides | Make a game without code on Android",
+           "Step-by-step guides to make your first 2D game with Yop2D, without code, on an Android tablet or phone: move a character, jump, score, health, levels.",
+           "Step-by-step guides to make your first game with Yop2D, without writing code. Follow them in order: each guide builds on what you learned in the previous one.",
+           "Read the guide", "Download Yop2D"),
+    "es": ("Todas las guías de Yop2D para principiantes | Crea un juego sin código en Android",
+           "Guías paso a paso para crear tu primer juego 2D con Yop2D, sin código, en una tableta o un móvil Android: mover un personaje, saltar, puntuación, vidas, niveles.",
+           "Guías paso a paso para crear tu primer juego con Yop2D, sin escribir código. Síguelas en orden: cada guía aprovecha lo que aprendiste en la anterior.",
+           "Leer la guía", "Descargar Yop2D"),
+    "de": ("Alle Yop2D-Anleitungen für Einsteiger | Ein Spiel ohne Code auf Android erstellen",
+           "Schritt-für-Schritt-Anleitungen für dein erstes 2D-Spiel mit Yop2D, ohne Code, auf einem Android-Tablet oder -Handy: Figur bewegen, springen, Punkte, Leben, Levels.",
+           "Schritt-für-Schritt-Anleitungen für dein erstes Spiel mit Yop2D, ganz ohne Code. Folge ihnen der Reihe nach: Jede Anleitung baut auf der vorherigen auf.",
+           "Anleitung lesen", "Yop2D herunterladen"),
+    "it": ("Tutte le guide Yop2D per principianti | Creare un gioco senza codice su Android",
+           "Guide passo passo per creare il tuo primo gioco 2D con Yop2D, senza codice, su tablet o telefono Android: muovere un personaggio, saltare, punteggio, vite, livelli.",
+           "Guide passo passo per creare il tuo primo gioco con Yop2D, senza scrivere codice. Seguile in ordine: ogni guida riprende quello che hai imparato nella precedente.",
+           "Leggi la guida", "Scarica Yop2D"),
+    "pt": ("Todos os guias do Yop2D para iniciantes | Crie um jogo sem código no Android",
+           "Guias passo a passo para criar seu primeiro jogo 2D com o Yop2D, sem código, no tablet ou celular Android: mover um personagem, pular, pontuação, vidas, fases.",
+           "Guias passo a passo para criar seu primeiro jogo com o Yop2D, sem escrever código. Siga-os em ordem: cada guia aproveita o que você aprendeu no anterior.",
+           "Ler o guia", "Baixar o Yop2D"),
+    "ru": ("Все руководства Yop2D для начинающих | Игра без кода на Android",
+           "Пошаговые руководства: первая 2D-игра в Yop2D без кода на Android-планшете или телефоне — движение персонажа, прыжок, очки, здоровье, уровни.",
+           "Пошаговые руководства, чтобы сделать первую игру в Yop2D, не написав ни строчки кода. Проходите их по порядку: каждое опирается на предыдущее.",
+           "Читать руководство", "Скачать Yop2D"),
+    "zh": ("Yop2D 全部新手教程 | 在安卓上无需代码制作游戏",
+           "分步教程：用 Yop2D 在安卓平板或手机上无需代码制作你的第一个 2D 游戏——移动角色、跳跃、得分、生命值、关卡。",
+           "分步教程，教你用 Yop2D 制作第一个游戏，完全不用写代码。建议按顺序学习：每篇教程都会用到上一篇学过的内容。",
+           "阅读教程", "下载 Yop2D"),
+    "ja": ("Yop2D 初心者ガイド一覧 | Android でコードなしのゲーム作り",
+           "Yop2D で、Android のタブレットやスマホを使ってコードなしで初めての 2D ゲームを作るためのステップごとのガイド：キャラクターの移動、ジャンプ、スコア、ライフ、レベル。",
+           "コードを書かずに Yop2D で初めてのゲームを作るための、ステップごとのガイドです。順番に進めてください。どのガイドも前のガイドで学んだことを使います。",
+           "ガイドを読む", "Yop2D をダウンロード"),
+}
+
+
+def chemin_tous(langue):
+    return "guides/index.html" if langue == "fr" else f"guides/{langue}/index.html"
 
 
 def chemin_page(guide, langue):
@@ -170,12 +215,12 @@ def page(guide, langue, src, sources, r):
         p = GUIDES[i - 1]
         nav.append(f'<a href="{lien_relatif(langue, p, langue)}">{ui["precedent"]} {html.escape(r.brut(sources[(p, langue)]["carte"][0]))}</a>')
     else:
-        nav.append(f'<a href="{accueil}#guides">{ui["precedent"]} {ui["tous"]}</a>')
+        nav.append(f'<a href="index.html">{ui["precedent"]} {ui["tous"]}</a>')
     if i + 1 < len(GUIDES) and (GUIDES[i + 1], langue) in sources:
         s = GUIDES[i + 1]
         nav.append(f'<a href="{lien_relatif(langue, s, langue)}">{ui["suivant"]} {html.escape(r.brut(sources[(s, langue)]["carte"][0]))} →</a>')
     else:
-        nav.append(f'<a href="{accueil}#guides">{ui["tous"]} →</a>')
+        nav.append(f'<a href="index.html">{ui["tous"]} →</a>')
     return f"""<!DOCTYPE html>
 <html lang="{langue}">
 <head>
@@ -202,6 +247,77 @@ def page(guide, langue, src, sources, r):
 
 <div class="nav">
 {chr(10).join(nav)}
+</div>
+</main>
+<footer>
+<p>{ui["pied"]} · <a href="{accueil}">{ui["site"]}</a> · <a href="{base}../noeuds/{langue}.html">{ui["noeuds"]}</a></p>
+</footer>
+</body>
+</html>
+"""
+
+
+def page_tous(langue, sources):
+    """Page « Tous les guides » d'une langue (liste des guides dans l'ordre de GUIDES)."""
+    ui = UI[langue]
+    titre, description, intro, lire, telecharger = TOUS[langue]
+    base = "" if langue == "fr" else "../"
+    accueil = base + "../" + ("index.html" if langue == "en" else f"{langue}/index.html")
+    alternates = "\n".join(f'<link rel="alternate" hreflang="{l}" href="{SITE}{chemin_tous(l)}">' for l in LANGUES)
+    alternates += f'\n<link rel="alternate" hreflang="x-default" href="{SITE}{chemin_tous("en")}">'
+    langues_liens = " · ".join(
+        f"<strong>{NOMS_LANGUES[l]}</strong>" if l == langue
+        else f'<a href="{base}{chemin_tous(l)[len("guides/"):]}" hreflang="{l}">{NOMS_LANGUES[l]}</a>'
+        for l in LANGUES)
+    cartes, elements = [], []
+    for i, g in enumerate([g for g in GUIDES if (g, langue) in sources], 1):
+        carte = json.load(open(os.path.join(RACINE, "aide", "guides", langue, f"{GUIDES.index(g) + 1:02d}-{g}.json"), encoding="utf-8"))
+        lien = lien_relatif(langue, g, langue)
+        etapes = sources[(g, langue)].get("etapes", [])
+        liste = ("<ol>" + "".join(f"<li>{html.escape(re.sub(r'<[^>]+>', '', n))}</li>" for n, _ in etapes) + "</ol>") if etapes else ""
+        cartes.append(f'''<div class="method carte-guide">
+<h2><span class="num">{i}</span> <a href="{lien}">{html.escape(carte["titre"])}</a></h2>
+<p>{html.escape(carte["description"])}</p>
+{liste}
+<p><a href="{lien}"><strong>{lire} →</strong></a></p>
+</div>''')
+        elements.append({"@type": "ListItem", "position": i, "name": carte["titre"], "url": SITE + chemin_page(g, langue)})
+    donnees = {"@context": "https://schema.org", "@type": "ItemList", "name": ui["tous"], "inLanguage": langue,
+               "itemListElement": elements}
+    return f"""<!DOCTYPE html>
+<html lang="{langue}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{html.escape(titre)}</title>
+<meta name="description" content="{html.escape(description)}">
+<link rel="canonical" href="{SITE}{chemin_tous(langue)}">
+{alternates}
+<link rel="stylesheet" href="{base}guide.css">
+<style>
+.carte-guide {{ margin-top: 1.25rem; }}
+.carte-guide h2 {{ margin-top: 0; border: 0; padding: 0; font-size: 1.25rem; }}
+.carte-guide h2 a {{ color: var(--ambre); text-decoration: none; }}
+.carte-guide ol {{ color: var(--text-dim); margin: 0.5rem 0; }}
+.num {{ display: inline-block; min-width: 1.8rem; height: 1.8rem; line-height: 1.8rem; text-align: center; border-radius: 50%; background: var(--teal); color: var(--background); font-size: 1rem; margin-right: 0.3rem; }}
+</style>
+<script type="application/ld+json">
+{json.dumps(donnees, ensure_ascii=False, indent=1)}
+</script>
+</head>
+<body>
+<header>
+<a href="{accueil}">← Yop2D</a>
+<h1>{html.escape(ui["tous"])}</h1>
+<p>{ui["sous_titre"]}</p>
+<p class="langues">{langues_liens}</p>
+</header>
+<main>
+<p>{html.escape(intro)}</p>
+{chr(10).join(cartes)}
+<div class="nav">
+<a href="{base}../noeuds/{langue}.html">{ui["noeuds"]} →</a>
+<a href="https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk">⬇️ {telecharger}</a>
 </div>
 </main>
 <footer>
@@ -244,6 +360,10 @@ def main():
         with open(os.path.join(RACINE, "aide", "guides", l, f"{GUIDES.index(g) + 1:02d}-{g}.json"), "w", encoding="utf-8") as f:
             json.dump(carte, f, ensure_ascii=False, indent=2)
             f.write("\n")
+
+    for l in LANGUES:
+        with open(os.path.join(RACINE, chemin_tous(l)), "w", encoding="utf-8") as f:
+            f.write(page_tous(l, sources))
 
     # Ancienne adresse anglaise du premier guide : redirection.
     open(os.path.join(RACINE, "guides", "move-character.html"), "w", encoding="utf-8").write(

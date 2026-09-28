@@ -333,6 +333,7 @@ def page(langue, t):
 <div class="grid">
 {guides}
 </div>
+<p style="text-align:center;margin-top:1.5rem"><a class="btn btn-download" href="{base}{"guides/index.html" if langue == "fr" else f"guides/{langue}/index.html"}">📚 {e(t["guides"]["tous"])} →</a></p>
 </section>
 
 <section id="nodes-dictionary">
@@ -444,9 +445,11 @@ def llms(t):
     lignes += ["", "## Beginner guides", ""]
     for c in cartes_guides("en"):
         lignes.append(f"- [{c['titre']}]({SITE}{c['lien']}): {c['description']}")
+    lignes.append(f"- [All guides]({SITE}guides/en/index.html): the list of all beginner guides, in order")
     lignes.append("")
-    lignes.append("Guides also exist in the other 8 languages: French at guides/<guide>.html, "
-                  "others at guides/<language code>/<guide>.html.")
+    lignes.append("Guides also exist in the other 8 languages: French at guides/<guide>.html "
+                  "(list: guides/index.html), others at guides/<language code>/<guide>.html "
+                  "(list: guides/<language code>/index.html).")
     lignes += ["", "## Node reference", ""]
     lignes += [f"- [All nodes, {NOMS_LANGUES[l]}]({SITE}noeuds/{l}.html)" for l in LANGUES]
     dossier = os.path.join(RACINE, "aide", "noeuds", "en")

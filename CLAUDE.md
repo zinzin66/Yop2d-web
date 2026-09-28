@@ -37,6 +37,8 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
 - `aide.html` : aide ouverte depuis le moteur dans une WebView.
 - `guides/` : 5 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
   Français : `guides/<guide>.html` ; autres langues : `guides/<langue>/<guide>.html`.
+  Page « Tous les guides » (générée aussi) : `guides/index.html` (fr), `guides/<langue>/index.html` ;
+  textes dans `TOUS` de `generer_guides.py`. Accueil et `llms.txt` y renvoient.
   `guides/move-character.html` = redirection vers `guides/en/deplacer-personnage.html`.
 
 ## Aide (aide.html)
@@ -85,7 +87,8 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
   de la version anglaise ; `appliquer <guide> <langue> fichier.txt` fabrique la
   source d'une langue (une phrase traduite par ligne, même ordre).
 - Nouveau guide : écrire `fr.json` et `en.json`, l'ajouter à `GUIDES`, traduire,
-  générer, ajouter les pages au `sitemap.xml`.
+  générer (la page « Tous les guides » suit), relancer `generer_accueil.py`
+  (pour `llms.txt`), ajouter les pages au `sitemap.xml`.
 
 ## Tester
 Pas de GitHub Pages pour une branche : tester `aide.html` en local dans un
@@ -98,11 +101,12 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 28/09/2026 : 4 guides débutant (fr) ; onglet Nœuds reconstruit depuis le
   catalogue du moteur (115 nœuds, 9 langues) ; guides traduits en 9 langues ;
   page testeurs en 9 langues ; pages `noeuds/<langue>.html` pour le référencement ;
-  accueil + comparatif + FAQ (19 questions) en 9 langues.
+  accueil + comparatif + FAQ (19 questions) en 9 langues ; `llms.txt` ;
+  page « Tous les guides » en 9 langues.
 
 ## Reste à faire
 - Référencement (objectif : faire connaître Yop2D partout, y compris Russie et
-  Chine) : page « Tous les guides » ; inscription Yandex et Baidu ;
+  Chine) : inscription Yandex et Baidu ;
   aide pour les messages de forums et vidéos. itch.io :
   https://yop2d-dev.itch.io/yop2d-no-code-game-engine
 - Ajouter les 3 captures manquantes de l'accueil (voir « Pages »).
