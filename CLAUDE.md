@@ -53,6 +53,10 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
   le script met le nom exact du moteur, entre guillemets de la langue.
 - Nouveau nœud dans le moteur → relancer le script : il liste les descriptions
   manquantes (en attendant, il affiche l'anglais puis le français).
+- Pages lisibles par les moteurs de recherche et les IA : `noeuds/<langue>.html`
+  (tous les nœuds sur une page), générées depuis `aide/noeuds/` par
+  `python3 outils/generer_pages_noeuds.py` : **à relancer après** `generer_aide_noeuds.py`.
+  (L'onglet Nœuds de `aide.html` se remplit par JavaScript : les robots ne le voient pas.)
 
 ## Guides : générés
 - Source : `guides/source/<guide>/<langue>.json` (titre, description, carte de
@@ -77,9 +81,17 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 27/09/2026 : aide en 9 langues, menu de langue, palette du moteur, noms
   officiels des nœuds (PR #1 et #2).
 - 28/09/2026 : 4 guides débutant (fr) ; onglet Nœuds reconstruit depuis le
-  catalogue du moteur (115 nœuds, 9 langues) ; guides traduits en 9 langues.
+  catalogue du moteur (115 nœuds, 9 langues) ; guides traduits en 9 langues ;
+  page testeurs en 9 langues ; pages `noeuds/<langue>.html` pour le référencement.
 
 ## Reste à faire
+- Référencement (objectif : faire connaître Yop2D partout, y compris Russie et
+  Chine) : accueil + FAQ en 9 langues (gratuit, sans pub, code fermé, jeux
+  libres de droits, pas de logo dans les jeux exportés, Android 7+, hors ligne,
+  export APK mais pas encore AAB/Play Store, statistiques anonymes Aptabase
+  désactivables) ; comparatif honnête avec d'autres moteurs ; `llms.txt` ; page
+  « Tous les guides » ; Yandex et Baidu. Auteur : « développeur indépendant »,
+  sans nationalité. itch.io : https://yop2d-dev.itch.io/yop2d-no-code-game-engine
 - Faire tester les étapes des guides sur tablette (projets zip de test, voir
   `Doc/MEMO_NOEUDS.md` du moteur : bouton `{ }` du Blueprint et import de zip).
 - Idées de guides suivants : caméra qui suit, sons et musique, animations,

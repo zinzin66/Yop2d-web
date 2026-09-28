@@ -35,31 +35,31 @@ LANGUES = gen.LANGUES
 NOMS_LANGUES = {"fr": "Français", "en": "English", "es": "Español", "de": "Deutsch", "it": "Italiano",
                 "pt": "Português", "ru": "Русский", "zh": "中文", "ja": "日本語"}
 UI = {
-    "fr": dict(sous_titre="Guide débutant · sans code", besoin="Il te faut :", precedent="←", suivant="Guide suivant :",
+    "fr": dict(noeuds="Référence des nœuds", sous_titre="Guide débutant · sans code", besoin="Il te faut :", precedent="←", suivant="Guide suivant :",
                tous="Tous les guides", pied="Yop2D, moteur de jeu 2D gratuit et sans code pour Android", site="Site officiel",
                outil="Yop2D (moteur de jeu 2D sans code pour Android)"),
-    "en": dict(sous_titre="Beginner guide · no code", besoin="You need:", precedent="←", suivant="Next guide:",
+    "en": dict(noeuds="Node reference", sous_titre="Beginner guide · no code", besoin="You need:", precedent="←", suivant="Next guide:",
                tous="All guides", pied="Yop2D, free no-code 2D game engine for Android", site="Official website",
                outil="Yop2D (no-code 2D game engine for Android)"),
-    "es": dict(sous_titre="Guía para principiantes · sin código", besoin="Necesitas:", precedent="←", suivant="Siguiente guía:",
+    "es": dict(noeuds="Referencia de nodos", sous_titre="Guía para principiantes · sin código", besoin="Necesitas:", precedent="←", suivant="Siguiente guía:",
                tous="Todas las guías", pied="Yop2D, motor de juegos 2D gratuito y sin código para Android", site="Sitio oficial",
                outil="Yop2D (motor de juegos 2D sin código para Android)"),
-    "de": dict(sous_titre="Anleitung für Einsteiger · ohne Code", besoin="Du brauchst:", precedent="←", suivant="Nächste Anleitung:",
+    "de": dict(noeuds="Knotenreferenz", sous_titre="Anleitung für Einsteiger · ohne Code", besoin="Du brauchst:", precedent="←", suivant="Nächste Anleitung:",
                tous="Alle Anleitungen", pied="Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android", site="Offizielle Website",
                outil="Yop2D (2D-Spiel-Engine ohne Code für Android)"),
-    "it": dict(sous_titre="Guida per principianti · senza codice", besoin="Ti serve:", precedent="←", suivant="Guida successiva:",
+    "it": dict(noeuds="Riferimento dei nodi", sous_titre="Guida per principianti · senza codice", besoin="Ti serve:", precedent="←", suivant="Guida successiva:",
                tous="Tutte le guide", pied="Yop2D, motore di gioco 2D gratuito e senza codice per Android", site="Sito ufficiale",
                outil="Yop2D (motore di gioco 2D senza codice per Android)"),
-    "pt": dict(sous_titre="Guia para iniciantes · sem código", besoin="Você precisa de:", precedent="←", suivant="Próximo guia:",
+    "pt": dict(noeuds="Referência de nós", sous_titre="Guia para iniciantes · sem código", besoin="Você precisa de:", precedent="←", suivant="Próximo guia:",
                tous="Todos os guias", pied="Yop2D, motor de jogos 2D gratuito e sem código para Android", site="Site oficial",
                outil="Yop2D (motor de jogos 2D sem código para Android)"),
-    "ru": dict(sous_titre="Руководство для новичков · без кода", besoin="Тебе понадобится:", precedent="←", suivant="Следующее руководство:",
+    "ru": dict(noeuds="Справочник узлов", sous_titre="Руководство для новичков · без кода", besoin="Тебе понадобится:", precedent="←", suivant="Следующее руководство:",
                tous="Все руководства", pied="Yop2D — бесплатный 2D-движок без кода для Android", site="Официальный сайт",
                outil="Yop2D (2D-движок без кода для Android)"),
-    "zh": dict(sous_titre="新手教程 · 无需代码", besoin="你需要：", precedent="←", suivant="下一篇：",
+    "zh": dict(noeuds="节点参考", sous_titre="新手教程 · 无需代码", besoin="你需要：", precedent="←", suivant="下一篇：",
                tous="全部教程", pied="Yop2D，免费、无需代码的 Android 2D 游戏引擎", site="官方网站",
                outil="Yop2D（无需代码的 Android 2D 游戏引擎）"),
-    "ja": dict(sous_titre="初心者ガイド · コード不要", besoin="用意するもの：", precedent="←", suivant="次のガイド：",
+    "ja": dict(noeuds="ノードリファレンス", sous_titre="初心者ガイド · コード不要", besoin="用意するもの：", precedent="←", suivant="次のガイド：",
                tous="すべてのガイド", pied="Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン", site="公式サイト",
                outil="Yop2D（Android 向けのコード不要 2D ゲームエンジン）"),
 }
@@ -203,7 +203,7 @@ def page(guide, langue, src, sources, r):
 </div>
 </main>
 <footer>
-<p>{ui["pied"]} · <a href="{base}../index.html">{ui["site"]}</a></p>
+<p>{ui["pied"]} · <a href="{base}../index.html">{ui["site"]}</a> · <a href="{base}../noeuds/{langue}.html">{ui["noeuds"]}</a></p>
 </footer>
 </body>
 </html>
