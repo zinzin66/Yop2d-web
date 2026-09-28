@@ -104,10 +104,17 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   accueil + comparatif + FAQ (19 questions) en 9 langues ; `llms.txt` ;
   page « Tous les guides » en 9 langues.
 
+## Moteurs de recherche
+- Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
+  `google74fcdd47f85fa058.html` et `google55621bdcee9caacd.html` (ne pas supprimer).
+- Bing : `BingSiteAuth.xml`. Yandex (28/09/2026) : fichier dans le dépôt
+  `zinzin66/zinzin66.github.io` (racine de l'adresse, avec `robots.txt` et une
+  redirection vers `/Yop2d-web/`). Baidu : inutile tant que le site est sur GitHub
+  (GitHub bloque son robot).
+
 ## Reste à faire
 - Référencement (objectif : faire connaître Yop2D partout, y compris Russie et
-  Chine) : inscription Yandex et Baidu ;
-  aide pour les messages de forums et vidéos. itch.io :
+  Chine) : aide pour les messages de forums et vidéos. itch.io :
   https://yop2d-dev.itch.io/yop2d-no-code-game-engine
 - Ajouter les 3 captures manquantes de l'accueil (voir « Pages »).
 - Faire tester les étapes des guides sur tablette (projets zip de test, voir
