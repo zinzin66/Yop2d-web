@@ -2,7 +2,7 @@
 """Construit l'onglet « Nœuds » de aide.html à partir du moteur Yop2D.
 
 Sources :
-  - le moteur (dépôt zinzin66/yop2d) : app/src/main/assets/catalogue_noeuds.json
+  - le moteur (dépôt zinzin66/yop2d-moteur) : app/src/main/assets/catalogue_noeuds.json
     et lang_<langue>.json → noms des nœuds, catégories, réglages, sorties ;
   - aide/source/descriptions/<langue>.json (ce dépôt) → rôle et exemple de chaque nœud.
 

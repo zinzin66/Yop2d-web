@@ -2,8 +2,10 @@
 
 Site officiel de Yop2D, moteur de jeu 2D no-code pour Android, publié avec
 GitHub Pages : `https://zinzin66.github.io/Yop2d-web/` (branche `main`).
-Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
-(branche la plus avancée : `Yop2d-animation`).
+Le code du moteur est dans le dépôt **PRIVÉ** `zinzin66/yop2d-moteur` (branche la plus avancée :
+`Yop2d-animation`). Le dépôt **public** `zinzin66/yop2d` ne contient QUE les versions publiées
+(Releases, fichier `Yop2D.apk`) : le bouton « Télécharger » du site et la recherche de mises à jour
+du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026).
 
 ## L'utilisateur
 - Ne sait pas programmer : expliquer simplement, en français, sans jargon.
@@ -56,7 +58,7 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
 - Couleurs : celles de `Palette.java` du moteur (variables CSS dans `:root`).
 
 ## Onglet Nœuds : généré depuis le moteur
-- Script : `python3 outils/generer_aide_noeuds.py <chemin du clone de zinzin66/yop2d>`
+- Script : `python3 outils/generer_aide_noeuds.py <chemin du clone de zinzin66/yop2d-moteur>`
   (branche `Yop2d-animation`). Il lit `catalogue_noeuds.json` et `lang_<langue>.json`
   du moteur (noms, catégories, réglages, sorties : exactement ceux de l'éditeur)
   et remplace tous les fichiers de `aide/noeuds/<langue>/`.
@@ -81,7 +83,7 @@ Le code du moteur est dans un autre dépôt : `zinzin66/yop2d`
   `**gras**`, `` `code` ``, `[texte](lien)`, `(guide:sauter)` pour un autre guide.
   Noms du moteur : `{{id}}` / `{{lang:cle}}` sans guillemets, `[[id]]` /
   `[[lang:cle]]` entre guillemets (mêmes repères que les descriptions des nœuds).
-- Générer : `python3 outils/generer_guides.py <clone de zinzin66/yop2d>` → pages
+- Générer : `python3 outils/generer_guides.py <clone de zinzin66/yop2d-moteur>` → pages
   HTML + `aide/guides/<langue>/*.json`. Ordre des guides : liste `GUIDES` du script.
 - Traduire : `python3 outils/traduire_guides.py extraire <guide>` liste les phrases
   de la version anglaise ; `appliquer <guide> <langue> fichier.txt` fabrique la
@@ -124,6 +126,10 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   (GitHub bloque son robot).
 
 ## Reste à faire
+- Sécurité (29/09/2026) : le dépôt du moteur était PUBLIC (code et builds visibles par tous). Il est
+  maintenant privé et renommé `yop2d-moteur` ; licence « tous droits réservés » ajoutée ; nouveau
+  dépôt public `yop2d` pour les téléchargements (release v0.1.921). Chaque nouvelle version publique :
+  Release dans `zinzin66/yop2d` avec un fichier nommé exactement `Yop2D.apk`, tag `v0.1.<build>`.
 - Idée validée pour plus tard (29/09/2026) : exemples téléchargeables depuis le site. Dossier `exemples/`
   (zip + vignettes) + `exemples/exemples.json` (nom et description en 9 langues, taille, version minimale
   du moteur) ; le moteur lit la liste au démarrage, garde 1 ou 2 exemples intégrés pour le hors-ligne,
