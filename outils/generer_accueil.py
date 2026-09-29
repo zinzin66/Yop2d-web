@@ -36,8 +36,8 @@ VIDEOS = [("a6wVvJh9uyQ", "2026-09-29")]
 # Captures d'écran, dans l'ordre des blocs « vitrine » des fichiers de textes.
 # Une image absente du dépôt est simplement masquée dans la page : il suffit
 # de l'ajouter avec ce nom exact pour qu'elle apparaisse.
-IMAGES = ["interface_demarage.png", "interface_editeur.png", "interface_tuiles.png",
-          "interfaceAnimation.jpg", "interfaceTitre.jpg", "interface_noeuds.png",
+IMAGES = ["interface_demarage.png", "interface_modeles.png", "interface_editeur.png", "interface_tuiles.png",
+          "interface_animation.png", "interface_titre.png", "interface_noeuds.png",
           "interface_editeur_noeuds.png", "exemples_jeux.png", "interface_telephone.png"]
 
 CSS = """
