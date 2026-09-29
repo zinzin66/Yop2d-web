@@ -12,6 +12,9 @@ def a_traduire(s):
     return re.search(r"[^\W\d_]", reste) is not None
 
 def parcourir(o, f):
+    # Bloc vidéo ["video", "identifiant YouTube", "légende"] : seule la légende se traduit
+    if isinstance(o, list) and len(o) == 3 and o[0] == "video":
+        return ["video", o[1], parcourir(o[2], f)]
     if isinstance(o, list):
         return [parcourir(x, f) for x in o]
     if isinstance(o, dict):

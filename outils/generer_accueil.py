@@ -29,6 +29,10 @@ DISCORD = "https://discord.gg/nHqCcqHZNQ"
 TELEGRAM = "https://t.me/+7PQ9WKw7n645Y2Zk"
 GITHUB = "https://github.com/zinzin66/yop2d"
 
+# Vidéos YouTube affichées sur l'accueil (identifiant, date de publication), la plus récente en premier.
+# Titre et description de chaque vidéo : "videos" des fichiers de textes, sous son identifiant.
+VIDEOS = [("a6wVvJh9uyQ", "2026-09-29")]
+
 # Captures d'écran, dans l'ordre des blocs « vitrine » des fichiers de textes.
 # Une image absente du dépôt est simplement masquée dans la page : il suffit
 # de l'ajouter avec ce nom exact pour qu'elle apparaisse.
@@ -75,6 +79,8 @@ header p { font-size: 1.25rem; max-width: 680px; margin: 0 auto; opacity: 0.95; 
 main { max-width: 1000px; margin: 0 auto; padding: 2rem 1rem; }
 section { margin-bottom: 4rem; }
 h2 { font-size: 2rem; color: var(--primary-color); border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+.video-cadre { position: relative; width: 100%; max-width: 850px; margin: 0 auto 1rem auto; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+.video-cadre iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .showcase { text-align: center; margin-bottom: 5rem; }
 .showcase p { font-size: 1.1rem; text-align: left; background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 .screenshot { width: 100%; max-width: 850px; height: auto; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); margin: 0 auto 1.5rem auto; display: block; }
@@ -240,6 +246,18 @@ def page(langue, t):
             for q, r in t["faq"]["questions"]],
     }
 
+    videos_ld = [{
+        "@context": "https://schema.org", "@type": "VideoObject",
+        "name": t["videos"][vid][0], "description": t["videos"][vid][1],
+        "thumbnailUrl": f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg", "uploadDate": date,
+        "embedUrl": f"https://www.youtube.com/embed/{vid}", "contentUrl": f"https://www.youtube.com/watch?v={vid}",
+    } for vid, date in VIDEOS]
+    videos = "\n".join(f"""<section class="showcase">
+<h2>{e(t["videos"][vid][0])}</h2>
+<div class="video-cadre"><iframe src="https://www.youtube-nocookie.com/embed/{vid}" title="{e(t["videos"][vid][0])}" loading="lazy" allowfullscreen allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"></iframe></div>
+<p>{e(t["videos"][vid][1])}</p>
+</section>""" for vid, date in VIDEOS)
+
     points = "\n".join(f"<li>{e(p)}</li>" for p in t["points"])
 
     vitrine = []
@@ -303,6 +321,9 @@ def page(langue, t):
 <script type="application/ld+json">
 {json.dumps(faq, ensure_ascii=False, indent=1)}
 </script>
+<script type="application/ld+json">
+{json.dumps(videos_ld, ensure_ascii=False, indent=1)}
+</script>
 <style>{CSS}</style>
 </head>
 <body>
@@ -329,6 +350,7 @@ def page(langue, t):
 <div class="lang-badge">🌍 {e(t["langues_interface"])}</div>
 </header>
 <main>
+{videos}
 {chr(10).join(vitrine)}
 
 <section id="features">
@@ -485,6 +507,7 @@ def llms(t):
         "",
         f"- [Privacy policy]({SITE}confidentialite.html): anonymous statistics, opt-out, nothing sent by exported games",
         f"- [YouTube]({YOUTUBE}): video tutorials",
+    ] + [f"- [Video: {t['videos'][vid][0]}](https://www.youtube.com/watch?v={vid}): {t['videos'][vid][1]}" for vid, _ in VIDEOS] + [
         f"- [Discord]({DISCORD}): community",
         f"- [Telegram]({TELEGRAM}): community",
         f"- [GitHub]({GITHUB}): releases",
