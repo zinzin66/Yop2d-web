@@ -266,6 +266,9 @@
 --text-dark: #0f172a;
 }
 body { font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans", "PingFang SC", "Hiragino Sans", sans-serif; line-height: 1.6; color: var(--text-dark); background: var(--background); margin: 0; padding: 0; }
+.duo { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.duo .screenshot { flex: 1 1 320px; min-width: 0; max-width: calc(50% - 0.5rem); }
+@media (max-width: 700px) { .duo .screenshot { max-width: 100%; } }
 .lang-bar { background: #0f172a; color: #cbd5e1; font-size: 0.9rem; padding: 0.5rem 1rem; text-align: center; line-height: 1.9; }
 .lang-bar a { color: #e2e8f0; text-decoration: none; margin: 0 0.35rem; white-space: nowrap; }
 .lang-bar a:hover { text-decoration: underline; }
@@ -411,6 +414,11 @@ footer a:hover { text-decoration: underline; }
 <p>グラデーション、縁取り、ネオン、影、立体、テクスチャ、カーブなどの装飾タイトルをエンジン内で直接作成。ほかのアプリで重い文字画像を作る必要がないので、APK も軽いままです。</p>
 </section>
 <section class="showcase">
+<h2>いろいろな言語の文章と会話</h2>
+<img src="../interface_text.png" alt="Yop2D のゲーム文章エディター（9 言語の会話）" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>ゲームの文章はすべて 1 つのファイルにまとめられ、Yop2D の中でそのまま編集できます：言語ごとに 1 行（hello.fr、hello.en…）。「ダイアログを表示」ノードがプレイヤーのスマホの言語を自動で選ぶので、ノードを増やさずにゲームが 9 言語に対応します。</p>
+</section>
+<section class="showcase">
 <h2>ビジュアルノードシステム</h2>
 <img src="../interface_noeuds.png" alt="タブレット上の Yop2D ビジュアルノードエディター（ビジュアルプログラミング）" class="screenshot" loading="lazy" onerror="this.remove()">
 <p>コードを書く必要はありません。ゲームのロジックは、つなぎ合わせたビジュアルブロック（ノード）で作ります。移動、物理、アニメーション、サウンド、会話、インベントリ、カメラ、タイマー、条件をカバーする 130 個のノードをすぐに使えます。ノードの列をまとめて折りたためるので、作業スペースもすっきり保てます。</p>
@@ -427,7 +435,10 @@ footer a:hover { text-decoration: underline; }
 </section>
 <section class="showcase">
 <h2>タブレットでもスマホでも</h2>
-<img src="../interface_telephone.png" alt="横向きの Android スマホで動く Yop2D エディター" class="screenshot" loading="lazy" onerror="this.remove()">
+<div class="duo">
+<img src="../interface_editeur_telephone.png" alt="横向きの Android スマホで動く Yop2D エディター" class="screenshot" loading="lazy" onerror="this.remove()">
+<img src="../interface_editeur_noeuds_telephone.png" alt="横向きの Android スマホで動く Yop2D エディター" class="screenshot" loading="lazy" onerror="this.remove()">
+</div>
 <p>いちばん快適なのはタブレットですが、Yop2D は横向きの Android スマホでも動きます。小さな画面ではパネルがコンパクトな配置に切り替わり、シーンにできるだけ広いスペースを残します。上部のバーは指でスクロールでき、ピンチ操作のズームは指の位置に合わせて動きます。</p>
 </section>
 

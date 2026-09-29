@@ -36,9 +36,11 @@ VIDEOS = [("a6wVvJh9uyQ", "2026-09-29")]
 # Captures d'écran, dans l'ordre des blocs « vitrine » des fichiers de textes.
 # Une image absente du dépôt est simplement masquée dans la page : il suffit
 # de l'ajouter avec ce nom exact pour qu'elle apparaisse.
+# Un bloc peut montrer plusieurs captures côte à côte : on donne alors une liste de noms.
 IMAGES = ["interface_demarage.png", "interface_modeles.png", "interface_editeur.png", "interface_tuiles.png",
-          "interface_animation.png", "interface_titre.png", "interface_noeuds.png",
-          "interface_editeur_noeuds.png", "exemples_jeux.png", "interface_telephone.png"]
+          "interface_animation.png", "interface_titre.png", "interface_text.png", "interface_noeuds.png",
+          "interface_editeur_noeuds.png", "exemples_jeux.png",
+          ["interface_editeur_telephone.png", "interface_editeur_noeuds_telephone.png"]]
 
 CSS = """
 :root {
@@ -52,6 +54,9 @@ CSS = """
 --text-dark: #0f172a;
 }
 body { font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans", "PingFang SC", "Hiragino Sans", sans-serif; line-height: 1.6; color: var(--text-dark); background: var(--background); margin: 0; padding: 0; }
+.duo { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.duo .screenshot { flex: 1 1 320px; min-width: 0; max-width: calc(50% - 0.5rem); }
+@media (max-width: 700px) { .duo .screenshot { max-width: 100%; } }
 .lang-bar { background: #0f172a; color: #cbd5e1; font-size: 0.9rem; padding: 0.5rem 1rem; text-align: center; line-height: 1.9; }
 .lang-bar a { color: #e2e8f0; text-decoration: none; margin: 0 0.35rem; white-space: nowrap; }
 .lang-bar a:hover { text-decoration: underline; }
@@ -262,9 +267,15 @@ def page(langue, t):
 
     vitrine = []
     for image, (alt, titre, texte) in zip(IMAGES, t["vitrine"]):
+        if isinstance(image, list):
+            imgs = "\n".join(f'<img src="{base}{i}" alt="{e(alt)}" class="screenshot" loading="lazy" onerror="this.remove()">'
+                             for i in image)
+            imgs = f'<div class="duo">\n{imgs}\n</div>'
+        else:
+            imgs = f'<img src="{base}{image}" alt="{e(alt)}" class="screenshot" loading="lazy" onerror="this.remove()">'
         vitrine.append(f"""<section class="showcase">
 <h2>{e(titre)}</h2>
-<img src="{base}{image}" alt="{e(alt)}" class="screenshot" loading="lazy" onerror="this.remove()">
+{imgs}
 <p>{liens(texte, base)}</p>
 </section>""")
 

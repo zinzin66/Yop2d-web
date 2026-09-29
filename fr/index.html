@@ -266,6 +266,9 @@
 --text-dark: #0f172a;
 }
 body { font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans", "PingFang SC", "Hiragino Sans", sans-serif; line-height: 1.6; color: var(--text-dark); background: var(--background); margin: 0; padding: 0; }
+.duo { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.duo .screenshot { flex: 1 1 320px; min-width: 0; max-width: calc(50% - 0.5rem); }
+@media (max-width: 700px) { .duo .screenshot { max-width: 100%; } }
 .lang-bar { background: #0f172a; color: #cbd5e1; font-size: 0.9rem; padding: 0.5rem 1rem; text-align: center; line-height: 1.9; }
 .lang-bar a { color: #e2e8f0; text-decoration: none; margin: 0 0.35rem; white-space: nowrap; }
 .lang-bar a:hover { text-decoration: underline; }
@@ -411,6 +414,11 @@ footer a:hover { text-decoration: underline; }
 <p>Créez des titres stylisés (dégradés, contours, néon, ombres, relief, textures, courbes) directement dans le moteur, au lieu de fabriquer de lourdes images de texte ailleurs. Votre APK reste léger.</p>
 </section>
 <section class="showcase">
+<h2>Textes et dialogues en plusieurs langues</h2>
+<img src="../interface_text.png" alt="Éditeur des textes du jeu dans Yop2D, avec les dialogues en 9 langues" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>Tous les textes du jeu sont rassemblés dans un seul fichier, modifiable directement dans Yop2D : une ligne par langue (bonjour.fr, bonjour.en…). Le nœud « Afficher un dialogue » choisit tout seul la langue du téléphone du joueur : votre jeu parle 9 langues sans aucun nœud en plus.</p>
+</section>
+<section class="showcase">
 <h2>Système de nœuds visuels</h2>
 <img src="../interface_noeuds.png" alt="Éditeur de nœuds visuel de Yop2D (programmation visuelle) sur tablette" class="screenshot" loading="lazy" onerror="this.remove()">
 <p>Aucun code à écrire : la logique du jeu se construit avec des blocs visuels (les nœuds) reliés entre eux. 130 nœuds prêts à l'emploi couvrent déplacements, physique, animations, sons, dialogues, inventaire, caméra, minuteurs et conditions. Repliez des chaînes entières de nœuds pour garder un espace de travail clair.</p>
@@ -427,7 +435,10 @@ footer a:hover { text-decoration: underline; }
 </section>
 <section class="showcase">
 <h2>Sur tablette et téléphone</h2>
-<img src="../interface_telephone.png" alt="Éditeur de Yop2D sur un téléphone Android en mode paysage" class="screenshot" loading="lazy" onerror="this.remove()">
+<div class="duo">
+<img src="../interface_editeur_telephone.png" alt="Éditeur de Yop2D sur un téléphone Android en mode paysage" class="screenshot" loading="lazy" onerror="this.remove()">
+<img src="../interface_editeur_noeuds_telephone.png" alt="Éditeur de Yop2D sur un téléphone Android en mode paysage" class="screenshot" loading="lazy" onerror="this.remove()">
+</div>
 <p>La tablette offre le plus de confort, mais Yop2D fonctionne aussi sur téléphone Android en mode paysage. Sur petit écran, les panneaux passent en disposition compacte pour laisser un maximum de place à la scène. Le bandeau du haut défile au doigt et le zoom à deux doigts suit vos doigts.</p>
 </section>
 

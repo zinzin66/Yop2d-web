@@ -266,6 +266,9 @@
 --text-dark: #0f172a;
 }
 body { font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans", "PingFang SC", "Hiragino Sans", sans-serif; line-height: 1.6; color: var(--text-dark); background: var(--background); margin: 0; padding: 0; }
+.duo { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.duo .screenshot { flex: 1 1 320px; min-width: 0; max-width: calc(50% - 0.5rem); }
+@media (max-width: 700px) { .duo .screenshot { max-width: 100%; } }
 .lang-bar { background: #0f172a; color: #cbd5e1; font-size: 0.9rem; padding: 0.5rem 1rem; text-align: center; line-height: 1.9; }
 .lang-bar a { color: #e2e8f0; text-decoration: none; margin: 0 0.35rem; white-space: nowrap; }
 .lang-bar a:hover { text-decoration: underline; }
@@ -411,6 +414,11 @@ footer a:hover { text-decoration: underline; }
 <p>Crea títulos estilizados (degradados, contornos, neón, sombras, relieve, texturas, curvas) directamente en el motor, en lugar de fabricar pesadas imágenes de texto en otras apps. Tu APK final sigue siendo ligero.</p>
 </section>
 <section class="showcase">
+<h2>Textos y diálogos en varios idiomas</h2>
+<img src="../interface_text.png" alt="Editor de textos del juego en Yop2D, con diálogos en 9 idiomas" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>Todos los textos del juego están en un solo archivo, que se edita directamente en Yop2D: una línea por idioma (hola.fr, hola.en…). El nodo «Mostrar diálogo» elige solo el idioma del teléfono del jugador: tu juego habla 9 idiomas sin ningún nodo extra.</p>
+</section>
+<section class="showcase">
 <h2>Sistema de nodos visuales</h2>
 <img src="../interface_noeuds.png" alt="Editor visual de nodos de Yop2D (programación visual) en una tableta" class="screenshot" loading="lazy" onerror="this.remove()">
 <p>Sin escribir código: la lógica del juego se construye con bloques visuales (nodos) conectados entre sí. 130 nodos listos para usar cubren movimiento, física, animaciones, sonido, diálogos, inventario, cámara, temporizadores y condiciones. Pliega cadenas enteras de nodos para mantener ordenado tu espacio de trabajo.</p>
@@ -427,7 +435,10 @@ footer a:hover { text-decoration: underline; }
 </section>
 <section class="showcase">
 <h2>En tabletas y móviles</h2>
-<img src="../interface_telephone.png" alt="Editor de Yop2D en un móvil Android en horizontal" class="screenshot" loading="lazy" onerror="this.remove()">
+<div class="duo">
+<img src="../interface_editeur_telephone.png" alt="Editor de Yop2D en un móvil Android en horizontal" class="screenshot" loading="lazy" onerror="this.remove()">
+<img src="../interface_editeur_noeuds_telephone.png" alt="Editor de Yop2D en un móvil Android en horizontal" class="screenshot" loading="lazy" onerror="this.remove()">
+</div>
 <p>La tableta es lo más cómodo, pero Yop2D también funciona en móviles Android en horizontal. En pantallas pequeñas, los paneles pasan a un diseño compacto para dejar el máximo espacio a la escena. La barra superior se desliza con el dedo y el zoom con dos dedos sigue tus dedos.</p>
 </section>
 

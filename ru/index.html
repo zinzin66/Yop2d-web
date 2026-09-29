@@ -266,6 +266,9 @@
 --text-dark: #0f172a;
 }
 body { font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans", "PingFang SC", "Hiragino Sans", sans-serif; line-height: 1.6; color: var(--text-dark); background: var(--background); margin: 0; padding: 0; }
+.duo { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.duo .screenshot { flex: 1 1 320px; min-width: 0; max-width: calc(50% - 0.5rem); }
+@media (max-width: 700px) { .duo .screenshot { max-width: 100%; } }
 .lang-bar { background: #0f172a; color: #cbd5e1; font-size: 0.9rem; padding: 0.5rem 1rem; text-align: center; line-height: 1.9; }
 .lang-bar a { color: #e2e8f0; text-decoration: none; margin: 0 0.35rem; white-space: nowrap; }
 .lang-bar a:hover { text-decoration: underline; }
@@ -411,6 +414,11 @@ footer a:hover { text-decoration: underline; }
 <p>Создавайте стильные заголовки (градиенты, обводка, неон, тени, рельеф, текстуры, изгибы) прямо в движке, а не делайте тяжёлые картинки с текстом в других приложениях. Итоговый APK остаётся лёгким.</p>
 </section>
 <section class="showcase">
+<h2>Тексты и диалоги на нескольких языках</h2>
+<img src="../interface_text.png" alt="Редактор текстов игры в Yop2D с диалогами на 9 языках" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>Все тексты игры собраны в одном файле, который редактируется прямо в Yop2D: по строке на язык (privet.fr, privet.en…). Узел «Показать диалог» сам выбирает язык телефона игрока: ваша игра говорит на 9 языках без лишних узлов.</p>
+</section>
+<section class="showcase">
 <h2>Система визуальных узлов</h2>
 <img src="../interface_noeuds.png" alt="Визуальный редактор узлов Yop2D (визуальное программирование) на планшете" class="screenshot" loading="lazy" onerror="this.remove()">
 <p>Никакого кода: логика игры собирается из визуальных блоков (узлов), соединённых между собой. 130 готовых узлов охватывают движение, физику, анимацию, звук, диалоги, инвентарь, камеру, таймеры и условия. Сворачивайте целые цепочки узлов, чтобы рабочая область оставалась аккуратной.</p>
@@ -427,7 +435,10 @@ footer a:hover { text-decoration: underline; }
 </section>
 <section class="showcase">
 <h2>На планшете и телефоне</h2>
-<img src="../interface_telephone.png" alt="Редактор Yop2D на Android-телефоне в альбомной ориентации" class="screenshot" loading="lazy" onerror="this.remove()">
+<div class="duo">
+<img src="../interface_editeur_telephone.png" alt="Редактор Yop2D на Android-телефоне в альбомной ориентации" class="screenshot" loading="lazy" onerror="this.remove()">
+<img src="../interface_editeur_noeuds_telephone.png" alt="Редактор Yop2D на Android-телефоне в альбомной ориентации" class="screenshot" loading="lazy" onerror="this.remove()">
+</div>
 <p>Удобнее всего на планшете, но Yop2D работает и на Android-телефонах в альбомной ориентации. На маленьких экранах панели переходят в компактный режим, чтобы оставить сцене как можно больше места. Верхнюю панель можно прокручивать пальцем, а масштаб двумя пальцами следует за вашими пальцами.</p>
 </section>
 
