@@ -266,6 +266,9 @@
 --text-dark: #0f172a;
 }
 body { font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans", "PingFang SC", "Hiragino Sans", sans-serif; line-height: 1.6; color: var(--text-dark); background: var(--background); margin: 0; padding: 0; }
+.duo { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.duo .screenshot { flex: 1 1 320px; min-width: 0; max-width: calc(50% - 0.5rem); }
+@media (max-width: 700px) { .duo .screenshot { max-width: 100%; } }
 .lang-bar { background: #0f172a; color: #cbd5e1; font-size: 0.9rem; padding: 0.5rem 1rem; text-align: center; line-height: 1.9; }
 .lang-bar a { color: #e2e8f0; text-decoration: none; margin: 0 0.35rem; white-space: nowrap; }
 .lang-bar a:hover { text-decoration: underline; }
@@ -411,6 +414,11 @@ footer a:hover { text-decoration: underline; }
 <p>直接在引擎中制作风格化标题（渐变、描边、霓虹、阴影、浮雕、纹理、弯曲），无需在其他应用里生成沉重的文字图片。最终的 APK 依然轻巧。</p>
 </section>
 <section class="showcase">
+<h2>多语言文字和对话</h2>
+<img src="../interface_text.png" alt="Yop2D 的游戏文字编辑器，含 9 种语言的对话" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>游戏里的所有文字都放在一个文件中，可以直接在 Yop2D 里编辑：每种语言一行（hello.fr、hello.en……）。“显示对话”节点会自动选择玩家手机的语言：不用多加任何节点，你的游戏就能说 9 种语言。</p>
+</section>
+<section class="showcase">
 <h2>可视化节点系统</h2>
 <img src="../interface_noeuds.png" alt="平板上的 Yop2D 可视化节点编辑器（可视化编程）" class="screenshot" loading="lazy" onerror="this.remove()">
 <p>无需写代码：用相互连接的可视化积木（节点）搭建游戏逻辑。130 个现成节点涵盖移动、物理、动画、声音、对话、物品栏、摄像机、计时器和条件。可以折叠整条节点链，让工作区保持整洁。</p>
@@ -427,7 +435,10 @@ footer a:hover { text-decoration: underline; }
 </section>
 <section class="showcase">
 <h2>平板和手机都能用</h2>
-<img src="../interface_telephone.png" alt="横屏安卓手机上的 Yop2D 编辑器" class="screenshot" loading="lazy" onerror="this.remove()">
+<div class="duo">
+<img src="../interface_editeur_telephone.png" alt="横屏安卓手机上的 Yop2D 编辑器" class="screenshot" loading="lazy" onerror="this.remove()">
+<img src="../interface_editeur_noeuds_telephone.png" alt="横屏安卓手机上的 Yop2D 编辑器" class="screenshot" loading="lazy" onerror="this.remove()">
+</div>
 <p>平板体验最舒适，但 Yop2D 也能在横屏的安卓手机上运行。在小屏幕上，面板会切换为紧凑布局，为场景留出尽可能多的空间。顶部工具栏可以用手指滑动，双指缩放会跟随你的手指。</p>
 </section>
 

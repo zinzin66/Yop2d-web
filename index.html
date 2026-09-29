@@ -266,6 +266,9 @@
 --text-dark: #0f172a;
 }
 body { font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans", "PingFang SC", "Hiragino Sans", sans-serif; line-height: 1.6; color: var(--text-dark); background: var(--background); margin: 0; padding: 0; }
+.duo { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+.duo .screenshot { flex: 1 1 320px; min-width: 0; max-width: calc(50% - 0.5rem); }
+@media (max-width: 700px) { .duo .screenshot { max-width: 100%; } }
 .lang-bar { background: #0f172a; color: #cbd5e1; font-size: 0.9rem; padding: 0.5rem 1rem; text-align: center; line-height: 1.9; }
 .lang-bar a { color: #e2e8f0; text-decoration: none; margin: 0 0.35rem; white-space: nowrap; }
 .lang-bar a:hover { text-decoration: underline; }
@@ -411,6 +414,11 @@ footer a:hover { text-decoration: underline; }
 <p>Create stylized titles (gradients, outlines, neon, shadows, relief, textures, curves) directly in the engine, instead of making heavy text images in other apps. Your final APK stays light.</p>
 </section>
 <section class="showcase">
+<h2>Texts and dialogues in several languages</h2>
+<img src="interface_text.png" alt="Yop2D game text editor, with dialogues in 9 languages" class="screenshot" loading="lazy" onerror="this.remove()">
+<p>All the game texts are gathered in a single file that you can edit right inside Yop2D: one line per language (hello.fr, hello.en…). The "Show dialogue" node picks the language of the player's phone by itself: your game speaks 9 languages without any extra node.</p>
+</section>
+<section class="showcase">
 <h2>Visual Node System</h2>
 <img src="interface_noeuds.png" alt="Yop2D visual node editor (visual scripting) on a tablet" class="screenshot" loading="lazy" onerror="this.remove()">
 <p>No code to write: you build your game logic with visual blocks (nodes) connected together. 130 ready-to-use nodes cover movement, physics, animation, sound, dialogues, inventory, camera, timers and conditions. Collapse whole chains of nodes to keep your workspace clear.</p>
@@ -427,7 +435,10 @@ footer a:hover { text-decoration: underline; }
 </section>
 <section class="showcase">
 <h2>On Tablets and Phones</h2>
-<img src="interface_telephone.png" alt="Yop2D editor running on an Android phone in landscape mode" class="screenshot" loading="lazy" onerror="this.remove()">
+<div class="duo">
+<img src="interface_editeur_telephone.png" alt="Yop2D editor running on an Android phone in landscape mode" class="screenshot" loading="lazy" onerror="this.remove()">
+<img src="interface_editeur_noeuds_telephone.png" alt="Yop2D editor running on an Android phone in landscape mode" class="screenshot" loading="lazy" onerror="this.remove()">
+</div>
 <p>Tablets offer the most comfortable experience, but Yop2D also runs on Android phones in landscape mode. On small screens, the panels switch to a compact layout to leave as much room as possible for your scene. The top bar scrolls with your finger and pinch zoom follows your fingers.</p>
 </section>
 
