@@ -20,6 +20,24 @@
       "exemple": "un proiettile o un'auto in corsa."
     },
     {
+      "nom": "Andare verso un oggetto (percorso)",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Velocità, Diagonali (true / false) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato",
+      "role": "L'oggetto A va verso l'oggetto B trovando da solo il percorso più corto, casella per casella, senza attraversare i muri (tessere «Solide» di uno sfondo a tessere, oggetti fisici fissi). Il percorso viene ricalcolato quando B si muove. «Arrivato» parte quando A tocca B.",
+      "exemple": "un fantasma che insegue il giocatore in un labirinto."
+    },
+    {
+      "nom": "Andare a un punto (percorso)",
+      "schema": "<b>Ingressi:</b> Oggetto, Posizione X, Posizione Y, Velocità, Diagonali (true / false) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato",
+      "role": "L'oggetto A va fino al punto X, Y girando attorno ai muri, per il percorso più corto (casella per casella). Con =doigt.x e =doigt.y va dove si tocca lo schermo. «Arrivato» parte all'arrivo. Se non c'è nessun percorso, resta fermo.",
+      "exemple": "toccare una casella per mandarci l'eroe, in un gioco di strategia o un dungeon."
+    },
+    {
+      "nom": "Fermare il percorso",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "L'oggetto smette di seguire il suo percorso («Andare verso un oggetto (percorso)» o «Andare a un punto (percorso)») e resta dov'è.",
+      "exemple": "la mosca si ferma quando la partita è vinta."
+    },
+    {
       "nom": "Insegui un oggetto",
       "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Velocità",
       "role": "L'oggetto A avanza da solo verso l'oggetto B, alla velocità scelta.",

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (127) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 127 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (130) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 130 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 127 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 130 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
 <nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-animationen">Animationen</a><a href="#c10-audio">Audio</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
@@ -595,6 +595,21 @@
 <div class="schema"><b>Eingänge:</b> Objekt, Geschwindigkeit</div>
 <p>Das Objekt bewegt sich von selbst in Blickrichtung, mit der gewählten Geschwindigkeit.</p>
 <p class="exemple"><b>Beispiel:</b> eine Kugel oder ein fahrendes Auto.</p>
+</div>
+<div class="fiche"><h3>Zu einem Objekt gehen (Weg)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Geschwindigkeit, Diagonalen (true / false) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
+<p>Objekt A geht zu Objekt B und findet selbst den kürzesten Weg, Feld für Feld, ohne durch Mauern zu gehen („feste“ Kacheln einer Kachelebene, feste physikalische Objekte). Der Weg wird neu berechnet, wenn B sich bewegt. „Angekommen“ startet, wenn A B berührt.</p>
+<p class="exemple"><b>Beispiel:</b> ein Geist, der den Spieler durch ein Labyrinth jagt.</p>
+</div>
+<div class="fiche"><h3>Zu einem Punkt gehen (Weg)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, X-Position, Y-Position, Geschwindigkeit, Diagonalen (true / false) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
+<p>Objekt A geht auf dem kürzesten Weg (Feld für Feld) um die Mauern herum zum Punkt X, Y. Mit =doigt.x und =doigt.y geht es dorthin, wo der Bildschirm berührt wird. „Angekommen“ startet bei der Ankunft. Gibt es keinen Weg, bleibt es stehen.</p>
+<p class="exemple"><b>Beispiel:</b> auf ein Feld tippen, um den Helden dorthin zu schicken, in einem Strategiespiel oder einem Dungeon.</p>
+</div>
+<div class="fiche"><h3>Weg stoppen</h3>
+<div class="schema"><b>Eingang:</b> Objekt</div>
+<p>Das Objekt folgt seinem Weg („Zu einem Objekt gehen (Weg)“ oder „Zu einem Punkt gehen (Weg)“) nicht mehr und bleibt stehen.</p>
+<p class="exemple"><b>Beispiel:</b> die Fliege hält an, wenn das Spiel gewonnen ist.</p>
 </div>
 <div class="fiche"><h3>Objekt verfolgen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Geschwindigkeit</div>

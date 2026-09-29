@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutti i nodi di Yop2D (127) | Riferimento</title>
-<meta name="description" content="Elenco completo dei 127 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
+<title>Tutti i nodi di Yop2D (130) | Riferimento</title>
+<meta name="description" content="Elenco completo dei 130 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 127 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
+<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 130 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
 <p><strong>Categorie</strong></p>
 <nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-animazioni">Animazioni</a><a href="#c10-audio">Audio</a></nav>
 <h2 id="c1-eventi">Eventi</h2>
@@ -595,6 +595,21 @@
 <div class="schema"><b>Ingressi:</b> Oggetto, Velocità</div>
 <p>L'oggetto avanza da solo, nella direzione in cui è girato, alla velocità scelta.</p>
 <p class="exemple"><b>Esempio:</b> un proiettile o un'auto in corsa.</p>
+</div>
+<div class="fiche"><h3>Andare verso un oggetto (percorso)</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B, Velocità, Diagonali (true / false) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato</div>
+<p>L'oggetto A va verso l'oggetto B trovando da solo il percorso più corto, casella per casella, senza attraversare i muri (tessere «Solide» di uno sfondo a tessere, oggetti fisici fissi). Il percorso viene ricalcolato quando B si muove. «Arrivato» parte quando A tocca B.</p>
+<p class="exemple"><b>Esempio:</b> un fantasma che insegue il giocatore in un labirinto.</p>
+</div>
+<div class="fiche"><h3>Andare a un punto (percorso)</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Posizione X, Posizione Y, Velocità, Diagonali (true / false) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato</div>
+<p>L'oggetto A va fino al punto X, Y girando attorno ai muri, per il percorso più corto (casella per casella). Con =doigt.x e =doigt.y va dove si tocca lo schermo. «Arrivato» parte all'arrivo. Se non c'è nessun percorso, resta fermo.</p>
+<p class="exemple"><b>Esempio:</b> toccare una casella per mandarci l'eroe, in un gioco di strategia o un dungeon.</p>
+</div>
+<div class="fiche"><h3>Fermare il percorso</h3>
+<div class="schema"><b>Ingresso:</b> Oggetto</div>
+<p>L'oggetto smette di seguire il suo percorso («Andare verso un oggetto (percorso)» o «Andare a un punto (percorso)») e resta dov'è.</p>
+<p class="exemple"><b>Esempio:</b> la mosca si ferma quando la partita è vinta.</p>
 </div>
 <div class="fiche"><h3>Insegui un oggetto</h3>
 <div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B, Velocità</div>

@@ -20,6 +20,24 @@
       "exemple": "une balle ou une voiture qui roule."
     },
     {
+      "nom": "Aller vers un objet (chemin)",
+      "schema": "<b>Entrées :</b> Objet A, Objet B, Vitesse, Diagonales (true / false) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé",
+      "role": "L'objet A va vers l'objet B en trouvant tout seul le plus court chemin, case par case, sans traverser les murs (tuiles « Solide » d'un décor en tuiles, objets physiques fixes). Le chemin est recalculé quand B bouge. « Arrivé » se lance quand A touche B.",
+      "exemple": "un fantôme qui poursuit le joueur dans un labyrinthe."
+    },
+    {
+      "nom": "Aller à un point (chemin)",
+      "schema": "<b>Entrées :</b> Objet, Position X, Position Y, Vitesse, Diagonales (true / false) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé",
+      "role": "L'objet A va jusqu'au point X, Y en contournant les murs, par le plus court chemin (case par case). Avec =doigt.x et =doigt.y, il va là où l'on touche l'écran. « Arrivé » se lance à l'arrivée. S'il n'y a aucun chemin, il reste sur place.",
+      "exemple": "toucher une case pour y envoyer le héros, dans un jeu de stratégie ou un donjon."
+    },
+    {
+      "nom": "Arrêter le chemin",
+      "schema": "<b>Entrée :</b> Objet",
+      "role": "L'objet arrête de suivre son chemin (« Aller vers un objet (chemin) » ou « Aller à un point (chemin) ») et reste là où il est.",
+      "exemple": "la mouche s'arrête quand la partie est gagnée."
+    },
+    {
       "nom": "Poursuivre un objet",
       "schema": "<b>Entrées :</b> Objet A, Objet B, Vitesse",
       "role": "L'objet A avance tout seul vers l'objet B, à la vitesse choisie.",

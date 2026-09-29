@@ -20,6 +20,24 @@
       "exemple": "uma bala ou um carro andando."
     },
     {
+      "nom": "Ir até um objeto (caminho)",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Velocidade, Diagonais (true / false) &nbsp;→&nbsp; <b>Saídas:</b> Imediatamente / Chegou",
+      "role": "O objeto A vai até o objeto B achando sozinho o caminho mais curto, casa por casa, sem atravessar paredes (ladrilhos “Sólidos” de um cenário de ladrilhos, objetos físicos fixos). O caminho é recalculado quando B se move. “Chegou” dispara quando A toca B.",
+      "exemple": "um fantasma que persegue o jogador num labirinto."
+    },
+    {
+      "nom": "Ir até um ponto (caminho)",
+      "schema": "<b>Entradas:</b> Objeto, Posição X, Posição Y, Velocidade, Diagonais (true / false) &nbsp;→&nbsp; <b>Saídas:</b> Imediatamente / Chegou",
+      "role": "O objeto A vai até o ponto X, Y contornando as paredes, pelo caminho mais curto (casa por casa). Com =doigt.x e =doigt.y, vai aonde a tela é tocada. “Chegou” dispara na chegada. Se não houver caminho, ele fica parado.",
+      "exemple": "tocar numa casa para mandar o herói até lá, num jogo de estratégia ou numa masmorra."
+    },
+    {
+      "nom": "Parar o caminho",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "O objeto para de seguir o caminho (“Ir até um objeto (caminho)” ou “Ir até um ponto (caminho)”) e fica onde está.",
+      "exemple": "a mosca para quando o jogo é vencido."
+    },
+    {
       "nom": "Perseguir um objeto",
       "schema": "<b>Entradas:</b> Objeto A, Objeto B, Velocidade",
       "role": "O objeto A anda sozinho em direção ao objeto B, na velocidade escolhida.",

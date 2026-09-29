@@ -127,6 +127,11 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   particules-effets (nouveau type de bloc des guides, légende traduite par `traduire_guides.py`).
   Titres et descriptions YouTube en 9 langues donnés à l'utilisateur (traductions ajoutées dans YouTube Studio).
 
+- 30/09/2026 : recherche de chemin dans le moteur (demande d'un utilisateur Discord) : 3 nœuds « Aller vers un
+  objet (chemin) », « Aller à un point (chemin) », « Arrêter le chemin » décrits en 9 langues (130 nœuds) ;
+  aide, pages `noeuds/`, accueil et `llms.txt` régénérés. Côté moteur (branche Yop2d-animation) : 31 modèles
+  de projet pour débutants (onglet « Modèles », 6 catégories) et 2 nouveaux exemples (Platformer, Maze chase).
+
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
   `google74fcdd47f85fa058.html` et `google55621bdcee9caacd.html` (ne pas supprimer).

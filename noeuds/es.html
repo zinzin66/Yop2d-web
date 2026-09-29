@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (127) | Referencia</title>
-<meta name="description" content="Lista completa de los 127 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (130) | Referencia</title>
+<meta name="description" content="Lista completa de los 130 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 127 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 130 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-animaciones">Animaciones</a><a href="#c10-audio">Audio</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -250,8 +250,8 @@
 <p class="exemple"><b>Ejemplo:</b> mostrar «¡Perdiste!», esperar 2 segundos y reiniciar la escena.</p>
 </div>
 <div class="fiche"><h3>Repetir</h3>
-<div class="schema"><b>Entradas:</b> Cada (segundos), Número de veces (0 = sin fin), Nombre del temporizador (opcional) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Cada vez / Terminado</div>
-<p>Lanza la salida «Cada vez» cada X segundos, un número de veces (0 = sin fin), y luego «Terminado». «Enseguida» sale al principio. Si ya está funcionando, no vuelve a empezar.</p>
+<div class="schema"><b>Entradas:</b> Cada (segundos), Número de veces (0 = sin fin), Nombre del temporizador (opcional) &nbsp;→&nbsp; <b>Salidas:</b> En seguida / Cada vez / Terminado</div>
+<p>Lanza la salida «Cada vez» cada X segundos, un número de veces (0 = sin fin), y luego «Terminado». «En seguida» sale al principio. Si ya está funcionando, no vuelve a empezar.</p>
 <p class="exemple"><b>Ejemplo:</b> hacer aparecer un enemigo cada 3 segundos.</p>
 </div>
 <div class="fiche"><h3>Cuenta atrás</h3>
@@ -595,6 +595,21 @@
 <div class="schema"><b>Entradas:</b> Objeto, Velocidad</div>
 <p>El objeto avanza solo, en la dirección hacia la que mira, a la velocidad elegida.</p>
 <p class="exemple"><b>Ejemplo:</b> una bala o un coche en marcha.</p>
+</div>
+<div class="fiche"><h3>Ir hacia un objeto (camino)</h3>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Velocidad, Diagonales (true / false) &nbsp;→&nbsp; <b>Salidas:</b> En seguida / Llegó</div>
+<p>El objeto A va hacia el objeto B encontrando solo el camino más corto, casilla a casilla, sin atravesar muros (baldosas «Sólidas» de un decorado de baldosas, objetos físicos fijos). El camino se recalcula cuando B se mueve. «Llegó» se activa cuando A toca a B.</p>
+<p class="exemple"><b>Ejemplo:</b> un fantasma que persigue al jugador por un laberinto.</p>
+</div>
+<div class="fiche"><h3>Ir a un punto (camino)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Posición X, Posición Y, Velocidad, Diagonales (true / false) &nbsp;→&nbsp; <b>Salidas:</b> En seguida / Llegó</div>
+<p>El objeto A va hasta el punto X, Y rodeando los muros, por el camino más corto (casilla a casilla). Con =doigt.x y =doigt.y va donde se toca la pantalla. «Llegó» se activa al llegar. Si no hay camino, se queda quieto.</p>
+<p class="exemple"><b>Ejemplo:</b> tocar una casilla para enviar allí al héroe, en un juego de estrategia o una mazmorra.</p>
+</div>
+<div class="fiche"><h3>Detener el camino</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>El objeto deja de seguir su camino («Ir hacia un objeto (camino)» o «Ir a un punto (camino)») y se queda donde está.</p>
+<p class="exemple"><b>Ejemplo:</b> la mosca se detiene cuando se gana la partida.</p>
 </div>
 <div class="fiche"><h3>Perseguir un objeto</h3>
 <div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Velocidad</div>
