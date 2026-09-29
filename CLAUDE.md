@@ -24,8 +24,11 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   Dans les textes, `@/` = racine du site ; `{nb_noeuds}` = nombre de nœuds de l'aide (calculé). La racine envoie vers `/<langue>/` si
   `?lang=xx` ou si le visiteur a déjà choisi une langue (clé `yop2d-langue`),
   sinon propose la langue du téléphone dans un bandeau. Captures : liste `IMAGES`
-  du script ; `interface_tuiles.png`, `exemples_jeux.png`, `interface_telephone.png`
-  manquent encore (masquées tant qu'elles ne sont pas ajoutées).
+  du script, toutes en `.png` à la racine (depuis le 30/09/2026), dans l'ordre des blocs « vitrine » :
+  interface_demarage, interface_modeles, interface_editeur, interface_tuiles, interface_animation,
+  interface_titre, interface_noeuds, interface_editeur_noeuds, exemples_jeux, interface_telephone.
+  Une image absente est masquée. L'utilisateur refait toutes les captures avec la nouvelle interface
+  (manquent encore : interface_modeles, interface_tuiles, exemples_jeux, interface_telephone).
   Faits à respecter : gratuit, jamais de pub, code source fermé, jeux libres
   (donner, vendre), aucun logo/filigrane dans les jeux, Android 7+, hors ligne,
   APK mais pas encore AAB, statistiques Aptabase anonymes désactivables,
@@ -131,6 +134,9 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   objet (chemin) », « Aller à un point (chemin) », « Arrêter le chemin » décrits en 9 langues (130 nœuds) ;
   aide, pages `noeuds/`, accueil et `llms.txt` régénérés. Côté moteur (branche Yop2d-animation) : 31 modèles
   de projet pour débutants (onglet « Modèles », 6 catégories) et 2 nouveaux exemples (Platformer, Maze chase).
+- 30/09/2026 : version 0.1.933 publiée par l'utilisateur. Accueil (9 langues) : bloc vitrine « 31 modèles pour
+  apprendre » (image `interface_modeles.png`), cartes « 31 modèles pour débutants » et « Recherche de chemin »,
+  7 exemples, FAQ « Comment apprendre » (onglet Modèles d'abord). Captures renommées en `.png`.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
