@@ -28,9 +28,9 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   interface_demarage, interface_modeles, interface_editeur, interface_tuiles, interface_animation,
   interface_titre, interface_text (dialogues.txt), interface_noeuds, interface_editeur_noeuds, exemples_jeux,
   et côte à côte (un élément de `IMAGES` peut être une liste) interface_editeur_telephone +
-  interface_editeur_noeuds_telephone. Une image absente est masquée. Nouvelles captures fournies le 30/09/2026 ;
-  à refaire : interface_demarage (montre une fausse « v0.1.999 » de test et l'onglet Modèles),
-  interface_editeur_noeuds (ancienne interface).
+  interface_editeur_noeuds_telephone. Une image absente est masquée. Nouvelles captures fournies le 30/09/2026 :
+  toutes à jour (interface_editeur_noeuds = fenêtre de réglage d'un nœud, refaite le 30/09 ;
+  interface_demarage même avec le bouton orange de test) ; rien à refaire.
   Faits à respecter : gratuit, jamais de pub, code source fermé, jeux libres
   (donner, vendre), aucun logo/filigrane dans les jeux, Android 7+, hors ligne,
   APK mais pas encore AAB, statistiques Aptabase anonymes désactivables,
