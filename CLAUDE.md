@@ -116,6 +116,9 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   (Neon shooter, Neon jump, Lost on the moon, Effects showcase, Parallaxe), carte « Jeux en plusieurs
   langues », cartes particules et caméra mises à jour ; guide particules-effets : étape 4 (électrocution,
   arrêt sur image) et renvoi vers l'exemple Effects showcase. Moteur validé : build 921.
+- 29/09/2026 : version 0.1.926 publiée (retours téléphones : bandeau qui défile, zoom, sélecteur de couleur
+  unique, fenêtre de texte, mode « déplacer seulement » du Blueprint, choix des images d'animation par
+  dossier). Accueil : carte « Un éditeur confortable » et phrase ajoutée à la carte « Sur tablette et téléphone ».
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
