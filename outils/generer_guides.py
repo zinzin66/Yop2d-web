@@ -178,6 +178,12 @@ class Rendu:
                 h.append(f"<{t}>" + "".join(f"<li>{self.texte(x)}</li>" for x in b[1]) + f"</{t}>")
             elif t == "tip":
                 h.append(f'<div class="tip">👉 {self.texte(b[1])}</div>')
+            elif t == "video":
+                # ["video", "identifiant YouTube", "légende"]
+                h.append(f'<figure class="video"><div class="video-cadre"><iframe src="https://www.youtube-nocookie.com/embed/{b[1]}" '
+                         f'title="{html.escape(self.brut(b[2]))}" loading="lazy" allowfullscreen '
+                         f'allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"></iframe></div>'
+                         f'<figcaption>{self.texte(b[2])}</figcaption></figure>')
             elif t == "attention":
                 h.append(f'<div class="tip attention">⚠️ {self.texte(b[1])}</div>')
             elif t == "chaine":

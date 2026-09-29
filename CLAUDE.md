@@ -16,6 +16,8 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   l'utilisateur la valide avec « Merge ». Le site est à jour 1 à 2 minutes après.
 
 ## Pages
+- Nouvelle vidéo YouTube : l'ajouter en tête de `VIDEOS` (`generer_accueil.py`) avec ses textes
+  dans "videos" des 9 fichiers `outils/accueil/<langue>.json`, et dans le guide concerné (bloc "video").
 - Accueil (présentation, comparatif avec d'autres moteurs, FAQ) en 9 langues,
   **généré** par `python3 outils/generer_accueil.py` depuis `outils/accueil/<langue>.json`.
   Anglais : `index.html` (racine) ; autres : `<langue>/index.html` (ex. `/fr/`).
@@ -119,6 +121,11 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 29/09/2026 : version 0.1.926 publiée (retours téléphones : bandeau qui défile, zoom, sélecteur de couleur
   unique, fenêtre de texte, mode « déplacer seulement » du Blueprint, choix des images d'animation par
   dossier). Accueil : carte « Un éditeur confortable » et phrase ajoutée à la carte « Sur tablette et téléphone ».
+- 29/09/2026 : 1re vidéo YouTube (effets de particules, a6wVvJh9uyQ) : section vidéo en haut de l'accueil
+  (liste `VIDEOS` de `generer_accueil.py`, titre/description dans "videos" de `outils/accueil/<langue>.json`,
+  balises VideoObject, lien dans `llms.txt`) et bloc `["video", "id", "légende"]` dans le guide
+  particules-effets (nouveau type de bloc des guides, légende traduite par `traduire_guides.py`).
+  Titres et descriptions YouTube en 9 langues donnés à l'utilisateur (traductions ajoutées dans YouTube Studio).
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
