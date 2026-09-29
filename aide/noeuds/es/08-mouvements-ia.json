@@ -20,6 +20,24 @@
       "exemple": "una bala o un coche en marcha."
     },
     {
+      "nom": "Ir hacia un objeto (camino)",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Velocidad, Diagonales (true / false) &nbsp;→&nbsp; <b>Salidas:</b> En seguida / Llegó",
+      "role": "El objeto A va hacia el objeto B encontrando solo el camino más corto, casilla a casilla, sin atravesar muros (baldosas «Sólidas» de un decorado de baldosas, objetos físicos fijos). El camino se recalcula cuando B se mueve. «Llegó» se activa cuando A toca a B.",
+      "exemple": "un fantasma que persigue al jugador por un laberinto."
+    },
+    {
+      "nom": "Ir a un punto (camino)",
+      "schema": "<b>Entradas:</b> Objeto, Posición X, Posición Y, Velocidad, Diagonales (true / false) &nbsp;→&nbsp; <b>Salidas:</b> En seguida / Llegó",
+      "role": "El objeto A va hasta el punto X, Y rodeando los muros, por el camino más corto (casilla a casilla). Con =doigt.x y =doigt.y va donde se toca la pantalla. «Llegó» se activa al llegar. Si no hay camino, se queda quieto.",
+      "exemple": "tocar una casilla para enviar allí al héroe, en un juego de estrategia o una mazmorra."
+    },
+    {
+      "nom": "Detener el camino",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "El objeto deja de seguir su camino («Ir hacia un objeto (camino)» o «Ir a un punto (camino)») y se queda donde está.",
+      "exemple": "la mosca se detiene cuando se gana la partida."
+    },
+    {
       "nom": "Perseguir un objeto",
       "schema": "<b>Entradas:</b> Objeto A, Objeto B, Velocidad",
       "role": "El objeto A avanza solo hacia el objeto B, a la velocidad elegida.",

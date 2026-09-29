@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D 全部节点（127 个）| 参考</title>
-<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 127 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<title>Yop2D 全部节点（130 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 130 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 127 个节点，以及它们的设置（输入）和输出。</p>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 130 个节点，以及它们的设置（输入）和输出。</p>
 <p><strong>分类</strong></p>
 <nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-动画">动画</a><a href="#c10-音频">音频</a></nav>
 <h2 id="c1-事件">事件</h2>
@@ -595,6 +595,21 @@
 <div class="schema"><b>输入：</b> 对象, 速度</div>
 <p>对象按所选速度，朝它面对的方向自动前进。</p>
 <p class="exemple"><b>示例：</b> 子弹或行驶中的汽车。</p>
+</div>
+<div class="fiche"><h3>走向对象（寻路）</h3>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B, 速度, 斜向移动 (true / false) &nbsp;→&nbsp; <b>输出：</b> 立即 / 到达</div>
+<p>对象 A 自己找到最短的路，一格一格走向对象 B，不会穿墙（瓦片背景中的“实心”瓦片、固定的物理对象）。B 移动时会重新计算路线。A 碰到 B 时触发 “到达”。</p>
+<p class="exemple"><b>示例：</b> 在迷宫里追赶玩家的幽灵。</p>
+</div>
+<div class="fiche"><h3>走到某个点（寻路）</h3>
+<div class="schema"><b>输入：</b> 对象, X 位置, Y 位置, 速度, 斜向移动 (true / false) &nbsp;→&nbsp; <b>输出：</b> 立即 / 到达</div>
+<p>对象 A 沿最短的路（一格一格）绕开墙壁走到点 X、Y。用 =doigt.x 和 =doigt.y，它会走到你点屏幕的地方。到达时触发 “到达”。如果没有路，它就留在原地。</p>
+<p class="exemple"><b>示例：</b> 在策略游戏或地下城里，点一个格子让英雄走过去。</p>
+</div>
+<div class="fiche"><h3>停止寻路</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>对象停止沿路线移动（“走向对象（寻路）” 或 “走到某个点（寻路）”），停在原地。</p>
+<p class="exemple"><b>示例：</b> 游戏获胜时苍蝇停下来。</p>
 </div>
 <div class="fiche"><h3>追踪对象</h3>
 <div class="schema"><b>输入：</b> 对象 A, 对象 B, 速度</div>

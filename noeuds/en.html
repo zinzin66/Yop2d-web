@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (127) | Reference</title>
-<meta name="description" content="Complete list of the 127 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (130) | Reference</title>
+<meta name="description" content="Complete list of the 130 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 127 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 130 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-animations">Animations</a><a href="#c10-audio">Audio</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -595,6 +595,21 @@
 <div class="schema"><b>Inputs:</b> Object, Speed</div>
 <p>The object moves by itself, in the direction it is facing, at the chosen speed.</p>
 <p class="exemple"><b>Example:</b> a bullet or a moving car.</p>
+</div>
+<div class="fiche"><h3>Go to an object (path)</h3>
+<div class="schema"><b>Inputs:</b> Object A, Object B, Speed, Diagonals (true / false) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
+<p>Object A goes to object B, finding the shortest path by itself, square by square, without going through walls ("Solid" tiles of a tile layer, fixed physical objects). The path is updated when B moves. “Arrived” runs when A touches B.</p>
+<p class="exemple"><b>Example:</b> a ghost chasing the player through a maze.</p>
+</div>
+<div class="fiche"><h3>Go to a point (path)</h3>
+<div class="schema"><b>Inputs:</b> Object, X position, Y position, Speed, Diagonals (true / false) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
+<p>Object A goes to point X, Y around the walls, by the shortest path (square by square). With =doigt.x and =doigt.y, it goes where the screen is touched. “Arrived” runs on arrival. If there is no path, it stays where it is.</p>
+<p class="exemple"><b>Example:</b> tap a square to send the hero there, in a strategy game or a dungeon.</p>
+</div>
+<div class="fiche"><h3>Stop the path</h3>
+<div class="schema"><b>Input:</b> Object</div>
+<p>The object stops following its path (“Go to an object (path)” or “Go to a point (path)”) and stays where it is.</p>
+<p class="exemple"><b>Example:</b> the fly stops when the game is won.</p>
 </div>
 <div class="fiche"><h3>Chase an object</h3>
 <div class="schema"><b>Inputs:</b> Object A, Object B, Speed</div>

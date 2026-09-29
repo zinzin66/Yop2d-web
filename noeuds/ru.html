@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Все узлы Yop2D (127) | Справочник</title>
-<meta name="description" content="Полный список 127 визуальных узлов Yop2D, 2D-движка без кода для Android: назначение, настройки, выходы и пример для каждого узла.">
+<title>Все узлы Yop2D (130) | Справочник</title>
+<meta name="description" content="Полный список 130 визуальных узлов Yop2D, 2D-движка без кода для Android: назначение, настройки, выходы и пример для каждого узла.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/ru.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D — бесплатный 2D-движок без кода для Android. Логика игры собирается из узлов (визуальных блоков), соединённых в Blueprint: события запускают цепочку, за ними идут действия и условия. На этой странице описаны все 127 узлов редактора, с их настройками (входами) и выходами.</p>
+<p>Yop2D — бесплатный 2D-движок без кода для Android. Логика игры собирается из узлов (визуальных блоков), соединённых в Blueprint: события запускают цепочку, за ними идут действия и условия. На этой странице описаны все 130 узлов редактора, с их настройками (входами) и выходами.</p>
 <p><strong>Категории</strong></p>
 <nav class="sommaire"><a href="#c1-события">События</a><a href="#c2-сцена-и-hud">Сцена и HUD</a><a href="#c3-время">Время</a><a href="#c4-внешний-вид">Внешний вид</a><a href="#c5-переменные">Переменные</a><a href="#c6-логика">Логика</a><a href="#c7-текст">Текст</a><a href="#c8-движение-и-ии">Движение и ИИ</a><a href="#c9-анимации">Анимации</a><a href="#c10-аудио">Аудио</a></nav>
 <h2 id="c1-события">События</h2>
@@ -595,6 +595,21 @@
 <div class="schema"><b>Входы:</b> Объект, Скорость</div>
 <p>Объект сам движется туда, куда повёрнут, с выбранной скоростью.</p>
 <p class="exemple"><b>Пример:</b> пуля или едущая машина.</p>
+</div>
+<div class="fiche"><h3>Идти к объекту (путь)</h3>
+<div class="schema"><b>Входы:</b> Объект A, Объект B, Скорость, Диагонали (true / false) &nbsp;→&nbsp; <b>Выходы:</b> Сразу / Прибыл</div>
+<p>Объект A идёт к объекту B, сам находя самый короткий путь клетка за клеткой и не проходя сквозь стены («твёрдые» тайлы слоя тайлов, неподвижные физические объекты). Путь пересчитывается, когда B двигается. «Прибыл» срабатывает, когда A касается B.</p>
+<p class="exemple"><b>Пример:</b> призрак, который гонится за игроком по лабиринту.</p>
+</div>
+<div class="fiche"><h3>Идти к точке (путь)</h3>
+<div class="schema"><b>Входы:</b> Объект, Позиция X, Позиция Y, Скорость, Диагонали (true / false) &nbsp;→&nbsp; <b>Выходы:</b> Сразу / Прибыл</div>
+<p>Объект A идёт к точке X, Y, обходя стены, самым коротким путём (клетка за клеткой). С =doigt.x и =doigt.y он идёт туда, где коснулись экрана. «Прибыл» срабатывает по прибытии. Если пути нет, объект остаётся на месте.</p>
+<p class="exemple"><b>Пример:</b> нажать на клетку, чтобы отправить туда героя, в стратегии или подземелье.</p>
+</div>
+<div class="fiche"><h3>Остановить путь</h3>
+<div class="schema"><b>Вход:</b> Объект</div>
+<p>Объект перестаёт идти по пути («Идти к объекту (путь)» или «Идти к точке (путь)») и остаётся на месте.</p>
+<p class="exemple"><b>Пример:</b> муха останавливается, когда игра выиграна.</p>
 </div>
 <div class="fiche"><h3>Преследовать</h3>
 <div class="schema"><b>Входы:</b> Объект A, Объект B, Скорость</div>
