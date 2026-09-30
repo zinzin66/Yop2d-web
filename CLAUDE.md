@@ -49,6 +49,13 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   Page « Tous les guides » (générée aussi) : `guides/index.html` (fr), `guides/<langue>/index.html` ;
   textes dans `TOUS` de `generer_guides.py`. Accueil et `llms.txt` y renvoient.
   `guides/move-character.html` = redirection vers `guides/en/deplacer-personnage.html`.
+- `exemples/` : **exemples téléchargeables par le moteur** (depuis le 30/09/2026). `<id>.zip` (projet Yop2D) +
+  `<id>.png` (vignette 300 x 300) ; textes (nom, description en 9 langues, `version`, `moteur_min` = build minimal)
+  dans `outils/exemples/source.json`. `python3 outils/generer_exemples.py` écrit `exemples/exemples.json` (lu par
+  l'onglet Exemples du moteur, tailles calculées) et la page `exemples/<langue>.html` ; relancer ensuite
+  `generer_accueil.py` (`llms.txt` liste les exemples). Exemple modifié → augmenter sa `version` (le moteur
+  retélécharge). Nouvel exemple → zip + png dans `exemples/`, entrée dans `source.json`, générer.
+  Le moteur (à partir de la version qui suit la 0.1.948) n'intègre plus que Platformer et Neon shooter.
 
 ## Aide (aide.html)
 - Deux onglets : **Nœuds** et **Guides**.
@@ -145,6 +152,8 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 30/09/2026 : noms clairs dans le moteur (Toast, Z-Order, Clamp, Scale, Glow, Blink, Cooldown... remplacés,
   « oui / non » au lieu de « true / false », millisecondes expliquées) : aide, pages `noeuds/`, guides, accueil et
   `llms.txt` régénérés depuis le catalogue du moteur (branche Yop2d-animation).
+- 30/09/2026 : exemples téléchargeables : dossier `exemples/` (7 exemples, 3,4 Mo), page « Exemples » en 9 langues,
+  lien sur l'accueil (bloc des exemples), `llms.txt`, `sitemap.xml`. Côté moteur : `ExemplesEnLigne.java`.
 - 30/09/2026 : version 0.1.948 publiée (guide « Ton premier jeu en 5 minutes », nouvelle fenêtre de réglage
   « ① Sur quoi ? / ② Réglages » avec aides et ligne « En clair », barre d'outils réduite, style sobre bleu néon).
   Accueil (9 langues) : cartes « Ton premier jeu en 5 minutes » et « Des réglages en clair » (17 cartes),
@@ -164,7 +173,7 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   maintenant privé et renommé `yop2d-moteur` ; licence « tous droits réservés » ajoutée ; nouveau
   dépôt public `yop2d` pour les téléchargements (release v0.1.921). Chaque nouvelle version publique :
   Release dans `zinzin66/yop2d` avec un fichier nommé exactement `Yop2D.apk`, tag `v0.1.<build>`.
-- Idée validée pour plus tard (29/09/2026) : exemples téléchargeables depuis le site. Dossier `exemples/`
+- FAIT le 30/09/2026 (voir « Pages ») : exemples téléchargeables depuis le site. Plan d'origine : Dossier `exemples/`
   (zip + vignettes) + `exemples/exemples.json` (nom et description en 9 langues, taille, version minimale
   du moteur) ; le moteur lit la liste au démarrage, garde 1 ou 2 exemples intégrés pour le hors-ligne,
   télécharge les autres à la demande et les garde. Page « Exemples » sur le site (référencement).
