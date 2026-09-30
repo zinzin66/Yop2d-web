@@ -29,8 +29,8 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   interface_titre, interface_text (dialogues.txt), interface_noeuds, interface_editeur_noeuds, exemples_jeux,
   et côte à côte (un élément de `IMAGES` peut être une liste) interface_editeur_telephone +
   interface_editeur_noeuds_telephone. Une image absente est masquée. Nouvelles captures fournies le 30/09/2026 :
-  toutes à jour (interface_editeur_noeuds = fenêtre de réglage d'un nœud, refaite le 30/09 ;
-  interface_demarage même avec le bouton orange de test) ; rien à refaire.
+  à refaire avec la 0.1.948 (nouvelle barre d'outils et nouvelle fenêtre de réglage) : interface_editeur,
+  interface_editeur_noeuds, interface_noeuds, interface_modeles (carte du guide) et les 2 captures téléphone.
   Faits à respecter : gratuit, jamais de pub, code source fermé, jeux libres
   (donner, vendre), aucun logo/filigrane dans les jeux, Android 7+, hors ligne,
   APK mais pas encore AAB, statistiques Aptabase anonymes désactivables,
@@ -145,6 +145,11 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 30/09/2026 : noms clairs dans le moteur (Toast, Z-Order, Clamp, Scale, Glow, Blink, Cooldown... remplacés,
   « oui / non » au lieu de « true / false », millisecondes expliquées) : aide, pages `noeuds/`, guides, accueil et
   `llms.txt` régénérés depuis le catalogue du moteur (branche Yop2d-animation).
+- 30/09/2026 : version 0.1.948 publiée (guide « Ton premier jeu en 5 minutes », nouvelle fenêtre de réglage
+  « ① Sur quoi ? / ② Réglages » avec aides et ligne « En clair », barre d'outils réduite, style sobre bleu néon).
+  Accueil (9 langues) : cartes « Ton premier jeu en 5 minutes » et « Des réglages en clair » (17 cartes),
+  carte « Un éditeur simple et confortable », blocs vitrine modèles et « Le cerveau de vos jeux », FAQ « Comment apprendre ».
+  Captures de l'éditeur (barre d'outils, fenêtre de réglage) à refaire par l'utilisateur avec la 0.1.948.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
