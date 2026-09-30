@@ -154,6 +154,7 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   `llms.txt` régénérés depuis le catalogue du moteur (branche Yop2d-animation).
 - 30/09/2026 : exemples téléchargeables : dossier `exemples/` (7 exemples, 3,4 Mo), page « Exemples » en 9 langues,
   lien sur l'accueil (bloc des exemples), `llms.txt`, `sitemap.xml`. Côté moteur : `ExemplesEnLigne.java`.
+  Puis exemple « Parallaxe » retiré (jugé moche par l'utilisateur ; à refaire en MODÈLE du moteur) : 6 exemples.
 - 30/09/2026 : version 0.1.948 publiée (guide « Ton premier jeu en 5 minutes », nouvelle fenêtre de réglage
   « ① Sur quoi ? / ② Réglages » avec aides et ligne « En clair », barre d'outils réduite, style sobre bleu néon).
   Accueil (9 langues) : cartes « Ton premier jeu en 5 minutes » et « Des réglages en clair » (17 cartes),
