@@ -494,6 +494,14 @@ def llms(t):
     lignes.append("Guides also exist in the other 8 languages: French at guides/<guide>.html "
                   "(list: guides/index.html), others at guides/<language code>/<guide>.html "
                   "(list: guides/<language code>/index.html).")
+    lignes += ["", "## Example games", ""]
+    with open(os.path.join(RACINE, "exemples", "exemples.json"), encoding="utf-8") as f:
+        for ex in json.load(f)["exemples"]:
+            lignes.append(f"- [{ex['nom']}]({SITE}exemples/{ex['fichier']}): {ex['description']['en']}")
+    lignes.append(f"- [All example games]({SITE}exemples/en.html): page with pictures (also in the 8 other languages, exemples/<language code>.html)")
+    lignes.append("")
+    lignes.append("The zip files are Yop2D projects: the engine downloads them from its \"Examples\" tab, "
+                  "or they can be opened with \"Open a downloaded project\".")
     lignes += ["", "## Node reference", ""]
     lignes += [f"- [All nodes, {NOMS_LANGUES[l]}]({SITE}noeuds/{l}.html)" for l in LANGUES]
     dossier = os.path.join(RACINE, "aide", "noeuds", "en")
