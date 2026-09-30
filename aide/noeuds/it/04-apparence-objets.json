@@ -26,32 +26,32 @@
       "exemple": "=ruota.rotation + 5 collegato a «Ogni frame» fa girare di continuo l'oggetto «ruota»."
     },
     {
-      "nom": "Modifica l'Opacità (Alpha)",
+      "nom": "Trasparenza",
       "schema": "<b>Ingressi:</b> Oggetto, Opacità (da 0 a 1)",
       "role": "Regola la trasparenza dell'oggetto: 0 = invisibile, 1 = pieno.",
       "exemple": "0.5 per un fantasma mezzo trasparente."
     },
     {
       "nom": "Visibilità",
-      "schema": "<b>Ingressi:</b> Oggetto, Visibile (true / false)",
+      "schema": "<b>Ingressi:</b> Oggetto, Visibile (sì / no)",
       "role": "Mostra (true) o nasconde (false) l'oggetto.",
       "exemple": "mostrare un messaggio «Hai vinto!» nascosto all'inizio."
     },
     {
-      "nom": "Imposta Tag",
+      "nom": "Dare un tag (famiglia di oggetti)",
       "schema": "<b>Ingressi:</b> Oggetto, Tag",
       "role": "Dà un nuovo tag (etichetta) all'oggetto.",
       "exemple": "un nemico sconfitto prende il tag «innocuo»."
     },
     {
-      "nom": "Cambia Z-Order",
-      "schema": "<b>Ingressi:</b> Oggetto, Z",
+      "nom": "Metti davanti / dietro",
+      "schema": "<b>Ingressi:</b> Oggetto, Profondità (più grande = davanti)",
       "role": "Cambia il livello dell'oggetto: più il numero è alto, più l'oggetto sta davanti agli altri.",
       "exemple": "mettere il giocatore davanti a un elemento di scenario."
     },
     {
-      "nom": "Imposta dimensione (Scala)",
-      "schema": "<b>Ingressi:</b> Oggetto, Scale X, Scale Y",
+      "nom": "Ingrandire / rimpicciolire",
+      "schema": "<b>Ingressi:</b> Oggetto, Dimensione orizzontale (1 = normale), Dimensione verticale (1 = normale)",
       "role": "Cambia la dimensione dell'oggetto: 1 = normale, 2 = il doppio, 0.5 = la metà.",
       "exemple": "il giocatore cresce dopo aver mangiato un fungo."
     },
@@ -92,7 +92,7 @@
       "exemple": "passare al bianco e nero durante un ricordo."
     },
     {
-      "nom": "Metodo di fusione (Effetto)",
+      "nom": "Miscela dei colori (effetto luminoso)",
       "schema": "<b>Ingressi:</b> Oggetto, Filtro",
       "role": "Cambia come l'oggetto si mescola con ciò che ha dietro (Additivo, Moltiplica, Scherma, Inverti).",
       "exemple": "Additivo per una luce o una fiamma che brilla."
@@ -104,13 +104,13 @@
       "exemple": "il personaggio guarda dove cammina."
     },
     {
-      "nom": "Modifica Blocco",
-      "schema": "<b>Ingressi:</b> Oggetto, Bloccato (true / false)",
+      "nom": "Blocca / sblocca l'oggetto",
+      "schema": "<b>Ingressi:</b> Oggetto, Bloccato (sì / no)",
       "role": "Blocca o sblocca l'oggetto nell'editor (il lucchetto). Non ha alcun effetto durante il gioco: per impedire di trascinare un oggetto, usa «Rendi trascinabile»."
     },
     {
-      "nom": "Fattore di Parallasse",
-      "schema": "<b>Ingressi:</b> Oggetto, Fattore (es. 0.5)",
+      "nom": "Scorrimento dello sfondo (profondità)",
+      "schema": "<b>Ingressi:</b> Oggetto, Velocità dello sfondo (1 = normale, 0.5 = più lento, effetto lontano)",
       "role": "Regola la velocità con cui l'oggetto scorre quando la telecamera si muove: 1 = normale, 0.5 = la metà (effetto profondità).",
       "exemple": "montagne sullo sfondo che scorrono lentamente."
     },
@@ -121,7 +121,7 @@
       "exemple": "una spada che segue la mano del personaggio."
     },
     {
-      "nom": "Bagliore (Glow)",
+      "nom": "Alone luminoso",
       "schema": "<b>Ingressi:</b> Oggetto, Stato, Colore, Dimensione del bagliore",
       "role": "Circonda l'oggetto con un bagliore morbido del colore e della dimensione scelti (segue la forma delle immagini), oppure lo toglie.",
       "exemple": "un bonus che brilla di giallo, dimensione 20."
@@ -151,20 +151,20 @@
       "exemple": "un fuoco che diventa fumo quando lo si spegne."
     },
     {
-      "nom": "Lampeggio (Blink)",
-      "schema": "<b>Ingressi:</b> Oggetto, Stato, Velocità (ms), Durata (ms, 0 = infinito)",
+      "nom": "Lampeggiare",
+      "schema": "<b>Ingressi:</b> Oggetto, Stato, Velocità (millisecondi, 1000 = 1 s), Durata (millisecondi, 0 = senza fine)",
       "role": "Fa lampeggiare l'oggetto alla velocità scelta (ms), per una durata (ms, 0 = senza fine), o ferma il lampeggio.",
       "exemple": "il giocatore lampeggia 1 secondo dopo essere stato colpito."
     },
     {
-      "nom": "Genera clone (Posizione X/Y)",
-      "schema": "<b>Ingressi:</b> Oggetto B, X, Y",
+      "nom": "Crea una copia dell'oggetto",
+      "schema": "<b>Ingressi:</b> Oggetto B, Posizione X, Posizione Y",
       "role": "Crea una copia dell'oggetto B (il modello) alla posizione X, Y. La copia diventa l'«Oggetto Implicato».",
       "exemple": "far cadere un sasso in una posizione a caso: X = random(0, 800)."
     },
     {
       "nom": "Spara un oggetto",
-      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Nome del modello, Direzione, Velocità, Distruggi fuori dallo schermo (true / false)",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Nome del modello, Direzione, Velocità, Distruggi fuori dallo schermo (sì / no)",
       "role": "Crea un proiettile (l'oggetto indicato in «Nome del modello») nel punto dell'oggetto A e lo lancia alla velocità scelta: 0°, 90°, 180°, 270°, verso l'oggetto B («Verso il bersaglio») o secondo l'angolo di A.",
       "exemple": "un'astronave che spara laser verso l'alto (270)."
     },

@@ -26,32 +26,32 @@
       "exemple": "=wheel.rotation + 5 linked to “Every frame” keeps the object “wheel” spinning."
     },
     {
-      "nom": "Modify Opacity (Alpha)",
+      "nom": "Transparency",
       "schema": "<b>Inputs:</b> Object, Opacity (0 to 1)",
       "role": "Sets the object's transparency: 0 = invisible, 1 = solid.",
       "exemple": "0.5 for a half-transparent ghost."
     },
     {
       "nom": "Visibility",
-      "schema": "<b>Inputs:</b> Object, Visible (true / false)",
+      "schema": "<b>Inputs:</b> Object, Visible (yes / no)",
       "role": "Shows (true) or hides (false) the object.",
       "exemple": "show a “You win!” message hidden at the start."
     },
     {
-      "nom": "Set Tag",
+      "nom": "Give a tag (object family)",
       "schema": "<b>Inputs:</b> Object, Tag",
       "role": "Gives the object a new tag (label).",
       "exemple": "a defeated enemy gets the tag “harmless”."
     },
     {
-      "nom": "Change Z-Order",
-      "schema": "<b>Inputs:</b> Object, Z",
+      "nom": "Bring to front / send back",
+      "schema": "<b>Inputs:</b> Object, Depth (bigger = in front)",
       "role": "Changes the object's layer: the bigger the number, the more the object is in front of others.",
       "exemple": "put the player in front of a decoration."
     },
     {
-      "nom": "Set size (Scale)",
-      "schema": "<b>Inputs:</b> Object, Scale X, Scale Y",
+      "nom": "Grow / shrink",
+      "schema": "<b>Inputs:</b> Object, Horizontal size (1 = normal), Vertical size (1 = normal)",
       "role": "Changes the object's size: 1 = normal, 2 = twice as big, 0.5 = half.",
       "exemple": "the player grows after eating a mushroom."
     },
@@ -92,7 +92,7 @@
       "exemple": "switch to black and white during a flashback."
     },
     {
-      "nom": "Blend mode (Effect)",
+      "nom": "Color blending (light effect)",
       "schema": "<b>Inputs:</b> Object, Filter",
       "role": "Changes how the object blends with what is behind it (Additive, Multiply, Screen, Invert).",
       "exemple": "Additive for a glowing light or flame."
@@ -104,13 +104,13 @@
       "exemple": "the character faces the way it walks."
     },
     {
-      "nom": "Modify Locked",
-      "schema": "<b>Inputs:</b> Object, Locked (true / false)",
+      "nom": "Lock / unlock the object",
+      "schema": "<b>Inputs:</b> Object, Locked (yes / no)",
       "role": "Locks or unlocks the object in the editor (the padlock). It has no effect during the game: to stop an object from being dragged, use “Set draggable”."
     },
     {
-      "nom": "Parallax Factor",
-      "schema": "<b>Inputs:</b> Object, Factor (e.g. 0.5)",
+      "nom": "Background scrolling (depth)",
+      "schema": "<b>Inputs:</b> Object, Background speed (1 = normal, 0.5 = slower, far away effect)",
       "role": "Sets how fast the object scrolls when the camera moves: 1 = normal, 0.5 = half as fast (depth effect).",
       "exemple": "mountains in the background that scroll slowly."
     },
@@ -121,7 +121,7 @@
       "exemple": "a sword that follows the character's hand."
     },
     {
-      "nom": "Glow",
+      "nom": "Glowing halo",
       "schema": "<b>Inputs:</b> Object, State, Color, Glow size",
       "role": "Surrounds the object with a soft glow of the chosen color and size (it follows the shape of images), or removes it.",
       "exemple": "a bonus that glows yellow, size 20."
@@ -152,19 +152,19 @@
     },
     {
       "nom": "Blink",
-      "schema": "<b>Inputs:</b> Object, State, Speed (ms), Duration (ms, 0 = infinite)",
+      "schema": "<b>Inputs:</b> Object, State, Speed (milliseconds, 1000 = 1 s), Duration (milliseconds, 0 = endless)",
       "role": "Makes the object blink at the chosen speed (ms), for a duration (ms, 0 = forever), or stops the blinking.",
       "exemple": "the player blinks for 1 second after being hit."
     },
     {
-      "nom": "Spawn clone (X/Y Position)",
-      "schema": "<b>Inputs:</b> Object B, X, Y",
+      "nom": "Create a copy of the object",
+      "schema": "<b>Inputs:</b> Object B, X position, Y position",
       "role": "Creates a copy of object B (the model) at position X, Y. The copy becomes the “Implied Object”.",
       "exemple": "drop a rock at a random position: X = random(0, 800)."
     },
     {
       "nom": "Shoot an object",
-      "schema": "<b>Inputs:</b> Object A, Object B, Model name, Direction, Speed, Destroy off screen (true / false)",
+      "schema": "<b>Inputs:</b> Object A, Object B, Model name, Direction, Speed, Destroy off screen (yes / no)",
       "role": "Creates a projectile (the object named in “Model name”) at object A, and launches it at the chosen speed: 0°, 90°, 180°, 270°, towards object B (“Toward target”) or along A's angle.",
       "exemple": "a ship firing lasers upwards (270)."
     },

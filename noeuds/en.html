@@ -178,18 +178,18 @@
 <p>Closes the exported game. In the editor, nothing closes: use the stop button.</p>
 <p class="exemple"><b>Example:</b> a “Quit” button in the main menu.</p>
 </div>
-<div class="fiche"><h3>Toast</h3>
+<div class="fiche"><h3>Small message at the bottom of the screen</h3>
 <div class="schema"><b>Input:</b> Message</div>
 <p>Shows a small message at the bottom of the screen for a few seconds. Start with = to show a calculation.</p>
 <p class="exemple"><b>Example:</b> ="Score: " + score</p>
 </div>
-<div class="fiche"><h3>Write to log</h3>
+<div class="fiche"><h3>Write to the log (for debugging)</h3>
 <div class="schema"><b>Input:</b> Message</div>
 <p>Writes a message in the project log (diagnostic file), without showing anything in the game. Start with = to write a calculation.</p>
 <p class="exemple"><b>Example:</b> ="health = " + vie, to check a value while testing.</p>
 </div>
 <div class="fiche"><h3>Follow with camera</h3>
-<div class="schema"><b>Inputs:</b> Object, Follow X (true / false), Follow Y (true / false), Parallax X only (true / false)</div>
+<div class="schema"><b>Inputs:</b> Object, Follow X (yes / no), Follow Y (yes / no), Parallax X only (yes / no)</div>
 <p>The camera follows the chosen object. You can make it follow only horizontally or vertically. With no object, the camera stops following.</p>
 <p class="exemple"><b>Example:</b> follow the player through a big platform level.</p>
 </div>
@@ -224,12 +224,12 @@
 <p class="exemple"><b>Example:</b> “Screen fade” (fade out), “Wait” 1 second, “Go to scene”, then “Screen fade” (fade in) when the next level starts.</p>
 </div>
 <div class="fiche"><h3>Camera shake</h3>
-<div class="schema"><b>Inputs:</b> Strength, Duration (ms)</div>
+<div class="schema"><b>Inputs:</b> Strength, Duration (milliseconds, 1000 = 1 s)</div>
 <p>Shakes the screen with the chosen strength and duration (in milliseconds).</p>
 <p class="exemple"><b>Example:</b> an explosion: intensity 15, duration 400.</p>
 </div>
 <div class="fiche"><h3>Vibration</h3>
-<div class="schema"><b>Input:</b> Duration (ms)</div>
+<div class="schema"><b>Input:</b> Duration (milliseconds, 1000 = 1 s)</div>
 <p>Makes the phone vibrate for the chosen duration (in milliseconds). Without a vibration motor, nothing happens.</p>
 <p class="exemple"><b>Example:</b> 100 ms when the player gets hit.</p>
 </div>
@@ -305,28 +305,28 @@
 <p>Turns the object to the given angle, in degrees.</p>
 <p class="exemple"><b>Example:</b> =wheel.rotation + 5 linked to “Every frame” keeps the object “wheel” spinning.</p>
 </div>
-<div class="fiche"><h3>Modify Opacity (Alpha)</h3>
+<div class="fiche"><h3>Transparency</h3>
 <div class="schema"><b>Inputs:</b> Object, Opacity (0 to 1)</div>
 <p>Sets the object's transparency: 0 = invisible, 1 = solid.</p>
 <p class="exemple"><b>Example:</b> 0.5 for a half-transparent ghost.</p>
 </div>
 <div class="fiche"><h3>Visibility</h3>
-<div class="schema"><b>Inputs:</b> Object, Visible (true / false)</div>
+<div class="schema"><b>Inputs:</b> Object, Visible (yes / no)</div>
 <p>Shows (true) or hides (false) the object.</p>
 <p class="exemple"><b>Example:</b> show a “You win!” message hidden at the start.</p>
 </div>
-<div class="fiche"><h3>Set Tag</h3>
+<div class="fiche"><h3>Give a tag (object family)</h3>
 <div class="schema"><b>Inputs:</b> Object, Tag</div>
 <p>Gives the object a new tag (label).</p>
 <p class="exemple"><b>Example:</b> a defeated enemy gets the tag “harmless”.</p>
 </div>
-<div class="fiche"><h3>Change Z-Order</h3>
-<div class="schema"><b>Inputs:</b> Object, Z</div>
+<div class="fiche"><h3>Bring to front / send back</h3>
+<div class="schema"><b>Inputs:</b> Object, Depth (bigger = in front)</div>
 <p>Changes the object's layer: the bigger the number, the more the object is in front of others.</p>
 <p class="exemple"><b>Example:</b> put the player in front of a decoration.</p>
 </div>
-<div class="fiche"><h3>Set size (Scale)</h3>
-<div class="schema"><b>Inputs:</b> Object, Scale X, Scale Y</div>
+<div class="fiche"><h3>Grow / shrink</h3>
+<div class="schema"><b>Inputs:</b> Object, Horizontal size (1 = normal), Vertical size (1 = normal)</div>
 <p>Changes the object's size: 1 = normal, 2 = twice as big, 0.5 = half.</p>
 <p class="exemple"><b>Example:</b> the player grows after eating a mushroom.</p>
 </div>
@@ -360,7 +360,7 @@
 <p>Applies a filter to the object: Black and White, Sepia, Invert, or None to remove it.</p>
 <p class="exemple"><b>Example:</b> switch to black and white during a flashback.</p>
 </div>
-<div class="fiche"><h3>Blend mode (Effect)</h3>
+<div class="fiche"><h3>Color blending (light effect)</h3>
 <div class="schema"><b>Inputs:</b> Object, Filter</div>
 <p>Changes how the object blends with what is behind it (Additive, Multiply, Screen, Invert).</p>
 <p class="exemple"><b>Example:</b> Additive for a glowing light or flame.</p>
@@ -370,12 +370,12 @@
 <p>Flips the object: Horizontal (left / right) or Vertical (up / down).</p>
 <p class="exemple"><b>Example:</b> the character faces the way it walks.</p>
 </div>
-<div class="fiche"><h3>Modify Locked</h3>
-<div class="schema"><b>Inputs:</b> Object, Locked (true / false)</div>
+<div class="fiche"><h3>Lock / unlock the object</h3>
+<div class="schema"><b>Inputs:</b> Object, Locked (yes / no)</div>
 <p>Locks or unlocks the object in the editor (the padlock). It has no effect during the game: to stop an object from being dragged, use “Set draggable”.</p>
 </div>
-<div class="fiche"><h3>Parallax Factor</h3>
-<div class="schema"><b>Inputs:</b> Object, Factor (e.g. 0.5)</div>
+<div class="fiche"><h3>Background scrolling (depth)</h3>
+<div class="schema"><b>Inputs:</b> Object, Background speed (1 = normal, 0.5 = slower, far away effect)</div>
 <p>Sets how fast the object scrolls when the camera moves: 1 = normal, 0.5 = half as fast (depth effect).</p>
 <p class="exemple"><b>Example:</b> mountains in the background that scroll slowly.</p>
 </div>
@@ -384,7 +384,7 @@
 <p>Attaches object A (the child) to object B (the parent): A follows B when it moves.</p>
 <p class="exemple"><b>Example:</b> a sword that follows the character's hand.</p>
 </div>
-<div class="fiche"><h3>Glow</h3>
+<div class="fiche"><h3>Glowing halo</h3>
 <div class="schema"><b>Inputs:</b> Object, State, Color, Glow size</div>
 <p>Surrounds the object with a soft glow of the chosen color and size (it follows the shape of images), or removes it.</p>
 <p class="exemple"><b>Example:</b> a bonus that glows yellow, size 20.</p>
@@ -410,17 +410,17 @@
 <p class="exemple"><b>Example:</b> a fire that turns into smoke when it is put out.</p>
 </div>
 <div class="fiche"><h3>Blink</h3>
-<div class="schema"><b>Inputs:</b> Object, State, Speed (ms), Duration (ms, 0 = infinite)</div>
+<div class="schema"><b>Inputs:</b> Object, State, Speed (milliseconds, 1000 = 1 s), Duration (milliseconds, 0 = endless)</div>
 <p>Makes the object blink at the chosen speed (ms), for a duration (ms, 0 = forever), or stops the blinking.</p>
 <p class="exemple"><b>Example:</b> the player blinks for 1 second after being hit.</p>
 </div>
-<div class="fiche"><h3>Spawn clone (X/Y Position)</h3>
-<div class="schema"><b>Inputs:</b> Object B, X, Y</div>
+<div class="fiche"><h3>Create a copy of the object</h3>
+<div class="schema"><b>Inputs:</b> Object B, X position, Y position</div>
 <p>Creates a copy of object B (the model) at position X, Y. The copy becomes the “Implied Object”.</p>
 <p class="exemple"><b>Example:</b> drop a rock at a random position: X = random(0, 800).</p>
 </div>
 <div class="fiche"><h3>Shoot an object</h3>
-<div class="schema"><b>Inputs:</b> Object A, Object B, Model name, Direction, Speed, Destroy off screen (true / false)</div>
+<div class="schema"><b>Inputs:</b> Object A, Object B, Model name, Direction, Speed, Destroy off screen (yes / no)</div>
 <p>Creates a projectile (the object named in “Model name”) at object A, and launches it at the chosen speed: 0°, 90°, 180°, 270°, towards object B (“Toward target”) or along A's angle.</p>
 <p class="exemple"><b>Example:</b> a ship firing lasers upwards (270).</p>
 </div>
@@ -464,7 +464,7 @@
 <div class="method">
 <div class="fiche"><h3>Modify Variable</h3>
 <div class="schema"><b>Inputs:</b> Object, Variable, Value</div>
-<p>Gives the variable a new value (a number, a text, true / false or a calculation).</p>
+<p>Gives the variable a new value (a number, a text, yes / no or a calculation).</p>
 <p class="exemple"><b>Example:</b> set “score” back to 0.</p>
 </div>
 <div class="fiche"><h3>Add to Variable</h3>
@@ -472,13 +472,13 @@
 <p>Adds the value to the variable (a negative number subtracts). For a text variable, adds the text at the end.</p>
 <p class="exemple"><b>Example:</b> score + 1 for each coin, health - 1 for each hit.</p>
 </div>
-<div class="fiche"><h3>Limit Value (Clamp)</h3>
+<div class="fiche"><h3>Keep a variable between two values</h3>
 <div class="schema"><b>Inputs:</b> Object, Variable, Minimum, Maximum</div>
 <p>Keeps the variable (a number) between a minimum and a maximum.</p>
 <p class="exemple"><b>Example:</b> health never goes above 100.</p>
 </div>
 <div class="fiche"><h3>Random number</h3>
-<div class="schema"><b>Inputs:</b> Object, Variable, Value: random(min, max)</div>
+<div class="schema"><b>Inputs:</b> Object, Variable, Between (min, max)</div>
 <p>Puts a random number in the variable. random(1, 6) gives a number from 1 to 6.</p>
 <p class="exemple"><b>Example:</b> a dice roll.</p>
 </div>
@@ -497,7 +497,7 @@
 <p>Follows the True output if the object is in the inventory, False otherwise.</p>
 <p class="exemple"><b>Example:</b> the door only opens if the key is in the inventory.</p>
 </div>
-<div class="fiche"><h3>Combine objects</h3>
+<div class="fiche"><h3>Combine two objects</h3>
 <div class="schema"><b>Inputs:</b> Object A, Object B, Result object name</div>
 <p>Replaces objects A and B with a copy of the object whose name you type, at A's place. If that model does not exist, nothing changes.</p>
 <p class="exemple"><b>Example:</b> stick + cloth = torch.</p>
@@ -569,7 +569,7 @@
 <p class="exemple"><b>Example:</b> ="Score: " + score</p>
 </div>
 <div class="fiche"><h3>Show dialogue</h3>
-<div class="schema"><b>Inputs:</b> Object, Dialogue key</div>
+<div class="schema"><b>Inputs:</b> Object, Sentence name (in the game texts)</div>
 <p>Writes into the Text object the sentence matching the key, from the dialogue file (dialogues.txt). Several languages: write “hello.en = Hello”, “hello.fr = Bonjour”…; the game uses the language in the “langue” variable, otherwise the phone language. “\n” = new line.</p>
 <p class="exemple"><b>Example:</b> the key “hello_merchant” shows the merchant's line.</p>
 </div>
@@ -597,12 +597,12 @@
 <p class="exemple"><b>Example:</b> a bullet or a moving car.</p>
 </div>
 <div class="fiche"><h3>Go to an object (path)</h3>
-<div class="schema"><b>Inputs:</b> Object A, Object B, Speed, Diagonals (true / false) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
+<div class="schema"><b>Inputs:</b> Object A, Object B, Speed, Diagonals (yes / no) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
 <p>Object A goes to object B, finding the shortest path by itself, square by square, without going through walls ("Solid" tiles of a tile layer, fixed physical objects). The path is updated when B moves. “Arrived” runs when A touches B.</p>
 <p class="exemple"><b>Example:</b> a ghost chasing the player through a maze.</p>
 </div>
 <div class="fiche"><h3>Go to a point (path)</h3>
-<div class="schema"><b>Inputs:</b> Object, X position, Y position, Speed, Diagonals (true / false) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
+<div class="schema"><b>Inputs:</b> Object, X position, Y position, Speed, Diagonals (yes / no) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
 <p>Object A goes to point X, Y around the walls, by the shortest path (square by square). With =doigt.x and =doigt.y, it goes where the screen is touched. “Arrived” runs on arrival. If there is no path, it stays where it is.</p>
 <p class="exemple"><b>Example:</b> tap a square to send the hero there, in a strategy game or a dungeon.</p>
 </div>
@@ -637,17 +637,17 @@
 <p class="exemple"><b>Example:</b> a jump: force -15.</p>
 </div>
 <div class="fiche"><h3>Enable physics</h3>
-<div class="schema"><b>Inputs:</b> Object, Falls (true / false)</div>
+<div class="schema"><b>Inputs:</b> Object, Falls (yes / no)</div>
 <p>Gives the object physics: Falls = true, it falls with gravity; false, it stays fixed like a floor.</p>
 <p class="exemple"><b>Example:</b> a platform that collapses when you walk on it.</p>
 </div>
 <div class="fiche"><h3>Set draggable</h3>
-<div class="schema"><b>Inputs:</b> Object, Draggable by finger (true / false)</div>
+<div class="schema"><b>Inputs:</b> Object, Draggable by finger (yes / no)</div>
 <p>Allows (true) or forbids (false) dragging the object with the finger during the game.</p>
 <p class="exemple"><b>Example:</b> lock a puzzle piece that is in the right place.</p>
 </div>
 <div class="fiche"><h3>Bounce around</h3>
-<div class="schema"><b>Inputs:</b> Object, Strength (0 = stop), Duration (ms), Keep going while moving (true / false)</div>
+<div class="schema"><b>Inputs:</b> Object, Strength (0 = stop), Duration (milliseconds, 1000 = 1 s), Keep going while moving (yes / no)</div>
 <p>Makes the object hop (a small visual bounce) with the chosen intensity and duration. 0 stops it. It can keep going while the object moves.</p>
 <p class="exemple"><b>Example:</b> a character that hops as it walks.</p>
 </div>
@@ -665,7 +665,7 @@
 <h2 id="c9-animations">Animations</h2>
 <div class="method">
 <div class="fiche"><h3>Play animation</h3>
-<div class="schema"><b>Inputs:</b> Object, Animation, Speed (frames/second), Loop (true / false)</div>
+<div class="schema"><b>Inputs:</b> Object, Animation, Speed (frames/second), Loop (yes / no)</div>
 <p>Plays one of the object's animations, at the chosen speed (frames per second), looping or once. If it is already playing, it continues without restarting.</p>
 <p class="exemple"><b>Example:</b> the “walk” animation when the character moves.</p>
 </div>
@@ -698,7 +698,7 @@
 <p class="exemple"><b>Example:</b> a “bling” when a coin is picked up.</p>
 </div>
 <div class="fiche"><h3>Play music</h3>
-<div class="schema"><b>Inputs:</b> Music file, Loop (true / false), Volume (%, 100 = full)</div>
+<div class="schema"><b>Inputs:</b> Music file, Loop (yes / no), Volume (%, 100 = full)</div>
 <p>Starts a music track, replacing the current one. Do not put it under “Every frame” (it would restart all the time).</p>
 <p class="exemple"><b>Example:</b> the level music, at start.</p>
 </div>
