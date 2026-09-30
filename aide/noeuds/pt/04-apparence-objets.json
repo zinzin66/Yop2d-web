@@ -26,32 +26,32 @@
       "exemple": "=roda.rotation + 5 ligado a “A cada frame” faz o objeto “roda” girar sem parar."
     },
     {
-      "nom": "Modificar a Opacidade (Alpha)",
+      "nom": "Transparência",
       "schema": "<b>Entradas:</b> Objeto, Opacidade (0 a 1)",
       "role": "Ajusta a transparência do objeto: 0 = invisível, 1 = opaco.",
       "exemple": "0.5 para um fantasma meio transparente."
     },
     {
       "nom": "Visibilidade",
-      "schema": "<b>Entradas:</b> Objeto, Visível (true / false)",
+      "schema": "<b>Entradas:</b> Objeto, Visível (sim / não)",
       "role": "Mostra (true) ou esconde (false) o objeto.",
       "exemple": "mostrar uma mensagem “Venceu!” escondida no começo."
     },
     {
-      "nom": "Definir a Tag",
+      "nom": "Dar uma tag (família de objetos)",
       "schema": "<b>Entradas:</b> Objeto, Tag",
       "role": "Dá uma nova tag (etiqueta) ao objeto.",
       "exemple": "um inimigo derrotado ganha a tag “inofensivo”."
     },
     {
-      "nom": "Mudar Z-Order",
-      "schema": "<b>Entradas:</b> Objeto, Z",
+      "nom": "Colocar na frente / atrás",
+      "schema": "<b>Entradas:</b> Objeto, Profundidade (maior = na frente)",
       "role": "Muda a camada do objeto: quanto maior o número, mais o objeto fica na frente dos outros.",
       "exemple": "colocar o jogador na frente de um cenário."
     },
     {
-      "nom": "Definir tamanho (Scale)",
-      "schema": "<b>Entradas:</b> Objeto, Scale X, Scale Y",
+      "nom": "Aumentar / diminuir",
+      "schema": "<b>Entradas:</b> Objeto, Tamanho horizontal (1 = normal), Tamanho vertical (1 = normal)",
       "role": "Muda o tamanho do objeto: 1 = normal, 2 = o dobro, 0.5 = a metade.",
       "exemple": "o jogador cresce depois de comer um cogumelo."
     },
@@ -92,7 +92,7 @@
       "exemple": "passar para preto e branco durante uma lembrança."
     },
     {
-      "nom": "Modo de mesclagem (Efeito)",
+      "nom": "Mistura de cores (efeito de luz)",
       "schema": "<b>Entradas:</b> Objeto, Filtro",
       "role": "Muda como o objeto se mistura com o que está atrás (Aditivo, Multiplicar, Tela, Inverter).",
       "exemple": "Aditivo para uma luz ou uma chama que brilha."
@@ -104,13 +104,13 @@
       "exemple": "o personagem olha para o lado em que anda."
     },
     {
-      "nom": "Modificar Bloqueio",
-      "schema": "<b>Entradas:</b> Objeto, Bloqueado (true / false)",
+      "nom": "Bloquear / desbloquear o objeto",
+      "schema": "<b>Entradas:</b> Objeto, Bloqueado (sim / não)",
       "role": "Trava ou destrava o objeto no editor (o cadeado). Não tem efeito nenhum durante o jogo: para impedir que um objeto seja arrastado, use “Tornar arrastável”."
     },
     {
-      "nom": "Fator de Paralaxe",
-      "schema": "<b>Entradas:</b> Objeto, Fator (ex.: 0.5)",
+      "nom": "Rolagem do cenário (profundidade)",
+      "schema": "<b>Entradas:</b> Objeto, Velocidade do cenário (1 = normal, 0.5 = mais lento, efeito distante)",
       "role": "Ajusta a velocidade com que o objeto rola quando a câmera se move: 1 = normal, 0.5 = metade (efeito de profundidade).",
       "exemple": "montanhas ao fundo que passam devagar."
     },
@@ -121,7 +121,7 @@
       "exemple": "uma espada que segue a mão do personagem."
     },
     {
-      "nom": "Brilho (Glow)",
+      "nom": "Halo luminoso",
       "schema": "<b>Entradas:</b> Objeto, Estado, Cor, Tamanho do brilho",
       "role": "Envolve o objeto com um brilho suave da cor e do tamanho escolhidos (segue a forma das imagens), ou o remove.",
       "exemple": "um bônus que brilha em amarelo, tamanho 20."
@@ -151,20 +151,20 @@
       "exemple": "um fogo que vira fumaça quando é apagado."
     },
     {
-      "nom": "Piscar (Blink)",
-      "schema": "<b>Entradas:</b> Objeto, Estado, Velocidade (ms), Duração (ms, 0 = infinito)",
+      "nom": "Piscar",
+      "schema": "<b>Entradas:</b> Objeto, Estado, Velocidade (milissegundos, 1000 = 1 s), Duração (milissegundos, 0 = sem fim)",
       "role": "Faz o objeto piscar na velocidade escolhida (ms), por um tempo (ms, 0 = sem fim), ou para de piscar.",
       "exemple": "o jogador pisca por 1 segundo depois de ser atingido."
     },
     {
-      "nom": "Gerar clone (Posição X/Y)",
-      "schema": "<b>Entradas:</b> Objeto B, X, Y",
+      "nom": "Criar uma cópia do objeto",
+      "schema": "<b>Entradas:</b> Objeto B, Posição X, Posição Y",
       "role": "Cria uma cópia do objeto B (o modelo) na posição X, Y. A cópia vira o “Objeto Implicado”.",
       "exemple": "fazer cair uma pedra numa posição aleatória: X = random(0, 800)."
     },
     {
       "nom": "Disparar um objeto",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade, Destruir fora da tela (true / false)",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade, Destruir fora da tela (sim / não)",
       "role": "Cria um projétil (o objeto indicado em “Nome do modelo”) no lugar do objeto A e o lança na velocidade escolhida: 0°, 90°, 180°, 270°, na direção do objeto B (“Em direção ao alvo”) ou no ângulo de A.",
       "exemple": "uma nave que atira lasers para cima (270)."
     },

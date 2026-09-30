@@ -142,6 +142,9 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 30/09/2026 : version 0.1.935 (avis de mise à jour au démarrage, bouton orange). Nouvelles captures de
   l'utilisateur intégrées ; bloc vitrine « Textes et dialogues en plusieurs langues » (11 blocs) ; bloc
   téléphone avec 2 captures côte à côte (classe CSS `duo`).
+- 30/09/2026 : noms clairs dans le moteur (Toast, Z-Order, Clamp, Scale, Glow, Blink, Cooldown... remplacés,
+  « oui / non » au lieu de « true / false », millisecondes expliquées) : aide, pages `noeuds/`, guides, accueil et
+  `llms.txt` régénérés depuis le catalogue du moteur (branche Yop2d-animation).
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers

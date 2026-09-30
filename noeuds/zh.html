@@ -178,18 +178,18 @@
 <p>关闭导出的游戏。在编辑器里不会关闭任何东西：请用停止按钮。</p>
 <p class="exemple"><b>示例：</b> 主菜单里的“退出”按钮。</p>
 </div>
-<div class="fiche"><h3>提示消息 (Toast)</h3>
+<div class="fiche"><h3>屏幕底部小提示</h3>
 <div class="schema"><b>输入：</b> 消息</div>
 <p>在屏幕底部显示几秒钟的小消息。以 = 开头可以显示计算结果。</p>
 <p class="exemple"><b>示例：</b> ="分数：" + score</p>
 </div>
-<div class="fiche"><h3>写入日志</h3>
+<div class="fiche"><h3>写入日志（用于调试）</h3>
 <div class="schema"><b>输入：</b> 消息</div>
 <p>把消息写进项目日志（诊断文件），游戏里不显示任何东西。以 = 开头可以写入计算结果。</p>
 <p class="exemple"><b>示例：</b> ="生命 = " + vie，测试时用来检查数值。</p>
 </div>
 <div class="fiche"><h3>锁定相机</h3>
-<div class="schema"><b>输入：</b> 对象, 跟随 X（true / false）, 跟随 Y（true / false）, 仅 X 视差（true / false）</div>
+<div class="schema"><b>输入：</b> 对象, 跟随 X（是 / 否）, 跟随 Y（是 / 否）, 仅 X 视差（是 / 否）</div>
 <p>摄像机跟随所选对象，也可以只水平或只垂直跟随。没有选择对象时，摄像机不再跟随。</p>
 <p class="exemple"><b>示例：</b> 在大型平台关卡中跟随玩家。</p>
 </div>
@@ -224,12 +224,12 @@
 <p class="exemple"><b>示例：</b> “屏幕淡入淡出”（淡出），“等待” 1 秒，“切换场景”，然后在下一关开始时 “屏幕淡入淡出”（淡入）。</p>
 </div>
 <div class="fiche"><h3>相机抖动</h3>
-<div class="schema"><b>输入：</b> 强度, 持续时间（毫秒）</div>
+<div class="schema"><b>输入：</b> 强度, 持续时间（毫秒，1000 = 1 秒）</div>
 <p>按所选强度和时长（毫秒）晃动屏幕。</p>
 <p class="exemple"><b>示例：</b> 爆炸：强度 15，时长 400。</p>
 </div>
 <div class="fiche"><h3>振动</h3>
-<div class="schema"><b>输入：</b> 持续时间（毫秒）</div>
+<div class="schema"><b>输入：</b> 持续时间（毫秒，1000 = 1 秒）</div>
 <p>让手机振动所选时长（毫秒）。没有振动马达时不会有反应。</p>
 <p class="exemple"><b>示例：</b> 玩家受伤时振动 100 毫秒。</p>
 </div>
@@ -305,28 +305,28 @@
 <p>把对象转到指定角度（度）。</p>
 <p class="exemple"><b>示例：</b> =lunzi.rotation + 5 连接到 “每帧”，让“lunzi”对象一直旋转。</p>
 </div>
-<div class="fiche"><h3>修改不透明度 (Alpha)</h3>
+<div class="fiche"><h3>透明度</h3>
 <div class="schema"><b>输入：</b> 对象, 不透明度（0到1）</div>
 <p>设置对象的透明度：0 = 看不见，1 = 不透明。</p>
 <p class="exemple"><b>示例：</b> 0.5：半透明的幽灵。</p>
 </div>
 <div class="fiche"><h3>可见性</h3>
-<div class="schema"><b>输入：</b> 对象, 可见（true / false）</div>
+<div class="schema"><b>输入：</b> 对象, 可见（是 / 否）</div>
 <p>显示（true）或隐藏（false）对象。</p>
 <p class="exemple"><b>示例：</b> 显示一开始隐藏的“你赢了！”消息。</p>
 </div>
-<div class="fiche"><h3>设置标签</h3>
+<div class="fiche"><h3>设置标签（对象分组）</h3>
 <div class="schema"><b>输入：</b> 对象, 标签</div>
 <p>给对象一个新标签。</p>
 <p class="exemple"><b>示例：</b> 被打败的敌人获得标签“无害”。</p>
 </div>
-<div class="fiche"><h3>改变 Z 轴层级</h3>
-<div class="schema"><b>输入：</b> 对象, Z</div>
+<div class="fiche"><h3>移到前面 / 后面</h3>
+<div class="schema"><b>输入：</b> 对象, 深度（越大越靠前）</div>
 <p>改变对象的图层：数字越大，对象越靠前。</p>
 <p class="exemple"><b>示例：</b> 让玩家显示在装饰物前面。</p>
 </div>
-<div class="fiche"><h3>设置大小 (缩放)</h3>
-<div class="schema"><b>输入：</b> 对象, Scale X, Scale Y</div>
+<div class="fiche"><h3>放大 / 缩小</h3>
+<div class="schema"><b>输入：</b> 对象, 水平大小（1 = 正常）, 垂直大小（1 = 正常）</div>
 <p>改变对象的大小：1 = 正常，2 = 两倍大，0.5 = 一半。</p>
 <p class="exemple"><b>示例：</b> 玩家吃了蘑菇后变大。</p>
 </div>
@@ -360,7 +360,7 @@
 <p>给对象加滤镜：黑白、棕褐色、反色，或选“无”去掉滤镜。</p>
 <p class="exemple"><b>示例：</b> 回忆片段时切换成黑白。</p>
 </div>
-<div class="fiche"><h3>混合模式 (效果)</h3>
+<div class="fiche"><h3>颜色混合（发光效果）</h3>
 <div class="schema"><b>输入：</b> 对象, 滤镜</div>
 <p>改变对象与背后内容的混合方式（叠加、正片叠底、滤色、反色）。</p>
 <p class="exemple"><b>示例：</b> 用“叠加”做发光的灯或火焰。</p>
@@ -370,12 +370,12 @@
 <p>翻转对象：水平（左 / 右）或垂直（上 / 下）。</p>
 <p class="exemple"><b>示例：</b> 角色面朝行走的方向。</p>
 </div>
-<div class="fiche"><h3>修改锁定状态</h3>
-<div class="schema"><b>输入：</b> 对象, 锁定（true / false）</div>
+<div class="fiche"><h3>锁定 / 解锁对象</h3>
+<div class="schema"><b>输入：</b> 对象, 锁定（是 / 否）</div>
 <p>在编辑器中锁定或解锁对象（小锁图标）。在游戏中没有任何作用：要禁止拖动对象，请使用 “设为可拖动”。</p>
 </div>
-<div class="fiche"><h3>视差系数</h3>
-<div class="schema"><b>输入：</b> 对象, 系数（如 0.5）</div>
+<div class="fiche"><h3>背景滚动（远近感）</h3>
+<div class="schema"><b>输入：</b> 对象, 背景速度（1 = 正常，0.5 = 更慢，远处效果）</div>
 <p>设置摄像机移动时对象的滚动速度：1 = 正常，0.5 = 慢一半（景深效果）。</p>
 <p class="exemple"><b>示例：</b> 背景里缓慢移动的山。</p>
 </div>
@@ -384,7 +384,7 @@
 <p>把对象 A（子对象）绑到对象 B（父对象）上：B 移动时 A 跟着移动。</p>
 <p class="exemple"><b>示例：</b> 跟随角色手部的剑。</p>
 </div>
-<div class="fiche"><h3>发光 (Glow)</h3>
+<div class="fiche"><h3>发光光晕</h3>
 <div class="schema"><b>输入：</b> 对象, 状态, 颜色, 光晕大小</div>
 <p>在对象周围加上所选颜色和大小的柔和光晕（会贴合图片的形状），或将其移除。</p>
 <p class="exemple"><b>示例：</b> 一个发出黄光的奖励道具，大小 20。</p>
@@ -409,18 +409,18 @@
 <p>在游戏中更改“粒子”对象的预设。</p>
 <p class="exemple"><b>示例：</b> 火被扑灭后变成烟。</p>
 </div>
-<div class="fiche"><h3>闪烁 (Blink)</h3>
-<div class="schema"><b>输入：</b> 对象, 状态, 速度（毫秒）, 持续时间（毫秒，0 = 无限）</div>
+<div class="fiche"><h3>闪烁</h3>
+<div class="schema"><b>输入：</b> 对象, 状态, 速度（毫秒，1000 = 1 秒）, 持续时间（毫秒，0 = 无限）</div>
 <p>让对象按所选速度（毫秒）闪烁一段时间（毫秒，0 = 一直闪），或停止闪烁。</p>
 <p class="exemple"><b>示例：</b> 玩家受伤后闪烁 1 秒。</p>
 </div>
-<div class="fiche"><h3>生成克隆（X/Y位置）</h3>
-<div class="schema"><b>输入：</b> 对象 B, X, Y</div>
+<div class="fiche"><h3>创建对象的副本</h3>
+<div class="schema"><b>输入：</b> 对象 B, X 位置, Y 位置</div>
 <p>在位置 X, Y 创建对象 B（模板）的副本。副本成为 “相关对象”。</p>
 <p class="exemple"><b>示例：</b> 在随机位置落下石头：X = random(0, 800)。</p>
 </div>
 <div class="fiche"><h3>发射对象</h3>
-<div class="schema"><b>输入：</b> 对象 A, 对象 B, 模型名称, 方向, 速度, 离开屏幕后销毁（true / false）</div>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B, 模型名称, 方向, 速度, 离开屏幕后销毁（是 / 否）</div>
 <p>在对象 A 处创建一个投射物（“模型名称” 里写的对象），并按所选速度发射：0°、90°、180°、270°、朝向对象 B（“朝向目标”）或按 A 的角度。</p>
 <p class="exemple"><b>示例：</b> 向上发射激光的飞船（270）。</p>
 </div>
@@ -464,7 +464,7 @@
 <div class="method">
 <div class="fiche"><h3>修改变量</h3>
 <div class="schema"><b>输入：</b> 对象, 变量, 值</div>
-<p>给变量一个新值（数字、文本、true / false 或计算结果）。</p>
+<p>给变量一个新值（数字、文本、是 / 否 或计算结果）。</p>
 <p class="exemple"><b>示例：</b> 把“score”重置为 0。</p>
 </div>
 <div class="fiche"><h3>增加变量值</h3>
@@ -472,13 +472,13 @@
 <p>把数值加到变量上（负数就是减）。文本变量会把文字加到末尾。</p>
 <p class="exemple"><b>示例：</b> 每个金币 score + 1，每次受伤生命 - 1。</p>
 </div>
-<div class="fiche"><h3>限制值 (Clamp)</h3>
+<div class="fiche"><h3>让变量保持在两个值之间</h3>
 <div class="schema"><b>输入：</b> 对象, 变量, 最小值, 最大值</div>
 <p>让变量（数字）保持在最小值和最大值之间。</p>
 <p class="exemple"><b>示例：</b> 生命值永远不超过 100。</p>
 </div>
 <div class="fiche"><h3>随机数</h3>
-<div class="schema"><b>输入：</b> 对象, 变量, 值：random(min, max)</div>
+<div class="schema"><b>输入：</b> 对象, 变量, 介于（最小，最大）</div>
 <p>把一个随机数放进变量。random(1, 6) 得到 1 到 6 之间的数。</p>
 <p class="exemple"><b>示例：</b> 掷骰子。</p>
 </div>
@@ -497,7 +497,7 @@
 <p>对象在物品栏里时走 “真” 输出，否则走 “假”。</p>
 <p class="exemple"><b>示例：</b> 只有钥匙在物品栏里时门才会打开。</p>
 </div>
-<div class="fiche"><h3>组合对象</h3>
+<div class="fiche"><h3>合并两个对象</h3>
 <div class="schema"><b>输入：</b> 对象 A, 对象 B, 结果对象名称</div>
 <p>用你写下名字的那个对象的副本，替换对象 A 和 B，放在 A 的位置。如果这个模板不存在，什么也不变。</p>
 <p class="exemple"><b>示例：</b> 木棍 + 布 = 火把。</p>
@@ -569,7 +569,7 @@
 <p class="exemple"><b>示例：</b> ="分数：" + score</p>
 </div>
 <div class="fiche"><h3>显示对话</h3>
-<div class="schema"><b>输入：</b> 对象, 对话键</div>
+<div class="schema"><b>输入：</b> 对象, 句子名称（在游戏文字中）</div>
 <p>从对话文件（dialogues.txt）中找到这个键对应的句子，写进文本对象。 多种语言：写 “nihao.zh = 你好”、“nihao.en = Hello”……；游戏使用变量 “langue” 中的语言，否则使用手机语言。“\n” = 换行。</p>
 <p class="exemple"><b>示例：</b> 键“nihao_shangren”显示商人的台词。</p>
 </div>
@@ -597,12 +597,12 @@
 <p class="exemple"><b>示例：</b> 子弹或行驶中的汽车。</p>
 </div>
 <div class="fiche"><h3>走向对象（寻路）</h3>
-<div class="schema"><b>输入：</b> 对象 A, 对象 B, 速度, 斜向移动 (true / false) &nbsp;→&nbsp; <b>输出：</b> 立即 / 到达</div>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B, 速度, 斜向移动 (是 / 否) &nbsp;→&nbsp; <b>输出：</b> 立即 / 到达</div>
 <p>对象 A 自己找到最短的路，一格一格走向对象 B，不会穿墙（瓦片背景中的“实心”瓦片、固定的物理对象）。B 移动时会重新计算路线。A 碰到 B 时触发 “到达”。</p>
 <p class="exemple"><b>示例：</b> 在迷宫里追赶玩家的幽灵。</p>
 </div>
 <div class="fiche"><h3>走到某个点（寻路）</h3>
-<div class="schema"><b>输入：</b> 对象, X 位置, Y 位置, 速度, 斜向移动 (true / false) &nbsp;→&nbsp; <b>输出：</b> 立即 / 到达</div>
+<div class="schema"><b>输入：</b> 对象, X 位置, Y 位置, 速度, 斜向移动 (是 / 否) &nbsp;→&nbsp; <b>输出：</b> 立即 / 到达</div>
 <p>对象 A 沿最短的路（一格一格）绕开墙壁走到点 X、Y。用 =doigt.x 和 =doigt.y，它会走到你点屏幕的地方。到达时触发 “到达”。如果没有路，它就留在原地。</p>
 <p class="exemple"><b>示例：</b> 在策略游戏或地下城里，点一个格子让英雄走过去。</p>
 </div>
@@ -637,17 +637,17 @@
 <p class="exemple"><b>示例：</b> 跳跃：力度 -15。</p>
 </div>
 <div class="fiche"><h3>启用物理</h3>
-<div class="schema"><b>输入：</b> 对象, 会下落（true / false）</div>
+<div class="schema"><b>输入：</b> 对象, 会下落（是 / 否）</div>
 <p>给对象加上物理：true 时会随重力下落；false 时像地面一样固定不动。</p>
 <p class="exemple"><b>示例：</b> 有人站上去就会塌掉的平台。</p>
 </div>
 <div class="fiche"><h3>设为可拖动</h3>
-<div class="schema"><b>输入：</b> 对象, 可用手指拖动（true / false）</div>
+<div class="schema"><b>输入：</b> 对象, 可用手指拖动（是 / 否）</div>
 <p>允许（true）或禁止（false）在游戏中用手指拖动对象。</p>
 <p class="exemple"><b>示例：</b> 锁住已经放对位置的拼图块。</p>
 </div>
 <div class="fiche"><h3>蹦跳</h3>
-<div class="schema"><b>输入：</b> 对象, 强度（0 = 停止）, 持续时间（毫秒）, 移动时持续（true / false）</div>
+<div class="schema"><b>输入：</b> 对象, 强度（0 = 停止）, 持续时间（毫秒，1000 = 1 秒）, 移动时持续（是 / 否）</div>
 <p>让对象按所选强度和时长蹦跳（小小的视觉弹跳）。0 表示停止。可以设置成对象移动时一直蹦跳。</p>
 <p class="exemple"><b>示例：</b> 走路时一蹦一跳的角色。</p>
 </div>
@@ -665,7 +665,7 @@
 <h2 id="c9-动画">动画</h2>
 <div class="method">
 <div class="fiche"><h3>播放动画</h3>
-<div class="schema"><b>输入：</b> 对象, 动画, 速度（帧/秒）, 循环（true / false）</div>
+<div class="schema"><b>输入：</b> 对象, 动画, 速度（帧/秒）, 循环（是 / 否）</div>
 <p>按所选速度（每秒帧数）播放对象的某个动画，可以循环或只播一次。如果已经在播放，就继续播而不重新开始。</p>
 <p class="exemple"><b>示例：</b> 角色前进时播放“行走”动画。</p>
 </div>
@@ -698,7 +698,7 @@
 <p class="exemple"><b>示例：</b> 捡到金币时的“叮”声。</p>
 </div>
 <div class="fiche"><h3>播放音乐</h3>
-<div class="schema"><b>输入：</b> 音乐文件, 循环（true / false）, 音量（%，100 = 最大）</div>
+<div class="schema"><b>输入：</b> 音乐文件, 循环（是 / 否）, 音量（%，100 = 最大）</div>
 <p>播放一段音乐，替换当前的音乐。不要放在 “每帧” 下面（它会不停地从头开始）。</p>
 <p class="exemple"><b>示例：</b> 开始时播放关卡音乐。</p>
 </div>

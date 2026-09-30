@@ -26,32 +26,32 @@
       "exemple": "=rad.rotation + 5 verbunden mit „Jeden Frame“ dreht das Objekt „rad“ ständig."
     },
     {
-      "nom": "Deckkraft ändern (Alpha)",
+      "nom": "Transparenz",
       "schema": "<b>Eingänge:</b> Objekt, Deckkraft (0 bis 1)",
       "role": "Stellt die Transparenz des Objekts ein: 0 = unsichtbar, 1 = deckend.",
       "exemple": "0.5 für einen halb durchsichtigen Geist."
     },
     {
       "nom": "Sichtbarkeit",
-      "schema": "<b>Eingänge:</b> Objekt, Sichtbar (true / false)",
+      "schema": "<b>Eingänge:</b> Objekt, Sichtbar (ja / nein)",
       "role": "Zeigt (true) oder versteckt (false) das Objekt.",
       "exemple": "eine anfangs versteckte Nachricht „Gewonnen!“ anzeigen."
     },
     {
-      "nom": "Tag setzen",
+      "nom": "Tag geben (Objektfamilie)",
       "schema": "<b>Eingänge:</b> Objekt, Tag",
       "role": "Gibt dem Objekt einen neuen Tag (Etikett).",
       "exemple": "ein besiegter Gegner bekommt den Tag „harmlos“."
     },
     {
-      "nom": "Z-Order ändern",
-      "schema": "<b>Eingänge:</b> Objekt, Z",
+      "nom": "Nach vorne / nach hinten",
+      "schema": "<b>Eingänge:</b> Objekt, Tiefe (größer = vorne)",
       "role": "Ändert die Ebene des Objekts: je größer die Zahl, desto weiter vorn liegt das Objekt.",
       "exemple": "den Spieler vor eine Dekoration setzen."
     },
     {
-      "nom": "Größe festlegen (Scale)",
-      "schema": "<b>Eingänge:</b> Objekt, Scale X, Scale Y",
+      "nom": "Vergrößern / verkleinern",
+      "schema": "<b>Eingänge:</b> Objekt, Horizontale Größe (1 = normal), Vertikale Größe (1 = normal)",
       "role": "Ändert die Größe des Objekts: 1 = normal, 2 = doppelt so groß, 0.5 = halb so groß.",
       "exemple": "der Spieler wächst, nachdem er einen Pilz gegessen hat."
     },
@@ -92,7 +92,7 @@
       "exemple": "während einer Erinnerung auf Schwarzweiß schalten."
     },
     {
-      "nom": "Mischmodus (Effekt)",
+      "nom": "Farbmischung (Lichteffekt)",
       "schema": "<b>Eingänge:</b> Objekt, Filter",
       "role": "Ändert, wie sich das Objekt mit dem Hintergrund mischt (Additiv, Multiplizieren, Bildschirm, Invertieren).",
       "exemple": "Additiv für ein leuchtendes Licht oder eine Flamme."
@@ -104,13 +104,13 @@
       "exemple": "die Figur schaut in Laufrichtung."
     },
     {
-      "nom": "Sperre ändern",
-      "schema": "<b>Eingänge:</b> Objekt, Gesperrt (true / false)",
+      "nom": "Objekt sperren / entsperren",
+      "schema": "<b>Eingänge:</b> Objekt, Gesperrt (ja / nein)",
       "role": "Sperrt oder entsperrt das Objekt im Editor (das Schloss). Im Spiel hat das keine Wirkung: Um das Ziehen eines Objekts zu verhindern, nutze „Verschiebbar machen“."
     },
     {
-      "nom": "Parallaxen-Faktor",
-      "schema": "<b>Eingänge:</b> Objekt, Faktor (z. B. 0.5)",
+      "nom": "Hintergrund-Bildlauf (Tiefe)",
+      "schema": "<b>Eingänge:</b> Objekt, Hintergrundtempo (1 = normal, 0.5 = langsamer, wirkt weit weg)",
       "role": "Legt fest, wie schnell das Objekt mitscrollt, wenn sich die Kamera bewegt: 1 = normal, 0.5 = halb so schnell (Tiefeneffekt).",
       "exemple": "Berge im Hintergrund, die langsam vorbeiziehen."
     },
@@ -121,7 +121,7 @@
       "exemple": "ein Schwert, das der Hand der Figur folgt."
     },
     {
-      "nom": "Leuchten (Glow)",
+      "nom": "Leuchtender Schein",
       "schema": "<b>Eingänge:</b> Objekt, Zustand, Farbe, Größe des Leuchtens",
       "role": "Umgibt das Objekt mit einem weichen Leuchten in der gewählten Farbe und Größe (folgt der Form von Bildern) oder entfernt es.",
       "exemple": "ein Bonus, der gelb leuchtet, Größe 20."
@@ -151,20 +151,20 @@
       "exemple": "ein Feuer, das beim Löschen zu Rauch wird."
     },
     {
-      "nom": "Blinken (Blink)",
-      "schema": "<b>Eingänge:</b> Objekt, Zustand, Geschwindigkeit (ms), Dauer (ms, 0 = unendlich)",
+      "nom": "Blinken",
+      "schema": "<b>Eingänge:</b> Objekt, Zustand, Geschwindigkeit (Millisekunden, 1000 = 1 s), Dauer (Millisekunden, 0 = endlos)",
       "role": "Lässt das Objekt mit der gewählten Geschwindigkeit (ms) blinken, für eine Dauer (ms, 0 = endlos), oder stoppt das Blinken.",
       "exemple": "der Spieler blinkt 1 Sekunde, nachdem er getroffen wurde."
     },
     {
-      "nom": "Klon erzeugen (X/Y-Position)",
-      "schema": "<b>Eingänge:</b> Objekt B, X, Y",
+      "nom": "Eine Kopie des Objekts erstellen",
+      "schema": "<b>Eingänge:</b> Objekt B, X-Position, Y-Position",
       "role": "Erstellt eine Kopie von Objekt B (der Vorlage) an der Position X, Y. Die Kopie wird zum „Impliziertes Objekt“.",
       "exemple": "einen Stein an zufälliger Stelle fallen lassen: X = random(0, 800)."
     },
     {
       "nom": "Ein Objekt abfeuern",
-      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit, Außerhalb des Bildschirms zerstören (true / false)",
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit, Außerhalb des Bildschirms zerstören (ja / nein)",
       "role": "Erstellt ein Geschoss (das Objekt aus „Modellname“) bei Objekt A und schießt es mit der gewählten Geschwindigkeit ab: 0°, 90°, 180°, 270°, zu Objekt B („Zum Ziel“) oder im Winkel von A.",
       "exemple": "ein Raumschiff, das Laser nach oben schießt (270)."
     },

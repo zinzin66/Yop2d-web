@@ -26,32 +26,32 @@
       "exemple": "=roue.rotation + 5 relié à « À chaque image » fait tourner l'objet « roue » en continu."
     },
     {
-      "nom": "Modifier l'Opacité (Alpha)",
+      "nom": "Transparence",
       "schema": "<b>Entrées :</b> Objet, Opacité (0 à 1)",
       "role": "Règle la transparence de l'objet : 0 = invisible, 1 = opaque.",
       "exemple": "0.5 pour un fantôme à moitié transparent."
     },
     {
       "nom": "Visibilité",
-      "schema": "<b>Entrées :</b> Objet, Visible (true / false)",
+      "schema": "<b>Entrées :</b> Objet, Visible (oui / non)",
       "role": "Montre (true) ou cache (false) l'objet.",
       "exemple": "afficher un message « Gagné ! » caché au départ."
     },
     {
-      "nom": "Définir le Tag",
+      "nom": "Donner un tag (famille d'objets)",
       "schema": "<b>Entrées :</b> Objet, Tag",
       "role": "Donne un nouveau tag (étiquette) à l'objet.",
       "exemple": "un ennemi vaincu prend le tag « inoffensif »."
     },
     {
-      "nom": "Changer Z-Order",
-      "schema": "<b>Entrées :</b> Objet, Z",
+      "nom": "Mettre devant / derrière",
+      "schema": "<b>Entrées :</b> Objet, Profondeur (plus grand = devant)",
       "role": "Change le calque de l'objet : plus le nombre est grand, plus l'objet passe devant les autres.",
       "exemple": "faire passer le joueur devant un décor."
     },
     {
-      "nom": "Définir la taille (Scale)",
-      "schema": "<b>Entrées :</b> Objet, Scale X, Scale Y",
+      "nom": "Agrandir / rétrécir",
+      "schema": "<b>Entrées :</b> Objet, Taille horizontale (1 = normale), Taille verticale (1 = normale)",
       "role": "Change la taille de l'objet : 1 = normal, 2 = deux fois plus grand, 0.5 = moitié.",
       "exemple": "le joueur grandit après avoir mangé un champignon."
     },
@@ -92,7 +92,7 @@
       "exemple": "passer en noir et blanc pendant un souvenir."
     },
     {
-      "nom": "Mode de fusion (Effet)",
+      "nom": "Mélange des couleurs (effet lumineux)",
       "schema": "<b>Entrées :</b> Objet, Filtre",
       "role": "Change la façon dont l'objet se mélange avec ce qu'il y a derrière (Additif, Multiplicatif, Écran, Inversion).",
       "exemple": "Additif pour une lumière ou une flamme qui brille."
@@ -104,13 +104,13 @@
       "exemple": "le personnage regarde du côté où il marche."
     },
     {
-      "nom": "Modifier Verrouillage",
-      "schema": "<b>Entrées :</b> Objet, Verrouillé (true / false)",
+      "nom": "Bloquer / débloquer l'objet",
+      "schema": "<b>Entrées :</b> Objet, Verrouillé (oui / non)",
       "role": "Verrouille ou déverrouille l'objet dans l'éditeur (le cadenas). N'a aucun effet pendant le jeu : pour empêcher de faire glisser un objet, utilise « Rendre déplaçable »."
     },
     {
-      "nom": "Facteur de Parallaxe",
-      "schema": "<b>Entrées :</b> Objet, Facteur (ex : 0.5)",
+      "nom": "Défilement du décor (profondeur)",
+      "schema": "<b>Entrées :</b> Objet, Vitesse du décor (1 = normale, 0.5 = plus lent, effet lointain)",
       "role": "Règle la vitesse de défilement de l'objet quand la caméra bouge : 1 = normal, 0.5 = deux fois plus lent (effet de profondeur).",
       "exemple": "des montagnes au fond qui défilent lentement."
     },
@@ -121,7 +121,7 @@
       "exemple": "une épée qui suit la main du personnage."
     },
     {
-      "nom": "Surbrillance (Glow)",
+      "nom": "Halo lumineux",
       "schema": "<b>Entrées :</b> Objet, État, Couleur, Taille du halo",
       "role": "Entoure l'objet d'un halo lumineux doux, de la couleur et de la taille choisies (il suit la forme des images), ou l'enlève.",
       "exemple": "un bonus qui brille en jaune, taille 20."
@@ -151,20 +151,20 @@
       "exemple": "un feu qui devient de la fumée quand on l'éteint."
     },
     {
-      "nom": "Clignotement (Blink)",
-      "schema": "<b>Entrées :</b> Objet, État, Vitesse (ms), Durée (ms, 0 = infini)",
+      "nom": "Clignoter",
+      "schema": "<b>Entrées :</b> Objet, État, Vitesse (millisecondes, 1000 = 1 s), Durée (millisecondes, 0 = sans fin)",
       "role": "Fait clignoter l'objet à la vitesse choisie (ms), pendant une durée (ms, 0 = sans fin), ou arrête le clignotement.",
       "exemple": "le joueur clignote 1 seconde après avoir été touché."
     },
     {
-      "nom": "Générer clone (Position X/Y)",
-      "schema": "<b>Entrées :</b> Objet B, X, Y",
+      "nom": "Créer une copie de l'objet",
+      "schema": "<b>Entrées :</b> Objet B, Position X, Position Y",
       "role": "Crée une copie de l'objet B (le modèle) à la position X, Y. La copie devient l'« Objet Impliqué ».",
       "exemple": "faire tomber une pierre à une position au hasard : X = random(0, 800)."
     },
     {
       "nom": "Tirer un objet",
-      "schema": "<b>Entrées :</b> Objet A, Objet B, Nom du modèle, Direction, Vitesse, Détruire hors de l'écran (true / false)",
+      "schema": "<b>Entrées :</b> Objet A, Objet B, Nom du modèle, Direction, Vitesse, Détruire hors de l'écran (oui / non)",
       "role": "Crée un projectile (l'objet nommé dans « Nom du modèle ») à l'endroit de l'objet A, et le lance à la vitesse choisie : 0°, 90°, 180°, 270°, vers l'objet B (« Vers la cible ») ou selon l'angle de A.",
       "exemple": "un vaisseau qui tire des lasers vers le haut (270)."
     },

@@ -178,18 +178,18 @@
 <p>Fecha o jogo exportado. No editor, não fecha nada: use o botão de parar.</p>
 <p class="exemple"><b>Exemplo:</b> um botão “Sair” no menu principal.</p>
 </div>
-<div class="fiche"><h3>Mensagem Toast</h3>
+<div class="fiche"><h3>Mensagem curta embaixo da tela</h3>
 <div class="schema"><b>Entrada:</b> Mensagem</div>
 <p>Mostra uma mensagenzinha embaixo na tela por alguns segundos. Comece com = para mostrar um cálculo.</p>
 <p class="exemple"><b>Exemplo:</b> ="Pontos: " + score</p>
 </div>
-<div class="fiche"><h3>Escrever no registo</h3>
+<div class="fiche"><h3>Anotar no registro (para depurar)</h3>
 <div class="schema"><b>Entrada:</b> Mensagem</div>
 <p>Escreve uma mensagem no registro do projeto (arquivo de diagnóstico), sem mostrar nada no jogo. Comece com = para escrever um cálculo.</p>
 <p class="exemple"><b>Exemplo:</b> ="vida = " + vie, para conferir um valor durante um teste.</p>
 </div>
 <div class="fiche"><h3>Fixar a câmera</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Seguir em X (true / false), Seguir em Y (true / false), Paralaxe só em X (true / false)</div>
+<div class="schema"><b>Entradas:</b> Objeto, Seguir em X (sim / não), Seguir em Y (sim / não), Paralaxe só em X (sim / não)</div>
 <p>A câmera segue o objeto escolhido, se quiser só na horizontal ou só na vertical. Sem objeto, a câmera para de seguir.</p>
 <p class="exemple"><b>Exemplo:</b> seguir o jogador numa fase grande de plataforma.</p>
 </div>
@@ -224,12 +224,12 @@
 <p class="exemple"><b>Exemplo:</b> “Esmaecimento da tela” (desaparecer), “Esperar” 1 segundo, “Ir para a cena” e depois “Esmaecimento da tela” (aparecer) no início da próxima fase.</p>
 </div>
 <div class="fiche"><h3>Tremor da câmera</h3>
-<div class="schema"><b>Entradas:</b> Intensidade, Duração (ms)</div>
+<div class="schema"><b>Entradas:</b> Intensidade, Duração (milissegundos, 1000 = 1 s)</div>
 <p>Sacode a tela com a força e a duração escolhidas (em milissegundos).</p>
 <p class="exemple"><b>Exemplo:</b> uma explosão: intensidade 15, duração 400.</p>
 </div>
 <div class="fiche"><h3>Vibração</h3>
-<div class="schema"><b>Entrada:</b> Duração (ms)</div>
+<div class="schema"><b>Entrada:</b> Duração (milissegundos, 1000 = 1 s)</div>
 <p>Faz o celular vibrar pela duração escolhida (em milissegundos). Sem vibração, nada acontece.</p>
 <p class="exemple"><b>Exemplo:</b> 100 ms quando o jogador é atingido.</p>
 </div>
@@ -305,28 +305,28 @@
 <p>Gira o objeto até o ângulo indicado, em graus.</p>
 <p class="exemple"><b>Exemplo:</b> =roda.rotation + 5 ligado a “A cada frame” faz o objeto “roda” girar sem parar.</p>
 </div>
-<div class="fiche"><h3>Modificar a Opacidade (Alpha)</h3>
+<div class="fiche"><h3>Transparência</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Opacidade (0 a 1)</div>
 <p>Ajusta a transparência do objeto: 0 = invisível, 1 = opaco.</p>
 <p class="exemple"><b>Exemplo:</b> 0.5 para um fantasma meio transparente.</p>
 </div>
 <div class="fiche"><h3>Visibilidade</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Visível (true / false)</div>
+<div class="schema"><b>Entradas:</b> Objeto, Visível (sim / não)</div>
 <p>Mostra (true) ou esconde (false) o objeto.</p>
 <p class="exemple"><b>Exemplo:</b> mostrar uma mensagem “Venceu!” escondida no começo.</p>
 </div>
-<div class="fiche"><h3>Definir a Tag</h3>
+<div class="fiche"><h3>Dar uma tag (família de objetos)</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Tag</div>
 <p>Dá uma nova tag (etiqueta) ao objeto.</p>
 <p class="exemple"><b>Exemplo:</b> um inimigo derrotado ganha a tag “inofensivo”.</p>
 </div>
-<div class="fiche"><h3>Mudar Z-Order</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Z</div>
+<div class="fiche"><h3>Colocar na frente / atrás</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Profundidade (maior = na frente)</div>
 <p>Muda a camada do objeto: quanto maior o número, mais o objeto fica na frente dos outros.</p>
 <p class="exemple"><b>Exemplo:</b> colocar o jogador na frente de um cenário.</p>
 </div>
-<div class="fiche"><h3>Definir tamanho (Scale)</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Scale X, Scale Y</div>
+<div class="fiche"><h3>Aumentar / diminuir</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Tamanho horizontal (1 = normal), Tamanho vertical (1 = normal)</div>
 <p>Muda o tamanho do objeto: 1 = normal, 2 = o dobro, 0.5 = a metade.</p>
 <p class="exemple"><b>Exemplo:</b> o jogador cresce depois de comer um cogumelo.</p>
 </div>
@@ -360,7 +360,7 @@
 <p>Aplica um filtro ao objeto: Preto e branco, Sépia, Inverter, ou Nenhum para tirar.</p>
 <p class="exemple"><b>Exemplo:</b> passar para preto e branco durante uma lembrança.</p>
 </div>
-<div class="fiche"><h3>Modo de mesclagem (Efeito)</h3>
+<div class="fiche"><h3>Mistura de cores (efeito de luz)</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Filtro</div>
 <p>Muda como o objeto se mistura com o que está atrás (Aditivo, Multiplicar, Tela, Inverter).</p>
 <p class="exemple"><b>Exemplo:</b> Aditivo para uma luz ou uma chama que brilha.</p>
@@ -370,12 +370,12 @@
 <p>Vira o objeto: Horizontal (esquerda / direita) ou Vertical (cima / baixo).</p>
 <p class="exemple"><b>Exemplo:</b> o personagem olha para o lado em que anda.</p>
 </div>
-<div class="fiche"><h3>Modificar Bloqueio</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Bloqueado (true / false)</div>
+<div class="fiche"><h3>Bloquear / desbloquear o objeto</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Bloqueado (sim / não)</div>
 <p>Trava ou destrava o objeto no editor (o cadeado). Não tem efeito nenhum durante o jogo: para impedir que um objeto seja arrastado, use “Tornar arrastável”.</p>
 </div>
-<div class="fiche"><h3>Fator de Paralaxe</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Fator (ex.: 0.5)</div>
+<div class="fiche"><h3>Rolagem do cenário (profundidade)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Velocidade do cenário (1 = normal, 0.5 = mais lento, efeito distante)</div>
 <p>Ajusta a velocidade com que o objeto rola quando a câmera se move: 1 = normal, 0.5 = metade (efeito de profundidade).</p>
 <p class="exemple"><b>Exemplo:</b> montanhas ao fundo que passam devagar.</p>
 </div>
@@ -384,7 +384,7 @@
 <p>Prende o objeto A (o filho) ao objeto B (o pai): A segue B quando ele se move.</p>
 <p class="exemple"><b>Exemplo:</b> uma espada que segue a mão do personagem.</p>
 </div>
-<div class="fiche"><h3>Brilho (Glow)</h3>
+<div class="fiche"><h3>Halo luminoso</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Estado, Cor, Tamanho do brilho</div>
 <p>Envolve o objeto com um brilho suave da cor e do tamanho escolhidos (segue a forma das imagens), ou o remove.</p>
 <p class="exemple"><b>Exemplo:</b> um bônus que brilha em amarelo, tamanho 20.</p>
@@ -409,18 +409,18 @@
 <p>Muda o modelo de um objeto “Partículas” durante o jogo.</p>
 <p class="exemple"><b>Exemplo:</b> um fogo que vira fumaça quando é apagado.</p>
 </div>
-<div class="fiche"><h3>Piscar (Blink)</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Estado, Velocidade (ms), Duração (ms, 0 = infinito)</div>
+<div class="fiche"><h3>Piscar</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Estado, Velocidade (milissegundos, 1000 = 1 s), Duração (milissegundos, 0 = sem fim)</div>
 <p>Faz o objeto piscar na velocidade escolhida (ms), por um tempo (ms, 0 = sem fim), ou para de piscar.</p>
 <p class="exemple"><b>Exemplo:</b> o jogador pisca por 1 segundo depois de ser atingido.</p>
 </div>
-<div class="fiche"><h3>Gerar clone (Posição X/Y)</h3>
-<div class="schema"><b>Entradas:</b> Objeto B, X, Y</div>
+<div class="fiche"><h3>Criar uma cópia do objeto</h3>
+<div class="schema"><b>Entradas:</b> Objeto B, Posição X, Posição Y</div>
 <p>Cria uma cópia do objeto B (o modelo) na posição X, Y. A cópia vira o “Objeto Implicado”.</p>
 <p class="exemple"><b>Exemplo:</b> fazer cair uma pedra numa posição aleatória: X = random(0, 800).</p>
 </div>
 <div class="fiche"><h3>Disparar um objeto</h3>
-<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade, Destruir fora da tela (true / false)</div>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade, Destruir fora da tela (sim / não)</div>
 <p>Cria um projétil (o objeto indicado em “Nome do modelo”) no lugar do objeto A e o lança na velocidade escolhida: 0°, 90°, 180°, 270°, na direção do objeto B (“Em direção ao alvo”) ou no ângulo de A.</p>
 <p class="exemple"><b>Exemplo:</b> uma nave que atira lasers para cima (270).</p>
 </div>
@@ -464,7 +464,7 @@
 <div class="method">
 <div class="fiche"><h3>Modificar Variável</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Variável, Valor</div>
-<p>Dá um novo valor à variável (um número, um texto, true / false ou um cálculo).</p>
+<p>Dá um novo valor à variável (um número, um texto, sim / não ou um cálculo).</p>
 <p class="exemple"><b>Exemplo:</b> voltar “score” para 0.</p>
 </div>
 <div class="fiche"><h3>Adicionar à Variável</h3>
@@ -472,13 +472,13 @@
 <p>Soma o valor à variável (um número negativo subtrai). Numa variável de texto, adiciona o texto no final.</p>
 <p class="exemple"><b>Exemplo:</b> score + 1 a cada moeda, vida - 1 a cada golpe.</p>
 </div>
-<div class="fiche"><h3>Limitar Valor (Clamp)</h3>
+<div class="fiche"><h3>Manter uma variável entre dois valores</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Variável, Mínimo, Máximo</div>
 <p>Mantém a variável (um número) entre um mínimo e um máximo.</p>
 <p class="exemple"><b>Exemplo:</b> a vida nunca passa de 100.</p>
 </div>
 <div class="fiche"><h3>Número aleatório</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Variável, Valor: random(min, max)</div>
+<div class="schema"><b>Entradas:</b> Objeto, Variável, Entre (mín, máx)</div>
 <p>Coloca um número aleatório na variável. random(1, 6) dá um número de 1 a 6.</p>
 <p class="exemple"><b>Exemplo:</b> jogar um dado.</p>
 </div>
@@ -497,7 +497,7 @@
 <p>Segue a saída “Verdadeiro” se o objeto estiver no inventário, senão “Falso”.</p>
 <p class="exemple"><b>Exemplo:</b> a porta só abre se a chave estiver no inventário.</p>
 </div>
-<div class="fiche"><h3>Combinar objetos</h3>
+<div class="fiche"><h3>Combinar dois objetos</h3>
 <div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Nome do objeto resultante</div>
 <p>Troca os objetos A e B por uma cópia do objeto cujo nome você escreve, no lugar de A. Se esse modelo não existir, nada muda.</p>
 <p class="exemple"><b>Exemplo:</b> graveto + pano = tocha.</p>
@@ -569,7 +569,7 @@
 <p class="exemple"><b>Exemplo:</b> ="Pontos: " + score</p>
 </div>
 <div class="fiche"><h3>Mostrar diálogo</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Chave do diálogo</div>
+<div class="schema"><b>Entradas:</b> Objeto, Nome da frase (nos textos do jogo)</div>
 <p>Escreve no objeto Texto a frase da chave, tirada do arquivo de diálogos (dialogues.txt). Vários idiomas: escreva “ola.pt = Olá”, “ola.en = Hello”…; o jogo usa o idioma da variável “langue”, senão o do telefone. “\n” = quebra de linha.</p>
 <p class="exemple"><b>Exemplo:</b> a chave “ola_mercador” mostra a fala do mercador.</p>
 </div>
@@ -597,12 +597,12 @@
 <p class="exemple"><b>Exemplo:</b> uma bala ou um carro andando.</p>
 </div>
 <div class="fiche"><h3>Ir até um objeto (caminho)</h3>
-<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Velocidade, Diagonais (true / false) &nbsp;→&nbsp; <b>Saídas:</b> Imediatamente / Chegou</div>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Velocidade, Diagonais (sim / não) &nbsp;→&nbsp; <b>Saídas:</b> Imediatamente / Chegou</div>
 <p>O objeto A vai até o objeto B achando sozinho o caminho mais curto, casa por casa, sem atravessar paredes (ladrilhos “Sólidos” de um cenário de ladrilhos, objetos físicos fixos). O caminho é recalculado quando B se move. “Chegou” dispara quando A toca B.</p>
 <p class="exemple"><b>Exemplo:</b> um fantasma que persegue o jogador num labirinto.</p>
 </div>
 <div class="fiche"><h3>Ir até um ponto (caminho)</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Posição X, Posição Y, Velocidade, Diagonais (true / false) &nbsp;→&nbsp; <b>Saídas:</b> Imediatamente / Chegou</div>
+<div class="schema"><b>Entradas:</b> Objeto, Posição X, Posição Y, Velocidade, Diagonais (sim / não) &nbsp;→&nbsp; <b>Saídas:</b> Imediatamente / Chegou</div>
 <p>O objeto A vai até o ponto X, Y contornando as paredes, pelo caminho mais curto (casa por casa). Com =doigt.x e =doigt.y, vai aonde a tela é tocada. “Chegou” dispara na chegada. Se não houver caminho, ele fica parado.</p>
 <p class="exemple"><b>Exemplo:</b> tocar numa casa para mandar o herói até lá, num jogo de estratégia ou numa masmorra.</p>
 </div>
@@ -637,17 +637,17 @@
 <p class="exemple"><b>Exemplo:</b> um pulo: força -15.</p>
 </div>
 <div class="fiche"><h3>Ativar a física</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Cai (true / false)</div>
+<div class="schema"><b>Entradas:</b> Objeto, Cai (sim / não)</div>
 <p>Dá física ao objeto: com true, ele cai com a gravidade; com false, fica parado como um chão.</p>
 <p class="exemple"><b>Exemplo:</b> uma plataforma que desaba quando você pisa nela.</p>
 </div>
 <div class="fiche"><h3>Tornar arrastável</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Arrastável com o dedo (true / false)</div>
+<div class="schema"><b>Entradas:</b> Objeto, Arrastável com o dedo (sim / não)</div>
 <p>Permite (true) ou proíbe (false) arrastar o objeto com o dedo durante o jogo.</p>
 <p class="exemple"><b>Exemplo:</b> travar uma peça de quebra-cabeça bem encaixada.</p>
 </div>
 <div class="fiche"><h3>Saltitar</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Intensidade (0 = parar), Duração (ms), Continua enquanto se move (true / false)</div>
+<div class="schema"><b>Entradas:</b> Objeto, Intensidade (0 = parar), Duração (milissegundos, 1000 = 1 s), Continua enquanto se move (sim / não)</div>
 <p>Faz o objeto dar pulinhos (pequeno quique visual) com a intensidade e a duração escolhidas. 0 para. Pode continuar enquanto o objeto se mexe.</p>
 <p class="exemple"><b>Exemplo:</b> um personagem que dá pulinhos ao andar.</p>
 </div>
@@ -665,7 +665,7 @@
 <h2 id="c9-animações">Animações</h2>
 <div class="method">
 <div class="fiche"><h3>Reproduzir animação</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Animação, Velocidade (quadros/segundo), Em loop (true / false)</div>
+<div class="schema"><b>Entradas:</b> Objeto, Animação, Velocidade (quadros/segundo), Em loop (sim / não)</div>
 <p>Toca uma animação do objeto, na velocidade escolhida (imagens por segundo), em loop ou uma vez. Se já estiver tocando, continua sem recomeçar.</p>
 <p class="exemple"><b>Exemplo:</b> a animação “andar” quando o personagem anda.</p>
 </div>
@@ -698,7 +698,7 @@
 <p class="exemple"><b>Exemplo:</b> um “plim” ao pegar uma moeda.</p>
 </div>
 <div class="fiche"><h3>Tocar música</h3>
-<div class="schema"><b>Entradas:</b> Arquivo de música, Em loop (true / false), Volume (%, 100 = máximo)</div>
+<div class="schema"><b>Entradas:</b> Arquivo de música, Em loop (sim / não), Volume (%, 100 = máximo)</div>
 <p>Toca uma música, que substitui a atual. Não coloque embaixo de “A cada frame” (ela recomeçaria sem parar).</p>
 <p class="exemple"><b>Exemplo:</b> a música da fase, no início.</p>
 </div>
