@@ -173,12 +173,14 @@ def main():
     for n in catalogue["noeuds"]:
         cibles = [c for c in ("objet", "objetB", "variable", "scene") if n.get(c)]
         sorties = n.get("sorties", ["suivant"])
-        noeuds.append(dict(id=n["cle"], categorie=n.get("categorie"),
+        noeuds.append(dict(id=n["cle"], categorie=n.get("categorie"), cache=n.get("cache", False),
                            cle_nom=n.get("nomCle") or "noeud_" + n["cle"], cibles=cibles,
                            reglages=[], champs=[n["cle"] + "." + c["cle"] for c in n.get("champs", [])],
                            sorties=[s["cle"] if isinstance(s, dict) else s for s in sorties]))
 
     noms_noeuds = {n["id"]: {l: tr.get(n["cle_nom"], l) for l in LANGUES} for n in noeuds}
+    # anciens nœuds ("cache": true) : plus dans le menu de l'éditeur, donc plus dans l'aide (leur nom reste citable)
+    noeuds = [n for n in noeuds if not n.get("cache")]
 
     ordre_categories = []
     for n in noeuds:

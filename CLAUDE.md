@@ -44,7 +44,7 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   `?lang=<langue du moteur>`.
   `confidentialite.html` : confidentialité.
 - `aide.html` : aide ouverte depuis le moteur dans une WebView.
-- `guides/` : 6 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
+- `guides/` : 7 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
   Français : `guides/<guide>.html` ; autres langues : `guides/<langue>/<guide>.html`.
   Page « Tous les guides » (générée aussi) : `guides/index.html` (fr), `guides/<langue>/index.html` ;
   textes dans `TOUS` de `generer_guides.py`. Accueil et `llms.txt` y renvoient.
@@ -167,6 +167,12 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   condition = une comparaison simple ; `outils/modeles/verifier_formules.py` du moteur vérifie les zips. Les 11 exemples
   réécrits (conditions « a && b » découpées en nœuds à la suite, Climb & run et Dungeon walk avec les nouveaux
   COMPORTEMENTS du moteur, cadenas avec « Revenir à 0 après ») ; moteur_min 961 (962 pour Dungeon escape).
+- 01/10/2026 : aide à jour pour les COMPORTEMENTS du moteur : nœud « Changer le comportement », option « Revenir à 0
+  après » de « Ajouter à une variable » ; anciens nœuds marqués "cache" dans le catalogue (activer_physique,
+  changer_rebond, modifier_deplacable) retirés de l'aide par generer_aide_noeuds.py (131 nœuds). Guides « Faire sauter » et
+  « Déplacer » réécrits pour la fenêtre « ⚙ Comportement de l'objet » (plus de « Physique » dans l'Inspecteur) ; nouveau
+  guide « comportements » (7 guides, 3e de la liste ; noms de la fenêtre écrits en clair dans chaque langue car ils
+  viennent de TextesEditeur.java du moteur, pas de lang_<langue>.json : les repères {{lang:comp_...}} ne marchent pas).
 - 30/09/2026 : version 0.1.948 publiée (guide « Ton premier jeu en 5 minutes », nouvelle fenêtre de réglage
   « ① Sur quoi ? / ② Réglages » avec aides et ligne « En clair », barre d'outils réduite, style sobre bleu néon).
   Accueil (9 langues) : cartes « Ton premier jeu en 5 minutes » et « Des réglages en clair » (17 cartes),

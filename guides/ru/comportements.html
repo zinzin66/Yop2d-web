@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как заставить персонажа ходить, прыгать и лазить без узлов? | Руководство Yop2D</title>
+<meta name="description" content="Поведение объектов в Yop2D: персонаж платформера, который ходит, прыгает и лезет по лестницам, или персонаж с видом сверху, со своими анимациями, без единого узла.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/comportements.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/comportements.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/comportements.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/comportements.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/comportements.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/comportements.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/comportements.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/comportements.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/comportements.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/comportements.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Поведение объектов: персонаж, который двигается без узлов",
+ "description": "Поведение объектов в Yop2D: персонаж платформера, который ходит, прыгает и лезет по лестницам, или персонаж с видом сверху, со своими анимациями, без единого узла.",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Пол",
+   "text": "В «⚙ Поведение объекта» выбери «Пол / стена»."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Персонаж",
+   "text": "Выбери «Персонаж платформера», управление «Джойстик», и добавь джойстик."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Лестницы",
+   "text": "У лестницы отметь «Лестница»."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Анимации",
+   "text": "Назови их покой, ходьба, прыжок, лезть и присесть: движок сам их проигрывает."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Изменить во время игры",
+   "text": "Используй узел «Изменить поведение»."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ru/index.html">← Yop2D</a>
+<h1>Поведение объектов: персонаж, который двигается без узлов</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../comportements.html" hreflang="fr">Français</a> · <a href="../en/comportements.html" hreflang="en">English</a> · <a href="../es/comportements.html" hreflang="es">Español</a> · <a href="../de/comportements.html" hreflang="de">Deutsch</a> · <a href="../it/comportements.html" hreflang="it">Italiano</a> · <a href="../pt/comportements.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/comportements.html" hreflang="zh">中文</a> · <a href="../ja/comportements.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Раньше, чтобы персонаж ходил, прыгал и лазил, нужно было много узлов и формул. Теперь ты просто выбираешь, <strong>что делает объект</strong>, в окне <strong>⚙ Поведение объекта</strong> инспектора, а движок делает остальное.</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>персонаж с именем <strong>player</strong> (Изображение);</li><li>пол: Изображение или широкий плоский Квадрат внизу сцены;</li><li>лестница (Изображение), если хочешь лазить;</li><li>Джойстик внизу слева на экране.</li></ul>
+</div>
+<h2>Шаг 1: пол</h2>
+<div class="method">
+<ol><li>Выбери пол.</li><li>В инспекторе нажми кнопку <strong>⚙ Поведение объекта</strong>.</li><li>Выбери <strong>Пол / стена</strong>: он не двигается, по нему ходят и в него упираются.</li></ol>
+<div class="tip">👉 Для платформы, сквозь которую можно запрыгнуть снизу, отметь ещё <strong>Проходим снизу</strong> в части «Ещё он…».</div>
+</div>
+<h2>Шаг 2: персонаж</h2>
+<div class="method">
+<ol><li>Выбери <strong>player</strong> и нажми <strong>⚙ Поведение объекта</strong>.</li><li>Выбери <strong>Персонаж платформера</strong>.</li><li>В «Его настройки» оставь <strong>Управление: Джойстик</strong>. Можно выбрать <strong>Скорость</strong> и <strong>Высоту прыжка</strong>.</li><li>Добавь на сцену Джойстик. Цель выбирать не нужно: персонаж сам его слушается.</li><li>Запусти игру: джойстик заставляет персонажа идти, а если толкнуть его вверх — прыгать.</li></ol>
+<div class="tip">👉 Хочешь кнопку для прыжка? Выбери её в <strong>Кнопка прыжка</strong>. Хочешь кнопки ◀ ▶? Выбери <strong>Управление: Кнопки</strong>, затем кнопку влево и кнопку вправо.</div>
+</div>
+<h2>Шаг 3: лестницы</h2>
+<div class="method">
+<ol><li>Выбери лестницу и нажми <strong>⚙ Поведение объекта</strong>.</li><li>Оставь <strong>Декор</strong> и отметь <strong>Лестница</strong> в части «Ещё он…».</li><li>Пусть лестница чуть-чуть выходит над платформой, к которой ведёт.</li><li>Запусти игру: перед лестницей толкни джойстик вверх, чтобы лезть, и вниз, чтобы спускаться. Наверху персонаж встаёт на платформу.</li></ol>
+<div class="tip">👉 Во время подъёма персонаж не падает: он висит, если отпустить джойстик. Толкни вбок, чтобы сойти с лестницы.</div>
+</div>
+<h2>Шаг 4: анимации сами по себе</h2>
+<div class="method">
+<p>В окне <strong>Анимации</strong> назови анимации персонажа так: <strong>покой</strong>, <strong>ходьба</strong>, <strong>прыжок</strong>, <strong>лезть</strong> и <strong>присесть</strong>. Движок проигрывает нужную анимацию по тому, что делает персонаж, и отражает картинку, когда он идёт влево.</p>
+<ul><li>Нет какой-то анимации? Не страшно: в этом случае картинка просто не меняется.</li><li>Несколько персонажей? Начни имя с имени объекта: <strong>player_ходьба</strong>, <strong>враг_ходьба</strong>. Каждый берёт свои.</li><li>Можно выбрать анимацию и вручную: в «Автоматические анимации» коснись строки и выбери из списка (с миниатюрой каждой анимации).</li></ul>
+</div>
+<h2>Враг, который ходит сам</h2>
+<div class="method">
+<p>Для патрулирующего врага тоже выбери <strong>Персонаж платформера</strong>, но с <strong>Управление: Нет</strong>: он больше не слушается джойстика. Двигай его своими узлами (например «Скользить к»): гравитация остаётся, а анимации следуют за его настоящими движениями.</p>
+</div>
+<h2>Персонаж с видом сверху (или в изо-виде)</h2>
+<div class="method">
+<ol><li>Выбери <strong>Персонаж (вид сверху)</strong> в ⚙ Поведение объекта.</li><li>В <strong>Направления</strong> выбери <strong>4</strong> (вверх, вниз, влево, вправо), <strong>Изо-вид</strong> (4 диагонали) или <strong>Влево / вправо</strong>.</li><li>Добавь направление к имени анимаций по-английски: <strong>ходьба_up</strong>, <strong>ходьба_down</strong>, <strong>ходьба_left</strong>, <strong>ходьба_right</strong>, и <strong>покой_up</strong>… (в изо-виде: <strong>ходьба_ne</strong>, <strong>ходьба_nw</strong>, <strong>ходьба_se</strong>, <strong>ходьба_sw</strong>).</li></ol>
+<div class="tip">👉 Нет анимации «left»? Движок отражает картинку «right».</div>
+</div>
+<h2>Изменить поведение во время игры</h2>
+<div class="method">
+<p>Узел «Изменить поведение» даёт те же варианты, что и окно. Пример: ящик в <strong>Пол / стена</strong> начинает падать, когда дёргают рычаг: «Изменить поведение» → <strong>Падает и отскакивает</strong>. Настройки на «(не менять)» сохраняют своё значение.</p>
+</div>
+<h2>Чтобы увидеть результат</h2>
+<p>Скачай примеры <strong>Climb &amp; run</strong> (платформер, лестницы, анимации) и <strong>Dungeon walk</strong> (изо-вид) на вкладке <strong>Примеры</strong> главного экрана Yop2D, затем коснись героя и открой <strong>⚙ Поведение объекта</strong>.</p>
+<h2>Если не работает</h2>
+<ul><li><strong>Персонаж не двигается:</strong> проверь <strong>Управление: Джойстик</strong> (а не «Нет») и что на сцене (или в HUD) есть джойстик.</li><li><strong>Он проваливается сквозь пол:</strong> у пола должно быть <strong>Пол / стена</strong>.</li><li><strong>Он не лезет:</strong> у лестницы должна быть отмечена <strong>Лестница</strong>, а у персонажа — <strong>Может лезть по лестницам: да</strong>.</li><li><strong>Анимация не меняется:</strong> проверь имена анимаций или выбери их вручную в списке.</li></ul>
+
+<div class="nav">
+<a href="../ru/sauter.html">← Прыжок персонажа</a>
+<a href="../ru/pieces-score.html">Следующее руководство: Собирать монеты и считать очки →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../ru/index.html">Официальный сайт</a> · <a href="../../noeuds/ru.html">Справочник узлов</a></p>
+</footer>
+</body>
+</html>

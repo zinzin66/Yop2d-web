@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos os nós do Yop2D (133) | Referência</title>
-<meta name="description" content="Lista completa dos 133 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
+<title>Todos os nós do Yop2D (131) | Referência</title>
+<meta name="description" content="Lista completa dos 131 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/pt.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 133 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
+<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 131 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
 <p><strong>Categorias</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-cena-e-hud">Cena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aparência-e-objetos">Aparência e Objetos</a><a href="#c5-variáveis-e-inventário">Variáveis e Inventário</a><a href="#c6-lógica-e-condições">Lógica e Condições</a><a href="#c7-textos-e-diálogos">Textos e Diálogos</a><a href="#c8-movimentos-e-ia">Movimentos e IA</a><a href="#c9-grades-e-quebra-cabeças">Grades e quebra-cabeças</a><a href="#c10-animações">Animações</a><a href="#c11-áudio">Áudio</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -372,7 +372,7 @@
 </div>
 <div class="fiche"><h3>Bloquear / desbloquear o objeto</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Bloqueado (sim / não)</div>
-<p>Trava ou destrava o objeto no editor (o cadeado). Não tem efeito nenhum durante o jogo: para impedir que um objeto seja arrastado, use “Tornar arrastável”.</p>
+<p>Trava ou destrava o objeto no editor (o cadeado). Não tem efeito nenhum durante o jogo: para impedir que um objeto seja arrastado, use “Mudar o comportamento”.</p>
 </div>
 <div class="fiche"><h3>Rolagem do cenário (profundidade)</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Velocidade do cenário (1 = normal, 0.5 = mais lento, efeito distante)</div>
@@ -468,9 +468,9 @@
 <p class="exemple"><b>Exemplo:</b> voltar “score” para 0.</p>
 </div>
 <div class="fiche"><h3>Adicionar à Variável</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Variável, Valor a adicionar</div>
-<p>Soma o valor à variável (um número negativo subtrai). Numa variável de texto, adiciona o texto no final.</p>
-<p class="exemple"><b>Exemplo:</b> score + 1 a cada moeda, vida - 1 a cada golpe.</p>
+<div class="schema"><b>Entradas:</b> Objeto, Variável, Valor a adicionar, Voltar a 0 depois de (opcional)</div>
+<p>Adiciona o valor à variável (um número negativo subtrai). Para uma variável de texto, adiciona o texto no fim. Com “Voltar a 0 depois de”, a variável gira como um contador: depois de 9 volta a 0 (e abaixo de 0 passa a 9).</p>
+<p class="exemple"><b>Exemplo:</b> pontuação + 1 a cada moeda; um dígito de cadeado: + 1 a cada toque, voltar a 0 depois de 9.</p>
 </div>
 <div class="fiche"><h3>Manter uma variável entre dois valores</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Variável, Mínimo, Máximo</div>
@@ -621,11 +621,6 @@
 <p>O objeto A se afasta sozinho do objeto B, na velocidade escolhida.</p>
 <p class="exemple"><b>Exemplo:</b> uma galinha fugindo do jogador.</p>
 </div>
-<div class="fiche"><h3>Mudar o quique</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Quique (0 a 1)</div>
-<p>Ajusta o quique de um objeto com física: 0 = não quica, 1 = quica muito.</p>
-<p class="exemple"><b>Exemplo:</b> 0.8 para uma bola saltitante.</p>
-</div>
 <div class="fiche"><h3>Empurrar em um ângulo</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Ângulo (0 = direita, 90 = baixo), Força</div>
 <p>Empurra o objeto numa direção (em graus: 0 = direita, 90 = baixo, 180 = esquerda, 270 = cima) com a força escolhida.</p>
@@ -636,15 +631,10 @@
 <p>Lança o objeto para cima (número negativo) ou para baixo (positivo), e dá física a ele para que caia de volta.</p>
 <p class="exemple"><b>Exemplo:</b> um pulo: força -15.</p>
 </div>
-<div class="fiche"><h3>Ativar a física</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Cai (sim / não)</div>
-<p>Dá física ao objeto: com true, ele cai com a gravidade; com false, fica parado como um chão.</p>
-<p class="exemple"><b>Exemplo:</b> uma plataforma que desaba quando você pisa nela.</p>
-</div>
-<div class="fiche"><h3>Tornar arrastável</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Arrastável com o dedo (sim / não)</div>
-<p>Permite (true) ou proíbe (false) arrastar o objeto com o dedo durante o jogo.</p>
-<p class="exemple"><b>Exemplo:</b> travar uma peça de quebra-cabeça bem encaixada.</p>
+<div class="fiche"><h3>Mudar o comportamento</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Como se move, Velocidade, Altura do pulo, É uma escada, Coletável</div>
+<p>Muda o que o objeto faz durante o jogo, com as mesmas opções da janela “Comportamento do objeto” do Inspetor: Cenário, Chão / parede, Cai e quica, Personagem de plataforma, Personagem visto de cima, Arrastado com o dedo. Também dá para mudar a velocidade, a altura do pulo, “é uma escada” e “coletável”. Cada ajuste em “(não mudar)” mantém seu valor.</p>
+<p class="exemple"><b>Exemplo:</b> uma caixa parada (Chão / parede) começa a cair quando se puxa uma alavanca: Mudar o comportamento → Cai e quica.</p>
 </div>
 <div class="fiche"><h3>Saltitar</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Intensidade (0 = parar), Duração (milissegundos, 1000 = 1 s), Continua enquanto se move (sim / não)</div>

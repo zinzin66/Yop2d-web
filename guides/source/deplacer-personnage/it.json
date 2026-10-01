@@ -1,147 +1,147 @@
 {
-  "titre_page": "Come muovere un personaggio in Yop2D? | Guida Yop2D",
-  "description": "Tre modi semplici per muovere un personaggio in Yop2D, senza codice: pulsanti sullo schermo, joystick virtuale o trascinamento col dito.",
-  "h1": "Come muovere un personaggio?",
-  "carte": [
-    "Muovere un personaggio",
-    "Muovere un oggetto con pulsanti, joystick o dito."
+ "titre_page": "Come muovere un personaggio in Yop2D? | Guida Yop2D",
+ "description": "Tre modi semplici per muovere un personaggio in Yop2D, senza codice: pulsanti sullo schermo, joystick virtuale o trascinamento col dito.",
+ "h1": "Come muovere un personaggio?",
+ "carte": [
+  "Muovere un personaggio",
+  "Muovere un oggetto con pulsanti, joystick o dito."
+ ],
+ "etapes": [
+  [
+   "Con pulsanti sullo schermo",
+   "Collega l'evento {{NoeudEventMaintenuObjet}} di ogni pulsante a un nodo {{pousser}} con {{lang:pousser.x}} = -5 o 5."
   ],
-  "etapes": [
-    [
-      "Con pulsanti sullo schermo",
-      "Collega l'evento {{NoeudEventMaintenuObjet}} di ogni pulsante a un nodo {{pousser}} con {{lang:pousser.x}} = -5 o 5."
-    ],
-    [
-      "Con un joystick virtuale",
-      "Aggiungi un oggetto {{lang:obj_prefix_joystick}} e scegli il personaggio in {{lang:insp_label_cible_joystick}}. Nessun nodo necessario."
-    ],
-    [
-      "Trascinandolo col dito",
-      "Spunta {{lang:insp_cb_deplacable}} nell'ispettore dell'oggetto."
-    ]
+  [
+   "Con un joystick virtuale",
+   "Aggiungi un oggetto {{lang:obj_prefix_joystick}} e scegli il personaggio in {{lang:insp_label_cible_joystick}}. Nessun nodo necessario."
   ],
-  "blocs": [
-    [
-      "p",
-      "In Yop2D ci sono tre modi semplici per muovere un personaggio, senza scrivere codice. Scegli quello adatto al tuo gioco."
-    ],
-    [
-      "h2",
-      "Metodo 1: con pulsanti sullo schermo (sinistra / destra)"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "p",
-          "Ideale per un platform o un gioco in cui il personaggio si muove su una linea."
-        ],
-        [
-          "ol",
-          [
-            "Nella scena, aggiungi il tuo personaggio (un **{{lang:obj_prefix_carre}}** o un'**{{lang:obj_prefix_image}}**) e chiamalo **player**.",
-            "Aggiungi due oggetti che faranno da pulsanti, per esempio due **{{lang:obj_prefix_bouton}}** (o due quadrati) chiamati **btnLeft** e **btnRight**. Mettili in basso sullo schermo.",
-            "Apri il **{{lang:titre_blueprint}}** della scena.",
-            "Aggiungi l'evento **[[NoeudEventMaintenuObjet]]** e scegli **btnLeft** come bersaglio.",
-            "Aggiungi un nodo **[[pousser]]**: bersaglio **player**, **{{lang:pousser.x}} = -5**, **{{lang:pousser.y}} = 0**.",
-            "Collega l'uscita dell'evento all'ingresso di [[pousser]].",
-            "Fai lo stesso per **btnRight**, con **{{lang:pousser.x}} = 5**.",
-            "Salva e avvia il gioco: finché tieni il dito su un pulsante, il personaggio avanza."
-          ]
-        ],
-        [
-          "chaine",
-          [
-            [
-              "ev",
-              "{{NoeudEventMaintenuObjet}}",
-              "bersaglio: btnLeft"
-            ],
-            [
-              "→"
-            ],
-            [
-              "n",
-              "{{pousser}}",
-              "bersaglio: player · {{lang:pousser.x}} = -5"
-            ]
-          ]
-        ],
-        [
-          "tip",
-          "[[NoeudEventMaintenuObjet]] si ripete a ogni fotogramma finché il dito resta sul pulsante: per questo il personaggio avanza di continuo. Per andare più veloce, aumenta il valore (per esempio 8 o 10)."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "Metodo 2: con un joystick virtuale"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "p",
-          "Ideale per un gioco visto dall'alto, in cui il personaggio si muove in tutte le direzioni. **Nessun nodo necessario.**"
-        ],
-        [
-          "ol",
-          [
-            "Aggiungi un oggetto **{{lang:obj_prefix_joystick}}** alla scena (categoria **{{lang:cat_interactifs}}**) e mettilo in basso a sinistra.",
-            "Seleziona il joystick. Nell'ispettore, sezione **[[lang:insp_sep_joystick]]**, tocca il pulsante di **[[lang:insp_label_cible_joystick]]** e scegli il tuo personaggio.",
-            "Salva e avvia il gioco: il personaggio segue la direzione del joystick."
-          ]
-        ],
-        [
-          "tip",
-          "**Scorciatoia:** se dai al personaggio il tag **Player** (o **Joueur**), il joystick lo muove automaticamente, anche senza scegliere nulla in [[lang:insp_label_cible_joystick]]. Attenzione: questo tag ha la precedenza sulla scelta dell'ispettore."
-        ],
-        [
-          "tip",
-          "**Per andare oltre:** le formule `joystick.x` e `joystick.y` danno la direzione (tra -1 e 1). Puoi usarle in un nodo [[pousser]] collegato a [[NoeudEventChaqueImage]], per esempio `=joystick.x * 5`. Il nodo **[[si_joystick]]** ha anche le uscite {{lang:port_haut}}, {{lang:port_bas}}, {{lang:port_gauche}}, {{lang:port_droite}} e {{lang:port_repos}}."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "Metodo 3: trascinarlo col dito"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "p",
-          "Ideale per un puzzle, un gioco di carte o un gioco in cui si spostano dei pezzi."
-        ],
-        [
-          "ol",
-          [
-            "Seleziona l'oggetto nell'editor della scena.",
-            "Nell'ispettore, spunta **[[lang:insp_cb_deplacable]]**.",
-            "Avvia il gioco: puoi trascinare l'oggetto col dito."
-          ]
-        ],
-        [
-          "tip",
-          "Per reagire quando il giocatore lascia l'oggetto (per esempio per controllare se è al posto giusto), usa l'evento **[[NoeudEventFinGlisser]]**."
-        ],
-        [
-          "tip",
-          "Per permettere o bloccare il trascinamento durante il gioco (un pezzo del puzzle messo bene, per esempio), usa il nodo **[[modifier_deplacable]]**."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "Consigli"
-    ],
-    [
-      "ul",
-      [
-        "**Per far saltare il personaggio**, segui la guida [Far saltare un personaggio](guide:sauter).",
-        "**Il gioco di esempio « Piattaforma »** incluso in Yop2D usa il metodo 1: aprilo per vedere un Blueprint completo che funziona.",
-        "**Una domanda?** Vieni a parlarne su [Discord](https://discord.gg/nHqCcqHZNQ) o [Telegram](https://t.me/+7PQ9WKw7n645Y2Zk)."
-      ]
-    ]
+  [
+   "Trascinandolo col dito",
+   "In ⚙ Comportamento dell'oggetto, scegli «Trascinato col dito»."
   ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "In Yop2D ci sono tre modi semplici per muovere un personaggio, senza scrivere codice. Scegli quello adatto al tuo gioco."
+  ],
+  [
+   "h2",
+   "Metodo 1: con pulsanti sullo schermo (sinistra / destra)"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "Ideale per un platform o un gioco in cui il personaggio si muove su una linea."
+    ],
+    [
+     "ol",
+     [
+      "Nella scena, aggiungi il tuo personaggio (un **{{lang:obj_prefix_carre}}** o un'**{{lang:obj_prefix_image}}**) e chiamalo **player**.",
+      "Aggiungi due oggetti che faranno da pulsanti, per esempio due **{{lang:obj_prefix_bouton}}** (o due quadrati) chiamati **btnLeft** e **btnRight**. Mettili in basso sullo schermo.",
+      "Apri il **{{lang:titre_blueprint}}** della scena.",
+      "Aggiungi l'evento **[[NoeudEventMaintenuObjet]]** e scegli **btnLeft** come bersaglio.",
+      "Aggiungi un nodo **[[pousser]]**: bersaglio **player**, **{{lang:pousser.x}} = -5**, **{{lang:pousser.y}} = 0**.",
+      "Collega l'uscita dell'evento all'ingresso di [[pousser]].",
+      "Fai lo stesso per **btnRight**, con **{{lang:pousser.x}} = 5**.",
+      "Salva e avvia il gioco: finché tieni il dito su un pulsante, il personaggio avanza."
+     ]
+    ],
+    [
+     "chaine",
+     [
+      [
+       "ev",
+       "{{NoeudEventMaintenuObjet}}",
+       "bersaglio: btnLeft"
+      ],
+      [
+       "→"
+      ],
+      [
+       "n",
+       "{{pousser}}",
+       "bersaglio: player · {{lang:pousser.x}} = -5"
+      ]
+     ]
+    ],
+    [
+     "tip",
+     "[[NoeudEventMaintenuObjet]] si ripete a ogni fotogramma finché il dito resta sul pulsante: per questo il personaggio avanza di continuo. Per andare più veloce, aumenta il valore (per esempio 8 o 10)."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Metodo 2: con un joystick virtuale"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "Ideale per un gioco visto dall'alto, in cui il personaggio si muove in tutte le direzioni. **Nessun nodo necessario.**"
+    ],
+    [
+     "ol",
+     [
+      "Aggiungi un oggetto **{{lang:obj_prefix_joystick}}** alla scena (categoria **{{lang:cat_interactifs}}**) e mettilo in basso a sinistra.",
+      "Seleziona il joystick. Nell'ispettore, sezione **[[lang:insp_sep_joystick]]**, tocca il pulsante di **[[lang:insp_label_cible_joystick]]** e scegli il tuo personaggio.",
+      "Salva e avvia il gioco: il personaggio segue la direzione del joystick."
+     ]
+    ],
+    [
+     "tip",
+     "**Scorciatoia:** se dai al personaggio il tag **Player** (o **Joueur**), il joystick lo muove automaticamente, anche senza scegliere nulla in [[lang:insp_label_cible_joystick]]. Attenzione: questo tag ha la precedenza sulla scelta dell'ispettore."
+    ],
+    [
+     "tip",
+     "**Per andare oltre:** le formule `joystick.x` e `joystick.y` danno la direzione (tra -1 e 1). Puoi usarle in un nodo [[pousser]] collegato a [[NoeudEventChaqueImage]], per esempio `=joystick.x * 5`. Il nodo **[[si_joystick]]** ha anche le uscite {{lang:port_haut}}, {{lang:port_bas}}, {{lang:port_gauche}}, {{lang:port_droite}} e {{lang:port_repos}}."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Metodo 3: trascinarlo col dito"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "Ideale per un puzzle, un gioco di carte o un gioco in cui si spostano dei pezzi."
+    ],
+    [
+     "ol",
+     [
+      "Seleziona l'oggetto nell'editor della scena.",
+      "Nell'ispettore, tocca **⚙ Comportamento dell'oggetto** e scegli **Trascinato col dito**.",
+      "Avvia il gioco: puoi trascinare l'oggetto col dito."
+     ]
+    ],
+    [
+     "tip",
+     "Per reagire quando il giocatore lascia l'oggetto (per esempio per controllare se è al posto giusto), usa l'evento **[[NoeudEventFinGlisser]]**."
+    ],
+    [
+     "tip",
+     "Per permettere o bloccare il trascinamento durante il gioco (un pezzo del puzzle messo bene, per esempio), usa il nodo **[[changer_comportement]]**."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Consigli"
+  ],
+  [
+   "ul",
+   [
+    "**Per far saltare il personaggio**, segui la guida [Far saltare un personaggio](guide:sauter).",
+    "**Il gioco di esempio « Piattaforma »** incluso in Yop2D usa il metodo 1: aprilo per vedere un Blueprint completo che funziona.",
+    "**Una domanda?** Vieni a parlarne su [Discord](https://discord.gg/nHqCcqHZNQ) o [Telegram](https://t.me/+7PQ9WKw7n645Y2Zk)."
+   ]
+  ]
+ ]
 }

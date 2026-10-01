@@ -1,0 +1,201 @@
+{
+  "titre_page": "¿Cómo hacer que un personaje camine, salte y suba escaleras sin nodos? | Guía Yop2D",
+  "description": "Los comportamientos de Yop2D: un personaje de plataformas que camina, salta y sube escaleras, o un personaje visto desde arriba, con sus animaciones, sin ningún nodo.",
+  "h1": "Los comportamientos: un personaje que se mueve sin nodos",
+  "carte": [
+    "Los comportamientos",
+    "Caminar, saltar, subir, vista desde arriba y animaciones, sin ningún nodo."
+  ],
+  "etapes": [
+    [
+      "El suelo",
+      "En «⚙ Comportamiento del objeto», elige «Suelo / pared»."
+    ],
+    [
+      "El personaje",
+      "Elige «Personaje de plataformas», controles «Joystick», y añade un joystick."
+    ],
+    [
+      "Las escaleras",
+      "En la escalera, marca «Una escalera»."
+    ],
+    [
+      "Las animaciones",
+      "Llámalas reposo, caminar, salto, escalar y agacharse: el motor las reproduce solo."
+    ],
+    [
+      "Cambiar durante el juego",
+      "Usa el nodo [[changer_comportement]]."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Antes, para que un personaje caminara, saltara y subiera hacían falta muchos nodos y fórmulas. Ahora simplemente eliges **lo que hace el objeto** en la ventana **⚙ Comportamiento del objeto** del inspector, y el motor hace el resto."
+    ],
+    [
+      "besoin",
+      [
+        "un personaje llamado **player** (una {{lang:obj_prefix_image}});",
+        "un suelo: una {{lang:obj_prefix_image}} o un {{lang:obj_prefix_carre}} ancho y plano, abajo en la escena;",
+        "una escalera (una {{lang:obj_prefix_image}}), si quieres subir;",
+        "un {{lang:obj_prefix_joystick}}, abajo a la izquierda de la pantalla."
+      ]
+    ],
+    [
+      "h2",
+      "Paso 1: el suelo"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Selecciona el suelo.",
+            "En el inspector, toca el botón **⚙ Comportamiento del objeto**.",
+            "Elige **Suelo / pared**: no se mueve, se camina encima y se choca con él."
+          ]
+        ],
+        [
+          "tip",
+          "Para una plataforma que se atraviesa saltando desde abajo, marca también **Atravesable desde abajo** en la parte «También es…»."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 2: el personaje"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Selecciona **player** y toca **⚙ Comportamiento del objeto**.",
+            "Elige **Personaje de plataformas**.",
+            "En «Sus ajustes», deja **Controles: Joystick**. Puedes elegir la **Velocidad** y la **Altura del salto**.",
+            "Añade un {{lang:obj_prefix_joystick}} a la escena. No hace falta elegirle un objetivo: el personaje lo sigue solo.",
+            "Lanza el juego: el joystick hace caminar al personaje, y empujarlo hacia arriba lo hace saltar."
+          ]
+        ],
+        [
+          "tip",
+          "¿Prefieres un botón para saltar? Elígelo en **Botón para saltar**. ¿Prefieres botones ◀ ▶? Elige **Controles: Botones**, y luego el botón izquierda y el botón derecha."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 3: las escaleras"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Selecciona la escalera y toca **⚙ Comportamiento del objeto**.",
+            "Deja **Decorado** y marca **Una escalera** en la parte «También es…».",
+            "Haz que la escalera suba un poco por encima de la plataforma a la que lleva.",
+            "Lanza el juego: delante de la escalera, empuja el joystick hacia arriba para subir y hacia abajo para bajar. Arriba, el personaje se posa en la plataforma."
+          ]
+        ],
+        [
+          "tip",
+          "Mientras sube, el personaje no cae: se queda agarrado si sueltas el joystick. Empuja hacia un lado para dejar la escalera."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 4: las animaciones, solas"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "En la ventana **Animaciones**, pon estos nombres a las animaciones del personaje: **reposo**, **caminar**, **salto**, **escalar** y **agacharse**. El motor reproduce la animación adecuada según lo que hace el personaje, y voltea la imagen cuando va a la izquierda."
+        ],
+        [
+          "ul",
+          [
+            "¿Falta una animación? No pasa nada: la imagen simplemente no cambia en ese caso.",
+            "¿Varios personajes? Empieza el nombre por el del objeto: **player_caminar**, **enemigo_caminar**. Cada uno toma las suyas.",
+            "También puedes elegir la animación a mano: en «Animaciones automáticas», toca una línea y elige de la lista (con una miniatura de cada animación)."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Un enemigo que camina solo"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Para un enemigo que patrulla, elige también **Personaje de plataformas**, pero con **Controles: Ninguno**: ya no obedece al joystick. Muévelo con tus nodos (por ejemplo [[glisser_vers]]): conserva la gravedad y sus animaciones siguen sus movimientos reales."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Un personaje visto desde arriba (o en vista iso)"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Elige **Personaje visto desde arriba** en ⚙ Comportamiento del objeto.",
+            "En **Direcciones**, elige **4** (arriba, abajo, izquierda, derecha), **Vista iso** (4 diagonales) o **Izq. / der.**.",
+            "Pon la dirección en el nombre de las animaciones: **caminar_arriba**, **caminar_abajo**, **caminar_izquierda**, **caminar_derecha**, y **reposo_arriba**… (en vista iso: **caminar_ne**, **caminar_nw**, **caminar_se**, **caminar_sw**)."
+          ]
+        ],
+        [
+          "tip",
+          "¿No hay animación «izquierda»? El motor voltea la imagen de «derecha»."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Cambiar de comportamiento durante el juego"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "El nodo [[changer_comportement]] ofrece las mismas opciones que la ventana. Ejemplo: una caja en **Suelo / pared** empieza a caer al tirar de una palanca: [[changer_comportement]] → **Cae y rebota**. Cada ajuste en «(no cambiar)» conserva su valor."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Para ver el resultado"
+    ],
+    [
+      "p",
+      "Descarga los ejemplos **Climb & run** (plataformas, escaleras, animaciones) y **Dungeon walk** (vista iso) en la pestaña **Ejemplos** de la pantalla de inicio de Yop2D, luego toca al héroe y abre **⚙ Comportamiento del objeto**."
+    ],
+    [
+      "h2",
+      "Si no funciona"
+    ],
+    [
+      "ul",
+      [
+        "**El personaje no se mueve:** comprueba **Controles: Joystick** (y no «Ninguno») y que haya un joystick en la escena (o en el HUD).",
+        "**Cae a través del suelo:** el suelo debe estar en **Suelo / pared**.",
+        "**No sube:** la escalera debe tener **Una escalera** marcada, y el personaje **Puede subir escaleras: sí**.",
+        "**La animación no cambia:** revisa los nombres de las animaciones, o elígelas a mano en la lista."
+      ]
+    ]
+  ]
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何不用节点让角色走路、跳跃和爬梯子？| Yop2D 指南</title>
+<meta name="description" content="Yop2D 的物体行为：会走、会跳、会爬梯子的平台角色，或俯视角色，带有自己的动画，一个节点都不用。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/comportements.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/comportements.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/comportements.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/comportements.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/comportements.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/comportements.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/comportements.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/comportements.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/comportements.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/comportements.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "物体行为：不用节点就能移动的角色",
+ "description": "Yop2D 的物体行为：会走、会跳、会爬梯子的平台角色，或俯视角色，带有自己的动画，一个节点都不用。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "地面",
+   "text": "在“⚙ 物体行为”里选择“地面 / 墙”。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "角色",
+   "text": "选择“平台角色”，操控选“摇杆”，再添加一个摇杆。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "梯子",
+   "text": "在梯子上勾选“梯子”。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "动画",
+   "text": "把它们命名为 静止、行走、跳跃、爬 和 蹲：引擎会自动播放。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "在游戏中改变",
+   "text": "使用节点 “改变行为”。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>物体行为：不用节点就能移动的角色</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../comportements.html" hreflang="fr">Français</a> · <a href="../en/comportements.html" hreflang="en">English</a> · <a href="../es/comportements.html" hreflang="es">Español</a> · <a href="../de/comportements.html" hreflang="de">Deutsch</a> · <a href="../it/comportements.html" hreflang="it">Italiano</a> · <a href="../pt/comportements.html" hreflang="pt">Português</a> · <a href="../ru/comportements.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/comportements.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>以前，让角色走、跳、爬需要很多节点和公式。现在你只要在检查器的 <strong>⚙ 物体行为</strong> 窗口里选择 <strong>物体做什么</strong>，剩下的交给引擎。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>一个名为 <strong>player</strong> 的角色（图像）；</li><li>地面：一个图像，或放在场景底部的宽而平的正方形；</li><li>梯子（图像），如果你想爬；</li><li>一个摇杆，放在屏幕左下角。</li></ul>
+</div>
+<h2>第 1 步：地面</h2>
+<div class="method">
+<ol><li>选中地面。</li><li>在检查器中点按钮 <strong>⚙ 物体行为</strong>。</li><li>选择 <strong>地面 / 墙</strong>：它不会动，可以站在上面，也会撞上。</li></ol>
+<div class="tip">👉 如果是可以从下方跳上去的平台，在“它还是……”部分再勾选 <strong>可从下方穿过</strong>。</div>
+</div>
+<h2>第 2 步：角色</h2>
+<div class="method">
+<ol><li>选中 <strong>player</strong>，点 <strong>⚙ 物体行为</strong>。</li><li>选择 <strong>平台角色</strong>。</li><li>在“它的设置”里保持 <strong>操控：摇杆</strong>。可以选择 <strong>速度</strong> 和 <strong>跳跃高度</strong>。</li><li>在场景中添加一个摇杆。不用给它选目标：角色会自己跟着它。</li><li>运行游戏：摇杆让角色走路，往上推就会跳。</li></ol>
+<div class="tip">👉 想用按钮跳？在 <strong>跳跃按钮</strong> 里选它。想用 ◀ ▶ 按钮？选择 <strong>操控：按钮</strong>，再选左按钮和右按钮。</div>
+</div>
+<h2>第 3 步：梯子</h2>
+<div class="method">
+<ol><li>选中梯子，点 <strong>⚙ 物体行为</strong>。</li><li>保持 <strong>装饰</strong>，在“它还是……”部分勾选 <strong>梯子</strong>。</li><li>让梯子稍微高出它通向的平台。</li><li>运行游戏：在梯子前往上推摇杆就会往上爬，往下推就会往下。到顶后，角色会站到平台上。</li></ol>
+<div class="tip">👉 爬梯子时角色不会掉下来：松开摇杆它会挂在梯子上。往旁边推就能离开梯子。</div>
+</div>
+<h2>第 4 步：自动播放的动画</h2>
+<div class="method">
+<p>在 <strong>动画</strong> 窗口里，把角色的动画命名为：<strong>静止</strong>、<strong>行走</strong>、<strong>跳跃</strong>、<strong>爬</strong> 和 <strong>蹲</strong>。引擎会根据角色在做什么播放对应的动画，向左走时还会自动翻转图片。</p>
+<ul><li>少了某个动画？没关系：这种情况下图片只是不变。</li><li>有多个角色？名字以物体名开头：<strong>player_行走</strong>、<strong>enemy_行走</strong>。每个角色用自己的动画。</li><li>也可以手动选择动画：在“自动动画”里点一行，从列表中选择（每个动画都有缩略图）。</li></ul>
+</div>
+<h2>自己走动的敌人</h2>
+<div class="method">
+<p>巡逻的敌人也选择 <strong>平台角色</strong>，但设为 <strong>操控：无</strong>：它就不再听摇杆的。用你的节点让它移动（例如 “滑向”）：它保留重力，动画会跟随它真实的移动。</p>
+</div>
+<h2>俯视角色（或等距视角）</h2>
+<div class="method">
+<ol><li>在 ⚙ 物体行为 里选择 <strong>俯视角色</strong>。</li><li>在 <strong>方向</strong> 里选择 <strong>4 个</strong>（上下左右）、<strong>等距视角</strong>（4 个斜方向）或 <strong>左 / 右</strong>。</li><li>用英文在动画名里加上方向：<strong>行走_up</strong>、<strong>行走_down</strong>、<strong>行走_left</strong>、<strong>行走_right</strong>，以及 <strong>静止_up</strong>……（等距视角：<strong>行走_ne</strong>、<strong>行走_nw</strong>、<strong>行走_se</strong>、<strong>行走_sw</strong>）。</li></ol>
+<div class="tip">👉 没有“left”动画？引擎会翻转“right”的图片。</div>
+</div>
+<h2>在游戏中改变行为</h2>
+<div class="method">
+<p>节点 “改变行为” 提供和窗口相同的选项。例子：一个设为 <strong>地面 / 墙</strong> 的箱子在拉下拉杆时开始掉落：“改变行为” → <strong>会掉落和弹跳</strong>。保持“（不改变）”的设置会保留原值。</p>
+</div>
+<h2>查看效果</h2>
+<p>在 Yop2D 首页的 <strong>示例</strong> 标签里下载 <strong>Climb &amp; run</strong>（平台、梯子、动画）和 <strong>Dungeon walk</strong>（等距视角）示例，然后点英雄，打开 <strong>⚙ 物体行为</strong>。</p>
+<h2>如果不起作用</h2>
+<ul><li><strong>角色不动：</strong> 检查 <strong>操控：摇杆</strong>（不是“无”），以及场景（或 HUD）里有摇杆。</li><li><strong>它掉穿了地面：</strong> 地面必须设为 <strong>地面 / 墙</strong>。</li><li><strong>它不爬：</strong> 梯子必须勾选 <strong>梯子</strong>，角色要设为 <strong>可以爬梯子：是</strong>。</li><li><strong>动画不变：</strong> 检查动画名称，或在列表里手动选择。</li></ul>
+
+<div class="nav">
+<a href="../zh/sauter.html">← 让角色跳跃</a>
+<a href="../zh/pieces-score.html">下一篇： 收集金币并计分 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>

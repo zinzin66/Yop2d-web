@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment faire marcher, sauter et grimper un personnage sans nœuds ? | Guide Yop2D</title>
+<meta name="description" content="Les comportements de Yop2D : un personnage de plateforme qui marche, saute et grimpe aux échelles, ou un personnage vu de dessus, avec ses animations, sans aucun nœud.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/comportements.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/comportements.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/comportements.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/comportements.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/comportements.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/comportements.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/comportements.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/comportements.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/comportements.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/comportements.html">
+<link rel="stylesheet" href="guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Les comportements : un personnage qui bouge sans nœuds",
+ "description": "Les comportements de Yop2D : un personnage de plateforme qui marche, saute et grimpe aux échelles, ou un personnage vu de dessus, avec ses animations, sans aucun nœud.",
+ "inLanguage": "fr",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (moteur de jeu 2D sans code pour Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Le sol",
+   "text": "Dans « ⚙ Comportement de l'objet », choisis « Sol / mur »."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Le personnage",
+   "text": "Choisis « Personnage de plateforme », commandes « Joystick », et ajoute un joystick."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Les échelles",
+   "text": "Sur l'échelle, coche « Une échelle »."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Les animations",
+   "text": "Nomme-les repos, marche, saut, grimpe et accroupi : le moteur les joue tout seul."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Changer pendant le jeu",
+   "text": "Utilise le nœud « Changer le comportement »."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../fr/index.html">← Yop2D</a>
+<h1>Les comportements : un personnage qui bouge sans nœuds</h1>
+<p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/comportements.html" hreflang="en">English</a> · <a href="es/comportements.html" hreflang="es">Español</a> · <a href="de/comportements.html" hreflang="de">Deutsch</a> · <a href="it/comportements.html" hreflang="it">Italiano</a> · <a href="pt/comportements.html" hreflang="pt">Português</a> · <a href="ru/comportements.html" hreflang="ru">Русский</a> · <a href="zh/comportements.html" hreflang="zh">中文</a> · <a href="ja/comportements.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Avant, pour faire marcher, sauter et grimper un personnage, il fallait beaucoup de nœuds et des formules. Maintenant, tu choisis simplement <strong>ce que fait l'objet</strong> dans la fenêtre <strong>⚙ Comportement de l'objet</strong> de l'inspecteur, et le moteur fait le reste.</p>
+<div class="besoin">
+<b>Il te faut :</b>
+<ul><li>un personnage nommé <strong>player</strong> (une Image) ;</li><li>un sol : une Image ou un Carré large et plat, en bas de la scène ;</li><li>une échelle (une Image), si tu veux grimper ;</li><li>un Joystick, en bas à gauche de l'écran.</li></ul>
+</div>
+<h2>Étape 1 : le sol</h2>
+<div class="method">
+<ol><li>Sélectionne le sol.</li><li>Dans l'inspecteur, touche le bouton <strong>⚙ Comportement de l'objet</strong>.</li><li>Choisis <strong>Sol / mur</strong> : il ne bouge pas, on marche dessus et on s'y cogne.</li></ol>
+<div class="tip">👉 Pour une plateforme que l'on traverse en sautant par-dessous, coche aussi <strong>Traversable par dessous</strong> dans la partie « Il est aussi… ».</div>
+</div>
+<h2>Étape 2 : le personnage</h2>
+<div class="method">
+<ol><li>Sélectionne <strong>player</strong> et touche <strong>⚙ Comportement de l'objet</strong>.</li><li>Choisis <strong>Personnage de plateforme</strong>.</li><li>Dans « Ses réglages », laisse <strong>Commandes : Joystick</strong>. Tu peux choisir la <strong>Vitesse</strong> et la <strong>Hauteur de saut</strong>.</li><li>Ajoute un Joystick dans la scène. Inutile de lui choisir une cible : le personnage le suit tout seul.</li><li>Lance le jeu : le joystick fait marcher le personnage, et le pousser vers le haut le fait sauter.</li></ol>
+<div class="tip">👉 Tu préfères un bouton pour sauter ? Choisis-le dans <strong>Bouton pour sauter</strong>. Tu préfères des boutons ◀ ▶ ? Choisis <strong>Commandes : Boutons</strong>, puis le bouton gauche et le bouton droite.</div>
+</div>
+<h2>Étape 3 : les échelles</h2>
+<div class="method">
+<ol><li>Sélectionne l'échelle et touche <strong>⚙ Comportement de l'objet</strong>.</li><li>Laisse <strong>Décor</strong> et coche <strong>Une échelle</strong> dans la partie « Il est aussi… ».</li><li>Fais monter l'échelle un peu au-dessus de la plateforme où elle mène.</li><li>Lance le jeu : devant l'échelle, pousse le joystick vers le haut pour grimper, vers le bas pour descendre. En haut, le personnage se pose sur la plateforme.</li></ol>
+<div class="tip">👉 Pendant la grimpe, le personnage ne tombe pas : il reste accroché si tu lâches le joystick. Pousse sur le côté pour quitter l'échelle.</div>
+</div>
+<h2>Étape 4 : les animations, toutes seules</h2>
+<div class="method">
+<p>Dans la fenêtre <strong>Animations</strong>, donne ces noms aux animations du personnage : <strong>repos</strong>, <strong>marche</strong>, <strong>saut</strong>, <strong>grimpe</strong> et <strong>accroupi</strong>. Le moteur joue la bonne animation selon ce que fait le personnage, et retourne l'image quand il va à gauche.</p>
+<ul><li>Une animation manque ? Pas grave : l'image ne change pas pour ce cas-là.</li><li>Plusieurs personnages ? Commence le nom par celui de l'objet : <strong>player_marche</strong>, <strong>mechant_marche</strong>. Chacun prend les siennes.</li><li>Tu peux aussi choisir l'animation à la main : dans « Animations jouées toutes seules », touche une ligne et choisis dans la liste (avec une vignette de chaque animation).</li></ul>
+</div>
+<h2>Un ennemi qui marche tout seul</h2>
+<div class="method">
+<p>Pour un ennemi qui patrouille, choisis aussi <strong>Personnage de plateforme</strong>, mais avec <strong>Commandes : Aucune</strong> : il n'obéit plus au joystick. Fais-le bouger avec tes nœuds (par exemple « Glisser vers ») : il garde la gravité et ses animations suivent ses vrais mouvements.</p>
+</div>
+<h2>Un personnage vu de dessus (ou en vue iso)</h2>
+<div class="method">
+<ol><li>Choisis <strong>Personnage vu de dessus</strong> dans ⚙ Comportement de l'objet.</li><li>Dans <strong>Directions</strong>, choisis <strong>4</strong> (haut, bas, gauche, droite), <strong>Vue iso</strong> (4 diagonales) ou <strong>Gauche / droite</strong>.</li><li>Nomme les animations avec la direction : <strong>marche_haut</strong>, <strong>marche_bas</strong>, <strong>marche_gauche</strong>, <strong>marche_droite</strong>, et <strong>repos_haut</strong>… (en vue iso : <strong>marche_ne</strong>, <strong>marche_no</strong>, <strong>marche_se</strong>, <strong>marche_so</strong>).</li></ol>
+<div class="tip">👉 Pas d'animation « gauche » ? Le moteur retourne l'image de « droite ».</div>
+</div>
+<h2>Changer de comportement pendant le jeu</h2>
+<div class="method">
+<p>Le nœud « Changer le comportement » propose les mêmes choix que la fenêtre. Exemple : une caisse posée en <strong>Sol / mur</strong> se met à tomber quand on tire un levier : « Changer le comportement » → <strong>Tombe et rebondit</strong>. Chaque réglage laissé sur « (ne pas changer) » garde sa valeur.</p>
+</div>
+<h2>Pour voir le résultat</h2>
+<p>Télécharge les exemples <strong>Climb &amp; run</strong> (plateforme, échelles, animations) et <strong>Dungeon walk</strong> (vue iso) dans l'onglet <strong>Exemples</strong> de l'accueil de Yop2D, puis touche le héros et ouvre <strong>⚙ Comportement de l'objet</strong>.</p>
+<h2>Si ça ne marche pas</h2>
+<ul><li><strong>Le personnage ne bouge pas :</strong> vérifie <strong>Commandes : Joystick</strong> (et pas « Aucune ») et qu'il y a bien un joystick dans la scène (ou dans le HUD).</li><li><strong>Il tombe à travers le sol :</strong> le sol doit être en <strong>Sol / mur</strong>.</li><li><strong>Il ne grimpe pas :</strong> l'échelle doit avoir <strong>Une échelle</strong> cochée, et le personnage <strong>Peut grimper aux échelles : oui</strong>.</li><li><strong>L'animation ne change pas :</strong> vérifie le nom des animations, ou choisis-les à la main dans la liste.</li></ul>
+
+<div class="nav">
+<a href="sauter.html">← Faire sauter un personnage</a>
+<a href="pieces-score.html">Guide suivant : Ramasser des pièces et compter le score →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="../fr/index.html">Site officiel</a> · <a href="../noeuds/fr.html">Référence des nœuds</a></p>
+</footer>
+</body>
+</html>

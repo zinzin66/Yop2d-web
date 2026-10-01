@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (133) | Reference</title>
-<meta name="description" content="Complete list of the 133 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (131) | Reference</title>
+<meta name="description" content="Complete list of the 131 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 133 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 131 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-animations">Animations</a><a href="#c11-audio">Audio</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -372,7 +372,7 @@
 </div>
 <div class="fiche"><h3>Lock / unlock the object</h3>
 <div class="schema"><b>Inputs:</b> Object, Locked (yes / no)</div>
-<p>Locks or unlocks the object in the editor (the padlock). It has no effect during the game: to stop an object from being dragged, use “Set draggable”.</p>
+<p>Locks or unlocks the object in the editor (the padlock). It has no effect during the game: to stop an object from being dragged, use “Change the behavior”.</p>
 </div>
 <div class="fiche"><h3>Background scrolling (depth)</h3>
 <div class="schema"><b>Inputs:</b> Object, Background speed (1 = normal, 0.5 = slower, far away effect)</div>
@@ -468,9 +468,9 @@
 <p class="exemple"><b>Example:</b> set “score” back to 0.</p>
 </div>
 <div class="fiche"><h3>Add to Variable</h3>
-<div class="schema"><b>Inputs:</b> Object, Variable, Value to add</div>
-<p>Adds the value to the variable (a negative number subtracts). For a text variable, adds the text at the end.</p>
-<p class="exemple"><b>Example:</b> score + 1 for each coin, health - 1 for each hit.</p>
+<div class="schema"><b>Inputs:</b> Object, Variable, Value to add, Back to 0 after (optional)</div>
+<p>Adds the value to the variable (a negative number subtracts). For a text variable, adds the text at the end. With "Back to 0 after", the variable turns like a counter: after 9 it goes back to 0 (and below 0 it goes to 9).</p>
+<p class="exemple"><b>Example:</b> score + 1 for each coin; a padlock digit: + 1 on each tap, back to 0 after 9.</p>
 </div>
 <div class="fiche"><h3>Keep a variable between two values</h3>
 <div class="schema"><b>Inputs:</b> Object, Variable, Minimum, Maximum</div>
@@ -621,11 +621,6 @@
 <p>Object A moves by itself away from object B, at the chosen speed.</p>
 <p class="exemple"><b>Example:</b> a chicken running away from the player.</p>
 </div>
-<div class="fiche"><h3>Set bounce</h3>
-<div class="schema"><b>Inputs:</b> Object, Bounce (0 to 1)</div>
-<p>Sets how much a physics object bounces: 0 = no bounce, 1 = bounces a lot.</p>
-<p class="exemple"><b>Example:</b> 0.8 for a bouncy ball.</p>
-</div>
 <div class="fiche"><h3>Push at an angle</h3>
 <div class="schema"><b>Inputs:</b> Object, Angle (0 = right, 90 = down), Force</div>
 <p>Pushes the object in a direction (in degrees: 0 = right, 90 = down, 180 = left, 270 = up) with the chosen force.</p>
@@ -636,15 +631,10 @@
 <p>Launches the object upwards (negative number) or downwards (positive), and gives it physics so it falls back.</p>
 <p class="exemple"><b>Example:</b> a jump: force -15.</p>
 </div>
-<div class="fiche"><h3>Enable physics</h3>
-<div class="schema"><b>Inputs:</b> Object, Falls (yes / no)</div>
-<p>Gives the object physics: Falls = true, it falls with gravity; false, it stays fixed like a floor.</p>
-<p class="exemple"><b>Example:</b> a platform that collapses when you walk on it.</p>
-</div>
-<div class="fiche"><h3>Set draggable</h3>
-<div class="schema"><b>Inputs:</b> Object, Draggable by finger (yes / no)</div>
-<p>Allows (true) or forbids (false) dragging the object with the finger during the game.</p>
-<p class="exemple"><b>Example:</b> lock a puzzle piece that is in the right place.</p>
+<div class="fiche"><h3>Change the behavior</h3>
+<div class="schema"><b>Inputs:</b> Object, How it moves, Speed, Jump height, Is a ladder, Collectable</div>
+<p>Changes what the object does during the game, with the same choices as the Inspector's "Object behavior" window: Scenery, Ground / wall, Falls and bounces, Platform character, Top-down character, Dragged with a finger. You can also change the speed, the jump height, "is a ladder" and "collectable". Every setting left on "(don't change)" keeps its value.</p>
+<p class="exemple"><b>Example:</b> a crate standing still (Ground / wall) starts to fall when a lever is pulled: Change the behavior → Falls and bounces.</p>
 </div>
 <div class="fiche"><h3>Bounce around</h3>
 <div class="schema"><b>Inputs:</b> Object, Strength (0 = stop), Duration (milliseconds, 1000 = 1 s), Keep going while moving (yes / no)</div>

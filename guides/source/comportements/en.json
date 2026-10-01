@@ -1,0 +1,201 @@
+{
+ "titre_page": "How to make a character walk, jump and climb without nodes? | Yop2D guide",
+ "description": "Yop2D behaviors: a platform character that walks, jumps and climbs ladders, or a top-down character, with its animations, without a single node.",
+ "h1": "Behaviors: a character that moves without nodes",
+ "carte": [
+  "Behaviors",
+  "Walk, jump, climb, top-down view and animations, without a single node."
+ ],
+ "etapes": [
+  [
+   "The ground",
+   "In \"⚙ Object behavior\", choose \"Ground / wall\"."
+  ],
+  [
+   "The character",
+   "Choose \"Platform character\", controls \"Joystick\", and add a joystick."
+  ],
+  [
+   "The ladders",
+   "On the ladder, check \"A ladder\"."
+  ],
+  [
+   "The animations",
+   "Name them idle, walk, jump, climb and duck: the engine plays them by itself."
+  ],
+  [
+   "Change during the game",
+   "Use the [[changer_comportement]] node."
+  ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "Before, making a character walk, jump and climb took a lot of nodes and formulas. Now you simply choose **what the object does** in the inspector's **⚙ Object behavior** window, and the engine does the rest."
+  ],
+  [
+   "besoin",
+   [
+    "a character named **player** (an {{lang:obj_prefix_image}});",
+    "a ground: an {{lang:obj_prefix_image}} or a wide, flat {{lang:obj_prefix_carre}} at the bottom of the scene;",
+    "a ladder (an {{lang:obj_prefix_image}}), if you want to climb;",
+    "a {{lang:obj_prefix_joystick}} at the bottom left of the screen."
+   ]
+  ],
+  [
+   "h2",
+   "Step 1: the ground"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Select the ground.",
+      "In the inspector, tap the **⚙ Object behavior** button.",
+      "Choose **Ground / wall**: it doesn't move, you walk on it and bump into it."
+     ]
+    ],
+    [
+     "tip",
+     "For a platform you can jump through from below, also check **Pass-through from below** in the \"It is also…\" part."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 2: the character"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Select **player** and tap **⚙ Object behavior**.",
+      "Choose **Platform character**.",
+      "In \"Its settings\", leave **Controls: Joystick**. You can choose the **Speed** and the **Jump height**.",
+      "Add a {{lang:obj_prefix_joystick}} to the scene. No need to choose a target: the character follows it by itself.",
+      "Run the game: the joystick makes the character walk, and pushing it up makes it jump."
+     ]
+    ],
+    [
+     "tip",
+     "Prefer a button to jump? Choose it in **Jump button**. Prefer ◀ ▶ buttons? Choose **Controls: Buttons**, then the left button and the right button."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 3: the ladders"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Select the ladder and tap **⚙ Object behavior**.",
+      "Leave **Scenery** and check **A ladder** in the \"It is also…\" part.",
+      "Make the ladder go a little above the platform it leads to.",
+      "Run the game: in front of the ladder, push the joystick up to climb and down to go down. At the top, the character lands on the platform."
+     ]
+    ],
+    [
+     "tip",
+     "While climbing, the character doesn't fall: it stays hanging if you let go of the joystick. Push sideways to leave the ladder."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 4: the animations, by themselves"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "In the **Animations** window, give the character's animations these names: **idle**, **walk**, **jump**, **climb** and **duck**. The engine plays the right animation for what the character does, and flips the image when it goes left."
+    ],
+    [
+     "ul",
+     [
+      "An animation is missing? No problem: the image just doesn't change in that case.",
+      "Several characters? Start the name with the object's name: **player_walk**, **enemy_walk**. Each one takes its own.",
+      "You can also choose the animation by hand: in \"Animations played automatically\", tap a line and pick from the list (with a thumbnail of each animation)."
+     ]
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "An enemy that walks by itself"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "For a patrolling enemy, also choose **Platform character**, but with **Controls: None**: it no longer obeys the joystick. Move it with your nodes (for example [[glisser_vers]]): it keeps gravity and its animations follow its real movements."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "A top-down character (or iso view)"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Choose **Top-down character** in ⚙ Object behavior.",
+      "In **Directions**, choose **4** (up, down, left, right), **Iso view** (4 diagonals) or **Left / right**.",
+      "Name the animations with the direction: **walk_up**, **walk_down**, **walk_left**, **walk_right**, and **idle_up**… (in iso view: **walk_ne**, **walk_nw**, **walk_se**, **walk_sw**)."
+     ]
+    ],
+    [
+     "tip",
+     "No \"left\" animation? The engine flips the \"right\" image."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Change behavior during the game"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "The [[changer_comportement]] node offers the same choices as the window. Example: a crate set to **Ground / wall** starts falling when a lever is pulled: [[changer_comportement]] → **Falls and bounces**. Every setting left on \"(don't change)\" keeps its value."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "To see the result"
+  ],
+  [
+   "p",
+   "Download the **Climb & run** (platform, ladders, animations) and **Dungeon walk** (iso view) examples in the **Examples** tab of Yop2D's home screen, then tap the hero and open **⚙ Object behavior**."
+  ],
+  [
+   "h2",
+   "If it doesn't work"
+  ],
+  [
+   "ul",
+   [
+    "**The character doesn't move:** check **Controls: Joystick** (not \"None\") and that there is a joystick in the scene (or in the HUD).",
+    "**It falls through the ground:** the ground must be set to **Ground / wall**.",
+    "**It doesn't climb:** the ladder must have **A ladder** checked, and the character **Can climb ladders: yes**.",
+    "**The animation doesn't change:** check the animation names, or pick them by hand in the list."
+   ]
+  ]
+ ]
+}

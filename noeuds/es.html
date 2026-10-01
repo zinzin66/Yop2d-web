@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (133) | Referencia</title>
-<meta name="description" content="Lista completa de los 133 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (131) | Referencia</title>
+<meta name="description" content="Lista completa de los 131 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 133 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 131 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-animaciones">Animaciones</a><a href="#c11-audio">Audio</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -372,7 +372,7 @@
 </div>
 <div class="fiche"><h3>Bloquear / desbloquear el objeto</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Bloqueado (sí / no)</div>
-<p>Bloquea o desbloquea el objeto en el editor (el candado). No tiene ningún efecto durante el juego: para impedir arrastrar un objeto, usa «Hacer arrastrable».</p>
+<p>Bloquea o desbloquea el objeto en el editor (el candado). No tiene ningún efecto durante el juego: para impedir arrastrar un objeto, usa «Cambiar el comportamiento».</p>
 </div>
 <div class="fiche"><h3>Desplazamiento del fondo (profundidad)</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Velocidad del fondo (1 = normal, 0.5 = más lento, efecto lejano)</div>
@@ -468,9 +468,9 @@
 <p class="exemple"><b>Ejemplo:</b> volver a poner «score» a 0.</p>
 </div>
 <div class="fiche"><h3>Añadir a Variable</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Variable, Valor a añadir</div>
-<p>Suma el valor a la variable (un número negativo resta). En una variable de texto, añade el texto al final.</p>
-<p class="exemple"><b>Ejemplo:</b> score + 1 por cada moneda, vida - 1 por cada golpe.</p>
+<div class="schema"><b>Entradas:</b> Objeto, Variable, Valor a añadir, Volver a 0 después de (opcional)</div>
+<p>Añade el valor a la variable (un número negativo resta). Para una variable de texto, añade el texto al final. Con «Volver a 0 después de», la variable gira como un contador: después de 9 vuelve a 0 (y por debajo de 0 pasa a 9).</p>
+<p class="exemple"><b>Ejemplo:</b> puntuación + 1 por cada moneda; una cifra de candado: + 1 en cada toque, volver a 0 después de 9.</p>
 </div>
 <div class="fiche"><h3>Mantener una variable entre dos valores</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Variable, Mínimo, Máximo</div>
@@ -621,11 +621,6 @@
 <p>El objeto A se aleja solo del objeto B, a la velocidad elegida.</p>
 <p class="exemple"><b>Ejemplo:</b> una gallina que huye del jugador.</p>
 </div>
-<div class="fiche"><h3>Cambiar el rebote</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Rebote (0 a 1)</div>
-<p>Ajusta el rebote de un objeto físico: 0 = no rebota, 1 = rebota mucho.</p>
-<p class="exemple"><b>Ejemplo:</b> 0.8 para una pelota que bota.</p>
-</div>
 <div class="fiche"><h3>Empujar según un ángulo</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Ángulo (0 = derecha, 90 = abajo), Fuerza</div>
 <p>Empuja el objeto en una dirección (en grados: 0 = derecha, 90 = abajo, 180 = izquierda, 270 = arriba) con la fuerza elegida.</p>
@@ -636,15 +631,10 @@
 <p>Lanza el objeto hacia arriba (número negativo) o hacia abajo (positivo), y le da física para que vuelva a caer.</p>
 <p class="exemple"><b>Ejemplo:</b> un salto: fuerza -15.</p>
 </div>
-<div class="fiche"><h3>Activar la física</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Cae (sí / no)</div>
-<p>Da física al objeto: con true, cae con la gravedad; con false, queda fijo como un suelo.</p>
-<p class="exemple"><b>Ejemplo:</b> una plataforma que se derrumba cuando la pisas.</p>
-</div>
-<div class="fiche"><h3>Hacer arrastrable</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Arrastrable con el dedo (sí / no)</div>
-<p>Permite (true) o prohíbe (false) arrastrar el objeto con el dedo durante el juego.</p>
-<p class="exemple"><b>Ejemplo:</b> bloquear una pieza de puzle bien colocada.</p>
+<div class="fiche"><h3>Cambiar el comportamiento</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Cómo se mueve, Velocidad, Altura del salto, Es una escalera, Recogible</div>
+<p>Cambia lo que hace el objeto durante el juego, con las mismas opciones que la ventana «Comportamiento del objeto» del Inspector: Decorado, Suelo / pared, Cae y rebota, Personaje de plataformas, Personaje visto desde arriba, Arrastrado con el dedo. También se puede cambiar la velocidad, la altura del salto, «es una escalera» y «recogible». Cada ajuste en «(no cambiar)» conserva su valor.</p>
+<p class="exemple"><b>Ejemplo:</b> una caja quieta (Suelo / pared) empieza a caer al tirar de una palanca: Cambiar el comportamiento → Cae y rebota.</p>
 </div>
 <div class="fiche"><h3>Saltar</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Intensidad (0 = parar), Duración (milisegundos, 1000 = 1 s), Continúa mientras se mueve (sí / no)</div>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (133) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 133 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (131) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 131 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 133 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 131 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
 <nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-animationen">Animationen</a><a href="#c11-audio">Audio</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
@@ -372,7 +372,7 @@
 </div>
 <div class="fiche"><h3>Objekt sperren / entsperren</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Gesperrt (ja / nein)</div>
-<p>Sperrt oder entsperrt das Objekt im Editor (das Schloss). Im Spiel hat das keine Wirkung: Um das Ziehen eines Objekts zu verhindern, nutze „Verschiebbar machen“.</p>
+<p>Sperrt oder entsperrt das Objekt im Editor (das Schloss). Im Spiel hat das keine Wirkung: Um das Ziehen eines Objekts zu verhindern, nutze „Verhalten ändern“.</p>
 </div>
 <div class="fiche"><h3>Hintergrund-Bildlauf (Tiefe)</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Hintergrundtempo (1 = normal, 0.5 = langsamer, wirkt weit weg)</div>
@@ -468,9 +468,9 @@
 <p class="exemple"><b>Beispiel:</b> „score“ wieder auf 0 setzen.</p>
 </div>
 <div class="fiche"><h3>Zu Variable hinzufügen</h3>
-<div class="schema"><b>Eingänge:</b> Objekt, Variable, Hinzuzufügender Wert</div>
-<p>Addiert den Wert zur Variable (eine negative Zahl zieht ab). Bei einer Textvariable wird der Text hinten angehängt.</p>
-<p class="exemple"><b>Beispiel:</b> score + 1 pro Münze, Leben - 1 pro Treffer.</p>
+<div class="schema"><b>Eingänge:</b> Objekt, Variable, Hinzuzufügender Wert, Zurück auf 0 nach (optional)</div>
+<p>Addiert den Wert zur Variable (eine negative Zahl zieht ab). Bei einer Textvariable wird der Text angehängt. Mit „Zurück auf 0 nach“ läuft die Variable wie ein Zähler: nach 9 wieder 0 (und unter 0 wird sie 9).</p>
+<p class="exemple"><b>Beispiel:</b> Punkte + 1 pro Münze; eine Ziffer eines Schlosses: + 1 bei jedem Tippen, zurück auf 0 nach 9.</p>
 </div>
 <div class="fiche"><h3>Variable zwischen zwei Werten halten</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Variable, Minimum, Maximum</div>
@@ -621,11 +621,6 @@
 <p>Objekt A entfernt sich von selbst von Objekt B, mit der gewählten Geschwindigkeit.</p>
 <p class="exemple"><b>Beispiel:</b> ein Huhn, das vor dem Spieler wegläuft.</p>
 </div>
-<div class="fiche"><h3>Abprall ändern</h3>
-<div class="schema"><b>Eingänge:</b> Objekt, Abprall (0 bis 1)</div>
-<p>Stellt ein, wie stark ein Physikobjekt abprallt: 0 = gar nicht, 1 = stark.</p>
-<p class="exemple"><b>Beispiel:</b> 0.8 für einen Flummi.</p>
-</div>
 <div class="fiche"><h3>In einem Winkel schieben</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Winkel (0 = rechts, 90 = unten), Kraft</div>
 <p>Schiebt das Objekt in eine Richtung (in Grad: 0 = rechts, 90 = unten, 180 = links, 270 = oben) mit der gewählten Kraft.</p>
@@ -636,15 +631,10 @@
 <p>Schleudert das Objekt nach oben (negative Zahl) oder nach unten (positiv) und gibt ihm Physik, damit es wieder fällt.</p>
 <p class="exemple"><b>Beispiel:</b> ein Sprung: Kraft -15.</p>
 </div>
-<div class="fiche"><h3>Physik aktivieren</h3>
-<div class="schema"><b>Eingänge:</b> Objekt, Fällt (ja / nein)</div>
-<p>Gibt dem Objekt Physik: bei true fällt es mit der Schwerkraft; bei false bleibt es fest wie ein Boden.</p>
-<p class="exemple"><b>Beispiel:</b> eine Plattform, die einstürzt, wenn man darauf tritt.</p>
-</div>
-<div class="fiche"><h3>Verschiebbar machen</h3>
-<div class="schema"><b>Eingänge:</b> Objekt, Mit dem Finger verschiebbar (ja / nein)</div>
-<p>Erlaubt (true) oder verbietet (false), das Objekt im Spiel mit dem Finger zu ziehen.</p>
-<p class="exemple"><b>Beispiel:</b> ein richtig gelegtes Puzzleteil festhalten.</p>
+<div class="fiche"><h3>Verhalten ändern</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Wie es sich bewegt, Tempo, Sprunghöhe, Ist eine Leiter, Aufsammelbar</div>
+<p>Ändert während des Spiels, was das Objekt tut – mit denselben Möglichkeiten wie das Fenster „Verhalten des Objekts“ im Inspektor: Deko, Boden / Wand, Fällt und springt, Plattform-Figur, Figur von oben, Mit dem Finger ziehen. Auch Tempo, Sprunghöhe, „ist eine Leiter“ und „aufsammelbar“ lassen sich ändern. Jede Einstellung auf „(nicht ändern)“ behält ihren Wert.</p>
+<p class="exemple"><b>Beispiel:</b> eine stehende Kiste (Boden / Wand) fällt herunter, wenn ein Hebel gezogen wird: Verhalten ändern → Fällt und springt.</p>
 </div>
 <div class="fiche"><h3>Hüpfen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Stärke (0 = stoppen), Dauer (Millisekunden, 1000 = 1 s), Läuft weiter, solange es sich bewegt (ja / nein)</div>

@@ -1,0 +1,201 @@
+{
+ "titre_page": "Comment faire marcher, sauter et grimper un personnage sans nœuds ? | Guide Yop2D",
+ "description": "Les comportements de Yop2D : un personnage de plateforme qui marche, saute et grimpe aux échelles, ou un personnage vu de dessus, avec ses animations, sans aucun nœud.",
+ "h1": "Les comportements : un personnage qui bouge sans nœuds",
+ "carte": [
+  "Les comportements",
+  "Marcher, sauter, grimper, vue de dessus et animations, sans aucun nœud."
+ ],
+ "etapes": [
+  [
+   "Le sol",
+   "Dans « ⚙ Comportement de l'objet », choisis « Sol / mur »."
+  ],
+  [
+   "Le personnage",
+   "Choisis « Personnage de plateforme », commandes « Joystick », et ajoute un joystick."
+  ],
+  [
+   "Les échelles",
+   "Sur l'échelle, coche « Une échelle »."
+  ],
+  [
+   "Les animations",
+   "Nomme-les repos, marche, saut, grimpe et accroupi : le moteur les joue tout seul."
+  ],
+  [
+   "Changer pendant le jeu",
+   "Utilise le nœud [[changer_comportement]]."
+  ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "Avant, pour faire marcher, sauter et grimper un personnage, il fallait beaucoup de nœuds et des formules. Maintenant, tu choisis simplement **ce que fait l'objet** dans la fenêtre **⚙ Comportement de l'objet** de l'inspecteur, et le moteur fait le reste."
+  ],
+  [
+   "besoin",
+   [
+    "un personnage nommé **player** (une {{lang:obj_prefix_image}}) ;",
+    "un sol : une {{lang:obj_prefix_image}} ou un {{lang:obj_prefix_carre}} large et plat, en bas de la scène ;",
+    "une échelle (une {{lang:obj_prefix_image}}), si tu veux grimper ;",
+    "un {{lang:obj_prefix_joystick}}, en bas à gauche de l'écran."
+   ]
+  ],
+  [
+   "h2",
+   "Étape 1 : le sol"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Sélectionne le sol.",
+      "Dans l'inspecteur, touche le bouton **⚙ Comportement de l'objet**.",
+      "Choisis **Sol / mur** : il ne bouge pas, on marche dessus et on s'y cogne."
+     ]
+    ],
+    [
+     "tip",
+     "Pour une plateforme que l'on traverse en sautant par-dessous, coche aussi **Traversable par dessous** dans la partie « Il est aussi… »."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Étape 2 : le personnage"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Sélectionne **player** et touche **⚙ Comportement de l'objet**.",
+      "Choisis **Personnage de plateforme**.",
+      "Dans « Ses réglages », laisse **Commandes : Joystick**. Tu peux choisir la **Vitesse** et la **Hauteur de saut**.",
+      "Ajoute un {{lang:obj_prefix_joystick}} dans la scène. Inutile de lui choisir une cible : le personnage le suit tout seul.",
+      "Lance le jeu : le joystick fait marcher le personnage, et le pousser vers le haut le fait sauter."
+     ]
+    ],
+    [
+     "tip",
+     "Tu préfères un bouton pour sauter ? Choisis-le dans **Bouton pour sauter**. Tu préfères des boutons ◀ ▶ ? Choisis **Commandes : Boutons**, puis le bouton gauche et le bouton droite."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Étape 3 : les échelles"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Sélectionne l'échelle et touche **⚙ Comportement de l'objet**.",
+      "Laisse **Décor** et coche **Une échelle** dans la partie « Il est aussi… ».",
+      "Fais monter l'échelle un peu au-dessus de la plateforme où elle mène.",
+      "Lance le jeu : devant l'échelle, pousse le joystick vers le haut pour grimper, vers le bas pour descendre. En haut, le personnage se pose sur la plateforme."
+     ]
+    ],
+    [
+     "tip",
+     "Pendant la grimpe, le personnage ne tombe pas : il reste accroché si tu lâches le joystick. Pousse sur le côté pour quitter l'échelle."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Étape 4 : les animations, toutes seules"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "Dans la fenêtre **Animations**, donne ces noms aux animations du personnage : **repos**, **marche**, **saut**, **grimpe** et **accroupi**. Le moteur joue la bonne animation selon ce que fait le personnage, et retourne l'image quand il va à gauche."
+    ],
+    [
+     "ul",
+     [
+      "Une animation manque ? Pas grave : l'image ne change pas pour ce cas-là.",
+      "Plusieurs personnages ? Commence le nom par celui de l'objet : **player_marche**, **mechant_marche**. Chacun prend les siennes.",
+      "Tu peux aussi choisir l'animation à la main : dans « Animations jouées toutes seules », touche une ligne et choisis dans la liste (avec une vignette de chaque animation)."
+     ]
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Un ennemi qui marche tout seul"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "Pour un ennemi qui patrouille, choisis aussi **Personnage de plateforme**, mais avec **Commandes : Aucune** : il n'obéit plus au joystick. Fais-le bouger avec tes nœuds (par exemple [[glisser_vers]]) : il garde la gravité et ses animations suivent ses vrais mouvements."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Un personnage vu de dessus (ou en vue iso)"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Choisis **Personnage vu de dessus** dans ⚙ Comportement de l'objet.",
+      "Dans **Directions**, choisis **4** (haut, bas, gauche, droite), **Vue iso** (4 diagonales) ou **Gauche / droite**.",
+      "Nomme les animations avec la direction : **marche_haut**, **marche_bas**, **marche_gauche**, **marche_droite**, et **repos_haut**… (en vue iso : **marche_ne**, **marche_no**, **marche_se**, **marche_so**)."
+     ]
+    ],
+    [
+     "tip",
+     "Pas d'animation « gauche » ? Le moteur retourne l'image de « droite »."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Changer de comportement pendant le jeu"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "Le nœud [[changer_comportement]] propose les mêmes choix que la fenêtre. Exemple : une caisse posée en **Sol / mur** se met à tomber quand on tire un levier : [[changer_comportement]] → **Tombe et rebondit**. Chaque réglage laissé sur « (ne pas changer) » garde sa valeur."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Pour voir le résultat"
+  ],
+  [
+   "p",
+   "Télécharge les exemples **Climb & run** (plateforme, échelles, animations) et **Dungeon walk** (vue iso) dans l'onglet **Exemples** de l'accueil de Yop2D, puis touche le héros et ouvre **⚙ Comportement de l'objet**."
+  ],
+  [
+   "h2",
+   "Si ça ne marche pas"
+  ],
+  [
+   "ul",
+   [
+    "**Le personnage ne bouge pas :** vérifie **Commandes : Joystick** (et pas « Aucune ») et qu'il y a bien un joystick dans la scène (ou dans le HUD).",
+    "**Il tombe à travers le sol :** le sol doit être en **Sol / mur**.",
+    "**Il ne grimpe pas :** l'échelle doit avoir **Une échelle** cochée, et le personnage **Peut grimper aux échelles : oui**.",
+    "**L'animation ne change pas :** vérifie le nom des animations, ou choisis-les à la main dans la liste."
+   ]
+  ]
+ ]
+}

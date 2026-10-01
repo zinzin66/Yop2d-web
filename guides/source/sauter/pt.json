@@ -1,160 +1,160 @@
 {
-  "titre_page": "Como fazer um personagem pular no Yop2D? | Guia Yop2D",
-  "description": "Fazer um personagem pular no Yop2D, sem código: gravidade, chão sólido, botão de pulo e os nós [[si_au_sol]] e [[impulsion]].",
-  "h1": "Como fazer um personagem pular?",
-  "carte": [
-    "Fazer um personagem pular",
-    "Gravidade, chão sólido e botão de pulo, sem pular no ar."
+ "titre_page": "Como fazer um personagem pular no Yop2D? | Guia Yop2D",
+ "description": "Fazer um personagem pular no Yop2D, sem código: gravidade, chão sólido, botão de pulo e os nós [[si_au_sol]] e [[impulsion]].",
+ "h1": "Como fazer um personagem pular?",
+ "carte": [
+  "Fazer um personagem pular",
+  "Gravidade, chão sólido e botão de pulo, sem pular no ar."
+ ],
+ "etapes": [
+  [
+   "Dar gravidade ao personagem",
+   "Abra ⚙ Comportamento do objeto e escolha «Cai e quica»."
   ],
-  "etapes": [
-    [
-      "Dar gravidade ao personagem",
-      "Marque {{lang:insp_cb_physique}} e passe para {{lang:insp_btn_physique_dynamique}}."
-    ],
-    [
-      "Colocar um chão sólido",
-      "Adicione um chão com {{lang:insp_cb_physique}}, deixado em {{lang:insp_btn_physique_statique}}."
-    ],
-    [
-      "Ligar o botão de pulo",
-      "{{NoeudEventClicObjet}} (btnJump) → {{si_au_sol}} (player) → {{lang:port_vrai}} → {{impulsion}} (player, -15)."
-    ]
+  [
+   "Colocar um chão sólido",
+   "Adicione um chão e escolha «Chão / parede» em ⚙ Comportamento do objeto."
   ],
-  "blocs": [
-    [
-      "p",
-      "Para um personagem pular, são necessárias três coisas: que ele **caia** (a gravidade), um **chão** para pousar e um **botão** que o empurre para cima, só quando ele estiver apoiado."
-    ],
-    [
-      "besoin",
-      [
-        "um personagem chamado **player** (um {{lang:obj_prefix_carre}} ou uma {{lang:obj_prefix_image}});",
-        "um chão: um {{lang:obj_prefix_carre}} largo e baixo chamado **floor**, embaixo na cena;",
-        "um botão chamado **btnJump** (um {{lang:obj_prefix_bouton}} ou um {{lang:obj_prefix_carre}}), embaixo à direita da tela."
-      ]
-    ],
-    [
-      "h2",
-      "Passo 1: dar gravidade ao personagem"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "ol",
-          [
-            "Selecione **player**.",
-            "No inspetor, seção **[[lang:insp_sep_physique]]**, marque **[[lang:insp_cb_physique]]**.",
-            "Toque no botão **[[lang:insp_btn_physique_statique]]** para que ele vire **[[lang:insp_btn_physique_dynamique]]**. « Dinâmico » quer dizer que o objeto cai."
-          ]
-        ],
-        [
-          "tip",
-          "O ajuste **[[lang:insp_label_gravite]]** muda a velocidade da queda: 0.5 para cair devagar, 2 para cair rápido."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "Passo 2: colocar um chão sólido"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "ol",
-          [
-            "Selecione **floor**.",
-            "Marque também **[[lang:insp_cb_physique]]**, mas **deixe em [[lang:insp_btn_physique_statique]]**: um objeto estático não se mexe e segura os objetos que caem nele.",
-            "Coloque **player** um pouco acima do chão."
-          ]
-        ],
-        [
-          "tip",
-          "Você pode fazer plataformas do mesmo jeito: quadrados estáticos colocados mais alto."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "Passo 3: o botão de pulo"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "ol",
-          [
-            "Abra o **{{lang:titre_blueprint}}** da cena.",
-            "Adicione o evento **[[NoeudEventClicObjet]]** e escolha **btnJump** como alvo.",
-            "Adicione o nó **[[si_au_sol]]** (categoria {{lang:cat_logique_conditions}}) e escolha **player** como alvo.",
-            "Adicione o nó **[[impulsion]]** (categoria {{lang:cat_mouvements_ia}}): alvo **player**, **{{lang:impulsion.force}} = -15**.",
-            "Ligue a saída de [[NoeudEventClicObjet]] à entrada de [[si_au_sol]], depois a saída **{{lang:port_vrai}}** de [[si_au_sol]] à entrada de [[impulsion]].",
-            "Salve, comece o jogo e toque no botão."
-          ]
-        ],
-        [
-          "chaine",
-          [
-            [
-              "ev",
-              "{{NoeudEventClicObjet}}",
-              "alvo: btnJump"
-            ],
-            [
-              "→"
-            ],
-            [
-              "cond",
-              "{{si_au_sol}}",
-              "alvo: player"
-            ],
-            [
-              "→",
-              "{{lang:port_vrai}}"
-            ],
-            [
-              "n",
-              "{{impulsion}}",
-              "alvo: player · -15"
-            ]
-          ]
-        ],
-        [
-          "tip",
-          "**Por que [[si_au_sol]]?** Sem ele, o jogador poderia pular de novo no meio do ar e sair voando tocando o botão várias vezes."
-        ],
-        [
-          "tip",
-          "**Negativo = para cima.** No Yop2D, os números Y aumentam para baixo da tela. -15 dá um pulinho, -20 um pulo grande."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "E para andar durante o pulo?"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "p",
-          "Adicione os botões esquerda e direita do guia [Mover um personagem](guide:deplacer-personnage) (método 1). Você pode deixar um dedo em « direita » e tocar em « pulo » com outro dedo."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "Se não funcionar"
-    ],
-    [
-      "ul",
-      [
-        "**O personagem não cai:** verifique se ele está em [[lang:insp_btn_physique_dynamique]].",
-        "**Ele atravessa o chão:** o chão precisa ter [[lang:insp_cb_physique]] marcado e continuar estático.",
-        "**Nada acontece ao tocar:** verifique se os fios estão ligados e se a saída usada é **{{lang:port_vrai}}**. Lembre-se de salvar antes de começar o jogo.",
-        "**Para comparar**, abra o jogo de exemplo **« Plataforma »** que vem com o Yop2D: ele usa exatamente esta montagem."
-      ]
-    ]
+  [
+   "Ligar o botão de pulo",
+   "{{NoeudEventClicObjet}} (btnJump) → {{si_au_sol}} (player) → {{lang:port_vrai}} → {{impulsion}} (player, -15)."
   ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "Para um personagem pular, são necessárias três coisas: que ele **caia** (a gravidade), um **chão** para pousar e um **botão** que o empurre para cima, só quando ele estiver apoiado."
+  ],
+  [
+   "besoin",
+   [
+    "um personagem chamado **player** (um {{lang:obj_prefix_carre}} ou uma {{lang:obj_prefix_image}});",
+    "um chão: um {{lang:obj_prefix_carre}} largo e baixo chamado **floor**, embaixo na cena;",
+    "um botão chamado **btnJump** (um {{lang:obj_prefix_bouton}} ou um {{lang:obj_prefix_carre}}), embaixo à direita da tela."
+   ]
+  ],
+  [
+   "h2",
+   "Passo 1: dar gravidade ao personagem"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Selecione **player**.",
+      "No inspetor, toque no botão **⚙ Comportamento do objeto**.",
+      "Escolha **Cai e quica**: o objeto cai com a gravidade."
+     ]
+    ],
+    [
+     "tip",
+     "Na mesma janela, **Gravidade** muda a velocidade da queda: **Leve** para cair devagar, **Forte** para cair rápido. Mais simples ainda: **Personagem de plataforma** anda e pula sozinho, sem nenhum nó (guia [Os comportamentos](guide:comportements))."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Passo 2: colocar um chão sólido"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Selecione **floor**.",
+      "Toque em **⚙ Comportamento do objeto** e escolha **Chão / parede**: ele não se move e segura os objetos que caem nele.",
+      "Coloque **player** um pouco acima do chão."
+     ]
+    ],
+    [
+     "tip",
+     "Você pode fazer plataformas do mesmo jeito: quadrados em **Chão / parede** colocados mais alto."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Passo 3: o botão de pulo"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Abra o **{{lang:titre_blueprint}}** da cena.",
+      "Adicione o evento **[[NoeudEventClicObjet]]** e escolha **btnJump** como alvo.",
+      "Adicione o nó **[[si_au_sol]]** (categoria {{lang:cat_logique_conditions}}) e escolha **player** como alvo.",
+      "Adicione o nó **[[impulsion]]** (categoria {{lang:cat_mouvements_ia}}): alvo **player**, **{{lang:impulsion.force}} = -15**.",
+      "Ligue a saída de [[NoeudEventClicObjet]] à entrada de [[si_au_sol]], depois a saída **{{lang:port_vrai}}** de [[si_au_sol]] à entrada de [[impulsion]].",
+      "Salve, comece o jogo e toque no botão."
+     ]
+    ],
+    [
+     "chaine",
+     [
+      [
+       "ev",
+       "{{NoeudEventClicObjet}}",
+       "alvo: btnJump"
+      ],
+      [
+       "→"
+      ],
+      [
+       "cond",
+       "{{si_au_sol}}",
+       "alvo: player"
+      ],
+      [
+       "→",
+       "{{lang:port_vrai}}"
+      ],
+      [
+       "n",
+       "{{impulsion}}",
+       "alvo: player · -15"
+      ]
+     ]
+    ],
+    [
+     "tip",
+     "**Por que [[si_au_sol]]?** Sem ele, o jogador poderia pular de novo no meio do ar e sair voando tocando o botão várias vezes."
+    ],
+    [
+     "tip",
+     "**Negativo = para cima.** No Yop2D, os números Y aumentam para baixo da tela. -15 dá um pulinho, -20 um pulo grande."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "E para andar durante o pulo?"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "Adicione os botões esquerda e direita do guia [Mover um personagem](guide:deplacer-personnage) (método 1). Você pode deixar um dedo em « direita » e tocar em « pulo » com outro dedo."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Se não funcionar"
+  ],
+  [
+   "ul",
+   [
+    "**O personagem não cai:** verifique se está em **Cai e quica** (botão ⚙ Comportamento do objeto).",
+    "**Ele atravessa o chão:** o chão deve estar em **Chão / parede**.",
+    "**Nada acontece ao tocar:** verifique se os fios estão ligados e se a saída usada é **{{lang:port_vrai}}**. Lembre-se de salvar antes de começar o jogo.",
+    "**Para comparar**, abra o jogo de exemplo **« Plataforma »** que vem com o Yop2D: ele usa exatamente esta montagem."
+   ]
+  ]
+ ]
 }
