@@ -182,6 +182,9 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   normale) : accueil (9 langues) : 35 modèles, 11 exemples listés (vitrine et FAQ), carte « Comportements prêts à l'emploi »
   (remplace « Physique et comportements »), nouvelles cartes « Grilles et puzzles », « Vue isométrique », « Un Inspecteur
   clair » (20 cartes), phrase « Ranger les nœuds » dans le bloc vitrine des nœuds.
+- 02/10/2026 : exemple « Memory cards » (jeu de memory, 12 exemples, moteur_min 971). Moteur : événements « Au clic sur un
+  objet »… ciblables par « # tag » (l'objet touché = objet impliqué) et nœud « Mélanger les places » (132 nœuds) : aide,
+  pages `noeuds/`, exemples, accueil (vitrine et FAQ : douze exemples) et `llms.txt` régénérés.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers

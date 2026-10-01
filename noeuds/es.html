@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (131) | Referencia</title>
-<meta name="description" content="Lista completa de los 131 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (132) | Referencia</title>
+<meta name="description" content="Lista completa de los 132 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 131 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 132 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-animaciones">Animaciones</a><a href="#c11-audio">Audio</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -55,7 +55,7 @@
 </div>
 <div class="fiche"><h3>Al Clic en Objeto</h3>
 <div class="schema"><b>Entrada:</b> Objeto</div>
-<p>Se ejecuta cuando el dedo toca el objeto elegido.</p>
+<p>Se ejecuta cuando el dedo toca el objeto elegido. Con una etiqueta («# carta») como objetivo, se lanza para cada objeto con esa etiqueta: el objeto tocado pasa a ser el objeto implicado.</p>
 <p class="exemple"><b>Ejemplo:</b> un botón «Saltar», abrir un cofre, elegir una respuesta.</p>
 </div>
 <div class="fiche"><h3>Fin de Clic en Objeto</h3>
@@ -668,6 +668,11 @@
 <div class="schema"><b>Entrada:</b> Objeto</div>
 <p>Cambia de sitio todas las piezas de la cuadrícula del objeto A, sin crear alineaciones y dejando al menos una jugada posible.</p>
 <p class="exemple"><b>Ejemplo:</b> un botón «Mezclar» cuando el jugador está atascado.</p>
+</div>
+<div class="fiche"><h3>Mezclar los lugares</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>Intercambia al azar los lugares de todos los objetos con la etiqueta elegida (Objeto A = «# etiqueta»). Sus objetos hijos los siguen.</p>
+<p class="exemple"><b>Ejemplo:</b> mezclar las cartas de un juego de memoria al empezar, o los vasos de un trile.</p>
 </div>
 </div>
 <h2 id="c10-animaciones">Animaciones</h2>
