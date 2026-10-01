@@ -162,6 +162,7 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   `outils/iso/` du moteur), 9 exemples.
 - 01/10/2026 : exemple « Dungeon walk » (vue iso, promenade au joystick, moteur_min 957 : ordre d'affichage selon la
   position, marche iso du joystick, zone de contact respectée par les murs), 10 exemples. Aide : réglage « image » des particules.
+- 01/10/2026 : exemple « Climb & run » (l'animation change selon le mouvement : marche, accroupi, saut, échelles), 11 exemples.
 - 30/09/2026 : version 0.1.948 publiée (guide « Ton premier jeu en 5 minutes », nouvelle fenêtre de réglage
   « ① Sur quoi ? / ② Réglages » avec aides et ligne « En clair », barre d'outils réduite, style sobre bleu néon).
   Accueil (9 langues) : cartes « Ton premier jeu en 5 minutes » et « Des réglages en clair » (17 cartes),
