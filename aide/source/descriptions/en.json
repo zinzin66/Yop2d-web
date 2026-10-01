@@ -1,507 +1,534 @@
 {
-  "limites_camera": ["Keeps the camera inside the level edges: it never shows the empty space beyond. All 0 = no limits.", "a level 6480 pixels wide: minimum X 0, maximum X 6480, minimum Y 0, maximum Y 1080, with [[fixer_camera]] on the player."],
-  "electrocution": ["Lightning crackles around the object: it flashes in the lightning color, shakes and throws sparks. Duration 0 = endless (electric fence); intensity 0 = stop.", "the wizard touches a trap: [[electrocution]] on the wizard (1 second), [[attendre]] 1 second, then [[recommencer_scene]]."],
-  "NoeudEventStart": [
-    "Runs only once, as soon as the scene starts.",
-    "place the enemies, show the starting score or start the music."
-  ],
-  "NoeudEventChaqueImage": [
-    "Runs over and over, on every frame of the game (about 60 times per second).",
-    "follow the finger or check a condition all the time. Avoid putting [[jouer_musique]] or [[appeler_fonction]] under it."
-  ],
-  "NoeudEventFinClic": [
-    "Runs when the player lifts their finger from the screen, anywhere.",
-    "stop shooting when the screen is released."
-  ],
-  "NoeudEventClicObjet": [
-    "Runs when the finger touches the chosen object.",
-    "a « Jump » button, opening a chest, picking an answer."
-  ],
-  "NoeudEventFinClicObjet": [
-    "Runs when the finger is lifted above the chosen object.",
-    "confirm a button only when it is released."
-  ],
-  "NoeudEventMaintenuObjet": [
-    "Repeats on every frame as long as the finger stays on the chosen object.",
-    "left / right buttons: while you hold them, the character moves."
-  ],
-  "NoeudEventDoigtAppuye": [
-    "Repeats on every frame as long as a finger is on the screen, anywhere.",
-    "make a ship climb while the screen is held (use doigt.x and doigt.y in formulas)."
-  ],
-  "NoeudEventDebutGlisser": [
-    "Runs when the player starts dragging the chosen object (it must be [[lang:insp_cb_deplacable]]).",
-    "enlarge a card when it is picked up."
-  ],
-  "NoeudEventFinGlisser": [
-    "Runs when the player drops the object they were dragging.",
-    "check whether a puzzle piece is in the right place."
-  ],
-  "NoeudEventCollisionAB": [
-    "Runs once, when object A starts touching object B. They must separate before it can run again. This is also the event to use for « entering a zone ».",
-    "the player touches the finish zone → next level."
-  ],
-  "NoeudEventSortieZone": [
-    "Runs once, when object A stops touching object B (it leaves the zone).",
-    "close a door when the player walks away."
-  ],
-  "NoeudEventSurvolObjet": [
-    "Runs when the finger, sliding across the screen, reaches the chosen object.",
-    "light up a button when the finger passes over it."
-  ],
-  "NoeudEventFinSurvol": [
-    "Runs when the finger leaves the object it was over.",
-    "turn off a button's highlight."
-  ],
-  "NoeudEventChoc": [
-    "Runs when the chosen object (dynamic physics) lands on a floor or bounces.",
-    "play a landing sound or shake the camera."
-  ],
-  "NoeudEventVariableChange": [
-    "Runs every time the value of the chosen variable changes.",
-    "when « vie » (health) changes, update the health bar."
-  ],
-  "NoeudEventPersonnalise": [
-    "Your own event, with the name you choose. It is started by the [[appeler_evenement]] node in the same Blueprint.",
-    "a « GameOver » event called from several places."
-  ],
-  "NoeudEventBoutonAction": [
-    "Runs when the player presses the scene's [[lang:obj_prefix_btnaction]] object (action button).",
-    "talk to a character or open a door in an adventure game."
-  ],
-  "NoeudEventCollisionTag": [
-    "Runs once per contact when the chosen object touches an object with this tag. The touched object becomes the [[lang:noeud_objet_implique]].",
-    "the player touches a coin (tag « piece ») → destroy the involved object and add 1 to the score."
-  ],
-  "changer_scene": [
-    "Leaves the current scene and goes to the chosen scene. This node ends the script.",
-    "go to the « Well done! » screen after the last level."
-  ],
-  "aller_scene_nom": [
-    "Goes to the scene whose name you type (or a formula giving that name). This node ends the script.",
-    "a formula like =\"Level\" + level to choose the level with a variable."
-  ],
-  "scene_suivante": [
-    "Goes to the scene placed just after in the scene list. This node ends the script.",
-    "the player reaches the finish → next level."
-  ],
-  "scene_precedente": [
-    "Goes to the scene placed just before in the scene list. This node ends the script.",
-    "a « Back » button in a menu."
-  ],
-  "recommencer_scene": [
-    "Restarts the scene from the beginning: objects back in place and local variables back to their starting value. Global variables do not change.",
-    "Game Over when health reaches 0."
-  ],
-  "ouvrir_hud": [
-    "Shows another scene on top of the game, like a layer (HUD), with its own Blueprint.",
-    "a pause menu or an inventory."
-  ],
-  "fermer_hud": [
-    "Closes the open HUD.",
-    "the « Close » button of the pause menu."
-  ],
-  "placer_copie_scene": [
-    "Places a copy of the chosen scene (prefab) in the game, at position X, Y.",
-    "spawn a group of enemies prepared in another scene."
-  ],
-  "detruire_copies_scene": [
-    "Removes all copies of the chosen scene placed in the game.",
-    "clear all enemy groups at the end of a wave."
-  ],
-  "quitter_jeu": [
-    "Closes the exported game. In the editor, nothing closes: use the stop button.",
-    "a « Quit » button in the main menu."
-  ],
-  "toast": [
-    "Shows a small message at the bottom of the screen for a few seconds. Start with = to show a calculation.",
-    "=\"Score: \" + score"
-  ],
-  "journal": [
-    "Writes a message in the project log (diagnostic file), without showing anything in the game. Start with = to write a calculation.",
-    "=\"health = \" + vie, to check a value while testing."
-  ],
-  "fixer_camera": [
-    "The camera follows the chosen object. You can make it follow only horizontally or vertically. With no object, the camera stops following.",
-    "follow the player through a big platform level."
-  ],
-  "elasticite_camera": [
-    "Sets how fast the camera catches up with the followed object: 0.01 = very soft, 1 = stuck to the object.",
-    "0.1 for a smooth camera that follows with a slight delay."
-  ],
-  "tremblement_camera": [
-    "Shakes the screen with the chosen strength and duration (in milliseconds).",
-    "an explosion: intensity 15, duration 400."
-  ],
-  "vibration": [
-    "Makes the phone vibrate for the chosen duration (in milliseconds). Without a vibration motor, nothing happens.",
-    "100 ms when the player gets hit."
-  ],
-  "sauvegarder_etat": [
-    "Remembers the state of the scene (objects and variables) and the global variables, like a save point.",
-    "a checkpoint flag in the middle of the level."
-  ],
-  "restaurer_etat": [
-    "Puts the scene back as it was at the last [[sauvegarder_etat]]. If there is no save yet, nothing changes.",
-    "start again from the checkpoint after a fall."
-  ],
-  "attendre": [
-    "Waits for the chosen time, in seconds, then continues. The rest of the game keeps running during the wait.",
-    "show « You lose! », wait 2 seconds, then restart the scene."
-  ],
-  "repeter": [
-    "Runs the [[lang:port_a_chaque_fois]] output every X seconds, a number of times (0 = forever), then [[lang:port_termine]]. [[lang:port_tout_de_suite]] runs at the start. If it is already running, it does not start again.",
-    "spawn an enemy every 3 seconds."
-  ],
-  "compte_a_rebours": [
-    "Removes 1 from the chosen variable (a number) every second until 0. [[lang:port_chaque_seconde]] runs on each tick, [[lang:port_termine]] at 0. [[lang:compte_a_rebours.depart]] sets the starting value.",
-    "a 60-second timer: at 0, Game Over."
-  ],
-  "arreter_minuteur": [
-    "Stops the timer (Repeat or Countdown) with this name, or all timers if the name is empty.",
-    "stop the timer when the player wins."
-  ],
-  "vitesse_jeu": [
-    "Changes the speed of the whole game: 1 = normal, 0.5 = slow motion, 2 = fast (from 0 to 4).",
-    "a slow-motion effect for 2 seconds."
-  ],
-  "pause_jeu": [
-    "Pauses the game: movements and timers stop.",
-    "open the pause menu."
-  ],
-  "reprendre_jeu": [
-    "Resumes the game after a pause.",
-    "the « Continue » button of the pause menu."
-  ],
-  "deplacer": [
-    "Puts the object directly at position X, Y (teleport).",
-    "put the player back at the start."
-  ],
-  "pousser": [
-    "Moves the object by the given distance from where it is now. A physics object is stopped by walls.",
-    "linked to [[NoeudEventMaintenuObjet]]: [[lang:pousser.x]] = 5 moves right."
-  ],
-  "modifier_propriete": [
-    "Changes an object property chosen from a list (x, y, rotation, opacity, text…).",
-    "set the rotation of a clock hand to =temps * 90."
-  ],
-  "rotation": [
-    "Turns the object to the given angle, in degrees.",
-    "=wheel.rotation + 5 linked to [[NoeudEventChaqueImage]] keeps the object « wheel » spinning."
-  ],
-  "opacite": [
-    "Sets the object's transparency: 0 = invisible, 1 = solid.",
-    "0.5 for a half-transparent ghost."
-  ],
-  "visibilite": [
-    "Shows (true) or hides (false) the object.",
-    "show a « You win! » message hidden at the start."
-  ],
-  "definir_tag": [
-    "Gives the object a new tag (label).",
-    "a defeated enemy gets the tag « harmless »."
-  ],
-  "changer_zorder": [
-    "Changes the object's layer: the bigger the number, the more the object is in front of others.",
-    "put the player in front of a decoration."
-  ],
-  "modifier_taille": [
-    "Changes the object's size: 1 = normal, 2 = twice as big, 0.5 = half.",
-    "the player grows after eating a mushroom."
-  ],
-  "detruire_objet": [
-    "Removes the chosen object from the scene.",
-    "choose [[lang:noeud_objet_implique]] to destroy the coin the player just touched."
-  ],
-  "detruire_par_tag": [
-    "Removes all objects with this tag.",
-    "a bomb destroys every « Enemy » object."
-  ],
-  "changer_image": [
-    "Replaces the object's image with another image from the Assets. Empty = no image.",
-    "the character looks left or right depending on the button."
-  ],
-  "modifier_couleur": [
-    "Changes the object's color.",
-    "a button turns green when the answer is right."
-  ],
-  "generer_clone": [
-    "Creates a copy of object B (the model) at the place of object A (the spawn point).",
-    "a cannon (A) that spawns cannonballs (B)."
-  ],
-  "filtre_couleur": [
-    "Applies a filter to the object: Black and White, Sepia, Invert, or None to remove it.",
-    "switch to black and white during a flashback."
-  ],
-  "mode_affichage": [
-    "Changes how the object blends with what is behind it (Additive, Multiply, Screen, Invert).",
-    "Additive for a glowing light or flame."
-  ],
-  "miroir": [
-    "Flips the object: Horizontal (left / right) or Vertical (up / down).",
-    "the character faces the way it walks."
-  ],
-  "modifier_verrouillage": [
-    "Locks or unlocks the object in the editor (the padlock). It has no effect during the game: to stop an object from being dragged, use [[modifier_deplacable]].",
-    null
-  ],
-  "parallaxe": [
-    "Sets how fast the object scrolls when the camera moves: 1 = normal, 0.5 = half as fast (depth effect).",
-    "mountains in the background that scroll slowly."
-  ],
-  "lier_objets": [
-    "Attaches object A (the child) to object B (the parent): A follows B when it moves.",
-    "a sword that follows the character's hand."
-  ],
-  "surbrillance": [
-    "Surrounds the object with a soft glow of the chosen color and size (it follows the shape of images), or removes it.",
-    "a bonus that glows yellow, size 20."
-  ],
-  "clignotement": [
-    "Makes the object blink at the chosen speed (ms), for a duration (ms, 0 = forever), or stops the blinking.",
-    "the player blinks for 1 second after being hit."
-  ],
-  "generer_clone_position": [
-    "Creates a copy of object B (the model) at position X, Y. The copy becomes the [[lang:noeud_objet_implique]].",
-    "drop a rock at a random position: X = random(0, 800)."
-  ],
-  "tirer": [
-    "Creates a projectile (the object named in [[lang:tirer.modele]]) at object A, and launches it at the chosen speed: 0°, 90°, 180°, 270°, towards object B ([[lang:option.Vers la cible]]) or along A's angle.",
-    "a ship firing lasers upwards (270)."
-  ],
-  "modifier_progression": [
-    "Sets how full a progress bar is, between its minimum and maximum.",
-    "[[lang:modifier_progression.valeur]] = vie (health), for a health bar."
-  ],
-  "traverser_ecran": [
-    "Whatever leaves one side of the screen comes back on the opposite side (Pac-Man effect).",
-    "an asteroid that leaves on the right and comes back on the left."
-  ],
-  "garder_dans_ecran": [
-    "Stops the object from leaving the screen. The margin stops it a little before the edge.",
-    "the player's ship always stays visible."
-  ],
-  "creer_objet": [
-    "Creates a copy of the chosen object (the model) at position X, Y.",
-    "add a crate at an exact spot."
-  ],
-  "fondu": [
-    "Smoothly changes the object's opacity to the target value, over the chosen time (seconds). The next nodes run without waiting.",
-    "fade out a title in 1 second (target opacity 0)."
-  ],
-  "modifier_variable": [
-    "Gives the variable a new value (a number, a text, yes / no or a calculation).",
-    "set « score » back to 0."
-  ],
-  "ajouter_variable": [
-    "Adds the value to the variable (a negative number subtracts). For a text variable, adds the text at the end.",
-    "score + 1 for each coin, health - 1 for each hit."
-  ],
-  "limiter_valeur": [
-    "Keeps the variable (a number) between a minimum and a maximum.",
-    "health never goes above 100."
-  ],
-  "nombre_aleatoire": [
-    "Puts a random number in the variable. random(1, 6) gives a number from 1 to 6.",
-    "a dice roll."
-  ],
-  "ajouter_inventaire": [
-    "Puts the object in the inventory (a variable of type Inventory List). It is only added once.",
-    "pick up a key."
-  ],
-  "retirer_inventaire": [
-    "Removes the object from the inventory.",
-    "use the key to open the door."
-  ],
-  "si_dans_inventaire": [
-    "Follows the True output if the object is in the inventory, False otherwise.",
-    "the door only opens if the key is in the inventory."
-  ],
-  "combinaison": [
-    "Replaces objects A and B with a copy of the object whose name you type, at A's place. If that model does not exist, nothing changes.",
-    "stick + cloth = torch."
-  ],
-  "condition": [
-    "Tests a condition: follows the True output if it is right, False otherwise. [[lang:port_ensuite]] runs afterwards, in both cases.",
-    "score >= 10 → True → next scene."
-  ],
-  "si_joystick": [
-    "Follows the output matching the joystick direction: Up, Down, Left, Right, or Idle when it is not touched.",
-    "linked to [[NoeudEventChaqueImage]] to play the walking animation in the right direction."
-  ],
-  "si_au_sol": [
-    "True if the bottom of the object is standing on a fixed, visible object (floor, platform), False otherwise.",
-    "only allow jumping when the player is on the ground."
-  ],
-  "si_en_mouvement": [
-    "True if the object moved since the previous frame, False otherwise.",
-    "play the walking animation only when the character moves."
-  ],
-  "appeler_fonction": [
-    "Runs a function (a Blueprint created in the Functions section), then continues. Do not put it under [[NoeudEventChaqueImage]].",
-    "a « LoseLife » function used by several enemies."
-  ],
-  "appeler_evenement": [
-    "Runs the [[NoeudEventPersonnalise]] with this name, in the same Blueprint, then continues.",
-    "call « GameOver » from the fall and from the timer."
-  ],
-  "sequence": [
-    "Runs its outputs one after the other: 1, then 2, then 3, then 4. An output with no link is skipped.",
-    "at start: 1 = place the player, 2 = start the music, 3 = show the score."
-  ],
-  "cooldown": [
-    "Lets things through [[lang:port_pret]] at most once per delay (in seconds); otherwise it is [[lang:port_attente]]. With an object chosen, each object has its own delay.",
-    "shoot at most once every 0.5 second."
-  ],
-  "si_hors_ecran": [
-    "True if the object is completely off the screen (plus the margin), False otherwise.",
-    "destroy bullets that leave the screen."
-  ],
-  "si_sinon": [
-    "Tests the first condition, then the second: follows [[lang:port_si]], [[lang:port_sinon_si]] or [[lang:port_sinon]]. [[lang:port_ensuite]] runs afterwards.",
-    "if score >= 100 → gold, else if score >= 50 → silver, else → bronze."
-  ],
-  "selon_valeur": [
-    "Compares the value to test with cases 1 to 6 and follows the output of the first matching case; [[lang:port_aucun]] if nothing matches. An empty case is skipped.",
-    "depending on « weapon »: 1 = sword, 2 = bow, 3 = wand."
-  ],
-  "modifier_texte": [
-    "Replaces the text of a Text object. Start with = to show a calculation.",
-    "=\"Score: \" + score"
-  ],
-  "afficher_dialogue": [
-    "Writes into the Text object the sentence matching the key, from the dialogue file (dialogues.txt). Several languages: write « hello.en = Hello », « hello.fr = Bonjour »…; the game uses the language in the « langue » variable, otherwise the phone language. « \\n » = new line.",
-    "the key « hello_merchant » shows the merchant's line."
-  ],
-  "ajouter_au_texte": [
-    "Adds text at the end of a variable of type Text.",
-    "type a password letter by letter."
-  ],
-  "arreter": [
-    "Stops the object dead: no more speed, push, jump or automatic movement.",
-    "freeze an enemy hit by an ice spell."
-  ],
-  "stopper_mouvements": [
-    "Turns off the object's automatic movements: move continuously, pursue and flee.",
-    "the enemy stops chasing when the player hides."
-  ],
-  "avancer_continu": [
-    "The object moves by itself, in the direction it is facing, at the chosen speed.",
-    "a bullet or a moving car."
-  ],
-  "poursuivre": [
-    "Object A moves by itself towards object B, at the chosen speed.",
-    "a ghost following the player."
-  ],
-  "fuir": [
-    "Object A moves by itself away from object B, at the chosen speed.",
-    "a chicken running away from the player."
-  ],
-  "changer_rebond": [
-    "Sets how much a physics object bounces: 0 = no bounce, 1 = bounces a lot.",
-    "0.8 for a bouncy ball."
-  ],
-  "force_angle": [
-    "Pushes the object in a direction (in degrees: 0 = right, 90 = down, 180 = left, 270 = up) with the chosen force.",
-    "a spring that sends the player diagonally."
-  ],
-  "impulsion": [
-    "Launches the object upwards (negative number) or downwards (positive), and gives it physics so it falls back.",
-    "a jump: force -15."
-  ],
-  "activer_physique": [
-    "Gives the object physics: Falls = true, it falls with gravity; false, it stays fixed like a floor.",
-    "a platform that collapses when you walk on it."
-  ],
-  "modifier_deplacable": [
-    "Allows (true) or forbids (false) dragging the object with the finger during the game.",
-    "lock a puzzle piece that is in the right place."
-  ],
-  "sautiller": [
-    "Makes the object hop (a small visual bounce) with the chosen intensity and duration. 0 stops it. It can keep going while the object moves.",
-    "a character that hops as it walks."
-  ],
-  "orienter_vers": [
-    "Turns object A towards object B. The offset fixes the image's direction (0 = the image faces right).",
-    "a turret aiming at the player."
-  ],
-  "glisser_vers": [
-    "Smoothly moves the object to position X, Y over the chosen time (seconds). The next nodes run without waiting.",
-    "a moving platform or a menu sliding onto the screen."
-  ],
-  "jouer_animation": [
-    "Plays one of the object's animations, at the chosen speed (frames per second), looping or once. If it is already playing, it continues without restarting.",
-    "the « walk » animation when the character moves."
-  ],
-  "arreter_animation": [
-    "Stops the animation and goes back to its first frame.",
-    "the character stops walking."
-  ],
-  "pause_animation": [
-    "Pauses the animation on the current frame.",
-    "freeze the character during a pause."
-  ],
-  "reprendre_animation": [
-    "Resumes the animation where it was paused.",
-    "after the pause."
-  ],
-  "vitesse_animation": [
-    "Changes the animation speed (frames per second) without restarting it.",
-    "running faster = faster animation."
-  ],
-  "jouer_son": [
-    "Plays a sound effect. Several sounds can play at the same time.",
-    "a « bling » when a coin is picked up."
-  ],
-  "jouer_musique": [
-    "Starts a music track, replacing the current one. Do not put it under [[NoeudEventChaqueImage]] (it would restart all the time).",
-    "the level music, at start."
-  ],
-  "arreter_musique": [
-    "Stops the current music.",
-    "silence on the Game Over screen."
-  ],
-  "effet_particules": [
-    "Fires a burst of particles on the object: explosion, sparks, dust, smoke, fire, rain, snow, confetti, trail, wake trail, hyperspace or speed lines. Count, color and size can be set.",
-    "a hit enemy explodes in magenta: Explosion preset, color #FF40D0."
-  ],
-  "particules_marche": [
-    "Turns a “Particles” object on or off: it emits continuously or stops (particles already fired finish their life).",
-    "turn the engine exhaust on when the ship moves."
-  ],
-  "salve_particules": [
-    "Fires many particles at once from a “Particles” object, with its settings (preset, color, size).",
-    "80 confetti when the level is won."
-  ],
-  "changer_modele_particules": [
-    "Changes the preset of a “Particles” object during the game.",
-    "a fire that turns into smoke when it is put out."
-  ],
-  "flash_ecran": [
-    "Flashes a color over the whole screen, fading out in a moment (intensity in %, duration in seconds).",
-    "a 0.5-second red flash when the player is hit."
-  ],
-  "teinte_ecran": [
-    "Lays a color over the whole game (under the HUD), with a smooth transition. Intensity 0 removes it.",
-    "night falls: dark blue, intensity 55, 2-second transition."
-  ],
-  "bords_assombris": [
-    "Gently darkens the edges of the screen, like in a movie (under the HUD). Intensity 0 removes it.",
-    "a scary mood in a cave: intensity 75."
-  ],
-  "fondu_ecran": [
-    "Fades the whole screen out to a color, or back in from it. The fade carries over from one scene to the next.",
-    "[[fondu_ecran]] (fade out), [[attendre]] 1 second, [[changer_scene]], then [[fondu_ecran]] (fade in) when the next level starts."
-  ],
-  "trainee_objet": [
-    "The object leaves a trail of particles behind it when it moves (preset, color and size of your choice). Set on a shot's model, every shot inherits it. Preset “None” removes it.",
-    "shots that leave a glowing trail: target = the shot's model, Trail preset."
-  ],
-  "arret_sur_image": [
-    "Slows the whole game almost to a stop for a very short moment (in real seconds), then the game goes back to its speed. It gives “punch” to impacts.",
-    "when an enemy explodes: duration 0.06, speed 0.05."
-  ],
-  "chemin_vers_objet": ["Object A goes to object B, finding the shortest path by itself, square by square, without going through walls (\"Solid\" tiles of a tile layer, fixed physical objects). The path is updated when B moves. [[lang:port_arrive]] runs when A touches B.", "a ghost chasing the player through a maze."],
-  "chemin_vers_point": ["Object A goes to point X, Y around the walls, by the shortest path (square by square). With =doigt.x and =doigt.y, it goes where the screen is touched. [[lang:port_arrive]] runs on arrival. If there is no path, it stays where it is.", "tap a square to send the hero there, in a strategy game or a dungeon."],
-  "chemin_arreter": ["The object stops following its path ([[chemin_vers_objet]] or [[chemin_vers_point]]) and stays where it is.", "the fly stops when the game is won."]
+ "limites_camera": [
+  "Keeps the camera inside the level edges: it never shows the empty space beyond. All 0 = no limits.",
+  "a level 6480 pixels wide: minimum X 0, maximum X 6480, minimum Y 0, maximum Y 1080, with [[fixer_camera]] on the player."
+ ],
+ "electrocution": [
+  "Lightning crackles around the object: it flashes in the lightning color, shakes and throws sparks. Duration 0 = endless (electric fence); intensity 0 = stop.",
+  "the wizard touches a trap: [[electrocution]] on the wizard (1 second), [[attendre]] 1 second, then [[recommencer_scene]]."
+ ],
+ "NoeudEventStart": [
+  "Runs only once, as soon as the scene starts.",
+  "place the enemies, show the starting score or start the music."
+ ],
+ "NoeudEventChaqueImage": [
+  "Runs over and over, on every frame of the game (about 60 times per second).",
+  "follow the finger or check a condition all the time. Avoid putting [[jouer_musique]] or [[appeler_fonction]] under it."
+ ],
+ "NoeudEventFinClic": [
+  "Runs when the player lifts their finger from the screen, anywhere.",
+  "stop shooting when the screen is released."
+ ],
+ "NoeudEventClicObjet": [
+  "Runs when the finger touches the chosen object.",
+  "a « Jump » button, opening a chest, picking an answer."
+ ],
+ "NoeudEventFinClicObjet": [
+  "Runs when the finger is lifted above the chosen object.",
+  "confirm a button only when it is released."
+ ],
+ "NoeudEventMaintenuObjet": [
+  "Repeats on every frame as long as the finger stays on the chosen object.",
+  "left / right buttons: while you hold them, the character moves."
+ ],
+ "NoeudEventDoigtAppuye": [
+  "Repeats on every frame as long as a finger is on the screen, anywhere.",
+  "make a ship climb while the screen is held (use doigt.x and doigt.y in formulas)."
+ ],
+ "NoeudEventDebutGlisser": [
+  "Runs when the player starts dragging the chosen object (it must be [[lang:insp_cb_deplacable]]).",
+  "enlarge a card when it is picked up."
+ ],
+ "NoeudEventFinGlisser": [
+  "Runs when the player drops the object they were dragging.",
+  "check whether a puzzle piece is in the right place."
+ ],
+ "NoeudEventCollisionAB": [
+  "Runs once, when object A starts touching object B. They must separate before it can run again. This is also the event to use for « entering a zone ».",
+  "the player touches the finish zone → next level."
+ ],
+ "NoeudEventSortieZone": [
+  "Runs once, when object A stops touching object B (it leaves the zone).",
+  "close a door when the player walks away."
+ ],
+ "NoeudEventSurvolObjet": [
+  "Runs when the finger, sliding across the screen, reaches the chosen object.",
+  "light up a button when the finger passes over it."
+ ],
+ "NoeudEventFinSurvol": [
+  "Runs when the finger leaves the object it was over.",
+  "turn off a button's highlight."
+ ],
+ "NoeudEventChoc": [
+  "Runs when the chosen object (dynamic physics) lands on a floor or bounces.",
+  "play a landing sound or shake the camera."
+ ],
+ "NoeudEventVariableChange": [
+  "Runs every time the value of the chosen variable changes.",
+  "when « vie » (health) changes, update the health bar."
+ ],
+ "NoeudEventPersonnalise": [
+  "Your own event, with the name you choose. It is started by the [[appeler_evenement]] node in the same Blueprint.",
+  "a « GameOver » event called from several places."
+ ],
+ "NoeudEventBoutonAction": [
+  "Runs when the player presses the scene's [[lang:obj_prefix_btnaction]] object (action button).",
+  "talk to a character or open a door in an adventure game."
+ ],
+ "NoeudEventCollisionTag": [
+  "Runs once per contact when the chosen object touches an object with this tag. The touched object becomes the [[lang:noeud_objet_implique]].",
+  "the player touches a coin (tag « piece ») → destroy the involved object and add 1 to the score."
+ ],
+ "changer_scene": [
+  "Leaves the current scene and goes to the chosen scene. This node ends the script.",
+  "go to the « Well done! » screen after the last level."
+ ],
+ "aller_scene_nom": [
+  "Goes to the scene whose name you type (or a formula giving that name). This node ends the script.",
+  "a formula like =\"Level\" + level to choose the level with a variable."
+ ],
+ "scene_suivante": [
+  "Goes to the scene placed just after in the scene list. This node ends the script.",
+  "the player reaches the finish → next level."
+ ],
+ "scene_precedente": [
+  "Goes to the scene placed just before in the scene list. This node ends the script.",
+  "a « Back » button in a menu."
+ ],
+ "recommencer_scene": [
+  "Restarts the scene from the beginning: objects back in place and local variables back to their starting value. Global variables do not change.",
+  "Game Over when health reaches 0."
+ ],
+ "ouvrir_hud": [
+  "Shows another scene on top of the game, like a layer (HUD), with its own Blueprint.",
+  "a pause menu or an inventory."
+ ],
+ "fermer_hud": [
+  "Closes the open HUD.",
+  "the « Close » button of the pause menu."
+ ],
+ "placer_copie_scene": [
+  "Places a copy of the chosen scene (prefab) in the game, at position X, Y.",
+  "spawn a group of enemies prepared in another scene."
+ ],
+ "detruire_copies_scene": [
+  "Removes all copies of the chosen scene placed in the game.",
+  "clear all enemy groups at the end of a wave."
+ ],
+ "quitter_jeu": [
+  "Closes the exported game. In the editor, nothing closes: use the stop button.",
+  "a « Quit » button in the main menu."
+ ],
+ "toast": [
+  "Shows a small message at the bottom of the screen for a few seconds. Start with = to show a calculation.",
+  "=\"Score: \" + score"
+ ],
+ "journal": [
+  "Writes a message in the project log (diagnostic file), without showing anything in the game. Start with = to write a calculation.",
+  "=\"health = \" + vie, to check a value while testing."
+ ],
+ "fixer_camera": [
+  "The camera follows the chosen object. You can make it follow only horizontally or vertically. With no object, the camera stops following.",
+  "follow the player through a big platform level."
+ ],
+ "elasticite_camera": [
+  "Sets how fast the camera catches up with the followed object: 0.01 = very soft, 1 = stuck to the object.",
+  "0.1 for a smooth camera that follows with a slight delay."
+ ],
+ "tremblement_camera": [
+  "Shakes the screen with the chosen strength and duration (in milliseconds).",
+  "an explosion: intensity 15, duration 400."
+ ],
+ "vibration": [
+  "Makes the phone vibrate for the chosen duration (in milliseconds). Without a vibration motor, nothing happens.",
+  "100 ms when the player gets hit."
+ ],
+ "sauvegarder_etat": [
+  "Remembers the state of the scene (objects and variables) and the global variables, like a save point.",
+  "a checkpoint flag in the middle of the level."
+ ],
+ "restaurer_etat": [
+  "Puts the scene back as it was at the last [[sauvegarder_etat]]. If there is no save yet, nothing changes.",
+  "start again from the checkpoint after a fall."
+ ],
+ "attendre": [
+  "Waits for the chosen time, in seconds, then continues. The rest of the game keeps running during the wait.",
+  "show « You lose! », wait 2 seconds, then restart the scene."
+ ],
+ "repeter": [
+  "Runs the [[lang:port_a_chaque_fois]] output every X seconds, a number of times (0 = forever), then [[lang:port_termine]]. [[lang:port_tout_de_suite]] runs at the start. If it is already running, it does not start again.",
+  "spawn an enemy every 3 seconds."
+ ],
+ "compte_a_rebours": [
+  "Removes 1 from the chosen variable (a number) every second until 0. [[lang:port_chaque_seconde]] runs on each tick, [[lang:port_termine]] at 0. [[lang:compte_a_rebours.depart]] sets the starting value.",
+  "a 60-second timer: at 0, Game Over."
+ ],
+ "arreter_minuteur": [
+  "Stops the timer (Repeat or Countdown) with this name, or all timers if the name is empty.",
+  "stop the timer when the player wins."
+ ],
+ "vitesse_jeu": [
+  "Changes the speed of the whole game: 1 = normal, 0.5 = slow motion, 2 = fast (from 0 to 4).",
+  "a slow-motion effect for 2 seconds."
+ ],
+ "pause_jeu": [
+  "Pauses the game: movements and timers stop.",
+  "open the pause menu."
+ ],
+ "reprendre_jeu": [
+  "Resumes the game after a pause.",
+  "the « Continue » button of the pause menu."
+ ],
+ "deplacer": [
+  "Puts the object directly at position X, Y (teleport).",
+  "put the player back at the start."
+ ],
+ "pousser": [
+  "Moves the object by the given distance from where it is now. A physics object is stopped by walls.",
+  "linked to [[NoeudEventMaintenuObjet]]: [[lang:pousser.x]] = 5 moves right."
+ ],
+ "modifier_propriete": [
+  "Changes an object property chosen from a list (x, y, rotation, opacity, text…).",
+  "set the rotation of a clock hand to =temps * 90."
+ ],
+ "rotation": [
+  "Turns the object to the given angle, in degrees.",
+  "=wheel.rotation + 5 linked to [[NoeudEventChaqueImage]] keeps the object « wheel » spinning."
+ ],
+ "opacite": [
+  "Sets the object's transparency: 0 = invisible, 1 = solid.",
+  "0.5 for a half-transparent ghost."
+ ],
+ "visibilite": [
+  "Shows (true) or hides (false) the object.",
+  "show a « You win! » message hidden at the start."
+ ],
+ "definir_tag": [
+  "Gives the object a new tag (label).",
+  "a defeated enemy gets the tag « harmless »."
+ ],
+ "changer_zorder": [
+  "Changes the object's layer: the bigger the number, the more the object is in front of others.",
+  "put the player in front of a decoration."
+ ],
+ "modifier_taille": [
+  "Changes the object's size: 1 = normal, 2 = twice as big, 0.5 = half.",
+  "the player grows after eating a mushroom."
+ ],
+ "detruire_objet": [
+  "Removes the chosen object from the scene.",
+  "choose [[lang:noeud_objet_implique]] to destroy the coin the player just touched."
+ ],
+ "detruire_par_tag": [
+  "Removes all objects with this tag.",
+  "a bomb destroys every « Enemy » object."
+ ],
+ "changer_image": [
+  "Replaces the object's image with another image from the Assets. Empty = no image.",
+  "the character looks left or right depending on the button."
+ ],
+ "modifier_couleur": [
+  "Changes the object's color.",
+  "a button turns green when the answer is right."
+ ],
+ "generer_clone": [
+  "Creates a copy of object B (the model) at the place of object A (the spawn point).",
+  "a cannon (A) that spawns cannonballs (B)."
+ ],
+ "filtre_couleur": [
+  "Applies a filter to the object: Black and White, Sepia, Invert, or None to remove it.",
+  "switch to black and white during a flashback."
+ ],
+ "mode_affichage": [
+  "Changes how the object blends with what is behind it (Additive, Multiply, Screen, Invert).",
+  "Additive for a glowing light or flame."
+ ],
+ "miroir": [
+  "Flips the object: Horizontal (left / right) or Vertical (up / down).",
+  "the character faces the way it walks."
+ ],
+ "modifier_verrouillage": [
+  "Locks or unlocks the object in the editor (the padlock). It has no effect during the game: to stop an object from being dragged, use [[modifier_deplacable]].",
+  null
+ ],
+ "parallaxe": [
+  "Sets how fast the object scrolls when the camera moves: 1 = normal, 0.5 = half as fast (depth effect).",
+  "mountains in the background that scroll slowly."
+ ],
+ "lier_objets": [
+  "Attaches object A (the child) to object B (the parent): A follows B when it moves.",
+  "a sword that follows the character's hand."
+ ],
+ "surbrillance": [
+  "Surrounds the object with a soft glow of the chosen color and size (it follows the shape of images), or removes it.",
+  "a bonus that glows yellow, size 20."
+ ],
+ "clignotement": [
+  "Makes the object blink at the chosen speed (ms), for a duration (ms, 0 = forever), or stops the blinking.",
+  "the player blinks for 1 second after being hit."
+ ],
+ "generer_clone_position": [
+  "Creates a copy of object B (the model) at position X, Y. The copy becomes the [[lang:noeud_objet_implique]].",
+  "drop a rock at a random position: X = random(0, 800)."
+ ],
+ "tirer": [
+  "Creates a projectile (the object named in [[lang:tirer.modele]]) at object A, and launches it at the chosen speed: 0°, 90°, 180°, 270°, towards object B ([[lang:option.Vers la cible]]) or along A's angle.",
+  "a ship firing lasers upwards (270)."
+ ],
+ "modifier_progression": [
+  "Sets how full a progress bar is, between its minimum and maximum.",
+  "[[lang:modifier_progression.valeur]] = vie (health), for a health bar."
+ ],
+ "traverser_ecran": [
+  "Whatever leaves one side of the screen comes back on the opposite side (Pac-Man effect).",
+  "an asteroid that leaves on the right and comes back on the left."
+ ],
+ "garder_dans_ecran": [
+  "Stops the object from leaving the screen. The margin stops it a little before the edge.",
+  "the player's ship always stays visible."
+ ],
+ "creer_objet": [
+  "Creates a copy of the chosen object (the model) at position X, Y.",
+  "add a crate at an exact spot."
+ ],
+ "fondu": [
+  "Smoothly changes the object's opacity to the target value, over the chosen time (seconds). The next nodes run without waiting.",
+  "fade out a title in 1 second (target opacity 0)."
+ ],
+ "modifier_variable": [
+  "Gives the variable a new value (a number, a text, yes / no or a calculation).",
+  "set « score » back to 0."
+ ],
+ "ajouter_variable": [
+  "Adds the value to the variable (a negative number subtracts). For a text variable, adds the text at the end.",
+  "score + 1 for each coin, health - 1 for each hit."
+ ],
+ "limiter_valeur": [
+  "Keeps the variable (a number) between a minimum and a maximum.",
+  "health never goes above 100."
+ ],
+ "nombre_aleatoire": [
+  "Puts a random number in the variable. random(1, 6) gives a number from 1 to 6.",
+  "a dice roll."
+ ],
+ "ajouter_inventaire": [
+  "Puts the object in the inventory (a variable of type Inventory List). It is only added once.",
+  "pick up a key."
+ ],
+ "retirer_inventaire": [
+  "Removes the object from the inventory.",
+  "use the key to open the door."
+ ],
+ "si_dans_inventaire": [
+  "Follows the True output if the object is in the inventory, False otherwise.",
+  "the door only opens if the key is in the inventory."
+ ],
+ "combinaison": [
+  "Replaces objects A and B with a copy of the object whose name you type, at A's place. If that model does not exist, nothing changes.",
+  "stick + cloth = torch."
+ ],
+ "condition": [
+  "Tests a condition: follows the True output if it is right, False otherwise. [[lang:port_ensuite]] runs afterwards, in both cases.",
+  "score >= 10 → True → next scene."
+ ],
+ "si_joystick": [
+  "Follows the output matching the joystick direction: Up, Down, Left, Right, or Idle when it is not touched.",
+  "linked to [[NoeudEventChaqueImage]] to play the walking animation in the right direction."
+ ],
+ "si_au_sol": [
+  "True if the bottom of the object is standing on a fixed, visible object (floor, platform), False otherwise.",
+  "only allow jumping when the player is on the ground."
+ ],
+ "si_en_mouvement": [
+  "True if the object moved since the previous frame, False otherwise.",
+  "play the walking animation only when the character moves."
+ ],
+ "appeler_fonction": [
+  "Runs a function (a Blueprint created in the Functions section), then continues. Do not put it under [[NoeudEventChaqueImage]].",
+  "a « LoseLife » function used by several enemies."
+ ],
+ "appeler_evenement": [
+  "Runs the [[NoeudEventPersonnalise]] with this name, in the same Blueprint, then continues.",
+  "call « GameOver » from the fall and from the timer."
+ ],
+ "sequence": [
+  "Runs its outputs one after the other: 1, then 2, then 3, then 4. An output with no link is skipped.",
+  "at start: 1 = place the player, 2 = start the music, 3 = show the score."
+ ],
+ "cooldown": [
+  "Lets things through [[lang:port_pret]] at most once per delay (in seconds); otherwise it is [[lang:port_attente]]. With an object chosen, each object has its own delay.",
+  "shoot at most once every 0.5 second."
+ ],
+ "si_hors_ecran": [
+  "True if the object is completely off the screen (plus the margin), False otherwise.",
+  "destroy bullets that leave the screen."
+ ],
+ "si_sinon": [
+  "Tests the first condition, then the second: follows [[lang:port_si]], [[lang:port_sinon_si]] or [[lang:port_sinon]]. [[lang:port_ensuite]] runs afterwards.",
+  "if score >= 100 → gold, else if score >= 50 → silver, else → bronze."
+ ],
+ "selon_valeur": [
+  "Compares the value to test with cases 1 to 6 and follows the output of the first matching case; [[lang:port_aucun]] if nothing matches. An empty case is skipped.",
+  "depending on « weapon »: 1 = sword, 2 = bow, 3 = wand."
+ ],
+ "modifier_texte": [
+  "Replaces the text of a Text object. Start with = to show a calculation.",
+  "=\"Score: \" + score"
+ ],
+ "afficher_dialogue": [
+  "Writes into the Text object the sentence matching the key, from the dialogue file (dialogues.txt). Several languages: write « hello.en = Hello », « hello.fr = Bonjour »…; the game uses the language in the « langue » variable, otherwise the phone language. « \\n » = new line.",
+  "the key « hello_merchant » shows the merchant's line."
+ ],
+ "ajouter_au_texte": [
+  "Adds text at the end of a variable of type Text.",
+  "type a password letter by letter."
+ ],
+ "arreter": [
+  "Stops the object dead: no more speed, push, jump or automatic movement.",
+  "freeze an enemy hit by an ice spell."
+ ],
+ "stopper_mouvements": [
+  "Turns off the object's automatic movements: move continuously, pursue and flee.",
+  "the enemy stops chasing when the player hides."
+ ],
+ "avancer_continu": [
+  "The object moves by itself, in the direction it is facing, at the chosen speed.",
+  "a bullet or a moving car."
+ ],
+ "poursuivre": [
+  "Object A moves by itself towards object B, at the chosen speed.",
+  "a ghost following the player."
+ ],
+ "fuir": [
+  "Object A moves by itself away from object B, at the chosen speed.",
+  "a chicken running away from the player."
+ ],
+ "changer_rebond": [
+  "Sets how much a physics object bounces: 0 = no bounce, 1 = bounces a lot.",
+  "0.8 for a bouncy ball."
+ ],
+ "force_angle": [
+  "Pushes the object in a direction (in degrees: 0 = right, 90 = down, 180 = left, 270 = up) with the chosen force.",
+  "a spring that sends the player diagonally."
+ ],
+ "impulsion": [
+  "Launches the object upwards (negative number) or downwards (positive), and gives it physics so it falls back.",
+  "a jump: force -15."
+ ],
+ "activer_physique": [
+  "Gives the object physics: Falls = true, it falls with gravity; false, it stays fixed like a floor.",
+  "a platform that collapses when you walk on it."
+ ],
+ "modifier_deplacable": [
+  "Allows (true) or forbids (false) dragging the object with the finger during the game.",
+  "lock a puzzle piece that is in the right place."
+ ],
+ "sautiller": [
+  "Makes the object hop (a small visual bounce) with the chosen intensity and duration. 0 stops it. It can keep going while the object moves.",
+  "a character that hops as it walks."
+ ],
+ "orienter_vers": [
+  "Turns object A towards object B. The offset fixes the image's direction (0 = the image faces right).",
+  "a turret aiming at the player."
+ ],
+ "glisser_vers": [
+  "Smoothly moves the object to position X, Y over the chosen time (seconds). The next nodes run without waiting.",
+  "a moving platform or a menu sliding onto the screen."
+ ],
+ "jouer_animation": [
+  "Plays one of the object's animations, at the chosen speed (frames per second), looping or once. If it is already playing, it continues without restarting.",
+  "the « walk » animation when the character moves."
+ ],
+ "arreter_animation": [
+  "Stops the animation and goes back to its first frame.",
+  "the character stops walking."
+ ],
+ "pause_animation": [
+  "Pauses the animation on the current frame.",
+  "freeze the character during a pause."
+ ],
+ "reprendre_animation": [
+  "Resumes the animation where it was paused.",
+  "after the pause."
+ ],
+ "vitesse_animation": [
+  "Changes the animation speed (frames per second) without restarting it.",
+  "running faster = faster animation."
+ ],
+ "jouer_son": [
+  "Plays a sound effect. Several sounds can play at the same time.",
+  "a « bling » when a coin is picked up."
+ ],
+ "jouer_musique": [
+  "Starts a music track, replacing the current one. Do not put it under [[NoeudEventChaqueImage]] (it would restart all the time).",
+  "the level music, at start."
+ ],
+ "arreter_musique": [
+  "Stops the current music.",
+  "silence on the Game Over screen."
+ ],
+ "effet_particules": [
+  "Fires a burst of particles on the object: explosion, sparks, dust, smoke, fire, rain, snow, confetti, trail, wake trail, hyperspace or speed lines. Count, color and size can be set.",
+  "a hit enemy explodes in magenta: Explosion preset, color #FF40D0."
+ ],
+ "particules_marche": [
+  "Turns a “Particles” object on or off: it emits continuously or stops (particles already fired finish their life).",
+  "turn the engine exhaust on when the ship moves."
+ ],
+ "salve_particules": [
+  "Fires many particles at once from a “Particles” object, with its settings (preset, color, size).",
+  "80 confetti when the level is won."
+ ],
+ "changer_modele_particules": [
+  "Changes the preset of a “Particles” object during the game.",
+  "a fire that turns into smoke when it is put out."
+ ],
+ "flash_ecran": [
+  "Flashes a color over the whole screen, fading out in a moment (intensity in %, duration in seconds).",
+  "a 0.5-second red flash when the player is hit."
+ ],
+ "teinte_ecran": [
+  "Lays a color over the whole game (under the HUD), with a smooth transition. Intensity 0 removes it.",
+  "night falls: dark blue, intensity 55, 2-second transition."
+ ],
+ "bords_assombris": [
+  "Gently darkens the edges of the screen, like in a movie (under the HUD). Intensity 0 removes it.",
+  "a scary mood in a cave: intensity 75."
+ ],
+ "fondu_ecran": [
+  "Fades the whole screen out to a color, or back in from it. The fade carries over from one scene to the next.",
+  "[[fondu_ecran]] (fade out), [[attendre]] 1 second, [[changer_scene]], then [[fondu_ecran]] (fade in) when the next level starts."
+ ],
+ "trainee_objet": [
+  "The object leaves a trail of particles behind it when it moves (preset, color and size of your choice). Set on a shot's model, every shot inherits it. Preset “None” removes it.",
+  "shots that leave a glowing trail: target = the shot's model, Trail preset."
+ ],
+ "arret_sur_image": [
+  "Slows the whole game almost to a stop for a very short moment (in real seconds), then the game goes back to its speed. It gives “punch” to impacts.",
+  "when an enemy explodes: duration 0.06, speed 0.05."
+ ],
+ "chemin_vers_objet": [
+  "Object A goes to object B, finding the shortest path by itself, square by square, without going through walls (\"Solid\" tiles of a tile layer, fixed physical objects). The path is updated when B moves. [[lang:port_arrive]] runs when A touches B.",
+  "a ghost chasing the player through a maze."
+ ],
+ "chemin_vers_point": [
+  "Object A goes to point X, Y around the walls, by the shortest path (square by square). With =doigt.x and =doigt.y, it goes where the screen is touched. [[lang:port_arrive]] runs on arrival. If there is no path, it stays where it is.",
+  "tap a square to send the hero there, in a strategy game or a dungeon."
+ ],
+ "chemin_arreter": [
+  "The object stops following its path ([[chemin_vers_objet]] or [[chemin_vers_point]]) and stays where it is.",
+  "the fly stops when the game is won."
+ ],
+ "grille_remplir": [
+  "Splits object A (the board) into columns and rows and puts in each cell a copy of a model object picked at random (at least 3 models, names separated by commas). There is never a match at the start, and the pieces drop in from the top. Use it before [[grille_jouer]].",
+  "at the start, an 8 x 8 grid of candies \"red, orange, yellow, green, blue, pink\"."
+ ],
+ "grille_jouer": [
+  "The heart of a match-3 game (Candy Crush style), to put under [[NoeudEventDoigtAppuye]]. Touching a piece selects it, touching its neighbour (or sliding the finger to it) swaps them. The swap only stays if it lines up 3 or more identical pieces; otherwise they go back ([[lang:port_refuse]]). Each matched piece starts [[lang:port_aligne]] (the involved object is the piece), then disappears; pieces fall, new ones arrive and combos happen by themselves. When everything is still: [[lang:port_termine]]. With no possible move, the grid shuffles itself.",
+  "[[lang:port_aligne]]: +10 points and sparkles on the piece; [[lang:port_termine]]: one move less."
+ ],
+ "grille_melanger": [
+  "Moves all the pieces of object A's grid to new places, without creating a match and keeping at least one possible move.",
+  "a \"Shuffle\" button when the player is stuck."
+ ]
 }

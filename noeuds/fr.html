@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tous les nœuds de Yop2D (130) | Référence</title>
-<meta name="description" content="Liste complète des 130 nœuds visuels de Yop2D, moteur de jeu 2D sans code pour Android : rôle, réglages, sorties et exemple de chaque nœud.">
+<title>Tous les nœuds de Yop2D (133) | Référence</title>
+<meta name="description" content="Liste complète des 133 nœuds visuels de Yop2D, moteur de jeu 2D sans code pour Android : rôle, réglages, sorties et exemple de chaque nœud.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><strong>Français</strong> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les 130 nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.</p>
+<p>Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les 133 nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.</p>
 <p><strong>Catégories</strong></p>
-<nav class="sommaire"><a href="#c1-événements">Événements</a><a href="#c2-scène-hud">Scène &amp; HUD</a><a href="#c3-temps">Temps</a><a href="#c4-apparence-objets">Apparence &amp; Objets</a><a href="#c5-variables-inventaire">Variables &amp; Inventaire</a><a href="#c6-logique-conditions">Logique &amp; Conditions</a><a href="#c7-textes-dialogues">Textes &amp; Dialogues</a><a href="#c8-mouvements-ia">Mouvements &amp; IA</a><a href="#c9-animations">Animations</a><a href="#c10-audio">Audio</a></nav>
+<nav class="sommaire"><a href="#c1-événements">Événements</a><a href="#c2-scène-hud">Scène &amp; HUD</a><a href="#c3-temps">Temps</a><a href="#c4-apparence-objets">Apparence &amp; Objets</a><a href="#c5-variables-inventaire">Variables &amp; Inventaire</a><a href="#c6-logique-conditions">Logique &amp; Conditions</a><a href="#c7-textes-dialogues">Textes &amp; Dialogues</a><a href="#c8-mouvements-ia">Mouvements &amp; IA</a><a href="#c9-grilles-et-puzzles">Grilles et puzzles</a><a href="#c10-animations">Animations</a><a href="#c11-audio">Audio</a></nav>
 <h2 id="c1-événements">Événements</h2>
 <div class="method">
 <div class="fiche"><h3>Au Démarrage</h3>
@@ -250,13 +250,13 @@
 <p class="exemple"><b>Exemple :</b> afficher « Perdu ! », attendre 2 secondes, puis recommencer la scène.</p>
 </div>
 <div class="fiche"><h3>Répéter</h3>
-<div class="schema"><b>Entrées :</b> Toutes les (secondes), Nombre de fois (0 = sans fin), Nom du minuteur (facultatif) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / À chaque fois / Terminé</div>
-<p>Lance la sortie « À chaque fois » toutes les X secondes, un certain nombre de fois (0 = sans fin), puis « Terminé ». « Tout de suite » part dès le début. S'il tourne déjà, il ne se relance pas.</p>
+<div class="schema"><b>Entrées :</b> Toutes les (secondes), Nombre de fois (0 = sans fin), Nom du minuteur (facultatif) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / À chaque fois / Coup terminé</div>
+<p>Lance la sortie « À chaque fois » toutes les X secondes, un certain nombre de fois (0 = sans fin), puis « Coup terminé ». « Tout de suite » part dès le début. S'il tourne déjà, il ne se relance pas.</p>
 <p class="exemple"><b>Exemple :</b> faire apparaître un ennemi toutes les 3 secondes.</p>
 </div>
 <div class="fiche"><h3>Compte à rebours</h3>
-<div class="schema"><b>Entrées :</b> Objet, Variable, Départ (facultatif), Nom du minuteur (facultatif) &nbsp;→&nbsp; <b>Sorties :</b> Chaque seconde / Terminé</div>
-<p>Enlève 1 à la variable choisie (un nombre) chaque seconde jusqu'à 0. « Chaque seconde » se lance à chaque tic, « Terminé » à 0. « Départ (facultatif) » donne la valeur de départ.</p>
+<div class="schema"><b>Entrées :</b> Objet, Variable, Départ (facultatif), Nom du minuteur (facultatif) &nbsp;→&nbsp; <b>Sorties :</b> Chaque seconde / Coup terminé</div>
+<p>Enlève 1 à la variable choisie (un nombre) chaque seconde jusqu'à 0. « Chaque seconde » se lance à chaque tic, « Coup terminé » à 0. « Départ (facultatif) » donne la valeur de départ.</p>
 <p class="exemple"><b>Exemple :</b> un chrono de 60 secondes : à 0, Game Over.</p>
 </div>
 <div class="fiche"><h3>Arrêter un minuteur</h3>
@@ -662,7 +662,25 @@
 <p class="exemple"><b>Exemple :</b> une plateforme qui se déplace ou un menu qui entre à l'écran.</p>
 </div>
 </div>
-<h2 id="c9-animations">Animations</h2>
+<h2 id="c9-grilles-et-puzzles">Grilles et puzzles</h2>
+<div class="method">
+<div class="fiche"><h3>Remplir la grille</h3>
+<div class="schema"><b>Entrées :</b> Objet, Colonnes, Lignes, Objets modèles (noms séparés par des virgules)</div>
+<p>Découpe l'objet A (le plateau) en colonnes et lignes, et pose dans chaque case une copie d'un objet modèle tiré au hasard (au moins 3 modèles, noms séparés par des virgules). Il n'y a jamais d'alignement au départ, et les pièces tombent du haut à l'arrivée. À utiliser avant « Jouer sur la grille (aligner 3) ».</p>
+<p class="exemple"><b>Exemple :</b> au démarrage, une grille 8 x 8 de bonbons « red, orange, yellow, green, blue, pink ».</p>
+</div>
+<div class="fiche"><h3>Jouer sur la grille (aligner 3)</h3>
+<div class="schema"><b>Entrées :</b> Objet, Position X du doigt, Position Y du doigt &nbsp;→&nbsp; <b>Sorties :</b> Pour chaque pièce alignée / Coup terminé / Échange refusé</div>
+<p>Le cœur d'un jeu « aligner 3 » (style Candy Crush), à placer sous « Doigt appuyé ». Toucher une pièce la choisit, toucher sa voisine (ou glisser le doigt vers elle) les échange. L'échange ne reste que s'il aligne 3 pièces pareilles ou plus ; sinon elles reviennent (« Échange refusé »). Chaque pièce alignée lance « Pour chaque pièce alignée » (l'objet impliqué est la pièce), puis disparaît ; les pièces tombent, de nouvelles arrivent et les combos partent tout seuls. Quand tout est calme : « Coup terminé ». Sans coup possible, la grille se mélange seule.</p>
+<p class="exemple"><b>Exemple :</b> « Pour chaque pièce alignée » : +10 points et des étincelles sur la pièce ; « Coup terminé » : un coup de moins.</p>
+</div>
+<div class="fiche"><h3>Mélanger la grille</h3>
+<div class="schema"><b>Entrée :</b> Objet</div>
+<p>Change la place de toutes les pièces de la grille de l'objet A, sans créer d'alignement et en gardant au moins un coup possible.</p>
+<p class="exemple"><b>Exemple :</b> un bouton « Mélanger » quand le joueur est bloqué.</p>
+</div>
+</div>
+<h2 id="c10-animations">Animations</h2>
 <div class="method">
 <div class="fiche"><h3>Jouer l'animation</h3>
 <div class="schema"><b>Entrées :</b> Objet, Animation, Vitesse (images/seconde), En boucle (oui / non)</div>
@@ -690,7 +708,7 @@
 <p class="exemple"><b>Exemple :</b> courir plus vite = animation plus rapide.</p>
 </div>
 </div>
-<h2 id="c10-audio">Audio</h2>
+<h2 id="c11-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Jouer un son</h3>
 <div class="schema"><b>Entrées :</b> Fichier son, Volume (%, 100 = plein)</div>

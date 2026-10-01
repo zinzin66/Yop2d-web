@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D の全ノード（130 個）| リファレンス</title>
-<meta name="description" content="Android 向けコード不要 2D ゲームエンジン Yop2D の 130 個のビジュアルノードの一覧：各ノードの役割、設定、出力、使用例。">
+<title>Yop2D の全ノード（133 個）| リファレンス</title>
+<meta name="description" content="Android 向けコード不要 2D ゲームエンジン Yop2D の 133 個のビジュアルノードの一覧：各ノードの役割、設定、出力、使用例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/ja.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
 </header>
 <main>
-<p>Yop2D は、Android 向けの無料・コード不要の 2D ゲームエンジンです。ゲームのロジックは、Blueprint の中でつないだノード（ビジュアルブロック）で作ります。イベントがつながりを始め、そのあとにアクションや条件が続きます。このページでは、エディターの 130 個のノードを、設定（入力）と出力とともに説明します。</p>
+<p>Yop2D は、Android 向けの無料・コード不要の 2D ゲームエンジンです。ゲームのロジックは、Blueprint の中でつないだノード（ビジュアルブロック）で作ります。イベントがつながりを始め、そのあとにアクションや条件が続きます。このページでは、エディターの 133 個のノードを、設定（入力）と出力とともに説明します。</p>
 <p><strong>カテゴリー</strong></p>
-<nav class="sommaire"><a href="#c1-イベント">イベント</a><a href="#c2-シーンとhud">シーンとHUD</a><a href="#c3-時間">時間</a><a href="#c4-外観とオブジェクト">外観とオブジェクト</a><a href="#c5-変数とインベントリ">変数とインベントリ</a><a href="#c6-ロジックと条件">ロジックと条件</a><a href="#c7-テキストとダイアログ">テキストとダイアログ</a><a href="#c8-移動とai">移動とAI</a><a href="#c9-アニメーション">アニメーション</a><a href="#c10-オーディオ">オーディオ</a></nav>
+<nav class="sommaire"><a href="#c1-イベント">イベント</a><a href="#c2-シーンとhud">シーンとHUD</a><a href="#c3-時間">時間</a><a href="#c4-外観とオブジェクト">外観とオブジェクト</a><a href="#c5-変数とインベントリ">変数とインベントリ</a><a href="#c6-ロジックと条件">ロジックと条件</a><a href="#c7-テキストとダイアログ">テキストとダイアログ</a><a href="#c8-移動とai">移動とAI</a><a href="#c9-グリッドとパズル">グリッドとパズル</a><a href="#c10-アニメーション">アニメーション</a><a href="#c11-オーディオ">オーディオ</a></nav>
 <h2 id="c1-イベント">イベント</h2>
 <div class="method">
 <div class="fiche"><h3>起動時</h3>
@@ -250,13 +250,13 @@
 <p class="exemple"><b>例：</b> 「負け！」を表示して 2 秒待ち、シーンをやり直す。</p>
 </div>
 <div class="fiche"><h3>繰り返す</h3>
-<div class="schema"><b>入力：</b> 間隔（秒）, 回数（0 = 無限）, タイマー名（省略可） &nbsp;→&nbsp; <b>出力：</b> すぐに / 毎回 / 終了</div>
-<p>X 秒ごとに 「毎回」 の出力を、決めた回数（0 = ずっと）動かし、最後に 「終了」 を動かします。「すぐに」 は最初にすぐ動きます。すでに動いているときは、もう一度は始まりません。</p>
+<div class="schema"><b>入力：</b> 間隔（秒）, 回数（0 = 無限）, タイマー名（省略可） &nbsp;→&nbsp; <b>出力：</b> すぐに / 毎回 / 手番おわり</div>
+<p>X 秒ごとに 「毎回」 の出力を、決めた回数（0 = ずっと）動かし、最後に 「手番おわり」 を動かします。「すぐに」 は最初にすぐ動きます。すでに動いているときは、もう一度は始まりません。</p>
 <p class="exemple"><b>例：</b> 3 秒ごとに敵を出す。</p>
 </div>
 <div class="fiche"><h3>カウントダウン</h3>
-<div class="schema"><b>入力：</b> オブジェクト, 変数, 開始値（省略可）, タイマー名（省略可） &nbsp;→&nbsp; <b>出力：</b> 毎秒 / 終了</div>
-<p>選んだ変数（数値）を 1 秒ごとに 1 ずつ減らし、0 まで数えます。毎回 「毎秒」 が動き、0 で 「終了」 が動きます。「開始値（省略可）」 で最初の値を決めます。</p>
+<div class="schema"><b>入力：</b> オブジェクト, 変数, 開始値（省略可）, タイマー名（省略可） &nbsp;→&nbsp; <b>出力：</b> 毎秒 / 手番おわり</div>
+<p>選んだ変数（数値）を 1 秒ごとに 1 ずつ減らし、0 まで数えます。毎回 「毎秒」 が動き、0 で 「手番おわり」 が動きます。「開始値（省略可）」 で最初の値を決めます。</p>
 <p class="exemple"><b>例：</b> 60 秒のタイマー：0 で Game Over。</p>
 </div>
 <div class="fiche"><h3>タイマーを止める</h3>
@@ -662,7 +662,25 @@
 <p class="exemple"><b>例：</b> 動く足場や、画面に入ってくるメニュー。</p>
 </div>
 </div>
-<h2 id="c9-アニメーション">アニメーション</h2>
+<h2 id="c9-グリッドとパズル">グリッドとパズル</h2>
+<div class="method">
+<div class="fiche"><h3>グリッドをうめる</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 列の数, 行の数, お手本オブジェクト（名前をカンマで区切る）</div>
+<p>オブジェクトA（ばん）を列と行に分け、それぞれのマスにランダムなお手本オブジェクトのコピーを置きます（お手本は3つ以上、名前はカンマで区切る）。最初からそろっていることはなく、ピースは上から落ちてきます。「グリッドで遊ぶ（3つそろえる）」 の前に使います。</p>
+<p class="exemple"><b>例：</b> スタート時に、8 x 8 のキャンディ「red, orange, yellow, green, blue, pink」をならべる。</p>
+</div>
+<div class="fiche"><h3>グリッドで遊ぶ（3つそろえる）</h3>
+<div class="schema"><b>入力：</b> オブジェクト, 指の X 位置, 指の Y 位置 &nbsp;→&nbsp; <b>出力：</b> そろったピースごとに / 手番おわり / 入れかえ失敗</div>
+<p>「3つそろえる」ゲーム（Candy Crush のような）の心ぞう部分で、「指で押している間」 の下に置きます。ピースをタッチすると選ばれ、となりのピースをタッチ（または指をすべらせる）と入れかわります。同じピースが3つ以上ならんだときだけ入れかえが残り、そうでなければもどります（「入れかえ失敗」）。そろったピースはそれぞれ 「そろったピースごとに」 を動かし（関係するオブジェクトはそのピース）、消えます。上のピースが落ち、新しいピースが来て、連鎖も自動で起きます。すべて止まると 「手番おわり」。動かせる手がなければ、グリッドは自動でまざります。</p>
+<p class="exemple"><b>例：</b> 「そろったピースごとに」：+10点とピースにキラキラ。「手番おわり」：のこり手数を1へらす。</p>
+</div>
+<div class="fiche"><h3>グリッドをまぜる</h3>
+<div class="schema"><b>入力：</b> オブジェクト</div>
+<p>オブジェクトAのグリッドのピースをすべて並べかえます。そろいは作らず、動かせる手を最低1つ残します。</p>
+<p class="exemple"><b>例：</b> プレイヤーがつまったときの「まぜる」ボタン。</p>
+</div>
+</div>
+<h2 id="c10-アニメーション">アニメーション</h2>
 <div class="method">
 <div class="fiche"><h3>アニメを再生</h3>
 <div class="schema"><b>入力：</b> オブジェクト, アニメーション, 速さ（コマ/秒）, ループ（はい / いいえ）</div>
@@ -690,7 +708,7 @@
 <p class="exemple"><b>例：</b> 速く走る = 速いアニメーション。</p>
 </div>
 </div>
-<h2 id="c10-オーディオ">オーディオ</h2>
+<h2 id="c11-オーディオ">オーディオ</h2>
 <div class="method">
 <div class="fiche"><h3>効果音を再生</h3>
 <div class="schema"><b>入力：</b> 音声ファイル, 音量（%、100 = 最大）</div>

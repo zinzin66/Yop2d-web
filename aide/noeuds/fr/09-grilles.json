@@ -1,0 +1,23 @@
+{
+  "categorie": "Grilles et puzzles",
+  "noeuds": [
+    {
+      "nom": "Remplir la grille",
+      "schema": "<b>Entrées :</b> Objet, Colonnes, Lignes, Objets modèles (noms séparés par des virgules)",
+      "role": "Découpe l'objet A (le plateau) en colonnes et lignes, et pose dans chaque case une copie d'un objet modèle tiré au hasard (au moins 3 modèles, noms séparés par des virgules). Il n'y a jamais d'alignement au départ, et les pièces tombent du haut à l'arrivée. À utiliser avant « Jouer sur la grille (aligner 3) ».",
+      "exemple": "au démarrage, une grille 8 x 8 de bonbons « red, orange, yellow, green, blue, pink »."
+    },
+    {
+      "nom": "Jouer sur la grille (aligner 3)",
+      "schema": "<b>Entrées :</b> Objet, Position X du doigt, Position Y du doigt &nbsp;→&nbsp; <b>Sorties :</b> Pour chaque pièce alignée / Coup terminé / Échange refusé",
+      "role": "Le cœur d'un jeu « aligner 3 » (style Candy Crush), à placer sous « Doigt appuyé ». Toucher une pièce la choisit, toucher sa voisine (ou glisser le doigt vers elle) les échange. L'échange ne reste que s'il aligne 3 pièces pareilles ou plus ; sinon elles reviennent (« Échange refusé »). Chaque pièce alignée lance « Pour chaque pièce alignée » (l'objet impliqué est la pièce), puis disparaît ; les pièces tombent, de nouvelles arrivent et les combos partent tout seuls. Quand tout est calme : « Coup terminé ». Sans coup possible, la grille se mélange seule.",
+      "exemple": "« Pour chaque pièce alignée » : +10 points et des étincelles sur la pièce ; « Coup terminé » : un coup de moins."
+    },
+    {
+      "nom": "Mélanger la grille",
+      "schema": "<b>Entrée :</b> Objet",
+      "role": "Change la place de toutes les pièces de la grille de l'objet A, sans créer d'alignement et en gardant au moins un coup possible.",
+      "exemple": "un bouton « Mélanger » quand le joueur est bloqué."
+    }
+  ]
+}

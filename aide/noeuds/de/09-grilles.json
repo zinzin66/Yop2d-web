@@ -1,0 +1,23 @@
+{
+  "categorie": "Raster und Puzzles",
+  "noeuds": [
+    {
+      "nom": "Raster füllen",
+      "schema": "<b>Eingänge:</b> Objekt, Spalten, Zeilen, Vorlage-Objekte (Namen mit Kommas getrennt)",
+      "role": "Teilt Objekt A (das Spielbrett) in Spalten und Zeilen und legt in jedes Feld eine Kopie eines zufällig gewählten Vorlage-Objekts (mindestens 3 Vorlagen, Namen mit Kommas getrennt). Am Anfang gibt es nie eine Reihe, und die Teile fallen von oben herein. Vor „Auf dem Raster spielen (3 in einer Reihe)“ verwenden.",
+      "exemple": "beim Start ein 8 x 8-Raster aus Bonbons „red, orange, yellow, green, blue, pink“."
+    },
+    {
+      "nom": "Auf dem Raster spielen (3 in einer Reihe)",
+      "schema": "<b>Eingänge:</b> Objekt, Finger-X-Position, Finger-Y-Position &nbsp;→&nbsp; <b>Ausgänge:</b> Für jedes passende Teil / Zug beendet / Tausch abgelehnt",
+      "role": "Das Herz eines „3 in einer Reihe“-Spiels (wie Candy Crush), unter „Finger gedrückt“ zu setzen. Ein Teil antippen wählt es aus, das Nachbarteil antippen (oder den Finger dorthin ziehen) tauscht sie. Der Tausch bleibt nur, wenn 3 oder mehr gleiche Teile in einer Reihe sind; sonst gehen sie zurück („Tausch abgelehnt“). Jedes passende Teil startet „Für jedes passende Teil“ (das beteiligte Objekt ist das Teil) und verschwindet dann; Teile fallen nach, neue kommen, und Kombos laufen von selbst. Wenn alles ruhig ist: „Zug beendet“. Ohne möglichen Zug mischt sich das Raster selbst.",
+      "exemple": "„Für jedes passende Teil“: +10 Punkte und Funken auf dem Teil; „Zug beendet“: ein Zug weniger."
+    },
+    {
+      "nom": "Raster mischen",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Verteilt alle Teile im Raster von Objekt A neu, ohne eine Reihe zu bilden und mit mindestens einem möglichen Zug.",
+      "exemple": "ein „Mischen“-Knopf, wenn der Spieler feststeckt."
+    }
+  ]
+}
