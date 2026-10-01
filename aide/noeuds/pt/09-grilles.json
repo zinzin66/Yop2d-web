@@ -1,0 +1,23 @@
+{
+  "categorie": "Grades e quebra-cabeças",
+  "noeuds": [
+    {
+      "nom": "Preencher a grade",
+      "schema": "<b>Entradas:</b> Objeto, Colunas, Linhas, Objetos modelo (nomes separados por vírgulas)",
+      "role": "Divide o objeto A (o tabuleiro) em colunas e linhas e coloca em cada casa uma cópia de um objeto modelo sorteado (pelo menos 3 modelos, nomes separados por vírgulas). Nunca há alinhamento no início, e as peças caem de cima. Use antes de “Jogar na grade (alinhar 3)”.",
+      "exemple": "no início, uma grade 8 x 8 de doces “red, orange, yellow, green, blue, pink”."
+    },
+    {
+      "nom": "Jogar na grade (alinhar 3)",
+      "schema": "<b>Entradas:</b> Objeto, Posição X do dedo, Posição Y do dedo &nbsp;→&nbsp; <b>Saídas:</b> Para cada peça alinhada / Jogada concluída / Troca recusada",
+      "role": "O coração de um jogo de “alinhar 3” (estilo Candy Crush), para colocar sob “Dedo pressionado”. Tocar uma peça a escolhe; tocar a vizinha (ou deslizar o dedo até ela) troca as duas. A troca só fica se alinhar 3 ou mais peças iguais; senão elas voltam (“Troca recusada”). Cada peça alinhada dispara “Para cada peça alinhada” (o objeto envolvido é a peça) e depois some; as peças caem, chegam novas e os combos acontecem sozinhos. Quando tudo fica parado: “Jogada concluída”. Sem jogada possível, a grade se embaralha sozinha.",
+      "exemple": "“Para cada peça alinhada”: +10 pontos e brilhos na peça; “Jogada concluída”: uma jogada a menos."
+    },
+    {
+      "nom": "Embaralhar a grade",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Troca de lugar todas as peças da grade do objeto A, sem criar alinhamento e mantendo pelo menos uma jogada possível.",
+      "exemple": "um botão “Embaralhar” quando o jogador está travado."
+    }
+  ]
+}

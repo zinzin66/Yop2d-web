@@ -1,0 +1,23 @@
+{
+  "categorie": "Cuadrículas y puzles",
+  "noeuds": [
+    {
+      "nom": "Rellenar la cuadrícula",
+      "schema": "<b>Entradas:</b> Objeto, Columnas, Filas, Objetos modelo (nombres separados por comas)",
+      "role": "Divide el objeto A (el tablero) en columnas y filas y pone en cada casilla una copia de un objeto modelo elegido al azar (al menos 3 modelos, nombres separados por comas). Nunca hay alineaciones al empezar, y las piezas caen desde arriba. Úsalo antes de «Jugar en la cuadrícula (unir 3)».",
+      "exemple": "al empezar, una cuadrícula de 8 x 8 caramelos «red, orange, yellow, green, blue, pink»."
+    },
+    {
+      "nom": "Jugar en la cuadrícula (unir 3)",
+      "schema": "<b>Entradas:</b> Objeto, Posición X del dedo, Posición Y del dedo &nbsp;→&nbsp; <b>Salidas:</b> Por cada pieza alineada / Jugada terminada / Intercambio rechazado",
+      "role": "El corazón de un juego de «unir 3» (estilo Candy Crush), para poner bajo «Dedo presionado». Tocar una pieza la elige; tocar su vecina (o deslizar el dedo hacia ella) las intercambia. El intercambio solo se queda si alinea 3 piezas iguales o más; si no, vuelven («Intercambio rechazado»). Cada pieza alineada lanza «Por cada pieza alineada» (el objeto implicado es la pieza) y luego desaparece; las piezas caen, llegan nuevas y los combos salen solos. Cuando todo se calma: «Jugada terminada». Sin jugadas posibles, la cuadrícula se mezcla sola.",
+      "exemple": "«Por cada pieza alineada»: +10 puntos y destellos en la pieza; «Jugada terminada»: un movimiento menos."
+    },
+    {
+      "nom": "Mezclar la cuadrícula",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Cambia de sitio todas las piezas de la cuadrícula del objeto A, sin crear alineaciones y dejando al menos una jugada posible.",
+      "exemple": "un botón «Mezclar» cuando el jugador está atascado."
+    }
+  ]
+}

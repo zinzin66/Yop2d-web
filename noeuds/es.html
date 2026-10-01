@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (130) | Referencia</title>
-<meta name="description" content="Lista completa de los 130 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (133) | Referencia</title>
+<meta name="description" content="Lista completa de los 133 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 130 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 133 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
-<nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-animaciones">Animaciones</a><a href="#c10-audio">Audio</a></nav>
+<nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-animaciones">Animaciones</a><a href="#c11-audio">Audio</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
 <div class="method">
 <div class="fiche"><h3>Al Iniciar</h3>
@@ -250,13 +250,13 @@
 <p class="exemple"><b>Ejemplo:</b> mostrar «¡Perdiste!», esperar 2 segundos y reiniciar la escena.</p>
 </div>
 <div class="fiche"><h3>Repetir</h3>
-<div class="schema"><b>Entradas:</b> Cada (segundos), Número de veces (0 = sin fin), Nombre del temporizador (opcional) &nbsp;→&nbsp; <b>Salidas:</b> En seguida / Cada vez / Terminado</div>
-<p>Lanza la salida «Cada vez» cada X segundos, un número de veces (0 = sin fin), y luego «Terminado». «En seguida» sale al principio. Si ya está funcionando, no vuelve a empezar.</p>
+<div class="schema"><b>Entradas:</b> Cada (segundos), Número de veces (0 = sin fin), Nombre del temporizador (opcional) &nbsp;→&nbsp; <b>Salidas:</b> En seguida / Cada vez / Jugada terminada</div>
+<p>Lanza la salida «Cada vez» cada X segundos, un número de veces (0 = sin fin), y luego «Jugada terminada». «En seguida» sale al principio. Si ya está funcionando, no vuelve a empezar.</p>
 <p class="exemple"><b>Ejemplo:</b> hacer aparecer un enemigo cada 3 segundos.</p>
 </div>
 <div class="fiche"><h3>Cuenta atrás</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Variable, Valor inicial (opcional), Nombre del temporizador (opcional) &nbsp;→&nbsp; <b>Salidas:</b> Cada segundo / Terminado</div>
-<p>Resta 1 a la variable elegida (un número) cada segundo hasta 0. «Cada segundo» se lanza en cada tic, «Terminado» al llegar a 0. «Valor inicial (opcional)» da el valor inicial.</p>
+<div class="schema"><b>Entradas:</b> Objeto, Variable, Valor inicial (opcional), Nombre del temporizador (opcional) &nbsp;→&nbsp; <b>Salidas:</b> Cada segundo / Jugada terminada</div>
+<p>Resta 1 a la variable elegida (un número) cada segundo hasta 0. «Cada segundo» se lanza en cada tic, «Jugada terminada» al llegar a 0. «Valor inicial (opcional)» da el valor inicial.</p>
 <p class="exemple"><b>Ejemplo:</b> un cronómetro de 60 segundos: en 0, Game Over.</p>
 </div>
 <div class="fiche"><h3>Detener un temporizador</h3>
@@ -662,7 +662,25 @@
 <p class="exemple"><b>Ejemplo:</b> una plataforma que se mueve o un menú que entra en pantalla.</p>
 </div>
 </div>
-<h2 id="c9-animaciones">Animaciones</h2>
+<h2 id="c9-cuadrículas-y-puzles">Cuadrículas y puzles</h2>
+<div class="method">
+<div class="fiche"><h3>Rellenar la cuadrícula</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Columnas, Filas, Objetos modelo (nombres separados por comas)</div>
+<p>Divide el objeto A (el tablero) en columnas y filas y pone en cada casilla una copia de un objeto modelo elegido al azar (al menos 3 modelos, nombres separados por comas). Nunca hay alineaciones al empezar, y las piezas caen desde arriba. Úsalo antes de «Jugar en la cuadrícula (unir 3)».</p>
+<p class="exemple"><b>Ejemplo:</b> al empezar, una cuadrícula de 8 x 8 caramelos «red, orange, yellow, green, blue, pink».</p>
+</div>
+<div class="fiche"><h3>Jugar en la cuadrícula (unir 3)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Posición X del dedo, Posición Y del dedo &nbsp;→&nbsp; <b>Salidas:</b> Por cada pieza alineada / Jugada terminada / Intercambio rechazado</div>
+<p>El corazón de un juego de «unir 3» (estilo Candy Crush), para poner bajo «Dedo presionado». Tocar una pieza la elige; tocar su vecina (o deslizar el dedo hacia ella) las intercambia. El intercambio solo se queda si alinea 3 piezas iguales o más; si no, vuelven («Intercambio rechazado»). Cada pieza alineada lanza «Por cada pieza alineada» (el objeto implicado es la pieza) y luego desaparece; las piezas caen, llegan nuevas y los combos salen solos. Cuando todo se calma: «Jugada terminada». Sin jugadas posibles, la cuadrícula se mezcla sola.</p>
+<p class="exemple"><b>Ejemplo:</b> «Por cada pieza alineada»: +10 puntos y destellos en la pieza; «Jugada terminada»: un movimiento menos.</p>
+</div>
+<div class="fiche"><h3>Mezclar la cuadrícula</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>Cambia de sitio todas las piezas de la cuadrícula del objeto A, sin crear alineaciones y dejando al menos una jugada posible.</p>
+<p class="exemple"><b>Ejemplo:</b> un botón «Mezclar» cuando el jugador está atascado.</p>
+</div>
+</div>
+<h2 id="c10-animaciones">Animaciones</h2>
 <div class="method">
 <div class="fiche"><h3>Reproducir animación</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Animación, Velocidad (cuadros/segundo), En bucle (sí / no)</div>
@@ -690,7 +708,7 @@
 <p class="exemple"><b>Ejemplo:</b> correr más rápido = animación más rápida.</p>
 </div>
 </div>
-<h2 id="c10-audio">Audio</h2>
+<h2 id="c11-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Reproducir sonido</h3>
 <div class="schema"><b>Entradas:</b> Archivo de sonido, Volumen (%, 100 = máximo)</div>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (130) | Reference</title>
-<meta name="description" content="Complete list of the 130 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (133) | Reference</title>
+<meta name="description" content="Complete list of the 133 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 130 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 133 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
-<nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-animations">Animations</a><a href="#c10-audio">Audio</a></nav>
+<nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-animations">Animations</a><a href="#c11-audio">Audio</a></nav>
 <h2 id="c1-events">Events</h2>
 <div class="method">
 <div class="fiche"><h3>On Start</h3>
@@ -250,13 +250,13 @@
 <p class="exemple"><b>Example:</b> show “You lose!”, wait 2 seconds, then restart the scene.</p>
 </div>
 <div class="fiche"><h3>Repeat</h3>
-<div class="schema"><b>Inputs:</b> Every (seconds), Number of times (0 = endless), Timer name (optional) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Each time / Finished</div>
-<p>Runs the “Each time” output every X seconds, a number of times (0 = forever), then “Finished”. “Right away” runs at the start. If it is already running, it does not start again.</p>
+<div class="schema"><b>Inputs:</b> Every (seconds), Number of times (0 = endless), Timer name (optional) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Each time / Move finished</div>
+<p>Runs the “Each time” output every X seconds, a number of times (0 = forever), then “Move finished”. “Right away” runs at the start. If it is already running, it does not start again.</p>
 <p class="exemple"><b>Example:</b> spawn an enemy every 3 seconds.</p>
 </div>
 <div class="fiche"><h3>Countdown</h3>
-<div class="schema"><b>Inputs:</b> Object, Variable, Start value (optional), Timer name (optional) &nbsp;→&nbsp; <b>Outputs:</b> Every second / Finished</div>
-<p>Removes 1 from the chosen variable (a number) every second until 0. “Every second” runs on each tick, “Finished” at 0. “Start value (optional)” sets the starting value.</p>
+<div class="schema"><b>Inputs:</b> Object, Variable, Start value (optional), Timer name (optional) &nbsp;→&nbsp; <b>Outputs:</b> Every second / Move finished</div>
+<p>Removes 1 from the chosen variable (a number) every second until 0. “Every second” runs on each tick, “Move finished” at 0. “Start value (optional)” sets the starting value.</p>
 <p class="exemple"><b>Example:</b> a 60-second timer: at 0, Game Over.</p>
 </div>
 <div class="fiche"><h3>Stop a timer</h3>
@@ -662,7 +662,25 @@
 <p class="exemple"><b>Example:</b> a moving platform or a menu sliding onto the screen.</p>
 </div>
 </div>
-<h2 id="c9-animations">Animations</h2>
+<h2 id="c9-grids-and-puzzles">Grids and puzzles</h2>
+<div class="method">
+<div class="fiche"><h3>Fill the grid</h3>
+<div class="schema"><b>Inputs:</b> Object, Columns, Rows, Model objects (names separated by commas)</div>
+<p>Splits object A (the board) into columns and rows and puts in each cell a copy of a model object picked at random (at least 3 models, names separated by commas). There is never a match at the start, and the pieces drop in from the top. Use it before “Play on the grid (match 3)”.</p>
+<p class="exemple"><b>Example:</b> at the start, an 8 x 8 grid of candies "red, orange, yellow, green, blue, pink".</p>
+</div>
+<div class="fiche"><h3>Play on the grid (match 3)</h3>
+<div class="schema"><b>Inputs:</b> Object, Finger X position, Finger Y position &nbsp;→&nbsp; <b>Outputs:</b> For each matched piece / Move finished / Swap refused</div>
+<p>The heart of a match-3 game (Candy Crush style), to put under “Finger held down”. Touching a piece selects it, touching its neighbour (or sliding the finger to it) swaps them. The swap only stays if it lines up 3 or more identical pieces; otherwise they go back (“Swap refused”). Each matched piece starts “For each matched piece” (the involved object is the piece), then disappears; pieces fall, new ones arrive and combos happen by themselves. When everything is still: “Move finished”. With no possible move, the grid shuffles itself.</p>
+<p class="exemple"><b>Example:</b> “For each matched piece”: +10 points and sparkles on the piece; “Move finished”: one move less.</p>
+</div>
+<div class="fiche"><h3>Shuffle the grid</h3>
+<div class="schema"><b>Input:</b> Object</div>
+<p>Moves all the pieces of object A's grid to new places, without creating a match and keeping at least one possible move.</p>
+<p class="exemple"><b>Example:</b> a "Shuffle" button when the player is stuck.</p>
+</div>
+</div>
+<h2 id="c10-animations">Animations</h2>
 <div class="method">
 <div class="fiche"><h3>Play animation</h3>
 <div class="schema"><b>Inputs:</b> Object, Animation, Speed (frames/second), Loop (yes / no)</div>
@@ -690,7 +708,7 @@
 <p class="exemple"><b>Example:</b> running faster = faster animation.</p>
 </div>
 </div>
-<h2 id="c10-audio">Audio</h2>
+<h2 id="c11-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Play sound</h3>
 <div class="schema"><b>Inputs:</b> Sound file, Volume (%, 100 = full)</div>

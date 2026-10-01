@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D 全部节点（130 个）| 参考</title>
-<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 130 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<title>Yop2D 全部节点（133 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 133 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 130 个节点，以及它们的设置（输入）和输出。</p>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 133 个节点，以及它们的设置（输入）和输出。</p>
 <p><strong>分类</strong></p>
-<nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-动画">动画</a><a href="#c10-音频">音频</a></nav>
+<nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-网格和益智">网格和益智</a><a href="#c10-动画">动画</a><a href="#c11-音频">音频</a></nav>
 <h2 id="c1-事件">事件</h2>
 <div class="method">
 <div class="fiche"><h3>启动时</h3>
@@ -250,13 +250,13 @@
 <p class="exemple"><b>示例：</b> 显示“你输了！”，等待 2 秒，然后重新开始场景。</p>
 </div>
 <div class="fiche"><h3>重复</h3>
-<div class="schema"><b>输入：</b> 每隔（秒）, 次数（0 = 无限）, 计时器名称（可选） &nbsp;→&nbsp; <b>输出：</b> 立即 / 每次 / 完成</div>
-<p>每隔 X 秒运行一次 “每次” 输出，重复指定次数（0 = 无限），最后运行 “完成”。“立即” 在一开始就运行。如果它已经在运行，不会重复启动。</p>
+<div class="schema"><b>输入：</b> 每隔（秒）, 次数（0 = 无限）, 计时器名称（可选） &nbsp;→&nbsp; <b>输出：</b> 立即 / 每次 / 本步结束</div>
+<p>每隔 X 秒运行一次 “每次” 输出，重复指定次数（0 = 无限），最后运行 “本步结束”。“立即” 在一开始就运行。如果它已经在运行，不会重复启动。</p>
 <p class="exemple"><b>示例：</b> 每 3 秒生成一个敌人。</p>
 </div>
 <div class="fiche"><h3>倒计时</h3>
-<div class="schema"><b>输入：</b> 对象, 变量, 起始值（可选）, 计时器名称（可选） &nbsp;→&nbsp; <b>输出：</b> 每秒 / 完成</div>
-<p>每秒把所选变量（数字）减 1，直到 0。每次计时运行 “每秒”，到 0 时运行 “完成”。“起始值（可选）” 设置起始值。</p>
+<div class="schema"><b>输入：</b> 对象, 变量, 起始值（可选）, 计时器名称（可选） &nbsp;→&nbsp; <b>输出：</b> 每秒 / 本步结束</div>
+<p>每秒把所选变量（数字）减 1，直到 0。每次计时运行 “每秒”，到 0 时运行 “本步结束”。“起始值（可选）” 设置起始值。</p>
 <p class="exemple"><b>示例：</b> 60 秒倒计时：到 0 时 Game Over。</p>
 </div>
 <div class="fiche"><h3>停止计时器</h3>
@@ -662,7 +662,25 @@
 <p class="exemple"><b>示例：</b> 移动的平台，或滑入屏幕的菜单。</p>
 </div>
 </div>
-<h2 id="c9-动画">动画</h2>
+<h2 id="c9-网格和益智">网格和益智</h2>
+<div class="method">
+<div class="fiche"><h3>填充网格</h3>
+<div class="schema"><b>输入：</b> 对象, 列数, 行数, 模板对象（名称用逗号分隔）</div>
+<p>把对象 A（棋盘）分成若干列和行，并在每个格子里放一个随机模板对象的副本（至少 3 个模板，名称用逗号分隔）。开局时绝不会有现成的三连，方块会从上方落下。请在 “在网格上游戏（三消）” 之前使用。</p>
+<p class="exemple"><b>示例：</b> 开局时生成 8 x 8 的糖果网格「red, orange, yellow, green, blue, pink」。</p>
+</div>
+<div class="fiche"><h3>在网格上游戏（三消）</h3>
+<div class="schema"><b>输入：</b> 对象, 手指 X 位置, 手指 Y 位置 &nbsp;→&nbsp; <b>输出：</b> 每个被消除的方块 / 本步结束 / 交换无效</div>
+<p>三消游戏（类似 Candy Crush）的核心，放在 “手指按住” 下面。点一个方块选中它，再点相邻的方块（或把手指滑过去）就会交换。只有连成 3 个或更多相同方块时交换才会保留，否则会换回来（“交换无效”）。每个被消除的方块都会触发 “每个被消除的方块”（相关对象就是该方块），然后消失；上面的方块落下，新的方块补上，连锁会自动发生。全部停稳后触发 “本步结束”。如果没有可走的步，网格会自动打乱。</p>
+<p class="exemple"><b>示例：</b> “每个被消除的方块”：加 10 分并在方块上冒火花；“本步结束”：步数减 1。</p>
+</div>
+<div class="fiche"><h3>打乱网格</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>把对象 A 网格中的所有方块换个位置，不产生三连，并保证至少有一步可走。</p>
+<p class="exemple"><b>示例：</b> 玩家卡住时的「打乱」按钮。</p>
+</div>
+</div>
+<h2 id="c10-动画">动画</h2>
 <div class="method">
 <div class="fiche"><h3>播放动画</h3>
 <div class="schema"><b>输入：</b> 对象, 动画, 速度（帧/秒）, 循环（是 / 否）</div>
@@ -690,7 +708,7 @@
 <p class="exemple"><b>示例：</b> 跑得越快 = 动画越快。</p>
 </div>
 </div>
-<h2 id="c10-音频">音频</h2>
+<h2 id="c11-音频">音频</h2>
 <div class="method">
 <div class="fiche"><h3>播放音效</h3>
 <div class="schema"><b>输入：</b> 音效文件, 音量（%，100 = 最大）</div>

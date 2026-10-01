@@ -1,0 +1,23 @@
+{
+  "categorie": "Grids and puzzles",
+  "noeuds": [
+    {
+      "nom": "Fill the grid",
+      "schema": "<b>Inputs:</b> Object, Columns, Rows, Model objects (names separated by commas)",
+      "role": "Splits object A (the board) into columns and rows and puts in each cell a copy of a model object picked at random (at least 3 models, names separated by commas). There is never a match at the start, and the pieces drop in from the top. Use it before “Play on the grid (match 3)”.",
+      "exemple": "at the start, an 8 x 8 grid of candies \"red, orange, yellow, green, blue, pink\"."
+    },
+    {
+      "nom": "Play on the grid (match 3)",
+      "schema": "<b>Inputs:</b> Object, Finger X position, Finger Y position &nbsp;→&nbsp; <b>Outputs:</b> For each matched piece / Move finished / Swap refused",
+      "role": "The heart of a match-3 game (Candy Crush style), to put under “Finger held down”. Touching a piece selects it, touching its neighbour (or sliding the finger to it) swaps them. The swap only stays if it lines up 3 or more identical pieces; otherwise they go back (“Swap refused”). Each matched piece starts “For each matched piece” (the involved object is the piece), then disappears; pieces fall, new ones arrive and combos happen by themselves. When everything is still: “Move finished”. With no possible move, the grid shuffles itself.",
+      "exemple": "“For each matched piece”: +10 points and sparkles on the piece; “Move finished”: one move less."
+    },
+    {
+      "nom": "Shuffle the grid",
+      "schema": "<b>Input:</b> Object",
+      "role": "Moves all the pieces of object A's grid to new places, without creating a match and keeping at least one possible move.",
+      "exemple": "a \"Shuffle\" button when the player is stuck."
+    }
+  ]
+}

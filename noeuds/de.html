@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (130) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 130 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (133) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 133 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 130 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 133 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
-<nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-animationen">Animationen</a><a href="#c10-audio">Audio</a></nav>
+<nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-animationen">Animationen</a><a href="#c11-audio">Audio</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
 <div class="method">
 <div class="fiche"><h3>Beim Start</h3>
@@ -250,13 +250,13 @@
 <p class="exemple"><b>Beispiel:</b> „Verloren!“ anzeigen, 2 Sekunden warten, dann die Szene neu starten.</p>
 </div>
 <div class="fiche"><h3>Wiederholen</h3>
-<div class="schema"><b>Eingänge:</b> Alle (Sekunden), Anzahl (0 = endlos), Name des Timers (optional) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Jedes Mal / Fertig</div>
-<p>Startet den Ausgang „Jedes Mal“ alle X Sekunden, eine bestimmte Anzahl Male (0 = endlos), dann „Fertig“. „Sofort“ läuft gleich zu Beginn. Läuft er schon, startet er nicht noch einmal.</p>
+<div class="schema"><b>Eingänge:</b> Alle (Sekunden), Anzahl (0 = endlos), Name des Timers (optional) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Jedes Mal / Zug beendet</div>
+<p>Startet den Ausgang „Jedes Mal“ alle X Sekunden, eine bestimmte Anzahl Male (0 = endlos), dann „Zug beendet“. „Sofort“ läuft gleich zu Beginn. Läuft er schon, startet er nicht noch einmal.</p>
 <p class="exemple"><b>Beispiel:</b> alle 3 Sekunden einen Gegner erscheinen lassen.</p>
 </div>
 <div class="fiche"><h3>Countdown</h3>
-<div class="schema"><b>Eingänge:</b> Objekt, Variable, Startwert (optional), Name des Timers (optional) &nbsp;→&nbsp; <b>Ausgänge:</b> Jede Sekunde / Fertig</div>
-<p>Zieht jede Sekunde 1 von der gewählten Variable (eine Zahl) ab, bis 0. „Jede Sekunde“ läuft bei jedem Tick, „Fertig“ bei 0. „Startwert (optional)“ legt den Startwert fest.</p>
+<div class="schema"><b>Eingänge:</b> Objekt, Variable, Startwert (optional), Name des Timers (optional) &nbsp;→&nbsp; <b>Ausgänge:</b> Jede Sekunde / Zug beendet</div>
+<p>Zieht jede Sekunde 1 von der gewählten Variable (eine Zahl) ab, bis 0. „Jede Sekunde“ läuft bei jedem Tick, „Zug beendet“ bei 0. „Startwert (optional)“ legt den Startwert fest.</p>
 <p class="exemple"><b>Beispiel:</b> ein 60-Sekunden-Timer: bei 0 Game Over.</p>
 </div>
 <div class="fiche"><h3>Timer stoppen</h3>
@@ -662,7 +662,25 @@
 <p class="exemple"><b>Beispiel:</b> eine bewegliche Plattform oder ein Menü, das ins Bild gleitet.</p>
 </div>
 </div>
-<h2 id="c9-animationen">Animationen</h2>
+<h2 id="c9-raster-und-puzzles">Raster und Puzzles</h2>
+<div class="method">
+<div class="fiche"><h3>Raster füllen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Spalten, Zeilen, Vorlage-Objekte (Namen mit Kommas getrennt)</div>
+<p>Teilt Objekt A (das Spielbrett) in Spalten und Zeilen und legt in jedes Feld eine Kopie eines zufällig gewählten Vorlage-Objekts (mindestens 3 Vorlagen, Namen mit Kommas getrennt). Am Anfang gibt es nie eine Reihe, und die Teile fallen von oben herein. Vor „Auf dem Raster spielen (3 in einer Reihe)“ verwenden.</p>
+<p class="exemple"><b>Beispiel:</b> beim Start ein 8 x 8-Raster aus Bonbons „red, orange, yellow, green, blue, pink“.</p>
+</div>
+<div class="fiche"><h3>Auf dem Raster spielen (3 in einer Reihe)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Finger-X-Position, Finger-Y-Position &nbsp;→&nbsp; <b>Ausgänge:</b> Für jedes passende Teil / Zug beendet / Tausch abgelehnt</div>
+<p>Das Herz eines „3 in einer Reihe“-Spiels (wie Candy Crush), unter „Finger gedrückt“ zu setzen. Ein Teil antippen wählt es aus, das Nachbarteil antippen (oder den Finger dorthin ziehen) tauscht sie. Der Tausch bleibt nur, wenn 3 oder mehr gleiche Teile in einer Reihe sind; sonst gehen sie zurück („Tausch abgelehnt“). Jedes passende Teil startet „Für jedes passende Teil“ (das beteiligte Objekt ist das Teil) und verschwindet dann; Teile fallen nach, neue kommen, und Kombos laufen von selbst. Wenn alles ruhig ist: „Zug beendet“. Ohne möglichen Zug mischt sich das Raster selbst.</p>
+<p class="exemple"><b>Beispiel:</b> „Für jedes passende Teil“: +10 Punkte und Funken auf dem Teil; „Zug beendet“: ein Zug weniger.</p>
+</div>
+<div class="fiche"><h3>Raster mischen</h3>
+<div class="schema"><b>Eingang:</b> Objekt</div>
+<p>Verteilt alle Teile im Raster von Objekt A neu, ohne eine Reihe zu bilden und mit mindestens einem möglichen Zug.</p>
+<p class="exemple"><b>Beispiel:</b> ein „Mischen“-Knopf, wenn der Spieler feststeckt.</p>
+</div>
+</div>
+<h2 id="c10-animationen">Animationen</h2>
 <div class="method">
 <div class="fiche"><h3>Animation abspielen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Animation, Tempo (Bilder/Sekunde), Wiederholen (ja / nein)</div>
@@ -690,7 +708,7 @@
 <p class="exemple"><b>Beispiel:</b> schneller rennen = schnellere Animation.</p>
 </div>
 </div>
-<h2 id="c10-audio">Audio</h2>
+<h2 id="c11-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Sound abspielen</h3>
 <div class="schema"><b>Eingänge:</b> Sounddatei, Lautstärke (%, 100 = voll)</div>
