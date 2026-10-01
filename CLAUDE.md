@@ -163,6 +163,10 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 01/10/2026 : exemple « Dungeon walk » (vue iso, promenade au joystick, moteur_min 957 : ordre d'affichage selon la
   position, marche iso du joystick, zone de contact respectée par les murs), 10 exemples. Aide : réglage « image » des particules.
 - 01/10/2026 : exemple « Climb & run » (l'animation change selon le mouvement : marche, accroupi, saut, échelles), 11 exemples.
+- 01/10/2026 : RÈGLE DES FORMULES (demande de l'utilisateur : pas de code de programmeur dans les exemples) : une
+  condition = une comparaison simple ; `outils/modeles/verifier_formules.py` du moteur vérifie les zips. Les 11 exemples
+  réécrits (conditions « a && b » découpées en nœuds à la suite, Climb & run et Dungeon walk avec les nouveaux
+  COMPORTEMENTS du moteur, cadenas avec « Revenir à 0 après ») ; moteur_min 961 (962 pour Dungeon escape).
 - 30/09/2026 : version 0.1.948 publiée (guide « Ton premier jeu en 5 minutes », nouvelle fenêtre de réglage
   « ① Sur quoi ? / ② Réglages » avec aides et ligne « En clair », barre d'outils réduite, style sobre bleu néon).
   Accueil (9 langues) : cartes « Ton premier jeu en 5 minutes » et « Des réglages en clair » (17 cartes),
