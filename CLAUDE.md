@@ -178,6 +178,10 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   Accueil (9 langues) : cartes « Ton premier jeu en 5 minutes » et « Des réglages en clair » (17 cartes),
   carte « Un éditeur simple et confortable », blocs vitrine modèles et « Le cerveau de vos jeux », FAQ « Comment apprendre ».
   Captures de l'éditeur (barre d'outils, fenêtre de réglage) à refaire par l'utilisateur avec la 0.1.948.
+- 01/10/2026 : bouton « Ranger les nœuds » du Blueprint (moteur build 968, validé). SORTIE préparée (build 969, version
+  normale) : accueil (9 langues) : 35 modèles, 11 exemples listés (vitrine et FAQ), carte « Comportements prêts à l'emploi »
+  (remplace « Physique et comportements »), nouvelles cartes « Grilles et puzzles », « Vue isométrique », « Un Inspecteur
+  clair » (20 cartes), phrase « Ranger les nœuds » dans le bloc vitrine des nœuds.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
