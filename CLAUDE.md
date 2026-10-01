@@ -157,7 +157,7 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   Puis exemple « Parallaxe » retiré (jugé moche par l'utilisateur ; à refaire en MODÈLE du moteur) : 6 exemples.
 - 01/10/2026 : exemples Pirate battle (PR #22) puis Candy match (style Candy Crush). Moteur : 3 nœuds « grille »
   (Remplir la grille, Jouer sur la grille (aligner 3), Mélanger la grille), catégorie « Grilles et puzzles » (133 nœuds) :
-  aide, pages `noeuds/`, `llms.txt` régénérés. Candy match demande le build 955 (`moteur_min`).
+  aide, pages `noeuds/`, `llms.txt` régénérés. Candy match demande le build 956 (`moteur_min`, bonbons sous le panneau de fin). Nœuds des exemples rangés (Logique.ranger).
 - 30/09/2026 : version 0.1.948 publiée (guide « Ton premier jeu en 5 minutes », nouvelle fenêtre de réglage
   « ① Sur quoi ? / ② Réglages » avec aides et ligne « En clair », barre d'outils réduite, style sobre bleu néon).
   Accueil (9 langues) : cartes « Ton premier jeu en 5 minutes » et « Des réglages en clair » (17 cartes),
