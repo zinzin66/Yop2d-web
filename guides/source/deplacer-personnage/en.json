@@ -1,58 +1,147 @@
 {
-  "titre_page": "How to move a character in Yop2D? | Yop2D Guide",
-  "description": "Three simple ways to move a character in Yop2D, without code: on-screen buttons, virtual joystick, or dragging with your finger.",
-  "h1": "How to move a character?",
-  "carte": ["Move a character", "Move an object with buttons, the joystick or your finger."],
-  "etapes": [
-    ["With on-screen buttons", "Link the {{NoeudEventMaintenuObjet}} event of each button to a {{pousser}} node with {{lang:pousser.x}} = -5 or 5."],
-    ["With a virtual joystick", "Add a {{lang:obj_prefix_joystick}} object and choose the character in {{lang:insp_label_cible_joystick}}. No node needed."],
-    ["By dragging it with your finger", "Tick {{lang:insp_cb_deplacable}} in the object's inspector."]
+ "titre_page": "How to move a character in Yop2D? | Yop2D Guide",
+ "description": "Three simple ways to move a character in Yop2D, without code: on-screen buttons, virtual joystick, or dragging with your finger.",
+ "h1": "How to move a character?",
+ "carte": [
+  "Move a character",
+  "Move an object with buttons, the joystick or your finger."
+ ],
+ "etapes": [
+  [
+   "With on-screen buttons",
+   "Link the {{NoeudEventMaintenuObjet}} event of each button to a {{pousser}} node with {{lang:pousser.x}} = -5 or 5."
   ],
-  "blocs": [
-    ["p", "In Yop2D, there are three simple ways to move a character, without writing code. Pick the one that fits your game."],
-    ["h2", "Method 1: with on-screen buttons (left / right)"],
-    ["bloc", [
-      ["p", "Great for a platform game, or a game where the character moves along a line."],
-      ["ol", [
-        "In your scene, add your character (a **{{lang:obj_prefix_carre}}** or an **{{lang:obj_prefix_image}}**) and name it **player**.",
-        "Add two objects to use as buttons, for example two **{{lang:obj_prefix_bouton}}** objects (or two squares) named **btnLeft** and **btnRight**. Put them at the bottom of the screen.",
-        "Open the scene's **{{lang:titre_blueprint}}**.",
-        "Add the **[[NoeudEventMaintenuObjet]]** event and choose **btnLeft** as its target.",
-        "Add a **[[pousser]]** node: target **player**, **{{lang:pousser.x}} = -5**, **{{lang:pousser.y}} = 0**.",
-        "Link the event's output to the input of [[pousser]].",
-        "Do the same for **btnRight**, with **{{lang:pousser.x}} = 5**.",
-        "Save, then start the game: as long as your finger stays on a button, the character moves."
-      ]],
-      ["chaine", [["ev", "{{NoeudEventMaintenuObjet}}", "target: btnLeft"], ["→"], ["n", "{{pousser}}", "target: player · {{lang:pousser.x}} = -5"]]],
-      ["tip", "[[NoeudEventMaintenuObjet]] repeats on every frame while the finger stays on the button: that is why the character keeps moving. To go faster, raise the value (for example 8 or 10)."]
-    ]],
-    ["h2", "Method 2: with a virtual joystick"],
-    ["bloc", [
-      ["p", "Great for a top-down game, where the character moves in every direction. **No node needed.**"],
-      ["ol", [
-        "Add a **{{lang:obj_prefix_joystick}}** object to your scene (category **{{lang:cat_interactifs}}**) and put it at the bottom left.",
-        "Select the joystick. In the inspector, section **[[lang:insp_sep_joystick]]**, tap the **[[lang:insp_label_cible_joystick]]** button and choose your character.",
-        "Save, then start the game: the character follows the joystick."
-      ]],
-      ["tip", "**Shortcut:** if you give your character the tag **Player** (or **Joueur**), the joystick moves it automatically, even if nothing is chosen in [[lang:insp_label_cible_joystick]]. Careful: this tag wins over the inspector's choice."],
-      ["tip", "**Going further:** the formulas `joystick.x` and `joystick.y` give the direction (between -1 and 1). You can use them in a [[pousser]] node linked to [[NoeudEventChaqueImage]], for example `=joystick.x * 5`. The **[[si_joystick]]** node also has {{lang:port_haut}}, {{lang:port_bas}}, {{lang:port_gauche}}, {{lang:port_droite}} and {{lang:port_repos}} outputs."]
-    ]],
-    ["h2", "Method 3: drag it with your finger"],
-    ["bloc", [
-      ["p", "Great for a puzzle, a card game or any game where you move pieces around."],
-      ["ol", [
-        "Select your object in the scene editor.",
-        "In the inspector, tick **[[lang:insp_cb_deplacable]]**.",
-        "Start the game: you can drag the object with your finger."
-      ]],
-      ["tip", "To react when the player lets go of the object (for example to check it is in the right place), use the **[[NoeudEventFinGlisser]]** event."],
-      ["tip", "To allow or block dragging during the game (a puzzle piece in the right place, for example), use the **[[modifier_deplacable]]** node."]
-    ]],
-    ["h2", "Tips"],
-    ["ul", [
-      "**To make the character jump**, follow the guide [Make a character jump](guide:sauter).",
-      "**The « Platform » example game** that comes with Yop2D uses method 1: open it to see a complete Blueprint that works.",
-      "**A question?** Come and talk about it on [Discord](https://discord.gg/nHqCcqHZNQ) or [Telegram](https://t.me/+7PQ9WKw7n645Y2Zk)."
-    ]]
+  [
+   "With a virtual joystick",
+   "Add a {{lang:obj_prefix_joystick}} object and choose the character in {{lang:insp_label_cible_joystick}}. No node needed."
+  ],
+  [
+   "By dragging it with your finger",
+   "In ⚙ Object behavior, choose \"Dragged with a finger\"."
   ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "In Yop2D, there are three simple ways to move a character, without writing code. Pick the one that fits your game."
+  ],
+  [
+   "h2",
+   "Method 1: with on-screen buttons (left / right)"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "Great for a platform game, or a game where the character moves along a line."
+    ],
+    [
+     "ol",
+     [
+      "In your scene, add your character (a **{{lang:obj_prefix_carre}}** or an **{{lang:obj_prefix_image}}**) and name it **player**.",
+      "Add two objects to use as buttons, for example two **{{lang:obj_prefix_bouton}}** objects (or two squares) named **btnLeft** and **btnRight**. Put them at the bottom of the screen.",
+      "Open the scene's **{{lang:titre_blueprint}}**.",
+      "Add the **[[NoeudEventMaintenuObjet]]** event and choose **btnLeft** as its target.",
+      "Add a **[[pousser]]** node: target **player**, **{{lang:pousser.x}} = -5**, **{{lang:pousser.y}} = 0**.",
+      "Link the event's output to the input of [[pousser]].",
+      "Do the same for **btnRight**, with **{{lang:pousser.x}} = 5**.",
+      "Save, then start the game: as long as your finger stays on a button, the character moves."
+     ]
+    ],
+    [
+     "chaine",
+     [
+      [
+       "ev",
+       "{{NoeudEventMaintenuObjet}}",
+       "target: btnLeft"
+      ],
+      [
+       "→"
+      ],
+      [
+       "n",
+       "{{pousser}}",
+       "target: player · {{lang:pousser.x}} = -5"
+      ]
+     ]
+    ],
+    [
+     "tip",
+     "[[NoeudEventMaintenuObjet]] repeats on every frame while the finger stays on the button: that is why the character keeps moving. To go faster, raise the value (for example 8 or 10)."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Method 2: with a virtual joystick"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "Great for a top-down game, where the character moves in every direction. **No node needed.**"
+    ],
+    [
+     "ol",
+     [
+      "Add a **{{lang:obj_prefix_joystick}}** object to your scene (category **{{lang:cat_interactifs}}**) and put it at the bottom left.",
+      "Select the joystick. In the inspector, section **[[lang:insp_sep_joystick]]**, tap the **[[lang:insp_label_cible_joystick]]** button and choose your character.",
+      "Save, then start the game: the character follows the joystick."
+     ]
+    ],
+    [
+     "tip",
+     "**Shortcut:** if you give your character the tag **Player** (or **Joueur**), the joystick moves it automatically, even if nothing is chosen in [[lang:insp_label_cible_joystick]]. Careful: this tag wins over the inspector's choice."
+    ],
+    [
+     "tip",
+     "**Going further:** the formulas `joystick.x` and `joystick.y` give the direction (between -1 and 1). You can use them in a [[pousser]] node linked to [[NoeudEventChaqueImage]], for example `=joystick.x * 5`. The **[[si_joystick]]** node also has {{lang:port_haut}}, {{lang:port_bas}}, {{lang:port_gauche}}, {{lang:port_droite}} and {{lang:port_repos}} outputs."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Method 3: drag it with your finger"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "Great for a puzzle, a card game or any game where you move pieces around."
+    ],
+    [
+     "ol",
+     [
+      "Select your object in the scene editor.",
+      "In the inspector, tap **⚙ Object behavior** and choose **Dragged with a finger**.",
+      "Start the game: you can drag the object with your finger."
+     ]
+    ],
+    [
+     "tip",
+     "To react when the player lets go of the object (for example to check it is in the right place), use the **[[NoeudEventFinGlisser]]** event."
+    ],
+    [
+     "tip",
+     "To allow or block dragging during the game (a puzzle piece in the right place, for example), use the **[[changer_comportement]]** node."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Tips"
+  ],
+  [
+   "ul",
+   [
+    "**To make the character jump**, follow the guide [Make a character jump](guide:sauter).",
+    "**The « Platform » example game** that comes with Yop2D uses method 1: open it to see a complete Blueprint that works.",
+    "**A question?** Come and talk about it on [Discord](https://discord.gg/nHqCcqHZNQ) or [Telegram](https://t.me/+7PQ9WKw7n645Y2Zk)."
+   ]
+  ]
+ ]
 }

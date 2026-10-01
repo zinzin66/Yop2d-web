@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to make a character walk, jump and climb without nodes? | Yop2D guide</title>
+<meta name="description" content="Yop2D behaviors: a platform character that walks, jumps and climbs ladders, or a top-down character, with its animations, without a single node.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/comportements.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/comportements.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/comportements.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/comportements.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/comportements.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/comportements.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/comportements.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/comportements.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/comportements.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/comportements.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Behaviors: a character that moves without nodes",
+ "description": "Yop2D behaviors: a platform character that walks, jumps and climbs ladders, or a top-down character, with its animations, without a single node.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "The ground",
+   "text": "In \"⚙ Object behavior\", choose \"Ground / wall\"."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "The character",
+   "text": "Choose \"Platform character\", controls \"Joystick\", and add a joystick."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "The ladders",
+   "text": "On the ladder, check \"A ladder\"."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "The animations",
+   "text": "Name them idle, walk, jump, climb and duck: the engine plays them by itself."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Change during the game",
+   "text": "Use the “Change the behavior” node."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Behaviors: a character that moves without nodes</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../comportements.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/comportements.html" hreflang="es">Español</a> · <a href="../de/comportements.html" hreflang="de">Deutsch</a> · <a href="../it/comportements.html" hreflang="it">Italiano</a> · <a href="../pt/comportements.html" hreflang="pt">Português</a> · <a href="../ru/comportements.html" hreflang="ru">Русский</a> · <a href="../zh/comportements.html" hreflang="zh">中文</a> · <a href="../ja/comportements.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Before, making a character walk, jump and climb took a lot of nodes and formulas. Now you simply choose <strong>what the object does</strong> in the inspector's <strong>⚙ Object behavior</strong> window, and the engine does the rest.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a character named <strong>player</strong> (an Image);</li><li>a ground: an Image or a wide, flat Square at the bottom of the scene;</li><li>a ladder (an Image), if you want to climb;</li><li>a Joystick at the bottom left of the screen.</li></ul>
+</div>
+<h2>Step 1: the ground</h2>
+<div class="method">
+<ol><li>Select the ground.</li><li>In the inspector, tap the <strong>⚙ Object behavior</strong> button.</li><li>Choose <strong>Ground / wall</strong>: it doesn't move, you walk on it and bump into it.</li></ol>
+<div class="tip">👉 For a platform you can jump through from below, also check <strong>Pass-through from below</strong> in the "It is also…" part.</div>
+</div>
+<h2>Step 2: the character</h2>
+<div class="method">
+<ol><li>Select <strong>player</strong> and tap <strong>⚙ Object behavior</strong>.</li><li>Choose <strong>Platform character</strong>.</li><li>In "Its settings", leave <strong>Controls: Joystick</strong>. You can choose the <strong>Speed</strong> and the <strong>Jump height</strong>.</li><li>Add a Joystick to the scene. No need to choose a target: the character follows it by itself.</li><li>Run the game: the joystick makes the character walk, and pushing it up makes it jump.</li></ol>
+<div class="tip">👉 Prefer a button to jump? Choose it in <strong>Jump button</strong>. Prefer ◀ ▶ buttons? Choose <strong>Controls: Buttons</strong>, then the left button and the right button.</div>
+</div>
+<h2>Step 3: the ladders</h2>
+<div class="method">
+<ol><li>Select the ladder and tap <strong>⚙ Object behavior</strong>.</li><li>Leave <strong>Scenery</strong> and check <strong>A ladder</strong> in the "It is also…" part.</li><li>Make the ladder go a little above the platform it leads to.</li><li>Run the game: in front of the ladder, push the joystick up to climb and down to go down. At the top, the character lands on the platform.</li></ol>
+<div class="tip">👉 While climbing, the character doesn't fall: it stays hanging if you let go of the joystick. Push sideways to leave the ladder.</div>
+</div>
+<h2>Step 4: the animations, by themselves</h2>
+<div class="method">
+<p>In the <strong>Animations</strong> window, give the character's animations these names: <strong>idle</strong>, <strong>walk</strong>, <strong>jump</strong>, <strong>climb</strong> and <strong>duck</strong>. The engine plays the right animation for what the character does, and flips the image when it goes left.</p>
+<ul><li>An animation is missing? No problem: the image just doesn't change in that case.</li><li>Several characters? Start the name with the object's name: <strong>player_walk</strong>, <strong>enemy_walk</strong>. Each one takes its own.</li><li>You can also choose the animation by hand: in "Animations played automatically", tap a line and pick from the list (with a thumbnail of each animation).</li></ul>
+</div>
+<h2>An enemy that walks by itself</h2>
+<div class="method">
+<p>For a patrolling enemy, also choose <strong>Platform character</strong>, but with <strong>Controls: None</strong>: it no longer obeys the joystick. Move it with your nodes (for example “Glide to”): it keeps gravity and its animations follow its real movements.</p>
+</div>
+<h2>A top-down character (or iso view)</h2>
+<div class="method">
+<ol><li>Choose <strong>Top-down character</strong> in ⚙ Object behavior.</li><li>In <strong>Directions</strong>, choose <strong>4</strong> (up, down, left, right), <strong>Iso view</strong> (4 diagonals) or <strong>Left / right</strong>.</li><li>Name the animations with the direction: <strong>walk_up</strong>, <strong>walk_down</strong>, <strong>walk_left</strong>, <strong>walk_right</strong>, and <strong>idle_up</strong>… (in iso view: <strong>walk_ne</strong>, <strong>walk_nw</strong>, <strong>walk_se</strong>, <strong>walk_sw</strong>).</li></ol>
+<div class="tip">👉 No "left" animation? The engine flips the "right" image.</div>
+</div>
+<h2>Change behavior during the game</h2>
+<div class="method">
+<p>The “Change the behavior” node offers the same choices as the window. Example: a crate set to <strong>Ground / wall</strong> starts falling when a lever is pulled: “Change the behavior” → <strong>Falls and bounces</strong>. Every setting left on "(don't change)" keeps its value.</p>
+</div>
+<h2>To see the result</h2>
+<p>Download the <strong>Climb &amp; run</strong> (platform, ladders, animations) and <strong>Dungeon walk</strong> (iso view) examples in the <strong>Examples</strong> tab of Yop2D's home screen, then tap the hero and open <strong>⚙ Object behavior</strong>.</p>
+<h2>If it doesn't work</h2>
+<ul><li><strong>The character doesn't move:</strong> check <strong>Controls: Joystick</strong> (not "None") and that there is a joystick in the scene (or in the HUD).</li><li><strong>It falls through the ground:</strong> the ground must be set to <strong>Ground / wall</strong>.</li><li><strong>It doesn't climb:</strong> the ladder must have <strong>A ladder</strong> checked, and the character <strong>Can climb ladders: yes</strong>.</li><li><strong>The animation doesn't change:</strong> check the animation names, or pick them by hand in the list.</li></ul>
+
+<div class="nav">
+<a href="../en/sauter.html">← Make a character jump</a>
+<a href="../en/pieces-score.html">Next guide: Collect coins and count the score →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D の全ノード（133 個）| リファレンス</title>
-<meta name="description" content="Android 向けコード不要 2D ゲームエンジン Yop2D の 133 個のビジュアルノードの一覧：各ノードの役割、設定、出力、使用例。">
+<title>Yop2D の全ノード（131 個）| リファレンス</title>
+<meta name="description" content="Android 向けコード不要 2D ゲームエンジン Yop2D の 131 個のビジュアルノードの一覧：各ノードの役割、設定、出力、使用例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/ja.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
 </header>
 <main>
-<p>Yop2D は、Android 向けの無料・コード不要の 2D ゲームエンジンです。ゲームのロジックは、Blueprint の中でつないだノード（ビジュアルブロック）で作ります。イベントがつながりを始め、そのあとにアクションや条件が続きます。このページでは、エディターの 133 個のノードを、設定（入力）と出力とともに説明します。</p>
+<p>Yop2D は、Android 向けの無料・コード不要の 2D ゲームエンジンです。ゲームのロジックは、Blueprint の中でつないだノード（ビジュアルブロック）で作ります。イベントがつながりを始め、そのあとにアクションや条件が続きます。このページでは、エディターの 131 個のノードを、設定（入力）と出力とともに説明します。</p>
 <p><strong>カテゴリー</strong></p>
 <nav class="sommaire"><a href="#c1-イベント">イベント</a><a href="#c2-シーンとhud">シーンとHUD</a><a href="#c3-時間">時間</a><a href="#c4-外観とオブジェクト">外観とオブジェクト</a><a href="#c5-変数とインベントリ">変数とインベントリ</a><a href="#c6-ロジックと条件">ロジックと条件</a><a href="#c7-テキストとダイアログ">テキストとダイアログ</a><a href="#c8-移動とai">移動とAI</a><a href="#c9-グリッドとパズル">グリッドとパズル</a><a href="#c10-アニメーション">アニメーション</a><a href="#c11-オーディオ">オーディオ</a></nav>
 <h2 id="c1-イベント">イベント</h2>
@@ -372,7 +372,7 @@
 </div>
 <div class="fiche"><h3>オブジェクトをロック / 解除</h3>
 <div class="schema"><b>入力：</b> オブジェクト, ロック（はい / いいえ）</div>
-<p>エディターでオブジェクトをロック・ロック解除します（カギのマーク）。ゲーム中には何の効果もありません。オブジェクトをドラッグできないようにするには 「ドラッグ可能にする」 を使ってください。</p>
+<p>エディターでオブジェクトをロック・ロック解除します（カギのマーク）。ゲーム中には何の効果もありません。オブジェクトをドラッグできないようにするには 「ふるまいを変える」 を使ってください。</p>
 </div>
 <div class="fiche"><h3>背景のスクロール（奥行き）</h3>
 <div class="schema"><b>入力：</b> オブジェクト, 背景の速さ（1 = ふつう、0.5 = ゆっくり、遠くに見える）</div>
@@ -468,9 +468,9 @@
 <p class="exemple"><b>例：</b> 「score」を 0 に戻す。</p>
 </div>
 <div class="fiche"><h3>変数に加算</h3>
-<div class="schema"><b>入力：</b> オブジェクト, 変数, 加算する値</div>
-<p>変数に値を足します（マイナスの数なら引きます）。テキストの変数なら、最後に文字を足します。</p>
-<p class="exemple"><b>例：</b> コインごとに score + 1、ダメージごとに体力 - 1。</p>
+<div class="schema"><b>入力：</b> オブジェクト, 変数, 加算する値, これをこえたら0にもどす（なくてもよい）</div>
+<p>変数に値を加える（マイナスの数なら引く）。テキスト変数なら最後に文字を足す。「これをこえたら0にもどす」を入れると、カウンターのように回る：9の次は0（0より下は9）。</p>
+<p class="exemple"><b>例：</b> コインごとにスコア + 1；錠前の数字：タップごとに + 1、9をこえたら0にもどす。</p>
 </div>
 <div class="fiche"><h3>変数を2つの値の間に保つ</h3>
 <div class="schema"><b>入力：</b> オブジェクト, 変数, 最小値, 最大値</div>
@@ -621,11 +621,6 @@
 <p>オブジェクト A が、選んだ速さでオブジェクト B から自分で離れます。</p>
 <p class="exemple"><b>例：</b> プレイヤーから逃げるニワトリ。</p>
 </div>
-<div class="fiche"><h3>バウンドを変更</h3>
-<div class="schema"><b>入力：</b> オブジェクト, バウンド（0〜1）</div>
-<p>物理オブジェクトのはね返りを決めます。0 = はねない、1 = よくはねる。</p>
-<p class="exemple"><b>例：</b> 0.8 でよくはねるボール。</p>
-</div>
 <div class="fiche"><h3>角度を付けて押す</h3>
 <div class="schema"><b>入力：</b> オブジェクト, 角度（0 = 右、90 = 下）, 力</div>
 <p>選んだ力で、オブジェクトをある方向に押します（角度：0 = 右、90 = 下、180 = 左、270 = 上）。</p>
@@ -636,15 +631,10 @@
 <p>オブジェクトを上（マイナスの数）または下（プラスの数）に飛ばし、落ちてくるように物理を与えます。</p>
 <p class="exemple"><b>例：</b> ジャンプ：力 -15。</p>
 </div>
-<div class="fiche"><h3>物理を有効にする</h3>
-<div class="schema"><b>入力：</b> オブジェクト, 落ちる（はい / いいえ）</div>
-<p>オブジェクトに物理を与えます。true なら重力で落ち、false なら地面のように固定されます。</p>
-<p class="exemple"><b>例：</b> 乗るとくずれる足場。</p>
-</div>
-<div class="fiche"><h3>ドラッグ可能にする</h3>
-<div class="schema"><b>入力：</b> オブジェクト, 指でドラッグ可能（はい / いいえ）</div>
-<p>ゲーム中に指でオブジェクトをドラッグすることを、許可（true）または禁止（false）します。</p>
-<p class="exemple"><b>例：</b> 正しく置いたパズルのピースを固定する。</p>
+<div class="fiche"><h3>ふるまいを変える</h3>
+<div class="schema"><b>入力：</b> オブジェクト, どう動く, はやさ, ジャンプの高さ, はしごにする, 拾える</div>
+<p>ゲーム中にオブジェクトのふるまいを変える。インスペクターの「オブジェクトのふるまい」画面と同じ選択肢：かざり、地面 / かべ、落ちてはずむ、アクションゲームのキャラ、上から見たキャラ、指でドラッグ。速さ、ジャンプの高さ、「はしごにする」「拾える」も変えられる。「（変えない）」のままの設定は元の値のまま。</p>
+<p class="exemple"><b>例：</b> 止まっている箱（地面 / かべ）がレバーを引くと落ちはじめる：ふるまいを変える → 落ちてはずむ。</p>
 </div>
 <div class="fiche"><h3>ぴょんぴょん跳ねる</h3>
 <div class="schema"><b>入力：</b> オブジェクト, 強さ（0 = 停止）, 長さ（ミリ秒、1000 = 1秒）, 動いている間続ける（はい / いいえ）</div>

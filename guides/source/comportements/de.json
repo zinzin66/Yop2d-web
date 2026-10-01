@@ -1,0 +1,201 @@
+{
+  "titre_page": "Wie lässt man eine Figur ohne Knoten gehen, springen und klettern? | Yop2D-Anleitung",
+  "description": "Das Verhalten in Yop2D: eine Plattform-Figur, die geht, springt und Leitern klettert, oder eine Figur von oben, mit ihren Animationen, ganz ohne Knoten.",
+  "h1": "Verhalten: eine Figur, die sich ohne Knoten bewegt",
+  "carte": [
+    "Verhalten",
+    "Gehen, springen, klettern, Ansicht von oben und Animationen, ganz ohne Knoten."
+  ],
+  "etapes": [
+    [
+      "Der Boden",
+      "Wähle in „⚙ Verhalten des Objekts“ „Boden / Wand“."
+    ],
+    [
+      "Die Figur",
+      "Wähle „Plattform-Figur“, Steuerung „Joystick“, und füge einen Joystick hinzu."
+    ],
+    [
+      "Die Leitern",
+      "Setze bei der Leiter den Haken „Eine Leiter“."
+    ],
+    [
+      "Die Animationen",
+      "Nenne sie ruhe, gehen, sprung, klettern und ducken: Die Engine spielt sie von selbst."
+    ],
+    [
+      "Während des Spiels ändern",
+      "Nimm den Knoten [[changer_comportement]]."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Früher brauchte man viele Knoten und Formeln, damit eine Figur geht, springt und klettert. Jetzt wählst du einfach **was das Objekt tut** im Fenster **⚙ Verhalten des Objekts** des Inspektors, und die Engine macht den Rest."
+    ],
+    [
+      "besoin",
+      [
+        "eine Figur namens **player** (ein {{lang:obj_prefix_image}});",
+        "ein Boden: ein {{lang:obj_prefix_image}} oder ein breites, flaches {{lang:obj_prefix_carre}} unten in der Szene;",
+        "eine Leiter (ein {{lang:obj_prefix_image}}), wenn du klettern willst;",
+        "ein {{lang:obj_prefix_joystick}} unten links auf dem Bildschirm."
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 1: der Boden"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Wähle den Boden aus.",
+            "Tippe im Inspektor auf den Knopf **⚙ Verhalten des Objekts**.",
+            "Wähle **Boden / Wand**: Er bewegt sich nicht, man läuft darauf und stößt dagegen."
+          ]
+        ],
+        [
+          "tip",
+          "Für eine Plattform, durch die man von unten springen kann, setze auch **Von unten durchspringbar** im Teil „Es ist auch…“."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 2: die Figur"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Wähle **player** aus und tippe auf **⚙ Verhalten des Objekts**.",
+            "Wähle **Plattform-Figur**.",
+            "Lass unter „Seine Einstellungen“ **Steuerung: Joystick**. Du kannst **Tempo** und **Sprunghöhe** wählen.",
+            "Füge der Szene einen {{lang:obj_prefix_joystick}} hinzu. Du musst kein Ziel wählen: Die Figur folgt ihm von selbst.",
+            "Starte das Spiel: Der Joystick lässt die Figur gehen, nach oben gedrückt springt sie."
+          ]
+        ],
+        [
+          "tip",
+          "Lieber einen Knopf zum Springen? Wähle ihn bei **Sprungknopf**. Lieber Knöpfe ◀ ▶? Wähle **Steuerung: Knöpfe** und dann den Knopf links und den Knopf rechts."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 3: die Leitern"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Wähle die Leiter aus und tippe auf **⚙ Verhalten des Objekts**.",
+            "Lass **Deko** und setze **Eine Leiter** im Teil „Es ist auch…“.",
+            "Lass die Leiter ein wenig über die Plattform hinausragen, zu der sie führt.",
+            "Starte das Spiel: Vor der Leiter drückst du den Joystick nach oben zum Klettern und nach unten zum Absteigen. Oben landet die Figur auf der Plattform."
+          ]
+        ],
+        [
+          "tip",
+          "Beim Klettern fällt die Figur nicht: Sie bleibt hängen, wenn du den Joystick loslässt. Drück zur Seite, um die Leiter zu verlassen."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 4: die Animationen, von selbst"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Gib den Animationen der Figur im Fenster **Animationen** diese Namen: **ruhe**, **gehen**, **sprung**, **klettern** und **ducken**. Die Engine spielt die passende Animation zu dem, was die Figur tut, und spiegelt das Bild, wenn sie nach links geht."
+        ],
+        [
+          "ul",
+          [
+            "Fehlt eine Animation? Kein Problem: Das Bild ändert sich in diesem Fall einfach nicht.",
+            "Mehrere Figuren? Beginne den Namen mit dem Objektnamen: **player_gehen**, **gegner_gehen**. Jede nimmt ihre eigenen.",
+            "Du kannst die Animation auch selbst wählen: Tippe unter „Automatische Animationen“ eine Zeile an und wähle aus der Liste (mit Vorschaubild jeder Animation)."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Ein Gegner, der von selbst läuft"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Für einen patrouillierenden Gegner wählst du ebenfalls **Plattform-Figur**, aber mit **Steuerung: Keine**: Er gehorcht dem Joystick nicht mehr. Bewege ihn mit deinen Knoten (zum Beispiel [[glisser_vers]]): Die Schwerkraft bleibt, und seine Animationen folgen seinen echten Bewegungen."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Eine Figur von oben (oder in Iso-Ansicht)"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Wähle **Figur von oben** in ⚙ Verhalten des Objekts.",
+            "Wähle bei **Richtungen** **4** (oben, unten, links, rechts), **Iso-Ansicht** (4 Diagonalen) oder **Links / rechts**.",
+            "Schreib die Richtung in den Namen der Animationen: **gehen_oben**, **gehen_unten**, **gehen_links**, **gehen_rechts** und **ruhe_oben**… (in Iso-Ansicht: **gehen_ne**, **gehen_nw**, **gehen_se**, **gehen_sw**)."
+          ]
+        ],
+        [
+          "tip",
+          "Keine Animation „links“? Die Engine spiegelt das Bild von „rechts“."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Das Verhalten während des Spiels ändern"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Der Knoten [[changer_comportement]] bietet dieselben Möglichkeiten wie das Fenster. Beispiel: Eine Kiste auf **Boden / Wand** fällt herunter, wenn ein Hebel gezogen wird: [[changer_comportement]] → **Fällt und springt**. Jede Einstellung auf „(nicht ändern)“ behält ihren Wert."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Das Ergebnis ansehen"
+    ],
+    [
+      "p",
+      "Lade die Beispiele **Climb & run** (Plattform, Leitern, Animationen) und **Dungeon walk** (Iso-Ansicht) im Tab **Beispiele** des Yop2D-Startbildschirms herunter, tippe dann den Helden an und öffne **⚙ Verhalten des Objekts**."
+    ],
+    [
+      "h2",
+      "Wenn es nicht klappt"
+    ],
+    [
+      "ul",
+      [
+        "**Die Figur bewegt sich nicht:** Prüfe **Steuerung: Joystick** (nicht „Keine“) und dass ein Joystick in der Szene (oder im HUD) ist.",
+        "**Sie fällt durch den Boden:** Der Boden muss auf **Boden / Wand** stehen.",
+        "**Sie klettert nicht:** Bei der Leiter muss **Eine Leiter** gesetzt sein und bei der Figur **Kann Leitern klettern: ja**.",
+        "**Die Animation wechselt nicht:** Prüfe die Namen der Animationen oder wähle sie selbst in der Liste."
+      ]
+    ]
+  ]
+}

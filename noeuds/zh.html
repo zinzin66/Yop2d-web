@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D 全部节点（133 个）| 参考</title>
-<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 133 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<title>Yop2D 全部节点（131 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 131 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 133 个节点，以及它们的设置（输入）和输出。</p>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 131 个节点，以及它们的设置（输入）和输出。</p>
 <p><strong>分类</strong></p>
 <nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-网格和益智">网格和益智</a><a href="#c10-动画">动画</a><a href="#c11-音频">音频</a></nav>
 <h2 id="c1-事件">事件</h2>
@@ -372,7 +372,7 @@
 </div>
 <div class="fiche"><h3>锁定 / 解锁对象</h3>
 <div class="schema"><b>输入：</b> 对象, 锁定（是 / 否）</div>
-<p>在编辑器中锁定或解锁对象（小锁图标）。在游戏中没有任何作用：要禁止拖动对象，请使用 “设为可拖动”。</p>
+<p>在编辑器中锁定或解锁对象（小锁图标）。在游戏中没有任何作用：要禁止拖动对象，请使用 “改变行为”。</p>
 </div>
 <div class="fiche"><h3>背景滚动（远近感）</h3>
 <div class="schema"><b>输入：</b> 对象, 背景速度（1 = 正常，0.5 = 更慢，远处效果）</div>
@@ -468,9 +468,9 @@
 <p class="exemple"><b>示例：</b> 把“score”重置为 0。</p>
 </div>
 <div class="fiche"><h3>增加变量值</h3>
-<div class="schema"><b>输入：</b> 对象, 变量, 要增加的值</div>
-<p>把数值加到变量上（负数就是减）。文本变量会把文字加到末尾。</p>
-<p class="exemple"><b>示例：</b> 每个金币 score + 1，每次受伤生命 - 1。</p>
+<div class="schema"><b>输入：</b> 对象, 变量, 要增加的值, 超过后回到 0（可选）</div>
+<p>把数值加到变量上（负数表示减去）。文本变量则把文字加到末尾。设置“超过后回到 0”时，变量像计数器一样循环：超过 9 回到 0（小于 0 时变成 9）。</p>
+<p class="exemple"><b>示例：</b> 每捡一枚金币分数 + 1；密码锁的一位数字：每点一次 + 1，超过 9 回到 0。</p>
 </div>
 <div class="fiche"><h3>让变量保持在两个值之间</h3>
 <div class="schema"><b>输入：</b> 对象, 变量, 最小值, 最大值</div>
@@ -621,11 +621,6 @@
 <p>对象 A 按所选速度自动远离对象 B。</p>
 <p class="exemple"><b>示例：</b> 躲着玩家跑的小鸡。</p>
 </div>
-<div class="fiche"><h3>设置弹跳</h3>
-<div class="schema"><b>输入：</b> 对象, 弹跳（0 到 1）</div>
-<p>设置物理对象的弹性：0 = 不弹，1 = 弹得很高。</p>
-<p class="exemple"><b>示例：</b> 0.8：弹力球。</p>
-</div>
 <div class="fiche"><h3>按角度推动</h3>
 <div class="schema"><b>输入：</b> 对象, 角度（0 = 右，90 = 下）, 力度</div>
 <p>按所选力度，把对象朝某个方向推（角度：0 = 右，90 = 下，180 = 左，270 = 上）。</p>
@@ -636,15 +631,10 @@
 <p>把对象向上（负数）或向下（正数）弹出，并给它物理效果让它落回来。</p>
 <p class="exemple"><b>示例：</b> 跳跃：力度 -15。</p>
 </div>
-<div class="fiche"><h3>启用物理</h3>
-<div class="schema"><b>输入：</b> 对象, 会下落（是 / 否）</div>
-<p>给对象加上物理：true 时会随重力下落；false 时像地面一样固定不动。</p>
-<p class="exemple"><b>示例：</b> 有人站上去就会塌掉的平台。</p>
-</div>
-<div class="fiche"><h3>设为可拖动</h3>
-<div class="schema"><b>输入：</b> 对象, 可用手指拖动（是 / 否）</div>
-<p>允许（true）或禁止（false）在游戏中用手指拖动对象。</p>
-<p class="exemple"><b>示例：</b> 锁住已经放对位置的拼图块。</p>
+<div class="fiche"><h3>改变行为</h3>
+<div class="schema"><b>输入：</b> 对象, 怎么移动, 速度, 跳跃高度, 是梯子, 可拾取</div>
+<p>在游戏中改变物体的行为，选项与检查器里的“物体行为”窗口相同：装饰、地面 / 墙、会掉落和弹跳、平台角色、俯视角色、用手指拖动。也可以改变速度、跳跃高度、“是梯子”和“可拾取”。保持“（不改变）”的设置会保留原值。</p>
+<p class="exemple"><b>示例：</b> 一个静止的箱子（地面 / 墙）在拉下拉杆时开始掉落：改变行为 → 会掉落和弹跳。</p>
 </div>
 <div class="fiche"><h3>蹦跳</h3>
 <div class="schema"><b>输入：</b> 对象, 强度（0 = 停止）, 持续时间（毫秒，1000 = 1 秒）, 移动时持续（是 / 否）</div>

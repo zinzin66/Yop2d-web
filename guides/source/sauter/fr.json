@@ -1,160 +1,160 @@
 {
-  "titre_page": "Comment faire sauter un personnage dans Yop2D ? | Guide Yop2D",
-  "description": "Faire sauter un personnage dans Yop2D, sans code : gravité, sol solide, bouton de saut et nœuds [[si_au_sol]] et [[impulsion]].",
-  "h1": "Comment faire sauter un personnage ?",
-  "carte": [
-    "Faire sauter un personnage",
-    "Gravité, sol solide et bouton de saut, sans pouvoir sauter en l'air."
+ "titre_page": "Comment faire sauter un personnage dans Yop2D ? | Guide Yop2D",
+ "description": "Faire sauter un personnage dans Yop2D, sans code : gravité, sol solide, bouton de saut et nœuds [[si_au_sol]] et [[impulsion]].",
+ "h1": "Comment faire sauter un personnage ?",
+ "carte": [
+  "Faire sauter un personnage",
+  "Gravité, sol solide et bouton de saut, sans pouvoir sauter en l'air."
+ ],
+ "etapes": [
+  [
+   "Donner la gravité au personnage",
+   "Ouvre ⚙ Comportement de l'objet et choisis « Tombe et rebondit »."
   ],
-  "etapes": [
-    [
-      "Donner la gravité au personnage",
-      "Coche {{lang:insp_cb_physique}} et passe en {{lang:insp_btn_physique_dynamique}}."
-    ],
-    [
-      "Poser un sol solide",
-      "Ajoute un sol avec {{lang:insp_cb_physique}}, laissé en {{lang:insp_btn_physique_statique}}."
-    ],
-    [
-      "Relier le bouton de saut",
-      "{{NoeudEventClicObjet}} (btnSaut) → {{si_au_sol}} (player) → {{lang:port_vrai}} → {{impulsion}} (player, -15)."
-    ]
+  [
+   "Poser un sol solide",
+   "Ajoute un sol et choisis « Sol / mur » dans ⚙ Comportement de l'objet."
   ],
-  "blocs": [
-    [
-      "p",
-      "Pour qu'un personnage saute, il faut trois choses : qu'il **tombe** (la gravité), un **sol** sur lequel il se pose, et un **bouton** qui le propulse vers le haut, seulement s'il est bien posé."
-    ],
-    [
-      "besoin",
-      [
-        "un personnage nommé **player** (un {{lang:obj_prefix_carre}} ou une {{lang:obj_prefix_image}}) ;",
-        "un sol : un {{lang:obj_prefix_carre}} large et plat nommé **sol**, en bas de la scène ;",
-        "un bouton nommé **btnSaut** (un {{lang:obj_prefix_bouton}} ou un {{lang:obj_prefix_carre}}), en bas à droite de l'écran."
-      ]
-    ],
-    [
-      "h2",
-      "Étape 1 : donner la gravité au personnage"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "ol",
-          [
-            "Sélectionne **player**.",
-            "Dans l'inspecteur, section **[[lang:insp_sep_physique]]**, coche **[[lang:insp_cb_physique]]**.",
-            "Touche le bouton **[[lang:insp_btn_physique_statique]]** pour qu'il devienne **[[lang:insp_btn_physique_dynamique]]**. « Dynamique » veut dire que l'objet tombe."
-          ]
-        ],
-        [
-          "tip",
-          "Le réglage **[[lang:insp_label_gravite]]** change la vitesse de chute : 0.5 pour tomber doucement, 2 pour tomber vite."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "Étape 2 : poser un sol solide"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "ol",
-          [
-            "Sélectionne **sol**.",
-            "Coche aussi **[[lang:insp_cb_physique]]**, mais **laisse-le en [[lang:insp_btn_physique_statique]]** : un objet statique ne bouge pas et bloque les objets qui tombent dessus.",
-            "Place **player** un peu au-dessus du sol."
-          ]
-        ],
-        [
-          "tip",
-          "Tu peux faire des plateformes de la même façon : des carrés statiques placés en hauteur."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "Étape 3 : le bouton de saut"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "ol",
-          [
-            "Ouvre le **{{lang:titre_blueprint}}** de la scène.",
-            "Ajoute l'événement **[[NoeudEventClicObjet]]** et choisis **btnSaut** comme cible.",
-            "Ajoute le nœud **[[si_au_sol]]** (catégorie {{lang:cat_logique_conditions}}) et choisis **player** comme cible.",
-            "Ajoute le nœud **[[impulsion]]** (catégorie {{lang:cat_mouvements_ia}}) : cible **player**, **{{lang:impulsion.force}} = -15**.",
-            "Relie la sortie de [[NoeudEventClicObjet]] à l'entrée de [[si_au_sol]], puis la sortie **{{lang:port_vrai}}** de [[si_au_sol]] à l'entrée de [[impulsion]].",
-            "Sauvegarde, puis lance le jeu et touche le bouton."
-          ]
-        ],
-        [
-          "chaine",
-          [
-            [
-              "ev",
-              "{{NoeudEventClicObjet}}",
-              "cible : btnSaut"
-            ],
-            [
-              "→"
-            ],
-            [
-              "cond",
-              "{{si_au_sol}}",
-              "cible : player"
-            ],
-            [
-              "→",
-              "{{lang:port_vrai}}"
-            ],
-            [
-              "n",
-              "{{impulsion}}",
-              "cible : player · -15"
-            ]
-          ]
-        ],
-        [
-          "tip",
-          "**Pourquoi [[si_au_sol]] ?** Sans lui, le joueur pourrait sauter à nouveau en plein vol et s'envoler en touchant le bouton plusieurs fois."
-        ],
-        [
-          "tip",
-          "**Négatif = vers le haut.** Dans Yop2D, les nombres Y grandissent vers le bas de l'écran. -15 fait un petit saut, -20 un grand saut."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "Et pour avancer pendant le saut ?"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "p",
-          "Ajoute les boutons gauche et droite du guide [Faire bouger un personnage](guide:deplacer-personnage) (méthode 1). Tu peux garder un doigt sur « droite » et toucher « saut » avec un autre doigt."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "Si ça ne marche pas"
-    ],
-    [
-      "ul",
-      [
-        "**Le personnage ne tombe pas :** vérifie qu'il est en [[lang:insp_btn_physique_dynamique]].",
-        "**Il traverse le sol :** le sol doit avoir [[lang:insp_cb_physique]] coché, en statique.",
-        "**Rien ne se passe au toucher :** vérifie que les fils sont bien reliés, et que la sortie utilisée est **{{lang:port_vrai}}**. Pense à sauvegarder avant de lancer le jeu.",
-        "**Pour comparer**, ouvre le jeu d'exemple **« Plateforme »** fourni avec Yop2D : il utilise exactement ce montage."
-      ]
-    ]
+  [
+   "Relier le bouton de saut",
+   "{{NoeudEventClicObjet}} (btnSaut) → {{si_au_sol}} (player) → {{lang:port_vrai}} → {{impulsion}} (player, -15)."
   ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "Pour qu'un personnage saute, il faut trois choses : qu'il **tombe** (la gravité), un **sol** sur lequel il se pose, et un **bouton** qui le propulse vers le haut, seulement s'il est bien posé."
+  ],
+  [
+   "besoin",
+   [
+    "un personnage nommé **player** (un {{lang:obj_prefix_carre}} ou une {{lang:obj_prefix_image}}) ;",
+    "un sol : un {{lang:obj_prefix_carre}} large et plat nommé **sol**, en bas de la scène ;",
+    "un bouton nommé **btnSaut** (un {{lang:obj_prefix_bouton}} ou un {{lang:obj_prefix_carre}}), en bas à droite de l'écran."
+   ]
+  ],
+  [
+   "h2",
+   "Étape 1 : donner la gravité au personnage"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Sélectionne **player**.",
+      "Dans l'inspecteur, touche le bouton **⚙ Comportement de l'objet**.",
+      "Choisis **Tombe et rebondit** : l'objet tombe avec la gravité."
+     ]
+    ],
+    [
+     "tip",
+     "Dans la même fenêtre, **Gravité** change la vitesse de chute : **Légère** pour tomber doucement, **Forte** pour tomber vite. Encore plus simple : **Personnage de plateforme** marche et saute tout seul, sans aucun nœud (guide [Les comportements](guide:comportements))."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Étape 2 : poser un sol solide"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Sélectionne **sol**.",
+      "Touche **⚙ Comportement de l'objet** et choisis **Sol / mur** : il ne bouge pas et bloque les objets qui tombent dessus.",
+      "Place **player** un peu au-dessus du sol."
+     ]
+    ],
+    [
+     "tip",
+     "Tu peux faire des plateformes de la même façon : des carrés en **Sol / mur** placés en hauteur."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Étape 3 : le bouton de saut"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Ouvre le **{{lang:titre_blueprint}}** de la scène.",
+      "Ajoute l'événement **[[NoeudEventClicObjet]]** et choisis **btnSaut** comme cible.",
+      "Ajoute le nœud **[[si_au_sol]]** (catégorie {{lang:cat_logique_conditions}}) et choisis **player** comme cible.",
+      "Ajoute le nœud **[[impulsion]]** (catégorie {{lang:cat_mouvements_ia}}) : cible **player**, **{{lang:impulsion.force}} = -15**.",
+      "Relie la sortie de [[NoeudEventClicObjet]] à l'entrée de [[si_au_sol]], puis la sortie **{{lang:port_vrai}}** de [[si_au_sol]] à l'entrée de [[impulsion]].",
+      "Sauvegarde, puis lance le jeu et touche le bouton."
+     ]
+    ],
+    [
+     "chaine",
+     [
+      [
+       "ev",
+       "{{NoeudEventClicObjet}}",
+       "cible : btnSaut"
+      ],
+      [
+       "→"
+      ],
+      [
+       "cond",
+       "{{si_au_sol}}",
+       "cible : player"
+      ],
+      [
+       "→",
+       "{{lang:port_vrai}}"
+      ],
+      [
+       "n",
+       "{{impulsion}}",
+       "cible : player · -15"
+      ]
+     ]
+    ],
+    [
+     "tip",
+     "**Pourquoi [[si_au_sol]] ?** Sans lui, le joueur pourrait sauter à nouveau en plein vol et s'envoler en touchant le bouton plusieurs fois."
+    ],
+    [
+     "tip",
+     "**Négatif = vers le haut.** Dans Yop2D, les nombres Y grandissent vers le bas de l'écran. -15 fait un petit saut, -20 un grand saut."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Et pour avancer pendant le saut ?"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "Ajoute les boutons gauche et droite du guide [Faire bouger un personnage](guide:deplacer-personnage) (méthode 1). Tu peux garder un doigt sur « droite » et toucher « saut » avec un autre doigt."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Si ça ne marche pas"
+  ],
+  [
+   "ul",
+   [
+    "**Le personnage ne tombe pas :** vérifie qu'il est en **Tombe et rebondit** (bouton ⚙ Comportement de l'objet).",
+    "**Il traverse le sol :** le sol doit être en **Sol / mur**.",
+    "**Rien ne se passe au toucher :** vérifie que les fils sont bien reliés, et que la sortie utilisée est **{{lang:port_vrai}}**. Pense à sauvegarder avant de lancer le jeu.",
+    "**Pour comparer**, ouvre le jeu d'exemple **« Plateforme »** fourni avec Yop2D : il utilise exactement ce montage."
+   ]
+  ]
+ ]
 }

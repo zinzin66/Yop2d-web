@@ -1,147 +1,147 @@
 {
-  "titre_page": "如何在 Yop2D 中移动角色？| Yop2D 教程",
-  "description": "在 Yop2D 中无需代码移动角色的三种简单方法：屏幕按钮、虚拟摇杆，或用手指拖动。",
-  "h1": "如何移动角色？",
-  "carte": [
-    "移动角色",
-    "用按钮、摇杆或手指移动对象。"
+ "titre_page": "如何在 Yop2D 中移动角色？| Yop2D 教程",
+ "description": "在 Yop2D 中无需代码移动角色的三种简单方法：屏幕按钮、虚拟摇杆，或用手指拖动。",
+ "h1": "如何移动角色？",
+ "carte": [
+  "移动角色",
+  "用按钮、摇杆或手指移动对象。"
+ ],
+ "etapes": [
+  [
+   "用屏幕按钮",
+   "把每个按钮的 {{NoeudEventMaintenuObjet}} 事件连接到 {{pousser}} 节点，{{lang:pousser.x}} = -5 或 5。"
   ],
-  "etapes": [
-    [
-      "用屏幕按钮",
-      "把每个按钮的 {{NoeudEventMaintenuObjet}} 事件连接到 {{pousser}} 节点，{{lang:pousser.x}} = -5 或 5。"
-    ],
-    [
-      "用虚拟摇杆",
-      "添加一个 {{lang:obj_prefix_joystick}} 对象，并在 {{lang:insp_label_cible_joystick}} 中选择角色。不需要任何节点。"
-    ],
-    [
-      "用手指拖动",
-      "在对象的检查器中勾选 {{lang:insp_cb_deplacable}}。"
-    ]
+  [
+   "用虚拟摇杆",
+   "添加一个 {{lang:obj_prefix_joystick}} 对象，并在 {{lang:insp_label_cible_joystick}} 中选择角色。不需要任何节点。"
   ],
-  "blocs": [
-    [
-      "p",
-      "在 Yop2D 中，有三种简单的方法可以移动角色，无需写代码。选一种适合你的游戏的方法吧。"
-    ],
-    [
-      "h2",
-      "方法 1：用屏幕按钮（左 / 右）"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "p",
-          "适合平台跳跃游戏，或角色沿一条线移动的游戏。"
-        ],
-        [
-          "ol",
-          [
-            "在场景中添加你的角色（一个 **{{lang:obj_prefix_carre}}** 或一张 **{{lang:obj_prefix_image}}**），命名为 **player**。",
-            "添加两个当作按钮的对象，比如两个 **{{lang:obj_prefix_bouton}}**（或两个方块），命名为 **btnLeft** 和 **btnRight**，放在屏幕底部。",
-            "打开场景的 **{{lang:titre_blueprint}}**。",
-            "添加 **[[NoeudEventMaintenuObjet]]** 事件，并选择 **btnLeft** 作为目标。",
-            "添加一个 **[[pousser]]** 节点：目标 **player**，**{{lang:pousser.x}} = -5**，**{{lang:pousser.y}} = 0**。",
-            "把事件的输出连接到 [[pousser]] 的输入。",
-            "对 **btnRight** 做同样的操作，**{{lang:pousser.x}} = 5**。",
-            "保存，然后开始游戏：只要手指按在按钮上，角色就会前进。"
-          ]
-        ],
-        [
-          "chaine",
-          [
-            [
-              "ev",
-              "{{NoeudEventMaintenuObjet}}",
-              "目标：btnLeft"
-            ],
-            [
-              "→"
-            ],
-            [
-              "n",
-              "{{pousser}}",
-              "目标：player · {{lang:pousser.x}} = -5"
-            ]
-          ]
-        ],
-        [
-          "tip",
-          "只要手指一直按在按钮上，[[NoeudEventMaintenuObjet]] 每一帧都会重复运行，所以角色会一直前进。想走得更快，就把数值调大（比如 8 或 10）。"
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "方法 2：用虚拟摇杆"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "p",
-          "适合俯视角游戏，角色可以向各个方向移动。**不需要任何节点。**"
-        ],
-        [
-          "ol",
-          [
-            "在场景中添加一个 **{{lang:obj_prefix_joystick}}** 对象（类别 **{{lang:cat_interactifs}}**），放在左下角。",
-            "选中摇杆。在检查器的 **[[lang:insp_sep_joystick]]** 区域，点击 **[[lang:insp_label_cible_joystick]]** 按钮并选择你的角色。",
-            "保存，然后开始游戏：角色会跟着摇杆的方向移动。"
-          ]
-        ],
-        [
-          "tip",
-          "**小窍门：**如果给角色加上标签 **Player**（或 **Joueur**），即使 [[lang:insp_label_cible_joystick]] 里什么也没选，摇杆也会自动移动它。注意：这个标签比检查器里的选择优先。"
-        ],
-        [
-          "tip",
-          "**进阶：**公式 `joystick.x` 和 `joystick.y` 给出方向（-1 到 1 之间）。可以在连接到 [[NoeudEventChaqueImage]] 的 [[pousser]] 节点中使用，例如 `=joystick.x * 5`。**[[si_joystick]]** 节点还有 {{lang:port_haut}}、{{lang:port_bas}}、{{lang:port_gauche}}、{{lang:port_droite}} 和 {{lang:port_repos}} 输出。"
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "方法 3：用手指拖动"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "p",
-          "适合拼图、卡牌游戏，或需要移动棋子的游戏。"
-        ],
-        [
-          "ol",
-          [
-            "在场景编辑器中选中你的对象。",
-            "在检查器中勾选 **[[lang:insp_cb_deplacable]]**。",
-            "开始游戏：你可以用手指拖动这个对象。"
-          ]
-        ],
-        [
-          "tip",
-          "想在玩家松开对象时做出反应（比如检查它是否放对了位置），使用 **[[NoeudEventFinGlisser]]** 事件。"
-        ],
-        [
-          "tip",
-          "想在游戏中允许或禁止拖动（比如已经放对的拼图块），使用 **[[modifier_deplacable]]** 节点。"
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "小贴士"
-    ],
-    [
-      "ul",
-      [
-        "**想让角色跳跃**，请看教程 [让角色跳跃](guide:sauter)。",
-        "**Yop2D 自带的示例游戏“平台”**使用的是方法 1：打开它，就能看到一个完整可用的 Blueprint。",
-        "**有问题？**欢迎来 [Discord](https://discord.gg/nHqCcqHZNQ) 或 [Telegram](https://t.me/+7PQ9WKw7n645Y2Zk) 交流。"
-      ]
-    ]
+  [
+   "用手指拖动",
+   "在 ⚙ 物体行为 里选择“用手指拖动”。"
   ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "在 Yop2D 中，有三种简单的方法可以移动角色，无需写代码。选一种适合你的游戏的方法吧。"
+  ],
+  [
+   "h2",
+   "方法 1：用屏幕按钮（左 / 右）"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "适合平台跳跃游戏，或角色沿一条线移动的游戏。"
+    ],
+    [
+     "ol",
+     [
+      "在场景中添加你的角色（一个 **{{lang:obj_prefix_carre}}** 或一张 **{{lang:obj_prefix_image}}**），命名为 **player**。",
+      "添加两个当作按钮的对象，比如两个 **{{lang:obj_prefix_bouton}}**（或两个方块），命名为 **btnLeft** 和 **btnRight**，放在屏幕底部。",
+      "打开场景的 **{{lang:titre_blueprint}}**。",
+      "添加 **[[NoeudEventMaintenuObjet]]** 事件，并选择 **btnLeft** 作为目标。",
+      "添加一个 **[[pousser]]** 节点：目标 **player**，**{{lang:pousser.x}} = -5**，**{{lang:pousser.y}} = 0**。",
+      "把事件的输出连接到 [[pousser]] 的输入。",
+      "对 **btnRight** 做同样的操作，**{{lang:pousser.x}} = 5**。",
+      "保存，然后开始游戏：只要手指按在按钮上，角色就会前进。"
+     ]
+    ],
+    [
+     "chaine",
+     [
+      [
+       "ev",
+       "{{NoeudEventMaintenuObjet}}",
+       "目标：btnLeft"
+      ],
+      [
+       "→"
+      ],
+      [
+       "n",
+       "{{pousser}}",
+       "目标：player · {{lang:pousser.x}} = -5"
+      ]
+     ]
+    ],
+    [
+     "tip",
+     "只要手指一直按在按钮上，[[NoeudEventMaintenuObjet]] 每一帧都会重复运行，所以角色会一直前进。想走得更快，就把数值调大（比如 8 或 10）。"
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "方法 2：用虚拟摇杆"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "适合俯视角游戏，角色可以向各个方向移动。**不需要任何节点。**"
+    ],
+    [
+     "ol",
+     [
+      "在场景中添加一个 **{{lang:obj_prefix_joystick}}** 对象（类别 **{{lang:cat_interactifs}}**），放在左下角。",
+      "选中摇杆。在检查器的 **[[lang:insp_sep_joystick]]** 区域，点击 **[[lang:insp_label_cible_joystick]]** 按钮并选择你的角色。",
+      "保存，然后开始游戏：角色会跟着摇杆的方向移动。"
+     ]
+    ],
+    [
+     "tip",
+     "**小窍门：**如果给角色加上标签 **Player**（或 **Joueur**），即使 [[lang:insp_label_cible_joystick]] 里什么也没选，摇杆也会自动移动它。注意：这个标签比检查器里的选择优先。"
+    ],
+    [
+     "tip",
+     "**进阶：**公式 `joystick.x` 和 `joystick.y` 给出方向（-1 到 1 之间）。可以在连接到 [[NoeudEventChaqueImage]] 的 [[pousser]] 节点中使用，例如 `=joystick.x * 5`。**[[si_joystick]]** 节点还有 {{lang:port_haut}}、{{lang:port_bas}}、{{lang:port_gauche}}、{{lang:port_droite}} 和 {{lang:port_repos}} 输出。"
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "方法 3：用手指拖动"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "适合拼图、卡牌游戏，或需要移动棋子的游戏。"
+    ],
+    [
+     "ol",
+     [
+      "在场景编辑器中选中你的对象。",
+      "在检查器中点 **⚙ 物体行为**，选择 **用手指拖动**。",
+      "开始游戏：你可以用手指拖动这个对象。"
+     ]
+    ],
+    [
+     "tip",
+     "想在玩家松开对象时做出反应（比如检查它是否放对了位置），使用 **[[NoeudEventFinGlisser]]** 事件。"
+    ],
+    [
+     "tip",
+     "想在游戏中允许或禁止拖动（比如已经放对的拼图块），使用 **[[changer_comportement]]** 节点。"
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "小贴士"
+  ],
+  [
+   "ul",
+   [
+    "**想让角色跳跃**，请看教程 [让角色跳跃](guide:sauter)。",
+    "**Yop2D 自带的示例游戏“平台”**使用的是方法 1：打开它，就能看到一个完整可用的 Blueprint。",
+    "**有问题？**欢迎来 [Discord](https://discord.gg/nHqCcqHZNQ) 或 [Telegram](https://t.me/+7PQ9WKw7n645Y2Zk) 交流。"
+   ]
+  ]
+ ]
 }

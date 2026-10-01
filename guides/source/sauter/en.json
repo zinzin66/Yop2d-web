@@ -1,160 +1,160 @@
 {
-  "titre_page": "How to make a character jump in Yop2D? | Yop2D Guide",
-  "description": "Make a character jump in Yop2D, without code: gravity, a solid floor, a jump button and the [[si_au_sol]] and [[impulsion]] nodes.",
-  "h1": "How to make a character jump?",
-  "carte": [
-    "Make a character jump",
-    "Gravity, a solid floor and a jump button, with no jumping in mid-air."
+ "titre_page": "How to make a character jump in Yop2D? | Yop2D Guide",
+ "description": "Make a character jump in Yop2D, without code: gravity, a solid floor, a jump button and the [[si_au_sol]] and [[impulsion]] nodes.",
+ "h1": "How to make a character jump?",
+ "carte": [
+  "Make a character jump",
+  "Gravity, a solid floor and a jump button, with no jumping in mid-air."
+ ],
+ "etapes": [
+  [
+   "Give the character gravity",
+   "Open ⚙ Object behavior and choose \"Falls and bounces\"."
   ],
-  "etapes": [
-    [
-      "Give the character gravity",
-      "Tick {{lang:insp_cb_physique}} and switch to {{lang:insp_btn_physique_dynamique}}."
-    ],
-    [
-      "Add a solid floor",
-      "Add a floor with {{lang:insp_cb_physique}}, left as {{lang:insp_btn_physique_statique}}."
-    ],
-    [
-      "Link the jump button",
-      "{{NoeudEventClicObjet}} (btnJump) → {{si_au_sol}} (player) → {{lang:port_vrai}} → {{impulsion}} (player, -15)."
-    ]
+  [
+   "Add a solid floor",
+   "Add a ground and choose \"Ground / wall\" in ⚙ Object behavior."
   ],
-  "blocs": [
-    [
-      "p",
-      "For a character to jump, you need three things: it must **fall** (gravity), a **floor** to land on, and a **button** that pushes it upwards, only when it is standing on something."
-    ],
-    [
-      "besoin",
-      [
-        "a character named **player** (a {{lang:obj_prefix_carre}} or an {{lang:obj_prefix_image}});",
-        "a floor: a wide, flat {{lang:obj_prefix_carre}} named **floor**, at the bottom of the scene;",
-        "a button named **btnJump** (a {{lang:obj_prefix_bouton}} or a {{lang:obj_prefix_carre}}), at the bottom right of the screen."
-      ]
-    ],
-    [
-      "h2",
-      "Step 1: give the character gravity"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "ol",
-          [
-            "Select **player**.",
-            "In the inspector, section **[[lang:insp_sep_physique]]**, tick **[[lang:insp_cb_physique]]**.",
-            "Tap the **[[lang:insp_btn_physique_statique]]** button so that it becomes **[[lang:insp_btn_physique_dynamique]]**. « Dynamic » means the object falls."
-          ]
-        ],
-        [
-          "tip",
-          "The **[[lang:insp_label_gravite]]** setting changes how fast it falls: 0.5 to fall slowly, 2 to fall fast."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "Step 2: add a solid floor"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "ol",
-          [
-            "Select **floor**.",
-            "Tick **[[lang:insp_cb_physique]]** too, but **leave it as [[lang:insp_btn_physique_statique]]**: a static object does not move and stops objects that fall on it.",
-            "Put **player** a little above the floor."
-          ]
-        ],
-        [
-          "tip",
-          "You can make platforms the same way: static squares placed higher up."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "Step 3: the jump button"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "ol",
-          [
-            "Open the scene's **{{lang:titre_blueprint}}**.",
-            "Add the **[[NoeudEventClicObjet]]** event and choose **btnJump** as its target.",
-            "Add the **[[si_au_sol]]** node (category {{lang:cat_logique_conditions}}) and choose **player** as its target.",
-            "Add the **[[impulsion]]** node (category {{lang:cat_mouvements_ia}}): target **player**, **{{lang:impulsion.force}} = -15**.",
-            "Link the output of [[NoeudEventClicObjet]] to the input of [[si_au_sol]], then the **{{lang:port_vrai}}** output of [[si_au_sol]] to the input of [[impulsion]].",
-            "Save, then start the game and tap the button."
-          ]
-        ],
-        [
-          "chaine",
-          [
-            [
-              "ev",
-              "{{NoeudEventClicObjet}}",
-              "target: btnJump"
-            ],
-            [
-              "→"
-            ],
-            [
-              "cond",
-              "{{si_au_sol}}",
-              "target: player"
-            ],
-            [
-              "→",
-              "{{lang:port_vrai}}"
-            ],
-            [
-              "n",
-              "{{impulsion}}",
-              "target: player · -15"
-            ]
-          ]
-        ],
-        [
-          "tip",
-          "**Why [[si_au_sol]]?** Without it, the player could jump again in mid-air and fly away by tapping the button several times."
-        ],
-        [
-          "tip",
-          "**Negative = upwards.** In Yop2D, Y numbers grow towards the bottom of the screen. -15 makes a small jump, -20 a big one."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "What about moving while jumping?"
-    ],
-    [
-      "bloc",
-      [
-        [
-          "p",
-          "Add the left and right buttons from the guide [Move a character](guide:deplacer-personnage) (method 1). You can keep one finger on « right » and tap « jump » with another finger."
-        ]
-      ]
-    ],
-    [
-      "h2",
-      "If it doesn't work"
-    ],
-    [
-      "ul",
-      [
-        "**The character doesn't fall:** check that it is set to [[lang:insp_btn_physique_dynamique]].",
-        "**It goes through the floor:** the floor must have [[lang:insp_cb_physique]] ticked, and stay static.",
-        "**Nothing happens when you tap:** check that the wires are linked, and that the output used is **{{lang:port_vrai}}**. Remember to save before starting the game.",
-        "**To compare**, open the **« Platform »** example game that comes with Yop2D: it uses exactly this setup."
-      ]
-    ]
+  [
+   "Link the jump button",
+   "{{NoeudEventClicObjet}} (btnJump) → {{si_au_sol}} (player) → {{lang:port_vrai}} → {{impulsion}} (player, -15)."
   ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "For a character to jump, you need three things: it must **fall** (gravity), a **floor** to land on, and a **button** that pushes it upwards, only when it is standing on something."
+  ],
+  [
+   "besoin",
+   [
+    "a character named **player** (a {{lang:obj_prefix_carre}} or an {{lang:obj_prefix_image}});",
+    "a floor: a wide, flat {{lang:obj_prefix_carre}} named **floor**, at the bottom of the scene;",
+    "a button named **btnJump** (a {{lang:obj_prefix_bouton}} or a {{lang:obj_prefix_carre}}), at the bottom right of the screen."
+   ]
+  ],
+  [
+   "h2",
+   "Step 1: give the character gravity"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Select **player**.",
+      "In the inspector, tap the **⚙ Object behavior** button.",
+      "Choose **Falls and bounces**: the object falls with gravity."
+     ]
+    ],
+    [
+     "tip",
+     "In the same window, **Gravity** changes how fast it falls: **Light** to fall gently, **Strong** to fall fast. Even simpler: **Platform character** walks and jumps by itself, with no nodes at all ([Behaviors](guide:comportements) guide)."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 2: add a solid floor"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Select **floor**.",
+      "Tap **⚙ Object behavior** and choose **Ground / wall**: it doesn't move and stops objects that fall on it.",
+      "Put **player** a little above the floor."
+     ]
+    ],
+    [
+     "tip",
+     "You can make platforms the same way: squares set to **Ground / wall** placed higher up."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 3: the jump button"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Open the scene's **{{lang:titre_blueprint}}**.",
+      "Add the **[[NoeudEventClicObjet]]** event and choose **btnJump** as its target.",
+      "Add the **[[si_au_sol]]** node (category {{lang:cat_logique_conditions}}) and choose **player** as its target.",
+      "Add the **[[impulsion]]** node (category {{lang:cat_mouvements_ia}}): target **player**, **{{lang:impulsion.force}} = -15**.",
+      "Link the output of [[NoeudEventClicObjet]] to the input of [[si_au_sol]], then the **{{lang:port_vrai}}** output of [[si_au_sol]] to the input of [[impulsion]].",
+      "Save, then start the game and tap the button."
+     ]
+    ],
+    [
+     "chaine",
+     [
+      [
+       "ev",
+       "{{NoeudEventClicObjet}}",
+       "target: btnJump"
+      ],
+      [
+       "→"
+      ],
+      [
+       "cond",
+       "{{si_au_sol}}",
+       "target: player"
+      ],
+      [
+       "→",
+       "{{lang:port_vrai}}"
+      ],
+      [
+       "n",
+       "{{impulsion}}",
+       "target: player · -15"
+      ]
+     ]
+    ],
+    [
+     "tip",
+     "**Why [[si_au_sol]]?** Without it, the player could jump again in mid-air and fly away by tapping the button several times."
+    ],
+    [
+     "tip",
+     "**Negative = upwards.** In Yop2D, Y numbers grow towards the bottom of the screen. -15 makes a small jump, -20 a big one."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "What about moving while jumping?"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "p",
+     "Add the left and right buttons from the guide [Move a character](guide:deplacer-personnage) (method 1). You can keep one finger on « right » and tap « jump » with another finger."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "If it doesn't work"
+  ],
+  [
+   "ul",
+   [
+    "**The character doesn't fall:** check that it is set to **Falls and bounces** (⚙ Object behavior button).",
+    "**It goes through the ground:** the ground must be set to **Ground / wall**.",
+    "**Nothing happens when you tap:** check that the wires are linked, and that the output used is **{{lang:port_vrai}}**. Remember to save before starting the game.",
+    "**To compare**, open the **« Platform »** example game that comes with Yop2D: it uses exactly this setup."
+   ]
+  ]
+ ]
 }

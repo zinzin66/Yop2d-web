@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ノードなしでキャラを歩かせ、ジャンプさせ、はしごをのぼらせるには？| Yop2D ガイド</title>
+<meta name="description" content="Yop2D のふるまい：歩いてジャンプしてはしごをのぼるアクションゲームのキャラや、上から見たキャラを、アニメーションつきで、ノードなしで作れる。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/comportements.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/comportements.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/comportements.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/comportements.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/comportements.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/comportements.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/comportements.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/comportements.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/comportements.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/comportements.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "ふるまい：ノードなしで動くキャラ",
+ "description": "Yop2D のふるまい：歩いてジャンプしてはしごをのぼるアクションゲームのキャラや、上から見たキャラを、アニメーションつきで、ノードなしで作れる。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "地面",
+   "text": "「⚙ オブジェクトのふるまい」で「地面 / かべ」を選ぶ。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "キャラ",
+   "text": "「アクションゲームのキャラ」、そうさは「ジョイスティック」を選び、ジョイスティックを追加する。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "はしご",
+   "text": "はしごで「はしご」にチェックを入れる。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "アニメーション",
+   "text": "名前を 待機、歩く、ジャンプ、のぼる、しゃがむ にする：エンジンが自動で再生する。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ゲーム中に変える",
+   "text": "ノード 「ふるまいを変える」 を使う。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>ふるまい：ノードなしで動くキャラ</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../comportements.html" hreflang="fr">Français</a> · <a href="../en/comportements.html" hreflang="en">English</a> · <a href="../es/comportements.html" hreflang="es">Español</a> · <a href="../de/comportements.html" hreflang="de">Deutsch</a> · <a href="../it/comportements.html" hreflang="it">Italiano</a> · <a href="../pt/comportements.html" hreflang="pt">Português</a> · <a href="../ru/comportements.html" hreflang="ru">Русский</a> · <a href="../zh/comportements.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>前は、キャラを歩かせたりジャンプさせたりのぼらせたりするのに、たくさんのノードと式が必要だった。今は、インスペクターの <strong>⚙ オブジェクトのふるまい</strong> 画面で <strong>オブジェクトが何をするか</strong> を選ぶだけ。あとはエンジンがやってくれる。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li><strong>player</strong> という名前のキャラ（画像）；</li><li>地面：画像、または場面の下にある横長で平らな四角形；</li><li>はしご（画像）、のぼりたいなら；</li><li>画面の左下にジョイスティック。</li></ul>
+</div>
+<h2>ステップ 1：地面</h2>
+<div class="method">
+<ol><li>地面を選ぶ。</li><li>インスペクターで <strong>⚙ オブジェクトのふるまい</strong> ボタンをタップ。</li><li><strong>地面 / かべ</strong> を選ぶ：動かず、上を歩けて、ぶつかる。</li></ol>
+<div class="tip">👉 下からジャンプですりぬけられる足場にするなら、「ほかにも…」の <strong>下からすりぬけられる</strong> にもチェック。</div>
+</div>
+<h2>ステップ 2：キャラ</h2>
+<div class="method">
+<ol><li><strong>player</strong> を選んで <strong>⚙ オブジェクトのふるまい</strong> をタップ。</li><li><strong>アクションゲームのキャラ</strong> を選ぶ。</li><li>「せってい」では <strong>そうさ：ジョイスティック</strong> のまま。<strong>はやさ</strong> と <strong>ジャンプの高さ</strong> を選べる。</li><li>場面にジョイスティックを追加する。ターゲットを選ぶ必要はない：キャラが自分で従う。</li><li>ゲームを始める：ジョイスティックでキャラが歩き、上にたおすとジャンプする。</li></ol>
+<div class="tip">👉 ジャンプはボタンがいい？<strong>ジャンプボタン</strong> で選ぶ。◀ ▶ ボタンがいい？<strong>そうさ：ボタン</strong> を選んで、左ボタンと右ボタンを選ぶ。</div>
+</div>
+<h2>ステップ 3：はしご</h2>
+<div class="method">
+<ol><li>はしごを選んで <strong>⚙ オブジェクトのふるまい</strong> をタップ。</li><li><strong>かざり</strong> のまま、「ほかにも…」の <strong>はしご</strong> にチェック。</li><li>はしごを、つながる足場より少し上まで伸ばす。</li><li>ゲームを始める：はしごの前でジョイスティックを上にたおすとのぼり、下でおりる。上に着くとキャラは足場に乗る。</li></ol>
+<div class="tip">👉 のぼっている間は落ちない：ジョイスティックをはなすと、つかまったまま。横にたおすとはしごからはなれる。</div>
+</div>
+<h2>ステップ 4：アニメーションは自動</h2>
+<div class="method">
+<p><strong>アニメーション</strong> 画面で、キャラのアニメーションにこの名前をつける：<strong>待機</strong>、<strong>歩く</strong>、<strong>ジャンプ</strong>、<strong>のぼる</strong>、<strong>しゃがむ</strong>。エンジンがキャラの動きに合わせて正しいアニメーションを再生し、左に行くときは画像を反転する。</p>
+<ul><li>アニメーションが足りない？だいじょうぶ：その場合は画像が変わらないだけ。</li><li>キャラが何人もいる？名前をオブジェクト名から始める：<strong>player_歩く</strong>、<strong>enemy_歩く</strong>。それぞれ自分のものを使う。</li><li>アニメーションは手で選ぶこともできる：「自動アニメーション」の行をタップして、リストから選ぶ（アニメーションごとにサムネイルつき）。</li></ul>
+</div>
+<h2>自分で歩く敵</h2>
+<div class="method">
+<p>見回りする敵も <strong>アクションゲームのキャラ</strong> にして、<strong>そうさ：なし</strong> にする：ジョイスティックに従わなくなる。ノードで動かすと（たとえば 「スライド移動」）、重力はそのままで、アニメーションは本当の動きに合わせて変わる。</p>
+</div>
+<h2>上から見たキャラ（またはアイソメ）</h2>
+<div class="method">
+<ol><li>⚙ オブジェクトのふるまい で <strong>上から見たキャラ</strong> を選ぶ。</li><li><strong>向き</strong> で <strong>4</strong>（上下左右）、<strong>アイソメ</strong>（4つのななめ）、または <strong>左 / 右</strong> を選ぶ。</li><li>アニメーションの名前に英語で向きをつける：<strong>歩く_up</strong>、<strong>歩く_down</strong>、<strong>歩く_left</strong>、<strong>歩く_right</strong>、<strong>待機_up</strong>…（アイソメ：<strong>歩く_ne</strong>、<strong>歩く_nw</strong>、<strong>歩く_se</strong>、<strong>歩く_sw</strong>）。</li></ol>
+<div class="tip">👉 「left」のアニメーションがない？エンジンが「right」の画像を反転する。</div>
+</div>
+<h2>ゲーム中にふるまいを変える</h2>
+<div class="method">
+<p>ノード 「ふるまいを変える」 には画面と同じ選択肢がある。例：<strong>地面 / かべ</strong> の箱が、レバーを引くと落ちはじめる：「ふるまいを変える」 → <strong>落ちてはずむ</strong>。「（変えない）」のままの設定は元の値のまま。</p>
+</div>
+<h2>結果を見る</h2>
+<p>Yop2D のホーム画面の <strong>サンプル</strong> タブで <strong>Climb &amp; run</strong>（アクション、はしご、アニメーション）と <strong>Dungeon walk</strong>（アイソメ）をダウンロードし、勇者をタップして <strong>⚙ オブジェクトのふるまい</strong> をひらく。</p>
+<h2>うまくいかないとき</h2>
+<ul><li><strong>キャラが動かない：</strong> <strong>そうさ：ジョイスティック</strong>（「なし」ではない）か、場面（または HUD）にジョイスティックがあるか確認。</li><li><strong>地面をすりぬけて落ちる：</strong> 地面を <strong>地面 / かべ</strong> にする。</li><li><strong>のぼらない：</strong> はしごに <strong>はしご</strong> のチェック、キャラに <strong>はしごをのぼれる：はい</strong> が必要。</li><li><strong>アニメーションが変わらない：</strong> アニメーションの名前を確認するか、リストから手で選ぶ。</li></ul>
+
+<div class="nav">
+<a href="../ja/sauter.html">← キャラクターをジャンプさせる</a>
+<a href="../ja/pieces-score.html">次のガイド： コインを集めてスコアを数える →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>
