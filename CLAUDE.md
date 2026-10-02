@@ -194,6 +194,11 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   objet »… ciblables par « # tag » (l'objet touché = objet impliqué) et nœud « Mélanger les places » (132 nœuds) : aide,
   pages `noeuds/`, exemples, accueil (vitrine et FAQ : douze exemples) et `llms.txt` régénérés.
 - 02/10/2026 : packs en ligne de la bibliothèque (`packs/`, générateur, robot GitHub, mode d'emploi) : Pirates et Espace.
+- 02/10/2026 : comportement « Patrouille (va-et-vient) » du moteur (build 1002, pas encore publié) : aide du nœud « Changer
+  le comportement », guide « comportements » (paragraphe « Un ennemi qui marche tout seul »). Accueil (9 langues) : carte
+  « Mon héros animé et 4 missions » (guide intégré + missions pièces, ennemi, victoire, APK ; 21 cartes), phrase Patrouille
+  dans « Comportements prêts à l'emploi », FAQ « Comment apprendre » complétée + question « reprendre une mission »
+  (☰ → Missions pas à pas, Passer / ◀ ; 20 questions). Boutons cités = textes du moteur (guide_passer, gp_faire_pour_moi).
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
