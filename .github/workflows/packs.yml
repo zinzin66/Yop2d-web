@@ -1,0 +1,40 @@
+# Robot des PACKS : quand un fichier change dans packs/<pack>/ (sur main), il refabrique les packs
+# (zip, vignette, packs.json) avec outils/generer_packs.py et les enregistre. Le moteur les voit ensuite
+# dans l'onglet « Packs à télécharger » de la bibliothèque, sans nouvelle version du moteur.
+name: Packs de la bibliothèque
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packs/*/**'
+      - 'outils/generer_packs.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: packs
+  cancel-in-progress: false
+
+jobs:
+  packs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pillow
+        run: pip install pillow
+      - name: Fabriquer les packs
+        run: python3 outils/generer_packs.py
+      - name: Enregistrer
+        run: |
+          git config user.name "yop2d-packs[bot]"
+          git config user.email "packs@users.noreply.github.com"
+          git add -A packs
+          if git diff --cached --quiet; then echo "Rien à changer"; exit 0; fi
+          git commit -m "Packs refabriqués"
+          git push
