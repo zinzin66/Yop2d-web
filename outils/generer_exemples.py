@@ -141,10 +141,20 @@ def main():
     source = json.load(open(os.path.join(RACINE, "outils", "exemples", "source.json"), encoding="utf-8"))
     exemples = []
     for ex in source["exemples"]:
-        fichier, image = ex["id"] + ".zip", ex["id"] + ".png"
+        # Le zip porte le numéro de version dans son nom (<id>-<version>.zip) : une nouvelle version = une nouvelle
+        # adresse, que le cache du site (jusqu'à 10 minutes) ne peut pas confondre avec l'ancienne.
+        # Un générateur écrit <id>.zip : on le renomme ici, et on retire les zips des versions précédentes.
+        fichier, image = f"{ex['id']}-{ex['version']}.zip", ex["id"] + ".png"
         chemin = os.path.join(dossier, fichier)
+        brut = os.path.join(dossier, ex["id"] + ".zip")
+        if os.path.exists(brut):
+            os.replace(brut, chemin)
+        for autre in os.listdir(dossier):
+            if autre.startswith(ex["id"] + "-") and autre.endswith(".zip") and autre != fichier \
+                    and autre[len(ex["id"]) + 1:-4].isdigit():
+                os.remove(os.path.join(dossier, autre))
         if not os.path.exists(chemin):
-            raise SystemExit(f"Fichier manquant : exemples/{fichier}")
+            raise SystemExit(f"Fichier manquant : exemples/{fichier} (ou exemples/{ex['id']}.zip)")
         if not os.path.exists(os.path.join(dossier, image)):
             raise SystemExit(f"Vignette manquante : exemples/{image}")
         manque = [l for l in LANGUES if l not in ex["description"]]
