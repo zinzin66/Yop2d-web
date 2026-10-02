@@ -56,6 +56,9 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   `generer_accueil.py` (`llms.txt` liste les exemples). Exemple modifié → augmenter sa `version` (le moteur
   retélécharge). Nouvel exemple → zip + png dans `exemples/`, entrée dans `source.json`, générer.
   Le moteur (à partir de la version qui suit la 0.1.948) n'intègre plus que Platformer et Neon shooter.
+  Depuis le 02/10/2026, le zip publié s'appelle `<id>-<version>.zip` (le cache du site, ~10 min, servait l'ancien zip
+  sous le même nom) : les générateurs du moteur écrivent `<id>.zip`, `generer_exemples.py` le renomme et efface les
+  versions précédentes. Un exemple modifié SANS changer sa `version` ne sera pas retéléchargé.
 
 ## Aide (aide.html)
 - Deux onglets : **Nœuds** et **Guides**.
