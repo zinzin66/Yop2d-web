@@ -59,6 +59,11 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   Depuis le 02/10/2026, le zip publié s'appelle `<id>-<version>.zip` (le cache du site, ~10 min, servait l'ancien zip
   sous le même nom) : les générateurs du moteur écrivent `<id>.zip`, `generer_exemples.py` le renomme et efface les
   versions précédentes. Un exemple modifié SANS changer sa `version` ne sera pas retéléchargé.
+- `packs/` : **packs de la bibliothèque du moteur** (depuis le 02/10/2026, onglet « Packs à télécharger »). Un dossier
+  par pack (`packs/<id>/<Dossier>/...`, `Animations/<nom>/`, `Licence.txt`, `pack.json` facultatif : voir
+  `packs/LISEZMOI.md`). `python3 outils/generer_packs.py` fabrique `packs/<id>-<empreinte>.zip`, `packs/<id>.png` et
+  `packs/packs.json` ; le robot `.github/workflows/packs.yml` le lance tout seul à chaque dépôt sur `main`
+  (l'utilisateur peut déposer ses propres fichiers libres de droits). Packs : pirates, espace (Kenney, CC0).
 
 ## Aide (aide.html)
 - Deux onglets : **Nœuds** et **Guides**.
@@ -188,6 +193,7 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 02/10/2026 : exemple « Memory cards » (jeu de memory, 12 exemples, moteur_min 971). Moteur : événements « Au clic sur un
   objet »… ciblables par « # tag » (l'objet touché = objet impliqué) et nœud « Mélanger les places » (132 nœuds) : aide,
   pages `noeuds/`, exemples, accueil (vitrine et FAQ : douze exemples) et `llms.txt` régénérés.
+- 02/10/2026 : packs en ligne de la bibliothèque (`packs/`, générateur, robot GitHub, mode d'emploi) : Pirates et Espace.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
