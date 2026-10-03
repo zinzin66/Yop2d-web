@@ -199,6 +199,9 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   « Mon héros animé et 4 missions » (guide intégré + missions pièces, ennemi, victoire, APK ; 21 cartes), phrase Patrouille
   dans « Comportements prêts à l'emploi », FAQ « Comment apprendre » complétée + question « reprendre une mission »
   (☰ → Missions pas à pas, Passer / ◀ ; 20 questions). Boutons cités = textes du moteur (guide_passer, gp_faire_pour_moi).
+- 03/10/2026 : version 0.1.1013 publiée (GitHub, itch.io, test fermé Google Play). PR #42 (Patrouille, missions) fusionnée.
+  Accueil (9 langues) : 3 nouvelles cartes « Bibliothèque Yop2D intégrée », « Découvrir l'éditeur », « Choisissez votre
+  langue » (24 cartes) ; phrases ajoutées aux FAQ « images, sons et musiques » et « Comment apprendre ». `llms.txt` régénéré.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
