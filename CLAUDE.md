@@ -203,7 +203,7 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   Accueil (9 langues) : 3 nouvelles cartes « Bibliothèque Yop2D intégrée », « Découvrir l'éditeur », « Choisissez votre
   langue » (24 cartes) ; phrases ajoutées aux FAQ « images, sons et musiques » et « Comment apprendre ». `llms.txt` régénéré.
 - 03/10/2026 : nouveau bloc vitrine « Une bibliothèque qui contient tout » (capture `interface_bibliotheque.png` fournie par
-  l'utilisateur, 12 blocs, 3e de la liste).
+  l'utilisateur, 12 blocs, 3e de la liste). Bloc « modèles » corrigé : le moteur ne s'ouvre plus sur l'onglet Modèles au 1er lancement.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
