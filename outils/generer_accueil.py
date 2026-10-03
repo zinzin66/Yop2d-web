@@ -37,7 +37,8 @@ VIDEOS = [("a6wVvJh9uyQ", "2026-09-29")]
 # Une image absente du dépôt est simplement masquée dans la page : il suffit
 # de l'ajouter avec ce nom exact pour qu'elle apparaisse.
 # Un bloc peut montrer plusieurs captures côte à côte : on donne alors une liste de noms.
-IMAGES = ["interface_demarage.png", "interface_modeles.png", "interface_editeur.png", "interface_tuiles.png",
+IMAGES = ["interface_demarage.png", "interface_modeles.png", "interface_bibliotheque.png",
+          "interface_editeur.png", "interface_tuiles.png",
           "interface_animation.png", "interface_titre.png", "interface_text.png", "interface_noeuds.png",
           "interface_editeur_noeuds.png", "exemples_jeux.png",
           ["interface_editeur_telephone.png", "interface_editeur_noeuds_telephone.png"]]
