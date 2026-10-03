@@ -25,7 +25,7 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   `?lang=xx` ou si le visiteur a déjà choisi une langue (clé `yop2d-langue`),
   sinon propose la langue du téléphone dans un bandeau. Captures : liste `IMAGES`
   du script, toutes en `.png` à la racine (depuis le 30/09/2026), dans l'ordre des blocs « vitrine » :
-  interface_demarage, interface_modeles, interface_editeur, interface_tuiles, interface_animation,
+  interface_demarage, interface_modeles, interface_bibliotheque, interface_editeur, interface_tuiles, interface_animation,
   interface_titre, interface_text (dialogues.txt), interface_noeuds, interface_editeur_noeuds, exemples_jeux,
   et côte à côte (un élément de `IMAGES` peut être une liste) interface_editeur_telephone +
   interface_editeur_noeuds_telephone. Une image absente est masquée. Nouvelles captures fournies le 30/09/2026 :
@@ -202,6 +202,8 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 03/10/2026 : version 0.1.1013 publiée (GitHub, itch.io, test fermé Google Play). PR #42 (Patrouille, missions) fusionnée.
   Accueil (9 langues) : 3 nouvelles cartes « Bibliothèque Yop2D intégrée », « Découvrir l'éditeur », « Choisissez votre
   langue » (24 cartes) ; phrases ajoutées aux FAQ « images, sons et musiques » et « Comment apprendre ». `llms.txt` régénéré.
+- 03/10/2026 : nouveau bloc vitrine « Une bibliothèque qui contient tout » (capture `interface_bibliotheque.png` fournie par
+  l'utilisateur, 12 blocs, 3e de la liste).
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
