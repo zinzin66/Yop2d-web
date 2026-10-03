@@ -199,6 +199,12 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   « Mon héros animé et 4 missions » (guide intégré + missions pièces, ennemi, victoire, APK ; 21 cartes), phrase Patrouille
   dans « Comportements prêts à l'emploi », FAQ « Comment apprendre » complétée + question « reprendre une mission »
   (☰ → Missions pas à pas, Passer / ◀ ; 20 questions). Boutons cités = textes du moteur (guide_passer, gp_faire_pour_moi).
+- 03/10/2026 : version 0.1.1013 publiée (GitHub Latest, itch.io, test fermé Google Play en examen) : choix de la langue
+  au 1er lancement, tout traduit, accueil du moteur avec 3 guides (« Premiers pas », « Ton jeu en APK », « Comprendre
+  l'interface » en 15 étapes), bulle des guides déplaçable et repliable, Patrouille, Annuler pour agrandir/tourner.
+  La version Play n'a pas de bouton de mise à jour (BuildConfig.POUR_PLAY). Devlog itch.io rédigé (anglais).
+  Le développeur de Star2D invite ses utilisateurs sur le test fermé. À faire sur le site : vérifier que l'accueil et la
+  FAQ citent les nouveaux noms des guides du moteur.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
