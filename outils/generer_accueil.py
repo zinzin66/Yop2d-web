@@ -28,6 +28,10 @@ YOUTUBE = "https://youtube.com/@yop2d"
 DISCORD = "https://discord.gg/nHqCcqHZNQ"
 TELEGRAM = "https://t.me/+7PQ9WKw7n645Y2Zk"
 GITHUB = "https://github.com/zinzin66/yop2d"
+# Bloc « À l'école » : contact des enseignants. Formulaire (Google Forms) : mettre son lien ici quand il existe
+# (None = bouton caché). Discord : le serveur, en attendant un lien vers le profil (message privé).
+FORMULAIRE_ENSEIGNANTS = None
+DISCORD_ENSEIGNANTS = DISCORD
 
 # Vidéos YouTube affichées sur l'accueil (identifiant, date de publication), la plus récente en premier.
 # Titre et description de chaque vidéo : "videos" des fichiers de textes, sous son identifiant.
@@ -96,6 +100,7 @@ h2 { font-size: 2rem; color: var(--primary-color); border-bottom: 2px solid #e2e
 .card a { color: var(--primary-color); font-weight: bold; }
 .bloc { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
 .bloc a { color: var(--primary-color); }
+.bloc a.btn { color: white; }
 .table-wrap { overflow-x: auto; background: white; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
 table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.95rem; }
 th, td { padding: 0.75rem; text-align: left; vertical-align: top; border-bottom: 1px solid #e2e8f0; }
@@ -212,6 +217,36 @@ def cartes_guides(langue):
             with open(os.path.join(dossier, nom), encoding="utf-8") as f:
                 cartes.append(json.load(f))
     return cartes
+
+
+def bloc_ecole(ec, base):
+    """Section « À l'école et pour les enfants » : 6 cartes, le mode école pas à pas, l'appel aux enseignants."""
+    cartes = "\n".join(f'<div class="card"><h3>{e(c[0])}</h3><p>{liens(c[1], base)}</p></div>' for c in ec["cartes"])
+    etapes = "\n".join(f"<li>{liens(x, base)}</li>" for x in ec["mode_etapes"])
+    boutons = []
+    if FORMULAIRE_ENSEIGNANTS:
+        boutons.append(f'<a class="btn btn-download" href="{FORMULAIRE_ENSEIGNANTS}" rel="noopener">{e(ec["bouton_formulaire"])}</a>')
+    boutons.append(f'<a class="btn btn-discord" href="{DISCORD_ENSEIGNANTS}" rel="noopener">{e(ec["bouton_discord"])}</a>')
+    return f"""<section id="school">
+<h2>{e(ec["titre"])}</h2>
+<p>{liens(ec["intro"], base)}</p>
+<div class="grid">
+{cartes}
+</div>
+<div class="bloc" style="margin-top:1.5rem">
+<h3>{e(ec["mode_titre"])}</h3>
+<ol>
+{etapes}
+</ol>
+<p class="note">{liens(ec["mode_note"], base)}</p>
+</div>
+<div class="bloc" style="margin-top:1.5rem;border-left:6px solid var(--accent-color)">
+<h3>{e(ec["enseignant_titre"])}</h3>
+<p>{liens(ec["enseignant_texte"], base)}</p>
+<p class="community-buttons" style="justify-content:flex-start">{" ".join(boutons)}</p>
+</div>
+</section>
+"""
 
 
 def page(langue, t):
@@ -372,6 +407,7 @@ def page(langue, t):
 </div>
 </section>
 
+{bloc_ecole(t["ecole"], base)}
 <section id="guides">
 <h2>{e(t["guides"]["titre"])}</h2>
 <p>{liens(t["guides"]["texte"], base)}</p>
@@ -487,6 +523,13 @@ def llms(t):
         "",
     ]
     lignes += [f"- [{NOMS_LANGUES[l]}]({SITE}{adresse_accueil(l)})" for l in LANGUES]
+    ec = t["ecole"]
+    lignes += ["", "## For schools and children", "", ec["intro"], ""]
+    lignes += [f"- {c[0].split(' ', 1)[1]}: {c[1]}" for c in ec["cartes"]]
+    lignes += ["", "School mode, step by step:", ""]
+    lignes += [f"{i}. {x}" for i, x in enumerate(ec["mode_etapes"], 1)]
+    lignes += ["", ec["mode_note"], "", f"{ec['enseignant_titre']}: {ec['enseignant_texte']} Contact: {DISCORD_ENSEIGNANTS}"
+               + (f" or {FORMULAIRE_ENSEIGNANTS}" if FORMULAIRE_ENSEIGNANTS else "")]
     lignes += ["", "## Beginner guides", ""]
     for c in cartes_guides("en"):
         lignes.append(f"- [{c['titre']}]({SITE}{c['lien']}): {c['description']}")
