@@ -32,6 +32,7 @@ GITHUB = "https://github.com/zinzin66/yop2d"
 # (None = bouton caché). Discord : le serveur, en attendant un lien vers le profil (message privé).
 FORMULAIRE_ENSEIGNANTS = None
 DISCORD_ENSEIGNANTS = DISCORD
+DISCORD_PSEUDO = "zinzin0000"   # nom Discord du développeur, affiché sous le bouton (message privé)
 
 # Vidéos YouTube affichées sur l'accueil (identifiant, date de publication), la plus récente en premier.
 # Titre et description de chaque vidéo : "videos" des fichiers de textes, sous son identifiant.
@@ -244,6 +245,7 @@ def bloc_ecole(ec, base):
 <h3>{e(ec["enseignant_titre"])}</h3>
 <p>{liens(ec["enseignant_texte"], base)}</p>
 <p class="community-buttons" style="justify-content:flex-start">{" ".join(boutons)}</p>
+<p class="note">💬 Discord : <strong>{DISCORD_PSEUDO}</strong></p>
 </div>
 </section>
 """
@@ -528,7 +530,7 @@ def llms(t):
     lignes += [f"- {c[0].split(' ', 1)[1]}: {c[1]}" for c in ec["cartes"]]
     lignes += ["", "School mode, step by step:", ""]
     lignes += [f"{i}. {x}" for i, x in enumerate(ec["mode_etapes"], 1)]
-    lignes += ["", ec["mode_note"], "", f"{ec['enseignant_titre']}: {ec['enseignant_texte']} Contact: {DISCORD_ENSEIGNANTS}"
+    lignes += ["", ec["mode_note"], "", f"{ec['enseignant_titre']}: {ec['enseignant_texte']} Contact: Discord {DISCORD_ENSEIGNANTS} (private message: {DISCORD_PSEUDO})"
                + (f" or {FORMULAIRE_ENSEIGNANTS}" if FORMULAIRE_ENSEIGNANTS else "")]
     lignes += ["", "## Beginner guides", ""]
     for c in cartes_guides("en"):
