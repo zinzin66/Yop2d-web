@@ -211,6 +211,12 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   (Nexus UI), 26 cartes, 5 packs en ligne (hologramme, effets, avion, monstres, gestes ; sources préparées par
   outils/modeles/preparer_packs_en_ligne.py du moteur), aide des 5 nœuds verts.
 
+- 08/10/2026 : SORTIE « jeux de dialogue » (build final 1045, APK + AAB) : aide et pages `noeuds/` régénérées (146 nœuds :
+  Dire une phrase, Poser un choix, Changer le décor, Montrer / cacher un personnage, Terminer l'histoire, Demander un texte,
+  Ambiance, Zoomer l'écran, Transition de l'écran) ; accueil (9 langues) : 37 modèles, 14 exemples (Firefly Night dans les
+  listes), 2 cartes « Jeux de dialogue (visual novel) » et « Ambiances, zoom et transitions » (28 cartes), FAQ « visual novel
+  comme avec Ren'Py ? » (23 questions) ; llms.txt. Pack personnages_vn et exemple Firefly Night publiés (PR #47).
+
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
   `google74fcdd47f85fa058.html` et `google55621bdcee9caacd.html` (ne pas supprimer).

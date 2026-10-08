@@ -1,0 +1,40 @@
+{
+  "categorie": "Story and dialogues",
+  "noeuds": [
+    {
+      "nom": "Say a line",
+      "schema": "<b>Inputs:</b> Who speaks, Emotion, The line, Place on screen, Character entrance, Effect, Sound or voice, Next comes &nbsp;→&nbsp; <b>Output:</b> Then",
+      "role": "Dialogue game: the chosen character says the line in a dialogue box, letter by letter, and the player taps the screen to continue. The character appears with their emotion (their Character sheet: pictures, color, voice). Special words: [c]color[/c], [t]shake[/t], [o]wave[/o], [p] for a pause, {score} for a variable; \"🌐 9 languages\" button to translate.",
+      "exemple": "Hana (happy) says \"Hello!\", then “Ask a choice” offers two answers."
+    },
+    {
+      "nom": "Ask a choice",
+      "schema": "<b>Inputs:</b> Who asks, Emotion, Question (optional), Answer 1, Answer 2, Answer 3, Answer 4, Condition of answer 1, Condition of answer 2, Condition of answer 3, Condition of answer 4, Answer not allowed, Timer (seconds, 0 = none) &nbsp;→&nbsp; <b>Outputs:</b> Answer 1 / Answer 2 / Answer 3 / Answer 4 / Time's up",
+      "role": "Shows 2 to 4 answers as big buttons: each answer goes out through its own output, so the story branches like a tree. An answer can require a condition (otherwise it is greyed out or hidden); an optional timer adds the \"Time's up\" output.",
+      "exemple": "\"Open the treasure\" leads to the good ending, \"Leave\" to the sad one."
+    },
+    {
+      "nom": "Change the background",
+      "schema": "<b>Inputs:</b> Background image (empty = none), Transition",
+      "role": "Puts a picture as the background, full screen, behind the story's characters (fading or at once). Empty picture = no more background.",
+      "exemple": "the meadow at the start, then the forest when Hana goes looking for her cat."
+    },
+    {
+      "nom": "Show / hide a character",
+      "schema": "<b>Inputs:</b> Character, They…, Emotion, Place on screen, Character entrance",
+      "role": "Brings a story character in (emotion, place, entrance: fade, slide, jump), changes their emotion or makes them leave, without speaking.",
+      "exemple": "Lyn comes in from the right while Hana is talking."
+    },
+    {
+      "nom": "End the story",
+      "role": "Clears the dialogue box, the characters and the background of the story: the game takes over again.",
+      "exemple": "after the last line, a mini-game starts."
+    },
+    {
+      "nom": "Ask the player for a text (name…)",
+      "schema": "<b>Inputs:</b> Variable, Question, Suggested answer",
+      "role": "Opens a small window with the keyboard: the player types a text (their name…), stored in the chosen variable; it continues when they tap OK. In lines, {prenom} shows this text.",
+      "exemple": "\"What's your name?\" → variable prenom → “Say a line” \"Nice to meet you, {prenom}!\"."
+    }
+  ]
+}

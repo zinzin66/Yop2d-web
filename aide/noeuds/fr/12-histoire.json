@@ -1,0 +1,40 @@
+{
+  "categorie": "Histoire et dialogues",
+  "noeuds": [
+    {
+      "nom": "Dire une phrase",
+      "schema": "<b>Entrées :</b> Qui parle, Émotion, La phrase, Place à l'écran, Entrée du personnage, Effet, Son ou voix, La suite vient &nbsp;→&nbsp; <b>Sortie :</b> Ensuite",
+      "role": "Jeu de dialogue : le personnage choisi dit la phrase dans une boîte de dialogue, lettre par lettre, et le joueur touche l'écran pour passer à la suite. Le personnage apparaît avec son émotion (sa fiche Personnage : images, couleur, voix). Mots spéciaux : [c]couleur[/c], [t]tremble[/t], [o]ondule[/o], [p] pour une pause, {score} pour une variable ; bouton « 🌐 9 langues » pour traduire.",
+      "exemple": "Hana (contente) dit « Bonjour ! », puis « Poser un choix » propose deux réponses."
+    },
+    {
+      "nom": "Poser un choix",
+      "schema": "<b>Entrées :</b> Qui pose la question, Émotion, Question (facultative), Réponse 1, Réponse 2, Réponse 3, Réponse 4, Condition de la réponse 1, Condition de la réponse 2, Condition de la réponse 3, Condition de la réponse 4, Réponse non permise, Minuteur (secondes, 0 = aucun) &nbsp;→&nbsp; <b>Sorties :</b> Réponse 1 / Réponse 2 / Réponse 3 / Réponse 4 / Temps écoulé",
+      "role": "Affiche 2 à 4 réponses en gros boutons : chaque réponse part par sa propre sortie, l'histoire se sépare comme un arbre. Une réponse peut demander une condition (sinon elle est grisée ou cachée) ; un minuteur facultatif ajoute la sortie « Temps écoulé ».",
+      "exemple": "« Ouvrir le trésor » mène à la bonne fin, « Partir » à la fin triste."
+    },
+    {
+      "nom": "Changer le décor",
+      "schema": "<b>Entrées :</b> Image du décor (vide = aucun), Passage",
+      "role": "Met une image en fond, sur tout l'écran, derrière les personnages de l'histoire (en fondu ou d'un coup). Image vide = plus de décor.",
+      "exemple": "la prairie au début, puis la forêt quand Hana part chercher son chat."
+    },
+    {
+      "nom": "Montrer / cacher un personnage",
+      "schema": "<b>Entrées :</b> Personnage, Il…, Émotion, Place à l'écran, Entrée du personnage",
+      "role": "Fait entrer un personnage de l'histoire (émotion, place, entrée : fondu, glisse, saut), change son émotion ou le fait sortir, sans qu'il parle.",
+      "exemple": "Lyn arrive par la droite pendant que Hana parle."
+    },
+    {
+      "nom": "Terminer l'histoire",
+      "role": "Efface la boîte de dialogue, les personnages et le décor de l'histoire : le jeu reprend la main.",
+      "exemple": "après la dernière phrase, on passe à un mini-jeu."
+    },
+    {
+      "nom": "Demander un texte au joueur (prénom…)",
+      "schema": "<b>Entrées :</b> Variable, Question, Réponse proposée",
+      "role": "Ouvre une petite fenêtre avec le clavier : le joueur écrit un texte (son prénom…), rangé dans la variable choisie ; la suite part quand il touche OK. Dans les phrases, {prenom} affiche ce texte.",
+      "exemple": "« Comment tu t'appelles ? » → variable prenom → « Dire une phrase » « Enchantée, {prenom} ! »."
+    }
+  ]
+}

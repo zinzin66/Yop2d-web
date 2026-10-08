@@ -1,0 +1,40 @@
+{
+  "categorie": "Historia y diálogos",
+  "noeuds": [
+    {
+      "nom": "Decir una frase",
+      "schema": "<b>Entradas:</b> Quién habla, Emoción, La frase, Lugar en pantalla, Entrada del personaje, Efecto, Sonido o voz, Lo siguiente llega &nbsp;→&nbsp; <b>Salida:</b> Después",
+      "role": "Juego de diálogo: el personaje elegido dice la frase en un cuadro de diálogo, letra a letra, y el jugador toca la pantalla para continuar. El personaje aparece con su emoción (su ficha de Personaje: imágenes, color, voz). Palabras especiales: [c]color[/c], [t]tiembla[/t], [o]ondula[/o], [p] para una pausa, {score} para una variable; botón «🌐 9 idiomas» para traducir.",
+      "exemple": "Hana (contenta) dice «¡Hola!» y luego «Proponer una elección» propone dos respuestas."
+    },
+    {
+      "nom": "Proponer una elección",
+      "schema": "<b>Entradas:</b> Quién pregunta, Emoción, Pregunta (opcional), Respuesta 1, Respuesta 2, Respuesta 3, Respuesta 4, Condición de la respuesta 1, Condición de la respuesta 2, Condición de la respuesta 3, Condición de la respuesta 4, Respuesta no permitida, Temporizador (segundos, 0 = ninguno) &nbsp;→&nbsp; <b>Salidas:</b> Respuesta 1 / Respuesta 2 / Respuesta 3 / Respuesta 4 / Se acabó el tiempo",
+      "role": "Muestra de 2 a 4 respuestas en botones grandes: cada respuesta sale por su propia salida y la historia se ramifica como un árbol. Una respuesta puede pedir una condición (si no, aparece en gris u oculta); un temporizador opcional añade la salida «Se acabó el tiempo».",
+      "exemple": "«Abrir el tesoro» lleva al final feliz, «Irse» al final triste."
+    },
+    {
+      "nom": "Cambiar el decorado",
+      "schema": "<b>Entradas:</b> Imagen del decorado (vacío = ninguno), Transición",
+      "role": "Pone una imagen de fondo, a pantalla completa, detrás de los personajes de la historia (con fundido o de golpe). Imagen vacía = sin decorado.",
+      "exemple": "la pradera al principio y luego el bosque cuando Hana va a buscar a su gato."
+    },
+    {
+      "nom": "Mostrar / ocultar un personaje",
+      "schema": "<b>Entradas:</b> Personaje, Él…, Emoción, Lugar en pantalla, Entrada del personaje",
+      "role": "Hace entrar a un personaje de la historia (emoción, lugar, entrada: fundido, deslizar, salto), cambia su emoción o lo hace salir, sin que hable.",
+      "exemple": "Lyn llega por la derecha mientras Hana habla."
+    },
+    {
+      "nom": "Terminar la historia",
+      "role": "Borra el cuadro de diálogo, los personajes y el decorado de la historia: el juego retoma el control.",
+      "exemple": "tras la última frase empieza un minijuego."
+    },
+    {
+      "nom": "Pedir un texto al jugador (nombre…)",
+      "schema": "<b>Entradas:</b> Variable, Pregunta, Respuesta propuesta",
+      "role": "Abre una pequeña ventana con el teclado: el jugador escribe un texto (su nombre…), guardado en la variable elegida; continúa al tocar OK. En las frases, {prenom} muestra ese texto.",
+      "exemple": "«¿Cómo te llamas?» → variable prenom → «Decir una frase» «¡Encantada, {prenom}!»."
+    }
+  ]
+}
