@@ -250,5 +250,5 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   dialogues, Hana (IAMST, CC0) et 3 décors aquarelle (Clifton Lambert, CC0) intégrés, modèle « Histoire à choix ». Exemple « Firefly Night » (Pen, Angie, Iris : pack en ligne personnages_vn = DoubleFree CC0, sans les images d’Angie blessée ; ne pas mélanger avec Hana, autre style).
   Descriptions des 5 nœuds écrites en 9 langues dans aide/source/descriptions/. À LA SORTIE : relancer
   generer_aide_noeuds.py + generer_pages_noeuds.py + generer_accueil.py (llms.txt), carte « Jeux de dialogue » sur l'accueil,
-  pack en ligne des personnages de Breezy (CC0, ne pas servir à entraîner des IA). Licences : Rachel Chen et Potat0Master
+  pack en ligne des personnages de Breezy (FAIT : packs/personnages_breezy, CC0, ne pas servir à entraîner des IA). Licences : Rachel Chen et Potat0Master
   interdisent la redistribution (pas dans nos packs).
