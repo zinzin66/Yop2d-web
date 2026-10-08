@@ -1,0 +1,40 @@
+{
+  "categorie": "Geschichte und Dialoge",
+  "noeuds": [
+    {
+      "nom": "Einen Satz sagen",
+      "schema": "<b>Eingänge:</b> Wer spricht, Gefühl, Der Satz, Platz auf dem Bildschirm, Auftritt der Figur, Effekt, Ton oder Stimme, Weiter geht es &nbsp;→&nbsp; <b>Ausgang:</b> Danach",
+      "role": "Dialogspiel: Die gewählte Figur sagt den Satz in einem Dialogkasten, Buchstabe für Buchstabe, und der Spieler tippt auf den Bildschirm, um weiterzumachen. Die Figur erscheint mit ihrem Gefühl (ihr Figurenblatt: Bilder, Farbe, Stimme). Besondere Wörter: [c]Farbe[/c], [t]zittern[/t], [o]Welle[/o], [p] für eine Pause, {score} für eine Variable; Knopf „🌐 9 Sprachen“ zum Übersetzen.",
+      "exemple": "Hana (froh) sagt „Hallo!“, dann bietet „Eine Wahl stellen“ zwei Antworten an."
+    },
+    {
+      "nom": "Eine Wahl stellen",
+      "schema": "<b>Eingänge:</b> Wer fragt, Gefühl, Frage (freiwillig), Antwort 1, Antwort 2, Antwort 3, Antwort 4, Bedingung der Antwort 1, Bedingung der Antwort 2, Bedingung der Antwort 3, Bedingung der Antwort 4, Nicht erlaubte Antwort, Timer (Sekunden, 0 = keiner) &nbsp;→&nbsp; <b>Ausgänge:</b> Antwort 1 / Antwort 2 / Antwort 3 / Antwort 4 / Zeit abgelaufen",
+      "role": "Zeigt 2 bis 4 Antworten als große Knöpfe: Jede Antwort hat ihren eigenen Ausgang, die Geschichte verzweigt sich wie ein Baum. Eine Antwort kann eine Bedingung verlangen (sonst ist sie ausgegraut oder versteckt); ein freiwilliger Timer fügt den Ausgang „Zeit abgelaufen“ hinzu.",
+      "exemple": "„Schatz öffnen“ führt zum guten Ende, „Gehen“ zum traurigen."
+    },
+    {
+      "nom": "Hintergrund wechseln",
+      "schema": "<b>Eingänge:</b> Hintergrundbild (leer = keins), Übergang",
+      "role": "Setzt ein Bild als Hintergrund, über den ganzen Bildschirm, hinter die Figuren der Geschichte (überblendet oder sofort). Leeres Bild = kein Hintergrund mehr.",
+      "exemple": "zuerst die Wiese, dann der Wald, wenn Hana ihre Katze sucht."
+    },
+    {
+      "nom": "Figur zeigen / verstecken",
+      "schema": "<b>Eingänge:</b> Figur, Die Figur…, Gefühl, Platz auf dem Bildschirm, Auftritt der Figur",
+      "role": "Lässt eine Figur der Geschichte auftreten (Gefühl, Platz, Auftritt: einblenden, gleiten, springen), ändert ihr Gefühl oder lässt sie gehen, ohne dass sie spricht.",
+      "exemple": "Lyn kommt von rechts, während Hana spricht."
+    },
+    {
+      "nom": "Geschichte beenden",
+      "role": "Entfernt Dialogkasten, Figuren und Hintergrund der Geschichte: Das Spiel übernimmt wieder.",
+      "exemple": "nach dem letzten Satz beginnt ein Minispiel."
+    },
+    {
+      "nom": "Spieler nach einem Text fragen (Name…)",
+      "schema": "<b>Eingänge:</b> Variable, Frage, Vorgeschlagene Antwort",
+      "role": "Öffnet ein kleines Fenster mit der Tastatur: Der Spieler schreibt einen Text (seinen Namen…), der in der gewählten Variable landet; weiter geht es mit OK. In Sätzen zeigt {prenom} diesen Text.",
+      "exemple": "„Wie heißt du?“ → Variable prenom → „Einen Satz sagen“ „Freut mich, {prenom}!“."
+    }
+  ]
+}

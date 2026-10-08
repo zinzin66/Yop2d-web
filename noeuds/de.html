@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (132) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 132 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (146) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 146 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 132 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 146 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
-<nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-animationen">Animationen</a><a href="#c11-audio">Audio</a></nav>
+<nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-animationen">Animationen</a><a href="#c11-audio">Audio</a><a href="#c12-geschichte-und-dialoge">Geschichte und Dialoge</a><a href="#c13-werte-grüne-kabel">Werte (grüne Kabel)</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
 <div class="method">
 <div class="fiche"><h3>Beim Start</h3>
@@ -222,6 +222,21 @@
 <div class="schema"><b>Eingänge:</b> Richtung, Farbe, Dauer (Sekunden)</div>
 <p>Blendet den ganzen Bildschirm zu einer Farbe aus oder aus ihr wieder ein. Die Überblendung läuft über den Szenenwechsel hinweg weiter.</p>
 <p class="exemple"><b>Beispiel:</b> „Bildschirmüberblendung“ (ausblenden), „Warten“ 1 Sekunde, „Zur Szene wechseln“, dann „Bildschirmüberblendung“ (einblenden) beim Start des nächsten Levels.</p>
+</div>
+<div class="fiche"><h3>Stimmung (Regen, Schnee, Nacht…)</h3>
+<div class="schema"><b>Eingänge:</b> Was fällt oder schwebt, Licht, Stärke, Umgebungsgeräusche (Regen, Wind, Donner…), Erscheint in (Sekunden)</div>
+<p>Legt eine Stimmung über den ganzen Bildschirm, die bis zum nächsten Stimmungs-Knoten bleibt: was fällt oder schwebt (Regen, Gewitter mit Blitzen, Schnee, Blütenblätter, Blätter, Glühwürmchen, Herzen, Blasen, Nebel) und ein Licht (Nacht, Sonnenuntergang, Erinnerung, Traum, Angst, dunkel). Die alte verblasst, während die neue kommt.</p>
+<p class="exemple"><b>Beispiel:</b> nach der Wahl „Gehen“ Gewitter und Nachtlicht; „keine“ und „normal“ entfernen alles.</p>
+</div>
+<div class="fiche"><h3>Bildschirm zoomen</h3>
+<div class="schema"><b>Eingänge:</b> Zoom (%, 100 = normal), Richtung, Dauer (Sekunden)</div>
+<p>Vergrößert sanft den ganzen Spielbildschirm (die Szene oder Hintergrund und Figuren einer Geschichte) zur Mitte, zum Gesicht, zu einer Seite, nach oben oder unten. 100 = wieder normal; Dialogkasten und HUD bewegen sich nicht.</p>
+<p class="exemple"><b>Beispiel:</b> Zoom 140 zum Gesicht für 2 Sekunden, wenn Hana Angst hat, dann Zoom 100.</p>
+</div>
+<div class="fiche"><h3>Bildschirmübergang (Kreis, Stern…)</h3>
+<div class="schema"><b>Eingänge:</b> Form, Richtung, Farbe, Dauer (Sekunden)</div>
+<p>Bedeckt den Bildschirm mit einer sich schließenden Form (Kreis, Stern, Raute, Wischblende, Vorhang, Jalousie) und macht dann weiter. Der Bildschirm bleibt bedeckt bis zu einem Übergang „Bild öffnet sich“: Szene oder Hintergrund dahinter wechseln.</p>
+<p class="exemple"><b>Beispiel:</b> sich schließender Kreis → „Zur Szene wechseln“ → sich öffnender Kreis.</p>
 </div>
 <div class="fiche"><h3>Kamera-Wackeln</h3>
 <div class="schema"><b>Eingänge:</b> Stärke, Dauer (Millisekunden, 1000 = 1 s)</div>
@@ -718,6 +733,66 @@
 <div class="fiche"><h3>Musik stoppen</h3>
 <p>Stoppt die aktuelle Musik.</p>
 <p class="exemple"><b>Beispiel:</b> Stille auf dem Game-Over-Bildschirm.</p>
+</div>
+</div>
+<h2 id="c12-geschichte-und-dialoge">Geschichte und Dialoge</h2>
+<div class="method">
+<div class="fiche"><h3>Einen Satz sagen</h3>
+<div class="schema"><b>Eingänge:</b> Wer spricht, Gefühl, Der Satz, Platz auf dem Bildschirm, Auftritt der Figur, Effekt, Ton oder Stimme, Weiter geht es &nbsp;→&nbsp; <b>Ausgang:</b> Danach</div>
+<p>Dialogspiel: Die gewählte Figur sagt den Satz in einem Dialogkasten, Buchstabe für Buchstabe, und der Spieler tippt auf den Bildschirm, um weiterzumachen. Die Figur erscheint mit ihrem Gefühl (ihr Figurenblatt: Bilder, Farbe, Stimme). Besondere Wörter: [c]Farbe[/c], [t]zittern[/t], [o]Welle[/o], [p] für eine Pause, {score} für eine Variable; Knopf „🌐 9 Sprachen“ zum Übersetzen.</p>
+<p class="exemple"><b>Beispiel:</b> Hana (froh) sagt „Hallo!“, dann bietet „Eine Wahl stellen“ zwei Antworten an.</p>
+</div>
+<div class="fiche"><h3>Eine Wahl stellen</h3>
+<div class="schema"><b>Eingänge:</b> Wer fragt, Gefühl, Frage (freiwillig), Antwort 1, Antwort 2, Antwort 3, Antwort 4, Bedingung der Antwort 1, Bedingung der Antwort 2, Bedingung der Antwort 3, Bedingung der Antwort 4, Nicht erlaubte Antwort, Timer (Sekunden, 0 = keiner) &nbsp;→&nbsp; <b>Ausgänge:</b> Antwort 1 / Antwort 2 / Antwort 3 / Antwort 4 / Zeit abgelaufen</div>
+<p>Zeigt 2 bis 4 Antworten als große Knöpfe: Jede Antwort hat ihren eigenen Ausgang, die Geschichte verzweigt sich wie ein Baum. Eine Antwort kann eine Bedingung verlangen (sonst ist sie ausgegraut oder versteckt); ein freiwilliger Timer fügt den Ausgang „Zeit abgelaufen“ hinzu.</p>
+<p class="exemple"><b>Beispiel:</b> „Schatz öffnen“ führt zum guten Ende, „Gehen“ zum traurigen.</p>
+</div>
+<div class="fiche"><h3>Hintergrund wechseln</h3>
+<div class="schema"><b>Eingänge:</b> Hintergrundbild (leer = keins), Übergang</div>
+<p>Setzt ein Bild als Hintergrund, über den ganzen Bildschirm, hinter die Figuren der Geschichte (überblendet oder sofort). Leeres Bild = kein Hintergrund mehr.</p>
+<p class="exemple"><b>Beispiel:</b> zuerst die Wiese, dann der Wald, wenn Hana ihre Katze sucht.</p>
+</div>
+<div class="fiche"><h3>Figur zeigen / verstecken</h3>
+<div class="schema"><b>Eingänge:</b> Figur, Die Figur…, Gefühl, Platz auf dem Bildschirm, Auftritt der Figur</div>
+<p>Lässt eine Figur der Geschichte auftreten (Gefühl, Platz, Auftritt: einblenden, gleiten, springen), ändert ihr Gefühl oder lässt sie gehen, ohne dass sie spricht.</p>
+<p class="exemple"><b>Beispiel:</b> Lyn kommt von rechts, während Hana spricht.</p>
+</div>
+<div class="fiche"><h3>Geschichte beenden</h3>
+<p>Entfernt Dialogkasten, Figuren und Hintergrund der Geschichte: Das Spiel übernimmt wieder.</p>
+<p class="exemple"><b>Beispiel:</b> nach dem letzten Satz beginnt ein Minispiel.</p>
+</div>
+<div class="fiche"><h3>Spieler nach einem Text fragen (Name…)</h3>
+<div class="schema"><b>Eingänge:</b> Variable, Frage, Vorgeschlagene Antwort</div>
+<p>Öffnet ein kleines Fenster mit der Tastatur: Der Spieler schreibt einen Text (seinen Namen…), der in der gewählten Variable landet; weiter geht es mit OK. In Sätzen zeigt {prenom} diesen Text.</p>
+<p class="exemple"><b>Beispiel:</b> „Wie heißt du?“ → Variable prenom → „Einen Satz sagen“ „Freut mich, {prenom}!“.</p>
+</div>
+</div>
+<h2 id="c13-werte-grüne-kabel">Werte (grüne Kabel)</h2>
+<div class="method">
+<div class="fiche"><h3>Zufallszahl</h3>
+<div class="schema"><b>Eingänge:</b> Von, Bis &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Knoten (Wert): liefert eine Zufallszahl zwischen „Von“ und „Bis“, bei jeder Verwendung neu gezogen. Schließe ihn mit dem Knopf 🔗 im Einstellungsfenster an eine Einstellung an.</p>
+<p class="exemple"><b>Beispiel:</b> eine Münze an einem zufälligen X zwischen 0 und 800 erscheinen lassen.</p>
+</div>
+<div class="fiche"><h3>Wert eines Objekts</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Was &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Knoten (Wert): liefert einen Wert des gewählten Objekts während des Spiels: seine x- oder y-Position, Breite, Drehung, Deckkraft…</p>
+<p class="exemple"><b>Beispiel:</b> eine Münze auf die Höhe des Spielers setzen (Y ← Wert eines Objekts: player, y).</p>
+</div>
+<div class="fiche"><h3>Wert einer Variable</h3>
+<div class="schema"><b>Eingang:</b> Variable &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Knoten (Wert): liefert den aktuellen Wert einer Variable (Punkte, Leben…) während des Spiels.</p>
+<p class="exemple"><b>Beispiel:</b> die Punkte in einem Text anzeigen (Text ← Wert einer Variable: score).</p>
+</div>
+<div class="fiche"><h3>Rechnung</h3>
+<div class="schema"><b>Eingänge:</b> A, Rechenart, B &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Knoten (Wert): rechnet A + B, A − B, A × B oder A ÷ B. A und B können Zahlen sein oder selbst ein grünes Kabel bekommen (Rechnungen in Kette).</p>
+<p class="exemple"><b>Beispiel:</b> doppelt so viele Punkte geben (Wert ← Rechnung: score × 2).</p>
+</div>
+<div class="fiche"><h3>Abstand zwischen 2 Objekten</h3>
+<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Knoten (Wert): liefert den Abstand (in Pixeln) zwischen den Mittelpunkten zweier Objekte während des Spiels.</p>
+<p class="exemple"><b>Beispiel:</b> den Bildschirm stärker wackeln lassen, wenn der Gegner nah ist.</p>
 </div>
 </div>
 <div class="liens-bas">

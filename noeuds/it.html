@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutti i nodi di Yop2D (132) | Riferimento</title>
-<meta name="description" content="Elenco completo dei 132 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
+<title>Tutti i nodi di Yop2D (146) | Riferimento</title>
+<meta name="description" content="Elenco completo dei 146 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 132 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
+<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 146 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
 <p><strong>Categorie</strong></p>
-<nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-griglie-e-puzzle">Griglie e puzzle</a><a href="#c10-animazioni">Animazioni</a><a href="#c11-audio">Audio</a></nav>
+<nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-griglie-e-puzzle">Griglie e puzzle</a><a href="#c10-animazioni">Animazioni</a><a href="#c11-audio">Audio</a><a href="#c12-storia-e-dialoghi">Storia e dialoghi</a><a href="#c13-valori-fili-verdi">Valori (fili verdi)</a></nav>
 <h2 id="c1-eventi">Eventi</h2>
 <div class="method">
 <div class="fiche"><h3>All'Avvio</h3>
@@ -222,6 +222,21 @@
 <div class="schema"><b>Ingressi:</b> Verso, Colore, Durata (secondi)</div>
 <p>Fa scomparire tutto lo schermo verso un colore, o lo fa riapparire da esso. La dissolvenza continua da una scena all'altra.</p>
 <p class="exemple"><b>Esempio:</b> «Dissolvenza dello schermo» (scomparire), «Attendere» 1 secondo, «Vai alla scena», poi «Dissolvenza dello schermo» (apparire) all'inizio del livello successivo.</p>
+</div>
+<div class="fiche"><h3>Atmosfera (pioggia, neve, notte…)</h3>
+<div class="schema"><b>Ingressi:</b> Ciò che cade o vola, Luce, Forza, Suoni d'ambiente (pioggia, vento, tuoni…), Arriva in (secondi)</div>
+<p>Mette un'atmosfera su tutto lo schermo, che resta fino al prossimo nodo Atmosfera: ciò che cade o vola (pioggia, temporale con lampi, neve, petali, foglie, lucciole, cuori, bolle, nebbia) e una luce (notte, tramonto, ricordo, sogno, paura, scuro). La vecchia sfuma mentre arriva la nuova.</p>
+<p class="exemple"><b>Esempio:</b> dopo la scelta «Andarsene», temporale e luce di notte; «nessuna» e «normale» tolgono tutto.</p>
+</div>
+<div class="fiche"><h3>Zoomare lo schermo</h3>
+<div class="schema"><b>Ingressi:</b> Zoom (%, 100 = normale), Verso, Durata (secondi)</div>
+<p>Ingrandisce dolcemente tutto lo schermo del gioco (la scena, o lo sfondo e i personaggi di una storia) verso il centro, il viso, un lato, l'alto o il basso. 100 = tornare normale; il riquadro di dialogo e l'HUD non si muovono.</p>
+<p class="exemple"><b>Esempio:</b> zoom 140 verso il viso per 2 secondi quando Hana ha paura, poi zoom 100.</p>
+</div>
+<div class="fiche"><h3>Transizione dello schermo (cerchio, stella…)</h3>
+<div class="schema"><b>Ingressi:</b> Forma, Verso, Colore, Durata (secondi)</div>
+<p>Copre lo schermo con una forma che si chiude (cerchio, stella, rombo, tendina, sipario, veneziana), poi continua. Lo schermo resta coperto fino a una transizione «lo schermo si apre»: si cambia la scena o lo sfondo nascosto dietro.</p>
+<p class="exemple"><b>Esempio:</b> cerchio che si chiude → «Vai alla scena» → cerchio che si apre.</p>
 </div>
 <div class="fiche"><h3>Tremolio della camera</h3>
 <div class="schema"><b>Ingressi:</b> Intensità, Durata (millisecondi, 1000 = 1 s)</div>
@@ -718,6 +733,66 @@
 <div class="fiche"><h3>Ferma la musica</h3>
 <p>Ferma la musica in corso.</p>
 <p class="exemple"><b>Esempio:</b> silenzio nella schermata di Game Over.</p>
+</div>
+</div>
+<h2 id="c12-storia-e-dialoghi">Storia e dialoghi</h2>
+<div class="method">
+<div class="fiche"><h3>Dire una frase</h3>
+<div class="schema"><b>Ingressi:</b> Chi parla, Emozione, La frase, Posizione sullo schermo, Entrata del personaggio, Effetto, Suono o voce, Si continua &nbsp;→&nbsp; <b>Uscita:</b> Poi</div>
+<p>Gioco di dialogo: il personaggio scelto dice la frase in un riquadro di dialogo, lettera per lettera, e il giocatore tocca lo schermo per continuare. Il personaggio appare con la sua emozione (la sua scheda Personaggio: immagini, colore, voce). Parole speciali: [c]colore[/c], [t]trema[/t], [o]ondeggia[/o], [p] per una pausa, {score} per una variabile; pulsante «🌐 9 lingue» per tradurre.</p>
+<p class="exemple"><b>Esempio:</b> Hana (felice) dice «Ciao!», poi «Proporre una scelta» propone due risposte.</p>
+</div>
+<div class="fiche"><h3>Proporre una scelta</h3>
+<div class="schema"><b>Ingressi:</b> Chi chiede, Emozione, Domanda (facoltativa), Risposta 1, Risposta 2, Risposta 3, Risposta 4, Condizione della risposta 1, Condizione della risposta 2, Condizione della risposta 3, Condizione della risposta 4, Risposta non permessa, Timer (secondi, 0 = nessuno) &nbsp;→&nbsp; <b>Uscite:</b> Risposta 1 / Risposta 2 / Risposta 3 / Risposta 4 / Tempo scaduto</div>
+<p>Mostra da 2 a 4 risposte in grandi pulsanti: ogni risposta esce dalla sua uscita e la storia si dirama come un albero. Una risposta può richiedere una condizione (altrimenti è grigia o nascosta); un timer facoltativo aggiunge l'uscita «Tempo scaduto».</p>
+<p class="exemple"><b>Esempio:</b> «Aprire il tesoro» porta al finale felice, «Andarsene» a quello triste.</p>
+</div>
+<div class="fiche"><h3>Cambiare lo sfondo</h3>
+<div class="schema"><b>Ingressi:</b> Immagine di sfondo (vuoto = nessuna), Transizione</div>
+<p>Mette un'immagine di sfondo, a schermo intero, dietro i personaggi della storia (in dissolvenza o di colpo). Immagine vuota = nessuno sfondo.</p>
+<p class="exemple"><b>Esempio:</b> il prato all'inizio, poi il bosco quando Hana va a cercare il suo gatto.</p>
+</div>
+<div class="fiche"><h3>Mostrare / nascondere un personaggio</h3>
+<div class="schema"><b>Ingressi:</b> Personaggio, Lui…, Emozione, Posizione sullo schermo, Entrata del personaggio</div>
+<p>Fa entrare un personaggio della storia (emozione, posizione, entrata: dissolvenza, scivolata, salto), cambia la sua emozione o lo fa uscire, senza parlare.</p>
+<p class="exemple"><b>Esempio:</b> Lyn arriva da destra mentre Hana parla.</p>
+</div>
+<div class="fiche"><h3>Terminare la storia</h3>
+<p>Cancella il riquadro di dialogo, i personaggi e lo sfondo della storia: il gioco riprende il controllo.</p>
+<p class="exemple"><b>Esempio:</b> dopo l'ultima frase parte un minigioco.</p>
+</div>
+<div class="fiche"><h3>Chiedere un testo al giocatore (nome…)</h3>
+<div class="schema"><b>Ingressi:</b> Variabile, Domanda, Risposta proposta</div>
+<p>Apre una piccola finestra con la tastiera: il giocatore scrive un testo (il suo nome…), salvato nella variabile scelta; si continua toccando OK. Nelle frasi, {prenom} mostra questo testo.</p>
+<p class="exemple"><b>Esempio:</b> «Come ti chiami?» → variabile prenom → «Dire una frase» «Piacere, {prenom}!».</p>
+</div>
+</div>
+<h2 id="c13-valori-fili-verdi">Valori (fili verdi)</h2>
+<div class="method">
+<div class="fiche"><h3>Numero a caso</h3>
+<div class="schema"><b>Ingressi:</b> Da, A &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde (valore): dà un numero a caso tra «Da» e «A», estratto di nuovo a ogni utilizzo. Collegalo a un'impostazione con il pulsante 🔗 della finestra delle impostazioni.</p>
+<p class="exemple"><b>Esempio:</b> far apparire una moneta a una X a caso tra 0 e 800.</p>
+</div>
+<div class="fiche"><h3>Valore di un oggetto</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Cosa &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde (valore): dà un valore dell'oggetto scelto durante il gioco: la sua posizione x o y, larghezza, rotazione, opacità…</p>
+<p class="exemple"><b>Esempio:</b> mettere una moneta alla stessa altezza del giocatore (Y ← valore di un oggetto: player, y).</p>
+</div>
+<div class="fiche"><h3>Valore di una variabile</h3>
+<div class="schema"><b>Ingresso:</b> Variabile &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde (valore): dà il valore attuale di una variabile (punteggio, vite…) durante il gioco.</p>
+<p class="exemple"><b>Esempio:</b> mostrare il punteggio in un testo (Testo ← valore di una variabile: score).</p>
+</div>
+<div class="fiche"><h3>Calcolo</h3>
+<div class="schema"><b>Ingressi:</b> A, Operazione, B &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde (valore): calcola A + B, A − B, A × B o A ÷ B. A e B possono essere numeri, o ricevere a loro volta un filo verde (calcoli a catena).</p>
+<p class="exemple"><b>Esempio:</b> dare il doppio dei punti (Valore ← calcolo: score × 2).</p>
+</div>
+<div class="fiche"><h3>Distanza tra 2 oggetti</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde (valore): dà la distanza (in pixel) tra il centro di due oggetti durante il gioco.</p>
+<p class="exemple"><b>Esempio:</b> far tremare di più lo schermo quando il nemico è vicino.</p>
 </div>
 </div>
 <div class="liens-bas">

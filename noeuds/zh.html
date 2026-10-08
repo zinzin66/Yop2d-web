@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D 全部节点（132 个）| 参考</title>
-<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 132 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<title>Yop2D 全部节点（146 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 146 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 132 个节点，以及它们的设置（输入）和输出。</p>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 146 个节点，以及它们的设置（输入）和输出。</p>
 <p><strong>分类</strong></p>
-<nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-网格和益智">网格和益智</a><a href="#c10-动画">动画</a><a href="#c11-音频">音频</a></nav>
+<nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-网格和益智">网格和益智</a><a href="#c10-动画">动画</a><a href="#c11-音频">音频</a><a href="#c12-故事与对话">故事与对话</a><a href="#c13-数值-绿线">数值（绿线）</a></nav>
 <h2 id="c1-事件">事件</h2>
 <div class="method">
 <div class="fiche"><h3>启动时</h3>
@@ -222,6 +222,21 @@
 <div class="schema"><b>输入：</b> 方向, 颜色, 持续时间（秒）</div>
 <p>让整个屏幕淡出为某种颜色，或从该颜色淡入。切换场景时淡入淡出会继续。</p>
 <p class="exemple"><b>示例：</b> “屏幕淡入淡出”（淡出），“等待” 1 秒，“切换场景”，然后在下一关开始时 “屏幕淡入淡出”（淡入）。</p>
+</div>
+<div class="fiche"><h3>氛围（雨、雪、夜晚……）</h3>
+<div class="schema"><b>输入：</b> 飘落或飞舞的东西, 光线, 强度, 环境音（雨、风、雷……）, 出现时间（秒）</div>
+<p>在整个屏幕上加上氛围，直到下一个“氛围”节点为止：飘落或飞舞的东西（雨、带闪电的雷雨、雪、花瓣、落叶、萤火虫、爱心、气泡、薄雾）和光线（夜晚、日落、回忆、梦境、恐惧、昏暗）。旧的淡出，新的淡入。</p>
+<p class="exemple"><b>示例：</b> 选择“离开”后，雷雨加夜晚光线；“无”和“正常”会全部移除。</p>
+</div>
+<div class="fiche"><h3>缩放画面</h3>
+<div class="schema"><b>输入：</b> 缩放（%，100 = 正常）, 朝向, 持续时间（秒）</div>
+<p>平滑放大整个游戏画面（场景，或故事的背景和角色），朝向中心、脸部、一侧、上方或下方。100 = 恢复正常；对话框和 HUD 不动。</p>
+<p class="exemple"><b>示例：</b> Hana 害怕时朝脸部缩放到 140，持续 2 秒，然后回到 100。</p>
+</div>
+<div class="fiche"><h3>画面转场（圆形、星形……）</h3>
+<div class="schema"><b>输入：</b> 形状, 方向, 颜色, 持续时间（秒）</div>
+<p>用收拢的形状盖住屏幕（圆形、星形、菱形、擦除、幕布、百叶窗），然后继续。屏幕会一直被盖住，直到“屏幕打开”转场：在后面切换场景或背景。</p>
+<p class="exemple"><b>示例：</b> 圆形收拢 → “切换场景” → 圆形展开。</p>
 </div>
 <div class="fiche"><h3>相机抖动</h3>
 <div class="schema"><b>输入：</b> 强度, 持续时间（毫秒，1000 = 1 秒）</div>
@@ -718,6 +733,66 @@
 <div class="fiche"><h3>停止音乐</h3>
 <p>停止当前的音乐。</p>
 <p class="exemple"><b>示例：</b> Game Over 画面保持安静。</p>
+</div>
+</div>
+<h2 id="c12-故事与对话">故事与对话</h2>
+<div class="method">
+<div class="fiche"><h3>说一句话</h3>
+<div class="schema"><b>输入：</b> 谁说话, 表情, 台词, 屏幕位置, 角色出场, 效果, 声音或配音, 接下来 &nbsp;→&nbsp; <b>输出：</b> 然后</div>
+<p>对话游戏：选中的角色在对话框里一个字一个字地说出台词，玩家点击屏幕继续。角色以设定的表情出现（角色卡：图片、颜色、声音）。特殊文字：[c]颜色[/c]、[t]颤抖[/t]、[o]波浪[/o]、[p] 停顿、{score} 显示变量；“🌐 9 种语言”按钮用于翻译。</p>
+<p class="exemple"><b>示例：</b> Hana（开心）说“你好！”，然后 “提出选择” 给出两个回答。</p>
+</div>
+<div class="fiche"><h3>提出选择</h3>
+<div class="schema"><b>输入：</b> 谁提问, 表情, 问题（可选）, 回答 1, 回答 2, 回答 3, 回答 4, 回答条件 1, 回答条件 2, 回答条件 3, 回答条件 4, 不可用的回答, 倒计时（秒，0 = 无） &nbsp;→&nbsp; <b>输出：</b> 回答 1 / 回答 2 / 回答 3 / 回答 4 / 时间到</div>
+<p>用大按钮显示 2 到 4 个回答：每个回答走自己的出口，故事像树一样分叉。回答可以设条件（不满足时变灰或隐藏）；可选的倒计时会增加“时间到”出口。</p>
+<p class="exemple"><b>示例：</b> “打开宝藏”通向好结局，“离开”通向悲伤结局。</p>
+</div>
+<div class="fiche"><h3>更换背景</h3>
+<div class="schema"><b>输入：</b> 背景图片（空 = 无）, 过渡</div>
+<p>把一张图片设为全屏背景，放在故事角色的后面（淡入淡出或直接切换）。图片留空 = 没有背景。</p>
+<p class="exemple"><b>示例：</b> 开始是草地，Hana 去找猫时换成森林。</p>
+</div>
+<div class="fiche"><h3>显示 / 隐藏角色</h3>
+<div class="schema"><b>输入：</b> 角色, 他…, 表情, 屏幕位置, 角色出场</div>
+<p>让故事角色登场（表情、位置、出场方式：淡入、滑入、跳入），改变表情或让角色离场，不说话。</p>
+<p class="exemple"><b>示例：</b> Hana 说话时，Lyn 从右边登场。</p>
+</div>
+<div class="fiche"><h3>结束故事</h3>
+<p>清除故事的对话框、角色和背景：游戏重新接管。</p>
+<p class="exemple"><b>示例：</b> 最后一句台词之后开始一个小游戏。</p>
+</div>
+<div class="fiche"><h3>让玩家输入文字（名字……）</h3>
+<div class="schema"><b>输入：</b> 变量, 问题, 默认回答</div>
+<p>打开一个带键盘的小窗口：玩家输入文字（名字……），存入所选变量；点 OK 后继续。在台词中，{prenom} 会显示这段文字。</p>
+<p class="exemple"><b>示例：</b> “你叫什么名字？”→ 变量 prenom → “说一句话”“很高兴认识你，{prenom}！”。</p>
+</div>
+</div>
+<h2 id="c13-数值-绿线">数值（绿线）</h2>
+<div class="method">
+<div class="fiche"><h3>随机数</h3>
+<div class="schema"><b>输入：</b> 从, 到 &nbsp;→&nbsp; <b>输出：</b> 无（脚本结束）</div>
+<p>绿色节点（数值）：给出“从”到“到”之间的随机数，每次使用都会重新抽取。用设置窗口里的 🔗 按钮把它接到某个设置上。</p>
+<p class="exemple"><b>示例：</b> 让金币出现在 0 到 800 之间随机的 X 位置。</p>
+</div>
+<div class="fiche"><h3>对象的数值</h3>
+<div class="schema"><b>输入：</b> 对象, 什么 &nbsp;→&nbsp; <b>输出：</b> 无（脚本结束）</div>
+<p>绿色节点（数值）：在游戏中给出所选对象的一个数值：x 或 y 位置、宽度、旋转、不透明度……</p>
+<p class="exemple"><b>示例：</b> 把金币放到和玩家一样的高度（Y ← 对象的数值：player, y）。</p>
+</div>
+<div class="fiche"><h3>变量的值</h3>
+<div class="schema"><b>输入：</b> 变量 &nbsp;→&nbsp; <b>输出：</b> 无（脚本结束）</div>
+<p>绿色节点（数值）：在游戏中给出某个变量（分数、生命……）的当前值。</p>
+<p class="exemple"><b>示例：</b> 在文字里显示分数（文字 ← 变量的值：score）。</p>
+</div>
+<div class="fiche"><h3>计算</h3>
+<div class="schema"><b>输入：</b> A, 运算, B &nbsp;→&nbsp; <b>输出：</b> 无（脚本结束）</div>
+<p>绿色节点（数值）：计算 A + B、A − B、A × B 或 A ÷ B。A 和 B 可以是数字，也可以再接一根绿线（连续计算）。</p>
+<p class="exemple"><b>示例：</b> 得到两倍的分数（数值 ← 计算：score × 2）。</p>
+</div>
+<div class="fiche"><h3>两个对象的距离</h3>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B &nbsp;→&nbsp; <b>输出：</b> 无（脚本结束）</div>
+<p>绿色节点（数值）：在游戏中给出两个对象中心之间的距离（像素）。</p>
+<p class="exemple"><b>示例：</b> 敌人靠近时让屏幕晃得更厉害。</p>
 </div>
 </div>
 <div class="liens-bas">

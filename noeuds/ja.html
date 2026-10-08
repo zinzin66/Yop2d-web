@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D の全ノード（132 個）| リファレンス</title>
-<meta name="description" content="Android 向けコード不要 2D ゲームエンジン Yop2D の 132 個のビジュアルノードの一覧：各ノードの役割、設定、出力、使用例。">
+<title>Yop2D の全ノード（146 個）| リファレンス</title>
+<meta name="description" content="Android 向けコード不要 2D ゲームエンジン Yop2D の 146 個のビジュアルノードの一覧：各ノードの役割、設定、出力、使用例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/ja.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
 </header>
 <main>
-<p>Yop2D は、Android 向けの無料・コード不要の 2D ゲームエンジンです。ゲームのロジックは、Blueprint の中でつないだノード（ビジュアルブロック）で作ります。イベントがつながりを始め、そのあとにアクションや条件が続きます。このページでは、エディターの 132 個のノードを、設定（入力）と出力とともに説明します。</p>
+<p>Yop2D は、Android 向けの無料・コード不要の 2D ゲームエンジンです。ゲームのロジックは、Blueprint の中でつないだノード（ビジュアルブロック）で作ります。イベントがつながりを始め、そのあとにアクションや条件が続きます。このページでは、エディターの 146 個のノードを、設定（入力）と出力とともに説明します。</p>
 <p><strong>カテゴリー</strong></p>
-<nav class="sommaire"><a href="#c1-イベント">イベント</a><a href="#c2-シーンとhud">シーンとHUD</a><a href="#c3-時間">時間</a><a href="#c4-外観とオブジェクト">外観とオブジェクト</a><a href="#c5-変数とインベントリ">変数とインベントリ</a><a href="#c6-ロジックと条件">ロジックと条件</a><a href="#c7-テキストとダイアログ">テキストとダイアログ</a><a href="#c8-移動とai">移動とAI</a><a href="#c9-グリッドとパズル">グリッドとパズル</a><a href="#c10-アニメーション">アニメーション</a><a href="#c11-オーディオ">オーディオ</a></nav>
+<nav class="sommaire"><a href="#c1-イベント">イベント</a><a href="#c2-シーンとhud">シーンとHUD</a><a href="#c3-時間">時間</a><a href="#c4-外観とオブジェクト">外観とオブジェクト</a><a href="#c5-変数とインベントリ">変数とインベントリ</a><a href="#c6-ロジックと条件">ロジックと条件</a><a href="#c7-テキストとダイアログ">テキストとダイアログ</a><a href="#c8-移動とai">移動とAI</a><a href="#c9-グリッドとパズル">グリッドとパズル</a><a href="#c10-アニメーション">アニメーション</a><a href="#c11-オーディオ">オーディオ</a><a href="#c12-ストーリーと会話">ストーリーと会話</a><a href="#c13-値-緑の線">値（緑の線）</a></nav>
 <h2 id="c1-イベント">イベント</h2>
 <div class="method">
 <div class="fiche"><h3>起動時</h3>
@@ -222,6 +222,21 @@
 <div class="schema"><b>入力：</b> 方向, 色, 時間（秒）</div>
 <p>画面全体をある色へフェードアウト、またはその色からフェードインします。フェードはシーンが変わっても続きます。</p>
 <p class="exemple"><b>例：</b> 「画面フェード」（フェードアウト）、「待つ」 1 秒、「シーンを切り替える」、次のステージの開始時に 「画面フェード」（フェードイン）。</p>
+</div>
+<div class="fiche"><h3>ふんいき（雨、雪、夜…）</h3>
+<div class="schema"><b>入力：</b> ふってくるもの, 光, 強さ, まわりの音（雨、風、かみなり…）, 出てくる時間（秒）</div>
+<p>画面全体にふんいきをつけ、次の「ふんいき」ノードまで続きます：ふってくるもの（雨、かみなりつきの嵐、雪、花びら、落ち葉、ホタル、ハート、あわ、きり）と光（夜、夕焼け、思い出、夢、こわい、暗い）。古いものが消えながら新しいものが出てきます。</p>
+<p class="exemple"><b>例：</b> 「立ち去る」を選んだら嵐と夜の光。「なし」と「ふつう」で全部消える。</p>
+</div>
+<div class="fiche"><h3>画面をズーム</h3>
+<div class="schema"><b>入力：</b> ズーム（%、100 = ふつう）, どこへ, 時間（秒）</div>
+<p>ゲーム画面全体（シーン、または物語の背景とキャラ）を、まんなか、顔、横、上、下に向けてなめらかに大きくします。100 = もとにもどす。会話ボックスと HUD は動きません。</p>
+<p class="exemple"><b>例：</b> ハナがこわがったら顔へズーム 140 を2秒、そのあとズーム 100。</p>
+</div>
+<div class="fiche"><h3>画面の切りかえ（まる、星…）</h3>
+<div class="schema"><b>入力：</b> 形, 向き, 色, 時間（秒）</div>
+<p>閉じていく形（まる、星、ひし形、ワイプ、カーテン、ブラインド）で画面をおおい、そのあと続きます。「画面が開く」まで画面はおおわれたまま：その間にシーンや背景を変えます。</p>
+<p class="exemple"><b>例：</b> まるく閉じる → 「シーンを切り替える」 → まるく開く。</p>
 </div>
 <div class="fiche"><h3>カメラの振動</h3>
 <div class="schema"><b>入力：</b> 強さ, 長さ（ミリ秒、1000 = 1秒）</div>
@@ -718,6 +733,66 @@
 <div class="fiche"><h3>音楽を停止</h3>
 <p>今流れている音楽を止めます。</p>
 <p class="exemple"><b>例：</b> Game Over 画面では静かにする。</p>
+</div>
+</div>
+<h2 id="c12-ストーリーと会話">ストーリーと会話</h2>
+<div class="method">
+<div class="fiche"><h3>セリフを言う</h3>
+<div class="schema"><b>入力：</b> だれが話す, 表情, セリフ, 画面の位置, キャラの登場, エフェクト, 音・ボイス, つぎへ進む &nbsp;→&nbsp; <b>出力：</b> その後</div>
+<p>会話ゲーム：選んだキャラが会話ボックスで1文字ずつセリフを言い、プレイヤーが画面をタッチすると続きます。キャラは表情つきで出ます（キャラのカード：画像、色、声）。特別な言葉：[c]色[/c]、[t]ふるえる[/t]、[o]波打つ[/o]、[p] で間、{score} で変数；「🌐 9言語」ボタンで翻訳。</p>
+<p class="exemple"><b>例：</b> ハナ（うれしい）が「こんにちは！」と言い、「選択肢を出す」 で2つの答えを出す。</p>
+</div>
+<div class="fiche"><h3>選択肢を出す</h3>
+<div class="schema"><b>入力：</b> だれが聞く, 表情, 質問（なくてもよい）, 答え 1, 答え 2, 答え 3, 答え 4, 答えの条件 1, 答えの条件 2, 答えの条件 3, 答えの条件 4, 選べない答え, タイマー（秒、0 = なし） &nbsp;→&nbsp; <b>出力：</b> 答え 1 / 答え 2 / 答え 3 / 答え 4 / 時間切れ</div>
+<p>2〜4個の答えを大きなボタンで出します。答えごとに出口があり、物語が木のように分かれます。答えに条件をつけられます（満たさないとグレーまたは非表示）。タイマーをつけると「時間切れ」の出口が増えます。</p>
+<p class="exemple"><b>例：</b> 「宝物を開ける」はハッピーエンド、「立ち去る」は悲しいエンドへ。</p>
+</div>
+<div class="fiche"><h3>背景を変える</h3>
+<div class="schema"><b>入力：</b> 背景の画像（空 = なし）, 切りかえ</div>
+<p>画像を全画面の背景にして、物語のキャラの後ろに置きます（フェードまたはすぐ）。画像が空 = 背景なし。</p>
+<p class="exemple"><b>例：</b> 最初は草原、ハナがネコを探しに行くと森。</p>
+</div>
+<div class="fiche"><h3>キャラを出す / 消す</h3>
+<div class="schema"><b>入力：</b> キャラ, キャラが…, 表情, 画面の位置, キャラの登場</div>
+<p>物語のキャラを登場させたり（表情、位置、登場：フェード、すべりこみ、ジャンプ）、表情を変えたり、退場させたりします。セリフはなし。</p>
+<p class="exemple"><b>例：</b> ハナが話している間にリンが右から登場。</p>
+</div>
+<div class="fiche"><h3>物語を終える</h3>
+<p>物語の会話ボックス、キャラ、背景を消して、ゲームに戻ります。</p>
+<p class="exemple"><b>例：</b> 最後のセリフのあとミニゲームが始まる。</p>
+</div>
+<div class="fiche"><h3>プレイヤーに文字を書いてもらう（名前…）</h3>
+<div class="schema"><b>入力：</b> 変数, 質問, はじめの答え</div>
+<p>キーボードつきの小さな窓を開きます：プレイヤーが文字（名前…）を書き、選んだ変数に入ります。OK で続きます。セリフの中で {prenom} がこの文字になります。</p>
+<p class="exemple"><b>例：</b> 「名前は？」→ 変数 prenom → 「セリフを言う」「よろしくね、{prenom}！」。</p>
+</div>
+</div>
+<h2 id="c13-値-緑の線">値（緑の線）</h2>
+<div class="method">
+<div class="fiche"><h3>ランダムな数</h3>
+<div class="schema"><b>入力：</b> から, まで &nbsp;→&nbsp; <b>出力：</b> なし（スクリプト終了）</div>
+<p>緑のノード（値）：「から」と「まで」のあいだのランダムな数を出す。使うたびに新しく決まる。設定ウィンドウの 🔗 ボタンで設定につなごう。</p>
+<p class="exemple"><b>例：</b> コインを 0〜800 のランダムな X に出す。</p>
+</div>
+<div class="fiche"><h3>オブジェクトの値</h3>
+<div class="schema"><b>入力：</b> オブジェクト, なに &nbsp;→&nbsp; <b>出力：</b> なし（スクリプト終了）</div>
+<p>緑のノード（値）：ゲーム中に、えらんだオブジェクトの値を出す：x や y の位置、はば、回転、不透明度など。</p>
+<p class="exemple"><b>例：</b> コインをプレイヤーと同じ高さに置く（Y ← オブジェクトの値：player, y）。</p>
+</div>
+<div class="fiche"><h3>変数の値</h3>
+<div class="schema"><b>入力：</b> 変数 &nbsp;→&nbsp; <b>出力：</b> なし（スクリプト終了）</div>
+<p>緑のノード（値）：ゲーム中の変数（スコア、ライフなど）の今の値を出す。</p>
+<p class="exemple"><b>例：</b> テキストにスコアを表示する（テキスト ← 変数の値：score）。</p>
+</div>
+<div class="fiche"><h3>計算</h3>
+<div class="schema"><b>入力：</b> A, 計算のしかた, B &nbsp;→&nbsp; <b>出力：</b> なし（スクリプト終了）</div>
+<p>緑のノード（値）：A + B、A − B、A × B、A ÷ B を計算する。A と B は数でもいいし、さらに緑の線をつないでもいい（計算をつなげる）。</p>
+<p class="exemple"><b>例：</b> 2倍のポイントをあげる（値 ← 計算：score × 2）。</p>
+</div>
+<div class="fiche"><h3>2つのオブジェクトの距離</h3>
+<div class="schema"><b>入力：</b> オブジェクト A, オブジェクト B &nbsp;→&nbsp; <b>出力：</b> なし（スクリプト終了）</div>
+<p>緑のノード（値）：ゲーム中に、2つのオブジェクトの中心のあいだの距離（ピクセル）を出す。</p>
+<p class="exemple"><b>例：</b> 敵が近いほど画面を強くゆらす。</p>
 </div>
 </div>
 <div class="liens-bas">
