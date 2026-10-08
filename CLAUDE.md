@@ -204,6 +204,12 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   langue » (24 cartes) ; phrases ajoutées aux FAQ « images, sons et musiques » et « Comment apprendre ». `llms.txt` régénéré.
 - 03/10/2026 : nouveau bloc vitrine « Une bibliothèque qui contient tout » (capture `interface_bibliotheque.png` fournie par
   l'utilisateur, 12 blocs, 3e de la liste). Bloc « modèles » corrigé : le moteur ne s'ouvre plus sur l'onglet Modèles au 1er lancement.
+- 07/10/2026 : NOUVELLE VERSION (build 1039, normale + AAB ; le 1038 avait un défaut). Site (PR #43) : bloc « À l'école et pour les enfants »
+  (clé « ecole » des fichiers accueil, section #school, mode école en 5 étapes, contact Discord = profil
+  https://discord.com/users/557189525437153290 + nom zinzin0000 ; formulaire enseignants : FORMULAIRE_ENSEIGNANTS de
+  generer_accueil.py, None tant que l'utilisateur n'a pas créé de Google Forms), FAQ 22 questions, 36 modèles, 13 exemples
+  (Nexus UI), 26 cartes, 5 packs en ligne (hologramme, effets, avion, monstres, gestes ; sources préparées par
+  outils/modeles/preparer_packs_en_ligne.py du moteur), aide des 5 nœuds verts.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
