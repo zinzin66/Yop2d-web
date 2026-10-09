@@ -222,6 +222,9 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   guide intégré « Ma première histoire » (4e guide, cadre jaune aussi dans les fenêtres). Site : aide des nœuds, accueil
   (cartes « Un vrai visual novel, complet » et « Ma première histoire en 5 minutes », 30 cartes ; FAQ Ren'Py complétée),
   Firefly Night v2 (moteur_min 1053), llms.txt.
+- 09/10/2026 : 0.1.1062 publiée (PR #50 fusionnée). Comparatif de l'accueil (9 langues) : ligne Ren'Py (5 moteurs), puce
+  « histoire à choix sans script » dans « fait pour vous si », Ren'Py = meilleur choix pour un long visual novel sur ordinateur
+  (rester humble : Ren'Py est la référence) ; note « octobre 2026 ».
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
