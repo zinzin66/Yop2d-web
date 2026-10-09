@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (146) | Reference</title>
-<meta name="description" content="Complete list of the 146 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (149) | Reference</title>
+<meta name="description" content="Complete list of the 149 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 146 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 149 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-animations">Animations</a><a href="#c11-audio">Audio</a><a href="#c12-story-and-dialogues">Story and dialogues</a><a href="#c13-values-green-wires">Values (green wires)</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -743,8 +743,8 @@
 <p class="exemple"><b>Example:</b> Hana (happy) says "Hello!", then “Ask a choice” offers two answers.</p>
 </div>
 <div class="fiche"><h3>Ask a choice</h3>
-<div class="schema"><b>Inputs:</b> Who asks, Emotion, Question (optional), Answer 1, Answer 2, Answer 3, Answer 4, Condition of answer 1, Condition of answer 2, Condition of answer 3, Condition of answer 4, Answer not allowed, Timer (seconds, 0 = none) &nbsp;→&nbsp; <b>Outputs:</b> Answer 1 / Answer 2 / Answer 3 / Answer 4 / Time's up</div>
-<p>Shows 2 to 4 answers as big buttons: each answer goes out through its own output, so the story branches like a tree. An answer can require a condition (otherwise it is greyed out or hidden); an optional timer adds the "Time's up" output.</p>
+<div class="schema"><b>Inputs:</b> Who asks, Emotion, Question (optional), Answer 1, Answer 2, Answer 3, Answer 4, Condition of answer 1, Condition of answer 2, Condition of answer 3, Condition of answer 4, Answer not allowed, Picture for answer 1 (optional), Picture for answer 2 (optional), Picture for answer 3 (optional), Picture for answer 4 (optional), Timer (seconds, 0 = none) &nbsp;→&nbsp; <b>Outputs:</b> Answer 1 / Answer 2 / Answer 3 / Answer 4 / Time's up</div>
+<p>Shows 2 to 4 answers as big buttons: each answer goes out through its own output, so the story branches like a tree. An answer can require a condition (otherwise it is greyed out or hidden); an optional timer adds the "Time's up" output. Each answer can also have a picture (advanced settings): the answers become big illustrated cards.</p>
 <p class="exemple"><b>Example:</b> "Open the treasure" leads to the good ending, "Leave" to the sad one.</p>
 </div>
 <div class="fiche"><h3>Change the background</h3>
@@ -758,8 +758,24 @@
 <p class="exemple"><b>Example:</b> Lyn comes in from the right while Hana is talking.</p>
 </div>
 <div class="fiche"><h3>End the story</h3>
-<p>Clears the dialogue box, the characters and the background of the story: the game takes over again.</p>
-<p class="exemple"><b>Example:</b> after the last line, a mini-game starts.</p>
+<div class="schema"><b>Input:</b> Ending name (optional: it counts in "Endings and gallery")</div>
+<p>Clears the dialogue box, the characters and the background of the story: the game takes over again. If you give an "Ending name", this ending is remembered forever and counts in "Endings and gallery" of the “Story title screen”; the saved game is erased.</p>
+<p class="exemple"><b>Example:</b> "Friends of the cabin" after the last line, then back to the title screen.</p>
+</div>
+<div class="fiche"><h3>Friendship (hearts)</h3>
+<div class="schema"><b>Inputs:</b> Who?, Hearts to add (−1 to remove), Maximum number of hearts</div>
+<p>Adds (or removes, with −1) friendship hearts for a character, up to the maximum. The hearts show at the top left during the story and a “+1 ❤” floats up (they can be hidden in the Dialogue style). They are saved with the game and restored by ◀ Back.</p>
+<p class="exemple"><b>Example:</b> after the kind answer “I'll stay with you”: Hana +1.</p>
+</div>
+<div class="fiche"><h3>If the friendship…</h3>
+<div class="schema"><b>Inputs:</b> Who?, is, hearts &nbsp;→&nbsp; <b>Outputs:</b> True / False</div>
+<p>Picks how the story goes on from a character's friendship hearts: the “True” output if the comparison is true, otherwise “False”. For an ending that depends on how you treated the characters.</p>
+<p class="exemple"><b>Example:</b> if Hana's friendship is at least 4 → the happy ending, otherwise the sad one.</p>
+</div>
+<div class="fiche"><h3>Story title screen</h3>
+<div class="schema"><b>Inputs:</b> Story title, Background picture (empty = the current background) &nbsp;→&nbsp; <b>Output:</b> New game</div>
+<p>Shows the story title over a picture, with big buttons: "Continue" (resumes where the player left off, with the background, characters, music and variables: the story saves itself at every line), "New game" (the output: the start of the story) and "Endings and gallery" (endings found and backgrounds already seen, the others are locked). During the story, the ◀ Back button returns to the previous line, even before a choice.</p>
+<p class="exemple"><b>Example:</b> placed right after "At start"; every “End the story” comes back to it.</p>
 </div>
 <div class="fiche"><h3>Ask the player for a text (name…)</h3>
 <div class="schema"><b>Inputs:</b> Variable, Question, Suggested answer</div>

@@ -9,8 +9,8 @@
     },
     {
       "nom": "Eine Wahl stellen",
-      "schema": "<b>Eingänge:</b> Wer fragt, Gefühl, Frage (freiwillig), Antwort 1, Antwort 2, Antwort 3, Antwort 4, Bedingung der Antwort 1, Bedingung der Antwort 2, Bedingung der Antwort 3, Bedingung der Antwort 4, Nicht erlaubte Antwort, Timer (Sekunden, 0 = keiner) &nbsp;→&nbsp; <b>Ausgänge:</b> Antwort 1 / Antwort 2 / Antwort 3 / Antwort 4 / Zeit abgelaufen",
-      "role": "Zeigt 2 bis 4 Antworten als große Knöpfe: Jede Antwort hat ihren eigenen Ausgang, die Geschichte verzweigt sich wie ein Baum. Eine Antwort kann eine Bedingung verlangen (sonst ist sie ausgegraut oder versteckt); ein freiwilliger Timer fügt den Ausgang „Zeit abgelaufen“ hinzu.",
+      "schema": "<b>Eingänge:</b> Wer fragt, Gefühl, Frage (freiwillig), Antwort 1, Antwort 2, Antwort 3, Antwort 4, Bedingung der Antwort 1, Bedingung der Antwort 2, Bedingung der Antwort 3, Bedingung der Antwort 4, Nicht erlaubte Antwort, Bild für Antwort 1 (freiwillig), Bild für Antwort 2 (freiwillig), Bild für Antwort 3 (freiwillig), Bild für Antwort 4 (freiwillig), Timer (Sekunden, 0 = keiner) &nbsp;→&nbsp; <b>Ausgänge:</b> Antwort 1 / Antwort 2 / Antwort 3 / Antwort 4 / Zeit abgelaufen",
+      "role": "Zeigt 2 bis 4 Antworten als große Knöpfe: Jede Antwort hat ihren eigenen Ausgang, die Geschichte verzweigt sich wie ein Baum. Eine Antwort kann eine Bedingung verlangen (sonst ist sie ausgegraut oder versteckt); ein freiwilliger Timer fügt den Ausgang „Zeit abgelaufen“ hinzu. Jede Antwort kann auch ein Bild haben (erweiterte Einstellungen): Die Antworten werden zu großen Bildkarten.",
       "exemple": "„Schatz öffnen“ führt zum guten Ende, „Gehen“ zum traurigen."
     },
     {
@@ -27,8 +27,27 @@
     },
     {
       "nom": "Geschichte beenden",
-      "role": "Entfernt Dialogkasten, Figuren und Hintergrund der Geschichte: Das Spiel übernimmt wieder.",
-      "exemple": "nach dem letzten Satz beginnt ein Minispiel."
+      "schema": "<b>Eingang:</b> Name des Endes (freiwillig: zählt in „Enden und Galerie“)",
+      "role": "Entfernt Dialogkasten, Figuren und Hintergrund der Geschichte: Das Spiel übernimmt wieder. Gibst du einen „Namen des Endes“ an, wird dieses Ende für immer gemerkt und zählt in „Enden und Galerie“ des „Titelbildschirm der Geschichte“; der Spielstand wird gelöscht.",
+      "exemple": "„Die Freunde der Hütte“ nach dem letzten Satz, dann zurück zum Titelbildschirm."
+    },
+    {
+      "nom": "Freundschaft (Herzen)",
+      "schema": "<b>Eingänge:</b> Wer?, Herzen dazu (−1 zum Abziehen), Höchstzahl an Herzen",
+      "role": "Gibt einer Figur Freundschaftsherzen dazu (oder nimmt mit −1 welche weg), höchstens bis zum Maximum. Die Herzen erscheinen während der Geschichte oben links und ein „+1 ❤“ fliegt hoch (im Dialogstil ausblendbar). Sie werden mit dem Spielstand gespeichert und von ◀ Zurück wiederhergestellt.",
+      "exemple": "nach der netten Antwort „Ich bleibe bei dir“: Hana +1."
+    },
+    {
+      "nom": "Wenn die Freundschaft…",
+      "schema": "<b>Eingänge:</b> Wer?, beträgt, Herzen &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch",
+      "role": "Wählt den weiteren Verlauf nach den Freundschaftsherzen einer Figur: Ausgang „Wahr“, wenn der Vergleich stimmt, sonst „Falsch“. Für ein Ende, das davon abhängt, wie man die Figuren behandelt hat.",
+      "exemple": "wenn Hanas Freundschaft mindestens 4 ist → das schöne Ende, sonst das traurige."
+    },
+    {
+      "nom": "Titelbildschirm der Geschichte",
+      "schema": "<b>Eingänge:</b> Titel der Geschichte, Hintergrundbild (leer = aktueller Hintergrund) &nbsp;→&nbsp; <b>Ausgang:</b> Neues Spiel",
+      "role": "Zeigt den Titel der Geschichte auf einem Bild, mit großen Knöpfen: „Weiterspielen“ (setzt dort fort, wo man aufgehört hat, mit Hintergrund, Figuren, Musik und Variablen: die Geschichte speichert sich bei jedem Satz selbst), „Neues Spiel“ (der Ausgang: der Anfang der Geschichte) und „Enden und Galerie“ (gefundene Enden und schon gesehene Hintergründe, die anderen sind gesperrt). Während der Geschichte führt ◀ Zurück zum vorigen Satz, sogar vor eine Wahl.",
+      "exemple": "direkt nach „Beim Start“; jedes „Geschichte beenden“ führt zu ihm zurück."
     },
     {
       "nom": "Spieler nach einem Text fragen (Name…)",

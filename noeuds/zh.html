@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D 全部节点（146 个）| 参考</title>
-<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 146 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<title>Yop2D 全部节点（149 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 149 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 146 个节点，以及它们的设置（输入）和输出。</p>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 149 个节点，以及它们的设置（输入）和输出。</p>
 <p><strong>分类</strong></p>
 <nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-网格和益智">网格和益智</a><a href="#c10-动画">动画</a><a href="#c11-音频">音频</a><a href="#c12-故事与对话">故事与对话</a><a href="#c13-数值-绿线">数值（绿线）</a></nav>
 <h2 id="c1-事件">事件</h2>
@@ -743,8 +743,8 @@
 <p class="exemple"><b>示例：</b> Hana（开心）说“你好！”，然后 “提出选择” 给出两个回答。</p>
 </div>
 <div class="fiche"><h3>提出选择</h3>
-<div class="schema"><b>输入：</b> 谁提问, 表情, 问题（可选）, 回答 1, 回答 2, 回答 3, 回答 4, 回答条件 1, 回答条件 2, 回答条件 3, 回答条件 4, 不可用的回答, 倒计时（秒，0 = 无） &nbsp;→&nbsp; <b>输出：</b> 回答 1 / 回答 2 / 回答 3 / 回答 4 / 时间到</div>
-<p>用大按钮显示 2 到 4 个回答：每个回答走自己的出口，故事像树一样分叉。回答可以设条件（不满足时变灰或隐藏）；可选的倒计时会增加“时间到”出口。</p>
+<div class="schema"><b>输入：</b> 谁提问, 表情, 问题（可选）, 回答 1, 回答 2, 回答 3, 回答 4, 回答条件 1, 回答条件 2, 回答条件 3, 回答条件 4, 不可用的回答, 回答 1 的图片（可选）, 回答 2 的图片（可选）, 回答 3 的图片（可选）, 回答 4 的图片（可选）, 倒计时（秒，0 = 无） &nbsp;→&nbsp; <b>输出：</b> 回答 1 / 回答 2 / 回答 3 / 回答 4 / 时间到</div>
+<p>用大按钮显示 2 到 4 个回答：每个回答走自己的出口，故事像树一样分叉。回答可以设条件（不满足时变灰或隐藏）；可选的倒计时会增加“时间到”出口。 每个回答还可以配一张图片（高级设置）：回答会变成带图的大卡片。</p>
 <p class="exemple"><b>示例：</b> “打开宝藏”通向好结局，“离开”通向悲伤结局。</p>
 </div>
 <div class="fiche"><h3>更换背景</h3>
@@ -758,8 +758,24 @@
 <p class="exemple"><b>示例：</b> Hana 说话时，Lyn 从右边登场。</p>
 </div>
 <div class="fiche"><h3>结束故事</h3>
-<p>清除故事的对话框、角色和背景：游戏重新接管。</p>
-<p class="exemple"><b>示例：</b> 最后一句台词之后开始一个小游戏。</p>
+<div class="schema"><b>输入：</b> 结局名称（可选：计入“结局与画廊”）</div>
+<p>清除故事的对话框、角色和背景：游戏重新接管。如果填写“结局名称”，这个结局会被永久记住，并计入“故事标题画面”的“结局与画廊”；存档会被删除。</p>
+<p class="exemple"><b>示例：</b> 最后一句之后显示“小屋里的朋友”，然后回到标题画面。</p>
+</div>
+<div class="fiche"><h3>友情（爱心）</h3>
+<div class="schema"><b>输入：</b> 谁？, 增加爱心（−1 表示减少）, 爱心上限</div>
+<p>给角色增加友情爱心（填 −1 则减少），不超过上限。故事进行时爱心显示在左上角，并飘起“+1 ❤”（可在对话样式中隐藏）。爱心随存档保存，◀ 返回时也会恢复。</p>
+<p class="exemple"><b>示例：</b> 选择温柔的回答“我陪着你”之后：Hana +1。</p>
+</div>
+<div class="fiche"><h3>如果友情……</h3>
+<div class="schema"><b>输入：</b> 谁？, 为, 颗爱心 &nbsp;→&nbsp; <b>输出：</b> 真 / 假</div>
+<p>根据角色的友情爱心决定故事的走向：比较成立走“真”，否则走“假”。用来做取决于玩家如何对待角色的结局。</p>
+<p class="exemple"><b>示例：</b> Hana 的友情至少为 4 → 美好结局，否则悲伤结局。</p>
+</div>
+<div class="fiche"><h3>故事标题画面</h3>
+<div class="schema"><b>输入：</b> 故事标题, 背景图片（空 = 当前背景） &nbsp;→&nbsp; <b>输出：</b> 新游戏</div>
+<p>在图片上显示故事标题和大按钮：“继续”（从上次离开的地方接着玩，背景、角色、音乐和变量都会恢复：故事每句话都会自动存档）、“新游戏”（输出：故事的开头）和“结局与画廊”（已发现的结局和看过的背景，其余的上锁）。故事进行中，◀ 返回按钮可以回到上一句，甚至回到选择之前。</p>
+<p class="exemple"><b>示例：</b> 放在“开始时”之后；每个“结束故事”都回到这里。</p>
 </div>
 <div class="fiche"><h3>让玩家输入文字（名字……）</h3>
 <div class="schema"><b>输入：</b> 变量, 问题, 默认回答</div>
