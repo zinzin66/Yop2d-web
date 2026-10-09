@@ -226,8 +226,8 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   « histoire à choix sans script » dans « fait pour vous si », Ren'Py = meilleur choix pour un long visual novel sur ordinateur
   (rester humble : Ren'Py est la référence) ; note « octobre 2026 ».
 - 10/10/2026 : 8e guide « histoire-choix » (visual novel : Hana tout prête, Dire une phrase, Poser un choix, fins + écran titre,
-  amitié, pour aller plus loin) en 9 langues, sitemap, llms.txt. Vidéo YouTube de l'utilisateur sur les histoires (postée le 09/10) :
-  identifiant à demander pour l'ajouter (VIDEOS de generer_accueil.py + bloc "video" du guide).
+  amitié, pour aller plus loin) en 9 langues, sitemap, llms.txt. 2e vidéo YouTube (histoires à choix,
+  JPe2HYy0XvE, 09/10/2026) : en tête de VIDEOS (accueil, llms.txt) et bloc "video" du guide histoire-choix (9 langues).
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
