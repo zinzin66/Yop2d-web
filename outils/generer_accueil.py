@@ -27,6 +27,7 @@ ITCH = "https://yop2d-dev.itch.io/yop2d-no-code-game-engine"
 YOUTUBE = "https://youtube.com/@yop2d"
 DISCORD = "https://discord.gg/nHqCcqHZNQ"
 TELEGRAM = "https://t.me/+7PQ9WKw7n645Y2Zk"
+MASTODON = "https://mastodon.social/@Yop2d"   # rel="me" : coche verte « site vérifié » sur le profil Mastodon
 GITHUB = "https://github.com/zinzin66/yop2d"
 # Bloc « À l'école » : contact des enseignants. Formulaire (Google Forms) : mettre son lien ici quand il existe
 # (None = bouton caché). Discord : le serveur, en attendant un lien vers le profil (message privé).
@@ -56,6 +57,7 @@ CSS = """
 --youtube-color: #dc2626;
 --discord-color: #5865f2;
 --telegram-color: #229ed9;
+--mastodon-color: #6364ff;
 --background: #f8fafc;
 --text-dark: #0f172a;
 }
@@ -84,6 +86,7 @@ header p { font-size: 1.25rem; max-width: 680px; margin: 0 auto; opacity: 0.95; 
 .btn-youtube { background: var(--youtube-color); }
 .btn-discord { background: var(--discord-color); }
 .btn-telegram { background: var(--telegram-color); }
+.btn-mastodon { background: var(--mastodon-color); }
 .install-note { max-width: 520px; margin: 1.5rem auto 0; font-size: 0.9rem; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: left; border-left: 4px solid var(--accent-color); }
 .install-note a { color: white; }
 .lang-badge { display: block; width: fit-content; max-width: 90%; background: rgba(255,255,255,0.2); padding: 0.5rem 1.5rem; border-radius: 30px; font-weight: bold; margin: 2rem auto 0 auto; font-size: 0.9rem; text-align: center; line-height: 1.4; }
@@ -277,7 +280,7 @@ def page(langue, t):
         "image": SITE + "interface_editeur.png",
         "description": t["description"],
         "featureList": [c[0] for c in t["capacites"]["cartes"]],
-        "sameAs": [YOUTUBE, DISCORD, TELEGRAM, GITHUB, ITCH],
+        "sameAs": [YOUTUBE, DISCORD, TELEGRAM, MASTODON, GITHUB, ITCH],
     }
     faq = {
         "@context": "https://schema.org",
@@ -356,6 +359,7 @@ def page(langue, t):
 <link rel="canonical" href="{url}">
 {alternates}
 <link rel="icon" href="{base}logo_yop2d.png">
+<link rel="me" href="{MASTODON}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Yop2D">
 <meta property="og:title" content="{e(t["titre"])}">
@@ -473,6 +477,7 @@ def page(langue, t):
 <div class="community-buttons">
     <a href="{DISCORD}" target="_blank" rel="noopener" class="btn btn-discord">💬 Discord</a>
     <a href="{TELEGRAM}" target="_blank" rel="noopener" class="btn btn-telegram">✈️ Telegram</a>
+    <a href="{MASTODON}" target="_blank" rel="me noopener" class="btn btn-mastodon">🐘 Mastodon</a>
 </div>
 </div>
 </section>
@@ -484,6 +489,7 @@ def page(langue, t):
 <a href="{YOUTUBE}" target="_blank" rel="noopener">YouTube</a> ·
 <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a> ·
 <a href="{TELEGRAM}" target="_blank" rel="noopener">Telegram</a> ·
+<a href="{MASTODON}" target="_blank" rel="me noopener">Mastodon</a> ·
 <a href="{ITCH}" target="_blank" rel="noopener">itch.io</a> ·
 <a href="{GITHUB}" target="_blank" rel="noopener">GitHub</a></p>
 </footer>
@@ -575,6 +581,7 @@ def llms(t):
     ] + [f"- [Video: {t['videos'][vid][0]}](https://www.youtube.com/watch?v={vid}): {t['videos'][vid][1]}" for vid, _ in VIDEOS] + [
         f"- [Discord]({DISCORD}): community",
         f"- [Telegram]({TELEGRAM}): community",
+        f"- [Mastodon]({MASTODON}): news",
         f"- [GitHub]({GITHUB}): releases",
         "",
     ]
