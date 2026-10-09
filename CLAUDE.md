@@ -228,6 +228,8 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 10/10/2026 : 8e guide « histoire-choix » (visual novel : Hana tout prête, Dire une phrase, Poser un choix, fins + écran titre,
   amitié, pour aller plus loin) en 9 langues, sitemap, llms.txt. 2e vidéo YouTube (histoires à choix,
   JPe2HYy0XvE, 09/10/2026) : en tête de VIDEOS (accueil, llms.txt) et bloc "video" du guide histoire-choix (9 langues).
+- 10/10/2026 : Mastodon https://mastodon.social/@Yop2d (MASTODON de generer_accueil.py) : <link rel="me"> dans l'en-tête,
+  bouton dans « Rejoindre la communauté », lien en bas de page (rel="me" = coche verte « site vérifié » sur le profil), sameAs, llms.txt.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
