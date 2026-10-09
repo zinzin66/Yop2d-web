@@ -1,0 +1,277 @@
+{
+  "titre_page": "How to make a visual novel (choice story) without code? | Yop2D guide",
+  "description": "Make a visual novel on an Android tablet or phone, with no code and nothing to import: a ready-made character, lines, choices, several endings, a title screen with saves, friendship hearts. A step-by-step guide with the [[dire_phrase]] and [[poser_choix]] nodes.",
+  "h1": "How to make a choice story (visual novel)?",
+  "carte": [
+    "Choice story (visual novel)",
+    "A character who talks, a question, several endings, a title screen with “Continue” and friendship hearts."
+  ],
+  "etapes": [
+    [
+      "A first line",
+      "{{NoeudEventStart}} → {{changer_decor}} → {{dire_phrase}} with Hana, a ready-made character."
+    ],
+    [
+      "A choice",
+      "{{poser_choix}}: each answer leaves by its own output towards a different story."
+    ],
+    [
+      "Endings and a title screen",
+      "{{terminer_histoire}} with an ending name, and {{ecran_titre_histoire}} at the start: “Continue”, “New game”, “Endings and gallery”."
+    ],
+    [
+      "Friendship",
+      "{{changer_amitie}} after a kind answer, {{tester_amitie}} to pick the ending."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "A visual novel is an illustrated story where the player reads dialogues and makes choices that change what happens next. With Yop2D, everything is done with your finger, without writing a script, and **without importing anything**: the library already has a ready-made character (Hana, with several emotions) and watercolor backgrounds. You don't even need to place anything in the scene: the nodes show the background, the characters and the text box by themselves."
+    ],
+    [
+      "besoin",
+      [
+        "Yop2D 0.1.1062 or newer;",
+        "a new empty project (an empty scene is enough)."
+      ]
+    ],
+    [
+      "tip",
+      "In Yop2D, the built-in guide **“My first story”** (home screen, guides card) does steps 1 and 2 with you in 5 minutes: a yellow frame shows where to tap, even inside windows. To see everything you can do, download the **Firefly Night** example in the Examples tab."
+    ],
+    [
+      "h2",
+      "Step 1: a background and a first line"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Open the scene's **{{lang:titre_blueprint}}**.",
+            "Add the **[[NoeudEventStart]]** event.",
+            "Add **[[changer_decor]]** and pick an image, for example the meadow.",
+            "Add **[[dire_phrase]]**. Tap **{{lang:dire_phrase.personnage}}**, then **＋ New character…**, then **⭐ Ready-made character**, and pick **Hana**. Next time, Hana will be right in the list.",
+            "Tap **{{lang:dire_phrase.phrase}}** and write what she says, for example: “Hello! Did you just arrive here?”. You can also pick her **{{lang:dire_phrase.emotion}}**.",
+            "Link the three nodes in order, then play: the background appears, Hana comes in and talks, letter by letter."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{changer_decor}}",
+              "meadow"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{dire_phrase}}",
+              "Hana · “Hello!”"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 2: ask a choice"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Add **[[poser_choix]]** and link it after Hana's line.",
+            "Write **{{lang:poser_choix.reponse1}}**: “Yes!” and **{{lang:poser_choix.reponse2}}**: “No thanks”. You can have up to 4 answers.",
+            "The node has one output per answer. Link the [[lang:port_reponse1]] output to a new [[dire_phrase]] (happy Hana: “Great! Come, I'll show you the village.”), and the [[lang:port_reponse2]] output to another one (sad Hana: “Oh… too bad.”).",
+            "Play and try both answers: the story branches like a tree."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{dire_phrase}}",
+              "“Hello!”"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{poser_choix}}",
+              "Yes! · No thanks"
+            ],
+            [
+              "→",
+              "{{lang:port_reponse1}}"
+            ],
+            [
+              "n",
+              "{{dire_phrase}}",
+              "“Great!”"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "While playing, the player can tap **◀ Back** to go back to the previous line, even before a choice, to try the other answer. The History, Auto, Skip, saves and settings buttons fold into a single ☰ menu."
+    ],
+    [
+      "h2",
+      "Step 3: endings and a title screen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "At the end of each branch, add **[[terminer_histoire]]**. Give it an **ending name**, for example “The village tour” or “Alone on the road”.",
+            "Add **[[ecran_titre_histoire]]** right after **[[NoeudEventStart]]**, write your story's title, and link its [[lang:port_nouvelle_partie]] output to **[[changer_decor]]**.",
+            "Link each **[[terminer_histoire]]** to **[[ecran_titre_histoire]]**: after an ending, the player goes back to the title screen.",
+            "Play: the title screen offers “New game”, then “Continue” (the story saves itself at every line) and “Endings and gallery” (the endings found, with a souvenir picture, and the backgrounds already seen)."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ecran_titre_histoire}}",
+              "“The village”"
+            ],
+            [
+              "→",
+              "{{lang:port_nouvelle_partie}}"
+            ],
+            [
+              "n",
+              "{{changer_decor}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "…"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{terminer_histoire}}",
+              "“The village tour”"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 4: friendship hearts that change the ending"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "After a kind answer, add **[[changer_amitie]]**: **{{lang:changer_amitie.personnage}}** Hana, **{{lang:changer_amitie.ajout}}** 1. Hearts appear at the top left and a “+1 ❤” floats up.",
+            "Before the ending, add **[[tester_amitie]]**: Hana, at least 2 hearts.",
+            "Link the [[lang:port_vrai]] output to the happy ending, and the [[lang:port_faux]] output to a sadder one. The hearts are kept in the save, and **◀ Back** puts them back as they were."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{changer_amitie}}",
+              "Hana +1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "…"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{tester_amitie}}",
+              "Hana ≥ 2"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{terminer_histoire}}",
+              "“Friends forever”"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Going further"
+    ],
+    [
+      "ul",
+      [
+        "**[[montrer_personnage]]** brings a character in or out without talking; each character can have its place on screen (left, middle, right).",
+        "**[[demander_texte]]** asks the player's name: in the lines, `{prenom}` shows it.",
+        "**[[ambiance]]** adds rain, storm, snow, petals, fireflies or night, with their sounds; **[[transition_ecran]]** and **[[zoom_ecran]]** add rhythm.",
+        "In **{{lang:dire_phrase.personnage}}**, **🎨 Dialogue style…** changes the text box: character portrait in the box, ☰ menu, hearts shown or not, lines read aloud.",
+        "Each answer of [[poser_choix]] can have a picture (advanced settings): the answers become big illustrated cards. An answer can also require a condition, and a timer adds the [[lang:port_temps_ecoule]] output.",
+        "The **🗺** button of the {{lang:titre_blueprint}} opens the **story map**: all branches, choices and endings at a glance; tapping a box takes you to the right node.",
+        "Each line can be written in 9 languages: the game shows the player's language."
+      ]
+    ],
+    [
+      "h2",
+      "If it doesn't work"
+    ],
+    [
+      "ul",
+      [
+        "**Nothing shows up:** check that [[NoeudEventStart]] is linked to the first node, and that each node is linked to the next.",
+        "**The line shows without a character:** **{{lang:dire_phrase.personnage}}** is empty, or it's the narrator. Pick Hana in the list.",
+        "**“Continue” doesn't appear:** there is no saved game yet. Start a “New game” and read at least one line.",
+        "**An ending doesn't count in “Endings and gallery”:** give it an **ending name** in [[terminer_histoire]].",
+        "**The player is stuck after an ending:** link [[terminer_histoire]] to [[ecran_titre_histoire]], or to another scene."
+      ]
+    ]
+  ]
+}

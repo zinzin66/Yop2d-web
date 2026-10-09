@@ -44,7 +44,7 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   `?lang=<langue du moteur>`.
   `confidentialite.html` : confidentialité.
 - `aide.html` : aide ouverte depuis le moteur dans une WebView.
-- `guides/` : 7 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
+- `guides/` : 8 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
   Français : `guides/<guide>.html` ; autres langues : `guides/<langue>/<guide>.html`.
   Page « Tous les guides » (générée aussi) : `guides/index.html` (fr), `guides/<langue>/index.html` ;
   textes dans `TOUS` de `generer_guides.py`. Accueil et `llms.txt` y renvoient.
@@ -225,6 +225,9 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 09/10/2026 : 0.1.1062 publiée (PR #50 fusionnée). Comparatif de l'accueil (9 langues) : ligne Ren'Py (5 moteurs), puce
   « histoire à choix sans script » dans « fait pour vous si », Ren'Py = meilleur choix pour un long visual novel sur ordinateur
   (rester humble : Ren'Py est la référence) ; note « octobre 2026 ».
+- 10/10/2026 : 8e guide « histoire-choix » (visual novel : Hana tout prête, Dire une phrase, Poser un choix, fins + écran titre,
+  amitié, pour aller plus loin) en 9 langues, sitemap, llms.txt. Vidéo YouTube de l'utilisateur sur les histoires (postée le 09/10) :
+  identifiant à demander pour l'ajouter (VIDEOS de generer_accueil.py + bloc "video" du guide).
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers

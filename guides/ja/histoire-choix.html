@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>コードなしでビジュアルノベル（選択肢のある物語）を作るには？ | Yop2D ガイド</title>
+<meta name="description" content="Android のタブレットやスマホで、コードなし・素材の読みこみなしでビジュアルノベルを作ろう：できあがりのキャラ、セリフ、選択肢、いくつものエンディング、セーブつきのタイトル画面、友情ハート。「セリフを言う」 と 「選択肢を出す」 ノードを使うステップごとのガイド。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/histoire-choix.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/histoire-choix.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/histoire-choix.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/histoire-choix.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/histoire-choix.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/histoire-choix.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/histoire-choix.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/histoire-choix.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/histoire-choix.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/histoire-choix.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "選択肢のある物語（ビジュアルノベル）を作るには？",
+ "description": "Android のタブレットやスマホで、コードなし・素材の読みこみなしでビジュアルノベルを作ろう：できあがりのキャラ、セリフ、選択肢、いくつものエンディング、セーブつきのタイトル画面、友情ハート。「セリフを言う」 と 「選択肢を出す」 ノードを使うステップごとのガイド。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "最初のセリフ",
+   "text": "起動時 → 背景を変える → セリフを言う、できあがりのキャラのハナで。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "選択肢",
+   "text": "選択肢を出す：答えごとに自分の出口から別の続きへ進む。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "エンディングとタイトル画面",
+   "text": "エンディング名をつけた 物語を終える と、最初に 物語のタイトル画面：「つづきから」「はじめから」「エンディングとギャラリー」。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "友情",
+   "text": "やさしい答えのあとに 友情（ハート）、エンディングを選ぶのに もし友情が…。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>選択肢のある物語（ビジュアルノベル）を作るには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../histoire-choix.html" hreflang="fr">Français</a> · <a href="../en/histoire-choix.html" hreflang="en">English</a> · <a href="../es/histoire-choix.html" hreflang="es">Español</a> · <a href="../de/histoire-choix.html" hreflang="de">Deutsch</a> · <a href="../it/histoire-choix.html" hreflang="it">Italiano</a> · <a href="../pt/histoire-choix.html" hreflang="pt">Português</a> · <a href="../ru/histoire-choix.html" hreflang="ru">Русский</a> · <a href="../zh/histoire-choix.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>ビジュアルノベルは、プレイヤーが会話を読み、その後の展開を変える選択をする、絵のついた物語です。Yop2D なら、スクリプトを書かずに指だけで、しかも<strong>素材を何も読みこまずに</strong>作れます：ライブラリには、できあがりのキャラ（いろいろな表情のハナ）と水彩の背景がもう入っています。シーンに何かを置く必要さえありません：背景もキャラもテキストボックスも、ノードが自分で表示します。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>Yop2D 0.1.1062 以降；</li><li>新しい空のプロジェクト（空のシーンひとつで十分）。</li></ul>
+</div>
+<div class="tip">👉 Yop2D の内蔵ガイド<strong>「はじめての物語」</strong>（ホーム画面のガイドカード）なら、ステップ 1 と 2 を 5 分でいっしょに進めます：タッチする場所を黄色い枠が示します（ウィンドウの中でも）。できることを全部見たいなら、「サンプル」タブでサンプル <strong>Firefly Night</strong> をダウンロードしてください。</div>
+<h2>ステップ 1：背景と最初のセリフ</h2>
+<div class="method">
+<ol><li>シーンの <strong>ブループリント</strong> を開く。</li><li>イベント <strong>「起動時」</strong> を追加する。</li><li><strong>「背景を変える」</strong> を追加して画像を選ぶ。たとえば草原。</li><li><strong>「セリフを言う」</strong> を追加する。<strong>だれが話す</strong> にタッチし、<strong>＋ 新しいキャラ…</strong>、<strong>⭐ できあがりのキャラ</strong> とタッチして、<strong>ハナ</strong> を選ぶ。次からはハナがすぐリストに出てきます。</li><li><strong>セリフ</strong> にタッチして、ハナのセリフを書く。たとえば「こんにちは！ ここに着いたばかり？」。ハナの <strong>表情</strong> も選べます。</li><li>3 つのノードを順番につないでゲームを動かす：背景が出て、ハナが登場し、1 文字ずつ話します。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>起動時</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>背景を変える</b><span>草原</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>セリフを言う</b><span>ハナ · 「こんにちは！」</span></div>
+</div>
+</div>
+<h2>ステップ 2：選択肢を出す</h2>
+<div class="method">
+<ol><li><strong>「選択肢を出す」</strong> を追加して、ハナのセリフのあとにつなぐ。</li><li><strong>答え 1</strong> に「うん！」、<strong>答え 2</strong> に「えんりょしとく」と書く。答えは 4 つまで作れます。</li><li>このノードには答えごとに出口があります。出口 「答え 1」 を新しい 「セリフを言う」（うれしいハナ：「やった！ おいで、村を案内するね。」）に、出口 「答え 2」 を別のもの（悲しいハナ：「そっか…ざんねん。」）につなぐ。</li><li>ゲームを動かして両方の答えを試そう：物語が木のように枝分かれします。</li></ol>
+<div class="chaine">
+<div class="noeud"><b>セリフを言う</b><span>「こんにちは！」</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>選択肢を出す</b><span>うん！ · えんりょしとく</span></div>
+<div class="fleche"><em>答え 1</em> →</div>
+<div class="noeud"><b>セリフを言う</b><span>「やった！」</span></div>
+</div>
+</div>
+<p>ゲーム中、プレイヤーは <strong>◀ 戻る</strong> で前のセリフにもどれます。選択肢の前にももどれるので、別の答えも試せます。履歴、オート、スキップ、セーブ、設定のボタンは、ひとつの ☰ メニューにまとめられます。</p>
+<h2>ステップ 3：エンディングとタイトル画面</h2>
+<div class="method">
+<ol><li>それぞれの枝の最後に <strong>「物語を終える」</strong> を追加する。<strong>エンディング名</strong> をつける。たとえば「村めぐり」や「ひとりぼっちの道」。</li><li><strong>「起動時」</strong> のすぐあとに <strong>「物語のタイトル画面」</strong> を追加し、物語のタイトルを書いて、出口 「はじめから」 を <strong>「背景を変える」</strong> につなぐ。</li><li>それぞれの <strong>「物語を終える」</strong> を <strong>「物語のタイトル画面」</strong> につなぐ：エンディングのあと、プレイヤーはタイトル画面にもどります。</li><li>ゲームを動かそう：タイトル画面には「はじめから」、そのあと「つづきから」（セリフごとに自動でセーブ）と「エンディングとギャラリー」（見つけたエンディングと思い出写真、もう見た背景）が出ます。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>起動時</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>物語のタイトル画面</b><span>「村」</span></div>
+<div class="fleche"><em>はじめから</em> →</div>
+<div class="noeud"><b>背景を変える</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>…</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>物語を終える</b><span>「村めぐり」</span></div>
+</div>
+</div>
+<h2>ステップ 4：エンディングを変える友情ハート</h2>
+<div class="method">
+<ol><li>やさしい答えのあとに <strong>「友情（ハート）」</strong> を追加する：<strong>だれ？</strong> ハナ、<strong>ふやすハート（−1 でへらす）</strong> 1。左上にハートが出て、「+1 ❤」がふわっと上がります。</li><li>エンディングの前に <strong>「もし友情が…」</strong> を追加する：ハナ、ハート 2 以上。</li><li>出口 「真」 をしあわせなエンディングに、出口 「偽」 をもっと悲しいエンディングにつなぐ。ハートはセーブにふくまれ、<strong>◀ 戻る</strong> でも元どおりになります。</li></ol>
+<div class="chaine">
+<div class="noeud"><b>友情（ハート）</b><span>ハナ +1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>…</b></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>もし友情が…</b><span>ハナ ≥ 2</span></div>
+<div class="fleche"><em>真</em> →</div>
+<div class="noeud"><b>物語を終える</b><span>「ずっと友だち」</span></div>
+</div>
+</div>
+<h2>もっと先へ</h2>
+<ul><li><strong>「キャラを出す / 消す」</strong> は、キャラを話させずに登場・退場させます。キャラごとに画面の位置（左・まん中・右）を決められます。</li><li><strong>「プレイヤーに文字を書いてもらう（名前…）」</strong> はプレイヤーの名前をたずねます：セリフの中で <code>{prenom}</code> がその名前を表示します。</li><li><strong>「ふんいき（雨、雪、夜…）」</strong> は雨、嵐、雪、花びら、ホタル、夜を音つきで加えます。<strong>「画面の切りかえ（まる、星…）」</strong> と <strong>「画面をズーム」</strong> でリズムが出ます。</li><li><strong>だれが話す</strong> の中の <strong>🎨 会話のスタイル…</strong> で、テキストボックスを変えられます：ボックスの中の顔アイコン、☰ メニュー、ハートの表示・非表示、セリフの読み上げ。</li><li>「選択肢を出す」 のそれぞれの答えに画像をつけられます（くわしい設定）：答えが大きな絵つきカードになります。答えに条件をつけることもでき、タイマーをつけると出口 「時間切れ」 が増えます。</li><li>ブループリント の <strong>🗺</strong> ボタンで<strong>物語の地図</strong>が開きます：すべての枝、選択肢、エンディングがひと目でわかり、マスにタッチすると、そのノードへ移動します。</li><li>どのセリフも 9 つの言語で書けます：ゲームはプレイヤーの言語で表示します。</li></ul>
+<h2>うまくいかないとき</h2>
+<ul><li><strong>何も表示されない：</strong>「起動時」 が最初のノードにつながっているか、どのノードも次のノードにつながっているか確かめよう。</li><li><strong>キャラなしでセリフが出る：</strong><strong>だれが話す</strong> が空か、ナレーターになっています。リストからハナを選ぼう。</li><li><strong>「つづきから」が出ない：</strong>まだセーブがありません。「はじめから」を始めて、セリフを 1 つ以上読もう。</li><li><strong>エンディングが「エンディングとギャラリー」に入らない：</strong>「物語を終える」 で<strong>エンディング名</strong>をつけよう。</li><li><strong>エンディングのあとで先に進めない：</strong>「物語を終える」 を 「物語のタイトル画面」 か、別のシーンにつなごう。</li></ul>
+
+<div class="nav">
+<a href="../ja/particules-effets.html">← パーティクルとエフェクト</a>
+<a href="index.html">すべてのガイド →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>
