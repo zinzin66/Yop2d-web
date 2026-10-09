@@ -9,8 +9,8 @@
     },
     {
       "nom": "Propor uma escolha",
-      "schema": "<b>Entradas:</b> Quem pergunta, Emoção, Pergunta (opcional), Resposta 1, Resposta 2, Resposta 3, Resposta 4, Condição da resposta 1, Condição da resposta 2, Condição da resposta 3, Condição da resposta 4, Resposta não permitida, Cronômetro (segundos, 0 = nenhum) &nbsp;→&nbsp; <b>Saídas:</b> Resposta 1 / Resposta 2 / Resposta 3 / Resposta 4 / Tempo esgotado",
-      "role": "Mostra de 2 a 4 respostas em botões grandes: cada resposta sai pela sua própria saída e a história se ramifica como uma árvore. Uma resposta pode exigir uma condição (senão fica cinza ou escondida); um cronômetro opcional adiciona a saída “Tempo esgotado”.",
+      "schema": "<b>Entradas:</b> Quem pergunta, Emoção, Pergunta (opcional), Resposta 1, Resposta 2, Resposta 3, Resposta 4, Condição da resposta 1, Condição da resposta 2, Condição da resposta 3, Condição da resposta 4, Resposta não permitida, Imagem da resposta 1 (opcional), Imagem da resposta 2 (opcional), Imagem da resposta 3 (opcional), Imagem da resposta 4 (opcional), Cronômetro (segundos, 0 = nenhum) &nbsp;→&nbsp; <b>Saídas:</b> Resposta 1 / Resposta 2 / Resposta 3 / Resposta 4 / Tempo esgotado",
+      "role": "Mostra de 2 a 4 respostas em botões grandes: cada resposta sai pela sua própria saída e a história se ramifica como uma árvore. Uma resposta pode exigir uma condição (senão fica cinza ou escondida); um cronômetro opcional adiciona a saída “Tempo esgotado”. Cada resposta também pode ter uma imagem (ajustes avançados): as respostas viram grandes cartas ilustradas.",
       "exemple": "“Abrir o tesouro” leva ao final feliz, “Ir embora” ao final triste."
     },
     {
@@ -27,8 +27,27 @@
     },
     {
       "nom": "Terminar a história",
-      "role": "Apaga a caixa de diálogo, os personagens e o cenário da história: o jogo retoma o controle.",
-      "exemple": "depois da última frase começa um minijogo."
+      "schema": "<b>Entrada:</b> Nome do final (opcional: conta em «Finais e galeria»)",
+      "role": "Apaga a caixa de diálogo, os personagens e o cenário da história: o jogo retoma o controle. Se você der um “Nome do final”, esse final fica guardado para sempre e conta em “Finais e galeria” da “Tela de título da história”; o jogo salvo é apagado.",
+      "exemple": "“Os amigos da cabana” depois da última frase, e volta à tela de título."
+    },
+    {
+      "nom": "Amizade (corações)",
+      "schema": "<b>Entradas:</b> Quem?, Corações a mais (−1 para tirar), Número máximo de corações",
+      "role": "Adiciona (ou tira, com −1) corações de amizade a uma personagem, sem passar do máximo. Os corações aparecem no canto superior esquerdo durante a história e um “+1 ❤” sai voando (podem ser escondidos no Estilo dos diálogos). São salvos com a partida e repostos pelo ◀ Voltar.",
+      "exemple": "depois da resposta gentil “Fico com você”: Hana +1."
+    },
+    {
+      "nom": "Se a amizade…",
+      "schema": "<b>Entradas:</b> Quem?, é de, corações &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso",
+      "role": "Escolhe como a história continua segundo os corações de amizade de uma personagem: a saída “Verdadeiro” se a comparação for verdadeira, senão “Falso”. Para um final que depende de como você tratou as personagens.",
+      "exemple": "se a amizade de Hana for pelo menos 4 → o final feliz, senão o final triste."
+    },
+    {
+      "nom": "Tela de título da história",
+      "schema": "<b>Entradas:</b> Título da história, Imagem de fundo (vazio = o cenário atual) &nbsp;→&nbsp; <b>Saída:</b> Novo jogo",
+      "role": "Mostra o título da história sobre uma imagem, com botões grandes: “Continuar” (retoma o jogo de onde parou, com cenário, personagens, música e variáveis: a história se salva sozinha a cada frase), “Novo jogo” (a saída: o começo da história) e “Finais e galeria” (finais descobertos e cenários já vistos; os outros ficam com cadeado). Durante a história, o botão ◀ Voltar retorna à frase anterior, até antes de uma escolha.",
+      "exemple": "logo depois de “Ao iniciar”; cada “Terminar a história” volta para ela."
     },
     {
       "nom": "Pedir um texto ao jogador (nome…)",

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos os nós do Yop2D (146) | Referência</title>
-<meta name="description" content="Lista completa dos 146 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
+<title>Todos os nós do Yop2D (149) | Referência</title>
+<meta name="description" content="Lista completa dos 149 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/pt.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 146 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
+<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 149 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
 <p><strong>Categorias</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-cena-e-hud">Cena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aparência-e-objetos">Aparência e Objetos</a><a href="#c5-variáveis-e-inventário">Variáveis e Inventário</a><a href="#c6-lógica-e-condições">Lógica e Condições</a><a href="#c7-textos-e-diálogos">Textos e Diálogos</a><a href="#c8-movimentos-e-ia">Movimentos e IA</a><a href="#c9-grades-e-quebra-cabeças">Grades e quebra-cabeças</a><a href="#c10-animações">Animações</a><a href="#c11-áudio">Áudio</a><a href="#c12-história-e-diálogos">História e diálogos</a><a href="#c13-valores-fios-verdes">Valores (fios verdes)</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -743,8 +743,8 @@
 <p class="exemple"><b>Exemplo:</b> Hana (feliz) diz “Olá!” e depois “Propor uma escolha” propõe duas respostas.</p>
 </div>
 <div class="fiche"><h3>Propor uma escolha</h3>
-<div class="schema"><b>Entradas:</b> Quem pergunta, Emoção, Pergunta (opcional), Resposta 1, Resposta 2, Resposta 3, Resposta 4, Condição da resposta 1, Condição da resposta 2, Condição da resposta 3, Condição da resposta 4, Resposta não permitida, Cronômetro (segundos, 0 = nenhum) &nbsp;→&nbsp; <b>Saídas:</b> Resposta 1 / Resposta 2 / Resposta 3 / Resposta 4 / Tempo esgotado</div>
-<p>Mostra de 2 a 4 respostas em botões grandes: cada resposta sai pela sua própria saída e a história se ramifica como uma árvore. Uma resposta pode exigir uma condição (senão fica cinza ou escondida); um cronômetro opcional adiciona a saída “Tempo esgotado”.</p>
+<div class="schema"><b>Entradas:</b> Quem pergunta, Emoção, Pergunta (opcional), Resposta 1, Resposta 2, Resposta 3, Resposta 4, Condição da resposta 1, Condição da resposta 2, Condição da resposta 3, Condição da resposta 4, Resposta não permitida, Imagem da resposta 1 (opcional), Imagem da resposta 2 (opcional), Imagem da resposta 3 (opcional), Imagem da resposta 4 (opcional), Cronômetro (segundos, 0 = nenhum) &nbsp;→&nbsp; <b>Saídas:</b> Resposta 1 / Resposta 2 / Resposta 3 / Resposta 4 / Tempo esgotado</div>
+<p>Mostra de 2 a 4 respostas em botões grandes: cada resposta sai pela sua própria saída e a história se ramifica como uma árvore. Uma resposta pode exigir uma condição (senão fica cinza ou escondida); um cronômetro opcional adiciona a saída “Tempo esgotado”. Cada resposta também pode ter uma imagem (ajustes avançados): as respostas viram grandes cartas ilustradas.</p>
 <p class="exemple"><b>Exemplo:</b> “Abrir o tesouro” leva ao final feliz, “Ir embora” ao final triste.</p>
 </div>
 <div class="fiche"><h3>Mudar o cenário</h3>
@@ -758,8 +758,24 @@
 <p class="exemple"><b>Exemplo:</b> Lyn chega pela direita enquanto Hana fala.</p>
 </div>
 <div class="fiche"><h3>Terminar a história</h3>
-<p>Apaga a caixa de diálogo, os personagens e o cenário da história: o jogo retoma o controle.</p>
-<p class="exemple"><b>Exemplo:</b> depois da última frase começa um minijogo.</p>
+<div class="schema"><b>Entrada:</b> Nome do final (opcional: conta em «Finais e galeria»)</div>
+<p>Apaga a caixa de diálogo, os personagens e o cenário da história: o jogo retoma o controle. Se você der um “Nome do final”, esse final fica guardado para sempre e conta em “Finais e galeria” da “Tela de título da história”; o jogo salvo é apagado.</p>
+<p class="exemple"><b>Exemplo:</b> “Os amigos da cabana” depois da última frase, e volta à tela de título.</p>
+</div>
+<div class="fiche"><h3>Amizade (corações)</h3>
+<div class="schema"><b>Entradas:</b> Quem?, Corações a mais (−1 para tirar), Número máximo de corações</div>
+<p>Adiciona (ou tira, com −1) corações de amizade a uma personagem, sem passar do máximo. Os corações aparecem no canto superior esquerdo durante a história e um “+1 ❤” sai voando (podem ser escondidos no Estilo dos diálogos). São salvos com a partida e repostos pelo ◀ Voltar.</p>
+<p class="exemple"><b>Exemplo:</b> depois da resposta gentil “Fico com você”: Hana +1.</p>
+</div>
+<div class="fiche"><h3>Se a amizade…</h3>
+<div class="schema"><b>Entradas:</b> Quem?, é de, corações &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso</div>
+<p>Escolhe como a história continua segundo os corações de amizade de uma personagem: a saída “Verdadeiro” se a comparação for verdadeira, senão “Falso”. Para um final que depende de como você tratou as personagens.</p>
+<p class="exemple"><b>Exemplo:</b> se a amizade de Hana for pelo menos 4 → o final feliz, senão o final triste.</p>
+</div>
+<div class="fiche"><h3>Tela de título da história</h3>
+<div class="schema"><b>Entradas:</b> Título da história, Imagem de fundo (vazio = o cenário atual) &nbsp;→&nbsp; <b>Saída:</b> Novo jogo</div>
+<p>Mostra o título da história sobre uma imagem, com botões grandes: “Continuar” (retoma o jogo de onde parou, com cenário, personagens, música e variáveis: a história se salva sozinha a cada frase), “Novo jogo” (a saída: o começo da história) e “Finais e galeria” (finais descobertos e cenários já vistos; os outros ficam com cadeado). Durante a história, o botão ◀ Voltar retorna à frase anterior, até antes de uma escolha.</p>
+<p class="exemple"><b>Exemplo:</b> logo depois de “Ao iniciar”; cada “Terminar a história” volta para ela.</p>
 </div>
 <div class="fiche"><h3>Pedir um texto ao jogador (nome…)</h3>
 <div class="schema"><b>Entradas:</b> Variável, Pergunta, Resposta sugerida</div>

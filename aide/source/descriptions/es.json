@@ -564,7 +564,7 @@
   "Hana (contenta) dice «¡Hola!» y luego [[poser_choix]] propone dos respuestas."
  ],
  "poser_choix": [
-  "Muestra de 2 a 4 respuestas en botones grandes: cada respuesta sale por su propia salida y la historia se ramifica como un árbol. Una respuesta puede pedir una condición (si no, aparece en gris u oculta); un temporizador opcional añade la salida «Se acabó el tiempo».",
+  "Muestra de 2 a 4 respuestas en botones grandes: cada respuesta sale por su propia salida y la historia se ramifica como un árbol. Una respuesta puede pedir una condición (si no, aparece en gris u oculta); un temporizador opcional añade la salida «Se acabó el tiempo». Cada respuesta también puede tener una imagen (ajustes avanzados): las respuestas se convierten en grandes cartas ilustradas.",
   "«Abrir el tesoro» lleva al final feliz, «Irse» al final triste."
  ],
  "changer_decor": [
@@ -576,8 +576,12 @@
   "Lyn llega por la derecha mientras Hana habla."
  ],
  "terminer_histoire": [
-  "Borra el cuadro de diálogo, los personajes y el decorado de la historia: el juego retoma el control.",
-  "tras la última frase empieza un minijuego."
+  "Borra el cuadro de diálogo, los personajes y el decorado de la historia: el juego retoma el control. Si das un «Nombre del final», ese final se recuerda para siempre y cuenta en «Finales y galería» de la [[ecran_titre_histoire]]; la partida guardada se borra.",
+  "«Los amigos de la cabaña» tras la última frase, y vuelta a la pantalla de título."
+ ],
+ "ecran_titre_histoire": [
+  "Muestra el título de la historia sobre una imagen, con botones grandes: «Continuar» (retoma la partida donde se dejó, con decorado, personajes, música y variables: la historia se guarda sola en cada frase), «Nueva partida» (la salida: el inicio de la historia) y «Finales y galería» (finales descubiertos y decorados ya vistos; los demás, con candado). Durante la historia, el botón ◀ Atrás vuelve a la frase anterior, incluso antes de una elección.",
+  "justo después de «Al inicio»; cada [[terminer_histoire]] vuelve a ella."
  ],
  "ambiance": [
   "Pone un ambiente en toda la pantalla, que se queda hasta el siguiente nodo Ambiente: lo que cae o vuela (lluvia, tormenta con rayos, nieve, pétalos, hojas, luciérnagas, corazones, burbujas, bruma) y una luz (noche, atardecer, recuerdo, sueño, miedo, oscuro). El anterior se borra mientras llega el nuevo.",
@@ -594,5 +598,13 @@
  "demander_texte": [
   "Abre una pequeña ventana con el teclado: el jugador escribe un texto (su nombre…), guardado en la variable elegida; continúa al tocar OK. En las frases, {prenom} muestra ese texto.",
   "«¿Cómo te llamas?» → variable prenom → [[dire_phrase]] «¡Encantada, {prenom}!»."
+ ],
+ "changer_amitie": [
+  "Añade (o quita, con −1) corazones de amistad a un personaje, sin pasar del máximo. Los corazones aparecen arriba a la izquierda durante la historia y un «+1 ❤» sale volando (se pueden ocultar en el Estilo de los diálogos). Se guardan con la partida y ◀ Atrás los recupera.",
+  "tras la respuesta amable «Me quedo contigo»: Hana +1."
+ ],
+ "tester_amitie": [
+  "Elige cómo sigue la historia según los corazones de amistad de un personaje: la salida [[lang:port_vrai]] si la comparación es verdadera, si no [[lang:port_faux]]. Para un final que depende de cómo has tratado a los personajes.",
+  "si la amistad de Hana es al menos 4 → el final feliz, si no el final triste."
  ]
 }

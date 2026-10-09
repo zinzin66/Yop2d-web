@@ -564,7 +564,7 @@
   "Hana (happy) says \"Hello!\", then [[poser_choix]] offers two answers."
  ],
  "poser_choix": [
-  "Shows 2 to 4 answers as big buttons: each answer goes out through its own output, so the story branches like a tree. An answer can require a condition (otherwise it is greyed out or hidden); an optional timer adds the \"Time's up\" output.",
+  "Shows 2 to 4 answers as big buttons: each answer goes out through its own output, so the story branches like a tree. An answer can require a condition (otherwise it is greyed out or hidden); an optional timer adds the \"Time's up\" output. Each answer can also have a picture (advanced settings): the answers become big illustrated cards.",
   "\"Open the treasure\" leads to the good ending, \"Leave\" to the sad one."
  ],
  "changer_decor": [
@@ -576,8 +576,12 @@
   "Lyn comes in from the right while Hana is talking."
  ],
  "terminer_histoire": [
-  "Clears the dialogue box, the characters and the background of the story: the game takes over again.",
-  "after the last line, a mini-game starts."
+  "Clears the dialogue box, the characters and the background of the story: the game takes over again. If you give an \"Ending name\", this ending is remembered forever and counts in \"Endings and gallery\" of the [[ecran_titre_histoire]]; the saved game is erased.",
+  "\"Friends of the cabin\" after the last line, then back to the title screen."
+ ],
+ "ecran_titre_histoire": [
+  "Shows the story title over a picture, with big buttons: \"Continue\" (resumes where the player left off, with the background, characters, music and variables: the story saves itself at every line), \"New game\" (the output: the start of the story) and \"Endings and gallery\" (endings found and backgrounds already seen, the others are locked). During the story, the ◀ Back button returns to the previous line, even before a choice.",
+  "placed right after \"At start\"; every [[terminer_histoire]] comes back to it."
  ],
  "ambiance": [
   "Puts an atmosphere over the whole screen that stays until the next Atmosphere node: what falls or floats (rain, storm with lightning, snow, petals, leaves, fireflies, hearts, bubbles, mist) and a light (night, sunset, memory, dream, fear, dark). The old one fades out while the new one comes in.",
@@ -594,5 +598,13 @@
  "demander_texte": [
   "Opens a small window with the keyboard: the player types a text (their name…), stored in the chosen variable; it continues when they tap OK. In lines, {prenom} shows this text.",
   "\"What's your name?\" → variable prenom → [[dire_phrase]] \"Nice to meet you, {prenom}!\"."
+ ],
+ "changer_amitie": [
+  "Adds (or removes, with −1) friendship hearts for a character, up to the maximum. The hearts show at the top left during the story and a “+1 ❤” floats up (they can be hidden in the Dialogue style). They are saved with the game and restored by ◀ Back.",
+  "after the kind answer “I'll stay with you”: Hana +1."
+ ],
+ "tester_amitie": [
+  "Picks how the story goes on from a character's friendship hearts: the [[lang:port_vrai]] output if the comparison is true, otherwise [[lang:port_faux]]. For an ending that depends on how you treated the characters.",
+  "if Hana's friendship is at least 4 → the happy ending, otherwise the sad one."
  ]
 }

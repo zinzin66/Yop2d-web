@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutti i nodi di Yop2D (146) | Riferimento</title>
-<meta name="description" content="Elenco completo dei 146 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
+<title>Tutti i nodi di Yop2D (149) | Riferimento</title>
+<meta name="description" content="Elenco completo dei 149 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 146 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
+<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 149 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
 <p><strong>Categorie</strong></p>
 <nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-griglie-e-puzzle">Griglie e puzzle</a><a href="#c10-animazioni">Animazioni</a><a href="#c11-audio">Audio</a><a href="#c12-storia-e-dialoghi">Storia e dialoghi</a><a href="#c13-valori-fili-verdi">Valori (fili verdi)</a></nav>
 <h2 id="c1-eventi">Eventi</h2>
@@ -743,8 +743,8 @@
 <p class="exemple"><b>Esempio:</b> Hana (felice) dice «Ciao!», poi «Proporre una scelta» propone due risposte.</p>
 </div>
 <div class="fiche"><h3>Proporre una scelta</h3>
-<div class="schema"><b>Ingressi:</b> Chi chiede, Emozione, Domanda (facoltativa), Risposta 1, Risposta 2, Risposta 3, Risposta 4, Condizione della risposta 1, Condizione della risposta 2, Condizione della risposta 3, Condizione della risposta 4, Risposta non permessa, Timer (secondi, 0 = nessuno) &nbsp;→&nbsp; <b>Uscite:</b> Risposta 1 / Risposta 2 / Risposta 3 / Risposta 4 / Tempo scaduto</div>
-<p>Mostra da 2 a 4 risposte in grandi pulsanti: ogni risposta esce dalla sua uscita e la storia si dirama come un albero. Una risposta può richiedere una condizione (altrimenti è grigia o nascosta); un timer facoltativo aggiunge l'uscita «Tempo scaduto».</p>
+<div class="schema"><b>Ingressi:</b> Chi chiede, Emozione, Domanda (facoltativa), Risposta 1, Risposta 2, Risposta 3, Risposta 4, Condizione della risposta 1, Condizione della risposta 2, Condizione della risposta 3, Condizione della risposta 4, Risposta non permessa, Immagine della risposta 1 (facoltativa), Immagine della risposta 2 (facoltativa), Immagine della risposta 3 (facoltativa), Immagine della risposta 4 (facoltativa), Timer (secondi, 0 = nessuno) &nbsp;→&nbsp; <b>Uscite:</b> Risposta 1 / Risposta 2 / Risposta 3 / Risposta 4 / Tempo scaduto</div>
+<p>Mostra da 2 a 4 risposte in grandi pulsanti: ogni risposta esce dalla sua uscita e la storia si dirama come un albero. Una risposta può richiedere una condizione (altrimenti è grigia o nascosta); un timer facoltativo aggiunge l'uscita «Tempo scaduto». Ogni risposta può anche avere un'immagine (impostazioni avanzate): le risposte diventano grandi carte illustrate.</p>
 <p class="exemple"><b>Esempio:</b> «Aprire il tesoro» porta al finale felice, «Andarsene» a quello triste.</p>
 </div>
 <div class="fiche"><h3>Cambiare lo sfondo</h3>
@@ -758,8 +758,24 @@
 <p class="exemple"><b>Esempio:</b> Lyn arriva da destra mentre Hana parla.</p>
 </div>
 <div class="fiche"><h3>Terminare la storia</h3>
-<p>Cancella il riquadro di dialogo, i personaggi e lo sfondo della storia: il gioco riprende il controllo.</p>
-<p class="exemple"><b>Esempio:</b> dopo l'ultima frase parte un minigioco.</p>
+<div class="schema"><b>Ingresso:</b> Nome del finale (facoltativo: conta in «Finali e galleria»)</div>
+<p>Cancella il riquadro di dialogo, i personaggi e lo sfondo della storia: il gioco riprende il controllo. Se dai un «Nome del finale», quel finale resta ricordato per sempre e conta in «Finali e galleria» della «Schermata del titolo della storia»; la partita salvata viene cancellata.</p>
+<p class="exemple"><b>Esempio:</b> «Gli amici della capanna» dopo l'ultima frase, poi ritorno alla schermata del titolo.</p>
+</div>
+<div class="fiche"><h3>Amicizia (cuori)</h3>
+<div class="schema"><b>Ingressi:</b> Chi?, Cuori in più (−1 per toglierne), Numero massimo di cuori</div>
+<p>Aggiunge (o toglie, con −1) cuori d'amicizia a un personaggio, senza superare il massimo. I cuori appaiono in alto a sinistra durante la storia e un «+1 ❤» vola via (si possono nascondere nello Stile dei dialoghi). Vengono salvati con la partita e ripristinati da ◀ Indietro.</p>
+<p class="exemple"><b>Esempio:</b> dopo la risposta gentile «Resto con te»: Hana +1.</p>
+</div>
+<div class="fiche"><h3>Se l'amicizia…</h3>
+<div class="schema"><b>Ingressi:</b> Chi?, è di, cuori &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso</div>
+<p>Sceglie come continua la storia in base ai cuori d'amicizia di un personaggio: l'uscita «Vero» se il confronto è vero, altrimenti «Falso». Per un finale che dipende da come hai trattato i personaggi.</p>
+<p class="exemple"><b>Esempio:</b> se l'amicizia di Hana è almeno 4 → il finale felice, altrimenti quello triste.</p>
+</div>
+<div class="fiche"><h3>Schermata del titolo della storia</h3>
+<div class="schema"><b>Ingressi:</b> Titolo della storia, Immagine di sfondo (vuoto = lo sfondo attuale) &nbsp;→&nbsp; <b>Uscita:</b> Nuova partita</div>
+<p>Mostra il titolo della storia su un'immagine, con grandi pulsanti: «Continua» (riprende la partita dove era rimasta, con sfondo, personaggi, musica e variabili: la storia si salva da sola a ogni frase), «Nuova partita» (l'uscita: l'inizio della storia) e «Finali e galleria» (finali scoperti e sfondi già visti, gli altri sono con il lucchetto). Durante la storia, il pulsante ◀ Indietro torna alla frase precedente, anche prima di una scelta.</p>
+<p class="exemple"><b>Esempio:</b> subito dopo «All'avvio»; ogni «Terminare la storia» torna lì.</p>
 </div>
 <div class="fiche"><h3>Chiedere un testo al giocatore (nome…)</h3>
 <div class="schema"><b>Ingressi:</b> Variabile, Domanda, Risposta proposta</div>

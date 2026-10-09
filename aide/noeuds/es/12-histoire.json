@@ -9,8 +9,8 @@
     },
     {
       "nom": "Proponer una elección",
-      "schema": "<b>Entradas:</b> Quién pregunta, Emoción, Pregunta (opcional), Respuesta 1, Respuesta 2, Respuesta 3, Respuesta 4, Condición de la respuesta 1, Condición de la respuesta 2, Condición de la respuesta 3, Condición de la respuesta 4, Respuesta no permitida, Temporizador (segundos, 0 = ninguno) &nbsp;→&nbsp; <b>Salidas:</b> Respuesta 1 / Respuesta 2 / Respuesta 3 / Respuesta 4 / Se acabó el tiempo",
-      "role": "Muestra de 2 a 4 respuestas en botones grandes: cada respuesta sale por su propia salida y la historia se ramifica como un árbol. Una respuesta puede pedir una condición (si no, aparece en gris u oculta); un temporizador opcional añade la salida «Se acabó el tiempo».",
+      "schema": "<b>Entradas:</b> Quién pregunta, Emoción, Pregunta (opcional), Respuesta 1, Respuesta 2, Respuesta 3, Respuesta 4, Condición de la respuesta 1, Condición de la respuesta 2, Condición de la respuesta 3, Condición de la respuesta 4, Respuesta no permitida, Imagen de la respuesta 1 (opcional), Imagen de la respuesta 2 (opcional), Imagen de la respuesta 3 (opcional), Imagen de la respuesta 4 (opcional), Temporizador (segundos, 0 = ninguno) &nbsp;→&nbsp; <b>Salidas:</b> Respuesta 1 / Respuesta 2 / Respuesta 3 / Respuesta 4 / Se acabó el tiempo",
+      "role": "Muestra de 2 a 4 respuestas en botones grandes: cada respuesta sale por su propia salida y la historia se ramifica como un árbol. Una respuesta puede pedir una condición (si no, aparece en gris u oculta); un temporizador opcional añade la salida «Se acabó el tiempo». Cada respuesta también puede tener una imagen (ajustes avanzados): las respuestas se convierten en grandes cartas ilustradas.",
       "exemple": "«Abrir el tesoro» lleva al final feliz, «Irse» al final triste."
     },
     {
@@ -27,8 +27,27 @@
     },
     {
       "nom": "Terminar la historia",
-      "role": "Borra el cuadro de diálogo, los personajes y el decorado de la historia: el juego retoma el control.",
-      "exemple": "tras la última frase empieza un minijuego."
+      "schema": "<b>Entrada:</b> Nombre del final (opcional: cuenta en «Finales y galería»)",
+      "role": "Borra el cuadro de diálogo, los personajes y el decorado de la historia: el juego retoma el control. Si das un «Nombre del final», ese final se recuerda para siempre y cuenta en «Finales y galería» de la «Pantalla de título de la historia»; la partida guardada se borra.",
+      "exemple": "«Los amigos de la cabaña» tras la última frase, y vuelta a la pantalla de título."
+    },
+    {
+      "nom": "Amistad (corazones)",
+      "schema": "<b>Entradas:</b> ¿Quién?, Corazones de más (−1 para quitar), Número máximo de corazones",
+      "role": "Añade (o quita, con −1) corazones de amistad a un personaje, sin pasar del máximo. Los corazones aparecen arriba a la izquierda durante la historia y un «+1 ❤» sale volando (se pueden ocultar en el Estilo de los diálogos). Se guardan con la partida y ◀ Atrás los recupera.",
+      "exemple": "tras la respuesta amable «Me quedo contigo»: Hana +1."
+    },
+    {
+      "nom": "Si la amistad…",
+      "schema": "<b>Entradas:</b> ¿Quién?, es de, corazones &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso",
+      "role": "Elige cómo sigue la historia según los corazones de amistad de un personaje: la salida «Verdadero» si la comparación es verdadera, si no «Falso». Para un final que depende de cómo has tratado a los personajes.",
+      "exemple": "si la amistad de Hana es al menos 4 → el final feliz, si no el final triste."
+    },
+    {
+      "nom": "Pantalla de título de la historia",
+      "schema": "<b>Entradas:</b> Título de la historia, Imagen de fondo (vacío = el decorado actual) &nbsp;→&nbsp; <b>Salida:</b> Nueva partida",
+      "role": "Muestra el título de la historia sobre una imagen, con botones grandes: «Continuar» (retoma la partida donde se dejó, con decorado, personajes, música y variables: la historia se guarda sola en cada frase), «Nueva partida» (la salida: el inicio de la historia) y «Finales y galería» (finales descubiertos y decorados ya vistos; los demás, con candado). Durante la historia, el botón ◀ Atrás vuelve a la frase anterior, incluso antes de una elección.",
+      "exemple": "justo después de «Al inicio»; cada «Terminar la historia» vuelve a ella."
     },
     {
       "nom": "Pedir un texto al jugador (nombre…)",

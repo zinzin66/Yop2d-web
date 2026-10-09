@@ -9,8 +9,8 @@
     },
     {
       "nom": "Proporre una scelta",
-      "schema": "<b>Ingressi:</b> Chi chiede, Emozione, Domanda (facoltativa), Risposta 1, Risposta 2, Risposta 3, Risposta 4, Condizione della risposta 1, Condizione della risposta 2, Condizione della risposta 3, Condizione della risposta 4, Risposta non permessa, Timer (secondi, 0 = nessuno) &nbsp;→&nbsp; <b>Uscite:</b> Risposta 1 / Risposta 2 / Risposta 3 / Risposta 4 / Tempo scaduto",
-      "role": "Mostra da 2 a 4 risposte in grandi pulsanti: ogni risposta esce dalla sua uscita e la storia si dirama come un albero. Una risposta può richiedere una condizione (altrimenti è grigia o nascosta); un timer facoltativo aggiunge l'uscita «Tempo scaduto».",
+      "schema": "<b>Ingressi:</b> Chi chiede, Emozione, Domanda (facoltativa), Risposta 1, Risposta 2, Risposta 3, Risposta 4, Condizione della risposta 1, Condizione della risposta 2, Condizione della risposta 3, Condizione della risposta 4, Risposta non permessa, Immagine della risposta 1 (facoltativa), Immagine della risposta 2 (facoltativa), Immagine della risposta 3 (facoltativa), Immagine della risposta 4 (facoltativa), Timer (secondi, 0 = nessuno) &nbsp;→&nbsp; <b>Uscite:</b> Risposta 1 / Risposta 2 / Risposta 3 / Risposta 4 / Tempo scaduto",
+      "role": "Mostra da 2 a 4 risposte in grandi pulsanti: ogni risposta esce dalla sua uscita e la storia si dirama come un albero. Una risposta può richiedere una condizione (altrimenti è grigia o nascosta); un timer facoltativo aggiunge l'uscita «Tempo scaduto». Ogni risposta può anche avere un'immagine (impostazioni avanzate): le risposte diventano grandi carte illustrate.",
       "exemple": "«Aprire il tesoro» porta al finale felice, «Andarsene» a quello triste."
     },
     {
@@ -27,8 +27,27 @@
     },
     {
       "nom": "Terminare la storia",
-      "role": "Cancella il riquadro di dialogo, i personaggi e lo sfondo della storia: il gioco riprende il controllo.",
-      "exemple": "dopo l'ultima frase parte un minigioco."
+      "schema": "<b>Ingresso:</b> Nome del finale (facoltativo: conta in «Finali e galleria»)",
+      "role": "Cancella il riquadro di dialogo, i personaggi e lo sfondo della storia: il gioco riprende il controllo. Se dai un «Nome del finale», quel finale resta ricordato per sempre e conta in «Finali e galleria» della «Schermata del titolo della storia»; la partita salvata viene cancellata.",
+      "exemple": "«Gli amici della capanna» dopo l'ultima frase, poi ritorno alla schermata del titolo."
+    },
+    {
+      "nom": "Amicizia (cuori)",
+      "schema": "<b>Ingressi:</b> Chi?, Cuori in più (−1 per toglierne), Numero massimo di cuori",
+      "role": "Aggiunge (o toglie, con −1) cuori d'amicizia a un personaggio, senza superare il massimo. I cuori appaiono in alto a sinistra durante la storia e un «+1 ❤» vola via (si possono nascondere nello Stile dei dialoghi). Vengono salvati con la partita e ripristinati da ◀ Indietro.",
+      "exemple": "dopo la risposta gentile «Resto con te»: Hana +1."
+    },
+    {
+      "nom": "Se l'amicizia…",
+      "schema": "<b>Ingressi:</b> Chi?, è di, cuori &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso",
+      "role": "Sceglie come continua la storia in base ai cuori d'amicizia di un personaggio: l'uscita «Vero» se il confronto è vero, altrimenti «Falso». Per un finale che dipende da come hai trattato i personaggi.",
+      "exemple": "se l'amicizia di Hana è almeno 4 → il finale felice, altrimenti quello triste."
+    },
+    {
+      "nom": "Schermata del titolo della storia",
+      "schema": "<b>Ingressi:</b> Titolo della storia, Immagine di sfondo (vuoto = lo sfondo attuale) &nbsp;→&nbsp; <b>Uscita:</b> Nuova partita",
+      "role": "Mostra il titolo della storia su un'immagine, con grandi pulsanti: «Continua» (riprende la partita dove era rimasta, con sfondo, personaggi, musica e variabili: la storia si salva da sola a ogni frase), «Nuova partita» (l'uscita: l'inizio della storia) e «Finali e galleria» (finali scoperti e sfondi già visti, gli altri sono con il lucchetto). Durante la storia, il pulsante ◀ Indietro torna alla frase precedente, anche prima di una scelta.",
+      "exemple": "subito dopo «All'avvio»; ogni «Terminare la storia» torna lì."
     },
     {
       "nom": "Chiedere un testo al giocatore (nome…)",
