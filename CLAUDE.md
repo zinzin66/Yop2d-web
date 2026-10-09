@@ -236,6 +236,10 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   JPe2HYy0XvE, 09/10/2026) : en tête de VIDEOS (accueil, llms.txt) et bloc "video" du guide histoire-choix (9 langues).
 - 10/10/2026 : Mastodon https://mastodon.social/@Yop2d (MASTODON de generer_accueil.py) : <link rel="me"> dans l'en-tête,
   bouton dans « Rejoindre la communauté », lien en bas de page (rel="me" = coche verte « site vérifié » sur le profil), sameAs, llms.txt.
+- 10/10/2026 : exemple « Crypt key » (15 exemples, moteur_min 1062) fait avec le pack donjon : salle case par case, trappes qui
+  s'ouvrent (Répéter + Changer l'image + zone « hole » déplacée), pics, gardien squelette piloté par les nœuds (commandes « aucune »
+  + Glisser vers), clé, porte en bois qui s'ouvre (nouvelles images `mur_porte_ouverte_<côté>` du pack). Générateur :
+  outils/modeles/generer_exemple_crypte.py du moteur. Accueil (9 langues) : exemple dans la liste, « quinze » partout.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
