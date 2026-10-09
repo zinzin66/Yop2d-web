@@ -216,6 +216,12 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   Ambiance, Zoomer l'écran, Transition de l'écran) ; accueil (9 langues) : 37 modèles, 14 exemples (Firefly Night dans les
   listes), 2 cartes « Jeux de dialogue (visual novel) » et « Ambiances, zoom et transitions » (28 cartes), FAQ « visual novel
   comme avec Ren'Py ? » (23 questions) ; llms.txt. Pack personnages_vn et exemple Firefly Night publiés (PR #47).
+- 09/10/2026 : SORTIE « visual novel complet » (build final 1062, APK + AAB) : écran titre (Continuer, Nouvelle partie,
+  Fins et galerie avec photos souvenirs), sauvegarde auto + 5 emplacements, ◀ Retour, ⚙ réglages du joueur, menu ☰ repliable,
+  portrait, nœuds « Amitié (cœurs) » et « Si l'amitié… » (149 nœuds), voix lue, réponses en images, 🗺 carte de l'histoire,
+  guide intégré « Ma première histoire » (4e guide, cadre jaune aussi dans les fenêtres). Site : aide des nœuds, accueil
+  (cartes « Un vrai visual novel, complet » et « Ma première histoire en 5 minutes », 30 cartes ; FAQ Ren'Py complétée),
+  Firefly Night v2 (moteur_min 1053), llms.txt.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
