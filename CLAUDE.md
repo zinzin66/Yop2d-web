@@ -235,6 +235,9 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   (GitHub bloque son robot).
 
 ## Reste à faire
+- EN ATTENTE (09/10/2026) : réponse d'un joueur sur des objets « pas collés aux bords de l'écran » (bandes noires quand
+  l'écran est plus allongé que le jeu). Détails et solutions proposées dans le CLAUDE.md du moteur (« À corriger »).
+  Si une solution est construite : mettre à jour l'accueil (carte ou FAQ) à la sortie.
 - Sécurité (29/09/2026) : le dépôt du moteur était PUBLIC (code et builds visibles par tous). Il est
   maintenant privé et renommé `yop2d-moteur` ; licence « tous droits réservés » ajoutée ; nouveau
   dépôt public `yop2d` pour les téléchargements (release v0.1.921). Chaque nouvelle version publique :
