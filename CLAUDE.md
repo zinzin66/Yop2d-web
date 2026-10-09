@@ -65,7 +65,8 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   `packs/packs.json` ; le robot `.github/workflows/packs.yml` le lance tout seul à chaque dépôt sur `main`
   (l'utilisateur peut déposer ses propres fichiers libres de droits). Packs : pirates, espace (Kenney, CC0)… ; depuis le
   10/10/2026 aussi medieval, combat_rpg, tir_dessus, tir_spatial, western (Superpowers, Pixel-boy, CC0), fabriqués par
-  outils/modeles/preparer_packs_superpowers.py du moteur.
+  outils/modeles/preparer_packs_superpowers.py du moteur ; duelyst (30 héros et monstres animés repos/marche/attaque/touche/
+  mort, Open Duelyst CC0, outils/modeles/preparer_pack_duelyst.py du moteur, choix dans CHOIX).
 
 ## Aide (aide.html)
 - Deux onglets : **Nœuds** et **Guides**.
