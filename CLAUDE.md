@@ -66,7 +66,8 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   (l'utilisateur peut déposer ses propres fichiers libres de droits). Packs : pirates, espace (Kenney, CC0)… ; depuis le
   10/10/2026 aussi medieval, combat_rpg, tir_dessus, tir_spatial, western (Superpowers, Pixel-boy, CC0), fabriqués par
   outils/modeles/preparer_packs_superpowers.py du moteur ; duelyst (30 héros et monstres animés repos/marche/attaque/touche/
-  mort, Open Duelyst CC0, outils/modeles/preparer_pack_duelyst.py du moteur, choix dans CHOIX).
+  mort, Open Duelyst CC0, outils/modeles/preparer_pack_duelyst.py du moteur, choix dans CHOIX) ; squelettes (KayKit CC0, 3D
+  rendue en images par outils/iso/preparer_pack_squelettes.py du moteur : de côté + vus de dessus 4 directions).
 
 ## Aide (aide.html)
 - Deux onglets : **Nœuds** et **Guides**.
