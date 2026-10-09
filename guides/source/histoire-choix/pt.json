@@ -1,0 +1,277 @@
+{
+  "titre_page": "Como criar uma visual novel (história com escolhas) sem código? | Guia Yop2D",
+  "description": "Crie uma visual novel num tablet ou celular Android, sem código e sem importar nada: uma personagem pronta, frases, escolhas, vários finais, uma tela de título com salvamento, corações de amizade. Guia passo a passo com os nós [[dire_phrase]] e [[poser_choix]].",
+  "h1": "Como criar uma história com escolhas (visual novel)?",
+  "carte": [
+    "História com escolhas (visual novel)",
+    "Uma personagem que fala, uma pergunta, vários finais, uma tela de título com «Continuar» e corações de amizade."
+  ],
+  "etapes": [
+    [
+      "Uma primeira frase",
+      "{{NoeudEventStart}} → {{changer_decor}} → {{dire_phrase}} com a Hana, uma personagem pronta."
+    ],
+    [
+      "Uma escolha",
+      "{{poser_choix}}: cada resposta sai pela sua própria saída rumo a uma continuação diferente."
+    ],
+    [
+      "Finais e tela de título",
+      "{{terminer_histoire}} com um nome de final, e {{ecran_titre_histoire}} no início: «Continuar», «Novo jogo», «Finais e galeria»."
+    ],
+    [
+      "A amizade",
+      "{{changer_amitie}} depois de uma resposta gentil, {{tester_amitie}} para escolher o final."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Uma visual novel é uma história ilustrada em que o jogador lê diálogos e faz escolhas que mudam o que acontece depois. Com o Yop2D, tudo se faz com o dedo, sem escrever script e **sem importar nada**: a biblioteca já tem uma personagem pronta (Hana, com várias emoções) e cenários em aquarela. Você nem precisa colocar nada na cena: os nós mostram sozinhos o cenário, as personagens e a caixa de diálogo."
+    ],
+    [
+      "besoin",
+      [
+        "Yop2D 0.1.1062 ou mais recente;",
+        "um projeto novo vazio (uma cena vazia basta)."
+      ]
+    ],
+    [
+      "tip",
+      "No Yop2D, o guia integrado **«Minha primeira história»** (tela inicial, cartão dos guias) faz com você as etapas 1 e 2 em 5 minutos: uma moldura amarela mostra onde tocar, até dentro das janelas. Para ver tudo o que dá para fazer, baixe o exemplo **Firefly Night** na aba Exemplos."
+    ],
+    [
+      "h2",
+      "Etapa 1: um cenário e uma primeira frase"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Abra o **{{lang:titre_blueprint}}** da cena.",
+            "Adicione o evento **[[NoeudEventStart]]**.",
+            "Adicione **[[changer_decor]]** e escolha uma imagem, por exemplo o prado.",
+            "Adicione **[[dire_phrase]]**. Toque em **{{lang:dire_phrase.personnage}}**, depois em **＋ Novo personagem…**, depois em **⭐ Personagem pronto**, e escolha a **Hana**. Da próxima vez, a Hana já estará na lista.",
+            "Toque em **{{lang:dire_phrase.phrase}}** e escreva o que ela diz, por exemplo: «Oi! Você acabou de chegar?». Você também pode escolher a **{{lang:dire_phrase.emotion}}** dela.",
+            "Ligue os três nós em ordem e teste o jogo: o cenário aparece, a Hana entra e fala, letra por letra."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{changer_decor}}",
+              "prado"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{dire_phrase}}",
+              "Hana · «Oi!»"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Etapa 2: fazer uma escolha"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Adicione **[[poser_choix]]** e ligue-o depois da frase da Hana.",
+            "Escreva **{{lang:poser_choix.reponse1}}**: «Sim!» e **{{lang:poser_choix.reponse2}}**: «Não, obrigado». Você pode ter até 4 respostas.",
+            "O nó tem uma saída por resposta. Ligue a saída [[lang:port_reponse1]] a um novo [[dire_phrase]] (Hana contente: «Legal! Vem, vou te mostrar a vila.»), e a saída [[lang:port_reponse2]] a outro (Hana triste: «Ah… que pena.»).",
+            "Teste o jogo e as duas respostas: a história se divide como uma árvore."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{dire_phrase}}",
+              "«Oi!»"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{poser_choix}}",
+              "Sim! · Não, obrigado"
+            ],
+            [
+              "→",
+              "{{lang:port_reponse1}}"
+            ],
+            [
+              "n",
+              "{{dire_phrase}}",
+              "«Legal!»"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "Durante o jogo, o jogador pode tocar em **◀ Voltar** para voltar à frase anterior, até antes de uma escolha, e testar a outra resposta. Os botões Histórico, Auto, Pular, salvamentos e ajustes cabem num único menu ☰."
+    ],
+    [
+      "h2",
+      "Etapa 3: finais e uma tela de título"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "No fim de cada ramo, adicione **[[terminer_histoire]]**. Dê a ele um **nome de final**, por exemplo «O passeio pela vila» ou «Sozinho na estrada».",
+            "Adicione **[[ecran_titre_histoire]]** logo depois de **[[NoeudEventStart]]**, escreva o título da sua história e ligue a saída [[lang:port_nouvelle_partie]] a **[[changer_decor]]**.",
+            "Ligue cada **[[terminer_histoire]]** a **[[ecran_titre_histoire]]**: depois de um final, o jogador volta à tela de título.",
+            "Teste o jogo: a tela de título oferece «Novo jogo», depois «Continuar» (a história se salva sozinha a cada frase) e «Finais e galeria» (os finais encontrados, com uma foto de lembrança, e os cenários já vistos)."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ecran_titre_histoire}}",
+              "«A vila»"
+            ],
+            [
+              "→",
+              "{{lang:port_nouvelle_partie}}"
+            ],
+            [
+              "n",
+              "{{changer_decor}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "…"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{terminer_histoire}}",
+              "«O passeio pela vila»"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Etapa 4: corações de amizade que mudam o final"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Depois de uma resposta gentil, adicione **[[changer_amitie]]**: **{{lang:changer_amitie.personnage}}** Hana, **{{lang:changer_amitie.ajout}}** 1. Corações aparecem no canto superior esquerdo e um «+1 ❤» sai voando.",
+            "Antes do final, adicione **[[tester_amitie]]**: Hana, pelo menos 2 corações.",
+            "Ligue a saída [[lang:port_vrai]] ao final feliz e a saída [[lang:port_faux]] a um final mais triste. Os corações ficam no salvamento, e o **◀ Voltar** os deixa como estavam."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{changer_amitie}}",
+              "Hana +1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "…"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{tester_amitie}}",
+              "Hana ≥ 2"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{terminer_histoire}}",
+              "«Amigos para sempre»"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Para ir mais longe"
+    ],
+    [
+      "ul",
+      [
+        "**[[montrer_personnage]]** faz uma personagem entrar ou sair sem falar; cada personagem pode ter seu lugar na tela (esquerda, meio, direita).",
+        "**[[demander_texte]]** pergunta o nome do jogador: nas frases, `{prenom}` mostra esse nome.",
+        "**[[ambiance]]** adiciona chuva, tempestade, neve, pétalas, vaga-lumes ou noite, com seus sons; **[[transition_ecran]]** e **[[zoom_ecran]]** dão ritmo.",
+        "Em **{{lang:dire_phrase.personnage}}**, **🎨 Estilo dos diálogos…** muda a caixa de texto: retrato da personagem na caixa, menu ☰, corações visíveis ou não, frases lidas em voz alta.",
+        "Cada resposta de [[poser_choix]] pode ter uma imagem (ajustes avançados): as respostas viram grandes cartas ilustradas. Uma resposta também pode exigir uma condição, e um cronômetro adiciona a saída [[lang:port_temps_ecoule]].",
+        "O botão **🗺** do {{lang:titre_blueprint}} abre o **mapa da história**: todos os ramos, escolhas e finais num relance; tocar numa caixa leva você ao nó certo.",
+        "Cada frase pode ser escrita em 9 idiomas: o jogo mostra a do jogador."
+      ]
+    ],
+    [
+      "h2",
+      "Se não funcionar"
+    ],
+    [
+      "ul",
+      [
+        "**Nada aparece:** verifique se [[NoeudEventStart]] está ligado ao primeiro nó e se cada nó está ligado ao seguinte.",
+        "**A frase aparece sem personagem:** **{{lang:dire_phrase.personnage}}** está vazio, ou é o narrador. Escolha a Hana na lista.",
+        "**«Continuar» não aparece:** ainda não há partida salva. Comece um «Novo jogo» e leia pelo menos uma frase.",
+        "**Um final não conta em «Finais e galeria»:** dê a ele um **nome de final** em [[terminer_histoire]].",
+        "**O jogador fica preso depois de um final:** ligue [[terminer_histoire]] a [[ecran_titre_histoire]] ou a outra cena."
+      ]
+    ]
+  ]
+}

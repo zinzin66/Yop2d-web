@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何不用代码制作视觉小说（选择式故事）？| Yop2D 教程</title>
+<meta name="description" content="在安卓平板或手机上制作视觉小说，无需代码，也无需导入任何素材：现成角色、台词、选择、多个结局、带存档的标题画面、友情爱心。使用 “说一句话” 和 “提出选择” 节点的分步教程。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/histoire-choix.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/histoire-choix.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/histoire-choix.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/histoire-choix.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/histoire-choix.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/histoire-choix.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/histoire-choix.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/histoire-choix.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/histoire-choix.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/histoire-choix.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何制作选择式故事（视觉小说）？",
+ "description": "在安卓平板或手机上制作视觉小说，无需代码，也无需导入任何素材：现成角色、台词、选择、多个结局、带存档的标题画面、友情爱心。使用 “说一句话” 和 “提出选择” 节点的分步教程。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "第一句台词",
+   "text": "启动时 → 更换背景 → 说一句话，使用现成角色 Hana。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "一个选择",
+   "text": "提出选择：每个回答都从自己的出口通向不同的后续。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "结局和标题画面",
+   "text": "结束故事 加上结局名称，开头放 故事标题画面：“继续”“新游戏”“结局与画廊”。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "友情",
+   "text": "温柔的回答之后用 友情（爱心），再用 如果友情…… 选择结局。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>如何制作选择式故事（视觉小说）？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../histoire-choix.html" hreflang="fr">Français</a> · <a href="../en/histoire-choix.html" hreflang="en">English</a> · <a href="../es/histoire-choix.html" hreflang="es">Español</a> · <a href="../de/histoire-choix.html" hreflang="de">Deutsch</a> · <a href="../it/histoire-choix.html" hreflang="it">Italiano</a> · <a href="../pt/histoire-choix.html" hreflang="pt">Português</a> · <a href="../ru/histoire-choix.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/histoire-choix.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>视觉小说是一种带插图的故事：玩家阅读对话，并做出改变后续剧情的选择。在 Yop2D 中，一切都用手指完成，不用写脚本，也<strong>无需导入任何素材</strong>：素材库里已经有一个现成角色（Hana，带多种表情）和水彩背景。你甚至不用在场景里摆放任何东西：节点会自己显示背景、角色和对话框。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>Yop2D 0.1.1062 或更新版本；</li><li>一个新的空项目（一个空场景就够了）。</li></ul>
+</div>
+<div class="tip">👉 在 Yop2D 中，内置引导<strong>“我的第一个故事”</strong>（首页的引导卡片）会在 5 分钟内陪你完成第 1 步和第 2 步：黄色方框会告诉你点哪里，连窗口里也有。想看能做到的一切，请在“示例”标签中下载示例 <strong>Firefly Night</strong>。</div>
+<h2>第 1 步：背景和第一句台词</h2>
+<div class="method">
+<ol><li>打开场景的 <strong>蓝图</strong>。</li><li>添加事件 <strong>“启动时”</strong>。</li><li>添加 <strong>“更换背景”</strong> 并选择一张图片，例如草地。</li><li>添加 <strong>“说一句话”</strong>。点 <strong>谁说话</strong>，再点 <strong>＋ 新角色…</strong>，再点 <strong>⭐ 现成角色</strong>，然后选择 <strong>Hana</strong>。下次 Hana 就会直接出现在列表里。</li><li>点 <strong>台词</strong>，写下她说的话，例如：“你好！你刚到这里吗？”。你也可以选择她的 <strong>表情</strong>。</li><li>按顺序连接这三个节点，然后运行游戏：背景出现，Hana 登场并一个字一个字地说话。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>启动时</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>更换背景</b><span>草地</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>说一句话</b><span>Hana · “你好！”</span></div>
+</div>
+</div>
+<h2>第 2 步：提出一个选择</h2>
+<div class="method">
+<ol><li>添加 <strong>“提出选择”</strong>，连接在 Hana 的台词之后。</li><li>写 <strong>回答 1</strong>：“好！”和 <strong>回答 2</strong>：“不用了，谢谢”。最多可以有 4 个回答。</li><li>这个节点每个回答都有一个出口。把出口 “回答 1” 连接到一个新的 “说一句话”（开心的 Hana：“太好了！来，我带你看看村子。”），把出口 “回答 2” 连接到另一个（难过的 Hana：“哦……真可惜。”）。</li><li>运行游戏，试试两个回答：故事像树一样分叉。</li></ol>
+<div class="chaine">
+<div class="noeud"><b>说一句话</b><span>“你好！”</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>提出选择</b><span>好！ · 不用了，谢谢</span></div>
+<div class="fleche"><em>回答 1</em> →</div>
+<div class="noeud"><b>说一句话</b><span>“太好了！”</span></div>
+</div>
+</div>
+<p>游戏中，玩家可以点 <strong>◀ 返回</strong> 回到上一句台词，甚至回到选择之前，去试试另一个回答。历史、自动、跳过、存档和设置按钮都可以收进一个 ☰ 菜单。</p>
+<h2>第 3 步：结局和标题画面</h2>
+<div class="method">
+<ol><li>在每个分支的结尾添加 <strong>“结束故事”</strong>。给它一个<strong>结局名称</strong>，例如“参观村子”或“独自上路”。</li><li>在 <strong>“启动时”</strong> 之后紧接着添加 <strong>“故事标题画面”</strong>，写下故事标题，并把它的出口 “新游戏” 连接到 <strong>“更换背景”</strong>。</li><li>把每个 <strong>“结束故事”</strong> 连接到 <strong>“故事标题画面”</strong>：结局之后，玩家会回到标题画面。</li><li>运行游戏：标题画面提供“新游戏”，之后还有“继续”（每句台词都会自动存档）和“结局与画廊”（已找到的结局及纪念照片，以及看过的背景）。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>启动时</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>故事标题画面</b><span>“村子”</span></div>
+<div class="fleche"><em>新游戏</em> →</div>
+<div class="noeud"><b>更换背景</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>…</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>结束故事</b><span>“参观村子”</span></div>
+</div>
+</div>
+<h2>第 4 步：改变结局的友情爱心</h2>
+<div class="method">
+<ol><li>在温柔的回答之后添加 <strong>“友情（爱心）”</strong>：<strong>谁？</strong> Hana，<strong>增加爱心（−1 表示减少）</strong> 1。左上角会出现爱心，并飘起“+1 ❤”。</li><li>在结局之前添加 <strong>“如果友情……”</strong>：Hana，至少 2 颗爱心。</li><li>把出口 “真” 连接到美好结局，把出口 “假” 连接到更悲伤的结局。爱心会保存在存档里，<strong>◀ 返回</strong> 也会把它们恢复原样。</li></ol>
+<div class="chaine">
+<div class="noeud"><b>友情（爱心）</b><span>Hana +1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>…</b></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>如果友情……</b><span>Hana ≥ 2</span></div>
+<div class="fleche"><em>真</em> →</div>
+<div class="noeud"><b>结束故事</b><span>“永远的朋友”</span></div>
+</div>
+</div>
+<h2>更进一步</h2>
+<ul><li><strong>“显示 / 隐藏角色”</strong> 让角色不说话地登场或退场；每个角色都可以有自己在屏幕上的位置（左、中、右）。</li><li><strong>“让玩家输入文字（名字……）”</strong> 询问玩家的名字：在台词里，<code>{prenom}</code> 会显示它。</li><li><strong>“氛围（雨、雪、夜晚……）”</strong> 添加雨、雷雨、雪、花瓣、萤火虫或夜晚，并带有声音；<strong>“画面转场（圆形、星形……）”</strong> 和 <strong>“缩放画面”</strong> 增加节奏感。</li><li>在 <strong>谁说话</strong> 中，<strong>🎨 对话样式…</strong> 可以修改文本框：框内显示角色头像、☰ 菜单、是否显示爱心、朗读台词。</li><li>“提出选择” 的每个回答都可以配一张图片（高级设置）：回答会变成带图的大卡片。回答还可以设置条件，计时器会添加出口 “时间到”。</li><li>蓝图 中的 <strong>🗺</strong> 按钮会打开<strong>故事地图</strong>：所有分支、选择和结局一目了然；点一个格子就会跳到对应的节点。</li><li>每句台词都可以用 9 种语言书写：游戏会显示玩家的语言。</li></ul>
+<h2>如果不起作用</h2>
+<ul><li><strong>什么都没出现：</strong>检查 “启动时” 是否连接到第一个节点，以及每个节点是否连接到下一个。</li><li><strong>台词出现了，但没有角色：</strong><strong>谁说话</strong> 是空的，或者选的是旁白。请在列表中选择 Hana。</li><li><strong>没有出现“继续”：</strong>还没有存档。开始“新游戏”并至少读一句台词。</li><li><strong>某个结局没有计入“结局与画廊”：</strong>在 “结束故事” 中给它一个<strong>结局名称</strong>。</li><li><strong>结局之后玩家卡住了：</strong>把 “结束故事” 连接到 “故事标题画面”，或连接到另一个场景。</li></ul>
+
+<div class="nav">
+<a href="../zh/particules-effets.html">← 粒子和特效</a>
+<a href="index.html">全部教程 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>

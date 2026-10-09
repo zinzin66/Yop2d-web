@@ -1,0 +1,277 @@
+{
+  "titre_page": "Wie erstellt man eine Visual Novel (Geschichte mit Entscheidungen) ohne Code? | Yop2D-Anleitung",
+  "description": "Erstelle eine Visual Novel auf einem Android-Tablet oder -Handy, ohne Code und ohne etwas zu importieren: eine fertige Figur, Sätze, Entscheidungen, mehrere Enden, ein Titelbildschirm mit Speichern, Freundschaftsherzen. Eine Schritt-für-Schritt-Anleitung mit den Knoten [[dire_phrase]] und [[poser_choix]].",
+  "h1": "Wie erstellt man eine Geschichte mit Entscheidungen (Visual Novel)?",
+  "carte": [
+    "Geschichte mit Entscheidungen (Visual Novel)",
+    "Eine Figur, die spricht, eine Frage, mehrere Enden, ein Titelbildschirm mit «Weiterspielen» und Freundschaftsherzen."
+  ],
+  "etapes": [
+    [
+      "Ein erster Satz",
+      "{{NoeudEventStart}} → {{changer_decor}} → {{dire_phrase}} mit Hana, einer fertigen Figur."
+    ],
+    [
+      "Eine Entscheidung",
+      "{{poser_choix}}: Jede Antwort geht über ihren eigenen Ausgang zu einer anderen Fortsetzung."
+    ],
+    [
+      "Enden und ein Titelbildschirm",
+      "{{terminer_histoire}} mit einem Namen für das Ende, und {{ecran_titre_histoire}} am Anfang: «Weiterspielen», «Neues Spiel», «Enden und Galerie»."
+    ],
+    [
+      "Freundschaft",
+      "{{changer_amitie}} nach einer netten Antwort, {{tester_amitie}}, um das Ende zu wählen."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Eine Visual Novel ist eine bebilderte Geschichte, in der man Dialoge liest und Entscheidungen trifft, die den weiteren Verlauf ändern. Mit Yop2D geht alles mit dem Finger, ohne Skript und **ohne etwas zu importieren**: Die Bibliothek enthält schon eine fertige Figur (Hana, mit mehreren Gefühlen) und Aquarell-Hintergründe. Du musst nicht einmal etwas in der Szene platzieren: Die Knoten zeigen den Hintergrund, die Figuren und das Textfeld von selbst."
+    ],
+    [
+      "besoin",
+      [
+        "Yop2D 0.1.1062 oder neuer;",
+        "ein neues, leeres Projekt (eine leere Szene genügt)."
+      ]
+    ],
+    [
+      "tip",
+      "In Yop2D macht die eingebaute Anleitung **«Meine erste Geschichte»** (Startbildschirm, Karte der Anleitungen) die Schritte 1 und 2 in 5 Minuten mit dir: Ein gelber Rahmen zeigt, wo du tippen musst, auch in den Fenstern. Um alles zu sehen, was möglich ist, lade das Beispiel **Firefly Night** im Tab Beispiele herunter."
+    ],
+    [
+      "h2",
+      "Schritt 1: ein Hintergrund und ein erster Satz"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Öffne den **{{lang:titre_blueprint}}** der Szene.",
+            "Füge das Ereignis **[[NoeudEventStart]]** hinzu.",
+            "Füge **[[changer_decor]]** hinzu und wähle ein Bild, zum Beispiel die Wiese.",
+            "Füge **[[dire_phrase]]** hinzu. Tippe auf **{{lang:dire_phrase.personnage}}**, dann auf **＋ Neue Figur…**, dann auf **⭐ Fertige Figur**, und wähle **Hana**. Beim nächsten Mal steht Hana direkt in der Liste.",
+            "Tippe auf **{{lang:dire_phrase.phrase}}** und schreib, was sie sagt, zum Beispiel: «Hallo! Bist du gerade angekommen?». Du kannst auch ihr **{{lang:dire_phrase.emotion}}** wählen.",
+            "Verbinde die drei Knoten der Reihe nach und starte das Spiel: Der Hintergrund erscheint, Hana kommt herein und spricht, Buchstabe für Buchstabe."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{changer_decor}}",
+              "Wiese"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{dire_phrase}}",
+              "Hana · «Hallo!»"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 2: eine Entscheidung stellen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge **[[poser_choix]]** hinzu und verbinde es nach Hanas Satz.",
+            "Schreib **{{lang:poser_choix.reponse1}}**: «Ja!» und **{{lang:poser_choix.reponse2}}**: «Nein danke». Du kannst bis zu 4 Antworten haben.",
+            "Der Knoten hat einen Ausgang pro Antwort. Verbinde den Ausgang [[lang:port_reponse1]] mit einem neuen [[dire_phrase]] (fröhliche Hana: «Super! Komm, ich zeige dir das Dorf.»), und den Ausgang [[lang:port_reponse2]] mit einem anderen (traurige Hana: «Oh… schade.»).",
+            "Starte das Spiel und probiere beide Antworten: Die Geschichte verzweigt sich wie ein Baum."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{dire_phrase}}",
+              "«Hallo!»"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{poser_choix}}",
+              "Ja! · Nein danke"
+            ],
+            [
+              "→",
+              "{{lang:port_reponse1}}"
+            ],
+            [
+              "n",
+              "{{dire_phrase}}",
+              "«Super!»"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "Während des Spiels kann man auf **◀ Zurück** tippen, um zum vorigen Satz zurückzukehren, sogar vor eine Entscheidung, und die andere Antwort zu probieren. Die Knöpfe Verlauf, Auto, Überspringen, Speichern und Einstellungen passen in ein einziges Menü ☰."
+    ],
+    [
+      "h2",
+      "Schritt 3: Enden und ein Titelbildschirm"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge am Ende jedes Zweigs **[[terminer_histoire]]** hinzu. Gib ihm einen **Namen für das Ende**, zum Beispiel «Der Dorfrundgang» oder «Allein auf dem Weg».",
+            "Füge **[[ecran_titre_histoire]]** direkt nach **[[NoeudEventStart]]** hinzu, schreib den Titel deiner Geschichte und verbinde seinen Ausgang [[lang:port_nouvelle_partie]] mit **[[changer_decor]]**.",
+            "Verbinde jedes **[[terminer_histoire]]** mit **[[ecran_titre_histoire]]**: Nach einem Ende kehrt man zum Titelbildschirm zurück.",
+            "Starte das Spiel: Der Titelbildschirm bietet «Neues Spiel», danach «Weiterspielen» (die Geschichte speichert sich bei jedem Satz von selbst) und «Enden und Galerie» (die gefundenen Enden mit einem Erinnerungsfoto und die schon gesehenen Hintergründe)."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ecran_titre_histoire}}",
+              "«Das Dorf»"
+            ],
+            [
+              "→",
+              "{{lang:port_nouvelle_partie}}"
+            ],
+            [
+              "n",
+              "{{changer_decor}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "…"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{terminer_histoire}}",
+              "«Der Dorfrundgang»"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 4: Freundschaftsherzen, die das Ende ändern"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge nach einer netten Antwort **[[changer_amitie]]** hinzu: **{{lang:changer_amitie.personnage}}** Hana, **{{lang:changer_amitie.ajout}}** 1. Oben links erscheinen Herzen und ein «+1 ❤» fliegt hoch.",
+            "Füge vor dem Ende **[[tester_amitie]]** hinzu: Hana, mindestens 2 Herzen.",
+            "Verbinde den Ausgang [[lang:port_vrai]] mit dem schönen Ende und den Ausgang [[lang:port_faux]] mit einem traurigeren. Die Herzen werden mit dem Spielstand gespeichert, und **◀ Zurück** stellt sie wieder her."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{changer_amitie}}",
+              "Hana +1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "…"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{tester_amitie}}",
+              "Hana ≥ 2"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{terminer_histoire}}",
+              "«Freunde für immer»"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Noch weiter"
+    ],
+    [
+      "ul",
+      [
+        "**[[montrer_personnage]]** lässt eine Figur auftreten oder abgehen, ohne dass sie spricht; jede Figur kann ihren Platz auf dem Bildschirm haben (links, Mitte, rechts).",
+        "**[[demander_texte]]** fragt nach dem Namen des Spielers: In den Sätzen zeigt `{prenom}` ihn an.",
+        "**[[ambiance]]** fügt Regen, Gewitter, Schnee, Blütenblätter, Glühwürmchen oder Nacht mit ihren Geräuschen hinzu; **[[transition_ecran]]** und **[[zoom_ecran]]** bringen Rhythmus.",
+        "In **{{lang:dire_phrase.personnage}}** ändert **🎨 Dialogstil…** das Textfeld: Porträt der Figur im Feld, Menü ☰, Herzen sichtbar oder nicht, vorgelesene Sätze.",
+        "Jede Antwort von [[poser_choix]] kann ein Bild haben (erweiterte Einstellungen): Die Antworten werden zu großen Bildkarten. Eine Antwort kann auch eine Bedingung verlangen, und ein Zeitlimit fügt den Ausgang [[lang:port_temps_ecoule]] hinzu.",
+        "Der Knopf **🗺** im {{lang:titre_blueprint}} öffnet die **Karte der Geschichte**: alle Zweige, Entscheidungen und Enden auf einen Blick; ein Tipp auf ein Kästchen bringt dich zum richtigen Knoten.",
+        "Jeder Satz kann in 9 Sprachen geschrieben werden: Das Spiel zeigt die Sprache des Spielers."
+      ]
+    ],
+    [
+      "h2",
+      "Wenn es nicht klappt"
+    ],
+    [
+      "ul",
+      [
+        "**Nichts erscheint:** Prüfe, ob [[NoeudEventStart]] mit dem ersten Knoten verbunden ist und jeder Knoten mit dem nächsten.",
+        "**Der Satz erscheint ohne Figur:** **{{lang:dire_phrase.personnage}}** ist leer oder es ist der Erzähler. Wähle Hana in der Liste.",
+        "**«Weiterspielen» erscheint nicht:** Es gibt noch keinen Spielstand. Starte ein «Neues Spiel» und lies mindestens einen Satz.",
+        "**Ein Ende zählt nicht in «Enden und Galerie»:** Gib ihm einen **Namen für das Ende** in [[terminer_histoire]].",
+        "**Der Spieler hängt nach einem Ende fest:** Verbinde [[terminer_histoire]] mit [[ecran_titre_histoire]] oder mit einer anderen Szene."
+      ]
+    ]
+  ]
+}

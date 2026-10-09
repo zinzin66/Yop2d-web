@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment créer un visual novel (histoire à choix) sans code ? | Guide Yop2D</title>
+<meta name="description" content="Créer un visual novel sur tablette ou téléphone Android, sans code et sans rien importer : personnage tout prêt, phrases, choix, plusieurs fins, écran titre avec sauvegarde, jauges d&#x27;amitié. Guide pas à pas avec les nœuds « Dire une phrase » et « Poser un choix ».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/histoire-choix.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/histoire-choix.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/histoire-choix.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/histoire-choix.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/histoire-choix.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/histoire-choix.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/histoire-choix.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/histoire-choix.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/histoire-choix.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/histoire-choix.html">
+<link rel="stylesheet" href="guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Comment créer une histoire à choix (visual novel) ?",
+ "description": "Créer un visual novel sur tablette ou téléphone Android, sans code et sans rien importer : personnage tout prêt, phrases, choix, plusieurs fins, écran titre avec sauvegarde, jauges d'amitié. Guide pas à pas avec les nœuds « Dire une phrase » et « Poser un choix ».",
+ "inLanguage": "fr",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (moteur de jeu 2D sans code pour Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Une première phrase",
+   "text": "Au Démarrage → Changer le décor → Dire une phrase avec Hana, un personnage tout prêt."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Un choix",
+   "text": "Poser un choix : chaque réponse part par sa propre sortie vers une suite différente."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Des fins et un écran titre",
+   "text": "Terminer l'histoire avec un nom de fin, et Écran titre de l'histoire au début : « Continuer », « Nouvelle partie », « Fins et galerie »."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "L'amitié",
+   "text": "Amitié (cœurs) après une réponse gentille, Si l'amitié… pour choisir la fin."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../fr/index.html">← Yop2D</a>
+<h1>Comment créer une histoire à choix (visual novel) ?</h1>
+<p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/histoire-choix.html" hreflang="en">English</a> · <a href="es/histoire-choix.html" hreflang="es">Español</a> · <a href="de/histoire-choix.html" hreflang="de">Deutsch</a> · <a href="it/histoire-choix.html" hreflang="it">Italiano</a> · <a href="pt/histoire-choix.html" hreflang="pt">Português</a> · <a href="ru/histoire-choix.html" hreflang="ru">Русский</a> · <a href="zh/histoire-choix.html" hreflang="zh">中文</a> · <a href="ja/histoire-choix.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Un visual novel est une histoire illustrée où le joueur lit des dialogues et fait des choix qui changent la suite. Avec Yop2D, tout se fait au doigt, sans écrire de script, et <strong>sans rien importer</strong> : la bibliothèque contient déjà un personnage tout prêt (Hana, avec plusieurs émotions) et des décors aquarelle. Tu n'as même rien à placer sur la scène : les nœuds affichent eux-mêmes le décor, les personnages et la boîte de dialogue.</p>
+<div class="besoin">
+<b>Il te faut :</b>
+<ul><li>Yop2D 0.1.1062 ou plus récent ;</li><li>un nouveau projet vide (une scène vide suffit).</li></ul>
+</div>
+<div class="tip">👉 Dans Yop2D, le guide intégré <strong>« Ma première histoire »</strong> (écran d'accueil, carte des guides) fait les étapes 1 et 2 avec toi en 5 minutes : un cadre jaune montre où toucher, même dans les fenêtres. Pour voir tout ce que l'on peut faire, télécharge l'exemple <strong>Firefly Night</strong> dans l'onglet Exemples.</div>
+<h2>Étape 1 : un décor et une première phrase</h2>
+<div class="method">
+<ol><li>Ouvre le <strong>Blueprint</strong> de la scène.</li><li>Ajoute l'événement <strong>« Au Démarrage »</strong>.</li><li>Ajoute <strong>« Changer le décor »</strong> et choisis une image, par exemple la prairie.</li><li>Ajoute <strong>« Dire une phrase »</strong>. Touche <strong>Qui parle</strong>, puis <strong>＋ Nouveau personnage…</strong>, puis <strong>⭐ Personnage tout prêt</strong>, et choisis <strong>Hana</strong>. La prochaine fois, Hana sera directement dans la liste.</li><li>Touche <strong>La phrase</strong> et écris ce qu'elle dit, par exemple : « Bonjour ! Tu viens d'arriver ici ? ». Tu peux aussi choisir son <strong>Émotion</strong>.</li><li>Relie les trois nœuds dans l'ordre, puis lance le jeu : le décor apparaît, Hana entre et parle, lettre par lettre.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Au Démarrage</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Changer le décor</b><span>prairie</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Dire une phrase</b><span>Hana · « Bonjour ! »</span></div>
+</div>
+</div>
+<h2>Étape 2 : poser un choix</h2>
+<div class="method">
+<ol><li>Ajoute <strong>« Poser un choix »</strong> et relie-le après la phrase de Hana.</li><li>Écris <strong>Réponse 1</strong> : « Oui ! » et <strong>Réponse 2</strong> : « Non merci ». Tu peux mettre jusqu'à 4 réponses.</li><li>Le nœud a une sortie par réponse. Relie la sortie « Réponse 1 » à une nouvelle « Dire une phrase » (Hana contente : « Génial ! Viens, je te montre le village. »), et la sortie « Réponse 2 » à une autre (Hana triste : « Oh… dommage. »).</li><li>Lance le jeu et essaie les deux réponses : l'histoire se sépare comme un arbre.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Dire une phrase</b><span>« Bonjour ! »</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Poser un choix</b><span>Oui ! · Non merci</span></div>
+<div class="fleche"><em>Réponse 1</em> →</div>
+<div class="noeud"><b>Dire une phrase</b><span>« Génial ! »</span></div>
+</div>
+</div>
+<p>Pendant le jeu, le joueur peut toucher <strong>◀ Retour</strong> pour revenir à la phrase d'avant, même avant un choix, pour essayer l'autre réponse. Les boutons Historique, Auto, Passer, sauvegardes et réglages sont rangés dans un seul menu ☰.</p>
+<h2>Étape 3 : des fins et un écran titre</h2>
+<div class="method">
+<ol><li>À la fin de chaque branche, ajoute <strong>« Terminer l'histoire »</strong>. Donne-lui un <strong>nom de fin</strong>, par exemple « La visite du village » ou « Seul sur la route ».</li><li>Ajoute <strong>« Écran titre de l'histoire »</strong> juste après <strong>« Au Démarrage »</strong>, écris le titre de ton histoire, et relie sa sortie « Nouvelle partie » à <strong>« Changer le décor »</strong>.</li><li>Relie chaque <strong>« Terminer l'histoire »</strong> à <strong>« Écran titre de l'histoire »</strong> : après une fin, le joueur revient à l'écran titre.</li><li>Lance le jeu : l'écran titre propose « Nouvelle partie », puis « Continuer » (l'histoire est sauvegardée toute seule à chaque phrase) et « Fins et galerie » (les fins trouvées, avec une photo souvenir, et les décors déjà vus).</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Au Démarrage</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Écran titre de l'histoire</b><span>« Le village »</span></div>
+<div class="fleche"><em>Nouvelle partie</em> →</div>
+<div class="noeud"><b>Changer le décor</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>…</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Terminer l'histoire</b><span>« La visite du village »</span></div>
+</div>
+</div>
+<h2>Étape 4 : des cœurs d'amitié qui changent la fin</h2>
+<div class="method">
+<ol><li>Après une réponse gentille, ajoute <strong>« Amitié (cœurs) »</strong> : <strong>Qui ?</strong> Hana, <strong>Cœurs en plus (−1 pour en enlever)</strong> 1. Des cœurs s'affichent en haut à gauche et un « +1 ❤ » s'envole.</li><li>Avant la fin, ajoute <strong>« Si l'amitié… »</strong> : Hana, au moins 2 cœurs.</li><li>Relie la sortie « Vrai » à la belle fin, et la sortie « Faux » à une fin plus triste. Les cœurs sont gardés dans la sauvegarde, et <strong>◀ Retour</strong> les remet comme avant.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Amitié (cœurs)</b><span>Hana +1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>…</b></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Si l'amitié…</b><span>Hana ≥ 2</span></div>
+<div class="fleche"><em>Vrai</em> →</div>
+<div class="noeud"><b>Terminer l'histoire</b><span>« Amis pour toujours »</span></div>
+</div>
+</div>
+<h2>Pour aller plus loin</h2>
+<ul><li><strong>« Montrer / cacher un personnage »</strong> fait entrer ou sortir un personnage sans qu'il parle ; chaque personnage peut avoir sa place à l'écran (gauche, milieu, droite).</li><li><strong>« Demander un texte au joueur (prénom…) »</strong> demande le prénom du joueur : dans les phrases, <code>{prenom}</code> l'affiche.</li><li><strong>« Ambiance (pluie, neige, nuit…) »</strong> ajoute pluie, orage, neige, pétales, lucioles ou nuit, avec leurs sons ; <strong>« Transition de l'écran (rond, étoile…) »</strong> et <strong>« Zoomer l'écran »</strong> donnent du rythme.</li><li>Dans <strong>Qui parle</strong>, <strong>🎨 Style des dialogues…</strong> change la boîte de texte : portrait du personnage dans la boîte, menu ☰, cœurs visibles ou non, phrases lues à voix haute.</li><li>Chaque réponse de « Poser un choix » peut avoir une image (réglages avancés) : les réponses deviennent de grandes cartes illustrées. Une réponse peut aussi demander une condition, et un minuteur ajoute la sortie « Temps écoulé ».</li><li>Le bouton <strong>🗺</strong> du Blueprint ouvre la <strong>carte de l'histoire</strong> : toutes les branches, les choix et les fins d'un coup d'œil ; toucher une case t'emmène au bon nœud.</li><li>Chaque phrase peut être écrite en 9 langues : le jeu affiche celle du joueur.</li></ul>
+<h2>Si ça ne marche pas</h2>
+<ul><li><strong>Rien ne s'affiche :</strong> vérifie que « Au Démarrage » est relié au premier nœud, et que chaque nœud est relié au suivant.</li><li><strong>La phrase s'affiche sans personnage :</strong> <strong>Qui parle</strong> est vide, ou c'est le narrateur. Choisis Hana dans la liste.</li><li><strong>« Continuer » n'apparaît pas :</strong> il n'y a pas encore de partie sauvegardée. Lance une « Nouvelle partie » et lis au moins une phrase.</li><li><strong>Une fin ne compte pas dans « Fins et galerie » :</strong> donne-lui un <strong>nom de fin</strong> dans « Terminer l'histoire ».</li><li><strong>Le joueur reste bloqué après une fin :</strong> relie « Terminer l'histoire » à « Écran titre de l'histoire », ou à une autre scène.</li></ul>
+
+<div class="nav">
+<a href="particules-effets.html">← Particules et effets</a>
+<a href="index.html">Tous les guides →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="../fr/index.html">Site officiel</a> · <a href="../noeuds/fr.html">Référence des nœuds</a></p>
+</footer>
+</body>
+</html>

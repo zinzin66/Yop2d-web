@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как сделать визуальную новеллу (историю с выбором) без кода? | Руководство Yop2D</title>
+<meta name="description" content="Сделайте визуальную новеллу на Android-планшете или телефоне, без кода и ничего не импортируя: готовый персонаж, фразы, выборы, несколько концовок, титульный экран с сохранениями, сердечки дружбы. Пошаговое руководство с узлами «Сказать фразу» и «Предложить выбор».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/histoire-choix.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/histoire-choix.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/histoire-choix.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/histoire-choix.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/histoire-choix.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/histoire-choix.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/histoire-choix.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/histoire-choix.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/histoire-choix.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/histoire-choix.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Как сделать историю с выбором (визуальную новеллу)?",
+ "description": "Сделайте визуальную новеллу на Android-планшете или телефоне, без кода и ничего не импортируя: готовый персонаж, фразы, выборы, несколько концовок, титульный экран с сохранениями, сердечки дружбы. Пошаговое руководство с узлами «Сказать фразу» и «Предложить выбор».",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Первая фраза",
+   "text": "При старте → Сменить фон → Сказать фразу с Ханой, готовым персонажем."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Выбор",
+   "text": "Предложить выбор: каждый ответ уходит через свой выход к своему продолжению."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Концовки и титульный экран",
+   "text": "Завершить историю с названием концовки и Титульный экран истории в начале: «Продолжить», «Новая игра», «Концовки и галерея»."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Дружба",
+   "text": "Дружба (сердечки) после доброго ответа, Если дружба…, чтобы выбрать концовку."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ru/index.html">← Yop2D</a>
+<h1>Как сделать историю с выбором (визуальную новеллу)?</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../histoire-choix.html" hreflang="fr">Français</a> · <a href="../en/histoire-choix.html" hreflang="en">English</a> · <a href="../es/histoire-choix.html" hreflang="es">Español</a> · <a href="../de/histoire-choix.html" hreflang="de">Deutsch</a> · <a href="../it/histoire-choix.html" hreflang="it">Italiano</a> · <a href="../pt/histoire-choix.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/histoire-choix.html" hreflang="zh">中文</a> · <a href="../ja/histoire-choix.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Визуальная новелла — это иллюстрированная история, в которой игрок читает диалоги и делает выборы, меняющие продолжение. В Yop2D всё делается пальцем, без скриптов и <strong>ничего не импортируя</strong>: в библиотеке уже есть готовый персонаж (Хана, с несколькими эмоциями) и акварельные фоны. Даже ставить ничего на сцену не нужно: узлы сами показывают фон, персонажей и окно диалога.</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>Yop2D 0.1.1062 или новее;</li><li>новый пустой проект (достаточно пустой сцены).</li></ul>
+</div>
+<div class="tip">👉 В Yop2D встроенное обучение <strong>«Моя первая история»</strong> (главный экран, карточка обучений) проходит с вами шаги 1 и 2 за 5 минут: жёлтая рамка показывает, куда нажать, даже внутри окон. Чтобы увидеть всё, что можно сделать, скачайте пример <strong>Firefly Night</strong> во вкладке «Примеры».</div>
+<h2>Шаг 1: фон и первая фраза</h2>
+<div class="method">
+<ol><li>Откройте <strong>Blueprint</strong> сцены.</li><li>Добавьте событие <strong>«При старте»</strong>.</li><li>Добавьте <strong>«Сменить фон»</strong> и выберите картинку, например луг.</li><li>Добавьте <strong>«Сказать фразу»</strong>. Нажмите <strong>Кто говорит</strong>, затем <strong>＋ Новый персонаж…</strong>, затем <strong>⭐ Готовый персонаж</strong> и выберите <strong>Хану</strong>. В следующий раз Хана будет сразу в списке.</li><li>Нажмите <strong>Фраза</strong> и напишите, что она говорит, например: «Привет! Ты только что пришёл?». Можно также выбрать её <strong>Эмоция</strong>.</li><li>Соедините три узла по порядку и запустите игру: появляется фон, Хана входит и говорит, буква за буквой.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>При старте</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Сменить фон</b><span>луг</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Сказать фразу</b><span>Хана · «Привет!»</span></div>
+</div>
+</div>
+<h2>Шаг 2: задать выбор</h2>
+<div class="method">
+<ol><li>Добавьте <strong>«Предложить выбор»</strong> и соедините его после фразы Ханы.</li><li>Напишите <strong>Ответ 1</strong>: «Да!» и <strong>Ответ 2</strong>: «Нет, спасибо». Можно сделать до 4 ответов.</li><li>У узла по одному выходу на каждый ответ. Соедините выход «Ответ 1» с новым «Сказать фразу» (довольная Хана: «Здорово! Пойдём, я покажу тебе деревню.»), а выход «Ответ 2» — с другим (грустная Хана: «Ох… жаль.»).</li><li>Запустите игру и попробуйте оба ответа: история ветвится, как дерево.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Сказать фразу</b><span>«Привет!»</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Предложить выбор</b><span>Да! · Нет, спасибо</span></div>
+<div class="fleche"><em>Ответ 1</em> →</div>
+<div class="noeud"><b>Сказать фразу</b><span>«Здорово!»</span></div>
+</div>
+</div>
+<p>Во время игры можно нажать <strong>◀ Назад</strong>, чтобы вернуться к предыдущей фразе, даже до выбора, и попробовать другой ответ. Кнопки истории, авто, пропуска, сохранений и настроек убираются в одно меню ☰.</p>
+<h2>Шаг 3: концовки и титульный экран</h2>
+<div class="method">
+<ol><li>В конце каждой ветки добавьте <strong>«Завершить историю»</strong>. Дайте ему <strong>название концовки</strong>, например «Прогулка по деревне» или «Один на дороге».</li><li>Добавьте <strong>«Титульный экран истории»</strong> сразу после <strong>«При старте»</strong>, напишите название истории и соедините его выход «Новая игра» с <strong>«Сменить фон»</strong>.</li><li>Соедините каждый <strong>«Завершить историю»</strong> с <strong>«Титульный экран истории»</strong>: после концовки игрок возвращается на титульный экран.</li><li>Запустите игру: титульный экран предлагает «Новая игра», затем «Продолжить» (история сама сохраняется на каждой фразе) и «Концовки и галерея» (найденные концовки с фото на память и уже увиденные фоны).</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>При старте</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Титульный экран истории</b><span>«Деревня»</span></div>
+<div class="fleche"><em>Новая игра</em> →</div>
+<div class="noeud"><b>Сменить фон</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>…</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Завершить историю</b><span>«Прогулка по деревне»</span></div>
+</div>
+</div>
+<h2>Шаг 4: сердечки дружбы, меняющие концовку</h2>
+<div class="method">
+<ol><li>После доброго ответа добавьте <strong>«Дружба (сердечки)»</strong>: <strong>Кто?</strong> Хана, <strong>Сколько сердечек добавить (−1 — убрать)</strong> 1. Слева вверху появляются сердечки, и «+1 ❤» взлетает вверх.</li><li>Перед концовкой добавьте <strong>«Если дружба…»</strong>: Хана, не меньше 2 сердечек.</li><li>Соедините выход «Истина» со счастливой концовкой, а выход «Ложь» — с более грустной. Сердечки хранятся в сохранении, а <strong>◀ Назад</strong> возвращает их как было.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Дружба (сердечки)</b><span>Хана +1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>…</b></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Если дружба…</b><span>Хана ≥ 2</span></div>
+<div class="fleche"><em>Истина</em> →</div>
+<div class="noeud"><b>Завершить историю</b><span>«Друзья навсегда»</span></div>
+</div>
+</div>
+<h2>Что ещё можно сделать</h2>
+<ul><li><strong>«Показать / скрыть персонажа»</strong> выводит персонажа на сцену или уводит его без слов; у каждого персонажа может быть своё место на экране (слева, в центре, справа).</li><li><strong>«Спросить текст у игрока (имя…)»</strong> спрашивает имя игрока: в фразах его показывает <code>{prenom}</code>.</li><li><strong>«Атмосфера (дождь, снег, ночь…)»</strong> добавляет дождь, грозу, снег, лепестки, светлячков или ночь со звуками; <strong>«Переход экрана (круг, звезда…)»</strong> и <strong>«Приблизить экран»</strong> задают ритм.</li><li>В <strong>Кто говорит</strong> пункт <strong>🎨 Стиль диалогов…</strong> меняет окно текста: портрет персонажа в окне, меню ☰, видимые или скрытые сердечки, чтение фраз вслух.</li><li>У каждого ответа «Предложить выбор» может быть картинка (дополнительные настройки): ответы становятся большими карточками с картинками. Ответ может требовать условие, а таймер добавляет выход «Время вышло».</li><li>Кнопка <strong>🗺</strong> в Blueprint открывает <strong>карту истории</strong>: все ветки, выборы и концовки сразу; нажатие на клетку ведёт к нужному узлу.</li><li>Каждую фразу можно написать на 9 языках: игра покажет язык игрока.</li></ul>
+<h2>Если не работает</h2>
+<ul><li><strong>Ничего не появляется:</strong> проверьте, что «При старте» соединён с первым узлом и каждый узел — со следующим.</li><li><strong>Фраза появляется без персонажа:</strong> поле <strong>Кто говорит</strong> пустое или выбран рассказчик. Выберите Хану в списке.</li><li><strong>Нет кнопки «Продолжить»:</strong> сохранённой игры ещё нет. Начните «Новую игру» и прочитайте хотя бы одну фразу.</li><li><strong>Концовка не попадает в «Концовки и галерея»:</strong> дайте ей <strong>название концовки</strong> в «Завершить историю».</li><li><strong>Игрок застревает после концовки:</strong> соедините «Завершить историю» с «Титульный экран истории» или с другой сценой.</li></ul>
+
+<div class="nav">
+<a href="../ru/particules-effets.html">← Частицы и эффекты</a>
+<a href="index.html">Все руководства →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../ru/index.html">Официальный сайт</a> · <a href="../../noeuds/ru.html">Справочник узлов</a></p>
+</footer>
+</body>
+</html>

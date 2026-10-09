@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to make a visual novel (choice story) without code? | Yop2D guide</title>
+<meta name="description" content="Make a visual novel on an Android tablet or phone, with no code and nothing to import: a ready-made character, lines, choices, several endings, a title screen with saves, friendship hearts. A step-by-step guide with the “Say a line” and “Ask a choice” nodes.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/histoire-choix.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/histoire-choix.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/histoire-choix.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/histoire-choix.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/histoire-choix.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/histoire-choix.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/histoire-choix.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/histoire-choix.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/histoire-choix.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/histoire-choix.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to make a choice story (visual novel)?",
+ "description": "Make a visual novel on an Android tablet or phone, with no code and nothing to import: a ready-made character, lines, choices, several endings, a title screen with saves, friendship hearts. A step-by-step guide with the “Say a line” and “Ask a choice” nodes.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "A first line",
+   "text": "On Start → Change the background → Say a line with Hana, a ready-made character."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "A choice",
+   "text": "Ask a choice: each answer leaves by its own output towards a different story."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Endings and a title screen",
+   "text": "End the story with an ending name, and Story title screen at the start: “Continue”, “New game”, “Endings and gallery”."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Friendship",
+   "text": "Friendship (hearts) after a kind answer, If the friendship… to pick the ending."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to make a choice story (visual novel)?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../histoire-choix.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/histoire-choix.html" hreflang="es">Español</a> · <a href="../de/histoire-choix.html" hreflang="de">Deutsch</a> · <a href="../it/histoire-choix.html" hreflang="it">Italiano</a> · <a href="../pt/histoire-choix.html" hreflang="pt">Português</a> · <a href="../ru/histoire-choix.html" hreflang="ru">Русский</a> · <a href="../zh/histoire-choix.html" hreflang="zh">中文</a> · <a href="../ja/histoire-choix.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>A visual novel is an illustrated story where the player reads dialogues and makes choices that change what happens next. With Yop2D, everything is done with your finger, without writing a script, and <strong>without importing anything</strong>: the library already has a ready-made character (Hana, with several emotions) and watercolor backgrounds. You don't even need to place anything in the scene: the nodes show the background, the characters and the text box by themselves.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>Yop2D 0.1.1062 or newer;</li><li>a new empty project (an empty scene is enough).</li></ul>
+</div>
+<div class="tip">👉 In Yop2D, the built-in guide <strong>“My first story”</strong> (home screen, guides card) does steps 1 and 2 with you in 5 minutes: a yellow frame shows where to tap, even inside windows. To see everything you can do, download the <strong>Firefly Night</strong> example in the Examples tab.</div>
+<h2>Step 1: a background and a first line</h2>
+<div class="method">
+<ol><li>Open the scene's <strong>Blueprint</strong>.</li><li>Add the <strong>“On Start”</strong> event.</li><li>Add <strong>“Change the background”</strong> and pick an image, for example the meadow.</li><li>Add <strong>“Say a line”</strong>. Tap <strong>Who speaks</strong>, then <strong>＋ New character…</strong>, then <strong>⭐ Ready-made character</strong>, and pick <strong>Hana</strong>. Next time, Hana will be right in the list.</li><li>Tap <strong>The line</strong> and write what she says, for example: “Hello! Did you just arrive here?”. You can also pick her <strong>Emotion</strong>.</li><li>Link the three nodes in order, then play: the background appears, Hana comes in and talks, letter by letter.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>On Start</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Change the background</b><span>meadow</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Say a line</b><span>Hana · “Hello!”</span></div>
+</div>
+</div>
+<h2>Step 2: ask a choice</h2>
+<div class="method">
+<ol><li>Add <strong>“Ask a choice”</strong> and link it after Hana's line.</li><li>Write <strong>Answer 1</strong>: “Yes!” and <strong>Answer 2</strong>: “No thanks”. You can have up to 4 answers.</li><li>The node has one output per answer. Link the “Answer 1” output to a new “Say a line” (happy Hana: “Great! Come, I'll show you the village.”), and the “Answer 2” output to another one (sad Hana: “Oh… too bad.”).</li><li>Play and try both answers: the story branches like a tree.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Say a line</b><span>“Hello!”</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Ask a choice</b><span>Yes! · No thanks</span></div>
+<div class="fleche"><em>Answer 1</em> →</div>
+<div class="noeud"><b>Say a line</b><span>“Great!”</span></div>
+</div>
+</div>
+<p>While playing, the player can tap <strong>◀ Back</strong> to go back to the previous line, even before a choice, to try the other answer. The History, Auto, Skip, saves and settings buttons fold into a single ☰ menu.</p>
+<h2>Step 3: endings and a title screen</h2>
+<div class="method">
+<ol><li>At the end of each branch, add <strong>“End the story”</strong>. Give it an <strong>ending name</strong>, for example “The village tour” or “Alone on the road”.</li><li>Add <strong>“Story title screen”</strong> right after <strong>“On Start”</strong>, write your story's title, and link its “New game” output to <strong>“Change the background”</strong>.</li><li>Link each <strong>“End the story”</strong> to <strong>“Story title screen”</strong>: after an ending, the player goes back to the title screen.</li><li>Play: the title screen offers “New game”, then “Continue” (the story saves itself at every line) and “Endings and gallery” (the endings found, with a souvenir picture, and the backgrounds already seen).</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>On Start</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Story title screen</b><span>“The village”</span></div>
+<div class="fleche"><em>New game</em> →</div>
+<div class="noeud"><b>Change the background</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>…</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>End the story</b><span>“The village tour”</span></div>
+</div>
+</div>
+<h2>Step 4: friendship hearts that change the ending</h2>
+<div class="method">
+<ol><li>After a kind answer, add <strong>“Friendship (hearts)”</strong>: <strong>Who?</strong> Hana, <strong>Hearts to add (−1 to remove)</strong> 1. Hearts appear at the top left and a “+1 ❤” floats up.</li><li>Before the ending, add <strong>“If the friendship…”</strong>: Hana, at least 2 hearts.</li><li>Link the “True” output to the happy ending, and the “False” output to a sadder one. The hearts are kept in the save, and <strong>◀ Back</strong> puts them back as they were.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Friendship (hearts)</b><span>Hana +1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>…</b></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>If the friendship…</b><span>Hana ≥ 2</span></div>
+<div class="fleche"><em>True</em> →</div>
+<div class="noeud"><b>End the story</b><span>“Friends forever”</span></div>
+</div>
+</div>
+<h2>Going further</h2>
+<ul><li><strong>“Show / hide a character”</strong> brings a character in or out without talking; each character can have its place on screen (left, middle, right).</li><li><strong>“Ask the player for a text (name…)”</strong> asks the player's name: in the lines, <code>{prenom}</code> shows it.</li><li><strong>“Atmosphere (rain, snow, night…)”</strong> adds rain, storm, snow, petals, fireflies or night, with their sounds; <strong>“Screen transition (circle, star…)”</strong> and <strong>“Zoom the screen”</strong> add rhythm.</li><li>In <strong>Who speaks</strong>, <strong>🎨 Dialogue style…</strong> changes the text box: character portrait in the box, ☰ menu, hearts shown or not, lines read aloud.</li><li>Each answer of “Ask a choice” can have a picture (advanced settings): the answers become big illustrated cards. An answer can also require a condition, and a timer adds the “Time's up” output.</li><li>The <strong>🗺</strong> button of the Blueprint opens the <strong>story map</strong>: all branches, choices and endings at a glance; tapping a box takes you to the right node.</li><li>Each line can be written in 9 languages: the game shows the player's language.</li></ul>
+<h2>If it doesn't work</h2>
+<ul><li><strong>Nothing shows up:</strong> check that “On Start” is linked to the first node, and that each node is linked to the next.</li><li><strong>The line shows without a character:</strong> <strong>Who speaks</strong> is empty, or it's the narrator. Pick Hana in the list.</li><li><strong>“Continue” doesn't appear:</strong> there is no saved game yet. Start a “New game” and read at least one line.</li><li><strong>An ending doesn't count in “Endings and gallery”:</strong> give it an <strong>ending name</strong> in “End the story”.</li><li><strong>The player is stuck after an ending:</strong> link “End the story” to “Story title screen”, or to another scene.</li></ul>
+
+<div class="nav">
+<a href="../en/particules-effets.html">← Particles and effects</a>
+<a href="index.html">All guides →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>

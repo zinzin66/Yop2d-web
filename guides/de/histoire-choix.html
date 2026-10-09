@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie erstellt man eine Visual Novel (Geschichte mit Entscheidungen) ohne Code? | Yop2D-Anleitung</title>
+<meta name="description" content="Erstelle eine Visual Novel auf einem Android-Tablet oder -Handy, ohne Code und ohne etwas zu importieren: eine fertige Figur, Sätze, Entscheidungen, mehrere Enden, ein Titelbildschirm mit Speichern, Freundschaftsherzen. Eine Schritt-für-Schritt-Anleitung mit den Knoten „Einen Satz sagen“ und „Eine Wahl stellen“.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/histoire-choix.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/histoire-choix.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/histoire-choix.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/histoire-choix.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/histoire-choix.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/histoire-choix.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/histoire-choix.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/histoire-choix.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/histoire-choix.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/histoire-choix.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie erstellt man eine Geschichte mit Entscheidungen (Visual Novel)?",
+ "description": "Erstelle eine Visual Novel auf einem Android-Tablet oder -Handy, ohne Code und ohne etwas zu importieren: eine fertige Figur, Sätze, Entscheidungen, mehrere Enden, ein Titelbildschirm mit Speichern, Freundschaftsherzen. Eine Schritt-für-Schritt-Anleitung mit den Knoten „Einen Satz sagen“ und „Eine Wahl stellen“.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Ein erster Satz",
+   "text": "Beim Start → Hintergrund wechseln → Einen Satz sagen mit Hana, einer fertigen Figur."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Eine Entscheidung",
+   "text": "Eine Wahl stellen: Jede Antwort geht über ihren eigenen Ausgang zu einer anderen Fortsetzung."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Enden und ein Titelbildschirm",
+   "text": "Geschichte beenden mit einem Namen für das Ende, und Titelbildschirm der Geschichte am Anfang: „Weiterspielen“, „Neues Spiel“, „Enden und Galerie“."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Freundschaft",
+   "text": "Freundschaft (Herzen) nach einer netten Antwort, Wenn die Freundschaft…, um das Ende zu wählen."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../de/index.html">← Yop2D</a>
+<h1>Wie erstellt man eine Geschichte mit Entscheidungen (Visual Novel)?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../histoire-choix.html" hreflang="fr">Français</a> · <a href="../en/histoire-choix.html" hreflang="en">English</a> · <a href="../es/histoire-choix.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/histoire-choix.html" hreflang="it">Italiano</a> · <a href="../pt/histoire-choix.html" hreflang="pt">Português</a> · <a href="../ru/histoire-choix.html" hreflang="ru">Русский</a> · <a href="../zh/histoire-choix.html" hreflang="zh">中文</a> · <a href="../ja/histoire-choix.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Eine Visual Novel ist eine bebilderte Geschichte, in der man Dialoge liest und Entscheidungen trifft, die den weiteren Verlauf ändern. Mit Yop2D geht alles mit dem Finger, ohne Skript und <strong>ohne etwas zu importieren</strong>: Die Bibliothek enthält schon eine fertige Figur (Hana, mit mehreren Gefühlen) und Aquarell-Hintergründe. Du musst nicht einmal etwas in der Szene platzieren: Die Knoten zeigen den Hintergrund, die Figuren und das Textfeld von selbst.</p>
+<div class="besoin">
+<b>Du brauchst:</b>
+<ul><li>Yop2D 0.1.1062 oder neuer;</li><li>ein neues, leeres Projekt (eine leere Szene genügt).</li></ul>
+</div>
+<div class="tip">👉 In Yop2D macht die eingebaute Anleitung <strong>„Meine erste Geschichte“</strong> (Startbildschirm, Karte der Anleitungen) die Schritte 1 und 2 in 5 Minuten mit dir: Ein gelber Rahmen zeigt, wo du tippen musst, auch in den Fenstern. Um alles zu sehen, was möglich ist, lade das Beispiel <strong>Firefly Night</strong> im Tab Beispiele herunter.</div>
+<h2>Schritt 1: ein Hintergrund und ein erster Satz</h2>
+<div class="method">
+<ol><li>Öffne den <strong>Blueprint</strong> der Szene.</li><li>Füge das Ereignis <strong>„Beim Start“</strong> hinzu.</li><li>Füge <strong>„Hintergrund wechseln“</strong> hinzu und wähle ein Bild, zum Beispiel die Wiese.</li><li>Füge <strong>„Einen Satz sagen“</strong> hinzu. Tippe auf <strong>Wer spricht</strong>, dann auf <strong>＋ Neue Figur…</strong>, dann auf <strong>⭐ Fertige Figur</strong>, und wähle <strong>Hana</strong>. Beim nächsten Mal steht Hana direkt in der Liste.</li><li>Tippe auf <strong>Der Satz</strong> und schreib, was sie sagt, zum Beispiel: „Hallo! Bist du gerade angekommen?“. Du kannst auch ihr <strong>Gefühl</strong> wählen.</li><li>Verbinde die drei Knoten der Reihe nach und starte das Spiel: Der Hintergrund erscheint, Hana kommt herein und spricht, Buchstabe für Buchstabe.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Beim Start</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Hintergrund wechseln</b><span>Wiese</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Einen Satz sagen</b><span>Hana · „Hallo!“</span></div>
+</div>
+</div>
+<h2>Schritt 2: eine Entscheidung stellen</h2>
+<div class="method">
+<ol><li>Füge <strong>„Eine Wahl stellen“</strong> hinzu und verbinde es nach Hanas Satz.</li><li>Schreib <strong>Antwort 1</strong>: „Ja!“ und <strong>Antwort 2</strong>: „Nein danke“. Du kannst bis zu 4 Antworten haben.</li><li>Der Knoten hat einen Ausgang pro Antwort. Verbinde den Ausgang „Antwort 1“ mit einem neuen „Einen Satz sagen“ (fröhliche Hana: „Super! Komm, ich zeige dir das Dorf.“), und den Ausgang „Antwort 2“ mit einem anderen (traurige Hana: „Oh… schade.“).</li><li>Starte das Spiel und probiere beide Antworten: Die Geschichte verzweigt sich wie ein Baum.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Einen Satz sagen</b><span>„Hallo!“</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Eine Wahl stellen</b><span>Ja! · Nein danke</span></div>
+<div class="fleche"><em>Antwort 1</em> →</div>
+<div class="noeud"><b>Einen Satz sagen</b><span>„Super!“</span></div>
+</div>
+</div>
+<p>Während des Spiels kann man auf <strong>◀ Zurück</strong> tippen, um zum vorigen Satz zurückzukehren, sogar vor eine Entscheidung, und die andere Antwort zu probieren. Die Knöpfe Verlauf, Auto, Überspringen, Speichern und Einstellungen passen in ein einziges Menü ☰.</p>
+<h2>Schritt 3: Enden und ein Titelbildschirm</h2>
+<div class="method">
+<ol><li>Füge am Ende jedes Zweigs <strong>„Geschichte beenden“</strong> hinzu. Gib ihm einen <strong>Namen für das Ende</strong>, zum Beispiel „Der Dorfrundgang“ oder „Allein auf dem Weg“.</li><li>Füge <strong>„Titelbildschirm der Geschichte“</strong> direkt nach <strong>„Beim Start“</strong> hinzu, schreib den Titel deiner Geschichte und verbinde seinen Ausgang „Neues Spiel“ mit <strong>„Hintergrund wechseln“</strong>.</li><li>Verbinde jedes <strong>„Geschichte beenden“</strong> mit <strong>„Titelbildschirm der Geschichte“</strong>: Nach einem Ende kehrt man zum Titelbildschirm zurück.</li><li>Starte das Spiel: Der Titelbildschirm bietet „Neues Spiel“, danach „Weiterspielen“ (die Geschichte speichert sich bei jedem Satz von selbst) und „Enden und Galerie“ (die gefundenen Enden mit einem Erinnerungsfoto und die schon gesehenen Hintergründe).</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Beim Start</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Titelbildschirm der Geschichte</b><span>„Das Dorf“</span></div>
+<div class="fleche"><em>Neues Spiel</em> →</div>
+<div class="noeud"><b>Hintergrund wechseln</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>…</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Geschichte beenden</b><span>„Der Dorfrundgang“</span></div>
+</div>
+</div>
+<h2>Schritt 4: Freundschaftsherzen, die das Ende ändern</h2>
+<div class="method">
+<ol><li>Füge nach einer netten Antwort <strong>„Freundschaft (Herzen)“</strong> hinzu: <strong>Wer?</strong> Hana, <strong>Herzen dazu (−1 zum Abziehen)</strong> 1. Oben links erscheinen Herzen und ein „+1 ❤“ fliegt hoch.</li><li>Füge vor dem Ende <strong>„Wenn die Freundschaft…“</strong> hinzu: Hana, mindestens 2 Herzen.</li><li>Verbinde den Ausgang „Wahr“ mit dem schönen Ende und den Ausgang „Falsch“ mit einem traurigeren. Die Herzen werden mit dem Spielstand gespeichert, und <strong>◀ Zurück</strong> stellt sie wieder her.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Freundschaft (Herzen)</b><span>Hana +1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>…</b></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Wenn die Freundschaft…</b><span>Hana ≥ 2</span></div>
+<div class="fleche"><em>Wahr</em> →</div>
+<div class="noeud"><b>Geschichte beenden</b><span>„Freunde für immer“</span></div>
+</div>
+</div>
+<h2>Noch weiter</h2>
+<ul><li><strong>„Figur zeigen / verstecken“</strong> lässt eine Figur auftreten oder abgehen, ohne dass sie spricht; jede Figur kann ihren Platz auf dem Bildschirm haben (links, Mitte, rechts).</li><li><strong>„Spieler nach einem Text fragen (Name…)“</strong> fragt nach dem Namen des Spielers: In den Sätzen zeigt <code>{prenom}</code> ihn an.</li><li><strong>„Stimmung (Regen, Schnee, Nacht…)“</strong> fügt Regen, Gewitter, Schnee, Blütenblätter, Glühwürmchen oder Nacht mit ihren Geräuschen hinzu; <strong>„Bildschirmübergang (Kreis, Stern…)“</strong> und <strong>„Bildschirm zoomen“</strong> bringen Rhythmus.</li><li>In <strong>Wer spricht</strong> ändert <strong>🎨 Dialogstil…</strong> das Textfeld: Porträt der Figur im Feld, Menü ☰, Herzen sichtbar oder nicht, vorgelesene Sätze.</li><li>Jede Antwort von „Eine Wahl stellen“ kann ein Bild haben (erweiterte Einstellungen): Die Antworten werden zu großen Bildkarten. Eine Antwort kann auch eine Bedingung verlangen, und ein Zeitlimit fügt den Ausgang „Zeit abgelaufen“ hinzu.</li><li>Der Knopf <strong>🗺</strong> im Blueprint öffnet die <strong>Karte der Geschichte</strong>: alle Zweige, Entscheidungen und Enden auf einen Blick; ein Tipp auf ein Kästchen bringt dich zum richtigen Knoten.</li><li>Jeder Satz kann in 9 Sprachen geschrieben werden: Das Spiel zeigt die Sprache des Spielers.</li></ul>
+<h2>Wenn es nicht klappt</h2>
+<ul><li><strong>Nichts erscheint:</strong> Prüfe, ob „Beim Start“ mit dem ersten Knoten verbunden ist und jeder Knoten mit dem nächsten.</li><li><strong>Der Satz erscheint ohne Figur:</strong> <strong>Wer spricht</strong> ist leer oder es ist der Erzähler. Wähle Hana in der Liste.</li><li><strong>„Weiterspielen“ erscheint nicht:</strong> Es gibt noch keinen Spielstand. Starte ein „Neues Spiel“ und lies mindestens einen Satz.</li><li><strong>Ein Ende zählt nicht in „Enden und Galerie“:</strong> Gib ihm einen <strong>Namen für das Ende</strong> in „Geschichte beenden“.</li><li><strong>Der Spieler hängt nach einem Ende fest:</strong> Verbinde „Geschichte beenden“ mit „Titelbildschirm der Geschichte“ oder mit einer anderen Szene.</li></ul>
+
+<div class="nav">
+<a href="../de/particules-effets.html">← Partikel und Effekte</a>
+<a href="index.html">Alle Anleitungen →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../de/index.html">Offizielle Website</a> · <a href="../../noeuds/de.html">Knotenreferenz</a></p>
+</footer>
+</body>
+</html>
