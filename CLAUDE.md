@@ -240,6 +240,8 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   s'ouvrent (Répéter + Changer l'image + zone « hole » déplacée), pics, gardien squelette piloté par les nœuds (commandes « aucune »
   + Glisser vers), clé, porte en bois qui s'ouvre (nouvelles images `mur_porte_ouverte_<côté>` du pack). Générateur :
   outils/modeles/generer_exemple_crypte.py du moteur. Accueil (9 langues) : exemple dans la liste, « quinze » partout.
+- 10/10/2026 : pack en ligne « cartoon » (garçon et pingouin HD animés, Segel / OpenGameArt, CC0 ; outils/modeles/
+  preparer_pack_cartoon.py du moteur). Servira à la vitrine des filtres (exemple « Filters showcase », à publier à la sortie).
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
