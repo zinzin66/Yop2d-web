@@ -252,6 +252,9 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   (GitHub bloque son robot).
 
 ## Reste à faire
+- SAUVEGARDE 10/10/2026 : voir la fin du CLAUDE.md du moteur (« SAUVEGARDE 10/10/2026 ») : build de test 1073, sélecteur
+  de couleur NON résolu, PR #61 (pack cartoon) à fusionner, sortie à préparer (aide des nœuds filtres/transitions, cartes de
+  l'accueil, exemple « Filters showcase »).
 - EN ATTENTE (09/10/2026) : réponse d'un joueur sur des objets « pas collés aux bords de l'écran » (bandes noires quand
   l'écran est plus allongé que le jeu). Détails et solutions proposées dans le CLAUDE.md du moteur (« À corriger »).
   Si une solution est construite : mettre à jour l'accueil (carte ou FAQ) à la sortie.
