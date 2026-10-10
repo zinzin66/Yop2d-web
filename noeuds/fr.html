@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tous les nœuds de Yop2D (149) | Référence</title>
-<meta name="description" content="Liste complète des 149 nœuds visuels de Yop2D, moteur de jeu 2D sans code pour Android : rôle, réglages, sorties et exemple de chaque nœud.">
+<title>Tous les nœuds de Yop2D (153) | Référence</title>
+<meta name="description" content="Liste complète des 153 nœuds visuels de Yop2D, moteur de jeu 2D sans code pour Android : rôle, réglages, sorties et exemple de chaque nœud.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><strong>Français</strong> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les 149 nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.</p>
+<p>Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les 153 nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.</p>
 <p><strong>Catégories</strong></p>
-<nav class="sommaire"><a href="#c1-événements">Événements</a><a href="#c2-scène-hud">Scène &amp; HUD</a><a href="#c3-temps">Temps</a><a href="#c4-apparence-objets">Apparence &amp; Objets</a><a href="#c5-variables-inventaire">Variables &amp; Inventaire</a><a href="#c6-logique-conditions">Logique &amp; Conditions</a><a href="#c7-textes-dialogues">Textes &amp; Dialogues</a><a href="#c8-mouvements-ia">Mouvements &amp; IA</a><a href="#c9-grilles-et-puzzles">Grilles et puzzles</a><a href="#c10-animations">Animations</a><a href="#c11-audio">Audio</a><a href="#c12-histoire-et-dialogues">Histoire et dialogues</a><a href="#c13-valeurs-fils-verts">Valeurs (fils verts)</a></nav>
+<nav class="sommaire"><a href="#c1-événements">Événements</a><a href="#c2-scène-hud">Scène &amp; HUD</a><a href="#c3-temps">Temps</a><a href="#c4-apparence-objets">Apparence &amp; Objets</a><a href="#c5-variables-inventaire">Variables &amp; Inventaire</a><a href="#c6-logique-conditions">Logique &amp; Conditions</a><a href="#c7-textes-dialogues">Textes &amp; Dialogues</a><a href="#c8-mouvements-ia">Mouvements &amp; IA</a><a href="#c9-grilles-et-puzzles">Grilles et puzzles</a><a href="#c10-transitions">Transitions</a><a href="#c11-animations">Animations</a><a href="#c12-audio">Audio</a><a href="#c13-histoire-et-dialogues">Histoire et dialogues</a><a href="#c14-valeurs-fils-verts">Valeurs (fils verts)</a><a href="#c15-filtres-d-écran">Filtres d'écran</a></nav>
 <h2 id="c1-événements">Événements</h2>
 <div class="method">
 <div class="fiche"><h3>Au Démarrage</h3>
@@ -71,6 +71,10 @@
 <div class="fiche"><h3>Doigt appuyé</h3>
 <p>Se répète à chaque image tant qu'un doigt est posé sur l'écran, n'importe où.</p>
 <p class="exemple"><b>Exemple :</b> faire monter un vaisseau tant qu'on appuie (utilise doigt.x et doigt.y dans les formules).</p>
+</div>
+<div class="fiche"><h3>Bouton retour pressé</h3>
+<p>Se lance quand le joueur appuie sur le bouton « retour » de son téléphone (flèche ou geste). Idéal pour ouvrir un menu pause ou revenir à l'écran précédent. Sans ce nœud, le bouton retour ne fait rien pendant le jeu.</p>
+<p class="exemple"><b>Exemple :</b> retour → « Mettre le jeu en pause », puis afficher un menu « Reprendre / Quitter ».</p>
 </div>
 <div class="fiche"><h3>Début de Glisser</h3>
 <div class="schema"><b>Entrée :</b> Objet</div>
@@ -232,11 +236,6 @@
 <div class="schema"><b>Entrées :</b> Zoom (%, 100 = normal), Vers, Durée (secondes)</div>
 <p>Grossit tout l'écran du jeu (la scène, ou le décor et les personnages d'une histoire) en douceur, vers le centre, le visage, un côté, le haut ou le bas. 100 = revenir à la normale ; la boîte de dialogue et le HUD ne bougent pas.</p>
 <p class="exemple"><b>Exemple :</b> zoom 140 vers le visage pendant 2 secondes quand Hana a peur, puis zoom 100.</p>
-</div>
-<div class="fiche"><h3>Transition de l'écran (rond, étoile…)</h3>
-<div class="schema"><b>Entrées :</b> Forme, Sens, Couleur, Durée (secondes)</div>
-<p>Couvre l'écran avec une forme qui se referme (rond, étoile, losange, volet, rideau, store), puis la suite part. L'écran reste couvert jusqu'à une transition « l'écran s'ouvre » : on change de scène ou de décor caché derrière.</p>
-<p class="exemple"><b>Exemple :</b> rond qui se ferme → « Changer de scène » → rond qui s'ouvre.</p>
 </div>
 <div class="fiche"><h3>Tremblement de la caméra</h3>
 <div class="schema"><b>Entrées :</b> Intensité, Durée (millisecondes, 1000 = 1 s)</div>
@@ -690,7 +689,20 @@
 <p class="exemple"><b>Exemple :</b> mélanger les cartes d'un memory au début de la partie, ou les gobelets d'un bonneteau.</p>
 </div>
 </div>
-<h2 id="c10-animations">Animations</h2>
+<h2 id="c10-transitions">Transitions</h2>
+<div class="method">
+<div class="fiche"><h3>Transition de l'écran (rond, étoile…)</h3>
+<div class="schema"><b>Entrées :</b> Forme, Sens, Couleur, Durée (secondes), Centre : objet (nom ; rond, étoile, losange, cœur, héros) &nbsp;→&nbsp; <b>Sorties :</b> Suivant / Tout de suite</div>
+<p>Couvre ou découvre l'écran avec une forme (19 au choix : rond, étoile, cœur, rideau, horloge, damier, tourbillon…). « Fermer » couvre l'écran et il reste couvert ; « Ouvrir » le découvre. « Suivant » part quand c'est fini, « Tout de suite » part aussitôt.</p>
+<p class="exemple"><b>Exemple :</b> rond qui se ferme → « Changer de scène » → rond qui s'ouvre. Pour changer de scène en une seule étape : « Changer de scène avec transition ».</p>
+</div>
+<div class="fiche"><h3>Changer de scène avec transition</h3>
+<div class="schema"><b>Entrées :</b> Scène, Forme, Couleur, Fermeture (secondes), Pause écran fermé (secondes), Ouverture (secondes), Forme pour rouvrir, Centre : objet (nom ; rond, étoile, losange, cœur, héros) &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)</div>
+<p>Change de scène avec une transition : l'écran se couvre avec une forme (rond, étoile, cœur, rideau, tourbillon… 19 formes), la nouvelle scène arrive, puis l'écran se rouvre. Il n'y a pas de sortie : la suite se règle dans « Au démarrage » de la nouvelle scène.</p>
+<p class="exemple"><b>Exemple :</b> on touche la porte : passer à la scène « Maison » avec un rond qui se ferme sur le héros.</p>
+</div>
+</div>
+<h2 id="c11-animations">Animations</h2>
 <div class="method">
 <div class="fiche"><h3>Jouer l'animation</h3>
 <div class="schema"><b>Entrées :</b> Objet, Animation, Vitesse (images/seconde), En boucle (oui / non)</div>
@@ -718,7 +730,7 @@
 <p class="exemple"><b>Exemple :</b> courir plus vite = animation plus rapide.</p>
 </div>
 </div>
-<h2 id="c11-audio">Audio</h2>
+<h2 id="c12-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Jouer un son</h3>
 <div class="schema"><b>Entrées :</b> Fichier son, Volume (%, 100 = plein)</div>
@@ -735,7 +747,7 @@
 <p class="exemple"><b>Exemple :</b> silence pendant l'écran de Game Over.</p>
 </div>
 </div>
-<h2 id="c12-histoire-et-dialogues">Histoire et dialogues</h2>
+<h2 id="c13-histoire-et-dialogues">Histoire et dialogues</h2>
 <div class="method">
 <div class="fiche"><h3>Dire une phrase</h3>
 <div class="schema"><b>Entrées :</b> Qui parle, Émotion, La phrase, Place à l'écran, Entrée du personnage, Effet, Son ou voix, La suite vient &nbsp;→&nbsp; <b>Sortie :</b> Ensuite</div>
@@ -783,7 +795,7 @@
 <p class="exemple"><b>Exemple :</b> « Comment tu t'appelles ? » → variable prenom → « Dire une phrase » « Enchantée, {prenom} ! ».</p>
 </div>
 </div>
-<h2 id="c13-valeurs-fils-verts">Valeurs (fils verts)</h2>
+<h2 id="c14-valeurs-fils-verts">Valeurs (fils verts)</h2>
 <div class="method">
 <div class="fiche"><h3>Nombre au hasard</h3>
 <div class="schema"><b>Entrées :</b> De, À &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)</div>
@@ -809,6 +821,19 @@
 <div class="schema"><b>Entrées :</b> Objet A, Objet B &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)</div>
 <p>Nœud vert (valeur) : donne la distance (en pixels) entre le centre de deux objets, pendant le jeu.</p>
 <p class="exemple"><b>Exemple :</b> faire trembler l'écran plus fort quand l'ennemi est proche.</p>
+</div>
+</div>
+<h2 id="c15-filtres-d-écran">Filtres d'écran</h2>
+<div class="method">
+<div class="fiche"><h3>Filtre d'écran</h3>
+<div class="schema"><b>Entrées :</b> Filtre, Force (%), Apparition (secondes), Durée (secondes, 0 = sans fin), Garder dans la scène suivante, Filtrer aussi les boutons et textes (HUD), Lampe torche : objet éclairé (nom ; vide = celui que suit la caméra), Lampe torche : taille de la lumière (%) &nbsp;→&nbsp; <b>Sorties :</b> Ensuite / Quand c'est fini</div>
+<p>Donne un « look » à tout le jeu, boutons et textes compris : télé, VHS, noir et blanc, sous l'eau, cauchemar, lampe torche… 32 filtres au choix. Il apparaît doucement, reste le temps voulu (0 = jusqu'à ce qu'on l'arrête) et peut continuer dans la scène suivante. « Ensuite » part tout de suite, « Quand c'est fini » à la fin de la durée.</p>
+<p class="exemple"><b>Exemple :</b> le héros est touché : filtre « Blessé » pendant 2 secondes ; ou « Lampe torche » dans une grotte.</p>
+</div>
+<div class="fiche"><h3>Arrêter le filtre</h3>
+<div class="schema"><b>Entrée :</b> Disparition (secondes) &nbsp;→&nbsp; <b>Sorties :</b> Ensuite / Quand c'est fini</div>
+<p>Fait disparaître en douceur le filtre d'écran en cours. « Ensuite » part tout de suite, « Quand c'est fini » quand le filtre a disparu.</p>
+<p class="exemple"><b>Exemple :</b> le héros sort de la grotte : arrêter la lampe torche en 1 seconde.</p>
 </div>
 </div>
 <div class="liens-bas">

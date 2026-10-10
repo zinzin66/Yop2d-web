@@ -592,8 +592,8 @@
   "zoom 140 hacia la cara durante 2 segundos cuando Hana tiene miedo, luego zoom 100."
  ],
  "transition_ecran": [
-  "Cubre la pantalla con una forma que se cierra (círculo, estrella, rombo, barrido, telón, persiana) y luego continúa. La pantalla queda cubierta hasta una transición «la pantalla se abre»: se cambia la escena o el decorado detrás.",
-  "círculo que se cierra → [[changer_scene]] → círculo que se abre."
+  "Cubre o descubre la pantalla con una forma (19 a elegir: círculo, estrella, corazón, cortina, reloj, tablero, torbellino…). «Cerrar» cubre la pantalla y se queda cubierta; «Abrir» la descubre. «Siguiente» se ejecuta al terminar, «Enseguida» se ejecuta al momento.",
+  "círculo que se cierra → [[changer_scene]] → círculo que se abre. Para cambiar de escena en un solo paso: [[changer_scene_transition]]."
  ],
  "demander_texte": [
   "Abre una pequeña ventana con el teclado: el jugador escribe un texto (su nombre…), guardado en la variable elegida; continúa al tocar OK. En las frases, {prenom} muestra ese texto.",
@@ -606,5 +606,21 @@
  "tester_amitie": [
   "Elige cómo sigue la historia según los corazones de amistad de un personaje: la salida [[lang:port_vrai]] si la comparación es verdadera, si no [[lang:port_faux]]. Para un final que depende de cómo has tratado a los personajes.",
   "si la amistad de Hana es al menos 4 → el final feliz, si no el final triste."
+ ],
+ "filtre_ecran": [
+  "Da un «aspecto» a todo el juego, botones y textos incluidos: tele, VHS, blanco y negro, bajo el agua, pesadilla, linterna… 32 filtros a elegir. Aparece suavemente, dura el tiempo que quieras (0 = hasta que lo detengas) y puede seguir en la escena siguiente. «Después» se ejecuta enseguida, «Cuando termine» al acabar la duración.",
+  "el héroe recibe un golpe: filtro «Herido» durante 2 segundos; o «Linterna» en una cueva."
+ ],
+ "arreter_filtre": [
+  "Hace desaparecer suavemente el filtro de pantalla actual. «Después» se ejecuta enseguida, «Cuando termine» cuando el filtro ha desaparecido.",
+  "el héroe sale de la cueva: apagar la linterna en 1 segundo."
+ ],
+ "changer_scene_transition": [
+  "Cambia de escena con una transición: la pantalla se cubre con una forma (círculo, estrella, corazón, cortina, torbellino… 19 formas), llega la nueva escena y la pantalla se vuelve a abrir. No tiene salida: lo que sigue se define en «Al empezar» de la nueva escena.",
+  "se toca la puerta: ir a la escena «Casa» con un círculo que se cierra sobre el héroe."
+ ],
+ "NoeudEventBoutonRetour": [
+  "Se ejecuta cuando el jugador pulsa el botón «atrás» del teléfono (flecha o gesto). Ideal para abrir un menú de pausa o volver a la pantalla anterior. Sin este nodo, el botón atrás no hace nada durante el juego.",
+  "atrás → [[pause_jeu]] y mostrar un menú «Continuar / Salir»."
  ]
 }

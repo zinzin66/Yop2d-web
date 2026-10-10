@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (149) | Referencia</title>
-<meta name="description" content="Lista completa de los 149 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (153) | Referencia</title>
+<meta name="description" content="Lista completa de los 153 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 149 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 153 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
-<nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-animaciones">Animaciones</a><a href="#c11-audio">Audio</a><a href="#c12-historia-y-diálogos">Historia y diálogos</a><a href="#c13-valores-cables-verdes">Valores (cables verdes)</a></nav>
+<nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-transiciones">Transiciones</a><a href="#c11-animaciones">Animaciones</a><a href="#c12-audio">Audio</a><a href="#c13-historia-y-diálogos">Historia y diálogos</a><a href="#c14-valores-cables-verdes">Valores (cables verdes)</a><a href="#c15-filtros-de-pantalla">Filtros de pantalla</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
 <div class="method">
 <div class="fiche"><h3>Al Iniciar</h3>
@@ -71,6 +71,10 @@
 <div class="fiche"><h3>Dedo presionado</h3>
 <p>Se repite en cada fotograma mientras haya un dedo en la pantalla, en cualquier sitio.</p>
 <p class="exemple"><b>Ejemplo:</b> hacer subir una nave mientras se pulsa (usa doigt.x y doigt.y en las fórmulas).</p>
+</div>
+<div class="fiche"><h3>Botón atrás pulsado</h3>
+<p>Se ejecuta cuando el jugador pulsa el botón «atrás» del teléfono (flecha o gesto). Ideal para abrir un menú de pausa o volver a la pantalla anterior. Sin este nodo, el botón atrás no hace nada durante el juego.</p>
+<p class="exemple"><b>Ejemplo:</b> atrás → «Pausar el juego» y mostrar un menú «Continuar / Salir».</p>
 </div>
 <div class="fiche"><h3>Inicio de Arrastre</h3>
 <div class="schema"><b>Entrada:</b> Objeto</div>
@@ -233,11 +237,6 @@
 <p>Agranda suavemente toda la pantalla del juego (la escena, o el decorado y los personajes de una historia) hacia el centro, la cara, un lado, arriba o abajo. 100 = volver a lo normal; el cuadro de diálogo y el HUD no se mueven.</p>
 <p class="exemple"><b>Ejemplo:</b> zoom 140 hacia la cara durante 2 segundos cuando Hana tiene miedo, luego zoom 100.</p>
 </div>
-<div class="fiche"><h3>Transición de pantalla (círculo, estrella…)</h3>
-<div class="schema"><b>Entradas:</b> Forma, Sentido, Color, Duración (segundos)</div>
-<p>Cubre la pantalla con una forma que se cierra (círculo, estrella, rombo, barrido, telón, persiana) y luego continúa. La pantalla queda cubierta hasta una transición «la pantalla se abre»: se cambia la escena o el decorado detrás.</p>
-<p class="exemple"><b>Ejemplo:</b> círculo que se cierra → «Ir a la escena» → círculo que se abre.</p>
-</div>
 <div class="fiche"><h3>Temblor de cámara</h3>
 <div class="schema"><b>Entradas:</b> Intensidad, Duración (milisegundos, 1000 = 1 s)</div>
 <p>Sacude la pantalla con la fuerza y la duración elegidas (en milisegundos).</p>
@@ -265,8 +264,8 @@
 <p class="exemple"><b>Ejemplo:</b> mostrar «¡Perdiste!», esperar 2 segundos y reiniciar la escena.</p>
 </div>
 <div class="fiche"><h3>Repetir</h3>
-<div class="schema"><b>Entradas:</b> Cada (segundos), Número de veces (0 = sin fin), Nombre del temporizador (opcional) &nbsp;→&nbsp; <b>Salidas:</b> En seguida / Cada vez / Jugada terminada</div>
-<p>Lanza la salida «Cada vez» cada X segundos, un número de veces (0 = sin fin), y luego «Jugada terminada». «En seguida» sale al principio. Si ya está funcionando, no vuelve a empezar.</p>
+<div class="schema"><b>Entradas:</b> Cada (segundos), Número de veces (0 = sin fin), Nombre del temporizador (opcional) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Cada vez / Jugada terminada</div>
+<p>Lanza la salida «Cada vez» cada X segundos, un número de veces (0 = sin fin), y luego «Jugada terminada». «Enseguida» sale al principio. Si ya está funcionando, no vuelve a empezar.</p>
 <p class="exemple"><b>Ejemplo:</b> hacer aparecer un enemigo cada 3 segundos.</p>
 </div>
 <div class="fiche"><h3>Cuenta atrás</h3>
@@ -612,12 +611,12 @@
 <p class="exemple"><b>Ejemplo:</b> una bala o un coche en marcha.</p>
 </div>
 <div class="fiche"><h3>Ir hacia un objeto (camino)</h3>
-<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Velocidad, Diagonales (sí / no) &nbsp;→&nbsp; <b>Salidas:</b> En seguida / Llegó</div>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Velocidad, Diagonales (sí / no) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Llegó</div>
 <p>El objeto A va hacia el objeto B encontrando solo el camino más corto, casilla a casilla, sin atravesar muros (baldosas «Sólidas» de un decorado de baldosas, objetos físicos fijos). El camino se recalcula cuando B se mueve. «Llegó» se activa cuando A toca a B.</p>
 <p class="exemple"><b>Ejemplo:</b> un fantasma que persigue al jugador por un laberinto.</p>
 </div>
 <div class="fiche"><h3>Ir a un punto (camino)</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Posición X, Posición Y, Velocidad, Diagonales (sí / no) &nbsp;→&nbsp; <b>Salidas:</b> En seguida / Llegó</div>
+<div class="schema"><b>Entradas:</b> Objeto, Posición X, Posición Y, Velocidad, Diagonales (sí / no) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Llegó</div>
 <p>El objeto A va hasta el punto X, Y rodeando los muros, por el camino más corto (casilla a casilla). Con =doigt.x y =doigt.y va donde se toca la pantalla. «Llegó» se activa al llegar. Si no hay camino, se queda quieto.</p>
 <p class="exemple"><b>Ejemplo:</b> tocar una casilla para enviar allí al héroe, en un juego de estrategia o una mazmorra.</p>
 </div>
@@ -690,7 +689,20 @@
 <p class="exemple"><b>Ejemplo:</b> mezclar las cartas de un juego de memoria al empezar, o los vasos de un trile.</p>
 </div>
 </div>
-<h2 id="c10-animaciones">Animaciones</h2>
+<h2 id="c10-transiciones">Transiciones</h2>
+<div class="method">
+<div class="fiche"><h3>Transición de pantalla (círculo, estrella…)</h3>
+<div class="schema"><b>Entradas:</b> Forma, Sentido, Color, Duración (segundos), Centro: objeto (nombre; círculo, estrella, rombo, corazón, héroe) &nbsp;→&nbsp; <b>Salidas:</b> Siguiente / Enseguida</div>
+<p>Cubre o descubre la pantalla con una forma (19 a elegir: círculo, estrella, corazón, cortina, reloj, tablero, torbellino…). «Cerrar» cubre la pantalla y se queda cubierta; «Abrir» la descubre. «Siguiente» se ejecuta al terminar, «Enseguida» se ejecuta al momento.</p>
+<p class="exemple"><b>Ejemplo:</b> círculo que se cierra → «Ir a la escena» → círculo que se abre. Para cambiar de escena en un solo paso: «Ir a la escena con transición».</p>
+</div>
+<div class="fiche"><h3>Ir a la escena con transición</h3>
+<div class="schema"><b>Entradas:</b> Escena, Forma, Color, Cierre (segundos), Pausa con la pantalla cerrada (segundos), Apertura (segundos), Forma para reabrir, Centro: objeto (nombre; círculo, estrella, rombo, corazón, héroe) &nbsp;→&nbsp; <b>Salida:</b> ninguna (fin del script)</div>
+<p>Cambia de escena con una transición: la pantalla se cubre con una forma (círculo, estrella, corazón, cortina, torbellino… 19 formas), llega la nueva escena y la pantalla se vuelve a abrir. No tiene salida: lo que sigue se define en «Al empezar» de la nueva escena.</p>
+<p class="exemple"><b>Ejemplo:</b> se toca la puerta: ir a la escena «Casa» con un círculo que se cierra sobre el héroe.</p>
+</div>
+</div>
+<h2 id="c11-animaciones">Animaciones</h2>
 <div class="method">
 <div class="fiche"><h3>Reproducir animación</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Animación, Velocidad (cuadros/segundo), En bucle (sí / no)</div>
@@ -718,7 +730,7 @@
 <p class="exemple"><b>Ejemplo:</b> correr más rápido = animación más rápida.</p>
 </div>
 </div>
-<h2 id="c11-audio">Audio</h2>
+<h2 id="c12-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Reproducir sonido</h3>
 <div class="schema"><b>Entradas:</b> Archivo de sonido, Volumen (%, 100 = máximo)</div>
@@ -735,7 +747,7 @@
 <p class="exemple"><b>Ejemplo:</b> silencio en la pantalla de Game Over.</p>
 </div>
 </div>
-<h2 id="c12-historia-y-diálogos">Historia y diálogos</h2>
+<h2 id="c13-historia-y-diálogos">Historia y diálogos</h2>
 <div class="method">
 <div class="fiche"><h3>Decir una frase</h3>
 <div class="schema"><b>Entradas:</b> Quién habla, Emoción, La frase, Lugar en pantalla, Entrada del personaje, Efecto, Sonido o voz, Lo siguiente llega &nbsp;→&nbsp; <b>Salida:</b> Después</div>
@@ -783,7 +795,7 @@
 <p class="exemple"><b>Ejemplo:</b> «¿Cómo te llamas?» → variable prenom → «Decir una frase» «¡Encantada, {prenom}!».</p>
 </div>
 </div>
-<h2 id="c13-valores-cables-verdes">Valores (cables verdes)</h2>
+<h2 id="c14-valores-cables-verdes">Valores (cables verdes)</h2>
 <div class="method">
 <div class="fiche"><h3>Número al azar</h3>
 <div class="schema"><b>Entradas:</b> De, A &nbsp;→&nbsp; <b>Salida:</b> ninguna (fin del script)</div>
@@ -809,6 +821,19 @@
 <div class="schema"><b>Entradas:</b> Objeto A, Objeto B &nbsp;→&nbsp; <b>Salida:</b> ninguna (fin del script)</div>
 <p>Nodo verde (valor): da la distancia (en píxeles) entre el centro de dos objetos durante el juego.</p>
 <p class="exemple"><b>Ejemplo:</b> hacer temblar más la pantalla cuando el enemigo está cerca.</p>
+</div>
+</div>
+<h2 id="c15-filtros-de-pantalla">Filtros de pantalla</h2>
+<div class="method">
+<div class="fiche"><h3>Filtro de pantalla</h3>
+<div class="schema"><b>Entradas:</b> Filtro, Fuerza (%), Aparición (segundos), Duración (segundos, 0 = sin fin), Mantener en la escena siguiente, Filtrar también botones y textos (HUD), Linterna: objeto iluminado (nombre; vacío = el que sigue la cámara), Linterna: tamaño de la luz (%) &nbsp;→&nbsp; <b>Salidas:</b> Después / Cuando termine</div>
+<p>Da un «aspecto» a todo el juego, botones y textos incluidos: tele, VHS, blanco y negro, bajo el agua, pesadilla, linterna… 32 filtros a elegir. Aparece suavemente, dura el tiempo que quieras (0 = hasta que lo detengas) y puede seguir en la escena siguiente. «Después» se ejecuta enseguida, «Cuando termine» al acabar la duración.</p>
+<p class="exemple"><b>Ejemplo:</b> el héroe recibe un golpe: filtro «Herido» durante 2 segundos; o «Linterna» en una cueva.</p>
+</div>
+<div class="fiche"><h3>Detener el filtro</h3>
+<div class="schema"><b>Entrada:</b> Desaparición (segundos) &nbsp;→&nbsp; <b>Salidas:</b> Después / Cuando termine</div>
+<p>Hace desaparecer suavemente el filtro de pantalla actual. «Después» se ejecuta enseguida, «Cuando termine» cuando el filtro ha desaparecido.</p>
+<p class="exemple"><b>Ejemplo:</b> el héroe sale de la cueva: apagar la linterna en 1 segundo.</p>
 </div>
 </div>
 <div class="liens-bas">

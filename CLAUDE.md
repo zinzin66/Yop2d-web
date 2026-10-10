@@ -242,6 +242,15 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   outils/modeles/generer_exemple_crypte.py du moteur. Accueil (9 langues) : exemple dans la liste, « quinze » partout.
 - 10/10/2026 : pack en ligne « cartoon » (garçon et pingouin HD animés, Segel / OpenGameArt, CC0 ; outils/modeles/
   preparer_pack_cartoon.py du moteur). Servira à la vitrine des filtres (exemple « Filters showcase », à publier à la sortie).
+- 10/10/2026 : exemple « Filters showcase » (32 filtres d'écran + 19 transitions, moteur_min 1072) ajouté dans exemples/ (16 exemples) :
+  les versions plus anciennes du moteur affichent « Mets Yop2D à jour pour y jouer ». Fabriqué par outils/modeles/generer_exemple_filtres.py
+  du moteur. Accueil (compteurs « quinze » -> « seize ») et aide des nœuds filtres/transitions : À FAIRE à la prochaine sortie.
+- 10/10/2026 (soir) : SORTIE PRÉPARÉE (moteur build 1077, version normale, APK seul, SANS AAB ; à publier : release v0.1.1077 Latest,
+  Yop2D.apk, + itch.io). Site (branche ccr-e5a50d19-voomo0, PR à fusionner À LA PUBLICATION) : aide des nœuds 153 (descriptions 9 langues
+  de filtre_ecran, arreter_filtre, changer_scene_transition, transition_ecran mis à jour, événement NoeudEventBoutonRetour ajouté à
+  EVENEMENTS de generer_aide_noeuds.py ; catégories renumérotées : 10-transitions ... 15-filtres), pages noeuds/, accueil (9 langues :
+  33 cartes dont « Filtres d'écran et transitions », « Plein écran sur tous les téléphones », « Le bouton retour du téléphone » ;
+  16 exemples avec Filters showcase), llms.txt, exemple Filters showcase (moteur_min 1072).
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
