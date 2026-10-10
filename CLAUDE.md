@@ -242,6 +242,9 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   outils/modeles/generer_exemple_crypte.py du moteur. Accueil (9 langues) : exemple dans la liste, « quinze » partout.
 - 10/10/2026 : pack en ligne « cartoon » (garçon et pingouin HD animés, Segel / OpenGameArt, CC0 ; outils/modeles/
   preparer_pack_cartoon.py du moteur). Servira à la vitrine des filtres (exemple « Filters showcase », à publier à la sortie).
+- 10/10/2026 : exemple « Filters showcase » (32 filtres d'écran + 19 transitions, moteur_min 1072) ajouté dans exemples/ (16 exemples) :
+  les versions plus anciennes du moteur affichent « Mets Yop2D à jour pour y jouer ». Fabriqué par outils/modeles/generer_exemple_filtres.py
+  du moteur. Accueil (compteurs « quinze » -> « seize ») et aide des nœuds filtres/transitions : À FAIRE à la prochaine sortie.
 
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
