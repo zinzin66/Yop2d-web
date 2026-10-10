@@ -37,7 +37,7 @@ DISCORD_PSEUDO = "zinzin0000"   # nom Discord du développeur, affiché sous le 
 
 # Vidéos YouTube affichées sur l'accueil (identifiant, date de publication), la plus récente en premier.
 # Titre et description de chaque vidéo : "videos" des fichiers de textes, sous son identifiant.
-VIDEOS = [("JPe2HYy0XvE", "2026-10-09"), ("a6wVvJh9uyQ", "2026-09-29")]
+VIDEOS = [("szUu6p-jNmY", "2026-10-10"), ("JPe2HYy0XvE", "2026-10-09"), ("a6wVvJh9uyQ", "2026-09-29")]
 
 # Captures d'écran, dans l'ordre des blocs « vitrine » des fichiers de textes.
 # Une image absente du dépôt est simplement masquée dans la page : il suffit

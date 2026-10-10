@@ -290,3 +290,4 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   generer_aide_noeuds.py + generer_pages_noeuds.py + generer_accueil.py (llms.txt), carte « Jeux de dialogue » sur l'accueil,
   pack en ligne des personnages de Breezy (FAIT : packs/personnages_breezy, CC0, ne pas servir à entraîner des IA). Licences : Rachel Chen et Potat0Master
   interdisent la redistribution (pas dans nos packs).
+- 10/10/2026 : 3e vidéo YouTube (filtres d'écran et transitions, szUu6p-jNmY) : en tête de VIDEOS (accueil 9 langues, llms.txt).
