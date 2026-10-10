@@ -592,8 +592,8 @@
   "zoom 140 vers le visage pendant 2 secondes quand Hana a peur, puis zoom 100."
  ],
  "transition_ecran": [
-  "Couvre l'écran avec une forme qui se referme (rond, étoile, losange, volet, rideau, store), puis la suite part. L'écran reste couvert jusqu'à une transition « l'écran s'ouvre » : on change de scène ou de décor caché derrière.",
-  "rond qui se ferme → [[changer_scene]] → rond qui s'ouvre."
+  "Couvre ou découvre l'écran avec une forme (19 au choix : rond, étoile, cœur, rideau, horloge, damier, tourbillon…). « Fermer » couvre l'écran et il reste couvert ; « Ouvrir » le découvre. « Suivant » part quand c'est fini, « Tout de suite » part aussitôt.",
+  "rond qui se ferme → [[changer_scene]] → rond qui s'ouvre. Pour changer de scène en une seule étape : [[changer_scene_transition]]."
  ],
  "demander_texte": [
   "Ouvre une petite fenêtre avec le clavier : le joueur écrit un texte (son prénom…), rangé dans la variable choisie ; la suite part quand il touche OK. Dans les phrases, {prenom} affiche ce texte.",
@@ -606,5 +606,21 @@
  "tester_amitie": [
   "Choisit la suite de l'histoire selon les cœurs d'amitié d'un personnage : la sortie [[lang:port_vrai]] si la comparaison est vraie, sinon [[lang:port_faux]]. Pour une fin qui dépend de la façon dont on a traité les personnages.",
   "si l'amitié de Hana est au moins 4 → la belle fin, sinon la fin triste."
+ ],
+ "filtre_ecran": [
+  "Donne un « look » à tout le jeu, boutons et textes compris : télé, VHS, noir et blanc, sous l'eau, cauchemar, lampe torche… 32 filtres au choix. Il apparaît doucement, reste le temps voulu (0 = jusqu'à ce qu'on l'arrête) et peut continuer dans la scène suivante. « Ensuite » part tout de suite, « Quand c'est fini » à la fin de la durée.",
+  "le héros est touché : filtre « Blessé » pendant 2 secondes ; ou « Lampe torche » dans une grotte."
+ ],
+ "arreter_filtre": [
+  "Fait disparaître en douceur le filtre d'écran en cours. « Ensuite » part tout de suite, « Quand c'est fini » quand le filtre a disparu.",
+  "le héros sort de la grotte : arrêter la lampe torche en 1 seconde."
+ ],
+ "changer_scene_transition": [
+  "Change de scène avec une transition : l'écran se couvre avec une forme (rond, étoile, cœur, rideau, tourbillon… 19 formes), la nouvelle scène arrive, puis l'écran se rouvre. Il n'y a pas de sortie : la suite se règle dans « Au démarrage » de la nouvelle scène.",
+  "on touche la porte : passer à la scène « Maison » avec un rond qui se ferme sur le héros."
+ ],
+ "NoeudEventBoutonRetour": [
+  "Se lance quand le joueur appuie sur le bouton « retour » de son téléphone (flèche ou geste). Idéal pour ouvrir un menu pause ou revenir à l'écran précédent. Sans ce nœud, le bouton retour ne fait rien pendant le jeu.",
+  "retour → [[pause_jeu]], puis afficher un menu « Reprendre / Quitter »."
  ]
 }

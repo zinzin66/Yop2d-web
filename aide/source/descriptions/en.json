@@ -592,8 +592,8 @@
   "zoom 140 towards the face for 2 seconds when Hana is scared, then zoom 100."
  ],
  "transition_ecran": [
-  "Covers the screen with a closing shape (circle, star, diamond, wipe, curtain, blinds), then continues. The screen stays covered until a \"screen opens\" transition: change the scene or background hidden behind it.",
-  "closing circle → [[changer_scene]] → opening circle."
+  "Covers or uncovers the screen with a shape (19 to choose from: circle, star, heart, curtain, clock, checkerboard, swirl…). “Close” covers the screen and it stays covered; “Open” uncovers it. “Next” runs when it's done, “Right away” runs immediately.",
+  "circle closing → [[changer_scene]] → circle opening. To change scene in a single step: [[changer_scene_transition]]."
  ],
  "demander_texte": [
   "Opens a small window with the keyboard: the player types a text (their name…), stored in the chosen variable; it continues when they tap OK. In lines, {prenom} shows this text.",
@@ -606,5 +606,21 @@
  "tester_amitie": [
   "Picks how the story goes on from a character's friendship hearts: the [[lang:port_vrai]] output if the comparison is true, otherwise [[lang:port_faux]]. For an ending that depends on how you treated the characters.",
   "if Hana's friendship is at least 4 → the happy ending, otherwise the sad one."
+ ],
+ "filtre_ecran": [
+  "Gives the whole game a “look”, buttons and texts included: TV, VHS, black and white, underwater, nightmare, flashlight… 32 filters to choose from. It fades in gently, stays as long as you want (0 = until you stop it) and can carry on into the next scene. “Then” runs right away, “When it's over” at the end of the duration.",
+  "the hero is hit: “Hurt” filter for 2 seconds; or “Flashlight” in a cave."
+ ],
+ "arreter_filtre": [
+  "Gently fades out the current screen filter. “Then” runs right away, “When it's over” once the filter is gone.",
+  "the hero leaves the cave: stop the flashlight in 1 second."
+ ],
+ "changer_scene_transition": [
+  "Changes scene with a transition: the screen is covered by a shape (circle, star, heart, curtain, swirl… 19 shapes), the new scene arrives, then the screen opens again. There is no output: what happens next is set in “At start” of the new scene.",
+  "the door is touched: go to the “House” scene with a circle closing on the hero."
+ ],
+ "NoeudEventBoutonRetour": [
+  "Runs when the player presses the Back button of their phone (arrow or swipe gesture). Great for opening a pause menu or going back to the previous screen. Without this node, the Back button does nothing during the game.",
+  "Back → [[pause_jeu]], then show a “Resume / Quit” menu."
  ]
 }

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D 全部节点（149 个）| 参考</title>
-<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 149 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<title>Yop2D 全部节点（153 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 153 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 149 个节点，以及它们的设置（输入）和输出。</p>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 153 个节点，以及它们的设置（输入）和输出。</p>
 <p><strong>分类</strong></p>
-<nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-网格和益智">网格和益智</a><a href="#c10-动画">动画</a><a href="#c11-音频">音频</a><a href="#c12-故事与对话">故事与对话</a><a href="#c13-数值-绿线">数值（绿线）</a></nav>
+<nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-网格和益智">网格和益智</a><a href="#c10-转场">转场</a><a href="#c11-动画">动画</a><a href="#c12-音频">音频</a><a href="#c13-故事与对话">故事与对话</a><a href="#c14-数值-绿线">数值（绿线）</a><a href="#c15-屏幕滤镜">屏幕滤镜</a></nav>
 <h2 id="c1-事件">事件</h2>
 <div class="method">
 <div class="fiche"><h3>启动时</h3>
@@ -71,6 +71,10 @@
 <div class="fiche"><h3>手指按住</h3>
 <p>只要有手指按在屏幕任意位置，每一帧都会重复运行。</p>
 <p class="exemple"><b>示例：</b> 按住屏幕时让飞船上升（在公式里用 doigt.x 和 doigt.y）。</p>
+</div>
+<div class="fiche"><h3>按下返回键</h3>
+<p>当玩家按下手机的返回键（箭头或手势）时运行。适合用来打开暂停菜单或回到上一个画面。如果游戏里没有这个节点，返回键在游戏中不起任何作用。</p>
+<p class="exemple"><b>示例：</b> 返回 → “暂停游戏”，然后显示“继续 / 退出”菜单。</p>
 </div>
 <div class="fiche"><h3>开始拖拽</h3>
 <div class="schema"><b>输入：</b> 对象</div>
@@ -232,11 +236,6 @@
 <div class="schema"><b>输入：</b> 缩放（%，100 = 正常）, 朝向, 持续时间（秒）</div>
 <p>平滑放大整个游戏画面（场景，或故事的背景和角色），朝向中心、脸部、一侧、上方或下方。100 = 恢复正常；对话框和 HUD 不动。</p>
 <p class="exemple"><b>示例：</b> Hana 害怕时朝脸部缩放到 140，持续 2 秒，然后回到 100。</p>
-</div>
-<div class="fiche"><h3>画面转场（圆形、星形……）</h3>
-<div class="schema"><b>输入：</b> 形状, 方向, 颜色, 持续时间（秒）</div>
-<p>用收拢的形状盖住屏幕（圆形、星形、菱形、擦除、幕布、百叶窗），然后继续。屏幕会一直被盖住，直到“屏幕打开”转场：在后面切换场景或背景。</p>
-<p class="exemple"><b>示例：</b> 圆形收拢 → “切换场景” → 圆形展开。</p>
 </div>
 <div class="fiche"><h3>相机抖动</h3>
 <div class="schema"><b>输入：</b> 强度, 持续时间（毫秒，1000 = 1 秒）</div>
@@ -690,7 +689,20 @@
 <p class="exemple"><b>示例：</b> 在开局时打乱记忆翻牌游戏的卡片，或猜杯子游戏的杯子。</p>
 </div>
 </div>
-<h2 id="c10-动画">动画</h2>
+<h2 id="c10-转场">转场</h2>
+<div class="method">
+<div class="fiche"><h3>画面转场（圆形、星形……）</h3>
+<div class="schema"><b>输入：</b> 形状, 方向, 颜色, 持续时间（秒）, 中心：物体（名称；圆形、星形、菱形、爱心、主角） &nbsp;→&nbsp; <b>输出：</b> 下一步 / 立即</div>
+<p>用一个形状盖住或揭开屏幕（19 种可选：圆形、星形、心形、幕布、时钟、棋盘、漩涡……）。“关闭”盖住屏幕并保持盖住；“打开”则揭开屏幕。“下一步”在完成后运行，“立即”马上运行。</p>
+<p class="exemple"><b>示例：</b> 圆形合拢 → “切换场景” → 圆形展开。想一步完成切换场景：“带转场切换场景”。</p>
+</div>
+<div class="fiche"><h3>带转场切换场景</h3>
+<div class="schema"><b>输入：</b> 场景, 形状, 颜色, 关闭（秒）, 关闭时停顿（秒）, 打开（秒）, 重新打开的形状, 中心：物体（名称；圆形、星形、菱形、爱心、主角） &nbsp;→&nbsp; <b>输出：</b> 无（脚本结束）</div>
+<p>带转场地切换场景：屏幕被一个形状盖住（圆形、星形、心形、幕布、漩涡……共 19 种），新场景出现，然后屏幕重新打开。它没有输出：接下来的内容在新场景的“启动时”里设置。</p>
+<p class="exemple"><b>示例：</b> 碰到门：切换到“房子”场景，圆形在英雄身上合拢。</p>
+</div>
+</div>
+<h2 id="c11-动画">动画</h2>
 <div class="method">
 <div class="fiche"><h3>播放动画</h3>
 <div class="schema"><b>输入：</b> 对象, 动画, 速度（帧/秒）, 循环（是 / 否）</div>
@@ -718,7 +730,7 @@
 <p class="exemple"><b>示例：</b> 跑得越快 = 动画越快。</p>
 </div>
 </div>
-<h2 id="c11-音频">音频</h2>
+<h2 id="c12-音频">音频</h2>
 <div class="method">
 <div class="fiche"><h3>播放音效</h3>
 <div class="schema"><b>输入：</b> 音效文件, 音量（%，100 = 最大）</div>
@@ -735,7 +747,7 @@
 <p class="exemple"><b>示例：</b> Game Over 画面保持安静。</p>
 </div>
 </div>
-<h2 id="c12-故事与对话">故事与对话</h2>
+<h2 id="c13-故事与对话">故事与对话</h2>
 <div class="method">
 <div class="fiche"><h3>说一句话</h3>
 <div class="schema"><b>输入：</b> 谁说话, 表情, 台词, 屏幕位置, 角色出场, 效果, 声音或配音, 接下来 &nbsp;→&nbsp; <b>输出：</b> 然后</div>
@@ -783,7 +795,7 @@
 <p class="exemple"><b>示例：</b> “你叫什么名字？”→ 变量 prenom → “说一句话”“很高兴认识你，{prenom}！”。</p>
 </div>
 </div>
-<h2 id="c13-数值-绿线">数值（绿线）</h2>
+<h2 id="c14-数值-绿线">数值（绿线）</h2>
 <div class="method">
 <div class="fiche"><h3>随机数</h3>
 <div class="schema"><b>输入：</b> 从, 到 &nbsp;→&nbsp; <b>输出：</b> 无（脚本结束）</div>
@@ -809,6 +821,19 @@
 <div class="schema"><b>输入：</b> 对象 A, 对象 B &nbsp;→&nbsp; <b>输出：</b> 无（脚本结束）</div>
 <p>绿色节点（数值）：在游戏中给出两个对象中心之间的距离（像素）。</p>
 <p class="exemple"><b>示例：</b> 敌人靠近时让屏幕晃得更厉害。</p>
+</div>
+</div>
+<h2 id="c15-屏幕滤镜">屏幕滤镜</h2>
+<div class="method">
+<div class="fiche"><h3>屏幕滤镜</h3>
+<div class="schema"><b>输入：</b> 滤镜, 强度（%）, 出现（秒）, 持续时间（秒，0 = 无限）, 在下一个场景保留, 同时过滤按钮和文字（HUD）, 手电筒：照亮的物体（名称；留空 = 镜头跟随的物体）, 手电筒：光圈大小（%） &nbsp;→&nbsp; <b>输出：</b> 然后 / 结束时</div>
+<p>给整个游戏（包括按钮和文字）加上一种“风格”：电视、VHS、黑白、水下、噩梦、手电筒……共 32 种滤镜可选。它会缓缓出现，持续你设定的时间（0 = 直到你停止它），还可以延续到下一个场景。“然后”立即运行，“结束时”在持续时间结束时运行。</p>
+<p class="exemple"><b>示例：</b> 英雄被击中：“受伤”滤镜持续 2 秒；或在山洞里使用“手电筒”。</p>
+</div>
+<div class="fiche"><h3>停止滤镜</h3>
+<div class="schema"><b>输入：</b> 消失（秒） &nbsp;→&nbsp; <b>输出：</b> 然后 / 结束时</div>
+<p>让当前的屏幕滤镜缓缓消失。“然后”立即运行，“结束时”在滤镜消失后运行。</p>
+<p class="exemple"><b>示例：</b> 英雄走出山洞：用 1 秒关掉手电筒。</p>
 </div>
 </div>
 <div class="liens-bas">

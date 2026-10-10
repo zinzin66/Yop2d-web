@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (149) | Reference</title>
-<meta name="description" content="Complete list of the 149 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (153) | Reference</title>
+<meta name="description" content="Complete list of the 153 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 149 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 153 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
-<nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-animations">Animations</a><a href="#c11-audio">Audio</a><a href="#c12-story-and-dialogues">Story and dialogues</a><a href="#c13-values-green-wires">Values (green wires)</a></nav>
+<nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-transitions">Transitions</a><a href="#c11-animations">Animations</a><a href="#c12-audio">Audio</a><a href="#c13-story-and-dialogues">Story and dialogues</a><a href="#c14-values-green-wires">Values (green wires)</a><a href="#c15-screen-filters">Screen filters</a></nav>
 <h2 id="c1-events">Events</h2>
 <div class="method">
 <div class="fiche"><h3>On Start</h3>
@@ -71,6 +71,10 @@
 <div class="fiche"><h3>Finger held down</h3>
 <p>Repeats on every frame as long as a finger is on the screen, anywhere.</p>
 <p class="exemple"><b>Example:</b> make a ship climb while the screen is held (use doigt.x and doigt.y in formulas).</p>
+</div>
+<div class="fiche"><h3>Back button pressed</h3>
+<p>Runs when the player presses the Back button of their phone (arrow or swipe gesture). Great for opening a pause menu or going back to the previous screen. Without this node, the Back button does nothing during the game.</p>
+<p class="exemple"><b>Example:</b> Back → “Pause the game”, then show a “Resume / Quit” menu.</p>
 </div>
 <div class="fiche"><h3>Drag Start</h3>
 <div class="schema"><b>Input:</b> Object</div>
@@ -232,11 +236,6 @@
 <div class="schema"><b>Inputs:</b> Zoom (%, 100 = normal), Towards, Duration (seconds)</div>
 <p>Smoothly enlarges the whole game screen (the scene, or a story's background and characters) towards the center, the face, a side, the top or the bottom. 100 = back to normal; the dialogue box and the HUD don't move.</p>
 <p class="exemple"><b>Example:</b> zoom 140 towards the face for 2 seconds when Hana is scared, then zoom 100.</p>
-</div>
-<div class="fiche"><h3>Screen transition (circle, star…)</h3>
-<div class="schema"><b>Inputs:</b> Shape, Direction, Color, Duration (seconds)</div>
-<p>Covers the screen with a closing shape (circle, star, diamond, wipe, curtain, blinds), then continues. The screen stays covered until a "screen opens" transition: change the scene or background hidden behind it.</p>
-<p class="exemple"><b>Example:</b> closing circle → “Go to scene” → opening circle.</p>
 </div>
 <div class="fiche"><h3>Camera shake</h3>
 <div class="schema"><b>Inputs:</b> Strength, Duration (milliseconds, 1000 = 1 s)</div>
@@ -690,7 +689,20 @@
 <p class="exemple"><b>Example:</b> shuffle the cards of a memory game at the start, or the cups of a shell game.</p>
 </div>
 </div>
-<h2 id="c10-animations">Animations</h2>
+<h2 id="c10-transitions">Transitions</h2>
+<div class="method">
+<div class="fiche"><h3>Screen transition (circle, star…)</h3>
+<div class="schema"><b>Inputs:</b> Shape, Direction, Color, Duration (seconds), Center: object (name; circle, star, diamond, heart, hero) &nbsp;→&nbsp; <b>Outputs:</b> Next / Right away</div>
+<p>Covers or uncovers the screen with a shape (19 to choose from: circle, star, heart, curtain, clock, checkerboard, swirl…). “Close” covers the screen and it stays covered; “Open” uncovers it. “Next” runs when it's done, “Right away” runs immediately.</p>
+<p class="exemple"><b>Example:</b> circle closing → “Go to scene” → circle opening. To change scene in a single step: “Go to scene with a transition”.</p>
+</div>
+<div class="fiche"><h3>Go to scene with a transition</h3>
+<div class="schema"><b>Inputs:</b> Scene, Shape, Color, Closing (seconds), Pause while closed (seconds), Opening (seconds), Shape to reopen, Center: object (name; circle, star, diamond, heart, hero) &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Changes scene with a transition: the screen is covered by a shape (circle, star, heart, curtain, swirl… 19 shapes), the new scene arrives, then the screen opens again. There is no output: what happens next is set in “At start” of the new scene.</p>
+<p class="exemple"><b>Example:</b> the door is touched: go to the “House” scene with a circle closing on the hero.</p>
+</div>
+</div>
+<h2 id="c11-animations">Animations</h2>
 <div class="method">
 <div class="fiche"><h3>Play animation</h3>
 <div class="schema"><b>Inputs:</b> Object, Animation, Speed (frames/second), Loop (yes / no)</div>
@@ -718,7 +730,7 @@
 <p class="exemple"><b>Example:</b> running faster = faster animation.</p>
 </div>
 </div>
-<h2 id="c11-audio">Audio</h2>
+<h2 id="c12-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Play sound</h3>
 <div class="schema"><b>Inputs:</b> Sound file, Volume (%, 100 = full)</div>
@@ -735,7 +747,7 @@
 <p class="exemple"><b>Example:</b> silence on the Game Over screen.</p>
 </div>
 </div>
-<h2 id="c12-story-and-dialogues">Story and dialogues</h2>
+<h2 id="c13-story-and-dialogues">Story and dialogues</h2>
 <div class="method">
 <div class="fiche"><h3>Say a line</h3>
 <div class="schema"><b>Inputs:</b> Who speaks, Emotion, The line, Place on screen, Character entrance, Effect, Sound or voice, Next comes &nbsp;→&nbsp; <b>Output:</b> Then</div>
@@ -783,7 +795,7 @@
 <p class="exemple"><b>Example:</b> "What's your name?" → variable prenom → “Say a line” "Nice to meet you, {prenom}!".</p>
 </div>
 </div>
-<h2 id="c13-values-green-wires">Values (green wires)</h2>
+<h2 id="c14-values-green-wires">Values (green wires)</h2>
 <div class="method">
 <div class="fiche"><h3>Random number</h3>
 <div class="schema"><b>Inputs:</b> From, To &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
@@ -809,6 +821,19 @@
 <div class="schema"><b>Inputs:</b> Object A, Object B &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
 <p>Green node (value): gives the distance (in pixels) between the centers of two objects during the game.</p>
 <p class="exemple"><b>Example:</b> shake the screen harder when the enemy is close.</p>
+</div>
+</div>
+<h2 id="c15-screen-filters">Screen filters</h2>
+<div class="method">
+<div class="fiche"><h3>Screen filter</h3>
+<div class="schema"><b>Inputs:</b> Filter, Strength (%), Fade in (seconds), Duration (seconds, 0 = endless), Keep in the next scene, Also filter buttons and texts (HUD), Flashlight: lit object (name; empty = the one the camera follows), Flashlight: light size (%) &nbsp;→&nbsp; <b>Outputs:</b> Then / When it's over</div>
+<p>Gives the whole game a “look”, buttons and texts included: TV, VHS, black and white, underwater, nightmare, flashlight… 32 filters to choose from. It fades in gently, stays as long as you want (0 = until you stop it) and can carry on into the next scene. “Then” runs right away, “When it's over” at the end of the duration.</p>
+<p class="exemple"><b>Example:</b> the hero is hit: “Hurt” filter for 2 seconds; or “Flashlight” in a cave.</p>
+</div>
+<div class="fiche"><h3>Stop the filter</h3>
+<div class="schema"><b>Input:</b> Fade out (seconds) &nbsp;→&nbsp; <b>Outputs:</b> Then / When it's over</div>
+<p>Gently fades out the current screen filter. “Then” runs right away, “When it's over” once the filter is gone.</p>
+<p class="exemple"><b>Example:</b> the hero leaves the cave: stop the flashlight in 1 second.</p>
 </div>
 </div>
 <div class="liens-bas">

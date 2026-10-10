@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutti i nodi di Yop2D (149) | Riferimento</title>
-<meta name="description" content="Elenco completo dei 149 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
+<title>Tutti i nodi di Yop2D (153) | Riferimento</title>
+<meta name="description" content="Elenco completo dei 153 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 149 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
+<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 153 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
 <p><strong>Categorie</strong></p>
-<nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-griglie-e-puzzle">Griglie e puzzle</a><a href="#c10-animazioni">Animazioni</a><a href="#c11-audio">Audio</a><a href="#c12-storia-e-dialoghi">Storia e dialoghi</a><a href="#c13-valori-fili-verdi">Valori (fili verdi)</a></nav>
+<nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-griglie-e-puzzle">Griglie e puzzle</a><a href="#c10-transizioni">Transizioni</a><a href="#c11-animazioni">Animazioni</a><a href="#c12-audio">Audio</a><a href="#c13-storia-e-dialoghi">Storia e dialoghi</a><a href="#c14-valori-fili-verdi">Valori (fili verdi)</a><a href="#c15-filtri-dello-schermo">Filtri dello schermo</a></nav>
 <h2 id="c1-eventi">Eventi</h2>
 <div class="method">
 <div class="fiche"><h3>All'Avvio</h3>
@@ -71,6 +71,10 @@
 <div class="fiche"><h3>Dito premuto</h3>
 <p>Si ripete a ogni fotogramma finché un dito è appoggiato sullo schermo, in qualsiasi punto.</p>
 <p class="exemple"><b>Esempio:</b> far salire un'astronave finché si preme (usa doigt.x e doigt.y nelle formule).</p>
+</div>
+<div class="fiche"><h3>Tasto indietro premuto</h3>
+<p>Parte quando il giocatore preme il tasto «indietro» del telefono (freccia o gesto). Ideale per aprire un menu di pausa o tornare alla schermata precedente. Senza questo nodo, il tasto indietro non fa nulla durante il gioco.</p>
+<p class="exemple"><b>Esempio:</b> indietro → «Metti in pausa il gioco», poi mostrare un menu «Riprendi / Esci».</p>
 </div>
 <div class="fiche"><h3>Inizio Trascinamento</h3>
 <div class="schema"><b>Ingresso:</b> Oggetto</div>
@@ -232,11 +236,6 @@
 <div class="schema"><b>Ingressi:</b> Zoom (%, 100 = normale), Verso, Durata (secondi)</div>
 <p>Ingrandisce dolcemente tutto lo schermo del gioco (la scena, o lo sfondo e i personaggi di una storia) verso il centro, il viso, un lato, l'alto o il basso. 100 = tornare normale; il riquadro di dialogo e l'HUD non si muovono.</p>
 <p class="exemple"><b>Esempio:</b> zoom 140 verso il viso per 2 secondi quando Hana ha paura, poi zoom 100.</p>
-</div>
-<div class="fiche"><h3>Transizione dello schermo (cerchio, stella…)</h3>
-<div class="schema"><b>Ingressi:</b> Forma, Verso, Colore, Durata (secondi)</div>
-<p>Copre lo schermo con una forma che si chiude (cerchio, stella, rombo, tendina, sipario, veneziana), poi continua. Lo schermo resta coperto fino a una transizione «lo schermo si apre»: si cambia la scena o lo sfondo nascosto dietro.</p>
-<p class="exemple"><b>Esempio:</b> cerchio che si chiude → «Vai alla scena» → cerchio che si apre.</p>
 </div>
 <div class="fiche"><h3>Tremolio della camera</h3>
 <div class="schema"><b>Ingressi:</b> Intensità, Durata (millisecondi, 1000 = 1 s)</div>
@@ -690,7 +689,20 @@
 <p class="exemple"><b>Esempio:</b> mescolare le carte di un memory all'inizio della partita, o i bicchieri del gioco delle tre carte.</p>
 </div>
 </div>
-<h2 id="c10-animazioni">Animazioni</h2>
+<h2 id="c10-transizioni">Transizioni</h2>
+<div class="method">
+<div class="fiche"><h3>Transizione dello schermo (cerchio, stella…)</h3>
+<div class="schema"><b>Ingressi:</b> Forma, Verso, Colore, Durata (secondi), Centro: oggetto (nome; cerchio, stella, rombo, cuore, eroe) &nbsp;→&nbsp; <b>Uscite:</b> Successivo / Subito</div>
+<p>Copre o scopre lo schermo con una forma (19 tra cui scegliere: cerchio, stella, cuore, sipario, orologio, scacchiera, vortice…). «Chiudi» copre lo schermo e resta coperto; «Apri» lo scopre. «Successivo» parte quando è finito, «Subito» parte subito.</p>
+<p class="exemple"><b>Esempio:</b> cerchio che si chiude → «Vai alla scena» → cerchio che si apre. Per cambiare scena in un solo passaggio: «Vai alla scena con transizione».</p>
+</div>
+<div class="fiche"><h3>Vai alla scena con transizione</h3>
+<div class="schema"><b>Ingressi:</b> Scena, Forma, Colore, Chiusura (secondi), Pausa a schermo chiuso (secondi), Apertura (secondi), Forma per riaprire, Centro: oggetto (nome; cerchio, stella, rombo, cuore, eroe) &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Cambia scena con una transizione: lo schermo si copre con una forma (cerchio, stella, cuore, sipario, vortice… 19 forme), arriva la nuova scena, poi lo schermo si riapre. Non ha uscita: il seguito si imposta in «All'avvio» della nuova scena.</p>
+<p class="exemple"><b>Esempio:</b> si tocca la porta: andare alla scena «Casa» con un cerchio che si chiude sull'eroe.</p>
+</div>
+</div>
+<h2 id="c11-animazioni">Animazioni</h2>
 <div class="method">
 <div class="fiche"><h3>Riproduci animazione</h3>
 <div class="schema"><b>Ingressi:</b> Oggetto, Animazione, Velocità (fotogrammi/secondo), In loop (sì / no)</div>
@@ -718,7 +730,7 @@
 <p class="exemple"><b>Esempio:</b> correre più veloce = animazione più rapida.</p>
 </div>
 </div>
-<h2 id="c11-audio">Audio</h2>
+<h2 id="c12-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Riproduci suono</h3>
 <div class="schema"><b>Ingressi:</b> File audio, Volume (%, 100 = pieno)</div>
@@ -735,7 +747,7 @@
 <p class="exemple"><b>Esempio:</b> silenzio nella schermata di Game Over.</p>
 </div>
 </div>
-<h2 id="c12-storia-e-dialoghi">Storia e dialoghi</h2>
+<h2 id="c13-storia-e-dialoghi">Storia e dialoghi</h2>
 <div class="method">
 <div class="fiche"><h3>Dire una frase</h3>
 <div class="schema"><b>Ingressi:</b> Chi parla, Emozione, La frase, Posizione sullo schermo, Entrata del personaggio, Effetto, Suono o voce, Si continua &nbsp;→&nbsp; <b>Uscita:</b> Poi</div>
@@ -783,7 +795,7 @@
 <p class="exemple"><b>Esempio:</b> «Come ti chiami?» → variabile prenom → «Dire una frase» «Piacere, {prenom}!».</p>
 </div>
 </div>
-<h2 id="c13-valori-fili-verdi">Valori (fili verdi)</h2>
+<h2 id="c14-valori-fili-verdi">Valori (fili verdi)</h2>
 <div class="method">
 <div class="fiche"><h3>Numero a caso</h3>
 <div class="schema"><b>Ingressi:</b> Da, A &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
@@ -809,6 +821,19 @@
 <div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
 <p>Nodo verde (valore): dà la distanza (in pixel) tra il centro di due oggetti durante il gioco.</p>
 <p class="exemple"><b>Esempio:</b> far tremare di più lo schermo quando il nemico è vicino.</p>
+</div>
+</div>
+<h2 id="c15-filtri-dello-schermo">Filtri dello schermo</h2>
+<div class="method">
+<div class="fiche"><h3>Filtro dello schermo</h3>
+<div class="schema"><b>Ingressi:</b> Filtro, Forza (%), Comparsa (secondi), Durata (secondi, 0 = senza fine), Mantieni nella scena successiva, Filtra anche pulsanti e testi (HUD), Torcia: oggetto illuminato (nome; vuoto = quello seguito dalla telecamera), Torcia: dimensione della luce (%) &nbsp;→&nbsp; <b>Uscite:</b> Poi / Quando è finito</div>
+<p>Dà un «look» a tutto il gioco, pulsanti e testi compresi: TV, VHS, bianco e nero, sott'acqua, incubo, torcia… 32 filtri tra cui scegliere. Appare dolcemente, resta quanto vuoi (0 = finché non lo fermi) e può continuare nella scena successiva. «Poi» parte subito, «Quando è finito» alla fine della durata.</p>
+<p class="exemple"><b>Esempio:</b> l'eroe viene colpito: filtro «Ferito» per 2 secondi; oppure «Torcia» in una grotta.</p>
+</div>
+<div class="fiche"><h3>Ferma il filtro</h3>
+<div class="schema"><b>Ingresso:</b> Scomparsa (secondi) &nbsp;→&nbsp; <b>Uscite:</b> Poi / Quando è finito</div>
+<p>Fa sparire dolcemente il filtro dello schermo in corso. «Poi» parte subito, «Quando è finito» quando il filtro è sparito.</p>
+<p class="exemple"><b>Esempio:</b> l'eroe esce dalla grotta: spegnere la torcia in 1 secondo.</p>
 </div>
 </div>
 <div class="liens-bas">
