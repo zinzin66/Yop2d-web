@@ -86,7 +86,7 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   `barre_vie` (remplissage = image dont la largeur suit « =vie * 6 », 3 couleurs, clignote sous 30, se remplit à zéro), `score_pop` (variable
   « score », le chiffre grossit + étincelles), `fenetre_pause` (bouton ⏸ + fenêtre Reprendre / Recommencer / Quitter, voile sombre, bouton
   retour du téléphone ; masquée par « Au démarrage »). Les formules ne nomment JAMAIS un objet (l'import renomme « _2 » sans changer les
-  formules) : elles lisent la variable de l'objet visé par le nœud. Pas encore testés sur tablette ; documentation (guide, accueil) à ajouter.
+  formules) : elles lisent la variable de l'objet visé par le nœud. Pas encore testés sur tablette ; documentation (guide, accueil) à ajouter. 11/10/2026 : dans le moteur (pas encore publié), un prefab ajouté devient une VRAIE SCÈNE du projet liée à la scène ouverte (liste des Scènes : « ↳ nom » sous la scène qui l'utilise) : guide « prefabs » et FAQ à réécrire en 9 langues quand le moteur sera validé.
 
 ## Aide (aide.html)
 - Deux onglets : **Nœuds** et **Guides**.
