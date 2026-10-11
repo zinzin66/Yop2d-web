@@ -44,7 +44,7 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   `?lang=<langue du moteur>`.
   `confidentialite.html` : confidentialité.
 - `aide.html` : aide ouverte depuis le moteur dans une WebView.
-- `guides/` : 8 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
+- `guides/` : 9 guides débutant en 9 langues, **générés** (voir « Guides » plus bas).
   Français : `guides/<guide>.html` ; autres langues : `guides/<langue>/<guide>.html`.
   Page « Tous les guides » (générée aussi) : `guides/index.html` (fr), `guides/<langue>/index.html` ;
   textes dans `TOUS` de `generer_guides.py`. Accueil et `llms.txt` y renvoient.
@@ -78,8 +78,9 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   Premiers prefabs (CC0, de l'utilisateur) : bouton animé rectangulaire en 6 couleurs + variante « texte animé ».
   11/10/2026 : 7 prefabs « boutons de styles » (étoile qui tourne, ninja pixel à cheval, néon, discret avec halo, verre, texte souligné,
   rond ▶) fabriqués par `python3 outils/creer_prefabs_styles.py <clone du moteur>` (images dessinées, sprites ninja Superpowers CC0, sons Yop2D,
-  polices OFL) puis `generer_prefabs.py`. AIDE / ACCUEIL / llms.txt / guide :
-  À ÉCRIRE quand l'utilisateur aura validé le test (demande du 11/10/2026).
+  polices OFL) puis `generer_prefabs.py`. DOCUMENTATION FAITE le 11/10/2026 (demande de l'utilisateur) : 9e guide « prefabs » (9 langues), accueil
+  (cartes « Objets prêts à l'emploi à télécharger » et « Un style de dialogue à votre goût », FAQ « Qu'est-ce qu'un prefab ? » : 24 questions,
+  35 cartes), llms.txt (section prefabs lue dans prefabs/prefabs.json), sitemap. Ne pas confondre avec la carte « Scènes comme objets (prefabs) ».
 
 ## Aide (aide.html)
 - Deux onglets : **Nœuds** et **Guides**.

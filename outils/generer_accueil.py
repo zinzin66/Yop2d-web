@@ -554,6 +554,14 @@ def llms(t):
     lignes.append("")
     lignes.append("The zip files are Yop2D projects: the engine downloads them from its \"Examples\" tab, "
                   "or they can be opened with \"Open a downloaded project\".")
+    lignes += ["", "## Ready-made objects (prefabs)", ""]
+    with open(os.path.join(RACINE, "prefabs", "prefabs.json"), encoding="utf-8") as f:
+        for pf in json.load(f)["prefabs"]:
+            lignes.append(f"- {pf['nom']['en']}: {pf['description']['en']}")
+    lignes.append("")
+    lignes.append("Prefabs are free (CC0) objects that already have their images, text and nodes. In the editor: Library, \"Prefabs to download\" tab "
+                  "(tick several, download, then \"Add to the scene\"). Own prefabs can be imported as a .zip (one scene) from the Resources panel. "
+                  f"Step-by-step guide: {SITE}guides/en/prefabs.html")
     lignes += ["", "## Node reference", ""]
     lignes += [f"- [All nodes, {NOMS_LANGUES[l]}]({SITE}noeuds/{l}.html)" for l in LANGUES]
     dossier = os.path.join(RACINE, "aide", "noeuds", "en")
