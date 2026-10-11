@@ -2,7 +2,9 @@
 """Fabrique les prefabs « boutons de styles » (dossiers prefabs/<id>/) : étoile qui tourne, ninja pixel à cheval, néon,
 discret avec halo, verre, texte souligné, rond avec lecture.
 
-Usage : python3 outils/creer_prefabs_styles.py <clone de zinzin66/yop2d-moteur>
+Usage : python3 outils/creer_prefabs_styles.py <clone de zinzin66/yop2d-moteur> [boutons|interface]
+(« boutons » = les 7 boutons ci-dessus, par défaut ; « interface » = 2e lot : interrupteur ON/OFF, barre de vie animée,
+score qui pop, fenêtre de pause. Ne relancer que le lot voulu : chaque lancement refait des identifiants neufs.)
 (les images sont DESSINÉES ici, les sprites du ninja viennent de la bibliothèque du moteur (Superpowers / Pixel-boy, CC0),
 les sons Yop2D et les polices (OFL) aussi). Ensuite : python3 outils/generer_prefabs.py (ou le robot GitHub le fait).
 """
@@ -414,19 +416,24 @@ class Logique:
         self.ligne += 1
         return n, 'Suivant'
 
-    def action(self, depuis, cle, parametres, cible):
-        dep, port = depuis
+    def action(self, depuis, cle, parametres, cible, variable=None):
+        """depuis = (nœud, port) ou (nœud, port, rang du port) ; variable = variable de l'objet visé (nœuds variables)."""
+        dep, port = depuis[0], depuis[1]
+        rang = depuis[2] if len(depuis) > 2 else 0
         n = {'classeType': 'com.ludexa.moteur.NoeudGenerique', 'cleNoeud': cle, 'id': uid(), 'cibleNom': cible,
              'parametres': {f'{cle}.{k}': str(v) for k, v in parametres.items()}, 'portsEntree': [],
-             'x': dep['x'] + 330.0, 'y': dep['y']}
+             'x': dep['x'] + 330.0, 'y': dep['y'] + rang * 260.0}
+        if variable:
+            n['cibleVariableNom'] = variable
         self.noeuds.append(n)
-        self.liens.append({'idArrivee': n['id'], 'idDepart': dep['id'], 'indexPortArrivee': 0, 'indexPortDepart': 0,
+        self.liens.append({'idArrivee': n['id'], 'idDepart': dep['id'], 'indexPortArrivee': 0, 'indexPortDepart': rang,
                            'portArrivee': 'port_entrer', 'portDepart': port})
         return n, 'port_suivant'
 
     def chaine(self, depuis, etapes, cible):
-        for cle, p in etapes:
-            depuis = self.action(depuis, cle, p, cible)
+        for etape in etapes:
+            cle, p = etape[0], etape[1]
+            depuis = self.action(depuis, cle, p, cible, etape[2] if len(etape) > 2 else None)
         return depuis
 
     def json(self):
@@ -441,7 +448,7 @@ def particules(modele, quantite=0, taille=1):
     return ('effet_particules', {'modele': modele, 'quantite': quantite, 'couleur': '', 'taille': taille, 'image': ''})
 
 
-def ecrire_prefab(id_, objets, logique, animations, polices, sons, lignes_anim=None):
+def ecrire_prefab(id_, objets, logique, animations, polices, sons, lignes_anim=None, prefixe=None):
     dossier = os.path.join(PREFABS, id_)
     # on garde les images fabriquées, on refait tout le reste
     for sous in ('logique', 'assets_ludexa/Fonts', 'assets_ludexa/Sons', 'assets_ludexa/Textes'):
@@ -468,7 +475,8 @@ def ecrire_prefab(id_, objets, logique, animations, polices, sons, lignes_anim=N
     for nom in ('reglages.json', 'variables_globales.json'):
         shutil.copy(os.path.join(PREFABS, 'bouton_bleu', nom), os.path.join(dossier, nom))
     nom_p, desc_p = TEXTES[id_]
-    infos = {'nom': {l: f'{PREFIXE[i]} – {nom_p[i]}' for i, l in enumerate(LANGUES)},
+    prefixe = prefixe or PREFIXE
+    infos = {'nom': {l: f'{prefixe[i]} – {nom_p[i]}' for i, l in enumerate(LANGUES)},
              'description': {l: f'{desc_p[i]} {OUVRIR[i]}' for i, l in enumerate(LANGUES)},
              'licence': 'CC0', 'auteur': 'Yop2D'}
     json.dump(infos, open(os.path.join(dossier, 'prefab.json'), 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
@@ -585,6 +593,379 @@ def construire():
     vignette(i, 'assets_ludexa/Images/bouton_rond_3.png')
 
 
+# ------------------------------------------------------------------ 2e lot : éléments d'interface (4 prefabs)
+PREFIXE_UI = ["Interface", "Interface", "Interfaz", "Oberfläche", "Interfaccia", "Interface", "Интерфейс", "界面", "インターフェース"]
+
+TEXTES.update({
+    'interrupteur': (
+        ["interrupteur ON/OFF", "ON/OFF switch", "interruptor ON/OFF", "EIN/AUS-Schalter", "interruttore ON/OFF", "interruptor ON/OFF", "переключатель ВКЛ/ВЫКЛ", "开关 ON/OFF", "ON/OFFスイッチ"],
+        ["Interrupteur à glissière : un toucher le passe de OFF (gris) à ON (vert) et inversement, avec une petite animation et un son. Il retient son état dans la variable « etat » (0 = éteint, 1 = allumé), idéal pour « Sons », « Musique » ou « Vibrations ».",
+         "Slide switch: one tap flips it from OFF (grey) to ON (green) and back, with a small animation and a sound. It remembers its state in the variable \"etat\" (0 = off, 1 = on), perfect for \"Sounds\", \"Music\" or \"Vibration\".",
+         "Interruptor deslizante: un toque lo pasa de OFF (gris) a ON (verde) y viceversa, con una pequeña animación y un sonido. Recuerda su estado en la variable «etat» (0 = apagado, 1 = encendido), ideal para «Sonidos», «Música» o «Vibración».",
+         "Schiebeschalter: Ein Antippen schaltet von AUS (grau) auf EIN (grün) und zurück, mit kleiner Animation und Ton. Er merkt sich seinen Zustand in der Variable „etat“ (0 = aus, 1 = an), ideal für „Ton“, „Musik“ oder „Vibration“.",
+         "Interruttore a scorrimento: un tocco lo porta da OFF (grigio) a ON (verde) e viceversa, con una piccola animazione e un suono. Ricorda il suo stato nella variabile «etat» (0 = spento, 1 = acceso), ideale per «Suoni», «Musica» o «Vibrazione».",
+         "Interruptor deslizante: um toque o leva de OFF (cinza) para ON (verde) e vice-versa, com uma pequena animação e um som. Guarda o estado na variável «etat» (0 = desligado, 1 = ligado), ideal para «Sons», «Música» ou «Vibração».",
+         "Ползунковый переключатель: одно нажатие переводит его из OFF (серый) в ON (зелёный) и обратно, с небольшой анимацией и звуком. Состояние хранится в переменной «etat» (0 = выкл, 1 = вкл) — удобно для «Звуков», «Музыки» или «Вибрации».",
+         "滑动开关：点一下就在 OFF（灰色）和 ON（绿色）之间切换，带小动画和音效。状态保存在变量 “etat” 中（0 = 关，1 = 开），很适合“音效”“音乐”“震动”。",
+         "スライド式のスイッチ。タップするとOFF（グレー）とON（緑）が切り替わり、小さなアニメと効果音が出ます。状態は変数「etat」（0 = オフ、1 = オン）に保存され、「効果音」「音楽」「バイブ」に最適です。"]),
+    'barre_vie': (
+        ["barre de vie animée", "animated health bar", "barra de vida animada", "animierte Lebensleiste", "barra della vita animata", "barra de vida animada", "анимированная полоска здоровья", "动画生命条", "アニメ付き体力バー"],
+        ["Barre de vie brillante qui se vide en douceur : verte, puis orange, puis rouge qui clignote quand il reste peu de vie. Touche-la pour tester (-10 à chaque fois) ; à zéro, elle se remplit de nouveau. La vie est dans la variable « vie » (0 à 100).",
+         "Glossy health bar that drains smoothly: green, then orange, then flashing red when little life is left. Tap it to test (-10 each time); at zero it refills. The life is stored in the variable \"vie\" (0 to 100).",
+         "Barra de vida brillante que se vacía suavemente: verde, luego naranja y roja parpadeante cuando queda poca vida. Tócala para probar (-10 cada vez); al llegar a cero se rellena. La vida está en la variable «vie» (0 a 100).",
+         "Glänzende Lebensleiste, die sich weich leert: grün, dann orange, dann blinkend rot bei wenig Leben. Zum Testen antippen (jedes Mal -10); bei null füllt sie sich wieder. Das Leben steht in der Variable „vie“ (0 bis 100).",
+         "Barra della vita lucida che si svuota dolcemente: verde, poi arancione, poi rossa lampeggiante quando resta poca vita. Toccala per provare (-10 ogni volta); a zero si riempie di nuovo. La vita è nella variabile «vie» (da 0 a 100).",
+         "Barra de vida brilhante que esvazia suavemente: verde, depois laranja e vermelha piscando quando resta pouca vida. Toque para testar (-10 a cada vez); ao chegar a zero ela enche de novo. A vida fica na variável «vie» (0 a 100).",
+         "Глянцевая полоска здоровья, плавно уменьшающаяся: зелёная, затем оранжевая, затем мигающая красная при малом здоровье. Нажми для проверки (каждый раз −10); на нуле она наполняется снова. Здоровье хранится в переменной «vie» (0–100).",
+         "有光泽的生命条，会平滑减少：绿色，然后橙色，生命很低时变成闪烁的红色。点一下试试（每次 -10）；归零后会重新充满。生命值保存在变量 “vie” 中（0 到 100）。",
+         "つやのある体力バー。なめらかに減り、緑 → オレンジ → 残りわずかで赤く点滅します。タップで試せます（1回で -10）。ゼロになると満タンに戻ります。体力は変数「vie」（0〜100）に入っています。"]),
+    'score_pop': (
+        ["score qui « pop »", "popping score", "puntuación que salta", "hüpfender Punktestand", "punteggio che salta", "pontuação que pula", "подпрыгивающий счёт", "弹跳的分数", "はずむスコア"],
+        ["Compteur de score avec une étoile. À chaque point gagné, le chiffre grossit un instant et lance des étincelles avec un son. Touche-le pour tester (+10) ; le score est dans la variable « score ».",
+         "Score counter with a star. Each time you score, the number swells for a moment and throws sparks with a sound. Tap it to test (+10); the score is stored in the variable \"score\".",
+         "Contador de puntos con una estrella. Cada vez que sumas, el número crece un instante y lanza chispas con un sonido. Tócalo para probar (+10); la puntuación está en la variable «score».",
+         "Punktezähler mit Stern. Bei jedem Punkt wird die Zahl kurz größer und sprüht Funken mit einem Ton. Zum Testen antippen (+10); der Punktestand steht in der Variable „score“.",
+         "Contatore di punti con una stella. A ogni punto il numero si ingrandisce un attimo e lancia scintille con un suono. Toccalo per provare (+10); il punteggio è nella variabile «score».",
+         "Contador de pontos com uma estrela. A cada ponto o número cresce por um instante e solta faíscas com um som. Toque para testar (+10); a pontuação fica na variável «score».",
+         "Счётчик очков со звездой. При каждом очке число на мгновение увеличивается и рассыпает искры со звуком. Нажми для проверки (+10); очки хранятся в переменной «score».",
+         "带星星的得分计数器。每得一分，数字会短暂放大并迸出火花，伴有音效。点一下试试（+10）；分数保存在变量 “score” 中。",
+         "星付きのスコア表示。得点のたびに数字が一瞬ふくらみ、火花と効果音が出ます。タップで試せます（+10）。スコアは変数「score」に入っています。"]),
+    'fenetre_pause': (
+        ["fenêtre de pause", "pause window", "ventana de pausa", "Pausenfenster", "finestra di pausa", "janela de pausa", "окно паузы", "暂停窗口", "ポーズ画面"],
+        ["Bouton ⏸ qui met le jeu en pause et ouvre une fenêtre avec Reprendre, Recommencer et Quitter, sur un fond assombri. Le bouton retour du téléphone l'ouvre aussi. Les textes et les couleurs se changent dans la scène.",
+         "A ⏸ button that pauses the game and opens a window with Resume, Restart and Quit over a dimmed background. The phone's back button opens it too. Texts and colours can be changed in the scene.",
+         "Un botón ⏸ que pausa el juego y abre una ventana con Reanudar, Reiniciar y Salir sobre un fondo oscurecido. El botón atrás del teléfono también la abre. Los textos y colores se cambian en la escena.",
+         "Ein ⏸-Button pausiert das Spiel und öffnet ein Fenster mit Fortsetzen, Neustart und Beenden auf abgedunkeltem Hintergrund. Die Zurück-Taste des Handys öffnet es ebenfalls. Texte und Farben lassen sich in der Szene ändern.",
+         "Un pulsante ⏸ che mette in pausa il gioco e apre una finestra con Riprendi, Ricomincia ed Esci su sfondo oscurato. Anche il tasto indietro del telefono la apre. Testi e colori si cambiano nella scena.",
+         "Um botão ⏸ que pausa o jogo e abre uma janela com Continuar, Reiniciar e Sair sobre um fundo escurecido. O botão voltar do celular também a abre. Textos e cores podem ser alterados na cena.",
+         "Кнопка ⏸ ставит игру на паузу и открывает окно с пунктами «Продолжить», «Заново» и «Выйти» на затемнённом фоне. Его открывает и кнопка «Назад» телефона. Тексты и цвета меняются в сцене.",
+         "⏸ 按钮会暂停游戏，并在变暗的背景上打开带有“继续”“重新开始”“退出”的窗口。手机的返回键也能打开它。文字和颜色可以在场景中修改。",
+         "⏸ ボタンでゲームを一時停止し、暗くした背景の上に「再開」「やり直し」「終了」の画面を開きます。スマホの戻るボタンでも開きます。文字や色はシーンで変えられます。"]),
+})
+
+
+def melange(c1, c2, t):
+    a, b = rgb(c1), rgb(c2)
+    return '#%02X%02X%02X' % tuple(int(a[i] + (b[i] - a[i]) * t) for i in range(3))
+
+
+def pilule(w, h, haut, bas, bord1, bord2, ep=8):
+    return fond_pilule(w, h, haut, bas, bord1, bord2, ep)
+
+
+def disque(im, cx, cy, r, couleur):
+    calque = Image.new('RGBA', (im.width * SS, im.height * SS), (0, 0, 0, 0))
+    ImageDraw.Draw(calque).ellipse(((cx - r) * SS, (cy - r) * SS, (cx + r) * SS, (cy + r) * SS), fill=couleur)
+    im.alpha_composite(calque.resize(im.size, Image.LANCZOS))
+
+
+def barres_arrondies(im, boites, rayon, couleur):
+    calque = Image.new('RGBA', (im.width * SS, im.height * SS), (0, 0, 0, 0))
+    d = ImageDraw.Draw(calque)
+    for x0, y0, x1, y1 in boites:
+        d.rounded_rectangle((x0 * SS, y0 * SS, x1 * SS, y1 * SS), radius=rayon * SS, fill=couleur)
+    im.alpha_composite(calque.resize(im.size, Image.LANCZOS))
+
+
+def images_interrupteur(dossier):
+    W, H = 440, 220
+    noms = []
+    for k in range(7):
+        t = k / 6
+        t = t * t * (3 - 2 * t)                           # départ et arrivée en douceur
+        im = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+        piste = pilule(W, H, melange('#3C455E', '#35F0A8', t), melange('#262D42', '#12A06E', t),
+                       melange('#58627F', '#C8FFE9', t), melange('#3A4258', '#47D9A0', t), 7)
+        im.alpha_composite(piste)
+        cx, cy, r = 110 + 220 * t, 110, 84
+        ombre = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+        disque(ombre, cx + 3, cy + 8, r, (0, 0, 0, 150))
+        im.alpha_composite(ombre.filter(ImageFilter.GaussianBlur(7)))
+        if t > 0:
+            halo = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+            disque(halo, cx, cy, r + 6, (120, 255, 200, 255))
+            im.alpha_composite(lueur(halo, (60, 255, 180, 255), 12, 0.9 * t))
+        bouton = degrade(W, H, '#FFFFFF', '#CBD3E6')
+        masque = Image.new('L', (W * SS, H * SS), 0)
+        ImageDraw.Draw(masque).ellipse(((cx - r) * SS, (cy - r) * SS, (cx + r) * SS, (cy + r) * SS), fill=255)
+        bouton.putalpha(masque.resize((W, H), Image.LANCZOS))
+        im.alpha_composite(bouton)
+        # dans le bouton : un rond gris (OFF) qui s'efface, une coche verte (ON) qui apparaît
+        marque = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+        trace = Image.new('RGBA', (W * SS, H * SS), (0, 0, 0, 0))
+        dt = ImageDraw.Draw(trace)
+        coche = [(cx - 30, cy + 2), (cx - 9, cy + 24), (cx + 32, cy - 24)]
+        dt.line([(x * SS, y * SS) for x, y in coche], fill=(24, 170, 118, int(255 * t)), width=13 * SS, joint='curve')
+        for x, y in (coche[0], coche[2]):
+            dt.ellipse(((x - 6.5) * SS, (y - 6.5) * SS, (x + 6.5) * SS, (y + 6.5) * SS), fill=(24, 170, 118, int(255 * t)))
+        marque.alpha_composite(trace.resize((W, H), Image.LANCZOS))
+        im.alpha_composite(marque)
+        if t < 1:
+            rond = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+            disque(rond, cx, cy, 26, (120, 130, 155, int(255 * (1 - t))))
+            disque(rond, cx, cy, 15, (232, 237, 248, int(255 * (1 - t))))
+            im.alpha_composite(rond)
+        n = f'interrupteur_{k + 1}.png'
+        sauver(im, os.path.join(dossier, 'assets_ludexa/Images', n))
+        noms.append('assets_ludexa/Images/' + n)
+    return noms
+
+
+def coeur_points(cx, cy, taille):
+    pts = []
+    for i in range(90):
+        a = 2 * math.pi * i / 90
+        x = 16 * math.sin(a) ** 3
+        y = -(13 * math.cos(a) - 5 * math.cos(2 * a) - 2 * math.cos(3 * a) - math.cos(4 * a))
+        pts.append((cx + x * taille, cy + y * taille))
+    return pts
+
+
+def images_barre_vie(dossier):
+    noms = {}
+    # le cadre (fond sombre + cœur)
+    W, H = 1440, 168
+    cadre = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    bord = degrade(W, H, '#6B7596', '#3A4258')
+    bord.putalpha(masque_arrondi(W, H, 84))
+    cadre.alpha_composite(bord)
+    fond = degrade(W, H, '#1B2133', '#0C101C')
+    fond.putalpha(masque_arrondi(W, H, 78, 6))
+    cadre.alpha_composite(fond)
+    halo = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    poly_lisse(halo, coeur_points(84, 84, 3.1), (255, 90, 110, 255))
+    cadre.alpha_composite(lueur(halo, (255, 60, 90, 255), 9, 0.9))
+    poly_lisse(cadre, coeur_points(84, 84, 2.9), (255, 90, 110, 255), (255, 190, 200, 255), 4)
+    poly_lisse(cadre, [(66, 66), (76, 58), (84, 64)], None, (255, 235, 238, 200), 5)
+    sauver(cadre, os.path.join(dossier, 'assets_ludexa/Images/barre_vie_cadre.png'))
+    noms['cadre'] = 'assets_ludexa/Images/barre_vie_cadre.png'
+    # le remplissage dans 3 couleurs (même forme)
+    W, H = 1200, 120
+    for nom, haut, bas in (('vert', '#8CF5A8', '#1FB45F'), ('orange', '#FFD070', '#EE8610'), ('rouge', '#FF8C8C', '#D01B38')):
+        im = degrade(W, H, haut, bas)
+        im.putalpha(masque_arrondi(W, H, 60))
+        reflet = Image.new('RGBA', (W, H), (255, 255, 255, 0))
+        m = Image.new('L', (W * SS, H * SS), 0)
+        ImageDraw.Draw(m).rounded_rectangle((24 * SS, 10 * SS, (W - 24) * SS, 50 * SS), radius=20 * SS, fill=95)
+        reflet.putalpha(ImageChops.multiply(m.resize((W, H), Image.LANCZOS), masque_arrondi(W, H, 60)))
+        im.alpha_composite(reflet)
+        n = f'assets_ludexa/Images/barre_vie_{nom}.png'
+        sauver(im, os.path.join(dossier, n))
+        noms[nom] = n
+    return noms
+
+
+def image_score(dossier):
+    W, H = 1120, 280
+    im = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    bord = degrade(W, H, '#FFE27A', '#FF9F1C')
+    bord.putalpha(masque_arrondi(W, H, 140))
+    im.alpha_composite(bord)
+    fond = degrade(W, H, '#2B2250', '#150F2E')
+    fond.putalpha(masque_arrondi(W, H, 132, 8))
+    im.alpha_composite(fond)
+    reflet = Image.new('RGBA', (W, H), (255, 255, 255, 0))
+    m = Image.new('L', (W * SS, H * SS), 0)
+    ImageDraw.Draw(m).rounded_rectangle((60 * SS, 22 * SS, (W - 60) * SS, 120 * SS), radius=48 * SS, fill=40)
+    reflet.putalpha(ImageChops.multiply(m.resize((W, H), Image.LANCZOS), masque_arrondi(W, H, 132, 8)))
+    im.alpha_composite(reflet)
+    halo = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    poly_lisse(halo, etoile_points(150, 140, 100, 44, 0), (255, 200, 60, 255))
+    im.alpha_composite(lueur(halo, (255, 190, 40, 255), 14, 1.0))
+    poly_lisse(im, etoile_points(150, 140, 90, 38, 0), (255, 213, 74, 255), (255, 140, 20, 255), 7)
+    poly_lisse(im, etoile_points(150, 140, 56, 24, 0), (255, 240, 160, 255))
+    n = 'assets_ludexa/Images/score_panneau.png'
+    sauver(im, os.path.join(dossier, n))
+    return n
+
+
+def images_pause(dossier):
+    noms = {}
+    # bouton ⏸ rond
+    S = 300
+    im = Image.new('RGBA', (S, S), (0, 0, 0, 0))
+    halo = Image.new('RGBA', (S, S), (0, 0, 0, 0))
+    disque(halo, S // 2, S // 2, 128, (76, 201, 240, 255))
+    im.alpha_composite(lueur(halo, (60, 180, 255, 255), 9, 0.9))
+    disque(im, S // 2, S // 2, 128, rgb('#4CC9F0'))
+    fond = degrade(S, S, '#2C3652', '#141A2C')
+    m = Image.new('L', (S * SS, S * SS), 0)
+    ImageDraw.Draw(m).ellipse((16 * SS, 16 * SS, (S - 16) * SS, (S - 16) * SS), fill=255)
+    fond.putalpha(m.resize((S, S), Image.LANCZOS))
+    im.alpha_composite(fond)
+    barres_arrondies(im, [(100, 88, 132, 212), (168, 88, 200, 212)], 12, (255, 255, 255, 255))
+    noms['bouton'] = 'assets_ludexa/Images/pause_bouton.png'
+    sauver(im, os.path.join(dossier, noms['bouton']))
+    # panneau
+    W, H = 1400, 1520
+    im = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    bord = degrade(W, H, '#4CC9F0', '#7B5CFF')
+    bord.putalpha(masque_arrondi(W, H, 90))
+    im.alpha_composite(bord)
+    fond = degrade(W, H, '#222A42', '#11162A')
+    fond.putalpha(masque_arrondi(W, H, 82, 8))
+    im.alpha_composite(fond)
+    noms['panneau'] = 'assets_ludexa/Images/pause_panneau.png'
+    sauver(im, os.path.join(dossier, noms['panneau']))
+    # 3 boutons
+    for nom, h1, h2, b1, b2 in (('reprendre', '#3EE6A4', '#14A06E', '#C8FFE9', '#47D9A0'),
+                                ('recommencer', '#5AD0F5', '#2A6FD8', '#CFF3FF', '#4C9BF0'),
+                                ('quitter', '#FF8696', '#C42848', '#FFD0D6', '#E8566E')):
+        n = f'assets_ludexa/Images/pause_{nom}.png'
+        sauver(pilule(1040, 240, h1, h2, b1, b2), os.path.join(dossier, n))
+        noms[nom] = n
+    # voile sombre
+    voile = Image.new('RGBA', (16, 16), (0, 0, 0, 150))
+    noms['voile'] = 'assets_ludexa/Images/pause_voile.png'
+    sauver(voile, os.path.join(dossier, noms['voile']))
+    return noms
+
+
+def variable_locale(nom, valeur):
+    return {'id': uid(), 'nom': nom, 'scope': 'LOCALE', 'type': 'ENTIER', 'valeur': valeur}
+
+
+def placer(o, x, y, z=None, parent=None, visible=None):
+    o['x'], o['y'] = float(x), float(y)
+    if z is not None:
+        o['zOrder'] = z
+    if parent is not None:
+        o['parentId'] = parent['id']
+    if visible is not None:
+        o['visible'] = visible
+    return o
+
+
+def vignette_image(id_, im):
+    """Vignette 300 x 300 composée à partir d'une image PIL (le dossier du prefab ne reçoit que vignette.png)."""
+    fond = degrade(300, 300, '#222838', '#141824')
+    e = min(264 / im.width, 264 / im.height)
+    im = im.resize((max(1, int(im.width * e)), max(1, int(im.height * e))), Image.LANCZOS)
+    fond.alpha_composite(im, ((300 - im.width) // 2, (300 - im.height) // 2))
+    fond.convert('RGB').save(os.path.join(PREFABS, id_, 'vignette.png'), 'PNG', optimize=True)
+
+
+def construire_interface():
+    # 1. interrupteur ON/OFF -------------------------------------------------
+    i = 'interrupteur'
+    dossier = os.path.join(PREFABS, i)
+    imgs = images_interrupteur(dossier)
+    b = objet_bouton(i, imgs[0], 220, 110)
+    b['variablesLocales'] = [variable_locale('etat', 0)]
+    L = Logique()
+    e = L.evenement('NoeudEventClicObjet', i)
+    c = L.action(e, 'condition', {'condition': 'etat == 0'}, i)
+    L.chaine((c[0], 'port_vrai', 0), [('modifier_variable', {'valeur': 1}, 'etat'),
+                                      ('jouer_animation', {'animation': i + '_on', 'vitesse': 24, 'boucle': 'false'}),
+                                      son('power_up', 60)], i)
+    L.chaine((c[0], 'port_faux', 1), [('modifier_variable', {'valeur': 0}, 'etat'),
+                                      ('jouer_animation', {'animation': i + '_off', 'vitesse': 24, 'boucle': 'false'}),
+                                      son('pop', 60)], i)
+    ecrire_prefab(i, [b], L, {i + '_on': imgs, i + '_off': imgs[::-1]}, [], ['power_up', 'pop'], prefixe=PREFIXE_UI)
+    vignette_image(i, Image.open(os.path.join(dossier, imgs[-1])).convert('RGBA'))
+
+    # 2. barre de vie animée -------------------------------------------------
+    i = 'barre_vie'
+    dossier = os.path.join(PREFABS, i)
+    im = images_barre_vie(dossier)
+    cadre = objet_bouton(i, im['cadre'], 720, 84)
+    plein = objet_bouton(i + '_remplissage', im['vert'], 600, 60)
+    placer(plein, 100, 12, 1, cadre)
+    plein['variablesLocales'] = [variable_locale('vie', 100)]
+    r = i + '_remplissage'
+    L = Logique()
+    e = L.evenement('NoeudEventClicObjet', r)
+    fin = L.chaine(e, [('ajouter_variable', {'valeur': -10}, 'vie'),
+                       ('limiter_valeur', {'min': 0, 'max': 100}, 'vie'),
+                       ('modifier_propriete', {'propriete': 'largeur', 'valeur': '=vie * 6'}),
+                       ('sautiller', {'intensite': 5, 'duree': 200, 'infini': 'false'}),
+                       son('rate', 70)], r)
+    c = L.action(fin, 'condition', {'condition': 'vie <= 0'}, r)
+    # vie à zéro : la barre se remplit de nouveau
+    L.chaine((c[0], 'port_vrai', 0), [('clignotement', {'etat': 'Désactiver', 'vitesse': 200, 'duree': 0}),
+                                      son('game_over', 70), ('attendre', {'duree': 1.2}),
+                                      ('modifier_variable', {'valeur': 100}, 'vie'),
+                                      ('modifier_propriete', {'propriete': 'largeur', 'valeur': '=vie * 6'}),
+                                      ('changer_image', {'image': im['vert']})], r)
+    # sinon : la couleur suit la vie restante
+    t = L.action((c[0], 'port_faux', 1), 'si_sinon', {'condition1': 'vie <= 30', 'condition2': 'vie <= 60'}, r)
+    L.chaine((t[0], 'port_si', 0), [('changer_image', {'image': im['rouge']}),
+                                    ('clignotement', {'etat': 'Activer', 'vitesse': 250, 'duree': 0})], r)
+    L.chaine((t[0], 'port_sinon_si', 1), [('clignotement', {'etat': 'Désactiver', 'vitesse': 250, 'duree': 0}),
+                                          ('changer_image', {'image': im['orange']})], r)
+    L.chaine((t[0], 'port_sinon', 2), [('clignotement', {'etat': 'Désactiver', 'vitesse': 250, 'duree': 0}),
+                                       ('changer_image', {'image': im['vert']})], r)
+    ecrire_prefab(i, [cadre, plein], L, {}, [], ['rate', 'game_over'], prefixe=PREFIXE_UI)
+    apercu = Image.open(os.path.join(dossier, im['cadre'])).convert('RGBA')
+    v = Image.open(os.path.join(dossier, im['orange'])).convert('RGBA').resize((1000, 100), Image.LANCZOS)
+    apercu.alpha_composite(v, (200, 34))
+    vignette_image(i, apercu)
+
+    # 3. score qui « pop » ---------------------------------------------------
+    i = 'score_pop'
+    dossier = os.path.join(PREFABS, i)
+    img = image_score(dossier)
+    panneau = objet_bouton(i, img, 560, 140)
+    chiffre = objet_texte(i + '_valeur', panneau, '0', 'Fredoka', 80, '#FFFFFF', 320, 100, 190, 20)
+    chiffre['variablesLocales'] = [variable_locale('score', 0)]
+    v = i + '_valeur'
+    L = Logique()
+    e = L.evenement('NoeudEventClicObjet', i)
+    L.chaine(e, [('ajouter_variable', {'valeur': 10}, 'score'),
+                 ('modifier_propriete', {'propriete': 'texte', 'valeur': '=score'}),
+                 ('modifier_taille', {'x': 1.4, 'y': 1.4}), particules('Etincelles'), son('power_up', 70),
+                 ('attendre', {'duree': 0.12}), ('modifier_taille', {'x': 1, 'y': 1})], v)
+    ecrire_prefab(i, [panneau, chiffre], L, {}, ['Fredoka'], ['power_up'], prefixe=PREFIXE_UI)
+    vignette_image(i, Image.open(os.path.join(dossier, img)).convert('RGBA'))
+
+    # 4. fenêtre de pause ----------------------------------------------------
+    i = 'fenetre_pause'
+    dossier = os.path.join(PREFABS, i)
+    im = images_pause(dossier)
+    bouton = placer(objet_bouton('pause_bouton', im['bouton'], 150, 150), 0, 0, 900)
+    fenetre = placer(objet_bouton('pause_fenetre', im['panneau'], 700, 760), 250, 0, 900)
+    voile = placer(objet_bouton('pause_voile', im['voile'], 4000, 3000), -1650, -1120, 899, fenetre, False)
+    titre = placer(objet_texte('pause_titre', fenetre, 'PAUSE', 'Fredoka', 84, '#E6EDF7', 600, 110, 50, 40), 50, 40, 901, fenetre)
+    objets = [bouton, fenetre, voile, titre]
+    boutons = {}
+    for k, (cle, libelle) in enumerate((('reprendre', 'Resume'), ('recommencer', 'Restart'), ('quitter', 'Quit'))):
+        bt = placer(objet_bouton('pause_' + cle, im[cle], 520, 120), 90, 200 + k * 170, 901, fenetre)
+        tx = placer(objet_texte('pause_txt_' + cle, bt, libelle, 'Fredoka', 60, '#FFFFFF', 480, 90, 20, 14), 20, 14, 902, bt)
+        objets += [bt, tx]
+        boutons[cle] = bt
+    L = Logique()
+    e = L.evenement('NoeudEventStart')
+    L.action(e, 'visibilite', {'valeur': 'false'}, 'pause_fenetre')
+    for classe, cible in (('NoeudEventClicObjet', 'pause_bouton'), ('NoeudEventBoutonRetour', None)):
+        e = L.evenement(classe, cible)
+        p = L.action(e, 'visibilite', {'valeur': 'true'}, 'pause_fenetre')
+        p = L.action(p, 'visibilite', {'valeur': 'true'}, 'pause_voile')
+        p = L.action(p, 'pause_jeu', {}, None)
+        L.action(p, 'jouer_son', {'fichier': 'assets_ludexa/Sons/pop.ogg', 'volume': 70}, None)
+    e = L.evenement('NoeudEventClicObjet', 'pause_reprendre')
+    p = L.action(e, 'reprendre_jeu', {}, None)
+    p = L.action(p, 'visibilite', {'valeur': 'false'}, 'pause_fenetre')
+    p = L.action(p, 'visibilite', {'valeur': 'false'}, 'pause_voile')
+    L.action(p, 'jouer_son', {'fichier': 'assets_ludexa/Sons/pop.ogg', 'volume': 70}, None)
+    e = L.evenement('NoeudEventClicObjet', 'pause_recommencer')
+    p = L.action(e, 'reprendre_jeu', {}, None)
+    p = L.action(p, 'visibilite', {'valeur': 'false'}, 'pause_fenetre')
+    p = L.action(p, 'visibilite', {'valeur': 'false'}, 'pause_voile')
+    L.action(p, 'recommencer_scene', {}, None)
+    e = L.evenement('NoeudEventClicObjet', 'pause_quitter')
+    L.action(e, 'quitter_jeu', {}, None)
+    ecrire_prefab(i, objets, L, {}, ['Fredoka'], ['pop'], prefixe=PREFIXE_UI)
+    apercu = Image.open(os.path.join(dossier, im['panneau'])).convert('RGBA')
+    for k, cle in enumerate(('reprendre', 'recommencer', 'quitter')):
+        apercu.alpha_composite(Image.open(os.path.join(dossier, im[cle])).convert('RGBA'), (180, 400 + k * 340))
+    vignette_image(i, apercu)
+
+
 if __name__ == '__main__':
-    construire()
-    print('7 prefabs écrits dans', PREFABS)
+    lot = sys.argv[2] if len(sys.argv) > 2 else 'boutons'
+    if lot == 'interface':
+        construire_interface()
+        print('4 prefabs d\'interface écrits dans', PREFABS)
+    else:
+        construire()
+        print('7 prefabs écrits dans', PREFABS)

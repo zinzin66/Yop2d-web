@@ -81,6 +81,12 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   polices OFL) puis `generer_prefabs.py`. DOCUMENTATION FAITE le 11/10/2026 (demande de l'utilisateur) : 9e guide « prefabs » (9 langues), accueil
   (cartes « Objets prêts à l'emploi à télécharger » et « Un style de dialogue à votre goût », FAQ « Qu'est-ce qu'un prefab ? » : 24 questions,
   35 cartes), llms.txt (section prefabs lue dans prefabs/prefabs.json), sitemap. Ne pas confondre avec la carte « Scènes comme objets (prefabs) ».
+  11/10/2026 (soir) : 2e lot « Interface » (4 prefabs, `python3 outils/creer_prefabs_styles.py <clone du moteur> interface`, ne pas relancer
+  sans l'argument : chaque lancement refait des identifiants neufs) : `interrupteur` (ON/OFF, variable locale « etat », animation 7 images),
+  `barre_vie` (remplissage = image dont la largeur suit « =vie * 6 », 3 couleurs, clignote sous 30, se remplit à zéro), `score_pop` (variable
+  « score », le chiffre grossit + étincelles), `fenetre_pause` (bouton ⏸ + fenêtre Reprendre / Recommencer / Quitter, voile sombre, bouton
+  retour du téléphone ; masquée par « Au démarrage »). Les formules ne nomment JAMAIS un objet (l'import renomme « _2 » sans changer les
+  formules) : elles lisent la variable de l'objet visé par le nœud. Pas encore testés sur tablette ; documentation (guide, accueil) à ajouter.
 
 ## Aide (aide.html)
 - Deux onglets : **Nœuds** et **Guides**.

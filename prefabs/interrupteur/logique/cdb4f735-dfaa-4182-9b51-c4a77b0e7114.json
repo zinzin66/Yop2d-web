@@ -1,0 +1,163 @@
+{
+  "liens": [
+    {
+      "idArrivee": "87054b33-6336-4903-87b4-01fc0fa3e3dd",
+      "idDepart": "6ed0e8d0-0b78-4042-ab16-14d6c48d16f2",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "Suivant"
+    },
+    {
+      "idArrivee": "4069cde7-6b47-4eb3-b7dc-9bf2d94fc8a6",
+      "idDepart": "87054b33-6336-4903-87b4-01fc0fa3e3dd",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "port_vrai"
+    },
+    {
+      "idArrivee": "77100e50-a1d6-4e68-8cc1-decfb76bbf7c",
+      "idDepart": "4069cde7-6b47-4eb3-b7dc-9bf2d94fc8a6",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "port_suivant"
+    },
+    {
+      "idArrivee": "c0dc8ba7-25ba-4953-961a-e060ece570f8",
+      "idDepart": "77100e50-a1d6-4e68-8cc1-decfb76bbf7c",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "port_suivant"
+    },
+    {
+      "idArrivee": "917d2ebb-601e-41e1-a16d-8ed2c6e8ae7a",
+      "idDepart": "87054b33-6336-4903-87b4-01fc0fa3e3dd",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 1,
+      "portArrivee": "port_entrer",
+      "portDepart": "port_faux"
+    },
+    {
+      "idArrivee": "e9aae2bb-bf82-4b1c-9afb-3ed6fbdad1a8",
+      "idDepart": "917d2ebb-601e-41e1-a16d-8ed2c6e8ae7a",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "port_suivant"
+    },
+    {
+      "idArrivee": "0902339c-beca-47e3-925a-34cf59af33ca",
+      "idDepart": "e9aae2bb-bf82-4b1c-9afb-3ed6fbdad1a8",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "port_suivant"
+    }
+  ],
+  "noeuds": [
+    {
+      "classeType": "com.ludexa.moteur.NoeudEventClicObjet",
+      "id": "6ed0e8d0-0b78-4042-ab16-14d6c48d16f2",
+      "parametres": {},
+      "portsEntree": [],
+      "x": 340.0,
+      "y": 120.0,
+      "cibleNom": "interrupteur"
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "condition",
+      "id": "87054b33-6336-4903-87b4-01fc0fa3e3dd",
+      "cibleNom": "interrupteur",
+      "parametres": {
+        "condition.condition": "etat == 0"
+      },
+      "portsEntree": [],
+      "x": 670.0,
+      "y": 120.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "modifier_variable",
+      "id": "4069cde7-6b47-4eb3-b7dc-9bf2d94fc8a6",
+      "cibleNom": "interrupteur",
+      "parametres": {
+        "modifier_variable.valeur": "1"
+      },
+      "portsEntree": [],
+      "x": 1000.0,
+      "y": 120.0,
+      "cibleVariableNom": "etat"
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "jouer_animation",
+      "id": "77100e50-a1d6-4e68-8cc1-decfb76bbf7c",
+      "cibleNom": "interrupteur",
+      "parametres": {
+        "jouer_animation.animation": "interrupteur_on",
+        "jouer_animation.vitesse": "24",
+        "jouer_animation.boucle": "false"
+      },
+      "portsEntree": [],
+      "x": 1330.0,
+      "y": 120.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "jouer_son",
+      "id": "c0dc8ba7-25ba-4953-961a-e060ece570f8",
+      "cibleNom": "interrupteur",
+      "parametres": {
+        "jouer_son.fichier": "assets_ludexa/Sons/power_up.ogg",
+        "jouer_son.volume": "60"
+      },
+      "portsEntree": [],
+      "x": 1660.0,
+      "y": 120.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "modifier_variable",
+      "id": "917d2ebb-601e-41e1-a16d-8ed2c6e8ae7a",
+      "cibleNom": "interrupteur",
+      "parametres": {
+        "modifier_variable.valeur": "0"
+      },
+      "portsEntree": [],
+      "x": 1000.0,
+      "y": 380.0,
+      "cibleVariableNom": "etat"
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "jouer_animation",
+      "id": "e9aae2bb-bf82-4b1c-9afb-3ed6fbdad1a8",
+      "cibleNom": "interrupteur",
+      "parametres": {
+        "jouer_animation.animation": "interrupteur_off",
+        "jouer_animation.vitesse": "24",
+        "jouer_animation.boucle": "false"
+      },
+      "portsEntree": [],
+      "x": 1330.0,
+      "y": 380.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "jouer_son",
+      "id": "0902339c-beca-47e3-925a-34cf59af33ca",
+      "cibleNom": "interrupteur",
+      "parametres": {
+        "jouer_son.fichier": "assets_ludexa/Sons/pop.ogg",
+        "jouer_son.volume": "60"
+      },
+      "portsEntree": [],
+      "x": 1660.0,
+      "y": 380.0
+    }
+  ]
+}
