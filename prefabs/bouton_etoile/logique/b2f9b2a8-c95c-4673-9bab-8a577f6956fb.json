@@ -1,0 +1,112 @@
+{
+  "liens": [
+    {
+      "idArrivee": "00fc6e6c-96a2-4280-a045-e193084e79e5",
+      "idDepart": "5e643d97-61c3-44ee-bc6d-d7eacf4a428a",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "Suivant"
+    },
+    {
+      "idArrivee": "9e90b6e6-9c70-4c01-b55f-14ac291b2c8a",
+      "idDepart": "c877c48d-e511-43e2-a92d-1f2cb60717f8",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "Suivant"
+    },
+    {
+      "idArrivee": "36d406dd-88d9-4a59-9f65-adc809d90a51",
+      "idDepart": "9e90b6e6-9c70-4c01-b55f-14ac291b2c8a",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "port_suivant"
+    },
+    {
+      "idArrivee": "ce8a6d9c-7989-46cc-9e92-1b9b3954eebe",
+      "idDepart": "36d406dd-88d9-4a59-9f65-adc809d90a51",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "port_suivant"
+    }
+  ],
+  "noeuds": [
+    {
+      "classeType": "com.ludexa.moteur.NoeudEventStart",
+      "id": "5e643d97-61c3-44ee-bc6d-d7eacf4a428a",
+      "parametres": {},
+      "portsEntree": [],
+      "x": 340.0,
+      "y": 120.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "jouer_animation",
+      "id": "00fc6e6c-96a2-4280-a045-e193084e79e5",
+      "cibleNom": "bouton_etoile",
+      "parametres": {
+        "jouer_animation.animation": "bouton_etoile_tourne",
+        "jouer_animation.vitesse": "12",
+        "jouer_animation.boucle": "true"
+      },
+      "portsEntree": [],
+      "x": 670.0,
+      "y": 120.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudEventClicObjet",
+      "id": "c877c48d-e511-43e2-a92d-1f2cb60717f8",
+      "parametres": {},
+      "portsEntree": [],
+      "x": 340.0,
+      "y": 450.0,
+      "cibleNom": "bouton_etoile"
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "effet_particules",
+      "id": "9e90b6e6-9c70-4c01-b55f-14ac291b2c8a",
+      "cibleNom": "bouton_etoile",
+      "parametres": {
+        "effet_particules.modele": "Etincelles",
+        "effet_particules.quantite": "0",
+        "effet_particules.couleur": "",
+        "effet_particules.taille": "1",
+        "effet_particules.image": ""
+      },
+      "portsEntree": [],
+      "x": 670.0,
+      "y": 450.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "sautiller",
+      "id": "36d406dd-88d9-4a59-9f65-adc809d90a51",
+      "cibleNom": "bouton_etoile",
+      "parametres": {
+        "sautiller.intensite": "8",
+        "sautiller.duree": "300",
+        "sautiller.infini": "false"
+      },
+      "portsEntree": [],
+      "x": 1000.0,
+      "y": 450.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "jouer_son",
+      "id": "ce8a6d9c-7989-46cc-9e92-1b9b3954eebe",
+      "cibleNom": "bouton_etoile",
+      "parametres": {
+        "jouer_son.fichier": "assets_ludexa/Sons/power_up.ogg",
+        "jouer_son.volume": "80"
+      },
+      "portsEntree": [],
+      "x": 1330.0,
+      "y": 450.0
+    }
+  ]
+}

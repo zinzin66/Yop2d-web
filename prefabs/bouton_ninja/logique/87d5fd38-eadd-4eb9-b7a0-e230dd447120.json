@@ -1,0 +1,112 @@
+{
+  "liens": [
+    {
+      "idArrivee": "a39fb8dd-ae29-4bb2-9235-a7c5646d85ea",
+      "idDepart": "86a75cf9-7c68-40c1-865b-28f02a04e11d",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "Suivant"
+    },
+    {
+      "idArrivee": "4c0e543f-0c05-4b2c-b960-ceb3de47a0c3",
+      "idDepart": "f1c361ab-651b-4169-8414-6744678c9076",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "Suivant"
+    },
+    {
+      "idArrivee": "5cea0f3a-2d27-4f30-b71f-3d798c73af73",
+      "idDepart": "4c0e543f-0c05-4b2c-b960-ceb3de47a0c3",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "port_suivant"
+    },
+    {
+      "idArrivee": "da00bc8a-dd0b-44d3-bf4a-c74cf876cdad",
+      "idDepart": "5cea0f3a-2d27-4f30-b71f-3d798c73af73",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "port_suivant"
+    }
+  ],
+  "noeuds": [
+    {
+      "classeType": "com.ludexa.moteur.NoeudEventStart",
+      "id": "86a75cf9-7c68-40c1-865b-28f02a04e11d",
+      "parametres": {},
+      "portsEntree": [],
+      "x": 340.0,
+      "y": 120.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "jouer_animation",
+      "id": "a39fb8dd-ae29-4bb2-9235-a7c5646d85ea",
+      "cibleNom": "bouton_ninja",
+      "parametres": {
+        "jouer_animation.animation": "bouton_ninja_marche",
+        "jouer_animation.vitesse": "9",
+        "jouer_animation.boucle": "true"
+      },
+      "portsEntree": [],
+      "x": 670.0,
+      "y": 120.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudEventClicObjet",
+      "id": "f1c361ab-651b-4169-8414-6744678c9076",
+      "parametres": {},
+      "portsEntree": [],
+      "x": 340.0,
+      "y": 450.0,
+      "cibleNom": "bouton_ninja"
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "effet_particules",
+      "id": "4c0e543f-0c05-4b2c-b960-ceb3de47a0c3",
+      "cibleNom": "bouton_ninja",
+      "parametres": {
+        "effet_particules.modele": "Poussiere",
+        "effet_particules.quantite": "0",
+        "effet_particules.couleur": "",
+        "effet_particules.taille": "1",
+        "effet_particules.image": ""
+      },
+      "portsEntree": [],
+      "x": 670.0,
+      "y": 450.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "sautiller",
+      "id": "5cea0f3a-2d27-4f30-b71f-3d798c73af73",
+      "cibleNom": "bouton_ninja",
+      "parametres": {
+        "sautiller.intensite": "6",
+        "sautiller.duree": "250",
+        "sautiller.infini": "false"
+      },
+      "portsEntree": [],
+      "x": 1000.0,
+      "y": 450.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "jouer_son",
+      "id": "da00bc8a-dd0b-44d3-bf4a-c74cf876cdad",
+      "cibleNom": "bouton_ninja",
+      "parametres": {
+        "jouer_son.fichier": "assets_ludexa/Sons/ressort.ogg",
+        "jouer_son.volume": "70"
+      },
+      "portsEntree": [],
+      "x": 1330.0,
+      "y": 450.0
+    }
+  ]
+}

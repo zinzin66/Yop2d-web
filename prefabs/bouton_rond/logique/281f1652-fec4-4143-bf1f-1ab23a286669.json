@@ -1,0 +1,112 @@
+{
+  "liens": [
+    {
+      "idArrivee": "13f44e87-a7bc-4728-94c0-ef5255461b97",
+      "idDepart": "df5d263f-0a51-47f9-93cb-c059432208c8",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "Suivant"
+    },
+    {
+      "idArrivee": "2a05aec7-aa00-49ad-a888-bf96f5be077b",
+      "idDepart": "307381a6-ee13-4941-97e5-c10171ba77df",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "Suivant"
+    },
+    {
+      "idArrivee": "2207baa1-970c-47b4-b351-d8800b5017f7",
+      "idDepart": "2a05aec7-aa00-49ad-a888-bf96f5be077b",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "port_suivant"
+    },
+    {
+      "idArrivee": "0e7d708c-1bb9-4dfd-a735-14bc37e65910",
+      "idDepart": "2207baa1-970c-47b4-b351-d8800b5017f7",
+      "indexPortArrivee": 0,
+      "indexPortDepart": 0,
+      "portArrivee": "port_entrer",
+      "portDepart": "port_suivant"
+    }
+  ],
+  "noeuds": [
+    {
+      "classeType": "com.ludexa.moteur.NoeudEventStart",
+      "id": "df5d263f-0a51-47f9-93cb-c059432208c8",
+      "parametres": {},
+      "portsEntree": [],
+      "x": 340.0,
+      "y": 120.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "jouer_animation",
+      "id": "13f44e87-a7bc-4728-94c0-ef5255461b97",
+      "cibleNom": "bouton_rond",
+      "parametres": {
+        "jouer_animation.animation": "bouton_rond_ondes",
+        "jouer_animation.vitesse": "10",
+        "jouer_animation.boucle": "true"
+      },
+      "portsEntree": [],
+      "x": 670.0,
+      "y": 120.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudEventClicObjet",
+      "id": "307381a6-ee13-4941-97e5-c10171ba77df",
+      "parametres": {},
+      "portsEntree": [],
+      "x": 340.0,
+      "y": 450.0,
+      "cibleNom": "bouton_rond"
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "sautiller",
+      "id": "2a05aec7-aa00-49ad-a888-bf96f5be077b",
+      "cibleNom": "bouton_rond",
+      "parametres": {
+        "sautiller.intensite": "14",
+        "sautiller.duree": "400",
+        "sautiller.infini": "false"
+      },
+      "portsEntree": [],
+      "x": 670.0,
+      "y": 450.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "effet_particules",
+      "id": "2207baa1-970c-47b4-b351-d8800b5017f7",
+      "cibleNom": "bouton_rond",
+      "parametres": {
+        "effet_particules.modele": "Confettis",
+        "effet_particules.quantite": "0",
+        "effet_particules.couleur": "",
+        "effet_particules.taille": "1",
+        "effet_particules.image": ""
+      },
+      "portsEntree": [],
+      "x": 1000.0,
+      "y": 450.0
+    },
+    {
+      "classeType": "com.ludexa.moteur.NoeudGenerique",
+      "cleNoeud": "jouer_son",
+      "id": "0e7d708c-1bb9-4dfd-a735-14bc37e65910",
+      "cibleNom": "bouton_rond",
+      "parametres": {
+        "jouer_son.fichier": "assets_ludexa/Sons/power_up.ogg",
+        "jouer_son.volume": "80"
+      },
+      "portsEntree": [],
+      "x": 1330.0,
+      "y": 450.0
+    }
+  ]
+}

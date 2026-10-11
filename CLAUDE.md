@@ -75,7 +75,10 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   ou + → Prefab → Image de l'emplacement → « Prefabs à télécharger »). Un dossier par prefab (`prefabs/<id>/` = petit projet Yop2D à UNE scène +
   `prefab.json` nom/description 9 langues, licence), mode d'emploi `prefabs/LISEZMOI.md`. `python3 outils/generer_prefabs.py` fabrique
   `prefabs/<id>-<empreinte>.zip`, `<id>.png`, `prefabs.json` ; le robot `.github/workflows/prefabs.yml` le lance tout seul à chaque dépôt sur `main`.
-  Premiers prefabs (CC0, de l'utilisateur) : bouton animé rectangulaire en 6 couleurs + variante « texte animé ». AIDE / ACCUEIL / llms.txt / guide :
+  Premiers prefabs (CC0, de l'utilisateur) : bouton animé rectangulaire en 6 couleurs + variante « texte animé ».
+  11/10/2026 : 7 prefabs « boutons de styles » (étoile qui tourne, ninja pixel à cheval, néon, discret avec halo, verre, texte souligné,
+  rond ▶) fabriqués par `python3 outils/creer_prefabs_styles.py <clone du moteur>` (images dessinées, sprites ninja Superpowers CC0, sons Yop2D,
+  polices OFL) puis `generer_prefabs.py`. AIDE / ACCUEIL / llms.txt / guide :
   À ÉCRIRE quand l'utilisateur aura validé le test (demande du 11/10/2026).
 
 ## Aide (aide.html)
