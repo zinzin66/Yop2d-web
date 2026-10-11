@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (153) | Referencia</title>
-<meta name="description" content="Lista completa de los 153 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (156) | Referencia</title>
+<meta name="description" content="Lista completa de los 156 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 153 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 156 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-transiciones">Transiciones</a><a href="#c11-animaciones">Animaciones</a><a href="#c12-audio">Audio</a><a href="#c13-historia-y-diálogos">Historia y diálogos</a><a href="#c14-valores-cables-verdes">Valores (cables verdes)</a><a href="#c15-filtros-de-pantalla">Filtros de pantalla</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -768,6 +768,21 @@
 <div class="schema"><b>Entradas:</b> Personaje, Él…, Emoción, Lugar en pantalla, Entrada del personaje</div>
 <p>Hace entrar a un personaje de la historia (emoción, lugar, entrada: fundido, deslizar, salto), cambia su emoción o lo hace salir, sin que hable.</p>
 <p class="exemple"><b>Ejemplo:</b> Lyn llega por la derecha mientras Hana habla.</p>
+</div>
+<div class="fiche"><h3>Animar un personaje</h3>
+<div class="schema"><b>Entradas:</b> Personaje, Ir a…, Tamaño (100 = normal, 120 = mayor), Número de saltitos, Duración (segundos), Estilo del movimiento, Sacudida (tiembla), Esperar al final antes de seguir</div>
+<p>Anima a un personaje que ya está en pantalla: se desliza a otro lugar, crece o encoge, da saltitos o tiembla. Tú eliges la duración y el estilo (constante, suave, rápido y suave, se pasa un poco, rebote). «Esperar al final» detiene la historia hasta que acaba el movimiento; si no, la historia sigue mientras se mueve. El personaje debe haberse mostrado antes con «Mostrar / ocultar un personaje».</p>
+<p class="exemple"><b>Ejemplo:</b> Hana se desliza de izquierda a derecha con un rebote mientras dice «¡Espérame!».</p>
+</div>
+<div class="fiche"><h3>Modo novela (texto a pantalla completa)</h3>
+<div class="schema"><b>Entrada:</b> ¿Qué hacer?</div>
+<p>Pasa al «modo novela»: el texto llena toda la pantalla sobre un fondo oscurecido y las frases de «Decir una frase» se van sumando una bajo otra, como en un libro. Cuando la página se llena, pasa sola. «Página nueva» la borra enseguida; «Volver al cuadro de diálogo» devuelve el cuadro habitual.</p>
+<p class="exemple"><b>Ejemplo:</b> Un relato nocturno en modo novela y luego vuelta al cuadro de diálogo para la conversación.</p>
+</div>
+<div class="fiche"><h3>Escena rejugable (galería)</h3>
+<div class="schema"><b>Entradas:</b> Inicio o final de la escena, Nombre de la escena (galería)</div>
+<p>Marca una escena que el jugador podrá volver a ver desde «Finales y galería» de la «Pantalla de título de la historia» (pestaña «Escenas para repetir»). Pon uno al «Inicio de la escena»: al pasar por él, la escena se desbloquea y se recuerda el estado de la historia. Pon otro al «Final de la escena»: al repetirla, la historia se detiene ahí y vuelve a la galería. Durante una repetición no se guarda nada. Las músicas lanzadas con «Reproducir música» también se desbloquean en la pestaña «Músicas».</p>
+<p class="exemple"><b>Ejemplo:</b> «El claro»: un nodo al comienzo del encuentro con Hana y otro justo después de que se vaya.</p>
 </div>
 <div class="fiche"><h3>Terminar la historia</h3>
 <div class="schema"><b>Entrada:</b> Nombre del final (opcional: cuenta en «Finales y galería»)</div>

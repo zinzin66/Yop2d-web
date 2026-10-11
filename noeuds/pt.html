@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos os nós do Yop2D (153) | Referência</title>
-<meta name="description" content="Lista completa dos 153 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
+<title>Todos os nós do Yop2D (156) | Referência</title>
+<meta name="description" content="Lista completa dos 156 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/pt.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 153 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
+<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 156 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
 <p><strong>Categorias</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-cena-e-hud">Cena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aparência-e-objetos">Aparência e Objetos</a><a href="#c5-variáveis-e-inventário">Variáveis e Inventário</a><a href="#c6-lógica-e-condições">Lógica e Condições</a><a href="#c7-textos-e-diálogos">Textos e Diálogos</a><a href="#c8-movimentos-e-ia">Movimentos e IA</a><a href="#c9-grades-e-quebra-cabeças">Grades e quebra-cabeças</a><a href="#c10-transições">Transições</a><a href="#c11-animações">Animações</a><a href="#c12-áudio">Áudio</a><a href="#c13-história-e-diálogos">História e diálogos</a><a href="#c14-valores-fios-verdes">Valores (fios verdes)</a><a href="#c15-filtros-de-tela">Filtros de tela</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -768,6 +768,21 @@
 <div class="schema"><b>Entradas:</b> Personagem, Ele…, Emoção, Lugar na tela, Entrada do personagem</div>
 <p>Faz entrar um personagem da história (emoção, lugar, entrada: fade, deslizar, pulo), muda a emoção dele ou o faz sair, sem falar.</p>
 <p class="exemple"><b>Exemplo:</b> Lyn chega pela direita enquanto Hana fala.</p>
+</div>
+<div class="fiche"><h3>Animar um personagem</h3>
+<div class="schema"><b>Entradas:</b> Personagem, Ir para…, Tamanho (100 = normal, 120 = maior), Número de pulinhos, Duração (segundos), Estilo do movimento, Tremer (ele treme), Esperar o fim antes de continuar</div>
+<p>Anima um personagem que já está na tela: ele desliza para outro lugar, cresce ou diminui, dá pulinhos ou treme. Você escolhe a duração e o estilo (constante, suave, rápido e suave, passa um pouco, quique). “Esperar o fim” segura a história até o movimento acabar; senão ela continua enquanto ele se move. O personagem precisa ter sido mostrado antes com “Mostrar / esconder um personagem”.</p>
+<p class="exemple"><b>Exemplo:</b> Hana desliza da esquerda para a direita quicando enquanto diz “Espere por mim!”.</p>
+</div>
+<div class="fiche"><h3>Modo romance (texto em tela cheia)</h3>
+<div class="schema"><b>Entrada:</b> O que fazer?</div>
+<p>Passa para o “modo romance”: o texto ocupa a tela inteira sobre um fundo escurecido e as frases de “Dizer uma frase” vão se somando uma abaixo da outra, como em um livro. Quando a página enche, ela vira sozinha. “Página nova” apaga na hora; “Voltar à caixa de diálogo” traz de volta a caixa de sempre.</p>
+<p class="exemple"><b>Exemplo:</b> Uma narração noturna em modo romance e depois volta à caixa de diálogo para a conversa.</p>
+</div>
+<div class="fiche"><h3>Cena para rever (galeria)</h3>
+<div class="schema"><b>Entradas:</b> Início ou fim da cena, Nome da cena (galeria)</div>
+<p>Marca uma cena que o jogador poderá rever em “Finais e galeria” da “Tela de título da história” (aba “Cenas para rever”). Coloque um no “Início da cena”: ao passar por ele, a cena é liberada e o estado da história é guardado. Coloque outro no “Fim da cena”: ao rever, a história para ali e volta à galeria. Durante uma revisão nada é salvo. As músicas tocadas com “Tocar música” também são liberadas na aba “Músicas”.</p>
+<p class="exemple"><b>Exemplo:</b> “A clareira”: um nó no começo do encontro com Hana e outro logo depois que ela vai embora.</p>
 </div>
 <div class="fiche"><h3>Terminar a história</h3>
 <div class="schema"><b>Entrada:</b> Nome do final (opcional: conta em «Finais e galeria»)</div>

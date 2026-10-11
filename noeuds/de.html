@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (153) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 153 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (156) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 156 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 153 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 156 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
 <nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-übergänge">Übergänge</a><a href="#c11-animationen">Animationen</a><a href="#c12-audio">Audio</a><a href="#c13-geschichte-und-dialoge">Geschichte und Dialoge</a><a href="#c14-werte-grüne-kabel">Werte (grüne Kabel)</a><a href="#c15-bildschirmfilter">Bildschirmfilter</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
@@ -768,6 +768,21 @@
 <div class="schema"><b>Eingänge:</b> Figur, Die Figur…, Gefühl, Platz auf dem Bildschirm, Auftritt der Figur</div>
 <p>Lässt eine Figur der Geschichte auftreten (Gefühl, Platz, Auftritt: einblenden, gleiten, springen), ändert ihr Gefühl oder lässt sie gehen, ohne dass sie spricht.</p>
 <p class="exemple"><b>Beispiel:</b> Lyn kommt von rechts, während Hana spricht.</p>
+</div>
+<div class="fiche"><h3>Figur animieren</h3>
+<div class="schema"><b>Eingänge:</b> Figur, Gehe zu…, Größe (100 = normal, 120 = größer), Anzahl kleiner Sprünge, Dauer (Sekunden), Bewegungsart, Zittern (er bebt), Auf das Ende warten, dann weiter</div>
+<p>Animiert eine Figur, die schon auf dem Bildschirm ist: sie gleitet an einen anderen Platz, wird größer oder kleiner, hüpft oder zittert. Du stellst Dauer und Art ein (gleichmäßig, weich, schnell dann sanft, leicht überschießen, abprallen). „Auf das Ende warten“ hält die Geschichte an, bis die Bewegung vorbei ist; sonst geht sie weiter, während sich die Figur bewegt. Die Figur muss vorher mit „Figur zeigen / verstecken“ gezeigt worden sein.</p>
+<p class="exemple"><b>Beispiel:</b> Hana gleitet mit einem Abprallen von links nach rechts und sagt dabei „Warte auf mich!“.</p>
+</div>
+<div class="fiche"><h3>Romanmodus (Text im Vollbild)</h3>
+<div class="schema"><b>Eingang:</b> Was tun?</div>
+<p>Wechselt in den „Romanmodus“: Der Text füllt den ganzen Bildschirm auf abgedunkeltem Hintergrund, und die Sätze von „Einen Satz sagen“ reihen sich untereinander wie in einem Buch. Ist die Seite voll, wird sie von selbst umgeblättert. „Neue Seite“ löscht sie sofort; „Zurück zur Dialogbox“ bringt die gewohnte Box zurück.</p>
+<p class="exemple"><b>Beispiel:</b> Eine nächtliche Erzählung im Romanmodus, danach zurück zur Dialogbox für das Gespräch.</p>
+</div>
+<div class="fiche"><h3>Wiederholbare Szene (Galerie)</h3>
+<div class="schema"><b>Eingänge:</b> Anfang oder Ende der Szene, Name der Szene (Galerie)</div>
+<p>Markiert eine Szene, die der Spieler unter „Enden und Galerie“ des „Titelbildschirm der Geschichte“ noch einmal ansehen kann (Reiter „Szenen zum Wiederholen“). Setze einen am „Anfang der Szene“: Beim Vorbeikommen wird die Szene freigeschaltet und der Stand der Geschichte gemerkt. Setze einen weiteren am „Ende der Szene“: Beim Wiederholen endet die Geschichte dort und es geht zurück zur Galerie. Beim Wiederholen wird nichts gespeichert. Mit „Musik abspielen“ gestartete Musik wird ebenfalls im Reiter „Musik“ freigeschaltet.</p>
+<p class="exemple"><b>Beispiel:</b> „Die Lichtung“: ein Knoten am Anfang der Begegnung mit Hana, ein weiterer gleich nach ihrem Abschied.</p>
 </div>
 <div class="fiche"><h3>Geschichte beenden</h3>
 <div class="schema"><b>Eingang:</b> Name des Endes (freiwillig: zählt in „Enden und Galerie“)</div>

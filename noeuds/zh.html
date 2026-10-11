@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D 全部节点（153 个）| 参考</title>
-<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 153 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<title>Yop2D 全部节点（156 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 156 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 153 个节点，以及它们的设置（输入）和输出。</p>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 156 个节点，以及它们的设置（输入）和输出。</p>
 <p><strong>分类</strong></p>
 <nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-网格和益智">网格和益智</a><a href="#c10-转场">转场</a><a href="#c11-动画">动画</a><a href="#c12-音频">音频</a><a href="#c13-故事与对话">故事与对话</a><a href="#c14-数值-绿线">数值（绿线）</a><a href="#c15-屏幕滤镜">屏幕滤镜</a></nav>
 <h2 id="c1-事件">事件</h2>
@@ -768,6 +768,21 @@
 <div class="schema"><b>输入：</b> 角色, 他…, 表情, 屏幕位置, 角色出场</div>
 <p>让故事角色登场（表情、位置、出场方式：淡入、滑入、跳入），改变表情或让角色离场，不说话。</p>
 <p class="exemple"><b>示例：</b> Hana 说话时，Lyn 从右边登场。</p>
+</div>
+<div class="fiche"><h3>让角色动起来</h3>
+<div class="schema"><b>输入：</b> 角色, 移到…, 大小（100 = 正常，120 = 更大）, 小跳次数, 持续时间（秒）, 动作风格, 颤抖（发抖）, 等结束后再继续</div>
+<p>让已经在屏幕上的角色动起来：滑到另一个位置、变大或变小、小跳或发抖。可以设置时长和动作风格（匀速、平滑、先快后缓、略微过冲、弹跳）。选择“等结束后再继续”时，故事会等动作结束；否则动作的同时故事继续。角色必须先用 “显示 / 隐藏角色” 显示出来。</p>
+<p class="exemple"><b>示例：</b> 小花一边说“等等我！”，一边弹跳着从左边滑到右边。</p>
+</div>
+<div class="fiche"><h3>小说模式（全屏文字）</h3>
+<div class="schema"><b>输入：</b> 要做什么？</div>
+<p>切换到“小说模式”：文字铺满整个屏幕，背景变暗，“说一句话” 的句子像书一样一句接一句排列。页面写满后会自动翻页。“新的一页”会立刻清空；“回到对话框”则恢复平常的对话框。</p>
+<p class="exemple"><b>示例：</b> 用小说模式讲一段夜晚的叙述，再回到对话框进行对话。</p>
+</div>
+<div class="fiche"><h3>可重播场景（画廊）</h3>
+<div class="schema"><b>输入：</b> 场景的开头或结尾, 场景名称（画廊）</div>
+<p>标记一个玩家之后可以重看的场景，在 “故事标题画面” 的“结局与画廊”里（“可重播的场景”标签页）。在“场景开头”放一个：故事经过时，场景解锁并记住故事状态。在“场景结尾”放另一个：重播时故事到此结束并回到画廊。重播期间不会保存任何内容。用 “播放音乐” 播放的音乐也会在“音乐”标签页解锁。</p>
+<p class="exemple"><b>示例：</b> “林间空地”：与小花相遇的开头放一个，她离开之后放另一个。</p>
 </div>
 <div class="fiche"><h3>结束故事</h3>
 <div class="schema"><b>输入：</b> 结局名称（可选：计入“结局与画廊”）</div>
