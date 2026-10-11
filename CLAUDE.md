@@ -308,3 +308,5 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   pack en ligne des personnages de Breezy (FAIT : packs/personnages_breezy, CC0, ne pas servir à entraîner des IA). Licences : Rachel Chen et Potat0Master
   interdisent la redistribution (pas dans nos packs).
 - 10/10/2026 : 3e vidéo YouTube (filtres d'écran et transitions, szUu6p-jNmY) : en tête de VIDEOS (accueil 9 langues, llms.txt).
+- 11/10/2026 (soir) : descriptions des 3 nouveaux nœuds de dialogue (animer_personnage, mode_roman, scene_rejouable) écrites en 9 langues dans aide/source/descriptions (PAS ENCORE régénérées : à la sortie du moteur, lancer generer_aide_noeuds.py puis generer_pages_noeuds.py puis generer_accueil.py ; ajouter à l'accueil les cartes « Animer les personnages », « Galerie, scènes à rejouer et musiques », « Mode roman »).
+
