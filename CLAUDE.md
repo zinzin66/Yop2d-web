@@ -71,6 +71,13 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   (KayKit Dungeon Remastered CC0, vue plongeante case par case : case = 192 x 144 px, cadre commun 240 x 324, grille 48 ;
   outils/iso/preparer_pack_donjon.py du moteur).
 
+- `prefabs/` : **objets prêts à l'emploi à télécharger par le moteur** (depuis le 11/10/2026 : panneau Ressources → icône « Prefabs à télécharger »,
+  ou + → Prefab → Image de l'emplacement → « Prefabs à télécharger »). Un dossier par prefab (`prefabs/<id>/` = petit projet Yop2D à UNE scène +
+  `prefab.json` nom/description 9 langues, licence), mode d'emploi `prefabs/LISEZMOI.md`. `python3 outils/generer_prefabs.py` fabrique
+  `prefabs/<id>-<empreinte>.zip`, `<id>.png`, `prefabs.json` ; le robot `.github/workflows/prefabs.yml` le lance tout seul à chaque dépôt sur `main`.
+  Premiers prefabs (CC0, de l'utilisateur) : bouton animé rectangulaire en 6 couleurs + variante « texte animé ». AIDE / ACCUEIL / llms.txt / guide :
+  À ÉCRIRE quand l'utilisateur aura validé le test (demande du 11/10/2026).
+
 ## Aide (aide.html)
 - Deux onglets : **Nœuds** et **Guides**.
 - Contenu en JSON, un dossier par langue (fr, en, es, de, it, pt, ru, zh, ja) :
