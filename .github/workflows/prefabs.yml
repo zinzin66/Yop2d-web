@@ -1,0 +1,40 @@
+# Robot des PREFABS : quand un fichier change dans prefabs/<prefab>/ (sur main), il refabrique les prefabs
+# (zip, vignette, prefabs.json) avec outils/generer_prefabs.py et les enregistre. Le moteur les voit ensuite
+# dans « Prefabs à télécharger » (panneau Ressources de l'éditeur), sans nouvelle version du moteur.
+name: Prefabs en ligne
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'prefabs/*/**'
+      - 'outils/generer_prefabs.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prefabs
+  cancel-in-progress: false
+
+jobs:
+  prefabs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pillow
+        run: pip install pillow
+      - name: Fabriquer les prefabs
+        run: python3 outils/generer_prefabs.py
+      - name: Enregistrer
+        run: |
+          git config user.name "yop2d-prefabs[bot]"
+          git config user.email "prefabs@users.noreply.github.com"
+          git add -A prefabs
+          if git diff --cached --quiet; then echo "Rien à changer"; exit 0; fi
+          git commit -m "Prefabs refabriqués"
+          git push
