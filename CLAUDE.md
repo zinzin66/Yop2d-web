@@ -86,7 +86,7 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
   `barre_vie` (remplissage = image dont la largeur suit « =vie * 6 », 3 couleurs, clignote sous 30, se remplit à zéro), `score_pop` (variable
   « score », le chiffre grossit + étincelles), `fenetre_pause` (bouton ⏸ + fenêtre Reprendre / Recommencer / Quitter, voile sombre, bouton
   retour du téléphone ; masquée par « Au démarrage »). Les formules ne nomment JAMAIS un objet (l'import renomme « _2 » sans changer les
-  formules) : elles lisent la variable de l'objet visé par le nœud. Pas encore testés sur tablette ; documentation (guide, accueil) à ajouter.
+  formules) : elles lisent la variable de l'objet visé par le nœud. Pas encore testés sur tablette ; documentation (guide, accueil) à ajouter. 11/10/2026 : dans le moteur (pas encore publié), un prefab ajouté devient une VRAIE SCÈNE du projet liée à la scène ouverte (liste des Scènes : « ↳ nom » sous la scène qui l'utilise) : guide « prefabs » et FAQ à réécrire en 9 langues quand le moteur sera validé.
 
 ## Aide (aide.html)
 - Deux onglets : **Nœuds** et **Guides**.
@@ -308,3 +308,6 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   pack en ligne des personnages de Breezy (FAIT : packs/personnages_breezy, CC0, ne pas servir à entraîner des IA). Licences : Rachel Chen et Potat0Master
   interdisent la redistribution (pas dans nos packs).
 - 10/10/2026 : 3e vidéo YouTube (filtres d'écran et transitions, szUu6p-jNmY) : en tête de VIDEOS (accueil 9 langues, llms.txt).
+- 11/10/2026 (soir) : descriptions des 3 nouveaux nœuds de dialogue (animer_personnage, mode_roman, scene_rejouable) écrites en 9 langues dans aide/source/descriptions (PAS ENCORE régénérées : à la sortie du moteur, lancer generer_aide_noeuds.py puis generer_pages_noeuds.py puis generer_accueil.py ; ajouter à l'accueil les cartes « Animer les personnages », « Galerie, scènes à rejouer et musiques », « Mode roman »).
+- 11/10/2026 (nuit) : SORTIE PRÉPARÉE (moteur build 1088, version normale, APK seul, SANS AAB ; à publier : release v0.1.1088 Latest, Yop2D.apk, + itch.io). Site (branche ccr-e5a50d19-voomo0, PR à fusionner À LA PUBLICATION) : aide des nœuds 156 (Animer un personnage, Mode roman, Scène à rejouer), pages noeuds/, accueil (9 langues : 38 cartes dont « Animer les personnages », « Galerie, scènes à rejouer et musiques », « Mode roman » ; carte et FAQ prefab : un prefab ajouté devient sa propre scène + éléments d'interface ; FAQ visual novel complétée), guide « prefabs » réécrit (scène à part, éléments d'interface), llms.txt, 4 nouveaux prefabs d'interface déjà en ligne (PR #67). Dans le moteur : prefab = vraie scène liée, liste des Scènes avec prefabs décalés dessous, mouvement de celui qui parle réglable (durée + allure), bouton « Prefabs à télécharger » retiré de la fenêtre des assets.
+

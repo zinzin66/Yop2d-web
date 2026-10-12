@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D の全ノード（153 個）| リファレンス</title>
-<meta name="description" content="Android 向けコード不要 2D ゲームエンジン Yop2D の 153 個のビジュアルノードの一覧：各ノードの役割、設定、出力、使用例。">
+<title>Yop2D の全ノード（156 個）| リファレンス</title>
+<meta name="description" content="Android 向けコード不要 2D ゲームエンジン Yop2D の 156 個のビジュアルノードの一覧：各ノードの役割、設定、出力、使用例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/ja.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
 </header>
 <main>
-<p>Yop2D は、Android 向けの無料・コード不要の 2D ゲームエンジンです。ゲームのロジックは、Blueprint の中でつないだノード（ビジュアルブロック）で作ります。イベントがつながりを始め、そのあとにアクションや条件が続きます。このページでは、エディターの 153 個のノードを、設定（入力）と出力とともに説明します。</p>
+<p>Yop2D は、Android 向けの無料・コード不要の 2D ゲームエンジンです。ゲームのロジックは、Blueprint の中でつないだノード（ビジュアルブロック）で作ります。イベントがつながりを始め、そのあとにアクションや条件が続きます。このページでは、エディターの 156 個のノードを、設定（入力）と出力とともに説明します。</p>
 <p><strong>カテゴリー</strong></p>
 <nav class="sommaire"><a href="#c1-イベント">イベント</a><a href="#c2-シーンとhud">シーンとHUD</a><a href="#c3-時間">時間</a><a href="#c4-外観とオブジェクト">外観とオブジェクト</a><a href="#c5-変数とインベントリ">変数とインベントリ</a><a href="#c6-ロジックと条件">ロジックと条件</a><a href="#c7-テキストとダイアログ">テキストとダイアログ</a><a href="#c8-移動とai">移動とAI</a><a href="#c9-グリッドとパズル">グリッドとパズル</a><a href="#c10-画面の切りかえ">画面の切りかえ</a><a href="#c11-アニメーション">アニメーション</a><a href="#c12-オーディオ">オーディオ</a><a href="#c13-ストーリーと会話">ストーリーと会話</a><a href="#c14-値-緑の線">値（緑の線）</a><a href="#c15-画面フィルター">画面フィルター</a></nav>
 <h2 id="c1-イベント">イベント</h2>
@@ -768,6 +768,21 @@
 <div class="schema"><b>入力：</b> キャラ, キャラが…, 表情, 画面の位置, キャラの登場</div>
 <p>物語のキャラを登場させたり（表情、位置、登場：フェード、すべりこみ、ジャンプ）、表情を変えたり、退場させたりします。セリフはなし。</p>
 <p class="exemple"><b>例：</b> ハナが話している間にリンが右から登場。</p>
+</div>
+<div class="fiche"><h3>キャラを動かす</h3>
+<div class="schema"><b>入力：</b> キャラ, 移動先…, 大きさ（100 = ふつう、120 = 大きめ）, ジャンプの回数, 長さ（秒）, 動きのタイプ, ふるえる, 終わるまで待つ</div>
+<p>すでに画面にいるキャラを動かします。別の位置へすべる、大きく／小さくなる、ぴょんぴょん跳ぶ、ふるえる。長さと動きのタイプ（一定、なめらか、速→ゆっくり、少し行き過ぎる、バウンド）を決められます。「終わるまで待つ」を選ぶと動きが終わるまで話が止まり、選ばなければ動きながら話が進みます。先に 「キャラを出す / 消す」 でキャラを出しておく必要があります。</p>
+<p class="exemple"><b>例：</b> ハナが「待ってー！」と言いながら、バウンドして左から右へすべる。</p>
+</div>
+<div class="fiche"><h3>ノベルモード（全画面テキスト）</h3>
+<div class="schema"><b>入力：</b> どうする？</div>
+<p>「ノベルモード」に切りかえます。背景が暗くなり、文字が画面いっぱいに広がって、「セリフを言う」 の文が本のように順に並びます。ページがいっぱいになると自動でめくられます。「新しいページ」はすぐに文字を消し、「会話ボックスに戻す」はいつものボックスに戻します。</p>
+<p class="exemple"><b>例：</b> 夜のナレーションをノベルモードで見せて、会話は会話ボックスに戻す。</p>
+</div>
+<div class="fiche"><h3>リプレイできる場面（ギャラリー）</h3>
+<div class="schema"><b>入力：</b> 場面のはじめか終わり, 場面の名前（ギャラリー）</div>
+<p>プレイヤーがあとから見返せる場面に印をつけます。「物語のタイトル画面」 の「エンディングとギャラリー」（「リプレイできる場面」タブ）で見られます。「場面のはじめ」に1つ置くと、そこを通ったときに場面が解放され、物語の状態が記憶されます。「場面の終わり」にもう1つ置くと、リプレイ時はそこで終わってギャラリーに戻ります。リプレイ中は何も保存されません。「音楽を再生」 で流した音楽も「音楽」タブで解放されます。</p>
+<p class="exemple"><b>例：</b> 「空き地」：ハナと出会う場面のはじめに1つ、彼女が去った直後にもう1つ。</p>
 </div>
 <div class="fiche"><h3>物語を終える</h3>
 <div class="schema"><b>入力：</b> エンディングの名前（なくてもよい：「エンディングとギャラリー」に入る）</div>

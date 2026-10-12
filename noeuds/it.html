@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutti i nodi di Yop2D (153) | Riferimento</title>
-<meta name="description" content="Elenco completo dei 153 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
+<title>Tutti i nodi di Yop2D (156) | Riferimento</title>
+<meta name="description" content="Elenco completo dei 156 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 153 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
+<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 156 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
 <p><strong>Categorie</strong></p>
 <nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-griglie-e-puzzle">Griglie e puzzle</a><a href="#c10-transizioni">Transizioni</a><a href="#c11-animazioni">Animazioni</a><a href="#c12-audio">Audio</a><a href="#c13-storia-e-dialoghi">Storia e dialoghi</a><a href="#c14-valori-fili-verdi">Valori (fili verdi)</a><a href="#c15-filtri-dello-schermo">Filtri dello schermo</a></nav>
 <h2 id="c1-eventi">Eventi</h2>
@@ -768,6 +768,21 @@
 <div class="schema"><b>Ingressi:</b> Personaggio, Lui…, Emozione, Posizione sullo schermo, Entrata del personaggio</div>
 <p>Fa entrare un personaggio della storia (emozione, posizione, entrata: dissolvenza, scivolata, salto), cambia la sua emozione o lo fa uscire, senza parlare.</p>
 <p class="exemple"><b>Esempio:</b> Lyn arriva da destra mentre Hana parla.</p>
+</div>
+<div class="fiche"><h3>Animare un personaggio</h3>
+<div class="schema"><b>Ingressi:</b> Personaggio, Vai a…, Dimensione (100 = normale, 120 = più grande), Numero di saltelli, Durata (secondi), Stile del movimento, Scossa (trema), Aspettare la fine prima di continuare</div>
+<p>Anima un personaggio già sullo schermo: scivola in un altro posto, cresce o rimpicciolisce, fa dei saltelli o trema. Scegli la durata e lo stile (costante, morbido, rapido poi dolce, va un po' oltre, rimbalzo). «Aspettare la fine» ferma la storia finché il movimento non è finito; altrimenti la storia continua mentre si muove. Il personaggio deve essere già stato mostrato con «Mostrare / nascondere un personaggio».</p>
+<p class="exemple"><b>Esempio:</b> Hana scivola da sinistra a destra con un rimbalzo mentre dice «Aspettami!».</p>
+</div>
+<div class="fiche"><h3>Modalità romanzo (testo a schermo intero)</h3>
+<div class="schema"><b>Ingresso:</b> Cosa fare?</div>
+<p>Passa alla «modalità romanzo»: il testo riempie tutto lo schermo su uno sfondo oscurato e le frasi di «Dire una frase» si aggiungono una sotto l'altra, come in un libro. Quando la pagina è piena, si gira da sola. «Nuova pagina» la cancella subito; «Tornare alla finestra di dialogo» rimette la finestra solita.</p>
+<p class="exemple"><b>Esempio:</b> Un racconto notturno in modalità romanzo, poi di nuovo la finestra di dialogo per la conversazione.</p>
+</div>
+<div class="fiche"><h3>Scena da rigiocare (galleria)</h3>
+<div class="schema"><b>Ingressi:</b> Inizio o fine della scena, Nome della scena (galleria)</div>
+<p>Segna una scena che il giocatore potrà rivedere da «Finali e galleria» della «Schermata del titolo della storia» (scheda «Scene da rigiocare»). Mettine uno all'«Inizio della scena»: passandoci, la scena si sblocca e lo stato della storia viene ricordato. Mettine un altro alla «Fine della scena»: quando si rigioca, la storia si ferma lì e si torna alla galleria. Durante un replay non si salva nulla. Anche le musiche avviate con «Riproduci musica» si sbloccano nella scheda «Musiche».</p>
+<p class="exemple"><b>Esempio:</b> «La radura»: un nodo all'inizio dell'incontro con Hana, un altro subito dopo la sua partenza.</p>
 </div>
 <div class="fiche"><h3>Terminare la storia</h3>
 <div class="schema"><b>Ingresso:</b> Nome del finale (facoltativo: conta in «Finali e galleria»)</div>

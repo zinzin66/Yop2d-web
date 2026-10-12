@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (153) | Reference</title>
-<meta name="description" content="Complete list of the 153 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (156) | Reference</title>
+<meta name="description" content="Complete list of the 156 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 153 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 156 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-transitions">Transitions</a><a href="#c11-animations">Animations</a><a href="#c12-audio">Audio</a><a href="#c13-story-and-dialogues">Story and dialogues</a><a href="#c14-values-green-wires">Values (green wires)</a><a href="#c15-screen-filters">Screen filters</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -768,6 +768,21 @@
 <div class="schema"><b>Inputs:</b> Character, They…, Emotion, Place on screen, Character entrance</div>
 <p>Brings a story character in (emotion, place, entrance: fade, slide, jump), changes their emotion or makes them leave, without speaking.</p>
 <p class="exemple"><b>Example:</b> Lyn comes in from the right while Hana is talking.</p>
+</div>
+<div class="fiche"><h3>Animate a character</h3>
+<div class="schema"><b>Inputs:</b> Character, Move to…, Size (100 = normal, 120 = bigger), Number of little jumps, Duration (seconds), Movement style, Shake (it trembles), Wait for the end before continuing</div>
+<p>Animates a character already on screen: it slides to another place, grows or shrinks, does little jumps or shakes. You set the duration and the style (even, smooth, quick then soft, slight overshoot, bounce). "Wait for the end" holds the story until the movement is over; otherwise the story goes on while it moves. The character must have been shown first with “Show / hide a character”.</p>
+<p class="exemple"><b>Example:</b> Hana slides from left to right with a bounce while she says "Wait for me!".</p>
+</div>
+<div class="fiche"><h3>Novel mode (full-screen text)</h3>
+<div class="schema"><b>Input:</b> What to do?</div>
+<p>Switches to "novel mode": the text fills the whole screen over a darkened background and the lines of “Say a line” pile up one under the other, like in a book. When the page is full, it turns by itself. "New page" clears it right away; "Back to the dialogue box" brings back the usual box.</p>
+<p class="exemple"><b>Example:</b> A night-time narration in novel mode, then back to the dialogue box for the conversation.</p>
+</div>
+<div class="fiche"><h3>Replayable scene (gallery)</h3>
+<div class="schema"><b>Inputs:</b> Start or end of the scene, Scene name (gallery)</div>
+<p>Marks a scene the player can watch again from "Endings and gallery" of the “Story title screen” ("Scenes to replay" tab). Put one at the "Start of the scene": when the story passes it, the scene unlocks and the state of the story is remembered. Put another at the "End of the scene": when replaying, the story stops there and goes back to the gallery. Nothing is saved during a replay. Music started with “Play music” also unlocks in the "Music" tab.</p>
+<p class="exemple"><b>Example:</b> "The clearing": one node at the start of the meeting with Hana, another right after she leaves.</p>
 </div>
 <div class="fiche"><h3>End the story</h3>
 <div class="schema"><b>Input:</b> Ending name (optional: it counts in "Endings and gallery")</div>
