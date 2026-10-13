@@ -11,6 +11,7 @@ import json
 import os
 import re
 import sys
+import unicodedata
 import urllib.error
 import urllib.request
 
@@ -28,32 +29,24 @@ ROLES = [
     ("Game maker", 0x4A90E2, True),
 ]
 
-# Salons : catégorie -> liste de (nom, texte d'aide, lecture seule)
+# Salons à avoir : (catégorie, autres noms possibles de la catégorie, liste de salons)
+# salon = (nom, texte d'aide, lecture seule, autres noms possibles déjà utilisés)
 STRUCTURE = [
-    ("📢 INFO", [
-        ("welcome-and-rules", "Welcome to the Yop2D community! Please read the rules.", True),
-        ("announcements", "New versions, test versions, new examples, packs and guides.", True),
+    ("Informations", ["informations", "info"], [
+        ("welcome-and-rules", "Welcome to the Yop2D community! Please read the rules.", True, ["regles", "rules", "reglement", "bienvenue", "welcome"]),
     ]),
-    ("💬 COMMUNITY", [
-        ("general", "Chat about Yop2D and game making.", False),
-        ("show-your-games", "Share your games, screenshots and videos!", False),
-        ("ideas-and-suggestions", "Your ideas for new nodes and features.", False),
-        ("off-topic", "Anything else.", False),
+    ("questions", ["questions", "aide", "help"], [
+        ("beta-testing", "Test versions: feedback welcome.", False, ["beta", "test", "tests", "testeurs"]),
     ]),
-    ("🆘 HELP", [
-        ("help-and-questions", "Stuck? Ask here. Say what you tried and send a screenshot.", False),
-        ("bug-reports", "Found a bug? Tell us the Yop2D version and how to reproduce it.", False),
-        ("beta-testing", "Test versions: feedback welcome.", False),
-    ]),
-    ("🌍 LANGUAGES", [
-        ("francais", "Discussion en français.", False),
-        ("espanol", "Conversación en español.", False),
-        ("deutsch", "Gespräche auf Deutsch.", False),
-        ("italiano", "Conversazione in italiano.", False),
-        ("portugues", "Conversa em português.", False),
-        ("russkiy", "Общение на русском.", False),
-        ("zhongwen", "中文交流。", False),
-        ("nihongo", "日本語で話そう。", False),
+    ("🌍 Languages", ["languages", "langues"], [
+        ("francais", "Discussion en français.", False, []),
+        ("espanol", "Conversación en español.", False, []),
+        ("deutsch", "Gespräche auf Deutsch.", False, []),
+        ("italiano", "Conversazione in italiano.", False, []),
+        ("portugues", "Conversa em português.", False, []),
+        ("russkiy", "Общение на русском.", False, []),
+        ("zhongwen", "中文交流。", False, []),
+        ("nihongo", "日本語で話そう。", False, []),
     ]),
 ]
 
@@ -74,7 +67,8 @@ def appel(methode, chemin, corps=None):
 
 
 def propre(nom):
-    """Nom sans émoji ni majuscules, pour comparer."""
+    """Nom sans accent, sans émoji ni majuscules, pour comparer."""
+    nom = unicodedata.normalize("NFKD", nom).encode("ascii", "ignore").decode()
     return re.sub(r"[^a-z0-9]+", "", nom.lower())
 
 
@@ -92,6 +86,19 @@ def main():
         print(f"  [{genre}] {c['name']}")
     print("  Rôles :", ", ".join(r["name"] for r in roles))
     if mode != "apply":
+        print("\n=== Ce que « apply » créerait ===")
+        existants = {propre(r["name"]) for r in roles}
+        for nom, _, _ in ROLES:
+            if propre(nom) not in existants:
+                print("  rôle :", nom)
+        for nom_cat, alias_cat, liste in STRUCTURE:
+            noms_cat = {propre(nom_cat)} | {propre(x) for x in alias_cat}
+            cat = next((c for c in salons if c["type"] == 4 and propre(c["name"]) in noms_cat), None)
+            print("  catégorie", ("existante : " + cat["name"]) if cat else "NOUVELLE : " + nom_cat)
+            for nom, _, _, alias in liste:
+                noms = {propre(nom)} | {propre(x) for x in alias}
+                if not any(c["type"] in (0, 5) and propre(c["name"]) in noms for c in salons):
+                    print("    salon :", nom)
         print("\nMode « list » : rien n'a été modifié.")
         return
 
@@ -105,16 +112,18 @@ def main():
             appel("POST", f"/guilds/{GUILD}/roles", {"name": nom, "color": couleur, "hoist": separe, "mentionable": True})
             print("  rôle créé :", nom)
 
-    for nom_cat, liste in STRUCTURE:
-        cat = next((c for c in salons if c["type"] == 4 and propre(c["name"]) == propre(nom_cat)), None)
+    for nom_cat, alias_cat, liste in STRUCTURE:
+        noms_cat = {propre(nom_cat)} | {propre(x) for x in alias_cat}
+        cat = next((c for c in salons if c["type"] == 4 and propre(c["name"]) in noms_cat), None)
         if cat is None:
             cat = appel("POST", f"/guilds/{GUILD}/channels", {"name": nom_cat, "type": 4})
             salons.append(cat)
             print("  catégorie créée :", nom_cat)
         else:
-            print("  déjà là :", nom_cat)
-        for nom, aide, lecture_seule in liste:
-            if any(c["type"] in (0, 5) and propre(c["name"]) == propre(nom) for c in salons):
+            print("  catégorie déjà là :", cat["name"])
+        for nom, aide, lecture_seule, alias in liste:
+            noms = {propre(nom)} | {propre(x) for x in alias}
+            if any(c["type"] in (0, 5) and propre(c["name"]) in noms for c in salons):
                 print("    déjà là :", nom)
                 continue
             corps = {"name": nom, "type": 0, "parent_id": cat["id"], "topic": aide}
