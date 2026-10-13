@@ -1,0 +1,27 @@
+# Configure le serveur Discord de Yop2D (salons, rôles) avec outils/discord/configurer.py.
+# À lancer à la main : onglet Actions > « Configurer Discord » > Run workflow.
+# Secrets nécessaires : DISCORD_BOT_TOKEN (jeton du robot) et DISCORD_GUILD_ID (numéro du serveur).
+name: Configurer Discord
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "list = regarder seulement (rien n'est changé) ; apply = créer ce qui manque"
+        type: choice
+        options: [list, apply]
+        default: list
+
+permissions:
+  contents: read
+
+jobs:
+  configurer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configurer
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
+        run: python3 outils/discord/configurer.py "${{ inputs.mode }}"
