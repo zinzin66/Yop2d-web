@@ -1,0 +1,70 @@
+# Robot DISCORD du site : à chaque dépôt sur main, annonce dans le salon des annonces ce qui est NOUVEAU
+# (exemples, packs, prefabs, guides). L'adresse du salon est dans le secret DISCORD_WEBHOOK_URL
+# (Settings > Secrets and variables > Actions). Sans ce secret, le robot ne fait rien.
+name: Annonces Discord
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'exemples/**'
+      - 'packs/**'
+      - 'prefabs/**'
+      - 'guides/en/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  annonce:
+    runs-on: ubuntu-latest
+    env:
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      AVANT: ${{ github.event.before }}
+      APRES: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Annoncer les nouveautés
+        run: |
+          if [ -z "$DISCORD_WEBHOOK_URL" ]; then echo "Pas de secret DISCORD_WEBHOOK_URL : rien à faire"; exit 0; fi
+          case "$AVANT" in ""|0000000000000000000000000000000000000000) echo "Pas de commit précédent"; exit 0;; esac
+          SITE="https://zinzin66.github.io/Yop2d-web"
+          MSG=""
+
+          # Dossiers nouveaux (packs, prefabs) : un dossier = un élément
+          for DOSSIER in packs prefabs; do
+            for ID in $(git ls-tree -d --name-only "$APRES" "$DOSSIER/" | sed "s#^$DOSSIER/##"); do
+              if ! git ls-tree -d --name-only "$AVANT" "$DOSSIER/" | sed "s#^$DOSSIER/##" | grep -qx "$ID"; then
+                if [ "$DOSSIER" = "packs" ]; then
+                  MSG="$MSG"$'\n'"📦 New library pack: **$ID** (Library → Packs to download)"
+                else
+                  MSG="$MSG"$'\n'"🧩 New ready-made prefab: **$ID** (Resources → Prefabs to download)"
+                fi
+              fi
+            done
+          done
+
+          # Exemples nouveaux : une vignette <id>.png de plus
+          for F in $(git ls-tree --name-only "$APRES" exemples/ | grep '\.png$'); do
+            if ! git ls-tree --name-only "$AVANT" exemples/ | grep -qx "$F"; then
+              ID=$(basename "$F" .png)
+              MSG="$MSG"$'\n'"🎮 New downloadable example: **$ID** (Examples tab, or $SITE/exemples/en.html)"
+            fi
+          done
+
+          # Guides nouveaux (version anglaise)
+          for F in $(git ls-tree --name-only "$APRES" guides/en/ | grep '\.html$'); do
+            if ! git ls-tree --name-only "$AVANT" guides/en/ | grep -qx "$F"; then
+              ID=$(basename "$F" .html)
+              [ "$ID" = "index" ] && continue
+              MSG="$MSG"$'\n'"📖 New guide: $SITE/guides/en/$ID.html"
+            fi
+          done
+
+          if [ -z "$MSG" ]; then echo "Rien de nouveau à annoncer"; exit 0; fi
+          TEXTE="✨ **Yop2D news**$MSG"
+          jq -n --arg c "${TEXTE:0:1900}" '{content:$c, allowed_mentions:{parse:[]}}' > message.json
+          curl -sS -f -H "Content-Type: application/json" -d @message.json "$DISCORD_WEBHOOK_URL"
