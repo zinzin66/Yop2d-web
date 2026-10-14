@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (156) | Reference</title>
-<meta name="description" content="Complete list of the 156 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (158) | Reference</title>
+<meta name="description" content="Complete list of the 158 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 156 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 158 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-transitions">Transitions</a><a href="#c11-animations">Animations</a><a href="#c12-audio">Audio</a><a href="#c13-story-and-dialogues">Story and dialogues</a><a href="#c14-values-green-wires">Values (green wires)</a><a href="#c15-screen-filters">Screen filters</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -437,6 +437,16 @@
 <div class="schema"><b>Inputs:</b> Object A, Object B, Model name, Direction, Speed, Destroy off screen (yes / no)</div>
 <p>Creates a projectile (the object named in “Model name”) at object A, and launches it at the chosen speed: 0°, 90°, 180°, 270°, towards object B (“Toward target”) or along A's angle.</p>
 <p class="exemple"><b>Example:</b> a ship firing lasers upwards (270).</p>
+</div>
+<div class="fiche"><h3>Launch a guided missile (curve)</h3>
+<div class="schema"><b>Inputs:</b> Object A, Object B, Model name (image facing right), Starting direction (0 = right, 90 = down, 180 = left, 270 = up), Speed, Turn: degrees per step (small = wide curve), Wait before aiming (seconds), Lifetime (seconds, 0 = endless)</div>
+<p>Launches a missile that starts in one direction, then slowly turns toward its target: it follows a real curve. “Object A” is the one that fires, “Object B” is the target to follow. The model is a hidden object whose image faces right. A small “Turn” gives a wide curve; when its lifetime ends, a missile that hit nothing explodes.</p>
+<p class="exemple"><b>Example:</b> an enemy fires a missile at the ship: object A = the enemy, object B = the ship, lifetime 3 seconds.</p>
+</div>
+<div class="fiche"><h3>Destroy the object after a delay (seconds)</h3>
+<div class="schema"><b>Inputs:</b> Object, Delay (seconds)</div>
+<p>Removes the chosen object after a delay (in seconds). Handy to make an explosion disappear once its animation is over.</p>
+<p class="exemple"><b>Example:</b> after “Generate clone (Spawner)” and “Play animation”, the explosion image is destroyed 0.4 seconds later.</p>
 </div>
 <div class="fiche"><h3>Set Progress</h3>
 <div class="schema"><b>Inputs:</b> Object, New progress</div>

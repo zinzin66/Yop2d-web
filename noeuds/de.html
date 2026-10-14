@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (156) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 156 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (158) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 158 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 156 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 158 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
 <nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-übergänge">Übergänge</a><a href="#c11-animationen">Animationen</a><a href="#c12-audio">Audio</a><a href="#c13-geschichte-und-dialoge">Geschichte und Dialoge</a><a href="#c14-werte-grüne-kabel">Werte (grüne Kabel)</a><a href="#c15-bildschirmfilter">Bildschirmfilter</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
@@ -437,6 +437,16 @@
 <div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit, Außerhalb des Bildschirms zerstören (ja / nein)</div>
 <p>Erstellt ein Geschoss (das Objekt aus „Modellname“) bei Objekt A und schießt es mit der gewählten Geschwindigkeit ab: 0°, 90°, 180°, 270°, zu Objekt B („Zum Ziel“) oder im Winkel von A.</p>
 <p class="exemple"><b>Beispiel:</b> ein Raumschiff, das Laser nach oben schießt (270).</p>
+</div>
+<div class="fiche"><h3>Lenkrakete abfeuern (Kurve)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Modellname (Bild nach rechts), Startrichtung (0 = rechts, 90 = unten, 180 = links, 270 = oben), Geschwindigkeit, Kurve: Grad pro Schritt (klein = weite Kurve), Wartezeit vor dem Zielen (Sekunden), Lebensdauer (Sekunden, 0 = endlos)</div>
+<p>Startet eine Rakete, die in eine Richtung losfliegt und dann langsam auf ihr Ziel einschwenkt: eine echte Kurve. „Objekt A“ ist der Schütze, „Objekt B“ das Ziel. Das Modell ist ein verstecktes Objekt, dessen Bild nach rechts schaut. Eine kleine „Kurve“ ergibt einen weiten Bogen; ist die Lebensdauer um, explodiert eine Rakete, die nichts getroffen hat.</p>
+<p class="exemple"><b>Beispiel:</b> ein Gegner feuert eine Rakete auf das Schiff: Objekt A = der Gegner, Objekt B = das Schiff, Lebensdauer 3 Sekunden.</p>
+</div>
+<div class="fiche"><h3>Objekt nach einer Verzögerung zerstören (Sekunden)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Verzögerung (Sekunden)</div>
+<p>Entfernt das gewählte Objekt nach einer Verzögerung (in Sekunden). Praktisch, damit eine Explosion nach ihrer Animation verschwindet.</p>
+<p class="exemple"><b>Beispiel:</b> nach „Klon erzeugen (Spawner)“ und „Animation abspielen“ wird das Explosionsbild 0,4 Sekunden später zerstört.</p>
 </div>
 <div class="fiche"><h3>Fortschritt festlegen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Neuer Fortschritt</div>

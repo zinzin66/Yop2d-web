@@ -169,6 +169,18 @@
       "exemple": "a ship firing lasers upwards (270)."
     },
     {
+      "nom": "Launch a guided missile (curve)",
+      "schema": "<b>Inputs:</b> Object A, Object B, Model name (image facing right), Starting direction (0 = right, 90 = down, 180 = left, 270 = up), Speed, Turn: degrees per step (small = wide curve), Wait before aiming (seconds), Lifetime (seconds, 0 = endless)",
+      "role": "Launches a missile that starts in one direction, then slowly turns toward its target: it follows a real curve. “Object A” is the one that fires, “Object B” is the target to follow. The model is a hidden object whose image faces right. A small “Turn” gives a wide curve; when its lifetime ends, a missile that hit nothing explodes.",
+      "exemple": "an enemy fires a missile at the ship: object A = the enemy, object B = the ship, lifetime 3 seconds."
+    },
+    {
+      "nom": "Destroy the object after a delay (seconds)",
+      "schema": "<b>Inputs:</b> Object, Delay (seconds)",
+      "role": "Removes the chosen object after a delay (in seconds). Handy to make an explosion disappear once its animation is over.",
+      "exemple": "after “Generate clone (Spawner)” and “Play animation”, the explosion image is destroyed 0.4 seconds later."
+    },
+    {
       "nom": "Set Progress",
       "schema": "<b>Inputs:</b> Object, New progress",
       "role": "Sets how full a progress bar is, between its minimum and maximum.",

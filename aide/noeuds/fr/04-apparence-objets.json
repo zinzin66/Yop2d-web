@@ -169,6 +169,18 @@
       "exemple": "un vaisseau qui tire des lasers vers le haut (270)."
     },
     {
+      "nom": "Lancer un missile guidé (courbe)",
+      "schema": "<b>Entrées :</b> Objet A, Objet B, Nom du modèle (image tournée vers la droite), Direction de départ (0 = droite, 90 = bas, 180 = gauche, 270 = haut), Vitesse, Virage : degrés par pas (petit = grande courbe), Attente avant de viser (secondes), Durée de vie (secondes, 0 = sans fin)",
+      "role": "Lance un missile qui part dans une direction puis tourne peu à peu vers sa cible : il décrit une vraie courbe. « Objet A » est celui qui tire, « Objet B » la cible à suivre. Le modèle est un objet caché dont l'image regarde vers la droite. Un petit « Virage » donne une grande courbe ; au bout de la durée de vie, le missile qui n'a rien touché explose.",
+      "exemple": "un ennemi lance un missile vers le vaisseau : objet A = l'ennemi, objet B = le vaisseau, durée de vie 3 secondes."
+    },
+    {
+      "nom": "Détruire l'objet après un délai (secondes)",
+      "schema": "<b>Entrées :</b> Objet, Délai (secondes)",
+      "role": "Supprime l'objet choisi après un délai (en secondes). Pratique pour faire disparaître une explosion une fois son animation terminée.",
+      "exemple": "après « Générer un clone (Spawner) » et « Jouer l'animation », l'image d'explosion est détruite 0,4 seconde plus tard."
+    },
+    {
       "nom": "Définir la Progression",
       "schema": "<b>Entrées :</b> Objet, Nouvelle progression",
       "role": "Règle le remplissage d'une barre de progression, entre son minimum et son maximum.",

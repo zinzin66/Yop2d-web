@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (156) | Referencia</title>
-<meta name="description" content="Lista completa de los 156 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (158) | Referencia</title>
+<meta name="description" content="Lista completa de los 158 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 156 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 158 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-transiciones">Transiciones</a><a href="#c11-animaciones">Animaciones</a><a href="#c12-audio">Audio</a><a href="#c13-historia-y-diálogos">Historia y diálogos</a><a href="#c14-valores-cables-verdes">Valores (cables verdes)</a><a href="#c15-filtros-de-pantalla">Filtros de pantalla</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -437,6 +437,16 @@
 <div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Nombre del modelo, Dirección, Velocidad, Destruir fuera de la pantalla (sí / no)</div>
 <p>Crea un proyectil (el objeto indicado en «Nombre del modelo») en el sitio del objeto A y lo lanza a la velocidad elegida: 0°, 90°, 180°, 270°, hacia el objeto B («Hacia el objetivo») o según el ángulo de A.</p>
 <p class="exemple"><b>Ejemplo:</b> una nave que dispara láseres hacia arriba (270).</p>
+</div>
+<div class="fiche"><h3>Lanzar un misil guiado (curva)</h3>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Nombre del modelo (imagen hacia la derecha), Dirección inicial (0 = derecha, 90 = abajo, 180 = izquierda, 270 = arriba), Velocidad, Giro: grados por paso (pequeño = curva amplia), Espera antes de apuntar (segundos), Duración (segundos, 0 = sin fin)</div>
+<p>Lanza un misil que sale en una dirección y luego gira poco a poco hacia su objetivo: describe una curva real. «Objeto A» es el que dispara y «Objeto B» el objetivo a seguir. El modelo es un objeto oculto cuya imagen mira a la derecha. Un «Giro» pequeño da una curva amplia; cuando acaba su duración, un misil que no tocó nada explota.</p>
+<p class="exemple"><b>Ejemplo:</b> un enemigo lanza un misil hacia la nave: objeto A = el enemigo, objeto B = la nave, duración 3 segundos.</p>
+</div>
+<div class="fiche"><h3>Destruir el objeto tras un retraso (segundos)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Retraso (segundos)</div>
+<p>Elimina el objeto elegido después de un retraso (en segundos). Útil para que una explosión desaparezca cuando termina su animación.</p>
+<p class="exemple"><b>Ejemplo:</b> después de «Generar clon (Spawner)» y «Reproducir animación», la imagen de la explosión se destruye 0,4 segundos más tarde.</p>
 </div>
 <div class="fiche"><h3>Definir el Progreso</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Nuevo progreso</div>
