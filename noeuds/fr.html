@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tous les nœuds de Yop2D (156) | Référence</title>
-<meta name="description" content="Liste complète des 156 nœuds visuels de Yop2D, moteur de jeu 2D sans code pour Android : rôle, réglages, sorties et exemple de chaque nœud.">
+<title>Tous les nœuds de Yop2D (158) | Référence</title>
+<meta name="description" content="Liste complète des 158 nœuds visuels de Yop2D, moteur de jeu 2D sans code pour Android : rôle, réglages, sorties et exemple de chaque nœud.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><strong>Français</strong> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les 156 nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.</p>
+<p>Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les 158 nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.</p>
 <p><strong>Catégories</strong></p>
 <nav class="sommaire"><a href="#c1-événements">Événements</a><a href="#c2-scène-hud">Scène &amp; HUD</a><a href="#c3-temps">Temps</a><a href="#c4-apparence-objets">Apparence &amp; Objets</a><a href="#c5-variables-inventaire">Variables &amp; Inventaire</a><a href="#c6-logique-conditions">Logique &amp; Conditions</a><a href="#c7-textes-dialogues">Textes &amp; Dialogues</a><a href="#c8-mouvements-ia">Mouvements &amp; IA</a><a href="#c9-grilles-et-puzzles">Grilles et puzzles</a><a href="#c10-transitions">Transitions</a><a href="#c11-animations">Animations</a><a href="#c12-audio">Audio</a><a href="#c13-histoire-et-dialogues">Histoire et dialogues</a><a href="#c14-valeurs-fils-verts">Valeurs (fils verts)</a><a href="#c15-filtres-d-écran">Filtres d'écran</a></nav>
 <h2 id="c1-événements">Événements</h2>
@@ -437,6 +437,16 @@
 <div class="schema"><b>Entrées :</b> Objet A, Objet B, Nom du modèle, Direction, Vitesse, Détruire hors de l'écran (oui / non)</div>
 <p>Crée un projectile (l'objet nommé dans « Nom du modèle ») à l'endroit de l'objet A, et le lance à la vitesse choisie : 0°, 90°, 180°, 270°, vers l'objet B (« Vers la cible ») ou selon l'angle de A.</p>
 <p class="exemple"><b>Exemple :</b> un vaisseau qui tire des lasers vers le haut (270).</p>
+</div>
+<div class="fiche"><h3>Lancer un missile guidé (courbe)</h3>
+<div class="schema"><b>Entrées :</b> Objet A, Objet B, Nom du modèle (image tournée vers la droite), Direction de départ (0 = droite, 90 = bas, 180 = gauche, 270 = haut), Vitesse, Virage : degrés par pas (petit = grande courbe), Attente avant de viser (secondes), Durée de vie (secondes, 0 = sans fin)</div>
+<p>Lance un missile qui part dans une direction puis tourne peu à peu vers sa cible : il décrit une vraie courbe. « Objet A » est celui qui tire, « Objet B » la cible à suivre. Le modèle est un objet caché dont l'image regarde vers la droite. Un petit « Virage » donne une grande courbe ; au bout de la durée de vie, le missile qui n'a rien touché explose.</p>
+<p class="exemple"><b>Exemple :</b> un ennemi lance un missile vers le vaisseau : objet A = l'ennemi, objet B = le vaisseau, durée de vie 3 secondes.</p>
+</div>
+<div class="fiche"><h3>Détruire l'objet après un délai (secondes)</h3>
+<div class="schema"><b>Entrées :</b> Objet, Délai (secondes)</div>
+<p>Supprime l'objet choisi après un délai (en secondes). Pratique pour faire disparaître une explosion une fois son animation terminée.</p>
+<p class="exemple"><b>Exemple :</b> après « Générer un clone (Spawner) » et « Jouer l'animation », l'image d'explosion est détruite 0,4 seconde plus tard.</p>
 </div>
 <div class="fiche"><h3>Définir la Progression</h3>
 <div class="schema"><b>Entrées :</b> Objet, Nouvelle progression</div>

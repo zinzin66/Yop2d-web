@@ -169,6 +169,18 @@
       "exemple": "uma nave que atira lasers para cima (270)."
     },
     {
+      "nom": "Lançar um míssil guiado (curva)",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nome do modelo (imagem virada para a direita), Direção inicial (0 = direita, 90 = baixo, 180 = esquerda, 270 = cima), Velocidade, Curva: graus por passo (pequeno = curva larga), Espera antes de mirar (segundos), Duração (segundos, 0 = sem fim)",
+      "role": "Lança um míssil que sai numa direção e depois vira aos poucos para o alvo: descreve uma curva de verdade. “Objeto A” é quem dispara e “Objeto B” o alvo a seguir. O modelo é um objeto escondido cuja imagem olha para a direita. Uma “Curva” pequena dá um arco grande; quando acaba a duração, um míssil que não acertou nada explode.",
+      "exemple": "um inimigo lança um míssil contra a nave: objeto A = o inimigo, objeto B = a nave, duração de 3 segundos."
+    },
+    {
+      "nom": "Destruir o objeto após um atraso (segundos)",
+      "schema": "<b>Entradas:</b> Objeto, Atraso (segundos)",
+      "role": "Remove o objeto escolhido depois de um atraso (em segundos). Útil para fazer uma explosão sumir quando a animação termina.",
+      "exemple": "depois de “Gerar clone (Spawner)” e “Reproduzir animação”, a imagem da explosão é destruída 0,4 segundo depois."
+    },
+    {
       "nom": "Definir o Progresso",
       "schema": "<b>Entradas:</b> Objeto, Novo progresso",
       "role": "Ajusta o preenchimento de uma barra de progresso, entre o mínimo e o máximo dela.",

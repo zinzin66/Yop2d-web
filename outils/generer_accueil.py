@@ -397,8 +397,6 @@ def page(langue, t):
     <a href="{YOUTUBE}" target="_blank" rel="noopener" class="btn btn-youtube">📺 {e(b["youtube"])}</a>
 </div>
 
-<img src="https://img.shields.io/github/downloads/zinzin66/yop2d/total?style=for-the-badge&color=blue" alt="{e(t["alt_badge"])}">
-
 <div class="install-note">{liens(t["note_installation"], base)}</div>
 <div class="lang-badge">🌍 {e(t["langues_interface"])}</div>
 </header>

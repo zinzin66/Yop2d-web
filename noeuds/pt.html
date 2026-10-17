@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos os nós do Yop2D (156) | Referência</title>
-<meta name="description" content="Lista completa dos 156 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
+<title>Todos os nós do Yop2D (158) | Referência</title>
+<meta name="description" content="Lista completa dos 158 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/pt.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 156 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
+<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 158 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
 <p><strong>Categorias</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-cena-e-hud">Cena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aparência-e-objetos">Aparência e Objetos</a><a href="#c5-variáveis-e-inventário">Variáveis e Inventário</a><a href="#c6-lógica-e-condições">Lógica e Condições</a><a href="#c7-textos-e-diálogos">Textos e Diálogos</a><a href="#c8-movimentos-e-ia">Movimentos e IA</a><a href="#c9-grades-e-quebra-cabeças">Grades e quebra-cabeças</a><a href="#c10-transições">Transições</a><a href="#c11-animações">Animações</a><a href="#c12-áudio">Áudio</a><a href="#c13-história-e-diálogos">História e diálogos</a><a href="#c14-valores-fios-verdes">Valores (fios verdes)</a><a href="#c15-filtros-de-tela">Filtros de tela</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -437,6 +437,16 @@
 <div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade, Destruir fora da tela (sim / não)</div>
 <p>Cria um projétil (o objeto indicado em “Nome do modelo”) no lugar do objeto A e o lança na velocidade escolhida: 0°, 90°, 180°, 270°, na direção do objeto B (“Em direção ao alvo”) ou no ângulo de A.</p>
 <p class="exemple"><b>Exemplo:</b> uma nave que atira lasers para cima (270).</p>
+</div>
+<div class="fiche"><h3>Lançar um míssil guiado (curva)</h3>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Nome do modelo (imagem virada para a direita), Direção inicial (0 = direita, 90 = baixo, 180 = esquerda, 270 = cima), Velocidade, Curva: graus por passo (pequeno = curva larga), Espera antes de mirar (segundos), Duração (segundos, 0 = sem fim)</div>
+<p>Lança um míssil que sai numa direção e depois vira aos poucos para o alvo: descreve uma curva de verdade. “Objeto A” é quem dispara e “Objeto B” o alvo a seguir. O modelo é um objeto escondido cuja imagem olha para a direita. Uma “Curva” pequena dá um arco grande; quando acaba a duração, um míssil que não acertou nada explode.</p>
+<p class="exemple"><b>Exemplo:</b> um inimigo lança um míssil contra a nave: objeto A = o inimigo, objeto B = a nave, duração de 3 segundos.</p>
+</div>
+<div class="fiche"><h3>Destruir o objeto após um atraso (segundos)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Atraso (segundos)</div>
+<p>Remove o objeto escolhido depois de um atraso (em segundos). Útil para fazer uma explosão sumir quando a animação termina.</p>
+<p class="exemple"><b>Exemplo:</b> depois de “Gerar clone (Spawner)” e “Reproduzir animação”, a imagem da explosão é destruída 0,4 segundo depois.</p>
 </div>
 <div class="fiche"><h3>Definir o Progresso</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Novo progresso</div>
