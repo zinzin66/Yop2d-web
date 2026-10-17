@@ -481,6 +481,14 @@ footer a:hover { text-decoration: underline; }
     <a href="https://youtube.com/@yop2d" target="_blank" rel="noopener" class="btn btn-youtube">📺 YouTube 教程</a>
 </div>
 
+<div class="lang-badge" id="dl-total" style="display:none;margin-top:1.5rem">⬇ <span id="dl-n"></span> · Yop2D 总下载量</div>
+<script>
+fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(function(r){return r.json();}).then(function(l){
+  var n=0; l.forEach(function(r){(r.assets||[]).forEach(function(a){n+=a.download_count||0;});});
+  if(n>0){document.getElementById("dl-n").textContent=n.toLocaleString();document.getElementById("dl-total").style.display="block";}
+}).catch(function(){});
+</script>
+
 <div class="install-note"><strong>⚠️ 安装提示：</strong>APK 不是从应用商店下载的，安卓可能会显示“Play 保护机制”或“未知应用”的警告。点按<em>更多详情</em>，然后选择<em>仍然安装</em>。Yop2D 也在 Google Play 进行封闭测试：<a href="../testeur.html?lang=zh">成为测试者</a>。需要 Android 7.0 或更高版本。</div>
 <div class="lang-badge">🌍 界面、帮助和教程支持简体中文、英语、法语、西班牙语、德语、意大利语、葡萄牙语、俄语和日语</div>
 </header>

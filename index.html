@@ -481,6 +481,14 @@ footer a:hover { text-decoration: underline; }
     <a href="https://youtube.com/@yop2d" target="_blank" rel="noopener" class="btn btn-youtube">📺 YouTube tutorials</a>
 </div>
 
+<div class="lang-badge" id="dl-total" style="display:none;margin-top:1.5rem">⬇ <span id="dl-n"></span> · Total Yop2D downloads</div>
+<script>
+fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(function(r){return r.json();}).then(function(l){
+  var n=0; l.forEach(function(r){(r.assets||[]).forEach(function(a){n+=a.download_count||0;});});
+  if(n>0){document.getElementById("dl-n").textContent=n.toLocaleString();document.getElementById("dl-total").style.display="block";}
+}).catch(function(){});
+</script>
+
 <div class="install-note"><strong>⚠️ Installation note:</strong> the APK is downloaded outside the Play Store, so Android may show a "Play Protect" or "Unknown app" warning. Tap <em>More details</em>, then <em>Install anyway</em>. Yop2D is also in closed testing on Google Play: <a href="testeur.html?lang=en">become a tester</a>. Requires Android 7.0 or newer.</div>
 <div class="lang-badge">🌍 Interface, help and guides in English, French, Spanish, German, Italian, Portuguese, Russian, Simplified Chinese and Japanese</div>
 </header>
