@@ -481,6 +481,14 @@ footer a:hover { text-decoration: underline; }
     <a href="https://youtube.com/@yop2d" target="_blank" rel="noopener" class="btn btn-youtube">📺 YouTube チュートリアル</a>
 </div>
 
+<div class="lang-badge" id="dl-total" style="display:none;margin-top:1.5rem">⬇ <span id="dl-n"></span> · Yop2D の総ダウンロード数</div>
+<script>
+fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(function(r){return r.json();}).then(function(l){
+  var n=0; l.forEach(function(r){(r.assets||[]).forEach(function(a){n+=a.download_count||0;});});
+  if(n>0){document.getElementById("dl-n").textContent=n.toLocaleString();document.getElementById("dl-total").style.display="block";}
+}).catch(function(){});
+</script>
+
 <div class="install-note"><strong>⚠️ インストールについて：</strong>APK は Play ストア以外からダウンロードするため、Android に「Play プロテクト」や「不明なアプリ」の警告が表示されることがあります。<em>詳細</em>をタップし、<em>インストールする</em>を選んでください。Yop2D は Google Play でクローズドテスト中です：<a href="../testeur.html?lang=ja">テスターになる</a>。Android 7.0 以上が必要です。</div>
 <div class="lang-badge">🌍 画面・ヘルプ・ガイドは日本語、英語、フランス語、スペイン語、ドイツ語、イタリア語、ポルトガル語、ロシア語、簡体字中国語に対応</div>
 </header>

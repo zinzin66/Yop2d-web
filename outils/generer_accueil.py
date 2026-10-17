@@ -397,6 +397,14 @@ def page(langue, t):
     <a href="{YOUTUBE}" target="_blank" rel="noopener" class="btn btn-youtube">📺 {e(b["youtube"])}</a>
 </div>
 
+<div class="lang-badge" id="dl-total" style="display:none;margin-top:1.5rem">⬇ <span id="dl-n"></span> · {e(t["alt_badge"])}</div>
+<script>
+fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(function(r){{return r.json();}}).then(function(l){{
+  var n=0; l.forEach(function(r){{(r.assets||[]).forEach(function(a){{n+=a.download_count||0;}});}});
+  if(n>0){{document.getElementById("dl-n").textContent=n.toLocaleString();document.getElementById("dl-total").style.display="block";}}
+}}).catch(function(){{}});
+</script>
+
 <div class="install-note">{liens(t["note_installation"], base)}</div>
 <div class="lang-badge">🌍 {e(t["langues_interface"])}</div>
 </header>
