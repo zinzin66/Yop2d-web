@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (158) | Reference</title>
-<meta name="description" content="Complete list of the 158 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (160) | Reference</title>
+<meta name="description" content="Complete list of the 160 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 158 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 160 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-transitions">Transitions</a><a href="#c11-animations">Animations</a><a href="#c12-audio">Audio</a><a href="#c13-story-and-dialogues">Story and dialogues</a><a href="#c14-values-green-wires">Values (green wires)</a><a href="#c15-screen-filters">Screen filters</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -788,6 +788,16 @@
 <div class="schema"><b>Input:</b> What to do?</div>
 <p>Switches to "novel mode": the text fills the whole screen over a darkened background and the lines of “Say a line” pile up one under the other, like in a book. When the page is full, it turns by itself. "New page" clears it right away; "Back to the dialogue box" brings back the usual box.</p>
 <p class="exemple"><b>Example:</b> A night-time narration in novel mode, then back to the dialogue box for the conversation.</p>
+</div>
+<div class="fiche"><h3>SMS mode (phone conversation)</h3>
+<div class="schema"><b>Inputs:</b> What to do?, Who writes to you (name and photo on top), Who is "me" (their lines on the right), Text under the name (empty = "online")</div>
+<p>Shows the conversation as text messages on a phone: the lines of “Say a line” become bubbles (on the left for whoever writes, with three little dots "…" before they appear) and the answers of “Ask a choice” are picked at the bottom of the phone, then arrive on the right. The narrator writes a small caption in the middle (for example "Last night, 10:14 pm"). "Who writes to you" gives the name and photo at the top; "Who is me" makes a character write on the right without going through a choice. "Clear the conversation" empties the phone; "Back to the dialogue box" leaves the mode. Everything is set in the Dialogue style: colours, size, time of the "…", full-screen phone…</p>
+<p class="exemple"><b>Example:</b> SMS mode (turn on, who writes to you: Hana) → Say a line (Hana: "Are you there?") → Ask a choice ("Yes, tell me" / "Why?").</p>
+</div>
+<div class="fiche"><h3>Unlock an achievement</h3>
+<div class="schema"><b>Inputs:</b> Achievement name, Description (shown in the list), Achievement image (empty = a star), Hint while it is hidden (empty = none)</div>
+<p>Unlocks an achievement: an "Achievement unlocked!" banner slides in at the top of the screen (only the first time in the published game; every time in the editor so you can see it). The achievement joins the "Achievements" tab of "Endings and gallery" of the “Story title screen”: it stays hidden behind "???" (with a hint if you write one) until it is won. Put one at the end of a story, in a secret branch, after “Friendship (hearts)”… The banner is set in the Dialogue style: colours, frame image, time, place (top or bottom), sound.</p>
+<p class="exemple"><b>Example:</b> End the story (ending "The lost sock") → Unlock an achievement (name "The lost sock", description "Secret ending found").</p>
 </div>
 <div class="fiche"><h3>Replayable scene (gallery)</h3>
 <div class="schema"><b>Inputs:</b> Start or end of the scene, Scene name (gallery)</div>

@@ -524,7 +524,7 @@ def llms(t):
         "Key facts:",
         "",
         "- Figures on this page are checked against the current version (0.1.1129, October 2026): "
-        f"{nombre_noeuds()} nodes, 47 templates, 19 example games, 9 interface languages. "
+        f"{nombre_noeuds()} nodes, 49 templates, 19 example games, 9 interface languages. "
         "If an older source gives different numbers (for example 127 nodes), it is outdated.",
     ]
     lignes += [f"- {p}" for p in t["points"]]
@@ -544,7 +544,7 @@ def llms(t):
         "- Tools: tilemap editor (brush, eraser, rectangle, fill, picker), sprite animation editor, music maker (4 tracks, real instruments, export to .ogg), dialogue/visual-novel system with save slots, gallery and 9 languages.",
         "- Screen filters (including a flashlight effect) and transitions, particles, parallax, camera follow and limits, pathfinding, physics, joystick and buttons, vibration, multi-language games.",
         "- APK export done on the device: your own icon, name, version number, launch image, screen-on option; a new version installs over the old one.",
-        "- Guided learning inside the app: 5 interactive guides and 4 step-by-step missions, 47 templates, 19 example games.",
+        "- Guided learning inside the app: 5 interactive guides and 4 step-by-step missions, 49 templates, 19 example games.",
         "",
         "## Maturity (honest summary)",
         "",

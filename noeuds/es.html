@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (158) | Referencia</title>
-<meta name="description" content="Lista completa de los 158 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (160) | Referencia</title>
+<meta name="description" content="Lista completa de los 160 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 158 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 160 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-transiciones">Transiciones</a><a href="#c11-animaciones">Animaciones</a><a href="#c12-audio">Audio</a><a href="#c13-historia-y-diálogos">Historia y diálogos</a><a href="#c14-valores-cables-verdes">Valores (cables verdes)</a><a href="#c15-filtros-de-pantalla">Filtros de pantalla</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -788,6 +788,16 @@
 <div class="schema"><b>Entrada:</b> ¿Qué hacer?</div>
 <p>Pasa al «modo novela»: el texto llena toda la pantalla sobre un fondo oscurecido y las frases de «Decir una frase» se van sumando una bajo otra, como en un libro. Cuando la página se llena, pasa sola. «Página nueva» la borra enseguida; «Volver al cuadro de diálogo» devuelve el cuadro habitual.</p>
 <p class="exemple"><b>Ejemplo:</b> Un relato nocturno en modo novela y luego vuelta al cuadro de diálogo para la conversación.</p>
+</div>
+<div class="fiche"><h3>Modo SMS (conversación en el móvil)</h3>
+<div class="schema"><b>Entradas:</b> ¿Qué hacer?, Quién te escribe (nombre y foto arriba), Quién es «yo» (sus frases a la derecha), Texto bajo el nombre (vacío = «en línea»)</div>
+<p>Muestra la conversación como SMS en un móvil: las frases de «Decir una frase» se convierten en burbujas (a la izquierda para quien escribe, con tres puntitos «…» antes de aparecer) y las respuestas de «Proponer una elección» se eligen abajo en el móvil y luego llegan a la derecha. El narrador escribe una pequeña leyenda en el centro (por ejemplo «Anoche, 22:14»). «Quién te escribe» pone el nombre y la foto arriba; «Quién es yo» hace que un personaje escriba a la derecha sin pasar por una elección. «Borrar la conversación» vacía el móvil; «Volver al cuadro de diálogo» sale del modo. Todo se ajusta en el Estilo de los diálogos: colores, tamaño, tiempo de los «…», móvil a pantalla completa…</p>
+<p class="exemple"><b>Ejemplo:</b> Modo SMS (activar, quién te escribe: Hana) → Decir una frase (Hana: «¿Estás ahí?») → Plantear una elección («Sí, dime» / «¿Por qué?»).</p>
+</div>
+<div class="fiche"><h3>Desbloquear un logro</h3>
+<div class="schema"><b>Entradas:</b> Nombre del logro, Descripción (se ve en la lista), Imagen del logro (vacío = una estrella), Pista mientras está oculto (vacío = ninguna)</div>
+<p>Desbloquea un logro: un cartel «¡Logro desbloqueado!» se desliza arriba de la pantalla (solo la primera vez en el juego publicado; en cada prueba en el editor, para que puedas verlo). El logro entra en la pestaña «Logros» de «Finales y galería» de la «Pantalla de título de la historia»: sigue oculto tras «???» (con una pista si escribes una) hasta que se gana. Pon uno al final de una historia, en una rama secreta, después de «Amistad (corazones)»… El cartel se ajusta en el Estilo de los diálogos: colores, imagen del marco, duración, lugar (arriba o abajo), sonido.</p>
+<p class="exemple"><b>Ejemplo:</b> Terminar la historia (final «El calcetín perdido») → Desbloquear un logro (nombre «El calcetín perdido», descripción «Final secreto encontrado»).</p>
 </div>
 <div class="fiche"><h3>Escena rejugable (galería)</h3>
 <div class="schema"><b>Entradas:</b> Inicio o final de la escena, Nombre de la escena (galería)</div>
