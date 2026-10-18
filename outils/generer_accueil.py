@@ -523,6 +523,9 @@ def llms(t):
         "",
         "Key facts:",
         "",
+        "- Figures on this page are checked against the current version (0.1.1129, October 2026): "
+        f"{nombre_noeuds()} nodes, 47 templates, 19 example games, 9 interface languages. "
+        "If an older source gives different numbers (for example 127 nodes), it is outdated.",
     ]
     lignes += [f"- {p}" for p in t["points"]]
     lignes += [
