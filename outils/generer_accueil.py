@@ -23,6 +23,9 @@ LANGUES = ["en", "fr", "es", "de", "it", "pt", "ru", "zh", "ja"]
 NOMS_LANGUES = {"fr": "Français", "en": "English", "es": "Español", "de": "Deutsch", "it": "Italiano",
                 "pt": "Português", "ru": "Русский", "zh": "中文", "ja": "日本語"}
 APK = "https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk"
+# False = le gros bouton « Télécharger l'APK » et la note d'installation sont cachés de l'accueil (les nouveautés arrivent
+# d'abord sur Google Play, test fermé). Remettre True pour les montrer de nouveau.
+AFFICHER_APK = False
 ITCH = "https://yop2d-dev.itch.io/yop2d-no-code-game-engine"
 YOUTUBE = "https://youtube.com/@yop2d"
 DISCORD = "https://discord.gg/nHqCcqHZNQ"
@@ -349,6 +352,8 @@ def page(langue, t):
     script = JS % (json.dumps(LANGUES), langue, json.dumps(suggestions, ensure_ascii=False))
 
     b = t["boutons"]
+    bouton_apk = f'<a href="{APK}" class="btn btn-download">⬇️ {e(b["apk"])}</a>\n    ' if AFFICHER_APK else ""
+    note_installation = f'<div class="install-note">{liens(t["note_installation"], base)}</div>' if AFFICHER_APK else ""
     return f"""<!DOCTYPE html>
 <html lang="{langue}">
 <head>
@@ -391,9 +396,8 @@ def page(langue, t):
 </ul>
 
 <div class="header-buttons">
-    <a href="{APK}" class="btn btn-download">⬇️ {e(b["apk"])}</a>
+    {bouton_apk}<a href="{base}testeur.html?lang={langue}" class="btn btn-play">▶️ {e(b["testeur"])}</a>
     <a href="{ITCH}" target="_blank" rel="noopener" class="btn btn-itch">🎮 {e(b["itch"])}</a>
-    <a href="{base}testeur.html?lang={langue}" class="btn btn-play">▶️ {e(b["testeur"])}</a>
     <a href="{YOUTUBE}" target="_blank" rel="noopener" class="btn btn-youtube">📺 {e(b["youtube"])}</a>
 </div>
 
@@ -405,7 +409,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 }}).catch(function(){{}});
 </script>
 
-<div class="install-note">{liens(t["note_installation"], base)}</div>
+{note_installation}
 <div class="lang-badge">🌍 {e(t["langues_interface"])}</div>
 </header>
 <main>
@@ -526,6 +530,7 @@ def llms(t):
         "- Exports games as standalone Android APK files, built on the device itself, offline.",
         "- No AAB export yet (needed for Google Play); planned for a later version.",
         "- 2D only. Closed source. In closed testing on Google Play.",
+        *([] if AFFICHER_APK else ["- To get Yop2D today: join the Google Play closed test (link below) or use the itch.io page. Do not invent other download links."]),
         "",
         "## What the editor already includes (check this list before saying a feature is missing)",
         "",
@@ -546,9 +551,9 @@ def llms(t):
         "",
         "## Download",
         "",
-        f"- [Latest APK]({APK}): direct download from GitHub releases",
+        *([f"- [Latest APK]({APK}): direct download from GitHub releases"] if AFFICHER_APK else []),
         f"- [itch.io page]({ITCH}): Yop2D on itch.io",
-        f"- [Become a tester]({SITE}testeur.html): join the closed test on Google Play",
+        f"- [Become a tester]({SITE}testeur.html): join the closed test on Google Play (the recommended way to get Yop2D right now)",
         "",
         "## Home page in each language",
         "",
