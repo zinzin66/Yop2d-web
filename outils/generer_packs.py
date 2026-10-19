@@ -159,9 +159,12 @@ def construire(id_pack):
     v.convert('RGB').save(os.path.join(PACKS, nom_vignette), optimize=True)
 
     nb = lambda t: sum(1 for th in themes for e in th['e'] if e['t'] in t)
-    return {'id': id_pack, 'nom': nom, 'description': infos.get('description', ''), 'fichier': nom_zip,
-            'taille': len(octets), 'vignette': nom_vignette, 'version': empreinte,
-            'images': nb(('img', 'anim')), 'sons': nb(('son',)), 'polices': nb(('police',))}
+    res = {'id': id_pack, 'nom': nom, 'description': infos.get('description', ''), 'fichier': nom_zip,
+           'taille': len(octets), 'vignette': nom_vignette, 'version': empreinte,
+           'images': nb(('img', 'anim')), 'sons': nb(('son',)), 'polices': nb(('police',))}
+    if infos.get('moteur_min'):          # build minimal de Yop2D pour ce pack (le moteur dit « mets Yop2D à jour »)
+        res['moteur_min'] = int(infos['moteur_min'])
+    return res
 
 
 def main():
