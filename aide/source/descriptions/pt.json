@@ -660,11 +660,19 @@
   "parar a passarela quando o jogador aperta um botão."
  ],
  "passage_decor": [
-  "Faz uma imagem (pássaro, nuvem, mosquito…) atravessar o fundo de uma história seguindo um movimento criado em Assets → Movimento. Escolha atrás ou na frente dos personagens (a caixa de texto fica sempre por cima). «Altura» ajusta o tamanho da imagem.",
+  "Faz uma imagem (pássaro, nuvem, mosquito…) atravessar o fundo de uma história seguindo um movimento criado em Assets → Movimento. Escolha atrás ou na frente dos personagens (a caixa de texto fica sempre por cima). «Altura» ajusta o tamanho da imagem. Se a imagem for uma animação (um pássaro batendo as asas), escreva o nome dela em « Animação da imagem » e a velocidade em « Velocidade (imagens por segundo) ».",
   "um pássaro cruzando o céu enquanto Hana fala."
  ],
  "arreter_passages": [
   "Remove todas as imagens que atravessam o fundo da história (iniciadas por [[passage_decor]]).",
   "o mosquito vai embora quando o diálogo termina."
+ ],
+ "sauvegarder_variables": [
+  "Escreve os valores das suas variáveis (globais e da cena) em um arquivo no aparelho: elas continuam lá quando o jogador fechar e reabrir o jogo. « Nome do salvamento » permite ter vários jogos. Deixe « Variáveis » vazio para guardar tudo, ou escreva nomes separados por vírgulas (pontos, vidas). Ao contrário de [[sauvegarder_etat]], sobrevive ao fechamento do jogo.",
+  "Quando o jogador ganha um ponto: [[ajouter_variable]] em « score » e depois [[sauvegarder_variables]]. A pontuação é gravada no arquivo a cada ponto."
+ ],
+ "charger_variables": [
+  "Recupera os valores escritos por [[sauvegarder_variables]] (mesmo nome de salvamento). Cada variável que ainda existe volta ao seu valor. Saída « Carregado » se deu certo, « Sem salvamento » no primeiro jogo. Costuma ficar logo depois de « Ao iniciar ».",
+  "Logo depois de [[NoeudEventStart]]: [[charger_variables]] e depois [[modifier_propriete]] para mostrar a pontuação recuperada."
  ]
 }

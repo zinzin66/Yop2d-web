@@ -147,6 +147,18 @@
       "nom": "Restore state",
       "role": "Puts the scene back as it was at the last “Save state”. If there is no save yet, nothing changes.",
       "exemple": "start again from the checkpoint after a fall."
+    },
+    {
+      "nom": "Save variables to a file",
+      "schema": "<b>Inputs:</b> Save name, Variables (empty = all)",
+      "role": "Writes the values of your variables (global ones and the scene's) to a file on the device, so they are still there when the player closes and reopens the game. “Save name” lets you keep several games. Leave “Variables” empty to keep everything, or type names separated by commas (score, lives). Unlike “Save state”, it survives closing the game.",
+      "exemple": "When the player scores: “Add to Variable” on “score”, then “Save variables to a file”. The score is written to the file at every point."
+    },
+    {
+      "nom": "Load variables from a file",
+      "schema": "<b>Inputs:</b> Save name, Variables (empty = all) &nbsp;→&nbsp; <b>Outputs:</b> Loaded / No save found",
+      "role": "Brings back the values written by “Save variables to a file” (same save name). Every variable that still exists gets its saved value back. Output “Loaded” when it worked, “No save found” on the very first game. Often placed right after “At start”.",
+      "exemple": "Right after “On Start”: “Load variables from a file”, then “Set a property” to show the score that was found."
     }
   ]
 }

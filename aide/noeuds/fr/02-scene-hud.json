@@ -147,6 +147,18 @@
       "nom": "Restaurer l'état",
       "role": "Remet la scène comme au dernier « Sauvegarder l'état ». S'il n'y a pas encore de sauvegarde, rien ne change.",
       "exemple": "repartir du checkpoint après une chute."
+    },
+    {
+      "nom": "Sauvegarder les variables dans un fichier",
+      "schema": "<b>Entrées :</b> Nom de la sauvegarde, Variables (vide = toutes)",
+      "role": "Écrit les valeurs de tes variables (globales et de la scène) dans un fichier sur l'appareil : elles seront encore là quand le joueur fermera puis rouvrira le jeu. « Nom de la sauvegarde » permet d'avoir plusieurs parties. Laisse « Variables » vide pour tout garder, ou écris des noms séparés par des virgules (score, vies). Contrairement à « Sauvegarder l'état », ça survit à la fermeture du jeu.",
+      "exemple": "Quand le joueur gagne un point : « Ajouter à Variable » sur « score », puis « Sauvegarder les variables dans un fichier ». Le score est écrit dans le fichier à chaque point."
+    },
+    {
+      "nom": "Charger les variables depuis un fichier",
+      "schema": "<b>Entrées :</b> Nom de la sauvegarde, Variables (vide = toutes) &nbsp;→&nbsp; <b>Sorties :</b> Chargé / Pas de sauvegarde",
+      "role": "Reprend les valeurs écrites par « Sauvegarder les variables dans un fichier » (même nom de sauvegarde). Chaque variable qui existe encore retrouve sa valeur. Sortie « Chargé » si tout s'est bien passé, « Pas de sauvegarde » à la toute première partie. À mettre souvent juste après « Au démarrage ».",
+      "exemple": "Juste après « Au Démarrage » : « Charger les variables depuis un fichier », puis « Modifier une propriété » pour afficher le score retrouvé."
     }
   ]
 }

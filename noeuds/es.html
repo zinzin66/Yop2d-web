@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (164) | Referencia</title>
-<meta name="description" content="Lista completa de los 164 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (166) | Referencia</title>
+<meta name="description" content="Lista completa de los 166 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 164 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 166 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-transiciones">Transiciones</a><a href="#c11-animaciones">Animaciones</a><a href="#c12-audio">Audio</a><a href="#c13-historia-y-diálogos">Historia y diálogos</a><a href="#c14-valores-cables-verdes">Valores (cables verdes)</a><a href="#c15-filtros-de-pantalla">Filtros de pantalla</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -127,7 +127,7 @@
 </div>
 <div class="fiche"><h3>Si el objeto toca el Tag</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Tag</div>
-<p>Se ejecuta una vez por contacto cuando el objeto elegido toca un objeto con esta etiqueta (tag). El objeto tocado pasa a ser el «Objeto Implicado».</p>
+<p>Se ejecuta una vez por contacto cuando el objeto elegido toca un objeto con esta etiqueta (tag). El objeto tocado pasa a ser el «Objeto Implicado». El ajuste «Lado tocado» limita el evento a un lado del objeto (arriba, abajo, izquierda, derecha): «la parte superior del objeto» significa que algo cae sobre él, por ejemplo un ascensor que lo aplasta. «Cualquiera» (por defecto) no tiene en cuenta el lado.</p>
 <p class="exemple"><b>Ejemplo:</b> el jugador toca una moneda (tag «piece») → destruir el objeto implicado y sumar 1 a la puntuación.</p>
 </div>
 </div>
@@ -254,6 +254,16 @@
 <div class="fiche"><h3>Restaurar estado</h3>
 <p>Deja la escena como en el último «Guardar estado». Si todavía no hay ninguno, no cambia nada.</p>
 <p class="exemple"><b>Ejemplo:</b> volver al checkpoint después de una caída.</p>
+</div>
+<div class="fiche"><h3>Guardar variables en un archivo</h3>
+<div class="schema"><b>Entradas:</b> Nombre de la partida, Variables (vacío = todas)</div>
+<p>Escribe los valores de tus variables (globales y de la escena) en un archivo del dispositivo: seguirán ahí cuando el jugador cierre y vuelva a abrir el juego. «Nombre de la partida» permite tener varias partidas. Deja «Variables» vacío para guardarlo todo, o escribe nombres separados por comas (puntos, vidas). A diferencia de «Guardar estado», sobrevive al cierre del juego.</p>
+<p class="exemple"><b>Ejemplo:</b> Cuando el jugador gana un punto: «Añadir a Variable» sobre «score» y luego «Guardar variables en un archivo». La puntuación se escribe en el archivo con cada punto.</p>
+</div>
+<div class="fiche"><h3>Cargar variables desde un archivo</h3>
+<div class="schema"><b>Entradas:</b> Nombre de la partida, Variables (vacío = todas) &nbsp;→&nbsp; <b>Salidas:</b> Cargado / Sin partida guardada</div>
+<p>Recupera los valores escritos por «Guardar variables en un archivo» (mismo nombre de partida). Cada variable que aún existe recupera su valor. Salida «Cargado» si todo fue bien, «Sin partida guardada» en la primera partida. Suele ponerse justo después de «Al empezar».</p>
+<p class="exemple"><b>Ejemplo:</b> Justo después de «Al Iniciar»: «Cargar variables desde un archivo» y luego «Modificar una propiedad» para mostrar la puntuación recuperada.</p>
 </div>
 </div>
 <h2 id="c3-tiempo">Tiempo</h2>
@@ -786,7 +796,7 @@
 </div>
 <div class="fiche"><h3>Pasar por el decorado</h3>
 <div class="schema"><b>Entradas:</b> Imagen que pasa, Movimiento (pasos), ¿Por dónde pasa?, Altura de la imagen (píxeles), Animación de la imagen (nombre, opcional), Velocidad de la animación (imágenes por segundo)</div>
-<p>Hace que una imagen (pájaro, nube, mosquito…) cruce el fondo de una historia siguiendo un movimiento creado en Assets → Movimiento. Elige detrás o delante de los personajes (el cuadro de texto siempre queda encima). «Altura» ajusta el tamaño de la imagen.</p>
+<p>Hace que una imagen (pájaro, nube, mosquito…) cruce el fondo de una historia siguiendo un movimiento creado en Assets → Movimiento. Elige detrás o delante de los personajes (el cuadro de texto siempre queda encima). «Altura» ajusta el tamaño de la imagen. Si la imagen es una animación (un pájaro que bate las alas), escribe su nombre en «Animación de la imagen» y la velocidad en «Velocidad (imágenes por segundo)».</p>
 <p class="exemple"><b>Ejemplo:</b> un pájaro que cruza el cielo mientras Hana habla.</p>
 </div>
 <div class="fiche"><h3>Detener las imágenes que pasan</h3>

@@ -147,6 +147,18 @@
       "nom": "Restaurar estado",
       "role": "Deja la escena como en el último «Guardar estado». Si todavía no hay ninguno, no cambia nada.",
       "exemple": "volver al checkpoint después de una caída."
+    },
+    {
+      "nom": "Guardar variables en un archivo",
+      "schema": "<b>Entradas:</b> Nombre de la partida, Variables (vacío = todas)",
+      "role": "Escribe los valores de tus variables (globales y de la escena) en un archivo del dispositivo: seguirán ahí cuando el jugador cierre y vuelva a abrir el juego. «Nombre de la partida» permite tener varias partidas. Deja «Variables» vacío para guardarlo todo, o escribe nombres separados por comas (puntos, vidas). A diferencia de «Guardar estado», sobrevive al cierre del juego.",
+      "exemple": "Cuando el jugador gana un punto: «Añadir a Variable» sobre «score» y luego «Guardar variables en un archivo». La puntuación se escribe en el archivo con cada punto."
+    },
+    {
+      "nom": "Cargar variables desde un archivo",
+      "schema": "<b>Entradas:</b> Nombre de la partida, Variables (vacío = todas) &nbsp;→&nbsp; <b>Salidas:</b> Cargado / Sin partida guardada",
+      "role": "Recupera los valores escritos por «Guardar variables en un archivo» (mismo nombre de partida). Cada variable que aún existe recupera su valor. Salida «Cargado» si todo fue bien, «Sin partida guardada» en la primera partida. Suele ponerse justo después de «Al empezar».",
+      "exemple": "Justo después de «Al Iniciar»: «Cargar variables desde un archivo» y luego «Modificar una propiedad» para mostrar la puntuación recuperada."
     }
   ]
 }

@@ -660,11 +660,19 @@
   "parar la pasarela cuando el jugador pulsa un botón."
  ],
  "passage_decor": [
-  "Hace que una imagen (pájaro, nube, mosquito…) cruce el fondo de una historia siguiendo un movimiento creado en Assets → Movimiento. Elige detrás o delante de los personajes (el cuadro de texto siempre queda encima). «Altura» ajusta el tamaño de la imagen.",
+  "Hace que una imagen (pájaro, nube, mosquito…) cruce el fondo de una historia siguiendo un movimiento creado en Assets → Movimiento. Elige detrás o delante de los personajes (el cuadro de texto siempre queda encima). «Altura» ajusta el tamaño de la imagen. Si la imagen es una animación (un pájaro que bate las alas), escribe su nombre en « Animación de la imagen » y la velocidad en « Velocidad (imágenes por segundo) ».",
   "un pájaro que cruza el cielo mientras Hana habla."
  ],
  "arreter_passages": [
   "Quita todas las imágenes que cruzan el fondo de la historia (lanzadas por [[passage_decor]]).",
   "el mosquito se va cuando termina el diálogo."
+ ],
+ "sauvegarder_variables": [
+  "Escribe los valores de tus variables (globales y de la escena) en un archivo del dispositivo: seguirán ahí cuando el jugador cierre y vuelva a abrir el juego. « Nombre de la partida » permite tener varias partidas. Deja « Variables » vacío para guardarlo todo, o escribe nombres separados por comas (puntos, vidas). A diferencia de [[sauvegarder_etat]], sobrevive al cierre del juego.",
+  "Cuando el jugador gana un punto: [[ajouter_variable]] sobre « score » y luego [[sauvegarder_variables]]. La puntuación se escribe en el archivo con cada punto."
+ ],
+ "charger_variables": [
+  "Recupera los valores escritos por [[sauvegarder_variables]] (mismo nombre de partida). Cada variable que aún existe recupera su valor. Salida « Cargado » si todo fue bien, « Sin partida guardada » en la primera partida. Suele ponerse justo después de « Al empezar ».",
+  "Justo después de [[NoeudEventStart]]: [[charger_variables]] y luego [[modifier_propriete]] para mostrar la puntuación recuperada."
  ]
 }

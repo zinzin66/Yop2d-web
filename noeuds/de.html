@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (164) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 164 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (166) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 166 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 164 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 166 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
 <nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-übergänge">Übergänge</a><a href="#c11-animationen">Animationen</a><a href="#c12-audio">Audio</a><a href="#c13-geschichte-und-dialoge">Geschichte und Dialoge</a><a href="#c14-werte-grüne-kabel">Werte (grüne Kabel)</a><a href="#c15-bildschirmfilter">Bildschirmfilter</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
@@ -127,7 +127,7 @@
 </div>
 <div class="fiche"><h3>Wenn Objekt Tag berührt</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Tag</div>
-<p>Läuft einmal pro Berührung, wenn das gewählte Objekt ein Objekt mit diesem Tag berührt. Das berührte Objekt wird zum „Impliziertes Objekt“.</p>
+<p>Läuft einmal pro Berührung, wenn das gewählte Objekt ein Objekt mit diesem Tag berührt. Das berührte Objekt wird zum „Impliziertes Objekt“. Die Einstellung „Berührte Seite“ beschränkt das Ereignis auf eine Seite des Objekts (oben, unten, links, rechts): „Oberseite des Objekts“ bedeutet, dass etwas von oben auf es trifft, zum Beispiel ein Aufzug, der es zerquetscht. „Überall“ (Standard) ignoriert die Seite.</p>
 <p class="exemple"><b>Beispiel:</b> der Spieler berührt eine Münze (Tag „piece“) → das beteiligte Objekt zerstören und 1 zum Punktestand addieren.</p>
 </div>
 </div>
@@ -254,6 +254,16 @@
 <div class="fiche"><h3>Zustand wiederherstellen</h3>
 <p>Stellt die Szene wie beim letzten „Zustand speichern“ wieder her. Gibt es noch keinen, ändert sich nichts.</p>
 <p class="exemple"><b>Beispiel:</b> nach einem Sturz am Checkpoint weitermachen.</p>
+</div>
+<div class="fiche"><h3>Variablen in einer Datei speichern</h3>
+<div class="schema"><b>Eingänge:</b> Name des Speicherstands, Variablen (leer = alle)</div>
+<p>Schreibt die Werte deiner Variablen (globale und die der Szene) in eine Datei auf dem Gerät: Sie sind wieder da, wenn der Spieler das Spiel schließt und neu öffnet. Mit „Name des Speicherstands“ kannst du mehrere Spielstände haben. Lass „Variablen“ leer, um alles zu speichern, oder schreibe Namen mit Kommas (punkte, leben). Anders als „Zustand speichern“ übersteht es das Schließen des Spiels.</p>
+<p class="exemple"><b>Beispiel:</b> Wenn der Spieler einen Punkt bekommt: „Zu Variable hinzufügen“ auf „score“, dann „Variablen in einer Datei speichern“. Der Punktestand wird bei jedem Punkt in die Datei geschrieben.</p>
+</div>
+<div class="fiche"><h3>Variablen aus einer Datei laden</h3>
+<div class="schema"><b>Eingänge:</b> Name des Speicherstands, Variablen (leer = alle) &nbsp;→&nbsp; <b>Ausgänge:</b> Geladen / Kein Speicherstand</div>
+<p>Holt die Werte zurück, die „Variablen in einer Datei speichern“ geschrieben hat (gleicher Name). Jede Variable, die noch existiert, bekommt ihren Wert zurück. Ausgang „Geladen“, wenn es geklappt hat, „Kein Speicherstand“ beim allerersten Spiel. Steht oft direkt nach „Beim Start“.</p>
+<p class="exemple"><b>Beispiel:</b> Direkt nach „Beim Start“: „Variablen aus einer Datei laden“, dann „Eigenschaft ändern“, um den wiedergefundenen Punktestand anzuzeigen.</p>
 </div>
 </div>
 <h2 id="c3-zeit">Zeit</h2>
@@ -786,7 +796,7 @@
 </div>
 <div class="fiche"><h3>Durch den Hintergrund ziehen</h3>
 <div class="schema"><b>Eingänge:</b> Vorbeiziehendes Bild, Bewegung (Schritte), Wo zieht es vorbei?, Bildhöhe (Pixel), Bildanimation (Name, optional), Animationstempo (Bilder pro Sekunde)</div>
-<p>Lässt ein Bild (Vogel, Wolke, Mücke…) über den Hintergrund einer Geschichte ziehen, entlang einer Bewegung aus Assets → Bewegung. Wahlweise hinter oder vor den Figuren (das Textfeld bleibt immer oben). „Höhe“ stellt die Bildgröße ein.</p>
+<p>Lässt ein Bild (Vogel, Wolke, Mücke…) über den Hintergrund einer Geschichte ziehen, entlang einer Bewegung aus Assets → Bewegung. Wahlweise hinter oder vor den Figuren (das Textfeld bleibt immer oben). „Höhe“ stellt die Bildgröße ein. Ist das Bild eine Animation (ein Vogel, der mit den Flügeln schlägt), schreibe ihren Namen in „Animation des Bildes“ und die Geschwindigkeit in „Geschwindigkeit (Bilder pro Sekunde)“.</p>
 <p class="exemple"><b>Beispiel:</b> ein Vogel fliegt über den Himmel, während Hana spricht.</p>
 </div>
 <div class="fiche"><h3>Vorbeiziehende Bilder stoppen</h3>

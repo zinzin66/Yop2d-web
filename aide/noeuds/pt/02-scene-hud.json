@@ -147,6 +147,18 @@
       "nom": "Restaurar estado",
       "role": "Deixa a cena como estava no último “Salvar estado”. Se ainda não houver salvamento, nada muda.",
       "exemple": "voltar ao checkpoint depois de uma queda."
+    },
+    {
+      "nom": "Salvar variáveis em um arquivo",
+      "schema": "<b>Entradas:</b> Nome do salvamento, Variáveis (vazio = todas)",
+      "role": "Escreve os valores das suas variáveis (globais e da cena) em um arquivo no aparelho: elas continuam lá quando o jogador fechar e reabrir o jogo. “Nome do salvamento” permite ter vários jogos. Deixe “Variáveis” vazio para guardar tudo, ou escreva nomes separados por vírgulas (pontos, vidas). Ao contrário de “Salvar estado”, sobrevive ao fechamento do jogo.",
+      "exemple": "Quando o jogador ganha um ponto: “Adicionar à Variável” em “score” e depois “Salvar variáveis em um arquivo”. A pontuação é gravada no arquivo a cada ponto."
+    },
+    {
+      "nom": "Carregar variáveis de um arquivo",
+      "schema": "<b>Entradas:</b> Nome do salvamento, Variáveis (vazio = todas) &nbsp;→&nbsp; <b>Saídas:</b> Carregado / Sem salvamento",
+      "role": "Recupera os valores escritos por “Salvar variáveis em um arquivo” (mesmo nome de salvamento). Cada variável que ainda existe volta ao seu valor. Saída “Carregado” se deu certo, “Sem salvamento” no primeiro jogo. Costuma ficar logo depois de “Ao iniciar”.",
+      "exemple": "Logo depois de “Ao Iniciar”: “Carregar variáveis de um arquivo” e depois “Modificar uma propriedade” para mostrar a pontuação recuperada."
     }
   ]
 }

@@ -147,6 +147,18 @@
       "nom": "Ripristina stato",
       "role": "Rimette la scena com'era all'ultimo «Salva stato». Se non c'è ancora un salvataggio, non cambia nulla.",
       "exemple": "ripartire dal checkpoint dopo una caduta."
+    },
+    {
+      "nom": "Salva le variabili in un file",
+      "schema": "<b>Ingressi:</b> Nome del salvataggio, Variabili (vuoto = tutte)",
+      "role": "Scrive i valori delle tue variabili (globali e della scena) in un file sul dispositivo: saranno ancora lì quando il giocatore chiude e riapre il gioco. «Nome del salvataggio» permette di avere più partite. Lascia «Variabili» vuoto per salvare tutto, oppure scrivi i nomi separati da virgole (punti, vite). A differenza di «Salva stato», sopravvive alla chiusura del gioco.",
+      "exemple": "Quando il giocatore fa un punto: «Aggiungi alla Variabile» su «score», poi «Salva le variabili in un file». Il punteggio viene scritto nel file a ogni punto."
+    },
+    {
+      "nom": "Carica le variabili da un file",
+      "schema": "<b>Ingressi:</b> Nome del salvataggio, Variabili (vuoto = tutte) &nbsp;→&nbsp; <b>Uscite:</b> Caricato / Nessun salvataggio",
+      "role": "Recupera i valori scritti da «Salva le variabili in un file» (stesso nome di salvataggio). Ogni variabile che esiste ancora riprende il suo valore. Uscita «Caricato» se è andata bene, «Nessun salvataggio» alla primissima partita. Spesso si mette subito dopo «All'avvio».",
+      "exemple": "Subito dopo «All'Avvio»: «Carica le variabili da un file», poi «Modifica una proprietà» per mostrare il punteggio ritrovato."
     }
   ]
 }

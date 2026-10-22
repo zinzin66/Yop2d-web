@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutti i nodi di Yop2D (164) | Riferimento</title>
-<meta name="description" content="Elenco completo dei 164 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
+<title>Tutti i nodi di Yop2D (166) | Riferimento</title>
+<meta name="description" content="Elenco completo dei 166 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 164 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
+<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 166 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
 <p><strong>Categorie</strong></p>
 <nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-griglie-e-puzzle">Griglie e puzzle</a><a href="#c10-transizioni">Transizioni</a><a href="#c11-animazioni">Animazioni</a><a href="#c12-audio">Audio</a><a href="#c13-storia-e-dialoghi">Storia e dialoghi</a><a href="#c14-valori-fili-verdi">Valori (fili verdi)</a><a href="#c15-filtri-dello-schermo">Filtri dello schermo</a></nav>
 <h2 id="c1-eventi">Eventi</h2>
@@ -127,7 +127,7 @@
 </div>
 <div class="fiche"><h3>Se l'oggetto tocca il Tag</h3>
 <div class="schema"><b>Ingressi:</b> Oggetto, Tag</div>
-<p>Si avvia una volta per contatto quando l'oggetto scelto tocca un oggetto con questo tag. L'oggetto toccato diventa l'«Oggetto Implicato».</p>
+<p>Si avvia una volta per contatto quando l'oggetto scelto tocca un oggetto con questo tag. L'oggetto toccato diventa l'«Oggetto Implicato». L'impostazione «Lato toccato» limita l'evento a un lato dell'oggetto (alto, basso, sinistra, destra): «la parte alta dell'oggetto» significa che qualcosa arriva da sopra, per esempio un ascensore che lo schiaccia. «Ovunque» (predefinito) ignora il lato.</p>
 <p class="exemple"><b>Esempio:</b> il giocatore tocca una moneta (tag «piece») → distruggere l'oggetto coinvolto e aggiungere 1 al punteggio.</p>
 </div>
 </div>
@@ -254,6 +254,16 @@
 <div class="fiche"><h3>Ripristina stato</h3>
 <p>Rimette la scena com'era all'ultimo «Salva stato». Se non c'è ancora un salvataggio, non cambia nulla.</p>
 <p class="exemple"><b>Esempio:</b> ripartire dal checkpoint dopo una caduta.</p>
+</div>
+<div class="fiche"><h3>Salva le variabili in un file</h3>
+<div class="schema"><b>Ingressi:</b> Nome del salvataggio, Variabili (vuoto = tutte)</div>
+<p>Scrive i valori delle tue variabili (globali e della scena) in un file sul dispositivo: saranno ancora lì quando il giocatore chiude e riapre il gioco. «Nome del salvataggio» permette di avere più partite. Lascia «Variabili» vuoto per salvare tutto, oppure scrivi i nomi separati da virgole (punti, vite). A differenza di «Salva stato», sopravvive alla chiusura del gioco.</p>
+<p class="exemple"><b>Esempio:</b> Quando il giocatore fa un punto: «Aggiungi alla Variabile» su «score», poi «Salva le variabili in un file». Il punteggio viene scritto nel file a ogni punto.</p>
+</div>
+<div class="fiche"><h3>Carica le variabili da un file</h3>
+<div class="schema"><b>Ingressi:</b> Nome del salvataggio, Variabili (vuoto = tutte) &nbsp;→&nbsp; <b>Uscite:</b> Caricato / Nessun salvataggio</div>
+<p>Recupera i valori scritti da «Salva le variabili in un file» (stesso nome di salvataggio). Ogni variabile che esiste ancora riprende il suo valore. Uscita «Caricato» se è andata bene, «Nessun salvataggio» alla primissima partita. Spesso si mette subito dopo «All'avvio».</p>
+<p class="exemple"><b>Esempio:</b> Subito dopo «All'Avvio»: «Carica le variabili da un file», poi «Modifica una proprietà» per mostrare il punteggio ritrovato.</p>
 </div>
 </div>
 <h2 id="c3-tempo">Tempo</h2>
@@ -786,7 +796,7 @@
 </div>
 <div class="fiche"><h3>Passare nello sfondo</h3>
 <div class="schema"><b>Ingressi:</b> Immagine che passa, Movimento (passi), Dove passa?, Altezza dell'immagine (pixel), Animazione dell'immagine (nome, facoltativo), Velocità dell'animazione (immagini al secondo)</div>
-<p>Fa attraversare lo sfondo di una storia a un'immagine (uccello, nuvola, zanzara…) seguendo un movimento creato in Assets → Movimento. Scegli dietro o davanti ai personaggi (il riquadro di testo resta sempre sopra). «Altezza» regola la dimensione dell'immagine.</p>
+<p>Fa attraversare lo sfondo di una storia a un'immagine (uccello, nuvola, zanzara…) seguendo un movimento creato in Assets → Movimento. Scegli dietro o davanti ai personaggi (il riquadro di testo resta sempre sopra). «Altezza» regola la dimensione dell'immagine. Se l'immagine è un'animazione (un uccello che batte le ali), scrivi il suo nome in «Animazione dell'immagine» e la velocità in «Velocità (immagini al secondo)».</p>
 <p class="exemple"><b>Esempio:</b> un uccello che attraversa il cielo mentre Hana parla.</p>
 </div>
 <div class="fiche"><h3>Fermare le immagini che passano</h3>
