@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (160) | Referencia</title>
-<meta name="description" content="Lista completa de los 160 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (164) | Referencia</title>
+<meta name="description" content="Lista completa de los 164 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 160 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 164 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-transiciones">Transiciones</a><a href="#c11-animaciones">Animaciones</a><a href="#c12-audio">Audio</a><a href="#c13-historia-y-diálogos">Historia y diálogos</a><a href="#c14-valores-cables-verdes">Valores (cables verdes)</a><a href="#c15-filtros-de-pantalla">Filtros de pantalla</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -605,6 +605,16 @@
 </div>
 <h2 id="c8-movimientos-e-ia">Movimientos e IA</h2>
 <div class="method">
+<div class="fiche"><h3>Reproducir movimiento (etapas)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Nombre del movimiento</div>
+<p>Reproduce en el objeto un movimiento creado en Assets → Movimiento (etapas: posición, rotación, tamaño, transparencia). El motor calcula lo que hay entre medias. Durante el movimiento, la gravedad y los controles del objeto se desactivan. Lo siguiente continúa sin esperar.</p>
+<p class="exemple"><b>Ejemplo:</b> una pasarela que sube y baja en bucle, o una puerta corredera.</p>
+</div>
+<div class="fiche"><h3>Detener el movimiento</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>Detiene el movimiento en curso del objeto. Se queda donde está.</p>
+<p class="exemple"><b>Ejemplo:</b> parar la pasarela cuando el jugador pulsa un botón.</p>
+</div>
 <div class="fiche"><h3>Detener el objeto</h3>
 <div class="schema"><b>Entrada:</b> Objeto</div>
 <p>Detiene en seco el objeto: sin velocidad, empuje, salto ni movimiento automático.</p>
@@ -770,9 +780,18 @@
 <p class="exemple"><b>Ejemplo:</b> «Abrir el tesoro» lleva al final feliz, «Irse» al final triste.</p>
 </div>
 <div class="fiche"><h3>Cambiar el decorado</h3>
-<div class="schema"><b>Entradas:</b> Imagen del decorado (vacío = ninguno), Transición</div>
+<div class="schema"><b>Entradas:</b> Imagen del decorado (vacío = ninguno), Transición, Movimiento lento del decorado, Duración del movimiento (segundos), Capa del medio, transparente (vacío = ninguna), Primer plano delante de los personajes, transparente (vacío = ninguno), Distancia del movimiento</div>
 <p>Pone una imagen de fondo, a pantalla completa, detrás de los personajes de la historia (con fundido o de golpe). Imagen vacía = sin decorado.</p>
 <p class="exemple"><b>Ejemplo:</b> la pradera al principio y luego el bosque cuando Hana va a buscar a su gato.</p>
+</div>
+<div class="fiche"><h3>Pasar por el decorado</h3>
+<div class="schema"><b>Entradas:</b> Imagen que pasa, Movimiento (pasos), ¿Por dónde pasa?, Altura de la imagen (píxeles), Animación de la imagen (nombre, opcional), Velocidad de la animación (imágenes por segundo)</div>
+<p>Hace que una imagen (pájaro, nube, mosquito…) cruce el fondo de una historia siguiendo un movimiento creado en Assets → Movimiento. Elige detrás o delante de los personajes (el cuadro de texto siempre queda encima). «Altura» ajusta el tamaño de la imagen.</p>
+<p class="exemple"><b>Ejemplo:</b> un pájaro que cruza el cielo mientras Hana habla.</p>
+</div>
+<div class="fiche"><h3>Detener las imágenes que pasan</h3>
+<p>Quita todas las imágenes que cruzan el fondo de la historia (lanzadas por «Pasar por el decorado»).</p>
+<p class="exemple"><b>Ejemplo:</b> el mosquito se va cuando termina el diálogo.</p>
 </div>
 <div class="fiche"><h3>Mostrar / ocultar un personaje</h3>
 <div class="schema"><b>Entradas:</b> Personaje, Él…, Emoción, Lugar en pantalla, Entrada del personaje</div>

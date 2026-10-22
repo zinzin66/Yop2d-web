@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos os nós do Yop2D (160) | Referência</title>
-<meta name="description" content="Lista completa dos 160 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
+<title>Todos os nós do Yop2D (164) | Referência</title>
+<meta name="description" content="Lista completa dos 164 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/pt.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 160 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
+<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 164 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
 <p><strong>Categorias</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-cena-e-hud">Cena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aparência-e-objetos">Aparência e Objetos</a><a href="#c5-variáveis-e-inventário">Variáveis e Inventário</a><a href="#c6-lógica-e-condições">Lógica e Condições</a><a href="#c7-textos-e-diálogos">Textos e Diálogos</a><a href="#c8-movimentos-e-ia">Movimentos e IA</a><a href="#c9-grades-e-quebra-cabeças">Grades e quebra-cabeças</a><a href="#c10-transições">Transições</a><a href="#c11-animações">Animações</a><a href="#c12-áudio">Áudio</a><a href="#c13-história-e-diálogos">História e diálogos</a><a href="#c14-valores-fios-verdes">Valores (fios verdes)</a><a href="#c15-filtros-de-tela">Filtros de tela</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -605,6 +605,16 @@
 </div>
 <h2 id="c8-movimentos-e-ia">Movimentos e IA</h2>
 <div class="method">
+<div class="fiche"><h3>Reproduzir movimento (etapas)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Nome do movimento</div>
+<p>Executa no objeto um movimento criado em Assets → Movimento (etapas: posição, rotação, tamanho, transparência). O motor calcula o que há entre elas. Durante o movimento, a gravidade e os controles do objeto ficam desligados. O próximo continua sem esperar.</p>
+<p class="exemple"><b>Exemplo:</b> uma passarela que sobe e desce em ciclo, ou uma porta deslizante.</p>
+</div>
+<div class="fiche"><h3>Parar o movimento</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>Para o movimento em andamento no objeto. Ele fica onde está.</p>
+<p class="exemple"><b>Exemplo:</b> parar a passarela quando o jogador aperta um botão.</p>
+</div>
 <div class="fiche"><h3>Parar o objeto</h3>
 <div class="schema"><b>Entrada:</b> Objeto</div>
 <p>Para o objeto na hora: sem velocidade, empurrão, pulo ou movimento automático.</p>
@@ -770,9 +780,18 @@
 <p class="exemple"><b>Exemplo:</b> “Abrir o tesouro” leva ao final feliz, “Ir embora” ao final triste.</p>
 </div>
 <div class="fiche"><h3>Mudar o cenário</h3>
-<div class="schema"><b>Entradas:</b> Imagem do cenário (vazio = nenhum), Transição</div>
+<div class="schema"><b>Entradas:</b> Imagem do cenário (vazio = nenhum), Transição, Movimento lento do cenário, Duração do movimento (segundos), Camada do meio, transparente (vazio = nenhuma), Primeiro plano na frente dos personagens, transparente (vazio = nenhum), Distância do movimento</div>
 <p>Coloca uma imagem de fundo, em tela cheia, atrás dos personagens da história (com fade ou de uma vez). Imagem vazia = sem cenário.</p>
 <p class="exemple"><b>Exemplo:</b> o prado no início e depois a floresta quando Hana vai procurar o gato.</p>
+</div>
+<div class="fiche"><h3>Passar pelo cenário</h3>
+<div class="schema"><b>Entradas:</b> Imagem que passa, Movimento (etapas), Por onde passa?, Altura da imagem (pixels), Animação da imagem (nome, opcional), Velocidade da animação (imagens por segundo)</div>
+<p>Faz uma imagem (pássaro, nuvem, mosquito…) atravessar o fundo de uma história seguindo um movimento criado em Assets → Movimento. Escolha atrás ou na frente dos personagens (a caixa de texto fica sempre por cima). “Altura” ajusta o tamanho da imagem.</p>
+<p class="exemple"><b>Exemplo:</b> um pássaro cruzando o céu enquanto Hana fala.</p>
+</div>
+<div class="fiche"><h3>Parar as imagens que passam</h3>
+<p>Remove todas as imagens que atravessam o fundo da história (iniciadas por “Passar pelo cenário”).</p>
+<p class="exemple"><b>Exemplo:</b> o mosquito vai embora quando o diálogo termina.</p>
 </div>
 <div class="fiche"><h3>Mostrar / esconder um personagem</h3>
 <div class="schema"><b>Entradas:</b> Personagem, Ele…, Emoção, Lugar na tela, Entrada do personagem</div>

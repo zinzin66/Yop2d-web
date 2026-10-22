@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (160) | Reference</title>
-<meta name="description" content="Complete list of the 160 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (164) | Reference</title>
+<meta name="description" content="Complete list of the 164 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 160 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 164 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-transitions">Transitions</a><a href="#c11-animations">Animations</a><a href="#c12-audio">Audio</a><a href="#c13-story-and-dialogues">Story and dialogues</a><a href="#c14-values-green-wires">Values (green wires)</a><a href="#c15-screen-filters">Screen filters</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -605,6 +605,16 @@
 </div>
 <h2 id="c8-movements-ai">Movements &amp; AI</h2>
 <div class="method">
+<div class="fiche"><h3>Play movement (steps)</h3>
+<div class="schema"><b>Inputs:</b> Object, Movement name</div>
+<p>Plays on the object a movement made in Assets → Movement (steps: position, rotation, size, transparency). The engine computes everything in between. While it moves, the object's gravity and controls are switched off. The next nodes run without waiting.</p>
+<p class="exemple"><b>Example:</b> a platform that goes up and down in a loop, or a sliding door.</p>
+</div>
+<div class="fiche"><h3>Stop the movement</h3>
+<div class="schema"><b>Input:</b> Object</div>
+<p>Stops the movement running on the object. It stays where it is.</p>
+<p class="exemple"><b>Example:</b> stop the platform when the player presses a button.</p>
+</div>
 <div class="fiche"><h3>Stop the object</h3>
 <div class="schema"><b>Input:</b> Object</div>
 <p>Stops the object dead: no more speed, push, jump or automatic movement.</p>
@@ -770,9 +780,18 @@
 <p class="exemple"><b>Example:</b> "Open the treasure" leads to the good ending, "Leave" to the sad one.</p>
 </div>
 <div class="fiche"><h3>Change the background</h3>
-<div class="schema"><b>Inputs:</b> Background image (empty = none), Transition</div>
+<div class="schema"><b>Inputs:</b> Background image (empty = none), Transition, Slow background movement, Movement duration (seconds), Middle layer, transparent (empty = none), Foreground in front of the characters, transparent (empty = none), Movement distance</div>
 <p>Puts a picture as the background, full screen, behind the story's characters (fading or at once). Empty picture = no more background.</p>
 <p class="exemple"><b>Example:</b> the meadow at the start, then the forest when Hana goes looking for her cat.</p>
+</div>
+<div class="fiche"><h3>Pass through the scenery</h3>
+<div class="schema"><b>Inputs:</b> Image that passes, Movement (steps), Where does it pass?, Image height (pixels), Image animation (name, optional), Animation speed (frames per second)</div>
+<p>Makes an image (bird, cloud, mosquito…) cross the background of a story, following a movement made in Assets → Movement. Choose behind or in front of the characters (the text box always stays on top). “Height” sets the size of the image.</p>
+<p class="exemple"><b>Example:</b> a bird flying across the sky while Hana talks.</p>
+</div>
+<div class="fiche"><h3>Stop the passing images</h3>
+<p>Removes all the images currently crossing the story background (started by “Pass through the scenery”).</p>
+<p class="exemple"><b>Example:</b> the mosquito leaves when the dialogue is over.</p>
 </div>
 <div class="fiche"><h3>Show / hide a character</h3>
 <div class="schema"><b>Inputs:</b> Character, They…, Emotion, Place on screen, Character entrance</div>

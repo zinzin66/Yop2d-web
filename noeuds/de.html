@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (160) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 160 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (164) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 164 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 160 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 164 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
 <nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-übergänge">Übergänge</a><a href="#c11-animationen">Animationen</a><a href="#c12-audio">Audio</a><a href="#c13-geschichte-und-dialoge">Geschichte und Dialoge</a><a href="#c14-werte-grüne-kabel">Werte (grüne Kabel)</a><a href="#c15-bildschirmfilter">Bildschirmfilter</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
@@ -605,6 +605,16 @@
 </div>
 <h2 id="c8-bewegung-ki">Bewegung &amp; KI</h2>
 <div class="method">
+<div class="fiche"><h3>Bewegung abspielen (Etappen)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Name der Bewegung</div>
+<p>Spielt auf dem Objekt eine Bewegung ab, die unter Assets → Bewegung erstellt wurde (Schritte: Position, Drehung, Größe, Transparenz). Das Dazwischen berechnet die Engine. Während der Bewegung sind Schwerkraft und Steuerung des Objekts abgeschaltet. Es geht sofort weiter, ohne zu warten.</p>
+<p class="exemple"><b>Beispiel:</b> eine Brücke, die in Schleife auf und ab fährt, oder eine Schiebetür.</p>
+</div>
+<div class="fiche"><h3>Bewegung stoppen</h3>
+<div class="schema"><b>Eingang:</b> Objekt</div>
+<p>Stoppt die laufende Bewegung des Objekts. Es bleibt dort stehen, wo es ist.</p>
+<p class="exemple"><b>Beispiel:</b> die Brücke anhalten, wenn der Spieler einen Knopf drückt.</p>
+</div>
 <div class="fiche"><h3>Objekt stoppen</h3>
 <div class="schema"><b>Eingang:</b> Objekt</div>
 <p>Stoppt das Objekt sofort: keine Geschwindigkeit, kein Schub, kein Sprung und keine automatische Bewegung mehr.</p>
@@ -770,9 +780,18 @@
 <p class="exemple"><b>Beispiel:</b> „Schatz öffnen“ führt zum guten Ende, „Gehen“ zum traurigen.</p>
 </div>
 <div class="fiche"><h3>Hintergrund wechseln</h3>
-<div class="schema"><b>Eingänge:</b> Hintergrundbild (leer = keins), Übergang</div>
+<div class="schema"><b>Eingänge:</b> Hintergrundbild (leer = keins), Übergang, Langsame Hintergrundbewegung, Dauer der Bewegung (Sekunden), Mittlere Ebene, transparent (leer = keine), Vordergrund vor den Figuren, transparent (leer = keiner), Weite der Bewegung</div>
 <p>Setzt ein Bild als Hintergrund, über den ganzen Bildschirm, hinter die Figuren der Geschichte (überblendet oder sofort). Leeres Bild = kein Hintergrund mehr.</p>
 <p class="exemple"><b>Beispiel:</b> zuerst die Wiese, dann der Wald, wenn Hana ihre Katze sucht.</p>
+</div>
+<div class="fiche"><h3>Durch den Hintergrund ziehen</h3>
+<div class="schema"><b>Eingänge:</b> Vorbeiziehendes Bild, Bewegung (Schritte), Wo zieht es vorbei?, Bildhöhe (Pixel), Bildanimation (Name, optional), Animationstempo (Bilder pro Sekunde)</div>
+<p>Lässt ein Bild (Vogel, Wolke, Mücke…) über den Hintergrund einer Geschichte ziehen, entlang einer Bewegung aus Assets → Bewegung. Wahlweise hinter oder vor den Figuren (das Textfeld bleibt immer oben). „Höhe“ stellt die Bildgröße ein.</p>
+<p class="exemple"><b>Beispiel:</b> ein Vogel fliegt über den Himmel, während Hana spricht.</p>
+</div>
+<div class="fiche"><h3>Vorbeiziehende Bilder stoppen</h3>
+<p>Entfernt alle Bilder, die gerade über den Hintergrund der Geschichte ziehen (gestartet mit „Durch den Hintergrund ziehen“).</p>
+<p class="exemple"><b>Beispiel:</b> die Mücke verschwindet, wenn der Dialog vorbei ist.</p>
 </div>
 <div class="fiche"><h3>Figur zeigen / verstecken</h3>
 <div class="schema"><b>Eingänge:</b> Figur, Die Figur…, Gefühl, Platz auf dem Bildschirm, Auftritt der Figur</div>
