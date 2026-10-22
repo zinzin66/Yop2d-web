@@ -76,7 +76,7 @@
   "hablar con un personaje o abrir una puerta en un juego de aventura."
  ],
  "NoeudEventCollisionTag": [
-  "Se ejecuta una vez por contacto cuando el objeto elegido toca un objeto con esta etiqueta (tag). El objeto tocado pasa a ser el [[lang:noeud_objet_implique]].",
+  "Se ejecuta una vez por contacto cuando el objeto elegido toca un objeto con esta etiqueta (tag). El objeto tocado pasa a ser el [[lang:noeud_objet_implique]]. El ajuste «Lado tocado» limita el evento a un lado del objeto (arriba, abajo, izquierda, derecha): «la parte superior del objeto» significa que algo cae sobre él, por ejemplo un ascensor que lo aplasta. «Cualquiera» (por defecto) no tiene en cuenta el lado.",
   "el jugador toca una moneda (tag « piece ») → destruir el objeto implicado y sumar 1 a la puntuación."
  ],
  "changer_scene": [
@@ -642,5 +642,29 @@
  "detruire_apres": [
   "Elimina el objeto elegido después de un retraso (en segundos). Útil para que una explosión desaparezca cuando termina su animación.",
   "después de [[generer_clone]] y [[jouer_animation]], la imagen de la explosión se destruye 0,4 segundos más tarde."
+ ],
+ "mode_sms": [
+  "Muestra la conversación como SMS en un móvil: las frases de [[dire_phrase]] se convierten en burbujas (a la izquierda para quien escribe, con tres puntitos «…» antes de aparecer) y las respuestas de [[poser_choix]] se eligen abajo en el móvil y luego llegan a la derecha. El narrador escribe una pequeña leyenda en el centro (por ejemplo «Anoche, 22:14»). «Quién te escribe» pone el nombre y la foto arriba; «Quién es yo» hace que un personaje escriba a la derecha sin pasar por una elección. «Borrar la conversación» vacía el móvil; «Volver al cuadro de diálogo» sale del modo. Todo se ajusta en el Estilo de los diálogos: colores, tamaño, tiempo de los «…», móvil a pantalla completa…",
+  "Modo SMS (activar, quién te escribe: Hana) → Decir una frase (Hana: «¿Estás ahí?») → Plantear una elección («Sí, dime» / «¿Por qué?»)."
+ ],
+ "debloquer_succes": [
+  "Desbloquea un logro: un cartel «¡Logro desbloqueado!» se desliza arriba de la pantalla (solo la primera vez en el juego publicado; en cada prueba en el editor, para que puedas verlo). El logro entra en la pestaña «Logros» de «Finales y galería» de la [[ecran_titre_histoire]]: sigue oculto tras «???» (con una pista si escribes una) hasta que se gana. Pon uno al final de una historia, en una rama secreta, después de [[changer_amitie]]… El cartel se ajusta en el Estilo de los diálogos: colores, imagen del marco, duración, lugar (arriba o abajo), sonido.",
+  "Terminar la historia (final «El calcetín perdido») → Desbloquear un logro (nombre «El calcetín perdido», descripción «Final secreto encontrado»)."
+ ],
+ "jouer_mouvement": [
+  "Reproduce en el objeto un movimiento creado en Assets → Movimiento (etapas: posición, rotación, tamaño, transparencia). El motor calcula lo que hay entre medias. Durante el movimiento, la gravedad y los controles del objeto se desactivan. Lo siguiente continúa sin esperar.",
+  "una pasarela que sube y baja en bucle, o una puerta corredera."
+ ],
+ "arreter_mouvement": [
+  "Detiene el movimiento en curso del objeto. Se queda donde está.",
+  "parar la pasarela cuando el jugador pulsa un botón."
+ ],
+ "passage_decor": [
+  "Hace que una imagen (pájaro, nube, mosquito…) cruce el fondo de una historia siguiendo un movimiento creado en Assets → Movimiento. Elige detrás o delante de los personajes (el cuadro de texto siempre queda encima). «Altura» ajusta el tamaño de la imagen.",
+  "un pájaro que cruza el cielo mientras Hana habla."
+ ],
+ "arreter_passages": [
+  "Quita todas las imágenes que cruzan el fondo de la historia (lanzadas por [[passage_decor]]).",
+  "el mosquito se va cuando termina el diálogo."
  ]
 }

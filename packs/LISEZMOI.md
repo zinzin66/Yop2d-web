@@ -24,7 +24,7 @@ packs/foret/
       marche/
       saut/
   Licence.txt        ← (conseillé) la licence des images : elle suit les fichiers dans les projets
-  pack.json          ← (facultatif) nom et description en 9 langues
+  pack.json          ← (facultatif) nom et description en 9 langues ; "moteur_min": 1140 = numéro du build de Yop2D à partir duquel le pack marche (les vieux Yop2D disent « mets Yop2D à jour »)
   vignette.png       ← (facultatif) l'image du pack ; sinon elle est composée toute seule
 ```
 

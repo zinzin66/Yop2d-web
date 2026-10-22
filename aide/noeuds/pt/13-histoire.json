@@ -15,9 +15,20 @@
     },
     {
       "nom": "Mudar o cenário",
-      "schema": "<b>Entradas:</b> Imagem do cenário (vazio = nenhum), Transição",
+      "schema": "<b>Entradas:</b> Imagem do cenário (vazio = nenhum), Transição, Movimento lento do cenário, Duração do movimento (segundos), Camada do meio, transparente (vazio = nenhuma), Primeiro plano na frente dos personagens, transparente (vazio = nenhum), Distância do movimento",
       "role": "Coloca uma imagem de fundo, em tela cheia, atrás dos personagens da história (com fade ou de uma vez). Imagem vazia = sem cenário.",
       "exemple": "o prado no início e depois a floresta quando Hana vai procurar o gato."
+    },
+    {
+      "nom": "Passar pelo cenário",
+      "schema": "<b>Entradas:</b> Imagem que passa, Movimento (etapas), Por onde passa?, Altura da imagem (pixels), Animação da imagem (nome, opcional), Velocidade da animação (imagens por segundo)",
+      "role": "Faz uma imagem (pássaro, nuvem, mosquito…) atravessar o fundo de uma história seguindo um movimento criado em Assets → Movimento. Escolha atrás ou na frente dos personagens (a caixa de texto fica sempre por cima). “Altura” ajusta o tamanho da imagem.",
+      "exemple": "um pássaro cruzando o céu enquanto Hana fala."
+    },
+    {
+      "nom": "Parar as imagens que passam",
+      "role": "Remove todas as imagens que atravessam o fundo da história (iniciadas por “Passar pelo cenário”).",
+      "exemple": "o mosquito vai embora quando o diálogo termina."
     },
     {
       "nom": "Mostrar / esconder um personagem",
@@ -36,6 +47,18 @@
       "schema": "<b>Entrada:</b> O que fazer?",
       "role": "Passa para o “modo romance”: o texto ocupa a tela inteira sobre um fundo escurecido e as frases de “Dizer uma frase” vão se somando uma abaixo da outra, como em um livro. Quando a página enche, ela vira sozinha. “Página nova” apaga na hora; “Voltar à caixa de diálogo” traz de volta a caixa de sempre.",
       "exemple": "Uma narração noturna em modo romance e depois volta à caixa de diálogo para a conversa."
+    },
+    {
+      "nom": "Modo SMS (conversa no celular)",
+      "schema": "<b>Entradas:</b> O que fazer?, Quem escreve (nome e foto no alto), Quem é «eu» (suas frases à direita), Texto sob o nome (vazio = «online»)",
+      "role": "Mostra a conversa como SMS num celular: as frases de “Dizer uma frase” viram balões (à esquerda para quem escreve, com três pontinhos “…” antes de aparecerem) e as respostas de “Propor uma escolha” são escolhidas embaixo do celular e depois chegam à direita. O narrador escreve uma pequena legenda no meio (por exemplo “Ontem à noite, 22:14”). “Quem escreve” dá o nome e a foto no alto; “Quem é eu” faz um personagem escrever à direita sem passar por uma escolha. “Apagar a conversa” esvazia o celular; “Voltar à caixa de diálogo” sai do modo. Tudo se ajusta no Estilo dos diálogos: cores, tamanho, tempo dos “…”, celular em tela cheia…",
+      "exemple": "Modo SMS (ativar, quem escreve: Hana) → Dizer uma frase (Hana: “Você está aí?”) → Fazer uma escolha (“Sim, diga” / “Por quê?”)."
+    },
+    {
+      "nom": "Desbloquear uma conquista",
+      "schema": "<b>Entradas:</b> Nome da conquista, Descrição (aparece na lista), Imagem da conquista (vazio = uma estrela), Dica enquanto está escondida (vazio = nenhuma)",
+      "role": "Desbloqueia uma conquista: um aviso “Conquista desbloqueada!” desliza no alto da tela (só na primeira vez no jogo publicado; a cada teste no editor, para você ver). A conquista entra na aba “Conquistas” de “Finais e galeria” da “Tela de título da história”: fica escondida atrás de “???” (com uma dica, se você escrever uma) até ser ganha. Coloque uma no fim de uma história, num ramo secreto, depois de “Amizade (corações)”… O aviso se ajusta no Estilo dos diálogos: cores, imagem da moldura, duração, lugar (alto ou baixo), som.",
+      "exemple": "Terminar a história (final “A meia perdida”) → Desbloquear uma conquista (nome “A meia perdida”, descrição “Final secreto encontrado”)."
     },
     {
       "nom": "Cena para rever (galeria)",

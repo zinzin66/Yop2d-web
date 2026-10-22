@@ -76,7 +76,7 @@
   "talk to a character or open a door in an adventure game."
  ],
  "NoeudEventCollisionTag": [
-  "Runs once per contact when the chosen object touches an object with this tag. The touched object becomes the [[lang:noeud_objet_implique]].",
+  "Runs once per contact when the chosen object touches an object with this tag. The touched object becomes the [[lang:noeud_objet_implique]]. The \"Touched side\" setting limits the event to one side of the object (top, bottom, left, right): \"top of the object\" means something comes down on it, for example an elevator crushing it. \"Anywhere\" (default) ignores the side.",
   "the player touches a coin (tag « piece ») → destroy the involved object and add 1 to the score."
  ],
  "changer_scene": [
@@ -642,5 +642,29 @@
  "detruire_apres": [
   "Removes the chosen object after a delay (in seconds). Handy to make an explosion disappear once its animation is over.",
   "after [[generer_clone]] and [[jouer_animation]], the explosion image is destroyed 0.4 seconds later."
+ ],
+ "mode_sms": [
+  "Shows the conversation as text messages on a phone: the lines of [[dire_phrase]] become bubbles (on the left for whoever writes, with three little dots \"…\" before they appear) and the answers of [[poser_choix]] are picked at the bottom of the phone, then arrive on the right. The narrator writes a small caption in the middle (for example \"Last night, 10:14 pm\"). \"Who writes to you\" gives the name and photo at the top; \"Who is me\" makes a character write on the right without going through a choice. \"Clear the conversation\" empties the phone; \"Back to the dialogue box\" leaves the mode. Everything is set in the Dialogue style: colours, size, time of the \"…\", full-screen phone…",
+  "SMS mode (turn on, who writes to you: Hana) → Say a line (Hana: \"Are you there?\") → Ask a choice (\"Yes, tell me\" / \"Why?\")."
+ ],
+ "debloquer_succes": [
+  "Unlocks an achievement: an \"Achievement unlocked!\" banner slides in at the top of the screen (only the first time in the published game; every time in the editor so you can see it). The achievement joins the \"Achievements\" tab of \"Endings and gallery\" of the [[ecran_titre_histoire]]: it stays hidden behind \"???\" (with a hint if you write one) until it is won. Put one at the end of a story, in a secret branch, after [[changer_amitie]]… The banner is set in the Dialogue style: colours, frame image, time, place (top or bottom), sound.",
+  "End the story (ending \"The lost sock\") → Unlock an achievement (name \"The lost sock\", description \"Secret ending found\")."
+ ],
+ "jouer_mouvement": [
+  "Plays on the object a movement made in Assets → Movement (steps: position, rotation, size, transparency). The engine computes everything in between. While it moves, the object's gravity and controls are switched off. The next nodes run without waiting.",
+  "a platform that goes up and down in a loop, or a sliding door."
+ ],
+ "arreter_mouvement": [
+  "Stops the movement running on the object. It stays where it is.",
+  "stop the platform when the player presses a button."
+ ],
+ "passage_decor": [
+  "Makes an image (bird, cloud, mosquito…) cross the background of a story, following a movement made in Assets → Movement. Choose behind or in front of the characters (the text box always stays on top). “Height” sets the size of the image.",
+  "a bird flying across the sky while Hana talks."
+ ],
+ "arreter_passages": [
+  "Removes all the images currently crossing the story background (started by [[passage_decor]]).",
+  "the mosquito leaves when the dialogue is over."
  ]
 }

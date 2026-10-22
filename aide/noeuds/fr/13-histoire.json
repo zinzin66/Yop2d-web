@@ -15,9 +15,20 @@
     },
     {
       "nom": "Changer le décor",
-      "schema": "<b>Entrées :</b> Image du décor (vide = aucun), Passage",
+      "schema": "<b>Entrées :</b> Image du décor (vide = aucun), Passage, Mouvement lent du décor, Durée du mouvement (secondes), Couche du milieu, transparente (vide = aucune), Premier plan devant les personnages, transparent (vide = aucun), Distance du mouvement",
       "role": "Met une image en fond, sur tout l'écran, derrière les personnages de l'histoire (en fondu ou d'un coup). Image vide = plus de décor.",
       "exemple": "la prairie au début, puis la forêt quand Hana part chercher son chat."
+    },
+    {
+      "nom": "Passage dans le décor",
+      "schema": "<b>Entrées :</b> Image qui passe, Mouvement (étapes), Où passe-t-elle ?, Hauteur de l'image (pixels), Animation de l'image (nom, facultatif), Vitesse de l'animation (images par seconde)",
+      "role": "Fait traverser le décor d'une histoire à une image (oiseau, nuage, moustique…) en suivant un mouvement créé dans Assets → Mouvement. Au choix : derrière ou devant les personnages (la boîte de texte reste toujours au-dessus). « Hauteur » règle la taille de l'image.",
+      "exemple": "un oiseau qui traverse le ciel pendant que Hana parle."
+    },
+    {
+      "nom": "Arrêter les passages dans le décor",
+      "role": "Retire tous les passages en cours dans le décor de l'histoire (images lancées par « Passage dans le décor »).",
+      "exemple": "le moustique repart quand le dialogue est fini."
     },
     {
       "nom": "Montrer / cacher un personnage",
@@ -36,6 +47,18 @@
       "schema": "<b>Entrée :</b> Que faire ?",
       "role": "Passe en « mode roman » : le texte remplit tout l'écran sur un fond assombri et les phrases de « Dire une phrase » s'ajoutent les unes sous les autres, comme dans un livre. Quand la page est pleine, elle se tourne toute seule. « Nouvelle page » l'efface tout de suite ; « Revenir à la boîte de dialogue » rend la boîte habituelle.",
       "exemple": "Un récit de nuit en mode roman, puis retour à la boîte de dialogue pour la conversation."
+    },
+    {
+      "nom": "Mode SMS (conversation sur téléphone)",
+      "schema": "<b>Entrées :</b> Que faire ?, Qui t'écrit (nom et photo en haut), Qui est « moi » (ses phrases à droite), Texte sous le nom (vide = « en ligne »)",
+      "role": "Affiche la conversation comme des SMS sur un téléphone : les phrases de « Dire une phrase » deviennent des bulles (à gauche pour celui qui écrit, avec trois petits points « … » avant qu'elles apparaissent) et les réponses de « Poser un choix » se choisissent en bas du téléphone, puis arrivent à droite. Le narrateur écrit une petite légende au milieu (par exemple « Hier soir, 22:14 »). « Qui t'écrit » donne le nom et la photo en haut ; « Qui est moi » fait écrire un personnage à droite sans passer par un choix. « Effacer la conversation » vide le téléphone ; « Revenir à la boîte de dialogue » quitte le mode. Tout se règle dans le Style des dialogues : couleurs, taille, temps des « … », téléphone en plein écran…",
+      "exemple": "Mode SMS (activer, qui t'écrit : Hana) → Dire une phrase (Hana : « Tu es là ? ») → Poser un choix (« Oui, dis-moi » / « Pourquoi ? »)."
+    },
+    {
+      "nom": "Débloquer un succès",
+      "schema": "<b>Entrées :</b> Nom du succès, Description (montrée dans la liste), Image du succès (vide = une étoile), Indice tant qu'il est caché (vide = aucun)",
+      "role": "Débloque un succès : un bandeau « Succès débloqué ! » glisse en haut de l'écran (la première fois seulement dans le jeu publié ; à chaque essai dans l'éditeur, pour que tu puisses le voir). Le succès entre dans l'onglet « Succès » de « Fins et galerie » de l'« Écran titre de l'histoire » : il reste caché derrière « ??? » (avec un indice si tu en écris un) tant qu'il n'est pas gagné. Mets-en un à la fin d'une histoire, dans une branche secrète, après « Amitié (cœurs) »… Le bandeau se règle dans le Style des dialogues : couleurs, image du cadre, durée, place (haut ou bas), son.",
+      "exemple": "Terminer l'histoire (fin « La chaussette perdue ») → Débloquer un succès (nom « La chaussette perdue », description « Fin secrète trouvée »)."
     },
     {
       "nom": "Scène à rejouer (galerie)",
