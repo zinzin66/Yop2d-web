@@ -3168,6 +3168,70 @@ function locatifFactureHTML() {
     <div class="card"><div id="factureResult"></div></div>`;
 }
 
+// ---------- HISTORIQUE : mois par mois, par logement ----------
+let histLogementId = '';
+let histPeriode = '12';   // '12' = 12 derniers mois, ou une année (ex. '2026')
+
+function setHist(key, val) { if (key === 'lg') histLogementId = val; else histPeriode = val; renderLocatif(); }
+
+function locatifHistoriqueHTML() {
+  const actifs = state.logements;
+  if (!actifs.length) return '<div class="card"><div class="empty">Aucun logement</div></div>';
+  if (!histLogementId || !getLogement(histLogementId)) histLogementId = actifs[0].id;
+  const l = getLogement(histLogementId);
+  const acc = getCompte(l.accountId);
+  const an = Number(locatifMonth.slice(0, 4));
+  let mois;
+  if (histPeriode === '12') mois = moisFenetre(locatifMonth, 12);
+  else mois = Array.from({ length: 12 }, (_, i) => histPeriode + '-' + String(i + 1).padStart(2, '0'));
+
+  const tot = { loyer: 0, om: 0, charges: 0, du: 0, enc: 0, kwh: 0, m3: 0 };
+  const lignes = mois.map(M => {
+    const cm = addMonths(M, -1);
+    const loyer = valeurAuMois(l.loyers, M), om = valeurAuMois(l.om, M);
+    const conso = consoLogement(l, cm);
+    const complet = !conso.manquants.length;
+    const premier = acc ? state.accountPosts.filter(p => p.accountId === acc.id).map(p => p.month).sort()[0] : null;
+    const data = acc && premier && M >= premier ? computeAccountMonth(acc, M) : null;   // avant le départ du suivi : pas de chiffres
+    const du = data ? data.totalPostes : loyer + om + (complet ? conso.total : 0);
+    const enc = data ? data.totalEncaisse : null;
+    tot.loyer += loyer; tot.om += om; tot.du += du;
+    if (complet) { tot.charges += conso.total; tot.kwh += conso.kwhTotal; tot.m3 += conso.m3; }
+    if (enc !== null) tot.enc += enc;
+    const vide = !complet && !data && !loyer && !om;
+    return `<tr class="${vide ? 'calc' : ''}">
+      <td><strong>${monthKeyLabel(M)}</strong></td>
+      <td class="num">${fmt(loyer)}</td><td class="num">${fmt(om)}</td>
+      <td class="num">${complet ? fmt(conso.total) : '<span class="hint">incomplet</span>'}</td>
+      <td class="num hint">${complet ? nf(conso.kwhTotal, 0) + ' kWh · ' + nf(conso.m3, 1) + ' m³' : '—'}</td>
+      <td class="num">${acc && !data ? '—' : fmt(du)}</td>
+      <td class="num">${enc === null ? '—' : fmt(enc)}</td>
+      <td class="num ${data ? (data.cumulTotal < -0.005 ? 'amount-neg' : data.cumulTotal > 0.005 ? 'amount-pos' : '') : ''}"><strong>${data ? fmt(data.cumulTotal) : '—'}</strong></td>
+    </tr>`;
+  }).join('');
+
+  const annees = [];
+  for (let y = an; y >= an - 4; y--) annees.push(y);
+  return `<div class="card">
+      <div class="section-title">📜 Historique</div>
+      <div class="form-row">
+        <label>Logement<select onchange="setHist('lg', this.value)">${actifs.map(x => `<option value="${x.id}" ${x.id === histLogementId ? 'selected' : ''}>${esc(x.code)} — ${esc(x.locataire)}</option>`).join('')}</select></label>
+        <label>Période<select onchange="setHist('per', this.value)">
+          <option value="12" ${histPeriode === '12' ? 'selected' : ''}>12 mois jusqu'à ${monthKeyLabel(locatifMonth)}</option>
+          ${annees.map(y => `<option value="${y}" ${histPeriode === String(y) ? 'selected' : ''}>Année ${y}</option>`).join('')}
+        </select></label>
+      </div>
+      <div class="hint">Charges = consommation du mois d'avant. « Dû » et « Encaissé » viennent du compte de suivi (règlements pointés)${acc ? '' : ' — ce logement n\'en a pas, le dû est donc recalculé'}. « Solde cumulé » : négatif = reste à percevoir, positif = trop-perçu.</div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Mois</th><th class="num">Loyer</th><th class="num">TOM</th><th class="num">Charges</th><th class="num">Consommation</th><th class="num">Dû</th><th class="num">Encaissé</th><th class="num">Solde cumulé</th></tr></thead>
+        <tbody>${lignes}
+          <tr class="calc total"><td>Total</td><td class="num">${fmt(tot.loyer)}</td><td class="num">${fmt(tot.om)}</td><td class="num">${fmt(tot.charges)}</td>
+          <td class="num">${nf(tot.kwh, 0)} kWh · ${nf(tot.m3, 1)} m³</td><td class="num">${fmt(tot.du)}</td><td class="num">${acc ? fmt(tot.enc) : '—'}</td><td></td></tr>
+        </tbody>
+      </table></div>
+    </div>`;
+}
+
 // ---------- propriétaire ----------
 function setProprio(key, val) { state.proprietaire[key] = val; save(); }
 
@@ -3185,7 +3249,7 @@ function renderLocatif() {
   // barre du haut : mois + onglets
   document.getElementById('locatifMonthLabel').textContent = monthKeyLabel(locatifMonth);
   const sections = [
-    ['apercu', '📊 Vue d\'ensemble'], ['logements', '🏠 Logements'], ['suivi', '📈 Suivi conso'], ['releves', '🔢 Saisie du mois'],
+    ['apercu', '📊 Vue d\'ensemble'], ['logements', '🏠 Logements'], ['suivi', '📈 Suivi conso'], ['historique', '📜 Historique'], ['releves', '🔢 Saisie du mois'],
     ['avis', '🧾 Avis'], ['facture', '⚡ Facture EDF'], ['tarifs', '💶 Tarifs'], ['regul', '⚖️ Ordures / eau'], ['proprio', '👤 Propriétaire']
   ];
   document.getElementById('locatifPills').innerHTML = sections.map(([k, label]) =>
@@ -3196,6 +3260,7 @@ function renderLocatif() {
 
   switch (locatifSection) {
     case 'logements': body.innerHTML = locatifLogementsHTML(); break;
+    case 'historique': body.innerHTML = locatifHistoriqueHTML(); break;
     case 'suivi':     body.innerHTML = locatifSuiviHTML(); majSuiviCalculs(); break;
     case 'releves':   body.innerHTML = locatifRelevesHTML(); majCalculsReleves(); break;
     case 'facture':   body.innerHTML = locatifFactureHTML(); majResultatFacture(); break;
