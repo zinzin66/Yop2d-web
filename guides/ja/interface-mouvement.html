@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>画像で見る動きエディター：ステップ、長さ、動き方 | Yop2D ガイド</title>
+<meta name="description" content="Yop2D の動きエディターを紹介：ステップを置く、長さと動き方を選ぶ、回転・大きさ・透明度、動きの保存。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/interface-mouvement.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/interface-mouvement.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/interface-mouvement.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/interface-mouvement.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/interface-mouvement.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/interface-mouvement.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/interface-mouvement.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/interface-mouvement.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/interface-mouvement.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/interface-mouvement.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "TechArticle",
+ "headline": "画像で見る動きエディター",
+ "description": "Yop2D の動きエディターを紹介：ステップを置く、長さと動き方を選ぶ、回転・大きさ・透明度、動きの保存。",
+ "inLanguage": "ja",
+ "about": {
+  "@type": "SoftwareApplication",
+  "name": "Yop2D"
+ }
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>画像で見る動きエディター</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../interface-mouvement.html" hreflang="fr">Français</a> · <a href="../en/interface-mouvement.html" hreflang="en">English</a> · <a href="../es/interface-mouvement.html" hreflang="es">Español</a> · <a href="../de/interface-mouvement.html" hreflang="de">Deutsch</a> · <a href="../it/interface-mouvement.html" hreflang="it">Italiano</a> · <a href="../pt/interface-mouvement.html" hreflang="pt">Português</a> · <a href="../ru/interface-mouvement.html" hreflang="ru">Русский</a> · <a href="../zh/interface-mouvement.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>動きは、オブジェクトをステップごとに動かします。オブジェクトをいくつかの場所に置くと、Yop2D がその間の道すじを計算します。エディターは <strong>アセット</strong> ウィンドウの <strong>動き</strong> ボタンで開きます。</p>
+<h2>画面をひと目で</h2>
+<figure class="capture"><a href="../img/mouvement_fenetre.png"><img src="../img/mouvement_fenetre.png" alt="15 個の番号つきマークを入れた動きエディターのスクリーンショット" loading="lazy"></a><figcaption>動きエディターのスクリーンショット（フランス語表示）。番号は下で説明します。</figcaption></figure>
+<ol class="legende"><li><span class="repere">1</span><div>エディターを<strong>閉じます</strong>。先に <strong>保存</strong> を忘れずに。</div></li><li><span class="repere">2</span><div><strong>▶ 見る</strong>：シーンで動きを再生して見られます。ボタンは <strong>■ 止める</strong> に変わります。</div></li><li><span class="repere">3</span><div><strong>くり返し</strong>：オンのとき、動きが終わりなくくり返されます。</div></li><li><span class="repere">4</span><div><strong>シーンのオブジェクト</strong>：シーンの中から動かすオブジェクトを選びます。今の場所がステップ 1 です。</div></li><li><span class="repere">5</span><div><strong>画像</strong>：シーンのオブジェクトを使わずに、画像で動きを試せます。</div></li><li><span class="repere">6</span><div><strong>ひらく</strong>：プロジェクトに保存済みの動きを開きます。</div></li><li><span class="repere">7</span><div><strong>保存</strong>：動きに名前をつけます。Assets の Mouvements フォルダにしまわれます。</div></li><li><span class="repere">8</span><div><strong>シーン</strong>：背景はあなたのシーンで、本物のオブジェクトも見えます。オブジェクトをドラッグして、選んだステップでの場所を決めます。</div></li><li><span class="repere">9</span><div><strong>ステップ</strong>：番号つきの四角が、そのステップでのオブジェクトの場所で、線が順番に結びます。選んでいるステップは青です。</div></li><li><span class="repere">10</span><div><strong>次のステップまでの時間</strong>：このステップから次のステップまでにかかる時間（秒）。</div></li><li><span class="repere">11</span><div><strong>動きかた</strong>：ステップからステップへの進み方：<strong>一定</strong>、<strong>なめらか</strong>、<strong>ブレーキ</strong>、<strong>行き過ぎる</strong>、<strong>はねる</strong>。</div></li><li><span class="repere">12</span><div><strong>回転（度）</strong>、<strong>大きさ（%）</strong>、<strong>見える度合い（%）</strong>：このステップでのオブジェクトの状態。100% = 通常の大きさ、またはしっかり見える。透明度が 0 = 見えない。</div></li><li><span class="repere">13</span><div><strong>オブジェクトの位置から始める</strong>：動きは、ゲームの中でオブジェクトがいる場所から始まります。<strong>進む向きに向ける</strong>：オブジェクトが進む向きを向きます。</div></li><li><span class="repere">14</span><div><strong>このステップを消す</strong>：選んだステップを消します。ステップは最低 2 つ必要です。</div></li><li><span class="repere">15</span><div><strong>ステップのカード</strong>：ステップをタップして設定します。<strong>+ ステップ</strong> で追加します。</div></li></ol>
+<div class="tip">👉 ゲームで動きを再生するには、Blueprint で 動きを再生（ステップ） ノードを使います。</div>
+
+<div class="nav">
+<a href="../ja/interface-comportement.html">← 画像で見るオブジェクトの動き</a>
+<a href="../ja/interface-blueprint.html">次のガイド： 画像で見る Blueprint →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L&#x27;éditeur de mouvement en images : étapes, durée, allure | Guide Yop2D</title>
+<meta name="description" content="Découvre l&#x27;éditeur de mouvement de Yop2D : poser des étapes, choisir la durée et l&#x27;allure, la rotation, la taille et la transparence, et enregistrer le mouvement.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/interface-mouvement.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/interface-mouvement.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/interface-mouvement.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/interface-mouvement.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/interface-mouvement.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/interface-mouvement.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/interface-mouvement.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/interface-mouvement.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/interface-mouvement.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/interface-mouvement.html">
+<link rel="stylesheet" href="guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "TechArticle",
+ "headline": "L'éditeur de mouvement en images",
+ "description": "Découvre l'éditeur de mouvement de Yop2D : poser des étapes, choisir la durée et l'allure, la rotation, la taille et la transparence, et enregistrer le mouvement.",
+ "inLanguage": "fr",
+ "about": {
+  "@type": "SoftwareApplication",
+  "name": "Yop2D"
+ }
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../fr/index.html">← Yop2D</a>
+<h1>L'éditeur de mouvement en images</h1>
+<p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/interface-mouvement.html" hreflang="en">English</a> · <a href="es/interface-mouvement.html" hreflang="es">Español</a> · <a href="de/interface-mouvement.html" hreflang="de">Deutsch</a> · <a href="it/interface-mouvement.html" hreflang="it">Italiano</a> · <a href="pt/interface-mouvement.html" hreflang="pt">Português</a> · <a href="ru/interface-mouvement.html" hreflang="ru">Русский</a> · <a href="zh/interface-mouvement.html" hreflang="zh">中文</a> · <a href="ja/interface-mouvement.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Un mouvement fait bouger un objet par étapes : tu poses l'objet à plusieurs endroits, et Yop2D calcule le chemin entre les deux. L'éditeur s'ouvre avec le bouton <strong>Mouvement</strong> de la fenêtre <strong>Assets</strong>.</p>
+<h2>L'écran en un coup d'œil</h2>
+<figure class="capture"><a href="img/mouvement_fenetre.png"><img src="img/mouvement_fenetre.png" alt="Capture de l&#x27;éditeur de mouvement avec 15 repères numérotés" loading="lazy"></a><figcaption>Capture de l'éditeur de mouvement (en français). Les numéros sont expliqués ci-dessous.</figcaption></figure>
+<ol class="legende"><li><span class="repere">1</span><div><strong>Fermer</strong> l'éditeur. Pense à <strong>Enregistrer</strong> avant.</div></li><li><span class="repere">2</span><div><strong>▶ Voir</strong> : joue le mouvement dans la scène pour le voir. Le bouton devient <strong>■ Stop</strong>.</div></li><li><span class="repere">3</span><div><strong>Boucle</strong> : quand il est allumé, le mouvement recommence sans fin.</div></li><li><span class="repere">4</span><div><strong>Objet de la scène</strong> : choisis un objet de ta scène à faire bouger. Sa place actuelle est l'étape 1.</div></li><li><span class="repere">5</span><div><strong>Image</strong> : choisis une image pour essayer le mouvement, sans utiliser un objet de la scène.</div></li><li><span class="repere">6</span><div><strong>Ouvrir</strong> : rouvre un mouvement déjà enregistré dans le projet.</div></li><li><span class="repere">7</span><div><strong>Enregistrer</strong> : donne un nom au mouvement ; il est rangé dans le dossier Mouvements des Assets.</div></li><li><span class="repere">8</span><div><strong>La scène</strong> : ton décor en fond, avec ses vrais objets. Glisse l'objet pour choisir où il est à l'étape choisie.</div></li><li><span class="repere">9</span><div><strong>Les étapes</strong> : chaque carré numéroté est la place de l'objet à une étape, et la ligne les relie dans l'ordre. L'étape choisie est en bleu.</div></li><li><span class="repere">10</span><div><strong>Durée jusqu'à l'étape suivante</strong> : le temps, en secondes, pour aller de cette étape à la suivante.</div></li><li><span class="repere">11</span><div><strong>Allure</strong> : la façon d'aller d'une étape à l'autre : <strong>Régulier</strong>, <strong>Doux</strong>, <strong>Freine</strong>, <strong>Dépasse un peu</strong> ou <strong>Rebond</strong>.</div></li><li><span class="repere">12</span><div><strong>Rotation (degrés)</strong>, <strong>Taille (%)</strong> et <strong>Visible (%)</strong> : l'état de l'objet à cette étape. 100 % = taille normale ou bien visible ; 0 = invisible pour la transparence.</div></li><li><span class="repere">13</span><div><strong>Partir de la place de l'objet</strong> : le mouvement part de là où l'objet se trouve dans le jeu. <strong>Tourner dans le sens du trajet</strong> : l'objet pivote pour regarder où il va.</div></li><li><span class="repere">14</span><div><strong>Supprimer cette étape</strong> : retire l'étape choisie. Il faut au moins 2 étapes.</div></li><li><span class="repere">15</span><div><strong>Les cartes d'étapes</strong> : touche une étape pour la régler, ou <strong>+ Étape</strong> pour en ajouter une.</div></li></ol>
+<div class="tip">👉 Pour jouer le mouvement dans ton jeu, utilise le nœud Jouer le mouvement (étapes) dans le Blueprint.</div>
+
+<div class="nav">
+<a href="interface-comportement.html">← Le comportement d&#x27;un objet en images</a>
+<a href="interface-blueprint.html">Guide suivant : Le Blueprint en images →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="../fr/index.html">Site officiel</a> · <a href="../noeuds/fr.html">Référence des nœuds</a></p>
+</footer>
+</body>
+</html>

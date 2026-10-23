@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图解动作编辑器：步骤、时长、节奏 | Yop2D 教程</title>
+<meta name="description" content="认识 Yop2D 的动作编辑器：放置步骤、选择时长和节奏、旋转、大小和透明度，并保存动作。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/interface-mouvement.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/interface-mouvement.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/interface-mouvement.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/interface-mouvement.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/interface-mouvement.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/interface-mouvement.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/interface-mouvement.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/interface-mouvement.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/interface-mouvement.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/interface-mouvement.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "TechArticle",
+ "headline": "图解动作编辑器",
+ "description": "认识 Yop2D 的动作编辑器：放置步骤、选择时长和节奏、旋转、大小和透明度，并保存动作。",
+ "inLanguage": "zh",
+ "about": {
+  "@type": "SoftwareApplication",
+  "name": "Yop2D"
+ }
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>图解动作编辑器</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../interface-mouvement.html" hreflang="fr">Français</a> · <a href="../en/interface-mouvement.html" hreflang="en">English</a> · <a href="../es/interface-mouvement.html" hreflang="es">Español</a> · <a href="../de/interface-mouvement.html" hreflang="de">Deutsch</a> · <a href="../it/interface-mouvement.html" hreflang="it">Italiano</a> · <a href="../pt/interface-mouvement.html" hreflang="pt">Português</a> · <a href="../ru/interface-mouvement.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/interface-mouvement.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>动作让对象分步骤运动：你把对象放在几个位置上，Yop2D 会算出它们之间的路径。点 <strong>资产</strong> 窗口里的 <strong>动作</strong> 按钮即可打开编辑器。</p>
+<h2>一眼看懂界面</h2>
+<figure class="capture"><a href="../img/mouvement_fenetre.png"><img src="../img/mouvement_fenetre.png" alt="带有 15 个编号标记的动作编辑器截图" loading="lazy"></a><figcaption>动作编辑器截图（法语界面）。编号的含义见下面。</figcaption></figure>
+<ol class="legende"><li><span class="repere">1</span><div><strong>关闭</strong>编辑器。关闭前别忘了<strong>保存</strong>。</div></li><li><span class="repere">2</span><div><strong>▶ 预览</strong>：在场景里播放动作，方便你查看。按钮会变成 <strong>■ 停止</strong>。</div></li><li><span class="repere">3</span><div><strong>循环</strong>：开启后，动作会不停地重新开始。</div></li><li><span class="repere">4</span><div><strong>场景物体</strong>：选择场景里要运动的对象。它当前的位置就是第 1 步。</div></li><li><span class="repere">5</span><div><strong>图片</strong>：选一张图片来试动作，不必用场景里的对象。</div></li><li><span class="repere">6</span><div><strong>打开</strong>：重新打开项目里已保存的动作。</div></li><li><span class="repere">7</span><div><strong>保存</strong>：给动作起个名字；它会存放在 Assets 的 Mouvements 文件夹里。</div></li><li><span class="repere">8</span><div><strong>场景</strong>：背景是你的场景，带着真实的对象。拖动对象，选择它在当前步骤的位置。</div></li><li><span class="repere">9</span><div><strong>步骤</strong>：每个带编号的方框是对象在某一步的位置，连线按顺序把它们连起来。选中的步骤是蓝色的。</div></li><li><span class="repere">10</span><div><strong>到下一步的时间</strong>：从这一步到下一步所需的时间（秒）。</div></li><li><span class="repere">11</span><div><strong>节奏</strong>：从一步到下一步的方式：<strong>匀速</strong>、<strong>平滑</strong>、<strong>减速</strong>、<strong>略微超出</strong>或<strong>弹跳</strong>。</div></li><li><span class="repere">12</span><div><strong>旋转（度）</strong>、<strong>大小（%）</strong>和<strong>可见度（%）</strong>：对象在这一步的状态。100% = 正常大小或完全可见；透明度为 0 = 不可见。</div></li><li><span class="repere">13</span><div><strong>从物体当前位置开始</strong>：动作从对象在游戏中所在的位置开始。<strong>朝向移动方向</strong>：对象会转向它前进的方向。</div></li><li><span class="repere">14</span><div><strong>删除此步骤</strong>：删除选中的步骤。至少需要 2 步。</div></li><li><span class="repere">15</span><div><strong>步骤卡片</strong>：点一个步骤来设置它，点 <strong>+ 步骤</strong> 添加一步。</div></li></ol>
+<div class="tip">👉 想在游戏里播放这个动作，请在 Blueprint 里使用 播放动作（步骤） 节点。</div>
+
+<div class="nav">
+<a href="../zh/interface-comportement.html">← 图解对象的行为</a>
+<a href="../zh/interface-blueprint.html">下一篇： 图解 Blueprint →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>
