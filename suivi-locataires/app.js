@@ -61,6 +61,7 @@ let state = {
     om:  { annee: new Date().getFullYear(), cotisation: 0, mois: 8, surfaceTotale: 0 },
     eau: { debut: '', fin: '', totalFacture: 0, totalM3: 0, prixApplique: 0, aboReel: 0, aboFacture: 0 }
   },
+  historiqueRegul: [], // régularisations enregistrées (ordures ménagères, eau)
   factureEdf: {}      // dernière facture EDF saisie (voir l'onglet « Facture EDF »)
 };
 
@@ -79,6 +80,7 @@ function migrate() {
   if (!state.releves || typeof state.releves !== 'object' || Array.isArray(state.releves)) state.releves = {};
   if (!Array.isArray(state.tarifs)) state.tarifs = [];
   state.factureEdf = { numero: '', debut: '', fin: '', hcHT: '', hpHT: '', acciseHT: '', tcfeHT: '', aboHT: '', ctaHT: '', tva: 20, nbLogements: 4, kwhFacture: '', montantHT: '', moisAbo: '', excludeLast: true, parts: {}, init: false, ...(state.factureEdf || {}) };
+  if (!Array.isArray(state.historiqueRegul)) state.historiqueRegul = [];
   state.proprietaire = { nom: '', adresse: '', ville: '', email: '', tel: '', iban: '', bic: '', lieu: '', ...(state.proprietaire || {}) };
   const r = state.regul || {};
   state.regul = {
@@ -2338,18 +2340,18 @@ function consoLogement(l, cm) {
       const x = consoCompteur(c.id, cm);
       if (x === null) { manquants.push(c.nom + ' (' + monthKeyLabel(cm) + ')'); return; }
       const prix = c.canal === 'hp' ? num(t.hp) : c.canal === 'hc' ? num(t.hc) : num(t.moyen);
-      lignesElec.push({ label: 'Éclairage ' + canalLabel(c.canal), kwh: x, prix });
+      lignesElec.push({ label: 'Éclairage ' + canalLabel(c.canal), kwh: x, prix, ancien: releve(c.id, addMonths(cm, -1)), nouveau: releve(c.id, cm) });
     });
   }
   lignesElec.forEach(e => {
     const m = e.kwh * e.prix;
     kwhTotal += e.kwh; total += m;
-    lignes.push({ label: e.label.trim(), detail: nf(e.kwh, 0) + ' kWh × ' + nf(e.prix, 4) + ' €', montant: m });
+    lignes.push({ label: e.label.trim(), detail: nf(e.kwh, 0) + ' kWh × ' + nf(e.prix, 4) + ' €', montant: m, qte: e.kwh, prix: e.prix, ancien: e.ancien, nouveau: e.nouveau, dec: 0 });
   });
   if (aElec) {
     const m = kwhTotal * num(t.tcfe);
     total += m;
-    lignes.push({ label: 'TCFE, CSPE', detail: nf(kwhTotal, 0) + ' kWh × ' + nf(num(t.tcfe), 4) + ' €', montant: m });
+    lignes.push({ label: 'TCFE, CSPE', detail: nf(kwhTotal, 0) + ' kWh × ' + nf(num(t.tcfe), 4) + ' €', montant: m, qte: kwhTotal, prix: num(t.tcfe), dec: 0 });
     total += num(t.elecAbo);
     lignes.push({ label: 'Abonnement + CTA', detail: '', montant: num(t.elecAbo) });
   }
@@ -2364,7 +2366,8 @@ function consoLogement(l, cm) {
   if (eau.length) {
     const m = m3 * num(t.eau);
     total += m;
-    lignes.push({ label: 'Eau', detail: nf(m3, 2) + ' m³ × ' + nf(num(t.eau), 4) + ' €', montant: m });
+    const sumIdx = mm => { let z = 0; for (const c of eau) { const v = releve(c.id, mm); if (v === null) return null; z += v; } return z; };
+    lignes.push({ label: 'Eau', detail: nf(m3, 2) + ' m³ × ' + nf(num(t.eau), 4) + ' €', montant: m, qte: m3, prix: num(t.eau), ancien: sumIdx(addMonths(cm, -1)), nouveau: sumIdx(cm), dec: 2 });
     total += num(t.eauAbo);
     lignes.push({ label: 'Abonnement eau', detail: '', montant: num(t.eauAbo) });
   }
@@ -2445,7 +2448,7 @@ function creerSuiviLogement(id) {
   }
   const check = checkCategoryAssignable(cat.id, 'tenant', null);
   if (!check.ok) return alert('La catégorie « ' + cat.name + ' » est déjà utilisée par le compte « ' + check.blockedBy.name + ' ».');
-  const acc = { id: uid(), name: l.code + (l.locataire ? ' — ' + l.locataire : ''), type: 'tenant', categoryIds: [cat.id] };
+  const acc = { id: uid(), name: l.code + (l.locataire ? ' — ' + nomsCourt(l) : ''), type: 'tenant', categoryIds: [cat.id] };
   state.accounts.push(acc);
   l.accountId = acc.id;
   save(); renderAll();
@@ -2731,53 +2734,77 @@ function appliquerMensualiteOM(logementId) {
 }
 
 // ---------- avis d'échéance (aperçu et impression) ----------
+function nomsCourt(l) { return String(l.locataire || '').replace(/\n+/g, ' et '); }
+
+// Avis d'échéance : même présentation que le tableur (loyer, relevés détaillés, charges, montant dû)
 function avisHTML(A) {
   const l = A.l;
   const p = state.proprietaire;
+  const nl = t => esc(t).replace(/\n/g, '<br>');
   const releveSeul = A.loyer === 0 && A.om === 0;
   const titre = releveSeul ? 'RELEVÉ DE CHARGES' : 'AVIS D\'ÉCHÉANCE';
+  const jj = k => String(lastDayOfMonth(k)).padStart(2, '0');
   const debut = releveSeul ? A.cm : A.M;
-  const periode = 'Du ' + frDate(debut + '-01') + ' au ' + frDate(debut + '-' + String(lastDayOfMonth(debut)).padStart(2, '0'));
-  const ligne = (label, montant, detail) => `<tr><td>${label}${detail ? ' <span class="avis-detail">' + detail + '</span>' : ''}</td><td class="r">${fmt(montant)}</td></tr>`;
-  let rows = '';
-  if (A.loyer) rows += ligne('Loyer', A.loyer);
-  if (A.om) rows += ligne('Taxe d\'ordures ménagères (TOM)', A.om);
-  if (A.enAvance && !releveSeul) {
-    rows += ligne('Avance sur charges', A.avance);
-  } else if (A.conso.lignes.length) {
-    rows += `<tr class="avis-sub"><td colspan="2">Charges — consommation de ${monthKeyLabel(A.cm)}</td></tr>`;
-    A.conso.lignes.forEach(x => { rows += ligne(esc(x.label), x.montant, esc(x.detail)); });
-    rows += `<tr class="avis-sub-total"><td>Total charges</td><td class="r">${fmt(A.conso.total)}</td></tr>`;
+  const periode = 'Du ' + frDate(debut + '-01') + ' au ' + frDate(debut + '-' + jj(debut));
+  const dAncien = frDate(A.cm + '-01'), dNouveau = frDate(A.cm + '-' + jj(A.cm));
+  const idx = v => v === null || v === undefined ? '' : nf(v, v % 1 ? 2 : 0);
+
+  // --- bloc loyer ---
+  let loyers = '';
+  if (A.loyer) loyers += `<tr><td>LOYER</td><td class="r">${fmt(A.loyer)}</td></tr>`;
+  if (A.om) loyers += `<tr><td>TAO (taxe d'ordures ménagères)</td><td class="r">${fmt(A.om)}</td></tr>`;
+  if (A.loyer || A.om) loyers += `<tr class="avis-tot"><td>Total</td><td class="r">${fmt(A.loyer + A.om)}</td></tr>`;
+
+  // --- bloc relevés détaillés ---
+  let releves = '';
+  if (A.conso.lignes.length) {
+    const titreReleves = A.enAvance && !releveSeul ? 'À TITRE INDICATIF : autres CHARGES' : 'CHARGES';
+    releves = `<div class="avis-bloc-titre">${titreReleves} — consommation de ${monthKeyLabel(A.cm)}</div>
+      <table class="avis-detail-table">
+        <thead><tr><th>Relevés :</th><th class="r">ancien<br><small>${dAncien}</small></th><th class="r">nouveau<br><small>${dNouveau}</small></th><th class="r">consommé</th><th class="r">tarif</th><th class="r">montant</th></tr></thead>
+        <tbody>${A.conso.lignes.map(x => x.qte !== undefined
+          ? `<tr><td>${esc(x.label)}</td><td class="r">${idx(x.ancien)}</td><td class="r">${idx(x.nouveau)}</td><td class="r">${nf(x.qte, x.dec)}</td><td class="r">${nf(x.prix, 4)}</td><td class="r">${fmt(x.montant)}</td></tr>`
+          : `<tr><td>${esc(x.label)}</td><td></td><td></td><td></td><td></td><td class="r">${fmt(x.montant)}</td></tr>`).join('')}
+          <tr class="avis-tot"><td colspan="5">TOTAL CHARGES</td><td class="r">${fmt(A.conso.total)}</td></tr>
+        </tbody></table>`;
   }
+
+  // --- récapitulatif : montant dû ---
+  let recap = '';
+  if (A.loyer || A.om) recap += `<tr><td>Loyer + TAO</td><td class="r">${fmt(A.loyer + A.om)}</td></tr>`;
+  if (A.enAvance && !releveSeul) recap += `<tr><td>Avance sur charges</td><td class="r">${fmt(A.avance)}</td></tr>`;
+  else recap += `<tr><td>Total charges</td><td class="r">${fmt(A.conso.total)}</td></tr>`;
   if (Math.abs(A.report) > 0.004) {
-    rows += ligne(A.report > 0 ? 'Régularisation : reste dû des mois précédents' : 'Régularisation : trop-perçu des mois précédents', A.report);
+    recap += `<tr><td>${A.report > 0 ? 'À RÉGULARISER MOIS PRÉCÉDENT' : 'TROP-PERÇU MOIS PRÉCÉDENT (à déduire)'}</td><td class="r">${fmt(A.report)}</td></tr>`;
   }
-  const total = A.appel;
-  const deja = A.encaisse > 0.004
-    ? `<tr><td>Déjà réglé ce mois (pointé)</td><td class="r">− ${fmt(A.encaisse)}</td></tr>
-       <tr class="avis-total"><td>RESTE À RÉGLER</td><td class="r">${fmt(A.reste)}</td></tr>` : '';
+  if (A.encaisse > 0.004) {
+    recap += `<tr><td>Montant à régler</td><td class="r">${fmt(A.appel)}</td></tr>
+      <tr><td>VRT : règlement déjà reçu ce mois</td><td class="r">− ${fmt(A.encaisse)}</td></tr>
+      <tr class="avis-total"><td>Montant dû à ce jour :</td><td class="r">${fmt(A.reste)}</td></tr>`;
+  } else {
+    recap += `<tr class="avis-total"><td>Montant dû à ce jour :</td><td class="r">${fmt(A.appel)}</td></tr>`;
+  }
+
   return `<div class="avis">
     <div class="avis-top">
-      <div>
+      <div class="avis-proprio">
         <strong>${esc(p.nom) || '<em>(propriétaire à renseigner)</em>'}</strong><br>
         ${esc(p.adresse)}<br>${esc(p.ville)}<br>${esc(p.email)}${p.tel ? '<br>Tél : ' + esc(p.tel) : ''}
       </div>
       <div class="avis-titre">${titre}<br><span>${periode}</span></div>
     </div>
-    <div class="avis-locataire">
-      <strong>${esc(l.locataire)}</strong><br>
-      ${esc(l.adresse)}
+    <div class="avis-adresses">
+      <div><span class="avis-lib">Adresse de la location :</span><br>${nl(l.adresse)}</div>
+      <div class="avis-locataire">${nl(l.locataire)}<br>${nl(l.adresse)}</div>
     </div>
-    <table class="avis-table"><tbody>
-      ${rows}
-      <tr class="avis-total"><td>MONTANT DÛ À CE JOUR</td><td class="r">${fmt(total)}</td></tr>
-      ${deja}
-    </tbody></table>
+    ${loyers ? `<table class="avis-table"><tbody>${loyers}</tbody></table>` : ''}
+    ${releves}
+    <table class="avis-table avis-recap"><tbody>${recap}</tbody></table>
     ${A.conso.manquants.length && !A.enAvance ? `<div class="avis-warn">⚠️ Relevés manquants : ${esc(A.conso.manquants.join(', '))}. Le montant des charges est incomplet.</div>` : ''}
     <div class="avis-pied">
       Règlement à effectuer au premier jour ouvrable du mois.<br>
-      ${p.iban ? 'IBAN : ' + esc(p.iban) + (p.bic ? ' — BIC : ' + esc(p.bic) : '') + '<br>' : ''}
-      ${p.lieu ? 'À ' + esc(p.lieu) + ', le ' : 'Le '}${new Date().toLocaleDateString('fr-FR')} — <em>Ceci n'est pas une quittance.</em>
+      ${p.iban ? 'IBAN : ' + esc(p.iban) + (p.bic ? ' - BIC : ' + esc(p.bic) : '') + '<br>' : ''}
+      <div class="avis-lieu">${p.lieu ? 'À ' + esc(p.lieu) + '<br>' : ''}Le ${new Date().toLocaleDateString('fr-FR')}<br><em>Ceci n'est pas une quittance</em></div>
     </div>
   </div>`;
 }
@@ -2797,17 +2824,28 @@ function majAvisPreview() {
     ${avisHTML(A)}
     <div class="avis-actions">
       <button class="success" onclick="majAttenduMois('${l.id}')">📥 Mettre à jour l'attendu dans le compte de suivi</button>
-      <button class="primary" onclick="imprimerAvis()">🖨️ Imprimer / PDF</button>
+      <button class="primary" onclick="imprimerAvis()">🖨️ Imprimer / PDF cet avis</button>
+      <button class="primary" onclick="imprimerTousAvis()">🖨️ Tous les avis de ${monthKeyLabel(locatifMonth)}</button>
     </div>`;
 }
 
+function lancerImpression(htmlAvis) {
+  document.getElementById('avisPrintZone').innerHTML = htmlAvis.map(h => '<div class="avis-page">' + h + '</div>').join('');
+  document.body.classList.add('print-avis');
+  window.print();
+  setTimeout(() => document.body.classList.remove('print-avis'), 800);
+}
 function imprimerAvis() {
   const l = getLogement(avisLogementId);
   if (!l) return;
-  document.getElementById('avisPrintZone').innerHTML = avisHTML(avisLogement(l, locatifMonth));
-  document.body.classList.add('print-avis');
-  window.print();
-  setTimeout(() => document.body.classList.remove('print-avis'), 500);
+  lancerImpression([avisHTML(avisLogement(l, locatifMonth))]);
+}
+function imprimerTousAvis() {
+  const liste = logementsActifs().map(l => avisLogement(l, locatifMonth)).filter(A => A.appel !== 0 || A.loyer || A.conso.total);
+  if (!liste.length) return alert('Aucun avis à imprimer ce mois-ci.');
+  const manque = liste.filter(A => A.conso.manquants.length && !A.enAvance).map(A => A.l.code);
+  if (manque.length && !confirm('Relevés manquants pour ' + manque.join(', ') + ' : leurs avis seront incomplets. Imprimer quand même ?')) return;
+  lancerImpression(liste.map(avisHTML));
 }
 
 function allerReleves(month) {
@@ -3082,7 +3120,7 @@ function majResultatFacture() {
       Positif = le locataire doit en plus. Négatif = on lui rend.</div>`;
     html += R.lignes.map(x => `<div class="regul-bloc">
         <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap;">
-          <strong>${esc(x.l.code)}</strong> <span class="hint">${esc(x.l.locataire)}</span>
+          <strong>${esc(x.l.code)}</strong> <span class="hint">${esc(nomsCourt(x.l))}</span>
           <span class="${x.total > 0 ? 'amount-neg' : 'amount-pos'}" style="font-size:1.05rem;"><strong>${fmt(x.total)}</strong></span>
         </div>
         ${x.manque ? '<div class="hint warn">⚠️ Relevés manquants sur la période : montant incomplet.</div>' : ''}
@@ -3215,7 +3253,7 @@ function locatifHistoriqueHTML() {
   return `<div class="card">
       <div class="section-title">📜 Historique</div>
       <div class="form-row">
-        <label>Logement<select onchange="setHist('lg', this.value)">${actifs.map(x => `<option value="${x.id}" ${x.id === histLogementId ? 'selected' : ''}>${esc(x.code)} — ${esc(x.locataire)}</option>`).join('')}</select></label>
+        <label>Logement<select onchange="setHist('lg', this.value)">${actifs.map(x => `<option value="${x.id}" ${x.id === histLogementId ? 'selected' : ''}>${esc(x.code)} — ${esc(nomsCourt(x))}</option>`).join('')}</select></label>
         <label>Période<select onchange="setHist('per', this.value)">
           <option value="12" ${histPeriode === '12' ? 'selected' : ''}>12 mois jusqu'à ${monthKeyLabel(locatifMonth)}</option>
           ${annees.map(y => `<option value="${y}" ${histPeriode === String(y) ? 'selected' : ''}>Année ${y}</option>`).join('')}
@@ -3250,7 +3288,7 @@ function renderLocatif() {
   document.getElementById('locatifMonthLabel').textContent = monthKeyLabel(locatifMonth);
   const sections = [
     ['apercu', '📊 Vue d\'ensemble'], ['logements', '🏠 Logements'], ['suivi', '📈 Suivi conso'], ['historique', '📜 Historique'], ['releves', '🔢 Saisie du mois'],
-    ['avis', '🧾 Avis'], ['facture', '⚡ Facture EDF'], ['tarifs', '💶 Tarifs'], ['regul', '⚖️ Ordures / eau'], ['proprio', '👤 Propriétaire']
+    ['avis', '🧾 Avis'], ['facture', '⚡ Facture EDF'], ['tarifs', '💶 Tarifs'], ['om', '🗑️ Ordures ménagères'], ['eau', '💧 Facture eau'], ['proprio', '👤 Propriétaire']
   ];
   document.getElementById('locatifPills').innerHTML = sections.map(([k, label]) =>
     `<button class="pill ${locatifSection === k ? 'active' : ''}" onclick="setLocatifSection('${k}')">${label}</button>`).join('');
@@ -3266,7 +3304,8 @@ function renderLocatif() {
     case 'facture':   body.innerHTML = locatifFactureHTML(); majResultatFacture(); break;
     case 'avis':      body.innerHTML = locatifAvisHTML(); majAvisPreview(); break;
     case 'tarifs':    body.innerHTML = locatifTarifsHTML(); break;
-    case 'regul':     body.innerHTML = locatifRegulHTML(); majResultatsRegul(); break;
+    case 'om':        body.innerHTML = locatifOMHTML(); majResultatsRegul(); break;
+    case 'eau':       body.innerHTML = locatifEauHTML(); majResultatsRegul(); break;
     case 'proprio':   body.innerHTML = locatifProprioHTML(); break;
     default:          body.innerHTML = locatifApercuHTML();
   }
@@ -3300,7 +3339,7 @@ function locatifApercuHTML() {
       <div class="table-scroll"><table>
         <thead><tr><th>Logement</th><th>Loyer + TOM</th><th>Charges</th><th>Report</th><th>À appeler</th><th>Encaissé</th><th>Reste</th></tr></thead>
         <tbody>${lignes.map(({ l, A }) => `<tr>
-          <td><strong>${esc(l.code)}</strong><br><span class="hint">${esc(l.locataire)}</span></td>
+          <td><strong>${esc(l.code)}</strong><br><span class="hint">${esc(nomsCourt(l))}</span></td>
           <td>${fmt(A.loyer + A.om)}</td>
           <td>${fmt(A.charges)}<br><span class="hint">${A.enAvance ? 'avance' : (A.conso.manquants.length ? 'incomplet' : 'réel')}</span></td>
           <td class="${A.report > 0.005 ? 'amount-neg' : A.report < -0.005 ? 'amount-pos' : ''}">${fmt(A.report)}</td>
@@ -3329,7 +3368,7 @@ function locatifLogementsHTML() {
         <div>
           <strong style="font-size:1.05rem;">${esc(l.code)}</strong> <span class="badge">${nf(l.surface, 0)} m²</span>
           ${l.actif === false ? '<span class="badge">inactif</span>' : ''}<br>
-          <span>${esc(l.locataire) || '<em>(locataire à renseigner)</em>'}</span><br>
+          <span>${esc(nomsCourt(l)) || '<em>(locataire à renseigner)</em>'}</span><br>
           <span class="hint">${esc(l.adresse)}</span>
         </div>
         <div style="display:flex;gap:8px;">
@@ -3415,7 +3454,7 @@ function locatifRelevesHTML() {
 
 // ----- Avis -----
 function locatifAvisHTML() {
-  const opts = logementsActifs().map(l => `<option value="${l.id}" ${l.id === avisLogementId ? 'selected' : ''}>${esc(l.code)} — ${esc(l.locataire)}</option>`).join('');
+  const opts = logementsActifs().map(l => `<option value="${l.id}" ${l.id === avisLogementId ? 'selected' : ''}>${esc(l.code)} — ${esc(nomsCourt(l))}</option>`).join('');
   if (!opts) return '<div class="card"><div class="empty">Aucun logement</div></div>';
   return `<div class="card">
       <div class="form-row" style="margin-bottom:12px;">
@@ -3449,35 +3488,93 @@ function locatifTarifsHTML() {
     </div>`;
 }
 
-// ----- Régularisations -----
-function locatifRegulHTML() {
-  const o = state.regul.om, e = state.regul.eau;
-  const inp = (type, key, val, step = 'any') => `<input type="number" step="${step}" inputmode="decimal" value="${esc(val)}" onchange="setRegul('${type}', '${key}', this.value)">`;
+// ----- Ordures ménagères -----
+function locatifOMHTML() {
+  const o = state.regul.om;
+  const inp = (key, val, step = 'any') => `<input type="number" step="${step}" inputmode="decimal" value="${esc(val)}" onchange="setRegul('om', '${key}', this.value)">`;
   return `<div class="card">
       <div class="section-title">🗑️ Ordures ménagères — régularisation annuelle</div>
-      <div class="hint">La cotisation de l'immeuble est répartie au m². On compare avec les mensualités déjà payées.</div>
+      <div class="hint">La cotisation de l'immeuble est répartie au m². On compare avec les mensualités déjà payées. Saisis les chiffres de ton avis de taxe : tout se recalcule.</div>
       <div class="form-row">
-        <label>Année${inp('om', 'annee', o.annee, '1')}</label>
-        <label>Cotisation annuelle (€)${inp('om', 'cotisation', o.cotisation)}</label>
-        <label>Surface totale (m²) <span class="hint">0 = somme des logements</span>${inp('om', 'surfaceTotale', o.surfaceTotale)}</label>
-        <label>Nombre de mois à régulariser${inp('om', 'mois', o.mois, '1')}</label>
+        <label>Année${inp('annee', o.annee, '1')}</label>
+        <label>Cotisation annuelle (€)${inp('cotisation', o.cotisation)}</label>
+        <label>Surface totale (m²) <span class="hint">0 = somme des logements</span>${inp('surfaceTotale', o.surfaceTotale)}</label>
+        <label>Nombre de mois à régulariser${inp('mois', o.mois, '1')}</label>
       </div>
       <div id="regulOMResult"></div>
+      <div style="margin-top:10px;"><button class="success" onclick="sauverRegulHistorique('om')">💾 Enregistrer ce calcul dans l'historique</button></div>
     </div>
-    <div class="card" style="margin-top:15px;">
-      <div class="section-title">💧 Eau — régularisation d'après la facture annuelle</div>
-      <div class="hint">Prix réel du m³ = facture ÷ m³ facturés. Pour chaque logement : m³ lus entre les deux relevés × (prix réel − prix appliqué), plus l'écart d'abonnement.</div>
+    ${histRegulHTML('om')}`;
+}
+
+// ----- Eau -----
+function locatifEauHTML() {
+  const e = state.regul.eau;
+  const inp = (key, val) => `<input type="number" step="any" inputmode="decimal" value="${esc(val)}" onchange="setRegul('eau', '${key}', this.value)">`;
+  return `<div class="card">
+      <div class="section-title">💧 Facture d'eau (SAUR) — régularisation</div>
+      <div class="hint">Prix réel du m³ = facture ÷ m³ facturés. Pour chaque logement : m³ lus entre les deux relevés × (prix réel − prix appliqué), plus l'écart d'abonnement. Les relevés viennent du Suivi conso.</div>
       <div class="form-row">
-        <label>Relevé de départ<input type="month" value="${esc(e.debut)}" onchange="setRegul('eau', 'debut', this.value)"></label>
-        <label>Relevé de fin<input type="month" value="${esc(e.fin)}" onchange="setRegul('eau', 'fin', this.value)"></label>
-        <label>Total de la facture (€)${inp('eau', 'totalFacture', e.totalFacture)}</label>
-        <label>m³ facturés (immeuble)${inp('eau', 'totalM3', e.totalM3)}</label>
-        <label>Prix du m³ déjà appliqué${inp('eau', 'prixApplique', e.prixApplique)}</label>
-        <label>Abonnements réels / logement (€)${inp('eau', 'aboReel', e.aboReel)}</label>
-        <label>Abonnements déjà facturés / logement (€)${inp('eau', 'aboFacture', e.aboFacture)}</label>
+        <label>Relevé de départ<input type="month" value="${esc(e.debut)}" placeholder="AAAA-MM" onchange="setRegul('eau', 'debut', this.value)"></label>
+        <label>Relevé de fin<input type="month" value="${esc(e.fin)}" placeholder="AAAA-MM" onchange="setRegul('eau', 'fin', this.value)"></label>
+        <label>Total de la facture (€)${inp('totalFacture', e.totalFacture)}</label>
+        <label>m³ facturés (immeuble)${inp('totalM3', e.totalM3)}</label>
+        <label>Prix du m³ déjà appliqué${inp('prixApplique', e.prixApplique)}</label>
+        <label>Abonnements réels / logement (€)${inp('aboReel', e.aboReel)}</label>
+        <label>Abonnements déjà facturés / logement (€)${inp('aboFacture', e.aboFacture)}</label>
       </div>
       <div id="regulEauResult"></div>
-    </div>`;
+      <div style="margin-top:10px;"><button class="success" onclick="sauverRegulHistorique('eau')">💾 Enregistrer ce calcul dans l'historique</button></div>
+    </div>
+    ${histRegulHTML('eau')}`;
+}
+
+// ----- Historique des régularisations (ordures ménagères et eau) -----
+function sauverRegulHistorique(type) {
+  let entry;
+  if (type === 'om') {
+    const r = calcRegulOM(), p = state.regul.om;
+    if (!r) return alert('Saisis d\'abord la cotisation annuelle.');
+    entry = { id: uid(), type, label: 'Ordures ménagères ' + p.annee,
+      info: { cotisation: p.cotisation, surface: r.surfaceTotale, prixM2: r.prixM2, mois: p.mois },
+      lignes: r.lignes.map(x => ({ code: x.l.code, ancienne: x.ancienne, nouvelle: x.nouvelle, regul: x.regul })) };
+  } else {
+    const r = calcRegulEau(), p = state.regul.eau;
+    if (!r) return alert('Saisis d\'abord la période et les chiffres de la facture.');
+    entry = { id: uid(), type, label: 'Eau ' + p.debut + ' → ' + p.fin,
+      info: { totalFacture: p.totalFacture, totalM3: p.totalM3, prixReel: r.prixReel, prixApplique: p.prixApplique },
+      lignes: r.lignes.map(x => ({ code: x.l.code, m3: x.m3, regulConso: x.regulConso, regulAbo: x.regulAbo, regul: x.regul })) };
+  }
+  state.historiqueRegul = state.historiqueRegul.filter(h => !(h.type === type && h.label === entry.label));
+  state.historiqueRegul.push(entry);
+  save(); renderLocatif();
+}
+function supprimerHistoriqueRegul(id) {
+  if (!confirm('Supprimer cette ligne de l\'historique ?')) return;
+  state.historiqueRegul = state.historiqueRegul.filter(h => h.id !== id);
+  save(); renderLocatif();
+}
+function histRegulHTML(type) {
+  const liste = state.historiqueRegul.filter(h => h.type === type).sort((a, b) => b.label.localeCompare(a.label));
+  const cell = v => v === undefined || v === null ? '—' : fmt(v);
+  const cartes = liste.map(h => {
+    const info = type === 'om'
+      ? `Cotisation ${fmt(h.info.cotisation)} · ${nf(h.info.surface, 0)} m² · ${nf(h.info.prixM2, 4)} €/m²${h.info.mois ? ' · ' + h.info.mois + ' mois' : ''}`
+      : `Facture ${fmt(h.info.totalFacture)} · ${nf(h.info.totalM3, 0)} m³ · prix réel ${nf(h.info.prixReel, 4)} € (appliqué : ${nf(h.info.prixApplique, 4)} €)`;
+    const entete = type === 'om'
+      ? '<th>Logement</th><th class="num">Mensualité payée</th><th class="num">Nouvelle mensualité</th><th class="num">Régularisation</th>'
+      : '<th>Logement</th><th class="num">m³</th><th class="num">Régul. conso</th><th class="num">Régul. abonnement</th><th class="num">Total</th>';
+    const lignes = h.lignes.map(x => type === 'om'
+      ? `<tr><td><strong>${esc(x.code)}</strong></td><td class="num">${cell(x.ancienne)}</td><td class="num">${cell(x.nouvelle)}</td><td class="num ${x.regul > 0 ? 'amount-neg' : 'amount-pos'}"><strong>${fmt(x.regul)}</strong></td></tr>`
+      : `<tr><td><strong>${esc(x.code)}</strong></td><td class="num">${x.m3 === undefined ? '—' : nf(x.m3, 2)}</td><td class="num">${cell(x.regulConso)}</td><td class="num">${cell(x.regulAbo)}</td><td class="num ${x.regul > 0 ? 'amount-neg' : 'amount-pos'}"><strong>${fmt(x.regul)}</strong></td></tr>`).join('');
+    return `<div class="regul-bloc">
+      <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;"><strong>${esc(h.label)}</strong>
+        <button class="danger" style="padding:3px 8px;min-height:30px;" onclick="supprimerHistoriqueRegul('${h.id}')">✕</button></div>
+      <div class="hint">${info}</div>
+      <div class="table-scroll"><table><thead><tr>${entete}</tr></thead><tbody>${lignes}</tbody></table></div></div>`;
+  }).join('');
+  return `<div class="card"><div class="section-title">📜 Historique ${type === 'om' ? 'des ordures ménagères' : 'de l\'eau'}</div>
+    ${cartes || '<div class="empty">Rien d\'enregistré pour l\'instant.</div>'}</div>`;
 }
 
 // ----- Propriétaire -----
@@ -3525,6 +3622,7 @@ function importLocatif() {
       if (d.tarifs) state.tarifs = d.tarifs;
       if (d.proprietaire) state.proprietaire = { ...state.proprietaire, ...d.proprietaire };
       if (d.regul) state.regul = { om: { ...state.regul.om, ...(d.regul.om || {}) }, eau: { ...state.regul.eau, ...(d.regul.eau || {}) } };
+      ajouteSiAbsent(state.historiqueRegul, d.historiqueRegul, 'id');
       if (d.factureEdf) state.factureEdf = { ...state.factureEdf, ...d.factureEdf };
       Object.keys(d.releves || {}).forEach(cid => {
         state.releves[cid] = { ...(state.releves[cid] || {}), ...d.releves[cid] };
