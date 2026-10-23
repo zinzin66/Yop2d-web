@@ -660,11 +660,19 @@
   "stopper la passerelle quand le joueur appuie sur un bouton."
  ],
  "passage_decor": [
-  "Fait traverser le décor d'une histoire à une image (oiseau, nuage, moustique…) en suivant un mouvement créé dans Assets → Mouvement. Au choix : derrière ou devant les personnages (la boîte de texte reste toujours au-dessus). « Hauteur » règle la taille de l'image.",
+  "Fait traverser le décor d'une histoire à une image (oiseau, nuage, moustique…) en suivant un mouvement créé dans Assets → Mouvement. Au choix : derrière ou devant les personnages (la boîte de texte reste toujours au-dessus). « Hauteur » règle la taille de l'image. Si l'image est une animation (oiseau qui bat des ailes), écris son nom dans « Animation de l'image » et la vitesse dans « Vitesse (images par seconde) ».",
   "un oiseau qui traverse le ciel pendant que Hana parle."
  ],
  "arreter_passages": [
   "Retire tous les passages en cours dans le décor de l'histoire (images lancées par [[passage_decor]]).",
   "le moustique repart quand le dialogue est fini."
+ ],
+ "sauvegarder_variables": [
+  "Écrit les valeurs de tes variables (globales et de la scène) dans un fichier sur l'appareil : elles seront encore là quand le joueur fermera puis rouvrira le jeu. « Nom de la sauvegarde » permet d'avoir plusieurs parties. Laisse « Variables » vide pour tout garder, ou écris des noms séparés par des virgules (score, vies). Contrairement à [[sauvegarder_etat]], ça survit à la fermeture du jeu.",
+  "Quand le joueur gagne un point : [[ajouter_variable]] sur « score », puis [[sauvegarder_variables]]. Le score est écrit dans le fichier à chaque point."
+ ],
+ "charger_variables": [
+  "Reprend les valeurs écrites par [[sauvegarder_variables]] (même nom de sauvegarde). Chaque variable qui existe encore retrouve sa valeur. Sortie « Chargé » si tout s'est bien passé, « Pas de sauvegarde » à la toute première partie. À mettre souvent juste après « Au démarrage ».",
+  "Juste après [[NoeudEventStart]] : [[charger_variables]], puis [[modifier_propriete]] pour afficher le score retrouvé."
  ]
 }

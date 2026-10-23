@@ -147,6 +147,18 @@
       "nom": "Zustand wiederherstellen",
       "role": "Stellt die Szene wie beim letzten „Zustand speichern“ wieder her. Gibt es noch keinen, ändert sich nichts.",
       "exemple": "nach einem Sturz am Checkpoint weitermachen."
+    },
+    {
+      "nom": "Variablen in einer Datei speichern",
+      "schema": "<b>Eingänge:</b> Name des Speicherstands, Variablen (leer = alle)",
+      "role": "Schreibt die Werte deiner Variablen (globale und die der Szene) in eine Datei auf dem Gerät: Sie sind wieder da, wenn der Spieler das Spiel schließt und neu öffnet. Mit „Name des Speicherstands“ kannst du mehrere Spielstände haben. Lass „Variablen“ leer, um alles zu speichern, oder schreibe Namen mit Kommas (punkte, leben). Anders als „Zustand speichern“ übersteht es das Schließen des Spiels.",
+      "exemple": "Wenn der Spieler einen Punkt bekommt: „Zu Variable hinzufügen“ auf „score“, dann „Variablen in einer Datei speichern“. Der Punktestand wird bei jedem Punkt in die Datei geschrieben."
+    },
+    {
+      "nom": "Variablen aus einer Datei laden",
+      "schema": "<b>Eingänge:</b> Name des Speicherstands, Variablen (leer = alle) &nbsp;→&nbsp; <b>Ausgänge:</b> Geladen / Kein Speicherstand",
+      "role": "Holt die Werte zurück, die „Variablen in einer Datei speichern“ geschrieben hat (gleicher Name). Jede Variable, die noch existiert, bekommt ihren Wert zurück. Ausgang „Geladen“, wenn es geklappt hat, „Kein Speicherstand“ beim allerersten Spiel. Steht oft direkt nach „Beim Start“.",
+      "exemple": "Direkt nach „Beim Start“: „Variablen aus einer Datei laden“, dann „Eigenschaft ändern“, um den wiedergefundenen Punktestand anzuzeigen."
     }
   ]
 }

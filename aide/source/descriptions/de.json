@@ -660,11 +660,19 @@
   "die Brücke anhalten, wenn der Spieler einen Knopf drückt."
  ],
  "passage_decor": [
-  "Lässt ein Bild (Vogel, Wolke, Mücke…) über den Hintergrund einer Geschichte ziehen, entlang einer Bewegung aus Assets → Bewegung. Wahlweise hinter oder vor den Figuren (das Textfeld bleibt immer oben). „Höhe“ stellt die Bildgröße ein.",
+  "Lässt ein Bild (Vogel, Wolke, Mücke…) über den Hintergrund einer Geschichte ziehen, entlang einer Bewegung aus Assets → Bewegung. Wahlweise hinter oder vor den Figuren (das Textfeld bleibt immer oben). „Höhe“ stellt die Bildgröße ein. Ist das Bild eine Animation (ein Vogel, der mit den Flügeln schlägt), schreibe ihren Namen in « Animation des Bildes » und die Geschwindigkeit in « Geschwindigkeit (Bilder pro Sekunde) ».",
   "ein Vogel fliegt über den Himmel, während Hana spricht."
  ],
  "arreter_passages": [
   "Entfernt alle Bilder, die gerade über den Hintergrund der Geschichte ziehen (gestartet mit [[passage_decor]]).",
   "die Mücke verschwindet, wenn der Dialog vorbei ist."
+ ],
+ "sauvegarder_variables": [
+  "Schreibt die Werte deiner Variablen (globale und die der Szene) in eine Datei auf dem Gerät: Sie sind wieder da, wenn der Spieler das Spiel schließt und neu öffnet. Mit « Name des Speicherstands » kannst du mehrere Spielstände haben. Lass « Variablen » leer, um alles zu speichern, oder schreibe Namen mit Kommas (punkte, leben). Anders als [[sauvegarder_etat]] übersteht es das Schließen des Spiels.",
+  "Wenn der Spieler einen Punkt bekommt: [[ajouter_variable]] auf « score », dann [[sauvegarder_variables]]. Der Punktestand wird bei jedem Punkt in die Datei geschrieben."
+ ],
+ "charger_variables": [
+  "Holt die Werte zurück, die [[sauvegarder_variables]] geschrieben hat (gleicher Name). Jede Variable, die noch existiert, bekommt ihren Wert zurück. Ausgang « Geladen », wenn es geklappt hat, « Kein Speicherstand » beim allerersten Spiel. Steht oft direkt nach « Beim Start ».",
+  "Direkt nach [[NoeudEventStart]]: [[charger_variables]], dann [[modifier_propriete]], um den wiedergefundenen Punktestand anzuzeigen."
  ]
 }

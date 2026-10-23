@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D 全部节点（164 个）| 参考</title>
-<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 164 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<title>Yop2D 全部节点（166 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 166 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 164 个节点，以及它们的设置（输入）和输出。</p>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 166 个节点，以及它们的设置（输入）和输出。</p>
 <p><strong>分类</strong></p>
 <nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-网格和益智">网格和益智</a><a href="#c10-转场">转场</a><a href="#c11-动画">动画</a><a href="#c12-音频">音频</a><a href="#c13-故事与对话">故事与对话</a><a href="#c14-数值-绿线">数值（绿线）</a><a href="#c15-屏幕滤镜">屏幕滤镜</a></nav>
 <h2 id="c1-事件">事件</h2>
@@ -127,7 +127,7 @@
 </div>
 <div class="fiche"><h3>如果对象碰到标签</h3>
 <div class="schema"><b>输入：</b> 对象, 标签</div>
-<p>所选对象碰到带有该标签的对象时，每次接触运行一次。被碰到的对象成为 “相关对象”。</p>
+<p>所选对象碰到带有该标签的对象时，每次接触运行一次。被碰到的对象成为 “相关对象”。“被碰到的一面”设置可以把事件限定在物体的某一面（上、下、左、右）：“物体上方”表示有东西从上面压下来，比如电梯压住它。“任意”（默认）则不看是哪一面。</p>
 <p class="exemple"><b>示例：</b> 玩家碰到金币（标签“piece”）→ 销毁相关对象，分数加 1。</p>
 </div>
 </div>
@@ -254,6 +254,16 @@
 <div class="fiche"><h3>恢复状态</h3>
 <p>把场景恢复到上一次 “保存状态” 的样子。如果还没有存档，什么也不变。</p>
 <p class="exemple"><b>示例：</b> 掉下去后从检查点重新开始。</p>
+</div>
+<div class="fiche"><h3>把变量保存到文件</h3>
+<div class="schema"><b>输入：</b> 存档名称, 变量（留空 = 全部）</div>
+<p>把你的变量（全局变量和当前场景的变量）的值写入设备上的文件：玩家关闭再打开游戏后，它们依然存在。“存档名称”可以让你有多个存档。“变量”留空表示全部保存，也可以写用逗号隔开的名字（分数,生命）。和 “保存状态” 不同，它在关闭游戏后仍然有效。</p>
+<p class="exemple"><b>示例：</b> 玩家得分时：先对 “score” 用 “增加变量值”，再用 “把变量保存到文件”。每得一分，分数就写进文件。</p>
+</div>
+<div class="fiche"><h3>从文件加载变量</h3>
+<div class="schema"><b>输入：</b> 存档名称, 变量（留空 = 全部） &nbsp;→&nbsp; <b>输出：</b> 已加载 / 没有存档</div>
+<p>恢复 “把变量保存到文件” 写入的值（同一个存档名称）。每个仍然存在的变量都会取回它的值。成功时走“已加载”，第一次玩时走“没有存档”。通常放在“游戏开始时”之后。</p>
+<p class="exemple"><b>示例：</b> 紧接在 “启动时” 之后：先 “从文件加载变量”，再用 “修改属性” 显示取回的分数。</p>
 </div>
 </div>
 <h2 id="c3-时间">时间</h2>
@@ -786,7 +796,7 @@
 </div>
 <div class="fiche"><h3>穿过背景</h3>
 <div class="schema"><b>输入：</b> 经过的图片, 动作（步骤）, 从哪里经过？, 图片高度（像素）, 图片动画（名称，可选）, 动画速度（每秒帧数）</div>
-<p>让一张图片（小鸟、云、蚊子……）按“资源 → 动作”里做好的动作穿过故事背景。可选在角色后面或前面（文字框始终在最上层）。“高度”设置图片大小。</p>
+<p>让一张图片（小鸟、云、蚊子……）按“资源 → 动作”里做好的动作穿过故事背景。可选在角色后面或前面（文字框始终在最上层）。“高度”设置图片大小。 如果图片是一段动画（比如扇动翅膀的鸟），请在“图片动画”里写它的名字，在“速度（每秒帧数）”里写速度。</p>
 <p class="exemple"><b>示例：</b> Hana 说话时，一只小鸟飞过天空。</p>
 </div>
 <div class="fiche"><h3>停止经过的图片</h3>

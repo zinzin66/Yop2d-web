@@ -660,11 +660,19 @@
   "fermare la passerella quando il giocatore preme un pulsante."
  ],
  "passage_decor": [
-  "Fa attraversare lo sfondo di una storia a un'immagine (uccello, nuvola, zanzara…) seguendo un movimento creato in Assets → Movimento. Scegli dietro o davanti ai personaggi (il riquadro di testo resta sempre sopra). «Altezza» regola la dimensione dell'immagine.",
+  "Fa attraversare lo sfondo di una storia a un'immagine (uccello, nuvola, zanzara…) seguendo un movimento creato in Assets → Movimento. Scegli dietro o davanti ai personaggi (il riquadro di testo resta sempre sopra). «Altezza» regola la dimensione dell'immagine. Se l'immagine è un'animazione (un uccello che batte le ali), scrivi il suo nome in « Animazione dell'immagine » e la velocità in « Velocità (immagini al secondo) ».",
   "un uccello che attraversa il cielo mentre Hana parla."
  ],
  "arreter_passages": [
   "Toglie tutte le immagini che attraversano lo sfondo della storia (avviate da [[passage_decor]]).",
   "la zanzara se ne va quando il dialogo è finito."
+ ],
+ "sauvegarder_variables": [
+  "Scrive i valori delle tue variabili (globali e della scena) in un file sul dispositivo: saranno ancora lì quando il giocatore chiude e riapre il gioco. « Nome del salvataggio » permette di avere più partite. Lascia « Variabili » vuoto per salvare tutto, oppure scrivi i nomi separati da virgole (punti, vite). A differenza di [[sauvegarder_etat]], sopravvive alla chiusura del gioco.",
+  "Quando il giocatore fa un punto: [[ajouter_variable]] su « score », poi [[sauvegarder_variables]]. Il punteggio viene scritto nel file a ogni punto."
+ ],
+ "charger_variables": [
+  "Recupera i valori scritti da [[sauvegarder_variables]] (stesso nome di salvataggio). Ogni variabile che esiste ancora riprende il suo valore. Uscita « Caricato » se è andata bene, « Nessun salvataggio » alla primissima partita. Spesso si mette subito dopo « All'avvio ».",
+  "Subito dopo [[NoeudEventStart]]: [[charger_variables]], poi [[modifier_propriete]] per mostrare il punteggio ritrovato."
  ]
 }
