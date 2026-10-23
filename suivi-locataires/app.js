@@ -62,12 +62,23 @@ let state = {
     eau: { debut: '', fin: '', totalFacture: 0, totalM3: 0, prixApplique: 0, aboReel: 0, aboFacture: 0 }
   },
   historiqueRegul: [], // régularisations enregistrées (ordures ménagères, eau)
+  derniereModif: '',  // date de la dernière modification (sert à prévenir si on restaure un fichier plus ancien)
   factureEdf: {}      // dernière facture EDF saisie (voir l'onglet « Facture EDF »)
 };
 
 // ============ PERSISTANCE ============
-function save() {
+// Chaque enregistrement note la date de la dernière modification (garderDate = restauration d'un fichier : on garde la date du fichier)
+function save(garderDate) {
+  if (!garderDate) state.derniereModif = new Date().toISOString();
   localStorage.setItem('budgetApp', JSON.stringify(state));
+}
+
+const frDateHeure = iso => iso ? new Date(iso).toLocaleString('fr-FR', { dateStyle: 'long', timeStyle: 'short' }) : '';
+function majInfoModif() {
+  const el = document.getElementById('infoModif');
+  if (el) el.innerHTML = state.derniereModif
+    ? '🕒 Dernière modification des données de cet appareil : <strong>' + frDateHeure(state.derniereModif) + '</strong>'
+    : '🕒 Aucune modification enregistrée sur cet appareil pour l\'instant.';
 }
 
 // S'assure que tous les champs (anciens et nouveaux) existent, quelle que soit l'origine des données
@@ -81,6 +92,7 @@ function migrate() {
   if (!Array.isArray(state.tarifs)) state.tarifs = [];
   state.factureEdf = { numero: '', debut: '', fin: '', hcHT: '', hpHT: '', acciseHT: '', tcfeHT: '', aboHT: '', ctaHT: '', tva: 20, nbLogements: 4, kwhFacture: '', montantHT: '', moisAbo: '', excludeLast: true, parts: {}, init: false, ...(state.factureEdf || {}) };
   if (!Array.isArray(state.historiqueRegul)) state.historiqueRegul = [];
+  if (typeof state.derniereModif !== 'string') state.derniereModif = '';
   state.proprietaire = { nom: '', adresse: '', ville: '', email: '', tel: '', iban: '', bic: '', lieu: '', ...(state.proprietaire || {}) };
   const r = state.regul || {};
   state.regul = {
@@ -2223,10 +2235,18 @@ function importData() {
   reader.onload = e => {
     try {
       const imported = JSON.parse(e.target.result);
-      if (!confirm('⚠️ Cela va REMPLACER toutes tes données actuelles.\n\nContinuer ?')) return;
+      // Prévenir si le fichier est plus ancien que les données déjà présentes sur cet appareil
+      const dateFichier = typeof imported.derniereModif === 'string' ? imported.derniereModif : '';
+      let msg = '⚠️ Cela va REMPLACER toutes tes données actuelles.\n\n';
+      msg += 'Données de cet appareil : ' + (state.derniereModif ? frDateHeure(state.derniereModif) : 'aucune date') + '\n';
+      msg += 'Fichier à restaurer : ' + (dateFichier ? frDateHeure(dateFichier) : 'sans date') + '\n\n';
+      if (state.derniereModif && (!dateFichier || dateFichier < state.derniereModif)) {
+        msg += '🚨 ATTENTION : ce fichier est PLUS ANCIEN que les données de cet appareil' + (dateFichier ? '' : ' (ou n\'a pas de date)') + '.\nTu risques de perdre tes saisies récentes.\n\n';
+      }
+      if (!confirm(msg + 'Continuer ?')) return;
       state = { ...state, ...imported };
       migrate();
-      save();
+      save(true);
       fileInput.value = '';
       renderAll();
       alert('✅ Données importées !');
@@ -3652,6 +3672,7 @@ function renderAll() {
   renderForecast();
   renderAccounts();
   renderLocatif();
+  majInfoModif();
 }
 
 // ============ INITIALISATION ============
