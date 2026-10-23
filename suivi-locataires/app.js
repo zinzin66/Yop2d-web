@@ -60,7 +60,8 @@ let state = {
   regul: {
     om:  { annee: new Date().getFullYear(), cotisation: 0, mois: 8, surfaceTotale: 0 },
     eau: { debut: '', fin: '', totalFacture: 0, totalM3: 0, prixApplique: 0, aboReel: 0, aboFacture: 0 }
-  }
+  },
+  factureEdf: {}      // dernière facture EDF saisie (voir l'onglet « Facture EDF »)
 };
 
 // ============ PERSISTANCE ============
@@ -77,6 +78,7 @@ function migrate() {
   if (!Array.isArray(state.compteurs)) state.compteurs = [];
   if (!state.releves || typeof state.releves !== 'object' || Array.isArray(state.releves)) state.releves = {};
   if (!Array.isArray(state.tarifs)) state.tarifs = [];
+  state.factureEdf = { numero: '', debut: '', fin: '', hcHT: '', hpHT: '', acciseHT: '', tcfeHT: '', aboHT: '', ctaHT: '', tva: 20, nbLogements: 4, kwhFacture: '', montantHT: '', moisAbo: '', excludeLast: true, parts: {}, init: false, ...(state.factureEdf || {}) };
   state.proprietaire = { nom: '', adresse: '', ville: '', email: '', tel: '', iban: '', bic: '', lieu: '', ...(state.proprietaire || {}) };
   const r = state.regul || {};
   state.regul = {
@@ -2253,7 +2255,6 @@ function resetAll() {
 let locatifSection = 'apercu';            // onglet affiché dans la page Locatif
 let locatifMonth = monthKey(new Date());  // mois choisi (YYYY-MM)
 let avisLogementId = '';                  // logement affiché dans l'onglet « Avis »
-let moyenCalc = { from: '', to: '', kwhFacture: '', montantHT: '' };
 
 // ---------- petits outils ----------
 const esc = s => String(s === undefined || s === null ? '' : s).replace(/[&<>"']/g, ch =>
@@ -2617,56 +2618,6 @@ function setTarif(i, key, val) {
   save();
 }
 
-// Tarif « moyen » (appartements sans compteur jour/nuit) d'après la facture EDF
-function calcTarifMoyen() {
-  const { from, to, kwhFacture, montantHT } = moyenCalc;
-  if (!from || !to || from > to) return null;
-  const t = tarifPour(to);
-  let kwhHC = 0, kwhHP = 0, manque = false;
-  const mois = [];
-  for (let k = from; k <= to && mois.length < 36; k = addMonths(k, 1)) mois.push(k);
-  state.compteurs.filter(c => c.nature === 'elec' && c.logementId && (c.canal === 'hc' || c.canal === 'hp')).forEach(c => {
-    mois.forEach(k => {
-      const x = consoCompteur(c.id, k);
-      if (x === null) { manque = true; return; }
-      if (c.canal === 'hc') kwhHC += x; else kwhHP += x;
-    });
-  });
-  const ttc = num(montantHT) * 1.2;
-  const coutJN = kwhHC * num(t.hc) + kwhHP * num(t.hp);
-  const kwhRestant = num(kwhFacture) - (kwhHC + kwhHP);
-  const moyen = kwhRestant > 0 ? (ttc - coutJN) / kwhRestant : 0;
-  return { ttc, coutJN, kwhHC, kwhHP, kwhRestant, moyen, manque, mois };
-}
-function setMoyen(champ, val) { moyenCalc[champ] = val; majResultatMoyen(); }
-function majResultatMoyen() {
-  const el = document.getElementById('moyenResult');
-  if (!el) return;
-  const r = calcTarifMoyen();
-  if (!r) { el.innerHTML = '<div class="hint">Choisis la période de la facture et saisis ses chiffres.</div>'; return; }
-  el.innerHTML = `
-    <div class="calc-line"><span>Facture TTC (HT × 1,2)</span><strong>${fmt(r.ttc)}</strong></div>
-    <div class="calc-line"><span>Consommation des logements jour/nuit : ${nf(r.kwhHC, 0)} kWh nuit + ${nf(r.kwhHP, 0)} kWh jour</span><strong>${fmt(r.coutJN)}</strong></div>
-    <div class="calc-line"><span>kWh restants à répartir (logements sans jour/nuit)</span><strong>${nf(r.kwhRestant, 0)} kWh</strong></div>
-    <div class="calc-line total"><span>Tarif moyen</span><strong>${nf(r.moyen, 4)} €/kWh</strong></div>
-    ${r.manque ? '<div class="hint warn">⚠️ Il manque des relevés sur cette période : le résultat est incomplet.</div>' : ''}
-    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-      <span class="hint">Appliquer à partir de :</span>
-      <input type="month" id="moyenFrom" value="${addMonths(moyenCalc.to, 1)}" style="width:auto;">
-      <button class="success" onclick="appliquerTarifMoyen()" ${r.moyen > 0 ? '' : 'disabled'}>✅ Utiliser ce tarif moyen</button>
-    </div>`;
-}
-function appliquerTarifMoyen() {
-  const r = calcTarifMoyen();
-  const from = document.getElementById('moyenFrom').value;
-  if (!r || !from) return;
-  const val = Math.round(r.moyen * 10000) / 10000;
-  let t = state.tarifs.find(x => x.from === from);
-  if (t) t.moyen = val; else state.tarifs.push({ ...tarifPour(from), from, moyen: val });
-  save(); renderLocatif();
-  alert('✅ Tarif moyen de ' + nf(val, 4) + ' €/kWh appliqué à partir de ' + monthKeyLabel(from) + '.');
-}
-
 // ---------- régularisations ----------
 function setRegul(type, key, val) {
   state.regul[type][key] = (key === 'debut' || key === 'fin') ? val : num(val);
@@ -2865,6 +2816,358 @@ function allerReleves(month) {
   renderLocatif();
 }
 
+// ---------- SUIVI CONSO : tableau mois par mois (comme l'onglet du tableur) ----------
+const SUIVI_NB_MOIS = 12;
+
+function moisFenetre(fin, nb = SUIVI_NB_MOIS) {
+  const l = [];
+  for (let i = nb - 1; i >= 0; i--) l.push(addMonths(fin, -i));
+  return l;
+}
+const courtMois = k => { const [y, m] = k.split('-').map(Number); return new Date(y, m - 1, 1).toLocaleDateString('fr-FR', { month: 'short' }).replace('.', '') + ' ' + String(y).slice(2); };
+
+// Contenu d'une cellule calculée, repérée par sa clé « type|a|b|mois »
+function calcCellSuivi(k) {
+  const [type, a, b, c] = k.split('|');
+  const aff = (x, d = 0) => x === null || x === undefined || isNaN(x) ? '—' : nf(x, d);
+  if (type === 'conso') {                         // consommation d'un compteur : conso|cid|nature|mois
+    const x = consoCompteur(a, c);
+    return aff(x, b === 'eau' ? 2 : 0);
+  }
+  if (type === 'tot') {                           // total d'un logement : tot|lgid|nature|mois
+    const cp = compteursDe(a, b);
+    let s = 0;
+    for (const cc of cp) { const x = consoCompteur(cc.id, c); if (x === null) return '—'; s += x; }
+    return cp.length ? aff(s, b === 'eau' ? 2 : 0) : '—';
+  }
+  if (type === 'ded') {                           // électricité déduite : ded|lgid||mois
+    const l = getLogement(a);
+    const r = l && consoLogement(l, c);
+    return r && !r.manquants.length ? aff(r.kwhTotal, 0) : '—';
+  }
+  if (type === 'gen') {                           // total général : gen|nature||mois
+    const cp = compteursDe('', a);
+    let s = 0;
+    for (const cc of cp) { const x = consoCompteur(cc.id, c); if (x === null) return '—'; s += x; }
+    return cp.length ? aff(s, a === 'eau' ? 2 : 0) : '—';
+  }
+  if (type === 'ctl') {                           // contrôle eau : général − somme des logements
+    const gen = compteursDe('', 'eau');
+    if (!gen.length) return '—';
+    let g = 0;
+    for (const cc of gen) { const x = consoCompteur(cc.id, c); if (x === null) return '—'; g += x; }
+    let s = 0;
+    for (const cc of state.compteurs.filter(z => z.nature === 'eau' && z.logementId)) { const x = consoCompteur(cc.id, c); if (x === null) return '—'; s += x; }
+    return aff(g - s, 2);
+  }
+  if (type === 'chg') {                           // charges calculées en € : chg|lgid||mois
+    const l = getLogement(a);
+    const r = l && consoLogement(l, c);
+    return r && !r.manquants.length ? fmt(r.total) : '—';
+  }
+  return '';
+}
+function majSuiviCalculs() {
+  document.querySelectorAll('#suiviTable [data-k]').forEach(td => { td.textContent = calcCellSuivi(td.dataset.k); });
+}
+function saisirReleveMois(cid, mois, valeur) {
+  setReleve(cid, mois, String(valeur).trim() === '' ? '' : num(valeur));
+  save();
+  majSuiviCalculs();
+}
+
+function locatifSuiviHTML() {
+  const mois = moisFenetre(locatifMonth);
+  const nomLg = id => { const l = getLogement(id); return l ? l.code : 'Général'; };
+  const th = mois.map(m => `<th class="num">${courtMois(m)}</th>`).join('');
+  const cols = mois.length + 1;
+  const rowIndex = c => `<tr><td class="sticky">${esc(c.nom)} <span class="hint">index</span></td>${mois.map(m =>
+    `<td><input type="number" step="any" inputmode="decimal" class="cell-input mini" value="${releve(c.id, m) === null ? '' : esc(releve(c.id, m))}" onchange="saisirReleveMois('${c.id}', '${m}', this.value)"></td>`).join('')}</tr>`;
+  const rowCalc = (label, keyFn, cls = 'calc') => `<tr class="${cls}"><td class="sticky">${label}</td>${mois.map(m => `<td class="num" data-k="${keyFn(m)}"></td>`).join('')}</tr>`;
+  const grp = t => `<tr class="grp"><td colspan="${cols}">${t}</td></tr>`;
+  const tri = (a, b) => nomLg(a.logementId).localeCompare(nomLg(b.logementId)) || a.nom.localeCompare(b.nom);
+
+  let h = '';
+  // ----- électricité -----
+  h += grp('⚡ ÉLECTRICITÉ (index en kWh)');
+  logementsActifs().forEach(l => {
+    const cp = compteursDe(l.id, 'elec').sort(tri);
+    cp.forEach(c => { h += rowIndex(c) + rowCalc('&nbsp;&nbsp;↳ conso kWh', m => `conso|${c.id}|elec|${m}`); });
+    if (cp.length > 1) h += rowCalc(`<strong>${esc(l.code)} — total kWh</strong>`, m => `tot|${l.id}|elec|${m}`, 'calc total');
+    if (l.elec === 'deduite') h += rowCalc(`<strong>${esc(l.code)} — kWh déduits (général − autres)</strong>`, m => `ded|${l.id}||${m}`, 'calc total');
+  });
+  const gE = compteursDe('', 'elec').sort(tri);
+  gE.forEach(c => { h += rowIndex(c) + rowCalc('&nbsp;&nbsp;↳ conso kWh', m => `conso|${c.id}|elec|${m}`); });
+  if (gE.length) h += rowCalc('<strong>Général — total kWh</strong>', m => `gen|elec||${m}`, 'calc total');
+
+  // ----- eau -----
+  h += grp('💧 EAU (index en m³)');
+  logementsActifs().forEach(l => {
+    compteursDe(l.id, 'eau').sort(tri).forEach(c => { h += rowIndex(c) + rowCalc('&nbsp;&nbsp;↳ conso m³', m => `conso|${c.id}|eau|${m}`); });
+  });
+  const gW = compteursDe('', 'eau');
+  gW.forEach(c => { h += rowIndex(c) + rowCalc('&nbsp;&nbsp;↳ conso m³', m => `conso|${c.id}|eau|${m}`); });
+  if (gW.length) h += rowCalc('<strong>Contrôle : général − somme des logements (m³)</strong>', m => `ctl|||${m}`, 'calc total');
+
+  // ----- charges calculées -----
+  h += grp('💶 CHARGES CALCULÉES (électricité + eau + abonnements, tarif du mois)');
+  logementsActifs().forEach(l => { h += rowCalc(esc(l.code), m => `chg|${l.id}||${m}`); });
+
+  return `<div class="card">
+      <div class="section-title">Suivi de la consommation</div>
+      <div class="hint">Saisis (ou corrige) directement l'<strong>index de fin de mois</strong> dans le tableau : les consommations, les totaux, le contrôle de l'eau et les charges en € se calculent tout seuls.
+      Les 12 mois affichés se terminent en <strong>${monthKeyLabel(locatifMonth)}</strong> (◀ ▶ en haut pour décaler).</div>
+      <div class="table-scroll"><table id="suiviTable" class="suivi">
+        <thead><tr><th class="sticky">Compteur</th>${th}</tr></thead>
+        <tbody>${h || `<tr><td colspan="${cols}" class="hint">Aucun compteur</td></tr>`}</tbody>
+      </table></div>
+    </div>`;
+}
+
+// ---------- FACTURE EDF : nouveaux tarifs, écarts, régularisation au prorata ----------
+const r4 = n => Math.round(n * 10000) / 10000;
+const r3 = n => Math.round(n * 1000) / 1000;
+
+function nbLogementsElec() {
+  return Math.max(1, logementsActifs().filter(l => l.elec === 'deduite' || compteursDe(l.id, 'elec').length).length);
+}
+// Première ouverture : on part des tarifs actuels (ce qui ne change pas n'est pas à ressaisir)
+function initFacture() {
+  const f = state.factureEdf;
+  if (f.init) return;
+  const t = tarifPour(locatifMonth);
+  const n = nbLogementsElec();
+  f.hcHT = String(Math.round(t.hc / 1.2 * 100000) / 100000);
+  f.hpHT = String(Math.round(t.hp / 1.2 * 100000) / 100000);
+  f.acciseHT = String(Math.round(t.tcfe / 1.2 * 100000) / 100000);
+  f.tcfeHT = '0';
+  f.aboHT = String(Math.round(t.elecAbo * n / 1.2 * 100) / 100);
+  f.ctaHT = '0';
+  f.tva = 20; f.nbLogements = n;
+  f.init = true;
+  save();
+}
+
+function periodeFacture(f) {
+  if (!f.debut || !f.fin || f.debut > f.fin) return [];
+  const a = f.debut.slice(0, 7), b = f.fin.slice(0, 7);
+  const l = [];
+  for (let k = a; k <= b && l.length < 12; k = addMonths(k, 1)) l.push(k);
+  return l;
+}
+// Part du mois comprise dans la période de la facture (prorata au nombre de jours), modifiable à la main
+function partMois(f, m) {
+  if (f.parts && f.parts[m] !== undefined && f.parts[m] !== '') return num(f.parts[m]) / 100;
+  const dim = lastDayOfMonth(m);
+  let d1 = 1, d2 = dim;
+  if (m === f.debut.slice(0, 7)) d1 = Number(f.debut.slice(8, 10));
+  if (m === f.fin.slice(0, 7)) d2 = Number(f.fin.slice(8, 10));
+  return Math.max(0, (d2 - d1 + 1) / dim);
+}
+function tarifsFacture(f) {
+  const k = 1 + num(f.tva) / 100;
+  const n = Math.max(1, num(f.nbLogements) || 1);
+  return {
+    hc: num(f.hcHT) * k, hp: num(f.hpHT) * k,
+    tcfe: (num(f.acciseHT) + num(f.tcfeHT)) * k,
+    elecAbo: (num(f.aboHT) + num(f.ctaHT)) * k / n
+  };
+}
+
+function calcFacture() {
+  const f = state.factureEdf;
+  const mois = periodeFacture(f);
+  const nw = tarifsFacture(f);
+  const base = mois.length ? mois[0] : locatifMonth;
+  const old = tarifPour(base);
+  // tarif moyen (logements sans jour/nuit) : facture − ce que paient les logements jour/nuit
+  let kwhHC = 0, kwhHP = 0, manqueMoyen = false;
+  state.compteurs.filter(c => c.nature === 'elec' && c.logementId && (c.canal === 'hc' || c.canal === 'hp')).forEach(c => {
+    mois.forEach(m => {
+      const x = consoCompteur(c.id, m);
+      if (x === null) { manqueMoyen = true; return; }
+      if (c.canal === 'hc') kwhHC += x * partMois(f, m); else kwhHP += x * partMois(f, m);
+    });
+  });
+  const ttc = num(f.montantHT) * (1 + num(f.tva) / 100);
+  const coutJN = kwhHC * nw.hc + kwhHP * nw.hp;
+  const kwhReste = num(f.kwhFacture) - (kwhHC + kwhHP);
+  const moyenNew = kwhReste > 0 && ttc > 0 ? (ttc - coutJN) / kwhReste : 0;
+  const moyenOld = num(old.moyen);
+  const moyenUtile = moyenNew > 0 ? moyenNew : moyenOld;
+
+  // régularisation : mois de la période, sauf le dernier (déjà facturé au nouveau tarif sur l'avis suivant)
+  const moisReg = f.excludeLast === false ? mois : mois.slice(0, -1);
+  const nbAbo = (f.moisAbo === '' || f.moisAbo === undefined) ? moisReg.length : num(f.moisAbo);
+  const lignes = logementsActifs().map(l => {
+    const lg = []; let manque = false, kwhTot = 0, aElec = false;
+    const ajoute = (label, kwh, ancien, nouveau) => {
+      kwhTot += kwh;
+      lg.push({ label, detail: nf(kwh, 1) + ' kWh × (' + nf(nouveau, 5) + ' − ' + nf(ancien, 5) + ')', montant: kwh * (nouveau - ancien) });
+    };
+    if (l.elec === 'deduite') {
+      aElec = true; let kwh = 0;
+      moisReg.forEach(m => { const r = consoLogement(l, m); if (r.manquants.length) manque = true; else kwh += r.kwhTotal * partMois(f, m); });
+      ajoute('Éclairage (déduit)', kwh, moyenOld, moyenUtile);
+    } else {
+      compteursDe(l.id, 'elec').forEach(c => {
+        aElec = true; let kwh = 0;
+        moisReg.forEach(m => { const x = consoCompteur(c.id, m); if (x === null) manque = true; else kwh += x * partMois(f, m); });
+        if (c.canal === 'hc') ajoute('Éclairage nuit (HC)', kwh, num(old.hc), nw.hc);
+        else if (c.canal === 'hp') ajoute('Éclairage jour (HP)', kwh, num(old.hp), nw.hp);
+        else ajoute('Éclairage', kwh, moyenOld, moyenUtile);
+      });
+    }
+    if (aElec) {
+      const kt = kwhTot;
+      lg.push({ label: 'TCFE, CSPE', detail: nf(kt, 1) + ' kWh × (' + nf(nw.tcfe, 5) + ' − ' + nf(num(old.tcfe), 5) + ')', montant: kt * (nw.tcfe - num(old.tcfe)) });
+      lg.push({ label: 'Abonnement + CTA', detail: nbAbo + ' mois × (' + nf(nw.elecAbo, 3) + ' − ' + nf(num(old.elecAbo), 3) + ')', montant: nbAbo * (nw.elecAbo - num(old.elecAbo)) });
+    }
+    const total = round2(lg.reduce((s, x) => s + x.montant, 0));
+    return { l, lignes: lg, total, manque };
+  });
+  return { f, mois, moisReg, nw, old, kwhHC, kwhHP, ttc, coutJN, kwhReste, moyenNew, moyenOld, moyenUtile, manqueMoyen, lignes, nbAbo };
+}
+
+function setFacture(key, val) {
+  const f = state.factureEdf;
+  if (key === 'excludeLast') f[key] = !!val;
+  else f[key] = val;
+  save();
+  if (key === 'debut' || key === 'fin') renderLocatif(); else majResultatFacture();
+}
+function setPartFacture(m, val) {
+  const f = state.factureEdf;
+  if (!f.parts) f.parts = {};
+  f.parts[m] = val;
+  save(); majResultatFacture();
+}
+
+function majResultatFacture() {
+  const el = document.getElementById('factureResult');
+  if (!el) return;
+  const R = calcFacture();
+  const f = R.f;
+  const ligneT = (label, ancien, nouveau, d = 5) => {
+    const ecart = nouveau - ancien;
+    const change = Math.abs(ecart) > 0.000005;
+    return `<tr class="${change ? 'changed' : ''}"><td>${label}</td><td class="num">${nf(ancien, d)}</td><td class="num"><strong>${nf(nouveau, d)}</strong></td>
+      <td class="num ${change ? (ecart > 0 ? 'amount-neg' : 'amount-pos') : ''}">${change ? (ecart > 0 ? '+' : '') + nf(ecart, d) : '= inchangé'}</td></tr>`;
+  };
+  const moyenInfo = R.moyenNew > 0
+    ? ligneT('kWh moyen (APP1, APP4…)', R.moyenOld, R.moyenNew)
+    : `<tr><td>kWh moyen (APP1, APP4…)</td><td class="num">${nf(R.moyenOld, 5)}</td><td colspan="2" class="hint">saisis les kWh et le montant HT de la facture pour le calculer</td></tr>`;
+
+  let html = `<div class="section-title" style="margin-top:14px;">Comparaison des tarifs (TTC)</div>
+    <div class="hint">Ancien = tarif en vigueur en ${R.mois.length ? monthKeyLabel(R.mois[0]) : monthKeyLabel(locatifMonth)}. Les lignes colorées ont changé.</div>
+    <div class="table-scroll"><table><thead><tr><th>Tarif</th><th class="num">Ancien</th><th class="num">Nouveau</th><th class="num">Écart</th></tr></thead><tbody>
+      ${ligneT('kWh nuit (HC)', num(R.old.hc), R.nw.hc)}
+      ${ligneT('kWh jour (HP)', num(R.old.hp), R.nw.hp)}
+      ${ligneT('TCFE + accise (€/kWh)', num(R.old.tcfe), R.nw.tcfe)}
+      ${ligneT('Abonnement + CTA (€/mois/logement)', num(R.old.elecAbo), R.nw.elecAbo, 3)}
+      ${moyenInfo}
+    </tbody></table></div>`;
+
+  if (R.moyenNew > 0) {
+    html += `<div class="calc-line"><span>Facture TTC : ${fmt(R.ttc)} − consommation des logements jour/nuit (${nf(R.kwhHC, 0)} kWh nuit + ${nf(R.kwhHP, 0)} kWh jour = ${fmt(R.coutJN)})</span><span></span></div>
+      <div class="calc-line"><span>kWh restants répartis entre les logements sans jour/nuit</span><strong>${nf(R.kwhReste, 0)} kWh</strong></div>`;
+    if (R.manqueMoyen) html += '<div class="hint warn">⚠️ Il manque des relevés sur la période : le tarif moyen est incomplet.</div>';
+  }
+
+  if (!R.mois.length) {
+    html += '<div class="hint warn">Renseigne les dates de début et de fin de la facture pour calculer la régularisation.</div>';
+  } else {
+    html += `<div class="section-title" style="margin-top:16px;">Régularisation de la période (${frDate(f.debut)} → ${frDate(f.fin)})</div>
+      <div class="hint">Mois régularisés : ${R.moisReg.map(m => monthKeyLabel(m) + ' (' + Math.round(partMois(f, m) * 100) + ' %)').join(', ') || 'aucun'}.
+      Positif = le locataire doit en plus. Négatif = on lui rend.</div>`;
+    html += R.lignes.map(x => `<div class="regul-bloc">
+        <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap;">
+          <strong>${esc(x.l.code)}</strong> <span class="hint">${esc(x.l.locataire)}</span>
+          <span class="${x.total > 0 ? 'amount-neg' : 'amount-pos'}" style="font-size:1.05rem;"><strong>${fmt(x.total)}</strong></span>
+        </div>
+        ${x.manque ? '<div class="hint warn">⚠️ Relevés manquants sur la période : montant incomplet.</div>' : ''}
+        <div class="table-scroll"><table><tbody>${x.lignes.map(z => `<tr><td>${esc(z.label)}</td><td class="hint">${z.detail}</td><td class="num">${nf(z.montant, 4)} €</td></tr>`).join('')}</tbody></table></div>
+        <button class="success" style="padding:5px 10px;font-size:.8rem;" onclick="ajouterRegulEdfAuSuivi('${x.l.id}')">➕ Ajouter ${fmt(x.total)} au suivi de ${monthKeyLabel(locatifMonth)}</button>
+      </div>`).join('');
+  }
+
+  html += `<div class="card inner" style="margin-top:16px;">
+      <div class="section-title">Appliquer les nouveaux tarifs</div>
+      <div class="hint">Les avis utilisent le tarif <strong>du mois de consommation</strong>. Par défaut : à partir du dernier mois de la facture (les mois d'avant sont régularisés ci-dessus).</div>
+      <div class="form-row">
+        <label>À partir du mois<input type="month" id="factureAppliquerDes" value="${R.mois.length ? R.mois[R.mois.length - 1] : locatifMonth}"></label>
+        <button class="success" onclick="appliquerFacture()">✅ Appliquer ces tarifs</button>
+      </div>
+    </div>`;
+  el.innerHTML = html;
+}
+
+function appliquerFacture() {
+  const R = calcFacture();
+  const from = document.getElementById('factureAppliquerDes').value;
+  if (!/^\d{4}-\d{2}$/.test(from)) return alert('Choisis le mois de départ (AAAA-MM)');
+  const prev = tarifPour(from);
+  const nouveau = {
+    ...prev, from,
+    hc: r4(R.nw.hc), hp: r4(R.nw.hp), tcfe: r4(R.nw.tcfe), elecAbo: r3(R.nw.elecAbo),
+    moyen: r4(R.moyenUtile)
+  };
+  const i = state.tarifs.findIndex(t => t.from === from);
+  if (i >= 0) state.tarifs[i] = nouveau; else state.tarifs.push(nouveau);
+  save(); renderLocatif();
+  alert('✅ Nouveaux tarifs appliqués à partir de ' + monthKeyLabel(from) + '.\n\nTu peux les revoir et les corriger dans l\'onglet Tarifs.');
+}
+
+function ajouterRegulEdfAuSuivi(logementId) {
+  const R = calcFacture();
+  const x = R.lignes.find(y => y.l.id === logementId);
+  const l = x && x.l;
+  const acc = l && getCompte(l.accountId);
+  if (!acc) return alert('Ce logement n\'a pas de compte de suivi (onglet Logements).');
+  if (x.manque && !confirm('Des relevés manquent : le montant est incomplet. Ajouter quand même ?')) return;
+  const f = R.f;
+  const res = poserPostAuto(acc, locatifMonth, 'regul-edf-' + f.fin, 'Régul lumière ' + frDate(f.debut) + ' → ' + frDate(f.fin) + ' ' + l.code, x.total);
+  save(); renderAll();
+  alert(res === 'fige' ? 'Ce poste est figé (✅), il n\'a pas été modifié.' :
+    res === 'rien' ? 'Montant nul : rien à ajouter.' : '✅ Régularisation de ' + fmt(x.total) + ' ajoutée à l\'attendu de ' + monthKeyLabel(locatifMonth) + '.');
+}
+
+function locatifFactureHTML() {
+  initFacture();
+  const f = state.factureEdf;
+  const mois = periodeFacture(f);
+  const inp = (key, label, step = 'any') => `<label>${label}<input type="number" step="${step}" inputmode="decimal" value="${esc(f[key])}" onchange="setFacture('${key}', this.value)"></label>`;
+  return `<div class="card">
+      <div class="section-title">⚡ Facture EDF de l'immeuble</div>
+      <div class="hint">Saisis les chiffres de ta nouvelle facture. Ceux qui n'ont pas changé sont déjà remplis avec les tarifs actuels : tu ne modifies que ce qui change. Les prix sont <strong>hors taxes (HT)</strong>, comme sur la facture.</div>
+      <div class="form-row">
+        <label>N° de facture<input value="${esc(f.numero)}" onchange="setFacture('numero', this.value)"></label>
+        <label>Début de période<input type="date" value="${esc(f.debut)}" onchange="setFacture('debut', this.value)"></label>
+        <label>Fin de période<input type="date" value="${esc(f.fin)}" onchange="setFacture('fin', this.value)"></label>
+      </div>
+      <div class="form-row">
+        ${inp('hcHT', 'kWh nuit HC (€ HT)')}${inp('hpHT', 'kWh jour HP (€ HT)')}
+        ${inp('acciseHT', 'Accise / « Ac s/Elect » (€ HT/kWh)')}${inp('tcfeHT', 'TCFE (€ HT/kWh)')}
+      </div>
+      <div class="form-row">
+        ${inp('aboHT', 'Abonnement immeuble (€ HT/mois)')}${inp('ctaHT', 'CTA immeuble (€ HT/mois)')}
+        ${inp('tva', 'TVA (%)')}${inp('nbLogements', 'Nombre de logements qui se partagent l\'abonnement', '1')}
+      </div>
+      <div class="form-row">
+        ${inp('kwhFacture', 'Total kWh facturés (immeuble)')}${inp('montantHT', 'Prix HT total de la facture (€)')}
+      </div>
+      <div class="hint">Les deux derniers chiffres servent à calculer le <strong>tarif moyen</strong> des logements sans heures pleines/creuses (APP1, APP4).</div>
+      <div class="section-title" style="margin-top:12px;">Régularisation au prorata</div>
+      <div class="form-row" style="align-items:center;">
+        <label class="inline" style="margin:0;"><input type="checkbox" ${f.excludeLast === false ? '' : 'checked'} onchange="setFacture('excludeLast', this.checked)"> Ne pas régulariser le dernier mois (déjà facturé au nouveau tarif)</label>
+        ${inp('moisAbo', 'Mois d\'abonnement à régulariser (vide = automatique)', '1')}
+      </div>
+      ${mois.length ? `<div class="hint">Part de consommation retenue pour chaque mois de la période (calculée d'après les jours, modifiable) :</div>
+        <div class="form-row">${mois.map(m => `<label>${monthKeyLabel(m)} (%)<input type="number" step="1" inputmode="decimal" value="${Math.round(partMois(f, m) * 1000) / 10}" onchange="setPartFacture('${m}', this.value)"></label>`).join('')}</div>` : ''}
+    </div>
+    <div class="card"><div id="factureResult"></div></div>`;
+}
+
 // ---------- propriétaire ----------
 function setProprio(key, val) { state.proprietaire[key] = val; save(); }
 
@@ -2882,8 +3185,8 @@ function renderLocatif() {
   // barre du haut : mois + onglets
   document.getElementById('locatifMonthLabel').textContent = monthKeyLabel(locatifMonth);
   const sections = [
-    ['apercu', '📊 Vue d\'ensemble'], ['logements', '🏠 Logements'], ['releves', '🔢 Relevés'],
-    ['avis', '🧾 Avis'], ['tarifs', '💶 Tarifs'], ['regul', '⚖️ Régularisations'], ['proprio', '👤 Propriétaire']
+    ['apercu', '📊 Vue d\'ensemble'], ['logements', '🏠 Logements'], ['suivi', '📈 Suivi conso'], ['releves', '🔢 Saisie du mois'],
+    ['avis', '🧾 Avis'], ['facture', '⚡ Facture EDF'], ['tarifs', '💶 Tarifs'], ['regul', '⚖️ Ordures / eau'], ['proprio', '👤 Propriétaire']
   ];
   document.getElementById('locatifPills').innerHTML = sections.map(([k, label]) =>
     `<button class="pill ${locatifSection === k ? 'active' : ''}" onclick="setLocatifSection('${k}')">${label}</button>`).join('');
@@ -2893,9 +3196,11 @@ function renderLocatif() {
 
   switch (locatifSection) {
     case 'logements': body.innerHTML = locatifLogementsHTML(); break;
+    case 'suivi':     body.innerHTML = locatifSuiviHTML(); majSuiviCalculs(); break;
     case 'releves':   body.innerHTML = locatifRelevesHTML(); majCalculsReleves(); break;
+    case 'facture':   body.innerHTML = locatifFactureHTML(); majResultatFacture(); break;
     case 'avis':      body.innerHTML = locatifAvisHTML(); majAvisPreview(); break;
-    case 'tarifs':    body.innerHTML = locatifTarifsHTML(); majResultatMoyen(); break;
+    case 'tarifs':    body.innerHTML = locatifTarifsHTML(); break;
     case 'regul':     body.innerHTML = locatifRegulHTML(); majResultatsRegul(); break;
     case 'proprio':   body.innerHTML = locatifProprioHTML(); break;
     default:          body.innerHTML = locatifApercuHTML();
@@ -3075,17 +3380,7 @@ function locatifTarifsHTML() {
         <tbody>${rows || '<tr><td colspan="9" class="hint">Aucun tarif</td></tr>'}</tbody>
       </table></div>
       <div style="margin-top:10px;"><button class="primary" onclick="addTarif()">➕ Nouvelle ligne à partir de ${monthKeyLabel(locatifMonth)}</button></div>
-    </div>
-    <div class="card" style="margin-top:15px;">
-      <div class="section-title">Calculer le tarif moyen (logements sans jour/nuit)</div>
-      <div class="hint">Avec la facture EDF de l'immeuble : on enlève ce que consomment les logements jour/nuit, et on répartit le reste. (Méthode de l'onglet EDF du tableur.)</div>
-      <div class="form-row">
-        <label>Premier mois de la facture<input type="month" value="${esc(moyenCalc.from)}" onchange="setMoyen('from', this.value)"></label>
-        <label>Dernier mois de la facture<input type="month" value="${esc(moyenCalc.to)}" onchange="setMoyen('to', this.value)"></label>
-        <label>kWh facturés (total)<input type="number" step="any" inputmode="decimal" value="${esc(moyenCalc.kwhFacture)}" onchange="setMoyen('kwhFacture', this.value)"></label>
-        <label>Montant HT de la facture (€)<input type="number" step="any" inputmode="decimal" value="${esc(moyenCalc.montantHT)}" onchange="setMoyen('montantHT', this.value)"></label>
-      </div>
-      <div id="moyenResult"></div>
+      <div class="hint" style="margin-top:8px;">Pour une nouvelle facture EDF, utilise plutôt l'onglet <strong>⚡ Facture EDF</strong> : il calcule les nouveaux tarifs et la régularisation.</div>
     </div>`;
 }
 
@@ -3165,6 +3460,7 @@ function importLocatif() {
       if (d.tarifs) state.tarifs = d.tarifs;
       if (d.proprietaire) state.proprietaire = { ...state.proprietaire, ...d.proprietaire };
       if (d.regul) state.regul = { om: { ...state.regul.om, ...(d.regul.om || {}) }, eau: { ...state.regul.eau, ...(d.regul.eau || {}) } };
+      if (d.factureEdf) state.factureEdf = { ...state.factureEdf, ...d.factureEdf };
       Object.keys(d.releves || {}).forEach(cid => {
         state.releves[cid] = { ...(state.releves[cid] || {}), ...d.releves[cid] };
       });
