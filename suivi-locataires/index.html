@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mon Budget + Suivi locataires</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Zone cachée utilisée seulement pour imprimer un avis d'échéance -->
+<div id="avisPrintZone"></div>
+
+<div class="app-container">
+
+  <header class="app-header">
+    <h1>💰 Mon Budget <span>+ Suivi locataires</span></h1>
+  </header>
+
+  <div id="alertBanner" class="alert-banner"></div>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="dashboard">📊 Tableau de bord</button>
+    <button class="tab" data-tab="locatif">🏠 Locatif</button>
+    <button class="tab" data-tab="accounts">👥 Comptes de suivi</button>
+    <button class="tab" data-tab="transactions">💳 Transactions</button>
+    <button class="tab" data-tab="banks">🏦 Banques</button>
+    <button class="tab" data-tab="recurring">🔁 Flux planifiés</button>
+    <button class="tab" data-tab="categories">🏷️ Catégories</button>
+    <button class="tab" data-tab="forecast">🔮 Prévisionnel</button>
+    <button class="tab" data-tab="data">💾 Données</button>
+  </nav>
+
+  <!-- ============ TABLEAU DE BORD ============ -->
+  <section id="dashboard" class="panel active">
+    <div id="kpis" class="kpis"></div>
+
+    <div class="card">
+      <div class="section-title">Dépenses par catégorie</div>
+      <div class="form-row" style="align-items:center;">
+        <button class="primary" id="catBtn3m" onclick="setCatChartPeriod('3m')">3 mois</button>
+        <button class="primary" id="catBtn6m" onclick="setCatChartPeriod('6m')">6 mois</button>
+        <button class="primary" id="catBtn12m" onclick="setCatChartPeriod('12m')">12 mois</button>
+        <button class="primary" id="catBtnCustom" onclick="setCatChartPeriod('custom')">Période…</button>
+        <button class="primary" id="catToggleAllBtn" onclick="toggleAllCatChartCategories()">Tout décocher</button>
+      </div>
+      <div id="catCustomPeriod" class="form-row" style="display:none;align-items:center;">
+        <select id="catPeriodFrom"></select>
+        <span>→</span>
+        <select id="catPeriodTo"></select>
+        <button class="success" onclick="applyCatChartCustomPeriod()">Appliquer</button>
+      </div>
+      <div id="catChartCategories" class="check-grid"></div>
+      <div class="chart-box">
+        <canvas id="catMonthChart"></canvas>
+        <div id="catChartEmpty" class="empty" style="display:none;">Rien à afficher pour cette sélection</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Revenus et dépenses sur 12 mois</div>
+      <div class="chart-box"><canvas id="monthChart"></canvas></div>
+    </div>
+  </section>
+
+  <!-- ============ LOCATIF ============ -->
+  <section id="locatif" class="panel">
+    <div class="locatif-bar">
+      <div class="account-nav">
+        <button onclick="navigateLocatifMonth(-1)">◀</button>
+        <div class="period" id="locatifMonthLabel"></div>
+        <button onclick="navigateLocatifMonth(1)">▶</button>
+      </div>
+      <button class="pill" onclick="setLocatifMonth(new Date().getFullYear() + '-' + String(new Date().getMonth() + 1).padStart(2, '0'))">Mois en cours</button>
+    </div>
+    <div id="locatifPills" class="pills"></div>
+    <div id="locatifBody"></div>
+  </section>
+
+  <!-- ============ COMPTES DE SUIVI ============ -->
+  <section id="accounts" class="panel">
+    <div class="accordion-header" onclick="toggleAccordion('accCreate')">
+      <span>➕ Créer un compte de suivi</span><span class="accordion-icon" id="icon-accCreate">▼</span>
+    </div>
+    <div class="accordion-content" id="content-accCreate" style="display:none;">
+      <div class="form-row">
+        <input id="accName" placeholder="Nom du compte (ex. APP1 — Dupont)">
+        <select id="accType">
+          <option value="tenant">👤 Locataire</option>
+          <option value="group">📊 Regroupement</option>
+        </select>
+      </div>
+      <div class="hint">Coche les catégories dont les transactions pointées comptent pour ce compte :</div>
+      <div id="accCatCheckboxes" class="check-grid"></div>
+      <button class="success" onclick="addAccount()">✅ Créer</button>
+    </div>
+    <div id="accountsList"></div>
+  </section>
+
+  <!-- ============ TRANSACTIONS ============ -->
+  <section id="transactions" class="panel">
+    <div id="txBanksSummary"></div>
+
+    <div class="card">
+      <div class="section-title">Nouvelle transaction</div>
+      <div class="form-row">
+        <select id="txType">
+          <option value="expense">💸 Dépense</option>
+          <option value="income">💰 Recette</option>
+        </select>
+        <select id="txBank"></select>
+        <select id="txCat"></select>
+        <input type="date" id="txDate">
+        <input id="txLabel" placeholder="Libellé">
+        <input type="number" id="txAmount" step="0.01" inputmode="decimal" placeholder="Montant (€)">
+      </div>
+      <div class="form-row">
+        <button class="success" onclick="addTransaction()">➕ Ajouter</button>
+        <button class="primary" onclick="openRecurringFromForm()">🔁 Planifier</button>
+        <button class="primary" onclick="openTransferModal()">🔄 Virement entre comptes</button>
+        <button class="primary" onclick="openMassCheckModal()">✅ Pointer en masse</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Historique</div>
+      <div class="form-row">
+        <select id="filterBank" onchange="renderTransactions()"></select>
+        <select id="filterStatus" onchange="renderTransactions()">
+          <option value="">Pointées ou non</option>
+          <option value="unchecked">⬜ À pointer</option>
+          <option value="checked">✅ Pointées</option>
+        </select>
+        <select id="filterType" onchange="renderTransactions()">
+          <option value="">Tous les types</option>
+          <option value="income">💰 Recettes</option>
+          <option value="expense">💸 Dépenses</option>
+          <option value="transfer">🔄 Virements</option>
+        </select>
+      </div>
+      <div id="transactionsList"></div>
+    </div>
+  </section>
+
+  <!-- ============ BANQUES ============ -->
+  <section id="banks" class="panel">
+    <div class="card">
+      <div class="section-title">Ajouter un compte bancaire</div>
+      <div class="form-row">
+        <input id="bankName" placeholder="Banque (ex. Crédit Agricole)">
+        <input id="accountName" placeholder="Compte (ex. Compte courant)">
+        <input type="number" id="bankBalance" step="0.01" inputmode="decimal" placeholder="Solde initial (€)">
+        <button class="success" onclick="addBank()">➕ Ajouter</button>
+      </div>
+    </div>
+    <div id="banksList"></div>
+  </section>
+
+  <!-- ============ FLUX PLANIFIÉS ============ -->
+  <section id="recurring" class="panel">
+    <div id="recurringSummary" class="kpis"></div>
+    <div class="card">
+      <div class="section-title">Nouveau flux planifié</div>
+      <div class="form-row">
+        <select id="rcType">
+          <option value="expense">💸 Dépense</option>
+          <option value="income">💰 Recette</option>
+        </select>
+        <input id="rcLabel" placeholder="Libellé">
+        <input type="number" id="rcAmount" step="0.01" inputmode="decimal" placeholder="Montant (€)">
+        <select id="rcCat"></select>
+        <select id="rcBank"></select>
+      </div>
+      <div class="form-row">
+        <select id="rcFreq">
+          <option value="monthly">Mensuelle</option>
+          <option value="bimonthly">Bimestrielle</option>
+          <option value="quarterly">Trimestrielle</option>
+          <option value="yearly">Annuelle</option>
+        </select>
+        <label>Jour du mois<input type="number" id="rcDay" min="1" max="31" value="1"></label>
+        <label>Début<input type="date" id="rcStart"></label>
+        <label>Fin (facultatif)<input type="date" id="rcEnd"></label>
+        <button class="success" onclick="addRecurring()">➕ Ajouter</button>
+      </div>
+    </div>
+    <div id="recurringList"></div>
+  </section>
+
+  <!-- ============ CATÉGORIES ============ -->
+  <section id="categories" class="panel">
+    <div class="card">
+      <div class="section-title">Nouvelle catégorie</div>
+      <div class="form-row">
+        <input id="catName" placeholder="Nom">
+        <input type="number" id="catBudget" step="1" inputmode="decimal" placeholder="Budget mensuel (€, facultatif)">
+        <button class="success" onclick="addCategory()">➕ Ajouter</button>
+      </div>
+    </div>
+    <div id="categoriesList"></div>
+  </section>
+
+  <!-- ============ PRÉVISIONNEL ============ -->
+  <section id="forecast" class="panel">
+    <div id="forecastKpis" class="kpis"></div>
+    <div class="card">
+      <div class="section-title">Hypothèses</div>
+      <div class="form-row">
+        <label>Hausse des revenus (%/an)<input type="number" id="fcRevGrowth" step="0.1" onchange="saveForecastParams(); renderForecast()"></label>
+        <label>Inflation des dépenses (%/an)<input type="number" id="fcInflation" step="0.1" onchange="saveForecastParams(); renderForecast()"></label>
+        <label>Rendement de l'épargne (%/an)<input type="number" id="fcYield" step="0.1" onchange="saveForecastParams(); renderForecast()"></label>
+        <label>Dépenses variables (€/mois)<input type="number" id="fcVariable" step="10" onchange="saveForecastParams(); renderForecast()"></label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title">Solde projeté sur 3 ans</div>
+      <div class="chart-box"><canvas id="forecastChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="section-title">Année par année</div>
+      <div id="forecastTable" class="table-scroll"></div>
+    </div>
+  </section>
+
+  <!-- ============ DONNÉES ============ -->
+  <section id="data" class="panel">
+    <div class="card">
+      <div class="section-title">💾 Sauvegarde</div>
+      <p class="hint">Télécharge régulièrement une sauvegarde : c'est ta protection si le navigateur efface ses données.</p>
+      <button class="success" onclick="exportData()">⬇️ Télécharger ma sauvegarde (.json)</button>
+    </div>
+    <div class="card">
+      <div class="section-title">♻️ Restaurer une sauvegarde</div>
+      <p class="hint">⚠️ Remplace TOUTES les données actuelles.</p>
+      <div class="form-row">
+        <input type="file" id="importFile" accept=".json,application/json">
+        <button class="primary" onclick="importData()">⬆️ Restaurer</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title">🏠 Importer mon tableur de suivi des locataires</div>
+      <p class="hint">Ajoute les logements, compteurs, relevés, tarifs et comptes de suivi, <strong>sans toucher</strong> à tes banques et transactions.</p>
+      <div class="form-row">
+        <input type="file" id="importLocatifFile" accept=".json,application/json">
+        <button class="primary" onclick="importLocatif()">⬆️ Importer le tableur</button>
+      </div>
+    </div>
+    <div class="card danger-zone">
+      <div class="section-title">🗑️ Tout effacer</div>
+      <button class="danger" onclick="resetAll()">Effacer toutes les données</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- FENÊTRES (MODALES)                                           -->
+<!-- ============================================================ -->
+
+<!-- Modifier une transaction -->
+<div id="editTransactionModal" class="modal">
+  <div class="modal-content">
+    <h3>✏️ Modifier la transaction</h3>
+    <label>Date<input type="date" id="etDate"></label>
+    <label>Libellé<input id="etLabel"></label>
+    <label>Banque<select id="etBank"></select></label>
+    <label>Catégorie<select id="etCat"></select></label>
+    <label>Type
+      <select id="etType"><option value="expense">💸 Dépense</option><option value="income">💰 Recette</option></select>
+    </label>
+    <label>Montant (€)<input type="number" id="etAmount" step="0.01" inputmode="decimal"></label>
+    <div class="modal-actions">
+      <button onclick="closeEditTransactionModal()">Annuler</button>
+      <button class="success" onclick="saveEditTransaction()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Virement -->
+<div id="transferModal" class="modal">
+  <div class="modal-content">
+    <h3>🔄 Virement entre deux comptes</h3>
+    <label>Depuis<select id="trFrom"></select></label>
+    <label>Vers<select id="trTo"></select></label>
+    <label>Montant (€)<input type="number" id="trAmount" step="0.01" inputmode="decimal"></label>
+    <label>Libellé<input id="trLabel" placeholder="Virement"></label>
+    <label>Date<input type="date" id="trDate"></label>
+    <label>Catégorie<select id="trCat"></select></label>
+    <div class="modal-actions">
+      <button onclick="closeTransferModal()">Annuler</button>
+      <button class="success" onclick="saveTransfer()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Planifier depuis une transaction -->
+<div id="recurringModal" class="modal">
+  <div class="modal-content">
+    <h3>🔁 Planifier cette opération</h3>
+    <div id="recDescription" class="hint"></div>
+    <label>Fréquence
+      <select id="recFreq">
+        <option value="monthly">Mensuelle</option>
+        <option value="bimonthly">Bimestrielle</option>
+        <option value="quarterly">Trimestrielle</option>
+        <option value="yearly">Annuelle</option>
+      </select>
+    </label>
+    <label>Jour du mois<input type="number" id="recDay" min="1" max="31"></label>
+    <label>Fin (facultatif)<input type="date" id="recEnd"></label>
+    <div class="modal-actions">
+      <button onclick="closeRecurringModal()">Annuler</button>
+      <button class="success" onclick="saveRecurringFromTransaction()">Créer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Pointage en masse -->
+<div id="massCheckModal" class="modal">
+  <div class="modal-content">
+    <h3>✅ Pointer en masse</h3>
+    <label>Quoi pointer ?
+      <select id="mcType" onchange="updateMassCheckOptions()">
+        <option value="month">Tout le mois en cours</option>
+        <option value="bank">Tout un compte bancaire</option>
+      </select>
+    </label>
+    <div id="mcBankOpts" style="display:none;">
+      <label>Compte<select id="mcBank"></select></label>
+    </div>
+    <div class="modal-actions">
+      <button onclick="closeMassCheckModal()">Annuler</button>
+      <button class="success" onclick="executeMassCheck()">Pointer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modifier un flux planifié -->
+<div id="editRecurringModal" class="modal">
+  <div class="modal-content">
+    <h3>✏️ Modifier le flux planifié</h3>
+    <label>Type
+      <select id="erType"><option value="expense">💸 Dépense</option><option value="income">💰 Recette</option></select>
+    </label>
+    <label>Libellé<input id="erLabel"></label>
+    <label>Montant (€)<input type="number" id="erAmount" step="0.01" inputmode="decimal"></label>
+    <label>Catégorie<select id="erCat"></select></label>
+    <label>Banque<select id="erBank"></select></label>
+    <label>Fréquence
+      <select id="erFreq">
+        <option value="monthly">Mensuelle</option>
+        <option value="bimonthly">Bimestrielle</option>
+        <option value="quarterly">Trimestrielle</option>
+        <option value="yearly">Annuelle</option>
+      </select>
+    </label>
+    <label>Jour du mois<input type="number" id="erDay" min="1" max="31"></label>
+    <label>Début<input type="date" id="erStart"></label>
+    <label>Fin (facultatif)<input type="date" id="erEnd"></label>
+    <div class="modal-actions">
+      <button onclick="document.getElementById('editRecurringModal').classList.remove('active')">Annuler</button>
+      <button class="success" onclick="saveEditRecurring()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modifier un compte de suivi -->
+<div id="editAccountModal" class="modal">
+  <div class="modal-content">
+    <h3>✏️ Modifier le compte de suivi</h3>
+    <label>Nom<input id="editAccName"></label>
+    <label>Type
+      <select id="editAccType" disabled>
+        <option value="tenant">👤 Locataire</option>
+        <option value="group">📊 Regroupement</option>
+      </select>
+    </label>
+    <div class="hint">Catégories suivies :</div>
+    <div id="editAccCatCheckboxes" class="check-grid"></div>
+    <div class="modal-actions">
+      <button onclick="document.getElementById('editAccountModal').classList.remove('active')">Annuler</button>
+      <button class="success" onclick="saveEditAccount()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Ajouter un poste à l'attendu -->
+<div id="accountPostModal" class="modal">
+  <div class="modal-content">
+    <h3>➕ Ajouter un poste</h3>
+    <div class="hint">Mois : <strong id="postModalPeriod"></strong></div>
+    <label>Ligne
+      <select id="postLine" onchange="updatePostLineForm()"></select>
+    </label>
+    <div id="postLibreLabelWrapper" style="display:none;">
+      <label>Libellé<input id="postLibreLabel"></label>
+    </div>
+    <label>Montant (€) <span class="hint">positif = dû par le locataire, négatif = à déduire</span>
+      <input type="number" id="postAmount" step="0.01" inputmode="decimal">
+    </label>
+    <div class="modal-actions">
+      <button onclick="closeAccountPostModal()">Annuler</button>
+      <button class="success" onclick="saveAccountPost()">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modifier un poste de l'attendu -->
+<div id="editAccountPostModal" class="modal">
+  <div class="modal-content">
+    <h3>✏️ Modifier le poste</h3>
+    <label>Libellé<input id="editPostLabel"></label>
+    <label>Montant (€)<input type="number" id="editPostAmount" step="0.01" inputmode="decimal"></label>
+    <div class="modal-actions">
+      <button onclick="closeEditAccountPostModal()">Annuler</button>
+      <button class="success" onclick="saveEditAccountPost()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Logement (nouveau / modification) -->
+<div id="logementModal" class="modal">
+  <div class="modal-content">
+    <h3 id="logementModalTitle">Logement</h3>
+    <label>Nom court<input id="lgCode" placeholder="APP1"></label>
+    <label>Locataire(s)<input id="lgLocataire" placeholder="Mme Dupont"></label>
+    <label>Adresse du logement<input id="lgAdresse" placeholder="12 rue des Lilas, 66000 Perpignan"></label>
+    <label>Surface (m²)<input type="number" id="lgSurface" step="0.1" inputmode="decimal"></label>
+    <div class="form-row">
+      <label>Loyer (€)<input type="number" id="lgLoyer" step="0.01" inputmode="decimal"></label>
+      <label>Ordures ménagères / mois (€)<input type="number" id="lgOm" step="0.01" inputmode="decimal"></label>
+    </div>
+    <label>Si le loyer ou la TOM change : à partir du mois
+      <input type="month" id="lgDepuis" placeholder="AAAA-MM">
+    </label>
+    <div class="hint" style="margin-top:-6px;">L'ancien montant est conservé pour les mois passés (historique).</div>
+    <label>Charges (eau, électricité)
+      <select id="lgMode" onchange="majLogementModalChamps()">
+        <option value="reel">Réelles : facturées d'après les relevés</option>
+        <option value="avance">Avance mensuelle fixe, régularisée ensuite</option>
+      </select>
+    </label>
+    <div id="lgAvanceWrap" style="display:none;">
+      <label>Montant de l'avance / mois (€)<input type="number" id="lgAvance" step="0.01" inputmode="decimal"></label>
+    </div>
+    <label>Électricité
+      <select id="lgElec">
+        <option value="releves">Avec ses propres compteurs</option>
+        <option value="deduite">Sans compteur : déduite (général − autres logements)</option>
+      </select>
+    </label>
+    <div class="form-row">
+      <label>Date d'entrée<input type="date" id="lgEntree"></label>
+      <label>Caution (€)<input type="number" id="lgCaution" step="0.01" inputmode="decimal"></label>
+    </div>
+    <label>Indice IRL de référence (pour réviser le loyer)<input type="number" id="lgIrl" step="0.01" inputmode="decimal"></label>
+    <label class="inline"><input type="checkbox" id="lgActif" checked> Logement actif (loué)</label>
+    <div class="modal-actions">
+      <button onclick="closeLogementModal()">Annuler</button>
+      <button class="success" onclick="saveLogement()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<script src="chart.umd.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
