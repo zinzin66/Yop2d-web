@@ -26,7 +26,7 @@ import sys
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://zinzin66.github.io/Yop2d-web/"
-GUIDES = ["deplacer-personnage", "sauter", "comportements", "pieces-score", "vie-game-over", "niveau-suivant", "particules-effets", "histoire-choix", "prefabs", "musique"]
+GUIDES = ["deplacer-personnage", "sauter", "comportements", "pieces-score", "vie-game-over", "niveau-suivant", "particules-effets", "histoire-choix", "prefabs", "musique", "interface-blueprint"]
 
 spec = importlib.util.spec_from_file_location("gen", os.path.join(RACINE, "outils", "generer_aide_noeuds.py"))
 gen = importlib.util.module_from_spec(spec)
@@ -184,6 +184,21 @@ class Rendu:
                          f'title="{html.escape(self.brut(b[2]))}" loading="lazy" allowfullscreen '
                          f'allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"></iframe></div>'
                          f'<figcaption>{self.texte(b[2])}</figcaption></figure>')
+            elif t == "icones":
+                # ["icones", [["icone", "Nom", "Explication"], ...]] : images guides/img/<icone>.png
+                base = "" if self.l == "fr" else "../"
+                h.append('<ul class="btns">' + "".join(
+                    f'<li><img src="{base}img/{x[0]}.png" alt="{html.escape(self.brut(x[1]))}" width="52" height="52" loading="lazy">'
+                    f'<div><b>{self.texte(x[1])}</b><br>{self.texte(x[2])}</div></li>' for x in b[1]) + "</ul>")
+            elif t == "image":
+                # ["image", "fichier.png", "texte alternatif", "légende"]
+                base = "" if self.l == "fr" else "../"
+                h.append(f'<figure class="capture"><a href="{base}img/{b[1]}"><img src="{base}img/{b[1]}" alt="{html.escape(self.brut(b[2]))}" loading="lazy"></a>'
+                         f'<figcaption>{self.texte(b[3])}</figcaption></figure>')
+            elif t == "legende":
+                # ["legende", [["1", "texte"], ...]] : liste de repères numérotés (numéros de la capture)
+                h.append('<ol class="legende">' + "".join(
+                    f'<li><span class="repere">{x[0]}</span><div>{self.texte(x[1])}</div></li>' for x in b[1]) + "</ol>")
             elif t == "attention":
                 h.append(f'<div class="tip attention">⚠️ {self.texte(b[1])}</div>')
             elif t == "chaine":
@@ -209,12 +224,19 @@ def page(guide, langue, src, sources, r):
         (f"<strong>{NOMS_LANGUES[l]}</strong>" if l == langue else
          f'<a href="{lien_relatif(langue, guide, l)}" hreflang="{l}">{NOMS_LANGUES[l]}</a>')
         for l in LANGUES if (guide, l) in sources)
-    howto = {
-        "@context": "https://schema.org", "@type": "HowTo", "name": r.brut(src["h1"]),
-        "description": r.brut(src["description"]), "inLanguage": langue,
-        "tool": [{"@type": "HowToTool", "name": ui["outil"]}],
-        "step": [{"@type": "HowToStep", "name": r.brut(n), "text": r.brut(t)} for n, t in src.get("etapes", [])],
-    }
+    if src.get("etapes"):
+        howto = {
+            "@context": "https://schema.org", "@type": "HowTo", "name": r.brut(src["h1"]),
+            "description": r.brut(src["description"]), "inLanguage": langue,
+            "tool": [{"@type": "HowToTool", "name": ui["outil"]}],
+            "step": [{"@type": "HowToStep", "name": r.brut(n), "text": r.brut(t)} for n, t in src["etapes"]],
+        }
+    else:   # page de référence (sans étapes) : article technique
+        howto = {
+            "@context": "https://schema.org", "@type": "TechArticle", "headline": r.brut(src["h1"]),
+            "description": r.brut(src["description"]), "inLanguage": langue,
+            "about": {"@type": "SoftwareApplication", "name": "Yop2D"},
+        }
     i = GUIDES.index(guide)
     nav = []
     if i > 0:
