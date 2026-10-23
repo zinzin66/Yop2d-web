@@ -1,0 +1,254 @@
+{
+ "titre_page": "El editor de Yop2D en imágenes: el 0/0, los botones y el Inspector | Guía de Yop2D",
+ "description": "Descubre el editor de Yop2D: dónde está el 0/0 de la escena, cómo se cuentan las posiciones, para qué sirve cada botón de la barra superior, el panel izquierdo y el Inspector de un objeto.",
+ "h1": "El editor en imágenes: el 0/0, los botones y el Inspector",
+ "carte": [
+  "El editor en imágenes",
+  "Dónde está el 0/0, cada botón de la barra superior, el panel izquierdo y el Inspector, explicados."
+ ],
+ "etapes": [],
+ "blocs": [
+  [
+   "p",
+   "El editor es la pantalla donde colocas tus objetos en una escena. Esta guía no te enseña a hacer un juego: te muestra dónde está cada cosa y para qué sirven los botones."
+  ],
+  [
+   "h2",
+   "¿Dónde está el 0/0 de la escena?"
+  ],
+  [
+   "p",
+   "Para colocar un objeto en el lugar correcto, hay que saber cómo se cuentan las posiciones. Mira la captura: los números de la **Posición** de la estrella se explican justo debajo."
+  ],
+  [
+   "image",
+   "editeur_ecran.png",
+   "Captura del editor con 4 marcas numeradas: el 0/0, las líneas de puntos, un objeto y su posición",
+   "Captura del editor (en francés). Los números se explican abajo."
+  ],
+  [
+   "legende",
+   [
+    [
+     "1",
+     "**El 0/0**: es la esquina superior izquierda del rectángulo de puntos. Todos los números de posición se cuentan desde este punto."
+    ],
+    [
+     "2",
+     "**Las líneas de puntos**: es la zona del juego, lo que el jugador ve al empezar. Por defecto mide 1920 por 1080 (1080 por 1920 en un juego vertical). Puedes poner objetos fuera: el jugador solo los verá si la cámara se mueve."
+    ],
+    [
+     "3",
+     "**Un objeto** (aquí la estrella): su posición es la de su **esquina superior izquierda**, no la de su centro."
+    ],
+    [
+     "4",
+     "**Posición, x e y**: x cuenta hacia la **derecha**, y cuenta hacia **abajo** (cuanto mayor es y, más abajo está el objeto). Aquí la estrella está en x 1071 e y 601: 1071 a la derecha y 601 hacia abajo desde el 0/0."
+    ]
+   ]
+  ],
+  [
+   "tip",
+   "Un objeto que tiene un **Padre** se coloca desde la esquina superior izquierda de su padre, no desde el 0/0 de la escena. Un número negativo, o mayor que la zona del juego, coloca el objeto fuera de las líneas de puntos: está permitido."
+  ],
+  [
+   "h2",
+   "La barra superior"
+  ],
+  [
+   "p",
+   "De izquierda a derecha:"
+  ],
+  [
+   "icones",
+   [
+    [
+     "editeur_ajouter",
+     "Añadir",
+     "Crea lo que necesitas. El menú ofrece **Objeto…** (crea un objeto) y, para las escenas: **Crear una escena**, **Renombrar la escena** y **Eliminar la escena**."
+    ],
+    [
+     "editeur_sauver",
+     "Guardar",
+     "Guarda tu proyecto. El guardado automático también lo hace, pero toca este botón antes de salir si quieres estar seguro."
+    ],
+    [
+     "editeur_annuler",
+     "Deshacer",
+     "Deshace el último cambio de la escena (objeto añadido, movido, borrado, ajuste cambiado…), hasta 50 veces."
+    ],
+    [
+     "editeur_refaire",
+     "Rehacer",
+     "Recupera lo que acabas de deshacer."
+    ],
+    [
+     "editeur_recentrer",
+     "Zoom normal",
+     "Devuelve el zoom al 100 %. En un juego vertical, muestra toda la zona del juego. También puedes pellizcar la escena con dos dedos para hacer zoom."
+    ],
+    [
+     "editeur_outils",
+     "Herramientas",
+     "Abre un menú de herramientas. El icono se vuelve azul cuando un modo está activado. **Solo mover**: activado, arrastrar un objeto solo lo mueve (sin asas para agrandar o girar). **Mover la vista**: arrastrar por la escena desplaza la vista en lugar de mover un objeto. **Cuadrícula magnética**: los objetos se ajustan a la cuadrícula. También encuentras **Copiar el objeto**, **Acercar**, **Alejar**, **Moverse por la escena** y **Descubre el editor** (una guía paso a paso dentro del editor)."
+    ],
+    [
+     "editeur_blueprint",
+     "Blueprint",
+     "Abre el Blueprint de la escena, la pantalla de los nodos (mira la guía [El Blueprint en imágenes](guide:interface-blueprint))."
+    ],
+    [
+     "editeur_aide",
+     "Ayuda",
+     "Abre la ayuda en el sitio web, con todas las guías."
+    ],
+    [
+     "editeur_menu",
+     "Menú",
+     "Abre un menú: **Ajustes del juego** (tamaño y formato del juego, guardado automático…), **Misiones paso a paso**, **Revisar mi juego** (busca despistes en tu juego) y **Salir del proyecto**."
+    ],
+    [
+     "editeur_jouer",
+     "Jugar",
+     "Inicia tu juego para probarlo. Aparece un botón ■ para volver al editor. Si la escena abierta no es la escena de inicio, Yop2D te pregunta con cuál empezar."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "El panel izquierdo"
+  ],
+  [
+   "p",
+   "Toca la flecha **<** de arriba para plegar este panel y tener más espacio (la flecha **>** hace lo mismo con el Inspector). En una pantalla pequeña, solo queda abierto un panel a la vez. Cada título se pliega al tocarlo."
+  ],
+  [
+   "ul",
+   [
+    "**Escenas**: la lista de tus escenas (un nivel, un menú…). Toca un nombre para abrirla. Con varias escenas, una estrella marca la escena de inicio.",
+    "**Jerarquía**: todos los objetos de la escena, en una lista. Toca un nombre para elegir el objeto. Puedes ordenarlos en carpetas con **Nueva carpeta** (no cambia nada en el juego).",
+    "**Assets**: abre tus archivos (imágenes, sonidos, fuentes…) y las herramientas para crear algunos, como la música o los efectos de sonido.",
+    "**Variables**: las variables del juego (la puntuación, las vidas…). Toca una variable de la lista para elegirla.",
+    "**Funciones**: funciones, es decir, pequeños grupos de nodos que puedes reutilizar. Mismo principio que las variables."
+   ]
+  ],
+  [
+   "icones",
+   [
+    [
+     "editeur_oeil",
+     "Mostrar / ocultar el objeto",
+     "En la lista de objetos, el ojo oculta o muestra el objeto. Es la casilla **Visible** del Inspector: un objeto oculto tampoco se ve en el juego."
+    ],
+    [
+     "editeur_cadenas_ligne",
+     "Bloquear el objeto",
+     "Un objeto bloqueado ya no se puede mover ni cambiar de tamaño por error. El candado es ámbar cuando el objeto está bloqueado."
+    ],
+    [
+     "editeur_var_plus",
+     "Añadir",
+     "Bajo las variables, crea una variable. Bajo las funciones, crea una función."
+    ],
+    [
+     "editeur_var_editer",
+     "Renombrar",
+     "Toca primero el nombre en la lista (variable o función) y luego este botón."
+    ],
+    [
+     "editeur_var_suppr",
+     "Eliminar",
+     "Mismo principio: elige primero y luego toca este botón."
+    ],
+    [
+     "editeur_fonc_blueprint",
+     "Editar la función",
+     "Elige una función de la lista y luego este botón: el Blueprint se abre en ella."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "El Inspector de un objeto"
+  ],
+  [
+   "p",
+   "Cuando tocas un objeto, el Inspector (el panel derecho) muestra todos sus ajustes. Es largo y cambia un poco según el tipo de objeto. Aquí están sus partes de arriba abajo, para una imagen."
+  ],
+  [
+   "image",
+   "editeur_inspecteur.png",
+   "El Inspector de una imagen de arriba abajo, con 15 marcas numeradas",
+   "El Inspector de una imagen (en francés). Los números se explican abajo."
+  ],
+  [
+   "legende",
+   [
+    [
+     "1",
+     "**La miniatura**: la imagen del objeto. Tócala para cargar otra."
+    ],
+    [
+     "2",
+     "**El candado**: bloquea el objeto para no moverlo por error (el mismo que en la lista de objetos)."
+    ],
+    [
+     "3",
+     "**El nombre** del objeto: cámbialo y toca **OK**. Los nodos encuentran el objeto gracias a este nombre."
+    ],
+    [
+     "4",
+     "**El tipo**: Imagen, Texto, Forma, Zona… Es solo una indicación."
+    ],
+    [
+     "5",
+     "**Comportamiento del objeto**: cómo se comporta el objeto en el juego. **Decorado** significa que no se mueve y no molesta a nadie. Tócalo para elegir otro comportamiento (suelo, personaje, plataforma…)."
+    ],
+    [
+     "6",
+     "**Los ajustes del tipo** (aquí **Propiedades de Imagen**): cargar otra imagen, quitarla con la papelera, mostrar un fondo de color. Esta parte cambia según el tipo de objeto."
+    ],
+    [
+     "7",
+     "**Posición**: x e y, contados desde el 0/0 (mira más arriba)."
+    ],
+    [
+     "8",
+     "**Tamaño**: ancho ↔ y alto ↕ del objeto, en píxeles. Cuando la cadena de la derecha está cerrada (azul), los dos números cambian juntos para mantener las proporciones."
+    ],
+    [
+     "9",
+     "**Escala**: un aumento. 1 = tamaño normal, 2 = el doble de grande, -1 = volteado como en un espejo. Misma cadena para las proporciones."
+    ],
+    [
+     "10",
+     "**Rotación**: el ángulo, en grados. El control deslizante gira el objeto y el botón redondo vuelve a 0."
+    ],
+    [
+     "11",
+     "**Z (delante / detrás)**: el orden de dibujo. Cuanto mayor es el número, más al frente queda el objeto. Los botones - y + lo cambian de uno en uno."
+    ],
+    [
+     "12",
+     "**Apariencia**: el color, la **Opacidad** (1 = bien visible, 0 = invisible; el botón redondo vuelve a 1) y la casilla **Visible**."
+    ],
+    [
+     "13",
+     "**Para los nodos**: lo que se usa en el Blueprint. Una **Etiqueta** es un nombre de familia (por ejemplo «enemigo») para apuntar a varios objetos a la vez; **Lista** muestra las ya usadas. También están las **Variables del objeto** y la casilla **Zona táctil invisible** (para zonas táctiles que no se ven en el juego)."
+    ],
+    [
+     "14",
+     "**Avanzado**: **Padre** (el objeto sigue a otro objeto, como una mano en un brazo), **Paralaje** (1 = el objeto se mueve con el decorado, 0 = se queda pegado a la pantalla, en medio = efecto de profundidad) y **Zona de contacto** (la parte del objeto que cuenta para los toques y las colisiones; **Zona de contacto a medida** permite dibujarla)."
+    ],
+    [
+     "15",
+     "**Eliminar el objeto**: borra el objeto de la escena."
+    ]
+   ]
+  ],
+  [
+   "tip",
+   "Para tocar cada cosa de verdad, paso a paso, abre el menú **Herramientas** y luego **Descubre el editor**: una guía dentro del editor te muestra dónde pulsar."
+  ]
+ ]
+}

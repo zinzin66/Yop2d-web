@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>画像で見る Yop2D エディター：0/0、ボタン、インスペクター | Yop2D ガイド</title>
+<meta name="description" content="Yop2D のエディターを紹介：シーンの 0/0 はどこか、位置の数え方、上のバーの各ボタンの役割、左パネル、オブジェクトのインスペクター。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/interface-editeur.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/interface-editeur.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/interface-editeur.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/interface-editeur.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/interface-editeur.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/interface-editeur.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/interface-editeur.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/interface-editeur.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/interface-editeur.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/interface-editeur.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "TechArticle",
+ "headline": "画像で見るエディター：0/0、ボタン、インスペクター",
+ "description": "Yop2D のエディターを紹介：シーンの 0/0 はどこか、位置の数え方、上のバーの各ボタンの役割、左パネル、オブジェクトのインスペクター。",
+ "inLanguage": "ja",
+ "about": {
+  "@type": "SoftwareApplication",
+  "name": "Yop2D"
+ }
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>画像で見るエディター：0/0、ボタン、インスペクター</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../interface-editeur.html" hreflang="fr">Français</a> · <a href="../en/interface-editeur.html" hreflang="en">English</a> · <a href="../es/interface-editeur.html" hreflang="es">Español</a> · <a href="../de/interface-editeur.html" hreflang="de">Deutsch</a> · <a href="../it/interface-editeur.html" hreflang="it">Italiano</a> · <a href="../pt/interface-editeur.html" hreflang="pt">Português</a> · <a href="../ru/interface-editeur.html" hreflang="ru">Русский</a> · <a href="../zh/interface-editeur.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>エディターは、シーンにオブジェクトを置く画面です。このガイドはゲームの作り方ではなく、何がどこにあるか、ボタンが何のためにあるかを説明します。</p>
+<h2>シーンの 0/0 はどこ？</h2>
+<p>オブジェクトを正しい場所に置くには、位置の数え方を知る必要があります。スクリーンショットを見てください。星の<strong>位置</strong>の数字は、すぐ下で説明します。</p>
+<figure class="capture"><a href="../img/editeur_ecran.png"><img src="../img/editeur_ecran.png" alt="4 つの番号つきマークを入れたエディターのスクリーンショット：0/0、点線、オブジェクト、その位置" loading="lazy"></a><figcaption>エディターのスクリーンショット（フランス語表示）。番号は下で説明します。</figcaption></figure>
+<ol class="legende"><li><span class="repere">1</span><div><strong>0/0</strong>：点線の四角の左上の角です。位置の数字はすべてこの点から数えます。</div></li><li><span class="repere">2</span><div><strong>点線</strong>：ゲームエリア、つまりプレイヤーが最初に見る範囲です。初期値は 1920 × 1080（縦向きのゲームは 1080 × 1920）。外にオブジェクトを置くこともできますが、プレイヤーに見えるのはカメラがそこへ動いたときだけです。</div></li><li><span class="repere">3</span><div><strong>オブジェクト</strong>（ここでは星）：位置は<strong>左上の角</strong>の位置で、中心ではありません。</div></li><li><span class="repere">4</span><div><strong>位置、x と y</strong>：x は<strong>右</strong>へ、y は<strong>下</strong>へ数えます（y が大きいほど下）。ここでは星が x 1071、y 601：0/0 から右へ 1071、下へ 601 の場所です。</div></li></ol>
+<div class="tip">👉 <strong>親</strong>を持つオブジェクトは、シーンの 0/0 ではなく、親オブジェクトの左上の角から数えて配置されます。マイナスの数や、ゲームエリアより大きい数だと、オブジェクトは点線の外に置かれます。それも問題ありません。</div>
+<h2>上のバー</h2>
+<p>左から右へ：</p>
+<ul class="btns"><li><img src="../img/editeur_ajouter.png" alt="追加" width="52" height="52" loading="lazy"><div><b>追加</b><br>必要なものを作ります。メニューには<strong>オブジェクト…</strong>（オブジェクトを作る）と、シーン用の<strong>シーンを作成</strong>、<strong>シーン名を変更</strong>、<strong>シーンを削除</strong>があります。</div></li><li><img src="../img/editeur_sauver.png" alt="保存" width="52" height="52" loading="lazy"><div><b>保存</b><br>プロジェクトを保存します。自動保存もしますが、確実にしたいときは離れる前にこのボタンをタップします。</div></li><li><img src="../img/editeur_annuler.png" alt="元に戻す" width="52" height="52" loading="lazy"><div><b>元に戻す</b><br>シーンの直前の変更（オブジェクトの追加・移動・削除、設定変更など）を取り消します。最大 50 回です。</div></li><li><img src="../img/editeur_refaire.png" alt="やり直す" width="52" height="52" loading="lazy"><div><b>やり直す</b><br>取り消した操作をもう一度行います。</div></li><li><img src="../img/editeur_recentrer.png" alt="標準ズーム" width="52" height="52" loading="lazy"><div><b>標準ズーム</b><br>ズームを 100% に戻します。縦向きのゲームではゲームエリア全体を表示します。2 本の指でつまんでもズームできます。</div></li><li><img src="../img/editeur_outils.png" alt="ツール" width="52" height="52" loading="lazy"><div><b>ツール</b><br>ツールのメニューを開きます。モードがオンのときはアイコンが青くなります。<strong>移動のみ</strong>：オンのとき、オブジェクトをドラッグすると移動するだけです（拡大や回転のハンドルは出ません）。<strong>画面を動かす</strong>：シーンをドラッグするとオブジェクトではなく表示がスクロールします。<strong>グリッドに吸着</strong>：オブジェクトがグリッドに吸着します。ほかに<strong>オブジェクトをコピー</strong>、<strong>ズームイン</strong>、<strong>ズームアウト</strong>、<strong>シーンの中で動く</strong>、<strong>エディターを知ろう</strong>（エディター内のステップガイド）があります。</div></li><li><img src="../img/editeur_blueprint.png" alt="Blueprint" width="52" height="52" loading="lazy"><div><b>Blueprint</b><br>シーンの Blueprint（ノードの画面）を開きます（ガイド<a href="../ja/interface-blueprint.html">画像で見る Blueprint</a>を参照）。</div></li><li><img src="../img/editeur_aide.png" alt="ヘルプ" width="52" height="52" loading="lazy"><div><b>ヘルプ</b><br>サイトのヘルプを開きます。すべてのガイドが載っています。</div></li><li><img src="../img/editeur_menu.png" alt="メニュー" width="52" height="52" loading="lazy"><div><b>メニュー</b><br>メニューを開きます：<strong>ゲームの設定</strong>（ゲームのサイズと形式、自動保存など）、<strong>ステップごとのミッション</strong>、<strong>ゲームをチェック</strong>（ゲームの見落としを探します）、<strong>プロジェクトを閉じる</strong>。</div></li><li><img src="../img/editeur_jouer.png" alt="再生" width="52" height="52" loading="lazy"><div><b>再生</b><br>ゲームを実行して試します。エディターに戻る ■ ボタンが出ます。開いているシーンがスタートシーンでないときは、どのシーンから始めるかを Yop2D が聞きます。</div></li></ul>
+<h2>左パネル</h2>
+<p>上の <strong>&lt;</strong> の矢印をタップするとこのパネルをたたんで広く使えます（<strong>&gt;</strong> の矢印はインスペクターで同じ働きをします）。画面が小さいときは、一度に 1 つのパネルだけが開きます。各タイトルはタップでたためます。</p>
+<ul><li><strong>シーン</strong>：シーンの一覧（レベル、メニューなど）。名前をタップで開きます。シーンが複数あると、星がスタートシーンを示します。</li><li><strong>階層 (ヒエラルキー)</strong>：シーンのオブジェクトを一覧にしたものです。名前をタップするとそのオブジェクトを選べます。<strong>新しいフォルダ</strong>でフォルダに整理できます（ゲームには影響しません）。</li><li><strong>アセット</strong>：ファイル（画像、音、フォントなど）と、音楽や効果音などを作るツールを開きます。</li><li><strong>変数</strong>：ゲームの変数（スコア、ライフなど）。一覧の変数をタップして選びます。</li><li><strong>関数</strong>：関数、つまり再利用できる小さなノードのまとまりです。変数と同じ使い方です。</li></ul>
+<ul class="btns"><li><img src="../img/editeur_oeil.png" alt="オブジェクトを表示 / 非表示" width="52" height="52" loading="lazy"><div><b>オブジェクトを表示 / 非表示</b><br>オブジェクト一覧の目のボタンで、オブジェクトを隠したり見せたりします。インスペクターの<strong>表示</strong>チェックと同じで、隠したオブジェクトはゲームでも表示されません。</div></li><li><img src="../img/editeur_cadenas_ligne.png" alt="オブジェクトをロック" width="52" height="52" loading="lazy"><div><b>オブジェクトをロック</b><br>ロックしたオブジェクトは、うっかり動かしたりサイズを変えたりできません。ロック中は鍵が琥珀色になります。</div></li><li><img src="../img/editeur_var_plus.png" alt="追加" width="52" height="52" loading="lazy"><div><b>追加</b><br>変数の下では変数を、関数の下では関数を作ります。</div></li><li><img src="../img/editeur_var_editer.png" alt="名前を変える" width="52" height="52" loading="lazy"><div><b>名前を変える</b><br>先に一覧で名前（変数または関数）をタップし、次にこのボタンを押します。</div></li><li><img src="../img/editeur_var_suppr.png" alt="削除" width="52" height="52" loading="lazy"><div><b>削除</b><br>同じく、先に選んでからこのボタンを押します。</div></li><li><img src="../img/editeur_fonc_blueprint.png" alt="関数を編集" width="52" height="52" loading="lazy"><div><b>関数を編集</b><br>一覧で関数を選んでこのボタンを押すと、Blueprint がその関数で開きます。</div></li></ul>
+<h2>オブジェクトのインスペクター</h2>
+<p>オブジェクトをタップすると、インスペクター（右パネル）にそのすべての設定が表示されます。長く、オブジェクトの種類によって少し変わります。ここでは画像の場合を、上から順に説明します。</p>
+<figure class="capture"><a href="../img/editeur_inspecteur.png"><img src="../img/editeur_inspecteur.png" alt="15 個の番号つきマークを入れた、画像のインスペクターの上から下まで" loading="lazy"></a><figcaption>画像のインスペクター（フランス語表示）。番号は下で説明します。</figcaption></figure>
+<ol class="legende"><li><span class="repere">1</span><div><strong>サムネイル</strong>：オブジェクトの画像です。タップして別の画像を読み込めます。</div></li><li><span class="repere">2</span><div><strong>鍵</strong>：うっかり動かさないようにオブジェクトをロックします（オブジェクト一覧のものと同じです）。</div></li><li><span class="repere">3</span><div><strong>名前</strong>：変更して<strong>OK</strong>をタップします。ノードはこの名前でオブジェクトを見つけます。</div></li><li><span class="repere">4</span><div><strong>種類</strong>：画像、テキスト、図形、ゾーンなど。ただの目安です。</div></li><li><span class="repere">5</span><div><strong>オブジェクトのふるまい</strong>：ゲーム中のオブジェクトの動き方です。<strong>かざり</strong>は、動かず、誰の邪魔にもならない、という意味です。タップすると別の動き（地面、キャラクター、足場など）を選べます。</div></li><li><span class="repere">6</span><div><strong>種類ごとの設定</strong>（ここでは<strong>画像のプロパティ</strong>）：別の画像を読み込む、ごみ箱で外す、色つきの背景を出す。この部分はオブジェクトの種類で変わります。</div></li><li><span class="repere">7</span><div><strong>位置</strong>：x と y。0/0 から数えます（上を参照）。</div></li><li><span class="repere">8</span><div><strong>サイズ</strong>：オブジェクトの幅 ↔ と高さ ↕（ピクセル）。右のチェーンが閉じている（青）ときは、2 つの数字が一緒に変わって比率を保ちます。</div></li><li><span class="repere">9</span><div><strong>拡大</strong>：拡大率です。1 = 通常、2 = 2 倍、-1 = 鏡のように反転。比率のチェーンも同じです。</div></li><li><span class="repere">10</span><div><strong>回転</strong>：角度（度）。スライダーで回し、丸いボタンで 0 に戻します。</div></li><li><span class="repere">11</span><div><strong>Z（前 / 後ろ）</strong>：描く順番です。数字が大きいほど手前に出ます。- と + のボタンで 1 ずつ変えます。</div></li><li><span class="repere">12</span><div><strong>見た目</strong>：色、<strong>不透明度</strong>（1 = しっかり見える、0 = 見えない。丸いボタンで 1 に戻る）、<strong>表示</strong>チェック。</div></li><li><span class="repere">13</span><div><strong>ノード用</strong>：Blueprint で使うものです。<strong>タグ</strong>は「仲間の名前」（たとえば「てき」）で、複数のオブジェクトを一度に指定できます。<strong>リスト</strong>は使用済みのものを表示します。ほかに<strong>オブジェクト変数</strong>と、<strong>見えないタッチエリア</strong>チェック（ゲームで見えないタッチエリア用）があります。</div></li><li><span class="repere">14</span><div><strong>詳細</strong>：<strong>親</strong>（腕についた手のように、別のオブジェクトに付いていく）、<strong>パララックス</strong>（1 = 背景と一緒に動く、0 = 画面に張りつく、その間 = 奥行きの効果）、<strong>ふれる範囲</strong>（タッチや衝突で使われる部分。<strong>ふれる範囲を自分で決める</strong>で自分で描けます）。</div></li><li><span class="repere">15</span><div><strong>オブジェクトを削除</strong>：オブジェクトをシーンから消します。</div></li></ol>
+<div class="tip">👉 実際にタップして試すには、<strong>ツール</strong>メニューから<strong>エディターを知ろう</strong>を開きます。エディター内のガイドが、押す場所を教えてくれます。</div>
+
+<div class="nav">
+<a href="../ja/interface-demarrage.html">← 画像で見るスタート画面</a>
+<a href="../ja/interface-assets.html">次のガイド： 画像で見る Assets ウィンドウ →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

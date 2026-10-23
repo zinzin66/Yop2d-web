@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图解“对象行为”窗口 | Yop2D 教程</title>
+<meta name="description" content="认识 Yop2D 的“对象行为”窗口：装饰、地面、平台角色、巡逻、电梯、操控、跳跃、自动动画和碰撞区域。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/interface-comportement.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/interface-comportement.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/interface-comportement.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/interface-comportement.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/interface-comportement.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/interface-comportement.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/interface-comportement.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/interface-comportement.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/interface-comportement.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/interface-comportement.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "TechArticle",
+ "headline": "图解“物体行为”窗口",
+ "description": "认识 Yop2D 的“对象行为”窗口：装饰、地面、平台角色、巡逻、电梯、操控、跳跃、自动动画和碰撞区域。",
+ "inLanguage": "zh",
+ "about": {
+  "@type": "SoftwareApplication",
+  "name": "Yop2D"
+ }
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>图解“物体行为”窗口</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../interface-comportement.html" hreflang="fr">Français</a> · <a href="../en/interface-comportement.html" hreflang="en">English</a> · <a href="../es/interface-comportement.html" hreflang="es">Español</a> · <a href="../de/interface-comportement.html" hreflang="de">Deutsch</a> · <a href="../it/interface-comportement.html" hreflang="it">Italiano</a> · <a href="../pt/interface-comportement.html" hreflang="pt">Português</a> · <a href="../ru/interface-comportement.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/interface-comportement.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>这个窗口决定对象在游戏里的行为。在检查器里点 <strong>物体行为</strong> 按钮打开。它取代了许多过去要手动完成的设置。</p>
+<h2>八种运动方式</h2>
+<p>只能选<strong>一个</strong>。下面是每个选项和引擎自带的说明：</p>
+<ul class="btns"><li><img src="../img/comportement_choix1.png" alt="装饰" width="52" height="52" loading="lazy"><div><b>装饰</b><br>不动，也不挡路。用于不该移动的背景、图画或文字。</div></li><li><img src="../img/comportement_choix2.png" alt="地面 / 墙" width="52" height="52" loading="lazy"><div><b>地面 / 墙</b><br>不动：可以站在上面，也会撞上。用于地面、墙壁和固定平台。</div></li><li><img src="../img/comportement_choix3.png" alt="会掉落和弹跳" width="52" height="52" loading="lazy"><div><b>会掉落和弹跳</b><br>箱子、球、石头……受重力影响，会在地面上反弹。</div></li><li><img src="../img/comportement_choix4.png" alt="平台角色" width="52" height="52" loading="lazy"><div><b>平台角色</b><br>走、跳、爬梯子（侧视）。用摇杆或按钮操控。</div></li><li><img src="../img/comportement_choix5.png" alt="巡逻（来回走）" width="52" height="52" loading="lazy"><div><b>巡逻（来回走）</b><br>自己来回走：很适合当敌人。走到地面边缘或撞墙就掉头。</div></li><li><img src="../img/comportement_choix6.png" alt="俯视角色" width="52" height="52" loading="lazy"><div><b>俯视角色</b><br>向各个方向移动（也支持等距视角）。可以朝 4 个方向走，或使用等距视角。</div></li><li><img src="../img/comportement_choix7.png" alt="用手指拖动" width="52" height="52" loading="lazy"><div><b>用手指拖动</b><br>玩家触摸即可移动它。玩家拿起它，想放哪就放哪。</div></li><li><img src="../img/comportement_choix8.png" alt="电梯（来回移动）" width="52" height="52" loading="lazy"><div><b>电梯（来回移动）</b><br>自己移动的平台，会带着站在上面的东西。你可以设置方向、距离和停顿。</div></li></ul>
+<h2>一眼看懂窗口</h2>
+<figure class="capture"><a href="../img/comportement_fenetre.png"><img src="../img/comportement_fenetre.png" alt="从上到下的“对象行为”窗口截图，带有 13 个编号标记" loading="lazy"></a><figcaption>平台角色的窗口（法语界面）。编号的含义见下面。</figcaption></figure>
+<ol class="legende"><li><span class="repere">1</span><div><strong>它怎么移动？（单选）</strong>：这就是对象的行为。</div></li><li><span class="repere">2</span><div><strong>当前选项</strong>是蓝色的，带实心圆。点另一个选项即可更换。</div></li><li><span class="repere">3</span><div><strong>关于节点的说明</strong>：节点优先。如果某个节点移动了对象（移动、推、滑向……），就按节点说的做，即使行为设置的是别的。</div></li><li><span class="repere">4</span><div><strong>它的设置</strong>：这部分会随上面的选择变化。这里是平台角色的设置。</div></li><li><span class="repere">5</span><div><strong>操控</strong>：玩家怎么操控它。<strong>摇杆</strong>、<strong>按钮</strong>（左、右……），或 <strong>无</strong>（由你的节点控制：敌人、非玩家角色）。</div></li><li><span class="repere">6</span><div><strong>速度</strong>：<strong>慢</strong>、<strong>普通</strong>或<strong>快</strong>。</div></li><li><span class="repere">7</span><div><strong>跳跃按钮</strong>：选择你游戏里的一个按钮。没有按钮时，把摇杆往上推就会跳。</div></li><li><span class="repere">8</span><div><strong>跳跃高度</strong>：<strong>低</strong>、<strong>中</strong>或<strong>高</strong>。</div></li><li><span class="repere">9</span><div><strong>可以爬梯子</strong>：<strong>是</strong>或<strong>否</strong>。场景里要有“梯子”对象。</div></li><li><span class="repere">10</span><div><strong>自动动画</strong>：设为<strong>是</strong>时，对象会根据正在做的事自动切换图片。</div></li><li><span class="repere">11</span><div><strong>状态列表</strong>：对象的每种状态（静止、行走、在空中、在梯子上、在地上按下）以及期望的动画名称（静止、行走、跳跃、爬、蹲）。“— 没有（可选）”表示你还没有这个名字的动画：图片不会变化。请把这些名字给你的动画（动画窗口）。有多个角色时，先写对象名（如 player_marche）。点一行可以自己选动画。</div></li><li><span class="repere">12</span><div><strong>它还是……（多选）</strong>：<strong>梯子</strong>（平台角色可以爬）、<strong>可拾取</strong>（可以放进物品栏）和“按位置决定前后”（用于俯视或等距视角）。</div></li><li><span class="repere">13</span><div><strong>接触区域</strong>：<strong>碰撞位置</strong>：<strong>整个物体</strong>或<strong>自定义</strong>。选自定义时，用对象上的手柄调整区域，或在检查器的“碰撞区域”里调整。</div></li></ol>
+
+<div class="nav">
+<a href="../zh/interface-bibliotheque.html">← 图解素材库</a>
+<a href="../zh/interface-mouvement.html">下一篇： 图解动作编辑器 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>

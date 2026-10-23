@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Окно «Поведение объекта» в картинках | Руководство Yop2D</title>
+<meta name="description" content="Знакомство с окном «Поведение объекта» в Yop2D: декор, земля, персонаж платформера, патруль, лифт, управление, прыжок, автоматические анимации и зона контакта.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/interface-comportement.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/interface-comportement.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/interface-comportement.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/interface-comportement.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/interface-comportement.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/interface-comportement.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/interface-comportement.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/interface-comportement.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/interface-comportement.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/interface-comportement.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "TechArticle",
+ "headline": "Окно «Поведение объекта» в картинках",
+ "description": "Знакомство с окном «Поведение объекта» в Yop2D: декор, земля, персонаж платформера, патруль, лифт, управление, прыжок, автоматические анимации и зона контакта.",
+ "inLanguage": "ru",
+ "about": {
+  "@type": "SoftwareApplication",
+  "name": "Yop2D"
+ }
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ru/index.html">← Yop2D</a>
+<h1>Окно «Поведение объекта» в картинках</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../interface-comportement.html" hreflang="fr">Français</a> · <a href="../en/interface-comportement.html" hreflang="en">English</a> · <a href="../es/interface-comportement.html" hreflang="es">Español</a> · <a href="../de/interface-comportement.html" hreflang="de">Deutsch</a> · <a href="../it/interface-comportement.html" hreflang="it">Italiano</a> · <a href="../pt/interface-comportement.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/interface-comportement.html" hreflang="zh">中文</a> · <a href="../ja/interface-comportement.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Это окно говорит, как объект ведёт себя в игре. Оно открывается из Инспектора кнопкой <strong>Поведение объекта</strong>. Оно заменяет множество настроек, которые раньше приходилось делать вручную.</p>
+<h2>Восемь способов двигаться</h2>
+<p>Выбирается <strong>только один</strong>. Вот каждый вариант с фразой из движка:</p>
+<ul class="btns"><li><img src="../img/comportement_choix1.png" alt="Декор" width="52" height="52" loading="lazy"><div><b>Декор</b><br>Не двигается, никому не мешает. Для фона, рисунка или текста, которые не должны двигаться.</div></li><li><img src="../img/comportement_choix2.png" alt="Пол / стена" width="52" height="52" loading="lazy"><div><b>Пол / стена</b><br>Не двигается: по нему ходят, в него упираются. Для земли, стен и неподвижных платформ.</div></li><li><img src="../img/comportement_choix3.png" alt="Падает и отскакивает" width="52" height="52" loading="lazy"><div><b>Падает и отскакивает</b><br>Ящик, мяч, камень… Подвержен силе тяжести и отскакивает от земли.</div></li><li><img src="../img/comportement_choix4.png" alt="Персонаж платформера" width="52" height="52" loading="lazy"><div><b>Персонаж платформера</b><br>Ходит, прыгает, лезет по лестницам (вид сбоку). Им управляют джойстиком или кнопками.</div></li><li><img src="../img/comportement_choix5.png" alt="Патруль (туда-обратно)" width="52" height="52" loading="lazy"><div><b>Патруль (туда-обратно)</b><br>Сам ходит туда и обратно: идеально для врага. Разворачивается на краю земли и у стены.</div></li><li><img src="../img/comportement_choix6.png" alt="Персонаж (вид сверху)" width="52" height="52" loading="lazy"><div><b>Персонаж (вид сверху)</b><br>Ходит во все стороны (и в изо-виде). Может ходить в 4 направлениях или в изометрии.</div></li><li><img src="../img/comportement_choix7.png" alt="Перетаскивается пальцем" width="52" height="52" loading="lazy"><div><b>Перетаскивается пальцем</b><br>Игрок двигает его касанием. Игрок берёт его и ставит, куда хочет.</div></li><li><img src="../img/comportement_choix8.png" alt="Лифт (туда-обратно)" width="52" height="52" loading="lazy"><div><b>Лифт (туда-обратно)</b><br>Платформа, которая едет сама и везёт то, что на ней стоит. Ты настраиваешь направление, расстояние и паузу.</div></li></ul>
+<h2>Окно с первого взгляда</h2>
+<figure class="capture"><a href="../img/comportement_fenetre.png"><img src="../img/comportement_fenetre.png" alt="Снимок окна «Поведение объекта» сверху вниз с 13 пронумерованными метками" loading="lazy"></a><figcaption>Окно для персонажа платформера (на французском). Номера объяснены ниже.</figcaption></figure>
+<ol class="legende"><li><span class="repere">1</span><div><strong>КАК ОН ДВИЖЕТСЯ? (один выбор)</strong>: это и есть поведение объекта.</div></li><li><span class="repere">2</span><div><strong>Активный вариант</strong> выделен синим, с закрашенным кружком. Нажми на другой вариант, чтобы сменить.</div></li><li><span class="repere">3</span><div><strong>Заметка про узлы</strong>: узлы главнее. Если узел двигает объект (Переместить, Толкнуть, Скользить к…), объект делает то, что сказано в узле, даже если поведение говорит другое.</div></li><li><span class="repere">4</span><div><strong>Его настройки</strong>: эта часть меняется в зависимости от варианта выше. Здесь — настройки персонажа платформера.</div></li><li><span class="repere">5</span><div><strong>Управление</strong>: как игрок им управляет. <strong>Джойстик</strong>, <strong>Кнопки</strong> (влево, вправо…) или <strong>Нет</strong> (им управляют твои узлы: враг, неигровой персонаж).</div></li><li><span class="repere">6</span><div><strong>Скорость</strong>: <strong>Медленно</strong>, <strong>Обычно</strong> или <strong>Быстро</strong>.</div></li><li><span class="repere">7</span><div><strong>Кнопка прыжка</strong>: выбери кнопку своей игры. Без кнопки прыгают, толкнув джойстик вверх.</div></li><li><span class="repere">8</span><div><strong>Высота прыжка</strong>: <strong>Низкий</strong>, <strong>Средний</strong> или <strong>Высокий</strong>.</div></li><li><span class="repere">9</span><div><strong>Может лезть по лестницам</strong>: <strong>да</strong> или <strong>нет</strong>. В сцене нужны объекты «лестница».</div></li><li><span class="repere">10</span><div><strong>Автоматические анимации</strong>: если стоит <strong>да</strong>, объект сам меняет картинку в зависимости от того, что делает.</div></li><li><span class="repere">11</span><div><strong>Список состояний</strong>: каждое состояние объекта (Стоит, Идёт, В воздухе, На лестнице, Вниз на земле) с ожидаемым названием анимации (покой, ходьба, прыжок, лезть, присесть). «— нет (не обязательно)» значит, что анимации с таким названием у тебя ещё нет: картинка не меняется. Дай такие названия своим анимациям (окно «Анимация»). Если персонажей несколько, начни с названия объекта (например player_marche). Нажми на строку, чтобы выбрать анимацию самому.</div></li><li><span class="repere">12</span><div><strong>ЕЩЁ ОН… (несколько)</strong>: <strong>Лестница</strong> (персонажи платформера могут по ней лазить), <strong>Можно подобрать</strong> (может попасть в инвентарь) и «впереди / позади в зависимости от положения» (для вида сверху или изометрии).</div></li><li><span class="repere">13</span><div><strong>Зона касания</strong>: <strong>Где он сталкивается</strong>: <strong>Весь объект</strong> или <strong>Своя</strong>. Для «по мерке» настрой зону рычажками на объекте или в «Зоне контакта» Инспектора.</div></li></ol>
+
+<div class="nav">
+<a href="../ru/interface-bibliotheque.html">← Библиотека в картинках</a>
+<a href="../ru/interface-mouvement.html">Следующее руководство: Редактор движения в картинках →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../ru/index.html">Официальный сайт</a> · <a href="../../noeuds/ru.html">Справочник узлов</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,254 @@
+{
+ "titre_page": "Yop2D's editor in pictures: the 0/0, the buttons and the Inspector | Yop2D guide",
+ "description": "Discover Yop2D's editor: where the scene's 0/0 is, how positions are counted, what each button of the top bar does, the left panel and an object's Inspector.",
+ "h1": "The editor in pictures: the 0/0, the buttons and the Inspector",
+ "carte": [
+  "The editor in pictures",
+  "Where the 0/0 is, every button of the top bar, the left panel and the Inspector, explained."
+ ],
+ "etapes": [],
+ "blocs": [
+  [
+   "p",
+   "The editor is the screen where you place your objects in a scene. This guide does not teach you how to make a game: it shows where things are and what the buttons are for."
+  ],
+  [
+   "h2",
+   "Where is the scene's 0/0?"
+  ],
+  [
+   "p",
+   "To put an object in the right place, you need to know how positions are counted. Look at the screenshot: the numbers in the star's **Position** are explained right below."
+  ],
+  [
+   "image",
+   "editeur_ecran.png",
+   "Screenshot of the editor with 4 numbered marks: the 0/0, the dashed lines, an object and its position",
+   "Screenshot of the editor (in French). The numbers are explained below."
+  ],
+  [
+   "legende",
+   [
+    [
+     "1",
+     "**The 0/0**: the top-left corner of the dashed rectangle. Every position number is counted from this point."
+    ],
+    [
+     "2",
+     "**The dashed lines**: the game area, what the player sees at the start. By default it is 1920 by 1080 (1080 by 1920 for a portrait game). You can place objects outside it: the player will only see them if the camera moves."
+    ],
+    [
+     "3",
+     "**An object** (here the star): its position is that of its **top-left corner**, not of its center."
+    ],
+    [
+     "4",
+     "**Position, x and y**: x counts to the **right**, y counts **downwards** (the bigger y is, the lower the object). Here the star is at x 1071 and y 601: 1071 to the right and 601 down from the 0/0."
+    ]
+   ]
+  ],
+  [
+   "tip",
+   "An object that has a **Parent** is placed from the top-left corner of its parent, not from the scene's 0/0. A negative number, or one bigger than the game area, puts the object outside the dashed lines: that is allowed."
+  ],
+  [
+   "h2",
+   "The top bar"
+  ],
+  [
+   "p",
+   "From left to right:"
+  ],
+  [
+   "icones",
+   [
+    [
+     "editeur_ajouter",
+     "Add",
+     "Creates what you need. The menu offers **Object…** (creates an object), then for scenes: **Create a scene**, **Rename the scene** and **Delete the scene**."
+    ],
+    [
+     "editeur_sauver",
+     "Save",
+     "Keeps your project. Automatic saving does it too, but tap this button before leaving if you want to be sure."
+    ],
+    [
+     "editeur_annuler",
+     "Undo",
+     "Undoes the last change to the scene (object added, moved, deleted, setting changed…), up to 50 times."
+    ],
+    [
+     "editeur_refaire",
+     "Redo",
+     "Puts back what you just undid."
+    ],
+    [
+     "editeur_recentrer",
+     "Normal zoom",
+     "Sets the zoom back to 100%. For a portrait game, it shows the whole game area. You can also pinch the scene with two fingers to zoom."
+    ],
+    [
+     "editeur_outils",
+     "Tools",
+     "Opens a menu of tools. The icon turns blue when a mode is on. **Move only**: when on, dragging an object only moves it (no handles to resize or rotate). **Move the view**: dragging in the scene scrolls the view instead of moving an object. **Snap to grid**: objects snap to the grid. You also find **Copy the object**, **Zoom in**, **Zoom out**, **Moving around the scene** and **Discover the editor** (a step-by-step guide inside the editor)."
+    ],
+    [
+     "editeur_blueprint",
+     "Blueprint",
+     "Opens the scene's Blueprint, the screen of nodes (see the guide [The Blueprint screen](guide:interface-blueprint))."
+    ],
+    [
+     "editeur_aide",
+     "Help",
+     "Opens the help on the website, with all the guides."
+    ],
+    [
+     "editeur_menu",
+     "Menu",
+     "Opens a menu: **Game settings** (game size and format, automatic saving…), **Step-by-step missions**, **Check my game** (looks for things you forgot in your game) and **Leave the project**."
+    ],
+    [
+     "editeur_jouer",
+     "Play",
+     "Runs your game so you can try it. A ■ button appears to go back to the editor. If the open scene is not the starting scene, Yop2D asks which one to start with."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "The left panel"
+  ],
+  [
+   "p",
+   "Tap the **<** arrow at the top to fold this panel and get more room (the **>** arrow does the same for the Inspector). On a small screen, only one panel stays open at a time. Each title folds when you tap it."
+  ],
+  [
+   "ul",
+   [
+    "**Scenes**: the list of your scenes (a level, a menu…). Tap a name to open it. With several scenes, a star marks the starting scene.",
+    "**Hierarchy**: all the objects of the scene, as a list. Tap a name to choose the object. You can sort them into folders with **New folder** (this changes nothing in the game).",
+    "**Assets (Resources)**: opens your files (images, sounds, fonts…) and the tools to create some, like music or sound effects.",
+    "**Variables**: the game's variables (the score, the lives…). Tap a variable in the list to choose it.",
+    "**Functions**: functions, meaning small groups of nodes you can reuse. Same principle as variables."
+   ]
+  ],
+  [
+   "icones",
+   [
+    [
+     "editeur_oeil",
+     "Show / hide the object",
+     "In the object list, the eye hides or shows the object. It is the **Visible** box of the Inspector: a hidden object is not shown in the game either."
+    ],
+    [
+     "editeur_cadenas_ligne",
+     "Lock the object",
+     "A locked object can no longer be moved or resized by mistake. The padlock is amber when the object is locked."
+    ],
+    [
+     "editeur_var_plus",
+     "Add",
+     "Under variables, creates a variable. Under functions, creates a function."
+    ],
+    [
+     "editeur_var_editer",
+     "Rename",
+     "First tap the name in the list (variable or function), then this button."
+    ],
+    [
+     "editeur_var_suppr",
+     "Delete",
+     "Same principle: choose first, then tap this button."
+    ],
+    [
+     "editeur_fonc_blueprint",
+     "Edit the function",
+     "Choose a function in the list, then this button: the Blueprint opens on it."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "An object's Inspector"
+  ],
+  [
+   "p",
+   "When you tap an object, the Inspector (the right panel) shows all its settings. It is long, and it changes a little depending on the object type. Here are its parts from top to bottom, for an image."
+  ],
+  [
+   "image",
+   "editeur_inspecteur.png",
+   "An image's Inspector from top to bottom, with 15 numbered marks",
+   "An image's Inspector (in French). The numbers are explained below."
+  ],
+  [
+   "legende",
+   [
+    [
+     "1",
+     "**The thumbnail**: the object's image. Tap it to load another one."
+    ],
+    [
+     "2",
+     "**The padlock**: locks the object so you no longer move it by mistake (the same one as in the object list)."
+    ],
+    [
+     "3",
+     "**The name** of the object: change it, then tap **OK**. Nodes find the object thanks to this name."
+    ],
+    [
+     "4",
+     "**The type**: Image, Text, Shape, Zone… It is just an indication."
+    ],
+    [
+     "5",
+     "**Object behavior**: how the object behaves in the game. **Scenery** means it does not move and bothers nobody. Tap it to choose another behavior (ground, character, platform…)."
+    ],
+    [
+     "6",
+     "**The type's settings** (here **Image Properties**): load another image, remove it with the trash can, show a colored background. This part changes with the object type."
+    ],
+    [
+     "7",
+     "**Position**: x and y, counted from the 0/0 (see above)."
+    ],
+    [
+     "8",
+     "**Size**: the object's width ↔ and height ↕, in pixels. When the chain on the right is closed (blue), both numbers change together to keep the proportions."
+    ],
+    [
+     "9",
+     "**Scale**: an enlargement. 1 = normal size, 2 = twice as big, -1 = flipped like in a mirror. Same chain for the proportions."
+    ],
+    [
+     "10",
+     "**Rotation**: the angle, in degrees. The slider turns the object, the round button goes back to 0."
+    ],
+    [
+     "11",
+     "**Z (front / back)**: the drawing order. The bigger the number, the more the object is in front of the others. The - and + buttons change it by one."
+    ],
+    [
+     "12",
+     "**Appearance**: the color, the **Opacity** (1 = fully visible, 0 = invisible; the round button puts 1 back) and the **Visible** box."
+    ],
+    [
+     "13",
+     "**For the nodes**: what is used in the Blueprint. A **Tag** is a family name (for example “enemy”) to target several objects at once; **List** shows the ones already used. There are also the **Object Variables**, and the **Invisible touch area** box (for touch areas that are not seen in the game)."
+    ],
+    [
+     "14",
+     "**Advanced**: **Parent** (the object follows another object, like a hand on an arm), **Parallax** (1 = the object moves with the scenery, 0 = it stays stuck to the screen, in between = depth effect) and **Contact area** (the part of the object that counts for touches and collisions; **Custom contact area** lets you draw it)."
+    ],
+    [
+     "15",
+     "**Delete the object**: erases the object from the scene."
+    ]
+   ]
+  ],
+  [
+   "tip",
+   "To touch each thing for real, step by step, open the **Tools** menu then **Discover the editor**: a guide inside the editor shows you where to tap."
+  ]
+ ]
+}
