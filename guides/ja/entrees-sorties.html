@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ノードの入力と出力はどうつなぐ？｜Yop2D ガイド</title>
+<meta name="description" content="Yop2D では出力につなげる線は1本ですが、入力には何本でもつなげられます。同じノードへ2つの道をつなぐ方法も学びましょう。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/entrees-sorties.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/entrees-sorties.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/entrees-sorties.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/entrees-sorties.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/entrees-sorties.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/entrees-sorties.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/entrees-sorties.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/entrees-sorties.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/entrees-sorties.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/entrees-sorties.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "ノードの入力と出力",
+ "description": "Yop2D では出力につなげる線は1本ですが、入力には何本でもつなげられます。同じノードへ2つの道をつなぐ方法も学びましょう。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "丸",
+   "text": "入力は左、出力は右にあります。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "出力につき線1本",
+   "text": "出力から新しい線を引くと、古い線と入れ替わります。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "1つの入力に複数の線",
+   "text": "2つの出力を同じ入力につなぐと、2つの道が同じノードに着きます。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>ノードの入力と出力</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../entrees-sorties.html" hreflang="fr">Français</a> · <a href="../en/entrees-sorties.html" hreflang="en">English</a> · <a href="../es/entrees-sorties.html" hreflang="es">Español</a> · <a href="../de/entrees-sorties.html" hreflang="de">Deutsch</a> · <a href="../it/entrees-sorties.html" hreflang="it">Italiano</a> · <a href="../pt/entrees-sorties.html" hreflang="pt">Português</a> · <a href="../ru/entrees-sorties.html" hreflang="ru">Русский</a> · <a href="../zh/entrees-sorties.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>ノードには<strong>丸</strong>があります。これが入力と出力です。丸をつなぐ線が、ノードを実行する順番を決めます。覚えるルールは1つ：<strong>出力の線は1本、入力の線は何本でもOK。</strong></p>
+<h2>ノードの丸</h2>
+<p><strong>左</strong>は入力の丸（入力）：ここでノードが「実行して」という合図を受け取ります。<strong>右</strong>は出力の丸（例：次へ）：ここから次のノードにバトンを渡します。条件 のように、真 と 偽 など複数の出力を持つノードもあります。</p>
+<h2>出力につなげる線は1本だけ</h2>
+<p>すでにつながっている出力から新しい線を引くと、新しい線が古い線と<strong>入れ替わり</strong>ます。出力は1か所にしか進めません。</p>
+<h2>入力には複数の線をつなげられる</h2>
+<div class="method">
+<ol><li>最初の出力から、つなぎたいノードの入力の丸まで線を引きます。</li><li>別の出力（または別のノード）から、<strong>同じ</strong>入力の丸まで2本目の線を引きます。</li><li>1本目の線はそのまま残ります。どちらかの道が届けば、そのノードが実行されます。</li></ol>
+<div class="tip">👉 例：カウントダウンには、1秒ごとに出る出力と、終わったときに出る出力があります。両方を、文字を変える同じノードにつなぎましょう。どちらの場合も時間が表示され、ノードを2つ作る必要はありません。</div>
+</div>
+<h2>{ } ウィンドウの文章</h2>
+<p>Blueprint の <strong>{ }</strong> ウィンドウでは、スクリプトが文章で書かれています。2つの道が届くノードは1回だけ説明され、もう一方の道は矢印 <strong>↩</strong> で終わります。これは「このノードは上で説明済み」という意味です。</p>
+<div class="tip">👉 線を切るには、線をタッチします。別の場所につなぎ直すには、出力から新しい線を引きます。</div>
+
+<div class="nav">
+<a href="../ja/interface-blueprint.html">← 画像で見る Blueprint</a>
+<a href="index.html">すべてのガイド →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

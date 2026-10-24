@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment relier les entrées et les sorties des nœuds ? | Guide Yop2D</title>
+<meta name="description" content="Dans Yop2D, une sortie accepte un seul fil, mais une entrée peut en recevoir plusieurs : apprends à relier les nœuds, y compris deux chemins vers le même nœud.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/entrees-sorties.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/entrees-sorties.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/entrees-sorties.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/entrees-sorties.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/entrees-sorties.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/entrees-sorties.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/entrees-sorties.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/entrees-sorties.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/entrees-sorties.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/entrees-sorties.html">
+<link rel="stylesheet" href="guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Les entrées et les sorties des nœuds",
+ "description": "Dans Yop2D, une sortie accepte un seul fil, mais une entrée peut en recevoir plusieurs : apprends à relier les nœuds, y compris deux chemins vers le même nœud.",
+ "inLanguage": "fr",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (moteur de jeu 2D sans code pour Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Les ronds",
+   "text": "L'entrée est à gauche, les sorties sont à droite."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Un fil par sortie",
+   "text": "Tirer un nouveau fil depuis une sortie remplace l'ancien."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Plusieurs fils dans une entrée",
+   "text": "Fais arriver deux sorties sur la même entrée : deux chemins mènent au même nœud."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../fr/index.html">← Yop2D</a>
+<h1>Les entrées et les sorties des nœuds</h1>
+<p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/entrees-sorties.html" hreflang="en">English</a> · <a href="es/entrees-sorties.html" hreflang="es">Español</a> · <a href="de/entrees-sorties.html" hreflang="de">Deutsch</a> · <a href="it/entrees-sorties.html" hreflang="it">Italiano</a> · <a href="pt/entrees-sorties.html" hreflang="pt">Português</a> · <a href="ru/entrees-sorties.html" hreflang="ru">Русский</a> · <a href="zh/entrees-sorties.html" hreflang="zh">中文</a> · <a href="ja/entrees-sorties.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Un nœud a des <strong>ronds</strong> : ce sont ses entrées et ses sorties. Les fils qui les relient disent dans quel ordre les nœuds s'exécutent. Une règle simple à retenir : <strong>une sortie n'a qu'un fil, une entrée peut en avoir plusieurs.</strong></p>
+<h2>Les ronds d'un nœud</h2>
+<p>À <strong>gauche</strong>, le rond d'entrée (Entrer) : c'est par là que le nœud reçoit l'ordre de s'exécuter. À <strong>droite</strong>, les ronds de sortie (par exemple Suivant) : c'est par là que le nœud passe la main au suivant. Certains nœuds ont plusieurs sorties, comme une Condition avec Vrai et Faux.</p>
+<h2>Une sortie ne prend qu'un seul fil</h2>
+<p>Si tu tires un nouveau fil depuis une sortie déjà reliée, le nouveau <strong>remplace</strong> l'ancien. Une sortie ne peut donc mener qu'à un seul endroit.</p>
+<h2>Une entrée accepte plusieurs fils</h2>
+<div class="method">
+<ol><li>Tire un fil depuis une première sortie jusqu'au rond d'entrée du nœud voulu.</li><li>Tire un deuxième fil depuis une autre sortie (ou depuis un autre nœud) jusqu'au <strong>même</strong> rond d'entrée.</li><li>Le premier fil reste en place : le nœud s'exécute dès que l'un de ces chemins arrive jusqu'à lui.</li></ol>
+<div class="tip">👉 Exemple : un compte à rebours a une sortie qui part à chaque seconde et une autre quand il est terminé. Relie les deux au même nœud qui change un texte : le temps s'affiche dans les deux cas, sans refaire le nœud.</div>
+</div>
+<h2>Le texte de la fenêtre { }</h2>
+<p>Dans la fenêtre <strong>{ }</strong> du Blueprint, le script est écrit sous forme de texte. Quand un nœud est atteint par deux chemins, il n'est décrit qu'une fois ; l'autre chemin se termine par une flèche <strong>↩</strong>, qui veut dire « ce nœud a déjà été décrit plus haut ».</p>
+<div class="tip">👉 Pour couper un fil, touche-le. Pour le refaire ailleurs, tire-en un nouveau depuis la sortie.</div>
+
+<div class="nav">
+<a href="interface-blueprint.html">← Le Blueprint en images</a>
+<a href="index.html">Tous les guides →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="../fr/index.html">Site officiel</a> · <a href="../noeuds/fr.html">Référence des nœuds</a></p>
+</footer>
+</body>
+</html>

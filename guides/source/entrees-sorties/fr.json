@@ -1,0 +1,78 @@
+{
+ "titre_page": "Comment relier les entrées et les sorties des nœuds ? | Guide Yop2D",
+ "description": "Dans Yop2D, une sortie accepte un seul fil, mais une entrée peut en recevoir plusieurs : apprends à relier les nœuds, y compris deux chemins vers le même nœud.",
+ "h1": "Les entrées et les sorties des nœuds",
+ "carte": [
+  "Entrées et sorties",
+  "Une sortie = un fil, une entrée = autant de fils que tu veux."
+ ],
+ "etapes": [
+  [
+   "Les ronds",
+   "L'entrée est à gauche, les sorties sont à droite."
+  ],
+  [
+   "Un fil par sortie",
+   "Tirer un nouveau fil depuis une sortie remplace l'ancien."
+  ],
+  [
+   "Plusieurs fils dans une entrée",
+   "Fais arriver deux sorties sur la même entrée : deux chemins mènent au même nœud."
+  ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "Un nœud a des **ronds** : ce sont ses entrées et ses sorties. Les fils qui les relient disent dans quel ordre les nœuds s'exécutent. Une règle simple à retenir : **une sortie n'a qu'un fil, une entrée peut en avoir plusieurs.**"
+  ],
+  [
+   "h2",
+   "Les ronds d'un nœud"
+  ],
+  [
+   "p",
+   "À **gauche**, le rond d'entrée ({{lang:port_entrer}}) : c'est par là que le nœud reçoit l'ordre de s'exécuter. À **droite**, les ronds de sortie (par exemple {{lang:port_suivant}}) : c'est par là que le nœud passe la main au suivant. Certains nœuds ont plusieurs sorties, comme une {{lang:noeud_condition}} avec {{lang:port_vrai}} et {{lang:port_faux}}."
+  ],
+  [
+   "h2",
+   "Une sortie ne prend qu'un seul fil"
+  ],
+  [
+   "p",
+   "Si tu tires un nouveau fil depuis une sortie déjà reliée, le nouveau **remplace** l'ancien. Une sortie ne peut donc mener qu'à un seul endroit."
+  ],
+  [
+   "h2",
+   "Une entrée accepte plusieurs fils"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Tire un fil depuis une première sortie jusqu'au rond d'entrée du nœud voulu.",
+      "Tire un deuxième fil depuis une autre sortie (ou depuis un autre nœud) jusqu'au **même** rond d'entrée.",
+      "Le premier fil reste en place : le nœud s'exécute dès que l'un de ces chemins arrive jusqu'à lui."
+     ]
+    ],
+    [
+     "tip",
+     "Exemple : un compte à rebours a une sortie qui part à chaque seconde et une autre quand il est terminé. Relie les deux au même nœud qui change un texte : le temps s'affiche dans les deux cas, sans refaire le nœud."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Le texte de la fenêtre { }"
+  ],
+  [
+   "p",
+   "Dans la fenêtre **{ }** du Blueprint, le script est écrit sous forme de texte. Quand un nœud est atteint par deux chemins, il n'est décrit qu'une fois ; l'autre chemin se termine par une flèche **↩**, qui veut dire « ce nœud a déjà été décrit plus haut »."
+  ],
+  [
+   "tip",
+   "Pour couper un fil, touche-le. Pour le refaire ailleurs, tire-en un nouveau depuis la sortie."
+  ]
+ ]
+}

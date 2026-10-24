@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何连接节点的输入和输出？| Yop2D 指南</title>
+<meta name="description" content="在 Yop2D 中，一个输出只能接一根线，而一个输入可以接多根线：学会连接节点，包括让两条路径通向同一个节点。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/entrees-sorties.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/entrees-sorties.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/entrees-sorties.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/entrees-sorties.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/entrees-sorties.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/entrees-sorties.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/entrees-sorties.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/entrees-sorties.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/entrees-sorties.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/entrees-sorties.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "节点的输入和输出",
+ "description": "在 Yop2D 中，一个输出只能接一根线，而一个输入可以接多根线：学会连接节点，包括让两条路径通向同一个节点。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "小圆圈",
+   "text": "输入在左边，输出在右边。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "每个输出一根线",
+   "text": "从输出拉出新线会替换旧线。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "一个输入接多根线",
+   "text": "把两个输出接到同一个输入：两条路径通向同一个节点。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>节点的输入和输出</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../entrees-sorties.html" hreflang="fr">Français</a> · <a href="../en/entrees-sorties.html" hreflang="en">English</a> · <a href="../es/entrees-sorties.html" hreflang="es">Español</a> · <a href="../de/entrees-sorties.html" hreflang="de">Deutsch</a> · <a href="../it/entrees-sorties.html" hreflang="it">Italiano</a> · <a href="../pt/entrees-sorties.html" hreflang="pt">Português</a> · <a href="../ru/entrees-sorties.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/entrees-sorties.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>节点上有<strong>小圆圈</strong>：它们就是输入和输出。连接它们的线决定了节点的执行顺序。记住一条简单的规则：<strong>一个输出只有一根线，一个输入可以有多根。</strong></p>
+<h2>节点的小圆圈</h2>
+<p><strong>左边</strong>是输入圆圈（进入）：节点从这里接收执行的指令。<strong>右边</strong>是输出圆圈（例如 下一步）：节点从这里把接力棒交给下一个。有些节点有多个输出，比如 条件 有 真 和 假。</p>
+<h2>一个输出只接一根线</h2>
+<p>如果从已连接的输出再拉一根新线，新线会<strong>替换</strong>旧线。所以一个输出只能通向一个地方。</p>
+<h2>一个输入可接多根线</h2>
+<div class="method">
+<ol><li>从第一个输出拉一根线，连到目标节点的输入圆圈。</li><li>再从另一个输出（或另一个节点）拉第二根线，连到<strong>同一个</strong>输入圆圈。</li><li>第一根线保持不变：只要其中任何一条路径到达，该节点就会执行。</li></ol>
+<div class="tip">👉 例子：倒计时有一个每秒触发的输出，和一个结束时触发的输出。把两者接到同一个修改文字的节点：两种情况下都会显示时间，不用做两个节点。</div>
+</div>
+<h2>{ } 窗口里的文字</h2>
+<p>在 Blueprint 的 <strong>{ }</strong> 窗口里，脚本以文字形式写出。当一个节点被两条路径到达时，它只描述一次；另一条路径以箭头 <strong>↩</strong> 结束，意思是“这个节点上面已经描述过了”。</p>
+<div class="tip">👉 要断开一根线，点一下它。要在别处重新连，就从输出拉一根新线。</div>
+
+<div class="nav">
+<a href="../zh/interface-blueprint.html">← 图解 Blueprint</a>
+<a href="index.html">全部教程 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,78 @@
+{
+ "titre_page": "How do I connect the inputs and outputs of nodes? | Yop2D guide",
+ "description": "In Yop2D an output takes only one wire, but an input can receive several: learn to connect nodes, including two paths leading to the same node.",
+ "h1": "The inputs and outputs of nodes",
+ "carte": [
+  "Inputs and outputs",
+  "One output = one wire, one input = as many wires as you like."
+ ],
+ "etapes": [
+  [
+   "The circles",
+   "The input is on the left, the outputs are on the right."
+  ],
+  [
+   "One wire per output",
+   "Pulling a new wire from an output replaces the old one."
+  ],
+  [
+   "Several wires into one input",
+   "Bring two outputs to the same input: two paths lead to the same node."
+  ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "A node has **circles**: these are its inputs and outputs. The wires between them say in which order the nodes run. One simple rule to remember: **an output has only one wire, an input can have several.**"
+  ],
+  [
+   "h2",
+   "The circles of a node"
+  ],
+  [
+   "p",
+   "On the **left**, the input circle ({{lang:port_entrer}}): this is where the node receives the order to run. On the **right**, the output circles (for example {{lang:port_suivant}}): this is where the node hands over to the next one. Some nodes have several outputs, like a {{lang:noeud_condition}} with {{lang:port_vrai}} and {{lang:port_faux}}."
+  ],
+  [
+   "h2",
+   "An output takes only one wire"
+  ],
+  [
+   "p",
+   "If you pull a new wire from an output that is already connected, the new one **replaces** the old one. So an output can only lead to one place."
+  ],
+  [
+   "h2",
+   "An input accepts several wires"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Pull a wire from a first output to the input circle of the node you want.",
+      "Pull a second wire from another output (or from another node) to the **same** input circle.",
+      "The first wire stays in place: the node runs as soon as one of these paths reaches it."
+     ]
+    ],
+    [
+     "tip",
+     "Example: a countdown has one output that fires every second and another when it is finished. Connect both to the same node that changes a text: the time shows in both cases, without building the node twice."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "The text of the { } window"
+  ],
+  [
+   "p",
+   "In the Blueprint **{ }** window, the script is written as text. When a node is reached by two paths, it is described only once; the other path ends with an arrow **↩**, which means “this node was already described above”."
+  ],
+  [
+   "tip",
+   "To cut a wire, tap it. To redo it elsewhere, pull a new one from the output."
+  ]
+ ]
+}

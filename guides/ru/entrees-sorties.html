@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как соединять входы и выходы узлов? | Руководство Yop2D</title>
+<meta name="description" content="В Yop2D к выходу идёт только один провод, а к входу можно подвести несколько: научись соединять узлы, в том числе двумя путями в один узел.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/entrees-sorties.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/entrees-sorties.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/entrees-sorties.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/entrees-sorties.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/entrees-sorties.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/entrees-sorties.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/entrees-sorties.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/entrees-sorties.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/entrees-sorties.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/entrees-sorties.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Входы и выходы узлов",
+ "description": "В Yop2D к выходу идёт только один провод, а к входу можно подвести несколько: научись соединять узлы, в том числе двумя путями в один узел.",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Кружки",
+   "text": "Вход слева, выходы справа."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Один провод на выход",
+   "text": "Новый провод от выхода заменяет старый."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Несколько проводов в один вход",
+   "text": "Подведи два выхода к одному входу: два пути ведут в один узел."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ru/index.html">← Yop2D</a>
+<h1>Входы и выходы узлов</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../entrees-sorties.html" hreflang="fr">Français</a> · <a href="../en/entrees-sorties.html" hreflang="en">English</a> · <a href="../es/entrees-sorties.html" hreflang="es">Español</a> · <a href="../de/entrees-sorties.html" hreflang="de">Deutsch</a> · <a href="../it/entrees-sorties.html" hreflang="it">Italiano</a> · <a href="../pt/entrees-sorties.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/entrees-sorties.html" hreflang="zh">中文</a> · <a href="../ja/entrees-sorties.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>У узла есть <strong>кружки</strong>: это его входы и выходы. Провода между ними показывают, в каком порядке выполняются узлы. Простое правило: <strong>у выхода один провод, у входа может быть несколько.</strong></p>
+<h2>Кружки узла</h2>
+<p><strong>Слева</strong> — кружок входа (Вход): через него узел получает приказ выполниться. <strong>Справа</strong> — кружки выходов (например, Дальше): через них узел передаёт эстафету следующему. У некоторых узлов несколько выходов, например у Условие есть Истина и Ложь.</p>
+<h2>К выходу идёт только один провод</h2>
+<p>Если потянуть новый провод от уже соединённого выхода, он <strong>заменит</strong> старый. Значит, выход может вести только в одно место.</p>
+<h2>Вход принимает несколько проводов</h2>
+<div class="method">
+<ol><li>Протяни провод от первого выхода к кружку входа нужного узла.</li><li>Протяни второй провод от другого выхода (или от другого узла) к <strong>тому же</strong> кружку входа.</li><li>Первый провод остаётся на месте: узел выполнится, как только до него дойдёт любой из этих путей.</li></ol>
+<div class="tip">👉 Пример: у обратного отсчёта есть выход, срабатывающий каждую секунду, и другой — по окончании. Соедини оба с одним узлом, который меняет текст: время покажется в обоих случаях, и узел не придётся делать дважды.</div>
+</div>
+<h2>Текст окна { }</h2>
+<p>В окне <strong>{ }</strong> Blueprint скрипт записан текстом. Если в узел приходят два пути, он описывается один раз; другой путь заканчивается стрелкой <strong>↩</strong>, которая значит «этот узел уже описан выше».</p>
+<div class="tip">👉 Чтобы убрать провод, коснись его. Чтобы провести его в другое место, потяни новый от выхода.</div>
+
+<div class="nav">
+<a href="../ru/interface-blueprint.html">← Blueprint в картинках</a>
+<a href="index.html">Все руководства →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../ru/index.html">Официальный сайт</a> · <a href="../../noeuds/ru.html">Справочник узлов</a></p>
+</footer>
+</body>
+</html>

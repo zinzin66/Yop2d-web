@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Cómo conectar las entradas y las salidas de los nodos? | Guía Yop2D</title>
+<meta name="description" content="En Yop2D una salida admite un solo cable, pero una entrada puede recibir varios: aprende a conectar nodos, incluidos dos caminos hacia el mismo nodo.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/es/entrees-sorties.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/entrees-sorties.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/entrees-sorties.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/entrees-sorties.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/entrees-sorties.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/entrees-sorties.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/entrees-sorties.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/entrees-sorties.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/entrees-sorties.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/entrees-sorties.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Las entradas y las salidas de los nodos",
+ "description": "En Yop2D una salida admite un solo cable, pero una entrada puede recibir varios: aprende a conectar nodos, incluidos dos caminos hacia el mismo nodo.",
+ "inLanguage": "es",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de juegos 2D sin código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Los círculos",
+   "text": "La entrada está a la izquierda, las salidas a la derecha."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Un cable por salida",
+   "text": "Tirar un cable nuevo desde una salida sustituye al anterior."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Varios cables en una entrada",
+   "text": "Lleva dos salidas a la misma entrada: dos caminos llegan al mismo nodo."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../es/index.html">← Yop2D</a>
+<h1>Las entradas y las salidas de los nodos</h1>
+<p>Guía para principiantes · sin código</p>
+<p class="langues"><a href="../entrees-sorties.html" hreflang="fr">Français</a> · <a href="../en/entrees-sorties.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="../de/entrees-sorties.html" hreflang="de">Deutsch</a> · <a href="../it/entrees-sorties.html" hreflang="it">Italiano</a> · <a href="../pt/entrees-sorties.html" hreflang="pt">Português</a> · <a href="../ru/entrees-sorties.html" hreflang="ru">Русский</a> · <a href="../zh/entrees-sorties.html" hreflang="zh">中文</a> · <a href="../ja/entrees-sorties.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Un nodo tiene <strong>círculos</strong>: son sus entradas y sus salidas. Los cables que los unen indican en qué orden se ejecutan los nodos. Una regla sencilla: <strong>una salida tiene un solo cable, una entrada puede tener varios.</strong></p>
+<h2>Los círculos de un nodo</h2>
+<p>A la <strong>izquierda</strong>, el círculo de entrada (Entrar): por ahí el nodo recibe la orden de ejecutarse. A la <strong>derecha</strong>, los círculos de salida (por ejemplo Siguiente): por ahí el nodo pasa el turno al siguiente. Algunos nodos tienen varias salidas, como una Condición con Verdadero y Falso.</p>
+<h2>Una salida admite un solo cable</h2>
+<p>Si tiras un cable nuevo desde una salida que ya está conectada, el nuevo <strong>sustituye</strong> al anterior. Así que una salida solo puede llevar a un sitio.</p>
+<h2>Una entrada admite varios cables</h2>
+<div class="method">
+<ol><li>Tira un cable desde una primera salida hasta el círculo de entrada del nodo que quieras.</li><li>Tira un segundo cable desde otra salida (o desde otro nodo) hasta el <strong>mismo</strong> círculo de entrada.</li><li>El primer cable se queda donde está: el nodo se ejecuta en cuanto uno de esos caminos llega hasta él.</li></ol>
+<div class="tip">👉 Ejemplo: una cuenta atrás tiene una salida que se activa cada segundo y otra cuando termina. Conecta las dos al mismo nodo que cambia un texto: el tiempo se muestra en ambos casos, sin crear el nodo dos veces.</div>
+</div>
+<h2>El texto de la ventana { }</h2>
+<p>En la ventana <strong>{ }</strong> del Blueprint, el script se escribe como texto. Cuando a un nodo llegan dos caminos, solo se describe una vez; el otro camino termina con una flecha <strong>↩</strong>, que significa «este nodo ya se describió más arriba».</p>
+<div class="tip">👉 Para cortar un cable, tócalo. Para rehacerlo en otro sitio, tira uno nuevo desde la salida.</div>
+
+<div class="nav">
+<a href="../es/interface-blueprint.html">← El Blueprint en imágenes</a>
+<a href="index.html">Todas las guías →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de juegos 2D gratuito y sin código para Android · <a href="../../es/index.html">Sitio oficial</a> · <a href="../../noeuds/es.html">Referencia de nodos</a></p>
+</footer>
+</body>
+</html>

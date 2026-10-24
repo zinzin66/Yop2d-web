@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How do I connect the inputs and outputs of nodes? | Yop2D guide</title>
+<meta name="description" content="In Yop2D an output takes only one wire, but an input can receive several: learn to connect nodes, including two paths leading to the same node.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/entrees-sorties.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/entrees-sorties.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/entrees-sorties.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/entrees-sorties.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/entrees-sorties.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/entrees-sorties.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/entrees-sorties.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/entrees-sorties.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/entrees-sorties.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/entrees-sorties.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "The inputs and outputs of nodes",
+ "description": "In Yop2D an output takes only one wire, but an input can receive several: learn to connect nodes, including two paths leading to the same node.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "The circles",
+   "text": "The input is on the left, the outputs are on the right."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "One wire per output",
+   "text": "Pulling a new wire from an output replaces the old one."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Several wires into one input",
+   "text": "Bring two outputs to the same input: two paths lead to the same node."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>The inputs and outputs of nodes</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../entrees-sorties.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/entrees-sorties.html" hreflang="es">Español</a> · <a href="../de/entrees-sorties.html" hreflang="de">Deutsch</a> · <a href="../it/entrees-sorties.html" hreflang="it">Italiano</a> · <a href="../pt/entrees-sorties.html" hreflang="pt">Português</a> · <a href="../ru/entrees-sorties.html" hreflang="ru">Русский</a> · <a href="../zh/entrees-sorties.html" hreflang="zh">中文</a> · <a href="../ja/entrees-sorties.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>A node has <strong>circles</strong>: these are its inputs and outputs. The wires between them say in which order the nodes run. One simple rule to remember: <strong>an output has only one wire, an input can have several.</strong></p>
+<h2>The circles of a node</h2>
+<p>On the <strong>left</strong>, the input circle (Enter): this is where the node receives the order to run. On the <strong>right</strong>, the output circles (for example Next): this is where the node hands over to the next one. Some nodes have several outputs, like a Condition with True and False.</p>
+<h2>An output takes only one wire</h2>
+<p>If you pull a new wire from an output that is already connected, the new one <strong>replaces</strong> the old one. So an output can only lead to one place.</p>
+<h2>An input accepts several wires</h2>
+<div class="method">
+<ol><li>Pull a wire from a first output to the input circle of the node you want.</li><li>Pull a second wire from another output (or from another node) to the <strong>same</strong> input circle.</li><li>The first wire stays in place: the node runs as soon as one of these paths reaches it.</li></ol>
+<div class="tip">👉 Example: a countdown has one output that fires every second and another when it is finished. Connect both to the same node that changes a text: the time shows in both cases, without building the node twice.</div>
+</div>
+<h2>The text of the { } window</h2>
+<p>In the Blueprint <strong>{ }</strong> window, the script is written as text. When a node is reached by two paths, it is described only once; the other path ends with an arrow <strong>↩</strong>, which means “this node was already described above”.</p>
+<div class="tip">👉 To cut a wire, tap it. To redo it elsewhere, pull a new one from the output.</div>
+
+<div class="nav">
+<a href="../en/interface-blueprint.html">← The Blueprint in pictures</a>
+<a href="index.html">All guides →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>

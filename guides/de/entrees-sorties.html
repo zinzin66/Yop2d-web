@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie verbinde ich die Ein- und Ausgänge von Knoten? | Yop2D-Anleitung</title>
+<meta name="description" content="In Yop2D nimmt ein Ausgang nur eine Leitung auf, ein Eingang aber mehrere: Lerne Knoten zu verbinden, auch zwei Wege zum selben Knoten.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/entrees-sorties.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/entrees-sorties.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/entrees-sorties.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/entrees-sorties.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/entrees-sorties.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/entrees-sorties.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/entrees-sorties.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/entrees-sorties.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/entrees-sorties.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/entrees-sorties.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Die Ein- und Ausgänge der Knoten",
+ "description": "In Yop2D nimmt ein Ausgang nur eine Leitung auf, ein Eingang aber mehrere: Lerne Knoten zu verbinden, auch zwei Wege zum selben Knoten.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Die Kreise",
+   "text": "Der Eingang ist links, die Ausgänge sind rechts."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Eine Leitung pro Ausgang",
+   "text": "Eine neue Leitung von einem Ausgang ersetzt die alte."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Mehrere Leitungen in einem Eingang",
+   "text": "Führe zwei Ausgänge zum selben Eingang: zwei Wege führen zum selben Knoten."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../de/index.html">← Yop2D</a>
+<h1>Die Ein- und Ausgänge der Knoten</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../entrees-sorties.html" hreflang="fr">Français</a> · <a href="../en/entrees-sorties.html" hreflang="en">English</a> · <a href="../es/entrees-sorties.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/entrees-sorties.html" hreflang="it">Italiano</a> · <a href="../pt/entrees-sorties.html" hreflang="pt">Português</a> · <a href="../ru/entrees-sorties.html" hreflang="ru">Русский</a> · <a href="../zh/entrees-sorties.html" hreflang="zh">中文</a> · <a href="../ja/entrees-sorties.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Ein Knoten hat <strong>Kreise</strong>: das sind seine Ein- und Ausgänge. Die Leitungen dazwischen legen fest, in welcher Reihenfolge die Knoten laufen. Eine einfache Regel: <strong>ein Ausgang hat nur eine Leitung, ein Eingang kann mehrere haben.</strong></p>
+<h2>Die Kreise eines Knotens</h2>
+<p>Links der Eingangskreis (Eingang): Dort bekommt der Knoten den Befehl zu laufen. Rechts die Ausgangskreise (zum Beispiel Weiter): Dort gibt der Knoten an den nächsten weiter. Manche Knoten haben mehrere Ausgänge, etwa eine Bedingung mit Wahr und Falsch.</p>
+<h2>Ein Ausgang nimmt nur eine Leitung auf</h2>
+<p>Wenn du von einem bereits verbundenen Ausgang eine neue Leitung ziehst, <strong>ersetzt</strong> sie die alte. Ein Ausgang kann also nur an eine Stelle führen.</p>
+<h2>Ein Eingang nimmt mehrere Leitungen auf</h2>
+<div class="method">
+<ol><li>Ziehe eine Leitung von einem ersten Ausgang zum Eingangskreis des gewünschten Knotens.</li><li>Ziehe eine zweite Leitung von einem anderen Ausgang (oder einem anderen Knoten) zum <strong>selben</strong> Eingangskreis.</li><li>Die erste Leitung bleibt bestehen: Der Knoten läuft, sobald einer dieser Wege bei ihm ankommt.</li></ol>
+<div class="tip">👉 Beispiel: Ein Countdown hat einen Ausgang, der jede Sekunde auslöst, und einen weiteren am Ende. Verbinde beide mit demselben Knoten, der einen Text ändert: Die Zeit erscheint in beiden Fällen, ohne den Knoten doppelt zu bauen.</div>
+</div>
+<h2>Der Text im Fenster { }</h2>
+<p>Im Blueprint-Fenster <strong>{ }</strong> steht das Skript als Text. Erreichen zwei Wege einen Knoten, wird er nur einmal beschrieben; der andere Weg endet mit einem Pfeil <strong>↩</strong>, der bedeutet „dieser Knoten wurde weiter oben schon beschrieben“.</p>
+<div class="tip">👉 Um eine Leitung zu trennen, tippe sie an. Um sie woanders neu zu ziehen, ziehe eine neue vom Ausgang.</div>
+
+<div class="nav">
+<a href="../de/interface-blueprint.html">← Der Blueprint in Bildern</a>
+<a href="index.html">Alle Anleitungen →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../de/index.html">Offizielle Website</a> · <a href="../../noeuds/de.html">Knotenreferenz</a></p>
+</footer>
+</body>
+</html>

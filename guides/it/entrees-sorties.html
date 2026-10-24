@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Come collegare gli ingressi e le uscite dei nodi? | Guida Yop2D</title>
+<meta name="description" content="In Yop2D un&#x27;uscita accetta un solo filo, ma un ingresso può riceverne diversi: impara a collegare i nodi, anche con due percorsi verso lo stesso nodo.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/it/entrees-sorties.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/entrees-sorties.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/entrees-sorties.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/entrees-sorties.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/entrees-sorties.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/entrees-sorties.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/entrees-sorties.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/entrees-sorties.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/entrees-sorties.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/entrees-sorties.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Gli ingressi e le uscite dei nodi",
+ "description": "In Yop2D un'uscita accetta un solo filo, ma un ingresso può riceverne diversi: impara a collegare i nodi, anche con due percorsi verso lo stesso nodo.",
+ "inLanguage": "it",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motore di gioco 2D senza codice per Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "I cerchi",
+   "text": "L'ingresso è a sinistra, le uscite sono a destra."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Un filo per uscita",
+   "text": "Tirare un nuovo filo da un'uscita sostituisce quello vecchio."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Più fili in un ingresso",
+   "text": "Porta due uscite sullo stesso ingresso: due percorsi arrivano allo stesso nodo."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../it/index.html">← Yop2D</a>
+<h1>Gli ingressi e le uscite dei nodi</h1>
+<p>Guida per principianti · senza codice</p>
+<p class="langues"><a href="../entrees-sorties.html" hreflang="fr">Français</a> · <a href="../en/entrees-sorties.html" hreflang="en">English</a> · <a href="../es/entrees-sorties.html" hreflang="es">Español</a> · <a href="../de/entrees-sorties.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="../pt/entrees-sorties.html" hreflang="pt">Português</a> · <a href="../ru/entrees-sorties.html" hreflang="ru">Русский</a> · <a href="../zh/entrees-sorties.html" hreflang="zh">中文</a> · <a href="../ja/entrees-sorties.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Un nodo ha dei <strong>cerchi</strong>: sono i suoi ingressi e le sue uscite. I fili che li collegano indicano in che ordine vengono eseguiti i nodi. Una regola semplice: <strong>un'uscita ha un solo filo, un ingresso può averne diversi.</strong></p>
+<h2>I cerchi di un nodo</h2>
+<p>A <strong>sinistra</strong>, il cerchio d'ingresso (Entra): da lì il nodo riceve l'ordine di eseguirsi. A <strong>destra</strong>, i cerchi d'uscita (per esempio Successivo): da lì il nodo passa la mano al successivo. Alcuni nodi hanno più uscite, come una Condizione con Vero e Falso.</p>
+<h2>Un'uscita accetta un solo filo</h2>
+<p>Se tiri un nuovo filo da un'uscita già collegata, il nuovo <strong>sostituisce</strong> quello vecchio. Quindi un'uscita può portare in un solo posto.</p>
+<h2>Un ingresso accetta più fili</h2>
+<div class="method">
+<ol><li>Tira un filo da una prima uscita fino al cerchio d'ingresso del nodo che vuoi.</li><li>Tira un secondo filo da un'altra uscita (o da un altro nodo) fino allo <strong>stesso</strong> cerchio d'ingresso.</li><li>Il primo filo resta al suo posto: il nodo si esegue appena uno di questi percorsi lo raggiunge.</li></ol>
+<div class="tip">👉 Esempio: un conto alla rovescia ha un'uscita che scatta ogni secondo e un'altra quando finisce. Collegale allo stesso nodo che cambia un testo: il tempo appare in entrambi i casi, senza rifare il nodo.</div>
+</div>
+<h2>Il testo della finestra { }</h2>
+<p>Nella finestra <strong>{ }</strong> del Blueprint lo script è scritto come testo. Quando un nodo è raggiunto da due percorsi, viene descritto una volta sola; l'altro percorso finisce con una freccia <strong>↩</strong>, che significa «questo nodo è già stato descritto sopra».</p>
+<div class="tip">👉 Per tagliare un filo, toccalo. Per rifarlo altrove, tirane uno nuovo dall'uscita.</div>
+
+<div class="nav">
+<a href="../it/interface-blueprint.html">← Il Blueprint in immagini</a>
+<a href="index.html">Tutte le guide →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motore di gioco 2D gratuito e senza codice per Android · <a href="../../it/index.html">Sito ufficiale</a> · <a href="../../noeuds/it.html">Riferimento dei nodi</a></p>
+</footer>
+</body>
+</html>
