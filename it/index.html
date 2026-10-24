@@ -118,7 +118,9 @@
   "Movimenti a tappe",
   "Ascensori e piattaforme mobili",
   "Tagliare un foglio di immagini",
-  "Tenere il punteggio e la partita"
+  "Tenere il punteggio e la partita",
+  "Un personaggio animato da una sola immagine",
+  "Note e riquadri nel Blueprint"
  ],
  "sameAs": [
   "https://youtube.com/@yop2d",
@@ -354,10 +356,42 @@
   },
   {
    "@type": "Question",
+   "name": "Come spiego i miei nodi o lascio commenti?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Nel Blueprint, tocca il pulsante della nota adesiva per mettere una nota libera (titolo, testo, 6 colori, ripiegabile), oppure scegli dei nodi con il pulsante di selezione e poi «Racchiudi in un riquadro»: il riquadro ha un titolo, un colore e un «?» che apre una spiegazione. I nodi nel riquadro lo seguono quando lo sposti. Annulla e ripeti funzionano anche per le note. Esiste una guida passo passo: «Come spiegare i nodi con note e riquadri?»."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Come creo un effetto sonoro (laser, salto, moneta)?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Nella finestra Assets, tocca «Effetto» (Android 10 o successivo). Scegli un suono retrò (laser, salto, moneta, esplosione, bonus…) e regolalo con i cursori, oppure scarica il pacchetto di 435 suoni liberi da diritti e ritocca uno di essi. «Crea il suono (.ogg)» lo salva nel progetto, poi il nodo «Riproduci suono» lo riproduce. Esiste una guida passo passo: «Come creare un effetto sonoro?»."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Come taglio un foglio di immagini (sprite sheet) in animazioni?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Negli Assets, tocca «Foglio», scegli l'immagine e indica il numero di colonne e di righe. Yop2D crea un'animazione per riga (con nomi che i comportamenti riconoscono) oppure ti lascia scegliere le immagini a mano, anche se un'animazione occupa più righe. Esiste una guida passo passo: «Come tagliare un foglio di immagini in animazioni?»."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Come faccio una piattaforma o un ascensore che si muove?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Due modi. Il più semplice: ⚙ Comportamento dell'oggetto → «Ascensore» (direzione, distanza, pausa, partenza quando ci sali sopra); porta ciò che sta sopra. Più libero: crea un movimento a passi negli Assets (pulsante «Movimento»), riproducilo con un nodo e spunta «Porta ciò che sta sopra» nel comportamento Suolo. Per schiacciare il giocatore, l'evento «Se oggetto tocca Tag» sa da che lato viene toccato."
+   }
+  },
+  {
+   "@type": "Question",
    "name": "Cosa sa fare Yop2D oggi?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Nell'editor: annulla e ripeti (nella scena e nel Blueprint), salvataggio automatico, copia e incolla, cartelle per ordinare oggetti e file, griglia magnetica, più scene, prova immediata con il pulsante ▶ e un pulsante «Controlla il mio gioco» che trova le dimenticanze. Per creare: 166 nodi, editor di tile, editor di animazioni, creatore di musica, giochi di dialogo con salvataggi, filtri dello schermo, particelle, ricerca del percorso, 50 modelli e guide passo passo. Per condividere: esportazione APK sul dispositivo con la tua icona, il numero di versione e un'immagine di avvio. Limiti attuali: solo Android e 2D, e uno sviluppatore indipendente che aggiorna il motore molto spesso."
+    "text": "Nell'editor: annulla e ripeti (nella scena e nel Blueprint), salvataggio automatico, copia e incolla, cartelle per ordinare oggetti e file, griglia magnetica, più scene, prova immediata con il pulsante ▶ e un pulsante «Controlla il mio gioco» che trova le dimenticanze. Per creare: 166 nodi, editor di tile, editor di animazioni, creatore di musica, editor di effetti sonori, laboratorio dei personaggi (animare un personaggio da un'immagine), movimenti a passi, note nel Blueprint, giochi di dialogo con salvataggi, filtri dello schermo, particelle, ricerca del percorso, 50 modelli e guide passo passo. Per condividere: esportazione APK sul dispositivo con la tua icona, il numero di versione e un'immagine di avvio. Limiti attuali: solo Android e 2D, e uno sviluppatore indipendente che aggiorna il motore molto spesso."
    }
   }
  ]
@@ -597,7 +631,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <section class="showcase">
 <h2>Giochi di esempio inclusi</h2>
 <img src="../exemples_jeux.png" alt="Giochi di esempio creati con Yop2D in esecuzione su Android" class="screenshot" loading="lazy" onerror="this.remove()">
-<p>Venti giochi di esempio si scaricano dalla scheda «Esempi» del motore: Neon shooter (arcade con astronave), Neon jump (platform con telecamera che segue), Platformer (monete, nemici e 3 vite), Climb & run (un personaggio che cammina, salta, si accovaccia e sale le scale da solo), Maze chase (un labirinto dove due mosche ti inseguono), Pirate battle (una battaglia navale contro i pirati), Candy match (allinea 3 caramelle), Memory cards (trova le coppie di carte), Nexus UI (un'interfaccia futuristica: menu, opzioni, negozio), Firefly Night (una storia a scelte con 4 finali), Dungeon walk e Dungeon escape (un dungeon in vista isometrica da esplorare e poi da cui fuggire), Crypt key (un dungeon visto dall'alto: botole, punte, una guardia e una chiave), Lost on the moon (una storia a scelte in 9 lingue) e una vetrina di tutti gli effetti visivi. Aprili, giocaci, poi modificali per capire come funziona tutto. Novità: Filters showcase, 32 filtri dello schermo e 19 transizioni da provare con un solo tocco. Hana ha una domanda urgente, una commedia assurda a dialoghi con 5 finali. Ruins maze, un grande labirinto di rovine in vista isometrica da esplorare alla sola luce di una torcia. Space 1, uno sparatutto spaziale verticale disegnato come uno schizzo, con boss, missili guidati e bonus vita. <a href="../exemples/it.html">Vedi tutti gli esempi →</a></p>
+<p>Ventuno giochi di esempio si scaricano dalla scheda «Esempi» del motore: Neon shooter (arcade con astronave), Neon jump (platform con telecamera che segue), Platformer (monete, nemici e 3 vite), Climb & run (un personaggio che cammina, salta, si accovaccia e sale le scale da solo), Maze chase (un labirinto dove due mosche ti inseguono), Pirate battle (una battaglia navale contro i pirati), Candy match (allinea 3 caramelle), Memory cards (trova le coppie di carte), Nexus UI (un'interfaccia futuristica: menu, opzioni, negozio), Firefly Night (una storia a scelte con 4 finali), Dungeon walk e Dungeon escape (un dungeon in vista isometrica da esplorare e poi da cui fuggire), Crypt key (un dungeon visto dall'alto: botole, punte, una guardia e una chiave), Lost on the moon (una storia a scelte in 9 lingue) e una vetrina di tutti gli effetti visivi. Aprili, giocaci, poi modificali per capire come funziona tutto. Novità: Filters showcase, 32 filtri dello schermo e 19 transizioni da provare con un solo tocco. Hana ha una domanda urgente, una commedia assurda a dialoghi con 5 finali. Ruins maze, un grande labirinto di rovine in vista isometrica da esplorare alla sola luce di una torcia. Space 1, uno sparatutto spaziale verticale disegnato come uno schizzo, con boss, missili guidati e bonus vita. Story showcase, la vetrina dei giochi di dialogo: sfondo in movimento, parallasse, grassetto e corsivo, obiettivi, SMS, atmosfere e modalità romanzo. Hana e la zanzara, una breve storia in cui una zanzara gira intorno a Hana e poi si lancia verso lo schermo. <a href="../exemples/it.html">Vedi tutti gli esempi →</a></p>
 </section>
 <section class="showcase">
 <h2>Su tablet e telefono</h2>
@@ -867,6 +901,14 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <h3>Tenere il punteggio e la partita</h3>
 <p>Due nodi, «Salva le variabili» e «Carica le variabili»: il punteggio, le vite o un inventario si ritrovano quando il giocatore chiude e riapre il gioco. Un modello pronto mostra come fare.</p>
 </div>
+<div class="card">
+<h3>Un personaggio animato da una sola immagine</h3>
+<p>Un pulsante «Personaggio» negli Assets: posiziona lo scheletro, racchiudi ogni parte, tappa i buchi con il timbro, il colore o il riempimento, e Yop2D crea Riposo, Camminata, Corsa, Salto, Attacco e Colpito, già riconosciuti dal comportamento «personaggio da piattaforma». Annulla e ripeti funzionano ovunque.</p>
+</div>
+<div class="card">
+<h3>Note e riquadri nel Blueprint</h3>
+<p>Metti note adesive e racchiudi gruppi di nodi in un riquadro colorato, con un titolo e un «?» che apre la spiegazione: il tuo script si spiega da solo. Gli esempi Memory cards, Pirate battle e Candy match ne contengono già.</p>
+</div>
 </div>
 </section>
 
@@ -998,6 +1040,21 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <h3>Ingressi e uscite</h3>
 <p>Un&#x27;uscita = un filo, un ingresso = tutti i fili che vuoi.</p>
 <p><a href="../guides/it/entrees-sorties.html">Leggi la guida →</a></p>
+</div>
+<div class="card">
+<h3>Foglio di immagini</h3>
+<p>Un&#x27;unica immagine tagliata in animazioni pronte.</p>
+<p><a href="../guides/it/planche-images.html">Leggi la guida →</a></p>
+</div>
+<div class="card">
+<h3>Crea un effetto sonoro</h3>
+<p>Un laser, un salto, una moneta: crea o ritocca il tuo suono.</p>
+<p><a href="../guides/it/bruitages.html">Leggi la guida →</a></p>
+</div>
+<div class="card">
+<h3>Note e riquadri</h3>
+<p>Scrivi spiegazioni direttamente nel Blueprint.</p>
+<p><a href="../guides/it/notes-blueprint.html">Leggi la guida →</a></p>
 </div>
 </div>
 <p style="text-align:center;margin-top:1.5rem"><a class="btn btn-download" href="../guides/it/index.html">📚 Tutte le guide →</a></p>
@@ -1173,8 +1230,24 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <p>Nella finestra degli Assets tocca il pulsante « Personaggio » e scegli l'immagine del tuo personaggio (di profilo). Posiziona lo scheletro (Yop2D prova a indovinarlo), contorna ogni parte, copri se serve i buchi con il timbro, il colore o il riempimento, poi scegli Riposo, Camminata, Corsa, Salto, Attacco e Colpito: Yop2D crea le immagini e le animazioni, già riconosciute dal comportamento « personaggio da platform ». Annulla e ripeti funzionano ovunque. Esiste una guida passo passo: « Come animare un personaggio partendo da una sola immagine? ».</p>
 </details>
 <details class="faq-item">
+<summary>Come spiego i miei nodi o lascio commenti?</summary>
+<p>Nel Blueprint, tocca il pulsante della nota adesiva per mettere una nota libera (titolo, testo, 6 colori, ripiegabile), oppure scegli dei nodi con il pulsante di selezione e poi «Racchiudi in un riquadro»: il riquadro ha un titolo, un colore e un «?» che apre una spiegazione. I nodi nel riquadro lo seguono quando lo sposti. Annulla e ripeti funzionano anche per le note. Esiste una guida passo passo: «Come spiegare i nodi con note e riquadri?».</p>
+</details>
+<details class="faq-item">
+<summary>Come creo un effetto sonoro (laser, salto, moneta)?</summary>
+<p>Nella finestra Assets, tocca «Effetto» (Android 10 o successivo). Scegli un suono retrò (laser, salto, moneta, esplosione, bonus…) e regolalo con i cursori, oppure scarica il pacchetto di 435 suoni liberi da diritti e ritocca uno di essi. «Crea il suono (.ogg)» lo salva nel progetto, poi il nodo «Riproduci suono» lo riproduce. Esiste una guida passo passo: «Come creare un effetto sonoro?».</p>
+</details>
+<details class="faq-item">
+<summary>Come taglio un foglio di immagini (sprite sheet) in animazioni?</summary>
+<p>Negli Assets, tocca «Foglio», scegli l'immagine e indica il numero di colonne e di righe. Yop2D crea un'animazione per riga (con nomi che i comportamenti riconoscono) oppure ti lascia scegliere le immagini a mano, anche se un'animazione occupa più righe. Esiste una guida passo passo: «Come tagliare un foglio di immagini in animazioni?».</p>
+</details>
+<details class="faq-item">
+<summary>Come faccio una piattaforma o un ascensore che si muove?</summary>
+<p>Due modi. Il più semplice: ⚙ Comportamento dell'oggetto → «Ascensore» (direzione, distanza, pausa, partenza quando ci sali sopra); porta ciò che sta sopra. Più libero: crea un movimento a passi negli Assets (pulsante «Movimento»), riproducilo con un nodo e spunta «Porta ciò che sta sopra» nel comportamento Suolo. Per schiacciare il giocatore, l'evento «Se oggetto tocca Tag» sa da che lato viene toccato.</p>
+</details>
+<details class="faq-item">
 <summary>Cosa sa fare Yop2D oggi?</summary>
-<p>Nell'editor: annulla e ripeti (nella scena e nel Blueprint), salvataggio automatico, copia e incolla, cartelle per ordinare oggetti e file, griglia magnetica, più scene, prova immediata con il pulsante ▶ e un pulsante «Controlla il mio gioco» che trova le dimenticanze. Per creare: 166 nodi, editor di tile, editor di animazioni, creatore di musica, giochi di dialogo con salvataggi, filtri dello schermo, particelle, ricerca del percorso, 50 modelli e guide passo passo. Per condividere: esportazione APK sul dispositivo con la tua icona, il numero di versione e un'immagine di avvio. Limiti attuali: solo Android e 2D, e uno sviluppatore indipendente che aggiorna il motore molto spesso.</p>
+<p>Nell'editor: annulla e ripeti (nella scena e nel Blueprint), salvataggio automatico, copia e incolla, cartelle per ordinare oggetti e file, griglia magnetica, più scene, prova immediata con il pulsante ▶ e un pulsante «Controlla il mio gioco» che trova le dimenticanze. Per creare: 166 nodi, editor di tile, editor di animazioni, creatore di musica, editor di effetti sonori, laboratorio dei personaggi (animare un personaggio da un'immagine), movimenti a passi, note nel Blueprint, giochi di dialogo con salvataggi, filtri dello schermo, particelle, ricerca del percorso, 50 modelli e guide passo passo. Per condividere: esportazione APK sul dispositivo con la tua icona, il numero di versione e un'immagine di avvio. Limiti attuali: solo Android e 2D, e uno sviluppatore indipendente che aggiorna il motore molto spesso.</p>
 </details>
 </section>
 

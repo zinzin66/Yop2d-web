@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How do I cut a sprite sheet into animations? | Yop2D guide</title>
+<meta name="description" content="In Yop2D, the &quot;Sheet&quot; button cuts a sprite sheet (columns and rows) and creates the animations for you, one per row or by picking the pictures by hand.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/planche-images.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/planche-images.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/planche-images.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/planche-images.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/planche-images.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/planche-images.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/planche-images.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/planche-images.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/planche-images.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/planche-images.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Cutting a sprite sheet into animations",
+ "description": "In Yop2D, the \"Sheet\" button cuts a sprite sheet (columns and rows) and creates the animations for you, one per row or by picking the pictures by hand.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Choose the sheet",
+   "text": "Assets → \"Sheet\", then your picture."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Count the pictures",
+   "text": "Tell Yop2D the columns and rows."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Create",
+   "text": "One animation per row, then \"Create N animations\"."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Cutting a sprite sheet into animations</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../planche-images.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/planche-images.html" hreflang="es">Español</a> · <a href="../de/planche-images.html" hreflang="de">Deutsch</a> · <a href="../it/planche-images.html" hreflang="it">Italiano</a> · <a href="../pt/planche-images.html" hreflang="pt">Português</a> · <a href="../ru/planche-images.html" hreflang="ru">Русский</a> · <a href="../zh/planche-images.html" hreflang="zh">中文</a> · <a href="../ja/planche-images.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Many characters come on <strong>a single sheet</strong>: all the walking or jumping pictures side by side, in rows. Yop2D <strong>cuts</strong> it up and makes the <strong>animations</strong> for you, so you don't have to save each picture.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a project open in the editor;</li><li>a sprite sheet (PNG) whose cells are all the same size.</li></ul>
+</div>
+<h2>Step 1: choose the sheet</h2>
+<div class="method">
+<ol><li>Open the <strong>Assets</strong> window and tap the <strong>Sheet</strong> button.</li><li>Pick your picture in the library. To use another one later: <strong>Change image</strong>.</li></ol>
+</div>
+<h2>Step 2: count the pictures</h2>
+<p>Answer <strong>How many pictures in the sheet?</strong>: the number of <strong>columns</strong> and <strong>rows</strong> (− and + buttons, or type the number). Yop2D suggests a number and tells you it guessed: <strong>count on your sheet and fix it if needed</strong>. The grid must fall exactly between the pictures.</p>
+<div class="tip">👉 A file name like "16x16" helps Yop2D guess the size of a cell.</div>
+<h2>Step 3: choose the animations</h2>
+<ul><li><strong>One animation per row</strong> (suggested when there are several rows): each row becomes an animation. Yop2D suggests names; tap ✎ to change them. With 4 rows it suggests walk_down, walk_left, walk_right, walk_up: these names are recognized by behaviors, so the animation plays by itself.</li><li><strong>Pick the pictures by hand</strong>: for an animation that spans several rows. Tap <strong>New animation</strong> if needed, pick the animation in the list, then tap the first picture on the sheet and slide to the last one.</li><li><strong>Skip empty cells</strong>: skips the empty cells of the sheet (ticked automatically if there are some).</li></ul>
+<h2>Step 4: preview and create</h2>
+<div class="method">
+<ol><li>Watch the <strong>Preview</strong>: it moves, so you can check the pictures flow well. The <strong>Preview speed</strong> setting only changes this preview.</li><li>Tap <strong>Create N animations</strong>.</li></ol>
+<div class="tip">👉 The game's speed is set in the “Play animation” node (frames per second), not in the preview.</div>
+</div>
+<p>The pictures are stored in <strong>Images</strong>, in a folder named after the sheet, and the animations appear in the animation list. Then use the “Play animation” node to play them.</p>
+
+<div class="nav">
+<a href="../en/entrees-sorties.html">← Inputs and outputs</a>
+<a href="../en/bruitages.html">Next guide: Create a sound effect →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>

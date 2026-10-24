@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>シートをアニメーションに切り分けるには？ | Yop2D ガイド</title>
+<meta name="description" content="Yop2D の「シート」ボタンは、画像シート（列と行）を切り分けて、アニメーションを自動で作ります。1行ごとに1つ、または絵を手動で選べます。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/planche-images.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/planche-images.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/planche-images.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/planche-images.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/planche-images.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/planche-images.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/planche-images.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/planche-images.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/planche-images.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/planche-images.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "シートをアニメーションに切り分ける",
+ "description": "Yop2D の「シート」ボタンは、画像シート（列と行）を切り分けて、アニメーションを自動で作ります。1行ごとに1つ、または絵を手動で選べます。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "シートを選ぶ",
+   "text": "Assets →「シート」、そして画像。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "絵を数える",
+   "text": "列と行の数を入れます。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "作る",
+   "text": "1行ごとに1つ、そして「アニメをN個作る」。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>シートをアニメーションに切り分ける</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../planche-images.html" hreflang="fr">Français</a> · <a href="../en/planche-images.html" hreflang="en">English</a> · <a href="../es/planche-images.html" hreflang="es">Español</a> · <a href="../de/planche-images.html" hreflang="de">Deutsch</a> · <a href="../it/planche-images.html" hreflang="it">Italiano</a> · <a href="../pt/planche-images.html" hreflang="pt">Português</a> · <a href="../ru/planche-images.html" hreflang="ru">Русский</a> · <a href="../zh/planche-images.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>多くのキャラは<strong>1枚のシート</strong>に入っています：歩く、ジャンプする絵が横に並び、行になっています。Yop2D がそれを<strong>切り分け</strong>て<strong>アニメ</strong>を作るので、1枚ずつ保存する必要はありません。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>エディターで開いているプロジェクト</li><li>すべてのマスが同じ大きさの画像シート（PNG）</li></ul>
+</div>
+<h2>ステップ1：シートを選ぶ</h2>
+<div class="method">
+<ol><li><strong>Assets</strong> ウィンドウを開き、<strong>シート</strong>ボタンを押します。</li><li>ライブラリーから画像を選びます。あとで別の画像にするには：<strong>画像を変える</strong>。</li></ol>
+</div>
+<h2>ステップ2：絵を数える</h2>
+<p><strong>シートに何枚の絵がありますか？</strong>に答えます：<strong>列</strong>と<strong>行</strong>の数です（− と + のボタン、または数字を入力）。Yop2D が数を提案し、推測したことを伝えます：<strong>シートで数えて、違ったら直してください</strong>。グリッドは絵と絵のあいだにぴったり合う必要があります。</p>
+<div class="tip">👉 「16x16」のようなファイル名は、Yop2D がマスの大きさを推測する助けになります。</div>
+<h2>ステップ3：アニメを選ぶ</h2>
+<ul><li><strong>1行ごとに1つのアニメ</strong>（行が複数あるときの初期の選択）：1行が1つのアニメになります。Yop2D が名前を提案します。✎ を押して変更できます。4行なら 歩く_下, 歩く_左, 歩く_右, 歩く_上 を提案します：この名前はビヘイビアが認識し、アニメは自動で再生されます。</li><li><strong>手動で絵を選ぶ</strong>：複数の行にまたがるアニメ用です。必要なら<strong>新しいアニメ</strong>を押し、リストでアニメを選んで、シートの最初の絵を押し、最後の絵までなぞります。</li><li><strong>空のマスを飛ばす</strong>：シートの空のマスを飛ばします（空があると自動でチェックされます）。</li></ul>
+<h2>ステップ4：確認して作る</h2>
+<div class="method">
+<ol><li><strong>プレビュー</strong>を見ます：動くので、絵がうまくつながるか確認できます。<strong>プレビューの速さ</strong>はこのプレビューだけを変えます。</li><li><strong>アニメをN個作る</strong>を押します。</li></ol>
+<div class="tip">👉 ゲーム中の速さは、プレビューではなく 「アニメを再生」 ノード（毎秒コマ数）で決めます。</div>
+</div>
+<p>画像は <strong>Images</strong> の中の、シートの名前のフォルダーに入り、アニメはアニメのリストに表示されます。あとは 「アニメを再生」 ノードで再生します。</p>
+
+<div class="nav">
+<a href="../ja/entrees-sorties.html">← 入力と出力</a>
+<a href="../ja/bruitages.html">次のガイド： 効果音を作る →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

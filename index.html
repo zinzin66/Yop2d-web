@@ -118,7 +118,9 @@
   "Step-by-step movements",
   "Elevators and moving platforms",
   "Cut a sprite sheet",
-  "Keep the score and the game"
+  "Keep the score and the game",
+  "An animated character from a single picture",
+  "Notes and frames in the Blueprint"
  ],
  "sameAs": [
   "https://youtube.com/@yop2d",
@@ -354,10 +356,42 @@
   },
   {
    "@type": "Question",
+   "name": "How do I explain my nodes or leave comments?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "In the Blueprint, tap the sticky-note button to place a free note (title, text, 6 colors, foldable), or pick nodes with the selection button then \"Frame them\": the frame has a title, a color and a \"?\" that opens an explanation. The nodes inside a frame follow it when you move it. Undo and redo work for notes too. A step-by-step guide exists: \"How do I explain my nodes with notes and frames?\"."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I create a sound effect (laser, jump, coin)?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "In the Assets window, tap \"Sound FX\" (Android 10 or later). Pick a retro sound (laser, jump, coin, explosion, power-up…) and adjust it with the sliders, or download the pack of 435 royalty-free sounds and tweak one of them. \"Create the sound (.ogg)\" saves it in your project, then the \"Play sound\" node plays it. A step-by-step guide exists: \"How do I create a sound effect?\"."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I cut a sprite sheet into animations?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "In the Assets, tap \"Sheet\", pick the image and give the number of columns and rows. Yop2D creates one animation per row (with names that behaviors recognize) or lets you pick the pictures by hand, even if an animation spans several rows. A step-by-step guide exists: \"How do I cut a sprite sheet into animations?\"."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I make a moving platform or an elevator?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Two ways. The simplest: ⚙ Object behavior → \"Elevator\" (direction, distance, pause, start when you step on it); it carries whatever stands on it. More freedom: create a step-by-step movement in the Assets (\"Movement\" button), play it with a node, and tick \"Carries what stands on it\" in the Ground behavior. To crush the player, the \"If object touches Tag\" event knows which side was touched."
+   }
+  },
+  {
+   "@type": "Question",
    "name": "What can Yop2D do today?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "In the editor: undo and redo (in the scene and in the Blueprint), automatic saving, copy-paste, folders to organise objects and files, grid snapping, several scenes, instant test with the ▶ button and a \"Check my game\" button that spots what you forgot. To create: 166 nodes, tile editor, animation editor, music maker, dialogue games with save slots, screen filters, particles, pathfinding, 50 templates and step-by-step guides. To share: APK export on the device with your own icon, version number and launch image. Current limits: Android and 2D only, and an independent developer who updates the engine very often."
+    "text": "In the editor: undo and redo (in the scene and in the Blueprint), automatic saving, copy-paste, folders to organise objects and files, grid snapping, several scenes, instant test with the ▶ button and a \"Check my game\" button that spots what you forgot. To create: 166 nodes, tile editor, animation editor, music maker, sound effect editor, character workshop (animate a character from one picture), step-by-step movements, notes in the Blueprint, dialogue games with save slots, screen filters, particles, pathfinding, 50 templates and step-by-step guides. To share: APK export on the device with your own icon, version number and launch image. Current limits: Android and 2D only, and an independent developer who updates the engine very often."
    }
   }
  ]
@@ -597,7 +631,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <section class="showcase">
 <h2>Example games included</h2>
 <img src="exemples_jeux.png" alt="Example games made with Yop2D running on Android" class="screenshot" loading="lazy" onerror="this.remove()">
-<p>Twenty example games can be downloaded from the engine's "Examples" tab: Neon shooter (ship arcade), Neon jump (platformer with a following camera), Platformer (coins, enemies and 3 lives), Climb & run (a character that walks, jumps, crouches and climbs ladders on its own), Maze chase (a maze where two flies chase you), Pirate battle (a naval battle against pirates), Candy match (match 3 candies), Memory cards (find the matching pairs of cards), Nexus UI (a futuristic interface: menus, options, shop), Firefly Night (a choice story with 4 endings), Dungeon walk and Dungeon escape (an isometric dungeon to explore, then escape), Crypt key (a top-down dungeon: trapdoors, spikes, a guard and a key), Lost on the moon (a choice-based story in 9 languages) and a showcase of every visual effect. Open them, play them, then change them to understand how everything works. New: Filters showcase, 32 screen filters and 19 transitions to try with a single tap. Hana Has an Urgent Question, an absurd dialogue comedy with 5 endings. Ruins maze, a huge isometric maze of ruins to explore by the light of a single torch. Space 1, a vertical space shooter drawn like a sketch, with a boss, guided missiles and extra-life bonuses. <a href="exemples/en.html">See all examples →</a></p>
+<p>Twenty-one example games can be downloaded from the engine's "Examples" tab: Neon shooter (ship arcade), Neon jump (platformer with a following camera), Platformer (coins, enemies and 3 lives), Climb & run (a character that walks, jumps, crouches and climbs ladders on its own), Maze chase (a maze where two flies chase you), Pirate battle (a naval battle against pirates), Candy match (match 3 candies), Memory cards (find the matching pairs of cards), Nexus UI (a futuristic interface: menus, options, shop), Firefly Night (a choice story with 4 endings), Dungeon walk and Dungeon escape (an isometric dungeon to explore, then escape), Crypt key (a top-down dungeon: trapdoors, spikes, a guard and a key), Lost on the moon (a choice-based story in 9 languages) and a showcase of every visual effect. Open them, play them, then change them to understand how everything works. New: Filters showcase, 32 screen filters and 19 transitions to try with a single tap. Hana Has an Urgent Question, an absurd dialogue comedy with 5 endings. Ruins maze, a huge isometric maze of ruins to explore by the light of a single torch. Space 1, a vertical space shooter drawn like a sketch, with a boss, guided missiles and extra-life bonuses. Story showcase, the showcase of dialogue games: moving background, parallax, bold and italic, achievements, text messages, moods and novel mode. Hana and the Mosquito, a short story where a mosquito circles around Hana then rushes at the screen. <a href="exemples/en.html">See all examples →</a></p>
 </section>
 <section class="showcase">
 <h2>On Tablets and Phones</h2>
@@ -867,6 +901,14 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <h3>Keep the score and the game</h3>
 <p>Two nodes, “Save variables” and “Load variables”: the score, the lives or an inventory are found again when the player closes and reopens the game. A ready-made template shows how.</p>
 </div>
+<div class="card">
+<h3>An animated character from a single picture</h3>
+<p>A "Character" button in the Assets: place the skeleton, outline each part, fill the gaps with the stamp, the color or the fill, and Yop2D makes Idle, Walk, Run, Jump, Attack and Hit, already recognized by the "platformer character" behavior. Undo and redo work everywhere.</p>
+</div>
+<div class="card">
+<h3>Notes and frames in the Blueprint</h3>
+<p>Put down sticky notes and surround groups of nodes with a colored frame, with a title and a "?" that opens the explanation: your script explains itself. The Memory cards, Pirate battle and Candy match examples already contain some.</p>
+</div>
 </div>
 </section>
 
@@ -998,6 +1040,21 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <h3>Inputs and outputs</h3>
 <p>One output = one wire, one input = as many wires as you like.</p>
 <p><a href="guides/en/entrees-sorties.html">Read the guide →</a></p>
+</div>
+<div class="card">
+<h3>Sprite sheet</h3>
+<p>One picture cut into ready-made animations.</p>
+<p><a href="guides/en/planche-images.html">Read the guide →</a></p>
+</div>
+<div class="card">
+<h3>Create a sound effect</h3>
+<p>A laser, a jump, a coin: build or tweak your sound.</p>
+<p><a href="guides/en/bruitages.html">Read the guide →</a></p>
+</div>
+<div class="card">
+<h3>Notes and frames</h3>
+<p>Write explanations right inside the Blueprint.</p>
+<p><a href="guides/en/notes-blueprint.html">Read the guide →</a></p>
 </div>
 </div>
 <p style="text-align:center;margin-top:1.5rem"><a class="btn btn-download" href="guides/en/index.html">📚 All guides →</a></p>
@@ -1173,8 +1230,24 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <p>In the Assets window, tap the "Character" button and choose your character picture (seen from the side). Place the skeleton (Yop2D tries to guess it), outline each part, fill any gaps with the stamp, the color or the fill, then choose Idle, Walk, Run, Jump, Attack and Hit: Yop2D makes the pictures and the animations, already recognized by the "platformer character" behavior. Undo and redo work everywhere. A step-by-step guide exists: "How do I animate a character from a single picture?".</p>
 </details>
 <details class="faq-item">
+<summary>How do I explain my nodes or leave comments?</summary>
+<p>In the Blueprint, tap the sticky-note button to place a free note (title, text, 6 colors, foldable), or pick nodes with the selection button then "Frame them": the frame has a title, a color and a "?" that opens an explanation. The nodes inside a frame follow it when you move it. Undo and redo work for notes too. A step-by-step guide exists: "How do I explain my nodes with notes and frames?".</p>
+</details>
+<details class="faq-item">
+<summary>How do I create a sound effect (laser, jump, coin)?</summary>
+<p>In the Assets window, tap "Sound FX" (Android 10 or later). Pick a retro sound (laser, jump, coin, explosion, power-up…) and adjust it with the sliders, or download the pack of 435 royalty-free sounds and tweak one of them. "Create the sound (.ogg)" saves it in your project, then the "Play sound" node plays it. A step-by-step guide exists: "How do I create a sound effect?".</p>
+</details>
+<details class="faq-item">
+<summary>How do I cut a sprite sheet into animations?</summary>
+<p>In the Assets, tap "Sheet", pick the image and give the number of columns and rows. Yop2D creates one animation per row (with names that behaviors recognize) or lets you pick the pictures by hand, even if an animation spans several rows. A step-by-step guide exists: "How do I cut a sprite sheet into animations?".</p>
+</details>
+<details class="faq-item">
+<summary>How do I make a moving platform or an elevator?</summary>
+<p>Two ways. The simplest: ⚙ Object behavior → "Elevator" (direction, distance, pause, start when you step on it); it carries whatever stands on it. More freedom: create a step-by-step movement in the Assets ("Movement" button), play it with a node, and tick "Carries what stands on it" in the Ground behavior. To crush the player, the "If object touches Tag" event knows which side was touched.</p>
+</details>
+<details class="faq-item">
 <summary>What can Yop2D do today?</summary>
-<p>In the editor: undo and redo (in the scene and in the Blueprint), automatic saving, copy-paste, folders to organise objects and files, grid snapping, several scenes, instant test with the ▶ button and a "Check my game" button that spots what you forgot. To create: 166 nodes, tile editor, animation editor, music maker, dialogue games with save slots, screen filters, particles, pathfinding, 50 templates and step-by-step guides. To share: APK export on the device with your own icon, version number and launch image. Current limits: Android and 2D only, and an independent developer who updates the engine very often.</p>
+<p>In the editor: undo and redo (in the scene and in the Blueprint), automatic saving, copy-paste, folders to organise objects and files, grid snapping, several scenes, instant test with the ▶ button and a "Check my game" button that spots what you forgot. To create: 166 nodes, tile editor, animation editor, music maker, sound effect editor, character workshop (animate a character from one picture), step-by-step movements, notes in the Blueprint, dialogue games with save slots, screen filters, particles, pathfinding, 50 templates and step-by-step guides. To share: APK export on the device with your own icon, version number and launch image. Current limits: Android and 2D only, and an independent developer who updates the engine very often.</p>
 </details>
 </section>
 

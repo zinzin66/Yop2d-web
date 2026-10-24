@@ -77,7 +77,7 @@
     [
       "Jeux d'exemple faits avec Yop2D sur Android",
       "Jeux d'exemple inclus",
-      "Vingt jeux d'exemple se téléchargent depuis l'onglet « Exemples » du moteur : Neon shooter (arcade de vaisseau), Neon jump (plateforme avec caméra qui suit), Platformer (pièces, ennemis et 3 vies), Climb & run (un personnage qui marche, saute, s'accroupit et grimpe aux échelles tout seul), Maze chase (un labyrinthe où deux mouches vous poursuivent), Pirate battle (une bataille navale contre des pirates), Candy match (alignez 3 bonbons), Memory cards (retrouvez les paires de cartes), Nexus UI (une interface futuriste : menus, options, boutique), Firefly Night (une histoire à choix avec 4 fins), Dungeon walk et Dungeon escape (un donjon en vue isométrique, à explorer puis à fuir), Crypt key (un donjon vu de dessus : trappes, pics, gardien et clé), Lost on the moon (une histoire à choix en 9 langues) et une vitrine de tous les effets visuels. Ouvrez-les, jouez-y, puis modifiez-les pour comprendre comment tout fonctionne. Nouveau : Filters showcase, 32 filtres d'écran et 19 transitions à essayer d'un toucher. Hana a une question urgente, une comédie absurde en dialogues avec 5 fins. Ruins maze, un grand labyrinthe de ruines en vue isométrique, à explorer à la seule lumière d'une torche. Space 1, un jeu de tir spatial vertical dessiné comme un croquis, avec boss, missiles guidés et bonus de vie. <a href=\"@/exemples/fr.html\">Voir tous les exemples →</a>"
+      "Vingt et un jeux d'exemple se téléchargent depuis l'onglet « Exemples » du moteur : Neon shooter (arcade de vaisseau), Neon jump (plateforme avec caméra qui suit), Platformer (pièces, ennemis et 3 vies), Climb & run (un personnage qui marche, saute, s'accroupit et grimpe aux échelles tout seul), Maze chase (un labyrinthe où deux mouches vous poursuivent), Pirate battle (une bataille navale contre des pirates), Candy match (alignez 3 bonbons), Memory cards (retrouvez les paires de cartes), Nexus UI (une interface futuriste : menus, options, boutique), Firefly Night (une histoire à choix avec 4 fins), Dungeon walk et Dungeon escape (un donjon en vue isométrique, à explorer puis à fuir), Crypt key (un donjon vu de dessus : trappes, pics, gardien et clé), Lost on the moon (une histoire à choix en 9 langues) et une vitrine de tous les effets visuels. Ouvrez-les, jouez-y, puis modifiez-les pour comprendre comment tout fonctionne. Nouveau : Filters showcase, 32 filtres d'écran et 19 transitions à essayer d'un toucher. Hana a une question urgente, une comédie absurde en dialogues avec 5 fins. Ruins maze, un grand labyrinthe de ruines en vue isométrique, à explorer à la seule lumière d'une torche. Space 1, un jeu de tir spatial vertical dessiné comme un croquis, avec boss, missiles guidés et bonus de vie. Story showcase, la vitrine des jeux de dialogue : décor qui bouge, parallaxe, gras et italique, succès, SMS, ambiances et mode roman. Hana et le moustique, une courte histoire où un moustique tourne autour d'Hana puis fonce vers l'écran. <a href=\"@/exemples/fr.html\">Voir tous les exemples →</a>"
     ],
     [
       "Éditeur de Yop2D sur un téléphone Android en mode paysage",
@@ -343,6 +343,14 @@
       [
         "Garder le score et la partie",
         "Deux nœuds, « Sauvegarder les variables » et « Charger les variables » : le score, les vies ou un inventaire sont retrouvés quand le joueur ferme puis rouvre le jeu. Un modèle prêt à l'emploi montre comment faire."
+      ],
+      [
+        "Un personnage animé à partir d'une seule image",
+        "Un bouton « Personnage » dans les Assets : posez le squelette, entourez chaque partie, bouchez les trous avec le tampon, la couleur ou le remplissage, et Yop2D fabrique Repos, Marche, Course, Saut, Attaque et Touché, déjà reconnus par le comportement « personnage de plateforme ». Annuler et refaire marchent partout."
+      ],
+      [
+        "Des notes et des cadres dans le Blueprint",
+        "Posez des post-it et entourez des groupes de nœuds d'un cadre coloré, avec un titre et un « ? » qui ouvre l'explication : votre script s'explique tout seul. Les exemples Memory cards, Pirate battle et Candy match en contiennent déjà."
       ]
     ]
   },
@@ -592,8 +600,24 @@
         "Dans la fenêtre des Assets, touchez le bouton « Personnage » et choisissez l'image de votre personnage (vu de côté). Posez le squelette (Yop2D essaie de le deviner), entourez chaque partie, bouchez au besoin les trous avec le tampon, la couleur ou le remplissage, puis choisissez Repos, Marche, Course, Saut, Attaque et Touché : Yop2D fabrique les images et les animations, déjà reconnues par le comportement « personnage de plateforme ». Annuler et refaire marchent partout. Un guide pas à pas existe : « Comment animer un personnage à partir d'une seule image ? »."
       ],
       [
+        "Comment expliquer mes nœuds ou laisser des commentaires ?",
+        "Dans le Blueprint, touchez le bouton post-it pour poser une note libre (titre, texte, 6 couleurs, repliable), ou choisissez des nœuds avec le bouton de sélection puis « Entourer d'un cadre » : le cadre a un titre, une couleur et un « ? » qui ouvre une explication. Les nœuds du cadre le suivent quand on le déplace. Annuler et refaire marchent aussi pour les notes. Un guide pas à pas existe : « Comment expliquer ses nœuds avec des notes et des cadres ? »."
+      ],
+      [
+        "Comment créer un bruitage (laser, saut, pièce) ?",
+        "Dans la fenêtre des Assets, touchez « Bruitage » (Android 10 ou plus). Choisissez un son rétro (laser, saut, pièce, explosion, bonus…) et réglez-le avec les curseurs, ou téléchargez le pack de 435 sons libres de droits et retouchez l'un d'eux. « Créer le son (.ogg) » l'enregistre dans votre projet, puis le nœud « Jouer un son » le joue. Un guide pas à pas existe : « Comment créer un bruitage ? »."
+      ],
+      [
+        "Comment découper une planche d'images (sprite sheet) ?",
+        "Dans les Assets, touchez « Planche », choisissez l'image et indiquez le nombre de colonnes et de lignes. Yop2D crée une animation par ligne (avec des noms que les comportements reconnaissent) ou vous laissez choisir les images à la main, même si une animation passe sur plusieurs lignes. Un guide pas à pas existe : « Comment découper une planche d'images en animations ? »."
+      ],
+      [
+        "Comment faire une plateforme ou un ascenseur qui bouge ?",
+        "Deux façons. Le plus simple : ⚙ Comportement de l'objet → « Ascenseur » (direction, distance, pause, départ quand on monte dessus) ; il emporte ce qui est posé dessus. Plus libre : créez un mouvement par étapes dans les Assets (bouton « Mouvement »), jouez-le avec un nœud, et cochez « Emporte ce qui est posé dessus » dans le comportement Sol. Pour écraser le joueur, l'événement « Si objet touche Tag » sait de quel côté on est touché."
+      ],
+      [
         "Qu'est-ce que Yop2D sait faire aujourd'hui ?",
-        "Dans l'éditeur : annuler et refaire (dans la scène et dans le Blueprint), enregistrement automatique, copier-coller, dossiers pour ranger objets et fichiers, grille aimantée, plusieurs scènes, test instantané avec le bouton ▶ et un bouton « Vérifier mon jeu » qui repère les oublis. Pour créer : {nb_noeuds} nœuds, éditeur de tuiles, éditeur d'animations, créateur de musique, jeux de dialogue avec sauvegardes, filtres d'écran, particules, recherche de chemin, 50 modèles et des guides pas à pas. Pour partager : export APK sur l'appareil avec votre icône, votre numéro de version et une image de lancement. Limites actuelles : Android et 2D seulement, un développeur indépendant qui met le moteur à jour très souvent."
+        "Dans l'éditeur : annuler et refaire (dans la scène et dans le Blueprint), enregistrement automatique, copier-coller, dossiers pour ranger objets et fichiers, grille aimantée, plusieurs scènes, test instantané avec le bouton ▶ et un bouton « Vérifier mon jeu » qui repère les oublis. Pour créer : {nb_noeuds} nœuds, éditeur de tuiles, éditeur d'animations, créateur de musique, éditeur de bruitages, atelier personnage (animer un personnage à partir d'une image), mouvements par étapes, notes dans le Blueprint, jeux de dialogue avec sauvegardes, filtres d'écran, particules, recherche de chemin, 50 modèles et des guides pas à pas. Pour partager : export APK sur l'appareil avec votre icône, votre numéro de version et une image de lancement. Limites actuelles : Android et 2D seulement, un développeur indépendant qui met le moteur à jour très souvent."
       ]
     ]
   },
