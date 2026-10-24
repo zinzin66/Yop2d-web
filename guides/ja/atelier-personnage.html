@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1枚の画像からキャラクターを動かすには？ | Yop2D ガイド</title>
+<meta name="description" content="Yop2D でキャラクターの画像を1枚読み込み、骨組みを置いて各パーツを囲むだけで、待機・歩く・走る・ジャンプ・攻撃・ダメージの動きができます。ほかに描く必要はありません。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/atelier-personnage.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/atelier-personnage.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/atelier-personnage.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/atelier-personnage.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/atelier-personnage.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/atelier-personnage.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/atelier-personnage.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/atelier-personnage.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/atelier-personnage.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/atelier-personnage.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "1枚の画像からキャラクターを動かすには？",
+ "description": "Yop2D でキャラクターの画像を1枚読み込み、骨組みを置いて各パーツを囲むだけで、待機・歩く・走る・ジャンプ・攻撃・ダメージの動きができます。ほかに描く必要はありません。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "工房を開く",
+   "text": "Assets ウィンドウ →「キャラ」ボタン、そして画像を選びます。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "骨組みを置く",
+   "text": "各丸を関節にドラッグし、続けて各パーツを囲みます。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "穴をふさぐ",
+   "text": "スタンプ・色・塗りつぶしで、腕が動いたときに見える部分を直します。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "アニメーションを作る",
+   "text": "動きを選んで「画像を作る」をタップします。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>1枚の画像からキャラクターを動かすには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../atelier-personnage.html" hreflang="fr">Français</a> · <a href="../en/atelier-personnage.html" hreflang="en">English</a> · <a href="../es/atelier-personnage.html" hreflang="es">Español</a> · <a href="../de/atelier-personnage.html" hreflang="de">Deutsch</a> · <a href="../it/atelier-personnage.html" hreflang="it">Italiano</a> · <a href="../pt/atelier-personnage.html" hreflang="pt">Português</a> · <a href="../ru/atelier-personnage.html" hreflang="ru">Русский</a> · <a href="../zh/atelier-personnage.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>キャラクターの画像が横向きで<strong>1枚だけ</strong>ありますか？Yop2D はそれをパーツ（頭・腕・脚など）に切り分けて動かし、<strong>待機・歩く・走る・ジャンプ・攻撃・ダメージ</strong>のアニメーションを作ります。ほかに描く必要も、画像シートを用意する必要もありません。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>エディターで開いているプロジェクト。</li><li>横向きのキャラクター画像（できれば背景が透明のもの。足が地面について、腕や脚がはっきり見えるもの）。</li></ul>
+</div>
+<h2>ステップ1：工房を開く</h2>
+<div class="method">
+<ol><li><strong>Assets</strong> ウィンドウ（リソースパネル）を開きます。</li><li>上の<strong>キャラ</strong>ボタンをタップし、<strong>キャラクターの画像を選ぶ</strong>を押します。</li><li>作業するには、キャラクターが<strong>右</strong>を向いている必要があります。左を向いているときは<strong>画像を左右反転</strong>をタップします。完成した画像はちゃんと左を向きます。</li></ol>
+<div class="tip">👉 上の <strong>↶</strong> と <strong>↷</strong> で、ほとんどの操作を取り消し・やり直しできます（最大60回）。気軽に試してください。</div>
+</div>
+<h2>ステップ2：骨組みを置く</h2>
+<div class="method">
+<ol><li><strong>骨組みを自動で置く</strong>をタップすると、Yop2D が関節の場所を推測します。</li><li>そのあとで直します。各丸を本当の関節（首・肩・ひじ・手・腰・ひざ・足首・つま先）にドラッグしてください。虫めがねが指の下の場所を見せてくれます。</li><li>丸をタップすると、名前の下にどこに置くかが表示されます。</li></ol>
+<div class="tip">👉 丸は関節の<strong>軸</strong>（腕や脚が回る点）に置き、端には置かないでください。正確なほど動きがきれいになります。</div>
+</div>
+<h2>ステップ3：各パーツを囲む</h2>
+<div class="method">
+<ol><li><strong>輪郭</strong>のステップをタップし、リストまたは画像上でパーツを選びます。</li><li>点をドラッグして絵の輪郭に沿わせます。辺の中ほどにある小さな <strong>+</strong> で点が増え、<strong>選んだ点を消す</strong>で1つ減ります。</li><li>すでに輪郭がうまく合っているときは、<strong>自動の輪郭</strong>を試してください。</li></ol>
+<div class="tip">👉 腕や脚は複数のパーツに分かれています（上腕と前腕、太もも・すね・足）。だからひじやひざが曲がります。</div>
+</div>
+<h2>ステップ4：穴をふさぐ（任意）</h2>
+<p>腕や脚が動くと、もとの場所に穴ができます。<strong>スタンプ</strong>のステップではキャラクターが動いた状態で表示され、穴が見えます。まず <strong>1. コピー元を選ぶ</strong>：絵のきれいな場所（たとえば服）をタップします。</p>
+<div class="method">
+<ul><li><strong>2. 穴をなぞる：</strong>選んだ場所を穴にコピーします。スタンプと同じです。</li><li><strong>2b. 選んだ場所の色で塗る：</strong>ブラシは選んだ場所の色ひとつで塗ります。破れた部分に便利です。</li><li><strong>2c. 点を置いて塗りつぶす：</strong>穴のまわりに点を置き、<strong>範囲を塗る</strong>をタップします。指を離す前なら点を動かせます。</li><li><strong>3. 消しゴム（垂れ下がりを消す）：</strong>はみ出した部分や垂れ下がった部分を消します。スライダーでブラシと消しゴムの大きさを決めます。</li><li><strong>直前の一筆を取り消す</strong>と<strong>すべて消す</strong>で、やり直せます。</li></ul>
+<div class="tip">👉 色がはみ出したら、消しゴムでなぞってください。いつでも直せます。</div>
+</div>
+<h2>ステップ5：動きを選んで試す</h2>
+<div class="method">
+<ol><li><strong>動かす</strong>のステップで動きを選びます：待機・歩く・走る・ジャンプ・攻撃・ダメージ。繰り返し動くのが見えます。</li><li><strong>速さ</strong>（1秒あたりのコマ数）と<strong>動きの大きさ</strong>（歩幅を小さく・大きく）を調整します。</li></ol>
+</div>
+<h2>ステップ6：画像を作る</h2>
+<div class="method">
+<ol><li><strong>作成</strong>のステップで、キャラクターに名前をつけ、作りたい動きにチェックを入れます。</li><li><strong>画像を作る</strong>をタップします。画像はプロジェクトの Images フォルダーに保存され、アニメーションがリストに追加されます。</li><li>使うには、キャラクターをシーンに置き、「プラットフォームのキャラクター」の動作を設定します。待機・歩く・走る・ジャンプのアニメーションを自動で認識します。「アニメを再生」 で再生することもできます。</li></ol>
+<div class="tip">👉 アニメーション名（待機・歩く・ジャンプなど）は Yop2D の動作が認識する名前です。設定は必要ありません。</div>
+</div>
+<h2>うまくいかないとき</h2>
+<ul><li><strong>キャラクターが逆を向いている：</strong>ステップ1で「画像を左右反転」をタップします。</li><li><strong>動くと手足に穴が見える：</strong>スタンプのステップで穴をふさぎます（コピー元・色・塗りつぶし）。</li><li><strong>腕が2本見える：</strong>パーツのリストで「このパーツは体に残る」のチェックを外します。</li><li><strong>結果がおかしい：</strong>↶ で戻るか、骨組みの点をもっと正確に置きます。</li><li><strong>絵が正面向き：</strong>今のところ、工房は横向きのキャラクターで動きます。</li></ul>
+
+<div class="nav">
+<a href="../ja/musique.html">← 自分の音楽を作ろう</a>
+<a href="../ja/interface-demarrage.html">次のガイド： 画像で見るスタート画面 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>
