@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie macht man ein Breakout-Spiel in Yop2D? | Yop2D-Anleitung</title>
+<meta name="description" content="Ein Breakout-Spiel in Yop2D ohne Code: ein Schläger, den du mit dem Finger bewegst, ein springender Ball, Steine zum Zerstören, Punkte und Leben mit Knoten.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/casse-briques.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/casse-briques.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/casse-briques.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/casse-briques.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/casse-briques.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/casse-briques.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/casse-briques.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/casse-briques.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/casse-briques.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/casse-briques.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie macht man ein Breakout-Spiel?",
+ "description": "Ein Breakout-Spiel in Yop2D ohne Code: ein Schläger, den du mit dem Finger bewegst, ein springender Ball, Steine zum Zerstören, Punkte und Leben mit Knoten.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Den Schläger platzieren",
+   "text": "Finger gedrückt → Objekt bewegen (paddle, X = folgt dem Finger)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Den Ball losschicken",
+   "text": "Beim Start → Variable ändern (vx, vy); Jeden Frame → Objekt schieben (ball, =vx, =vy)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "An den Rändern abprallen",
+   "text": "Bedingung (=ball.x <= 0) → Wahr → Variable ändern (vx, =abs(vx))."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Am Schläger abprallen",
+   "text": "Kollision A/B (ball, paddle) → Variable ändern (vy, =-abs(vy))."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Die Steine zerstören",
+   "text": "Wenn Objekt Tag berührt (ball, brick) → Objekt zerstören → Zu Variable hinzufügen (score, 10)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Leben und Spielende",
+   "text": "Bedingung (=ball.y >= 1920) → Zu Variable hinzufügen (lives, -1) → Bedingung (=lives <= 0) → Szene neu starten."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../de/index.html">← Yop2D</a>
+<h1>Wie macht man ein Breakout-Spiel?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../casse-briques.html" hreflang="fr">Français</a> · <a href="../en/casse-briques.html" hreflang="en">English</a> · <a href="../es/casse-briques.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/casse-briques.html" hreflang="it">Italiano</a> · <a href="../pt/casse-briques.html" hreflang="pt">Português</a> · <a href="../ru/casse-briques.html" hreflang="ru">Русский</a> · <a href="../zh/casse-briques.html" hreflang="zh">中文</a> · <a href="../ja/casse-briques.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Bei einem Breakout-Spiel prallt ein <strong>Ball</strong> an den Rändern und an einem <strong>Schläger</strong> ab, den du mit dem Finger bewegst, und zerstört <strong>Steine</strong>. Hier steuern wir den Ball mit zwei kleinen Variablen: <strong>vx</strong> (seine Geschwindigkeit nach rechts) und <strong>vy</strong> (seine Geschwindigkeit nach unten). Wenn der Ball abprallt, ändern wir einfach das Vorzeichen der Variable.</p>
+<div class="besoin">
+<b>Du brauchst:</b>
+<ul><li>ein Bild namens <strong>paddle</strong>, unten auf dem Bildschirm (zum Beispiel 208 x 48 px, etwa bei y = 1700);</li><li>ein Bild namens <strong>ball</strong>, in der Mitte des Bildschirms (zum Beispiel 44 x 44 px);</li><li>Steine: Bilds oben auf dem Bildschirm (zum Beispiel 128 x 64 px, 8 pro Reihe);</li><li>zwei Text-Objekte: <strong>scoreText</strong> (Text „Punkte: 0“) und <strong>livesText</strong> (Text „Leben: 3“), oben auf dem Bildschirm.</li></ul>
+</div>
+<div class="tip">👉 Diese Anleitung ist für ein Spiel im <strong>Hochformat 1080 x 1920</strong> geschrieben. Die Bilder stammen aus dem kostenlosen Paket <strong>Puzzle (brick breaker)</strong> (Kenney, frei nutzbar, CC0). Lade es in der Yop2D-<strong>Bibliothek</strong> im Tab <strong>Pakete zum Herunterladen</strong> herunter: Dort findest du <strong>paddleBlu</strong> (Schläger, 208 x 48), <strong>ballBlue</strong> (Ball, 44 x 44) und <strong>element_blue_rectangle_glossy</strong> (Stein, 128 x 64, in Blau, Grün, Rot, Gelb, Lila und Grau). Du kannst auch eigene Zeichnungen verwenden: Dann passe die Zahlen in den Formeln an ihre Größen an.</div>
+<h2>Schritt 1: Tags und Variablen</h2>
+<div class="method">
+<ol><li>Wähle einen Stein aus. Schreibe im Inspektor im Feld <strong>Tag (Etikett)</strong> <strong>brick</strong>. Mache dasselbe bei jedem Stein.</li><li>Öffne im linken Bereich den Abschnitt <strong>Variablen</strong> und lege fünf Variablen an, alle mit dem Bereich <strong>Lokal</strong> und dem Typ <strong>Ganze Zahl</strong>:</li></ol>
+<ul><li><strong>score</strong>: Startwert <strong>0</strong>;</li><li><strong>lives</strong>: Startwert <strong>3</strong>;</li><li><strong>bricks</strong>: die <strong>Anzahl der Steine</strong> in deinem Spiel (zum Beispiel <strong>27</strong>). Sie zeigt, wann alles zerstört ist;</li><li><strong>vx</strong> und <strong>vy</strong>: Startwert <strong>0</strong>. Das ist die Geschwindigkeit des Balls, sie wird beim Start festgelegt.</li></ul>
+<div class="tip">👉 Ein Stein mehr oder weniger? Ändere einfach den Startwert von <strong>bricks</strong>. Ist die Zahl zu groß, gewinnst du nie; ist sie zu klein, gewinnst du zu früh.</div>
+</div>
+<h2>Schritt 2: Der Schläger folgt dem Finger</h2>
+<div class="method">
+<ol><li>Öffne das <strong>Blueprint</strong> der Szene.</li><li>Füge das Ereignis <strong>„Finger gedrückt“</strong> hinzu (es wiederholt sich, solange ein Finger auf dem Bildschirm ist).</li><li>Füge <strong>„Objekt bewegen“</strong> hinzu: Ziel <strong>paddle</strong>, <strong>X</strong> = <code>=clamp(doigt.x - 104, 0, 872)</code>, <strong>Y</strong> = <code>1700</code>.</li><li>Verbinde die beiden Knoten und starte das Spiel: Der Schläger folgt deinem Finger und verlässt den Bildschirm nie.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Finger gedrückt</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Objekt bewegen</b><span>paddle · =clamp(doigt.x - 104, 0, 872) · 1700</span></div>
+</div>
+<div class="tip">👉 <strong>Wie liest man die Formel?</strong> <code>doigt.x</code> ist die Position deines Fingers („doigt“ heißt auf Französisch Finger). Wir ziehen 104 ab (die Hälfte des Schlägers), um ihn unter dem Finger zu zentrieren. <code>clamp(…, 0, 872)</code> hält ihn auf dem Bildschirm: 872 = 1080 − 208 (die Breite des Schlägers).</div>
+</div>
+<h2>Schritt 3: Der Ball startet</h2>
+<div class="method">
+<ol><li>Füge das Ereignis <strong>„Beim Start“</strong> hinzu und danach zwei <strong>„Variable ändern“</strong>-Knoten hintereinander: Variable <strong>vx</strong> = <code>6</code>, dann Variable <strong>vy</strong> = <code>-9</code>.</li><li>Füge das Ereignis <strong>„Jeden Frame“</strong> hinzu und danach <strong>„Objekt schieben“</strong>: Ziel <strong>ball</strong>, <strong>X hinzufügen</strong> = <code>=vx</code>, <strong>Y hinzufügen</strong> = <code>=vy</code>.</li><li>Verbinde jedes Ereignis mit seinen Knoten und starte das Spiel: Der Ball fliegt nach rechts oben und verlässt den Bildschirm.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Beim Start</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Variable ändern</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Variable ändern</b><span>vy · -9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Jeden Frame</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Objekt schieben</b><span>ball · =vx · =vy</span></div>
+</div>
+<div class="tip">👉 <strong>Negativ = nach oben.</strong> In Yop2D wächst Y zum unteren Bildschirmrand hin: <strong>vy = -9</strong> schickt den Ball nach oben. Für einen schnelleren Ball nimm 8 und -12.</div>
+</div>
+<h2>Schritt 4: An den Rändern abprallen</h2>
+<div class="method">
+<p>Direkt nach <strong>„Objekt schieben“</strong> prüfen wir in jedem Bild, ob der Ball einen Rand berührt. Wir verketten drei <strong>„Bedingung“</strong>-Knoten und folgen jedes Mal dem Ausgang <strong>„Danach“</strong> (der in jedem Fall läuft).</p>
+<ol><li>Linker Rand: <strong>„Bedingung“</strong> <code>=ball.x &lt;= 0</code>. Ausgang <strong>Wahr</strong> → <strong>„Variable ändern“</strong>: Variable <strong>vx</strong>, Wert <code>=abs(vx)</code> (immer nach rechts).</li><li>Rechter Rand: <strong>„Bedingung“</strong> <code>=ball.x &gt;= 1036</code>. Ausgang <strong>Wahr</strong> → <strong>„Variable ändern“</strong>: Variable <strong>vx</strong>, Wert <code>=-abs(vx)</code> (immer nach links). 1036 = 1080 − 44 (die Breite des Balls).</li><li>Oben: <strong>„Bedingung“</strong> <code>=ball.y &lt;= 0</code>. Ausgang <strong>Wahr</strong> → <strong>„Variable ändern“</strong>: Variable <strong>vy</strong>, Wert <code>=abs(vy)</code> (immer nach unten).</li><li>Verbinde jede <strong>„Bedingung“</strong> über ihren Ausgang <strong>„Danach“</strong> mit der nächsten. Die erste wird mit dem Ausgang von <strong>„Objekt schieben“</strong> verbunden.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Objekt schieben</b><span>ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Bedingung</b><span>=ball.x &lt;= 0</span></div>
+<div class="fleche"><em>Wahr</em> →</div>
+<div class="noeud"><b>Variable ändern</b><span>vx · =abs(vx)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Bedingung</b><span>=ball.x &gt;= 1036</span></div>
+<div class="fleche"><em>Wahr</em> →</div>
+<div class="noeud"><b>Variable ändern</b><span>vx · =-abs(vx)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Bedingung</b><span>=ball.y &lt;= 0</span></div>
+<div class="fleche"><em>Wahr</em> →</div>
+<div class="noeud"><b>Variable ändern</b><span>vy · =abs(vy)</span></div>
+</div>
+<div class="tip">👉 <strong>Warum abs?</strong> <code>abs(vx)</code> ist immer eine positive Zahl. Am linken Rand wird der Ball also gezwungen, nach rechts zu fliegen, selbst wenn er den Rand in zwei Bildern hintereinander berührt: Er bleibt nie stecken.</div>
+</div>
+<h2>Schritt 5: Am Schläger abprallen</h2>
+<div class="method">
+<ol><li>Füge das Ereignis <strong>„Kollision A/B“</strong> hinzu: <strong>Objekt A</strong> = <strong>ball</strong>, <strong>Objekt B</strong> = <strong>paddle</strong>.</li><li>Füge <strong>„Variable ändern“</strong> hinzu: Variable <strong>vy</strong>, Wert <code>=-abs(vy)</code> (der Ball fliegt wieder nach oben).</li><li>Füge einen zweiten <strong>„Variable ändern“</strong> hinzu: Variable <strong>vx</strong>, Wert <code>=(ball.x + 22 - paddle.x - 104) / 13</code>.</li><li>Verbinde die drei Knoten der Reihe nach.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Kollision A/B</b><span>ball · paddle</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Variable ändern</b><span>vy · =-abs(vy)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Variable ändern</b><span>vx · =(ball.x + 22 - paddle.x - 104) / 13</span></div>
+</div>
+<div class="tip">👉 <strong>Wozu dient die letzte Formel?</strong> Sie misst, wo der Ball auf den Schläger trifft: In der Mitte fliegt er gerade nach oben; am linken Rand nach links; am rechten Rand nach rechts. Der Spieler kann also <strong>zielen</strong>. (22 = die Hälfte des Balls, 104 = die Hälfte des Schlägers.)</div>
+</div>
+<h2>Schritt 6: Die Steine zerstören</h2>
+<div class="method">
+<ol><li>Füge das Ereignis <strong>„Wenn Objekt Tag berührt“</strong> hinzu: Ziel <strong>ball</strong>, Tag <strong>brick</strong>.</li><li>Füge <strong>„Objekt zerstören“</strong> hinzu und wähle <strong>Das beteiligte Objekt</strong> als Ziel: Das ist der Stein, den der Ball gerade berührt hat.</li><li>Füge <strong>„Variable ändern“</strong> hinzu: Variable <strong>vy</strong>, Wert <code>=-vy</code> (der Ball prallt ab).</li><li>Füge <strong>„Zu Variable hinzufügen“</strong> hinzu: Variable <strong>score</strong>, <strong>Hinzuzufügender Wert = 10</strong>.</li><li>Füge <strong>„Zu Variable hinzufügen“</strong> hinzu: Variable <strong>bricks</strong>, <strong>Hinzuzufügender Wert = -1</strong>.</li><li>Füge <strong>„Text ändern“</strong> hinzu: Ziel <strong>scoreText</strong>, <strong>Neuer Text</strong> = <code>="Punkte: " + score</code>.</li><li>Verbinde alle Knoten der Reihe nach.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Wenn Objekt Tag berührt</b><span>ball · brick</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Objekt zerstören</b><span>Impliziertes Objekt</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Variable ändern</b><span>vy · =-vy</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Zu Variable hinzufügen</b><span>score · + 10</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Zu Variable hinzufügen</b><span>bricks · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Text ändern</b><span>scoreText</span></div>
+</div>
+<div class="tip">👉 Wenn der Ball einen Stein zerstört, prallt er immer nach oben oder unten ab, auch wenn er den Stein von der Seite getroffen hat. Das ist einfach und funktioniert bei einem Breakout-Spiel gut.</div>
+</div>
+<h2>Schritt 7: Gewinnen</h2>
+<div class="method">
+<p>Füge nach <strong>„Text ändern“</strong> aus Schritt 6 hinzu:</p>
+<ol><li><strong>„Bedingung“</strong> <code>=bricks &lt;= 0</code>.</li><li>Am Ausgang <strong>Wahr</strong>: <strong>„Variable ändern“</strong> <strong>vx</strong> = <code>0</code>, <strong>„Variable ändern“</strong> <strong>vy</strong> = <code>0</code> (der Ball bleibt stehen), dann <strong>„Kurze Nachricht unten am Bildschirm“</strong> mit der Nachricht <strong>Gewonnen!</strong>, dann <strong>„Warten“</strong> 2 Sekunden, dann <strong>„Szene neu starten“</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Text ändern</b><span>scoreText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Bedingung</b><span>=bricks &lt;= 0</span></div>
+<div class="fleche"><em>Wahr</em> →</div>
+<div class="noeud"><b>Variable ändern</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Variable ändern</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Kurze Nachricht unten am Bildschirm</b><span>Gewonnen!</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Warten</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Szene neu starten</b></div>
+</div>
+<div class="tip">👉 „Szene neu starten“ stellt die Objekte wieder an ihren Platz und setzt die <strong>Lokal</strong>-Variablen auf ihren Startwert zurück: Das Spiel beginnt neu mit 3 Leben, 0 Punkten und allen Steinen.</div>
+</div>
+<h2>Schritt 8: Leben und Game Over</h2>
+<div class="method">
+<p>Wenn der Ball unter den Schläger fällt, verliert der Spieler ein Leben. Wir setzen die Kette aus Schritt 4 fort: Füge nach der dritten <strong>„Bedingung“</strong> (oben) eine vierte hinzu, verbunden über ihren Ausgang <strong>„Danach“</strong>.</p>
+<ol><li><strong>„Bedingung“</strong> <code>=ball.y &gt;= 1920</code>, Ausgang <strong>Wahr</strong>.</li><li><strong>„Zu Variable hinzufügen“</strong>: Variable <strong>lives</strong>, <strong>Hinzuzufügender Wert = -1</strong>.</li><li><strong>„Text ändern“</strong>: Ziel <strong>livesText</strong>, <strong>Neuer Text</strong> = <code>="Leben: " + lives</code>.</li><li><strong>„Bedingung“</strong> <code>=lives &lt;= 0</code>.</li><li>Ausgang <strong>Wahr</strong> (kein Leben mehr): <strong>„Objekt bewegen“</strong> den <strong>ball</strong> nach X = <code>518</code>, Y = <code>1000</code>, <strong>„Variable ändern“</strong> <strong>vx</strong> = <code>0</code>, <strong>„Variable ändern“</strong> <strong>vy</strong> = <code>0</code> (der Ball wird in die Mitte zurückgesetzt und angehalten), dann <strong>„Kurze Nachricht unten am Bildschirm“</strong> „Spiel vorbei!“, <strong>„Warten“</strong> 2 Sekunden, <strong>„Szene neu starten“</strong>.</li><li>Ausgang <strong>Falsch</strong> (noch Leben übrig): <strong>„Objekt bewegen“</strong> den <strong>ball</strong> nach X = <code>518</code>, Y = <code>1000</code>, dann <strong>„Variable ändern“</strong> <strong>vy</strong> = <code>-9</code>, dann <strong>„Variable ändern“</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
+<div class="chaine">
+<div class="noeud condition"><b>Bedingung</b><span>=ball.y &gt;= 1920</span></div>
+<div class="fleche"><em>Wahr</em> →</div>
+<div class="noeud"><b>Zu Variable hinzufügen</b><span>lives · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Text ändern</b><span>livesText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Bedingung</b><span>=lives &lt;= 0</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Bedingung</b><span>=lives &lt;= 0</span></div>
+<div class="fleche"><em>Wahr</em> →</div>
+<div class="noeud"><b>Objekt bewegen</b><span>ball · 518 · 1000</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Variable ändern</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Variable ändern</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Kurze Nachricht unten am Bildschirm</b><span>Spiel vorbei!</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Warten</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Szene neu starten</b></div>
+</div>
+<div class="tip">👉 <strong>Warum den Ball vor dem Warten anhalten?</strong> Während der 2 Sekunden Wartezeit läuft das Spiel weiter. Bliebe der Ball unter dem Bildschirm, würde er in jedem Bild ein Leben kosten, und der Lebenszähler würde sehr tief fallen (-178!). In die Mitte zurückgesetzt und ruhig stört er nicht mehr.</div>
+<div class="chaine">
+<div class="noeud condition"><b>Bedingung</b><span>=lives &lt;= 0</span></div>
+<div class="fleche"><em>Falsch</em> →</div>
+<div class="noeud"><b>Objekt bewegen</b><span>ball · 518 · 1000</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Variable ändern</b><span>vy · -9</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Variable ändern</b><span>vx · 6</span></div>
+</div>
+</div>
+<h2>Weiter gehen</h2>
+<ul><li><strong>Sounds:</strong> Füge <strong>„Sound abspielen“</strong> nach <strong>„Objekt zerstören“</strong> hinzu (ein „Klack“, wenn ein Stein zerbricht) und im Ereignis des Schlägers.</li><li><strong>Verschiedene Farben:</strong> Gib allen Steinen denselben Tag <strong>brick</strong>, egal welche Farbe sie haben: Ein einziger Aufbau genügt.</li><li><strong>Mehr Tempo:</strong> Füge bei jedem zerstörten Stein <strong>„Variable ändern“</strong> <code>=vx * 1.02</code> hinzu, damit das Spiel immer schwerer wird.</li><li><strong>Funken:</strong> Füge einen <strong>„Partikeleffekt“</strong> hinzu, wenn ein Stein zerbricht (siehe die Anleitung <a href="../de/particules-effets.html">Partikel und Effekte</a>).</li></ul>
+<h2>Wenn es nicht funktioniert</h2>
+<ul><li><strong>Der Ball bewegt sich nicht:</strong> Prüfe, dass <strong>vx</strong> und <strong>vy</strong> beim Start geändert werden und dass <strong>„Objekt schieben“</strong> die Formeln <code>=vx</code> und <code>=vy</code> benutzt (mit dem <strong>=</strong> am Anfang).</li><li><strong>Der Ball fliegt durch den Schläger oder die Steine:</strong> Prüfe die Namen (<strong>ball</strong>, <strong>paddle</strong>) und den Tag <strong>brick</strong>, überall gleich geschrieben (ohne Großbuchstaben). Ist der Ball sehr schnell, mache die Steine etwas größer oder bremse den Ball.</li><li><strong>Der Ball verlässt den Bildschirm ohne abzuprallen:</strong> Die <strong>„Bedingung“</strong>-Knoten müssen nacheinander über den Ausgang <strong>„Danach“</strong> verbunden sein, und der erste muss von <strong>„Objekt schieben“</strong> ausgehen.</li><li><strong>Du gewinnst zu früh oder nie:</strong> Die Variable <strong>bricks</strong> muss genau der Anzahl der Steine im Spiel entsprechen.</li><li><strong>Der Schläger bewegt sich schlecht:</strong> In der Formel ist <code>doigt.x</code> der Finger, nicht der Schläger; behalte das <strong>=</strong> am Anfang und schließe die Klammer.</li></ul>
+
+<div class="nav">
+<a href="../de/vie-game-over.html">← Leben verlieren und Game Over</a>
+<a href="../de/niveau-suivant.html">Nächste Anleitung: Zum nächsten Level →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../de/index.html">Offizielle Website</a> · <a href="../../noeuds/de.html">Knotenreferenz</a></p>
+</footer>
+</body>
+</html>

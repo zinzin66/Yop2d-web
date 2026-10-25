@@ -8,6 +8,13 @@
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/casse-briques.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/casse-briques.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/casse-briques.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/casse-briques.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/casse-briques.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/casse-briques.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/casse-briques.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/casse-briques.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/casse-briques.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/casse-briques.html">
 <link rel="stylesheet" href="guide.css">
 <script type="application/ld+json">
 {
@@ -62,7 +69,7 @@
 <a href="../fr/index.html">← Yop2D</a>
 <h1>Comment faire un casse-briques ?</h1>
 <p>Guide débutant · sans code</p>
-<p class="langues"><strong>Français</strong> · <a href="en/casse-briques.html" hreflang="en">English</a></p>
+<p class="langues"><strong>Français</strong> · <a href="en/casse-briques.html" hreflang="en">English</a> · <a href="es/casse-briques.html" hreflang="es">Español</a> · <a href="de/casse-briques.html" hreflang="de">Deutsch</a> · <a href="it/casse-briques.html" hreflang="it">Italiano</a> · <a href="pt/casse-briques.html" hreflang="pt">Português</a> · <a href="ru/casse-briques.html" hreflang="ru">Русский</a> · <a href="zh/casse-briques.html" hreflang="zh">中文</a> · <a href="ja/casse-briques.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
 <p>Dans un casse-briques, une <strong>balle</strong> rebondit sur les bords, sur une <strong>raquette</strong> que tu déplaces au doigt, et casse des <strong>briques</strong>. Ici, on pilote la balle avec deux petites variables, <strong>vx</strong> (sa vitesse vers la droite) et <strong>vy</strong> (sa vitesse vers le bas). Quand la balle rebondit, on change simplement le signe de la variable.</p>
@@ -70,7 +77,7 @@
 <b>Il te faut :</b>
 <ul><li>une Image nommée <strong>raquette</strong>, en bas de l'écran (par exemple 208 x 48 px, vers y = 1700) ;</li><li>une Image nommée <strong>balle</strong>, au milieu de l'écran (par exemple 44 x 44 px) ;</li><li>des briques : des Images en haut de l'écran (par exemple 128 x 64 px, 8 par ligne) ;</li><li>deux objets Texte : <strong>texteScore</strong> (texte « Score : 0 ») et <strong>texteVies</strong> (texte « Vies : 3 »), en haut de l'écran.</li></ul>
 </div>
-<div class="tip">👉 Ce guide est écrit pour un jeu en <strong>portrait de 1080 x 1920</strong>. Les images viennent du pack gratuit <strong>Puzzle Pack</strong> de Kenney (libre de droits, CC0), dossier <strong>PNG/Double</strong> : <strong>paddleBlu.png</strong> (raquette, 208 x 48), <strong>ballBlue.png</strong> (balle, 44 x 44) et <strong>element_blue_rectangle_glossy.png</strong> (brique, 128 x 64, existe en bleu, vert, rouge, jaune, violet et gris). Tu peux aussi utiliser tes propres dessins : adapte alors les nombres des formules à leurs tailles.</div>
+<div class="tip">👉 Ce guide est écrit pour un jeu en <strong>portrait de 1080 x 1920</strong>. Les images viennent du pack gratuit <strong>Puzzle (casse-briques)</strong> (Kenney, libre de droits, CC0). Télécharge-le dans la <strong>Bibliothèque</strong> de Yop2D, onglet <strong>Packs à télécharger</strong> : tu y trouves <strong>paddleBlu</strong> (raquette, 208 x 48), <strong>ballBlue</strong> (balle, 44 x 44) et <strong>element_blue_rectangle_glossy</strong> (brique, 128 x 64, en bleu, vert, rouge, jaune, violet et gris). Tu peux aussi utiliser tes propres dessins : adapte alors les nombres des formules à leurs tailles.</div>
 <h2>Étape 1 : les tags et les variables</h2>
 <div class="method">
 <ol><li>Sélectionne une brique. Dans l'inspecteur, champ <strong>Tag (Étiquette)</strong>, écris <strong>brique</strong>. Fais pareil pour chaque brique.</li><li>Dans le panneau de gauche, ouvre la section <strong>Variables</strong> et crée cinq variables, toutes en portée <strong>Locale</strong> et type <strong>Entier</strong> :</li></ol>
@@ -79,17 +86,17 @@
 </div>
 <h2>Étape 2 : la raquette suit le doigt</h2>
 <div class="method">
-<ol><li>Ouvre le <strong>Blueprint</strong> de la scène.</li><li>Ajoute l'événement <strong>« Doigt appuyé »</strong> (il se répète tant qu'un doigt est posé sur l'écran).</li><li>Ajoute <strong>« Déplacer Objet »</strong> : cible <strong>raquette</strong>, <strong>X</strong>, valeur <code>=clamp(doigt.x - 104, 0, 872)</code>, <strong>Y</strong> = <code>1700</code>.</li><li>Relie les deux nœuds, puis lance le jeu : la raquette suit ton doigt sans sortir de l'écran.</li></ol>
+<ol><li>Ouvre le <strong>Blueprint</strong> de la scène.</li><li>Ajoute l'événement <strong>« Doigt appuyé »</strong> (il se répète tant qu'un doigt est posé sur l'écran).</li><li>Ajoute <strong>« Déplacer Objet »</strong> : cible <strong>raquette</strong>, <strong>X</strong> = <code>=clamp(doigt.x - 104, 0, 872)</code>, <strong>Y</strong> = <code>1700</code>.</li><li>Relie les deux nœuds, puis lance le jeu : la raquette suit ton doigt sans sortir de l'écran.</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>Doigt appuyé</b></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Déplacer Objet</b><span>raquette · =clamp(doigt.x - 104, 0, 872) · 1700</span></div>
 </div>
-<div class="tip">👉 <strong>Comment lire la formule ?</strong> <code>doigt.x</code> est la position de ton doigt. On enlève 104 (la moitié de la raquette) pour la centrer sous le doigt. <code>clamp(…, 0, 840)</code> l'empêche de sortir : 872 = 1080 − 208 (la largeur de la raquette).</div>
+<div class="tip">👉 <strong>Comment lire la formule ?</strong> <code>doigt.x</code> est la position de ton doigt. On enlève 104 (la moitié de la raquette) pour la centrer sous le doigt. <code>clamp(…, 0, 872)</code> l'empêche de sortir : 872 = 1080 − 208 (la largeur de la raquette).</div>
 </div>
 <h2>Étape 3 : la balle part</h2>
 <div class="method">
-<ol><li>Ajoute l'événement <strong>« Au Démarrage »</strong>, puis deux nœuds <strong>« Modifier Variable »</strong> à la suite : variable <strong>vx</strong> = <code>6</code>, puis variable <strong>vy</strong> = <code>-9</code>.</li><li>Ajoute l'événement <strong>« À chaque image »</strong>, puis <strong>« Pousser objet »</strong> : cible <strong>balle</strong>, <strong>Ajout X</strong>, valeur <code>=vx</code>, <strong>Ajout Y</strong>, valeur <code>=vy</code>.</li><li>Relie chaque événement à ses nœuds et lance le jeu : la balle part en haut à droite, et sort de l'écran.</li></ol>
+<ol><li>Ajoute l'événement <strong>« Au Démarrage »</strong>, puis deux nœuds <strong>« Modifier Variable »</strong> à la suite : variable <strong>vx</strong> = <code>6</code>, puis variable <strong>vy</strong> = <code>-9</code>.</li><li>Ajoute l'événement <strong>« À chaque image »</strong>, puis <strong>« Pousser objet »</strong> : cible <strong>balle</strong>, <strong>Ajout X</strong> = <code>=vx</code>, <strong>Ajout Y</strong> = <code>=vy</code>.</li><li>Relie chaque événement à ses nœuds et lance le jeu : la balle part en haut à droite, et sort de l'écran.</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>Au Démarrage</b></div>
 <div class="fleche">→</div>
@@ -141,7 +148,7 @@
 </div>
 <h2>Étape 6 : casser les briques</h2>
 <div class="method">
-<ol><li>Ajoute l'événement <strong>« Si objet touche Tag »</strong> : cible <strong>balle</strong>, Tag <strong>brique</strong>.</li><li>Ajoute <strong>« Détruire Objet »</strong> et choisis comme cible <strong>L'objet impliqué dans l'événement</strong> : c'est la brique que la balle vient de toucher.</li><li>Ajoute <strong>« Modifier Variable »</strong> : variable <strong>vy</strong>, valeur <code>=-vy</code> (la balle rebondit).</li><li>Ajoute <strong>« Ajouter à Variable »</strong> : variable <strong>score</strong>, <strong>Valeur à ajouter = 10</strong>.</li><li>Ajoute <strong>« Ajouter à Variable »</strong> : variable <strong>briques</strong>, <strong>Valeur à ajouter = -1</strong>.</li><li>Ajoute <strong>« Modifier Texte »</strong> : cible <strong>texteScore</strong>, <strong>Nouveau texte</strong>, valeur <code>="Score : " + score</code>.</li><li>Relie tous les nœuds dans l'ordre.</li></ol>
+<ol><li>Ajoute l'événement <strong>« Si objet touche Tag »</strong> : cible <strong>balle</strong>, Tag <strong>brique</strong>.</li><li>Ajoute <strong>« Détruire Objet »</strong> et choisis comme cible <strong>L'objet impliqué dans l'événement</strong> : c'est la brique que la balle vient de toucher.</li><li>Ajoute <strong>« Modifier Variable »</strong> : variable <strong>vy</strong>, valeur <code>=-vy</code> (la balle rebondit).</li><li>Ajoute <strong>« Ajouter à Variable »</strong> : variable <strong>score</strong>, <strong>Valeur à ajouter = 10</strong>.</li><li>Ajoute <strong>« Ajouter à Variable »</strong> : variable <strong>briques</strong>, <strong>Valeur à ajouter = -1</strong>.</li><li>Ajoute <strong>« Modifier Texte »</strong> : cible <strong>texteScore</strong>, <strong>Nouveau texte</strong> = <code>="Score : " + score</code>.</li><li>Relie tous les nœuds dans l'ordre.</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>Si objet touche Tag</b><span>balle · brique</span></div>
 <div class="fleche">→</div>
@@ -181,7 +188,7 @@
 <h2>Étape 8 : les vies et le Game Over</h2>
 <div class="method">
 <p>Quand la balle tombe sous la raquette, le joueur perd une vie. On reprend la chaîne de l'étape 4 : après la troisième <strong>« Condition »</strong> (le haut), ajoute une quatrième, reliée par sa sortie <strong>« Ensuite »</strong>.</p>
-<ol><li><strong>« Condition »</strong> <code>=balle.y &gt;= 1920</code>, sortie <strong>Vrai</strong>.</li><li><strong>« Ajouter à Variable »</strong> : variable <strong>vies</strong>, <strong>Valeur à ajouter = -1</strong>.</li><li><strong>« Modifier Texte »</strong> : cible <strong>texteVies</strong>, <strong>Nouveau texte</strong>, valeur <code>="Vies : " + vies</code>.</li><li><strong>« Condition »</strong> <code>=vies &lt;= 0</code>.</li><li>Sortie <strong>Vrai</strong> (plus de vie) : <strong>« Déplacer Objet »</strong> la <strong>balle</strong> à X = <code>518</code>, Y = <code>1000</code>, <strong>« Modifier Variable »</strong> <strong>vx</strong> = <code>0</code>, <strong>« Modifier Variable »</strong> <strong>vy</strong> = <code>0</code> (la balle est remise au milieu et s'arrête), puis <strong>« Petit message en bas de l'écran »</strong> « Perdu ! », <strong>« Attendre »</strong> 2 secondes, <strong>« Recommencer la scène »</strong>.</li><li>Sortie <strong>Faux</strong> (il reste des vies) : <strong>« Déplacer Objet »</strong> la <strong>balle</strong> à X = <code>518</code>, Y = <code>1000</code>, puis <strong>« Modifier Variable »</strong> <strong>vy</strong> = <code>-9</code>, puis <strong>« Modifier Variable »</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
+<ol><li><strong>« Condition »</strong> <code>=balle.y &gt;= 1920</code>, sortie <strong>Vrai</strong>.</li><li><strong>« Ajouter à Variable »</strong> : variable <strong>vies</strong>, <strong>Valeur à ajouter = -1</strong>.</li><li><strong>« Modifier Texte »</strong> : cible <strong>texteVies</strong>, <strong>Nouveau texte</strong> = <code>="Vies : " + vies</code>.</li><li><strong>« Condition »</strong> <code>=vies &lt;= 0</code>.</li><li>Sortie <strong>Vrai</strong> (plus de vie) : <strong>« Déplacer Objet »</strong> la <strong>balle</strong> à X = <code>518</code>, Y = <code>1000</code>, <strong>« Modifier Variable »</strong> <strong>vx</strong> = <code>0</code>, <strong>« Modifier Variable »</strong> <strong>vy</strong> = <code>0</code> (la balle est remise au milieu et s'arrête), puis <strong>« Petit message en bas de l'écran »</strong> « Perdu ! », <strong>« Attendre »</strong> 2 secondes, <strong>« Recommencer la scène »</strong>.</li><li>Sortie <strong>Faux</strong> (il reste des vies) : <strong>« Déplacer Objet »</strong> la <strong>balle</strong> à X = <code>518</code>, Y = <code>1000</code>, puis <strong>« Modifier Variable »</strong> <strong>vy</strong> = <code>-9</code>, puis <strong>« Modifier Variable »</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
 <div class="chaine">
 <div class="noeud condition"><b>Condition</b><span>=balle.y &gt;= 1920</span></div>
 <div class="fleche"><em>Vrai</em> →</div>

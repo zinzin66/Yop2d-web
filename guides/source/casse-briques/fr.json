@@ -48,7 +48,7 @@
     ],
     [
       "tip",
-      "Ce guide est écrit pour un jeu en **portrait de 1080 x 1920**. Les images viennent du pack gratuit **Puzzle Pack** de Kenney (libre de droits, CC0), dossier **PNG/Double** : **paddleBlu.png** (raquette, 208 x 48), **ballBlue.png** (balle, 44 x 44) et **element_blue_rectangle_glossy.png** (brique, 128 x 64, existe en bleu, vert, rouge, jaune, violet et gris). Tu peux aussi utiliser tes propres dessins : adapte alors les nombres des formules à leurs tailles."
+      "Ce guide est écrit pour un jeu en **portrait de 1080 x 1920**. Les images viennent du pack gratuit **Puzzle (casse-briques)** (Kenney, libre de droits, CC0). Télécharge-le dans la **Bibliothèque** de Yop2D, onglet **Packs à télécharger** : tu y trouves **paddleBlu** (raquette, 208 x 48), **ballBlue** (balle, 44 x 44) et **element_blue_rectangle_glossy** (brique, 128 x 64, en bleu, vert, rouge, jaune, violet et gris). Tu peux aussi utiliser tes propres dessins : adapte alors les nombres des formules à leurs tailles."
     ],
     [
       "h2",
@@ -91,7 +91,7 @@
           [
             "Ouvre le **{{lang:titre_blueprint}}** de la scène.",
             "Ajoute l'événement **[[NoeudEventDoigtAppuye]]** (il se répète tant qu'un doigt est posé sur l'écran).",
-            "Ajoute **[[deplacer]]** : cible **raquette**, **X**, valeur `=clamp(doigt.x - 104, 0, 872)`, **Y** = `1700`.",
+            "Ajoute **[[deplacer]]** : cible **raquette**, **X** = `=clamp(doigt.x - 104, 0, 872)`, **Y** = `1700`.",
             "Relie les deux nœuds, puis lance le jeu : la raquette suit ton doigt sans sortir de l'écran."
           ]
         ],
@@ -114,7 +114,7 @@
         ],
         [
           "tip",
-          "**Comment lire la formule ?** `doigt.x` est la position de ton doigt. On enlève 104 (la moitié de la raquette) pour la centrer sous le doigt. `clamp(…, 0, 840)` l'empêche de sortir : 872 = 1080 − 208 (la largeur de la raquette)."
+          "**Comment lire la formule ?** `doigt.x` est la position de ton doigt. On enlève 104 (la moitié de la raquette) pour la centrer sous le doigt. `clamp(…, 0, 872)` l'empêche de sortir : 872 = 1080 − 208 (la largeur de la raquette)."
         ]
       ]
     ],
@@ -129,7 +129,7 @@
           "ol",
           [
             "Ajoute l'événement **[[NoeudEventStart]]**, puis deux nœuds **[[modifier_variable]]** à la suite : variable **vx** = `6`, puis variable **vy** = `-9`.",
-            "Ajoute l'événement **[[NoeudEventChaqueImage]]**, puis **[[pousser]]** : cible **balle**, **Ajout X**, valeur `=vx`, **Ajout Y**, valeur `=vy`.",
+            "Ajoute l'événement **[[NoeudEventChaqueImage]]**, puis **[[pousser]]** : cible **balle**, **Ajout X** = `=vx`, **Ajout Y** = `=vy`.",
             "Relie chaque événement à ses nœuds et lance le jeu : la balle part en haut à droite, et sort de l'écran."
           ]
         ],
@@ -335,7 +335,7 @@
             "Ajoute **[[modifier_variable]]** : variable **vy**, valeur `=-vy` (la balle rebondit).",
             "Ajoute **[[ajouter_variable]]** : variable **score**, **{{lang:ajouter_variable.valeur}} = 10**.",
             "Ajoute **[[ajouter_variable]]** : variable **briques**, **{{lang:ajouter_variable.valeur}} = -1**.",
-            "Ajoute **[[modifier_texte]]** : cible **texteScore**, **{{lang:modifier_texte.valeur}}**, valeur `=\"Score : \" + score`.",
+            "Ajoute **[[modifier_texte]]** : cible **texteScore**, **{{lang:modifier_texte.valeur}}** = `=\"Score : \" + score`.",
             "Relie tous les nœuds dans l'ordre."
           ]
         ],
@@ -493,7 +493,7 @@
           [
             "**[[condition]]** `=balle.y >= 1920`, sortie **{{lang:port_vrai}}**.",
             "**[[ajouter_variable]]** : variable **vies**, **{{lang:ajouter_variable.valeur}} = -1**.",
-            "**[[modifier_texte]]** : cible **texteVies**, **{{lang:modifier_texte.valeur}}**, valeur `=\"Vies : \" + vies`.",
+            "**[[modifier_texte]]** : cible **texteVies**, **{{lang:modifier_texte.valeur}}** = `=\"Vies : \" + vies`.",
             "**[[condition]]** `=vies <= 0`.",
             "Sortie **{{lang:port_vrai}}** (plus de vie) : **[[deplacer]]** la **balle** à X = `518`, Y = `1000`, **[[modifier_variable]]** **vx** = `0`, **[[modifier_variable]]** **vy** = `0` (la balle est remise au milieu et s'arrête), puis **[[toast]]** « Perdu ! », **[[attendre]]** 2 secondes, **[[recommencer_scene]]**.",
             "Sortie **{{lang:port_faux}}** (il reste des vies) : **[[deplacer]]** la **balle** à X = `518`, Y = `1000`, puis **[[modifier_variable]]** **vy** = `-9`, puis **[[modifier_variable]]** **vx** = `6`."

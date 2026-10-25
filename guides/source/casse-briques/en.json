@@ -48,7 +48,7 @@
     ],
     [
       "tip",
-      "This guide is written for a **1080 x 1920 portrait** game. The images come from Kenney's free **Puzzle Pack** (free to use, CC0), folder **PNG/Double**: **paddleBlu.png** (paddle, 208 x 48), **ballBlue.png** (ball, 44 x 44) and **element_blue_rectangle_glossy.png** (brick, 128 x 64, available in blue, green, red, yellow, purple and grey). You can also use your own drawings: then adapt the numbers in the formulas to their sizes."
+      "This guide is written for a **1080 x 1920 portrait** game. The images come from the free **Puzzle (brick breaker)** pack (Kenney, free to use, CC0). Download it in the Yop2D **Library**, tab **Packs to download**: you will find **paddleBlu** (paddle, 208 x 48), **ballBlue** (ball, 44 x 44) and **element_blue_rectangle_glossy** (brick, 128 x 64, in blue, green, red, yellow, purple and grey). You can also use your own drawings: then adapt the numbers in the formulas to their sizes."
     ],
     [
       "h2",
@@ -91,7 +91,7 @@
           [
             "Open the scene's **{{lang:titre_blueprint}}**.",
             "Add the **[[NoeudEventDoigtAppuye]]** event (it repeats as long as a finger is on the screen).",
-            "Add **[[deplacer]]**: target **paddle**, **X**, value `=clamp(doigt.x - 104, 0, 872)`, **Y** = `1700`.",
+            "Add **[[deplacer]]**: target **paddle**, **X** = `=clamp(doigt.x - 104, 0, 872)`, **Y** = `1700`.",
             "Link the two nodes, then run the game: the paddle follows your finger and never leaves the screen."
           ]
         ],
@@ -114,7 +114,7 @@
         ],
         [
           "tip",
-          "**How to read the formula?** `doigt.x` is your finger's position (« doigt » means finger). We subtract 104 (half the paddle) to center it under the finger. `clamp(…, 0, 840)` keeps it on screen: 872 = 1080 − 208 (the paddle's width)."
+          "**How to read the formula?** `doigt.x` is your finger's position (« doigt » means finger). We subtract 104 (half the paddle) to center it under the finger. `clamp(…, 0, 872)` keeps it on screen: 872 = 1080 − 208 (the paddle's width)."
         ]
       ]
     ],
@@ -129,7 +129,7 @@
           "ol",
           [
             "Add the **[[NoeudEventStart]]** event, then two **[[modifier_variable]]** nodes one after the other: variable **vx** = `6`, then variable **vy** = `-9`.",
-            "Add the **[[NoeudEventChaqueImage]]** event, then **[[pousser]]**: target **ball**, **Add X**, value `=vx`, **Add Y**, value `=vy`.",
+            "Add the **[[NoeudEventChaqueImage]]** event, then **[[pousser]]**: target **ball**, **Add X** = `=vx`, **Add Y** = `=vy`.",
             "Link each event to its nodes and run the game: the ball goes up and to the right, and leaves the screen."
           ]
         ],
@@ -335,7 +335,7 @@
             "Add **[[modifier_variable]]**: variable **vy**, value `=-vy` (the ball bounces).",
             "Add **[[ajouter_variable]]**: variable **score**, **{{lang:ajouter_variable.valeur}} = 10**.",
             "Add **[[ajouter_variable]]**: variable **bricks**, **{{lang:ajouter_variable.valeur}} = -1**.",
-            "Add **[[modifier_texte]]**: target **scoreText**, **{{lang:modifier_texte.valeur}}**, value `=\"Score: \" + score`.",
+            "Add **[[modifier_texte]]**: target **scoreText**, **{{lang:modifier_texte.valeur}}** = `=\"Score: \" + score`.",
             "Link all the nodes in order."
           ]
         ],
@@ -493,7 +493,7 @@
           [
             "**[[condition]]** `=ball.y >= 1920`, output **{{lang:port_vrai}}**.",
             "**[[ajouter_variable]]**: variable **lives**, **{{lang:ajouter_variable.valeur}} = -1**.",
-            "**[[modifier_texte]]**: target **livesText**, **{{lang:modifier_texte.valeur}}**, value `=\"Lives: \" + lives`.",
+            "**[[modifier_texte]]**: target **livesText**, **{{lang:modifier_texte.valeur}}** = `=\"Lives: \" + lives`.",
             "**[[condition]]** `=lives <= 0`.",
             "Output **{{lang:port_vrai}}** (no lives left): **[[deplacer]]** the **ball** to X = `518`, Y = `1000`, **[[modifier_variable]]** **vx** = `0`, **[[modifier_variable]]** **vy** = `0` (the ball is put back in the middle and stops), then **[[toast]]** « Game over! », **[[attendre]]** 2 seconds, **[[recommencer_scene]]**.",
             "Output **{{lang:port_faux}}** (lives left): **[[deplacer]]** the **ball** to X = `518`, Y = `1000`, then **[[modifier_variable]]** **vy** = `-9`, then **[[modifier_variable]]** **vx** = `6`."

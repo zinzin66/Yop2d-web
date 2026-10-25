@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como fazer um jogo de quebra-tijolos no Yop2D? | Guia Yop2D</title>
+<meta name="description" content="Faça um jogo de quebra-tijolos no Yop2D sem código: uma raquete que você move com o dedo, uma bola que quica, tijolos para quebrar, pontos e vidas com nós.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/pt/casse-briques.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/casse-briques.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/casse-briques.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/casse-briques.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/casse-briques.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/casse-briques.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/casse-briques.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/casse-briques.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/casse-briques.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/casse-briques.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Como fazer um jogo de quebra-tijolos?",
+ "description": "Faça um jogo de quebra-tijolos no Yop2D sem código: uma raquete que você move com o dedo, uma bola que quica, tijolos para quebrar, pontos e vidas com nós.",
+ "inLanguage": "pt",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de jogos 2D sem código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Colocar a raquete",
+   "text": "Dedo pressionado → Mover Objeto (paddle, X = segue o dedo)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Lançar a bola",
+   "text": "Ao Iniciar → Modificar Variável (vx, vy); A cada frame → Empurrar objeto (ball, =vx, =vy)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Quicar nas bordas",
+   "text": "Condição (=ball.x <= 0) → Verdadeiro → Modificar Variável (vx, =abs(vx))."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Quicar na raquete",
+   "text": "Colisão A/B (ball, paddle) → Modificar Variável (vy, =-abs(vy))."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Quebrar os tijolos",
+   "text": "Se o objeto tocar no Tag (ball, brick) → Destruir Objeto → Adicionar à Variável (score, 10)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Vidas e fim de jogo",
+   "text": "Condição (=ball.y >= 1920) → Adicionar à Variável (lives, -1) → Condição (=lives <= 0) → Reiniciar a cena."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../pt/index.html">← Yop2D</a>
+<h1>Como fazer um jogo de quebra-tijolos?</h1>
+<p>Guia para iniciantes · sem código</p>
+<p class="langues"><a href="../casse-briques.html" hreflang="fr">Français</a> · <a href="../en/casse-briques.html" hreflang="en">English</a> · <a href="../es/casse-briques.html" hreflang="es">Español</a> · <a href="../de/casse-briques.html" hreflang="de">Deutsch</a> · <a href="../it/casse-briques.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="../ru/casse-briques.html" hreflang="ru">Русский</a> · <a href="../zh/casse-briques.html" hreflang="zh">中文</a> · <a href="../ja/casse-briques.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Em um quebra-tijolos, uma <strong>bola</strong> quica nas bordas e em uma <strong>raquete</strong> que você move com o dedo, e quebra <strong>tijolos</strong>. Aqui controlamos a bola com duas pequenas variáveis: <strong>vx</strong> (sua velocidade para a direita) e <strong>vy</strong> (sua velocidade para baixo). Quando a bola quica, basta mudar o sinal da variável.</p>
+<div class="besoin">
+<b>Você precisa de:</b>
+<ul><li>uma Imagem chamada <strong>paddle</strong>, na parte de baixo da tela (por exemplo 208 x 48 px, perto de y = 1700);</li><li>uma Imagem chamada <strong>ball</strong>, no meio da tela (por exemplo 44 x 44 px);</li><li>tijolos: Imagems na parte de cima da tela (por exemplo 128 x 64 px, 8 por fileira);</li><li>dois objetos Texto: <strong>scoreText</strong> (texto “Pontos: 0”) e <strong>livesText</strong> (texto “Vidas: 3”), na parte de cima da tela.</li></ul>
+</div>
+<div class="tip">👉 Este guia foi escrito para um jogo em <strong>retrato 1080 x 1920</strong>. As imagens vêm do pacote gratuito <strong>Puzzle (brick breaker)</strong> (Kenney, livre de direitos, CC0). Baixe-o na <strong>Biblioteca</strong> do Yop2D, aba <strong>Pacotes para baixar</strong>: lá você encontra <strong>paddleBlu</strong> (raquete, 208 x 48), <strong>ballBlue</strong> (bola, 44 x 44) e <strong>element_blue_rectangle_glossy</strong> (tijolo, 128 x 64, em azul, verde, vermelho, amarelo, roxo e cinza). Você também pode usar seus próprios desenhos: nesse caso, adapte os números das fórmulas aos tamanhos deles.</div>
+<h2>Passo 1: tags e variáveis</h2>
+<div class="method">
+<ol><li>Selecione um tijolo. No inspetor, campo <strong>Tag (Rótulo)</strong>, escreva <strong>brick</strong>. Faça o mesmo com cada tijolo.</li><li>No painel da esquerda, abra a seção <strong>Variáveis</strong> e crie cinco variáveis, todas com escopo <strong>Local</strong> e tipo <strong>Inteiro</strong>:</li></ol>
+<ul><li><strong>score</strong>: valor inicial <strong>0</strong>;</li><li><strong>lives</strong>: valor inicial <strong>3</strong>;</li><li><strong>bricks</strong>: o <strong>número de tijolos</strong> do seu jogo (por exemplo <strong>27</strong>). Serve para saber quando tudo está quebrado;</li><li><strong>vx</strong> e <strong>vy</strong>: valor inicial <strong>0</strong>. É a velocidade da bola, definida ao começar.</li></ul>
+<div class="tip">👉 Um tijolo a mais ou a menos? Basta mudar o valor inicial de <strong>bricks</strong>. Se o número for grande demais, você nunca ganha; se for pequeno demais, ganha cedo demais.</div>
+</div>
+<h2>Passo 2: a raquete segue o dedo</h2>
+<div class="method">
+<ol><li>Abra o <strong>Blueprint</strong> da cena.</li><li>Adicione o evento <strong>“Dedo pressionado”</strong> (ele se repete enquanto houver um dedo na tela).</li><li>Adicione <strong>“Mover Objeto”</strong>: alvo <strong>paddle</strong>, <strong>X</strong> = <code>=clamp(doigt.x - 104, 0, 872)</code>, <strong>Y</strong> = <code>1700</code>.</li><li>Ligue os dois nós e inicie o jogo: a raquete segue seu dedo e nunca sai da tela.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Dedo pressionado</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Mover Objeto</b><span>paddle · =clamp(doigt.x - 104, 0, 872) · 1700</span></div>
+</div>
+<div class="tip">👉 <strong>Como ler a fórmula?</strong> <code>doigt.x</code> é a posição do seu dedo (“doigt” significa dedo em francês). Subtraímos 104 (metade da raquete) para centralizá-la sob o dedo. <code>clamp(…, 0, 872)</code> a mantém na tela: 872 = 1080 − 208 (a largura da raquete).</div>
+</div>
+<h2>Passo 3: a bola sai</h2>
+<div class="method">
+<ol><li>Adicione o evento <strong>“Ao Iniciar”</strong>, depois dois nós <strong>“Modificar Variável”</strong> em sequência: variável <strong>vx</strong> = <code>6</code>, depois variável <strong>vy</strong> = <code>-9</code>.</li><li>Adicione o evento <strong>“A cada frame”</strong>, depois <strong>“Empurrar objeto”</strong>: alvo <strong>ball</strong>, <strong>Somar X</strong> = <code>=vx</code>, <strong>Somar Y</strong> = <code>=vy</code>.</li><li>Ligue cada evento aos seus nós e inicie o jogo: a bola sobe para a direita e sai da tela.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Ao Iniciar</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variável</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variável</b><span>vy · -9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>A cada frame</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Empurrar objeto</b><span>ball · =vx · =vy</span></div>
+</div>
+<div class="tip">👉 <strong>Negativo = para cima.</strong> No Yop2D, Y cresce em direção à parte de baixo da tela: <strong>vy = -9</strong> manda a bola para cima. Para uma bola mais rápida, use 8 e -12.</div>
+</div>
+<h2>Passo 4: quicar nas bordas</h2>
+<div class="method">
+<p>Logo depois de <strong>“Empurrar objeto”</strong>, verificamos a cada imagem se a bola toca uma borda. Encadeamos três nós <strong>“Condição”</strong>, seguindo sempre a saída <strong>“Depois”</strong> (que roda em qualquer caso).</p>
+<ol><li>Borda esquerda: <strong>“Condição”</strong> <code>=ball.x &lt;= 0</code>. Saída <strong>Verdadeiro</strong> → <strong>“Modificar Variável”</strong>: variável <strong>vx</strong>, valor <code>=abs(vx)</code> (sempre para a direita).</li><li>Borda direita: <strong>“Condição”</strong> <code>=ball.x &gt;= 1036</code>. Saída <strong>Verdadeiro</strong> → <strong>“Modificar Variável”</strong>: variável <strong>vx</strong>, valor <code>=-abs(vx)</code> (sempre para a esquerda). 1036 = 1080 − 44 (a largura da bola).</li><li>Em cima: <strong>“Condição”</strong> <code>=ball.y &lt;= 0</code>. Saída <strong>Verdadeiro</strong> → <strong>“Modificar Variável”</strong>: variável <strong>vy</strong>, valor <code>=abs(vy)</code> (sempre para baixo).</li><li>Ligue cada <strong>“Condição”</strong> à seguinte pela saída <strong>“Depois”</strong>. A primeira é ligada à saída de <strong>“Empurrar objeto”</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Empurrar objeto</b><span>ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condição</b><span>=ball.x &lt;= 0</span></div>
+<div class="fleche"><em>Verdadeiro</em> →</div>
+<div class="noeud"><b>Modificar Variável</b><span>vx · =abs(vx)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condição</b><span>=ball.x &gt;= 1036</span></div>
+<div class="fleche"><em>Verdadeiro</em> →</div>
+<div class="noeud"><b>Modificar Variável</b><span>vx · =-abs(vx)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condição</b><span>=ball.y &lt;= 0</span></div>
+<div class="fleche"><em>Verdadeiro</em> →</div>
+<div class="noeud"><b>Modificar Variável</b><span>vy · =abs(vy)</span></div>
+</div>
+<div class="tip">👉 <strong>Por que abs?</strong> <code>abs(vx)</code> é sempre um número positivo. Na borda esquerda, forçamos a bola a ir para a direita, mesmo que ela toque a borda duas imagens seguidas: ela nunca fica presa.</div>
+</div>
+<h2>Passo 5: quicar na raquete</h2>
+<div class="method">
+<ol><li>Adicione o evento <strong>“Colisão A/B”</strong>: <strong>Objeto A</strong> = <strong>ball</strong>, <strong>Objeto B</strong> = <strong>paddle</strong>.</li><li>Adicione <strong>“Modificar Variável”</strong>: variável <strong>vy</strong>, valor <code>=-abs(vy)</code> (a bola volta a subir).</li><li>Adicione um segundo <strong>“Modificar Variável”</strong>: variável <strong>vx</strong>, valor <code>=(ball.x + 22 - paddle.x - 104) / 13</code>.</li><li>Ligue os três nós em ordem.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Colisão A/B</b><span>ball · paddle</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variável</b><span>vy · =-abs(vy)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variável</b><span>vx · =(ball.x + 22 - paddle.x - 104) / 13</span></div>
+</div>
+<div class="tip">👉 <strong>Para que serve a última fórmula?</strong> Ela mede onde a bola cai na raquete: no centro, sobe reta; na borda esquerda, vai para a esquerda; na direita, vai para a direita. O jogador pode <strong>mirar</strong>. (22 = metade da bola, 104 = metade da raquete.)</div>
+</div>
+<h2>Passo 6: quebrar os tijolos</h2>
+<div class="method">
+<ol><li>Adicione o evento <strong>“Se o objeto tocar no Tag”</strong>: alvo <strong>ball</strong>, Tag <strong>brick</strong>.</li><li>Adicione <strong>“Destruir Objeto”</strong> e escolha <strong>O objeto implicado no evento</strong> como alvo: é o tijolo que a bola acabou de tocar.</li><li>Adicione <strong>“Modificar Variável”</strong>: variável <strong>vy</strong>, valor <code>=-vy</code> (a bola quica).</li><li>Adicione <strong>“Adicionar à Variável”</strong>: variável <strong>score</strong>, <strong>Valor a adicionar = 10</strong>.</li><li>Adicione <strong>“Adicionar à Variável”</strong>: variável <strong>bricks</strong>, <strong>Valor a adicionar = -1</strong>.</li><li>Adicione <strong>“Modificar Texto”</strong>: alvo <strong>scoreText</strong>, <strong>Novo texto</strong> = <code>="Pontos: " + score</code>.</li><li>Ligue todos os nós em ordem.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Se o objeto tocar no Tag</b><span>ball · brick</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Destruir Objeto</b><span>Objeto Implicado</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variável</b><span>vy · =-vy</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Adicionar à Variável</b><span>score · + 10</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Adicionar à Variável</b><span>bricks · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Texto</b><span>scoreText</span></div>
+</div>
+<div class="tip">👉 Quando a bola quebra um tijolo, ela sempre quica para cima ou para baixo, mesmo que tenha tocado o tijolo pelo lado. É simples e funciona bem em um quebra-tijolos.</div>
+</div>
+<h2>Passo 7: ganhar</h2>
+<div class="method">
+<p>Depois de <strong>“Modificar Texto”</strong> do passo 6, adicione:</p>
+<ol><li><strong>“Condição”</strong> <code>=bricks &lt;= 0</code>.</li><li>Na saída <strong>Verdadeiro</strong>: <strong>“Modificar Variável”</strong> <strong>vx</strong> = <code>0</code>, <strong>“Modificar Variável”</strong> <strong>vy</strong> = <code>0</code> (a bola para), depois <strong>“Mensagem curta embaixo da tela”</strong> com a mensagem <strong>Você ganhou!</strong>, depois <strong>“Esperar”</strong> 2 segundos e então <strong>“Reiniciar a cena”</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Modificar Texto</b><span>scoreText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condição</b><span>=bricks &lt;= 0</span></div>
+<div class="fleche"><em>Verdadeiro</em> →</div>
+<div class="noeud"><b>Modificar Variável</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variável</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Mensagem curta embaixo da tela</b><span>Você ganhou!</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Esperar</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Reiniciar a cena</b></div>
+</div>
+<div class="tip">👉 “Reiniciar a cena” devolve os objetos ao lugar e as variáveis <strong>Local</strong> ao valor inicial: o jogo recomeça com 3 vidas, 0 pontos e todos os tijolos.</div>
+</div>
+<h2>Passo 8: vidas e Game Over</h2>
+<div class="method">
+<p>Quando a bola cai abaixo da raquete, o jogador perde uma vida. Continuamos a cadeia do passo 4: depois da terceira <strong>“Condição”</strong> (a de cima), adicione uma quarta, ligada pela saída <strong>“Depois”</strong>.</p>
+<ol><li><strong>“Condição”</strong> <code>=ball.y &gt;= 1920</code>, saída <strong>Verdadeiro</strong>.</li><li><strong>“Adicionar à Variável”</strong>: variável <strong>lives</strong>, <strong>Valor a adicionar = -1</strong>.</li><li><strong>“Modificar Texto”</strong>: alvo <strong>livesText</strong>, <strong>Novo texto</strong> = <code>="Vidas: " + lives</code>.</li><li><strong>“Condição”</strong> <code>=lives &lt;= 0</code>.</li><li>Saída <strong>Verdadeiro</strong> (sem vidas): <strong>“Mover Objeto”</strong> a <strong>ball</strong> para X = <code>518</code>, Y = <code>1000</code>, <strong>“Modificar Variável”</strong> <strong>vx</strong> = <code>0</code>, <strong>“Modificar Variável”</strong> <strong>vy</strong> = <code>0</code> (a bola volta ao meio e para), depois <strong>“Mensagem curta embaixo da tela”</strong> “Fim de jogo!”, <strong>“Esperar”</strong> 2 segundos, <strong>“Reiniciar a cena”</strong>.</li><li>Saída <strong>Falso</strong> (ainda há vidas): <strong>“Mover Objeto”</strong> a <strong>ball</strong> para X = <code>518</code>, Y = <code>1000</code>, depois <strong>“Modificar Variável”</strong> <strong>vy</strong> = <code>-9</code>, depois <strong>“Modificar Variável”</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
+<div class="chaine">
+<div class="noeud condition"><b>Condição</b><span>=ball.y &gt;= 1920</span></div>
+<div class="fleche"><em>Verdadeiro</em> →</div>
+<div class="noeud"><b>Adicionar à Variável</b><span>lives · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Texto</b><span>livesText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condição</b><span>=lives &lt;= 0</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condição</b><span>=lives &lt;= 0</span></div>
+<div class="fleche"><em>Verdadeiro</em> →</div>
+<div class="noeud"><b>Mover Objeto</b><span>ball · 518 · 1000</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variável</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variável</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Mensagem curta embaixo da tela</b><span>Fim de jogo!</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Esperar</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Reiniciar a cena</b></div>
+</div>
+<div class="tip">👉 <strong>Por que parar a bola antes de esperar?</strong> Durante os 2 segundos de espera, o jogo continua. Se a bola ficasse abaixo da tela, ela faria perder uma vida a cada imagem, e o contador de vidas cairia muito (-178!). Devolvida ao meio e parada, ela não atrapalha mais.</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condição</b><span>=lives &lt;= 0</span></div>
+<div class="fleche"><em>Falso</em> →</div>
+<div class="noeud"><b>Mover Objeto</b><span>ball · 518 · 1000</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variável</b><span>vy · -9</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variável</b><span>vx · 6</span></div>
+</div>
+</div>
+<h2>Para ir mais longe</h2>
+<ul><li><strong>Sons:</strong> adicione <strong>“Tocar som”</strong> depois de <strong>“Destruir Objeto”</strong> (um “clac” quando um tijolo quebra) e no evento da raquete.</li><li><strong>Cores diferentes:</strong> dê a mesma tag <strong>brick</strong> a todos os tijolos, seja qual for a cor: uma única configuração basta.</li><li><strong>Mais velocidade:</strong> adicione <strong>“Modificar Variável”</strong> <code>=vx * 1.02</code> a cada tijolo quebrado para o jogo ficar cada vez mais difícil.</li><li><strong>Faíscas:</strong> adicione um <strong>“Efeito de partículas”</strong> quando um tijolo quebrar (veja o guia <a href="../pt/particules-effets.html">Partículas e efeitos</a>).</li></ul>
+<h2>Se não funcionar</h2>
+<ul><li><strong>A bola não se move:</strong> verifique se <strong>vx</strong> e <strong>vy</strong> mudam ao começar e se <strong>“Empurrar objeto”</strong> usa as fórmulas <code>=vx</code> e <code>=vy</code> (com o <strong>=</strong> no início).</li><li><strong>A bola atravessa a raquete ou os tijolos:</strong> verifique os nomes (<strong>ball</strong>, <strong>paddle</strong>) e a tag <strong>brick</strong>, escrita igual em todo lugar (sem maiúsculas). Se a bola estiver muito rápida, aumente um pouco os tijolos ou deixe-a mais lenta.</li><li><strong>A bola sai da tela sem quicar:</strong> os nós <strong>“Condição”</strong> devem estar ligados um após o outro pela saída <strong>“Depois”</strong>, e o primeiro deve sair de <strong>“Empurrar objeto”</strong>.</li><li><strong>Você ganha cedo demais ou nunca:</strong> a variável <strong>bricks</strong> deve valer exatamente o número de tijolos do jogo.</li><li><strong>A raquete se move mal:</strong> na fórmula, <code>doigt.x</code> é o dedo, não a raquete; mantenha o <strong>=</strong> no início e feche o parêntese.</li></ul>
+
+<div class="nav">
+<a href="../pt/vie-game-over.html">← Perder vida e Game Over</a>
+<a href="../pt/niveau-suivant.html">Próximo guia: Passar para a próxima fase →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de jogos 2D gratuito e sem código para Android · <a href="../../pt/index.html">Site oficial</a> · <a href="../../noeuds/pt.html">Referência de nós</a></p>
+</footer>
+</body>
+</html>

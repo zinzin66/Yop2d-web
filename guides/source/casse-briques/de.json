@@ -1,0 +1,664 @@
+{
+  "titre_page": "Wie macht man ein Breakout-Spiel in Yop2D? | Yop2D-Anleitung",
+  "description": "Ein Breakout-Spiel in Yop2D ohne Code: ein Schläger, den du mit dem Finger bewegst, ein springender Ball, Steine zum Zerstören, Punkte und Leben mit Knoten.",
+  "h1": "Wie macht man ein Breakout-Spiel?",
+  "carte": [
+    "Ein Breakout-Spiel machen",
+    "Schläger mit dem Finger, springender Ball, Steine zerstören, Punkte und Leben."
+  ],
+  "etapes": [
+    [
+      "Den Schläger platzieren",
+      "{{NoeudEventDoigtAppuye}} → {{deplacer}} (paddle, X = folgt dem Finger)."
+    ],
+    [
+      "Den Ball losschicken",
+      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy); {{NoeudEventChaqueImage}} → {{pousser}} (ball, =vx, =vy)."
+    ],
+    [
+      "An den Rändern abprallen",
+      "{{condition}} (=ball.x <= 0) → {{lang:port_vrai}} → {{modifier_variable}} (vx, =abs(vx))."
+    ],
+    [
+      "Am Schläger abprallen",
+      "{{NoeudEventCollisionAB}} (ball, paddle) → {{modifier_variable}} (vy, =-abs(vy))."
+    ],
+    [
+      "Die Steine zerstören",
+      "{{NoeudEventCollisionTag}} (ball, brick) → {{detruire_objet}} → {{ajouter_variable}} (score, 10)."
+    ],
+    [
+      "Leben und Spielende",
+      "{{condition}} (=ball.y >= 1920) → {{ajouter_variable}} (lives, -1) → {{condition}} (=lives <= 0) → {{recommencer_scene}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Bei einem Breakout-Spiel prallt ein **Ball** an den Rändern und an einem **Schläger** ab, den du mit dem Finger bewegst, und zerstört **Steine**. Hier steuern wir den Ball mit zwei kleinen Variablen: **vx** (seine Geschwindigkeit nach rechts) und **vy** (seine Geschwindigkeit nach unten). Wenn der Ball abprallt, ändern wir einfach das Vorzeichen der Variable."
+    ],
+    [
+      "besoin",
+      [
+        "ein {{lang:obj_prefix_image}} namens **paddle**, unten auf dem Bildschirm (zum Beispiel 208 x 48 px, etwa bei y = 1700);",
+        "ein {{lang:obj_prefix_image}} namens **ball**, in der Mitte des Bildschirms (zum Beispiel 44 x 44 px);",
+        "Steine: {{lang:obj_prefix_image}}s oben auf dem Bildschirm (zum Beispiel 128 x 64 px, 8 pro Reihe);",
+        "zwei {{lang:obj_prefix_texte}}-Objekte: **scoreText** (Text « Punkte: 0 ») und **livesText** (Text « Leben: 3 »), oben auf dem Bildschirm."
+      ]
+    ],
+    [
+      "tip",
+      "Diese Anleitung ist für ein Spiel im **Hochformat 1080 x 1920** geschrieben. Die Bilder stammen aus dem kostenlosen Paket **Puzzle (brick breaker)** (Kenney, frei nutzbar, CC0). Lade es in der Yop2D-**Bibliothek** im Tab **Pakete zum Herunterladen** herunter: Dort findest du **paddleBlu** (Schläger, 208 x 48), **ballBlue** (Ball, 44 x 44) und **element_blue_rectangle_glossy** (Stein, 128 x 64, in Blau, Grün, Rot, Gelb, Lila und Grau). Du kannst auch eigene Zeichnungen verwenden: Dann passe die Zahlen in den Formeln an ihre Größen an."
+    ],
+    [
+      "h2",
+      "Schritt 1: Tags und Variablen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Wähle einen Stein aus. Schreibe im Inspektor im Feld **{{lang:insp_label_tag}}** **brick**. Mache dasselbe bei jedem Stein.",
+            "Öffne im linken Bereich den Abschnitt **{{lang:panneau_ress_variables}}** und lege fünf Variablen an, alle mit dem Bereich **{{lang:var_scope_locale}}** und dem Typ **{{lang:var_type_entier}}**:"
+          ]
+        ],
+        [
+          "ul",
+          [
+            "**score**: Startwert **0**;",
+            "**lives**: Startwert **3**;",
+            "**bricks**: die **Anzahl der Steine** in deinem Spiel (zum Beispiel **27**). Sie zeigt, wann alles zerstört ist;",
+            "**vx** und **vy**: Startwert **0**. Das ist die Geschwindigkeit des Balls, sie wird beim Start festgelegt."
+          ]
+        ],
+        [
+          "tip",
+          "Ein Stein mehr oder weniger? Ändere einfach den Startwert von **bricks**. Ist die Zahl zu groß, gewinnst du nie; ist sie zu klein, gewinnst du zu früh."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 2: Der Schläger folgt dem Finger"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Öffne das **{{lang:titre_blueprint}}** der Szene.",
+            "Füge das Ereignis **[[NoeudEventDoigtAppuye]]** hinzu (es wiederholt sich, solange ein Finger auf dem Bildschirm ist).",
+            "Füge **[[deplacer]]** hinzu: Ziel **paddle**, **X** = `=clamp(doigt.x - 104, 0, 872)`, **Y** = `1700`.",
+            "Verbinde die beiden Knoten und starte das Spiel: Der Schläger folgt deinem Finger und verlässt den Bildschirm nie."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventDoigtAppuye}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "paddle · =clamp(doigt.x - 104, 0, 872) · 1700"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Wie liest man die Formel?** `doigt.x` ist die Position deines Fingers (« doigt » heißt auf Französisch Finger). Wir ziehen 104 ab (die Hälfte des Schlägers), um ihn unter dem Finger zu zentrieren. `clamp(…, 0, 872)` hält ihn auf dem Bildschirm: 872 = 1080 − 208 (die Breite des Schlägers)."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 3: Der Ball startet"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge das Ereignis **[[NoeudEventStart]]** hinzu und danach zwei **[[modifier_variable]]**-Knoten hintereinander: Variable **vx** = `6`, dann Variable **vy** = `-9`.",
+            "Füge das Ereignis **[[NoeudEventChaqueImage]]** hinzu und danach **[[pousser]]**: Ziel **ball**, **X hinzufügen** = `=vx`, **Y hinzufügen** = `=vy`.",
+            "Verbinde jedes Ereignis mit seinen Knoten und starte das Spiel: Der Ball fliegt nach rechts oben und verlässt den Bildschirm."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{pousser}}",
+              "ball · =vx · =vy"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Negativ = nach oben.** In Yop2D wächst Y zum unteren Bildschirmrand hin: **vy = -9** schickt den Ball nach oben. Für einen schnelleren Ball nimm 8 und -12."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 4: An den Rändern abprallen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Direkt nach **[[pousser]]** prüfen wir in jedem Bild, ob der Ball einen Rand berührt. Wir verketten drei **[[condition]]**-Knoten und folgen jedes Mal dem Ausgang **[[lang:port_ensuite]]** (der in jedem Fall läuft)."
+        ],
+        [
+          "ol",
+          [
+            "Linker Rand: **[[condition]]** `=ball.x <= 0`. Ausgang **{{lang:port_vrai}}** → **[[modifier_variable]]**: Variable **vx**, Wert `=abs(vx)` (immer nach rechts).",
+            "Rechter Rand: **[[condition]]** `=ball.x >= 1036`. Ausgang **{{lang:port_vrai}}** → **[[modifier_variable]]**: Variable **vx**, Wert `=-abs(vx)` (immer nach links). 1036 = 1080 − 44 (die Breite des Balls).",
+            "Oben: **[[condition]]** `=ball.y <= 0`. Ausgang **{{lang:port_vrai}}** → **[[modifier_variable]]**: Variable **vy**, Wert `=abs(vy)` (immer nach unten).",
+            "Verbinde jede **[[condition]]** über ihren Ausgang **[[lang:port_ensuite]]** mit der nächsten. Die erste wird mit dem Ausgang von **[[pousser]]** verbunden."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{pousser}}",
+              "ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=ball.x <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · =abs(vx)"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=ball.x >= 1036"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · =-abs(vx)"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=ball.y <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · =abs(vy)"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Warum abs?** `abs(vx)` ist immer eine positive Zahl. Am linken Rand wird der Ball also gezwungen, nach rechts zu fliegen, selbst wenn er den Rand in zwei Bildern hintereinander berührt: Er bleibt nie stecken."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 5: Am Schläger abprallen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge das Ereignis **[[NoeudEventCollisionAB]]** hinzu: **Objekt A** = **ball**, **Objekt B** = **paddle**.",
+            "Füge **[[modifier_variable]]** hinzu: Variable **vy**, Wert `=-abs(vy)` (der Ball fliegt wieder nach oben).",
+            "Füge einen zweiten **[[modifier_variable]]** hinzu: Variable **vx**, Wert `=(ball.x + 22 - paddle.x - 104) / 13`.",
+            "Verbinde die drei Knoten der Reihe nach."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · paddle"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · =-abs(vy)"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · =(ball.x + 22 - paddle.x - 104) / 13"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Wozu dient die letzte Formel?** Sie misst, wo der Ball auf den Schläger trifft: In der Mitte fliegt er gerade nach oben; am linken Rand nach links; am rechten Rand nach rechts. Der Spieler kann also **zielen**. (22 = die Hälfte des Balls, 104 = die Hälfte des Schlägers.)"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 6: Die Steine zerstören"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge das Ereignis **[[NoeudEventCollisionTag]]** hinzu: Ziel **ball**, {{lang:Tag}} **brick**.",
+            "Füge **[[detruire_objet]]** hinzu und wähle **{{lang:noeud_objet_implique_long}}** als Ziel: Das ist der Stein, den der Ball gerade berührt hat.",
+            "Füge **[[modifier_variable]]** hinzu: Variable **vy**, Wert `=-vy` (der Ball prallt ab).",
+            "Füge **[[ajouter_variable]]** hinzu: Variable **score**, **{{lang:ajouter_variable.valeur}} = 10**.",
+            "Füge **[[ajouter_variable]]** hinzu: Variable **bricks**, **{{lang:ajouter_variable.valeur}} = -1**.",
+            "Füge **[[modifier_texte]]** hinzu: Ziel **scoreText**, **{{lang:modifier_texte.valeur}}** = `=\"Punkte: \" + score`.",
+            "Verbinde alle Knoten der Reihe nach."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "ball · brick"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · =-vy"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "score · + 10"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "bricks · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "Wenn der Ball einen Stein zerstört, prallt er immer nach oben oder unten ab, auch wenn er den Stein von der Seite getroffen hat. Das ist einfach und funktioniert bei einem Breakout-Spiel gut."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 7: Gewinnen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Füge nach **[[modifier_texte]]** aus Schritt 6 hinzu:"
+        ],
+        [
+          "ol",
+          [
+            "**[[condition]]** `=bricks <= 0`.",
+            "Am Ausgang **{{lang:port_vrai}}**: **[[modifier_variable]]** **vx** = `0`, **[[modifier_variable]]** **vy** = `0` (der Ball bleibt stehen), dann **[[toast]]** mit der Nachricht **Gewonnen!**, dann **[[attendre]]** 2 Sekunden, dann **[[recommencer_scene]]**."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=bricks <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "Gewonnen!"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[recommencer_scene]] stellt die Objekte wieder an ihren Platz und setzt die **{{lang:var_scope_locale}}**-Variablen auf ihren Startwert zurück: Das Spiel beginnt neu mit 3 Leben, 0 Punkten und allen Steinen."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 8: Leben und Game Over"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Wenn der Ball unter den Schläger fällt, verliert der Spieler ein Leben. Wir setzen die Kette aus Schritt 4 fort: Füge nach der dritten **[[condition]]** (oben) eine vierte hinzu, verbunden über ihren Ausgang **[[lang:port_ensuite]]**."
+        ],
+        [
+          "ol",
+          [
+            "**[[condition]]** `=ball.y >= 1920`, Ausgang **{{lang:port_vrai}}**.",
+            "**[[ajouter_variable]]**: Variable **lives**, **{{lang:ajouter_variable.valeur}} = -1**.",
+            "**[[modifier_texte]]**: Ziel **livesText**, **{{lang:modifier_texte.valeur}}** = `=\"Leben: \" + lives`.",
+            "**[[condition]]** `=lives <= 0`.",
+            "Ausgang **{{lang:port_vrai}}** (kein Leben mehr): **[[deplacer]]** den **ball** nach X = `518`, Y = `1000`, **[[modifier_variable]]** **vx** = `0`, **[[modifier_variable]]** **vy** = `0` (der Ball wird in die Mitte zurückgesetzt und angehalten), dann **[[toast]]** « Spiel vorbei! », **[[attendre]]** 2 Sekunden, **[[recommencer_scene]]**.",
+            "Ausgang **{{lang:port_faux}}** (noch Leben übrig): **[[deplacer]]** den **ball** nach X = `518`, Y = `1000`, dann **[[modifier_variable]]** **vy** = `-9`, dann **[[modifier_variable]]** **vx** = `6`."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=ball.y >= 1920"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "lives · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "livesText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "ball · 518 · 1000"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "Spiel vorbei!"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Warum den Ball vor dem Warten anhalten?** Während der 2 Sekunden Wartezeit läuft das Spiel weiter. Bliebe der Ball unter dem Bildschirm, würde er in jedem Bild ein Leben kosten, und der Lebenszähler würde sehr tief fallen (-178!). In die Mitte zurückgesetzt und ruhig stört er nicht mehr."
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_faux}}"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "ball · 518 · 1000"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Weiter gehen"
+    ],
+    [
+      "ul",
+      [
+        "**Sounds:** Füge **[[jouer_son]]** nach **[[detruire_objet]]** hinzu (ein « Klack », wenn ein Stein zerbricht) und im Ereignis des Schlägers.",
+        "**Verschiedene Farben:** Gib allen Steinen denselben Tag **brick**, egal welche Farbe sie haben: Ein einziger Aufbau genügt.",
+        "**Mehr Tempo:** Füge bei jedem zerstörten Stein **[[modifier_variable]]** `=vx * 1.02` hinzu, damit das Spiel immer schwerer wird.",
+        "**Funken:** Füge einen **[[effet_particules]]** hinzu, wenn ein Stein zerbricht (siehe die Anleitung [Partikel und Effekte](guide:particules-effets))."
+      ]
+    ],
+    [
+      "h2",
+      "Wenn es nicht funktioniert"
+    ],
+    [
+      "ul",
+      [
+        "**Der Ball bewegt sich nicht:** Prüfe, dass **vx** und **vy** beim Start geändert werden und dass **[[pousser]]** die Formeln `=vx` und `=vy` benutzt (mit dem **=** am Anfang).",
+        "**Der Ball fliegt durch den Schläger oder die Steine:** Prüfe die Namen (**ball**, **paddle**) und den Tag **brick**, überall gleich geschrieben (ohne Großbuchstaben). Ist der Ball sehr schnell, mache die Steine etwas größer oder bremse den Ball.",
+        "**Der Ball verlässt den Bildschirm ohne abzuprallen:** Die **[[condition]]**-Knoten müssen nacheinander über den Ausgang **[[lang:port_ensuite]]** verbunden sein, und der erste muss von **[[pousser]]** ausgehen.",
+        "**Du gewinnst zu früh oder nie:** Die Variable **bricks** muss genau der Anzahl der Steine im Spiel entsprechen.",
+        "**Der Schläger bewegt sich schlecht:** In der Formel ist `doigt.x` der Finger, nicht der Schläger; behalte das **=** am Anfang und schließe die Klammer."
+      ]
+    ]
+  ]
+}

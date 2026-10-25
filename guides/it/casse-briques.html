@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Come fare un gioco rompimattoni in Yop2D? | Guida Yop2D</title>
+<meta name="description" content="Fai un gioco rompimattoni in Yop2D senza codice: una racchetta che muovi con il dito, una palla che rimbalza, mattoni da rompere, punteggio e vite con i nodi.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/it/casse-briques.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/casse-briques.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/casse-briques.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/casse-briques.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/casse-briques.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/casse-briques.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/casse-briques.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/casse-briques.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/casse-briques.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/casse-briques.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Come fare un gioco rompimattoni?",
+ "description": "Fai un gioco rompimattoni in Yop2D senza codice: una racchetta che muovi con il dito, una palla che rimbalza, mattoni da rompere, punteggio e vite con i nodi.",
+ "inLanguage": "it",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motore di gioco 2D senza codice per Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Mettere la racchetta",
+   "text": "Dito premuto → Sposta Oggetto (paddle, X = segue il dito)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Lanciare la palla",
+   "text": "All'Avvio → Modifica Variabile (vx, vy); Ogni frame → Spingi l'oggetto (ball, =vx, =vy)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Rimbalzare sui bordi",
+   "text": "Condizione (=ball.x <= 0) → Vero → Modifica Variabile (vx, =abs(vx))."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Rimbalzare sulla racchetta",
+   "text": "Collisione A/B (ball, paddle) → Modifica Variabile (vy, =-abs(vy))."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Rompere i mattoni",
+   "text": "Se l'oggetto tocca il Tag (ball, brick) → Distruggi Oggetto → Aggiungi alla Variabile (score, 10)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Vite e fine della partita",
+   "text": "Condizione (=ball.y >= 1920) → Aggiungi alla Variabile (lives, -1) → Condizione (=lives <= 0) → Ricomincia la scena."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../it/index.html">← Yop2D</a>
+<h1>Come fare un gioco rompimattoni?</h1>
+<p>Guida per principianti · senza codice</p>
+<p class="langues"><a href="../casse-briques.html" hreflang="fr">Français</a> · <a href="../en/casse-briques.html" hreflang="en">English</a> · <a href="../es/casse-briques.html" hreflang="es">Español</a> · <a href="../de/casse-briques.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="../pt/casse-briques.html" hreflang="pt">Português</a> · <a href="../ru/casse-briques.html" hreflang="ru">Русский</a> · <a href="../zh/casse-briques.html" hreflang="zh">中文</a> · <a href="../ja/casse-briques.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>In un rompimattoni, una <strong>palla</strong> rimbalza sui bordi e su una <strong>racchetta</strong> che muovi con il dito, e rompe i <strong>mattoni</strong>. Qui guidiamo la palla con due piccole variabili: <strong>vx</strong> (la sua velocità verso destra) e <strong>vy</strong> (la sua velocità verso il basso). Quando la palla rimbalza, basta cambiare il segno della variabile.</p>
+<div class="besoin">
+<b>Ti serve:</b>
+<ul><li>un Immagine chiamato <strong>paddle</strong>, in basso nello schermo (per esempio 208 x 48 px, verso y = 1700);</li><li>un Immagine chiamato <strong>ball</strong>, al centro dello schermo (per esempio 44 x 44 px);</li><li>dei mattoni: Immagine in alto nello schermo (per esempio 128 x 64 px, 8 per riga);</li><li>due oggetti Testo: <strong>scoreText</strong> (testo «Punti: 0») e <strong>livesText</strong> (testo «Vite: 3»), in alto nello schermo.</li></ul>
+</div>
+<div class="tip">👉 Questa guida è scritta per un gioco <strong>verticale 1080 x 1920</strong>. Le immagini vengono dal pacchetto gratuito <strong>Puzzle (brick breaker)</strong> (Kenney, libero da diritti, CC0). Scaricalo nella <strong>Libreria</strong> di Yop2D, scheda <strong>Pacchetti da scaricare</strong>: ci trovi <strong>paddleBlu</strong> (racchetta, 208 x 48), <strong>ballBlue</strong> (palla, 44 x 44) e <strong>element_blue_rectangle_glossy</strong> (mattone, 128 x 64, in blu, verde, rosso, giallo, viola e grigio). Puoi anche usare i tuoi disegni: in tal caso adatta i numeri delle formule alle loro dimensioni.</div>
+<h2>Passo 1: tag e variabili</h2>
+<div class="method">
+<ol><li>Seleziona un mattone. Nell'ispettore, campo <strong>Tag (Etichetta)</strong>, scrivi <strong>brick</strong>. Fai lo stesso per ogni mattone.</li><li>Nel pannello di sinistra, apri la sezione <strong>Variabili</strong> e crea cinque variabili, tutte con ambito <strong>Locale</strong> e tipo <strong>Intero</strong>:</li></ol>
+<ul><li><strong>score</strong>: valore iniziale <strong>0</strong>;</li><li><strong>lives</strong>: valore iniziale <strong>3</strong>;</li><li><strong>bricks</strong>: il <strong>numero di mattoni</strong> del tuo gioco (per esempio <strong>27</strong>). Serve a sapere quando è tutto rotto;</li><li><strong>vx</strong> e <strong>vy</strong>: valore iniziale <strong>0</strong>. È la velocità della palla, si imposta all'avvio.</li></ul>
+<div class="tip">👉 Un mattone in più o in meno? Cambia semplicemente il valore iniziale di <strong>bricks</strong>. Se il numero è troppo grande, non vinci mai; se è troppo piccolo, vinci troppo presto.</div>
+</div>
+<h2>Passo 2: la racchetta segue il dito</h2>
+<div class="method">
+<ol><li>Apri il <strong>Blueprint</strong> della scena.</li><li>Aggiungi l'evento <strong>«Dito premuto»</strong> (si ripete finché un dito è sullo schermo).</li><li>Aggiungi <strong>«Sposta Oggetto»</strong>: bersaglio <strong>paddle</strong>, <strong>X</strong> = <code>=clamp(doigt.x - 104, 0, 872)</code>, <strong>Y</strong> = <code>1700</code>.</li><li>Collega i due nodi e avvia il gioco: la racchetta segue il tuo dito e non esce mai dallo schermo.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Dito premuto</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Sposta Oggetto</b><span>paddle · =clamp(doigt.x - 104, 0, 872) · 1700</span></div>
+</div>
+<div class="tip">👉 <strong>Come leggere la formula?</strong> <code>doigt.x</code> è la posizione del tuo dito («doigt» significa dito in francese). Togliamo 104 (metà della racchetta) per centrarla sotto il dito. <code>clamp(…, 0, 872)</code> la tiene nello schermo: 872 = 1080 − 208 (la larghezza della racchetta).</div>
+</div>
+<h2>Passo 3: la palla parte</h2>
+<div class="method">
+<ol><li>Aggiungi l'evento <strong>«All'Avvio»</strong>, poi due nodi <strong>«Modifica Variabile»</strong> uno dopo l'altro: variabile <strong>vx</strong> = <code>6</code>, poi variabile <strong>vy</strong> = <code>-9</code>.</li><li>Aggiungi l'evento <strong>«Ogni frame»</strong>, poi <strong>«Spingi l'oggetto»</strong>: bersaglio <strong>ball</strong>, <strong>Aggiungi X</strong> = <code>=vx</code>, <strong>Aggiungi Y</strong> = <code>=vy</code>.</li><li>Collega ogni evento ai suoi nodi e avvia il gioco: la palla sale verso destra ed esce dallo schermo.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>All'Avvio</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vy · -9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Ogni frame</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Spingi l'oggetto</b><span>ball · =vx · =vy</span></div>
+</div>
+<div class="tip">👉 <strong>Negativo = verso l'alto.</strong> In Yop2D, Y cresce verso il basso dello schermo: <strong>vy = -9</strong> manda la palla verso l'alto. Per una palla più veloce, usa 8 e -12.</div>
+</div>
+<h2>Passo 4: rimbalzare sui bordi</h2>
+<div class="method">
+<p>Subito dopo <strong>«Spingi l'oggetto»</strong>, a ogni immagine controlliamo se la palla tocca un bordo. Concateniamo tre nodi <strong>«Condizione»</strong>, seguendo ogni volta l'uscita <strong>«Poi»</strong> (che parte sempre).</p>
+<ol><li>Bordo sinistro: <strong>«Condizione»</strong> <code>=ball.x &lt;= 0</code>. Uscita <strong>Vero</strong> → <strong>«Modifica Variabile»</strong>: variabile <strong>vx</strong>, valore <code>=abs(vx)</code> (sempre verso destra).</li><li>Bordo destro: <strong>«Condizione»</strong> <code>=ball.x &gt;= 1036</code>. Uscita <strong>Vero</strong> → <strong>«Modifica Variabile»</strong>: variabile <strong>vx</strong>, valore <code>=-abs(vx)</code> (sempre verso sinistra). 1036 = 1080 − 44 (la larghezza della palla).</li><li>In alto: <strong>«Condizione»</strong> <code>=ball.y &lt;= 0</code>. Uscita <strong>Vero</strong> → <strong>«Modifica Variabile»</strong>: variabile <strong>vy</strong>, valore <code>=abs(vy)</code> (sempre verso il basso).</li><li>Collega ogni <strong>«Condizione»</strong> alla successiva con la sua uscita <strong>«Poi»</strong>. La prima è collegata all'uscita di <strong>«Spingi l'oggetto»</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Spingi l'oggetto</b><span>ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condizione</b><span>=ball.x &lt;= 0</span></div>
+<div class="fleche"><em>Vero</em> →</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vx · =abs(vx)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condizione</b><span>=ball.x &gt;= 1036</span></div>
+<div class="fleche"><em>Vero</em> →</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vx · =-abs(vx)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condizione</b><span>=ball.y &lt;= 0</span></div>
+<div class="fleche"><em>Vero</em> →</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vy · =abs(vy)</span></div>
+</div>
+<div class="tip">👉 <strong>Perché abs?</strong> <code>abs(vx)</code> dà sempre un numero positivo. Al bordo sinistro costringiamo la palla ad andare verso destra, anche se tocca il bordo due immagini di fila: non resta mai bloccata.</div>
+</div>
+<h2>Passo 5: rimbalzare sulla racchetta</h2>
+<div class="method">
+<ol><li>Aggiungi l'evento <strong>«Collisione A/B»</strong>: <strong>Oggetto A</strong> = <strong>ball</strong>, <strong>Oggetto B</strong> = <strong>paddle</strong>.</li><li>Aggiungi <strong>«Modifica Variabile»</strong>: variabile <strong>vy</strong>, valore <code>=-abs(vy)</code> (la palla torna verso l'alto).</li><li>Aggiungi un secondo <strong>«Modifica Variabile»</strong>: variabile <strong>vx</strong>, valore <code>=(ball.x + 22 - paddle.x - 104) / 13</code>.</li><li>Collega i tre nodi in ordine.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Collisione A/B</b><span>ball · paddle</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vy · =-abs(vy)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vx · =(ball.x + 22 - paddle.x - 104) / 13</span></div>
+</div>
+<div class="tip">👉 <strong>A cosa serve l'ultima formula?</strong> Misura dove la palla cade sulla racchetta: al centro risale dritta; sul bordo sinistro va a sinistra; sul bordo destro va a destra. Il giocatore può quindi <strong>mirare</strong>. (22 = metà della palla, 104 = metà della racchetta.)</div>
+</div>
+<h2>Passo 6: rompere i mattoni</h2>
+<div class="method">
+<ol><li>Aggiungi l'evento <strong>«Se l'oggetto tocca il Tag»</strong>: bersaglio <strong>ball</strong>, Tag <strong>brick</strong>.</li><li>Aggiungi <strong>«Distruggi Oggetto»</strong> e scegli <strong>L'oggetto implicato nell'evento</strong> come bersaglio: è il mattone che la palla ha appena toccato.</li><li>Aggiungi <strong>«Modifica Variabile»</strong>: variabile <strong>vy</strong>, valore <code>=-vy</code> (la palla rimbalza).</li><li>Aggiungi <strong>«Aggiungi alla Variabile»</strong>: variabile <strong>score</strong>, <strong>Valore da aggiungere = 10</strong>.</li><li>Aggiungi <strong>«Aggiungi alla Variabile»</strong>: variabile <strong>bricks</strong>, <strong>Valore da aggiungere = -1</strong>.</li><li>Aggiungi <strong>«Modifica Testo»</strong>: bersaglio <strong>scoreText</strong>, <strong>Nuovo testo</strong> = <code>="Punti: " + score</code>.</li><li>Collega tutti i nodi in ordine.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Se l'oggetto tocca il Tag</b><span>ball · brick</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Distruggi Oggetto</b><span>Oggetto Implicato</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vy · =-vy</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Aggiungi alla Variabile</b><span>score · + 10</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Aggiungi alla Variabile</b><span>bricks · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifica Testo</b><span>scoreText</span></div>
+</div>
+<div class="tip">👉 Quando la palla rompe un mattone, rimbalza sempre verso l'alto o verso il basso, anche se ha toccato il mattone di lato. È semplice e funziona bene in un rompimattoni.</div>
+</div>
+<h2>Passo 7: vincere</h2>
+<div class="method">
+<p>Dopo <strong>«Modifica Testo»</strong> del passo 6, aggiungi:</p>
+<ol><li><strong>«Condizione»</strong> <code>=bricks &lt;= 0</code>.</li><li>Sull'uscita <strong>Vero</strong>: <strong>«Modifica Variabile»</strong> <strong>vx</strong> = <code>0</code>, <strong>«Modifica Variabile»</strong> <strong>vy</strong> = <code>0</code> (la palla si ferma), poi <strong>«Messaggio breve in fondo allo schermo»</strong> con il messaggio <strong>Hai vinto!</strong>, poi <strong>«Attendere»</strong> 2 secondi, poi <strong>«Ricomincia la scena»</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Modifica Testo</b><span>scoreText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condizione</b><span>=bricks &lt;= 0</span></div>
+<div class="fleche"><em>Vero</em> →</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Messaggio breve in fondo allo schermo</b><span>Hai vinto!</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Attendere</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Ricomincia la scena</b></div>
+</div>
+<div class="tip">👉 «Ricomincia la scena» rimette gli oggetti al loro posto e le variabili <strong>Locale</strong> al loro valore iniziale: la partita ricomincia con 3 vite, 0 punti e tutti i mattoni.</div>
+</div>
+<h2>Passo 8: vite e Game Over</h2>
+<div class="method">
+<p>Quando la palla cade sotto la racchetta, il giocatore perde una vita. Continuiamo la catena del passo 4: dopo la terza <strong>«Condizione»</strong> (quella in alto), aggiungine una quarta, collegata dalla sua uscita <strong>«Poi»</strong>.</p>
+<ol><li><strong>«Condizione»</strong> <code>=ball.y &gt;= 1920</code>, uscita <strong>Vero</strong>.</li><li><strong>«Aggiungi alla Variabile»</strong>: variabile <strong>lives</strong>, <strong>Valore da aggiungere = -1</strong>.</li><li><strong>«Modifica Testo»</strong>: bersaglio <strong>livesText</strong>, <strong>Nuovo testo</strong> = <code>="Vite: " + lives</code>.</li><li><strong>«Condizione»</strong> <code>=lives &lt;= 0</code>.</li><li>Uscita <strong>Vero</strong> (nessuna vita): <strong>«Sposta Oggetto»</strong> la <strong>ball</strong> a X = <code>518</code>, Y = <code>1000</code>, <strong>«Modifica Variabile»</strong> <strong>vx</strong> = <code>0</code>, <strong>«Modifica Variabile»</strong> <strong>vy</strong> = <code>0</code> (la palla torna al centro e si ferma), poi <strong>«Messaggio breve in fondo allo schermo»</strong> «Partita finita!», <strong>«Attendere»</strong> 2 secondi, <strong>«Ricomincia la scena»</strong>.</li><li>Uscita <strong>Falso</strong> (restano vite): <strong>«Sposta Oggetto»</strong> la <strong>ball</strong> a X = <code>518</code>, Y = <code>1000</code>, poi <strong>«Modifica Variabile»</strong> <strong>vy</strong> = <code>-9</code>, poi <strong>«Modifica Variabile»</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
+<div class="chaine">
+<div class="noeud condition"><b>Condizione</b><span>=ball.y &gt;= 1920</span></div>
+<div class="fleche"><em>Vero</em> →</div>
+<div class="noeud"><b>Aggiungi alla Variabile</b><span>lives · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifica Testo</b><span>livesText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condizione</b><span>=lives &lt;= 0</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condizione</b><span>=lives &lt;= 0</span></div>
+<div class="fleche"><em>Vero</em> →</div>
+<div class="noeud"><b>Sposta Oggetto</b><span>ball · 518 · 1000</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Messaggio breve in fondo allo schermo</b><span>Partita finita!</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Attendere</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Ricomincia la scena</b></div>
+</div>
+<div class="tip">👉 <strong>Perché fermare la palla prima di aspettare?</strong> Durante i 2 secondi di attesa il gioco continua. Se la palla restasse sotto lo schermo, farebbe perdere una vita a ogni immagine e il contatore delle vite scenderebbe molto in basso (-178!). Rimessa al centro e ferma, non dà più fastidio.</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condizione</b><span>=lives &lt;= 0</span></div>
+<div class="fleche"><em>Falso</em> →</div>
+<div class="noeud"><b>Sposta Oggetto</b><span>ball · 518 · 1000</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vy · -9</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifica Variabile</b><span>vx · 6</span></div>
+</div>
+</div>
+<h2>Per andare oltre</h2>
+<ul><li><strong>Suoni:</strong> aggiungi <strong>«Riproduci suono»</strong> dopo <strong>«Distruggi Oggetto»</strong> (un «clac» quando un mattone si rompe) e nell'evento della racchetta.</li><li><strong>Colori diversi:</strong> dai lo stesso tag <strong>brick</strong> a tutti i mattoni, qualunque sia il loro colore: basta una sola impostazione.</li><li><strong>Più velocità:</strong> aggiungi <strong>«Modifica Variabile»</strong> <code>=vx * 1.02</code> a ogni mattone rotto, così il gioco diventa sempre più difficile.</li><li><strong>Scintille:</strong> aggiungi un <strong>«Effetto particellare»</strong> quando un mattone si rompe (vedi la guida <a href="../it/particules-effets.html">Particelle ed effetti</a>).</li></ul>
+<h2>Se non funziona</h2>
+<ul><li><strong>La palla non si muove:</strong> controlla che <strong>vx</strong> e <strong>vy</strong> cambino all'avvio e che <strong>«Spingi l'oggetto»</strong> usi le formule <code>=vx</code> e <code>=vy</code> (con il <strong>=</strong> all'inizio).</li><li><strong>La palla attraversa la racchetta o i mattoni:</strong> controlla i nomi (<strong>ball</strong>, <strong>paddle</strong>) e il tag <strong>brick</strong>, scritto uguale ovunque (senza maiuscole). Se la palla è molto veloce, ingrandisci un po' i mattoni o rallentala.</li><li><strong>La palla esce dallo schermo senza rimbalzare:</strong> i nodi <strong>«Condizione»</strong> devono essere collegati uno dopo l'altro con l'uscita <strong>«Poi»</strong>, e il primo deve partire da <strong>«Spingi l'oggetto»</strong>.</li><li><strong>Vinci troppo presto o mai:</strong> la variabile <strong>bricks</strong> deve valere esattamente il numero di mattoni del gioco.</li><li><strong>La racchetta si muove male:</strong> nella formula <code>doigt.x</code> è il dito, non la racchetta; tieni il <strong>=</strong> all'inizio e chiudi la parentesi.</li></ul>
+
+<div class="nav">
+<a href="../it/vie-game-over.html">← Perdere vita e Game Over</a>
+<a href="../it/niveau-suivant.html">Guida successiva: Passare al livello successivo →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motore di gioco 2D gratuito e senza codice per Android · <a href="../../it/index.html">Sito ufficiale</a> · <a href="../../noeuds/it.html">Riferimento dei nodi</a></p>
+</footer>
+</body>
+</html>

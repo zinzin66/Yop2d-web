@@ -1,0 +1,664 @@
+{
+  "titre_page": "Yop2D でブロック崩しを作るには？ | Yop2D ガイド",
+  "description": "Yop2D でコードなしにブロック崩しを作ろう：指で動かすパドル、はね返るボール、こわすブロック、ノードで点数とライフ。",
+  "h1": "ブロック崩しを作るには？",
+  "carte": [
+    "ブロック崩しを作る",
+    "指で動かすパドル、はね返るボール、こわすブロック、点数とライフ。"
+  ],
+  "etapes": [
+    [
+      "パドルを置く",
+      "{{NoeudEventDoigtAppuye}} → {{deplacer}} (paddle, X = 指についてくる)。"
+    ],
+    [
+      "ボールを発射する",
+      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy); {{NoeudEventChaqueImage}} → {{pousser}} (ball, =vx, =vy)."
+    ],
+    [
+      "はしではね返る",
+      "{{condition}} (=ball.x <= 0) → {{lang:port_vrai}} → {{modifier_variable}} (vx, =abs(vx))."
+    ],
+    [
+      "パドルではね返る",
+      "{{NoeudEventCollisionAB}} (ball, paddle) → {{modifier_variable}} (vy, =-abs(vy))."
+    ],
+    [
+      "ブロックをこわす",
+      "{{NoeudEventCollisionTag}} (ball, brick) → {{detruire_objet}} → {{ajouter_variable}} (score, 10)."
+    ],
+    [
+      "ライフとゲームオーバー",
+      "{{condition}} (=ball.y >= 1920) → {{ajouter_variable}} (lives, -1) → {{condition}} (=lives <= 0) → {{recommencer_scene}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "ブロック崩しでは、**ボール**がはしと、指で動かす**パドル**ではね返り、**ブロック**をこわします。ここでは 2 つの小さな変数でボールを動かします。**vx**（右向きの速さ）と **vy**（下向きの速さ）です。ボールがはね返るときは、変数の正負を入れかえるだけです。"
+    ],
+    [
+      "besoin",
+      [
+        "**paddle** という名前の{{lang:obj_prefix_image}}を、画面の下に置きます（たとえば 208 x 48 px、y = 1700 あたり）。",
+        "**ball** という名前の{{lang:obj_prefix_image}}を、画面の真ん中に置きます（たとえば 44 x 44 px）。",
+        "ブロック：画面の上にならべる{{lang:obj_prefix_image}}（たとえば 128 x 64 px、1 列に 8 個）。",
+        "{{lang:obj_prefix_texte}}オブジェクトを 2 つ：**scoreText**（テキスト « 点数：0 »）と **livesText**（テキスト « ライフ：3 »）を、画面の上に置きます。"
+      ]
+    ],
+    [
+      "tip",
+      "このガイドは **1080 x 1920 の縦向き**のゲーム用に書かれています。画像は無料のパック **Puzzle (brick breaker)**（Kenney、自由に使える、CC0）のものです。Yop2D の**ライブラリ**の**ダウンロードできるパック**タブからダウンロードしてください。**paddleBlu**（パドル、208 x 48）、**ballBlue**（ボール、44 x 44）、**element_blue_rectangle_glossy**（ブロック、128 x 64、青・緑・赤・黄・紫・灰色）が入っています。自分で描いた絵も使えます。その場合は、式の数字をその大きさに合わせて変えてください。"
+    ],
+    [
+      "h2",
+      "ステップ 1：タグと変数"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "ブロックを 1 つ選びます。インスペクターの **{{lang:insp_label_tag}}** 欄に **brick** と書きます。すべてのブロックで同じようにします。",
+            "左のパネルで **{{lang:panneau_ress_variables}}** のセクションを開き、変数を 5 つ作ります。どれも範囲は **{{lang:var_scope_locale}}**、タイプは **{{lang:var_type_entier}}** です。"
+          ]
+        ],
+        [
+          "ul",
+          [
+            "**score**：初期値 **0**。",
+            "**lives**：初期値 **3**。",
+            "**bricks**：ゲームの**ブロックの数**（たとえば **27**）。すべてこわれたかどうかを知るために使います。",
+            "**vx** と **vy**：初期値 **0**。ボールの速さで、ゲーム開始時に決めます。"
+          ]
+        ],
+        [
+          "tip",
+          "ブロックを増やしたり減らしたりしたい？ **bricks** の初期値を変えるだけです。数が大きすぎると勝てず、小さすぎると早く勝ってしまいます。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 2：パドルが指についてくる"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "シーンの**{{lang:titre_blueprint}}**を開きます。",
+            "イベント **[[NoeudEventDoigtAppuye]]** を追加します（画面に指があるあいだ、くり返されます）。",
+            "**[[deplacer]]** を追加します：対象 **paddle**、**X** = `=clamp(doigt.x - 104, 0, 872)`、**Y** = `1700`。",
+            "2 つのノードをつないでゲームを実行します。パドルが指についてきて、画面の外には出ません。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventDoigtAppuye}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "paddle · =clamp(doigt.x - 104, 0, 872) · 1700"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**式の読み方は？** `doigt.x` は指の位置です（« doigt » はフランス語で「指」の意味）。パドルを指の下の中央に置くため、104（パドルの半分）を引きます。`clamp(…, 0, 872)` は画面の中にとどめます。872 = 1080 − 208（パドルの幅）です。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 3：ボールが動きだす"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "イベント **[[NoeudEventStart]]** を追加し、続けて **[[modifier_variable]]** を 2 つつなげます：変数 **vx** = `6`、次に変数 **vy** = `-9`。",
+            "イベント **[[NoeudEventChaqueImage]]** を追加し、続けて **[[pousser]]**：対象 **ball**、**X を足す** = `=vx`、**Y を足す** = `=vy`。",
+            "それぞれのイベントをノードにつないでゲームを実行します。ボールは右上に飛んで、画面の外に出ていきます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{pousser}}",
+              "ball · =vx · =vy"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**マイナス = 上。** Yop2D では Y が画面の下に向かって大きくなります。**vy = -9** でボールは上に飛びます。もっと速くしたいときは 8 と -12 にしましょう。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 4：はしではね返る"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "**[[pousser]]** のすぐあとで、ボールがはしにふれたかをフレームごとに調べます。**[[condition]]** を 3 つつなげ、そのたびに **[[lang:port_ensuite]]** の出力をたどります（どんな場合でも実行されます）。"
+        ],
+        [
+          "ol",
+          [
+            "左のはし：**[[condition]]** `=ball.x <= 0`。出力 **{{lang:port_vrai}}** → **[[modifier_variable]]**：変数 **vx**、値 `=abs(vx)`（いつも右向き）。",
+            "右のはし：**[[condition]]** `=ball.x >= 1036`。出力 **{{lang:port_vrai}}** → **[[modifier_variable]]**：変数 **vx**、値 `=-abs(vx)`（いつも左向き）。1036 = 1080 − 44（ボールの幅）です。",
+            "上：**[[condition]]** `=ball.y <= 0`。出力 **{{lang:port_vrai}}** → **[[modifier_variable]]**：変数 **vy**、値 `=abs(vy)`（いつも下向き）。",
+            "それぞれの **[[condition]]** を、**[[lang:port_ensuite]]** の出力で次の **[[condition]]** につなぎます。最初のものは **[[pousser]]** の出力につなぎます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{pousser}}",
+              "ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=ball.x <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · =abs(vx)"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=ball.x >= 1036"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · =-abs(vx)"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=ball.y <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · =abs(vy)"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**なぜ abs？** `abs(vx)` はいつも正の数です。左のはしでは、2 フレーム続けてふれても、ボールは必ず右に向かうので、はしにはさまりません。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 5：パドルではね返る"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "イベント **[[NoeudEventCollisionAB]]** を追加します：**オブジェクト A** = **ball**、**オブジェクト B** = **paddle**。",
+            "**[[modifier_variable]]** を追加します：変数 **vy**、値 `=-abs(vy)`（ボールが上にもどる）。",
+            "2 つ目の **[[modifier_variable]]** を追加します：変数 **vx**、値 `=(ball.x + 22 - paddle.x - 104) / 13`。",
+            "3 つのノードを順番につなぎます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · paddle"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · =-abs(vy)"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · =(ball.x + 22 - paddle.x - 104) / 13"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**最後の式は何のため？** ボールがパドルのどこに当たったかを測ります。真ん中ならまっすぐ上、左はしなら左、右はしなら右に飛びます。プレイヤーがねらえるようになります。（22 = ボールの半分、104 = パドルの半分。）"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 6：ブロックをこわす"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "イベント **[[NoeudEventCollisionTag]]** を追加します：対象 **ball**、{{lang:Tag}} **brick**。",
+            "**[[detruire_objet]]** を追加し、対象に **{{lang:noeud_objet_implique_long}}** を選びます。ボールがいまふれたブロックのことです。",
+            "**[[modifier_variable]]** を追加します：変数 **vy**、値 `=-vy`（ボールがはね返る）。",
+            "**[[ajouter_variable]]** を追加します：変数 **score**、**{{lang:ajouter_variable.valeur}} = 10**。",
+            "**[[ajouter_variable]]** を追加します：変数 **bricks**、**{{lang:ajouter_variable.valeur}} = -1**。",
+            "**[[modifier_texte]]** を追加します：対象 **scoreText**、**{{lang:modifier_texte.valeur}}** = `=\"点数：\" + score`。",
+            "すべてのノードを順番につなぎます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "ball · brick"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · =-vy"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "score · + 10"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "bricks · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "ボールがブロックをこわすときは、ブロックの横にふれても、いつも上か下にはね返ります。かんたんで、ブロック崩しにはちょうどいい方法です。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 7：勝つ"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "ステップ 6 の **[[modifier_texte]]** のあとに、次を追加します。"
+        ],
+        [
+          "ol",
+          [
+            "**[[condition]]** `=bricks <= 0`.",
+            "**{{lang:port_vrai}}** の出力で：**[[modifier_variable]]** **vx** = `0`、**[[modifier_variable]]** **vy** = `0`（ボールが止まる）、次に **[[toast]]** でメッセージ **勝ったよ！**、次に **[[attendre]]** 2 秒、最後に **[[recommencer_scene]]**。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=bricks <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "勝ったよ！"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[recommencer_scene]] は、オブジェクトを元の場所にもどし、**{{lang:var_scope_locale}}** の変数を初期値にもどします。ライフ 3、0 点、すべてのブロックで、ゲームが最初からやり直しになります。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 8：ライフとゲームオーバー"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "ボールがパドルの下に落ちると、プレイヤーはライフを 1 つ失います。ステップ 4 の続きです。3 つ目の **[[condition]]**（上）のあとに 4 つ目を追加し、**[[lang:port_ensuite]]** の出力でつなぎます。"
+        ],
+        [
+          "ol",
+          [
+            "**[[condition]]** `=ball.y >= 1920`、出力 **{{lang:port_vrai}}**。",
+            "**[[ajouter_variable]]**：変数 **lives**、**{{lang:ajouter_variable.valeur}} = -1**。",
+            "**[[modifier_texte]]**：対象 **livesText**、**{{lang:modifier_texte.valeur}}** = `=\"ライフ：\" + lives`。",
+            "**[[condition]]** `=lives <= 0`.",
+            "出力 **{{lang:port_vrai}}**（ライフなし）：**[[deplacer]]** **ball** を X = `518`、Y = `1000` へ、**[[modifier_variable]]** **vx** = `0`、**[[modifier_variable]]** **vy** = `0`（ボールを真ん中にもどして止める）、次に **[[toast]]** « ゲームオーバー！ »、**[[attendre]]** 2 秒、**[[recommencer_scene]]**。",
+            "出力 **{{lang:port_faux}}**（ライフが残っている）：**[[deplacer]]** **ball** を X = `518`、Y = `1000` へ、次に **[[modifier_variable]]** **vy** = `-9`、次に **[[modifier_variable]]** **vx** = `6`。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=ball.y >= 1920"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "lives · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "livesText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "ball · 518 · 1000"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "ゲームオーバー！"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**なぜ待つ前にボールを止めるの？** 2 秒待っているあいだも、ゲームは動き続けています。ボールが画面の下に残ったままだと、フレームごとにライフが減り、ライフの数がとても小さくなってしまいます（-178！）。真ん中にもどして止めておけば、じゃまをしません。"
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_faux}}"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "ball · 518 · 1000"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "さらに進むために"
+    ],
+    [
+      "ul",
+      [
+        "**音：** **[[detruire_objet]]** のあとに **[[jouer_son]]** を追加します（ブロックがこわれるときの「カチッ」）。パドルのイベントにも追加できます。",
+        "**いろいろな色：** 色がちがっても、すべてのブロックに同じタグ **brick** をつければ、設定は 1 つで足ります。",
+        "**もっと速く：** ブロックをこわすたびに **[[modifier_variable]]** `=vx * 1.02` を追加すると、ゲームがだんだん難しくなります。",
+        "**火花：** ブロックがこわれるときに **[[effet_particules]]** を追加します（ガイド[パーティクルとエフェクト](guide:particules-effets)を見てください）。"
+      ]
+    ],
+    [
+      "h2",
+      "うまく動かないときは"
+    ],
+    [
+      "ul",
+      [
+        "**ボールが動かない：** 開始時に **vx** と **vy** が変わっているか、**[[pousser]]** が式 `=vx` と `=vy` を使っているか（先頭に **=** があるか）を確かめます。",
+        "**ボールがパドルやブロックをすりぬける：** 名前（**ball**、**paddle**）とタグ **brick** が、どこでも同じ書き方（大文字なし）か確かめます。ボールが速すぎるときは、ブロックを少し大きくするか、ボールをおそくします。",
+        "**ボールがはね返らずに画面の外へ出る：** **[[condition]]** のノードは **[[lang:port_ensuite]]** の出力で順番につなぎ、最初のものは **[[pousser]]** からつなぐ必要があります。",
+        "**勝つのが早すぎる、または勝てない：** 変数 **bricks** は、ゲームのブロックの数とちょうど同じ値にします。",
+        "**パドルの動きがおかしい：** 式の `doigt.x` は指のことで、パドルではありません。先頭の **=** を残し、かっこを閉じます。"
+      ]
+    ]
+  ]
+}

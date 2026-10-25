@@ -8,6 +8,13 @@
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/casse-briques.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/casse-briques.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/casse-briques.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/casse-briques.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/casse-briques.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/casse-briques.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/casse-briques.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/casse-briques.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/casse-briques.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/casse-briques.html">
 <link rel="stylesheet" href="../guide.css">
 <script type="application/ld+json">
 {
@@ -62,7 +69,7 @@
 <a href="../../index.html">← Yop2D</a>
 <h1>How to make a brick breaker game?</h1>
 <p>Beginner guide · no code</p>
-<p class="langues"><a href="../casse-briques.html" hreflang="fr">Français</a> · <strong>English</strong></p>
+<p class="langues"><a href="../casse-briques.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/casse-briques.html" hreflang="es">Español</a> · <a href="../de/casse-briques.html" hreflang="de">Deutsch</a> · <a href="../it/casse-briques.html" hreflang="it">Italiano</a> · <a href="../pt/casse-briques.html" hreflang="pt">Português</a> · <a href="../ru/casse-briques.html" hreflang="ru">Русский</a> · <a href="../zh/casse-briques.html" hreflang="zh">中文</a> · <a href="../ja/casse-briques.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
 <p>In a brick breaker, a <strong>ball</strong> bounces off the edges and off a <strong>paddle</strong> you move with your finger, and breaks <strong>bricks</strong>. Here we drive the ball with two small variables, <strong>vx</strong> (its speed to the right) and <strong>vy</strong> (its speed downward). When the ball bounces, we simply change the sign of the variable.</p>
@@ -70,7 +77,7 @@
 <b>You need:</b>
 <ul><li>an Image named <strong>paddle</strong>, at the bottom of the screen (for example 208 x 48 px, around y = 1700);</li><li>an Image named <strong>ball</strong>, in the middle of the screen (for example 44 x 44 px);</li><li>bricks: Images at the top of the screen (for example 128 x 64 px, 8 per row);</li><li>two Text objects: <strong>scoreText</strong> (text “Score: 0”) and <strong>livesText</strong> (text “Lives: 3”), at the top of the screen.</li></ul>
 </div>
-<div class="tip">👉 This guide is written for a <strong>1080 x 1920 portrait</strong> game. The images come from Kenney's free <strong>Puzzle Pack</strong> (free to use, CC0), folder <strong>PNG/Double</strong>: <strong>paddleBlu.png</strong> (paddle, 208 x 48), <strong>ballBlue.png</strong> (ball, 44 x 44) and <strong>element_blue_rectangle_glossy.png</strong> (brick, 128 x 64, available in blue, green, red, yellow, purple and grey). You can also use your own drawings: then adapt the numbers in the formulas to their sizes.</div>
+<div class="tip">👉 This guide is written for a <strong>1080 x 1920 portrait</strong> game. The images come from the free <strong>Puzzle (brick breaker)</strong> pack (Kenney, free to use, CC0). Download it in the Yop2D <strong>Library</strong>, tab <strong>Packs to download</strong>: you will find <strong>paddleBlu</strong> (paddle, 208 x 48), <strong>ballBlue</strong> (ball, 44 x 44) and <strong>element_blue_rectangle_glossy</strong> (brick, 128 x 64, in blue, green, red, yellow, purple and grey). You can also use your own drawings: then adapt the numbers in the formulas to their sizes.</div>
 <h2>Step 1: tags and variables</h2>
 <div class="method">
 <ol><li>Select a brick. In the inspector, field <strong>Tag (Label)</strong>, type <strong>brick</strong>. Do the same for every brick.</li><li>In the left panel, open the <strong>Variables</strong> section and create five variables, all with scope <strong>Local</strong> and type <strong>Integer</strong>:</li></ol>
@@ -79,17 +86,17 @@
 </div>
 <h2>Step 2: the paddle follows your finger</h2>
 <div class="method">
-<ol><li>Open the scene's <strong>Blueprint</strong>.</li><li>Add the <strong>“Finger held down”</strong> event (it repeats as long as a finger is on the screen).</li><li>Add <strong>“Move Object”</strong>: target <strong>paddle</strong>, <strong>X</strong>, value <code>=clamp(doigt.x - 104, 0, 872)</code>, <strong>Y</strong> = <code>1700</code>.</li><li>Link the two nodes, then run the game: the paddle follows your finger and never leaves the screen.</li></ol>
+<ol><li>Open the scene's <strong>Blueprint</strong>.</li><li>Add the <strong>“Finger held down”</strong> event (it repeats as long as a finger is on the screen).</li><li>Add <strong>“Move Object”</strong>: target <strong>paddle</strong>, <strong>X</strong> = <code>=clamp(doigt.x - 104, 0, 872)</code>, <strong>Y</strong> = <code>1700</code>.</li><li>Link the two nodes, then run the game: the paddle follows your finger and never leaves the screen.</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>Finger held down</b></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Move Object</b><span>paddle · =clamp(doigt.x - 104, 0, 872) · 1700</span></div>
 </div>
-<div class="tip">👉 <strong>How to read the formula?</strong> <code>doigt.x</code> is your finger's position (“doigt” means finger). We subtract 104 (half the paddle) to center it under the finger. <code>clamp(…, 0, 840)</code> keeps it on screen: 872 = 1080 − 208 (the paddle's width).</div>
+<div class="tip">👉 <strong>How to read the formula?</strong> <code>doigt.x</code> is your finger's position (“doigt” means finger). We subtract 104 (half the paddle) to center it under the finger. <code>clamp(…, 0, 872)</code> keeps it on screen: 872 = 1080 − 208 (the paddle's width).</div>
 </div>
 <h2>Step 3: the ball starts</h2>
 <div class="method">
-<ol><li>Add the <strong>“On Start”</strong> event, then two <strong>“Modify Variable”</strong> nodes one after the other: variable <strong>vx</strong> = <code>6</code>, then variable <strong>vy</strong> = <code>-9</code>.</li><li>Add the <strong>“Every frame”</strong> event, then <strong>“Push object”</strong>: target <strong>ball</strong>, <strong>Add X</strong>, value <code>=vx</code>, <strong>Add Y</strong>, value <code>=vy</code>.</li><li>Link each event to its nodes and run the game: the ball goes up and to the right, and leaves the screen.</li></ol>
+<ol><li>Add the <strong>“On Start”</strong> event, then two <strong>“Modify Variable”</strong> nodes one after the other: variable <strong>vx</strong> = <code>6</code>, then variable <strong>vy</strong> = <code>-9</code>.</li><li>Add the <strong>“Every frame”</strong> event, then <strong>“Push object”</strong>: target <strong>ball</strong>, <strong>Add X</strong> = <code>=vx</code>, <strong>Add Y</strong> = <code>=vy</code>.</li><li>Link each event to its nodes and run the game: the ball goes up and to the right, and leaves the screen.</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>On Start</b></div>
 <div class="fleche">→</div>
@@ -141,7 +148,7 @@
 </div>
 <h2>Step 6: break the bricks</h2>
 <div class="method">
-<ol><li>Add the <strong>“If object touches Tag”</strong> event: target <strong>ball</strong>, Tag <strong>brick</strong>.</li><li>Add <strong>“Destroy Object”</strong> and choose <strong>The object involved in the event</strong> as the target: it is the brick the ball has just touched.</li><li>Add <strong>“Modify Variable”</strong>: variable <strong>vy</strong>, value <code>=-vy</code> (the ball bounces).</li><li>Add <strong>“Add to Variable”</strong>: variable <strong>score</strong>, <strong>Value to add = 10</strong>.</li><li>Add <strong>“Add to Variable”</strong>: variable <strong>bricks</strong>, <strong>Value to add = -1</strong>.</li><li>Add <strong>“Modify Text”</strong>: target <strong>scoreText</strong>, <strong>New text</strong>, value <code>="Score: " + score</code>.</li><li>Link all the nodes in order.</li></ol>
+<ol><li>Add the <strong>“If object touches Tag”</strong> event: target <strong>ball</strong>, Tag <strong>brick</strong>.</li><li>Add <strong>“Destroy Object”</strong> and choose <strong>The object involved in the event</strong> as the target: it is the brick the ball has just touched.</li><li>Add <strong>“Modify Variable”</strong>: variable <strong>vy</strong>, value <code>=-vy</code> (the ball bounces).</li><li>Add <strong>“Add to Variable”</strong>: variable <strong>score</strong>, <strong>Value to add = 10</strong>.</li><li>Add <strong>“Add to Variable”</strong>: variable <strong>bricks</strong>, <strong>Value to add = -1</strong>.</li><li>Add <strong>“Modify Text”</strong>: target <strong>scoreText</strong>, <strong>New text</strong> = <code>="Score: " + score</code>.</li><li>Link all the nodes in order.</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>If object touches Tag</b><span>ball · brick</span></div>
 <div class="fleche">→</div>
@@ -181,7 +188,7 @@
 <h2>Step 8: lives and Game Over</h2>
 <div class="method">
 <p>When the ball falls below the paddle, the player loses a life. We continue the chain from step 4: after the third <strong>“Condition”</strong> (the top), add a fourth one, linked by its <strong>“Then”</strong> output.</p>
-<ol><li><strong>“Condition”</strong> <code>=ball.y &gt;= 1920</code>, output <strong>True</strong>.</li><li><strong>“Add to Variable”</strong>: variable <strong>lives</strong>, <strong>Value to add = -1</strong>.</li><li><strong>“Modify Text”</strong>: target <strong>livesText</strong>, <strong>New text</strong>, value <code>="Lives: " + lives</code>.</li><li><strong>“Condition”</strong> <code>=lives &lt;= 0</code>.</li><li>Output <strong>True</strong> (no lives left): <strong>“Move Object”</strong> the <strong>ball</strong> to X = <code>518</code>, Y = <code>1000</code>, <strong>“Modify Variable”</strong> <strong>vx</strong> = <code>0</code>, <strong>“Modify Variable”</strong> <strong>vy</strong> = <code>0</code> (the ball is put back in the middle and stops), then <strong>“Small message at the bottom of the screen”</strong> “Game over!”, <strong>“Wait”</strong> 2 seconds, <strong>“Restart the scene”</strong>.</li><li>Output <strong>False</strong> (lives left): <strong>“Move Object”</strong> the <strong>ball</strong> to X = <code>518</code>, Y = <code>1000</code>, then <strong>“Modify Variable”</strong> <strong>vy</strong> = <code>-9</code>, then <strong>“Modify Variable”</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
+<ol><li><strong>“Condition”</strong> <code>=ball.y &gt;= 1920</code>, output <strong>True</strong>.</li><li><strong>“Add to Variable”</strong>: variable <strong>lives</strong>, <strong>Value to add = -1</strong>.</li><li><strong>“Modify Text”</strong>: target <strong>livesText</strong>, <strong>New text</strong> = <code>="Lives: " + lives</code>.</li><li><strong>“Condition”</strong> <code>=lives &lt;= 0</code>.</li><li>Output <strong>True</strong> (no lives left): <strong>“Move Object”</strong> the <strong>ball</strong> to X = <code>518</code>, Y = <code>1000</code>, <strong>“Modify Variable”</strong> <strong>vx</strong> = <code>0</code>, <strong>“Modify Variable”</strong> <strong>vy</strong> = <code>0</code> (the ball is put back in the middle and stops), then <strong>“Small message at the bottom of the screen”</strong> “Game over!”, <strong>“Wait”</strong> 2 seconds, <strong>“Restart the scene”</strong>.</li><li>Output <strong>False</strong> (lives left): <strong>“Move Object”</strong> the <strong>ball</strong> to X = <code>518</code>, Y = <code>1000</code>, then <strong>“Modify Variable”</strong> <strong>vy</strong> = <code>-9</code>, then <strong>“Modify Variable”</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
 <div class="chaine">
 <div class="noeud condition"><b>Condition</b><span>=ball.y &gt;= 1920</span></div>
 <div class="fleche"><em>True</em> →</div>
