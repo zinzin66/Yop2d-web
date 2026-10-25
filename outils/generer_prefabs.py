@@ -71,7 +71,7 @@ def construire(id_prefab):
     for f in os.listdir(PREFABS):          # efface les anciennes versions du zip
         if re.fullmatch(re.escape(id_prefab) + r'-[0-9a-f]{8}\.zip', f) and f != nom_zip:
             os.remove(os.path.join(PREFABS, f))
-    return {
+    res = {
         'id': id_prefab,
         'nom': infos['nom'],
         'description': infos['description'],
@@ -82,6 +82,9 @@ def construire(id_prefab):
         'vignette': id_prefab + '.png',
         'version': version,
     }
+    if infos.get('moteur_min'):          # build minimal de Yop2D pour ce prefab (le moteur dit « mets Yop2D à jour »)
+        res['moteur_min'] = int(infos['moteur_min'])
+    return res
 
 
 def main():
