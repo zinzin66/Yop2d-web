@@ -39,6 +39,16 @@ objets += [
 
 L = Logique()
 ENSUITE = lambda n: (n[0], 'port_ensuite', 2)
+
+def vert(id, cle, parametres=None, variable=None):
+    """Un nœud VERT (valeur), sans fil d'exécution : un réglage s'y branche avec « @valeur:<id> »."""
+    n = {'classeType': 'com.ludexa.moteur.NoeudGenerique', 'id': id, 'portsEntree': [], 'x': 0.0, 'y': 0.0, 'cleNoeud': cle,
+         'parametres': {cle + '.' + k: str(v) for k, v in (parametres or {}).items()}}
+    if variable: n['cibleVariableNom'] = variable
+    L.noeuds.append(n)
+
+def brancher(noeud, reglage, vert_id):
+    L.noeud(noeud)['parametres'][reglage] = '@valeur:' + vert_id
 # La raquette : le joueur la glisse au doigt ; chaque image on la remet à sa hauteur et on la garde dans l'écran
 e = L.evenement('paddle_frame', 'NoeudEventChaqueImage', sortie='Sortie')
 L.chaine(e, [('lock_y', 'modifier_propriete', {'propriete': 'y', 'valeur': 1700}, 'raquette'),
@@ -48,7 +58,11 @@ e = L.evenement('start', 'NoeudEventStart', sortie='Sortie')
 L.chaine(e, [('start_vx', 'modifier_variable', {'valeur': 6}, None, 'vx'),
              ('start_vy', 'modifier_variable', {'valeur': -9}, None, 'vy')])
 e = L.evenement('frame', 'NoeudEventChaqueImage', sortie='Sortie')
-L.action(e, 'push', 'pousser', {'x': '=vx', 'y': '=vy'}, 'balle')
+L.action(e, 'push', 'pousser', {'x': 0, 'y': 0}, 'balle')
+vert('g_push_vx', 'valeur_variable', variable='vx')
+vert('g_push_vy', 'valeur_variable', variable='vy')
+brancher('push', 'pousser.x', 'g_push_vx')
+brancher('push', 'pousser.y', 'g_push_vy')
 # Les murs invisibles : la balle repart de l'autre côté (des nombres tout simples, rien à calculer)
 for ev, mur, var, val, nom in [('wall_left', 'mur_gauche', 'vx', 6, 'left_do'), ('wall_right', 'mur_droit', 'vx', -6, 'right_do'),
                                ('wall_top', 'mur_haut', 'vy', 9, 'top_do')]:
@@ -59,7 +73,9 @@ for ev, mur, var, val, nom in [('wall_left', 'mur_gauche', 'vx', 6, 'left_do'), 
 e = L.evenement('hit_paddle', 'NoeudEventCollisionAB', cible='balle', sortie='Collision')
 L.noeud('hit_paddle')['cibleNomB'] = 'raquette'
 L.chaine(e, [('paddle_vy', 'modifier_variable', {'valeur': -9}, None, 'vy'),
-             ('paddle_vx', 'modifier_variable', {'valeur': '=random(-6, 6)'}, None, 'vx')])
+             ('paddle_vx', 'modifier_variable', {'valeur': 0}, None, 'vx')])
+vert('g_random', 'valeur_hasard', {'de': -6, 'a': 6})
+brancher('paddle_vx', 'modifier_variable.valeur', 'g_random')
 # Les briques : on casse, la balle repart de l'autre sens, score, victoire
 e = L.evenement('hit_brick', 'NoeudEventCollisionTag', {'Tag': 'brique'}, 'balle', sortie='Sortie')
 t = L.chaine(e, [('brick_destroy', 'detruire_objet', {}, '__OBJET_IMPLIQUE__'),
@@ -146,11 +162,11 @@ ESPACE = 2 * MARGE + ENTETE + 80
 # 1. la raquette
 b1 = section([['paddle_frame', 'lock_y', 'keep_in']], 0, HAUT)
 # 2. la balle part et avance
-b2 = section([['start', 'start_vx', 'start_vy'], ['frame', 'push']], 0, b1[3] + ESPACE)
+b2 = section([['start', 'start_vx', 'start_vy'], ['frame', 'push'], ('push', ['g_push_vx', 'g_push_vy'])], 0, b1[3] + ESPACE)
 # 3. les murs
 b3 = section([['wall_left', 'left_do'], ['wall_right', 'right_do'], ['wall_top', 'top_do']], 0, b2[3] + ESPACE)
 # 4. la raquette renvoie la balle
-b4 = section([['hit_paddle', 'paddle_vy', 'paddle_vx']], 0, b3[3] + ESPACE)
+b4 = section([['hit_paddle', 'paddle_vy', 'paddle_vx'], ('paddle_vx', ['g_random'])], 0, b3[3] + ESPACE)
 # 5. les briques et la victoire
 b5 = section([['hit_brick', 'brick_destroy', 'brick_dir', 'brick_score', 'brick_count', 'brick_text', 'all_gone'],
               ('brick_dir', ['dir_down']), ('brick_dir', ['dir_up']),
@@ -165,13 +181,13 @@ cadre('cadre_raquette', 'Step 2 - The paddle follows your finger',
       'height (Set a property: y = 1700) and kept inside the screen (Keep in screen).', BLEU, b1)
 cadre('cadre_depart', 'Step 3 - The ball starts and moves',
       'When the game starts, the ball speed is set: vx = 6 (to the right) and vy = -9 (negative = up). Then, every '
-      'frame, the ball is pushed by vx and vy.', VERT, b2)
+      'frame, the ball is pushed by vx and vy. The two green nodes "Variable value" give the values of vx and vy to the Push setting.', VERT, b2)
 cadre('cadre_murs', 'Step 4 - The walls send the ball back',
       'The three invisible walls (zones around the screen) change the ball direction with plain numbers: left wall: '
       'vx = 6, right wall: vx = -6, top wall: vy = 9. Nothing to calculate.', ORANGE, b3)
 cadre('cadre_raquette_rebond', 'Step 5 - The ball bounces on the paddle',
-      'The ball goes back up (vy = -9) and leaves in a random direction (vx = a random number between -6 and 6), so '
-      'the game is never the same.', VIOLET, b4)
+      'The ball goes back up (vy = -9) and leaves in a random direction: the green node "Random number" (between -6 and 6) '
+      'gives its value to vx, so the game is never the same.', VIOLET, b4)
 cadre('cadre_briques', 'Steps 6 and 7 - Break the bricks and win',
       'Each brick has the tag "brique", so one setup works for every brick. The touched brick is the "involved object": '
       'it is destroyed. If the ball was going up (vy < 0) it goes down, otherwise it goes up. Then the score goes up and '
@@ -186,6 +202,9 @@ postit('note_variables', 'Variables',
        'starting value when the scene restarts.', JAUNE, xp, b1[1] - MARGE - ENTETE, h=210)
 postit('note_negatif', 'Negative = up',
        'In Yop2D, Y grows toward the bottom of the screen. vy = -9 sends the ball up.', VERT, xp, b2[1] - MARGE - ENTETE)
+postit('note_vert', 'Green nodes',
+       'A green node gives a value to a setting: no need to type a formula. Here "Variable value" gives vx and vy to Push, and "Random number" gives a random direction.',
+       VERT, xp, b2[1] - MARGE - ENTETE + 220, h=230)
 postit('note_murs', 'Invisible walls',
        'The walls are "Zone" objects placed around the screen. They are invisible during the game but the ball can touch '
        'them.', ORANGE, xp, b3[1] - MARGE - ENTETE, h=210)
