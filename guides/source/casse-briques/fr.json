@@ -40,15 +40,15 @@
     [
       "besoin",
       [
-        "une {{lang:obj_prefix_image}} nommée **raquette**, en bas de l'écran (par exemple 240 x 48 px, vers y = 1700) ;",
-        "une {{lang:obj_prefix_image}} nommée **balle**, au milieu de l'écran (par exemple 48 x 48 px) ;",
-        "des briques : des {{lang:obj_prefix_image}}s en haut de l'écran (par exemple 120 x 48 px, 9 par ligne pour remplir 1080 px de large) ;",
+        "une {{lang:obj_prefix_image}} nommée **raquette**, en bas de l'écran (par exemple 208 x 48 px, vers y = 1700) ;",
+        "une {{lang:obj_prefix_image}} nommée **balle**, au milieu de l'écran (par exemple 44 x 44 px) ;",
+        "des briques : des {{lang:obj_prefix_image}}s en haut de l'écran (par exemple 128 x 64 px, 8 par ligne) ;",
         "deux objets {{lang:obj_prefix_texte}} : **texteScore** (texte « Score : 0 ») et **texteVies** (texte « Vies : 3 »), en haut de l'écran."
       ]
     ],
     [
       "tip",
-      "Ce guide est écrit pour un jeu en **portrait de 1080 x 1920**. Les images (raquette, balle, briques) peuvent être tes propres dessins ou des images libres de droits de la bibliothèque de Yop2D."
+      "Ce guide est écrit pour un jeu en **portrait de 1080 x 1920**. Les images viennent du pack gratuit **Puzzle Pack** de Kenney (libre de droits, CC0), dossier **PNG/Double** : **paddleBlu.png** (raquette, 208 x 48), **ballBlue.png** (balle, 44 x 44) et **element_blue_rectangle_glossy.png** (brique, 128 x 64, existe en bleu, vert, rouge, jaune, violet et gris). Tu peux aussi utiliser tes propres dessins : adapte alors les nombres des formules à leurs tailles."
     ],
     [
       "h2",
@@ -91,7 +91,7 @@
           [
             "Ouvre le **{{lang:titre_blueprint}}** de la scène.",
             "Ajoute l'événement **[[NoeudEventDoigtAppuye]]** (il se répète tant qu'un doigt est posé sur l'écran).",
-            "Ajoute **[[deplacer]]** : cible **raquette**, **X**, valeur `=clamp(doigt.x - 120, 0, 840)`, **Y** = `1700`.",
+            "Ajoute **[[deplacer]]** : cible **raquette**, **X**, valeur `=clamp(doigt.x - 104, 0, 872)`, **Y** = `1700`.",
             "Relie les deux nœuds, puis lance le jeu : la raquette suit ton doigt sans sortir de l'écran."
           ]
         ],
@@ -108,13 +108,13 @@
             [
               "n",
               "{{deplacer}}",
-              "raquette · =clamp(doigt.x - 120, 0, 840) · 1700"
+              "raquette · =clamp(doigt.x - 104, 0, 872) · 1700"
             ]
           ]
         ],
         [
           "tip",
-          "**Comment lire la formule ?** `doigt.x` est la position de ton doigt. On enlève 120 (la moitié de la raquette) pour la centrer sous le doigt. `clamp(…, 0, 840)` l'empêche de sortir : 840 = 1080 − 240 (la largeur de la raquette)."
+          "**Comment lire la formule ?** `doigt.x` est la position de ton doigt. On enlève 104 (la moitié de la raquette) pour la centrer sous le doigt. `clamp(…, 0, 840)` l'empêche de sortir : 872 = 1080 − 208 (la largeur de la raquette)."
         ]
       ]
     ],
@@ -196,7 +196,7 @@
           "ol",
           [
             "Bord gauche : **[[condition]]** `=balle.x <= 0`. Sortie **{{lang:port_vrai}}** → **[[modifier_variable]]** : variable **vx**, valeur `=abs(vx)` (toujours vers la droite).",
-            "Bord droit : **[[condition]]** `=balle.x >= 1032`. Sortie **{{lang:port_vrai}}** → **[[modifier_variable]]** : variable **vx**, valeur `=-abs(vx)` (toujours vers la gauche). 1032 = 1080 − 48 (la largeur de la balle).",
+            "Bord droit : **[[condition]]** `=balle.x >= 1036`. Sortie **{{lang:port_vrai}}** → **[[modifier_variable]]** : variable **vx**, valeur `=-abs(vx)` (toujours vers la gauche). 1036 = 1080 − 44 (la largeur de la balle).",
             "Haut : **[[condition]]** `=balle.y <= 0`. Sortie **{{lang:port_vrai}}** → **[[modifier_variable]]** : variable **vy**, valeur `=abs(vy)` (toujours vers le bas).",
             "Relie chaque **[[condition]]** à la suivante par sa sortie **[[lang:port_ensuite]]**. La première est reliée à la sortie de **[[pousser]]**."
           ]
@@ -234,7 +234,7 @@
             [
               "cond",
               "{{condition}}",
-              "=balle.x >= 1032"
+              "=balle.x >= 1036"
             ],
             [
               "→",
@@ -284,7 +284,7 @@
           [
             "Ajoute l'événement **[[NoeudEventCollisionAB]]** : **Objet A** = **balle**, **Objet B** = **raquette**.",
             "Ajoute **[[modifier_variable]]** : variable **vy**, valeur `=-abs(vy)` (la balle repart vers le haut).",
-            "Ajoute un second **[[modifier_variable]]** : variable **vx**, valeur `=(balle.x + 24 - raquette.x - 120) / 15`.",
+            "Ajoute un second **[[modifier_variable]]** : variable **vx**, valeur `=(balle.x + 22 - raquette.x - 104) / 13`.",
             "Relie les trois nœuds dans l'ordre."
           ]
         ],
@@ -310,13 +310,13 @@
             [
               "n",
               "{{modifier_variable}}",
-              "vx · =(balle.x + 24 - raquette.x - 120) / 15"
+              "vx · =(balle.x + 22 - raquette.x - 104) / 13"
             ]
           ]
         ],
         [
           "tip",
-          "**À quoi sert la dernière formule ?** Elle mesure où la balle tombe sur la raquette : au centre, elle repart tout droit ; sur le bord gauche, elle part vers la gauche ; sur le bord droit, vers la droite. Le joueur peut donc **viser**. (24 = la moitié de la balle, 120 = la moitié de la raquette.)"
+          "**À quoi sert la dernière formule ?** Elle mesure où la balle tombe sur la raquette : au centre, elle repart tout droit ; sur le bord gauche, elle part vers la gauche ; sur le bord droit, vers la droite. Le joueur peut donc **viser**. (22 = la moitié de la balle, 104 = la moitié de la raquette.)"
         ]
       ]
     ],
@@ -480,7 +480,7 @@
             "**[[modifier_texte]]** : cible **texteVies**, **{{lang:modifier_texte.valeur}}**, valeur `=\"Vies : \" + vies`.",
             "**[[condition]]** `=vies <= 0`.",
             "Sortie **{{lang:port_vrai}}** (plus de vie) : **[[toast]]** « Perdu ! », **[[attendre]]** 2 secondes, **[[recommencer_scene]]**.",
-            "Sortie **{{lang:port_faux}}** (il reste des vies) : **[[deplacer]]** la **balle** à X = `516`, Y = `1000`, puis **[[modifier_variable]]** **vy** = `-9`, puis **[[modifier_variable]]** **vx** = `6`."
+            "Sortie **{{lang:port_faux}}** (il reste des vies) : **[[deplacer]]** la **balle** à X = `518`, Y = `1000`, puis **[[modifier_variable]]** **vy** = `-9`, puis **[[modifier_variable]]** **vx** = `6`."
           ]
         ],
         [
@@ -567,7 +567,7 @@
             [
               "n",
               "{{deplacer}}",
-              "balle · 516 · 1000"
+              "balle · 518 · 1000"
             ],
             [
               "→"
