@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to make a brick breaker game in Yop2D? | Yop2D Guide</title>
+<meta name="description" content="Make a brick breaker game in Yop2D with no code: a paddle you move with your finger, a bouncing ball, bricks to break, score and lives with nodes.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/casse-briques.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/casse-briques.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/casse-briques.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to make a brick breaker game?",
+ "description": "Make a brick breaker game in Yop2D with no code: a paddle you move with your finger, a bouncing ball, bricks to break, score and lives with nodes.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Place the paddle",
+   "text": "Finger held down → Move Object (paddle, X = follows the finger)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Launch the ball",
+   "text": "On Start → Modify Variable (vx, vy); Every frame → Push object (ball, =vx, =vy)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Bounce on the edges",
+   "text": "Condition (=ball.x <= 0) → True → Modify Variable (vx, =abs(vx))."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Bounce on the paddle",
+   "text": "Collision A/B (ball, paddle) → Modify Variable (vy, =-abs(vy))."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Break the bricks",
+   "text": "If object touches Tag (ball, brick) → Destroy Object → Add to Variable (score, 10)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Lives and game over",
+   "text": "Condition (=ball.y >= 1920) → Add to Variable (lives, -1) → Condition (=lives <= 0) → Restart the scene."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to make a brick breaker game?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../casse-briques.html" hreflang="fr">Français</a> · <strong>English</strong></p>
+</header>
+<main>
+<p>In a brick breaker, a <strong>ball</strong> bounces off the edges and off a <strong>paddle</strong> you move with your finger, and breaks <strong>bricks</strong>. Here we drive the ball with two small variables, <strong>vx</strong> (its speed to the right) and <strong>vy</strong> (its speed downward). When the ball bounces, we simply change the sign of the variable.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>an Image named <strong>paddle</strong>, at the bottom of the screen (for example 240 x 48 px, around y = 1700);</li><li>an Image named <strong>ball</strong>, in the middle of the screen (for example 48 x 48 px);</li><li>bricks: Images at the top of the screen (for example 120 x 48 px, 9 per row to fill the 1080 px width);</li><li>two Text objects: <strong>scoreText</strong> (text “Score: 0”) and <strong>livesText</strong> (text “Lives: 3”), at the top of the screen.</li></ul>
+</div>
+<div class="tip">👉 This guide is written for a <strong>1080 x 1920 portrait</strong> game. The images (paddle, ball, bricks) can be your own drawings or free-to-use images from the Yop2D library.</div>
+<h2>Step 1: tags and variables</h2>
+<div class="method">
+<ol><li>Select a brick. In the inspector, field <strong>Tag (Label)</strong>, type <strong>brick</strong>. Do the same for every brick.</li><li>In the left panel, open the <strong>Variables</strong> section and create five variables, all with scope <strong>Local</strong> and type <strong>Integer</strong>:</li></ol>
+<ul><li><strong>score</strong>: starting value <strong>0</strong>;</li><li><strong>lives</strong>: starting value <strong>3</strong>;</li><li><strong>bricks</strong>: the <strong>number of bricks</strong> in your game (for example <strong>27</strong>). It tells you when everything is broken;</li><li><strong>vx</strong> and <strong>vy</strong>: starting value <strong>0</strong>. This is the ball's speed, set when the game starts.</li></ul>
+<div class="tip">👉 One brick more or less? Just change the starting value of <strong>bricks</strong>. If the number is too big, you never win; if it is too small, you win too early.</div>
+</div>
+<h2>Step 2: the paddle follows your finger</h2>
+<div class="method">
+<ol><li>Open the scene's <strong>Blueprint</strong>.</li><li>Add the <strong>“Finger held down”</strong> event (it repeats as long as a finger is on the screen).</li><li>Add <strong>“Move Object”</strong>: target <strong>paddle</strong>, <strong>X</strong>, value <code>=clamp(doigt.x - 120, 0, 840)</code>, <strong>Y</strong> = <code>1700</code>.</li><li>Link the two nodes, then run the game: the paddle follows your finger and never leaves the screen.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Finger held down</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Move Object</b><span>paddle · =clamp(doigt.x - 120, 0, 840) · 1700</span></div>
+</div>
+<div class="tip">👉 <strong>How to read the formula?</strong> <code>doigt.x</code> is your finger's position (“doigt” means finger). We subtract 120 (half the paddle) to center it under the finger. <code>clamp(…, 0, 840)</code> keeps it on screen: 840 = 1080 − 240 (the paddle's width).</div>
+</div>
+<h2>Step 3: the ball starts</h2>
+<div class="method">
+<ol><li>Add the <strong>“On Start”</strong> event, then two <strong>“Modify Variable”</strong> nodes one after the other: variable <strong>vx</strong> = <code>6</code>, then variable <strong>vy</strong> = <code>-9</code>.</li><li>Add the <strong>“Every frame”</strong> event, then <strong>“Push object”</strong>: target <strong>ball</strong>, <strong>Add X</strong>, value <code>=vx</code>, <strong>Add Y</strong>, value <code>=vy</code>.</li><li>Link each event to its nodes and run the game: the ball goes up and to the right, and leaves the screen.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>On Start</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vy · -9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Every frame</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Push object</b><span>ball · =vx · =vy</span></div>
+</div>
+<div class="tip">👉 <strong>Negative = up.</strong> In Yop2D, Y grows toward the bottom of the screen: <strong>vy = -9</strong> sends the ball upward. For a faster ball, use 8 and -12.</div>
+</div>
+<h2>Step 4: bounce on the edges</h2>
+<div class="method">
+<p>Right after <strong>“Push object”</strong>, we check on every frame whether the ball touches an edge. We chain three <strong>“Condition”</strong> nodes, each time following the <strong>“Then”</strong> output (which runs in every case).</p>
+<ol><li>Left edge: <strong>“Condition”</strong> <code>=ball.x &lt;= 0</code>. Output <strong>True</strong> → <strong>“Modify Variable”</strong>: variable <strong>vx</strong>, value <code>=abs(vx)</code> (always to the right).</li><li>Right edge: <strong>“Condition”</strong> <code>=ball.x &gt;= 1032</code>. Output <strong>True</strong> → <strong>“Modify Variable”</strong>: variable <strong>vx</strong>, value <code>=-abs(vx)</code> (always to the left). 1032 = 1080 − 48 (the ball's width).</li><li>Top: <strong>“Condition”</strong> <code>=ball.y &lt;= 0</code>. Output <strong>True</strong> → <strong>“Modify Variable”</strong>: variable <strong>vy</strong>, value <code>=abs(vy)</code> (always downward).</li><li>Link each <strong>“Condition”</strong> to the next one with its <strong>“Then”</strong> output. The first one is linked to the output of <strong>“Push object”</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Push object</b><span>ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condition</b><span>=ball.x &lt;= 0</span></div>
+<div class="fleche"><em>True</em> →</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · =abs(vx)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condition</b><span>=ball.x &gt;= 1032</span></div>
+<div class="fleche"><em>True</em> →</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · =-abs(vx)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condition</b><span>=ball.y &lt;= 0</span></div>
+<div class="fleche"><em>True</em> →</div>
+<div class="noeud"><b>Modify Variable</b><span>vy · =abs(vy)</span></div>
+</div>
+<div class="tip">👉 <strong>Why abs?</strong> <code>abs(vx)</code> is always a positive number. At the left edge, the ball is forced to go right, even if it touches the edge two frames in a row: it never gets stuck.</div>
+</div>
+<h2>Step 5: bounce on the paddle</h2>
+<div class="method">
+<ol><li>Add the <strong>“Collision A/B”</strong> event: <strong>Object A</strong> = <strong>ball</strong>, <strong>Object B</strong> = <strong>paddle</strong>.</li><li>Add <strong>“Modify Variable”</strong>: variable <strong>vy</strong>, value <code>=-abs(vy)</code> (the ball goes back up).</li><li>Add a second <strong>“Modify Variable”</strong>: variable <strong>vx</strong>, value <code>=(ball.x + 24 - paddle.x - 120) / 15</code>.</li><li>Link the three nodes in order.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>ball · paddle</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vy · =-abs(vy)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · =(ball.x + 24 - paddle.x - 120) / 15</span></div>
+</div>
+<div class="tip">👉 <strong>What is the last formula for?</strong> It measures where the ball lands on the paddle: in the middle, it goes straight up; on the left edge, it goes left; on the right edge, it goes right. The player can <strong>aim</strong>. (24 = half the ball, 120 = half the paddle.)</div>
+</div>
+<h2>Step 6: break the bricks</h2>
+<div class="method">
+<ol><li>Add the <strong>“If object touches Tag”</strong> event: target <strong>ball</strong>, Tag <strong>brick</strong>.</li><li>Add <strong>“Destroy Object”</strong> and choose <strong>The object involved in the event</strong> as the target: it is the brick the ball has just touched.</li><li>Add <strong>“Modify Variable”</strong>: variable <strong>vy</strong>, value <code>=-vy</code> (the ball bounces).</li><li>Add <strong>“Add to Variable”</strong>: variable <strong>score</strong>, <strong>Value to add = 10</strong>.</li><li>Add <strong>“Add to Variable”</strong>: variable <strong>bricks</strong>, <strong>Value to add = -1</strong>.</li><li>Add <strong>“Modify Text”</strong>: target <strong>scoreText</strong>, <strong>New text</strong>, value <code>="Score: " + score</code>.</li><li>Link all the nodes in order.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>If object touches Tag</b><span>ball · brick</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Destroy Object</b><span>Implied Object</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vy · =-vy</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Add to Variable</b><span>score · + 10</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Add to Variable</b><span>bricks · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Text</b><span>scoreText</span></div>
+</div>
+<div class="tip">👉 When the ball breaks a brick, it always bounces up or down, even if it hit the brick from the side. It is simple, and it works well in a brick breaker.</div>
+</div>
+<h2>Step 7: win</h2>
+<div class="method">
+<p>After the <strong>“Modify Text”</strong> of step 6, add:</p>
+<ol><li><strong>“Condition”</strong> <code>=bricks &lt;= 0</code>.</li><li>On the <strong>True</strong> output: <strong>“Small message at the bottom of the screen”</strong> with the message <strong>You win!</strong>, then <strong>“Wait”</strong> 2 seconds, then <strong>“Restart the scene”</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Modify Text</b><span>scoreText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condition</b><span>=bricks &lt;= 0</span></div>
+<div class="fleche"><em>True</em> →</div>
+<div class="noeud"><b>Small message at the bottom of the screen</b><span>You win!</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Wait</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Restart the scene</b></div>
+</div>
+<div class="tip">👉 “Restart the scene” puts the objects back in place and the <strong>Local</strong> variables back to their starting value: the game restarts with 3 lives, 0 points and all the bricks.</div>
+</div>
+<h2>Step 8: lives and Game Over</h2>
+<div class="method">
+<p>When the ball falls below the paddle, the player loses a life. We continue the chain from step 4: after the third <strong>“Condition”</strong> (the top), add a fourth one, linked by its <strong>“Then”</strong> output.</p>
+<ol><li><strong>“Condition”</strong> <code>=ball.y &gt;= 1920</code>, output <strong>True</strong>.</li><li><strong>“Add to Variable”</strong>: variable <strong>lives</strong>, <strong>Value to add = -1</strong>.</li><li><strong>“Modify Text”</strong>: target <strong>livesText</strong>, <strong>New text</strong>, value <code>="Lives: " + lives</code>.</li><li><strong>“Condition”</strong> <code>=lives &lt;= 0</code>.</li><li>Output <strong>True</strong> (no lives left): <strong>“Small message at the bottom of the screen”</strong> “Game over!”, <strong>“Wait”</strong> 2 seconds, <strong>“Restart the scene”</strong>.</li><li>Output <strong>False</strong> (lives left): <strong>“Move Object”</strong> the <strong>ball</strong> to X = <code>516</code>, Y = <code>1000</code>, then <strong>“Modify Variable”</strong> <strong>vy</strong> = <code>-9</code>, then <strong>“Modify Variable”</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
+<div class="chaine">
+<div class="noeud condition"><b>Condition</b><span>=ball.y &gt;= 1920</span></div>
+<div class="fleche"><em>True</em> →</div>
+<div class="noeud"><b>Add to Variable</b><span>lives · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Text</b><span>livesText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condition</b><span>=lives &lt;= 0</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condition</b><span>=lives &lt;= 0</span></div>
+<div class="fleche"><em>True</em> →</div>
+<div class="noeud"><b>Small message at the bottom of the screen</b><span>Game over!</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Wait</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Restart the scene</b></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condition</b><span>=lives &lt;= 0</span></div>
+<div class="fleche"><em>False</em> →</div>
+<div class="noeud"><b>Move Object</b><span>ball · 516 · 1000</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vy · -9</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · 6</span></div>
+</div>
+</div>
+<h2>Going further</h2>
+<ul><li><strong>Sounds:</strong> add <strong>“Play sound”</strong> after <strong>“Destroy Object”</strong> (a “clack” when a brick breaks) and in the paddle event.</li><li><strong>Different colors:</strong> give the same tag <strong>brick</strong> to all the bricks, whatever their color: a single setup is enough.</li><li><strong>More speed:</strong> add <strong>“Modify Variable”</strong> <code>=vx * 1.02</code> each time a brick breaks so the game gets harder and harder.</li><li><strong>Sparks:</strong> add an <strong>“Particle effect”</strong> when a brick breaks (see the guide <a href="../en/particules-effets.html">Particles and effects</a>).</li></ul>
+<h2>If it doesn't work</h2>
+<ul><li><strong>The ball doesn't move:</strong> check that <strong>vx</strong> and <strong>vy</strong> are changed at the start, and that <strong>“Push object”</strong> uses the formulas <code>=vx</code> and <code>=vy</code> (with the <strong>=</strong> at the beginning).</li><li><strong>The ball goes through the paddle or the bricks:</strong> check the names (<strong>ball</strong>, <strong>paddle</strong>) and the tag <strong>brick</strong>, spelled the same everywhere (no capital letter). If the ball is very fast, make the bricks a little bigger or slow the ball down.</li><li><strong>The ball leaves the screen without bouncing:</strong> the <strong>“Condition”</strong> nodes must be linked one after the other with the <strong>“Then”</strong> output, and the first one must start from <strong>“Push object”</strong>.</li><li><strong>You win too early or never:</strong> the variable <strong>bricks</strong> must be exactly the number of bricks in the game.</li><li><strong>The paddle moves badly:</strong> in the formula, <code>doigt.x</code> is the finger, not the paddle; keep the <strong>=</strong> at the beginning and close the parenthesis.</li></ul>
+
+<div class="nav">
+<a href="../en/vie-game-over.html">← Lose health and Game Over</a>
+<a href="../en/niveau-suivant.html">Next guide: Go to the next level →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>

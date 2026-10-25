@@ -26,7 +26,7 @@ import sys
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://zinzin66.github.io/Yop2d-web/"
-GUIDES = ["deplacer-personnage", "sauter", "comportements", "pieces-score", "vie-game-over", "niveau-suivant", "particules-effets", "histoire-choix", "prefabs", "musique", "interface-demarrage", "interface-editeur", "interface-assets", "interface-bibliotheque", "interface-comportement", "interface-mouvement", "interface-blueprint"]
+GUIDES = ["deplacer-personnage", "sauter", "comportements", "pieces-score", "vie-game-over", "casse-briques", "niveau-suivant", "particules-effets", "histoire-choix", "prefabs", "musique", "interface-demarrage", "interface-editeur", "interface-assets", "interface-bibliotheque", "interface-comportement", "interface-mouvement", "interface-blueprint"]
 
 spec = importlib.util.spec_from_file_location("gen", os.path.join(RACINE, "outils", "generer_aide_noeuds.py"))
 gen = importlib.util.module_from_spec(spec)
@@ -239,13 +239,15 @@ def page(guide, langue, src, sources, r):
         }
     i = GUIDES.index(guide)
     nav = []
-    if i > 0:
-        p = GUIDES[i - 1]
+    avant = [x for x in GUIDES[:i] if (x, langue) in sources]   # guide pas encore traduit : on saute
+    if avant:
+        p = avant[-1]
         nav.append(f'<a href="{lien_relatif(langue, p, langue)}">{ui["precedent"]} {html.escape(r.brut(sources[(p, langue)]["carte"][0]))}</a>')
     else:
         nav.append(f'<a href="index.html">{ui["precedent"]} {ui["tous"]}</a>')
-    if i + 1 < len(GUIDES) and (GUIDES[i + 1], langue) in sources:
-        s = GUIDES[i + 1]
+    apres = [x for x in GUIDES[i + 1:] if (x, langue) in sources]
+    if apres:
+        s = apres[0]
         nav.append(f'<a href="{lien_relatif(langue, s, langue)}">{ui["suivant"]} {html.escape(r.brut(sources[(s, langue)]["carte"][0]))} →</a>')
     else:
         nav.append(f'<a href="index.html">{ui["tous"]} →</a>')
