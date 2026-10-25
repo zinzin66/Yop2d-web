@@ -236,12 +236,12 @@ for f in MONSTRES:
     for h, autre in (('hero1', 'hero2'), ('hero2', 'hero1')):
         pn = h[-1]
         c = cond(pere, 'te_h_%s_%s' % (f, h), 'vh%s = 1' % pn)
-        go = L.action(VRAI(c), 'te_go_%s_%s' % (f, h), 'chemin_vers_objet', {'vitesse': 6, 'diagonales': 'false', 'arret': 'ch_voisine', 'bloquants': 'joueur,ennemi'}, f)
+        go = L.action(VRAI(c), 'te_go_%s_%s' % (f, h), 'chemin_vers_objet', {'vitesse': 12, 'diagonales': 'false', 'arret': 'ch_voisine', 'bloquants': 'joueur,ennemi'}, f)
         L.noeud('te_go_%s_%s' % (f, h))['cibleNomB'] = h
         appeler(('te_go_%s_%s' % (f, h), 'port_arrive', 1), 'te_arr_%s_%s' % (f, h), 'atk_%s_%s' % (f, h), decalage_y=170)
         pere = FAUX(c)   # ce héros n'est plus là : on essaie l'autre
     t = (t[0], 'port_ensuite', 2)
-t = L.chaine(t, [('te_wait2', 'attendre', {'duree': 2.6}), ('te_stop1', 'chemin_arreter', {}, 'foe1'), ('te_stop2', 'chemin_arreter', {}, 'foe2')])
+t = L.chaine(t, [('te_wait2', 'attendre', {'duree': 4.0}), ('te_stop1', 'chemin_arreter', {}, 'foe1'), ('te_stop2', 'chemin_arreter', {}, 'foe2')])
 L.action(t, 'te_next', 'tour_suivant', {'equipes': 'joueur,ennemi'})
 
 # 8. Un monstre attaque un héros
