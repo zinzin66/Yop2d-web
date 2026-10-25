@@ -1,6 +1,6 @@
 {
   "titre_page": "Como fazer um jogo de quebra-tijolos no Yop2D? | Guia Yop2D",
-  "description": "Faça um jogo de quebra-tijolos no Yop2D sem código: uma raquete que você move com o dedo, uma bola que quica, tijolos para quebrar, pontos e vidas com nós.",
+  "description": "Faça um jogo de quebra-tijolos no Yop2D sem código: uma raquete que você move com o dedo, paredes invisíveis, uma bola que quica, tijolos para quebrar, pontos e vidas com nós.",
   "h1": "Como fazer um jogo de quebra-tijolos?",
   "carte": [
     "Fazer um quebra-tijolos",
@@ -9,19 +9,19 @@
   "etapes": [
     [
       "Colocar a raquete",
-      "{{NoeudEventDoigtAppuye}} → {{deplacer}} (paddle, X = segue o dedo)."
+      "{{modifier_propriete}} (paddle, y = 1700) → {{garder_dans_ecran}}, com o comportamento « Arrastado com o dedo »."
+    ],
+    [
+      "Cercar a tela com paredes invisíveis",
+      "Quatro {{lang:obj_prefix_zone}}s: left_wall, right_wall, top_wall e bottom_wall."
     ],
     [
       "Lançar a bola",
-      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy); {{NoeudEventChaqueImage}} → {{pousser}} (ball, =vx, =vy)."
+      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy); {{NoeudEventChaqueImage}} → {{pousser}} (ball)."
     ],
     [
-      "Quicar nas bordas",
-      "{{condition}} (=ball.x <= 0) → {{lang:port_vrai}} → {{modifier_variable}} (vx, =abs(vx))."
-    ],
-    [
-      "Quicar na raquete",
-      "{{NoeudEventCollisionAB}} (ball, paddle) → {{modifier_variable}} (vy, =-abs(vy))."
+      "Quicar nas paredes e na raquete",
+      "{{NoeudEventCollisionAB}} (ball, left_wall) → {{modifier_variable}} (vx, 6)."
     ],
     [
       "Quebrar os tijolos",
@@ -29,13 +29,13 @@
     ],
     [
       "Vidas e fim de jogo",
-      "{{condition}} (=ball.y >= 1920) → {{ajouter_variable}} (lives, -1) → {{condition}} (=lives <= 0) → {{recommencer_scene}}."
+      "{{NoeudEventCollisionAB}} (ball, bottom_wall) → {{ajouter_variable}} (lives, -1) → {{recommencer_scene}}."
     ]
   ],
   "blocs": [
     [
       "p",
-      "Em um quebra-tijolos, uma **bola** quica nas bordas e em uma **raquete** que você move com o dedo, e quebra **tijolos**. Aqui controlamos a bola com duas pequenas variáveis: **vx** (sua velocidade para a direita) e **vy** (sua velocidade para baixo). Quando a bola quica, basta mudar o sinal da variável."
+      "Em um quebra-tijolos, uma **bola** quica nas paredes e em uma **raquete** que você move com o dedo, e quebra **tijolos**. Aqui a bola se move graças a duas variáveis: **vx** (sua velocidade para a direita) e **vy** (sua velocidade para baixo). Quando ela toca uma parede, simplesmente damos a ela outro número."
     ],
     [
       "besoin",
@@ -48,7 +48,7 @@
     ],
     [
       "tip",
-      "Este guia foi escrito para um jogo em **retrato 1080 x 1920**. As imagens vêm do pacote gratuito **Puzzle (brick breaker)** (Kenney, livre de direitos, CC0). Baixe-o na **Biblioteca** do Yop2D, aba **Pacotes para baixar**: lá você encontra **paddleBlu** (raquete, 208 x 48), **ballBlue** (bola, 44 x 44) e **element_blue_rectangle_glossy** (tijolo, 128 x 64, em azul, verde, vermelho, amarelo, roxo e cinza). Você também pode usar seus próprios desenhos: nesse caso, adapte os números das fórmulas aos tamanhos deles."
+      "Este guia foi escrito para um jogo em **retrato 1080 x 1920**. As imagens vêm do pacote gratuito **Puzzle (brick breaker)** (Kenney, livre de direitos, CC0). Baixe-o na **Biblioteca** do Yop2D, aba **Pacotes para baixar**: lá você encontra **paddleBlu** (raquete), **ballBlue** (bola) e **element_blue_rectangle_glossy** (tijolo, em azul, verde, vermelho, amarelo, roxo e cinza). Você também pode usar seus próprios desenhos."
     ],
     [
       "h2",
@@ -69,7 +69,7 @@
           [
             "**score**: valor inicial **0**;",
             "**lives**: valor inicial **3**;",
-            "**bricks**: o **número de tijolos** do seu jogo (por exemplo **27**). Serve para saber quando tudo está quebrado;",
+            "**bricks**: o **número de tijolos** do seu jogo (por exemplo **24**). Serve para saber quando tudo está quebrado;",
             "**vx** e **vy**: valor inicial **0**. É a velocidade da bola, definida ao começar."
           ]
         ],
@@ -81,7 +81,33 @@
     ],
     [
       "h2",
-      "Passo 2: a raquete segue o dedo"
+      "Passo 2: as paredes invisíveis"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "A bola quica em paredes que não se veem: quatro **{{lang:obj_prefix_zone}}s** colocadas ao redor da tela. Uma zona é invisível durante o jogo, mas a bola pode tocá-la."
+        ],
+        [
+          "ol",
+          [
+            "Adicione uma {{lang:obj_prefix_zone}} chamada **left_wall**: X = `-300`, Y = `-400`, largura `300`, altura `2800`.",
+            "Adicione uma {{lang:obj_prefix_zone}} chamada **right_wall**: X = `1080`, Y = `-400`, largura `300`, altura `2800`.",
+            "Adicione uma {{lang:obj_prefix_zone}} chamada **top_wall**: X = `-300`, Y = `-300`, largura `1680`, altura `300`.",
+            "Adicione uma {{lang:obj_prefix_zone}} chamada **bottom_wall**: X = `-300`, Y = `1920`, largura `1680`, altura `300`."
+          ]
+        ],
+        [
+          "tip",
+          "As paredes são grossas de propósito: uma bola rápida não consegue atravessá-las. As três primeiras devolvem a bola; **bottom_wall** serve para perder uma vida."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 3: a raquete segue o dedo"
     ],
     [
       "bloc",
@@ -89,10 +115,11 @@
         [
           "ol",
           [
-            "Abra o **{{lang:titre_blueprint}}** da cena.",
-            "Adicione o evento **[[NoeudEventDoigtAppuye]]** (ele se repete enquanto houver um dedo na tela).",
-            "Adicione **[[deplacer]]**: alvo **paddle**, **X** = `=clamp(doigt.x - 104, 0, 872)`, **Y** = `1700`.",
-            "Ligue os dois nós e inicie o jogo: a raquete segue seu dedo e nunca sai da tela."
+            "Selecione **paddle**, toque em **⚙ Comportement de l'objet** e escolha **Arrastado com o dedo**: o jogador a pega e a move.",
+            "Abra o **{{lang:titre_blueprint}}** da cena e adicione o evento **[[NoeudEventChaqueImage]]**.",
+            "Adicione **[[modifier_propriete]]**: alvo **paddle**, **Propriedade** = `y`, **Valor** = `1700`.",
+            "Adicione **[[garder_dans_ecran]]**: alvo **paddle**, **Margem** = `0`.",
+            "Ligue os três nós em ordem."
           ]
         ],
         [
@@ -100,27 +127,35 @@
           [
             [
               "ev",
-              "{{NoeudEventDoigtAppuye}}"
+              "{{NoeudEventChaqueImage}}"
             ],
             [
               "→"
             ],
             [
               "n",
-              "{{deplacer}}",
-              "paddle · =clamp(doigt.x - 104, 0, 872) · 1700"
+              "{{modifier_propriete}}",
+              "paddle · y · 1700"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{garder_dans_ecran}}",
+              "paddle · 0"
             ]
           ]
         ],
         [
           "tip",
-          "**Como ler a fórmula?** `doigt.x` é a posição do seu dedo (« doigt » significa dedo em francês). Subtraímos 104 (metade da raquete) para centralizá-la sob o dedo. `clamp(…, 0, 872)` a mantém na tela: 872 = 1080 − 208 (a largura da raquete)."
+          "**Por que esses dois nós?** « Arrastado com o dedo » permite mover a raquete em todas as direções. A cada imagem, nós a devolvemos à mesma altura e a impedimos de sair da tela: ela só se move para a esquerda e para a direita."
         ]
       ]
     ],
     [
       "h2",
-      "Passo 3: a bola sai"
+      "Passo 4: a bola sai"
     ],
     [
       "bloc",
@@ -128,9 +163,11 @@
         [
           "ol",
           [
-            "Adicione o evento **[[NoeudEventStart]]**, depois dois nós **[[modifier_variable]]** em sequência: variável **vx** = `6`, depois variável **vy** = `-9`.",
-            "Adicione o evento **[[NoeudEventChaqueImage]]**, depois **[[pousser]]**: alvo **ball**, **Somar X** = `=vx`, **Somar Y** = `=vy`.",
-            "Ligue cada evento aos seus nós e inicie o jogo: a bola sobe para a direita e sai da tela."
+            "Adicione o evento **[[NoeudEventStart]]**, depois dois nós **[[modifier_variable]]** em sequência: variável **vx**, valor `6`, depois variável **vy**, valor `-9`.",
+            "Adicione o evento **[[NoeudEventChaqueImage]]**, depois **[[pousser]]**: alvo **ball**.",
+            "Na janela de ajustes de **[[pousser]]**, toque no botão **🔗** ao lado de **Adicionar X**, escolha **[[valeur_variable]]**, depois escolha a variável **vx** no nó verde que aparece.",
+            "Faça o mesmo com **Adicionar Y** e a variável **vy**.",
+            "Ligue cada evento aos seus nós e inicie o jogo: a bola sobe para a direita e depois sai da tela."
           ]
         ],
         [
@@ -171,60 +208,54 @@
             [
               "n",
               "{{pousser}}",
-              "ball · =vx · =vy"
+              "ball · X ← vx · Y ← vy"
             ]
           ]
         ],
         [
           "tip",
-          "**Negativo = para cima.** No Yop2D, Y cresce em direção à parte de baixo da tela: **vy = -9** manda a bola para cima. Para uma bola mais rápida, use 8 e -12."
+          "**Um nó verde** dá um valor a um ajuste, sem escrever nada. Aqui, **[[valeur_variable]]** diz a **[[pousser]]**: « avance **vx** para a direita e **vy** para baixo, a cada imagem »."
+        ],
+        [
+          "tip",
+          "**Negativo = para cima.** No Yop2D, Y cresce em direção à parte de baixo da tela: **vy = -9** manda a bola para cima."
         ]
       ]
     ],
     [
       "h2",
-      "Passo 4: quicar nas bordas"
+      "Passo 5: quicar nas paredes"
     ],
     [
       "bloc",
       [
         [
           "p",
-          "Logo depois de **[[pousser]]**, verificamos a cada imagem se a bola toca uma borda. Encadeamos três nós **[[condition]]**, seguindo sempre a saída **[[lang:port_ensuite]]** (que roda em qualquer caso)."
+          "Cada parede dá um novo número à bola. Adicione três eventos **[[NoeudEventCollisionAB]]** (**Objeto A** = **ball**):"
         ],
         [
           "ol",
           [
-            "Borda esquerda: **[[condition]]** `=ball.x <= 0`. Saída **{{lang:port_vrai}}** → **[[modifier_variable]]**: variável **vx**, valor `=abs(vx)` (sempre para a direita).",
-            "Borda direita: **[[condition]]** `=ball.x >= 1036`. Saída **{{lang:port_vrai}}** → **[[modifier_variable]]**: variável **vx**, valor `=-abs(vx)` (sempre para a esquerda). 1036 = 1080 − 44 (a largura da bola).",
-            "Em cima: **[[condition]]** `=ball.y <= 0`. Saída **{{lang:port_vrai}}** → **[[modifier_variable]]**: variável **vy**, valor `=abs(vy)` (sempre para baixo).",
-            "Ligue cada **[[condition]]** à seguinte pela saída **[[lang:port_ensuite]]**. A primeira é ligada à saída de **[[pousser]]**."
+            "**Objeto B** = **left_wall** → **[[modifier_variable]]**: variável **vx**, valor `6` (a bola volta para a direita).",
+            "**Objeto B** = **right_wall** → **[[modifier_variable]]**: variável **vx**, valor `-6` (a bola volta para a esquerda).",
+            "**Objeto B** = **top_wall** → **[[modifier_variable]]**: variável **vy**, valor `9` (a bola volta para baixo)."
           ]
         ],
         [
           "chaine",
           [
             [
-              "n",
-              "{{pousser}}",
-              "ball"
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · left_wall"
             ],
             [
               "→"
             ],
             [
-              "cond",
-              "{{condition}}",
-              "=ball.x <= 0"
-            ],
-            [
-              "→",
-              "{{lang:port_vrai}}"
-            ],
-            [
               "n",
               "{{modifier_variable}}",
-              "vx · =abs(vx)"
+              "vx · 6"
             ]
           ]
         ],
@@ -232,18 +263,17 @@
           "chaine",
           [
             [
-              "cond",
-              "{{condition}}",
-              "=ball.x >= 1036"
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · right_wall"
             ],
             [
-              "→",
-              "{{lang:port_vrai}}"
+              "→"
             ],
             [
               "n",
               "{{modifier_variable}}",
-              "vx · =-abs(vx)"
+              "vx · -6"
             ]
           ]
         ],
@@ -251,30 +281,25 @@
           "chaine",
           [
             [
-              "cond",
-              "{{condition}}",
-              "=ball.y <= 0"
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · top_wall"
             ],
             [
-              "→",
-              "{{lang:port_vrai}}"
+              "→"
             ],
             [
               "n",
               "{{modifier_variable}}",
-              "vy · =abs(vy)"
+              "vy · 9"
             ]
           ]
-        ],
-        [
-          "tip",
-          "**Por que abs?** `abs(vx)` é sempre um número positivo. Na borda esquerda, forçamos a bola a ir para a direita, mesmo que ela toque a borda duas imagens seguidas: ela nunca fica presa."
         ]
       ]
     ],
     [
       "h2",
-      "Passo 5: quicar na raquete"
+      "Passo 6: quicar na raquete"
     ],
     [
       "bloc",
@@ -283,9 +308,9 @@
           "ol",
           [
             "Adicione o evento **[[NoeudEventCollisionAB]]**: **Objeto A** = **ball**, **Objeto B** = **paddle**.",
-            "Adicione **[[modifier_variable]]**: variável **vy**, valor `=-abs(vy)` (a bola volta a subir).",
-            "Adicione um segundo **[[modifier_variable]]**: variável **vx**, valor `=(ball.x + 22 - paddle.x - 104) / 13`.",
-            "Ligue os três nós em ordem."
+            "Adicione **[[modifier_variable]]**: variável **vy**, valor `-9` (a bola volta a subir).",
+            "Adicione um segundo **[[modifier_variable]]**: variável **vx**. Toque em **🔗** ao lado do valor, escolha **[[valeur_hasard]]** e defina **De** = `-6` e **Até** = `6`.",
+            "Ligue os nós em ordem."
           ]
         ],
         [
@@ -302,7 +327,7 @@
             [
               "n",
               "{{modifier_variable}}",
-              "vy · =-abs(vy)"
+              "vy · -9"
             ],
             [
               "→"
@@ -310,19 +335,19 @@
             [
               "n",
               "{{modifier_variable}}",
-              "vx · =(ball.x + 22 - paddle.x - 104) / 13"
+              "vx · ← número aleatório (-6 a 6)"
             ]
           ]
         ],
         [
           "tip",
-          "**Para que serve a última fórmula?** Ela mede onde a bola cai na raquete: no centro, sobe reta; na borda esquerda, vai para a esquerda; na direita, vai para a direita. O jogador pode **mirar**. (22 = metade da bola, 104 = metade da raquete.)"
+          "A cada quique na raquete, a bola sai em uma **direção aleatória**: o jogo nunca é igual duas vezes."
         ]
       ]
     ],
     [
       "h2",
-      "Passo 6: quebrar os tijolos"
+      "Passo 7: quebrar os tijolos"
     ],
     [
       "bloc",
@@ -332,11 +357,10 @@
           [
             "Adicione o evento **[[NoeudEventCollisionTag]]**: alvo **ball**, {{lang:Tag}} **brick**.",
             "Adicione **[[detruire_objet]]** e escolha **{{lang:noeud_objet_implique_long}}** como alvo: é o tijolo que a bola acabou de tocar.",
-            "Adicione **[[modifier_variable]]**: variável **vy**, valor `=-vy` (a bola quica).",
-            "Adicione **[[ajouter_variable]]**: variável **score**, **{{lang:ajouter_variable.valeur}} = 10**.",
+            "Adicione **[[condition]]** `=vy < 0` (« a bola está subindo »). Saída **{{lang:port_vrai}}** → **[[modifier_variable]]**: variável **vy**, valor `9`. Saída **{{lang:port_faux}}** → **[[modifier_variable]]**: variável **vy**, valor `-9`.",
+            "A partir da saída **[[lang:port_ensuite]]** da condição, adicione **[[ajouter_variable]]**: variável **score**, **{{lang:ajouter_variable.valeur}} = 10**.",
             "Adicione **[[ajouter_variable]]**: variável **bricks**, **{{lang:ajouter_variable.valeur}} = -1**.",
-            "Adicione **[[modifier_texte]]**: alvo **scoreText**, **{{lang:modifier_texte.valeur}}** = `=\"Pontos: \" + score`.",
-            "Ligue todos os nós em ordem."
+            "Adicione **[[modifier_texte]]**: alvo **scoreText**, **{{lang:modifier_texte.valeur}}** = `=\"Pontos: \" + score`."
           ]
         ],
         [
@@ -359,12 +383,61 @@
               "→"
             ],
             [
-              "n",
-              "{{modifier_variable}}",
-              "vy · =-vy"
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
             ],
             [
-              "→"
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_faux}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_ensuite}}"
             ],
             [
               "n",
@@ -391,20 +464,24 @@
         ],
         [
           "tip",
-          "Quando a bola quebra um tijolo, ela sempre quica para cima ou para baixo, mesmo que tenha tocado o tijolo pelo lado. É simples e funciona bem em um quebra-tijolos."
+          "**Por que `=vy < 0`?** Se **vy** for menor que 0, a bola está subindo: depois de quebrar o tijolo, ela desce. Caso contrário, ela está descendo e volta a subir."
+        ],
+        [
+          "tip",
+          "**O sinal = no começo do texto** diz ao Yop2D para **calcular** o texto em vez de escrevê-lo como está (veja o guia [Coletar moedas e contar pontos](guide:pieces-score))."
         ]
       ]
     ],
     [
       "h2",
-      "Passo 7: ganhar"
+      "Passo 8: ganhar"
     ],
     [
       "bloc",
       [
         [
           "p",
-          "Depois de **[[modifier_texte]]** do passo 6, adicione:"
+          "Depois de **[[modifier_texte]]** do passo 7, adicione:"
         ],
         [
           "ol",
@@ -479,19 +556,19 @@
     ],
     [
       "h2",
-      "Passo 8: vidas e Game Over"
+      "Passo 9: vidas e Game Over"
     ],
     [
       "bloc",
       [
         [
           "p",
-          "Quando a bola cai abaixo da raquete, o jogador perde uma vida. Continuamos a cadeia do passo 4: depois da terceira **[[condition]]** (a de cima), adicione uma quarta, ligada pela saída **[[lang:port_ensuite]]**."
+          "Quando a bola toca **bottom_wall** (embaixo da tela), o jogador perde uma vida."
         ],
         [
           "ol",
           [
-            "**[[condition]]** `=ball.y >= 1920`, saída **{{lang:port_vrai}}**.",
+            "Adicione o evento **[[NoeudEventCollisionAB]]**: **Objeto A** = **ball**, **Objeto B** = **bottom_wall**.",
             "**[[ajouter_variable]]**: variável **lives**, **{{lang:ajouter_variable.valeur}} = -1**.",
             "**[[modifier_texte]]**: alvo **livesText**, **{{lang:modifier_texte.valeur}}** = `=\"Vidas: \" + lives`.",
             "**[[condition]]** `=lives <= 0`.",
@@ -503,13 +580,12 @@
           "chaine",
           [
             [
-              "cond",
-              "{{condition}}",
-              "=ball.y >= 1920"
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · bottom_wall"
             ],
             [
-              "→",
-              "{{lang:port_vrai}}"
+              "→"
             ],
             [
               "n",
@@ -593,10 +669,6 @@
           ]
         ],
         [
-          "tip",
-          "**Por que parar a bola antes de esperar?** Durante os 2 segundos de espera, o jogo continua. Se a bola ficasse abaixo da tela, ela faria perder uma vida a cada imagem, e o contador de vidas cairia muito (-178!). Devolvida ao meio e parada, ela não atrapalha mais."
-        ],
-        [
           "chaine",
           [
             [
@@ -630,6 +702,10 @@
               "vx · 6"
             ]
           ]
+        ],
+        [
+          "tip",
+          "**Por que parar a bola antes de esperar?** Durante os 2 segundos de espera, o jogo continua. Se a bola ficasse abaixo da tela, ela faria perder uma vida a cada imagem, e o contador de vidas cairia muito. Devolvida ao meio e parada, ela não atrapalha mais."
         ]
       ]
     ],
@@ -642,7 +718,7 @@
       [
         "**Sons:** adicione **[[jouer_son]]** depois de **[[detruire_objet]]** (um « clac » quando um tijolo quebra) e no evento da raquete.",
         "**Cores diferentes:** dê a mesma tag **brick** a todos os tijolos, seja qual for a cor: uma única configuração basta.",
-        "**Mais velocidade:** adicione **[[modifier_variable]]** `=vx * 1.02` a cada tijolo quebrado para o jogo ficar cada vez mais difícil.",
+        "**Uma bola mais rápida:** mude os números `6`, `-6`, `9` e `-9` em todos os lugares (por exemplo `8`, `-8`, `12` e `-12`).",
         "**Faíscas:** adicione um **[[effet_particules]]** quando um tijolo quebrar (veja o guia [Partículas e efeitos](guide:particules-effets))."
       ]
     ],
@@ -653,11 +729,11 @@
     [
       "ul",
       [
-        "**A bola não se move:** verifique se **vx** e **vy** mudam ao começar e se **[[pousser]]** usa as fórmulas `=vx` e `=vy` (com o **=** no início).",
-        "**A bola atravessa a raquete ou os tijolos:** verifique os nomes (**ball**, **paddle**) e a tag **brick**, escrita igual em todo lugar (sem maiúsculas). Se a bola estiver muito rápida, aumente um pouco os tijolos ou deixe-a mais lenta.",
-        "**A bola sai da tela sem quicar:** os nós **[[condition]]** devem estar ligados um após o outro pela saída **[[lang:port_ensuite]]**, e o primeiro deve sair de **[[pousser]]**.",
+        "**A bola não se move:** verifique se **vx** e **vy** mudam ao começar e se **[[pousser]]** está ligado aos nós verdes **[[valeur_variable]]** (toque em **Adicionar X**: a linha deve mostrar o fio verde).",
+        "**A bola atravessa uma parede ou os tijolos:** verifique os nomes (**ball**, **paddle**, **left_wall**…) e a tag **brick**, escrita igual em todo lugar (sem maiúsculas). Se a bola estiver muito rápida, aumente um pouco os tijolos ou deixe-a mais lenta.",
+        "**A raquete sobe ou desce:** o nó **[[modifier_propriete]]** deve estar ligado a **{{NoeudEventChaqueImage}}**, com **Propriedade** = `y`.",
         "**Você ganha cedo demais ou nunca:** a variável **bricks** deve valer exatamente o número de tijolos do jogo.",
-        "**A raquete se move mal:** na fórmula, `doigt.x` é o dedo, não a raquete; mantenha o **=** no início e feche o parêntese."
+        "**Para comparar**, abra o projeto de teste (seus nós estão organizados por seção, com quadros e notas adesivas que explicam cada parte)."
       ]
     ]
   ]

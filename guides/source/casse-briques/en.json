@@ -1,6 +1,6 @@
 {
   "titre_page": "How to make a brick breaker game in Yop2D? | Yop2D Guide",
-  "description": "Make a brick breaker game in Yop2D with no code: a paddle you move with your finger, a bouncing ball, bricks to break, score and lives with nodes.",
+  "description": "Make a brick breaker game in Yop2D with no code: a paddle you move with your finger, invisible walls, a bouncing ball, bricks to break, score and lives with nodes.",
   "h1": "How to make a brick breaker game?",
   "carte": [
     "Make a brick breaker",
@@ -9,19 +9,19 @@
   "etapes": [
     [
       "Place the paddle",
-      "{{NoeudEventDoigtAppuye}} → {{deplacer}} (paddle, X = follows the finger)."
+      "{{modifier_propriete}} (paddle, y = 1700) → {{garder_dans_ecran}}, with the behavior « Dragged with a finger »."
+    ],
+    [
+      "Surround the screen with invisible walls",
+      "Four {{lang:obj_prefix_zone}}s: left_wall, right_wall, top_wall and bottom_wall."
     ],
     [
       "Launch the ball",
-      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy); {{NoeudEventChaqueImage}} → {{pousser}} (ball, =vx, =vy)."
+      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy); {{NoeudEventChaqueImage}} → {{pousser}} (ball)."
     ],
     [
-      "Bounce on the edges",
-      "{{condition}} (=ball.x <= 0) → {{lang:port_vrai}} → {{modifier_variable}} (vx, =abs(vx))."
-    ],
-    [
-      "Bounce on the paddle",
-      "{{NoeudEventCollisionAB}} (ball, paddle) → {{modifier_variable}} (vy, =-abs(vy))."
+      "Bounce on the walls and the paddle",
+      "{{NoeudEventCollisionAB}} (ball, left_wall) → {{modifier_variable}} (vx, 6)."
     ],
     [
       "Break the bricks",
@@ -29,13 +29,13 @@
     ],
     [
       "Lives and game over",
-      "{{condition}} (=ball.y >= 1920) → {{ajouter_variable}} (lives, -1) → {{condition}} (=lives <= 0) → {{recommencer_scene}}."
+      "{{NoeudEventCollisionAB}} (ball, bottom_wall) → {{ajouter_variable}} (lives, -1) → {{recommencer_scene}}."
     ]
   ],
   "blocs": [
     [
       "p",
-      "In a brick breaker, a **ball** bounces off the edges and off a **paddle** you move with your finger, and breaks **bricks**. Here we drive the ball with two small variables, **vx** (its speed to the right) and **vy** (its speed downward). When the ball bounces, we simply change the sign of the variable."
+      "In a brick breaker, a **ball** bounces off walls and off a **paddle** you move with your finger, and breaks **bricks**. Here the ball moves thanks to two variables, **vx** (its speed to the right) and **vy** (its speed downward). When it touches a wall, we simply give it another number."
     ],
     [
       "besoin",
@@ -48,7 +48,7 @@
     ],
     [
       "tip",
-      "This guide is written for a **1080 x 1920 portrait** game. The images come from the free **Puzzle (brick breaker)** pack (Kenney, free to use, CC0). Download it in the Yop2D **Library**, tab **Packs to download**: you will find **paddleBlu** (paddle, 208 x 48), **ballBlue** (ball, 44 x 44) and **element_blue_rectangle_glossy** (brick, 128 x 64, in blue, green, red, yellow, purple and grey). You can also use your own drawings: then adapt the numbers in the formulas to their sizes."
+      "This guide is written for a **1080 x 1920 portrait** game. The images come from the free **Puzzle (brick breaker)** pack (Kenney, free to use, CC0). Download it in the Yop2D **Library**, tab **Packs to download**: you will find **paddleBlu** (paddle), **ballBlue** (ball) and **element_blue_rectangle_glossy** (brick, in blue, green, red, yellow, purple and grey). You can also use your own drawings."
     ],
     [
       "h2",
@@ -69,7 +69,7 @@
           [
             "**score**: starting value **0**;",
             "**lives**: starting value **3**;",
-            "**bricks**: the **number of bricks** in your game (for example **27**). It tells you when everything is broken;",
+            "**bricks**: the **number of bricks** in your game (for example **24**). It tells you when everything is broken;",
             "**vx** and **vy**: starting value **0**. This is the ball's speed, set when the game starts."
           ]
         ],
@@ -81,7 +81,33 @@
     ],
     [
       "h2",
-      "Step 2: the paddle follows your finger"
+      "Step 2: the invisible walls"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "The ball bounces off walls you cannot see: four **{{lang:obj_prefix_zone}}s** placed around the screen. A zone is invisible during the game, but the ball can touch it."
+        ],
+        [
+          "ol",
+          [
+            "Add a {{lang:obj_prefix_zone}} named **left_wall**: X = `-300`, Y = `-400`, width `300`, height `2800`.",
+            "Add a {{lang:obj_prefix_zone}} named **right_wall**: X = `1080`, Y = `-400`, width `300`, height `2800`.",
+            "Add a {{lang:obj_prefix_zone}} named **top_wall**: X = `-300`, Y = `-300`, width `1680`, height `300`.",
+            "Add a {{lang:obj_prefix_zone}} named **bottom_wall**: X = `-300`, Y = `1920`, width `1680`, height `300`."
+          ]
+        ],
+        [
+          "tip",
+          "The walls are thick on purpose: a fast ball cannot go through them. The first three send the ball back; **bottom_wall** is used to lose a life."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 3: the paddle follows your finger"
     ],
     [
       "bloc",
@@ -89,10 +115,11 @@
         [
           "ol",
           [
-            "Open the scene's **{{lang:titre_blueprint}}**.",
-            "Add the **[[NoeudEventDoigtAppuye]]** event (it repeats as long as a finger is on the screen).",
-            "Add **[[deplacer]]**: target **paddle**, **X** = `=clamp(doigt.x - 104, 0, 872)`, **Y** = `1700`.",
-            "Link the two nodes, then run the game: the paddle follows your finger and never leaves the screen."
+            "Select **paddle**, touch **⚙ Comportement de l'objet** and choose **Dragged with a finger**: the player takes it and moves it.",
+            "Open the scene's **{{lang:titre_blueprint}}** and add the **[[NoeudEventChaqueImage]]** event.",
+            "Add **[[modifier_propriete]]**: target **paddle**, **Property** = `y`, **Value** = `1700`.",
+            "Add **[[garder_dans_ecran]]**: target **paddle**, **Margin** = `0`.",
+            "Link the three nodes in order."
           ]
         ],
         [
@@ -100,27 +127,35 @@
           [
             [
               "ev",
-              "{{NoeudEventDoigtAppuye}}"
+              "{{NoeudEventChaqueImage}}"
             ],
             [
               "→"
             ],
             [
               "n",
-              "{{deplacer}}",
-              "paddle · =clamp(doigt.x - 104, 0, 872) · 1700"
+              "{{modifier_propriete}}",
+              "paddle · y · 1700"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{garder_dans_ecran}}",
+              "paddle · 0"
             ]
           ]
         ],
         [
           "tip",
-          "**How to read the formula?** `doigt.x` is your finger's position (« doigt » means finger). We subtract 104 (half the paddle) to center it under the finger. `clamp(…, 0, 872)` keeps it on screen: 872 = 1080 − 208 (the paddle's width)."
+          "**Why these two nodes?** « Dragged with a finger » lets the paddle move in every direction. On every frame, we put it back at the same height and keep it from leaving the screen: it only moves left and right."
         ]
       ]
     ],
     [
       "h2",
-      "Step 3: the ball starts"
+      "Step 4: the ball starts"
     ],
     [
       "bloc",
@@ -128,9 +163,11 @@
         [
           "ol",
           [
-            "Add the **[[NoeudEventStart]]** event, then two **[[modifier_variable]]** nodes one after the other: variable **vx** = `6`, then variable **vy** = `-9`.",
-            "Add the **[[NoeudEventChaqueImage]]** event, then **[[pousser]]**: target **ball**, **Add X** = `=vx`, **Add Y** = `=vy`.",
-            "Link each event to its nodes and run the game: the ball goes up and to the right, and leaves the screen."
+            "Add the **[[NoeudEventStart]]** event, then two **[[modifier_variable]]** nodes one after the other: variable **vx**, value `6`, then variable **vy**, value `-9`.",
+            "Add the **[[NoeudEventChaqueImage]]** event, then **[[pousser]]**: target **ball**.",
+            "In the settings window of **[[pousser]]**, touch the **🔗** button next to **Add X**, choose **[[valeur_variable]]**, then choose the variable **vx** in the green node that appears.",
+            "Do the same for **Add Y** with the variable **vy**.",
+            "Link each event to its nodes and run the game: the ball goes up and to the right, then leaves the screen."
           ]
         ],
         [
@@ -171,60 +208,54 @@
             [
               "n",
               "{{pousser}}",
-              "ball · =vx · =vy"
+              "ball · X ← vx · Y ← vy"
             ]
           ]
         ],
         [
           "tip",
-          "**Negative = up.** In Yop2D, Y grows toward the bottom of the screen: **vy = -9** sends the ball upward. For a faster ball, use 8 and -12."
+          "**A green node** gives a value to a setting, without typing anything. Here, **[[valeur_variable]]** tells **[[pousser]]**: « move by **vx** to the right and by **vy** downward, on every frame »."
+        ],
+        [
+          "tip",
+          "**Negative = up.** In Yop2D, Y grows toward the bottom of the screen: **vy = -9** sends the ball upward."
         ]
       ]
     ],
     [
       "h2",
-      "Step 4: bounce on the edges"
+      "Step 5: bounce on the walls"
     ],
     [
       "bloc",
       [
         [
           "p",
-          "Right after **[[pousser]]**, we check on every frame whether the ball touches an edge. We chain three **[[condition]]** nodes, each time following the **[[lang:port_ensuite]]** output (which runs in every case)."
+          "Each wall gives the ball a new number. Add three **[[NoeudEventCollisionAB]]** events (**Object A** = **ball**):"
         ],
         [
           "ol",
           [
-            "Left edge: **[[condition]]** `=ball.x <= 0`. Output **{{lang:port_vrai}}** → **[[modifier_variable]]**: variable **vx**, value `=abs(vx)` (always to the right).",
-            "Right edge: **[[condition]]** `=ball.x >= 1036`. Output **{{lang:port_vrai}}** → **[[modifier_variable]]**: variable **vx**, value `=-abs(vx)` (always to the left). 1036 = 1080 − 44 (the ball's width).",
-            "Top: **[[condition]]** `=ball.y <= 0`. Output **{{lang:port_vrai}}** → **[[modifier_variable]]**: variable **vy**, value `=abs(vy)` (always downward).",
-            "Link each **[[condition]]** to the next one with its **[[lang:port_ensuite]]** output. The first one is linked to the output of **[[pousser]]**."
+            "**Object B** = **left_wall** → **[[modifier_variable]]**: variable **vx**, value `6` (the ball goes back to the right).",
+            "**Object B** = **right_wall** → **[[modifier_variable]]**: variable **vx**, value `-6` (the ball goes back to the left).",
+            "**Object B** = **top_wall** → **[[modifier_variable]]**: variable **vy**, value `9` (the ball goes back down)."
           ]
         ],
         [
           "chaine",
           [
             [
-              "n",
-              "{{pousser}}",
-              "ball"
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · left_wall"
             ],
             [
               "→"
             ],
             [
-              "cond",
-              "{{condition}}",
-              "=ball.x <= 0"
-            ],
-            [
-              "→",
-              "{{lang:port_vrai}}"
-            ],
-            [
               "n",
               "{{modifier_variable}}",
-              "vx · =abs(vx)"
+              "vx · 6"
             ]
           ]
         ],
@@ -232,18 +263,17 @@
           "chaine",
           [
             [
-              "cond",
-              "{{condition}}",
-              "=ball.x >= 1036"
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · right_wall"
             ],
             [
-              "→",
-              "{{lang:port_vrai}}"
+              "→"
             ],
             [
               "n",
               "{{modifier_variable}}",
-              "vx · =-abs(vx)"
+              "vx · -6"
             ]
           ]
         ],
@@ -251,30 +281,25 @@
           "chaine",
           [
             [
-              "cond",
-              "{{condition}}",
-              "=ball.y <= 0"
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · top_wall"
             ],
             [
-              "→",
-              "{{lang:port_vrai}}"
+              "→"
             ],
             [
               "n",
               "{{modifier_variable}}",
-              "vy · =abs(vy)"
+              "vy · 9"
             ]
           ]
-        ],
-        [
-          "tip",
-          "**Why abs?** `abs(vx)` is always a positive number. At the left edge, the ball is forced to go right, even if it touches the edge two frames in a row: it never gets stuck."
         ]
       ]
     ],
     [
       "h2",
-      "Step 5: bounce on the paddle"
+      "Step 6: bounce on the paddle"
     ],
     [
       "bloc",
@@ -283,9 +308,9 @@
           "ol",
           [
             "Add the **[[NoeudEventCollisionAB]]** event: **Object A** = **ball**, **Object B** = **paddle**.",
-            "Add **[[modifier_variable]]**: variable **vy**, value `=-abs(vy)` (the ball goes back up).",
-            "Add a second **[[modifier_variable]]**: variable **vx**, value `=(ball.x + 22 - paddle.x - 104) / 13`.",
-            "Link the three nodes in order."
+            "Add **[[modifier_variable]]**: variable **vy**, value `-9` (the ball goes back up).",
+            "Add a second **[[modifier_variable]]**: variable **vx**. Touch **🔗** next to the value, choose **[[valeur_hasard]]**, then set **From** = `-6` and **To** = `6`.",
+            "Link the nodes in order."
           ]
         ],
         [
@@ -302,7 +327,7 @@
             [
               "n",
               "{{modifier_variable}}",
-              "vy · =-abs(vy)"
+              "vy · -9"
             ],
             [
               "→"
@@ -310,19 +335,19 @@
             [
               "n",
               "{{modifier_variable}}",
-              "vx · =(ball.x + 22 - paddle.x - 104) / 13"
+              "vx · ← random number (-6 to 6)"
             ]
           ]
         ],
         [
           "tip",
-          "**What is the last formula for?** It measures where the ball lands on the paddle: in the middle, it goes straight up; on the left edge, it goes left; on the right edge, it goes right. The player can **aim**. (22 = half the ball, 104 = half the paddle.)"
+          "On every bounce on the paddle, the ball leaves in a **random direction**: the game is never the same twice."
         ]
       ]
     ],
     [
       "h2",
-      "Step 6: break the bricks"
+      "Step 7: break the bricks"
     ],
     [
       "bloc",
@@ -332,11 +357,10 @@
           [
             "Add the **[[NoeudEventCollisionTag]]** event: target **ball**, {{lang:Tag}} **brick**.",
             "Add **[[detruire_objet]]** and choose **{{lang:noeud_objet_implique_long}}** as the target: it is the brick the ball has just touched.",
-            "Add **[[modifier_variable]]**: variable **vy**, value `=-vy` (the ball bounces).",
-            "Add **[[ajouter_variable]]**: variable **score**, **{{lang:ajouter_variable.valeur}} = 10**.",
+            "Add **[[condition]]** `=vy < 0` (« the ball is going up »). Output **{{lang:port_vrai}}** → **[[modifier_variable]]**: variable **vy**, value `9`. Output **{{lang:port_faux}}** → **[[modifier_variable]]**: variable **vy**, value `-9`.",
+            "From the **[[lang:port_ensuite]]** output of the condition, add **[[ajouter_variable]]**: variable **score**, **{{lang:ajouter_variable.valeur}} = 10**.",
             "Add **[[ajouter_variable]]**: variable **bricks**, **{{lang:ajouter_variable.valeur}} = -1**.",
-            "Add **[[modifier_texte]]**: target **scoreText**, **{{lang:modifier_texte.valeur}}** = `=\"Score: \" + score`.",
-            "Link all the nodes in order."
+            "Add **[[modifier_texte]]**: target **scoreText**, **{{lang:modifier_texte.valeur}}** = `=\"Score: \" + score`."
           ]
         ],
         [
@@ -359,12 +383,61 @@
               "→"
             ],
             [
-              "n",
-              "{{modifier_variable}}",
-              "vy · =-vy"
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
             ],
             [
-              "→"
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_faux}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_ensuite}}"
             ],
             [
               "n",
@@ -391,20 +464,24 @@
         ],
         [
           "tip",
-          "When the ball breaks a brick, it always bounces up or down, even if it hit the brick from the side. It is simple, and it works well in a brick breaker."
+          "**Why `=vy < 0`?** If **vy** is smaller than 0, the ball is going up: after breaking the brick, it goes down. Otherwise it is going down, and it goes back up."
+        ],
+        [
+          "tip",
+          "**The = sign at the beginning of the text** tells Yop2D to **calculate** the text instead of writing it as it is (see the guide [Collect coins and count points](guide:pieces-score))."
         ]
       ]
     ],
     [
       "h2",
-      "Step 7: win"
+      "Step 8: win"
     ],
     [
       "bloc",
       [
         [
           "p",
-          "After the **[[modifier_texte]]** of step 6, add:"
+          "After the **[[modifier_texte]]** of step 7, add:"
         ],
         [
           "ol",
@@ -479,19 +556,19 @@
     ],
     [
       "h2",
-      "Step 8: lives and Game Over"
+      "Step 9: lives and Game Over"
     ],
     [
       "bloc",
       [
         [
           "p",
-          "When the ball falls below the paddle, the player loses a life. We continue the chain from step 4: after the third **[[condition]]** (the top), add a fourth one, linked by its **[[lang:port_ensuite]]** output."
+          "When the ball touches **bottom_wall** (under the screen), the player loses a life."
         ],
         [
           "ol",
           [
-            "**[[condition]]** `=ball.y >= 1920`, output **{{lang:port_vrai}}**.",
+            "Add the **[[NoeudEventCollisionAB]]** event: **Object A** = **ball**, **Object B** = **bottom_wall**.",
             "**[[ajouter_variable]]**: variable **lives**, **{{lang:ajouter_variable.valeur}} = -1**.",
             "**[[modifier_texte]]**: target **livesText**, **{{lang:modifier_texte.valeur}}** = `=\"Lives: \" + lives`.",
             "**[[condition]]** `=lives <= 0`.",
@@ -503,13 +580,12 @@
           "chaine",
           [
             [
-              "cond",
-              "{{condition}}",
-              "=ball.y >= 1920"
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · bottom_wall"
             ],
             [
-              "→",
-              "{{lang:port_vrai}}"
+              "→"
             ],
             [
               "n",
@@ -593,10 +669,6 @@
           ]
         ],
         [
-          "tip",
-          "**Why stop the ball before waiting?** During the 2 seconds of waiting, the game keeps running. If the ball stayed below the screen, it would cost a life on every frame, and the lives counter would drop very low (-178!). Put back in the middle and motionless, it no longer causes trouble."
-        ],
-        [
           "chaine",
           [
             [
@@ -630,6 +702,10 @@
               "vx · 6"
             ]
           ]
+        ],
+        [
+          "tip",
+          "**Why stop the ball before waiting?** During the 2 seconds of waiting, the game keeps running. If the ball stayed below the screen, it would cost a life on every frame, and the lives counter would drop very low. Put back in the middle and motionless, it no longer causes trouble."
         ]
       ]
     ],
@@ -642,7 +718,7 @@
       [
         "**Sounds:** add **[[jouer_son]]** after **[[detruire_objet]]** (a « clack » when a brick breaks) and in the paddle event.",
         "**Different colors:** give the same tag **brick** to all the bricks, whatever their color: a single setup is enough.",
-        "**More speed:** add **[[modifier_variable]]** `=vx * 1.02` each time a brick breaks so the game gets harder and harder.",
+        "**A faster ball:** change the numbers `6`, `-6`, `9` and `-9` everywhere (for example `8`, `-8`, `12` and `-12`).",
         "**Sparks:** add an **[[effet_particules]]** when a brick breaks (see the guide [Particles and effects](guide:particules-effets))."
       ]
     ],
@@ -653,11 +729,11 @@
     [
       "ul",
       [
-        "**The ball doesn't move:** check that **vx** and **vy** are changed at the start, and that **[[pousser]]** uses the formulas `=vx` and `=vy` (with the **=** at the beginning).",
-        "**The ball goes through the paddle or the bricks:** check the names (**ball**, **paddle**) and the tag **brick**, spelled the same everywhere (no capital letter). If the ball is very fast, make the bricks a little bigger or slow the ball down.",
-        "**The ball leaves the screen without bouncing:** the **[[condition]]** nodes must be linked one after the other with the **[[lang:port_ensuite]]** output, and the first one must start from **[[pousser]]**.",
+        "**The ball doesn't move:** check that **vx** and **vy** change at the start, and that **[[pousser]]** is linked to the green **[[valeur_variable]]** nodes (touch **Add X**: the line must show the green wire).",
+        "**The ball goes through a wall or the bricks:** check the names (**ball**, **paddle**, **left_wall**…) and the tag **brick**, spelled the same everywhere (no capital letter). If the ball is very fast, make the bricks a little bigger or slow the ball down.",
+        "**The paddle goes up or down:** the **[[modifier_propriete]]** node must be linked to **{{NoeudEventChaqueImage}}**, with **Property** = `y`.",
         "**You win too early or never:** the variable **bricks** must be exactly the number of bricks in the game.",
-        "**The paddle moves badly:** in the formula, `doigt.x` is the finger, not the paddle; keep the **=** at the beginning and close the parenthesis."
+        "**To compare**, open the test project (its nodes are sorted by section, with frames and sticky notes that explain each part)."
       ]
     ]
   ]

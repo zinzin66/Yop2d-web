@@ -1,6 +1,6 @@
 {
   "titre_page": "如何在 Yop2D 中制作打砖块游戏？| Yop2D 教程",
-  "description": "在 Yop2D 中无需代码制作打砖块游戏：用手指移动的挡板、会弹跳的球、要打碎的砖块，用节点实现得分和生命。",
+  "description": "在 Yop2D 中无需代码制作打砖块游戏：用手指移动的挡板、看不见的墙、会弹跳的球、要打碎的砖块，用节点实现得分和生命。",
   "h1": "如何制作打砖块游戏？",
   "carte": [
     "制作打砖块",
@@ -9,19 +9,19 @@
   "etapes": [
     [
       "放置挡板",
-      "{{NoeudEventDoigtAppuye}} → {{deplacer}} (paddle, X = 跟随手指)。"
+      "{{modifier_propriete}} (paddle, y = 1700) → {{garder_dans_ecran}}，行为选择 « 用手指拖动 »。"
+    ],
+    [
+      "用看不见的墙围住屏幕",
+      "四个{{lang:obj_prefix_zone}}：left_wall、right_wall、top_wall 和 bottom_wall。"
     ],
     [
       "发射球",
-      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy); {{NoeudEventChaqueImage}} → {{pousser}} (ball, =vx, =vy)."
+      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy); {{NoeudEventChaqueImage}} → {{pousser}} (ball)."
     ],
     [
-      "在边缘反弹",
-      "{{condition}} (=ball.x <= 0) → {{lang:port_vrai}} → {{modifier_variable}} (vx, =abs(vx))."
-    ],
-    [
-      "在挡板上反弹",
-      "{{NoeudEventCollisionAB}} (ball, paddle) → {{modifier_variable}} (vy, =-abs(vy))."
+      "在墙上和挡板上反弹",
+      "{{NoeudEventCollisionAB}} (ball, left_wall) → {{modifier_variable}} (vx, 6)."
     ],
     [
       "打碎砖块",
@@ -29,13 +29,13 @@
     ],
     [
       "生命和游戏结束",
-      "{{condition}} (=ball.y >= 1920) → {{ajouter_variable}} (lives, -1) → {{condition}} (=lives <= 0) → {{recommencer_scene}}."
+      "{{NoeudEventCollisionAB}} (ball, bottom_wall) → {{ajouter_variable}} (lives, -1) → {{recommencer_scene}}."
     ]
   ],
   "blocs": [
     [
       "p",
-      "在打砖块游戏中，**球**会在边缘和你用手指移动的**挡板**上反弹，并打碎**砖块**。这里我们用两个小变量来控制球：**vx**（向右的速度）和 **vy**（向下的速度）。球反弹时，我们只需改变变量的正负号。"
+      "在打砖块游戏中，**球**会在墙和你用手指移动的**挡板**上反弹，并打碎**砖块**。这里球靠两个变量移动：**vx**（向右的速度）和 **vy**（向下的速度）。球碰到墙时，我们只需给它另一个数字。"
     ],
     [
       "besoin",
@@ -48,7 +48,7 @@
     ],
     [
       "tip",
-      "本教程针对 **1080 x 1920 竖屏**游戏编写。图片来自免费素材包 **Puzzle (brick breaker)**（Kenney，可自由使用，CC0）。在 Yop2D 的**资源库**中打开**可下载素材包**标签页即可下载：里面有 **paddleBlu**（挡板，208 x 48）、**ballBlue**（球，44 x 44）和 **element_blue_rectangle_glossy**（砖块，128 x 64，有蓝、绿、红、黄、紫、灰色）。你也可以使用自己的图画：这时请按它们的尺寸调整公式中的数字。"
+      "本教程针对 **1080 x 1920 竖屏**游戏编写。图片来自免费素材包 **Puzzle (brick breaker)**（Kenney，可自由使用，CC0）。在 Yop2D 的**资源库**中打开**可下载素材包**标签页即可下载：里面有 **paddleBlu**（挡板）、**ballBlue**（球）和 **element_blue_rectangle_glossy**（砖块，有蓝、绿、红、黄、紫、灰色）。你也可以使用自己的图画。"
     ],
     [
       "h2",
@@ -69,7 +69,7 @@
           [
             "**score**：初始值 **0**；",
             "**lives**：初始值 **3**；",
-            "**bricks**：你的游戏中的**砖块数量**（例如 **27**）。它用来判断砖块何时全部打碎；",
+            "**bricks**：你的游戏中的**砖块数量**（例如 **24**）。它用来判断砖块何时全部打碎；",
             "**vx** 和 **vy**：初始值 **0**。这是球的速度，在游戏开始时设置。"
           ]
         ],
@@ -81,7 +81,33 @@
     ],
     [
       "h2",
-      "第 2 步：挡板跟随手指"
+      "第 2 步：看不见的墙"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "球会在看不见的墙上反弹：在屏幕四周放四个**{{lang:obj_prefix_zone}}**。区域在游戏中是看不见的，但球可以碰到它。"
+        ],
+        [
+          "ol",
+          [
+            "添加一个名为 **left_wall** 的{{lang:obj_prefix_zone}}：X = `-300`，Y = `-400`，宽 `300`，高 `2800`。",
+            "添加一个名为 **right_wall** 的{{lang:obj_prefix_zone}}：X = `1080`，Y = `-400`，宽 `300`，高 `2800`。",
+            "添加一个名为 **top_wall** 的{{lang:obj_prefix_zone}}：X = `-300`，Y = `-300`，宽 `1680`，高 `300`。",
+            "添加一个名为 **bottom_wall** 的{{lang:obj_prefix_zone}}：X = `-300`，Y = `1920`，宽 `1680`，高 `300`。"
+          ]
+        ],
+        [
+          "tip",
+          "墙故意做得很厚：快速的球穿不过去。前三面墙把球弹回去；**bottom_wall** 用来失去一条生命。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 3 步：挡板跟随手指"
     ],
     [
       "bloc",
@@ -89,10 +115,11 @@
         [
           "ol",
           [
-            "打开场景的**{{lang:titre_blueprint}}**。",
-            "添加事件 **[[NoeudEventDoigtAppuye]]**（只要屏幕上有手指，它就会不断重复）。",
-            "添加 **[[deplacer]]**：目标 **paddle**，**X** = `=clamp(doigt.x - 104, 0, 872)`，**Y** = `1700`。",
-            "连接这两个节点，然后运行游戏：挡板会跟着你的手指，并且不会离开屏幕。"
+            "选中 **paddle**，点击 **⚙ Comportement de l'objet**，选择 **用手指拖动**：玩家可以抓住它并移动。",
+            "打开场景的**{{lang:titre_blueprint}}**，添加事件 **[[NoeudEventChaqueImage]]**。",
+            "添加 **[[modifier_propriete]]**：目标 **paddle**，**属性** = `y`，**值** = `1700`。",
+            "添加 **[[garder_dans_ecran]]**：目标 **paddle**，**边距** = `0`。",
+            "按顺序连接这三个节点。"
           ]
         ],
         [
@@ -100,27 +127,35 @@
           [
             [
               "ev",
-              "{{NoeudEventDoigtAppuye}}"
+              "{{NoeudEventChaqueImage}}"
             ],
             [
               "→"
             ],
             [
               "n",
-              "{{deplacer}}",
-              "paddle · =clamp(doigt.x - 104, 0, 872) · 1700"
+              "{{modifier_propriete}}",
+              "paddle · y · 1700"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{garder_dans_ecran}}",
+              "paddle · 0"
             ]
           ]
         ],
         [
           "tip",
-          "**如何读这个公式？** `doigt.x` 是你手指的位置（« doigt » 在法语中是手指的意思）。我们减去 104（挡板宽度的一半），让挡板位于手指正下方。`clamp(…, 0, 872)` 让它保持在屏幕内：872 = 1080 − 208（挡板的宽度）。"
+          "**为什么要这两个节点？** « 用手指拖动 » 让挡板可以向任意方向移动。我们在每一帧把它放回同一高度，并防止它离开屏幕：这样它只会左右移动。"
         ]
       ]
     ],
     [
       "h2",
-      "第 3 步：球出发"
+      "第 4 步：球出发"
     ],
     [
       "bloc",
@@ -128,8 +163,10 @@
         [
           "ol",
           [
-            "添加事件 **[[NoeudEventStart]]**，然后依次添加两个 **[[modifier_variable]]** 节点：变量 **vx** = `6`，再是变量 **vy** = `-9`。",
-            "添加事件 **[[NoeudEventChaqueImage]]**，然后添加 **[[pousser]]**：目标 **ball**，**增加 X** = `=vx`，**增加 Y** = `=vy`。",
+            "添加事件 **[[NoeudEventStart]]**，然后依次添加两个 **[[modifier_variable]]** 节点：变量 **vx**，值 `6`，再是变量 **vy**，值 `-9`。",
+            "添加事件 **[[NoeudEventChaqueImage]]**，然后添加 **[[pousser]]**：目标 **ball**。",
+            "在 **[[pousser]]** 的设置窗口中，点击 **增加 X** 旁边的 **🔗** 按钮，选择 **[[valeur_variable]]**，然后在出现的绿色节点中选择变量 **vx**。",
+            "对 **增加 Y** 做同样的事，选择变量 **vy**。",
             "把每个事件连到它的节点，然后运行游戏：球向右上方飞去，然后飞出屏幕。"
           ]
         ],
@@ -171,60 +208,54 @@
             [
               "n",
               "{{pousser}}",
-              "ball · =vx · =vy"
+              "ball · X ← vx · Y ← vy"
             ]
           ]
         ],
         [
           "tip",
-          "**负数 = 向上。** 在 Yop2D 中，Y 朝屏幕下方增大：**vy = -9** 会让球向上飞。想要更快的球，可以用 8 和 -12。"
+          "**绿色节点**可以给一个设置赋值，不用输入任何东西。这里 **[[valeur_variable]]** 对 **[[pousser]]** 说：« 每一帧向右移动 **vx**，向下移动 **vy** »。"
+        ],
+        [
+          "tip",
+          "**负数 = 向上。** 在 Yop2D 中，Y 朝屏幕下方增大：**vy = -9** 会让球向上飞。"
         ]
       ]
     ],
     [
       "h2",
-      "第 4 步：在边缘反弹"
+      "第 5 步：在墙上反弹"
     ],
     [
       "bloc",
       [
         [
           "p",
-          "紧接着 **[[pousser]]**，我们在每一帧检查球是否碰到边缘。我们把三个 **[[condition]]** 节点串起来，每次都沿着 **[[lang:port_ensuite]]** 输出连接（它在任何情况下都会执行）。"
+          "每面墙都会给球一个新的数字。添加三个 **[[NoeudEventCollisionAB]]** 事件（**对象 A** = **ball**）："
         ],
         [
           "ol",
           [
-            "左边缘：**[[condition]]** `=ball.x <= 0`。输出 **{{lang:port_vrai}}** → **[[modifier_variable]]**：变量 **vx**，值 `=abs(vx)`（始终向右）。",
-            "右边缘：**[[condition]]** `=ball.x >= 1036`。输出 **{{lang:port_vrai}}** → **[[modifier_variable]]**：变量 **vx**，值 `=-abs(vx)`（始终向左）。1036 = 1080 − 44（球的宽度）。",
-            "上边缘：**[[condition]]** `=ball.y <= 0`。输出 **{{lang:port_vrai}}** → **[[modifier_variable]]**：变量 **vy**，值 `=abs(vy)`（始终向下）。",
-            "用每个 **[[condition]]** 的 **[[lang:port_ensuite]]** 输出连接到下一个。第一个连接到 **[[pousser]]** 的输出。"
+            "**对象 B** = **left_wall** → **[[modifier_variable]]**：变量 **vx**，值 `6`（球回到向右飞）。",
+            "**对象 B** = **right_wall** → **[[modifier_variable]]**：变量 **vx**，值 `-6`（球回到向左飞）。",
+            "**对象 B** = **top_wall** → **[[modifier_variable]]**：变量 **vy**，值 `9`（球回到向下飞）。"
           ]
         ],
         [
           "chaine",
           [
             [
-              "n",
-              "{{pousser}}",
-              "ball"
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · left_wall"
             ],
             [
               "→"
             ],
             [
-              "cond",
-              "{{condition}}",
-              "=ball.x <= 0"
-            ],
-            [
-              "→",
-              "{{lang:port_vrai}}"
-            ],
-            [
               "n",
               "{{modifier_variable}}",
-              "vx · =abs(vx)"
+              "vx · 6"
             ]
           ]
         ],
@@ -232,18 +263,17 @@
           "chaine",
           [
             [
-              "cond",
-              "{{condition}}",
-              "=ball.x >= 1036"
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · right_wall"
             ],
             [
-              "→",
-              "{{lang:port_vrai}}"
+              "→"
             ],
             [
               "n",
               "{{modifier_variable}}",
-              "vx · =-abs(vx)"
+              "vx · -6"
             ]
           ]
         ],
@@ -251,30 +281,25 @@
           "chaine",
           [
             [
-              "cond",
-              "{{condition}}",
-              "=ball.y <= 0"
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · top_wall"
             ],
             [
-              "→",
-              "{{lang:port_vrai}}"
+              "→"
             ],
             [
               "n",
               "{{modifier_variable}}",
-              "vy · =abs(vy)"
+              "vy · 9"
             ]
           ]
-        ],
-        [
-          "tip",
-          "**为什么用 abs？** `abs(vx)` 总是正数。在左边缘，球被强制向右飞，即使它连续两帧碰到边缘，也不会被卡住。"
         ]
       ]
     ],
     [
       "h2",
-      "第 5 步：在挡板上反弹"
+      "第 6 步：在挡板上反弹"
     ],
     [
       "bloc",
@@ -283,9 +308,9 @@
           "ol",
           [
             "添加事件 **[[NoeudEventCollisionAB]]**：**对象 A** = **ball**，**对象 B** = **paddle**。",
-            "添加 **[[modifier_variable]]**：变量 **vy**，值 `=-abs(vy)`（球重新向上飞）。",
-            "再添加一个 **[[modifier_variable]]**：变量 **vx**，值 `=(ball.x + 22 - paddle.x - 104) / 13`。",
-            "按顺序连接这三个节点。"
+            "添加 **[[modifier_variable]]**：变量 **vy**，值 `-9`（球重新向上飞）。",
+            "再添加一个 **[[modifier_variable]]**：变量 **vx**。点击值旁边的 **🔗**，选择 **[[valeur_hasard]]**，然后设置 **从** = `-6`，**到** = `6`。",
+            "按顺序连接这些节点。"
           ]
         ],
         [
@@ -302,7 +327,7 @@
             [
               "n",
               "{{modifier_variable}}",
-              "vy · =-abs(vy)"
+              "vy · -9"
             ],
             [
               "→"
@@ -310,19 +335,19 @@
             [
               "n",
               "{{modifier_variable}}",
-              "vx · =(ball.x + 22 - paddle.x - 104) / 13"
+              "vx · ← 随机数（-6 到 6）"
             ]
           ]
         ],
         [
           "tip",
-          "**最后一个公式有什么用？** 它测量球落在挡板的哪个位置：落在中间时直直向上；落在左边时向左飞；落在右边时向右飞。这样玩家就可以**瞄准**。（22 = 球宽度的一半，104 = 挡板宽度的一半。）"
+          "每次在挡板上反弹，球都会朝**随机方向**飞出：游戏永远不会两次一样。"
         ]
       ]
     ],
     [
       "h2",
-      "第 6 步：打碎砖块"
+      "第 7 步：打碎砖块"
     ],
     [
       "bloc",
@@ -332,11 +357,10 @@
           [
             "添加事件 **[[NoeudEventCollisionTag]]**：目标 **ball**，{{lang:Tag}} **brick**。",
             "添加 **[[detruire_objet]]**，并选择 **{{lang:noeud_objet_implique_long}}** 作为目标：它就是球刚刚碰到的那块砖。",
-            "添加 **[[modifier_variable]]**：变量 **vy**，值 `=-vy`（球反弹）。",
-            "添加 **[[ajouter_variable]]**：变量 **score**，**{{lang:ajouter_variable.valeur}} = 10**。",
+            "添加 **[[condition]]** `=vy < 0`（« 球正在向上飞 »）。输出 **{{lang:port_vrai}}** → **[[modifier_variable]]**：变量 **vy**，值 `9`。输出 **{{lang:port_faux}}** → **[[modifier_variable]]**：变量 **vy**，值 `-9`。",
+            "从条件的 **[[lang:port_ensuite]]** 输出开始，添加 **[[ajouter_variable]]**：变量 **score**，**{{lang:ajouter_variable.valeur}} = 10**。",
             "添加 **[[ajouter_variable]]**：变量 **bricks**，**{{lang:ajouter_variable.valeur}} = -1**。",
-            "添加 **[[modifier_texte]]**：目标 **scoreText**，**{{lang:modifier_texte.valeur}}** = `=\"得分：\" + score`。",
-            "按顺序连接所有节点。"
+            "添加 **[[modifier_texte]]**：目标 **scoreText**，**{{lang:modifier_texte.valeur}}** = `=\"得分：\" + score`。"
           ]
         ],
         [
@@ -359,12 +383,61 @@
               "→"
             ],
             [
-              "n",
-              "{{modifier_variable}}",
-              "vy · =-vy"
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
             ],
             [
-              "→"
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_faux}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_ensuite}}"
             ],
             [
               "n",
@@ -391,20 +464,24 @@
         ],
         [
           "tip",
-          "球打碎砖块时，总是向上或向下反弹，即使它是从侧面碰到砖块的。这样做很简单，在打砖块游戏中效果也很好。"
+          "**为什么用 `=vy < 0`？** 如果 **vy** 小于 0，球正在向上飞：打碎砖块后，它向下飞。否则它正在向下飞，然后再向上飞。"
+        ],
+        [
+          "tip",
+          "**文字开头的 = 号**告诉 Yop2D 去**计算**这段文字，而不是原样写出来（参见教程[收集金币并计分](guide:pieces-score)）。"
         ]
       ]
     ],
     [
       "h2",
-      "第 7 步：获胜"
+      "第 8 步：获胜"
     ],
     [
       "bloc",
       [
         [
           "p",
-          "在第 6 步的 **[[modifier_texte]]** 之后，添加："
+          "在第 7 步的 **[[modifier_texte]]** 之后，添加："
         ],
         [
           "ol",
@@ -479,19 +556,19 @@
     ],
     [
       "h2",
-      "第 8 步：生命和 Game Over"
+      "第 9 步：生命和 Game Over"
     ],
     [
       "bloc",
       [
         [
           "p",
-          "球掉到挡板下方时，玩家失去一条生命。我们延续第 4 步的链条：在第三个 **[[condition]]**（上边缘）之后，再添加第四个，用它的 **[[lang:port_ensuite]]** 输出连接。"
+          "球碰到 **bottom_wall**（屏幕下方）时，玩家失去一条生命。"
         ],
         [
           "ol",
           [
-            "**[[condition]]** `=ball.y >= 1920`，输出 **{{lang:port_vrai}}**。",
+            "添加事件 **[[NoeudEventCollisionAB]]**：**对象 A** = **ball**，**对象 B** = **bottom_wall**。",
             "**[[ajouter_variable]]**：变量 **lives**，**{{lang:ajouter_variable.valeur}} = -1**。",
             "**[[modifier_texte]]**：目标 **livesText**，**{{lang:modifier_texte.valeur}}** = `=\"生命：\" + lives`。",
             "**[[condition]]** `=lives <= 0`.",
@@ -503,13 +580,12 @@
           "chaine",
           [
             [
-              "cond",
-              "{{condition}}",
-              "=ball.y >= 1920"
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · bottom_wall"
             ],
             [
-              "→",
-              "{{lang:port_vrai}}"
+              "→"
             ],
             [
               "n",
@@ -593,10 +669,6 @@
           ]
         ],
         [
-          "tip",
-          "**为什么等待之前要先让球停下？** 在 2 秒的等待期间，游戏仍在运行。如果球一直停在屏幕下方，它每一帧都会扣掉一条生命，生命计数会降到很低（-178！）。把它放回中间并让它静止，就不会再捣乱了。"
-        ],
-        [
           "chaine",
           [
             [
@@ -630,6 +702,10 @@
               "vx · 6"
             ]
           ]
+        ],
+        [
+          "tip",
+          "**为什么等待之前要先让球停下？** 在 2 秒的等待期间，游戏仍在运行。如果球一直停在屏幕下方，它每一帧都会扣掉一条生命，生命计数会降到很低。把它放回中间并让它静止，就不会再捣乱了。"
         ]
       ]
     ],
@@ -642,7 +718,7 @@
       [
         "**声音：**在 **[[detruire_objet]]** 之后添加 **[[jouer_son]]**（砖块碎裂时发出「啪」的一声），也可以加在挡板的事件里。",
         "**不同颜色：**不管颜色如何，给所有砖块相同的标签 **brick**：一套设置就够了。",
-        "**更快的速度：**每打碎一块砖就添加 **[[modifier_variable]]** `=vx * 1.02`，让游戏越来越难。",
+        "**更快的球：**把所有地方的数字 `6`、`-6`、`9` 和 `-9` 都改掉（例如改成 `8`、`-8`、`12` 和 `-12`）。",
         "**火花：**砖块碎裂时添加一个 **[[effet_particules]]**（参见教程[粒子与特效](guide:particules-effets)）。"
       ]
     ],
@@ -653,11 +729,11 @@
     [
       "ul",
       [
-        "**球不动：**检查 **vx** 和 **vy** 是否在开始时被修改，以及 **[[pousser]]** 是否使用了公式 `=vx` 和 `=vy`（开头要有 **=**）。",
-        "**球穿过挡板或砖块：**检查名称（**ball**、**paddle**）和标签 **brick**，每处写法要一致（不要大写）。如果球太快，把砖块做大一点，或者让球慢一点。",
-        "**球没有反弹就飞出屏幕：**各个 **[[condition]]** 节点必须通过 **[[lang:port_ensuite]]** 输出一个接一个连接，并且第一个必须从 **[[pousser]]** 出发。",
+        "**球不动：**检查 **vx** 和 **vy** 是否在开始时被修改，以及 **[[pousser]]** 是否连接到绿色的 **[[valeur_variable]]** 节点（点击 **增加 X**：那一行应该显示绿色的线）。",
+        "**球穿过墙或砖块：**检查名称（**ball**、**paddle**、**left_wall**……）和标签 **brick**，每处写法要一致（不要大写）。如果球太快，把砖块做大一点，或者让球慢一点。",
+        "**挡板向上或向下跑：**节点 **[[modifier_propriete]]** 必须连接到 **{{NoeudEventChaqueImage}}**，并且 **属性** = `y`。",
         "**赢得太早或永远赢不了：**变量 **bricks** 必须正好等于游戏中的砖块数量。",
-        "**挡板移动不正常：**公式中的 `doigt.x` 是手指，不是挡板；开头要保留 **=**，并且括号要闭合。"
+        "**想对照一下**，可以打开测试项目（它的节点按部分整理，带有框和便利贴，解释每一部分）。"
       ]
     ]
   ]

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>如何在 Yop2D 中制作打砖块游戏？| Yop2D 教程</title>
-<meta name="description" content="在 Yop2D 中无需代码制作打砖块游戏：用手指移动的挡板、会弹跳的球、要打碎的砖块，用节点实现得分和生命。">
+<meta name="description" content="在 Yop2D 中无需代码制作打砖块游戏：用手指移动的挡板、看不见的墙、会弹跳的球、要打碎的砖块，用节点实现得分和生命。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/casse-briques.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/casse-briques.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/casse-briques.html">
@@ -21,7 +21,7 @@
  "@context": "https://schema.org",
  "@type": "HowTo",
  "name": "如何制作打砖块游戏？",
- "description": "在 Yop2D 中无需代码制作打砖块游戏：用手指移动的挡板、会弹跳的球、要打碎的砖块，用节点实现得分和生命。",
+ "description": "在 Yop2D 中无需代码制作打砖块游戏：用手指移动的挡板、看不见的墙、会弹跳的球、要打碎的砖块，用节点实现得分和生命。",
  "inLanguage": "zh",
  "tool": [
   {
@@ -33,22 +33,22 @@
   {
    "@type": "HowToStep",
    "name": "放置挡板",
-   "text": "手指按住 → 移动对象 (paddle, X = 跟随手指)。"
+   "text": "修改属性 (paddle, y = 1700) → 保持在屏幕内，行为选择 “用手指拖动”。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "用看不见的墙围住屏幕",
+   "text": "四个区域：left_wall、right_wall、top_wall 和 bottom_wall。"
   },
   {
    "@type": "HowToStep",
    "name": "发射球",
-   "text": "启动时 → 修改变量 (vx, vy); 每帧 → 推动对象 (ball, =vx, =vy)."
+   "text": "启动时 → 修改变量 (vx, vy); 每帧 → 推动对象 (ball)."
   },
   {
    "@type": "HowToStep",
-   "name": "在边缘反弹",
-   "text": "条件 (=ball.x <= 0) → 真 → 修改变量 (vx, =abs(vx))."
-  },
-  {
-   "@type": "HowToStep",
-   "name": "在挡板上反弹",
-   "text": "碰撞 A/B (ball, paddle) → 修改变量 (vy, =-abs(vy))."
+   "name": "在墙上和挡板上反弹",
+   "text": "碰撞 A/B (ball, left_wall) → 修改变量 (vx, 6)."
   },
   {
    "@type": "HowToStep",
@@ -58,7 +58,7 @@
   {
    "@type": "HowToStep",
    "name": "生命和游戏结束",
-   "text": "条件 (=ball.y >= 1920) → 增加变量值 (lives, -1) → 条件 (=lives <= 0) → 重新开始场景."
+   "text": "碰撞 A/B (ball, bottom_wall) → 增加变量值 (lives, -1) → 重新开始场景."
   }
  ]
 }
@@ -72,31 +72,39 @@
 <p class="langues"><a href="../casse-briques.html" hreflang="fr">Français</a> · <a href="../en/casse-briques.html" hreflang="en">English</a> · <a href="../es/casse-briques.html" hreflang="es">Español</a> · <a href="../de/casse-briques.html" hreflang="de">Deutsch</a> · <a href="../it/casse-briques.html" hreflang="it">Italiano</a> · <a href="../pt/casse-briques.html" hreflang="pt">Português</a> · <a href="../ru/casse-briques.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/casse-briques.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>在打砖块游戏中，<strong>球</strong>会在边缘和你用手指移动的<strong>挡板</strong>上反弹，并打碎<strong>砖块</strong>。这里我们用两个小变量来控制球：<strong>vx</strong>（向右的速度）和 <strong>vy</strong>（向下的速度）。球反弹时，我们只需改变变量的正负号。</p>
+<p>在打砖块游戏中，<strong>球</strong>会在墙和你用手指移动的<strong>挡板</strong>上反弹，并打碎<strong>砖块</strong>。这里球靠两个变量移动：<strong>vx</strong>（向右的速度）和 <strong>vy</strong>（向下的速度）。球碰到墙时，我们只需给它另一个数字。</p>
 <div class="besoin">
 <b>你需要：</b>
 <ul><li>一个名为 <strong>paddle</strong> 的图像，放在屏幕下方（例如 208 x 48 px，大约在 y = 1700）；</li><li>一个名为 <strong>ball</strong> 的图像，放在屏幕中间（例如 44 x 44 px）；</li><li>砖块：屏幕上方的若干图像（例如 128 x 64 px，每行 8 个）；</li><li>两个文本对象：<strong>scoreText</strong>（文字 “得分：0”）和 <strong>livesText</strong>（文字 “生命：3”），放在屏幕上方。</li></ul>
 </div>
-<div class="tip">👉 本教程针对 <strong>1080 x 1920 竖屏</strong>游戏编写。图片来自免费素材包 <strong>Puzzle (brick breaker)</strong>（Kenney，可自由使用，CC0）。在 Yop2D 的<strong>资源库</strong>中打开<strong>可下载素材包</strong>标签页即可下载：里面有 <strong>paddleBlu</strong>（挡板，208 x 48）、<strong>ballBlue</strong>（球，44 x 44）和 <strong>element_blue_rectangle_glossy</strong>（砖块，128 x 64，有蓝、绿、红、黄、紫、灰色）。你也可以使用自己的图画：这时请按它们的尺寸调整公式中的数字。</div>
+<div class="tip">👉 本教程针对 <strong>1080 x 1920 竖屏</strong>游戏编写。图片来自免费素材包 <strong>Puzzle (brick breaker)</strong>（Kenney，可自由使用，CC0）。在 Yop2D 的<strong>资源库</strong>中打开<strong>可下载素材包</strong>标签页即可下载：里面有 <strong>paddleBlu</strong>（挡板）、<strong>ballBlue</strong>（球）和 <strong>element_blue_rectangle_glossy</strong>（砖块，有蓝、绿、红、黄、紫、灰色）。你也可以使用自己的图画。</div>
 <h2>第 1 步：标签和变量</h2>
 <div class="method">
 <ol><li>选中一块砖。在检查器的 <strong>标签 (Tag)</strong> 栏中输入 <strong>brick</strong>。每块砖都这样做。</li><li>在左侧面板中打开 <strong>变量</strong> 部分，创建五个变量，范围都选 <strong>局部</strong>，类型都选 <strong>整数</strong>：</li></ol>
-<ul><li><strong>score</strong>：初始值 <strong>0</strong>；</li><li><strong>lives</strong>：初始值 <strong>3</strong>；</li><li><strong>bricks</strong>：你的游戏中的<strong>砖块数量</strong>（例如 <strong>27</strong>）。它用来判断砖块何时全部打碎；</li><li><strong>vx</strong> 和 <strong>vy</strong>：初始值 <strong>0</strong>。这是球的速度，在游戏开始时设置。</li></ul>
+<ul><li><strong>score</strong>：初始值 <strong>0</strong>；</li><li><strong>lives</strong>：初始值 <strong>3</strong>；</li><li><strong>bricks</strong>：你的游戏中的<strong>砖块数量</strong>（例如 <strong>24</strong>）。它用来判断砖块何时全部打碎；</li><li><strong>vx</strong> 和 <strong>vy</strong>：初始值 <strong>0</strong>。这是球的速度，在游戏开始时设置。</li></ul>
 <div class="tip">👉 多一块或少一块砖？只需修改 <strong>bricks</strong> 的初始值。数字太大，永远赢不了；数字太小，会赢得太早。</div>
 </div>
-<h2>第 2 步：挡板跟随手指</h2>
+<h2>第 2 步：看不见的墙</h2>
 <div class="method">
-<ol><li>打开场景的<strong>蓝图</strong>。</li><li>添加事件 <strong>“手指按住”</strong>（只要屏幕上有手指，它就会不断重复）。</li><li>添加 <strong>“移动对象”</strong>：目标 <strong>paddle</strong>，<strong>X</strong> = <code>=clamp(doigt.x - 104, 0, 872)</code>，<strong>Y</strong> = <code>1700</code>。</li><li>连接这两个节点，然后运行游戏：挡板会跟着你的手指，并且不会离开屏幕。</li></ol>
+<p>球会在看不见的墙上反弹：在屏幕四周放四个<strong>区域</strong>。区域在游戏中是看不见的，但球可以碰到它。</p>
+<ol><li>添加一个名为 <strong>left_wall</strong> 的区域：X = <code>-300</code>，Y = <code>-400</code>，宽 <code>300</code>，高 <code>2800</code>。</li><li>添加一个名为 <strong>right_wall</strong> 的区域：X = <code>1080</code>，Y = <code>-400</code>，宽 <code>300</code>，高 <code>2800</code>。</li><li>添加一个名为 <strong>top_wall</strong> 的区域：X = <code>-300</code>，Y = <code>-300</code>，宽 <code>1680</code>，高 <code>300</code>。</li><li>添加一个名为 <strong>bottom_wall</strong> 的区域：X = <code>-300</code>，Y = <code>1920</code>，宽 <code>1680</code>，高 <code>300</code>。</li></ol>
+<div class="tip">👉 墙故意做得很厚：快速的球穿不过去。前三面墙把球弹回去；<strong>bottom_wall</strong> 用来失去一条生命。</div>
+</div>
+<h2>第 3 步：挡板跟随手指</h2>
+<div class="method">
+<ol><li>选中 <strong>paddle</strong>，点击 <strong>⚙ Comportement de l'objet</strong>，选择 <strong>用手指拖动</strong>：玩家可以抓住它并移动。</li><li>打开场景的<strong>蓝图</strong>，添加事件 <strong>“每帧”</strong>。</li><li>添加 <strong>“修改属性”</strong>：目标 <strong>paddle</strong>，<strong>属性</strong> = <code>y</code>，<strong>值</strong> = <code>1700</code>。</li><li>添加 <strong>“保持在屏幕内”</strong>：目标 <strong>paddle</strong>，<strong>边距</strong> = <code>0</code>。</li><li>按顺序连接这三个节点。</li></ol>
 <div class="chaine">
-<div class="noeud evenement"><b>手指按住</b></div>
+<div class="noeud evenement"><b>每帧</b></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>移动对象</b><span>paddle · =clamp(doigt.x - 104, 0, 872) · 1700</span></div>
+<div class="noeud"><b>修改属性</b><span>paddle · y · 1700</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>保持在屏幕内</b><span>paddle · 0</span></div>
 </div>
-<div class="tip">👉 <strong>如何读这个公式？</strong> <code>doigt.x</code> 是你手指的位置（“doigt” 在法语中是手指的意思）。我们减去 104（挡板宽度的一半），让挡板位于手指正下方。<code>clamp(…, 0, 872)</code> 让它保持在屏幕内：872 = 1080 − 208（挡板的宽度）。</div>
+<div class="tip">👉 <strong>为什么要这两个节点？</strong> “用手指拖动” 让挡板可以向任意方向移动。我们在每一帧把它放回同一高度，并防止它离开屏幕：这样它只会左右移动。</div>
 </div>
-<h2>第 3 步：球出发</h2>
+<h2>第 4 步：球出发</h2>
 <div class="method">
-<ol><li>添加事件 <strong>“启动时”</strong>，然后依次添加两个 <strong>“修改变量”</strong> 节点：变量 <strong>vx</strong> = <code>6</code>，再是变量 <strong>vy</strong> = <code>-9</code>。</li><li>添加事件 <strong>“每帧”</strong>，然后添加 <strong>“推动对象”</strong>：目标 <strong>ball</strong>，<strong>增加 X</strong> = <code>=vx</code>，<strong>增加 Y</strong> = <code>=vy</code>。</li><li>把每个事件连到它的节点，然后运行游戏：球向右上方飞去，然后飞出屏幕。</li></ol>
+<ol><li>添加事件 <strong>“启动时”</strong>，然后依次添加两个 <strong>“修改变量”</strong> 节点：变量 <strong>vx</strong>，值 <code>6</code>，再是变量 <strong>vy</strong>，值 <code>-9</code>。</li><li>添加事件 <strong>“每帧”</strong>，然后添加 <strong>“推动对象”</strong>：目标 <strong>ball</strong>。</li><li>在 <strong>“推动对象”</strong> 的设置窗口中，点击 <strong>增加 X</strong> 旁边的 <strong>🔗</strong> 按钮，选择 <strong>“变量的值”</strong>，然后在出现的绿色节点中选择变量 <strong>vx</strong>。</li><li>对 <strong>增加 Y</strong> 做同样的事，选择变量 <strong>vy</strong>。</li><li>把每个事件连到它的节点，然后运行游戏：球向右上方飞去，然后飞出屏幕。</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>启动时</b></div>
 <div class="fleche">→</div>
@@ -107,66 +115,78 @@
 <div class="chaine">
 <div class="noeud evenement"><b>每帧</b></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>推动对象</b><span>ball · =vx · =vy</span></div>
+<div class="noeud"><b>推动对象</b><span>ball · X ← vx · Y ← vy</span></div>
 </div>
-<div class="tip">👉 <strong>负数 = 向上。</strong> 在 Yop2D 中，Y 朝屏幕下方增大：<strong>vy = -9</strong> 会让球向上飞。想要更快的球，可以用 8 和 -12。</div>
+<div class="tip">👉 <strong>绿色节点</strong>可以给一个设置赋值，不用输入任何东西。这里 <strong>“变量的值”</strong> 对 <strong>“推动对象”</strong> 说：“每一帧向右移动 <strong>vx</strong>，向下移动 <strong>vy</strong>”。</div>
+<div class="tip">👉 <strong>负数 = 向上。</strong> 在 Yop2D 中，Y 朝屏幕下方增大：<strong>vy = -9</strong> 会让球向上飞。</div>
 </div>
-<h2>第 4 步：在边缘反弹</h2>
+<h2>第 5 步：在墙上反弹</h2>
 <div class="method">
-<p>紧接着 <strong>“推动对象”</strong>，我们在每一帧检查球是否碰到边缘。我们把三个 <strong>“条件”</strong> 节点串起来，每次都沿着 <strong>“然后”</strong> 输出连接（它在任何情况下都会执行）。</p>
-<ol><li>左边缘：<strong>“条件”</strong> <code>=ball.x &lt;= 0</code>。输出 <strong>真</strong> → <strong>“修改变量”</strong>：变量 <strong>vx</strong>，值 <code>=abs(vx)</code>（始终向右）。</li><li>右边缘：<strong>“条件”</strong> <code>=ball.x &gt;= 1036</code>。输出 <strong>真</strong> → <strong>“修改变量”</strong>：变量 <strong>vx</strong>，值 <code>=-abs(vx)</code>（始终向左）。1036 = 1080 − 44（球的宽度）。</li><li>上边缘：<strong>“条件”</strong> <code>=ball.y &lt;= 0</code>。输出 <strong>真</strong> → <strong>“修改变量”</strong>：变量 <strong>vy</strong>，值 <code>=abs(vy)</code>（始终向下）。</li><li>用每个 <strong>“条件”</strong> 的 <strong>“然后”</strong> 输出连接到下一个。第一个连接到 <strong>“推动对象”</strong> 的输出。</li></ol>
+<p>每面墙都会给球一个新的数字。添加三个 <strong>“碰撞 A/B”</strong> 事件（<strong>对象 A</strong> = <strong>ball</strong>）：</p>
+<ol><li><strong>对象 B</strong> = <strong>left_wall</strong> → <strong>“修改变量”</strong>：变量 <strong>vx</strong>，值 <code>6</code>（球回到向右飞）。</li><li><strong>对象 B</strong> = <strong>right_wall</strong> → <strong>“修改变量”</strong>：变量 <strong>vx</strong>，值 <code>-6</code>（球回到向左飞）。</li><li><strong>对象 B</strong> = <strong>top_wall</strong> → <strong>“修改变量”</strong>：变量 <strong>vy</strong>，值 <code>9</code>（球回到向下飞）。</li></ol>
 <div class="chaine">
-<div class="noeud"><b>推动对象</b><span>ball</span></div>
+<div class="noeud evenement"><b>碰撞 A/B</b><span>ball · left_wall</span></div>
 <div class="fleche">→</div>
-<div class="noeud condition"><b>条件</b><span>=ball.x &lt;= 0</span></div>
-<div class="fleche"><em>真</em> →</div>
-<div class="noeud"><b>修改变量</b><span>vx · =abs(vx)</span></div>
+<div class="noeud"><b>修改变量</b><span>vx · 6</span></div>
 </div>
 <div class="chaine">
-<div class="noeud condition"><b>条件</b><span>=ball.x &gt;= 1036</span></div>
-<div class="fleche"><em>真</em> →</div>
-<div class="noeud"><b>修改变量</b><span>vx · =-abs(vx)</span></div>
+<div class="noeud evenement"><b>碰撞 A/B</b><span>ball · right_wall</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vx · -6</span></div>
 </div>
 <div class="chaine">
-<div class="noeud condition"><b>条件</b><span>=ball.y &lt;= 0</span></div>
-<div class="fleche"><em>真</em> →</div>
-<div class="noeud"><b>修改变量</b><span>vy · =abs(vy)</span></div>
+<div class="noeud evenement"><b>碰撞 A/B</b><span>ball · top_wall</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vy · 9</span></div>
 </div>
-<div class="tip">👉 <strong>为什么用 abs？</strong> <code>abs(vx)</code> 总是正数。在左边缘，球被强制向右飞，即使它连续两帧碰到边缘，也不会被卡住。</div>
 </div>
-<h2>第 5 步：在挡板上反弹</h2>
+<h2>第 6 步：在挡板上反弹</h2>
 <div class="method">
-<ol><li>添加事件 <strong>“碰撞 A/B”</strong>：<strong>对象 A</strong> = <strong>ball</strong>，<strong>对象 B</strong> = <strong>paddle</strong>。</li><li>添加 <strong>“修改变量”</strong>：变量 <strong>vy</strong>，值 <code>=-abs(vy)</code>（球重新向上飞）。</li><li>再添加一个 <strong>“修改变量”</strong>：变量 <strong>vx</strong>，值 <code>=(ball.x + 22 - paddle.x - 104) / 13</code>。</li><li>按顺序连接这三个节点。</li></ol>
+<ol><li>添加事件 <strong>“碰撞 A/B”</strong>：<strong>对象 A</strong> = <strong>ball</strong>，<strong>对象 B</strong> = <strong>paddle</strong>。</li><li>添加 <strong>“修改变量”</strong>：变量 <strong>vy</strong>，值 <code>-9</code>（球重新向上飞）。</li><li>再添加一个 <strong>“修改变量”</strong>：变量 <strong>vx</strong>。点击值旁边的 <strong>🔗</strong>，选择 <strong>“随机数”</strong>，然后设置 <strong>从</strong> = <code>-6</code>，<strong>到</strong> = <code>6</code>。</li><li>按顺序连接这些节点。</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>碰撞 A/B</b><span>ball · paddle</span></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>修改变量</b><span>vy · =-abs(vy)</span></div>
+<div class="noeud"><b>修改变量</b><span>vy · -9</span></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>修改变量</b><span>vx · =(ball.x + 22 - paddle.x - 104) / 13</span></div>
+<div class="noeud"><b>修改变量</b><span>vx · ← 随机数（-6 到 6）</span></div>
 </div>
-<div class="tip">👉 <strong>最后一个公式有什么用？</strong> 它测量球落在挡板的哪个位置：落在中间时直直向上；落在左边时向左飞；落在右边时向右飞。这样玩家就可以<strong>瞄准</strong>。（22 = 球宽度的一半，104 = 挡板宽度的一半。）</div>
+<div class="tip">👉 每次在挡板上反弹，球都会朝<strong>随机方向</strong>飞出：游戏永远不会两次一样。</div>
 </div>
-<h2>第 6 步：打碎砖块</h2>
+<h2>第 7 步：打碎砖块</h2>
 <div class="method">
-<ol><li>添加事件 <strong>“如果对象碰到标签”</strong>：目标 <strong>ball</strong>，标签 <strong>brick</strong>。</li><li>添加 <strong>“销毁对象”</strong>，并选择 <strong>事件中涉及的对象</strong> 作为目标：它就是球刚刚碰到的那块砖。</li><li>添加 <strong>“修改变量”</strong>：变量 <strong>vy</strong>，值 <code>=-vy</code>（球反弹）。</li><li>添加 <strong>“增加变量值”</strong>：变量 <strong>score</strong>，<strong>要增加的值 = 10</strong>。</li><li>添加 <strong>“增加变量值”</strong>：变量 <strong>bricks</strong>，<strong>要增加的值 = -1</strong>。</li><li>添加 <strong>“修改文本”</strong>：目标 <strong>scoreText</strong>，<strong>新文本</strong> = <code>="得分：" + score</code>。</li><li>按顺序连接所有节点。</li></ol>
+<ol><li>添加事件 <strong>“如果对象碰到标签”</strong>：目标 <strong>ball</strong>，标签 <strong>brick</strong>。</li><li>添加 <strong>“销毁对象”</strong>，并选择 <strong>事件中涉及的对象</strong> 作为目标：它就是球刚刚碰到的那块砖。</li><li>添加 <strong>“条件”</strong> <code>=vy &lt; 0</code>（“球正在向上飞”）。输出 <strong>真</strong> → <strong>“修改变量”</strong>：变量 <strong>vy</strong>，值 <code>9</code>。输出 <strong>假</strong> → <strong>“修改变量”</strong>：变量 <strong>vy</strong>，值 <code>-9</code>。</li><li>从条件的 <strong>“然后”</strong> 输出开始，添加 <strong>“增加变量值”</strong>：变量 <strong>score</strong>，<strong>要增加的值 = 10</strong>。</li><li>添加 <strong>“增加变量值”</strong>：变量 <strong>bricks</strong>，<strong>要增加的值 = -1</strong>。</li><li>添加 <strong>“修改文本”</strong>：目标 <strong>scoreText</strong>，<strong>新文本</strong> = <code>="得分：" + score</code>。</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>如果对象碰到标签</b><span>ball · brick</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>销毁对象</b><span>相关对象</span></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>修改变量</b><span>vy · =-vy</span></div>
-<div class="fleche">→</div>
+<div class="noeud condition"><b>条件</b><span>=vy &lt; 0</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>条件</b><span>=vy &lt; 0</span></div>
+<div class="fleche"><em>真</em> →</div>
+<div class="noeud"><b>修改变量</b><span>vy · 9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>条件</b><span>=vy &lt; 0</span></div>
+<div class="fleche"><em>假</em> →</div>
+<div class="noeud"><b>修改变量</b><span>vy · -9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>条件</b><span>=vy &lt; 0</span></div>
+<div class="fleche"><em>然后</em> →</div>
 <div class="noeud"><b>增加变量值</b><span>score · + 10</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>增加变量值</b><span>bricks · - 1</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>修改文本</b><span>scoreText</span></div>
 </div>
-<div class="tip">👉 球打碎砖块时，总是向上或向下反弹，即使它是从侧面碰到砖块的。这样做很简单，在打砖块游戏中效果也很好。</div>
+<div class="tip">👉 <strong>为什么用 <code>=vy &lt; 0</code>？</strong> 如果 <strong>vy</strong> 小于 0，球正在向上飞：打碎砖块后，它向下飞。否则它正在向下飞，然后再向上飞。</div>
+<div class="tip">👉 <strong>文字开头的 = 号</strong>告诉 Yop2D 去<strong>计算</strong>这段文字，而不是原样写出来（参见教程<a href="../zh/pieces-score.html">收集金币并计分</a>）。</div>
 </div>
-<h2>第 7 步：获胜</h2>
+<h2>第 8 步：获胜</h2>
 <div class="method">
-<p>在第 6 步的 <strong>“修改文本”</strong> 之后，添加：</p>
+<p>在第 7 步的 <strong>“修改文本”</strong> 之后，添加：</p>
 <ol><li><strong>“条件”</strong> <code>=bricks &lt;= 0</code>.</li><li>在 <strong>真</strong> 输出上：<strong>“修改变量”</strong> <strong>vx</strong> = <code>0</code>，<strong>“修改变量”</strong> <strong>vy</strong> = <code>0</code>（球停下），然后 <strong>“屏幕底部小提示”</strong> 显示消息 <strong>你赢了！</strong>，再 <strong>“等待”</strong> 2 秒，最后 <strong>“重新开始场景”</strong>。</li></ol>
 <div class="chaine">
 <div class="noeud"><b>修改文本</b><span>scoreText</span></div>
@@ -185,13 +205,13 @@
 </div>
 <div class="tip">👉 “重新开始场景” 会让对象回到原位，并让 <strong>局部</strong> 变量恢复初始值：游戏重新开始，有 3 条生命、0 分和全部砖块。</div>
 </div>
-<h2>第 8 步：生命和 Game Over</h2>
+<h2>第 9 步：生命和 Game Over</h2>
 <div class="method">
-<p>球掉到挡板下方时，玩家失去一条生命。我们延续第 4 步的链条：在第三个 <strong>“条件”</strong>（上边缘）之后，再添加第四个，用它的 <strong>“然后”</strong> 输出连接。</p>
-<ol><li><strong>“条件”</strong> <code>=ball.y &gt;= 1920</code>，输出 <strong>真</strong>。</li><li><strong>“增加变量值”</strong>：变量 <strong>lives</strong>，<strong>要增加的值 = -1</strong>。</li><li><strong>“修改文本”</strong>：目标 <strong>livesText</strong>，<strong>新文本</strong> = <code>="生命：" + lives</code>。</li><li><strong>“条件”</strong> <code>=lives &lt;= 0</code>.</li><li>输出 <strong>真</strong>（没有生命了）：<strong>“移动对象”</strong> <strong>ball</strong> 到 X = <code>518</code>，Y = <code>1000</code>，<strong>“修改变量”</strong> <strong>vx</strong> = <code>0</code>，<strong>“修改变量”</strong> <strong>vy</strong> = <code>0</code>（球回到中间并停下），然后 <strong>“屏幕底部小提示”</strong> “游戏结束！”，<strong>“等待”</strong> 2 秒，<strong>“重新开始场景”</strong>。</li><li>输出 <strong>假</strong>（还有生命）：<strong>“移动对象”</strong> <strong>ball</strong> 到 X = <code>518</code>，Y = <code>1000</code>，然后 <strong>“修改变量”</strong> <strong>vy</strong> = <code>-9</code>，再 <strong>“修改变量”</strong> <strong>vx</strong> = <code>6</code>。</li></ol>
+<p>球碰到 <strong>bottom_wall</strong>（屏幕下方）时，玩家失去一条生命。</p>
+<ol><li>添加事件 <strong>“碰撞 A/B”</strong>：<strong>对象 A</strong> = <strong>ball</strong>，<strong>对象 B</strong> = <strong>bottom_wall</strong>。</li><li><strong>“增加变量值”</strong>：变量 <strong>lives</strong>，<strong>要增加的值 = -1</strong>。</li><li><strong>“修改文本”</strong>：目标 <strong>livesText</strong>，<strong>新文本</strong> = <code>="生命：" + lives</code>。</li><li><strong>“条件”</strong> <code>=lives &lt;= 0</code>.</li><li>输出 <strong>真</strong>（没有生命了）：<strong>“移动对象”</strong> <strong>ball</strong> 到 X = <code>518</code>，Y = <code>1000</code>，<strong>“修改变量”</strong> <strong>vx</strong> = <code>0</code>，<strong>“修改变量”</strong> <strong>vy</strong> = <code>0</code>（球回到中间并停下），然后 <strong>“屏幕底部小提示”</strong> “游戏结束！”，<strong>“等待”</strong> 2 秒，<strong>“重新开始场景”</strong>。</li><li>输出 <strong>假</strong>（还有生命）：<strong>“移动对象”</strong> <strong>ball</strong> 到 X = <code>518</code>，Y = <code>1000</code>，然后 <strong>“修改变量”</strong> <strong>vy</strong> = <code>-9</code>，再 <strong>“修改变量”</strong> <strong>vx</strong> = <code>6</code>。</li></ol>
 <div class="chaine">
-<div class="noeud condition"><b>条件</b><span>=ball.y &gt;= 1920</span></div>
-<div class="fleche"><em>真</em> →</div>
+<div class="noeud evenement"><b>碰撞 A/B</b><span>ball · bottom_wall</span></div>
+<div class="fleche">→</div>
 <div class="noeud"><b>增加变量值</b><span>lives · - 1</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>修改文本</b><span>livesText</span></div>
@@ -213,7 +233,6 @@
 <div class="fleche">→</div>
 <div class="noeud"><b>重新开始场景</b></div>
 </div>
-<div class="tip">👉 <strong>为什么等待之前要先让球停下？</strong> 在 2 秒的等待期间，游戏仍在运行。如果球一直停在屏幕下方，它每一帧都会扣掉一条生命，生命计数会降到很低（-178！）。把它放回中间并让它静止，就不会再捣乱了。</div>
 <div class="chaine">
 <div class="noeud condition"><b>条件</b><span>=lives &lt;= 0</span></div>
 <div class="fleche"><em>假</em> →</div>
@@ -223,11 +242,12 @@
 <div class="fleche">→</div>
 <div class="noeud"><b>修改变量</b><span>vx · 6</span></div>
 </div>
+<div class="tip">👉 <strong>为什么等待之前要先让球停下？</strong> 在 2 秒的等待期间，游戏仍在运行。如果球一直停在屏幕下方，它每一帧都会扣掉一条生命，生命计数会降到很低。把它放回中间并让它静止，就不会再捣乱了。</div>
 </div>
 <h2>进一步改进</h2>
-<ul><li><strong>声音：</strong>在 <strong>“销毁对象”</strong> 之后添加 <strong>“播放音效”</strong>（砖块碎裂时发出「啪」的一声），也可以加在挡板的事件里。</li><li><strong>不同颜色：</strong>不管颜色如何，给所有砖块相同的标签 <strong>brick</strong>：一套设置就够了。</li><li><strong>更快的速度：</strong>每打碎一块砖就添加 <strong>“修改变量”</strong> <code>=vx * 1.02</code>，让游戏越来越难。</li><li><strong>火花：</strong>砖块碎裂时添加一个 <strong>“粒子效果”</strong>（参见教程<a href="../zh/particules-effets.html">粒子与特效</a>）。</li></ul>
+<ul><li><strong>声音：</strong>在 <strong>“销毁对象”</strong> 之后添加 <strong>“播放音效”</strong>（砖块碎裂时发出「啪」的一声），也可以加在挡板的事件里。</li><li><strong>不同颜色：</strong>不管颜色如何，给所有砖块相同的标签 <strong>brick</strong>：一套设置就够了。</li><li><strong>更快的球：</strong>把所有地方的数字 <code>6</code>、<code>-6</code>、<code>9</code> 和 <code>-9</code> 都改掉（例如改成 <code>8</code>、<code>-8</code>、<code>12</code> 和 <code>-12</code>）。</li><li><strong>火花：</strong>砖块碎裂时添加一个 <strong>“粒子效果”</strong>（参见教程<a href="../zh/particules-effets.html">粒子与特效</a>）。</li></ul>
 <h2>如果不起作用</h2>
-<ul><li><strong>球不动：</strong>检查 <strong>vx</strong> 和 <strong>vy</strong> 是否在开始时被修改，以及 <strong>“推动对象”</strong> 是否使用了公式 <code>=vx</code> 和 <code>=vy</code>（开头要有 <strong>=</strong>）。</li><li><strong>球穿过挡板或砖块：</strong>检查名称（<strong>ball</strong>、<strong>paddle</strong>）和标签 <strong>brick</strong>，每处写法要一致（不要大写）。如果球太快，把砖块做大一点，或者让球慢一点。</li><li><strong>球没有反弹就飞出屏幕：</strong>各个 <strong>“条件”</strong> 节点必须通过 <strong>“然后”</strong> 输出一个接一个连接，并且第一个必须从 <strong>“推动对象”</strong> 出发。</li><li><strong>赢得太早或永远赢不了：</strong>变量 <strong>bricks</strong> 必须正好等于游戏中的砖块数量。</li><li><strong>挡板移动不正常：</strong>公式中的 <code>doigt.x</code> 是手指，不是挡板；开头要保留 <strong>=</strong>，并且括号要闭合。</li></ul>
+<ul><li><strong>球不动：</strong>检查 <strong>vx</strong> 和 <strong>vy</strong> 是否在开始时被修改，以及 <strong>“推动对象”</strong> 是否连接到绿色的 <strong>“变量的值”</strong> 节点（点击 <strong>增加 X</strong>：那一行应该显示绿色的线）。</li><li><strong>球穿过墙或砖块：</strong>检查名称（<strong>ball</strong>、<strong>paddle</strong>、<strong>left_wall</strong>……）和标签 <strong>brick</strong>，每处写法要一致（不要大写）。如果球太快，把砖块做大一点，或者让球慢一点。</li><li><strong>挡板向上或向下跑：</strong>节点 <strong>“修改属性”</strong> 必须连接到 <strong>每帧</strong>，并且 <strong>属性</strong> = <code>y</code>。</li><li><strong>赢得太早或永远赢不了：</strong>变量 <strong>bricks</strong> 必须正好等于游戏中的砖块数量。</li><li><strong>想对照一下</strong>，可以打开测试项目（它的节点按部分整理，带有框和便利贴，解释每一部分）。</li></ul>
 
 <div class="nav">
 <a href="../zh/vie-game-over.html">← 掉血与 Game Over</a>

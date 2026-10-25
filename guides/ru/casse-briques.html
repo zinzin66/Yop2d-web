@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Как сделать игру-арканоид в Yop2D? | Руководство Yop2D</title>
-<meta name="description" content="Сделай игру-арканоид в Yop2D без кода: платформа, которую ты двигаешь пальцем, отскакивающий мяч, блоки, которые нужно разбить, очки и жизни с помощью узлов.">
+<meta name="description" content="Сделай игру-арканоид в Yop2D без кода: платформа, которую ты двигаешь пальцем, невидимые стены, отскакивающий мяч, блоки, которые нужно разбить, очки и жизни с помощью узлов.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/casse-briques.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/casse-briques.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/casse-briques.html">
@@ -21,7 +21,7 @@
  "@context": "https://schema.org",
  "@type": "HowTo",
  "name": "Как сделать игру-арканоид?",
- "description": "Сделай игру-арканоид в Yop2D без кода: платформа, которую ты двигаешь пальцем, отскакивающий мяч, блоки, которые нужно разбить, очки и жизни с помощью узлов.",
+ "description": "Сделай игру-арканоид в Yop2D без кода: платформа, которую ты двигаешь пальцем, невидимые стены, отскакивающий мяч, блоки, которые нужно разбить, очки и жизни с помощью узлов.",
  "inLanguage": "ru",
  "tool": [
   {
@@ -33,22 +33,22 @@
   {
    "@type": "HowToStep",
    "name": "Поставить платформу",
-   "text": "Палец нажат → Переместить (paddle, X = следует за пальцем)."
+   "text": "Изменить свойство (paddle, y = 1700) → Удерживать в экране, с поведением «Перетаскивается пальцем»."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Окружить экран невидимыми стенами",
+   "text": "Четыре Зона: left_wall, right_wall, top_wall и bottom_wall."
   },
   {
    "@type": "HowToStep",
    "name": "Запустить мяч",
-   "text": "При старте → Изменить переменную (vx, vy); Каждый кадр → Толкнуть объект (ball, =vx, =vy)."
+   "text": "При старте → Изменить переменную (vx, vy); Каждый кадр → Толкнуть объект (ball)."
   },
   {
    "@type": "HowToStep",
-   "name": "Отскок от краёв",
-   "text": "Условие (=ball.x <= 0) → Истина → Изменить переменную (vx, =abs(vx))."
-  },
-  {
-   "@type": "HowToStep",
-   "name": "Отскок от платформы",
-   "text": "Столкновение A/B (ball, paddle) → Изменить переменную (vy, =-abs(vy))."
+   "name": "Отскок от стен и от платформы",
+   "text": "Столкновение A/B (ball, left_wall) → Изменить переменную (vx, 6)."
   },
   {
    "@type": "HowToStep",
@@ -58,7 +58,7 @@
   {
    "@type": "HowToStep",
    "name": "Жизни и конец игры",
-   "text": "Условие (=ball.y >= 1920) → Добавить к переменной (lives, -1) → Условие (=lives <= 0) → Перезапустить сцену."
+   "text": "Столкновение A/B (ball, bottom_wall) → Добавить к переменной (lives, -1) → Перезапустить сцену."
   }
  ]
 }
@@ -72,31 +72,39 @@
 <p class="langues"><a href="../casse-briques.html" hreflang="fr">Français</a> · <a href="../en/casse-briques.html" hreflang="en">English</a> · <a href="../es/casse-briques.html" hreflang="es">Español</a> · <a href="../de/casse-briques.html" hreflang="de">Deutsch</a> · <a href="../it/casse-briques.html" hreflang="it">Italiano</a> · <a href="../pt/casse-briques.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/casse-briques.html" hreflang="zh">中文</a> · <a href="../ja/casse-briques.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>В арканоиде <strong>мяч</strong> отскакивает от краёв и от <strong>платформы</strong>, которую ты двигаешь пальцем, и разбивает <strong>блоки</strong>. Здесь мы управляем мячом с помощью двух небольших переменных: <strong>vx</strong> (его скорость вправо) и <strong>vy</strong> (его скорость вниз). Когда мяч отскакивает, мы просто меняем знак переменной.</p>
+<p>В арканоиде <strong>мяч</strong> отскакивает от стен и от <strong>платформы</strong>, которую ты двигаешь пальцем, и разбивает <strong>блоки</strong>. Здесь мяч движется благодаря двум переменным: <strong>vx</strong> (его скорость вправо) и <strong>vy</strong> (его скорость вниз). Когда он касается стены, мы просто даём ему другое число.</p>
 <div class="besoin">
 <b>Тебе понадобится:</b>
 <ul><li>Изображение с именем <strong>paddle</strong>, внизу экрана (например, 208 x 48 px, около y = 1700);</li><li>Изображение с именем <strong>ball</strong>, в середине экрана (например, 44 x 44 px);</li><li>блоки: Изображение вверху экрана (например, 128 x 64 px, по 8 в ряд);</li><li>два объекта Текст: <strong>scoreText</strong> (текст «Очки: 0») и <strong>livesText</strong> (текст «Жизни: 3»), вверху экрана.</li></ul>
 </div>
-<div class="tip">👉 Это руководство написано для игры в <strong>вертикальном формате 1080 x 1920</strong>. Картинки взяты из бесплатного набора <strong>Puzzle (brick breaker)</strong> (Kenney, свободное использование, CC0). Скачай его в <strong>Библиотеке</strong> Yop2D, на вкладке <strong>Наборы для загрузки</strong>: там есть <strong>paddleBlu</strong> (платформа, 208 x 48), <strong>ballBlue</strong> (мяч, 44 x 44) и <strong>element_blue_rectangle_glossy</strong> (блок, 128 x 64, синий, зелёный, красный, жёлтый, фиолетовый и серый). Можно использовать и свои рисунки: тогда подгони числа в формулах под их размеры.</div>
+<div class="tip">👉 Это руководство написано для игры в <strong>вертикальном формате 1080 x 1920</strong>. Картинки взяты из бесплатного набора <strong>Puzzle (brick breaker)</strong> (Kenney, свободное использование, CC0). Скачай его в <strong>Библиотеке</strong> Yop2D, на вкладке <strong>Наборы для загрузки</strong>: там есть <strong>paddleBlu</strong> (платформа), <strong>ballBlue</strong> (мяч) и <strong>element_blue_rectangle_glossy</strong> (блок, синий, зелёный, красный, жёлтый, фиолетовый и серый). Можно использовать и свои рисунки.</div>
 <h2>Шаг 1: теги и переменные</h2>
 <div class="method">
 <ol><li>Выбери блок. В инспекторе, в поле <strong>Тег (Метка)</strong>, напиши <strong>brick</strong>. Сделай то же самое для каждого блока.</li><li>На левой панели открой раздел <strong>Переменные</strong> и создай пять переменных, все с областью <strong>Локальная</strong> и типом <strong>Целое</strong>:</li></ol>
-<ul><li><strong>score</strong>: начальное значение <strong>0</strong>;</li><li><strong>lives</strong>: начальное значение <strong>3</strong>;</li><li><strong>bricks</strong>: <strong>количество блоков</strong> в твоей игре (например, <strong>27</strong>). Оно нужно, чтобы понять, когда всё разбито;</li><li><strong>vx</strong> и <strong>vy</strong>: начальное значение <strong>0</strong>. Это скорость мяча, она задаётся при запуске.</li></ul>
+<ul><li><strong>score</strong>: начальное значение <strong>0</strong>;</li><li><strong>lives</strong>: начальное значение <strong>3</strong>;</li><li><strong>bricks</strong>: <strong>количество блоков</strong> в твоей игре (например, <strong>24</strong>). Оно нужно, чтобы понять, когда всё разбито;</li><li><strong>vx</strong> и <strong>vy</strong>: начальное значение <strong>0</strong>. Это скорость мяча, она задаётся при запуске.</li></ul>
 <div class="tip">👉 Блоком больше или меньше? Просто измени начальное значение <strong>bricks</strong>. Если число слишком большое, ты никогда не выиграешь; если слишком маленькое, выиграешь слишком рано.</div>
 </div>
-<h2>Шаг 2: платформа следует за пальцем</h2>
+<h2>Шаг 2: невидимые стены</h2>
 <div class="method">
-<ol><li>Открой <strong>Blueprint</strong> сцены.</li><li>Добавь событие <strong>«Палец нажат»</strong> (оно повторяется, пока палец лежит на экране).</li><li>Добавь <strong>«Переместить»</strong>: цель <strong>paddle</strong>, <strong>X</strong> = <code>=clamp(doigt.x - 104, 0, 872)</code>, <strong>Y</strong> = <code>1700</code>.</li><li>Соедини два узла и запусти игру: платформа следует за пальцем и никогда не выходит за экран.</li></ol>
+<p>Мяч отскакивает от стен, которых не видно: четыре <strong>Зона</strong>, расставленные вокруг экрана. Зона невидима во время игры, но мяч может её касаться.</p>
+<ol><li>Добавь Зона с именем <strong>left_wall</strong>: X = <code>-300</code>, Y = <code>-400</code>, ширина <code>300</code>, высота <code>2800</code>.</li><li>Добавь Зона с именем <strong>right_wall</strong>: X = <code>1080</code>, Y = <code>-400</code>, ширина <code>300</code>, высота <code>2800</code>.</li><li>Добавь Зона с именем <strong>top_wall</strong>: X = <code>-300</code>, Y = <code>-300</code>, ширина <code>1680</code>, высота <code>300</code>.</li><li>Добавь Зона с именем <strong>bottom_wall</strong>: X = <code>-300</code>, Y = <code>1920</code>, ширина <code>1680</code>, высота <code>300</code>.</li></ol>
+<div class="tip">👉 Стены сделаны толстыми специально: быстрый мяч не сможет пролететь сквозь них. Первые три отправляют мяч обратно; <strong>bottom_wall</strong> нужна, чтобы терять жизнь.</div>
+</div>
+<h2>Шаг 3: платформа следует за пальцем</h2>
+<div class="method">
+<ol><li>Выбери <strong>paddle</strong>, нажми <strong>⚙ Comportement de l'objet</strong> и выбери <strong>Перетаскивается пальцем</strong>: игрок берёт платформу и двигает её.</li><li>Открой <strong>Blueprint</strong> сцены и добавь событие <strong>«Каждый кадр»</strong>.</li><li>Добавь <strong>«Изменить свойство»</strong>: цель <strong>paddle</strong>, <strong>Свойство</strong> = <code>y</code>, <strong>Значение</strong> = <code>1700</code>.</li><li>Добавь <strong>«Удерживать в экране»</strong>: цель <strong>paddle</strong>, <strong>Отступ</strong> = <code>0</code>.</li><li>Соедини три узла по порядку.</li></ol>
 <div class="chaine">
-<div class="noeud evenement"><b>Палец нажат</b></div>
+<div class="noeud evenement"><b>Каждый кадр</b></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>Переместить</b><span>paddle · =clamp(doigt.x - 104, 0, 872) · 1700</span></div>
+<div class="noeud"><b>Изменить свойство</b><span>paddle · y · 1700</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Удерживать в экране</b><span>paddle · 0</span></div>
 </div>
-<div class="tip">👉 <strong>Как читать формулу?</strong> <code>doigt.x</code> — это положение твоего пальца («doigt» по-французски «палец»). Мы вычитаем 104 (половину платформы), чтобы поставить её по центру под пальцем. <code>clamp(…, 0, 872)</code> удерживает её на экране: 872 = 1080 − 208 (ширина платформы).</div>
+<div class="tip">👉 <strong>Зачем эти два узла?</strong> «Перетаскивается пальцем» позволяет двигать платформу в любую сторону. На каждом кадре мы возвращаем её на ту же высоту и не даём выйти за экран: она двигается только влево и вправо.</div>
 </div>
-<h2>Шаг 3: мяч стартует</h2>
+<h2>Шаг 4: мяч стартует</h2>
 <div class="method">
-<ol><li>Добавь событие <strong>«При старте»</strong>, затем два узла <strong>«Изменить переменную»</strong> подряд: переменная <strong>vx</strong> = <code>6</code>, потом переменная <strong>vy</strong> = <code>-9</code>.</li><li>Добавь событие <strong>«Каждый кадр»</strong>, затем <strong>«Толкнуть объект»</strong>: цель <strong>ball</strong>, <strong>Добавить X</strong> = <code>=vx</code>, <strong>Добавить Y</strong> = <code>=vy</code>.</li><li>Соедини каждое событие с его узлами и запусти игру: мяч летит вверх и вправо и уходит за экран.</li></ol>
+<ol><li>Добавь событие <strong>«При старте»</strong>, затем два узла <strong>«Изменить переменную»</strong> подряд: переменная <strong>vx</strong>, значение <code>6</code>, потом переменная <strong>vy</strong>, значение <code>-9</code>.</li><li>Добавь событие <strong>«Каждый кадр»</strong>, затем <strong>«Толкнуть объект»</strong>: цель <strong>ball</strong>.</li><li>В окне настроек <strong>«Толкнуть объект»</strong> нажми кнопку <strong>🔗</strong> рядом с <strong>Добавить X</strong>, выбери <strong>«Значение переменной»</strong>, затем выбери переменную <strong>vx</strong> в зелёном узле, который появится.</li><li>Сделай то же самое для <strong>Добавить Y</strong> с переменной <strong>vy</strong>.</li><li>Соедини каждое событие с его узлами и запусти игру: мяч летит вверх и вправо, а затем уходит за экран.</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>При старте</b></div>
 <div class="fleche">→</div>
@@ -107,66 +115,78 @@
 <div class="chaine">
 <div class="noeud evenement"><b>Каждый кадр</b></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>Толкнуть объект</b><span>ball · =vx · =vy</span></div>
+<div class="noeud"><b>Толкнуть объект</b><span>ball · X ← vx · Y ← vy</span></div>
 </div>
-<div class="tip">👉 <strong>Минус = вверх.</strong> В Yop2D ось Y растёт к низу экрана: <strong>vy = -9</strong> отправляет мяч вверх. Для более быстрого мяча возьми 8 и -12.</div>
+<div class="tip">👉 <strong>Зелёный узел</strong> задаёт значение настройке, ничего не печатая. Здесь <strong>«Значение переменной»</strong> говорит <strong>«Толкнуть объект»</strong>: «на каждом кадре смещайся на <strong>vx</strong> вправо и на <strong>vy</strong> вниз».</div>
+<div class="tip">👉 <strong>Минус = вверх.</strong> В Yop2D ось Y растёт к низу экрана: <strong>vy = -9</strong> отправляет мяч вверх.</div>
 </div>
-<h2>Шаг 4: отскок от краёв</h2>
+<h2>Шаг 5: отскок от стен</h2>
 <div class="method">
-<p>Сразу после <strong>«Толкнуть объект»</strong> мы на каждом кадре проверяем, касается ли мяч края. Мы соединяем цепочкой три узла <strong>«Условие»</strong>, каждый раз используя выход <strong>«Затем»</strong> (он срабатывает в любом случае).</p>
-<ol><li>Левый край: <strong>«Условие»</strong> <code>=ball.x &lt;= 0</code>. Выход <strong>Истина</strong> → <strong>«Изменить переменную»</strong>: переменная <strong>vx</strong>, значение <code>=abs(vx)</code> (всегда вправо).</li><li>Правый край: <strong>«Условие»</strong> <code>=ball.x &gt;= 1036</code>. Выход <strong>Истина</strong> → <strong>«Изменить переменную»</strong>: переменная <strong>vx</strong>, значение <code>=-abs(vx)</code> (всегда влево). 1036 = 1080 − 44 (ширина мяча).</li><li>Верх: <strong>«Условие»</strong> <code>=ball.y &lt;= 0</code>. Выход <strong>Истина</strong> → <strong>«Изменить переменную»</strong>: переменная <strong>vy</strong>, значение <code>=abs(vy)</code> (всегда вниз).</li><li>Соедини каждый <strong>«Условие»</strong> со следующим через его выход <strong>«Затем»</strong>. Первый соединяется с выходом <strong>«Толкнуть объект»</strong>.</li></ol>
+<p>Каждая стена даёт мячу новое число. Добавь три события <strong>«Столкновение A/B»</strong> (<strong>Объект A</strong> = <strong>ball</strong>):</p>
+<ol><li><strong>Объект B</strong> = <strong>left_wall</strong> → <strong>«Изменить переменную»</strong>: переменная <strong>vx</strong>, значение <code>6</code> (мяч летит обратно вправо).</li><li><strong>Объект B</strong> = <strong>right_wall</strong> → <strong>«Изменить переменную»</strong>: переменная <strong>vx</strong>, значение <code>-6</code> (мяч летит обратно влево).</li><li><strong>Объект B</strong> = <strong>top_wall</strong> → <strong>«Изменить переменную»</strong>: переменная <strong>vy</strong>, значение <code>9</code> (мяч летит обратно вниз).</li></ol>
 <div class="chaine">
-<div class="noeud"><b>Толкнуть объект</b><span>ball</span></div>
+<div class="noeud evenement"><b>Столкновение A/B</b><span>ball · left_wall</span></div>
 <div class="fleche">→</div>
-<div class="noeud condition"><b>Условие</b><span>=ball.x &lt;= 0</span></div>
-<div class="fleche"><em>Истина</em> →</div>
-<div class="noeud"><b>Изменить переменную</b><span>vx · =abs(vx)</span></div>
+<div class="noeud"><b>Изменить переменную</b><span>vx · 6</span></div>
 </div>
 <div class="chaine">
-<div class="noeud condition"><b>Условие</b><span>=ball.x &gt;= 1036</span></div>
-<div class="fleche"><em>Истина</em> →</div>
-<div class="noeud"><b>Изменить переменную</b><span>vx · =-abs(vx)</span></div>
+<div class="noeud evenement"><b>Столкновение A/B</b><span>ball · right_wall</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vx · -6</span></div>
 </div>
 <div class="chaine">
-<div class="noeud condition"><b>Условие</b><span>=ball.y &lt;= 0</span></div>
-<div class="fleche"><em>Истина</em> →</div>
-<div class="noeud"><b>Изменить переменную</b><span>vy · =abs(vy)</span></div>
+<div class="noeud evenement"><b>Столкновение A/B</b><span>ball · top_wall</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vy · 9</span></div>
 </div>
-<div class="tip">👉 <strong>Почему abs?</strong> <code>abs(vx)</code> всегда даёт положительное число. У левого края мяч принудительно летит вправо, даже если он коснулся края два кадра подряд: он никогда не застрянет.</div>
 </div>
-<h2>Шаг 5: отскок от платформы</h2>
+<h2>Шаг 6: отскок от платформы</h2>
 <div class="method">
-<ol><li>Добавь событие <strong>«Столкновение A/B»</strong>: <strong>Объект A</strong> = <strong>ball</strong>, <strong>Объект B</strong> = <strong>paddle</strong>.</li><li>Добавь <strong>«Изменить переменную»</strong>: переменная <strong>vy</strong>, значение <code>=-abs(vy)</code> (мяч снова летит вверх).</li><li>Добавь второй <strong>«Изменить переменную»</strong>: переменная <strong>vx</strong>, значение <code>=(ball.x + 22 - paddle.x - 104) / 13</code>.</li><li>Соедини три узла по порядку.</li></ol>
+<ol><li>Добавь событие <strong>«Столкновение A/B»</strong>: <strong>Объект A</strong> = <strong>ball</strong>, <strong>Объект B</strong> = <strong>paddle</strong>.</li><li>Добавь <strong>«Изменить переменную»</strong>: переменная <strong>vy</strong>, значение <code>-9</code> (мяч снова летит вверх).</li><li>Добавь второй <strong>«Изменить переменную»</strong>: переменная <strong>vx</strong>. Нажми <strong>🔗</strong> рядом со значением, выбери <strong>«Случайное число»</strong>, затем задай <strong>От</strong> = <code>-6</code> и <strong>До</strong> = <code>6</code>.</li><li>Соедини узлы по порядку.</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>Столкновение A/B</b><span>ball · paddle</span></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>Изменить переменную</b><span>vy · =-abs(vy)</span></div>
+<div class="noeud"><b>Изменить переменную</b><span>vy · -9</span></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>Изменить переменную</b><span>vx · =(ball.x + 22 - paddle.x - 104) / 13</span></div>
+<div class="noeud"><b>Изменить переменную</b><span>vx · ← случайное число (от -6 до 6)</span></div>
 </div>
-<div class="tip">👉 <strong>Для чего последняя формула?</strong> Она измеряет, в какое место платформы попал мяч: по центру он летит прямо вверх; у левого края — влево; у правого — вправо. Так игрок может <strong>целиться</strong>. (22 = половина мяча, 104 = половина платформы.)</div>
+<div class="tip">👉 При каждом отскоке от платформы мяч вылетает в <strong>случайном направлении</strong>: игра никогда не повторяется.</div>
 </div>
-<h2>Шаг 6: разбить блоки</h2>
+<h2>Шаг 7: разбить блоки</h2>
 <div class="method">
-<ol><li>Добавь событие <strong>«Если объект касается тега»</strong>: цель <strong>ball</strong>, Тег <strong>brick</strong>.</li><li>Добавь <strong>«Уничтожить объект»</strong> и выбери целью <strong>Объект, участвующий в событии</strong>: это блок, которого мяч только что коснулся.</li><li>Добавь <strong>«Изменить переменную»</strong>: переменная <strong>vy</strong>, значение <code>=-vy</code> (мяч отскакивает).</li><li>Добавь <strong>«Добавить к переменной»</strong>: переменная <strong>score</strong>, <strong>Добавляемое значение = 10</strong>.</li><li>Добавь <strong>«Добавить к переменной»</strong>: переменная <strong>bricks</strong>, <strong>Добавляемое значение = -1</strong>.</li><li>Добавь <strong>«Изменить текст»</strong>: цель <strong>scoreText</strong>, <strong>Новый текст</strong> = <code>="Очки: " + score</code>.</li><li>Соедини все узлы по порядку.</li></ol>
+<ol><li>Добавь событие <strong>«Если объект касается тега»</strong>: цель <strong>ball</strong>, Тег <strong>brick</strong>.</li><li>Добавь <strong>«Уничтожить объект»</strong> и выбери целью <strong>Объект, участвующий в событии</strong>: это блок, которого мяч только что коснулся.</li><li>Добавь <strong>«Условие»</strong> <code>=vy &lt; 0</code> («мяч летит вверх»). Выход <strong>Истина</strong> → <strong>«Изменить переменную»</strong>: переменная <strong>vy</strong>, значение <code>9</code>. Выход <strong>Ложь</strong> → <strong>«Изменить переменную»</strong>: переменная <strong>vy</strong>, значение <code>-9</code>.</li><li>От выхода <strong>«Затем»</strong> условия добавь <strong>«Добавить к переменной»</strong>: переменная <strong>score</strong>, <strong>Добавляемое значение = 10</strong>.</li><li>Добавь <strong>«Добавить к переменной»</strong>: переменная <strong>bricks</strong>, <strong>Добавляемое значение = -1</strong>.</li><li>Добавь <strong>«Изменить текст»</strong>: цель <strong>scoreText</strong>, <strong>Новый текст</strong> = <code>="Очки: " + score</code>.</li></ol>
 <div class="chaine">
 <div class="noeud evenement"><b>Если объект касается тега</b><span>ball · brick</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Уничтожить объект</b><span>Подразумеваемый объект</span></div>
 <div class="fleche">→</div>
-<div class="noeud"><b>Изменить переменную</b><span>vy · =-vy</span></div>
-<div class="fleche">→</div>
+<div class="noeud condition"><b>Условие</b><span>=vy &lt; 0</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Условие</b><span>=vy &lt; 0</span></div>
+<div class="fleche"><em>Истина</em> →</div>
+<div class="noeud"><b>Изменить переменную</b><span>vy · 9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Условие</b><span>=vy &lt; 0</span></div>
+<div class="fleche"><em>Ложь</em> →</div>
+<div class="noeud"><b>Изменить переменную</b><span>vy · -9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Условие</b><span>=vy &lt; 0</span></div>
+<div class="fleche"><em>Затем</em> →</div>
 <div class="noeud"><b>Добавить к переменной</b><span>score · + 10</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Добавить к переменной</b><span>bricks · - 1</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Изменить текст</b><span>scoreText</span></div>
 </div>
-<div class="tip">👉 Когда мяч разбивает блок, он всегда отскакивает вверх или вниз, даже если задел блок сбоку. Это просто и хорошо работает в арканоиде.</div>
+<div class="tip">👉 <strong>Почему <code>=vy &lt; 0</code>?</strong> Если <strong>vy</strong> меньше 0, мяч летит вверх: после разрушения блока он летит вниз. Иначе он летит вниз, а затем снова вверх.</div>
+<div class="tip">👉 <strong>Знак = в начале текста</strong> говорит Yop2D <strong>вычислить</strong> текст, а не писать его как есть (см. руководство <a href="../ru/pieces-score.html">Собирать монеты и считать очки</a>).</div>
 </div>
-<h2>Шаг 7: победа</h2>
+<h2>Шаг 8: победа</h2>
 <div class="method">
-<p>После <strong>«Изменить текст»</strong> из шага 6 добавь:</p>
+<p>После <strong>«Изменить текст»</strong> из шага 7 добавь:</p>
 <ol><li><strong>«Условие»</strong> <code>=bricks &lt;= 0</code>.</li><li>На выходе <strong>Истина</strong>: <strong>«Изменить переменную»</strong> <strong>vx</strong> = <code>0</code>, <strong>«Изменить переменную»</strong> <strong>vy</strong> = <code>0</code> (мяч останавливается), затем <strong>«Короткое сообщение внизу экрана»</strong> с сообщением <strong>Ты выиграл!</strong>, затем <strong>«Ждать»</strong> 2 секунды, затем <strong>«Перезапустить сцену»</strong>.</li></ol>
 <div class="chaine">
 <div class="noeud"><b>Изменить текст</b><span>scoreText</span></div>
@@ -185,13 +205,13 @@
 </div>
 <div class="tip">👉 «Перезапустить сцену» возвращает объекты на место, а <strong>Локальная</strong> переменные — к начальному значению: игра начинается заново с 3 жизнями, 0 очков и всеми блоками.</div>
 </div>
-<h2>Шаг 8: жизни и Game Over</h2>
+<h2>Шаг 9: жизни и Game Over</h2>
 <div class="method">
-<p>Когда мяч падает ниже платформы, игрок теряет жизнь. Продолжаем цепочку из шага 4: после третьего <strong>«Условие»</strong> (верхнего) добавь четвёртый, соединённый через выход <strong>«Затем»</strong>.</p>
-<ol><li><strong>«Условие»</strong> <code>=ball.y &gt;= 1920</code>, выход <strong>Истина</strong>.</li><li><strong>«Добавить к переменной»</strong>: переменная <strong>lives</strong>, <strong>Добавляемое значение = -1</strong>.</li><li><strong>«Изменить текст»</strong>: цель <strong>livesText</strong>, <strong>Новый текст</strong> = <code>="Жизни: " + lives</code>.</li><li><strong>«Условие»</strong> <code>=lives &lt;= 0</code>.</li><li>Выход <strong>Истина</strong> (жизней нет): <strong>«Переместить»</strong> <strong>ball</strong> в X = <code>518</code>, Y = <code>1000</code>, <strong>«Изменить переменную»</strong> <strong>vx</strong> = <code>0</code>, <strong>«Изменить переменную»</strong> <strong>vy</strong> = <code>0</code> (мяч возвращается в центр и останавливается), затем <strong>«Короткое сообщение внизу экрана»</strong> «Игра окончена!», <strong>«Ждать»</strong> 2 секунды, <strong>«Перезапустить сцену»</strong>.</li><li>Выход <strong>Ложь</strong> (жизни остались): <strong>«Переместить»</strong> <strong>ball</strong> в X = <code>518</code>, Y = <code>1000</code>, затем <strong>«Изменить переменную»</strong> <strong>vy</strong> = <code>-9</code>, затем <strong>«Изменить переменную»</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
+<p>Когда мяч касается <strong>bottom_wall</strong> (под экраном), игрок теряет жизнь.</p>
+<ol><li>Добавь событие <strong>«Столкновение A/B»</strong>: <strong>Объект A</strong> = <strong>ball</strong>, <strong>Объект B</strong> = <strong>bottom_wall</strong>.</li><li><strong>«Добавить к переменной»</strong>: переменная <strong>lives</strong>, <strong>Добавляемое значение = -1</strong>.</li><li><strong>«Изменить текст»</strong>: цель <strong>livesText</strong>, <strong>Новый текст</strong> = <code>="Жизни: " + lives</code>.</li><li><strong>«Условие»</strong> <code>=lives &lt;= 0</code>.</li><li>Выход <strong>Истина</strong> (жизней нет): <strong>«Переместить»</strong> <strong>ball</strong> в X = <code>518</code>, Y = <code>1000</code>, <strong>«Изменить переменную»</strong> <strong>vx</strong> = <code>0</code>, <strong>«Изменить переменную»</strong> <strong>vy</strong> = <code>0</code> (мяч возвращается в центр и останавливается), затем <strong>«Короткое сообщение внизу экрана»</strong> «Игра окончена!», <strong>«Ждать»</strong> 2 секунды, <strong>«Перезапустить сцену»</strong>.</li><li>Выход <strong>Ложь</strong> (жизни остались): <strong>«Переместить»</strong> <strong>ball</strong> в X = <code>518</code>, Y = <code>1000</code>, затем <strong>«Изменить переменную»</strong> <strong>vy</strong> = <code>-9</code>, затем <strong>«Изменить переменную»</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
 <div class="chaine">
-<div class="noeud condition"><b>Условие</b><span>=ball.y &gt;= 1920</span></div>
-<div class="fleche"><em>Истина</em> →</div>
+<div class="noeud evenement"><b>Столкновение A/B</b><span>ball · bottom_wall</span></div>
+<div class="fleche">→</div>
 <div class="noeud"><b>Добавить к переменной</b><span>lives · - 1</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Изменить текст</b><span>livesText</span></div>
@@ -213,7 +233,6 @@
 <div class="fleche">→</div>
 <div class="noeud"><b>Перезапустить сцену</b></div>
 </div>
-<div class="tip">👉 <strong>Зачем останавливать мяч перед ожиданием?</strong> Пока длятся 2 секунды ожидания, игра продолжается. Если бы мяч оставался под экраном, он отнимал бы жизнь на каждом кадре, и счётчик жизней ушёл бы очень глубоко в минус (-178!). Возвращённый в центр и неподвижный, он больше не мешает.</div>
 <div class="chaine">
 <div class="noeud condition"><b>Условие</b><span>=lives &lt;= 0</span></div>
 <div class="fleche"><em>Ложь</em> →</div>
@@ -223,11 +242,12 @@
 <div class="fleche">→</div>
 <div class="noeud"><b>Изменить переменную</b><span>vx · 6</span></div>
 </div>
+<div class="tip">👉 <strong>Зачем останавливать мяч перед ожиданием?</strong> Пока длятся 2 секунды ожидания, игра продолжается. Если бы мяч оставался под экраном, он отнимал бы жизнь на каждом кадре, и счётчик жизней ушёл бы очень глубоко в минус. Возвращённый в центр и неподвижный, он больше не мешает.</div>
 </div>
 <h2>Что дальше</h2>
-<ul><li><strong>Звуки:</strong> добавь <strong>«Воспроизвести звук»</strong> после <strong>«Уничтожить объект»</strong> («клак», когда блок разбивается) и в событие платформы.</li><li><strong>Разные цвета:</strong> дай всем блокам один и тот же тег <strong>brick</strong>, какого бы они ни были цвета: достаточно одной настройки.</li><li><strong>Больше скорости:</strong> добавляй <strong>«Изменить переменную»</strong> <code>=vx * 1.02</code> при каждом разбитом блоке, чтобы игра становилась всё сложнее.</li><li><strong>Искры:</strong> добавь <strong>«Эффект частиц»</strong>, когда блок разбивается (см. руководство <a href="../ru/particules-effets.html">Частицы и эффекты</a>).</li></ul>
+<ul><li><strong>Звуки:</strong> добавь <strong>«Воспроизвести звук»</strong> после <strong>«Уничтожить объект»</strong> («клак», когда блок разбивается) и в событие платформы.</li><li><strong>Разные цвета:</strong> дай всем блокам один и тот же тег <strong>brick</strong>, какого бы они ни были цвета: достаточно одной настройки.</li><li><strong>Более быстрый мяч:</strong> измени везде числа <code>6</code>, <code>-6</code>, <code>9</code> и <code>-9</code> (например, на <code>8</code>, <code>-8</code>, <code>12</code> и <code>-12</code>).</li><li><strong>Искры:</strong> добавь <strong>«Эффект частиц»</strong>, когда блок разбивается (см. руководство <a href="../ru/particules-effets.html">Частицы и эффекты</a>).</li></ul>
 <h2>Если не работает</h2>
-<ul><li><strong>Мяч не движется:</strong> проверь, что <strong>vx</strong> и <strong>vy</strong> меняются при запуске и что <strong>«Толкнуть объект»</strong> использует формулы <code>=vx</code> и <code>=vy</code> (со знаком <strong>=</strong> в начале).</li><li><strong>Мяч проходит сквозь платформу или блоки:</strong> проверь имена (<strong>ball</strong>, <strong>paddle</strong>) и тег <strong>brick</strong>, написанный везде одинаково (без заглавных букв). Если мяч очень быстрый, сделай блоки чуть больше или замедли мяч.</li><li><strong>Мяч уходит за экран без отскока:</strong> узлы <strong>«Условие»</strong> должны быть соединены друг за другом через выход <strong>«Затем»</strong>, а первый должен идти от <strong>«Толкнуть объект»</strong>.</li><li><strong>Ты выигрываешь слишком рано или никогда:</strong> переменная <strong>bricks</strong> должна быть равна точному числу блоков в игре.</li><li><strong>Платформа двигается плохо:</strong> в формуле <code>doigt.x</code> — это палец, а не платформа; сохрани <strong>=</strong> в начале и закрой скобку.</li></ul>
+<ul><li><strong>Мяч не движется:</strong> проверь, что <strong>vx</strong> и <strong>vy</strong> меняются при запуске и что <strong>«Толкнуть объект»</strong> соединён с зелёными узлами <strong>«Значение переменной»</strong> (нажми <strong>Добавить X</strong>: в строке должна быть зелёная нить).</li><li><strong>Мяч проходит сквозь стену или блоки:</strong> проверь имена (<strong>ball</strong>, <strong>paddle</strong>, <strong>left_wall</strong>…) и тег <strong>brick</strong>, написанный везде одинаково (без заглавных букв). Если мяч очень быстрый, сделай блоки чуть больше или замедли мяч.</li><li><strong>Платформа уходит вверх или вниз:</strong> узел <strong>«Изменить свойство»</strong> должен быть соединён с <strong>Каждый кадр</strong>, а <strong>Свойство</strong> = <code>y</code>.</li><li><strong>Ты выигрываешь слишком рано или никогда:</strong> переменная <strong>bricks</strong> должна быть равна точному числу блоков в игре.</li><li><strong>Для сравнения</strong> открой тестовый проект (его узлы разложены по разделам, с рамками и стикерами, которые объясняют каждую часть).</li></ul>
 
 <div class="nav">
 <a href="../ru/vie-game-over.html">← Потеря здоровья и Game Over</a>
