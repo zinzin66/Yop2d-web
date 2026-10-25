@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Fabrique l'exemple « Tactics demo » (stratégie au tour par tour sur une grille, FAIT À LA MAIN avec les nœuds existants) :
+"""Fabrique l'exemple « Tactics demo » VERSION 3 (stratégie au tour par tour sur une grille) avec les nœuds « grille » du moteur :
 exemples/tactics_demo.zip + exemples/tactics_demo.png (vignette 300 x 300).
-Usage : python3 outils/creer_exemple_tactique.py <clone de zinzin66/yop2d-moteur>
-Puis : entrée dans outils/exemples/source.json, python3 outils/generer_exemples.py, python3 outils/generer_accueil.py.
+Usage : python3 outils/creer_exemple_tactique.py <clone de zinzin66/yop2d-moteur, branche claude/discord-yop2d-config-ox8qgh>
+Puis : entrée dans outils/exemples/source.json (version 3), python3 outils/generer_exemples.py, python3 outils/generer_accueil.py.
 
-Le jeu : 2 héros, 2 monstres, une carte de 14 x 10 cases (décor en tuiles ; buissons et rochers = murs). À SON TOUR le joueur
-touche un héros (il grossit), puis le sol (il y va, en contournant les murs) ou un monstre (il l'attaque). Chaque héros agit une
-fois par tour (il devient gris). Quand les deux ont joué (ou si on touche « Fin du tour »), les monstres avancent vers les héros.
-Un monstre qui touche un héros fait perdre une vie. Tous les monstres battus = victoire ; plus de vie = défaite.
-N'utilise QUE des nœuds publiés avant la 1120 (chemins, tags, variables, conditions, événements locaux).
-CE QUI MANQUE (voir « Ce qui manque » sur le site) : zone de déplacement visible, gestion des tours, limite de distance."""
-import os, sys, tempfile
+Le jeu : 2 héros (Chevalier : corps à corps ; Archer : portée 3), 2 monstres, carte de 14 x 10 cases avec TERRAINS (forêt = 2 pas et +1 défense,
+sable = 2 pas, montagne = infranchissable ; liste dans terrains.json). À SON TOUR le joueur touche un héros : ses cases accessibles
+apparaissent en bleu (coût du terrain compté, murs et unités bloquent) ; il touche une case bleue : le héros y va (chemin) ; la zone
+d'attaque apparaît en rouge : il touche un monstre dans la zone (dégâts = attaque - défense - terrain) ou « Attendre ». Chaque héros joue
+une fois par tour ; quand tous ont joué (ou « Fin du tour »), les monstres avancent à côté d'un héros et l'attaquent.
+Nœuds : fiche d'unité, tours, cases accessibles, terrains, chemin vers une case, s'arrêter à côté de la cible, attaquer."""
+import os, sys, json, tempfile
 SITE_RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if len(sys.argv) != 2:
     sys.exit(__doc__)
@@ -20,6 +20,7 @@ from commun import *
 P = 'tactique/'
 NJ = 'assets_ludexa/Images/Ninja/'
 SON = 'assets_ludexa/Sons/Yop2D/'
+TILESET = NJ + 'Tuiles/tileset_ninja.png'
 CASE, GX, GY = 80, 60, 140
 CARTE = ["..............",
          "..B...s....B..",
@@ -31,13 +32,17 @@ CARTE = ["..............",
          "....s.##..s...",
          "..B........B..",
          ".............."]
-CASES = {'hero1': (1, 3), 'hero2': (1, 6), 'foe1': (12, 3), 'foe2': (12, 6)}
-IMAGES = {'hero1': 'Personnages/ninja6', 'hero2': 'Personnages/ninja4', 'foe1': 'Monstres/monstre3', 'foe2': 'Monstres/monstre8'}
+# nom : (image, colonne, ligne, fiche = (vie, attaque, défense, mouvement, portée))
+HEROS = {'hero1': ('Personnages/ninja6', 1, 3, (20, 6, 2, 4, 1)), 'hero2': ('Personnages/ninja4', 1, 6, (14, 4, 0, 4, 3))}
+MONSTRES = {'foe1': ('Monstres/monstre3', 12, 3, (12, 5, 1, 3, 1)), 'foe2': ('Monstres/monstre8', 12, 6, (8, 4, 0, 3, 1))}
+IMAGES = {n: v[0] for n, v in list(HEROS.items()) + list(MONSTRES.items())}
 BLANC, OR, VERT, ROUGE = argb('#FFFFFF'), argb('#FFD166'), argb('#7BE0A0'), argb('#FF7B7B')
 
 def coin(col, lig):
     return GX + col * CASE, GY + lig * CASE
 
+def tous(en, fr, es, pt, de, it, ru, zh, ja):
+    return dict(zip(['en', 'fr', 'es', 'pt', 'de', 'it', 'ru', 'zh', 'ja'], [en, fr, es, pt, de, it, ru, zh, ja]))
 TEXTES = {
  'your_turn': {'fr': 'À ton tour', 'en': 'Your turn', 'es': 'Tu turno', 'de': 'Du bist dran', 'it': 'Tocca a te', 'pt': 'Sua vez',
                'ru': 'Твой ход', 'zh': '轮到你了', 'ja': 'あなたの番'},
@@ -47,211 +52,246 @@ TEXTES = {
              'ru': 'Победа!', 'zh': '胜利！', 'ja': '勝利！'},
  'defeat': {'fr': 'Défaite…', 'en': 'Defeat…', 'es': 'Derrota…', 'de': 'Niederlage …', 'it': 'Sconfitta…', 'pt': 'Derrota…',
             'ru': 'Поражение…', 'zh': '失败……', 'ja': '敗北…'},
- 'help': {'fr': 'Touche un héros, puis le sol pour avancer\nou un monstre pour l\'attaquer.\nChaque héros joue une fois par tour.\nQuand les deux ont joué, les monstres avancent.',
-          'en': 'Tap a hero, then the ground to move\nor a monster to attack it.\nEach hero plays once per turn.\nWhen both have played, the monsters move.',
-          'es': 'Toca un héroe y luego el suelo para moverte\no un monstruo para atacarlo.\nCada héroe juega una vez por turno.\nCuando los dos han jugado, avanzan los monstruos.',
-          'de': 'Tippe einen Helden an, dann den Boden zum Laufen\noder ein Monster zum Angreifen.\nJeder Held spielt einmal pro Runde.\nHaben beide gespielt, ziehen die Monster.',
-          'it': 'Tocca un eroe, poi il terreno per muoverti\no un mostro per attaccarlo.\nOgni eroe gioca una volta per turno.\nQuando hanno giocato entrambi, avanzano i mostri.',
-          'pt': 'Toque em um herói, depois no chão para andar\nou em um monstro para atacá-lo.\nCada herói joga uma vez por turno.\nQuando os dois jogaram, os monstros avançam.',
-          'ru': 'Нажми на героя, затем на землю, чтобы идти,\nили на монстра, чтобы атаковать.\nКаждый герой ходит раз за ход.\nКогда сходили оба, двигаются монстры.',
-          'zh': '点一个英雄，再点地面移动，\n或点怪物进行攻击。\n每个英雄每回合行动一次。\n两人都行动后，怪物前进。',
-          'ja': 'ヒーローをタッチして、地面をタッチすると移動、\nモンスターをタッチすると攻撃します。\nヒーローは 1 ターンに 1 回動けます。\n2 人とも動くと、モンスターが進みます。'},
- 'lives': {'fr': 'Vies', 'en': 'Lives', 'es': 'Vidas', 'de': 'Leben', 'it': 'Vite', 'pt': 'Vidas', 'ru': 'Жизни', 'zh': '生命', 'ja': 'ライフ'},
- 'monsters': {'fr': 'Monstres', 'en': 'Monsters', 'es': 'Monstruos', 'de': 'Monster', 'it': 'Mostri', 'pt': 'Monstros',
-              'ru': 'Монстры', 'zh': '怪物', 'ja': 'モンスター'},
  'end_turn': {'fr': 'Fin du tour', 'en': 'End turn', 'es': 'Fin del turno', 'de': 'Zug beenden', 'it': 'Fine turno', 'pt': 'Fim do turno',
               'ru': 'Конец хода', 'zh': '结束回合', 'ja': 'ターン終了'},
+ 'wait': tous('Wait', 'Attendre', 'Esperar', 'Esperar', 'Warten', 'Aspetta', 'Ждать', '待机', 'まつ'),
+ 'too_far': tous('Too far!', 'Trop loin !', '¡Demasiado lejos!', 'Muito longe!', 'Zu weit!', 'Troppo lontano!', 'Слишком далеко!', '太远了！', '遠すぎる！'),
+ 'hint_pick': tous('Touch one of your heroes.', 'Touche un de tes héros.', 'Toca uno de tus héroes.', 'Toque em um dos seus heróis.', 'Tippe einen deiner Helden an.',
+                   'Tocca uno dei tuoi eroi.', 'Нажми на одного из героев.', '点你的一个英雄。', 'ヒーローをタッチ。'),
+ 'hint_move': tous('Touch a blue cell to move there.', 'Touche une case bleue pour y aller.', 'Toca una casilla azul para ir.', 'Toque em uma casa azul para ir.',
+                   'Tippe ein blaues Feld, um dorthin zu gehen.', 'Tocca una casella blu per andarci.', 'Нажми на синюю клетку, чтобы пойти.', '点蓝色格子前往。', '青いマスをタッチして移動。'),
+ 'hint_attack': tous('Touch a monster in the red zone, or Wait.', 'Touche un monstre dans la zone rouge, ou Attendre.', 'Toca un monstruo en la zona roja, o Esperar.',
+                     'Toque em um monstro na zona vermelha, ou Esperar.', 'Tippe ein Monster in der roten Zone an, oder Warten.', 'Tocca un mostro nella zona rossa, o Aspetta.',
+                     'Нажми на монстра в красной зоне или «Ждать».', '点红色区域内的怪物，或待机。', '赤い範囲のモンスターをタッチ、または「まつ」。'),
+ 'knight': tous('Knight', 'Chevalier', 'Caballero', 'Cavaleiro', 'Ritter', 'Cavaliere', 'Рыцарь', '骑士', '騎士'),
+ 'archer': tous('Archer', 'Archer', 'Arquero', 'Arqueiro', 'Bogenschütze', 'Arciere', 'Лучник', '弓箭手', '弓兵'),
+ 'orc': tous('Orc', 'Orc', 'Orco', 'Orc', 'Ork', 'Orco', 'Орк', '兽人', 'オーク'),
+ 'rat': tous('Rat', 'Rat', 'Rata', 'Rato', 'Ratte', 'Ratto', 'Крыса', '老鼠', 'ネズミ'),
 }
 
 # ---------------------------------------------------------------- objets
-objets = [objet('fond', 0, 0, largeur=1920, hauteur=1080, z=-100, prefixe=P, afficherFondColore=True, couleur=argb('#16301F')),
-          decor_tuiles('carte', GX, GY, CARTE, prefixe=P, taille=CASE, tileset=NJ + 'Tuiles/tileset_ninja.png'),
-          # le sol touchable : une zone invisible posée sur toute la carte
+carte = decor_tuiles('carte', GX, GY, CARTE, prefixe=P, taille=CASE, tileset=TILESET)
+carte['tuilesSolides'] = [False, False, False, False]   # ce sont les TERRAINS (terrains.json) qui bloquent
+TERRAINS = {'terrains': [
+    {'id': 't1', 'nom': 'Grass', 'couleur': argb('#6FBF73'), 'cout': 1, 'bloque': False, 'defense': 0, 'proprietes': {}},
+    {'id': 't2', 'nom': 'Forest', 'couleur': argb('#2E7D32'), 'cout': 2, 'bloque': False, 'defense': 1, 'proprietes': {}},
+    {'id': 't3', 'nom': 'Mountain', 'couleur': argb('#9AA3AE'), 'cout': 1, 'bloque': True, 'defense': 2, 'proprietes': {}},
+    {'id': 't4', 'nom': 'Sand', 'couleur': argb('#E0C068'), 'cout': 2, 'bloque': False, 'defense': 0, 'proprietes': {}}],
+    'tuiles': {TILESET: ['t1', 't2', 't3', 't4']}}
+objets = [objet('fond', 0, 0, largeur=1920, hauteur=1080, z=-100, prefixe=P, afficherFondColore=True, couleur=argb('#16301F')), carte,
           objet('terrain', GX, GY, largeur=14 * CASE, hauteur=10 * CASE, z=1, prefixe=P, type='zone', estZoneDeClic=True)]
 ANIMS = {}
-def unite(nom, vivant_tag=None):
-    c, l = CASES[nom]
-    x, y = coin(c, l)
-    o = objet(nom, x, y, NJ + IMAGES[nom] + '_bas_1.png', CASE, CASE, z=50, prefixe=P, estPhysique=True, estStatique=False,
+def unite(nom, tag, col, lig, clic):
+    x, y = coin(col, lig)
+    o = objet(nom, x, y, NJ + IMAGES[nom] + '_bas_1.png', CASE, CASE, z=50, prefixe=P, tag=tag, estZoneDeClic=clic, estPhysique=True, estStatique=False,
               graviteScale=0.0, comportement='dessus', directions='4', commandes='aucune', animationsAuto=True, vitesseComportement=6.0)
     for etat in ('walk', 'idle'):
         for d in ('bas', 'haut', 'gauche', 'droite'):
             ANIMS['%s_%s_%s' % (nom, etat, d)] = [NJ + IMAGES[nom] + '_%s_%d.png' % (d, i) for i in (range(1, 5) if etat == 'walk' else [1])]
     return o
-objets += [unite(n) for n in CASES]
-objets += [
-    texte('turn_text', 1240, 150, 640, 90, ' ', 60, OR, z=60, prefixe=P, alignementTexte='CENTRE', cheminPolice=None),
-    texte('help_text', 1240, 270, 640, 250, ' ', 30, BLANC, z=60, prefixe=P, alignementTexte='CENTRE', cheminPolice=None),
-    texte('lives_label', 1240, 570, 330, 60, ' ', 38, BLANC, z=60, prefixe=P, alignementTexte='DROITE', cheminPolice=None),
-    texte('lives_text', 1590, 560, 200, 80, '3', 60, ROUGE, z=60, prefixe=P, cheminPolice=None),
-    texte('foes_label', 1240, 680, 330, 60, ' ', 38, BLANC, z=60, prefixe=P, alignementTexte='DROITE', cheminPolice=None),
-    texte('foes_text', 1590, 670, 200, 80, '2', 60, VERT, z=60, prefixe=P, cheminPolice=None)]
-bouton = objet('btn_end', 1300, 820, largeur=520, hauteur=120, z=60, prefixe=P, afficherFondColore=True, couleur=argb('#2B6CB0'),
-               estZoneDeClic=True)
-objets += [bouton, texte('btn_end_text', 0, 28, 520, 70, ' ', 46, BLANC, z=61, prefixe=P, parentId=bouton['id'],
-                         alignementTexte='CENTRE', cheminPolice=None)]
+objets += [unite(n, 'joueur', v[1], v[2], True) for n, v in HEROS.items()] + [unite(n, 'ennemi', v[1], v[2], True) for n, v in MONSTRES.items()]
+NOMS_UNITES = [('hero1', 'knight'), ('hero2', 'archer'), ('foe1', 'orc'), ('foe2', 'rat')]
+objets += [texte('turn_text', 1240, 130, 640, 90, ' ', 56, OR, z=60, prefixe=P, alignementTexte='CENTRE', cheminPolice=None)]
+for i, (u, cle) in enumerate(NOMS_UNITES):
+    y = 260 + i * 70
+    objets += [texte('lab_' + u, 1240, y, 330, 60, ' ', 36, BLANC, z=60, prefixe=P, alignementTexte='DROITE', cheminPolice=None),
+               texte('val_' + u, 1590, y - 4, 290, 70, '-', 40, VERT if u.startswith('hero') else ROUGE, z=60, prefixe=P, cheminPolice=None)]
+objets += [texte('hint_text', 1240, 560, 640, 150, ' ', 30, BLANC, z=60, prefixe=P, alignementTexte='CENTRE', cheminPolice=None)]
+def bouton(nom, x, w):
+    b = objet(nom, x, 760, largeur=w, hauteur=120, z=60, prefixe=P, afficherFondColore=True, couleur=argb('#2B6CB0'), estZoneDeClic=True)
+    return [b, texte(nom + '_text', 0, 28, w, 70, ' ', 42, BLANC, z=61, prefixe=P, parentId=b['id'], alignementTexte='CENTRE', cheminPolice=None)]
+objets += bouton('btn_wait', 1250, 290) + bouton('btn_end', 1570, 300)
 
 # ---------------------------------------------------------------- logique
 L = Logique()
 ENSUITE = lambda n: (n[0], 'port_ensuite', 2)
-def evenement_local(id, nom):
+def local(id, nom):
     return L.evenement(id, 'NoeudEventPersonnalise', {"Nom de l'événement": nom})
 def appeler(depuis, id, nom, **kw):
     return L.action(depuis, id, 'appeler_evenement', {'evenement': nom}, **kw)
 def dire(depuis, id, cle, cible):
     return L.action(depuis, id, 'afficher_dialogue', {'cle': cle}, cible)
-def chemin_vers_objet(depuis, id, qui, vers, vitesse):
-    t = L.action(depuis, id, 'chemin_vers_objet', {'vitesse': vitesse, 'diagonales': 'false'}, qui)
-    L.noeud(id)['cibleNomB'] = vers
+def var(depuis, id, nom, valeur):
+    return L.action(depuis, id, 'modifier_variable', {'valeur': valeur}, None, nom)
+def cond(depuis, id, texte_):
+    return L.action(depuis, id, 'condition', {'condition': texte_})
+ACC = {'colonne': '=colonne(doigt.x + camera.x)', 'ligne': '=ligne(doigt.y + camera.y)'}
+def montrer_deplacement(depuis, id, h):
+    return L.action(depuis, id, 'montrer_cases', {'mode': 'zc_deplacement', 'pas': '=%s.mouvement' % h, 'couleur': '#4CC9F0', 'opacite': 40, 'contour': 'o_oui',
+                                                  'chiffres': 'o_oui', 'murs': 'o_oui', 'bloquants': 'joueur,ennemi', 'terrains': '', 'zone': ''}, h)
+def montrer_attaque(depuis, id, h):
+    return L.action(depuis, id, 'montrer_cases', {'mode': 'zc_attaque', 'pas': '=%s.portee' % h, 'couleur': '#FF4040', 'opacite': 45, 'contour': 'o_oui',
+                                                  'chiffres': 'o_non', 'murs': 'o_non', 'bloquants': '', 'terrains': '', 'zone': 'attaque'}, h)
+def attaquer(depuis, id, qui, cible):
+    t = L.action(depuis, id, 'attaquer', {'puissance': 100, 'terrain': 'o_oui', 'minimum': 'o_oui', 'detruire': 'o_oui'}, qui)
+    L.noeud(id)['cibleNomB'] = cible
     return t
+def vie_texte(depuis, id, u):   # « 12 / 20 » dans le texte de l'unité
+    return L.action(depuis, id, 'modifier_propriete', {'propriete': 'texte', 'valeur': '=%s.vie + " / " + %s.vie_max' % (u, u)}, 'val_' + u)
 
-# Au démarrage : tout remettre à zéro, écrire les textes
+# Au démarrage : fiches d'unité, compteurs, textes, puis le tour du joueur commence
 e = L.evenement('start', 'NoeudEventStart')
-L.chaine(e, [('s_tour', 'modifier_variable', {'valeur': 1}, None, 'tour'), ('s_sel', 'modifier_variable', {'valeur': 0}, None, 'sel'),
-             ('s_joues', 'modifier_variable', {'valeur': 0}, None, 'joues'), ('s_f1', 'modifier_variable', {'valeur': 0}, None, 'fini1'),
-             ('s_f2', 'modifier_variable', {'valeur': 0}, None, 'fini2'), ('s_foes', 'modifier_variable', {'valeur': 2}, None, 'monstres'),
-             ('s_v1', 'modifier_variable', {'valeur': 1}, None, 'vivant1'), ('s_v2', 'modifier_variable', {'valeur': 1}, None, 'vivant2'),
-             ('s_vies', 'modifier_variable', {'valeur': 3}, None, 'vies'), ('s_marche', 'modifier_variable', {'valeur': 0}, None, 'marche')])
-L.chaine(('s_marche', 'port_suivant', 0), [
-    ('s_t1', 'afficher_dialogue', {'cle': 'your_turn'}, 'turn_text'), ('s_t2', 'afficher_dialogue', {'cle': 'help'}, 'help_text'),
-    ('s_t3', 'afficher_dialogue', {'cle': 'lives'}, 'lives_label'), ('s_t4', 'afficher_dialogue', {'cle': 'monsters'}, 'foes_label'),
-    ('s_t5', 'afficher_dialogue', {'cle': 'end_turn'}, 'btn_end_text'),
-    ('s_n1', 'modifier_propriete', {'propriete': 'texte', 'valeur': '=vies'}, 'lives_text'),
-    ('s_n2', 'modifier_propriete', {'propriete': 'texte', 'valeur': '=monstres'}, 'foes_text')])
+etapes = []
+for u, v in list(HEROS.items()) + list(MONSTRES.items()):
+    etapes.append(('f_' + u, 'definir_fiche', dict(zip(['vie', 'attaque', 'defense', 'mouvement', 'portee'], v[3])), u))
+for nom, valeur in (('etat', 0), ('sel', 0), ('joues', 0), ('heros', 2), ('monstres', 2), ('vh1', 1), ('vh2', 1), ('vf1', 1), ('vf2', 1)):
+    etapes.append(('s_' + nom, 'modifier_variable', {'valeur': valeur}, None, nom))
+t = L.chaine(e, etapes)
+for u, cle in NOMS_UNITES:
+    t = dire(t, 'sl_' + u, cle, 'lab_' + u)
+    t = vie_texte(t, 'sv_' + u, u)
+t = dire(t, 's_wait', 'wait', 'btn_wait_text')
+t = dire(t, 's_end', 'end_turn', 'btn_end_text')
+L.action(t, 's_go', 'tour_suivant', {'equipes': 'joueur,ennemi'})
 
-# 1. Choisir un héros
-for h in ('1', '2'):
-    e = L.evenement('pick%s' % h, 'NoeudEventClicObjet', cible='hero%s' % h)
-    t = L.chaine(e, [('pick%s_t' % h, 'condition', {'condition': 'tour = 1'})])
-    t = L.chaine(VRAI(t), [('pick%s_f' % h, 'condition', {'condition': 'fini%s = 0' % h})])
-    autre = '2' if h == '1' else '1'
-    L.chaine(VRAI(t), [('pick%s_sel' % h, 'modifier_variable', {'valeur': int(h)}, None, 'sel'),
-                       ('pick%s_big' % h, 'modifier_taille', {'x': 1.25, 'y': 1.25}, 'hero%s' % h),
-                       ('pick%s_small' % h, 'modifier_taille', {'x': 1, 'y': 1}, 'hero%s' % autre),
-                       ('pick%s_snd' % h, 'jouer_son', {'fichier': SON + 'pop.ogg', 'volume': 60})])
+# Début du tour du joueur (lancé tout seul par « Passer au tour suivant » : événement local « tour_joueur »)
+e = local('tour_joueur', 'tour_joueur')
+t = L.chaine(e, [('tj_etat', 'modifier_variable', {'valeur': 0}, None, 'etat'), ('tj_sel', 'modifier_variable', {'valeur': 0}, None, 'sel'),
+                 ('tj_joues', 'modifier_variable', {'valeur': 0}, None, 'joues'), ('tj_c', 'cacher_cases', {'zone': ''}),
+                 ('tj_a', 'modifier_taille', {'x': 1, 'y': 1}, 'hero1'), ('tj_b', 'modifier_taille', {'x': 1, 'y': 1}, 'hero2'),
+                 ('tj_t', 'afficher_dialogue', {'cle': 'your_turn'}, 'turn_text'), ('tj_h', 'afficher_dialogue', {'cle': 'hint_pick'}, 'hint_text')])
 
-# 2. Toucher le sol : le héros choisi y va
+# 1. Choisir un héros : ses cases accessibles apparaissent
+for h, autre in (('hero1', 'hero2'), ('hero2', 'hero1')):
+    n = h[-1]
+    e = L.evenement('pick_' + h, 'NoeudEventClicObjet', cible=h)
+    t = L.action(e, 'pk_tour_' + h, 'si_tour_de', {'equipe': 'joueur'})
+    t = cond(VRAI(t), 'pk_etat_' + h, 'etat < 2')
+    t = L.action(VRAI(t), 'pk_joue_' + h, 'si_a_joue', {}, h)
+    L.chaine(FAUX(t), [('pk_cache_' + h, 'cacher_cases', {'zone': ''}), ('pk_sel_' + h, 'modifier_variable', {'valeur': int(n)}, None, 'sel'),
+                       ('pk_etat1_' + h, 'modifier_variable', {'valeur': 1}, None, 'etat'),
+                       ('pk_big_' + h, 'modifier_taille', {'x': 1.25, 'y': 1.25}, h), ('pk_small_' + h, 'modifier_taille', {'x': 1, 'y': 1}, autre),
+                       ('pk_snd_' + h, 'jouer_son', {'fichier': SON + 'pop.ogg', 'volume': 60})])
+    t2 = montrer_deplacement(('pk_snd_' + h, 'port_suivant', 0), 'pk_zone_' + h, h)
+    dire(t2, 'pk_hint_' + h, 'hint_move', 'hint_text')
+
+# 2. Toucher le sol : si la case est bleue, le héros choisi y va
 e = L.evenement('ground', 'NoeudEventClicObjet', cible='terrain')
-t = L.chaine(e, [('g_tour', 'condition', {'condition': 'tour = 1'})])
-c1 = L.chaine(VRAI(t), [('g_c1', 'condition', {'condition': 'sel = 1'})])
-for h, c in (('1', c1),):
-    pass
-def aller_au_sol(depuis, h):
-    L.action(depuis, 'g_go%s' % h, 'chemin_vers_point', {'x': '=doigt.x', 'y': '=doigt.y', 'vitesse': 8, 'diagonales': 'false'}, 'hero%s' % h)
-    L.chaine(('g_go%s' % h, 'port_tout_de_suite', 0), [('g_go%s_sel' % h, 'modifier_variable', {'valeur': 0}, None, 'sel'),
-                                                       ('g_go%s_small' % h, 'modifier_taille', {'x': 1, 'y': 1}, 'hero%s' % h),
-                                                       ('g_go%s_fini' % h, 'modifier_variable', {'valeur': 1}, None, 'fini%s' % h),
-                                                       ('g_go%s_marche' % h, 'ajouter_variable', {'valeur': 1}, None, 'marche')])
-    appeler(('g_go%s' % h, 'port_arrive', 1), 'g_go%s_done' % h, 'fin_hero%s' % h, decalage_y=180)
-aller_au_sol(VRAI(c1), '1')
-c2 = L.chaine(FAUX(c1), [('g_c2', 'condition', {'condition': 'sel = 2'})])
-aller_au_sol(VRAI(c2), '2')
+t = cond(e, 'g_etat', 'etat = 1')
+t = cond(VRAI(t), 'g_sel', 'sel = 1')
+for h, depuis in (('hero1', VRAI(t)), ('hero2', FAUX(t))):
+    a = L.action(depuis, 'g_acc_' + h, 'si_case_accessible', dict(ACC, zone=''))
+    s = var(VRAI(a), 'g_mv_' + h, 'etat', 4)
+    go = L.action(s, 'g_go_' + h, 'chemin_vers_case', dict(ACC, vitesse=8, diagonales='false', bloquants='joueur,ennemi'), h)
+    appeler(('g_go_' + h, 'port_arrive', 1), 'g_arr_' + h, 'apres_deplacement', decalage_y=170)
+    dire(FAUX(a), 'g_far_' + h, 'too_far', 'hint_text')
 
-# 3. Toucher un monstre : le héros choisi va l'attaquer
-for f, vivant in (('1', 'vivant1'), ('2', 'vivant2')):
-    e = L.evenement('foe%s_tap' % f, 'NoeudEventClicObjet', cible='foe%s' % f)
-    t = L.chaine(e, [('a%s_tour' % f, 'condition', {'condition': 'tour = 1'})])
-    c1 = L.chaine(VRAI(t), [('a%s_c1' % f, 'condition', {'condition': 'sel = 1'})])
-    for h, entree in (('1', VRAI(c1)), ('2', None)):
-        if h == '2':
-            c2 = L.chaine(FAUX(c1), [('a%s_c2' % f, 'condition', {'condition': 'sel = 2'})])
-            entree = VRAI(c2)
-        idm = 'walk%s%s' % (h, f)
-        L.action(entree, idm, 'chemin_vers_point', {'x': '=doigt.x', 'y': '=doigt.y', 'vitesse': 8, 'diagonales': 'false'}, 'hero%s' % h)
-        L.chaine((idm, 'port_tout_de_suite', 0), [('%s_sel' % idm, 'modifier_variable', {'valeur': 0}, None, 'sel'),
-                                                  ('%s_small' % idm, 'modifier_taille', {'x': 1, 'y': 1}, 'hero%s' % h),
-                                                  ('%s_fini' % idm, 'modifier_variable', {'valeur': 1}, None, 'fini%s' % h),
-                                                  ('%s_marche' % idm, 'ajouter_variable', {'valeur': 1}, None, 'marche')])
-        appeler((idm, 'port_arrive', 1), '%s_hit' % idm, 'attaque%s%s' % (h, f), decalage_y=180)
+# 3. Après le déplacement : la zone d'attaque apparaît en rouge
+e = local('moved', 'apres_deplacement')
+t = L.chaine(e, [('m_c', 'cacher_cases', {'zone': ''}), ('m_etat', 'modifier_variable', {'valeur': 2}, None, 'etat'), ('m_sel', 'condition', {'condition': 'sel = 1'})])
+a1 = montrer_attaque(VRAI(t), 'm_a1', 'hero1')
+a2 = montrer_attaque(FAUX(t), 'm_a2', 'hero2')
+dire(ENSUITE(t), 'm_hint', 'hint_attack', 'hint_text')
 
-# L'attaque : le monstre est détruit
-for h in ('1', '2'):
-    for f in ('1', '2'):
-        e = evenement_local('atk%s%s' % (h, f), 'attaque%s%s' % (h, f))
-        t = L.chaine(e, [('atk%s%s_fx' % (h, f), 'effet_particules', {'modele': 'Explosion', 'quantite': 30, 'couleur': '', 'taille': 1.3}, 'foe%s' % f),
-                         ('atk%s%s_snd' % (h, f), 'jouer_son', {'fichier': SON + 'explosion.ogg', 'volume': 70}),
-                         ('atk%s%s_del' % (h, f), 'detruire_objet', None, 'foe%s' % f),
-                         ('atk%s%s_v' % (h, f), 'modifier_variable', {'valeur': 0}, None, 'vivant%s' % f),
-                         ('atk%s%s_n' % (h, f), 'ajouter_variable', {'valeur': -1}, None, 'monstres'),
-                         ('atk%s%s_txt' % (h, f), 'modifier_propriete', {'propriete': 'texte', 'valeur': '=monstres'}, 'foes_text'),
-                         ('atk%s%s_c' % (h, f), 'condition', {'condition': 'monstres <= 0'})])
-        appeler(VRAI(t), 'atk%s%s_win' % (h, f), 'victoire', decalage_y=0)
-        appeler(FAUX(t), 'atk%s%s_end' % (h, f), 'fin_hero%s' % h, decalage_y=0)
+# 4. Toucher un monstre dans la zone rouge : le héros choisi l'attaque
+for f in MONSTRES:
+    fn = f[-1]
+    e = L.evenement('hit_' + f, 'NoeudEventClicObjet', cible=f)
+    t = cond(e, 'a_etat_' + f, 'etat = 2')
+    t = cond(VRAI(t), 'a_sel_' + f, 'sel = 1')
+    for h, depuis in (('hero1', VRAI(t)), ('hero2', FAUX(t))):
+        acc = L.action(depuis, 'a_acc_%s_%s' % (f, h), 'si_case_accessible', dict(ACC, zone='attaque'))
+        hit = attaquer(VRAI(acc), 'a_hit_%s_%s' % (f, h), h, f)
+        v = vie_texte(('a_hit_%s_%s' % (f, h), 'port_vivant', 0), 'a_vie_%s_%s' % (f, h), f)
+        appeler(v, 'a_fin_%s_%s' % (f, h), 'fin_action')
+        d = L.action(('a_hit_%s_%s' % (f, h), 'port_detruit', 1), 'a_x_%s_%s' % (f, h), 'modifier_texte', {'valeur': 'X'}, 'val_' + f, decalage_y=150)
+        d = L.action(d, 'a_n_%s_%s' % (f, h), 'ajouter_variable', {'valeur': -1}, None, 'monstres')
+        d = L.action(d, 'a_v_%s_%s' % (f, h), 'modifier_variable', {'valeur': 0}, None, 'vf' + fn)
+        d = cond(d, 'a_w_%s_%s' % (f, h), 'monstres <= 0')
+        appeler(VRAI(d), 'a_win_%s_%s' % (f, h), 'victoire')
+        appeler(FAUX(d), 'a_cont_%s_%s' % (f, h), 'fin_action')
+        dire(FAUX(acc), 'a_far_%s_%s' % (f, h), 'too_far', 'hint_text')
 
-# Un héros a fini son action : il devient gris ; si les deux ont joué, c'est aux monstres
-for h in ('1', '2'):
-    e = evenement_local('done%s' % h, 'fin_hero%s' % h)
-    t = L.chaine(e, [('done%s_m' % h, 'ajouter_variable', {'valeur': -1}, None, 'marche'),
-                     ('done%s_f' % h, 'modifier_variable', {'valeur': 1}, None, 'fini%s' % h),
-                     ('done%s_g' % h, 'filtre_couleur', {'filtre': 'Noir et Blanc'}, 'hero%s' % h),
-                     ('done%s_j' % h, 'ajouter_variable', {'valeur': 1}, None, 'joues'),
-                     ('done%s_c' % h, 'condition', {'condition': 'joues >= 2'})])
-    appeler(VRAI(t), 'done%s_go' % h, 'tour_monstres')
+# 5. Fin de l'action d'un héros : il a joué ; quand tous ont joué, les monstres jouent
+e = local('fin_action', 'fin_action')
+t = cond(e, 'fa_sel', 'sel = 1')
+L.action(VRAI(t), 'fa_j1', 'marquer_joue', {}, 'hero1')
+L.action(FAUX(t), 'fa_j2', 'marquer_joue', {}, 'hero2', decalage_y=150)
+t = L.chaine(ENSUITE(t), [('fa_cache', 'cacher_cases', {'zone': ''}), ('fa_a', 'modifier_taille', {'x': 1, 'y': 1}, 'hero1'),
+                          ('fa_b', 'modifier_taille', {'x': 1, 'y': 1}, 'hero2'), ('fa_etat', 'modifier_variable', {'valeur': 0}, None, 'etat'),
+                          ('fa_sel0', 'modifier_variable', {'valeur': 0}, None, 'sel'), ('fa_n', 'ajouter_variable', {'valeur': 1}, None, 'joues'),
+                          ('fa_hint', 'afficher_dialogue', {'cle': 'hint_pick'}, 'hint_text'), ('fa_c', 'condition', {'condition': 'joues >= heros'})])
+L.action(VRAI(t), 'fa_next', 'tour_suivant', {'equipes': 'joueur,ennemi'})
 
-# Bouton « Fin du tour »
-e = L.evenement('end_tap', 'NoeudEventClicObjet', cible='btn_end')
-t = L.chaine(e, [('end_c', 'condition', {'condition': 'tour = 1'})])
-t = L.chaine(VRAI(t), [('end_m', 'condition', {'condition': 'marche = 0'})])
-appeler(VRAI(t), 'end_go', 'tour_monstres')
+# 6. Boutons « Attendre » (le héros choisi ne fait rien de plus) et « Fin du tour »
+e = L.evenement('btn_wait', 'NoeudEventClicObjet', cible='btn_wait')
+t = cond(e, 'w_a', 'etat > 0')
+t = cond(VRAI(t), 'w_b', 'etat < 3')
+appeler(VRAI(t), 'w_go', 'fin_action')
+e = L.evenement('btn_end', 'NoeudEventClicObjet', cible='btn_end')
+t = L.action(e, 'e_tour', 'si_tour_de', {'equipe': 'joueur'})
+t = cond(VRAI(t), 'e_etat', 'etat < 3')
+L.chaine(VRAI(t), [('e_cache', 'cacher_cases', {'zone': ''}), ('e_a', 'modifier_taille', {'x': 1, 'y': 1}, 'hero1'),
+                   ('e_b', 'modifier_taille', {'x': 1, 'y': 1}, 'hero2'), ('e_next', 'tour_suivant', {'equipes': 'joueur,ennemi'})])
 
-# Le tour des monstres : chacun va vers « son » héros pendant un moment, puis on s'arrête
-e = evenement_local('foes', 'tour_monstres')
-t = L.chaine(e, [('f_tour', 'modifier_variable', {'valeur': 2}, None, 'tour'),
-                 ('f_txt', 'afficher_dialogue', {'cle': 'enemy_turn'}, 'turn_text'),
-                 ('f_wait0', 'attendre', {'duree': 0.8}),
-                 ('f_c1', 'condition', {'condition': 'vivant1 = 1'})])
-chemin_vers_objet(VRAI(t), 'f_go1', 'foe1', 'hero1', 4)
-appeler(('f_go1', 'port_arrive', 1), 'f_hit1', 'monstre_touche', decalage_y=180)
-t = L.chaine(ENSUITE(t), [('f_c2', 'condition', {'condition': 'vivant2 = 1'})])
-chemin_vers_objet(VRAI(t), 'f_go2', 'foe2', 'hero2', 4)
-appeler(('f_go2', 'port_arrive', 1), 'f_hit2', 'monstre_touche', decalage_y=180)
-t = L.chaine(ENSUITE(t), [('f_wait', 'attendre', {'duree': 1.6}), ('f_s1', 'condition', {'condition': 'vivant1 = 1'})])
-L.action(VRAI(t), 'f_stop1', 'chemin_arreter', None, 'foe1')
-t = L.chaine(ENSUITE(t), [('f_s2', 'condition', {'condition': 'vivant2 = 1'})])
-L.action(VRAI(t), 'f_stop2', 'chemin_arreter', None, 'foe2')
-appeler(ENSUITE(t), 'f_new', 'nouveau_tour')
+# 7. Tour des monstres (lancé tout seul : événement local « tour_ennemi ») : chacun va à côté d'un héros vivant et l'attaque
+e = local('tour_ennemi', 'tour_ennemi')
+t = L.chaine(e, [('te_etat', 'modifier_variable', {'valeur': 4}, None, 'etat'), ('te_c', 'cacher_cases', {'zone': ''}),
+                 ('te_txt', 'afficher_dialogue', {'cle': 'enemy_turn'}, 'turn_text'), ('te_hint', 'afficher_dialogue', {'cle': 'enemy_turn'}, 'hint_text'),
+                 ('te_wait', 'attendre', {'duree': 0.6})])
+for f in MONSTRES:
+    fn = f[-1]
+    t = cond(t, 'te_v_' + f, 'vf%s = 1' % fn)
+    pere = VRAI(t)
+    for h, autre in (('hero1', 'hero2'), ('hero2', 'hero1')):
+        pn = h[-1]
+        c = cond(pere, 'te_h_%s_%s' % (f, h), 'vh%s = 1' % pn)
+        go = L.action(VRAI(c), 'te_go_%s_%s' % (f, h), 'chemin_vers_objet', {'vitesse': 6, 'diagonales': 'false', 'arret': 'ch_voisine', 'bloquants': 'joueur,ennemi'}, f)
+        L.noeud('te_go_%s_%s' % (f, h))['cibleNomB'] = h
+        appeler(('te_go_%s_%s' % (f, h), 'port_arrive', 1), 'te_arr_%s_%s' % (f, h), 'atk_%s_%s' % (f, h), decalage_y=170)
+        pere = FAUX(c)   # ce héros n'est plus là : on essaie l'autre
+    t = (t[0], 'port_ensuite', 2)
+t = L.chaine(t, [('te_wait2', 'attendre', {'duree': 2.6}), ('te_stop1', 'chemin_arreter', {}, 'foe1'), ('te_stop2', 'chemin_arreter', {}, 'foe2')])
+L.action(t, 'te_next', 'tour_suivant', {'equipes': 'joueur,ennemi'})
 
-# Un monstre touche un héros : une vie en moins
-e = evenement_local('hit', 'monstre_touche')
-t = L.chaine(e, [('h_v', 'ajouter_variable', {'valeur': -1}, None, 'vies'),
-                 ('h_txt', 'modifier_propriete', {'propriete': 'texte', 'valeur': '=vies'}, 'lives_text'),
-                 ('h_flash', 'flash_ecran', {'couleur': '#FF4040', 'intensite': 45, 'duree': 0.3}),
-                 ('h_shake', 'tremblement_camera', {'intensite': 10, 'duree': 400}),
-                 ('h_c', 'condition', {'condition': 'vies <= 0'})])
-appeler(VRAI(t), 'h_lose', 'defaite')
-
-# Nouveau tour : les héros redeviennent actifs
-e = evenement_local('newturn', 'nouveau_tour')
-L.chaine(e, [('n_tour', 'modifier_variable', {'valeur': 1}, None, 'tour'), ('n_sel', 'modifier_variable', {'valeur': 0}, None, 'sel'),
-             ('n_joues', 'modifier_variable', {'valeur': 0}, None, 'joues'), ('n_f1', 'modifier_variable', {'valeur': 0}, None, 'fini1'),
-             ('n_f2', 'modifier_variable', {'valeur': 0}, None, 'fini2'), ('n_m', 'modifier_variable', {'valeur': 0}, None, 'marche'),
-             ('n_g1', 'filtre_couleur', {'filtre': 'Aucun'}, 'hero1'), ('n_g2', 'filtre_couleur', {'filtre': 'Aucun'}, 'hero2'),
-             ('n_txt', 'afficher_dialogue', {'cle': 'your_turn'}, 'turn_text')])
+# 8. Un monstre attaque un héros
+for f in MONSTRES:
+    for h in HEROS:
+        pn = h[-1]
+        e = local('atk_%s_%s' % (f, h), 'atk_%s_%s' % (f, h))
+        hit = attaquer(e, 'at_hit_%s_%s' % (f, h), f, h)
+        v = L.chaine(('at_hit_%s_%s' % (f, h), 'port_vivant', 0), [('at_vie_%s_%s' % (f, h), 'modifier_propriete', {'propriete': 'texte', 'valeur': '=%s.vie + " / " + %s.vie_max' % (h, h)}, 'val_' + h),
+                                                                     ('at_fx_%s_%s' % (f, h), 'flash_ecran', {'couleur': '#FF4040', 'intensite': 35, 'duree': 0.25})])
+        d = L.action(('at_hit_%s_%s' % (f, h), 'port_detruit', 1), 'at_x_%s_%s' % (f, h), 'modifier_texte', {'valeur': 'X'}, 'val_' + h, decalage_y=150)
+        d = L.action(d, 'at_n_%s_%s' % (f, h), 'ajouter_variable', {'valeur': -1}, None, 'heros')
+        d = L.action(d, 'at_v_%s_%s' % (f, h), 'modifier_variable', {'valeur': 0}, None, 'vh' + pn)
+        d = cond(d, 'at_w_%s_%s' % (f, h), 'heros <= 0')
+        appeler(VRAI(d), 'at_lose_%s_%s' % (f, h), 'defaite')
 
 # Fin de partie
-e = evenement_local('win', 'victoire')
-L.chaine(e, [('w_tour', 'modifier_variable', {'valeur': 3}, None, 'tour'), ('w_txt', 'afficher_dialogue', {'cle': 'victory'}, 'turn_text'),
+e = local('win', 'victoire')
+L.chaine(e, [('w_etat', 'modifier_variable', {'valeur': 4}, None, 'etat'), ('w_c', 'cacher_cases', {'zone': ''}), ('w_txt', 'afficher_dialogue', {'cle': 'victory'}, 'turn_text'),
              ('w_fx', 'effet_particules', {'modele': 'Confettis', 'quantite': 150, 'couleur': '', 'taille': 1.5}, 'turn_text'),
              ('w_snd', 'jouer_son', {'fichier': SON + 'victoire.ogg', 'volume': 80}), ('w_wait', 'attendre', {'duree': 3}),
              ('w_again', 'recommencer_scene')])
-e = evenement_local('lose', 'defaite')
-L.chaine(e, [('l_tour', 'modifier_variable', {'valeur': 3}, None, 'tour'), ('l_txt', 'afficher_dialogue', {'cle': 'defeat'}, 'turn_text'),
+e = local('lose', 'defaite')
+L.chaine(e, [('l_etat', 'modifier_variable', {'valeur': 4}, None, 'etat'), ('l_c', 'cacher_cases', {'zone': ''}), ('l_txt', 'afficher_dialogue', {'cle': 'defeat'}, 'turn_text'),
              ('l_snd', 'jouer_son', {'fichier': SON + 'game_over.ogg', 'volume': 80}), ('l_wait', 'attendre', {'duree': 3}),
              ('l_again', 'recommencer_scene')])
 
+# Règle des formules : pas de colonne(doigt.x + camera.x) écrit à la main : on branche les nœuds verts « Colonne touchée » / « Ligne touchée »
+for n in list(L.noeuds):
+    cle = n.get('cleNoeud')
+    if cle in ('si_case_accessible', 'chemin_vers_case'):
+        for champ, vert in (('colonne', 'valeur_colonne_touchee'), ('ligne', 'valeur_ligne_touchee')):
+            vid = '%s_%s' % (n['id'], 'vc' if champ == 'colonne' else 'vl')
+            L.noeuds.append({'classeType': 'com.ludexa.moteur.NoeudGenerique', 'id': vid, 'portsEntree': [], 'x': 0.0, 'y': 0.0, 'cleNoeud': vert, 'parametres': {}})
+            n['parametres']['%s.%s' % (cle, champ)] = '@valeur:' + vid
 scenes = [scene('Jeu', objets, P)]
-VARIABLES = variables(P, [(n, 0) for n in ('tour', 'sel', 'joues', 'fini1', 'fini2', 'monstres', 'vivant1', 'vivant2', 'vies', 'marche')])
-
+VARIABLES = variables(P, [(n, 0) for n in ('etat', 'sel', 'joues', 'heros', 'monstres', 'vh1', 'vh2', 'vf1', 'vf2')])
 with tempfile.TemporaryDirectory() as tmp:
     p = os.path.join(tmp, 'projet')
     ecrire_projet(p, scenes, {'Jeu': L.ranger().json()}, VARIABLES, ANIMS, TEXTES, pixels_nets=True)
     ecrire(os.path.join(p, 'meta.json'), {'nom': 'Tactics demo', 'dateCreation': '2026-10-25 12:00:00', 'dateModif': '2026-10-25 12:00:00'})
+    with open(os.path.join(p, 'terrains.json'), 'w') as f:
+        json.dump(TERRAINS, f)
     sortie = os.path.join(SITE_RACINE, 'exemples')
     zipper_projet(p, os.path.join(sortie, 'tactics_demo.zip'))
     vue = [o for o in objets if o['nom'] not in ('terrain',)]
-    im = dessiner(os.path.join(tmp, 'x.png'), vue, nets=True, textes={'turn_text': TEXTES['your_turn']['en'], 'lives_label': 'Lives', 'foes_label': 'Monsters', 'help_text': '', 'btn_end_text': 'End turn'})
-    carte = im.crop((GX - 20, GY - 20, GX + 14 * CASE + 20, GY + 10 * CASE + 20))
-    carre = Image.new('RGB', (carte.width, carte.width), (22, 48, 31))   # vignette carrée : la carte au centre
-    carre.paste(carte, (0, (carte.width - carte.height) // 2))
+    im = dessiner(os.path.join(tmp, 'x.png'), vue, nets=True, textes={'turn_text': TEXTES['your_turn']['en'], 'btn_wait_text': 'Wait', 'btn_end_text': 'End turn',
+                                                                      'lab_hero1': 'Knight', 'lab_hero2': 'Archer', 'lab_foe1': 'Orc', 'lab_foe2': 'Rat', 'hint_text': ''})
+    carte_im = im.crop((GX - 20, GY - 20, GX + 14 * CASE + 20, GY + 10 * CASE + 20))
+    carre = Image.new('RGB', (carte_im.width, carte_im.width), (22, 48, 31))
+    carre.paste(carte_im, (0, (carte_im.width - carte_im.height) // 2))
     carre.resize((300, 300), Image.LANCZOS).save(os.path.join(sortie, 'tactics_demo.png'), optimize=True)
 print('%d nœuds -> exemples/tactics_demo.zip (%d Ko)' % (len(L.noeuds), os.path.getsize(os.path.join(sortie, 'tactics_demo.zip')) // 1024))
