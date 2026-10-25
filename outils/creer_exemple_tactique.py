@@ -111,8 +111,8 @@ L.chaine(e, [('s_tour', 'modifier_variable', {'valeur': 1}, None, 'tour'), ('s_s
              ('s_joues', 'modifier_variable', {'valeur': 0}, None, 'joues'), ('s_f1', 'modifier_variable', {'valeur': 0}, None, 'fini1'),
              ('s_f2', 'modifier_variable', {'valeur': 0}, None, 'fini2'), ('s_foes', 'modifier_variable', {'valeur': 2}, None, 'monstres'),
              ('s_v1', 'modifier_variable', {'valeur': 1}, None, 'vivant1'), ('s_v2', 'modifier_variable', {'valeur': 1}, None, 'vivant2'),
-             ('s_vies', 'modifier_variable', {'valeur': 3}, None, 'vies')])
-L.chaine(('s_vies', 'port_suivant', 0), [
+             ('s_vies', 'modifier_variable', {'valeur': 3}, None, 'vies'), ('s_marche', 'modifier_variable', {'valeur': 0}, None, 'marche')])
+L.chaine(('s_marche', 'port_suivant', 0), [
     ('s_t1', 'afficher_dialogue', {'cle': 'your_turn'}, 'turn_text'), ('s_t2', 'afficher_dialogue', {'cle': 'help'}, 'help_text'),
     ('s_t3', 'afficher_dialogue', {'cle': 'lives'}, 'lives_label'), ('s_t4', 'afficher_dialogue', {'cle': 'monsters'}, 'foes_label'),
     ('s_t5', 'afficher_dialogue', {'cle': 'end_turn'}, 'btn_end_text'),
@@ -139,7 +139,9 @@ for h, c in (('1', c1),):
 def aller_au_sol(depuis, h):
     L.action(depuis, 'g_go%s' % h, 'chemin_vers_point', {'x': '=doigt.x', 'y': '=doigt.y', 'vitesse': 8, 'diagonales': 'false'}, 'hero%s' % h)
     L.chaine(('g_go%s' % h, 'port_tout_de_suite', 0), [('g_go%s_sel' % h, 'modifier_variable', {'valeur': 0}, None, 'sel'),
-                                                       ('g_go%s_small' % h, 'modifier_taille', {'x': 1, 'y': 1}, 'hero%s' % h)])
+                                                       ('g_go%s_small' % h, 'modifier_taille', {'x': 1, 'y': 1}, 'hero%s' % h),
+                                                       ('g_go%s_fini' % h, 'modifier_variable', {'valeur': 1}, None, 'fini%s' % h),
+                                                       ('g_go%s_marche' % h, 'ajouter_variable', {'valeur': 1}, None, 'marche')])
     appeler(('g_go%s' % h, 'port_arrive', 1), 'g_go%s_done' % h, 'fin_hero%s' % h, decalage_y=180)
 aller_au_sol(VRAI(c1), '1')
 c2 = L.chaine(FAUX(c1), [('g_c2', 'condition', {'condition': 'sel = 2'})])
@@ -155,9 +157,11 @@ for f, vivant in (('1', 'vivant1'), ('2', 'vivant2')):
             c2 = L.chaine(FAUX(c1), [('a%s_c2' % f, 'condition', {'condition': 'sel = 2'})])
             entree = VRAI(c2)
         idm = 'walk%s%s' % (h, f)
-        chemin_vers_objet(entree, idm, 'hero%s' % h, 'foe%s' % f, 8)
+        L.action(entree, idm, 'chemin_vers_point', {'x': '=doigt.x', 'y': '=doigt.y', 'vitesse': 8, 'diagonales': 'false'}, 'hero%s' % h)
         L.chaine((idm, 'port_tout_de_suite', 0), [('%s_sel' % idm, 'modifier_variable', {'valeur': 0}, None, 'sel'),
-                                                  ('%s_small' % idm, 'modifier_taille', {'x': 1, 'y': 1}, 'hero%s' % h)])
+                                                  ('%s_small' % idm, 'modifier_taille', {'x': 1, 'y': 1}, 'hero%s' % h),
+                                                  ('%s_fini' % idm, 'modifier_variable', {'valeur': 1}, None, 'fini%s' % h),
+                                                  ('%s_marche' % idm, 'ajouter_variable', {'valeur': 1}, None, 'marche')])
         appeler((idm, 'port_arrive', 1), '%s_hit' % idm, 'attaque%s%s' % (h, f), decalage_y=180)
 
 # L'attaque : le monstre est détruit
@@ -177,7 +181,8 @@ for h in ('1', '2'):
 # Un héros a fini son action : il devient gris ; si les deux ont joué, c'est aux monstres
 for h in ('1', '2'):
     e = evenement_local('done%s' % h, 'fin_hero%s' % h)
-    t = L.chaine(e, [('done%s_f' % h, 'modifier_variable', {'valeur': 1}, None, 'fini%s' % h),
+    t = L.chaine(e, [('done%s_m' % h, 'ajouter_variable', {'valeur': -1}, None, 'marche'),
+                     ('done%s_f' % h, 'modifier_variable', {'valeur': 1}, None, 'fini%s' % h),
                      ('done%s_g' % h, 'filtre_couleur', {'filtre': 'Noir et Blanc'}, 'hero%s' % h),
                      ('done%s_j' % h, 'ajouter_variable', {'valeur': 1}, None, 'joues'),
                      ('done%s_c' % h, 'condition', {'condition': 'joues >= 2'})])
@@ -186,6 +191,7 @@ for h in ('1', '2'):
 # Bouton « Fin du tour »
 e = L.evenement('end_tap', 'NoeudEventClicObjet', cible='btn_end')
 t = L.chaine(e, [('end_c', 'condition', {'condition': 'tour = 1'})])
+t = L.chaine(VRAI(t), [('end_m', 'condition', {'condition': 'marche = 0'})])
 appeler(VRAI(t), 'end_go', 'tour_monstres')
 
 # Le tour des monstres : chacun va vers « son » héros pendant un moment, puis on s'arrête
@@ -218,7 +224,7 @@ appeler(VRAI(t), 'h_lose', 'defaite')
 e = evenement_local('newturn', 'nouveau_tour')
 L.chaine(e, [('n_tour', 'modifier_variable', {'valeur': 1}, None, 'tour'), ('n_sel', 'modifier_variable', {'valeur': 0}, None, 'sel'),
              ('n_joues', 'modifier_variable', {'valeur': 0}, None, 'joues'), ('n_f1', 'modifier_variable', {'valeur': 0}, None, 'fini1'),
-             ('n_f2', 'modifier_variable', {'valeur': 0}, None, 'fini2'),
+             ('n_f2', 'modifier_variable', {'valeur': 0}, None, 'fini2'), ('n_m', 'modifier_variable', {'valeur': 0}, None, 'marche'),
              ('n_g1', 'filtre_couleur', {'filtre': 'Aucun'}, 'hero1'), ('n_g2', 'filtre_couleur', {'filtre': 'Aucun'}, 'hero2'),
              ('n_txt', 'afficher_dialogue', {'cle': 'your_turn'}, 'turn_text')])
 
@@ -234,7 +240,7 @@ L.chaine(e, [('l_tour', 'modifier_variable', {'valeur': 3}, None, 'tour'), ('l_t
              ('l_again', 'recommencer_scene')])
 
 scenes = [scene('Jeu', objets, P)]
-VARIABLES = variables(P, [(n, 0) for n in ('tour', 'sel', 'joues', 'fini1', 'fini2', 'monstres', 'vivant1', 'vivant2', 'vies')])
+VARIABLES = variables(P, [(n, 0) for n in ('tour', 'sel', 'joues', 'fini1', 'fini2', 'monstres', 'vivant1', 'vivant2', 'vies', 'marche')])
 
 with tempfile.TemporaryDirectory() as tmp:
     p = os.path.join(tmp, 'projet')
