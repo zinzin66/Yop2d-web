@@ -160,12 +160,16 @@
 <h2>Step 7: win</h2>
 <div class="method">
 <p>After the <strong>“Modify Text”</strong> of step 6, add:</p>
-<ol><li><strong>“Condition”</strong> <code>=bricks &lt;= 0</code>.</li><li>On the <strong>True</strong> output: <strong>“Small message at the bottom of the screen”</strong> with the message <strong>You win!</strong>, then <strong>“Wait”</strong> 2 seconds, then <strong>“Restart the scene”</strong>.</li></ol>
+<ol><li><strong>“Condition”</strong> <code>=bricks &lt;= 0</code>.</li><li>On the <strong>True</strong> output: <strong>“Modify Variable”</strong> <strong>vx</strong> = <code>0</code>, <strong>“Modify Variable”</strong> <strong>vy</strong> = <code>0</code> (the ball stops), then <strong>“Small message at the bottom of the screen”</strong> with the message <strong>You win!</strong>, then <strong>“Wait”</strong> 2 seconds, then <strong>“Restart the scene”</strong>.</li></ol>
 <div class="chaine">
 <div class="noeud"><b>Modify Text</b><span>scoreText</span></div>
 <div class="fleche">→</div>
 <div class="noeud condition"><b>Condition</b><span>=bricks &lt;= 0</span></div>
 <div class="fleche"><em>True</em> →</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
 <div class="noeud"><b>Small message at the bottom of the screen</b><span>You win!</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Wait</b><span>2</span></div>
@@ -177,7 +181,7 @@
 <h2>Step 8: lives and Game Over</h2>
 <div class="method">
 <p>When the ball falls below the paddle, the player loses a life. We continue the chain from step 4: after the third <strong>“Condition”</strong> (the top), add a fourth one, linked by its <strong>“Then”</strong> output.</p>
-<ol><li><strong>“Condition”</strong> <code>=ball.y &gt;= 1920</code>, output <strong>True</strong>.</li><li><strong>“Add to Variable”</strong>: variable <strong>lives</strong>, <strong>Value to add = -1</strong>.</li><li><strong>“Modify Text”</strong>: target <strong>livesText</strong>, <strong>New text</strong>, value <code>="Lives: " + lives</code>.</li><li><strong>“Condition”</strong> <code>=lives &lt;= 0</code>.</li><li>Output <strong>True</strong> (no lives left): <strong>“Small message at the bottom of the screen”</strong> “Game over!”, <strong>“Wait”</strong> 2 seconds, <strong>“Restart the scene”</strong>.</li><li>Output <strong>False</strong> (lives left): <strong>“Move Object”</strong> the <strong>ball</strong> to X = <code>518</code>, Y = <code>1000</code>, then <strong>“Modify Variable”</strong> <strong>vy</strong> = <code>-9</code>, then <strong>“Modify Variable”</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
+<ol><li><strong>“Condition”</strong> <code>=ball.y &gt;= 1920</code>, output <strong>True</strong>.</li><li><strong>“Add to Variable”</strong>: variable <strong>lives</strong>, <strong>Value to add = -1</strong>.</li><li><strong>“Modify Text”</strong>: target <strong>livesText</strong>, <strong>New text</strong>, value <code>="Lives: " + lives</code>.</li><li><strong>“Condition”</strong> <code>=lives &lt;= 0</code>.</li><li>Output <strong>True</strong> (no lives left): <strong>“Move Object”</strong> the <strong>ball</strong> to X = <code>518</code>, Y = <code>1000</code>, <strong>“Modify Variable”</strong> <strong>vx</strong> = <code>0</code>, <strong>“Modify Variable”</strong> <strong>vy</strong> = <code>0</code> (the ball is put back in the middle and stops), then <strong>“Small message at the bottom of the screen”</strong> “Game over!”, <strong>“Wait”</strong> 2 seconds, <strong>“Restart the scene”</strong>.</li><li>Output <strong>False</strong> (lives left): <strong>“Move Object”</strong> the <strong>ball</strong> to X = <code>518</code>, Y = <code>1000</code>, then <strong>“Modify Variable”</strong> <strong>vy</strong> = <code>-9</code>, then <strong>“Modify Variable”</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
 <div class="chaine">
 <div class="noeud condition"><b>Condition</b><span>=ball.y &gt;= 1920</span></div>
 <div class="fleche"><em>True</em> →</div>
@@ -190,12 +194,19 @@
 <div class="chaine">
 <div class="noeud condition"><b>Condition</b><span>=lives &lt;= 0</span></div>
 <div class="fleche"><em>True</em> →</div>
+<div class="noeud"><b>Move Object</b><span>ball · 518 · 1000</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
 <div class="noeud"><b>Small message at the bottom of the screen</b><span>Game over!</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Wait</b><span>2</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Restart the scene</b></div>
 </div>
+<div class="tip">👉 <strong>Why stop the ball before waiting?</strong> During the 2 seconds of waiting, the game keeps running. If the ball stayed below the screen, it would cost a life on every frame, and the lives counter would drop very low (-178!). Put back in the middle and motionless, it no longer causes trouble.</div>
 <div class="chaine">
 <div class="noeud condition"><b>Condition</b><span>=lives &lt;= 0</span></div>
 <div class="fleche"><em>False</em> →</div>

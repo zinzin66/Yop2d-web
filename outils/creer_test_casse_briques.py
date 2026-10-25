@@ -55,7 +55,10 @@ c4 = L.action(ENSUITE(c3), 'bottom', 'condition', {'condition': '=balle.y >= 192
 t = L.chaine(VRAI(c4), [('lose_life', 'ajouter_variable', {'valeur': -1}, None, 'vies'),
                         ('show_lives', 'modifier_texte', {'valeur': '="Vies : " + vies'}, 'texteVies'),
                         ('no_lives', 'condition', {'condition': '=vies <= 0'})])
-L.chaine(VRAI(t), [('lost_toast', 'toast', {'message': 'Perdu !'}), ('lost_wait', 'attendre', {'duree': 2}),
+L.chaine(VRAI(t), [('lost_ball', 'deplacer', {'x': 518, 'y': 1000}, 'balle'),
+                   ('lost_vx', 'modifier_variable', {'valeur': 0}, None, 'vx'),
+                   ('lost_vy', 'modifier_variable', {'valeur': 0}, None, 'vy'),
+                   ('lost_toast', 'toast', {'message': 'Perdu !'}), ('lost_wait', 'attendre', {'duree': 2}),
                    ('lost_restart', 'recommencer_scene')])
 L.chaine(FAUX(t), [('relaunch', 'deplacer', {'x': 518, 'y': 1000}, 'balle'),
                    ('relaunch_vy', 'modifier_variable', {'valeur': -9}, None, 'vy'),
@@ -73,7 +76,9 @@ t = L.chaine(e, [('brick_destroy', 'detruire_objet', {}, '__OBJET_IMPLIQUE__'),
                  ('brick_count', 'ajouter_variable', {'valeur': -1}, None, 'briques'),
                  ('brick_text', 'modifier_texte', {'valeur': '="Score : " + score'}, 'texteScore'),
                  ('all_gone', 'condition', {'condition': '=briques <= 0'})])
-L.chaine(VRAI(t), [('win_toast', 'toast', {'message': 'Gagné !'}), ('win_wait', 'attendre', {'duree': 2}),
+L.chaine(VRAI(t), [('win_vx', 'modifier_variable', {'valeur': 0}, None, 'vx'),
+                   ('win_vy', 'modifier_variable', {'valeur': 0}, None, 'vy'),
+                   ('win_toast', 'toast', {'message': 'Gagné !'}), ('win_wait', 'attendre', {'duree': 2}),
                    ('win_restart', 'recommencer_scene')])
 
 scene_jeu = scene('Jeu', objets, P)

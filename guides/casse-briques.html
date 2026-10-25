@@ -160,12 +160,16 @@
 <h2>Étape 7 : gagner</h2>
 <div class="method">
 <p>Après <strong>« Modifier Texte »</strong> de l'étape 6, ajoute :</p>
-<ol><li><strong>« Condition »</strong> <code>=briques &lt;= 0</code>.</li><li>Sur la sortie <strong>Vrai</strong> : <strong>« Petit message en bas de l'écran »</strong> avec le message <strong>Gagné !</strong>, puis <strong>« Attendre »</strong> 2 secondes, puis <strong>« Recommencer la scène »</strong>.</li></ol>
+<ol><li><strong>« Condition »</strong> <code>=briques &lt;= 0</code>.</li><li>Sur la sortie <strong>Vrai</strong> : <strong>« Modifier Variable »</strong> <strong>vx</strong> = <code>0</code>, <strong>« Modifier Variable »</strong> <strong>vy</strong> = <code>0</code> (la balle s'arrête), puis <strong>« Petit message en bas de l'écran »</strong> avec le message <strong>Gagné !</strong>, puis <strong>« Attendre »</strong> 2 secondes, puis <strong>« Recommencer la scène »</strong>.</li></ol>
 <div class="chaine">
 <div class="noeud"><b>Modifier Texte</b><span>texteScore</span></div>
 <div class="fleche">→</div>
 <div class="noeud condition"><b>Condition</b><span>=briques &lt;= 0</span></div>
 <div class="fleche"><em>Vrai</em> →</div>
+<div class="noeud"><b>Modifier Variable</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
 <div class="noeud"><b>Petit message en bas de l'écran</b><span>Gagné !</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Attendre</b><span>2</span></div>
@@ -177,7 +181,7 @@
 <h2>Étape 8 : les vies et le Game Over</h2>
 <div class="method">
 <p>Quand la balle tombe sous la raquette, le joueur perd une vie. On reprend la chaîne de l'étape 4 : après la troisième <strong>« Condition »</strong> (le haut), ajoute une quatrième, reliée par sa sortie <strong>« Ensuite »</strong>.</p>
-<ol><li><strong>« Condition »</strong> <code>=balle.y &gt;= 1920</code>, sortie <strong>Vrai</strong>.</li><li><strong>« Ajouter à Variable »</strong> : variable <strong>vies</strong>, <strong>Valeur à ajouter = -1</strong>.</li><li><strong>« Modifier Texte »</strong> : cible <strong>texteVies</strong>, <strong>Nouveau texte</strong>, valeur <code>="Vies : " + vies</code>.</li><li><strong>« Condition »</strong> <code>=vies &lt;= 0</code>.</li><li>Sortie <strong>Vrai</strong> (plus de vie) : <strong>« Petit message en bas de l'écran »</strong> « Perdu ! », <strong>« Attendre »</strong> 2 secondes, <strong>« Recommencer la scène »</strong>.</li><li>Sortie <strong>Faux</strong> (il reste des vies) : <strong>« Déplacer Objet »</strong> la <strong>balle</strong> à X = <code>518</code>, Y = <code>1000</code>, puis <strong>« Modifier Variable »</strong> <strong>vy</strong> = <code>-9</code>, puis <strong>« Modifier Variable »</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
+<ol><li><strong>« Condition »</strong> <code>=balle.y &gt;= 1920</code>, sortie <strong>Vrai</strong>.</li><li><strong>« Ajouter à Variable »</strong> : variable <strong>vies</strong>, <strong>Valeur à ajouter = -1</strong>.</li><li><strong>« Modifier Texte »</strong> : cible <strong>texteVies</strong>, <strong>Nouveau texte</strong>, valeur <code>="Vies : " + vies</code>.</li><li><strong>« Condition »</strong> <code>=vies &lt;= 0</code>.</li><li>Sortie <strong>Vrai</strong> (plus de vie) : <strong>« Déplacer Objet »</strong> la <strong>balle</strong> à X = <code>518</code>, Y = <code>1000</code>, <strong>« Modifier Variable »</strong> <strong>vx</strong> = <code>0</code>, <strong>« Modifier Variable »</strong> <strong>vy</strong> = <code>0</code> (la balle est remise au milieu et s'arrête), puis <strong>« Petit message en bas de l'écran »</strong> « Perdu ! », <strong>« Attendre »</strong> 2 secondes, <strong>« Recommencer la scène »</strong>.</li><li>Sortie <strong>Faux</strong> (il reste des vies) : <strong>« Déplacer Objet »</strong> la <strong>balle</strong> à X = <code>518</code>, Y = <code>1000</code>, puis <strong>« Modifier Variable »</strong> <strong>vy</strong> = <code>-9</code>, puis <strong>« Modifier Variable »</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
 <div class="chaine">
 <div class="noeud condition"><b>Condition</b><span>=balle.y &gt;= 1920</span></div>
 <div class="fleche"><em>Vrai</em> →</div>
@@ -190,12 +194,19 @@
 <div class="chaine">
 <div class="noeud condition"><b>Condition</b><span>=vies &lt;= 0</span></div>
 <div class="fleche"><em>Vrai</em> →</div>
+<div class="noeud"><b>Déplacer Objet</b><span>balle · 518 · 1000</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
 <div class="noeud"><b>Petit message en bas de l'écran</b><span>Perdu !</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Attendre</b><span>2</span></div>
 <div class="fleche">→</div>
 <div class="noeud"><b>Recommencer la scène</b></div>
 </div>
+<div class="tip">👉 <strong>Pourquoi arrêter la balle avant d'attendre ?</strong> Pendant les 2 secondes d'attente, le jeu continue. Si la balle restait sous l'écran, elle ferait perdre une vie à chaque image, et le compteur de vies descendrait très bas (-178 !). Remise au milieu et immobile, elle ne gêne plus.</div>
 <div class="chaine">
 <div class="noeud condition"><b>Condition</b><span>=vies &lt;= 0</span></div>
 <div class="fleche"><em>Faux</em> →</div>

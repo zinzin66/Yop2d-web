@@ -410,7 +410,7 @@
           "ol",
           [
             "**[[condition]]** `=briques <= 0`.",
-            "Sur la sortie **{{lang:port_vrai}}** : **[[toast]]** avec le message **Gagné !**, puis **[[attendre]]** 2 secondes, puis **[[recommencer_scene]]**."
+            "Sur la sortie **{{lang:port_vrai}}** : **[[modifier_variable]]** **vx** = `0`, **[[modifier_variable]]** **vy** = `0` (la balle s'arrête), puis **[[toast]]** avec le message **Gagné !**, puis **[[attendre]]** 2 secondes, puis **[[recommencer_scene]]**."
           ]
         ],
         [
@@ -432,6 +432,22 @@
             [
               "→",
               "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
             ],
             [
               "n",
@@ -479,7 +495,7 @@
             "**[[ajouter_variable]]** : variable **vies**, **{{lang:ajouter_variable.valeur}} = -1**.",
             "**[[modifier_texte]]** : cible **texteVies**, **{{lang:modifier_texte.valeur}}**, valeur `=\"Vies : \" + vies`.",
             "**[[condition]]** `=vies <= 0`.",
-            "Sortie **{{lang:port_vrai}}** (plus de vie) : **[[toast]]** « Perdu ! », **[[attendre]]** 2 secondes, **[[recommencer_scene]]**.",
+            "Sortie **{{lang:port_vrai}}** (plus de vie) : **[[deplacer]]** la **balle** à X = `518`, Y = `1000`, **[[modifier_variable]]** **vx** = `0`, **[[modifier_variable]]** **vy** = `0` (la balle est remise au milieu et s'arrête), puis **[[toast]]** « Perdu ! », **[[attendre]]** 2 secondes, **[[recommencer_scene]]**.",
             "Sortie **{{lang:port_faux}}** (il reste des vies) : **[[deplacer]]** la **balle** à X = `518`, Y = `1000`, puis **[[modifier_variable]]** **vy** = `-9`, puis **[[modifier_variable]]** **vx** = `6`."
           ]
         ],
@@ -532,6 +548,30 @@
             ],
             [
               "n",
+              "{{deplacer}}",
+              "balle · 518 · 1000"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
               "{{toast}}",
               "Perdu !"
             ],
@@ -551,6 +591,10 @@
               "{{recommencer_scene}}"
             ]
           ]
+        ],
+        [
+          "tip",
+          "**Pourquoi arrêter la balle avant d'attendre ?** Pendant les 2 secondes d'attente, le jeu continue. Si la balle restait sous l'écran, elle ferait perdre une vie à chaque image, et le compteur de vies descendrait très bas (-178 !). Remise au milieu et immobile, elle ne gêne plus."
         ],
         [
           "chaine",
