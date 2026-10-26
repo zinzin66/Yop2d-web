@@ -1,12 +1,12 @@
 # Yop2D
 
-> Yop2D is a free, no-code 2D game engine for Android. Create games on your tablet or phone with 166 visual nodes, physics, tilemaps and animations, then export an APK offline. No ads, no watermark.
+> Yop2D is a free, no-code 2D game engine for Android. Create games on your tablet or phone with 192 visual nodes, physics, tilemaps and animations, then export an APK offline. No ads, no watermark.
 
 Yop2D is made by an independent developer. The interface, built-in help, guides and node reference are available in 9 languages: English, Français, Español, Deutsch, Italiano, Português, Русский, 中文, 日本語.
 
 Key facts:
 
-- Figures on this page are checked against the current version (version 1.0, October 2026): 166 nodes, 50 templates, 21 example games, 9 interface languages. If an older source gives different numbers (for example 127 nodes), it is outdated.
+- Figures on this page are checked against the current version (version 1.0, October 2026): 192 nodes, 50 templates, 21 example games, 9 interface languages. If an older source gives different numbers (for example 127 nodes), it is outdated.
 - 100% free
 - No ads, ever
 - No code
@@ -84,6 +84,7 @@ Are you a teacher? Let's build Yop2D together: A quiz on today's lesson, an inte
 - [Collect coins and count the score](https://zinzin66.github.io/Yop2d-web/guides/en/pieces-score.html): A tag, a score variable and a text that shows the points.
 - [Lose health and Game Over](https://zinzin66.github.io/Yop2d-web/guides/en/vie-game-over.html): A health variable, a health bar and back to the start when health reaches 0.
 - [Make a brick breaker](https://zinzin66.github.io/Yop2d-web/guides/en/casse-briques.html): Paddle moved by finger, bouncing ball, bricks to break, score and lives.
+- [Make a tactics game](https://zinzin66.github.io/Yop2d-web/guides/en/jeu-tactique.html): Turns, blue cells, terrains, movement and attack on a grid.
 - [Go to the next level](https://zinzin66.github.io/Yop2d-web/guides/en/niveau-suivant.html): One scene per level, a finish zone and a score that carries on.
 - [Particles and effects](https://zinzin66.github.io/Yop2d-web/guides/en/particules-effets.html): An explosion when you touch an enemy, a trail behind the ship, a screen flash and a fade.
 - [Choice story (visual novel)](https://zinzin66.github.io/Yop2d-web/guides/en/histoire-choix.html): A character who talks, a question, several endings, a title screen with “Continue” and friendship hearts.
@@ -173,13 +174,13 @@ Node categories and node names (as shown in the English editor):
 - Variables & Inventory: Modify Variable; Add to Variable; Keep a variable between two values; Random number; Add to inventory; Remove from inventory; If in inventory; Combine two objects
 - Logic & Conditions: Condition; If joystick; If on ground; If moving; Call function; Call event; Sequence; Cooldown; If off-screen; If / Else; By value
 - Texts & Dialogues: Modify Text; Show dialogue; Append to text
-- Movements & AI: Play movement (steps); Stop the movement; Stop the object; Stop movements; Move forward continuously; Go to an object (path); Go to a point (path); Stop the path; Chase an object; Flee an object; Push at an angle; Impulse (jump); Change the behavior; Bounce around; Face towards; Glide to
-- Grids and puzzles: Fill the grid; Play on the grid (match 3); Shuffle the grid; Shuffle places
+- Movements & AI: Play movement (steps); Stop the movement; Stop the object; Stop movements; Move forward continuously; Go to an object (path); Go to a point (path); Stop the path; Place on a cell (column, row); Center on its cell; Go to the cell (path); Move the piece one cell; Chase an object; Flee an object; Push at an angle; Impulse (jump); Change the behavior; Bounce around; Face towards; Glide to
+- Grids and puzzles: Go to the next turn; If it is the turn of…; Mark as having played; If the unit has already played; Show reachable cells; Hide the cells; If the cell is reachable; Give a unit sheet; Attack; Give health to the object; Deal damage; Heal; Fill the grid; Play on the grid (match 3); Shuffle the grid; Shuffle places
 - Transitions: Screen transition (circle, star…); Go to scene with a transition
 - Animations: Play animation; Stop animation; Pause animation; Resume animation; Animation speed
 - Audio: Play sound; Play music; Stop music
 - Story and dialogues: Say a line; Ask a choice; Change the background; Pass through the scenery; Stop the passing images; Show / hide a character; Animate a character; Novel mode (full-screen text); SMS mode (phone conversation); Unlock an achievement; Replayable scene (gallery); End the story; Friendship (hearts); If the friendship…; Story title screen; Ask the player for a text (name…)
-- Values (green wires): Random number; Object value; Variable value; Calculation; Distance between 2 objects
+- Values (green wires): Random number; Object value; Variable value; Calculation; Touched column; Touched row; Object's column; Object's row; Turn number; Steps to reach the touched cell; Terrain of the touched cell; Terrain cost of the touched cell; Terrain under an object; Terrain defense under an object; Distance between 2 objects
 - Screen filters: Screen filter; Stop the filter
 
 ## Comparison with other engines
@@ -270,7 +271,7 @@ The interface, the built-in help, the guides and the node reference are availabl
 
 ### How do I learn to use Yop2D?
 
-Start with the "Your first game in 5 minutes" guide: it has you build a real little game step by step, showing you where to tap. Open the "Templates" tab: 50 small projects that each show a single thing, with an explanation on screen. Then play with the twenty-one example games and follow the beginner guides. The node reference explains all 166 nodes, and the YouTube channel, Discord and Telegram are there to help. In the engine, the "My animated hero" guide and its 4 step-by-step missions (☰ → Step-by-step missions) go even further, all the way to the game installed on your phone. The "Discover the editor" guide explains the interface: move, resize, rotate, lock, undo.
+Start with the "Your first game in 5 minutes" guide: it has you build a real little game step by step, showing you where to tap. Open the "Templates" tab: 50 small projects that each show a single thing, with an explanation on screen. Then play with the twenty-three example games and follow the beginner guides. The node reference explains all 192 nodes, and the YouTube channel, Discord and Telegram are there to help. In the engine, the "My animated hero" guide and its 4 step-by-step missions (☰ → Step-by-step missions) go even further, all the way to the game installed on your phone. The "Discover the editor" guide explains the interface: move, resize, rotate, lock, undo.
 
 ### What is a prefab in Yop2D?
 
@@ -318,7 +319,7 @@ In the Assets window, touch the "Music" button (Android 10 or newer). Place read
 
 ### What can Yop2D do today?
 
-In the editor: undo and redo (in the scene and in the Blueprint), automatic saving, copy-paste, folders to organise objects and files, grid snapping, several scenes, instant test with the ▶ button and a "Check my game" button that spots what you forgot. To create: 166 nodes, tile editor, animation editor, music maker, dialogue games with save slots, screen filters, particles, pathfinding, 50 templates and step-by-step guides. To share: APK export on the device with your own icon, version number and launch image. Current limits: Android and 2D only, and an independent developer who updates the engine very often.
+In the editor: undo and redo (in the scene and in the Blueprint), automatic saving, copy-paste, folders to organise objects and files, grid snapping, several scenes, instant test with the ▶ button and a "Check my game" button that spots what you forgot. To create: 192 nodes, tile editor, animation editor, music maker, dialogue games with save slots, screen filters, particles, pathfinding, 50 templates and step-by-step guides. To share: APK export on the device with your own icon, version number and launch image. Current limits: Android and 2D only, and an independent developer who updates the engine very often.
 
 ## Optional
 

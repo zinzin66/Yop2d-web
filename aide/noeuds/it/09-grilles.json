@@ -2,6 +2,78 @@
   "categorie": "Griglie e puzzle",
   "noeuds": [
     {
+      "nom": "Passa al turno successivo",
+      "schema": "<b>Ingresso:</b> Squadre, in ordine (tag separati da virgola)",
+      "role": "Passa il gioco alla squadra successiva. Scrivi le squadre in ordine con i loro tag (per esempio giocatore,nemico). La prima chiamata (per esempio dopo «All'Avvio») inizia dalla prima squadra; quando tutte hanno giocato, il numero del turno aumenta. All'inizio di ogni turno parte l'evento locale «tour_<squadra>» se esiste (per esempio «tour_nemico»).",
+      "exemple": "mettere «Passa al turno successivo» sul pulsante «Fine turno»."
+    },
+    {
+      "nom": "Se è il turno di…",
+      "schema": "<b>Ingresso:</b> Squadra (tag) &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso",
+      "role": "Vero se è il turno della squadra scritta (il suo tag), Falso altrimenti.",
+      "exemple": "lasciare che il giocatore tocchi le sue unità solo durante il suo turno."
+    },
+    {
+      "nom": "Segna come già giocato",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Ricorda che l'unità (oggetto A) ha già giocato in questo turno. Tutto viene cancellato quando inizia il turno successivo.",
+      "exemple": "impedire a un eroe di muoversi due volte nello stesso turno."
+    },
+    {
+      "nom": "Se l'unità ha già giocato",
+      "schema": "<b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso",
+      "role": "Vero se l'unità (oggetto A) ha già giocato in questo turno, Falso altrimenti.",
+      "exemple": "rifiutare di muovere un eroe che ha già giocato."
+    },
+    {
+      "nom": "Mostra le caselle raggiungibili",
+      "schema": "<b>Ingressi:</b> Oggetto, Tipo di zona, Numero di passi (o portata), Colore delle caselle, Visibilità delle caselle (0 = invisibile, 100 = piena), Cornice attorno a ogni casella, Scrivere i passi su ogni casella, I muri bloccano (movimento), Questi tag bloccano il passaggio (separati da virgola), Terreno che costa più passi (tag=costo, es. bosco=2, acqua=3), Nome della zona (facoltativo: per mostrarne più)",
+      "role": "Colora le caselle dove l'oggetto scelto può andare (o che può attaccare). I muri bloccano, e puoi aggiungere tag che bloccano (altre unità) e terreni che costano più passi (bosco=2). Colore, visibilità, cornice e numeri sono regolabili. «Nome della zona» permette di mostrarne più insieme (movimento in blu, attacco in rosso).",
+      "exemple": "mostrare la zona di movimento di un eroe quando viene toccato."
+    },
+    {
+      "nom": "Nascondi le caselle",
+      "schema": "<b>Ingresso:</b> Nome della zona (facoltativo)",
+      "role": "Cancella le caselle colorate (tutte, o una zona con nome).",
+      "exemple": "nascondere la zona quando l'eroe è arrivato."
+    },
+    {
+      "nom": "Se la casella è raggiungibile",
+      "schema": "<b>Ingressi:</b> Colonna, Riga, Nome della zona (facoltativo) &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso",
+      "role": "Vero se la casella (colonna, riga) è una di quelle mostrate. Di default: la casella toccata dal dito. Falso altrimenti.",
+      "exemple": "rifiutare un movimento troppo lontano con «troppo lontano!»."
+    },
+    {
+      "nom": "Dai una scheda unità",
+      "schema": "<b>Ingressi:</b> Oggetto, Punti vita, Attacco, Difesa, Movimento (passi), Portata d'attacco (caselle)",
+      "role": "Dà all'oggetto la sua scheda: vita, attacco, difesa, movimento e portata (variabili d'oggetto «vie», «attaque», «defense», «mouvement», «portee»). Si possono leggere ovunque con una formula, per esempio =eroe.mouvement per i passi delle caselle raggiungibili. Metti questo nodo dopo «All'Avvio» di ogni unità, o in un prefab di unità riutilizzabile.",
+      "exemple": "creare un arciere: vita 8, attacco 4, difesa 0, movimento 4, portata 3."
+    },
+    {
+      "nom": "Attacca",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Potenza dell'attacco (%), Conta la difesa del terreno del bersaglio, Sempre almeno 1 danno, Distruggi il bersaglio quando finisce la vita &nbsp;→&nbsp; <b>Uscite:</b> Ancora vivo / Senza vita",
+      "role": "L'oggetto A attacca l'oggetto B: danno = attacco di A × potenza − difesa di B − difesa del terreno di B. Due uscite: «Ancora vivo» e «Senza vita» (il bersaglio viene distrutto se la casella è spuntata). Entrambi gli oggetti hanno bisogno di una scheda unità.",
+      "exemple": "un eroe colpisce il mostro toccato."
+    },
+    {
+      "nom": "Dai vita all'oggetto",
+      "schema": "<b>Ingressi:</b> Oggetto, Punti vita",
+      "role": "Dà punti vita all'oggetto scelto (variabile d'oggetto «vie», e «vie_max» per il massimo). Leggila ovunque con una formula, per esempio =mostro.vie, per scriverla in un testo o in una barra.",
+      "exemple": "dare 10 punti vita a un mostro all'inizio."
+    },
+    {
+      "nom": "Infliggi danni",
+      "schema": "<b>Ingressi:</b> Oggetto, Danni, Distruggi l'oggetto quando finisce la vita, Sottrai la difesa del terreno su cui si trova &nbsp;→&nbsp; <b>Uscite:</b> Ancora vivo / Senza vita",
+      "role": "Toglie punti vita all'oggetto (mai sotto 0). Due uscite: «Ancora vivo» e «Senza vita» (l'oggetto viene distrutto se la casella è spuntata; «l'oggetto coinvolto» resta quello colpito).",
+      "exemple": "un eroe colpisce un mostro: 3 danni, poi un piccolo messaggio a seconda del risultato."
+    },
+    {
+      "nom": "Curare",
+      "schema": "<b>Ingressi:</b> Oggetto, Vita restituita",
+      "role": "Restituisce punti vita all'oggetto, senza superare il suo massimo.",
+      "exemple": "una pozione che restituisce 5 punti vita all'eroe."
+    },
+    {
       "nom": "Riempire la griglia",
       "schema": "<b>Ingressi:</b> Oggetto, Colonne, Righe, Oggetti modello (nomi separati da virgole)",
       "role": "Divide l'oggetto A (il tabellone) in colonne e righe e mette in ogni casella una copia di un oggetto modello scelto a caso (almeno 3 modelli, nomi separati da virgole). All'inizio non c'è mai un allineamento, e i pezzi cadono dall'alto. Da usare prima di «Giocare sulla griglia (allinea 3)».",

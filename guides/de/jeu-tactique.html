@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie macht man ein rundenbasiertes Taktikspiel in Yop2D? | Yop2D-Anleitung</title>
+<meta name="description" content="Mach in Yop2D ein Taktikspiel auf einem Raster, ohne Code: Runden, erreichbare blaue Felder, Gelände, Bewegung, Angriff und Leben mit Nodes.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/jeu-tactique.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/jeu-tactique.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/jeu-tactique.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/jeu-tactique.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/jeu-tactique.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/jeu-tactique.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/jeu-tactique.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/jeu-tactique.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/jeu-tactique.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/jeu-tactique.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie macht man ein Taktikspiel?",
+ "description": "Mach in Yop2D ein Taktikspiel auf einem Raster, ohne Code: Runden, erreichbare blaue Felder, Gelände, Bewegung, Angriff und Leben mit Nodes.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Jeder Einheit ein Blatt geben",
+   "text": "Beim Start → Einheitenblatt geben (Leben, Angriff, Verteidigung, Bewegung, Reichweite)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Den Zug des Spielers beginnen",
+   "text": "Zum nächsten Zug (joueur, ennemi) startet das lokale Ereignis \"tour_joueur\"."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Zeigen, wohin der Held gehen kann",
+   "text": "Bei Objektklick → Wenn … am Zug ist → Erreichbare Felder zeigen."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Den Helden laufen lassen",
+   "text": "Bei Objektklick (das Gelände) → Wenn das Feld erreichbar ist → Zum Feld gehen (Weg)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Angreifen",
+   "text": "Bei Objektklick (das Monster) → Wenn das Feld erreichbar ist → Angreifen."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Der Zug der Monster",
+   "text": "\"tour_ennemi\" → Zu einem Objekt gehen (Weg) (neben den Helden) → Angreifen."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../de/index.html">← Yop2D</a>
+<h1>Wie macht man ein Taktikspiel?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../jeu-tactique.html" hreflang="fr">Français</a> · <a href="../en/jeu-tactique.html" hreflang="en">English</a> · <a href="../es/jeu-tactique.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/jeu-tactique.html" hreflang="it">Italiano</a> · <a href="../pt/jeu-tactique.html" hreflang="pt">Português</a> · <a href="../ru/jeu-tactique.html" hreflang="ru">Русский</a> · <a href="../zh/jeu-tactique.html" hreflang="zh">中文</a> · <a href="../ja/jeu-tactique.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>In einem <strong>Taktik</strong>spiel spielen die Spieler <strong>abwechselnd</strong> auf einem Raster: Du wählst eine Einheit, siehst die Felder, die sie erreichen kann, bewegst sie, dann greift sie an. Diese Anleitung baut das einfachste mögliche Spiel: <strong>ein Held und ein Monster</strong>. Alles ist schon im Beispiel <strong>Tactics tutorial</strong> fertig (Reiter <strong>Beispiele</strong> des Startbildschirms): Öffne sein Blueprint, jeder Schritt steckt in einem <strong>farbigen Rahmen</strong> mit einem kleinen <strong>?</strong>, das ihn erklärt.</p>
+<div class="besoin">
+<b>Du brauchst:</b>
+<ul><li>eine Tile-Karte deiner Wahl (das Spielraster <strong>ist</strong> das Raster dieser Tile-Karte);</li><li>ein Bild namens <strong>hero1</strong> mit dem Tag <strong>joueur</strong> und ein weiteres namens <strong>foe1</strong> mit dem Tag <strong>ennemi</strong>;</li><li>eine Zone namens <strong>terrain</strong>, die die ganze Karte bedeckt (sie berührt man, um ein Feld zu wählen);</li><li>eine Variable <strong>etat</strong> (Ganzzahl, lokal), um zu wissen, wo wir sind: 0 = einen Helden wählen, 1 = Held gewählt, 2 = Held bewegt.</li></ul>
+</div>
+<div class="tip">👉 Das <strong>Gelände</strong> (Wald, Sand, Berg …) stellst du im Tile-Editor im Teil <strong>Gelände der Tiles</strong> ein: Schrittkosten, blockiert oder nicht, Verteidigungsbonus. Der Berg versperrt den Weg, der Wald kostet 2 Schritte.</div>
+<h2>Schritt 1: die Einheitenblätter</h2>
+<div class="method">
+<ol><li>Füge das Ereignis <strong>„Beim Start“</strong> hinzu.</li><li>Füge <strong>„Einheitenblatt geben“</strong> für <strong>hero1</strong> hinzu: Leben <code>20</code>, Angriff <code>6</code>, Verteidigung <code>2</code>, Bewegung <code>4</code>, Reichweite <code>1</code>.</li><li>Füge ein zweites <strong>„Einheitenblatt geben“</strong> für <strong>foe1</strong> hinzu, mit eigenen Zahlen.</li><li>Verbinde die Nodes der Reihe nach und füge <strong>„Zum nächsten Zug“</strong> mit den Teams <code>joueur,ennemi</code> hinzu.</li></ol>
+<div class="tip">👉 Das Blatt wird im Objekt gespeichert: Du kannst es überall mit einer Formel lesen, zum Beispiel <code>=hero1.vie</code>.</div>
+</div>
+<h2>Schritt 2: der Zug des Spielers</h2>
+<div class="method">
+<ol><li>Füge das Ereignis <strong>„Lokales Ereignis“</strong> hinzu und schreibe den Namen <code>tour_joueur</code>. Es startet von selbst zu Beginn des Spielerzugs.</li><li>Setze <strong>etat</strong> mit <strong>„Variable ändern“</strong> auf <code>0</code>, dann <strong>„Felder verbergen“</strong>, um die alten Felder zu löschen.</li></ol>
+<p>Für jedes Team startet <strong>„Zum nächsten Zug“</strong> das lokale Ereignis "tour_" gefolgt vom Teamnamen: <code>tour_joueur</code>, dann <code>tour_ennemi</code>.</p>
+</div>
+<h2>Schritt 3: Held berühren, blaue Felder sehen</h2>
+<div class="method">
+<ol><li>Füge <strong>„Bei Objektklick“</strong> auf <strong>hero1</strong> hinzu.</li><li>Füge <strong>„Wenn … am Zug ist“</strong> mit dem Team <code>joueur</code> hinzu, dann am Ausgang <strong>Wahr</strong> eine <strong>„Bedingung“</strong> <code>etat &lt; 2</code>.</li><li>Füge <strong>„Variable ändern“</strong> hinzu: <strong>etat</strong> = <code>1</code>.</li><li>Füge <strong>„Erreichbare Felder zeigen“</strong> auf <strong>hero1</strong> hinzu: Zonentyp <strong>Bewegung (Wände zählen)</strong>, Schrittzahl <code>=hero1.mouvement</code>, Farbe blau, <strong>Schrittzahl auf jedes Feld schreiben</strong> = ja, <strong>Diese Tags blockieren den Weg</strong> = <code>joueur,ennemi</code>.</li></ol>
+<div class="tip">👉 Die Zahlen auf den Feldern sind die nötigen <strong>Schritte</strong>. Waldfelder kosten 2: Der Held kommt weniger weit.</div>
+</div>
+<h2>Schritt 4: blaues Feld berühren, der Held läuft</h2>
+<div class="method">
+<ol><li>Füge <strong>„Bei Objektklick“</strong> auf <strong>terrain</strong> hinzu, dann eine <strong>„Bedingung“</strong> <code>etat = 1</code>.</li><li>Füge <strong>„Wenn das Feld erreichbar ist“</strong> hinzu. Für Spalte und Zeile berührst du <strong>🔗</strong> und wählst die grünen Nodes <strong>„Berührte Spalte“</strong> und <strong>„Berührte Zeile“</strong>: keine Formel zu schreiben.</li><li>Am Ausgang <strong>Wahr</strong>: <strong>„Variable ändern“</strong> <strong>etat</strong> = <code>4</code> (der Held läuft), dann <strong>„Zum Feld gehen (Weg)“</strong> auf <strong>hero1</strong>, mit denselben grünen Nodes und <strong>Diese Tags blockieren den Weg</strong> = <code>joueur,ennemi</code>.</li><li>Rufe am Ausgang <strong>Angekommen</strong> das lokale Ereignis <code>apres_deplacement</code> mit <strong>„Ereignis aufrufen“</strong> auf.</li></ol>
+</div>
+<h2>Schritt 5: die Angriffszone, dann der Angriff</h2>
+<div class="method">
+<ol><li>Im lokalen Ereignis <strong>apres_deplacement</strong>: <strong>„Felder verbergen“</strong>, <strong>etat</strong> = <code>2</code>, dann <strong>„Erreichbare Felder zeigen“</strong> mit Typ <strong>Angriff / Reichweite (über Wände hinweg)</strong>, Schrittzahl <code>=hero1.portee</code>, Farbe rot, mit dem Zonennamen <code>attaque</code>.</li><li>Füge <strong>„Bei Objektklick“</strong> auf <strong>foe1</strong> hinzu, eine <strong>„Bedingung“</strong> <code>etat = 2</code> und <strong>„Wenn das Feld erreichbar ist“</strong> mit dem Zonennamen <code>attaque</code>.</li><li>Bei <strong>Wahr</strong>: <strong>„Angreifen“</strong> (Objekt A = <strong>hero1</strong>, Objekt B = <strong>foe1</strong>). Der Schaden ist der Angriff minus die Verteidigung des Monsters minus die Verteidigung seines Geländes.</li><li>Ausgang <strong>Noch am Leben</strong>: seinen Lebenstext aktualisieren. Ausgang <strong>Keine Leben mehr</strong>: Das Monster wird zerstört, füge den Sieg hinzu.</li></ol>
+</div>
+<h2>Schritt 6: der Zug der Monster</h2>
+<div class="method">
+<ol><li>Füge das lokale Ereignis <code>tour_ennemi</code> hinzu.</li><li>Füge <strong>„Zu einem Objekt gehen (Weg)“</strong> auf <strong>foe1</strong> hinzu, Objekt B = <strong>hero1</strong>, <strong>Anhalten</strong> = <strong>Auf einem Nachbarfeld, zentriert</strong>, <strong>Diese Tags blockieren den Weg</strong> = <code>joueur,ennemi</code>.</li><li>Rufe am Ausgang <strong>Angekommen</strong> ein lokales Ereignis auf, in dem <strong>foe1</strong> <strong>hero1</strong> <strong>„Angreifen“</strong>.</li><li>Nach ein paar Sekunden (<strong>„Warten“</strong>): <strong>„Weg stoppen“</strong>, dann <strong>„Zum nächsten Zug“</strong>: Der Zug geht zurück an den Spieler.</li></ol>
+</div>
+<h2>Weiter gehen</h2>
+<ul><li><strong>Mehrere Helden:</strong> Füge <strong>„Als gespielt markieren“</strong> und <strong>„Wenn die Einheit schon gespielt hat“</strong> hinzu, damit ein Held nur einmal pro Zug spielt (das macht das Beispiel <strong>Tactics demo</strong>).</li><li><strong>Eine Lebensleiste:</strong> Lies <code>=hero1.vie</code> und <code>=hero1.vie_max</code> in einem Text oder einem Fortschrittsbalken.</li><li><strong>Heilen:</strong> <strong>„Heilen“</strong> gibt Leben zurück, ohne das Maximum zu überschreiten.</li><li><strong>Ein Brettspiel:</strong> <strong>„Figur ein Feld bewegen“</strong> bewegt eine Figur um ein Feld, schön zentriert (Knöpfe ◀ ▶ ▲ ▼).</li></ul>
+<h2>Wenn es nicht funktioniert</h2>
+<ul><li><strong>Kein blaues Feld:</strong> Der Held muss das in <strong>„Wenn … am Zug ist“</strong> geschriebene Tag haben, und <strong>„Zum nächsten Zug“</strong> muss beim Start ausgeführt worden sein.</li><li><strong>Die Felder passen nicht zum Bild:</strong> Das Raster ist das der ersten Tile-Karte der Szene. Ohne Tile-Karte sind die Felder 80 px groß.</li><li><strong>Der Held bewegt sich nicht:</strong> Prüfe, ob das berührte Feld blau ist und <strong>etat</strong> in diesem Moment <code>1</code> ist.</li><li><strong>Zum Vergleichen</strong> öffne das Beispiel <strong>Tactics tutorial</strong>: Jeder Teil des Blueprints steckt in einem Rahmen, der ihn erklärt.</li></ul>
+
+<div class="nav">
+<a href="../de/casse-briques.html">← Ein Breakout-Spiel machen</a>
+<a href="../de/niveau-suivant.html">Nächste Anleitung: Zum nächsten Level →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../de/index.html">Offizielle Website</a> · <a href="../../noeuds/de.html">Knotenreferenz</a></p>
+</footer>
+</body>
+</html>

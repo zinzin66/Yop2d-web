@@ -1,0 +1,198 @@
+{
+  "titre_page": "¿Cómo hacer un juego de tácticas por turnos en Yop2D? | Guía Yop2D",
+  "description": "Haz un juego de tácticas en una cuadrícula en Yop2D, sin código: turnos, casillas azules accesibles, terrenos, movimiento, ataque y vida con nodos.",
+  "h1": "¿Cómo hacer un juego de tácticas?",
+  "carte": [
+    "Hacer un juego de tácticas",
+    "Turnos, casillas azules, terrenos, movimiento y ataque en una cuadrícula."
+  ],
+  "etapes": [
+    [
+      "Dar una ficha a cada unidad",
+      "{{NoeudEventStart}} → {{definir_fiche}} (vida, ataque, defensa, movimiento, alcance)."
+    ],
+    [
+      "Empezar el turno del jugador",
+      "{{tour_suivant}} (joueur, ennemi) lanza el evento local \"tour_joueur\"."
+    ],
+    [
+      "Mostrar adónde puede ir el héroe",
+      "{{NoeudEventClicObjet}} → {{si_tour_de}} → {{montrer_cases}}."
+    ],
+    [
+      "Hacer caminar al héroe",
+      "{{NoeudEventClicObjet}} (el terreno) → {{si_case_accessible}} → {{chemin_vers_case}}."
+    ],
+    [
+      "Atacar",
+      "{{NoeudEventClicObjet}} (el monstruo) → {{si_case_accessible}} → {{attaquer}}."
+    ],
+    [
+      "El turno de los monstruos",
+      "\"tour_ennemi\" → {{chemin_vers_objet}} (junto al héroe) → {{attaquer}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "En un juego de **tácticas**, los jugadores juegan por **turnos** en una cuadrícula: eliges una unidad, ves las casillas a las que puede ir, la mueves y luego ataca. Esta guía construye el juego más sencillo posible: **un héroe y un monstruo**. Todo ya está hecho en el ejemplo **Tactics tutorial** (pestaña **Ejemplos** de la pantalla de inicio): abre su Blueprint, cada paso está en un **marco de color** con un pequeño **?** que lo explica."
+    ],
+    [
+      "besoin",
+      [
+        "un mapa de tiles a tu gusto (la cuadrícula del juego **es** la de ese mapa de tiles);",
+        "una {{lang:obj_prefix_image}} llamada **hero1** con el tag **joueur**, y otra llamada **foe1** con el tag **ennemi**;",
+        "una {{lang:obj_prefix_zone}} llamada **terrain** que cubra todo el mapa (es la que se toca para elegir una casilla);",
+        "una variable **etat** (entero, local) para saber en qué punto estamos: 0 = elegir un héroe, 1 = héroe elegido, 2 = héroe movido."
+      ]
+    ],
+    [
+      "tip",
+      "Los **terrenos** (bosque, arena, montaña…) se configuran en el editor de tiles, en la parte **Terrenos de los tiles**: coste en pasos, bloqueado o no, bonus de defensa. La montaña bloquea el paso, el bosque cuesta 2 pasos."
+    ],
+    [
+      "h2",
+      "Paso 1: las fichas de las unidades"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Añade el evento **[[NoeudEventStart]]**.",
+            "Añade **[[definir_fiche]]** para **hero1**: vida `20`, ataque `6`, defensa `2`, movimiento `4`, alcance `1`.",
+            "Añade un segundo **[[definir_fiche]]** para **foe1**, con sus propios números.",
+            "Une los nodos en orden y añade **[[tour_suivant]]** con los equipos `joueur,ennemi`."
+          ]
+        ],
+        [
+          "tip",
+          "La ficha se guarda en el objeto: puedes leerla en cualquier sitio con una fórmula, por ejemplo `=hero1.vie`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 2: el turno del jugador"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Añade el evento **[[NoeudEventPersonnalise]]** y escribe el nombre `tour_joueur`. Arranca solo al principio del turno del jugador.",
+            "Pon **etat** a `0` con **[[modifier_variable]]** y luego **[[cacher_cases]]** para borrar las casillas anteriores."
+          ]
+        ],
+        [
+          "p",
+          "Para cada equipo, **[[tour_suivant]]** lanza el evento local \"tour_\" seguido del nombre del equipo: `tour_joueur`, luego `tour_ennemi`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 3: toca al héroe y mira las casillas azules"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Añade **[[NoeudEventClicObjet]]** sobre **hero1**.",
+            "Añade **[[si_tour_de]]** con el equipo `joueur` y, en la salida **{{lang:port_vrai}}**, una **[[condition]]** `etat < 2`.",
+            "Añade **[[modifier_variable]]**: **etat** = `1`.",
+            "Añade **[[montrer_cases]]** sobre **hero1**: tipo de zona **Movimiento (los muros cuentan)**, número de pasos `=hero1.mouvement`, color azul, **Escribir los pasos en cada casilla** = sí, **Estos tags bloquean el paso** = `joueur,ennemi`."
+          ]
+        ],
+        [
+          "tip",
+          "Los números de las casillas son los **pasos** necesarios para llegar. Las casillas de bosque cuestan 2: el héroe llega menos lejos."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 4: toca una casilla azul y el héroe camina"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Añade **[[NoeudEventClicObjet]]** sobre **terrain** y luego una **[[condition]]** `etat = 1`.",
+            "Añade **[[si_case_accessible]]**. Para la columna y la fila, toca **🔗** y elige los nodos verdes **[[valeur_colonne_touchee]]** y **[[valeur_ligne_touchee]]**: no hay que escribir fórmulas.",
+            "En la salida **{{lang:port_vrai}}**: **[[modifier_variable]]** **etat** = `4` (el héroe camina) y luego **[[chemin_vers_case]]** sobre **hero1**, con los mismos nodos verdes y **Estos tags bloquean el camino** = `joueur,ennemi`.",
+            "En la salida **{{lang:port_arrive}}**, llama al evento local `apres_deplacement` con **[[appeler_evenement]]**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 5: la zona de ataque y luego el ataque"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "En el evento local **apres_deplacement**: **[[cacher_cases]]**, **etat** = `2` y luego **[[montrer_cases]]** con tipo **Ataque / alcance (pasa sobre los muros)**, número de pasos `=hero1.portee`, color rojo, con el nombre de zona `attaque`.",
+            "Añade **[[NoeudEventClicObjet]]** sobre **foe1**, una **[[condition]]** `etat = 2` y **[[si_case_accessible]]** con el nombre de zona `attaque`.",
+            "En **{{lang:port_vrai}}**: **[[attaquer]]** (objeto A = **hero1**, objeto B = **foe1**). El daño es el ataque, menos la defensa del monstruo, menos la defensa de su terreno.",
+            "Salida **Sigue vivo**: actualiza su texto de vida. Salida **Sin vida**: el monstruo se destruye, añade la victoria."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 6: el turno de los monstruos"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Añade el evento local `tour_ennemi`.",
+            "Añade **[[chemin_vers_objet]]** sobre **foe1**, objeto B = **hero1**, **Detenerse** = **En una casilla vecina, centrado**, **Estos tags bloquean el camino** = `joueur,ennemi`.",
+            "En la salida **{{lang:port_arrive}}**, llama a un evento local donde **foe1** **[[attaquer]]** a **hero1**.",
+            "Tras unos segundos (**[[attendre]]**), **[[chemin_arreter]]** y luego **[[tour_suivant]]**: el turno vuelve al jugador."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Ir más lejos"
+    ],
+    [
+      "ul",
+      [
+        "**Varios héroes:** añade **[[marquer_joue]]** y **[[si_a_joue]]** para que un héroe juegue solo una vez por turno (es lo que hace el ejemplo **Tactics demo**).",
+        "**Una barra de vida:** lee `=hero1.vie` y `=hero1.vie_max` en un texto o una barra de progreso.",
+        "**Curar:** **[[soigner]]** devuelve vida sin pasar del máximo.",
+        "**Un juego de mesa:** **[[pion_une_case]]** mueve una pieza una casilla, bien centrada (botones ◀ ▶ ▲ ▼)."
+      ]
+    ],
+    [
+      "h2",
+      "Si no funciona"
+    ],
+    [
+      "ul",
+      [
+        "**Ninguna casilla azul:** el héroe debe tener el tag escrito en **[[si_tour_de]]**, y **[[tour_suivant]]** debe haberse lanzado al empezar.",
+        "**Las casillas no coinciden con el dibujo:** la cuadrícula es la del primer mapa de tiles de la escena. Sin mapa de tiles, las casillas miden 80 px.",
+        "**El héroe no se mueve:** comprueba que la casilla tocada es azul y que **etat** vale `1` en ese momento.",
+        "**Para comparar**, abre el ejemplo **Tactics tutorial**: cada parte del Blueprint está en un marco que la explica."
+      ]
+    ]
+  ]
+}

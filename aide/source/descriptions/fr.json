@@ -508,7 +508,7 @@
   "quand un ennemi explose : durée 0,06, vitesse 0,05."
  ],
  "chemin_vers_objet": [
-  "L'objet A va vers l'objet B en trouvant tout seul le plus court chemin, case par case, sans traverser les murs (tuiles « Solide » d'un décor en tuiles, objets physiques fixes). Le chemin est recalculé quand B bouge. [[lang:port_arrive]] se lance quand A touche B.",
+  "L'objet A va vers l'objet B en trouvant tout seul le plus court chemin, case par case, sans traverser les murs (tuiles « Solide » d'un décor en tuiles, objets physiques fixes). Le chemin est recalculé quand B bouge. [[lang:port_arrive]] se lance quand A touche B. Le réglage « S'arrêter » permet de s'arrêter sur une case voisine, bien centré (jeux sur grille) ; « Ces tags bloquent le chemin » fait contourner les autres unités.",
   "un fantôme qui poursuit le joueur dans un labyrinthe."
  ],
  "chemin_vers_point": [
@@ -674,5 +674,109 @@
  "charger_variables": [
   "Reprend les valeurs écrites par [[sauvegarder_variables]] (même nom de sauvegarde). Chaque variable qui existe encore retrouve sa valeur. Sortie « Chargé » si tout s'est bien passé, « Pas de sauvegarde » à la toute première partie. À mettre souvent juste après « Au démarrage ».",
   "Juste après [[NoeudEventStart]] : [[charger_variables]], puis [[modifier_propriete]] pour afficher le score retrouvé."
+ ],
+ "placer_case": [
+  "Met l'objet A pile au milieu de la case choisie (colonne et ligne, comptées à partir de 0 en haut à gauche). La grille est celle du décor en tuiles de la scène. Avec le bouton 🔗, branche [[valeur_colonne_touchee]] et [[valeur_ligne_touchee]] pour l'envoyer sur la case que le doigt touche.",
+  "déplacer un pion sur la case touchée dans un jeu de plateau."
+ ],
+ "centrer_case": [
+  "L'objet A reste dans sa case mais se remet pile au milieu. Pratique quand un déplacement s'est arrêté entre deux cases.",
+  "recentrer un héros après son déplacement."
+ ],
+ "valeur_colonne_touchee": [
+  "Nœud vert (valeur) : donne la colonne de la case que le doigt touche (0 = la première à gauche). Branche-le sur un réglage avec le bouton 🔗.",
+  "savoir dans quelle colonne on a touché pour poser une tourelle."
+ ],
+ "valeur_ligne_touchee": [
+  "Nœud vert (valeur) : donne la ligne de la case que le doigt touche (0 = la première en haut). Branche-le sur un réglage avec le bouton 🔗.",
+  "savoir dans quelle ligne on a touché pour poser un bâtiment."
+ ],
+ "valeur_colonne_objet": [
+  "Nœud vert (valeur) : donne la colonne de la case où se trouve l'objet choisi (0 = la première à gauche).",
+  "savoir dans quelle colonne se trouve le héros."
+ ],
+ "valeur_ligne_objet": [
+  "Nœud vert (valeur) : donne la ligne de la case où se trouve l'objet choisi (0 = la première en haut).",
+  "savoir dans quelle ligne se trouve le héros."
+ ],
+ "tour_suivant": [
+  "Fait passer le jeu à l'équipe suivante. Écris les équipes dans l'ordre, par leur tag (ex. joueur,ennemi). Le premier appel (par exemple après « Au démarrage ») commence par la première équipe ; quand toutes ont joué, le numéro du tour augmente. À chaque début de tour, l'événement local « tour_<équipe> » part s'il existe (ex. « tour_ennemi »).",
+  "mettre « Passer au tour suivant » sur le bouton « Fin du tour »."
+ ],
+ "si_tour_de": [
+  "Vrai si c'est le tour de l'équipe écrite (son tag), Faux sinon.",
+  "laisser le joueur toucher ses unités seulement pendant son tour."
+ ],
+ "marquer_joue": [
+  "Note que l'unité (objet A) a joué ce tour-ci. Tout est effacé au début du tour suivant.",
+  "empêcher un héros de bouger deux fois dans le même tour."
+ ],
+ "si_a_joue": [
+  "Vrai si l'unité (objet A) a déjà joué ce tour-ci, Faux sinon.",
+  "refuser de déplacer un héros qui a déjà joué."
+ ],
+ "valeur_numero_tour": [
+  "Nœud vert : le numéro du tour en cours (1, 2, 3…), à brancher avec le bouton 🔗.",
+  "afficher « Tour 3 » dans un texte."
+ ],
+ "montrer_cases": [
+  "Colore les cases où l'objet choisi peut aller (ou attaquer). Les murs bloquent, et tu peux ajouter des tags qui bloquent (autres unités) et des terrains qui coûtent plus de pas (foret=2). Couleur, visibilité, cadre et chiffres se règlent. « Nom de la zone » permet d'en montrer plusieurs (déplacement en bleu, attaque en rouge).",
+  "montrer la zone de déplacement d'un héros quand on le touche."
+ ],
+ "cacher_cases": [
+  "Efface les cases colorées (toutes, ou celles d'une zone nommée).",
+  "cacher la zone une fois le héros arrivé."
+ ],
+ "si_case_accessible": [
+  "Vrai si la case (colonne, ligne) fait partie des cases montrées. Par défaut : la case que le doigt touche. Faux sinon.",
+  "refuser un déplacement trop loin avec « trop loin ! »."
+ ],
+ "valeur_cout_case": [
+  "Nœud vert : le nombre de pas pour aller sur la case touchée (-1 si elle est hors zone). Pratique pour compter les pas restants.",
+  "pas restants = pas de l'unité - ce nombre."
+ ],
+ "definir_vie": [
+  "Donne des points de vie à l'objet choisi (variable d'objet « vie », et « vie_max » pour le maximum). On la lit partout avec une formule, par exemple =monstre.vie, pour l'écrire dans un texte ou dans une barre.",
+  "donner 10 points de vie à un monstre au démarrage."
+ ],
+ "infliger_degats": [
+  "Enlève des points de vie à l'objet (jamais en dessous de 0). Deux sorties : « Encore en vie » et « Plus de vie » (l'objet est détruit si la case est cochée ; « l'objet impliqué » reste celui touché).",
+  "un héros frappe un monstre : 3 dégâts, puis un petit message selon le résultat."
+ ],
+ "soigner": [
+  "Rend des points de vie à l'objet, sans dépasser sa vie maximum.",
+  "une potion qui rend 5 points de vie au héros."
+ ],
+ "valeur_terrain_touche": [
+  "Nœud vert : le nom du terrain de la case touchée (« Forêt », « Eau »…), ou rien s'il n'y en a pas. Les terrains se règlent dans l'éditeur de tuiles.",
+  "afficher « Forêt » quand on touche une case de forêt."
+ ],
+ "valeur_cout_terrain_touche": [
+  "Nœud vert : le coût en pas du terrain de la case touchée (1 s'il n'y en a pas).",
+  "dire « ça coûte 2 pas » avant un déplacement."
+ ],
+ "valeur_terrain_objet": [
+  "Nœud vert : le nom du terrain sur lequel se trouve l'objet choisi.",
+  "savoir si le héros est dans l'eau ou sur la route."
+ ],
+ "valeur_defense_objet": [
+  "Nœud vert : le bonus de défense du terrain sous l'objet choisi.",
+  "afficher le bonus de défense d'une unité."
+ ],
+ "chemin_vers_case": [
+  "L'objet marche jusqu'au CENTRE de la case (colonne, ligne) en contournant les murs, les terrains qui bloquent et les unités des tags indiqués. Par défaut : la case touchée par le doigt. Sortie « Arrivé » une fois sur la case.",
+  "envoyer un héros sur une case bleue touchée."
+ ],
+ "pion_une_case": [
+  "Fait avancer le pion d'une case (haut, bas, gauche, droite), bien centré. Si la case est un mur, un terrain qui bloque, une unité (tags) ou le bord de la carte : sortie « Bloqué ». Sinon « Arrivé » à la fin du pas.",
+  "déplacer un pion de jeu de plateau avec des boutons ◀ ▶ ▲ ▼."
+ ],
+ "definir_fiche": [
+  "Donne à l'objet sa fiche : vie, attaque, défense, mouvement et portée (variables d'objet « vie », « attaque », « defense », « mouvement », « portee »). Elles se lisent partout par formule, par exemple =hero.mouvement pour le nombre de pas des cases accessibles. Mets ce nœud « Au démarrage » de chaque unité, ou dans un prefab d'unité réutilisable.",
+  "créer un archer : vie 8, attaque 4, défense 0, mouvement 4, portée 3."
+ ],
+ "attaquer": [
+  "L'objet A attaque l'objet B : dégâts = attaque de A × puissance − défense de B − défense du terrain de B. Deux sorties : « Encore en vie » et « Plus de vie » (la cible est détruite si la case est cochée). Les deux objets doivent avoir une fiche d'unité.",
+  "un héros frappe le monstre touché."
  ]
 }

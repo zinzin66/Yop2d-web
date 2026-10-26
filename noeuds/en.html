@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (166) | Reference</title>
-<meta name="description" content="Complete list of the 166 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (192) | Reference</title>
+<meta name="description" content="Complete list of the 192 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 166 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 192 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-transitions">Transitions</a><a href="#c11-animations">Animations</a><a href="#c12-audio">Audio</a><a href="#c13-story-and-dialogues">Story and dialogues</a><a href="#c14-values-green-wires">Values (green wires)</a><a href="#c15-screen-filters">Screen filters</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -641,12 +641,12 @@
 <p class="exemple"><b>Example:</b> a bullet or a moving car.</p>
 </div>
 <div class="fiche"><h3>Go to an object (path)</h3>
-<div class="schema"><b>Inputs:</b> Object A, Object B, Speed, Diagonals (yes / no) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
-<p>Object A goes to object B, finding the shortest path by itself, square by square, without going through walls ("Solid" tiles of a tile layer, fixed physical objects). The path is updated when B moves. “Arrived” runs when A touches B.</p>
+<div class="schema"><b>Inputs:</b> Object A, Object B, Speed, Diagonals (yes / no), Stop, These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
+<p>Object A goes to object B, finding the shortest path by itself, square by square, without going through walls ("Solid" tiles of a tile layer, fixed physical objects). The path is updated when B moves. “Arrived” runs when A touches B. The "Stop" setting lets the object stop on a neighbouring cell, well centered (grid games); "These tags block the path" makes it go around other units.</p>
 <p class="exemple"><b>Example:</b> a ghost chasing the player through a maze.</p>
 </div>
 <div class="fiche"><h3>Go to a point (path)</h3>
-<div class="schema"><b>Inputs:</b> Object, X position, Y position, Speed, Diagonals (yes / no) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
+<div class="schema"><b>Inputs:</b> Object, X position, Y position, Speed, Diagonals (yes / no), These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
 <p>Object A goes to point X, Y around the walls, by the shortest path (square by square). With =doigt.x and =doigt.y, it goes where the screen is touched. “Arrived” runs on arrival. If there is no path, it stays where it is.</p>
 <p class="exemple"><b>Example:</b> tap a square to send the hero there, in a strategy game or a dungeon.</p>
 </div>
@@ -654,6 +654,26 @@
 <div class="schema"><b>Input:</b> Object</div>
 <p>The object stops following its path (“Go to an object (path)” or “Go to a point (path)”) and stays where it is.</p>
 <p class="exemple"><b>Example:</b> the fly stops when the game is won.</p>
+</div>
+<div class="fiche"><h3>Place on a cell (column, row)</h3>
+<div class="schema"><b>Inputs:</b> Object, Column (0 = the first), Row (0 = the first)</div>
+<p>Puts object A exactly in the middle of the chosen cell (column and row, counted from 0 at the top left). The grid is the one of the scene's tile map. With the 🔗 button, plug in “Touched column” and “Touched row” to send it to the cell the finger touches.</p>
+<p class="exemple"><b>Example:</b> move a piece to the touched cell in a board game.</p>
+</div>
+<div class="fiche"><h3>Center on its cell</h3>
+<div class="schema"><b>Input:</b> Object</div>
+<p>Object A stays in its cell but goes back exactly to the middle. Handy when a move stopped between two cells.</p>
+<p class="exemple"><b>Example:</b> re-center a hero after its move.</p>
+</div>
+<div class="fiche"><h3>Go to the cell (path)</h3>
+<div class="schema"><b>Inputs:</b> Object, Column, Row, Speed, Diagonals (yes / no), These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
+<p>The object walks to the CENTER of the cell (column, row), going around walls, blocking terrains and the units with the given tags. Default: the cell touched by the finger. "Arrived" output once on the cell.</p>
+<p class="exemple"><b>Example:</b> send a hero to a touched blue cell.</p>
+</div>
+<div class="fiche"><h3>Move the piece one cell</h3>
+<div class="schema"><b>Inputs:</b> Object, Direction, Speed, These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Arrived / Blocked (wall, terrain, unit, edge)</div>
+<p>Moves the piece one cell (up, down, left, right), well centered. If the cell is a wall, a blocking terrain, a unit (tags) or the edge of the map: "Blocked" output. Otherwise "Arrived" at the end of the step.</p>
+<p class="exemple"><b>Example:</b> move a board-game piece with ◀ ▶ ▲ ▼ buttons.</p>
 </div>
 <div class="fiche"><h3>Chase an object</h3>
 <div class="schema"><b>Inputs:</b> Object A, Object B, Speed</div>
@@ -698,6 +718,66 @@
 </div>
 <h2 id="c9-grids-and-puzzles">Grids and puzzles</h2>
 <div class="method">
+<div class="fiche"><h3>Go to the next turn</h3>
+<div class="schema"><b>Input:</b> Teams, in order (tags separated by a comma)</div>
+<p>Passes the game to the next team. Write the teams in order using their tags (e.g. player,enemy). The first call (for example after "At start") begins with the first team; when every team has played, the turn number goes up. At the start of each turn the local event "tour_&lt;team&gt;" runs if it exists (e.g. "tour_enemy").</p>
+<p class="exemple"><b>Example:</b> put "Go to the next turn" on the "End turn" button.</p>
+</div>
+<div class="fiche"><h3>If it is the turn of…</h3>
+<div class="schema"><b>Input:</b> Team (tag) &nbsp;→&nbsp; <b>Outputs:</b> True / False</div>
+<p>True if it is the turn of the team written (its tag), False otherwise.</p>
+<p class="exemple"><b>Example:</b> let the player touch their units only during their own turn.</p>
+</div>
+<div class="fiche"><h3>Mark as having played</h3>
+<div class="schema"><b>Input:</b> Object</div>
+<p>Remembers that the unit (object A) has played this turn. Everything is cleared when the next turn starts.</p>
+<p class="exemple"><b>Example:</b> stop a hero from moving twice in the same turn.</p>
+</div>
+<div class="fiche"><h3>If the unit has already played</h3>
+<div class="schema"><b>Input:</b> Object &nbsp;→&nbsp; <b>Outputs:</b> True / False</div>
+<p>True if the unit (object A) has already played this turn, False otherwise.</p>
+<p class="exemple"><b>Example:</b> refuse to move a hero that has already played.</p>
+</div>
+<div class="fiche"><h3>Show reachable cells</h3>
+<div class="schema"><b>Inputs:</b> Object, Zone type, Number of steps (or range), Color of the cells, Cell visibility (0 = invisible, 100 = solid), Frame around each cell, Write the step count on each cell, Walls block (movement), These tags block the way (separated by commas), Terrain costing more steps (tag=cost, e.g. forest=2, water=3), Zone name (optional: to show several)</div>
+<p>Colors the cells the chosen object can move to (or attack). Walls block, and you can add tags that block (other units) and terrains that cost more steps (forest=2). Color, visibility, frame and numbers are adjustable. "Zone name" lets you show several at once (movement in blue, attack in red).</p>
+<p class="exemple"><b>Example:</b> show a hero's movement zone when it is touched.</p>
+</div>
+<div class="fiche"><h3>Hide the cells</h3>
+<div class="schema"><b>Input:</b> Zone name (optional)</div>
+<p>Clears the colored cells (all of them, or one named zone).</p>
+<p class="exemple"><b>Example:</b> hide the zone once the hero has arrived.</p>
+</div>
+<div class="fiche"><h3>If the cell is reachable</h3>
+<div class="schema"><b>Inputs:</b> Column, Row, Zone name (optional) &nbsp;→&nbsp; <b>Outputs:</b> True / False</div>
+<p>True if the cell (column, row) is one of the shown cells. By default: the cell the finger touches. False otherwise.</p>
+<p class="exemple"><b>Example:</b> refuse a move that is too far with "too far!".</p>
+</div>
+<div class="fiche"><h3>Give a unit sheet</h3>
+<div class="schema"><b>Inputs:</b> Object, Health points, Attack, Defense, Movement (steps), Attack range (cells)</div>
+<p>Gives the object its sheet: health, attack, defense, movement and range (object variables "vie", "attaque", "defense", "mouvement", "portee"). They can be read anywhere with a formula, e.g. =hero.mouvement for the number of steps of the reachable cells. Put this node "At start" of each unit, or in a reusable unit prefab.</p>
+<p class="exemple"><b>Example:</b> create an archer: health 8, attack 4, defense 0, movement 4, range 3.</p>
+</div>
+<div class="fiche"><h3>Attack</h3>
+<div class="schema"><b>Inputs:</b> Object A, Object B, Attack power (%), Count the defense of the target's terrain, Always at least 1 damage, Destroy the target when its health runs out &nbsp;→&nbsp; <b>Outputs:</b> Still alive / Out of health</div>
+<p>Object A attacks object B: damage = A's attack × power − B's defense − the defense of B's terrain. Two outputs: "Still alive" and "Out of health" (the target is destroyed if the box is ticked). Both objects need a unit sheet.</p>
+<p class="exemple"><b>Example:</b> a hero hits the touched monster.</p>
+</div>
+<div class="fiche"><h3>Give health to the object</h3>
+<div class="schema"><b>Inputs:</b> Object, Health points</div>
+<p>Gives health points to the chosen object (object variable "vie", and "vie_max" for the maximum). Read it anywhere with a formula, e.g. =monster.vie, to write it in a text or a bar.</p>
+<p class="exemple"><b>Example:</b> give a monster 10 health points at the start.</p>
+</div>
+<div class="fiche"><h3>Deal damage</h3>
+<div class="schema"><b>Inputs:</b> Object, Damage, Destroy the object when its health runs out, Subtract the defense of the terrain it stands on &nbsp;→&nbsp; <b>Outputs:</b> Still alive / Out of health</div>
+<p>Removes health points from the object (never below 0). Two outputs: "Still alive" and "Out of health" (the object is destroyed if the box is ticked; "the involved object" stays the one hit).</p>
+<p class="exemple"><b>Example:</b> a hero hits a monster: 3 damage, then a small message depending on the result.</p>
+</div>
+<div class="fiche"><h3>Heal</h3>
+<div class="schema"><b>Inputs:</b> Object, Health restored</div>
+<p>Gives health points back to the object, without going over its maximum.</p>
+<p class="exemple"><b>Example:</b> a potion that restores 5 health points to the hero.</p>
+</div>
 <div class="fiche"><h3>Fill the grid</h3>
 <div class="schema"><b>Inputs:</b> Object, Columns, Rows, Model objects (names separated by commas)</div>
 <p>Splits object A (the board) into columns and rows and puts in each cell a copy of a model object picked at random (at least 3 models, names separated by commas). There is never a match at the start, and the pieces drop in from the top. Use it before “Play on the grid (match 3)”.</p>
@@ -880,6 +960,56 @@
 <div class="schema"><b>Inputs:</b> A, Operation, B &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
 <p>Green node (value): calculates A + B, A − B, A × B or A ÷ B. A and B can be numbers, or receive a green wire themselves (chained calculations).</p>
 <p class="exemple"><b>Example:</b> give twice as many points (Value ← calculation: score × 2).</p>
+</div>
+<div class="fiche"><h3>Touched column</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node (value): gives the column of the cell the finger touches (0 = the first on the left). Plug it into a setting with the 🔗 button.</p>
+<p class="exemple"><b>Example:</b> know which column was touched to place a tower.</p>
+</div>
+<div class="fiche"><h3>Touched row</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node (value): gives the row of the cell the finger touches (0 = the first at the top). Plug it into a setting with the 🔗 button.</p>
+<p class="exemple"><b>Example:</b> know which row was touched to place a building.</p>
+</div>
+<div class="fiche"><h3>Object's column</h3>
+<div class="schema"><b>Input:</b> Object &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node (value): gives the column of the cell where the chosen object is (0 = the first on the left).</p>
+<p class="exemple"><b>Example:</b> know in which column the hero is.</p>
+</div>
+<div class="fiche"><h3>Object's row</h3>
+<div class="schema"><b>Input:</b> Object &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node (value): gives the row of the cell where the chosen object is (0 = the first at the top).</p>
+<p class="exemple"><b>Example:</b> know in which row the hero is.</p>
+</div>
+<div class="fiche"><h3>Turn number</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node: the current turn number (1, 2, 3…), plug it in with the 🔗 button.</p>
+<p class="exemple"><b>Example:</b> show "Turn 3" in a text.</p>
+</div>
+<div class="fiche"><h3>Steps to reach the touched cell</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node: the number of steps to reach the touched cell (-1 if it is outside the zone). Handy to count remaining steps.</p>
+<p class="exemple"><b>Example:</b> remaining steps = the unit's steps - this number.</p>
+</div>
+<div class="fiche"><h3>Terrain of the touched cell</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node: the name of the terrain of the touched cell ("Forest", "Water"…), or nothing if there is none. Terrains are set in the tile editor.</p>
+<p class="exemple"><b>Example:</b> show "Forest" when a forest cell is touched.</p>
+</div>
+<div class="fiche"><h3>Terrain cost of the touched cell</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node: the step cost of the terrain of the touched cell (1 if there is none).</p>
+<p class="exemple"><b>Example:</b> say "this costs 2 steps" before a move.</p>
+</div>
+<div class="fiche"><h3>Terrain under an object</h3>
+<div class="schema"><b>Input:</b> Object &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node: the name of the terrain the chosen object stands on.</p>
+<p class="exemple"><b>Example:</b> know whether the hero is in water or on the road.</p>
+</div>
+<div class="fiche"><h3>Terrain defense under an object</h3>
+<div class="schema"><b>Input:</b> Object &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node: the defense bonus of the terrain under the chosen object.</p>
+<p class="exemple"><b>Example:</b> show a unit's defense bonus.</p>
 </div>
 <div class="fiche"><h3>Distance between 2 objects</h3>
 <div class="schema"><b>Inputs:</b> Object A, Object B &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (166) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 166 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (192) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 192 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 166 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 192 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
 <nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-übergänge">Übergänge</a><a href="#c11-animationen">Animationen</a><a href="#c12-audio">Audio</a><a href="#c13-geschichte-und-dialoge">Geschichte und Dialoge</a><a href="#c14-werte-grüne-kabel">Werte (grüne Kabel)</a><a href="#c15-bildschirmfilter">Bildschirmfilter</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
@@ -641,12 +641,12 @@
 <p class="exemple"><b>Beispiel:</b> eine Kugel oder ein fahrendes Auto.</p>
 </div>
 <div class="fiche"><h3>Zu einem Objekt gehen (Weg)</h3>
-<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Geschwindigkeit, Diagonalen (ja / nein) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
-<p>Objekt A geht zu Objekt B und findet selbst den kürzesten Weg, Feld für Feld, ohne durch Mauern zu gehen („feste“ Kacheln einer Kachelebene, feste physikalische Objekte). Der Weg wird neu berechnet, wenn B sich bewegt. „Angekommen“ startet, wenn A B berührt.</p>
+<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Geschwindigkeit, Diagonalen (ja / nein), Anhalten, Diese Tags blockieren den Weg (andere Einheiten, mit Komma getrennt) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
+<p>Objekt A geht zu Objekt B und findet selbst den kürzesten Weg, Feld für Feld, ohne durch Mauern zu gehen („feste“ Kacheln einer Kachelebene, feste physikalische Objekte). Der Weg wird neu berechnet, wenn B sich bewegt. „Angekommen“ startet, wenn A B berührt. Mit der Einstellung „Anhalten“ bleibt das Objekt auf einem Nachbarfeld stehen, schön zentriert (Rasterspiele); „Diese Tags blockieren den Weg“ lässt es andere Einheiten umgehen.</p>
 <p class="exemple"><b>Beispiel:</b> ein Geist, der den Spieler durch ein Labyrinth jagt.</p>
 </div>
 <div class="fiche"><h3>Zu einem Punkt gehen (Weg)</h3>
-<div class="schema"><b>Eingänge:</b> Objekt, X-Position, Y-Position, Geschwindigkeit, Diagonalen (ja / nein) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
+<div class="schema"><b>Eingänge:</b> Objekt, X-Position, Y-Position, Geschwindigkeit, Diagonalen (ja / nein), Diese Tags blockieren den Weg (andere Einheiten, mit Komma getrennt) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
 <p>Objekt A geht auf dem kürzesten Weg (Feld für Feld) um die Mauern herum zum Punkt X, Y. Mit =doigt.x und =doigt.y geht es dorthin, wo der Bildschirm berührt wird. „Angekommen“ startet bei der Ankunft. Gibt es keinen Weg, bleibt es stehen.</p>
 <p class="exemple"><b>Beispiel:</b> auf ein Feld tippen, um den Helden dorthin zu schicken, in einem Strategiespiel oder einem Dungeon.</p>
 </div>
@@ -654,6 +654,26 @@
 <div class="schema"><b>Eingang:</b> Objekt</div>
 <p>Das Objekt folgt seinem Weg („Zu einem Objekt gehen (Weg)“ oder „Zu einem Punkt gehen (Weg)“) nicht mehr und bleibt stehen.</p>
 <p class="exemple"><b>Beispiel:</b> die Fliege hält an, wenn das Spiel gewonnen ist.</p>
+</div>
+<div class="fiche"><h3>Auf ein Feld setzen (Spalte, Zeile)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Spalte (0 = die erste), Zeile (0 = die erste)</div>
+<p>Setzt Objekt A genau in die Mitte des gewählten Feldes (Spalte und Zeile, ab 0 oben links gezählt). Das Raster ist das der Tile-Karte der Szene. Mit dem Knopf 🔗 verbindest du „Berührte Spalte“ und „Berührte Zeile“, um es auf das berührte Feld zu schicken.</p>
+<p class="exemple"><b>Beispiel:</b> eine Figur in einem Brettspiel auf das berührte Feld setzen.</p>
+</div>
+<div class="fiche"><h3>Auf seinem Feld zentrieren</h3>
+<div class="schema"><b>Eingang:</b> Objekt</div>
+<p>Objekt A bleibt in seinem Feld, geht aber genau in die Mitte zurück. Praktisch, wenn eine Bewegung zwischen zwei Feldern endete.</p>
+<p class="exemple"><b>Beispiel:</b> einen Helden nach seiner Bewegung neu zentrieren.</p>
+</div>
+<div class="fiche"><h3>Zum Feld gehen (Weg)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Spalte, Zeile, Geschwindigkeit, Diagonalen (ja / nein), Diese Tags blockieren den Weg (andere Einheiten, mit Komma getrennt) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
+<p>Das Objekt läuft zur MITTE des Feldes (Spalte, Zeile) und umgeht Wände, blockierendes Gelände und die Einheiten mit den angegebenen Tags. Standard: das berührte Feld. Ausgang „Angekommen“ einmal auf dem Feld.</p>
+<p class="exemple"><b>Beispiel:</b> einen Helden auf ein berührtes blaues Feld schicken.</p>
+</div>
+<div class="fiche"><h3>Figur ein Feld bewegen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Richtung, Geschwindigkeit, Diese Tags blockieren den Weg (andere Einheiten, mit Komma getrennt) &nbsp;→&nbsp; <b>Ausgänge:</b> Angekommen / Blockiert (Wand, Gelände, Einheit, Rand)</div>
+<p>Bewegt die Figur um ein Feld (oben, unten, links, rechts), schön zentriert. Ist das Feld eine Wand, ein blockierendes Gelände, eine Einheit (Tags) oder der Kartenrand: Ausgang „Blockiert“. Sonst „Angekommen“ am Ende des Schritts.</p>
+<p class="exemple"><b>Beispiel:</b> eine Brettspielfigur mit den Knöpfen ◀ ▶ ▲ ▼ bewegen.</p>
 </div>
 <div class="fiche"><h3>Objekt verfolgen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Geschwindigkeit</div>
@@ -698,6 +718,66 @@
 </div>
 <h2 id="c9-raster-und-puzzles">Raster und Puzzles</h2>
 <div class="method">
+<div class="fiche"><h3>Zum nächsten Zug</h3>
+<div class="schema"><b>Eingang:</b> Teams der Reihe nach (Tags mit Komma getrennt)</div>
+<p>Gibt das Spiel an das nächste Team weiter. Schreibe die Teams der Reihe nach mit ihren Tags (z. B. spieler,gegner). Der erste Aufruf (zum Beispiel nach „Beim Start“) beginnt mit dem ersten Team; wenn alle gespielt haben, steigt die Zugnummer. Zu Beginn jedes Zugs läuft das lokale Ereignis „tour_&lt;Team&gt;“, falls es existiert (z. B. „tour_gegner“).</p>
+<p class="exemple"><b>Beispiel:</b> „Zum nächsten Zug“ auf den Knopf „Zug beenden“ legen.</p>
+</div>
+<div class="fiche"><h3>Wenn … am Zug ist</h3>
+<div class="schema"><b>Eingang:</b> Team (Tag) &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch</div>
+<p>Wahr, wenn das geschriebene Team (sein Tag) am Zug ist, sonst Falsch.</p>
+<p class="exemple"><b>Beispiel:</b> den Spieler seine Einheiten nur während seines eigenen Zugs berühren lassen.</p>
+</div>
+<div class="fiche"><h3>Als gespielt markieren</h3>
+<div class="schema"><b>Eingang:</b> Objekt</div>
+<p>Merkt sich, dass die Einheit (Objekt A) in diesem Zug gespielt hat. Alles wird gelöscht, wenn der nächste Zug beginnt.</p>
+<p class="exemple"><b>Beispiel:</b> verhindern, dass ein Held sich im selben Zug zweimal bewegt.</p>
+</div>
+<div class="fiche"><h3>Wenn die Einheit schon gespielt hat</h3>
+<div class="schema"><b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch</div>
+<p>Wahr, wenn die Einheit (Objekt A) in diesem Zug schon gespielt hat, sonst Falsch.</p>
+<p class="exemple"><b>Beispiel:</b> es ablehnen, einen Helden zu bewegen, der schon gespielt hat.</p>
+</div>
+<div class="fiche"><h3>Erreichbare Felder zeigen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Zonentyp, Anzahl Schritte (oder Reichweite), Farbe der Felder, Sichtbarkeit der Felder (0 = unsichtbar, 100 = voll), Rahmen um jedes Feld, Schrittzahl auf jedes Feld schreiben, Wände blockieren (Bewegung), Diese Tags blockieren den Weg (mit Komma getrennt), Gelände mit mehr Schritten (Tag=Kosten, z. B. wald=2, wasser=3), Zonenname (optional: für mehrere)</div>
+<p>Färbt die Felder ein, auf die das gewählte Objekt gehen (oder die es angreifen) kann. Wände blockieren, und du kannst blockierende Tags (andere Einheiten) und Gelände hinzufügen, das mehr Schritte kostet (Wald=2). Farbe, Sichtbarkeit, Rahmen und Zahlen sind einstellbar. Mit „Zonenname“ zeigst du mehrere gleichzeitig (Bewegung blau, Angriff rot).</p>
+<p class="exemple"><b>Beispiel:</b> die Bewegungszone eines Helden zeigen, wenn man ihn berührt.</p>
+</div>
+<div class="fiche"><h3>Felder verbergen</h3>
+<div class="schema"><b>Eingang:</b> Zonenname (optional)</div>
+<p>Löscht die gefärbten Felder (alle oder eine benannte Zone).</p>
+<p class="exemple"><b>Beispiel:</b> die Zone verbergen, wenn der Held angekommen ist.</p>
+</div>
+<div class="fiche"><h3>Wenn das Feld erreichbar ist</h3>
+<div class="schema"><b>Eingänge:</b> Spalte, Zeile, Zonenname (optional) &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch</div>
+<p>Wahr, wenn das Feld (Spalte, Zeile) eines der gezeigten Felder ist. Standard: das berührte Feld. Sonst Falsch.</p>
+<p class="exemple"><b>Beispiel:</b> eine zu weite Bewegung mit „zu weit!“ ablehnen.</p>
+</div>
+<div class="fiche"><h3>Einheitenblatt geben</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Lebenspunkte, Angriff, Verteidigung, Bewegung (Schritte), Angriffsreichweite (Felder)</div>
+<p>Gibt dem Objekt sein Blatt: Leben, Angriff, Verteidigung, Bewegung und Reichweite (Objektvariablen „vie“, „attaque“, „defense“, „mouvement“, „portee“). Sie sind überall mit einer Formel lesbar, z. B. =held.mouvement für die Schritte der erreichbaren Felder. Setze diesen Node nach „Beim Start“ jeder Einheit oder in ein wiederverwendbares Einheiten-Prefab.</p>
+<p class="exemple"><b>Beispiel:</b> einen Bogenschützen erstellen: Leben 8, Angriff 4, Verteidigung 0, Bewegung 4, Reichweite 3.</p>
+</div>
+<div class="fiche"><h3>Angreifen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Angriffsstärke (%), Verteidigung des Geländes des Ziels zählen, Immer mindestens 1 Schaden, Ziel zerstören, wenn die Leben aufgebraucht sind &nbsp;→&nbsp; <b>Ausgänge:</b> Noch am Leben / Keine Leben mehr</div>
+<p>Objekt A greift Objekt B an: Schaden = Angriff von A × Stärke − Verteidigung von B − Geländeverteidigung von B. Zwei Ausgänge: „Noch am Leben“ und „Kein Leben mehr“ (das Ziel wird zerstört, wenn das Kästchen angehakt ist). Beide Objekte brauchen ein Einheitenblatt.</p>
+<p class="exemple"><b>Beispiel:</b> ein Held schlägt das berührte Monster.</p>
+</div>
+<div class="fiche"><h3>Objekt Leben geben</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Lebenspunkte</div>
+<p>Gibt dem gewählten Objekt Lebenspunkte (Objektvariable „vie“, und „vie_max“ für das Maximum). Überall mit einer Formel lesbar, z. B. =monster.vie, um sie in einen Text oder einen Balken zu schreiben.</p>
+<p class="exemple"><b>Beispiel:</b> einem Monster am Anfang 10 Lebenspunkte geben.</p>
+</div>
+<div class="fiche"><h3>Schaden zufügen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Schaden, Objekt zerstören, wenn die Leben aufgebraucht sind, Verteidigung des Geländes abziehen &nbsp;→&nbsp; <b>Ausgänge:</b> Noch am Leben / Keine Leben mehr</div>
+<p>Zieht dem Objekt Lebenspunkte ab (nie unter 0). Zwei Ausgänge: „Noch am Leben“ und „Kein Leben mehr“ (das Objekt wird zerstört, wenn das Kästchen angehakt ist; „das beteiligte Objekt“ bleibt das getroffene).</p>
+<p class="exemple"><b>Beispiel:</b> ein Held schlägt ein Monster: 3 Schaden, dann eine kleine Meldung je nach Ergebnis.</p>
+</div>
+<div class="fiche"><h3>Heilen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Zurückgegebene Leben</div>
+<p>Gibt dem Objekt Lebenspunkte zurück, ohne sein Maximum zu überschreiten.</p>
+<p class="exemple"><b>Beispiel:</b> ein Trank, der dem Helden 5 Lebenspunkte zurückgibt.</p>
+</div>
 <div class="fiche"><h3>Raster füllen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Spalten, Zeilen, Vorlage-Objekte (Namen mit Kommas getrennt)</div>
 <p>Teilt Objekt A (das Spielbrett) in Spalten und Zeilen und legt in jedes Feld eine Kopie eines zufällig gewählten Vorlage-Objekts (mindestens 3 Vorlagen, Namen mit Kommas getrennt). Am Anfang gibt es nie eine Reihe, und die Teile fallen von oben herein. Vor „Auf dem Raster spielen (3 in einer Reihe)“ verwenden.</p>
@@ -880,6 +960,56 @@
 <div class="schema"><b>Eingänge:</b> A, Rechenart, B &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
 <p>Grüner Knoten (Wert): rechnet A + B, A − B, A × B oder A ÷ B. A und B können Zahlen sein oder selbst ein grünes Kabel bekommen (Rechnungen in Kette).</p>
 <p class="exemple"><b>Beispiel:</b> doppelt so viele Punkte geben (Wert ← Rechnung: score × 2).</p>
+</div>
+<div class="fiche"><h3>Berührte Spalte</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node (Wert): liefert die Spalte des berührten Feldes (0 = die erste links). Mit dem Knopf 🔗 in eine Einstellung stecken.</p>
+<p class="exemple"><b>Beispiel:</b> wissen, welche Spalte berührt wurde, um einen Turm zu setzen.</p>
+</div>
+<div class="fiche"><h3>Berührte Zeile</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node (Wert): liefert die Zeile des berührten Feldes (0 = die erste oben). Mit dem Knopf 🔗 in eine Einstellung stecken.</p>
+<p class="exemple"><b>Beispiel:</b> wissen, welche Zeile berührt wurde, um ein Gebäude zu setzen.</p>
+</div>
+<div class="fiche"><h3>Spalte eines Objekts</h3>
+<div class="schema"><b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node (Wert): liefert die Spalte des Feldes, auf dem das gewählte Objekt steht (0 = die erste links).</p>
+<p class="exemple"><b>Beispiel:</b> wissen, in welcher Spalte der Held steht.</p>
+</div>
+<div class="fiche"><h3>Zeile eines Objekts</h3>
+<div class="schema"><b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node (Wert): liefert die Zeile des Feldes, auf dem das gewählte Objekt steht (0 = die erste oben).</p>
+<p class="exemple"><b>Beispiel:</b> wissen, in welcher Zeile der Held steht.</p>
+</div>
+<div class="fiche"><h3>Zugnummer</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: die aktuelle Zugnummer (1, 2, 3…), mit dem Knopf 🔗 einstecken.</p>
+<p class="exemple"><b>Beispiel:</b> „Zug 3“ in einem Text anzeigen.</p>
+</div>
+<div class="fiche"><h3>Schritte bis zum berührten Feld</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: die Anzahl Schritte bis zum berührten Feld (-1, wenn es außerhalb der Zone liegt). Praktisch, um die übrigen Schritte zu zählen.</p>
+<p class="exemple"><b>Beispiel:</b> übrige Schritte = Schritte der Einheit - diese Zahl.</p>
+</div>
+<div class="fiche"><h3>Gelände des berührten Feldes</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: der Name des Geländes des berührten Feldes („Wald“, „Wasser“…), oder nichts, wenn es keins gibt. Das Gelände wird im Tile-Editor festgelegt.</p>
+<p class="exemple"><b>Beispiel:</b> „Wald“ anzeigen, wenn ein Waldfeld berührt wird.</p>
+</div>
+<div class="fiche"><h3>Geländekosten des berührten Feldes</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: die Schrittkosten des Geländes des berührten Feldes (1, wenn es keins gibt).</p>
+<p class="exemple"><b>Beispiel:</b> „das kostet 2 Schritte“ vor einer Bewegung sagen.</p>
+</div>
+<div class="fiche"><h3>Gelände unter einem Objekt</h3>
+<div class="schema"><b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: der Name des Geländes, auf dem das gewählte Objekt steht.</p>
+<p class="exemple"><b>Beispiel:</b> wissen, ob der Held im Wasser oder auf der Straße steht.</p>
+</div>
+<div class="fiche"><h3>Geländeverteidigung unter einem Objekt</h3>
+<div class="schema"><b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: der Verteidigungsbonus des Geländes unter dem gewählten Objekt.</p>
+<p class="exemple"><b>Beispiel:</b> den Verteidigungsbonus einer Einheit anzeigen.</p>
 </div>
 <div class="fiche"><h3>Abstand zwischen 2 Objekten</h3>
 <div class="schema"><b>Eingänge:</b> Objekt A, Objekt B &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>

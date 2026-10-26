@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tous les nœuds de Yop2D (166) | Référence</title>
-<meta name="description" content="Liste complète des 166 nœuds visuels de Yop2D, moteur de jeu 2D sans code pour Android : rôle, réglages, sorties et exemple de chaque nœud.">
+<title>Tous les nœuds de Yop2D (192) | Référence</title>
+<meta name="description" content="Liste complète des 192 nœuds visuels de Yop2D, moteur de jeu 2D sans code pour Android : rôle, réglages, sorties et exemple de chaque nœud.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><strong>Français</strong> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les 166 nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.</p>
+<p>Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les 192 nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.</p>
 <p><strong>Catégories</strong></p>
 <nav class="sommaire"><a href="#c1-événements">Événements</a><a href="#c2-scène-hud">Scène &amp; HUD</a><a href="#c3-temps">Temps</a><a href="#c4-apparence-objets">Apparence &amp; Objets</a><a href="#c5-variables-inventaire">Variables &amp; Inventaire</a><a href="#c6-logique-conditions">Logique &amp; Conditions</a><a href="#c7-textes-dialogues">Textes &amp; Dialogues</a><a href="#c8-mouvements-ia">Mouvements &amp; IA</a><a href="#c9-grilles-et-puzzles">Grilles et puzzles</a><a href="#c10-transitions">Transitions</a><a href="#c11-animations">Animations</a><a href="#c12-audio">Audio</a><a href="#c13-histoire-et-dialogues">Histoire et dialogues</a><a href="#c14-valeurs-fils-verts">Valeurs (fils verts)</a><a href="#c15-filtres-d-écran">Filtres d'écran</a></nav>
 <h2 id="c1-événements">Événements</h2>
@@ -641,12 +641,12 @@
 <p class="exemple"><b>Exemple :</b> une balle ou une voiture qui roule.</p>
 </div>
 <div class="fiche"><h3>Aller vers un objet (chemin)</h3>
-<div class="schema"><b>Entrées :</b> Objet A, Objet B, Vitesse, Diagonales (oui / non) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé</div>
-<p>L'objet A va vers l'objet B en trouvant tout seul le plus court chemin, case par case, sans traverser les murs (tuiles « Solide » d'un décor en tuiles, objets physiques fixes). Le chemin est recalculé quand B bouge. « Arrivé » se lance quand A touche B.</p>
+<div class="schema"><b>Entrées :</b> Objet A, Objet B, Vitesse, Diagonales (oui / non), S'arrêter, Ces tags bloquent le chemin (autres unités, séparés par une virgule) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé</div>
+<p>L'objet A va vers l'objet B en trouvant tout seul le plus court chemin, case par case, sans traverser les murs (tuiles « Solide » d'un décor en tuiles, objets physiques fixes). Le chemin est recalculé quand B bouge. « Arrivé » se lance quand A touche B. Le réglage « S'arrêter » permet de s'arrêter sur une case voisine, bien centré (jeux sur grille) ; « Ces tags bloquent le chemin » fait contourner les autres unités.</p>
 <p class="exemple"><b>Exemple :</b> un fantôme qui poursuit le joueur dans un labyrinthe.</p>
 </div>
 <div class="fiche"><h3>Aller à un point (chemin)</h3>
-<div class="schema"><b>Entrées :</b> Objet, Position X, Position Y, Vitesse, Diagonales (oui / non) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé</div>
+<div class="schema"><b>Entrées :</b> Objet, Position X, Position Y, Vitesse, Diagonales (oui / non), Ces tags bloquent le chemin (autres unités, séparés par une virgule) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé</div>
 <p>L'objet A va jusqu'au point X, Y en contournant les murs, par le plus court chemin (case par case). Avec =doigt.x et =doigt.y, il va là où l'on touche l'écran. « Arrivé » se lance à l'arrivée. S'il n'y a aucun chemin, il reste sur place.</p>
 <p class="exemple"><b>Exemple :</b> toucher une case pour y envoyer le héros, dans un jeu de stratégie ou un donjon.</p>
 </div>
@@ -654,6 +654,26 @@
 <div class="schema"><b>Entrée :</b> Objet</div>
 <p>L'objet arrête de suivre son chemin (« Aller vers un objet (chemin) » ou « Aller à un point (chemin) ») et reste là où il est.</p>
 <p class="exemple"><b>Exemple :</b> la mouche s'arrête quand la partie est gagnée.</p>
+</div>
+<div class="fiche"><h3>Placer sur une case (colonne, ligne)</h3>
+<div class="schema"><b>Entrées :</b> Objet, Colonne (0 = la première), Ligne (0 = la première)</div>
+<p>Met l'objet A pile au milieu de la case choisie (colonne et ligne, comptées à partir de 0 en haut à gauche). La grille est celle du décor en tuiles de la scène. Avec le bouton 🔗, branche « Colonne touchée » et « Ligne touchée » pour l'envoyer sur la case que le doigt touche.</p>
+<p class="exemple"><b>Exemple :</b> déplacer un pion sur la case touchée dans un jeu de plateau.</p>
+</div>
+<div class="fiche"><h3>Centrer sur sa case</h3>
+<div class="schema"><b>Entrée :</b> Objet</div>
+<p>L'objet A reste dans sa case mais se remet pile au milieu. Pratique quand un déplacement s'est arrêté entre deux cases.</p>
+<p class="exemple"><b>Exemple :</b> recentrer un héros après son déplacement.</p>
+</div>
+<div class="fiche"><h3>Aller à la case (chemin)</h3>
+<div class="schema"><b>Entrées :</b> Objet, Colonne, Ligne, Vitesse, Diagonales (oui / non), Ces tags bloquent le chemin (autres unités, séparés par une virgule) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé</div>
+<p>L'objet marche jusqu'au CENTRE de la case (colonne, ligne) en contournant les murs, les terrains qui bloquent et les unités des tags indiqués. Par défaut : la case touchée par le doigt. Sortie « Arrivé » une fois sur la case.</p>
+<p class="exemple"><b>Exemple :</b> envoyer un héros sur une case bleue touchée.</p>
+</div>
+<div class="fiche"><h3>Déplacer le pion d'une case</h3>
+<div class="schema"><b>Entrées :</b> Objet, Direction, Vitesse, Ces tags bloquent le chemin (autres unités, séparés par une virgule) &nbsp;→&nbsp; <b>Sorties :</b> Arrivé / Bloqué (mur, terrain, unité, bord)</div>
+<p>Fait avancer le pion d'une case (haut, bas, gauche, droite), bien centré. Si la case est un mur, un terrain qui bloque, une unité (tags) ou le bord de la carte : sortie « Bloqué ». Sinon « Arrivé » à la fin du pas.</p>
+<p class="exemple"><b>Exemple :</b> déplacer un pion de jeu de plateau avec des boutons ◀ ▶ ▲ ▼.</p>
 </div>
 <div class="fiche"><h3>Poursuivre un objet</h3>
 <div class="schema"><b>Entrées :</b> Objet A, Objet B, Vitesse</div>
@@ -698,6 +718,66 @@
 </div>
 <h2 id="c9-grilles-et-puzzles">Grilles et puzzles</h2>
 <div class="method">
+<div class="fiche"><h3>Passer au tour suivant</h3>
+<div class="schema"><b>Entrée :</b> Équipes, dans l'ordre (tags séparés par une virgule)</div>
+<p>Fait passer le jeu à l'équipe suivante. Écris les équipes dans l'ordre, par leur tag (ex. joueur,ennemi). Le premier appel (par exemple après « Au démarrage ») commence par la première équipe ; quand toutes ont joué, le numéro du tour augmente. À chaque début de tour, l'événement local « tour_&lt;équipe&gt; » part s'il existe (ex. « tour_ennemi »).</p>
+<p class="exemple"><b>Exemple :</b> mettre « Passer au tour suivant » sur le bouton « Fin du tour ».</p>
+</div>
+<div class="fiche"><h3>Si c'est le tour de…</h3>
+<div class="schema"><b>Entrée :</b> Équipe (tag) &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux</div>
+<p>Vrai si c'est le tour de l'équipe écrite (son tag), Faux sinon.</p>
+<p class="exemple"><b>Exemple :</b> laisser le joueur toucher ses unités seulement pendant son tour.</p>
+</div>
+<div class="fiche"><h3>Marquer comme ayant joué</h3>
+<div class="schema"><b>Entrée :</b> Objet</div>
+<p>Note que l'unité (objet A) a joué ce tour-ci. Tout est effacé au début du tour suivant.</p>
+<p class="exemple"><b>Exemple :</b> empêcher un héros de bouger deux fois dans le même tour.</p>
+</div>
+<div class="fiche"><h3>Si l'unité a déjà joué</h3>
+<div class="schema"><b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux</div>
+<p>Vrai si l'unité (objet A) a déjà joué ce tour-ci, Faux sinon.</p>
+<p class="exemple"><b>Exemple :</b> refuser de déplacer un héros qui a déjà joué.</p>
+</div>
+<div class="fiche"><h3>Montrer les cases accessibles</h3>
+<div class="schema"><b>Entrées :</b> Objet, Type de zone, Nombre de pas (ou portée), Couleur des cases, Visibilité des cases (0 = invisible, 100 = pleine), Cadre autour de chaque case, Écrire le nombre de pas sur chaque case, Les murs bloquent (déplacement), Ces tags bloquent le passage (séparés par une virgule), Terrains qui coûtent plus de pas (tag=coût, ex. foret=2, eau=3), Nom de la zone (facultatif : pour en montrer plusieurs)</div>
+<p>Colore les cases où l'objet choisi peut aller (ou attaquer). Les murs bloquent, et tu peux ajouter des tags qui bloquent (autres unités) et des terrains qui coûtent plus de pas (foret=2). Couleur, visibilité, cadre et chiffres se règlent. « Nom de la zone » permet d'en montrer plusieurs (déplacement en bleu, attaque en rouge).</p>
+<p class="exemple"><b>Exemple :</b> montrer la zone de déplacement d'un héros quand on le touche.</p>
+</div>
+<div class="fiche"><h3>Cacher les cases</h3>
+<div class="schema"><b>Entrée :</b> Nom de la zone (facultatif)</div>
+<p>Efface les cases colorées (toutes, ou celles d'une zone nommée).</p>
+<p class="exemple"><b>Exemple :</b> cacher la zone une fois le héros arrivé.</p>
+</div>
+<div class="fiche"><h3>Si la case est accessible</h3>
+<div class="schema"><b>Entrées :</b> Colonne, Ligne, Nom de la zone (facultatif) &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux</div>
+<p>Vrai si la case (colonne, ligne) fait partie des cases montrées. Par défaut : la case que le doigt touche. Faux sinon.</p>
+<p class="exemple"><b>Exemple :</b> refuser un déplacement trop loin avec « trop loin ! ».</p>
+</div>
+<div class="fiche"><h3>Donner une fiche d'unité</h3>
+<div class="schema"><b>Entrées :</b> Objet, Points de vie, Attaque, Défense, Mouvement (pas), Portée d'attaque (cases)</div>
+<p>Donne à l'objet sa fiche : vie, attaque, défense, mouvement et portée (variables d'objet « vie », « attaque », « defense », « mouvement », « portee »). Elles se lisent partout par formule, par exemple =hero.mouvement pour le nombre de pas des cases accessibles. Mets ce nœud « Au démarrage » de chaque unité, ou dans un prefab d'unité réutilisable.</p>
+<p class="exemple"><b>Exemple :</b> créer un archer : vie 8, attaque 4, défense 0, mouvement 4, portée 3.</p>
+</div>
+<div class="fiche"><h3>Attaquer</h3>
+<div class="schema"><b>Entrées :</b> Objet A, Objet B, Puissance de l'attaque (%), Compter la défense du terrain de la cible, Toujours au moins 1 dégât, Détruire la cible quand elle n'a plus de vie &nbsp;→&nbsp; <b>Sorties :</b> Encore en vie / Plus de vie</div>
+<p>L'objet A attaque l'objet B : dégâts = attaque de A × puissance − défense de B − défense du terrain de B. Deux sorties : « Encore en vie » et « Plus de vie » (la cible est détruite si la case est cochée). Les deux objets doivent avoir une fiche d'unité.</p>
+<p class="exemple"><b>Exemple :</b> un héros frappe le monstre touché.</p>
+</div>
+<div class="fiche"><h3>Donner de la vie à l'objet</h3>
+<div class="schema"><b>Entrées :</b> Objet, Points de vie</div>
+<p>Donne des points de vie à l'objet choisi (variable d'objet « vie », et « vie_max » pour le maximum). On la lit partout avec une formule, par exemple =monstre.vie, pour l'écrire dans un texte ou dans une barre.</p>
+<p class="exemple"><b>Exemple :</b> donner 10 points de vie à un monstre au démarrage.</p>
+</div>
+<div class="fiche"><h3>Infliger des dégâts</h3>
+<div class="schema"><b>Entrées :</b> Objet, Dégâts, Détruire l'objet quand il n'a plus de vie, Retirer la défense du terrain où il se trouve &nbsp;→&nbsp; <b>Sorties :</b> Encore en vie / Plus de vie</div>
+<p>Enlève des points de vie à l'objet (jamais en dessous de 0). Deux sorties : « Encore en vie » et « Plus de vie » (l'objet est détruit si la case est cochée ; « l'objet impliqué » reste celui touché).</p>
+<p class="exemple"><b>Exemple :</b> un héros frappe un monstre : 3 dégâts, puis un petit message selon le résultat.</p>
+</div>
+<div class="fiche"><h3>Soigner</h3>
+<div class="schema"><b>Entrées :</b> Objet, Vie rendue</div>
+<p>Rend des points de vie à l'objet, sans dépasser sa vie maximum.</p>
+<p class="exemple"><b>Exemple :</b> une potion qui rend 5 points de vie au héros.</p>
+</div>
 <div class="fiche"><h3>Remplir la grille</h3>
 <div class="schema"><b>Entrées :</b> Objet, Colonnes, Lignes, Objets modèles (noms séparés par des virgules)</div>
 <p>Découpe l'objet A (le plateau) en colonnes et lignes, et pose dans chaque case une copie d'un objet modèle tiré au hasard (au moins 3 modèles, noms séparés par des virgules). Il n'y a jamais d'alignement au départ, et les pièces tombent du haut à l'arrivée. À utiliser avant « Jouer sur la grille (aligner 3) ».</p>
@@ -880,6 +960,56 @@
 <div class="schema"><b>Entrées :</b> A, Opération, B &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)</div>
 <p>Nœud vert (valeur) : calcule A + B, A − B, A × B ou A ÷ B. A et B peuvent être des nombres, ou recevoir à leur tour un fil vert (calculs en chaîne).</p>
 <p class="exemple"><b>Exemple :</b> donner deux fois plus de points (Valeur ← calcul : score × 2).</p>
+</div>
+<div class="fiche"><h3>Colonne touchée</h3>
+<div class="schema"><b>Sortie :</b> aucune (fin du script)</div>
+<p>Nœud vert (valeur) : donne la colonne de la case que le doigt touche (0 = la première à gauche). Branche-le sur un réglage avec le bouton 🔗.</p>
+<p class="exemple"><b>Exemple :</b> savoir dans quelle colonne on a touché pour poser une tourelle.</p>
+</div>
+<div class="fiche"><h3>Ligne touchée</h3>
+<div class="schema"><b>Sortie :</b> aucune (fin du script)</div>
+<p>Nœud vert (valeur) : donne la ligne de la case que le doigt touche (0 = la première en haut). Branche-le sur un réglage avec le bouton 🔗.</p>
+<p class="exemple"><b>Exemple :</b> savoir dans quelle ligne on a touché pour poser un bâtiment.</p>
+</div>
+<div class="fiche"><h3>Colonne d'un objet</h3>
+<div class="schema"><b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)</div>
+<p>Nœud vert (valeur) : donne la colonne de la case où se trouve l'objet choisi (0 = la première à gauche).</p>
+<p class="exemple"><b>Exemple :</b> savoir dans quelle colonne se trouve le héros.</p>
+</div>
+<div class="fiche"><h3>Ligne d'un objet</h3>
+<div class="schema"><b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)</div>
+<p>Nœud vert (valeur) : donne la ligne de la case où se trouve l'objet choisi (0 = la première en haut).</p>
+<p class="exemple"><b>Exemple :</b> savoir dans quelle ligne se trouve le héros.</p>
+</div>
+<div class="fiche"><h3>Numéro du tour</h3>
+<div class="schema"><b>Sortie :</b> aucune (fin du script)</div>
+<p>Nœud vert : le numéro du tour en cours (1, 2, 3…), à brancher avec le bouton 🔗.</p>
+<p class="exemple"><b>Exemple :</b> afficher « Tour 3 » dans un texte.</p>
+</div>
+<div class="fiche"><h3>Pas pour aller sur la case touchée</h3>
+<div class="schema"><b>Sortie :</b> aucune (fin du script)</div>
+<p>Nœud vert : le nombre de pas pour aller sur la case touchée (-1 si elle est hors zone). Pratique pour compter les pas restants.</p>
+<p class="exemple"><b>Exemple :</b> pas restants = pas de l'unité - ce nombre.</p>
+</div>
+<div class="fiche"><h3>Terrain de la case touchée</h3>
+<div class="schema"><b>Sortie :</b> aucune (fin du script)</div>
+<p>Nœud vert : le nom du terrain de la case touchée (« Forêt », « Eau »…), ou rien s'il n'y en a pas. Les terrains se règlent dans l'éditeur de tuiles.</p>
+<p class="exemple"><b>Exemple :</b> afficher « Forêt » quand on touche une case de forêt.</p>
+</div>
+<div class="fiche"><h3>Coût du terrain de la case touchée</h3>
+<div class="schema"><b>Sortie :</b> aucune (fin du script)</div>
+<p>Nœud vert : le coût en pas du terrain de la case touchée (1 s'il n'y en a pas).</p>
+<p class="exemple"><b>Exemple :</b> dire « ça coûte 2 pas » avant un déplacement.</p>
+</div>
+<div class="fiche"><h3>Terrain sous un objet</h3>
+<div class="schema"><b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)</div>
+<p>Nœud vert : le nom du terrain sur lequel se trouve l'objet choisi.</p>
+<p class="exemple"><b>Exemple :</b> savoir si le héros est dans l'eau ou sur la route.</p>
+</div>
+<div class="fiche"><h3>Défense du terrain sous un objet</h3>
+<div class="schema"><b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)</div>
+<p>Nœud vert : le bonus de défense du terrain sous l'objet choisi.</p>
+<p class="exemple"><b>Exemple :</b> afficher le bonus de défense d'une unité.</p>
 </div>
 <div class="fiche"><h3>Distance entre 2 objets</h3>
 <div class="schema"><b>Entrées :</b> Objet A, Objet B &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)</div>

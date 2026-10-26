@@ -1,0 +1,198 @@
+{
+  "titre_page": "Como fazer um jogo de tática por turnos no Yop2D? | Guia Yop2D",
+  "description": "Faça um jogo de tática em uma grade no Yop2D, sem código: turnos, casas azuis alcançáveis, terrenos, movimento, ataque e vida com nós.",
+  "h1": "Como fazer um jogo de tática?",
+  "carte": [
+    "Fazer um jogo de tática",
+    "Turnos, casas azuis, terrenos, movimento e ataque em uma grade."
+  ],
+  "etapes": [
+    [
+      "Dar uma ficha a cada unidade",
+      "{{NoeudEventStart}} → {{definir_fiche}} (vida, ataque, defesa, movimento, alcance)."
+    ],
+    [
+      "Começar o turno do jogador",
+      "{{tour_suivant}} (joueur, ennemi) executa o evento local \"tour_joueur\"."
+    ],
+    [
+      "Mostrar aonde o herói pode ir",
+      "{{NoeudEventClicObjet}} → {{si_tour_de}} → {{montrer_cases}}."
+    ],
+    [
+      "Fazer o herói andar",
+      "{{NoeudEventClicObjet}} (o terreno) → {{si_case_accessible}} → {{chemin_vers_case}}."
+    ],
+    [
+      "Atacar",
+      "{{NoeudEventClicObjet}} (o monstro) → {{si_case_accessible}} → {{attaquer}}."
+    ],
+    [
+      "O turno dos monstros",
+      "\"tour_ennemi\" → {{chemin_vers_objet}} (ao lado do herói) → {{attaquer}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Em um jogo de **tática**, os jogadores jogam por **turnos** em uma grade: você escolhe uma unidade, vê as casas que ela alcança, a move e depois ela ataca. Este guia monta o jogo mais simples possível: **um herói e um monstro**. Tudo já está pronto no exemplo **Tactics tutorial** (aba **Exemplos** da tela inicial): abra seu Blueprint, cada etapa está em um **quadro colorido** com um pequeno **?** que a explica."
+    ],
+    [
+      "besoin",
+      [
+        "um mapa de tiles à sua escolha (a grade do jogo **é** a grade desse mapa de tiles);",
+        "uma {{lang:obj_prefix_image}} chamada **hero1** com a tag **joueur**, e outra chamada **foe1** com a tag **ennemi**;",
+        "uma {{lang:obj_prefix_zone}} chamada **terrain** que cubra o mapa inteiro (é nela que se toca para escolher uma casa);",
+        "uma variável **etat** (inteiro, local) para saber em que ponto estamos: 0 = escolher um herói, 1 = herói escolhido, 2 = herói movido."
+      ]
+    ],
+    [
+      "tip",
+      "Os **terrenos** (floresta, areia, montanha…) são definidos no editor de tiles, na parte **Terrenos dos tiles**: custo em passos, bloqueado ou não, bônus de defesa. A montanha bloqueia a passagem, a floresta custa 2 passos."
+    ],
+    [
+      "h2",
+      "Etapa 1: as fichas das unidades"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Adicione o evento **[[NoeudEventStart]]**.",
+            "Adicione **[[definir_fiche]]** para **hero1**: vida `20`, ataque `6`, defesa `2`, movimento `4`, alcance `1`.",
+            "Adicione um segundo **[[definir_fiche]]** para **foe1**, com seus próprios números.",
+            "Ligue os nós em ordem e adicione **[[tour_suivant]]** com as equipes `joueur,ennemi`."
+          ]
+        ],
+        [
+          "tip",
+          "A ficha fica guardada no objeto: você pode lê-la em qualquer lugar com uma fórmula, por exemplo `=hero1.vie`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Etapa 2: o turno do jogador"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Adicione o evento **[[NoeudEventPersonnalise]]** e escreva o nome `tour_joueur`. Ele começa sozinho no início do turno do jogador.",
+            "Coloque **etat** em `0` com **[[modifier_variable]]** e depois **[[cacher_cases]]** para apagar as casas antigas."
+          ]
+        ],
+        [
+          "p",
+          "Para cada equipe, **[[tour_suivant]]** executa o evento local \"tour_\" seguido do nome da equipe: `tour_joueur`, depois `tour_ennemi`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Etapa 3: toque no herói e veja as casas azuis"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Adicione **[[NoeudEventClicObjet]]** em **hero1**.",
+            "Adicione **[[si_tour_de]]** com a equipe `joueur` e, na saída **{{lang:port_vrai}}**, uma **[[condition]]** `etat < 2`.",
+            "Adicione **[[modifier_variable]]**: **etat** = `1`.",
+            "Adicione **[[montrer_cases]]** em **hero1**: tipo de zona **Movimento (as paredes contam)**, número de passos `=hero1.mouvement`, cor azul, **Escrever os passos em cada casa** = sim, **Estas tags bloqueiam a passagem** = `joueur,ennemi`."
+          ]
+        ],
+        [
+          "tip",
+          "Os números nas casas são os **passos** necessários para chegar. As casas de floresta custam 2: o herói vai menos longe."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Etapa 4: toque em uma casa azul e o herói anda"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Adicione **[[NoeudEventClicObjet]]** em **terrain** e depois uma **[[condition]]** `etat = 1`.",
+            "Adicione **[[si_case_accessible]]**. Para a coluna e a linha, toque em **🔗** e escolha os nós verdes **[[valeur_colonne_touchee]]** e **[[valeur_ligne_touchee]]**: nenhuma fórmula para escrever.",
+            "Na saída **{{lang:port_vrai}}**: **[[modifier_variable]]** **etat** = `4` (o herói está andando) e depois **[[chemin_vers_case]]** em **hero1**, com os mesmos nós verdes e **Estas tags bloqueiam o caminho** = `joueur,ennemi`.",
+            "Na saída **{{lang:port_arrive}}**, chame o evento local `apres_deplacement` com **[[appeler_evenement]]**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Etapa 5: a zona de ataque e depois o ataque"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "No evento local **apres_deplacement**: **[[cacher_cases]]**, **etat** = `2` e depois **[[montrer_cases]]** com tipo **Ataque / alcance (passa sobre as paredes)**, número de passos `=hero1.portee`, cor vermelha, com o nome de zona `attaque`.",
+            "Adicione **[[NoeudEventClicObjet]]** em **foe1**, uma **[[condition]]** `etat = 2` e **[[si_case_accessible]]** com o nome de zona `attaque`.",
+            "Em **{{lang:port_vrai}}**: **[[attaquer]]** (objeto A = **hero1**, objeto B = **foe1**). O dano é o ataque, menos a defesa do monstro, menos a defesa do terreno dele.",
+            "Saída **Ainda vivo**: atualize o texto de vida. Saída **Sem vida**: o monstro é destruído, adicione a vitória."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Etapa 6: o turno dos monstros"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Adicione o evento local `tour_ennemi`.",
+            "Adicione **[[chemin_vers_objet]]** em **foe1**, objeto B = **hero1**, **Parar** = **Numa casa vizinha, centrado**, **Estas tags bloqueiam o caminho** = `joueur,ennemi`.",
+            "Na saída **{{lang:port_arrive}}**, chame um evento local em que **foe1** **[[attaquer]]** **hero1**.",
+            "Depois de alguns segundos (**[[attendre]]**), **[[chemin_arreter]]** e depois **[[tour_suivant]]**: o turno volta ao jogador."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Ir além"
+    ],
+    [
+      "ul",
+      [
+        "**Vários heróis:** adicione **[[marquer_joue]]** e **[[si_a_joue]]** para que um herói jogue só uma vez por turno (é o que faz o exemplo **Tactics demo**).",
+        "**Uma barra de vida:** leia `=hero1.vie` e `=hero1.vie_max` em um texto ou barra de progresso.",
+        "**Curar:** **[[soigner]]** devolve vida sem passar do máximo.",
+        "**Um jogo de tabuleiro:** **[[pion_une_case]]** move uma peça uma casa, bem centrada (botões ◀ ▶ ▲ ▼)."
+      ]
+    ],
+    [
+      "h2",
+      "Se não funcionar"
+    ],
+    [
+      "ul",
+      [
+        "**Nenhuma casa azul:** o herói deve ter a tag escrita em **[[si_tour_de]]**, e **[[tour_suivant]]** deve ter sido executado no início.",
+        "**As casas não batem com o desenho:** a grade é a do primeiro mapa de tiles da cena. Sem mapa de tiles, as casas medem 80 px.",
+        "**O herói não se mexe:** verifique se a casa tocada é azul e se **etat** vale `1` nesse momento.",
+        "**Para comparar**, abra o exemplo **Tactics tutorial**: cada parte do Blueprint está em um quadro que a explica."
+      ]
+    ]
+  ]
+}

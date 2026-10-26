@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как сделать пошаговую тактическую игру в Yop2D? | Руководство Yop2D</title>
+<meta name="description" content="Сделай тактическую игру на сетке в Yop2D без кода: ходы, доступные синие клетки, местность, движение, атака и здоровье с помощью нод.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/jeu-tactique.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/jeu-tactique.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/jeu-tactique.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/jeu-tactique.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/jeu-tactique.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/jeu-tactique.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/jeu-tactique.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/jeu-tactique.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/jeu-tactique.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/jeu-tactique.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Как сделать тактическую игру?",
+ "description": "Сделай тактическую игру на сетке в Yop2D без кода: ходы, доступные синие клетки, местность, движение, атака и здоровье с помощью нод.",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Дать карточку каждому юниту",
+   "text": "При старте → Дать карточку юнита (здоровье, атака, защита, движение, дальность)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Начать ход игрока",
+   "text": "Перейти к следующему ходу (joueur, ennemi) запускает локальное событие \"tour_joueur\"."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Показать, куда может пойти герой",
+   "text": "Клик по объекту → Если ходит… → Показать доступные клетки."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Заставить героя идти",
+   "text": "Клик по объекту (местность) → Если клетка доступна → Идти к клетке (путь)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Атаковать",
+   "text": "Клик по объекту (монстр) → Если клетка доступна → Атаковать."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Ход монстров",
+   "text": "\"tour_ennemi\" → Идти к объекту (путь) (рядом с героем) → Атаковать."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ru/index.html">← Yop2D</a>
+<h1>Как сделать тактическую игру?</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../jeu-tactique.html" hreflang="fr">Français</a> · <a href="../en/jeu-tactique.html" hreflang="en">English</a> · <a href="../es/jeu-tactique.html" hreflang="es">Español</a> · <a href="../de/jeu-tactique.html" hreflang="de">Deutsch</a> · <a href="../it/jeu-tactique.html" hreflang="it">Italiano</a> · <a href="../pt/jeu-tactique.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/jeu-tactique.html" hreflang="zh">中文</a> · <a href="../ja/jeu-tactique.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>В <strong>тактической</strong> игре игроки ходят <strong>по очереди</strong> на сетке: выбираешь юнит, видишь клетки, куда он может дойти, двигаешь его, и затем он атакует. Это руководство строит самую простую игру: <strong>один герой и один монстр</strong>. Всё уже готово в примере <strong>Tactics tutorial</strong> (вкладка <strong>Примеры</strong> стартового экрана): открой его Blueprint, каждый шаг лежит в <strong>цветной рамке</strong> с маленьким <strong>?</strong>, который его объясняет.</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>карта тайлов на твой выбор (сетка игры <strong>это</strong> сетка этой карты тайлов);</li><li>Изображение с именем <strong>hero1</strong> и тегом <strong>joueur</strong> и ещё одно с именем <strong>foe1</strong> и тегом <strong>ennemi</strong>;</li><li>Зона с именем <strong>terrain</strong>, покрывающая всю карту (на неё нажимают, чтобы выбрать клетку);</li><li>переменная <strong>etat</strong> (целое, локальная), чтобы знать, где мы: 0 = выбрать героя, 1 = герой выбран, 2 = герой передвинут.</li></ul>
+</div>
+<div class="tip">👉 <strong>Местность</strong> (лес, песок, гора…) настраивается в редакторе тайлов, в части <strong>Местность тайлов</strong>: стоимость в шагах, блокирует или нет, бонус защиты. Гора преграждает путь, лес стоит 2 шага.</div>
+<h2>Шаг 1: карточки юнитов</h2>
+<div class="method">
+<ol><li>Добавь событие <strong>«При старте»</strong>.</li><li>Добавь <strong>«Дать карточку юнита»</strong> для <strong>hero1</strong>: здоровье <code>20</code>, атака <code>6</code>, защита <code>2</code>, движение <code>4</code>, дальность <code>1</code>.</li><li>Добавь второй <strong>«Дать карточку юнита»</strong> для <strong>foe1</strong> со своими числами.</li><li>Соедини ноды по порядку и добавь <strong>«Перейти к следующему ходу»</strong> с командами <code>joueur,ennemi</code>.</li></ol>
+<div class="tip">👉 Карточка хранится в объекте: её можно прочитать где угодно формулой, например <code>=hero1.vie</code>.</div>
+</div>
+<h2>Шаг 2: ход игрока</h2>
+<div class="method">
+<ol><li>Добавь событие <strong>«Локальное событие»</strong> и напиши имя <code>tour_joueur</code>. Оно запускается само в начале хода игрока.</li><li>Поставь <strong>etat</strong> в <code>0</code> нодой <strong>«Изменить переменную»</strong>, затем <strong>«Скрыть клетки»</strong>, чтобы стереть старые клетки.</li></ol>
+<p>Для каждой команды <strong>«Перейти к следующему ходу»</strong> запускает локальное событие "tour_" и имя команды: <code>tour_joueur</code>, затем <code>tour_ennemi</code>.</p>
+</div>
+<h2>Шаг 3: нажми на героя и увидишь синие клетки</h2>
+<div class="method">
+<ol><li>Добавь <strong>«Клик по объекту»</strong> на <strong>hero1</strong>.</li><li>Добавь <strong>«Если ходит…»</strong> с командой <code>joueur</code>, затем на выходе <strong>Истина</strong> — <strong>«Условие»</strong> <code>etat &lt; 2</code>.</li><li>Добавь <strong>«Изменить переменную»</strong>: <strong>etat</strong> = <code>1</code>.</li><li>Добавь <strong>«Показать доступные клетки»</strong> на <strong>hero1</strong>: тип зоны <strong>Движение (стены мешают)</strong>, число шагов <code>=hero1.mouvement</code>, синий цвет, <strong>Писать число шагов на клетках</strong> = да, <strong>Эти теги преграждают путь</strong> = <code>joueur,ennemi</code>.</li></ol>
+<div class="tip">👉 Числа на клетках — это <strong>шаги</strong>, нужные, чтобы туда дойти. Клетки леса стоят 2: герой уходит не так далеко.</div>
+</div>
+<h2>Шаг 4: нажми на синюю клетку, герой пойдёт</h2>
+<div class="method">
+<ol><li>Добавь <strong>«Клик по объекту»</strong> на <strong>terrain</strong>, затем <strong>«Условие»</strong> <code>etat = 1</code>.</li><li>Добавь <strong>«Если клетка доступна»</strong>. Для столбца и строки нажми <strong>🔗</strong> и выбери зелёные ноды <strong>«Нажатый столбец»</strong> и <strong>«Нажатая строка»</strong>: писать формулы не нужно.</li><li>На выходе <strong>Истина</strong>: <strong>«Изменить переменную»</strong> <strong>etat</strong> = <code>4</code> (герой идёт), затем <strong>«Идти к клетке (путь)»</strong> на <strong>hero1</strong> с теми же зелёными нодами и <strong>Эти теги преграждают путь</strong> = <code>joueur,ennemi</code>.</li><li>На выходе <strong>Прибыл</strong> вызови локальное событие <code>apres_deplacement</code> нодой <strong>«Вызвать событие»</strong>.</li></ol>
+</div>
+<h2>Шаг 5: зона атаки, затем атака</h2>
+<div class="method">
+<ol><li>В локальном событии <strong>apres_deplacement</strong>: <strong>«Скрыть клетки»</strong>, <strong>etat</strong> = <code>2</code>, затем <strong>«Показать доступные клетки»</strong> с типом <strong>Атака / дальность (поверх стен)</strong>, число шагов <code>=hero1.portee</code>, красный цвет, с именем зоны <code>attaque</code>.</li><li>Добавь <strong>«Клик по объекту»</strong> на <strong>foe1</strong>, <strong>«Условие»</strong> <code>etat = 2</code> и <strong>«Если клетка доступна»</strong> с именем зоны <code>attaque</code>.</li><li>На <strong>Истина</strong>: <strong>«Атаковать»</strong> (объект A = <strong>hero1</strong>, объект B = <strong>foe1</strong>). Урон — это атака минус защита монстра минус защита его местности.</li><li>Выход <strong>Ещё жив</strong>: обнови текст его здоровья. Выход <strong>Здоровья нет</strong>: монстр уничтожен, добавь победу.</li></ol>
+</div>
+<h2>Шаг 6: ход монстров</h2>
+<div class="method">
+<ol><li>Добавь локальное событие <code>tour_ennemi</code>.</li><li>Добавь <strong>«Идти к объекту (путь)»</strong> на <strong>foe1</strong>, объект B = <strong>hero1</strong>, <strong>Остановиться</strong> = <strong>На соседней клетке, по центру</strong>, <strong>Эти теги преграждают путь</strong> = <code>joueur,ennemi</code>.</li><li>На выходе <strong>Прибыл</strong> вызови локальное событие, где <strong>foe1</strong> <strong>«Атаковать»</strong> <strong>hero1</strong>.</li><li>Через несколько секунд (<strong>«Ждать»</strong>): <strong>«Остановить путь»</strong>, затем <strong>«Перейти к следующему ходу»</strong>: ход возвращается игроку.</li></ol>
+</div>
+<h2>Идти дальше</h2>
+<ul><li><strong>Несколько героев:</strong> добавь <strong>«Отметить как сходившего»</strong> и <strong>«Если юнит уже ходил»</strong>, чтобы герой ходил один раз за ход (так делает пример <strong>Tactics demo</strong>).</li><li><strong>Полоса здоровья:</strong> читай <code>=hero1.vie</code> и <code>=hero1.vie_max</code> в тексте или полосе прогресса.</li><li><strong>Лечение:</strong> <strong>«Лечить»</strong> возвращает здоровье, не превышая максимум.</li><li><strong>Настольная игра:</strong> <strong>«Сдвинуть фишку на клетку»</strong> двигает фигуру на одну клетку точно по центру (кнопки ◀ ▶ ▲ ▼).</li></ul>
+<h2>Если не работает</h2>
+<ul><li><strong>Нет синих клеток:</strong> у героя должен быть тег, записанный в <strong>«Если ходит…»</strong>, а <strong>«Перейти к следующему ходу»</strong> должен быть запущен в начале.</li><li><strong>Клетки не совпадают с рисунком:</strong> сетка — это сетка первой карты тайлов сцены. Без карты тайлов клетки по 80 px.</li><li><strong>Герой не двигается:</strong> проверь, что нажатая клетка синяя и что <strong>etat</strong> равно <code>1</code> в этот момент.</li><li><strong>Для сравнения</strong> открой пример <strong>Tactics tutorial</strong>: каждая часть Blueprint лежит в рамке, которая её объясняет.</li></ul>
+
+<div class="nav">
+<a href="../ru/casse-briques.html">← Сделать арканоид</a>
+<a href="../ru/niveau-suivant.html">Следующее руководство: Переход на следующий уровень →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../ru/index.html">Официальный сайт</a> · <a href="../../noeuds/ru.html">Справочник узлов</a></p>
+</footer>
+</body>
+</html>

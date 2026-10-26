@@ -2,6 +2,78 @@
   "categorie": "Raster und Puzzles",
   "noeuds": [
     {
+      "nom": "Zum nächsten Zug",
+      "schema": "<b>Eingang:</b> Teams der Reihe nach (Tags mit Komma getrennt)",
+      "role": "Gibt das Spiel an das nächste Team weiter. Schreibe die Teams der Reihe nach mit ihren Tags (z. B. spieler,gegner). Der erste Aufruf (zum Beispiel nach „Beim Start“) beginnt mit dem ersten Team; wenn alle gespielt haben, steigt die Zugnummer. Zu Beginn jedes Zugs läuft das lokale Ereignis „tour_<Team>“, falls es existiert (z. B. „tour_gegner“).",
+      "exemple": "„Zum nächsten Zug“ auf den Knopf „Zug beenden“ legen."
+    },
+    {
+      "nom": "Wenn … am Zug ist",
+      "schema": "<b>Eingang:</b> Team (Tag) &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch",
+      "role": "Wahr, wenn das geschriebene Team (sein Tag) am Zug ist, sonst Falsch.",
+      "exemple": "den Spieler seine Einheiten nur während seines eigenen Zugs berühren lassen."
+    },
+    {
+      "nom": "Als gespielt markieren",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Merkt sich, dass die Einheit (Objekt A) in diesem Zug gespielt hat. Alles wird gelöscht, wenn der nächste Zug beginnt.",
+      "exemple": "verhindern, dass ein Held sich im selben Zug zweimal bewegt."
+    },
+    {
+      "nom": "Wenn die Einheit schon gespielt hat",
+      "schema": "<b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch",
+      "role": "Wahr, wenn die Einheit (Objekt A) in diesem Zug schon gespielt hat, sonst Falsch.",
+      "exemple": "es ablehnen, einen Helden zu bewegen, der schon gespielt hat."
+    },
+    {
+      "nom": "Erreichbare Felder zeigen",
+      "schema": "<b>Eingänge:</b> Objekt, Zonentyp, Anzahl Schritte (oder Reichweite), Farbe der Felder, Sichtbarkeit der Felder (0 = unsichtbar, 100 = voll), Rahmen um jedes Feld, Schrittzahl auf jedes Feld schreiben, Wände blockieren (Bewegung), Diese Tags blockieren den Weg (mit Komma getrennt), Gelände mit mehr Schritten (Tag=Kosten, z. B. wald=2, wasser=3), Zonenname (optional: für mehrere)",
+      "role": "Färbt die Felder ein, auf die das gewählte Objekt gehen (oder die es angreifen) kann. Wände blockieren, und du kannst blockierende Tags (andere Einheiten) und Gelände hinzufügen, das mehr Schritte kostet (Wald=2). Farbe, Sichtbarkeit, Rahmen und Zahlen sind einstellbar. Mit „Zonenname“ zeigst du mehrere gleichzeitig (Bewegung blau, Angriff rot).",
+      "exemple": "die Bewegungszone eines Helden zeigen, wenn man ihn berührt."
+    },
+    {
+      "nom": "Felder verbergen",
+      "schema": "<b>Eingang:</b> Zonenname (optional)",
+      "role": "Löscht die gefärbten Felder (alle oder eine benannte Zone).",
+      "exemple": "die Zone verbergen, wenn der Held angekommen ist."
+    },
+    {
+      "nom": "Wenn das Feld erreichbar ist",
+      "schema": "<b>Eingänge:</b> Spalte, Zeile, Zonenname (optional) &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch",
+      "role": "Wahr, wenn das Feld (Spalte, Zeile) eines der gezeigten Felder ist. Standard: das berührte Feld. Sonst Falsch.",
+      "exemple": "eine zu weite Bewegung mit „zu weit!“ ablehnen."
+    },
+    {
+      "nom": "Einheitenblatt geben",
+      "schema": "<b>Eingänge:</b> Objekt, Lebenspunkte, Angriff, Verteidigung, Bewegung (Schritte), Angriffsreichweite (Felder)",
+      "role": "Gibt dem Objekt sein Blatt: Leben, Angriff, Verteidigung, Bewegung und Reichweite (Objektvariablen „vie“, „attaque“, „defense“, „mouvement“, „portee“). Sie sind überall mit einer Formel lesbar, z. B. =held.mouvement für die Schritte der erreichbaren Felder. Setze diesen Node nach „Beim Start“ jeder Einheit oder in ein wiederverwendbares Einheiten-Prefab.",
+      "exemple": "einen Bogenschützen erstellen: Leben 8, Angriff 4, Verteidigung 0, Bewegung 4, Reichweite 3."
+    },
+    {
+      "nom": "Angreifen",
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Angriffsstärke (%), Verteidigung des Geländes des Ziels zählen, Immer mindestens 1 Schaden, Ziel zerstören, wenn die Leben aufgebraucht sind &nbsp;→&nbsp; <b>Ausgänge:</b> Noch am Leben / Keine Leben mehr",
+      "role": "Objekt A greift Objekt B an: Schaden = Angriff von A × Stärke − Verteidigung von B − Geländeverteidigung von B. Zwei Ausgänge: „Noch am Leben“ und „Kein Leben mehr“ (das Ziel wird zerstört, wenn das Kästchen angehakt ist). Beide Objekte brauchen ein Einheitenblatt.",
+      "exemple": "ein Held schlägt das berührte Monster."
+    },
+    {
+      "nom": "Objekt Leben geben",
+      "schema": "<b>Eingänge:</b> Objekt, Lebenspunkte",
+      "role": "Gibt dem gewählten Objekt Lebenspunkte (Objektvariable „vie“, und „vie_max“ für das Maximum). Überall mit einer Formel lesbar, z. B. =monster.vie, um sie in einen Text oder einen Balken zu schreiben.",
+      "exemple": "einem Monster am Anfang 10 Lebenspunkte geben."
+    },
+    {
+      "nom": "Schaden zufügen",
+      "schema": "<b>Eingänge:</b> Objekt, Schaden, Objekt zerstören, wenn die Leben aufgebraucht sind, Verteidigung des Geländes abziehen &nbsp;→&nbsp; <b>Ausgänge:</b> Noch am Leben / Keine Leben mehr",
+      "role": "Zieht dem Objekt Lebenspunkte ab (nie unter 0). Zwei Ausgänge: „Noch am Leben“ und „Kein Leben mehr“ (das Objekt wird zerstört, wenn das Kästchen angehakt ist; „das beteiligte Objekt“ bleibt das getroffene).",
+      "exemple": "ein Held schlägt ein Monster: 3 Schaden, dann eine kleine Meldung je nach Ergebnis."
+    },
+    {
+      "nom": "Heilen",
+      "schema": "<b>Eingänge:</b> Objekt, Zurückgegebene Leben",
+      "role": "Gibt dem Objekt Lebenspunkte zurück, ohne sein Maximum zu überschreiten.",
+      "exemple": "ein Trank, der dem Helden 5 Lebenspunkte zurückgibt."
+    },
+    {
       "nom": "Raster füllen",
       "schema": "<b>Eingänge:</b> Objekt, Spalten, Zeilen, Vorlage-Objekte (Namen mit Kommas getrennt)",
       "role": "Teilt Objekt A (das Spielbrett) in Spalten und Zeilen und legt in jedes Feld eine Kopie eines zufällig gewählten Vorlage-Objekts (mindestens 3 Vorlagen, Namen mit Kommas getrennt). Am Anfang gibt es nie eine Reihe, und die Teile fallen von oben herein. Vor „Auf dem Raster spielen (3 in einer Reihe)“ verwenden.",

@@ -508,7 +508,7 @@
   "when an enemy explodes: duration 0.06, speed 0.05."
  ],
  "chemin_vers_objet": [
-  "Object A goes to object B, finding the shortest path by itself, square by square, without going through walls (\"Solid\" tiles of a tile layer, fixed physical objects). The path is updated when B moves. [[lang:port_arrive]] runs when A touches B.",
+  "Object A goes to object B, finding the shortest path by itself, square by square, without going through walls (\"Solid\" tiles of a tile layer, fixed physical objects). The path is updated when B moves. [[lang:port_arrive]] runs when A touches B. The \"Stop\" setting lets the object stop on a neighbouring cell, well centered (grid games); \"These tags block the path\" makes it go around other units.",
   "a ghost chasing the player through a maze."
  ],
  "chemin_vers_point": [
@@ -674,5 +674,109 @@
  "charger_variables": [
   "Brings back the values written by [[sauvegarder_variables]] (same save name). Every variable that still exists gets its saved value back. Output « Loaded » when it worked, « No save found » on the very first game. Often placed right after « At start ».",
   "Right after [[NoeudEventStart]]: [[charger_variables]], then [[modifier_propriete]] to show the score that was found."
+ ],
+ "placer_case": [
+  "Puts object A exactly in the middle of the chosen cell (column and row, counted from 0 at the top left). The grid is the one of the scene's tile map. With the 🔗 button, plug in [[valeur_colonne_touchee]] and [[valeur_ligne_touchee]] to send it to the cell the finger touches.",
+  "move a piece to the touched cell in a board game."
+ ],
+ "centrer_case": [
+  "Object A stays in its cell but goes back exactly to the middle. Handy when a move stopped between two cells.",
+  "re-center a hero after its move."
+ ],
+ "valeur_colonne_touchee": [
+  "Green node (value): gives the column of the cell the finger touches (0 = the first on the left). Plug it into a setting with the 🔗 button.",
+  "know which column was touched to place a tower."
+ ],
+ "valeur_ligne_touchee": [
+  "Green node (value): gives the row of the cell the finger touches (0 = the first at the top). Plug it into a setting with the 🔗 button.",
+  "know which row was touched to place a building."
+ ],
+ "valeur_colonne_objet": [
+  "Green node (value): gives the column of the cell where the chosen object is (0 = the first on the left).",
+  "know in which column the hero is."
+ ],
+ "valeur_ligne_objet": [
+  "Green node (value): gives the row of the cell where the chosen object is (0 = the first at the top).",
+  "know in which row the hero is."
+ ],
+ "tour_suivant": [
+  "Passes the game to the next team. Write the teams in order using their tags (e.g. player,enemy). The first call (for example after \"At start\") begins with the first team; when every team has played, the turn number goes up. At the start of each turn the local event \"tour_<team>\" runs if it exists (e.g. \"tour_enemy\").",
+  "put \"Go to the next turn\" on the \"End turn\" button."
+ ],
+ "si_tour_de": [
+  "True if it is the turn of the team written (its tag), False otherwise.",
+  "let the player touch their units only during their own turn."
+ ],
+ "marquer_joue": [
+  "Remembers that the unit (object A) has played this turn. Everything is cleared when the next turn starts.",
+  "stop a hero from moving twice in the same turn."
+ ],
+ "si_a_joue": [
+  "True if the unit (object A) has already played this turn, False otherwise.",
+  "refuse to move a hero that has already played."
+ ],
+ "valeur_numero_tour": [
+  "Green node: the current turn number (1, 2, 3…), plug it in with the 🔗 button.",
+  "show \"Turn 3\" in a text."
+ ],
+ "montrer_cases": [
+  "Colors the cells the chosen object can move to (or attack). Walls block, and you can add tags that block (other units) and terrains that cost more steps (forest=2). Color, visibility, frame and numbers are adjustable. \"Zone name\" lets you show several at once (movement in blue, attack in red).",
+  "show a hero's movement zone when it is touched."
+ ],
+ "cacher_cases": [
+  "Clears the colored cells (all of them, or one named zone).",
+  "hide the zone once the hero has arrived."
+ ],
+ "si_case_accessible": [
+  "True if the cell (column, row) is one of the shown cells. By default: the cell the finger touches. False otherwise.",
+  "refuse a move that is too far with \"too far!\"."
+ ],
+ "valeur_cout_case": [
+  "Green node: the number of steps to reach the touched cell (-1 if it is outside the zone). Handy to count remaining steps.",
+  "remaining steps = the unit's steps - this number."
+ ],
+ "definir_vie": [
+  "Gives health points to the chosen object (object variable \"vie\", and \"vie_max\" for the maximum). Read it anywhere with a formula, e.g. =monster.vie, to write it in a text or a bar.",
+  "give a monster 10 health points at the start."
+ ],
+ "infliger_degats": [
+  "Removes health points from the object (never below 0). Two outputs: \"Still alive\" and \"Out of health\" (the object is destroyed if the box is ticked; \"the involved object\" stays the one hit).",
+  "a hero hits a monster: 3 damage, then a small message depending on the result."
+ ],
+ "soigner": [
+  "Gives health points back to the object, without going over its maximum.",
+  "a potion that restores 5 health points to the hero."
+ ],
+ "valeur_terrain_touche": [
+  "Green node: the name of the terrain of the touched cell (\"Forest\", \"Water\"…), or nothing if there is none. Terrains are set in the tile editor.",
+  "show \"Forest\" when a forest cell is touched."
+ ],
+ "valeur_cout_terrain_touche": [
+  "Green node: the step cost of the terrain of the touched cell (1 if there is none).",
+  "say \"this costs 2 steps\" before a move."
+ ],
+ "valeur_terrain_objet": [
+  "Green node: the name of the terrain the chosen object stands on.",
+  "know whether the hero is in water or on the road."
+ ],
+ "valeur_defense_objet": [
+  "Green node: the defense bonus of the terrain under the chosen object.",
+  "show a unit's defense bonus."
+ ],
+ "chemin_vers_case": [
+  "The object walks to the CENTER of the cell (column, row), going around walls, blocking terrains and the units with the given tags. Default: the cell touched by the finger. \"Arrived\" output once on the cell.",
+  "send a hero to a touched blue cell."
+ ],
+ "pion_une_case": [
+  "Moves the piece one cell (up, down, left, right), well centered. If the cell is a wall, a blocking terrain, a unit (tags) or the edge of the map: \"Blocked\" output. Otherwise \"Arrived\" at the end of the step.",
+  "move a board-game piece with ◀ ▶ ▲ ▼ buttons."
+ ],
+ "definir_fiche": [
+  "Gives the object its sheet: health, attack, defense, movement and range (object variables \"vie\", \"attaque\", \"defense\", \"mouvement\", \"portee\"). They can be read anywhere with a formula, e.g. =hero.mouvement for the number of steps of the reachable cells. Put this node \"At start\" of each unit, or in a reusable unit prefab.",
+  "create an archer: health 8, attack 4, defense 0, movement 4, range 3."
+ ],
+ "attaquer": [
+  "Object A attacks object B: damage = A's attack × power − B's defense − the defense of B's terrain. Two outputs: \"Still alive\" and \"Out of health\" (the target is destroyed if the box is ticked). Both objects need a unit sheet.",
+  "a hero hits the touched monster."
  ]
 }

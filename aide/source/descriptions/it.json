@@ -508,7 +508,7 @@
   "quando esplode un nemico: durata 0,06, velocità 0,05."
  ],
  "chemin_vers_objet": [
-  "L'oggetto A va verso l'oggetto B trovando da solo il percorso più corto, casella per casella, senza attraversare i muri (tessere «Solide» di uno sfondo a tessere, oggetti fisici fissi). Il percorso viene ricalcolato quando B si muove. [[lang:port_arrive]] parte quando A tocca B.",
+  "L'oggetto A va verso l'oggetto B trovando da solo il percorso più corto, casella per casella, senza attraversare i muri (tessere «Solide» di uno sfondo a tessere, oggetti fisici fissi). Il percorso viene ricalcolato quando B si muove. [[lang:port_arrive]] parte quando A tocca B. L'impostazione «Fermarsi» permette di fermarsi su una casella vicina, ben centrato (giochi su griglia); «Questi tag bloccano il percorso» fa aggirare le altre unità.",
   "un fantasma che insegue il giocatore in un labirinto."
  ],
  "chemin_vers_point": [
@@ -674,5 +674,109 @@
  "charger_variables": [
   "Recupera i valori scritti da [[sauvegarder_variables]] (stesso nome di salvataggio). Ogni variabile che esiste ancora riprende il suo valore. Uscita « Caricato » se è andata bene, « Nessun salvataggio » alla primissima partita. Spesso si mette subito dopo « All'avvio ».",
   "Subito dopo [[NoeudEventStart]]: [[charger_variables]], poi [[modifier_propriete]] per mostrare il punteggio ritrovato."
+ ],
+ "placer_case": [
+  "Mette l'oggetto A esattamente al centro della casella scelta (colonna e riga, contate da 0 in alto a sinistra). La griglia è quella della mappa di tile della scena. Con il pulsante 🔗, collega [[valeur_colonne_touchee]] e [[valeur_ligne_touchee]] per mandarlo sulla casella toccata dal dito.",
+  "spostare una pedina sulla casella toccata in un gioco da tavolo."
+ ],
+ "centrer_case": [
+  "L'oggetto A resta nella sua casella ma torna esattamente al centro. Utile quando un movimento si è fermato tra due caselle.",
+  "ricentrare un eroe dopo il suo movimento."
+ ],
+ "valeur_colonne_touchee": [
+  "Nodo verde (valore): dà la colonna della casella toccata dal dito (0 = la prima a sinistra). Collegalo a un'impostazione con il pulsante 🔗.",
+  "sapere quale colonna è stata toccata per piazzare una torre."
+ ],
+ "valeur_ligne_touchee": [
+  "Nodo verde (valore): dà la riga della casella toccata dal dito (0 = la prima in alto). Collegalo a un'impostazione con il pulsante 🔗.",
+  "sapere quale riga è stata toccata per piazzare un edificio."
+ ],
+ "valeur_colonne_objet": [
+  "Nodo verde (valore): dà la colonna della casella in cui si trova l'oggetto scelto (0 = la prima a sinistra).",
+  "sapere in quale colonna si trova l'eroe."
+ ],
+ "valeur_ligne_objet": [
+  "Nodo verde (valore): dà la riga della casella in cui si trova l'oggetto scelto (0 = la prima in alto).",
+  "sapere in quale riga si trova l'eroe."
+ ],
+ "tour_suivant": [
+  "Passa il gioco alla squadra successiva. Scrivi le squadre in ordine con i loro tag (per esempio giocatore,nemico). La prima chiamata (per esempio dopo [[NoeudEventStart]]) inizia dalla prima squadra; quando tutte hanno giocato, il numero del turno aumenta. All'inizio di ogni turno parte l'evento locale «tour_<squadra>» se esiste (per esempio «tour_nemico»).",
+  "mettere [[tour_suivant]] sul pulsante «Fine turno»."
+ ],
+ "si_tour_de": [
+  "Vero se è il turno della squadra scritta (il suo tag), Falso altrimenti.",
+  "lasciare che il giocatore tocchi le sue unità solo durante il suo turno."
+ ],
+ "marquer_joue": [
+  "Ricorda che l'unità (oggetto A) ha già giocato in questo turno. Tutto viene cancellato quando inizia il turno successivo.",
+  "impedire a un eroe di muoversi due volte nello stesso turno."
+ ],
+ "si_a_joue": [
+  "Vero se l'unità (oggetto A) ha già giocato in questo turno, Falso altrimenti.",
+  "rifiutare di muovere un eroe che ha già giocato."
+ ],
+ "valeur_numero_tour": [
+  "Nodo verde: il numero del turno attuale (1, 2, 3…), collegalo con il pulsante 🔗.",
+  "mostrare «Turno 3» in un testo."
+ ],
+ "montrer_cases": [
+  "Colora le caselle dove l'oggetto scelto può andare (o che può attaccare). I muri bloccano, e puoi aggiungere tag che bloccano (altre unità) e terreni che costano più passi (bosco=2). Colore, visibilità, cornice e numeri sono regolabili. «Nome della zona» permette di mostrarne più insieme (movimento in blu, attacco in rosso).",
+  "mostrare la zona di movimento di un eroe quando viene toccato."
+ ],
+ "cacher_cases": [
+  "Cancella le caselle colorate (tutte, o una zona con nome).",
+  "nascondere la zona quando l'eroe è arrivato."
+ ],
+ "si_case_accessible": [
+  "Vero se la casella (colonna, riga) è una di quelle mostrate. Di default: la casella toccata dal dito. Falso altrimenti.",
+  "rifiutare un movimento troppo lontano con «troppo lontano!»."
+ ],
+ "valeur_cout_case": [
+  "Nodo verde: il numero di passi per raggiungere la casella toccata (-1 se è fuori dalla zona). Utile per contare i passi rimasti.",
+  "passi rimasti = passi dell'unità - questo numero."
+ ],
+ "definir_vie": [
+  "Dà punti vita all'oggetto scelto (variabile d'oggetto «vie», e «vie_max» per il massimo). Leggila ovunque con una formula, per esempio =mostro.vie, per scriverla in un testo o in una barra.",
+  "dare 10 punti vita a un mostro all'inizio."
+ ],
+ "infliger_degats": [
+  "Toglie punti vita all'oggetto (mai sotto 0). Due uscite: «Ancora vivo» e «Senza vita» (l'oggetto viene distrutto se la casella è spuntata; «l'oggetto coinvolto» resta quello colpito).",
+  "un eroe colpisce un mostro: 3 danni, poi un piccolo messaggio a seconda del risultato."
+ ],
+ "soigner": [
+  "Restituisce punti vita all'oggetto, senza superare il suo massimo.",
+  "una pozione che restituisce 5 punti vita all'eroe."
+ ],
+ "valeur_terrain_touche": [
+  "Nodo verde: il nome del terreno della casella toccata («Bosco», «Acqua»…), o niente se non c'è. I terreni si definiscono nell'editor di tile.",
+  "mostrare «Bosco» quando si tocca una casella di bosco."
+ ],
+ "valeur_cout_terrain_touche": [
+  "Nodo verde: il costo in passi del terreno della casella toccata (1 se non c'è).",
+  "dire «costa 2 passi» prima di muoversi."
+ ],
+ "valeur_terrain_objet": [
+  "Nodo verde: il nome del terreno su cui si trova l'oggetto scelto.",
+  "sapere se l'eroe è nell'acqua o sulla strada."
+ ],
+ "valeur_defense_objet": [
+  "Nodo verde: il bonus di difesa del terreno sotto l'oggetto scelto.",
+  "mostrare il bonus di difesa di un'unità."
+ ],
+ "chemin_vers_case": [
+  "L'oggetto cammina fino al CENTRO della casella (colonna, riga), aggirando muri, terreni che bloccano e le unità con i tag indicati. Di default: la casella toccata dal dito. Uscita «Arrivato» una volta sulla casella.",
+  "mandare un eroe su una casella blu toccata."
+ ],
+ "pion_une_case": [
+  "Sposta la pedina di una casella (su, giù, sinistra, destra), ben centrata. Se la casella è un muro, un terreno che blocca, un'unità (tag) o il bordo della mappa: uscita «Bloccato». Altrimenti «Arrivato» alla fine del passo.",
+  "muovere una pedina da gioco da tavolo con i pulsanti ◀ ▶ ▲ ▼."
+ ],
+ "definir_fiche": [
+  "Dà all'oggetto la sua scheda: vita, attacco, difesa, movimento e portata (variabili d'oggetto «vie», «attaque», «defense», «mouvement», «portee»). Si possono leggere ovunque con una formula, per esempio =eroe.mouvement per i passi delle caselle raggiungibili. Metti questo nodo dopo [[NoeudEventStart]] di ogni unità, o in un prefab di unità riutilizzabile.",
+  "creare un arciere: vita 8, attacco 4, difesa 0, movimento 4, portata 3."
+ ],
+ "attaquer": [
+  "L'oggetto A attacca l'oggetto B: danno = attacco di A × potenza − difesa di B − difesa del terreno di B. Due uscite: «Ancora vivo» e «Senza vita» (il bersaglio viene distrutto se la casella è spuntata). Entrambi gli oggetti hanno bisogno di una scheda unità.",
+  "un eroe colpisce il mostro toccato."
  ]
 }

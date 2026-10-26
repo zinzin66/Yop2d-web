@@ -508,7 +508,7 @@
   "wenn ein Gegner explodiert: Dauer 0,06, Tempo 0,05."
  ],
  "chemin_vers_objet": [
-  "Objekt A geht zu Objekt B und findet selbst den kürzesten Weg, Feld für Feld, ohne durch Mauern zu gehen („feste“ Kacheln einer Kachelebene, feste physikalische Objekte). Der Weg wird neu berechnet, wenn B sich bewegt. [[lang:port_arrive]] startet, wenn A B berührt.",
+  "Objekt A geht zu Objekt B und findet selbst den kürzesten Weg, Feld für Feld, ohne durch Mauern zu gehen („feste“ Kacheln einer Kachelebene, feste physikalische Objekte). Der Weg wird neu berechnet, wenn B sich bewegt. [[lang:port_arrive]] startet, wenn A B berührt. Mit der Einstellung „Anhalten“ bleibt das Objekt auf einem Nachbarfeld stehen, schön zentriert (Rasterspiele); „Diese Tags blockieren den Weg“ lässt es andere Einheiten umgehen.",
   "ein Geist, der den Spieler durch ein Labyrinth jagt."
  ],
  "chemin_vers_point": [
@@ -674,5 +674,109 @@
  "charger_variables": [
   "Holt die Werte zurück, die [[sauvegarder_variables]] geschrieben hat (gleicher Name). Jede Variable, die noch existiert, bekommt ihren Wert zurück. Ausgang « Geladen », wenn es geklappt hat, « Kein Speicherstand » beim allerersten Spiel. Steht oft direkt nach « Beim Start ».",
   "Direkt nach [[NoeudEventStart]]: [[charger_variables]], dann [[modifier_propriete]], um den wiedergefundenen Punktestand anzuzeigen."
+ ],
+ "placer_case": [
+  "Setzt Objekt A genau in die Mitte des gewählten Feldes (Spalte und Zeile, ab 0 oben links gezählt). Das Raster ist das der Tile-Karte der Szene. Mit dem Knopf 🔗 verbindest du [[valeur_colonne_touchee]] und [[valeur_ligne_touchee]], um es auf das berührte Feld zu schicken.",
+  "eine Figur in einem Brettspiel auf das berührte Feld setzen."
+ ],
+ "centrer_case": [
+  "Objekt A bleibt in seinem Feld, geht aber genau in die Mitte zurück. Praktisch, wenn eine Bewegung zwischen zwei Feldern endete.",
+  "einen Helden nach seiner Bewegung neu zentrieren."
+ ],
+ "valeur_colonne_touchee": [
+  "Grüner Node (Wert): liefert die Spalte des berührten Feldes (0 = die erste links). Mit dem Knopf 🔗 in eine Einstellung stecken.",
+  "wissen, welche Spalte berührt wurde, um einen Turm zu setzen."
+ ],
+ "valeur_ligne_touchee": [
+  "Grüner Node (Wert): liefert die Zeile des berührten Feldes (0 = die erste oben). Mit dem Knopf 🔗 in eine Einstellung stecken.",
+  "wissen, welche Zeile berührt wurde, um ein Gebäude zu setzen."
+ ],
+ "valeur_colonne_objet": [
+  "Grüner Node (Wert): liefert die Spalte des Feldes, auf dem das gewählte Objekt steht (0 = die erste links).",
+  "wissen, in welcher Spalte der Held steht."
+ ],
+ "valeur_ligne_objet": [
+  "Grüner Node (Wert): liefert die Zeile des Feldes, auf dem das gewählte Objekt steht (0 = die erste oben).",
+  "wissen, in welcher Zeile der Held steht."
+ ],
+ "tour_suivant": [
+  "Gibt das Spiel an das nächste Team weiter. Schreibe die Teams der Reihe nach mit ihren Tags (z. B. spieler,gegner). Der erste Aufruf (zum Beispiel nach [[NoeudEventStart]]) beginnt mit dem ersten Team; wenn alle gespielt haben, steigt die Zugnummer. Zu Beginn jedes Zugs läuft das lokale Ereignis „tour_<Team>“, falls es existiert (z. B. „tour_gegner“).",
+  "[[tour_suivant]] auf den Knopf „Zug beenden“ legen."
+ ],
+ "si_tour_de": [
+  "Wahr, wenn das geschriebene Team (sein Tag) am Zug ist, sonst Falsch.",
+  "den Spieler seine Einheiten nur während seines eigenen Zugs berühren lassen."
+ ],
+ "marquer_joue": [
+  "Merkt sich, dass die Einheit (Objekt A) in diesem Zug gespielt hat. Alles wird gelöscht, wenn der nächste Zug beginnt.",
+  "verhindern, dass ein Held sich im selben Zug zweimal bewegt."
+ ],
+ "si_a_joue": [
+  "Wahr, wenn die Einheit (Objekt A) in diesem Zug schon gespielt hat, sonst Falsch.",
+  "es ablehnen, einen Helden zu bewegen, der schon gespielt hat."
+ ],
+ "valeur_numero_tour": [
+  "Grüner Node: die aktuelle Zugnummer (1, 2, 3…), mit dem Knopf 🔗 einstecken.",
+  "„Zug 3“ in einem Text anzeigen."
+ ],
+ "montrer_cases": [
+  "Färbt die Felder ein, auf die das gewählte Objekt gehen (oder die es angreifen) kann. Wände blockieren, und du kannst blockierende Tags (andere Einheiten) und Gelände hinzufügen, das mehr Schritte kostet (Wald=2). Farbe, Sichtbarkeit, Rahmen und Zahlen sind einstellbar. Mit „Zonenname“ zeigst du mehrere gleichzeitig (Bewegung blau, Angriff rot).",
+  "die Bewegungszone eines Helden zeigen, wenn man ihn berührt."
+ ],
+ "cacher_cases": [
+  "Löscht die gefärbten Felder (alle oder eine benannte Zone).",
+  "die Zone verbergen, wenn der Held angekommen ist."
+ ],
+ "si_case_accessible": [
+  "Wahr, wenn das Feld (Spalte, Zeile) eines der gezeigten Felder ist. Standard: das berührte Feld. Sonst Falsch.",
+  "eine zu weite Bewegung mit „zu weit!“ ablehnen."
+ ],
+ "valeur_cout_case": [
+  "Grüner Node: die Anzahl Schritte bis zum berührten Feld (-1, wenn es außerhalb der Zone liegt). Praktisch, um die übrigen Schritte zu zählen.",
+  "übrige Schritte = Schritte der Einheit - diese Zahl."
+ ],
+ "definir_vie": [
+  "Gibt dem gewählten Objekt Lebenspunkte (Objektvariable „vie“, und „vie_max“ für das Maximum). Überall mit einer Formel lesbar, z. B. =monster.vie, um sie in einen Text oder einen Balken zu schreiben.",
+  "einem Monster am Anfang 10 Lebenspunkte geben."
+ ],
+ "infliger_degats": [
+  "Zieht dem Objekt Lebenspunkte ab (nie unter 0). Zwei Ausgänge: „Noch am Leben“ und „Kein Leben mehr“ (das Objekt wird zerstört, wenn das Kästchen angehakt ist; „das beteiligte Objekt“ bleibt das getroffene).",
+  "ein Held schlägt ein Monster: 3 Schaden, dann eine kleine Meldung je nach Ergebnis."
+ ],
+ "soigner": [
+  "Gibt dem Objekt Lebenspunkte zurück, ohne sein Maximum zu überschreiten.",
+  "ein Trank, der dem Helden 5 Lebenspunkte zurückgibt."
+ ],
+ "valeur_terrain_touche": [
+  "Grüner Node: der Name des Geländes des berührten Feldes („Wald“, „Wasser“…), oder nichts, wenn es keins gibt. Das Gelände wird im Tile-Editor festgelegt.",
+  "„Wald“ anzeigen, wenn ein Waldfeld berührt wird."
+ ],
+ "valeur_cout_terrain_touche": [
+  "Grüner Node: die Schrittkosten des Geländes des berührten Feldes (1, wenn es keins gibt).",
+  "„das kostet 2 Schritte“ vor einer Bewegung sagen."
+ ],
+ "valeur_terrain_objet": [
+  "Grüner Node: der Name des Geländes, auf dem das gewählte Objekt steht.",
+  "wissen, ob der Held im Wasser oder auf der Straße steht."
+ ],
+ "valeur_defense_objet": [
+  "Grüner Node: der Verteidigungsbonus des Geländes unter dem gewählten Objekt.",
+  "den Verteidigungsbonus einer Einheit anzeigen."
+ ],
+ "chemin_vers_case": [
+  "Das Objekt läuft zur MITTE des Feldes (Spalte, Zeile) und umgeht Wände, blockierendes Gelände und die Einheiten mit den angegebenen Tags. Standard: das berührte Feld. Ausgang „Angekommen“ einmal auf dem Feld.",
+  "einen Helden auf ein berührtes blaues Feld schicken."
+ ],
+ "pion_une_case": [
+  "Bewegt die Figur um ein Feld (oben, unten, links, rechts), schön zentriert. Ist das Feld eine Wand, ein blockierendes Gelände, eine Einheit (Tags) oder der Kartenrand: Ausgang „Blockiert“. Sonst „Angekommen“ am Ende des Schritts.",
+  "eine Brettspielfigur mit den Knöpfen ◀ ▶ ▲ ▼ bewegen."
+ ],
+ "definir_fiche": [
+  "Gibt dem Objekt sein Blatt: Leben, Angriff, Verteidigung, Bewegung und Reichweite (Objektvariablen „vie“, „attaque“, „defense“, „mouvement“, „portee“). Sie sind überall mit einer Formel lesbar, z. B. =held.mouvement für die Schritte der erreichbaren Felder. Setze diesen Node nach [[NoeudEventStart]] jeder Einheit oder in ein wiederverwendbares Einheiten-Prefab.",
+  "einen Bogenschützen erstellen: Leben 8, Angriff 4, Verteidigung 0, Bewegung 4, Reichweite 3."
+ ],
+ "attaquer": [
+  "Objekt A greift Objekt B an: Schaden = Angriff von A × Stärke − Verteidigung von B − Geländeverteidigung von B. Zwei Ausgänge: „Noch am Leben“ und „Kein Leben mehr“ (das Ziel wird zerstört, wenn das Kästchen angehakt ist). Beide Objekte brauchen ein Einheitenblatt.",
+  "ein Held schlägt das berührte Monster."
  ]
 }

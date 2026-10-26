@@ -2,6 +2,78 @@
   "categorie": "Grilles et puzzles",
   "noeuds": [
     {
+      "nom": "Passer au tour suivant",
+      "schema": "<b>Entrée :</b> Équipes, dans l'ordre (tags séparés par une virgule)",
+      "role": "Fait passer le jeu à l'équipe suivante. Écris les équipes dans l'ordre, par leur tag (ex. joueur,ennemi). Le premier appel (par exemple après « Au démarrage ») commence par la première équipe ; quand toutes ont joué, le numéro du tour augmente. À chaque début de tour, l'événement local « tour_<équipe> » part s'il existe (ex. « tour_ennemi »).",
+      "exemple": "mettre « Passer au tour suivant » sur le bouton « Fin du tour »."
+    },
+    {
+      "nom": "Si c'est le tour de…",
+      "schema": "<b>Entrée :</b> Équipe (tag) &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux",
+      "role": "Vrai si c'est le tour de l'équipe écrite (son tag), Faux sinon.",
+      "exemple": "laisser le joueur toucher ses unités seulement pendant son tour."
+    },
+    {
+      "nom": "Marquer comme ayant joué",
+      "schema": "<b>Entrée :</b> Objet",
+      "role": "Note que l'unité (objet A) a joué ce tour-ci. Tout est effacé au début du tour suivant.",
+      "exemple": "empêcher un héros de bouger deux fois dans le même tour."
+    },
+    {
+      "nom": "Si l'unité a déjà joué",
+      "schema": "<b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux",
+      "role": "Vrai si l'unité (objet A) a déjà joué ce tour-ci, Faux sinon.",
+      "exemple": "refuser de déplacer un héros qui a déjà joué."
+    },
+    {
+      "nom": "Montrer les cases accessibles",
+      "schema": "<b>Entrées :</b> Objet, Type de zone, Nombre de pas (ou portée), Couleur des cases, Visibilité des cases (0 = invisible, 100 = pleine), Cadre autour de chaque case, Écrire le nombre de pas sur chaque case, Les murs bloquent (déplacement), Ces tags bloquent le passage (séparés par une virgule), Terrains qui coûtent plus de pas (tag=coût, ex. foret=2, eau=3), Nom de la zone (facultatif : pour en montrer plusieurs)",
+      "role": "Colore les cases où l'objet choisi peut aller (ou attaquer). Les murs bloquent, et tu peux ajouter des tags qui bloquent (autres unités) et des terrains qui coûtent plus de pas (foret=2). Couleur, visibilité, cadre et chiffres se règlent. « Nom de la zone » permet d'en montrer plusieurs (déplacement en bleu, attaque en rouge).",
+      "exemple": "montrer la zone de déplacement d'un héros quand on le touche."
+    },
+    {
+      "nom": "Cacher les cases",
+      "schema": "<b>Entrée :</b> Nom de la zone (facultatif)",
+      "role": "Efface les cases colorées (toutes, ou celles d'une zone nommée).",
+      "exemple": "cacher la zone une fois le héros arrivé."
+    },
+    {
+      "nom": "Si la case est accessible",
+      "schema": "<b>Entrées :</b> Colonne, Ligne, Nom de la zone (facultatif) &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux",
+      "role": "Vrai si la case (colonne, ligne) fait partie des cases montrées. Par défaut : la case que le doigt touche. Faux sinon.",
+      "exemple": "refuser un déplacement trop loin avec « trop loin ! »."
+    },
+    {
+      "nom": "Donner une fiche d'unité",
+      "schema": "<b>Entrées :</b> Objet, Points de vie, Attaque, Défense, Mouvement (pas), Portée d'attaque (cases)",
+      "role": "Donne à l'objet sa fiche : vie, attaque, défense, mouvement et portée (variables d'objet « vie », « attaque », « defense », « mouvement », « portee »). Elles se lisent partout par formule, par exemple =hero.mouvement pour le nombre de pas des cases accessibles. Mets ce nœud « Au démarrage » de chaque unité, ou dans un prefab d'unité réutilisable.",
+      "exemple": "créer un archer : vie 8, attaque 4, défense 0, mouvement 4, portée 3."
+    },
+    {
+      "nom": "Attaquer",
+      "schema": "<b>Entrées :</b> Objet A, Objet B, Puissance de l'attaque (%), Compter la défense du terrain de la cible, Toujours au moins 1 dégât, Détruire la cible quand elle n'a plus de vie &nbsp;→&nbsp; <b>Sorties :</b> Encore en vie / Plus de vie",
+      "role": "L'objet A attaque l'objet B : dégâts = attaque de A × puissance − défense de B − défense du terrain de B. Deux sorties : « Encore en vie » et « Plus de vie » (la cible est détruite si la case est cochée). Les deux objets doivent avoir une fiche d'unité.",
+      "exemple": "un héros frappe le monstre touché."
+    },
+    {
+      "nom": "Donner de la vie à l'objet",
+      "schema": "<b>Entrées :</b> Objet, Points de vie",
+      "role": "Donne des points de vie à l'objet choisi (variable d'objet « vie », et « vie_max » pour le maximum). On la lit partout avec une formule, par exemple =monstre.vie, pour l'écrire dans un texte ou dans une barre.",
+      "exemple": "donner 10 points de vie à un monstre au démarrage."
+    },
+    {
+      "nom": "Infliger des dégâts",
+      "schema": "<b>Entrées :</b> Objet, Dégâts, Détruire l'objet quand il n'a plus de vie, Retirer la défense du terrain où il se trouve &nbsp;→&nbsp; <b>Sorties :</b> Encore en vie / Plus de vie",
+      "role": "Enlève des points de vie à l'objet (jamais en dessous de 0). Deux sorties : « Encore en vie » et « Plus de vie » (l'objet est détruit si la case est cochée ; « l'objet impliqué » reste celui touché).",
+      "exemple": "un héros frappe un monstre : 3 dégâts, puis un petit message selon le résultat."
+    },
+    {
+      "nom": "Soigner",
+      "schema": "<b>Entrées :</b> Objet, Vie rendue",
+      "role": "Rend des points de vie à l'objet, sans dépasser sa vie maximum.",
+      "exemple": "une potion qui rend 5 points de vie au héros."
+    },
+    {
       "nom": "Remplir la grille",
       "schema": "<b>Entrées :</b> Objet, Colonnes, Lignes, Objets modèles (noms séparés par des virgules)",
       "role": "Découpe l'objet A (le plateau) en colonnes et lignes, et pose dans chaque case une copie d'un objet modèle tiré au hasard (au moins 3 modèles, noms séparés par des virgules). Il n'y a jamais d'alignement au départ, et les pièces tombent du haut à l'arrivée. À utiliser avant « Jouer sur la grille (aligner 3) ».",

@@ -2,6 +2,78 @@
   "categorie": "Grids and puzzles",
   "noeuds": [
     {
+      "nom": "Go to the next turn",
+      "schema": "<b>Input:</b> Teams, in order (tags separated by a comma)",
+      "role": "Passes the game to the next team. Write the teams in order using their tags (e.g. player,enemy). The first call (for example after \"At start\") begins with the first team; when every team has played, the turn number goes up. At the start of each turn the local event \"tour_<team>\" runs if it exists (e.g. \"tour_enemy\").",
+      "exemple": "put \"Go to the next turn\" on the \"End turn\" button."
+    },
+    {
+      "nom": "If it is the turn of…",
+      "schema": "<b>Input:</b> Team (tag) &nbsp;→&nbsp; <b>Outputs:</b> True / False",
+      "role": "True if it is the turn of the team written (its tag), False otherwise.",
+      "exemple": "let the player touch their units only during their own turn."
+    },
+    {
+      "nom": "Mark as having played",
+      "schema": "<b>Input:</b> Object",
+      "role": "Remembers that the unit (object A) has played this turn. Everything is cleared when the next turn starts.",
+      "exemple": "stop a hero from moving twice in the same turn."
+    },
+    {
+      "nom": "If the unit has already played",
+      "schema": "<b>Input:</b> Object &nbsp;→&nbsp; <b>Outputs:</b> True / False",
+      "role": "True if the unit (object A) has already played this turn, False otherwise.",
+      "exemple": "refuse to move a hero that has already played."
+    },
+    {
+      "nom": "Show reachable cells",
+      "schema": "<b>Inputs:</b> Object, Zone type, Number of steps (or range), Color of the cells, Cell visibility (0 = invisible, 100 = solid), Frame around each cell, Write the step count on each cell, Walls block (movement), These tags block the way (separated by commas), Terrain costing more steps (tag=cost, e.g. forest=2, water=3), Zone name (optional: to show several)",
+      "role": "Colors the cells the chosen object can move to (or attack). Walls block, and you can add tags that block (other units) and terrains that cost more steps (forest=2). Color, visibility, frame and numbers are adjustable. \"Zone name\" lets you show several at once (movement in blue, attack in red).",
+      "exemple": "show a hero's movement zone when it is touched."
+    },
+    {
+      "nom": "Hide the cells",
+      "schema": "<b>Input:</b> Zone name (optional)",
+      "role": "Clears the colored cells (all of them, or one named zone).",
+      "exemple": "hide the zone once the hero has arrived."
+    },
+    {
+      "nom": "If the cell is reachable",
+      "schema": "<b>Inputs:</b> Column, Row, Zone name (optional) &nbsp;→&nbsp; <b>Outputs:</b> True / False",
+      "role": "True if the cell (column, row) is one of the shown cells. By default: the cell the finger touches. False otherwise.",
+      "exemple": "refuse a move that is too far with \"too far!\"."
+    },
+    {
+      "nom": "Give a unit sheet",
+      "schema": "<b>Inputs:</b> Object, Health points, Attack, Defense, Movement (steps), Attack range (cells)",
+      "role": "Gives the object its sheet: health, attack, defense, movement and range (object variables \"vie\", \"attaque\", \"defense\", \"mouvement\", \"portee\"). They can be read anywhere with a formula, e.g. =hero.mouvement for the number of steps of the reachable cells. Put this node \"At start\" of each unit, or in a reusable unit prefab.",
+      "exemple": "create an archer: health 8, attack 4, defense 0, movement 4, range 3."
+    },
+    {
+      "nom": "Attack",
+      "schema": "<b>Inputs:</b> Object A, Object B, Attack power (%), Count the defense of the target's terrain, Always at least 1 damage, Destroy the target when its health runs out &nbsp;→&nbsp; <b>Outputs:</b> Still alive / Out of health",
+      "role": "Object A attacks object B: damage = A's attack × power − B's defense − the defense of B's terrain. Two outputs: \"Still alive\" and \"Out of health\" (the target is destroyed if the box is ticked). Both objects need a unit sheet.",
+      "exemple": "a hero hits the touched monster."
+    },
+    {
+      "nom": "Give health to the object",
+      "schema": "<b>Inputs:</b> Object, Health points",
+      "role": "Gives health points to the chosen object (object variable \"vie\", and \"vie_max\" for the maximum). Read it anywhere with a formula, e.g. =monster.vie, to write it in a text or a bar.",
+      "exemple": "give a monster 10 health points at the start."
+    },
+    {
+      "nom": "Deal damage",
+      "schema": "<b>Inputs:</b> Object, Damage, Destroy the object when its health runs out, Subtract the defense of the terrain it stands on &nbsp;→&nbsp; <b>Outputs:</b> Still alive / Out of health",
+      "role": "Removes health points from the object (never below 0). Two outputs: \"Still alive\" and \"Out of health\" (the object is destroyed if the box is ticked; \"the involved object\" stays the one hit).",
+      "exemple": "a hero hits a monster: 3 damage, then a small message depending on the result."
+    },
+    {
+      "nom": "Heal",
+      "schema": "<b>Inputs:</b> Object, Health restored",
+      "role": "Gives health points back to the object, without going over its maximum.",
+      "exemple": "a potion that restores 5 health points to the hero."
+    },
+    {
       "nom": "Fill the grid",
       "schema": "<b>Inputs:</b> Object, Columns, Rows, Model objects (names separated by commas)",
       "role": "Splits object A (the board) into columns and rows and puts in each cell a copy of a model object picked at random (at least 3 models, names separated by commas). There is never a match at the start, and the pieces drop in from the top. Use it before “Play on the grid (match 3)”.",

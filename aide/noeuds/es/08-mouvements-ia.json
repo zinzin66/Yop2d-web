@@ -33,13 +33,13 @@
     },
     {
       "nom": "Ir hacia un objeto (camino)",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Velocidad, Diagonales (sí / no) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Llegó",
-      "role": "El objeto A va hacia el objeto B encontrando solo el camino más corto, casilla a casilla, sin atravesar muros (baldosas «Sólidas» de un decorado de baldosas, objetos físicos fijos). El camino se recalcula cuando B se mueve. «Llegó» se activa cuando A toca a B.",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Velocidad, Diagonales (sí / no), Detenerse, Estos tags bloquean el camino (otras unidades, separados por comas) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Llegó",
+      "role": "El objeto A va hacia el objeto B encontrando solo el camino más corto, casilla a casilla, sin atravesar muros (baldosas «Sólidas» de un decorado de baldosas, objetos físicos fijos). El camino se recalcula cuando B se mueve. «Llegó» se activa cuando A toca a B. El ajuste «Detenerse» permite pararse en una casilla vecina, bien centrado (juegos de cuadrícula); «Estos tags bloquean el camino» hace rodear a otras unidades.",
       "exemple": "un fantasma que persigue al jugador por un laberinto."
     },
     {
       "nom": "Ir a un punto (camino)",
-      "schema": "<b>Entradas:</b> Objeto, Posición X, Posición Y, Velocidad, Diagonales (sí / no) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Llegó",
+      "schema": "<b>Entradas:</b> Objeto, Posición X, Posición Y, Velocidad, Diagonales (sí / no), Estos tags bloquean el camino (otras unidades, separados por comas) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Llegó",
       "role": "El objeto A va hasta el punto X, Y rodeando los muros, por el camino más corto (casilla a casilla). Con =doigt.x y =doigt.y va donde se toca la pantalla. «Llegó» se activa al llegar. Si no hay camino, se queda quieto.",
       "exemple": "tocar una casilla para enviar allí al héroe, en un juego de estrategia o una mazmorra."
     },
@@ -48,6 +48,30 @@
       "schema": "<b>Entrada:</b> Objeto",
       "role": "El objeto deja de seguir su camino («Ir hacia un objeto (camino)» o «Ir a un punto (camino)») y se queda donde está.",
       "exemple": "la mosca se detiene cuando se gana la partida."
+    },
+    {
+      "nom": "Colocar en una casilla (columna, fila)",
+      "schema": "<b>Entradas:</b> Objeto, Columna (0 = la primera), Fila (0 = la primera)",
+      "role": "Pone el objeto A justo en el centro de la casilla elegida (columna y fila, contadas desde 0 arriba a la izquierda). La cuadrícula es la del mapa de tiles de la escena. Con el botón 🔗, conecta «Columna tocada» y «Fila tocada» para enviarlo a la casilla que toca el dedo.",
+      "exemple": "mover una pieza a la casilla tocada en un juego de mesa."
+    },
+    {
+      "nom": "Centrar en su casilla",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "El objeto A se queda en su casilla pero vuelve exactamente al centro. Útil cuando un movimiento se detuvo entre dos casillas.",
+      "exemple": "recentrar a un héroe después de moverse."
+    },
+    {
+      "nom": "Ir a la casilla (camino)",
+      "schema": "<b>Entradas:</b> Objeto, Columna, Fila, Velocidad, Diagonales (sí / no), Estos tags bloquean el camino (otras unidades, separados por comas) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Llegó",
+      "role": "El objeto camina hasta el CENTRO de la casilla (columna, fila), rodeando muros, terrenos que bloquean y las unidades con los tags indicados. Por defecto: la casilla que toca el dedo. Salida «Llegó» una vez en la casilla.",
+      "exemple": "enviar a un héroe a una casilla azul tocada."
+    },
+    {
+      "nom": "Mover la ficha una casilla",
+      "schema": "<b>Entradas:</b> Objeto, Dirección, Velocidad, Estos tags bloquean el camino (otras unidades, separados por comas) &nbsp;→&nbsp; <b>Salidas:</b> Llegó / Bloqueado (muro, terreno, unidad, borde)",
+      "role": "Mueve la pieza una casilla (arriba, abajo, izquierda, derecha), bien centrada. Si la casilla es un muro, un terreno que bloquea, una unidad (tags) o el borde del mapa: salida «Bloqueado». Si no, «Llegó» al final del paso.",
+      "exemple": "mover una pieza de juego de mesa con botones ◀ ▶ ▲ ▼."
     },
     {
       "nom": "Perseguir un objeto",

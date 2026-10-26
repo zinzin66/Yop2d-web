@@ -2,6 +2,78 @@
   "categorie": "Cuadrículas y puzles",
   "noeuds": [
     {
+      "nom": "Pasar al siguiente turno",
+      "schema": "<b>Entrada:</b> Equipos, en orden (tags separados por coma)",
+      "role": "Pasa el juego al siguiente equipo. Escribe los equipos en orden con sus tags (por ejemplo jugador,enemigo). La primera vez (por ejemplo tras «Al Iniciar») empieza por el primer equipo; cuando todos han jugado, el número de turno sube. Al empezar cada turno se ejecuta el evento local «tour_<equipo>» si existe (por ejemplo «tour_enemigo»).",
+      "exemple": "poner «Pasar al siguiente turno» en el botón «Fin del turno»."
+    },
+    {
+      "nom": "Si es el turno de…",
+      "schema": "<b>Entrada:</b> Equipo (tag) &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso",
+      "role": "Verdadero si es el turno del equipo escrito (su tag), Falso si no.",
+      "exemple": "dejar que el jugador toque sus unidades solo durante su turno."
+    },
+    {
+      "nom": "Marcar como ya jugado",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Recuerda que la unidad (objeto A) ya jugó en este turno. Todo se borra al empezar el turno siguiente.",
+      "exemple": "impedir que un héroe se mueva dos veces en el mismo turno."
+    },
+    {
+      "nom": "Si la unidad ya jugó",
+      "schema": "<b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso",
+      "role": "Verdadero si la unidad (objeto A) ya jugó en este turno, Falso si no.",
+      "exemple": "rechazar mover a un héroe que ya jugó."
+    },
+    {
+      "nom": "Mostrar casillas accesibles",
+      "schema": "<b>Entradas:</b> Objeto, Tipo de zona, Número de pasos (o alcance), Color de las casillas, Visibilidad de las casillas (0 = invisible, 100 = sólida), Marco alrededor de cada casilla, Escribir los pasos en cada casilla, Los muros bloquean (movimiento), Estos tags bloquean el paso (separados por comas), Terreno que cuesta más pasos (tag=coste, p. ej. bosque=2, agua=3), Nombre de la zona (opcional: para mostrar varias)",
+      "role": "Colorea las casillas a las que puede ir (o atacar) el objeto elegido. Los muros bloquean, y puedes añadir tags que bloquean (otras unidades) y terrenos que cuestan más pasos (bosque=2). El color, la visibilidad, el marco y los números se pueden ajustar. «Nombre de la zona» permite mostrar varias a la vez (movimiento en azul, ataque en rojo).",
+      "exemple": "mostrar la zona de movimiento de un héroe al tocarlo."
+    },
+    {
+      "nom": "Ocultar las casillas",
+      "schema": "<b>Entrada:</b> Nombre de la zona (opcional)",
+      "role": "Borra las casillas coloreadas (todas, o una zona con nombre).",
+      "exemple": "ocultar la zona cuando el héroe ha llegado."
+    },
+    {
+      "nom": "Si la casilla es accesible",
+      "schema": "<b>Entradas:</b> Columna, Fila, Nombre de la zona (opcional) &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso",
+      "role": "Verdadero si la casilla (columna, fila) es una de las casillas mostradas. Por defecto: la casilla que toca el dedo. Falso en caso contrario.",
+      "exemple": "rechazar un movimiento demasiado lejano con «¡demasiado lejos!»."
+    },
+    {
+      "nom": "Dar una ficha de unidad",
+      "schema": "<b>Entradas:</b> Objeto, Puntos de vida, Ataque, Defensa, Movimiento (pasos), Alcance de ataque (casillas)",
+      "role": "Da al objeto su ficha: vida, ataque, defensa, movimiento y alcance (variables de objeto «vie», «attaque», «defense», «mouvement», «portee»). Se pueden leer donde quieras con una fórmula, por ejemplo =heroe.mouvement para los pasos de las casillas accesibles. Pon este nodo tras «Al Iniciar» de cada unidad, o en un prefab de unidad reutilizable.",
+      "exemple": "crear un arquero: vida 8, ataque 4, defensa 0, movimiento 4, alcance 3."
+    },
+    {
+      "nom": "Atacar",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Potencia del ataque (%), Contar la defensa del terreno del objetivo, Siempre al menos 1 de daño, Destruir el objetivo cuando se queda sin vida &nbsp;→&nbsp; <b>Salidas:</b> Sigue vivo / Sin vida",
+      "role": "El objeto A ataca al objeto B: daño = ataque de A × potencia − defensa de B − defensa del terreno de B. Dos salidas: «Sigue con vida» y «Sin vida» (el objetivo se destruye si la casilla está marcada). Los dos objetos necesitan una ficha de unidad.",
+      "exemple": "un héroe golpea al monstruo tocado."
+    },
+    {
+      "nom": "Dar vida al objeto",
+      "schema": "<b>Entradas:</b> Objeto, Puntos de vida",
+      "role": "Da puntos de vida al objeto elegido (variable de objeto «vie», y «vie_max» para el máximo). Léela donde quieras con una fórmula, por ejemplo =monstruo.vie, para escribirla en un texto o una barra.",
+      "exemple": "dar 10 puntos de vida a un monstruo al empezar."
+    },
+    {
+      "nom": "Infligir daño",
+      "schema": "<b>Entradas:</b> Objeto, Daño, Destruir el objeto cuando se queda sin vida, Restar la defensa del terreno donde está &nbsp;→&nbsp; <b>Salidas:</b> Sigue vivo / Sin vida",
+      "role": "Quita puntos de vida al objeto (nunca por debajo de 0). Dos salidas: «Sigue con vida» y «Sin vida» (el objeto se destruye si la casilla está marcada; «el objeto implicado» sigue siendo el golpeado).",
+      "exemple": "un héroe golpea a un monstruo: 3 de daño y luego un mensaje según el resultado."
+    },
+    {
+      "nom": "Curar",
+      "schema": "<b>Entradas:</b> Objeto, Vida devuelta",
+      "role": "Devuelve puntos de vida al objeto, sin pasar de su máximo.",
+      "exemple": "una poción que devuelve 5 puntos de vida al héroe."
+    },
+    {
       "nom": "Rellenar la cuadrícula",
       "schema": "<b>Entradas:</b> Objeto, Columnas, Filas, Objetos modelo (nombres separados por comas)",
       "role": "Divide el objeto A (el tablero) en columnas y filas y pone en cada casilla una copia de un objeto modelo elegido al azar (al menos 3 modelos, nombres separados por comas). Nunca hay alineaciones al empezar, y las piezas caen desde arriba. Úsalo antes de «Jugar en la cuadrícula (unir 3)».",

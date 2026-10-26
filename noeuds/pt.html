@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos os nós do Yop2D (166) | Referência</title>
-<meta name="description" content="Lista completa dos 166 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
+<title>Todos os nós do Yop2D (192) | Referência</title>
+<meta name="description" content="Lista completa dos 192 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/pt.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 166 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
+<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 192 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
 <p><strong>Categorias</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-cena-e-hud">Cena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aparência-e-objetos">Aparência e Objetos</a><a href="#c5-variáveis-e-inventário">Variáveis e Inventário</a><a href="#c6-lógica-e-condições">Lógica e Condições</a><a href="#c7-textos-e-diálogos">Textos e Diálogos</a><a href="#c8-movimentos-e-ia">Movimentos e IA</a><a href="#c9-grades-e-quebra-cabeças">Grades e quebra-cabeças</a><a href="#c10-transições">Transições</a><a href="#c11-animações">Animações</a><a href="#c12-áudio">Áudio</a><a href="#c13-história-e-diálogos">História e diálogos</a><a href="#c14-valores-fios-verdes">Valores (fios verdes)</a><a href="#c15-filtros-de-tela">Filtros de tela</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -641,12 +641,12 @@
 <p class="exemple"><b>Exemplo:</b> uma bala ou um carro andando.</p>
 </div>
 <div class="fiche"><h3>Ir até um objeto (caminho)</h3>
-<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Velocidade, Diagonais (sim / não) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou</div>
-<p>O objeto A vai até o objeto B achando sozinho o caminho mais curto, casa por casa, sem atravessar paredes (ladrilhos “Sólidos” de um cenário de ladrilhos, objetos físicos fixos). O caminho é recalculado quando B se move. “Chegou” dispara quando A toca B.</p>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Velocidade, Diagonais (sim / não), Parar, Estas tags bloqueiam o caminho (outras unidades, separadas por vírgula) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou</div>
+<p>O objeto A vai até o objeto B achando sozinho o caminho mais curto, casa por casa, sem atravessar paredes (ladrilhos “Sólidos” de um cenário de ladrilhos, objetos físicos fixos). O caminho é recalculado quando B se move. “Chegou” dispara quando A toca B. O ajuste “Parar” permite parar em uma casa vizinha, bem centralizado (jogos de grade); “Estas tags bloqueiam o caminho” faz contornar outras unidades.</p>
 <p class="exemple"><b>Exemplo:</b> um fantasma que persegue o jogador num labirinto.</p>
 </div>
 <div class="fiche"><h3>Ir até um ponto (caminho)</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Posição X, Posição Y, Velocidade, Diagonais (sim / não) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou</div>
+<div class="schema"><b>Entradas:</b> Objeto, Posição X, Posição Y, Velocidade, Diagonais (sim / não), Estas tags bloqueiam o caminho (outras unidades, separadas por vírgula) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou</div>
 <p>O objeto A vai até o ponto X, Y contornando as paredes, pelo caminho mais curto (casa por casa). Com =doigt.x e =doigt.y, vai aonde a tela é tocada. “Chegou” dispara na chegada. Se não houver caminho, ele fica parado.</p>
 <p class="exemple"><b>Exemplo:</b> tocar numa casa para mandar o herói até lá, num jogo de estratégia ou numa masmorra.</p>
 </div>
@@ -654,6 +654,26 @@
 <div class="schema"><b>Entrada:</b> Objeto</div>
 <p>O objeto para de seguir o caminho (“Ir até um objeto (caminho)” ou “Ir até um ponto (caminho)”) e fica onde está.</p>
 <p class="exemple"><b>Exemplo:</b> a mosca para quando o jogo é vencido.</p>
+</div>
+<div class="fiche"><h3>Colocar em uma casa (coluna, linha)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Coluna (0 = a primeira), Linha (0 = a primeira)</div>
+<p>Coloca o objeto A exatamente no meio da casa escolhida (coluna e linha, contadas a partir de 0 no canto superior esquerdo). A grade é a do mapa de tiles da cena. Com o botão 🔗, ligue “Coluna tocada” e “Linha tocada” para enviá-lo à casa que o dedo toca.</p>
+<p class="exemple"><b>Exemplo:</b> mover uma peça para a casa tocada em um jogo de tabuleiro.</p>
+</div>
+<div class="fiche"><h3>Centralizar na sua casa</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>O objeto A fica na sua casa, mas volta exatamente para o meio. Útil quando um movimento parou entre duas casas.</p>
+<p class="exemple"><b>Exemplo:</b> recentralizar um herói depois do movimento.</p>
+</div>
+<div class="fiche"><h3>Ir para a casa (caminho)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Coluna, Linha, Velocidade, Diagonais (sim / não), Estas tags bloqueiam o caminho (outras unidades, separadas por vírgula) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou</div>
+<p>O objeto caminha até o CENTRO da casa (coluna, linha), contornando paredes, terrenos que bloqueiam e as unidades com as tags indicadas. Por padrão: a casa que o dedo toca. Saída “Chegou” uma vez na casa.</p>
+<p class="exemple"><b>Exemplo:</b> enviar um herói a uma casa azul tocada.</p>
+</div>
+<div class="fiche"><h3>Mover a peça uma casa</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Direção, Velocidade, Estas tags bloqueiam o caminho (outras unidades, separadas por vírgula) &nbsp;→&nbsp; <b>Saídas:</b> Chegou / Bloqueado (parede, terreno, unidade, borda)</div>
+<p>Move a peça uma casa (acima, abaixo, esquerda, direita), bem centrada. Se a casa for uma parede, um terreno que bloqueia, uma unidade (tags) ou a borda do mapa: saída “Bloqueado”. Senão, “Chegou” no fim do passo.</p>
+<p class="exemple"><b>Exemplo:</b> mover uma peça de tabuleiro com botões ◀ ▶ ▲ ▼.</p>
 </div>
 <div class="fiche"><h3>Perseguir um objeto</h3>
 <div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Velocidade</div>
@@ -698,6 +718,66 @@
 </div>
 <h2 id="c9-grades-e-quebra-cabeças">Grades e quebra-cabeças</h2>
 <div class="method">
+<div class="fiche"><h3>Passar para o próximo turno</h3>
+<div class="schema"><b>Entrada:</b> Equipes, em ordem (tags separadas por vírgula)</div>
+<p>Passa o jogo para a próxima equipe. Escreva as equipes em ordem com suas tags (por exemplo jogador,inimigo). A primeira vez (por exemplo depois de “Ao Iniciar”) começa pela primeira equipe; quando todas jogaram, o número do turno aumenta. No início de cada turno, o evento local “tour_&lt;equipe&gt;” é executado se existir (por exemplo “tour_inimigo”).</p>
+<p class="exemple"><b>Exemplo:</b> colocar “Passar para o próximo turno” no botão “Fim do turno”.</p>
+</div>
+<div class="fiche"><h3>Se for a vez de…</h3>
+<div class="schema"><b>Entrada:</b> Equipe (tag) &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso</div>
+<p>Verdadeiro se for a vez da equipe escrita (sua tag), Falso caso contrário.</p>
+<p class="exemple"><b>Exemplo:</b> deixar o jogador tocar suas unidades só durante o seu turno.</p>
+</div>
+<div class="fiche"><h3>Marcar como já jogou</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>Lembra que a unidade (objeto A) já jogou neste turno. Tudo é apagado quando o próximo turno começa.</p>
+<p class="exemple"><b>Exemplo:</b> impedir que um herói se mova duas vezes no mesmo turno.</p>
+</div>
+<div class="fiche"><h3>Se a unidade já jogou</h3>
+<div class="schema"><b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso</div>
+<p>Verdadeiro se a unidade (objeto A) já jogou neste turno, Falso caso contrário.</p>
+<p class="exemple"><b>Exemplo:</b> recusar mover um herói que já jogou.</p>
+</div>
+<div class="fiche"><h3>Mostrar casas alcançáveis</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Tipo de zona, Número de passos (ou alcance), Cor das casas, Visibilidade das casas (0 = invisível, 100 = cheia), Moldura em cada casa, Escrever os passos em cada casa, As paredes bloqueiam (movimento), Estas tags bloqueiam a passagem (separadas por vírgula), Terreno que custa mais passos (tag=custo, ex. floresta=2, agua=3), Nome da zona (opcional: para mostrar várias)</div>
+<p>Colore as casas para onde o objeto escolhido pode ir (ou atacar). As paredes bloqueiam, e você pode adicionar tags que bloqueiam (outras unidades) e terrenos que custam mais passos (floresta=2). Cor, visibilidade, moldura e números são ajustáveis. “Nome da zona” permite mostrar várias ao mesmo tempo (movimento em azul, ataque em vermelho).</p>
+<p class="exemple"><b>Exemplo:</b> mostrar a zona de movimento de um herói quando ele é tocado.</p>
+</div>
+<div class="fiche"><h3>Esconder as casas</h3>
+<div class="schema"><b>Entrada:</b> Nome da zona (opcional)</div>
+<p>Apaga as casas coloridas (todas, ou uma zona com nome).</p>
+<p class="exemple"><b>Exemplo:</b> esconder a zona quando o herói chegou.</p>
+</div>
+<div class="fiche"><h3>Se a casa for alcançável</h3>
+<div class="schema"><b>Entradas:</b> Coluna, Linha, Nome da zona (opcional) &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso</div>
+<p>Verdadeiro se a casa (coluna, linha) é uma das casas mostradas. Por padrão: a casa que o dedo toca. Falso caso contrário.</p>
+<p class="exemple"><b>Exemplo:</b> recusar um movimento longe demais com “longe demais!”.</p>
+</div>
+<div class="fiche"><h3>Dar uma ficha de unidade</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Pontos de vida, Ataque, Defesa, Movimento (passos), Alcance de ataque (casas)</div>
+<p>Dá ao objeto sua ficha: vida, ataque, defesa, movimento e alcance (variáveis de objeto “vie”, “attaque”, “defense”, “mouvement”, “portee”). Podem ser lidas em qualquer lugar com uma fórmula, por exemplo =heroi.mouvement para os passos das casas alcançáveis. Coloque este nó depois de “Ao Iniciar” de cada unidade, ou em um prefab de unidade reutilizável.</p>
+<p class="exemple"><b>Exemplo:</b> criar um arqueiro: vida 8, ataque 4, defesa 0, movimento 4, alcance 3.</p>
+</div>
+<div class="fiche"><h3>Atacar</h3>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Poder do ataque (%), Contar a defesa do terreno do alvo, Sempre pelo menos 1 de dano, Destruir o alvo quando a vida acabar &nbsp;→&nbsp; <b>Saídas:</b> Ainda vivo / Sem vida</div>
+<p>O objeto A ataca o objeto B: dano = ataque de A × poder − defesa de B − defesa do terreno de B. Duas saídas: “Ainda vivo” e “Sem vida” (o alvo é destruído se a caixa estiver marcada). Os dois objetos precisam de uma ficha de unidade.</p>
+<p class="exemple"><b>Exemplo:</b> um herói bate no monstro tocado.</p>
+</div>
+<div class="fiche"><h3>Dar vida ao objeto</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Pontos de vida</div>
+<p>Dá pontos de vida ao objeto escolhido (variável de objeto “vie”, e “vie_max” para o máximo). Leia em qualquer lugar com uma fórmula, por exemplo =monstro.vie, para escrever em um texto ou barra.</p>
+<p class="exemple"><b>Exemplo:</b> dar 10 pontos de vida a um monstro no início.</p>
+</div>
+<div class="fiche"><h3>Causar dano</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Dano, Destruir o objeto quando a vida acabar, Subtrair a defesa do terreno onde está &nbsp;→&nbsp; <b>Saídas:</b> Ainda vivo / Sem vida</div>
+<p>Tira pontos de vida do objeto (nunca abaixo de 0). Duas saídas: “Ainda vivo” e “Sem vida” (o objeto é destruído se a caixa estiver marcada; “o objeto envolvido” continua sendo o atingido).</p>
+<p class="exemple"><b>Exemplo:</b> um herói bate em um monstro: 3 de dano e depois uma mensagem conforme o resultado.</p>
+</div>
+<div class="fiche"><h3>Curar</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Vida devolvida</div>
+<p>Devolve pontos de vida ao objeto, sem passar do máximo.</p>
+<p class="exemple"><b>Exemplo:</b> uma poção que devolve 5 pontos de vida ao herói.</p>
+</div>
 <div class="fiche"><h3>Preencher a grade</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Colunas, Linhas, Objetos modelo (nomes separados por vírgulas)</div>
 <p>Divide o objeto A (o tabuleiro) em colunas e linhas e coloca em cada casa uma cópia de um objeto modelo sorteado (pelo menos 3 modelos, nomes separados por vírgulas). Nunca há alinhamento no início, e as peças caem de cima. Use antes de “Jogar na grade (alinhar 3)”.</p>
@@ -880,6 +960,56 @@
 <div class="schema"><b>Entradas:</b> A, Operação, B &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
 <p>Nó verde (valor): calcula A + B, A − B, A × B ou A ÷ B. A e B podem ser números, ou receber por sua vez um fio verde (cálculos em cadeia).</p>
 <p class="exemple"><b>Exemplo:</b> dar o dobro de pontos (Valor ← cálculo: score × 2).</p>
+</div>
+<div class="fiche"><h3>Coluna tocada</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): dá a coluna da casa que o dedo toca (0 = a primeira à esquerda). Ligue-o a um ajuste com o botão 🔗.</p>
+<p class="exemple"><b>Exemplo:</b> saber qual coluna foi tocada para colocar uma torre.</p>
+</div>
+<div class="fiche"><h3>Linha tocada</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): dá a linha da casa que o dedo toca (0 = a primeira no alto). Ligue-o a um ajuste com o botão 🔗.</p>
+<p class="exemple"><b>Exemplo:</b> saber qual linha foi tocada para colocar um edifício.</p>
+</div>
+<div class="fiche"><h3>Coluna de um objeto</h3>
+<div class="schema"><b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): dá a coluna da casa onde está o objeto escolhido (0 = a primeira à esquerda).</p>
+<p class="exemple"><b>Exemplo:</b> saber em que coluna está o herói.</p>
+</div>
+<div class="fiche"><h3>Linha de um objeto</h3>
+<div class="schema"><b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): dá a linha da casa onde está o objeto escolhido (0 = a primeira no alto).</p>
+<p class="exemple"><b>Exemplo:</b> saber em que linha está o herói.</p>
+</div>
+<div class="fiche"><h3>Número do turno</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: o número do turno atual (1, 2, 3…), ligue-o com o botão 🔗.</p>
+<p class="exemple"><b>Exemplo:</b> mostrar “Turno 3” em um texto.</p>
+</div>
+<div class="fiche"><h3>Passos para chegar à casa tocada</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: o número de passos para chegar à casa tocada (-1 se estiver fora da zona). Útil para contar os passos restantes.</p>
+<p class="exemple"><b>Exemplo:</b> passos restantes = passos da unidade - este número.</p>
+</div>
+<div class="fiche"><h3>Terreno da casa tocada</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: o nome do terreno da casa tocada (“Floresta”, “Água”…), ou nada se não houver. Os terrenos são definidos no editor de tiles.</p>
+<p class="exemple"><b>Exemplo:</b> mostrar “Floresta” ao tocar uma casa de floresta.</p>
+</div>
+<div class="fiche"><h3>Custo do terreno da casa tocada</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: o custo em passos do terreno da casa tocada (1 se não houver).</p>
+<p class="exemple"><b>Exemplo:</b> dizer “isto custa 2 passos” antes de mover.</p>
+</div>
+<div class="fiche"><h3>Terreno sob um objeto</h3>
+<div class="schema"><b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: o nome do terreno em que o objeto escolhido está.</p>
+<p class="exemple"><b>Exemplo:</b> saber se o herói está na água ou na estrada.</p>
+</div>
+<div class="fiche"><h3>Defesa do terreno sob um objeto</h3>
+<div class="schema"><b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: o bônus de defesa do terreno sob o objeto escolhido.</p>
+<p class="exemple"><b>Exemplo:</b> mostrar o bônus de defesa de uma unidade.</p>
 </div>
 <div class="fiche"><h3>Distância entre 2 objetos</h3>
 <div class="schema"><b>Entradas:</b> Objeto A, Objeto B &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>

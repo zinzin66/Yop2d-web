@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutti i nodi di Yop2D (166) | Riferimento</title>
-<meta name="description" content="Elenco completo dei 166 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
+<title>Tutti i nodi di Yop2D (192) | Riferimento</title>
+<meta name="description" content="Elenco completo dei 192 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 166 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
+<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 192 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
 <p><strong>Categorie</strong></p>
 <nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-griglie-e-puzzle">Griglie e puzzle</a><a href="#c10-transizioni">Transizioni</a><a href="#c11-animazioni">Animazioni</a><a href="#c12-audio">Audio</a><a href="#c13-storia-e-dialoghi">Storia e dialoghi</a><a href="#c14-valori-fili-verdi">Valori (fili verdi)</a><a href="#c15-filtri-dello-schermo">Filtri dello schermo</a></nav>
 <h2 id="c1-eventi">Eventi</h2>
@@ -641,12 +641,12 @@
 <p class="exemple"><b>Esempio:</b> un proiettile o un'auto in corsa.</p>
 </div>
 <div class="fiche"><h3>Andare verso un oggetto (percorso)</h3>
-<div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B, Velocità, Diagonali (sì / no) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato</div>
-<p>L'oggetto A va verso l'oggetto B trovando da solo il percorso più corto, casella per casella, senza attraversare i muri (tessere «Solide» di uno sfondo a tessere, oggetti fisici fissi). Il percorso viene ricalcolato quando B si muove. «Arrivato» parte quando A tocca B.</p>
+<div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B, Velocità, Diagonali (sì / no), Fermarsi, Questi tag bloccano il percorso (altre unità, separati da virgola) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato</div>
+<p>L'oggetto A va verso l'oggetto B trovando da solo il percorso più corto, casella per casella, senza attraversare i muri (tessere «Solide» di uno sfondo a tessere, oggetti fisici fissi). Il percorso viene ricalcolato quando B si muove. «Arrivato» parte quando A tocca B. L'impostazione «Fermarsi» permette di fermarsi su una casella vicina, ben centrato (giochi su griglia); «Questi tag bloccano il percorso» fa aggirare le altre unità.</p>
 <p class="exemple"><b>Esempio:</b> un fantasma che insegue il giocatore in un labirinto.</p>
 </div>
 <div class="fiche"><h3>Andare a un punto (percorso)</h3>
-<div class="schema"><b>Ingressi:</b> Oggetto, Posizione X, Posizione Y, Velocità, Diagonali (sì / no) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato</div>
+<div class="schema"><b>Ingressi:</b> Oggetto, Posizione X, Posizione Y, Velocità, Diagonali (sì / no), Questi tag bloccano il percorso (altre unità, separati da virgola) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato</div>
 <p>L'oggetto A va fino al punto X, Y girando attorno ai muri, per il percorso più corto (casella per casella). Con =doigt.x e =doigt.y va dove si tocca lo schermo. «Arrivato» parte all'arrivo. Se non c'è nessun percorso, resta fermo.</p>
 <p class="exemple"><b>Esempio:</b> toccare una casella per mandarci l'eroe, in un gioco di strategia o un dungeon.</p>
 </div>
@@ -654,6 +654,26 @@
 <div class="schema"><b>Ingresso:</b> Oggetto</div>
 <p>L'oggetto smette di seguire il suo percorso («Andare verso un oggetto (percorso)» o «Andare a un punto (percorso)») e resta dov'è.</p>
 <p class="exemple"><b>Esempio:</b> la mosca si ferma quando la partita è vinta.</p>
+</div>
+<div class="fiche"><h3>Mettere su una casella (colonna, riga)</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Colonna (0 = la prima), Riga (0 = la prima)</div>
+<p>Mette l'oggetto A esattamente al centro della casella scelta (colonna e riga, contate da 0 in alto a sinistra). La griglia è quella della mappa di tile della scena. Con il pulsante 🔗, collega «Colonna toccata» e «Riga toccata» per mandarlo sulla casella toccata dal dito.</p>
+<p class="exemple"><b>Esempio:</b> spostare una pedina sulla casella toccata in un gioco da tavolo.</p>
+</div>
+<div class="fiche"><h3>Centrare nella sua casella</h3>
+<div class="schema"><b>Ingresso:</b> Oggetto</div>
+<p>L'oggetto A resta nella sua casella ma torna esattamente al centro. Utile quando un movimento si è fermato tra due caselle.</p>
+<p class="exemple"><b>Esempio:</b> ricentrare un eroe dopo il suo movimento.</p>
+</div>
+<div class="fiche"><h3>Vai alla casella (percorso)</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Colonna, Riga, Velocità, Diagonali (sì / no), Questi tag bloccano il percorso (altre unità, separati da virgola) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato</div>
+<p>L'oggetto cammina fino al CENTRO della casella (colonna, riga), aggirando muri, terreni che bloccano e le unità con i tag indicati. Di default: la casella toccata dal dito. Uscita «Arrivato» una volta sulla casella.</p>
+<p class="exemple"><b>Esempio:</b> mandare un eroe su una casella blu toccata.</p>
+</div>
+<div class="fiche"><h3>Muovi la pedina di una casella</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Direzione, Velocità, Questi tag bloccano il percorso (altre unità, separati da virgola) &nbsp;→&nbsp; <b>Uscite:</b> Arrivato / Bloccato (muro, terreno, unità, bordo)</div>
+<p>Sposta la pedina di una casella (su, giù, sinistra, destra), ben centrata. Se la casella è un muro, un terreno che blocca, un'unità (tag) o il bordo della mappa: uscita «Bloccato». Altrimenti «Arrivato» alla fine del passo.</p>
+<p class="exemple"><b>Esempio:</b> muovere una pedina da gioco da tavolo con i pulsanti ◀ ▶ ▲ ▼.</p>
 </div>
 <div class="fiche"><h3>Insegui un oggetto</h3>
 <div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B, Velocità</div>
@@ -698,6 +718,66 @@
 </div>
 <h2 id="c9-griglie-e-puzzle">Griglie e puzzle</h2>
 <div class="method">
+<div class="fiche"><h3>Passa al turno successivo</h3>
+<div class="schema"><b>Ingresso:</b> Squadre, in ordine (tag separati da virgola)</div>
+<p>Passa il gioco alla squadra successiva. Scrivi le squadre in ordine con i loro tag (per esempio giocatore,nemico). La prima chiamata (per esempio dopo «All'Avvio») inizia dalla prima squadra; quando tutte hanno giocato, il numero del turno aumenta. All'inizio di ogni turno parte l'evento locale «tour_&lt;squadra&gt;» se esiste (per esempio «tour_nemico»).</p>
+<p class="exemple"><b>Esempio:</b> mettere «Passa al turno successivo» sul pulsante «Fine turno».</p>
+</div>
+<div class="fiche"><h3>Se è il turno di…</h3>
+<div class="schema"><b>Ingresso:</b> Squadra (tag) &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso</div>
+<p>Vero se è il turno della squadra scritta (il suo tag), Falso altrimenti.</p>
+<p class="exemple"><b>Esempio:</b> lasciare che il giocatore tocchi le sue unità solo durante il suo turno.</p>
+</div>
+<div class="fiche"><h3>Segna come già giocato</h3>
+<div class="schema"><b>Ingresso:</b> Oggetto</div>
+<p>Ricorda che l'unità (oggetto A) ha già giocato in questo turno. Tutto viene cancellato quando inizia il turno successivo.</p>
+<p class="exemple"><b>Esempio:</b> impedire a un eroe di muoversi due volte nello stesso turno.</p>
+</div>
+<div class="fiche"><h3>Se l'unità ha già giocato</h3>
+<div class="schema"><b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso</div>
+<p>Vero se l'unità (oggetto A) ha già giocato in questo turno, Falso altrimenti.</p>
+<p class="exemple"><b>Esempio:</b> rifiutare di muovere un eroe che ha già giocato.</p>
+</div>
+<div class="fiche"><h3>Mostra le caselle raggiungibili</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Tipo di zona, Numero di passi (o portata), Colore delle caselle, Visibilità delle caselle (0 = invisibile, 100 = piena), Cornice attorno a ogni casella, Scrivere i passi su ogni casella, I muri bloccano (movimento), Questi tag bloccano il passaggio (separati da virgola), Terreno che costa più passi (tag=costo, es. bosco=2, acqua=3), Nome della zona (facoltativo: per mostrarne più)</div>
+<p>Colora le caselle dove l'oggetto scelto può andare (o che può attaccare). I muri bloccano, e puoi aggiungere tag che bloccano (altre unità) e terreni che costano più passi (bosco=2). Colore, visibilità, cornice e numeri sono regolabili. «Nome della zona» permette di mostrarne più insieme (movimento in blu, attacco in rosso).</p>
+<p class="exemple"><b>Esempio:</b> mostrare la zona di movimento di un eroe quando viene toccato.</p>
+</div>
+<div class="fiche"><h3>Nascondi le caselle</h3>
+<div class="schema"><b>Ingresso:</b> Nome della zona (facoltativo)</div>
+<p>Cancella le caselle colorate (tutte, o una zona con nome).</p>
+<p class="exemple"><b>Esempio:</b> nascondere la zona quando l'eroe è arrivato.</p>
+</div>
+<div class="fiche"><h3>Se la casella è raggiungibile</h3>
+<div class="schema"><b>Ingressi:</b> Colonna, Riga, Nome della zona (facoltativo) &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso</div>
+<p>Vero se la casella (colonna, riga) è una di quelle mostrate. Di default: la casella toccata dal dito. Falso altrimenti.</p>
+<p class="exemple"><b>Esempio:</b> rifiutare un movimento troppo lontano con «troppo lontano!».</p>
+</div>
+<div class="fiche"><h3>Dai una scheda unità</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Punti vita, Attacco, Difesa, Movimento (passi), Portata d'attacco (caselle)</div>
+<p>Dà all'oggetto la sua scheda: vita, attacco, difesa, movimento e portata (variabili d'oggetto «vie», «attaque», «defense», «mouvement», «portee»). Si possono leggere ovunque con una formula, per esempio =eroe.mouvement per i passi delle caselle raggiungibili. Metti questo nodo dopo «All'Avvio» di ogni unità, o in un prefab di unità riutilizzabile.</p>
+<p class="exemple"><b>Esempio:</b> creare un arciere: vita 8, attacco 4, difesa 0, movimento 4, portata 3.</p>
+</div>
+<div class="fiche"><h3>Attacca</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B, Potenza dell'attacco (%), Conta la difesa del terreno del bersaglio, Sempre almeno 1 danno, Distruggi il bersaglio quando finisce la vita &nbsp;→&nbsp; <b>Uscite:</b> Ancora vivo / Senza vita</div>
+<p>L'oggetto A attacca l'oggetto B: danno = attacco di A × potenza − difesa di B − difesa del terreno di B. Due uscite: «Ancora vivo» e «Senza vita» (il bersaglio viene distrutto se la casella è spuntata). Entrambi gli oggetti hanno bisogno di una scheda unità.</p>
+<p class="exemple"><b>Esempio:</b> un eroe colpisce il mostro toccato.</p>
+</div>
+<div class="fiche"><h3>Dai vita all'oggetto</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Punti vita</div>
+<p>Dà punti vita all'oggetto scelto (variabile d'oggetto «vie», e «vie_max» per il massimo). Leggila ovunque con una formula, per esempio =mostro.vie, per scriverla in un testo o in una barra.</p>
+<p class="exemple"><b>Esempio:</b> dare 10 punti vita a un mostro all'inizio.</p>
+</div>
+<div class="fiche"><h3>Infliggi danni</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Danni, Distruggi l'oggetto quando finisce la vita, Sottrai la difesa del terreno su cui si trova &nbsp;→&nbsp; <b>Uscite:</b> Ancora vivo / Senza vita</div>
+<p>Toglie punti vita all'oggetto (mai sotto 0). Due uscite: «Ancora vivo» e «Senza vita» (l'oggetto viene distrutto se la casella è spuntata; «l'oggetto coinvolto» resta quello colpito).</p>
+<p class="exemple"><b>Esempio:</b> un eroe colpisce un mostro: 3 danni, poi un piccolo messaggio a seconda del risultato.</p>
+</div>
+<div class="fiche"><h3>Curare</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Vita restituita</div>
+<p>Restituisce punti vita all'oggetto, senza superare il suo massimo.</p>
+<p class="exemple"><b>Esempio:</b> una pozione che restituisce 5 punti vita all'eroe.</p>
+</div>
 <div class="fiche"><h3>Riempire la griglia</h3>
 <div class="schema"><b>Ingressi:</b> Oggetto, Colonne, Righe, Oggetti modello (nomi separati da virgole)</div>
 <p>Divide l'oggetto A (il tabellone) in colonne e righe e mette in ogni casella una copia di un oggetto modello scelto a caso (almeno 3 modelli, nomi separati da virgole). All'inizio non c'è mai un allineamento, e i pezzi cadono dall'alto. Da usare prima di «Giocare sulla griglia (allinea 3)».</p>
@@ -880,6 +960,56 @@
 <div class="schema"><b>Ingressi:</b> A, Operazione, B &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
 <p>Nodo verde (valore): calcola A + B, A − B, A × B o A ÷ B. A e B possono essere numeri, o ricevere a loro volta un filo verde (calcoli a catena).</p>
 <p class="exemple"><b>Esempio:</b> dare il doppio dei punti (Valore ← calcolo: score × 2).</p>
+</div>
+<div class="fiche"><h3>Colonna toccata</h3>
+<div class="schema"><b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde (valore): dà la colonna della casella toccata dal dito (0 = la prima a sinistra). Collegalo a un'impostazione con il pulsante 🔗.</p>
+<p class="exemple"><b>Esempio:</b> sapere quale colonna è stata toccata per piazzare una torre.</p>
+</div>
+<div class="fiche"><h3>Riga toccata</h3>
+<div class="schema"><b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde (valore): dà la riga della casella toccata dal dito (0 = la prima in alto). Collegalo a un'impostazione con il pulsante 🔗.</p>
+<p class="exemple"><b>Esempio:</b> sapere quale riga è stata toccata per piazzare un edificio.</p>
+</div>
+<div class="fiche"><h3>Colonna di un oggetto</h3>
+<div class="schema"><b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde (valore): dà la colonna della casella in cui si trova l'oggetto scelto (0 = la prima a sinistra).</p>
+<p class="exemple"><b>Esempio:</b> sapere in quale colonna si trova l'eroe.</p>
+</div>
+<div class="fiche"><h3>Riga di un oggetto</h3>
+<div class="schema"><b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde (valore): dà la riga della casella in cui si trova l'oggetto scelto (0 = la prima in alto).</p>
+<p class="exemple"><b>Esempio:</b> sapere in quale riga si trova l'eroe.</p>
+</div>
+<div class="fiche"><h3>Numero del turno</h3>
+<div class="schema"><b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde: il numero del turno attuale (1, 2, 3…), collegalo con il pulsante 🔗.</p>
+<p class="exemple"><b>Esempio:</b> mostrare «Turno 3» in un testo.</p>
+</div>
+<div class="fiche"><h3>Passi per la casella toccata</h3>
+<div class="schema"><b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde: il numero di passi per raggiungere la casella toccata (-1 se è fuori dalla zona). Utile per contare i passi rimasti.</p>
+<p class="exemple"><b>Esempio:</b> passi rimasti = passi dell'unità - questo numero.</p>
+</div>
+<div class="fiche"><h3>Terreno della casella toccata</h3>
+<div class="schema"><b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde: il nome del terreno della casella toccata («Bosco», «Acqua»…), o niente se non c'è. I terreni si definiscono nell'editor di tile.</p>
+<p class="exemple"><b>Esempio:</b> mostrare «Bosco» quando si tocca una casella di bosco.</p>
+</div>
+<div class="fiche"><h3>Costo del terreno della casella toccata</h3>
+<div class="schema"><b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde: il costo in passi del terreno della casella toccata (1 se non c'è).</p>
+<p class="exemple"><b>Esempio:</b> dire «costa 2 passi» prima di muoversi.</p>
+</div>
+<div class="fiche"><h3>Terreno sotto un oggetto</h3>
+<div class="schema"><b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde: il nome del terreno su cui si trova l'oggetto scelto.</p>
+<p class="exemple"><b>Esempio:</b> sapere se l'eroe è nell'acqua o sulla strada.</p>
+</div>
+<div class="fiche"><h3>Difesa del terreno sotto un oggetto</h3>
+<div class="schema"><b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>
+<p>Nodo verde: il bonus di difesa del terreno sotto l'oggetto scelto.</p>
+<p class="exemple"><b>Esempio:</b> mostrare il bonus di difesa di un'unità.</p>
 </div>
 <div class="fiche"><h3>Distanza tra 2 oggetti</h3>
 <div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)</div>

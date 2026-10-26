@@ -508,7 +508,7 @@
   "cuando explota un enemigo: duración 0,06, velocidad 0,05."
  ],
  "chemin_vers_objet": [
-  "El objeto A va hacia el objeto B encontrando solo el camino más corto, casilla a casilla, sin atravesar muros (baldosas «Sólidas» de un decorado de baldosas, objetos físicos fijos). El camino se recalcula cuando B se mueve. [[lang:port_arrive]] se activa cuando A toca a B.",
+  "El objeto A va hacia el objeto B encontrando solo el camino más corto, casilla a casilla, sin atravesar muros (baldosas «Sólidas» de un decorado de baldosas, objetos físicos fijos). El camino se recalcula cuando B se mueve. [[lang:port_arrive]] se activa cuando A toca a B. El ajuste «Detenerse» permite pararse en una casilla vecina, bien centrado (juegos de cuadrícula); «Estos tags bloquean el camino» hace rodear a otras unidades.",
   "un fantasma que persigue al jugador por un laberinto."
  ],
  "chemin_vers_point": [
@@ -674,5 +674,109 @@
  "charger_variables": [
   "Recupera los valores escritos por [[sauvegarder_variables]] (mismo nombre de partida). Cada variable que aún existe recupera su valor. Salida « Cargado » si todo fue bien, « Sin partida guardada » en la primera partida. Suele ponerse justo después de « Al empezar ».",
   "Justo después de [[NoeudEventStart]]: [[charger_variables]] y luego [[modifier_propriete]] para mostrar la puntuación recuperada."
+ ],
+ "placer_case": [
+  "Pone el objeto A justo en el centro de la casilla elegida (columna y fila, contadas desde 0 arriba a la izquierda). La cuadrícula es la del mapa de tiles de la escena. Con el botón 🔗, conecta [[valeur_colonne_touchee]] y [[valeur_ligne_touchee]] para enviarlo a la casilla que toca el dedo.",
+  "mover una pieza a la casilla tocada en un juego de mesa."
+ ],
+ "centrer_case": [
+  "El objeto A se queda en su casilla pero vuelve exactamente al centro. Útil cuando un movimiento se detuvo entre dos casillas.",
+  "recentrar a un héroe después de moverse."
+ ],
+ "valeur_colonne_touchee": [
+  "Nodo verde (valor): da la columna de la casilla que toca el dedo (0 = la primera a la izquierda). Conéctalo a un ajuste con el botón 🔗.",
+  "saber qué columna se tocó para colocar una torre."
+ ],
+ "valeur_ligne_touchee": [
+  "Nodo verde (valor): da la fila de la casilla que toca el dedo (0 = la primera arriba). Conéctalo a un ajuste con el botón 🔗.",
+  "saber qué fila se tocó para colocar un edificio."
+ ],
+ "valeur_colonne_objet": [
+  "Nodo verde (valor): da la columna de la casilla donde está el objeto elegido (0 = la primera a la izquierda).",
+  "saber en qué columna está el héroe."
+ ],
+ "valeur_ligne_objet": [
+  "Nodo verde (valor): da la fila de la casilla donde está el objeto elegido (0 = la primera arriba).",
+  "saber en qué fila está el héroe."
+ ],
+ "tour_suivant": [
+  "Pasa el juego al siguiente equipo. Escribe los equipos en orden con sus tags (por ejemplo jugador,enemigo). La primera vez (por ejemplo tras [[NoeudEventStart]]) empieza por el primer equipo; cuando todos han jugado, el número de turno sube. Al empezar cada turno se ejecuta el evento local «tour_<equipo>» si existe (por ejemplo «tour_enemigo»).",
+  "poner [[tour_suivant]] en el botón «Fin del turno»."
+ ],
+ "si_tour_de": [
+  "Verdadero si es el turno del equipo escrito (su tag), Falso si no.",
+  "dejar que el jugador toque sus unidades solo durante su turno."
+ ],
+ "marquer_joue": [
+  "Recuerda que la unidad (objeto A) ya jugó en este turno. Todo se borra al empezar el turno siguiente.",
+  "impedir que un héroe se mueva dos veces en el mismo turno."
+ ],
+ "si_a_joue": [
+  "Verdadero si la unidad (objeto A) ya jugó en este turno, Falso si no.",
+  "rechazar mover a un héroe que ya jugó."
+ ],
+ "valeur_numero_tour": [
+  "Nodo verde: el número del turno actual (1, 2, 3…), conéctalo con el botón 🔗.",
+  "mostrar «Turno 3» en un texto."
+ ],
+ "montrer_cases": [
+  "Colorea las casillas a las que puede ir (o atacar) el objeto elegido. Los muros bloquean, y puedes añadir tags que bloquean (otras unidades) y terrenos que cuestan más pasos (bosque=2). El color, la visibilidad, el marco y los números se pueden ajustar. «Nombre de la zona» permite mostrar varias a la vez (movimiento en azul, ataque en rojo).",
+  "mostrar la zona de movimiento de un héroe al tocarlo."
+ ],
+ "cacher_cases": [
+  "Borra las casillas coloreadas (todas, o una zona con nombre).",
+  "ocultar la zona cuando el héroe ha llegado."
+ ],
+ "si_case_accessible": [
+  "Verdadero si la casilla (columna, fila) es una de las casillas mostradas. Por defecto: la casilla que toca el dedo. Falso en caso contrario.",
+  "rechazar un movimiento demasiado lejano con «¡demasiado lejos!»."
+ ],
+ "valeur_cout_case": [
+  "Nodo verde: el número de pasos para llegar a la casilla tocada (-1 si está fuera de la zona). Útil para contar los pasos restantes.",
+  "pasos restantes = pasos de la unidad - este número."
+ ],
+ "definir_vie": [
+  "Da puntos de vida al objeto elegido (variable de objeto «vie», y «vie_max» para el máximo). Léela donde quieras con una fórmula, por ejemplo =monstruo.vie, para escribirla en un texto o una barra.",
+  "dar 10 puntos de vida a un monstruo al empezar."
+ ],
+ "infliger_degats": [
+  "Quita puntos de vida al objeto (nunca por debajo de 0). Dos salidas: «Sigue con vida» y «Sin vida» (el objeto se destruye si la casilla está marcada; «el objeto implicado» sigue siendo el golpeado).",
+  "un héroe golpea a un monstruo: 3 de daño y luego un mensaje según el resultado."
+ ],
+ "soigner": [
+  "Devuelve puntos de vida al objeto, sin pasar de su máximo.",
+  "una poción que devuelve 5 puntos de vida al héroe."
+ ],
+ "valeur_terrain_touche": [
+  "Nodo verde: el nombre del terreno de la casilla tocada («Bosque», «Agua»…), o nada si no hay. Los terrenos se definen en el editor de tiles.",
+  "mostrar «Bosque» al tocar una casilla de bosque."
+ ],
+ "valeur_cout_terrain_touche": [
+  "Nodo verde: el coste en pasos del terreno de la casilla tocada (1 si no hay).",
+  "decir «esto cuesta 2 pasos» antes de moverse."
+ ],
+ "valeur_terrain_objet": [
+  "Nodo verde: el nombre del terreno sobre el que está el objeto elegido.",
+  "saber si el héroe está en el agua o en el camino."
+ ],
+ "valeur_defense_objet": [
+  "Nodo verde: el bonus de defensa del terreno bajo el objeto elegido.",
+  "mostrar el bonus de defensa de una unidad."
+ ],
+ "chemin_vers_case": [
+  "El objeto camina hasta el CENTRO de la casilla (columna, fila), rodeando muros, terrenos que bloquean y las unidades con los tags indicados. Por defecto: la casilla que toca el dedo. Salida «Llegó» una vez en la casilla.",
+  "enviar a un héroe a una casilla azul tocada."
+ ],
+ "pion_une_case": [
+  "Mueve la pieza una casilla (arriba, abajo, izquierda, derecha), bien centrada. Si la casilla es un muro, un terreno que bloquea, una unidad (tags) o el borde del mapa: salida «Bloqueado». Si no, «Llegó» al final del paso.",
+  "mover una pieza de juego de mesa con botones ◀ ▶ ▲ ▼."
+ ],
+ "definir_fiche": [
+  "Da al objeto su ficha: vida, ataque, defensa, movimiento y alcance (variables de objeto «vie», «attaque», «defense», «mouvement», «portee»). Se pueden leer donde quieras con una fórmula, por ejemplo =heroe.mouvement para los pasos de las casillas accesibles. Pon este nodo tras [[NoeudEventStart]] de cada unidad, o en un prefab de unidad reutilizable.",
+  "crear un arquero: vida 8, ataque 4, defensa 0, movimiento 4, alcance 3."
+ ],
+ "attaquer": [
+  "El objeto A ataca al objeto B: daño = ataque de A × potencia − defensa de B − defensa del terreno de B. Dos salidas: «Sigue con vida» y «Sin vida» (el objetivo se destruye si la casilla está marcada). Los dos objetos necesitan una ficha de unidad.",
+  "un héroe golpea al monstruo tocado."
  ]
 }
