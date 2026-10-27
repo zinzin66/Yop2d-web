@@ -806,5 +806,49 @@
  "lumiere_cycle": [
   "Takes the whole game from day to an orange evening, a blue night, dawn, then day again, all by itself. You choose the length of a full day (30 to 120 seconds for a lively game), the starting moment and whether the cycle repeats forever. A paused game freezes the cycle. Length 0 = stop the cycle (the sky stays as it is). A manual setting with [[lumiere_ambiance]] takes over. Your lights ([[lumiere_source]]) stay on: you see them better at night.",
   "a living world: on start, [[lumiere_cycle]] with a length of 90 seconds, starting « Full day », looping."
+ ],
+ "physique_monde": [
+  "Sets the physics world of the scene: gravity downwards (100% = normal, 0 = space, negative = objects fall upwards), sideways gravity (a wind that always blows), calculation precision and whether resting objects fall asleep. Use it once, under “At start”. It only affects objects that have the “Realistic physics” behavior (⚙ Behavior).",
+  "a level on the Moon: gravity 20%."
+ ],
+ "physique_changer": [
+  "Changes the settings of a physics object during the game: its type (normal, fixed, guided, or no more physics), material (wood, stone, metal, rubber, ball, ice, feather), shape, weight, bounce, grip, gravity, air drag, top speed, whether it rotates, whether it is a ghost or very fast, its layer. Any setting left empty or on “(do not change)” stays as it is. On an object without physics yet, choosing a type gives it physics.",
+  "a ball that turns into rubber (material “Rubber”) when a bonus is picked up."
+ ],
+ "physique_pousser": [
+  "Pushes a physics object with a force. “Steady push”: repeat it every frame (under “Every frame” or “Finger down”), the object speeds up as long as you push (a rocket, a wind, a fan). “A hit”: adds speed at once (a jump, a kick). By default the effect is the same on a light or heavy object; in the advanced settings you can make weight matter, and push away from the center to make the object spin. Values: pixels per second (per second squared for the steady push).",
+  "a rocket game: “Finger down” → push upwards (-2500) steadily."
+ ],
+ "physique_vitesse": [
+  "Sets the speed of a physics object, in pixels per second: to the right, downwards (negative = upwards) and spin in degrees per second. Any box left empty leaves that speed unchanged. “Replace” gives exactly this speed; “Add” adds it to the current speed. The “Stop everything” option sets all speeds to zero. Perfect for a jump (downward speed of -900), a sharp stop or a character moving at constant speed.",
+  "a platformer jump: downward speed = -900, only if [[physique_test]] says the object is standing on something."
+ ],
+ "physique_lancer": [
+  "Launches a physics object in a direction: you give the angle (0 = to the right, -90 = up, 90 = down, 180 = to the left) and the starting speed. Gravity then does the rest: the object follows a curve. Ideal for a slingshot game, a cannon, a ball throw. The angle can be a formula (for example the angle between the object and the finger).",
+  "a slingshot: when the finger lets go, launch the bird at the angle of the elastic."
+ ],
+ "physique_explosion": [
+  "Blasts every physics object around a point: the closer to the center, the harder they are thrown, and they start to spin. The center is the middle of the chosen object, or an (x, y) point if you write one. You set the blast radius and the force (the speed given at the center). Option: only objects with a certain tag. The node destroys nothing: combine it with “Particle effect” and “Destroy object” for a real explosion.",
+  "a bomb: when it touches the ground, explosion with radius 500 and force 1800, then destroy the bomb."
+ ],
+ "physique_lier": [
+  "Links two objects so they hold or move together, like in real life. Kind of link: hinge (swings around a point: door, pendulum), rigid rod (fixed distance), spring (elastic, with stiffness), rope (maximum length), slider (slides along a rail, with limits and motor), weld (stuck together), wheel with suspension (car: A = the body, B = the wheel, with motor), brake (top view). Object B is optional: without B, object A is attached to a fixed point of the scenery. Give the link a name to adjust it (“Adjust a link”) or cut it (“Cut a link”) later. In the advanced settings: point on each side, limits, rail direction, motor, collision between the two objects. Both objects need the “Realistic physics” behavior (except a fixed support).",
+  "a pendulum: A = the ball, B = a small fixed object at the top, type “Hinge” or “Rigid rod”; a bridge: planks linked by hinges."
+ ],
+ "physique_regler_liaison": [
+  "Changes a link already created by “Link two objects” (found by its name): start, stop or speed up its motor, set its strength, the stiffness of a spring or suspension, the length of a rod or rope, the limits. Any empty box stays as before. Example: a car whose wheel motor starts when a button is pressed.",
+  "“Gas” button: adjust the link “rear_wheel” with motor = 720; on release: motor = 0."
+ ],
+ "physique_couper": [
+  "Cuts a link: write its name, or write an object's name to cut all of its links. The objects separate and each falls on its own (a collapsing bridge, a cut rope, a detaching cabin).",
+  "a trapped bridge: when the hero touches the lever, cut the link “plank_3”."
+ ],
+ "physique_doigt": [
+  "Lets you grab a physics object with the finger and drag it, like in real life: the object follows the finger with a bit of elasticity, pushes the others and can get stuck. Put it under “Finger down” (action “Grab and drag”): while the finger is down, the object under it is dragged; as soon as the finger lifts, it is released by itself (or use the “Let go” action). You can restrict the grab to objects with a tag, and set the softness of the grip.",
+  "a crate puzzle: the player moves crates with a fingertip to build a tower."
+ ],
+ "physique_test": [
+  "Asks a question about a physics object and follows the “true” or “false” exit: is it standing on something (to allow a jump), does it touch something, does it touch something above, is it at rest (asleep), is it moving fast, falling, rising. For “moves fast”, “falling” and “rising” the threshold in pixels per second is set in the advanced settings. You can also read values directly in a formula: object.vitesse, object.masse, object.vitesseRotation.",
+  "a platformer jump: “Jump button” → If the object is standing on something → set downward speed to -900."
  ]
 }

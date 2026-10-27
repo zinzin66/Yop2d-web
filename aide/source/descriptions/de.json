@@ -806,5 +806,49 @@
  "lumiere_cycle": [
   "Lässt das ganze Spiel von allein vom Tag über einen orangen Abend zur blauen Nacht, zur Morgendämmerung und wieder zum Tag wechseln. Du wählst die Dauer eines ganzen Tages (30 bis 120 Sekunden für ein lebendiges Spiel), den Startzeitpunkt und ob sich der Zyklus endlos wiederholt. Bei Pause steht der Zyklus still. Dauer 0 = Zyklus anhalten (der Himmel bleibt, wie er ist). Eine manuelle Einstellung mit [[lumiere_ambiance]] übernimmt. Deine Lichter ([[lumiere_source]]) bleiben an: Nachts sieht man sie besser.",
   "eine lebendige Welt: beim Start [[lumiere_cycle]] mit 90 Sekunden, Start « Voller Tag », Schleife."
+ ],
+ "physique_monde": [
+  "Stellt die Physikwelt der Szene ein: Schwerkraft nach unten (100 % = normal, 0 = Weltraum, negativ = Objekte fallen nach oben), seitliche Schwerkraft (ein ständiger Wind), Genauigkeit der Berechnung und ob ruhende Objekte einschlafen. Einmal verwenden, unter „Beim Start“. Wirkt nur auf Objekte mit dem Verhalten „Realistische Physik“ (⚙ Verhalten).",
+  "ein Level auf dem Mond: Schwerkraft 20 %."
+ ],
+ "physique_changer": [
+  "Ändert die Einstellungen eines Physik-Objekts während des Spiels: Typ (normal, fest, geführt oder keine Physik mehr), Material (Holz, Stein, Metall, Gummi, Ball, Eis, Feder), Form, Gewicht, Abprallen, Haftung, Schwerkraft, Luftwiderstand, Höchstgeschwindigkeit, ob es sich dreht, ob es ein Geist oder sehr schnell ist, seine Ebene. Leer oder auf „(nicht ändern)“ gelassene Einstellungen bleiben. Bei einem Objekt ohne Physik gibt die Wahl eines Typs ihm Physik.",
+  "ein Ball, der zu Gummi wird (Material „Gummi“), wenn man einen Bonus einsammelt."
+ ],
+ "physique_pousser": [
+  "Schiebt ein Physik-Objekt mit einer Kraft. „Dauerschub“: in jedem Bild wiederholen (unter „Jedes Bild“ oder „Finger gedrückt“), das Objekt wird schneller, solange du schiebst (Rakete, Wind, Ventilator). „Ein Stoß“: gibt sofort Tempo (Sprung, Tritt). Standardmäßig wirkt es auf leichte und schwere Objekte gleich; in den erweiterten Einstellungen kann das Gewicht zählen, und außerhalb der Mitte schieben lässt das Objekt kreiseln. Werte: Pixel pro Sekunde (pro Sekunde zum Quadrat beim Dauerschub).",
+  "ein Raketenspiel: „Finger gedrückt“ → dauerhaft nach oben schieben (-2500)."
+ ],
+ "physique_vitesse": [
+  "Stellt das Tempo eines Physik-Objekts ein, in Pixel pro Sekunde: nach rechts, nach unten (negativ = nach oben) und Drehung in Grad pro Sekunde. Leere Felder lassen dieses Tempo unverändert. „Ersetzen“ setzt genau dieses Tempo; „Addieren“ addiert es zum aktuellen. Die Option „Alles anhalten“ setzt alle Tempi auf null. Ideal für einen Sprung (Tempo nach unten -900), einen harten Stopp oder eine Figur mit gleichbleibendem Tempo.",
+  "ein Plattform-Sprung: Tempo nach unten = -900, nur wenn [[physique_test]] sagt, dass das Objekt steht."
+ ],
+ "physique_lancer": [
+  "Wirft ein Physik-Objekt in eine Richtung: du gibst den Winkel (0 = rechts, -90 = oben, 90 = unten, 180 = links) und das Starttempo an. Den Rest erledigt die Schwerkraft: das Objekt fliegt eine Kurve. Ideal für ein Schleuder-Spiel, eine Kanone, einen Ballwurf. Der Winkel kann eine Formel sein (z. B. der Winkel zwischen Objekt und Finger).",
+  "eine Schleuder: beim Loslassen den Vogel im Winkel des Gummis abschießen."
+ ],
+ "physique_explosion": [
+  "Lässt alle Physik-Objekte um einen Punkt wegfliegen: je näher am Zentrum, desto heftiger werden sie geschleudert, und sie fangen an zu kreiseln. Das Zentrum ist die Mitte des gewählten Objekts oder ein Punkt (x, y), wenn du einen einträgst. Du stellst Radius und Kraft (das Tempo im Zentrum) ein. Option: nur Objekte mit einem bestimmten Tag. Der Knoten zerstört nichts: kombiniere ihn mit „Partikeleffekt“ und „Objekt zerstören“ für eine echte Explosion.",
+  "eine Bombe: beim Bodenkontakt Explosion mit Radius 500 und Kraft 1800, dann die Bombe zerstören."
+ ],
+ "physique_lier": [
+  "Verbindet zwei Objekte, sodass sie halten oder sich gemeinsam bewegen, wie im echten Leben. Art der Verbindung: Scharnier (dreht sich um einen Punkt: Tür, Pendel), starre Stange (feste Entfernung), Feder (elastisch, mit Härte), Seil (maximale Länge), Schiene (gleitet auf einer Bahn, mit Grenzen und Motor), Schweißnaht (zusammengeklebt), Rad mit Federung (Auto: A = die Karosserie, B = das Rad, mit Motor), Bremse (Draufsicht). Objekt B ist optional: ohne B hängt Objekt A an einem festen Punkt der Kulisse. Gib der Verbindung einen Namen, um sie später einzustellen („Verbindung einstellen“) oder zu trennen („Verbindung trennen“). In den erweiterten Einstellungen: Punkt auf jeder Seite, Grenzen, Richtung der Schiene, Motor, Kollision der beiden Objekte. Beide Objekte brauchen das Verhalten „Realistische Physik“ (außer einem festen Halter).",
+  "ein Pendel: A = die Kugel, B = ein kleines festes Objekt oben, Typ „Scharnier“ oder „Starre Stange“; eine Brücke: Planken, durch Scharniere verbunden."
+ ],
+ "physique_regler_liaison": [
+  "Ändert eine mit „Zwei Objekte verbinden“ erstellte Verbindung (über ihren Namen gefunden): Motor starten, stoppen oder beschleunigen, Stärke, Härte einer Feder oder Federung, Länge von Stange oder Seil, Grenzen. Leere Felder bleiben wie zuvor. Beispiel: ein Auto, dessen Radmotor beim Tastendruck anspringt.",
+  "Knopf „Gas“: Verbindung „hinterrad“ mit Motor = 720 einstellen; beim Loslassen: Motor = 0."
+ ],
+ "physique_couper": [
+  "Trennt eine Verbindung: schreibe ihren Namen, oder den Namen eines Objekts, um alle seine Verbindungen zu trennen. Die Objekte lösen sich und fallen jeweils für sich (eine einstürzende Brücke, ein gekapptes Seil, eine sich lösende Kabine).",
+  "eine Brückenfalle: berührt der Held den Hebel, die Verbindung „planke_3“ trennen."
+ ],
+ "physique_doigt": [
+  "Erlaubt, ein Physik-Objekt mit dem Finger zu greifen und zu ziehen, wie im echten Leben: das Objekt folgt dem Finger mit etwas Elastizität, schiebt andere und kann sich verkeilen. Unter „Finger gedrückt“ einsetzen (Aktion „Mit dem Finger greifen und ziehen“): solange der Finger aufliegt, wird das Objekt darunter gezogen; hebt sich der Finger, wird es von selbst losgelassen (oder die Aktion „Loslassen“ nutzen). Du kannst den Griff auf Objekte mit einem Tag beschränken und die Weichheit einstellen.",
+  "ein Kistenrätsel: der Spieler verschiebt Kisten mit der Fingerspitze und baut einen Turm."
+ ],
+ "physique_test": [
+  "Stellt eine Frage zu einem Physik-Objekt und folgt dem Ausgang „wahr“ oder „falsch“: steht es auf etwas (um einen Sprung zu erlauben), berührt es etwas, berührt es etwas darüber, ruht es (schläft), bewegt es sich schnell, fällt es, steigt es. Bei „bewegt sich schnell“, „fällt“ und „steigt“ stellst du die Schwelle in Pixel pro Sekunde in den erweiterten Einstellungen ein. Du kannst auch direkt in einer Formel lesen: objekt.vitesse, objekt.masse, objekt.vitesseRotation.",
+  "ein Plattform-Sprung: „Sprungknopf“ → Wenn das Objekt auf etwas steht → Tempo nach unten auf -900."
  ]
 }

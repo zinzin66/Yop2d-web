@@ -806,5 +806,49 @@
  "lumiere_cycle": [
   "Fait passer tout le jeu du jour au soir orange, à la nuit bleue, à l'aube, puis au jour, tout seul. Tu choisis la durée d'une journée complète (30 à 120 secondes pour un jeu vivant), le moment de départ et si le cycle recommence sans fin. Le jeu en pause fige le cycle. Durée 0 = arrêter le cycle (le ciel reste comme il est). Un réglage à la main avec [[lumiere_ambiance]] reprend la main. Tes lumières ([[lumiere_source]]) restent allumées : on les voit mieux la nuit.",
   "un monde vivant : au démarrage, [[lumiere_cycle]] avec une durée de 90 secondes, début « Plein jour », en boucle."
+ ],
+ "physique_monde": [
+  "Règle le monde physique de la scène : la gravité vers le bas (100 % = normale, 0 = espace, négatif = les objets tombent vers le haut), une gravité vers le côté (un vent qui souffle tout le temps), la précision du calcul et le sommeil des objets immobiles. À mettre une fois, sous « Au démarrage ». Ne concerne que les objets qui ont le comportement « Physique réaliste » (⚙ Comportement).",
+  "un niveau sur la Lune : gravité 20 %."
+ ],
+ "physique_changer": [
+  "Change les réglages d'un objet physique en plein jeu : son type (normal, fixe, guidé, ou plus de physique), sa matière (bois, pierre, métal, caoutchouc, ballon, glace, plume), sa forme, son poids, son rebond, son accroche, sa gravité, le freinage de l'air, sa vitesse maximale, s'il tourne, s'il est un fantôme ou très rapide, sa couche. Chaque réglage laissé vide ou sur « (ne pas changer) » reste comme il est. Sur un objet qui n'a pas encore la physique, choisir un type la lui donne.",
+  "une balle qui devient du caoutchouc (matière « Caoutchouc ») quand on ramasse un bonus."
+ ],
+ "physique_pousser": [
+  "Pousse un objet physique avec une force. « Poussée continue » : à répéter à chaque image (sous « À chaque image » ou « Doigt appuyé »), l'objet accélère tant que tu pousses (une fusée, un vent, un ventilateur). « Un coup » : ajoute tout de suite de la vitesse (un saut, un coup de pied). Par défaut, l'effet est le même sur un objet léger ou lourd ; en réglage avancé, tu peux dire que le poids compte, et pousser ailleurs qu'au centre pour faire tourner l'objet. Valeurs : pixels par seconde (par seconde au carré pour la poussée continue).",
+  "un jeu de fusée : « Doigt appuyé » → pousser vers le haut (-2500) en continu."
+ ],
+ "physique_vitesse": [
+  "Règle la vitesse d'un objet physique, en pixels par seconde : vers la droite, vers le bas (négatif = vers le haut) et rotation en degrés par seconde. Chaque case laissée vide ne change pas cette vitesse. « Remplacer » donne exactement cette vitesse ; « Ajouter » la rajoute à la vitesse actuelle. L'option « Tout arrêter » remet toutes les vitesses à zéro. Parfait pour un saut (vitesse vers le bas à -900), un arrêt net ou un personnage qui avance à vitesse constante.",
+  "un saut de plateforme : vitesse vers le bas = -900, seulement si [[physique_test]] dit que l'objet est posé."
+ ],
+ "physique_lancer": [
+  "Lance un objet physique dans une direction : tu donnes l'angle (0 = vers la droite, -90 = vers le haut, 90 = vers le bas, 180 = vers la gauche) et la vitesse de départ. Ensuite la gravité fait le reste : l'objet décrit une courbe. Idéal pour un jeu de lance-pierre, un canon, un lancer de ballon. L'angle peut être une formule (par exemple l'angle entre l'objet et le doigt).",
+  "un lance-pierre : au relâchement du doigt, lancer l'oiseau avec l'angle de l'élastique."
+ ],
+ "physique_explosion": [
+  "Fait souffler tous les objets physiques autour d'un point : plus ils sont près du centre, plus ils sont projetés fort, et ils se mettent à tourner. Le centre est le milieu de l'objet choisi, ou un point (x, y) si tu en écris un. Tu règles le rayon du souffle et la force (la vitesse donnée au centre). Option : seulement les objets d'un certain tag. Le nœud ne détruit rien : combine-le avec « Effet de particules » et « Détruire l'objet » pour une vraie explosion.",
+  "une bombe : quand elle touche le sol, explosion de rayon 500 et force 1800, puis détruire la bombe."
+ ],
+ "physique_lier": [
+  "Relie deux objets pour qu'ils se tiennent ou bougent ensemble, comme dans la vraie vie. Sorte de liaison : charnière (pivote autour d'un point : porte, balancier, pendule), tige rigide (distance fixe), ressort (élastique, avec raideur), corde (longueur maximale), glissière (coulisse sur un rail, avec limites et moteur), soudure (collés), roue avec suspension (voiture : A = la caisse, B = la roue, avec moteur), frein (vue de dessus). L'objet B est facultatif : sans B, l'objet A est accroché à un point fixe du décor. Donne un nom à la liaison pour la régler (« Régler une liaison ») ou la couper (« Couper une liaison ») plus tard. En réglages avancés : point de chaque côté, limites, direction du rail, moteur, collision entre les deux objets. Les deux objets doivent avoir le comportement « Physique réaliste » (sauf un support fixe).",
+  "un pendule : A = la boule, B = un petit objet fixe en haut, type « Charnière » ou « Tige rigide » ; un pont : planches reliées par des charnières."
+ ],
+ "physique_regler_liaison": [
+  "Change une liaison déjà créée par « Relier deux objets » (on la retrouve par son nom) : démarrer, arrêter ou accélérer son moteur, régler sa force, la raideur d'un ressort ou d'une suspension, la longueur d'une tige ou d'une corde, les limites. Chaque case vide reste comme avant. Exemple : une voiture dont le moteur des roues démarre quand on appuie sur un bouton.",
+  "bouton « Gaz » : régler la liaison « roue_arriere » avec moteur = 720 ; au relâchement : moteur = 0."
+ ],
+ "physique_couper": [
+  "Coupe une liaison : écris son nom, ou écris le nom d'un objet pour couper toutes ses liaisons. Les objets se séparent et retombent chacun de leur côté (un pont qui s'effondre, une corde coupée, une cabine qui se détache).",
+  "un pont piégé : quand le héros touche le levier, couper la liaison « planche_3 »."
+ ],
+ "physique_doigt": [
+  "Permet de saisir un objet physique avec le doigt et de le tirer, comme dans la vraie vie : l'objet suit le doigt avec un peu d'élasticité, pousse les autres et peut se coincer. À mettre sous « Doigt appuyé » (action « Saisir et tirer ») : tant que le doigt est posé, l'objet sous le doigt est tiré ; dès que le doigt se lève, il est lâché tout seul (ou utilise l'action « Lâcher »). Tu peux limiter la prise aux objets d'un tag, et régler la souplesse de la prise.",
+  "un puzzle de caisses : le joueur déplace les caisses du bout du doigt pour fabriquer une tour."
+ ],
+ "physique_test": [
+  "Pose une question sur un objet physique et suit la sortie « vrai » ou « faux » : est-il posé sur quelque chose (pour autoriser un saut), touche-t-il quelque chose, touche-t-il quelque chose au-dessus, est-il au repos (endormi), bouge-t-il vite, tombe-t-il, monte-t-il. Pour « bouge vite », « tombe » et « monte », le seuil en pixels par seconde se règle en avancé. Tu peux aussi lire directement dans une formule : objet.vitesse, objet.masse, objet.vitesseRotation.",
+  "un saut de plateforme : « Bouton saut » → Si l'objet est posé sur quelque chose → régler la vitesse vers le bas à -900."
  ]
 }

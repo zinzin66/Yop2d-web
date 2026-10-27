@@ -806,5 +806,49 @@
  "lumiere_cycle": [
   "Faz todo o jogo passar do dia ao entardecer laranja, à noite azul, ao amanhecer e de novo ao dia, sozinho. Você escolhe a duração de um dia completo (30 a 120 segundos para um jogo vivo), o momento de início e se o ciclo se repete sem fim. Com o jogo em pausa o ciclo congela. Duração 0 = parar o ciclo (o céu fica como está). Um ajuste manual com [[lumiere_ambiance]] assume o controle. Suas luzes ([[lumiere_source]]) continuam acesas: veem-se melhor à noite.",
   "um mundo vivo: ao começar, [[lumiere_cycle]] com 90 segundos, início « Pleno dia », em loop."
+ ],
+ "physique_monde": [
+  "Ajusta o mundo físico da cena: a gravidade para baixo (100 % = normal, 0 = espaço, negativo = os objetos caem para cima), uma gravidade lateral (um vento constante), a precisão do cálculo e se os objetos parados dormem. Use uma vez, sob «Ao iniciar». Só afeta objetos com o comportamento «Física realista» (⚙ Comportamento).",
+  "uma fase na Lua: gravidade 20 %."
+ ],
+ "physique_changer": [
+  "Muda os ajustes de um objeto físico durante o jogo: o tipo (normal, fixo, guiado ou sem física), material (madeira, pedra, metal, borracha, bola, gelo, pena), forma, peso, quique, aderência, gravidade, freio do ar, velocidade máxima, se gira, se é fantasma ou muito rápido, a camada. O que ficar vazio ou em «(não mudar)» continua igual. Num objeto sem física, escolher um tipo dá física a ele.",
+  "uma bola que vira borracha (material «Borracha») quando se pega um bônus."
+ ],
+ "physique_pousser": [
+  "Empurra um objeto físico com uma força. «Empurrão contínuo»: repita a cada imagem (sob «A cada imagem» ou «Dedo pressionado»), o objeto acelera enquanto você empurra (um foguete, um vento, um ventilador). «Uma pancada»: acrescenta velocidade na hora (um pulo, um chute). Por padrão o efeito é igual em objeto leve ou pesado; nos ajustes avançados o peso pode contar e dá para empurrar fora do centro para girar. Valores: pixels por segundo (por segundo ao quadrado no contínuo).",
+  "um jogo de foguete: «Dedo pressionado» → empurrar para cima (-2500) continuamente."
+ ],
+ "physique_vitesse": [
+  "Ajusta a velocidade de um objeto físico, em pixels por segundo: para a direita, para baixo (negativo = cima) e giro em graus por segundo. Campos vazios não mudam aquela velocidade. «Substituir» dá exatamente essa velocidade; «Somar» soma à atual. A opção «Parar tudo» zera todas as velocidades. Ótimo para um pulo (velocidade para baixo de -900), uma parada seca ou um personagem que anda em velocidade constante.",
+  "um pulo de plataforma: velocidade para baixo = -900, só se [[physique_test]] disser que o objeto está apoiado."
+ ],
+ "physique_lancer": [
+  "Lança um objeto físico numa direção: você dá o ângulo (0 = direita, -90 = cima, 90 = baixo, 180 = esquerda) e a velocidade inicial. Depois a gravidade faz o resto: o objeto descreve uma curva. Ideal para um jogo de estilingue, um canhão, um arremesso de bola. O ângulo pode ser uma fórmula (por exemplo o ângulo entre o objeto e o dedo).",
+  "um estilingue: ao soltar o dedo, lançar o pássaro no ângulo do elástico."
+ ],
+ "physique_explosion": [
+  "Faz soprar todos os objetos físicos em volta de um ponto: quanto mais perto do centro, mais forte são arremessados, e começam a girar. O centro é o meio do objeto escolhido, ou um ponto (x, y) se você escrever um. Você ajusta o raio e a força (a velocidade dada no centro). Opção: só os objetos de certa tag. O nó não destrói nada: combine com «Efeito de partículas» e «Destruir objeto» para uma explosão de verdade.",
+  "uma bomba: ao tocar o chão, explosão de raio 500 e força 1800, depois destruir a bomba."
+ ],
+ "physique_lier": [
+  "Liga dois objetos para que se segurem ou se movam juntos, como na vida real. Tipo de ligação: dobradiça (gira em torno de um ponto: porta, pêndulo), haste rígida (distância fixa), mola (elástica, com rigidez), corda (comprimento máximo), corrediça (desliza num trilho, com limites e motor), solda (colados), roda com suspensão (carro: A = a carroceria, B = a roda, com motor), freio (vista de cima). O objeto B é opcional: sem B, o objeto A fica preso a um ponto fixo do cenário. Dê um nome à ligação para ajustá-la («Ajustar uma ligação») ou cortá-la («Cortar uma ligação») depois. Nos ajustes avançados: ponto de cada lado, limites, direção do trilho, motor, colisão entre os dois objetos. Os dois objetos precisam do comportamento «Física realista» (exceto um suporte fixo).",
+  "um pêndulo: A = a bola, B = um objeto fixo pequeno no alto, tipo «Dobradiça» ou «Haste rígida»; uma ponte: tábuas ligadas por dobradiças."
+ ],
+ "physique_regler_liaison": [
+  "Muda uma ligação já criada por «Ligar dois objetos» (achada pelo nome): ligar, parar ou acelerar o motor, ajustar a força, a rigidez de uma mola ou suspensão, o comprimento de uma haste ou corda, os limites. Campos vazios ficam como antes. Exemplo: um carro cujo motor das rodas liga ao apertar um botão.",
+  "botão «Acelerar»: ajustar a ligação «roda_traseira» com motor = 720; ao soltar: motor = 0."
+ ],
+ "physique_couper": [
+  "Corta uma ligação: escreva o nome dela, ou o nome de um objeto para cortar todas as ligações dele. Os objetos se separam e cada um cai para seu lado (uma ponte que desaba, uma corda cortada, uma cabine que se solta).",
+  "uma ponte armadilha: quando o herói toca a alavanca, cortar a ligação «tabua_3»."
+ ],
+ "physique_doigt": [
+  "Permite agarrar um objeto físico com o dedo e arrastá-lo, como na vida real: o objeto segue o dedo com um pouco de elasticidade, empurra os outros e pode ficar preso. Coloque sob «Dedo pressionado» (ação «Agarrar e arrastar»): enquanto o dedo está apoiado, o objeto sob ele é arrastado; ao levantar, é solto sozinho (ou use a ação «Soltar»). Pode limitar a objetos de uma tag e ajustar a maciez da pegada.",
+  "um quebra-cabeça de caixas: o jogador move caixas com a ponta do dedo para construir uma torre."
+ ],
+ "physique_test": [
+  "Faz uma pergunta sobre um objeto físico e segue a saída «verdadeiro» ou «falso»: está apoiado em algo (para permitir um pulo)?, toca algo?, toca algo por cima?, está em repouso (dormindo)?, move-se rápido?, cai?, sobe? Para «move-se rápido», «cai» e «sobe» o limite em pixels por segundo se ajusta no avançado. Também dá para ler direto numa fórmula: objeto.vitesse, objeto.masse, objeto.vitesseRotation.",
+  "um pulo de plataforma: «Botão de pulo» → Se o objeto está apoiado em algo → velocidade para baixo = -900."
  ]
 }
