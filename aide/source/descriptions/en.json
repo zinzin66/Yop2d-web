@@ -784,7 +784,7 @@
   "a sunset: [[lumiere_ambiance]] orange, darkness 40, over 6 seconds; [[attendre]] 6 seconds; then [[lumiere_ambiance]] night blue, darkness 90, over 6 seconds."
  ],
  "lumiere_source": [
-  "Attaches a light to the object: it follows the object when it moves (a character's torch, a lantern, a fire…), even if the object is the child of another. Settings: color, radius in pixels (distance from the center), lighting (100 = normal, up to 300: stronger and farther), colored glow (0 = none), flicker (none, candle, torch, flickers) and shift. One light per object, 8 at most at once. It cuts through the darkness set by [[lumiere_ambiance]]; without darkness it only adds its glow.",
+  "Attaches a light to the object: it follows the object when it moves (a character's torch, a lantern, a fire…), even if the object is the child of another. Settings: color, radius in pixels (distance from the center), lighting (100 = normal, up to 300: stronger and farther), colored glow (0 = none), flicker (none, candle, torch, flickers) and shift. One light per object, 8 at most at once. It cuts through the darkness set by [[lumiere_ambiance]]; without darkness it only adds its glow. « Switching on » setting: « Only when it is dark » turns the light on by itself at nightfall (ideal with [[lumiere_cycle]]).",
   "a character's torch: placed on a « lantern » object that is a child of the hero, radius 360, flicker « torch »."
  ],
  "lumiere_eteindre": [
@@ -802,5 +802,9 @@
  "NoeudEventNouvelleScene": [
   "Runs every time a new scene opens. Made for the \"Global logic\" (which runs in every scene): for example, placing the chosen army on each map. In an ordinary scene, \"On start\" is enough.",
   null
+ ],
+ "lumiere_cycle": [
+  "Takes the whole game from day to an orange evening, a blue night, dawn, then day again, all by itself. You choose the length of a full day (30 to 120 seconds for a lively game), the starting moment and whether the cycle repeats forever. A paused game freezes the cycle. Length 0 = stop the cycle (the sky stays as it is). A manual setting with [[lumiere_ambiance]] takes over. Your lights ([[lumiere_source]]) stay on: you see them better at night.",
+  "a living world: on start, [[lumiere_cycle]] with a length of 90 seconds, starting « Full day », looping."
  ]
 }

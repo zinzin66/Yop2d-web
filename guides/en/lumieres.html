@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to add lights, shadows and a day and night cycle in Yop2D? | Yop2D Guide</title>
+<meta name="description" content="Make your game come alive in Yop2D: a dark night, a torch that follows your hero, soft shadows under the characters and a day that turns into night by itself. No code.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/lumieres.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/lumieres.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/lumieres.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/lumieres.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/lumieres.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/lumieres.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/lumieres.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/lumieres.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/lumieres.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/lumieres.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to add lights, shadows and a day and night cycle?",
+ "description": "Make your game come alive in Yop2D: a dark night, a torch that follows your hero, soft shadows under the characters and a day that turns into night by itself. No code.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Darken the game",
+   "text": "Add the node \"Darkness and light mood\"."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Light a torch",
+   "text": "Add \"Light source\" on an object."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Add a shadow",
+   "text": "Tick \"Shadow under the object\" in the Inspector."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Let the day pass",
+   "text": "Add the node \"Day and night cycle\"."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to add lights, shadows and a day and night cycle?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../lumieres.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/lumieres.html" hreflang="es">Español</a> · <a href="../de/lumieres.html" hreflang="de">Deutsch</a> · <a href="../it/lumieres.html" hreflang="it">Italiano</a> · <a href="../pt/lumieres.html" hreflang="pt">Português</a> · <a href="../ru/lumieres.html" hreflang="ru">Русский</a> · <a href="../zh/lumieres.html" hreflang="zh">中文</a> · <a href="../ja/lumieres.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>With a few nodes, a game goes from flat to atmospheric: a dark night, a lantern that follows your hero, soft shadows and a sun that sets by itself. Nothing to write: you only choose values. The lights are drawn on the screen (they do not go around walls), which keeps the game fast on every phone.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a project open in the editor;</li><li>images that look good in the dark (the 3D packs of the library, for example). A pixel art image enlarged a lot looks blurry: turn on <strong>Pixel art</strong> in the game settings.</li></ul>
+</div>
+<h2>Step 1: darken the game</h2>
+<div class="method">
+<ol><li>Open the <strong>Blueprint</strong> and add “Darkness and light mood” after “On Start”.</li><li>Choose the <strong>darkness</strong>: 0 is full day, 100 is pitch black. For a night where you still see the scene, try 85.</li><li>Choose the <strong>color of the night</strong>: a dark blue looks natural, black makes it scarier.</li></ol>
+<div class="tip">👉 The darkness and the color change smoothly. Use a length of 30 seconds to turn a day into a night, like a sunset.</div>
+</div>
+<h2>Step 2: light a torch</h2>
+<div class="method">
+<ol><li>Add “Light source (torch, lantern…)” and choose the object that carries the light: a torch, a window, a lantern.</li><li>Set the <strong>radius</strong> (the distance from the center, in pixels), the <strong>lighting</strong> (100 is normal, up to 300 for a stronger light) and the <strong>colored glow</strong>.</li><li>Choose the <strong>flicker</strong>: candle for a soft flame, torch for a strong one, flickers for a failing lamp.</li><li>The light follows its object. To make a lantern that follows your hero, put a small invisible object on the hero (a child object) and light that object.</li></ol>
+<div class="tip">👉 With <strong>Switching on = Only when it is dark</strong>, the light turns on by itself when the night falls and turns off during the day. Use “Turn off the object's light” to turn a light off with a node.</div>
+</div>
+<h2>Step 3: add a shadow</h2>
+<div class="method">
+<ol><li>Select a character in the scene and open the <strong>Inspector</strong>, part <strong>Appearance</strong>.</li><li>Tick <strong>Shadow under the object</strong>: set its <strong>strength</strong> and its <strong>width</strong>.</li><li>The shadow follows the object everywhere. The node “Shadow under the object” does the same, if you prefer to switch it on during the game.</li></ol>
+</div>
+<h2>Step 4: let the day pass</h2>
+<div class="method">
+<ol><li>Add “Day and night cycle” at the start of the game.</li><li>Choose the <strong>length of a full day</strong>: 30 to 120 seconds feel alive. Then the <strong>starting moment</strong> (full day, evening, deep night or dawn) and whether it <strong>repeats forever</strong>.</li><li>Put your lights on <strong>Only when it is dark</strong>: they turn on at nightfall, all by themselves.</li></ol>
+<div class="tip">👉 Length 0 stops the cycle where it is. A game on pause freezes the cycle too. To jump to a moment, use “Day and night cycle” again with another starting moment: the example "Day and night village" does it with 5 buttons.</div>
+</div>
+<h2>To go further</h2>
+<ul><li>Open the models <strong>Torch and shadows</strong> and <strong>Day and night</strong> (Models tab) to see everything already set up.</li><li>Download the example <strong>Day and night village</strong> (Examples tab): a 3D village, windows that light up at night and a knight with a lantern.</li><li>Up to 8 lights can shine at the same time, so the game stays fast on every device.</li></ul>
+<h2>If it does not work</h2>
+<ul><li><strong>I do not see any light:</strong> the darkness is probably 0. A light only shows on a darker scene.</li><li><strong>The light does not follow my hero:</strong> attach it to an object placed on the hero (a child object), not to a fixed object.</li><li><strong>The night is not dark enough:</strong> raise the darkness (up to 100) and choose a darker color.</li></ul>
+
+<div class="nav">
+<a href="../en/particules-effets.html">← Particles and effects</a>
+<a href="../en/histoire-choix.html">Next guide: Choice story (visual novel) →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>

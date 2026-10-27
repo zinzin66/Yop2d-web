@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (198) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 198 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (199) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 199 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 198 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 199 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
 <nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-übergänge">Übergänge</a><a href="#c11-animationen">Animationen</a><a href="#c12-audio">Audio</a><a href="#c13-geschichte-und-dialoge">Geschichte und Dialoge</a><a href="#c14-werte-grüne-kabel">Werte (grüne Kabel)</a><a href="#c15-bildschirmfilter">Bildschirmfilter</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
@@ -244,6 +244,11 @@
 <div class="schema"><b>Eingänge:</b> Farbe der Nacht, Dunkelheit (%, 0 = Tag, 100 = fast tiefschwarz), Ändert sich in (Sekunden: 30 = ein Sonnenuntergang)</div>
 <p>Verdunkelt das ganze Spiel (unter Buttons und Punktestand) in der gewählten Farbe. Dunkelheit 0 = voller Tag, 100 = völlig schwarz, außer rund um Lichtquellen. Stufe und Farbe ändern sich sanft: in 30 Sekunden geht es vom Tag über ein oranges Abendrot zur blauen Nacht, wie ein Sonnenuntergang.</p>
 <p class="exemple"><b>Beispiel:</b> ein Sonnenuntergang: „Dunkelheit und Lichtstimmung“ orange, Dunkelheit 40, in 6 Sekunden; „Warten“ 6 Sekunden; dann „Dunkelheit und Lichtstimmung“ Nachtblau, Dunkelheit 90, in 6 Sekunden.</p>
+</div>
+<div class="fiche"><h3>Tag-Nacht-Zyklus</h3>
+<div class="schema"><b>Eingänge:</b> Dauer eines ganzen Tages (Sekunden, 0 = stoppen), Wir beginnen bei…, Endlos wiederholen (ja) oder nur ein Tag (nein)</div>
+<p>Lässt das ganze Spiel von allein vom Tag über einen orangen Abend zur blauen Nacht, zur Morgendämmerung und wieder zum Tag wechseln. Du wählst die Dauer eines ganzen Tages (30 bis 120 Sekunden für ein lebendiges Spiel), den Startzeitpunkt und ob sich der Zyklus endlos wiederholt. Bei Pause steht der Zyklus still. Dauer 0 = Zyklus anhalten (der Himmel bleibt, wie er ist). Eine manuelle Einstellung mit „Dunkelheit und Lichtstimmung“ übernimmt. Deine Lichter („Lichtquelle (Fackel, Laterne…)“) bleiben an: Nachts sieht man sie besser.</p>
+<p class="exemple"><b>Beispiel:</b> eine lebendige Welt: beim Start „Tag-Nacht-Zyklus“ mit 90 Sekunden, Start „Voller Tag“, Schleife.</p>
 </div>
 <div class="fiche"><h3>Kamera-Wackeln</h3>
 <div class="schema"><b>Eingänge:</b> Stärke, Dauer (Millisekunden, 1000 = 1 s)</div>
@@ -487,8 +492,8 @@
 <p class="exemple"><b>Beispiel:</b> der Zauberer berührt eine Falle: „Stromschlag“ auf den Zauberer (1 Sekunde), „Warten“ 1 Sekunde, dann „Szene neu starten“.</p>
 </div>
 <div class="fiche"><h3>Lichtquelle (Fackel, Laterne…)</h3>
-<div class="schema"><b>Eingänge:</b> Objekt, Lichtfarbe, Radius (Pixel: Abstand vom Zentrum), Beleuchtung (%, 100 = normal, 200 = sehr stark), Farbiger Schein (%, 0 = keiner, 200 = sehr stark), Flackern, Horizontal verschieben (Pixel), Vertikal verschieben (Pixel, negativ = nach oben)</div>
-<p>Hängt ein Licht an das Objekt: Es folgt dem Objekt, wenn es sich bewegt (Fackel einer Figur, Laterne, Feuer …), auch wenn das Objekt ein Kind eines anderen ist. Einstellungen: Farbe, Radius in Pixeln (Abstand vom Zentrum), Beleuchtung (100 = normal, bis 300: stärker und weiter), farbiger Schein (0 = keiner), Flackern (keins, Kerze, Fackel, flackert) und Versatz. Ein Licht pro Objekt, höchstens 8 gleichzeitig. Es durchdringt die Dunkelheit von „Dunkelheit und Lichtstimmung“; ohne Dunkelheit fügt es nur seinen Schein hinzu.</p>
+<div class="schema"><b>Eingänge:</b> Objekt, Lichtfarbe, Radius (Pixel: Abstand vom Zentrum), Beleuchtung (%, 100 = normal, 200 = sehr stark), Farbiger Schein (%, 0 = keiner, 200 = sehr stark), Flackern, Einschalten, Horizontal verschieben (Pixel), Vertikal verschieben (Pixel, negativ = nach oben)</div>
+<p>Hängt ein Licht an das Objekt: Es folgt dem Objekt, wenn es sich bewegt (Fackel einer Figur, Laterne, Feuer …), auch wenn das Objekt ein Kind eines anderen ist. Einstellungen: Farbe, Radius in Pixeln (Abstand vom Zentrum), Beleuchtung (100 = normal, bis 300: stärker und weiter), farbiger Schein (0 = keiner), Flackern (keins, Kerze, Fackel, flackert) und Versatz. Ein Licht pro Objekt, höchstens 8 gleichzeitig. Es durchdringt die Dunkelheit von „Dunkelheit und Lichtstimmung“; ohne Dunkelheit fügt es nur seinen Schein hinzu. Einstellung „Einschalten“: „Nur wenn es dunkel ist“ schaltet das Licht bei Einbruch der Nacht von allein ein (ideal mit „Tag-Nacht-Zyklus“).</p>
 <p class="exemple"><b>Beispiel:</b> die Fackel einer Figur: an einem Objekt „Laterne“, Kind des Helden, Radius 360, Flackern „Fackel“.</p>
 </div>
 <div class="fiche"><h3>Licht des Objekts ausschalten</h3>

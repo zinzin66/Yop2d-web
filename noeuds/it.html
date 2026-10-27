@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutti i nodi di Yop2D (198) | Riferimento</title>
-<meta name="description" content="Elenco completo dei 198 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
+<title>Tutti i nodi di Yop2D (199) | Riferimento</title>
+<meta name="description" content="Elenco completo dei 199 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 198 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
+<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 199 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
 <p><strong>Categorie</strong></p>
 <nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-griglie-e-puzzle">Griglie e puzzle</a><a href="#c10-transizioni">Transizioni</a><a href="#c11-animazioni">Animazioni</a><a href="#c12-audio">Audio</a><a href="#c13-storia-e-dialoghi">Storia e dialoghi</a><a href="#c14-valori-fili-verdi">Valori (fili verdi)</a><a href="#c15-filtri-dello-schermo">Filtri dello schermo</a></nav>
 <h2 id="c1-eventi">Eventi</h2>
@@ -244,6 +244,11 @@
 <div class="schema"><b>Ingressi:</b> Colore della notte, Oscurità (%, 0 = giorno, 100 = quasi nero totale), Cambia in (secondi: 30 = un tramonto)</div>
 <p>Oscura tutto il gioco (sotto i pulsanti e il punteggio) con il colore scelto. Oscurità 0 = pieno giorno, 100 = nero totale, tranne intorno alle fonti di luce. Il livello e il colore cambiano dolcemente: in 30 secondi si passa dal giorno al crepuscolo arancione e poi alla notte blu, come un tramonto.</p>
 <p class="exemple"><b>Esempio:</b> un tramonto: «Oscurità e atmosfera di luce» arancione, oscurità 40, in 6 secondi; «Attendere» 6 secondi; poi «Oscurità e atmosfera di luce» blu notte, oscurità 90, in 6 secondi.</p>
+</div>
+<div class="fiche"><h3>Ciclo giorno e notte</h3>
+<div class="schema"><b>Ingressi:</b> Durata di un giorno intero (secondi, 0 = ferma), Si inizia a…, Ripeti senza fine (sì) o un solo giorno (no)</div>
+<p>Fa passare tutto il gioco dal giorno alla sera arancione, alla notte blu, all'alba e di nuovo al giorno, da solo. Scegli la durata di un giorno intero (da 30 a 120 secondi per un gioco vivo), il momento di partenza e se il ciclo si ripete senza fine. Con il gioco in pausa il ciclo si ferma. Durata 0 = ferma il ciclo (il cielo resta com'è). Un'impostazione manuale con «Oscurità e atmosfera di luce» prende il controllo. Le tue luci («Fonte di luce (torcia, lanterna…)») restano accese: di notte si vedono meglio.</p>
+<p class="exemple"><b>Esempio:</b> un mondo vivo: all'avvio, «Ciclo giorno e notte» con 90 secondi, inizio «Pieno giorno», in loop.</p>
 </div>
 <div class="fiche"><h3>Tremolio della camera</h3>
 <div class="schema"><b>Ingressi:</b> Intensità, Durata (millisecondi, 1000 = 1 s)</div>
@@ -487,8 +492,8 @@
 <p class="exemple"><b>Esempio:</b> il mago tocca una trappola: «Folgorazione» sul mago (1 secondo), «Attendere» 1 secondo, poi «Ricomincia la scena».</p>
 </div>
 <div class="fiche"><h3>Fonte di luce (torcia, lanterna…)</h3>
-<div class="schema"><b>Ingressi:</b> Oggetto, Colore della luce, Raggio (pixel: distanza dal centro), Illuminazione (%, 100 = normale, 200 = molto forte), Alone colorato (%, 0 = nessuno, 200 = molto forte), Tremolio, Spostamento orizzontale (pixel), Spostamento verticale (pixel, negativo = in alto)</div>
-<p>Aggancia una luce all'oggetto: lo segue quando si muove (torcia di un personaggio, lanterna, fuoco…), anche se l'oggetto è figlio di un altro. Impostazioni: colore, raggio in pixel (distanza dal centro), illuminazione (100 = normale, fino a 300: più forte e più lontano), alone colorato (0 = nessuno), tremolio (nessuno, candela, torcia, sfarfalla) e spostamento. Una luce per oggetto, al massimo 8 contemporaneamente. Buca l'oscurità di «Oscurità e atmosfera di luce»; senza oscurità aggiunge solo il suo alone.</p>
+<div class="schema"><b>Ingressi:</b> Oggetto, Colore della luce, Raggio (pixel: distanza dal centro), Illuminazione (%, 100 = normale, 200 = molto forte), Alone colorato (%, 0 = nessuno, 200 = molto forte), Tremolio, Accensione, Spostamento orizzontale (pixel), Spostamento verticale (pixel, negativo = in alto)</div>
+<p>Aggancia una luce all'oggetto: lo segue quando si muove (torcia di un personaggio, lanterna, fuoco…), anche se l'oggetto è figlio di un altro. Impostazioni: colore, raggio in pixel (distanza dal centro), illuminazione (100 = normale, fino a 300: più forte e più lontano), alone colorato (0 = nessuno), tremolio (nessuno, candela, torcia, sfarfalla) e spostamento. Una luce per oggetto, al massimo 8 contemporaneamente. Buca l'oscurità di «Oscurità e atmosfera di luce»; senza oscurità aggiunge solo il suo alone. Impostazione «Accensione»: «Solo quando fa buio» accende la luce da sola al calar della notte (ideale con «Ciclo giorno e notte»).</p>
 <p class="exemple"><b>Esempio:</b> la torcia di un personaggio: su un oggetto «lanterna» figlio dell'eroe, raggio 360, tremolio «torcia».</p>
 </div>
 <div class="fiche"><h3>Spegni la luce dell'oggetto</h3>

@@ -784,7 +784,7 @@
   "ein Sonnenuntergang: [[lumiere_ambiance]] orange, Dunkelheit 40, in 6 Sekunden; [[attendre]] 6 Sekunden; dann [[lumiere_ambiance]] Nachtblau, Dunkelheit 90, in 6 Sekunden."
  ],
  "lumiere_source": [
-  "Hängt ein Licht an das Objekt: Es folgt dem Objekt, wenn es sich bewegt (Fackel einer Figur, Laterne, Feuer …), auch wenn das Objekt ein Kind eines anderen ist. Einstellungen: Farbe, Radius in Pixeln (Abstand vom Zentrum), Beleuchtung (100 = normal, bis 300: stärker und weiter), farbiger Schein (0 = keiner), Flackern (keins, Kerze, Fackel, flackert) und Versatz. Ein Licht pro Objekt, höchstens 8 gleichzeitig. Es durchdringt die Dunkelheit von [[lumiere_ambiance]]; ohne Dunkelheit fügt es nur seinen Schein hinzu.",
+  "Hängt ein Licht an das Objekt: Es folgt dem Objekt, wenn es sich bewegt (Fackel einer Figur, Laterne, Feuer …), auch wenn das Objekt ein Kind eines anderen ist. Einstellungen: Farbe, Radius in Pixeln (Abstand vom Zentrum), Beleuchtung (100 = normal, bis 300: stärker und weiter), farbiger Schein (0 = keiner), Flackern (keins, Kerze, Fackel, flackert) und Versatz. Ein Licht pro Objekt, höchstens 8 gleichzeitig. Es durchdringt die Dunkelheit von [[lumiere_ambiance]]; ohne Dunkelheit fügt es nur seinen Schein hinzu. Einstellung « Einschalten »: « Nur wenn es dunkel ist » schaltet das Licht bei Einbruch der Nacht von allein ein (ideal mit [[lumiere_cycle]]).",
   "die Fackel einer Figur: an einem Objekt « Laterne », Kind des Helden, Radius 360, Flackern « Fackel »."
  ],
  "lumiere_eteindre": [
@@ -802,5 +802,9 @@
  "NoeudEventNouvelleScene": [
   "Startet jedes Mal, wenn eine neue Szene geöffnet wird. Gedacht für die «Globale Logik» (die in allen Szenen läuft): zum Beispiel die gewählte Armee auf jeder Karte aufstellen. In einer normalen Szene reicht «Beim Start».",
   null
+ ],
+ "lumiere_cycle": [
+  "Lässt das ganze Spiel von allein vom Tag über einen orangen Abend zur blauen Nacht, zur Morgendämmerung und wieder zum Tag wechseln. Du wählst die Dauer eines ganzen Tages (30 bis 120 Sekunden für ein lebendiges Spiel), den Startzeitpunkt und ob sich der Zyklus endlos wiederholt. Bei Pause steht der Zyklus still. Dauer 0 = Zyklus anhalten (der Himmel bleibt, wie er ist). Eine manuelle Einstellung mit [[lumiere_ambiance]] übernimmt. Deine Lichter ([[lumiere_source]]) bleiben an: Nachts sieht man sie besser.",
+  "eine lebendige Welt: beim Start [[lumiere_cycle]] mit 90 Sekunden, Start « Voller Tag », Schleife."
  ]
 }

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tous les nœuds de Yop2D (198) | Référence</title>
-<meta name="description" content="Liste complète des 198 nœuds visuels de Yop2D, moteur de jeu 2D sans code pour Android : rôle, réglages, sorties et exemple de chaque nœud.">
+<title>Tous les nœuds de Yop2D (199) | Référence</title>
+<meta name="description" content="Liste complète des 199 nœuds visuels de Yop2D, moteur de jeu 2D sans code pour Android : rôle, réglages, sorties et exemple de chaque nœud.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><strong>Français</strong> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les 198 nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.</p>
+<p>Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les 199 nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.</p>
 <p><strong>Catégories</strong></p>
 <nav class="sommaire"><a href="#c1-événements">Événements</a><a href="#c2-scène-hud">Scène &amp; HUD</a><a href="#c3-temps">Temps</a><a href="#c4-apparence-objets">Apparence &amp; Objets</a><a href="#c5-variables-inventaire">Variables &amp; Inventaire</a><a href="#c6-logique-conditions">Logique &amp; Conditions</a><a href="#c7-textes-dialogues">Textes &amp; Dialogues</a><a href="#c8-mouvements-ia">Mouvements &amp; IA</a><a href="#c9-grilles-et-puzzles">Grilles et puzzles</a><a href="#c10-transitions">Transitions</a><a href="#c11-animations">Animations</a><a href="#c12-audio">Audio</a><a href="#c13-histoire-et-dialogues">Histoire et dialogues</a><a href="#c14-valeurs-fils-verts">Valeurs (fils verts)</a><a href="#c15-filtres-d-écran">Filtres d'écran</a></nav>
 <h2 id="c1-événements">Événements</h2>
@@ -244,6 +244,11 @@
 <div class="schema"><b>Entrées :</b> Couleur de la nuit, Obscurité (%, 0 = plein jour, 100 = noir presque total), Change en (secondes : 30 = un vrai coucher de soleil)</div>
 <p>Assombrit tout le jeu (sous les boutons et le score) avec la couleur de ton choix. Obscurité 0 = plein jour, 100 = noir complet, sauf autour des sources de lumière. Le niveau et la couleur changent en douceur : avec 30 secondes, on passe du jour au crépuscule orange puis à la nuit bleue, comme un coucher de soleil.</p>
 <p class="exemple"><b>Exemple :</b> un coucher de soleil : « Obscurité et ambiance de lumière » orange, obscurité 40, en 6 secondes ; « Attendre » 6 secondes ; puis « Obscurité et ambiance de lumière » bleu nuit, obscurité 90, en 6 secondes.</p>
+</div>
+<div class="fiche"><h3>Cycle jour et nuit</h3>
+<div class="schema"><b>Entrées :</b> Durée d'une journée complète (secondes, 0 = arrêter), On commence au moment…, Recommencer sans fin (oui) ou une seule journée (non)</div>
+<p>Fait passer tout le jeu du jour au soir orange, à la nuit bleue, à l'aube, puis au jour, tout seul. Tu choisis la durée d'une journée complète (30 à 120 secondes pour un jeu vivant), le moment de départ et si le cycle recommence sans fin. Le jeu en pause fige le cycle. Durée 0 = arrêter le cycle (le ciel reste comme il est). Un réglage à la main avec « Obscurité et ambiance de lumière » reprend la main. Tes lumières (« Source de lumière (torche, lanterne…) ») restent allumées : on les voit mieux la nuit.</p>
+<p class="exemple"><b>Exemple :</b> un monde vivant : au démarrage, « Cycle jour et nuit » avec une durée de 90 secondes, début « Plein jour », en boucle.</p>
 </div>
 <div class="fiche"><h3>Tremblement de la caméra</h3>
 <div class="schema"><b>Entrées :</b> Intensité, Durée (millisecondes, 1000 = 1 s)</div>
@@ -487,8 +492,8 @@
 <p class="exemple"><b>Exemple :</b> le magicien touche un piège : « Électrocution » sur le magicien (1 seconde), « Attendre » 1 seconde, puis « Recommencer la scène ».</p>
 </div>
 <div class="fiche"><h3>Source de lumière (torche, lanterne…)</h3>
-<div class="schema"><b>Entrées :</b> Objet, Couleur de la lumière, Rayon (pixels : distance de la lumière au centre), Éclairage (%, 100 = normal, 200 = très fort), Lueur colorée (%, 0 = aucune, 200 = très forte), Vacillement, Décalage horizontal (pixels), Décalage vertical (pixels, négatif = vers le haut)</div>
-<p>Accroche une lumière à l'objet : elle le suit quand il bouge (torche d'un personnage, lanterne, feu…), même si l'objet est l'enfant d'un autre. Réglages : couleur, rayon en pixels (distance au centre), éclairage (100 = normal, jusqu'à 300 : plus fort et plus loin), lueur colorée (0 = aucune), vacillement (aucun, bougie, torche, clignote) et décalage. Une seule lumière par objet, 8 au plus en même temps. Elle perce l'obscurité posée par « Obscurité et ambiance de lumière » ; sans obscurité, elle ajoute seulement sa lueur.</p>
+<div class="schema"><b>Entrées :</b> Objet, Couleur de la lumière, Rayon (pixels : distance de la lumière au centre), Éclairage (%, 100 = normal, 200 = très fort), Lueur colorée (%, 0 = aucune, 200 = très forte), Vacillement, Allumage, Décalage horizontal (pixels), Décalage vertical (pixels, négatif = vers le haut)</div>
+<p>Accroche une lumière à l'objet : elle le suit quand il bouge (torche d'un personnage, lanterne, feu…), même si l'objet est l'enfant d'un autre. Réglages : couleur, rayon en pixels (distance au centre), éclairage (100 = normal, jusqu'à 300 : plus fort et plus loin), lueur colorée (0 = aucune), vacillement (aucun, bougie, torche, clignote) et décalage. Une seule lumière par objet, 8 au plus en même temps. Elle perce l'obscurité posée par « Obscurité et ambiance de lumière » ; sans obscurité, elle ajoute seulement sa lueur. Réglage « Allumage » : « Seulement quand il fait sombre » allume la lumière toute seule à la tombée de la nuit (idéal avec « Cycle jour et nuit »).</p>
 <p class="exemple"><b>Exemple :</b> une torche de personnage : posée sur un objet « lanterne » enfant du héros, rayon 360, vacillement « torche ».</p>
 </div>
 <div class="fiche"><h3>Éteindre la lumière de l'objet</h3>

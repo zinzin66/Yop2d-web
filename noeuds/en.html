@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (198) | Reference</title>
-<meta name="description" content="Complete list of the 198 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (199) | Reference</title>
+<meta name="description" content="Complete list of the 199 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 198 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 199 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-transitions">Transitions</a><a href="#c11-animations">Animations</a><a href="#c12-audio">Audio</a><a href="#c13-story-and-dialogues">Story and dialogues</a><a href="#c14-values-green-wires">Values (green wires)</a><a href="#c15-screen-filters">Screen filters</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -244,6 +244,11 @@
 <div class="schema"><b>Inputs:</b> Color of the night, Darkness (%, 0 = full day, 100 = almost pitch black), Changes over (seconds: 30 = a real sunset)</div>
 <p>Darkens the whole game (under the buttons and score) with the color you choose. Darkness 0 = full daylight, 100 = pitch black, except around light sources. The level and the color change smoothly: over 30 seconds you go from day to an orange dusk and then a blue night, like a sunset.</p>
 <p class="exemple"><b>Example:</b> a sunset: “Darkness and light mood” orange, darkness 40, over 6 seconds; “Wait” 6 seconds; then “Darkness and light mood” night blue, darkness 90, over 6 seconds.</p>
+</div>
+<div class="fiche"><h3>Day and night cycle</h3>
+<div class="schema"><b>Inputs:</b> Length of a full day (seconds, 0 = stop), We start at…, Repeat forever (yes) or one day only (no)</div>
+<p>Takes the whole game from day to an orange evening, a blue night, dawn, then day again, all by itself. You choose the length of a full day (30 to 120 seconds for a lively game), the starting moment and whether the cycle repeats forever. A paused game freezes the cycle. Length 0 = stop the cycle (the sky stays as it is). A manual setting with “Darkness and light mood” takes over. Your lights (“Light source (torch, lantern…)”) stay on: you see them better at night.</p>
+<p class="exemple"><b>Example:</b> a living world: on start, “Day and night cycle” with a length of 90 seconds, starting “Full day”, looping.</p>
 </div>
 <div class="fiche"><h3>Camera shake</h3>
 <div class="schema"><b>Inputs:</b> Strength, Duration (milliseconds, 1000 = 1 s)</div>
@@ -487,8 +492,8 @@
 <p class="exemple"><b>Example:</b> the wizard touches a trap: “Electrocution” on the wizard (1 second), “Wait” 1 second, then “Restart the scene”.</p>
 </div>
 <div class="fiche"><h3>Light source (torch, lantern…)</h3>
-<div class="schema"><b>Inputs:</b> Object, Light color, Radius (pixels: distance from the light's center), Lighting (%, 100 = normal, 200 = very strong), Colored glow (%, 0 = none, 200 = very strong), Flicker, Horizontal shift (pixels), Vertical shift (pixels, negative = up)</div>
-<p>Attaches a light to the object: it follows the object when it moves (a character's torch, a lantern, a fire…), even if the object is the child of another. Settings: color, radius in pixels (distance from the center), lighting (100 = normal, up to 300: stronger and farther), colored glow (0 = none), flicker (none, candle, torch, flickers) and shift. One light per object, 8 at most at once. It cuts through the darkness set by “Darkness and light mood”; without darkness it only adds its glow.</p>
+<div class="schema"><b>Inputs:</b> Object, Light color, Radius (pixels: distance from the light's center), Lighting (%, 100 = normal, 200 = very strong), Colored glow (%, 0 = none, 200 = very strong), Flicker, Switching on, Horizontal shift (pixels), Vertical shift (pixels, negative = up)</div>
+<p>Attaches a light to the object: it follows the object when it moves (a character's torch, a lantern, a fire…), even if the object is the child of another. Settings: color, radius in pixels (distance from the center), lighting (100 = normal, up to 300: stronger and farther), colored glow (0 = none), flicker (none, candle, torch, flickers) and shift. One light per object, 8 at most at once. It cuts through the darkness set by “Darkness and light mood”; without darkness it only adds its glow. “Switching on” setting: “Only when it is dark” turns the light on by itself at nightfall (ideal with “Day and night cycle”).</p>
 <p class="exemple"><b>Example:</b> a character's torch: placed on a “lantern” object that is a child of the hero, radius 360, flicker “torch”.</p>
 </div>
 <div class="fiche"><h3>Turn off the object's light</h3>

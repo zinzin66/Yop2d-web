@@ -784,7 +784,7 @@
   "un coucher de soleil : [[lumiere_ambiance]] orange, obscurité 40, en 6 secondes ; [[attendre]] 6 secondes ; puis [[lumiere_ambiance]] bleu nuit, obscurité 90, en 6 secondes."
  ],
  "lumiere_source": [
-  "Accroche une lumière à l'objet : elle le suit quand il bouge (torche d'un personnage, lanterne, feu…), même si l'objet est l'enfant d'un autre. Réglages : couleur, rayon en pixels (distance au centre), éclairage (100 = normal, jusqu'à 300 : plus fort et plus loin), lueur colorée (0 = aucune), vacillement (aucun, bougie, torche, clignote) et décalage. Une seule lumière par objet, 8 au plus en même temps. Elle perce l'obscurité posée par [[lumiere_ambiance]] ; sans obscurité, elle ajoute seulement sa lueur.",
+  "Accroche une lumière à l'objet : elle le suit quand il bouge (torche d'un personnage, lanterne, feu…), même si l'objet est l'enfant d'un autre. Réglages : couleur, rayon en pixels (distance au centre), éclairage (100 = normal, jusqu'à 300 : plus fort et plus loin), lueur colorée (0 = aucune), vacillement (aucun, bougie, torche, clignote) et décalage. Une seule lumière par objet, 8 au plus en même temps. Elle perce l'obscurité posée par [[lumiere_ambiance]] ; sans obscurité, elle ajoute seulement sa lueur. Réglage « Allumage » : « Seulement quand il fait sombre » allume la lumière toute seule à la tombée de la nuit (idéal avec [[lumiere_cycle]]).",
   "une torche de personnage : posée sur un objet « lanterne » enfant du héros, rayon 360, vacillement « torche »."
  ],
  "lumiere_eteindre": [
@@ -802,5 +802,9 @@
  "NoeudEventNouvelleScene": [
   "Se lance chaque fois qu'une nouvelle scène s'ouvre. Fait pour la « Logique globale » (qui tourne dans toutes les scènes) : par exemple placer l'armée choisie sur chaque carte. Dans une scène ordinaire, « Au démarrage » suffit.",
   null
+ ],
+ "lumiere_cycle": [
+  "Fait passer tout le jeu du jour au soir orange, à la nuit bleue, à l'aube, puis au jour, tout seul. Tu choisis la durée d'une journée complète (30 à 120 secondes pour un jeu vivant), le moment de départ et si le cycle recommence sans fin. Le jeu en pause fige le cycle. Durée 0 = arrêter le cycle (le ciel reste comme il est). Un réglage à la main avec [[lumiere_ambiance]] reprend la main. Tes lumières ([[lumiere_source]]) restent allumées : on les voit mieux la nuit.",
+  "un monde vivant : au démarrage, [[lumiere_cycle]] avec une durée de 90 secondes, début « Plein jour », en boucle."
  ]
 }

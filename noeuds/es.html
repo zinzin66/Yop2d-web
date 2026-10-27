@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (198) | Referencia</title>
-<meta name="description" content="Lista completa de los 198 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (199) | Referencia</title>
+<meta name="description" content="Lista completa de los 199 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 198 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 199 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-transiciones">Transiciones</a><a href="#c11-animaciones">Animaciones</a><a href="#c12-audio">Audio</a><a href="#c13-historia-y-diálogos">Historia y diálogos</a><a href="#c14-valores-cables-verdes">Valores (cables verdes)</a><a href="#c15-filtros-de-pantalla">Filtros de pantalla</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -244,6 +244,11 @@
 <div class="schema"><b>Entradas:</b> Color de la noche, Oscuridad (%, 0 = pleno día, 100 = casi negro total), Cambia en (segundos: 30 = un atardecer)</div>
 <p>Oscurece todo el juego (bajo los botones y la puntuación) con el color que elijas. Oscuridad 0 = pleno día, 100 = negro total, salvo alrededor de las fuentes de luz. El nivel y el color cambian suavemente: con 30 segundos se pasa del día al crepúsculo naranja y luego a la noche azul, como una puesta de sol.</p>
 <p class="exemple"><b>Ejemplo:</b> una puesta de sol: «Oscuridad y ambiente de luz» naranja, oscuridad 40, en 6 segundos; «Esperar» 6 segundos; luego «Oscuridad y ambiente de luz» azul noche, oscuridad 90, en 6 segundos.</p>
+</div>
+<div class="fiche"><h3>Ciclo de día y noche</h3>
+<div class="schema"><b>Entradas:</b> Duración de un día completo (segundos, 0 = detener), Empezamos en…, Repetir sin fin (sí) o un solo día (no)</div>
+<p>Hace pasar todo el juego del día al atardecer naranja, a la noche azul, al amanecer y otra vez al día, solo. Eliges la duración de un día completo (de 30 a 120 segundos para un juego vivo), el momento de inicio y si el ciclo se repite sin fin. Con el juego en pausa el ciclo se congela. Duración 0 = detener el ciclo (el cielo se queda como está). Un ajuste manual con «Oscuridad y ambiente de luz» toma el control. Tus luces («Fuente de luz (antorcha, farol…)») siguen encendidas: se ven mejor de noche.</p>
+<p class="exemple"><b>Ejemplo:</b> un mundo vivo: al empezar, «Ciclo de día y noche» con 90 segundos, inicio «Pleno día», en bucle.</p>
 </div>
 <div class="fiche"><h3>Temblor de cámara</h3>
 <div class="schema"><b>Entradas:</b> Intensidad, Duración (milisegundos, 1000 = 1 s)</div>
@@ -487,8 +492,8 @@
 <p class="exemple"><b>Ejemplo:</b> el mago toca una trampa: «Electrocución» sobre el mago (1 segundo), «Esperar» 1 segundo y luego «Reiniciar la escena».</p>
 </div>
 <div class="fiche"><h3>Fuente de luz (antorcha, farol…)</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Color de la luz, Radio (píxeles: distancia desde el centro), Iluminación (%, 100 = normal, 200 = muy fuerte), Resplandor de color (%, 0 = ninguno, 200 = muy fuerte), Parpadeo, Desplazamiento horizontal (píxeles), Desplazamiento vertical (píxeles, negativo = arriba)</div>
-<p>Une una luz al objeto: lo sigue cuando se mueve (antorcha de un personaje, farol, fuego…), aunque el objeto sea hijo de otro. Ajustes: color, radio en píxeles (distancia al centro), iluminación (100 = normal, hasta 300: más fuerte y más lejos), resplandor de color (0 = ninguno), parpadeo (ninguno, vela, antorcha, parpadea) y desplazamiento. Una luz por objeto, 8 como máximo a la vez. Atraviesa la oscuridad de «Oscuridad y ambiente de luz»; sin oscuridad solo añade su resplandor.</p>
+<div class="schema"><b>Entradas:</b> Objeto, Color de la luz, Radio (píxeles: distancia desde el centro), Iluminación (%, 100 = normal, 200 = muy fuerte), Resplandor de color (%, 0 = ninguno, 200 = muy fuerte), Parpadeo, Encendido, Desplazamiento horizontal (píxeles), Desplazamiento vertical (píxeles, negativo = arriba)</div>
+<p>Une una luz al objeto: lo sigue cuando se mueve (antorcha de un personaje, farol, fuego…), aunque el objeto sea hijo de otro. Ajustes: color, radio en píxeles (distancia al centro), iluminación (100 = normal, hasta 300: más fuerte y más lejos), resplandor de color (0 = ninguno), parpadeo (ninguno, vela, antorcha, parpadea) y desplazamiento. Una luz por objeto, 8 como máximo a la vez. Atraviesa la oscuridad de «Oscuridad y ambiente de luz»; sin oscuridad solo añade su resplandor. Ajuste «Encendido»: «Solo cuando oscurece» enciende la luz sola al caer la noche (ideal con «Ciclo de día y noche»).</p>
 <p class="exemple"><b>Ejemplo:</b> la antorcha de un personaje: sobre un objeto «farol» hijo del héroe, radio 360, parpadeo «antorcha».</p>
 </div>
 <div class="fiche"><h3>Apagar la luz del objeto</h3>

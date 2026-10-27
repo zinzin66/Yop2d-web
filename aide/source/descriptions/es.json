@@ -784,7 +784,7 @@
   "una puesta de sol: [[lumiere_ambiance]] naranja, oscuridad 40, en 6 segundos; [[attendre]] 6 segundos; luego [[lumiere_ambiance]] azul noche, oscuridad 90, en 6 segundos."
  ],
  "lumiere_source": [
-  "Une una luz al objeto: lo sigue cuando se mueve (antorcha de un personaje, farol, fuego…), aunque el objeto sea hijo de otro. Ajustes: color, radio en píxeles (distancia al centro), iluminación (100 = normal, hasta 300: más fuerte y más lejos), resplandor de color (0 = ninguno), parpadeo (ninguno, vela, antorcha, parpadea) y desplazamiento. Una luz por objeto, 8 como máximo a la vez. Atraviesa la oscuridad de [[lumiere_ambiance]]; sin oscuridad solo añade su resplandor.",
+  "Une una luz al objeto: lo sigue cuando se mueve (antorcha de un personaje, farol, fuego…), aunque el objeto sea hijo de otro. Ajustes: color, radio en píxeles (distancia al centro), iluminación (100 = normal, hasta 300: más fuerte y más lejos), resplandor de color (0 = ninguno), parpadeo (ninguno, vela, antorcha, parpadea) y desplazamiento. Una luz por objeto, 8 como máximo a la vez. Atraviesa la oscuridad de [[lumiere_ambiance]]; sin oscuridad solo añade su resplandor. Ajuste « Encendido »: « Solo cuando oscurece » enciende la luz sola al caer la noche (ideal con [[lumiere_cycle]]).",
   "la antorcha de un personaje: sobre un objeto « farol » hijo del héroe, radio 360, parpadeo « antorcha »."
  ],
  "lumiere_eteindre": [
@@ -802,5 +802,9 @@
  "NoeudEventNouvelleScene": [
   "Se lanza cada vez que se abre una escena nueva. Pensado para la «Lógica global» (que funciona en todas las escenas): por ejemplo, colocar el ejército elegido en cada mapa. En una escena normal basta con «Al empezar».",
   null
+ ],
+ "lumiere_cycle": [
+  "Hace pasar todo el juego del día al atardecer naranja, a la noche azul, al amanecer y otra vez al día, solo. Eliges la duración de un día completo (de 30 a 120 segundos para un juego vivo), el momento de inicio y si el ciclo se repite sin fin. Con el juego en pausa el ciclo se congela. Duración 0 = detener el ciclo (el cielo se queda como está). Un ajuste manual con [[lumiere_ambiance]] toma el control. Tus luces ([[lumiere_source]]) siguen encendidas: se ven mejor de noche.",
+  "un mundo vivo: al empezar, [[lumiere_cycle]] con 90 segundos, inicio « Pleno día », en bucle."
  ]
 }

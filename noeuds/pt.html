@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos os nós do Yop2D (198) | Referência</title>
-<meta name="description" content="Lista completa dos 198 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
+<title>Todos os nós do Yop2D (199) | Referência</title>
+<meta name="description" content="Lista completa dos 199 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/pt.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 198 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
+<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 199 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
 <p><strong>Categorias</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-cena-e-hud">Cena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aparência-e-objetos">Aparência e Objetos</a><a href="#c5-variáveis-e-inventário">Variáveis e Inventário</a><a href="#c6-lógica-e-condições">Lógica e Condições</a><a href="#c7-textos-e-diálogos">Textos e Diálogos</a><a href="#c8-movimentos-e-ia">Movimentos e IA</a><a href="#c9-grades-e-quebra-cabeças">Grades e quebra-cabeças</a><a href="#c10-transições">Transições</a><a href="#c11-animações">Animações</a><a href="#c12-áudio">Áudio</a><a href="#c13-história-e-diálogos">História e diálogos</a><a href="#c14-valores-fios-verdes">Valores (fios verdes)</a><a href="#c15-filtros-de-tela">Filtros de tela</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -244,6 +244,11 @@
 <div class="schema"><b>Entradas:</b> Cor da noite, Escuridão (%, 0 = pleno dia, 100 = quase preto total), Muda em (segundos: 30 = um pôr do sol)</div>
 <p>Escurece todo o jogo (sob os botões e a pontuação) com a cor que escolher. Escuridão 0 = pleno dia, 100 = preto total, exceto em volta das fontes de luz. O nível e a cor mudam suavemente: com 30 segundos vai-se do dia ao crepúsculo laranja e depois à noite azul, como um pôr do sol.</p>
 <p class="exemple"><b>Exemplo:</b> um pôr do sol: “Escuridão e clima de luz” laranja, escuridão 40, em 6 segundos; “Esperar” 6 segundos; depois “Escuridão e clima de luz” azul-noite, escuridão 90, em 6 segundos.</p>
+</div>
+<div class="fiche"><h3>Ciclo de dia e noite</h3>
+<div class="schema"><b>Entradas:</b> Duração de um dia completo (segundos, 0 = parar), Começamos em…, Repetir sem fim (sim) ou um só dia (não)</div>
+<p>Faz todo o jogo passar do dia ao entardecer laranja, à noite azul, ao amanhecer e de novo ao dia, sozinho. Você escolhe a duração de um dia completo (30 a 120 segundos para um jogo vivo), o momento de início e se o ciclo se repete sem fim. Com o jogo em pausa o ciclo congela. Duração 0 = parar o ciclo (o céu fica como está). Um ajuste manual com “Escuridão e clima de luz” assume o controle. Suas luzes (“Fonte de luz (tocha, lanterna…)”) continuam acesas: veem-se melhor à noite.</p>
+<p class="exemple"><b>Exemplo:</b> um mundo vivo: ao começar, “Ciclo de dia e noite” com 90 segundos, início “Pleno dia”, em loop.</p>
 </div>
 <div class="fiche"><h3>Tremor da câmera</h3>
 <div class="schema"><b>Entradas:</b> Intensidade, Duração (milissegundos, 1000 = 1 s)</div>
@@ -487,8 +492,8 @@
 <p class="exemple"><b>Exemplo:</b> o mago toca numa armadilha: “Eletrocussão” no mago (1 segundo), “Esperar” 1 segundo, depois “Reiniciar a cena”.</p>
 </div>
 <div class="fiche"><h3>Fonte de luz (tocha, lanterna…)</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Cor da luz, Raio (pixels: distância do centro), Iluminação (%, 100 = normal, 200 = muito forte), Brilho colorido (%, 0 = nenhum, 200 = muito forte), Oscilação, Deslocamento horizontal (pixels), Deslocamento vertical (pixels, negativo = para cima)</div>
-<p>Prende uma luz ao objeto: ela o segue quando se move (tocha de um personagem, lanterna, fogo…), mesmo que o objeto seja filho de outro. Ajustes: cor, raio em pixels (distância do centro), iluminação (100 = normal, até 300: mais forte e mais longe), brilho colorido (0 = nenhum), oscilação (nenhuma, vela, tocha, pisca) e deslocamento. Uma luz por objeto, 8 no máximo ao mesmo tempo. Ela atravessa a escuridão de “Escuridão e clima de luz”; sem escuridão só acrescenta o brilho.</p>
+<div class="schema"><b>Entradas:</b> Objeto, Cor da luz, Raio (pixels: distância do centro), Iluminação (%, 100 = normal, 200 = muito forte), Brilho colorido (%, 0 = nenhum, 200 = muito forte), Oscilação, Acendimento, Deslocamento horizontal (pixels), Deslocamento vertical (pixels, negativo = para cima)</div>
+<p>Prende uma luz ao objeto: ela o segue quando se move (tocha de um personagem, lanterna, fogo…), mesmo que o objeto seja filho de outro. Ajustes: cor, raio em pixels (distância do centro), iluminação (100 = normal, até 300: mais forte e mais longe), brilho colorido (0 = nenhum), oscilação (nenhuma, vela, tocha, pisca) e deslocamento. Uma luz por objeto, 8 no máximo ao mesmo tempo. Ela atravessa a escuridão de “Escuridão e clima de luz”; sem escuridão só acrescenta o brilho. Ajuste “Acendimento”: “Só quando escurece” acende a luz sozinha ao cair da noite (ideal com “Ciclo de dia e noite”).</p>
 <p class="exemple"><b>Exemplo:</b> a tocha de um personagem: em um objeto “lanterna” filho do herói, raio 360, oscilação “tocha”.</p>
 </div>
 <div class="fiche"><h3>Apagar a luz do objeto</h3>

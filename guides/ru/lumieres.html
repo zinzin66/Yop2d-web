@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как добавить свет, тени и смену дня и ночи в Yop2D? | Руководство Yop2D</title>
+<meta name="description" content="Оживи свою игру в Yop2D: тёмная ночь, факел, который идёт за героем, мягкие тени под персонажами и день, который сам превращается в ночь. Без кода.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/lumieres.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/lumieres.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/lumieres.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/lumieres.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/lumieres.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/lumieres.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/lumieres.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/lumieres.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/lumieres.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/lumieres.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Как добавить свет, тени и смену дня и ночи?",
+ "description": "Оживи свою игру в Yop2D: тёмная ночь, факел, который идёт за героем, мягкие тени под персонажами и день, который сам превращается в ночь. Без кода.",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Затемнить игру",
+   "text": "Добавь узел «Темнота и световая атмосфера»."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Зажечь факел",
+   "text": "Добавь «Источник света» на объект."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Добавить тень",
+   "text": "Поставь флажок «Тень под объектом» в Инспекторе."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Дать дню пройти",
+   "text": "Добавь узел «Смена дня и ночи»."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ru/index.html">← Yop2D</a>
+<h1>Как добавить свет, тени и смену дня и ночи?</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../lumieres.html" hreflang="fr">Français</a> · <a href="../en/lumieres.html" hreflang="en">English</a> · <a href="../es/lumieres.html" hreflang="es">Español</a> · <a href="../de/lumieres.html" hreflang="de">Deutsch</a> · <a href="../it/lumieres.html" hreflang="it">Italiano</a> · <a href="../pt/lumieres.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/lumieres.html" hreflang="zh">中文</a> · <a href="../ja/lumieres.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Всего несколько узлов — и игра из плоской становится атмосферной: тёмная ночь, фонарь, который идёт за героем, мягкие тени и солнце, которое садится само. Ничего писать не нужно: ты только выбираешь значения. Свет рисуется на экране (он не огибает стены), поэтому игра остаётся быстрой на любом телефоне.</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>проект, открытый в редакторе;</li><li>картинки, которые хорошо смотрятся в темноте (например, 3D-паки из библиотеки). Сильно увеличенный пиксель-арт выглядит размытым: включи <strong>Пиксель-арт: чёткие пиксели</strong> в настройках игры.</li></ul>
+</div>
+<h2>Шаг 1: затемнить игру</h2>
+<div class="method">
+<ol><li>Открой <strong>Blueprint</strong> и добавь «Темнота и световая атмосфера» после «При старте».</li><li>Выбери <strong>темноту</strong>: 0 — полный день, 100 — полная тьма. Для ночи, где сцена ещё видна, попробуй 85.</li><li>Выбери <strong>цвет ночи</strong>: тёмно-синий выглядит естественно, чёрный — страшнее.</li></ol>
+<div class="tip">👉 Темнота и цвет меняются плавно. За 30 секунд день превращается в ночь, как на закате.</div>
+</div>
+<h2>Шаг 2: зажечь факел</h2>
+<div class="method">
+<ol><li>Добавь «Источник света (факел, фонарь…)» и выбери объект, который несёт свет: факел, окно, фонарь.</li><li>Настрой <strong>радиус</strong> (расстояние от центра, в пикселях), <strong>освещение</strong> (100 — норма, до 300 для более сильного света) и <strong>цветное свечение</strong>.</li><li>Выбери <strong>мерцание</strong>: свеча — мягкое пламя, факел — сильное, мигает — для неисправной лампы.</li><li>Свет следует за своим объектом. Чтобы фонарь шёл за героем, поставь на героя маленький невидимый объект (дочерний объект) и зажги этот объект.</li></ol>
+<div class="tip">👉 При <strong>Включение = Только когда темно</strong> свет сам зажигается с наступлением ночи и гаснет днём. Используй «Погасить свет объекта», чтобы погасить свет узлом.</div>
+</div>
+<h2>Шаг 3: добавить тень</h2>
+<div class="method">
+<ol><li>Выбери персонажа на сцене и открой <strong>Инспектор</strong>, раздел <strong>Внешний вид</strong>.</li><li>Поставь флажок <strong>Тень под объектом</strong>: настрой её <strong>силу</strong> и <strong>ширину</strong>.</li><li>Тень следует за объектом повсюду. Узел «Тень под объектом» делает то же самое, если хочешь включать её во время игры.</li></ol>
+</div>
+<h2>Шаг 4: дать дню пройти</h2>
+<div class="method">
+<ol><li>Добавь «Смена дня и ночи» в начале игры.</li><li>Выбери <strong>длительность полных суток</strong>: от 30 до 120 секунд — выглядит живо. Затем <strong>момент начала</strong> (полный день, вечер, глубокая ночь или рассвет) и <strong>повторять ли без конца</strong>.</li><li>Поставь свои огни на <strong>Только когда темно</strong>: они зажгутся сами с наступлением ночи.</li></ol>
+<div class="tip">👉 Длительность 0 останавливает цикл там, где он есть. Игра на паузе тоже замораживает цикл. Чтобы перейти к нужному моменту, используй «Смена дня и ночи» ещё раз с другим моментом начала: пример «Day and night village» делает это 5 кнопками.</div>
+</div>
+<h2>Что дальше</h2>
+<ul><li>Открой шаблоны <strong>Факел и тени</strong> и <strong>День и ночь</strong> (вкладка «Шаблоны»), чтобы увидеть всё уже настроенным.</li><li>Скачай пример <strong>Day and night village</strong> (вкладка «Примеры»): 3D-деревня, окна, которые загораются ночью, и рыцарь с фонарём.</li><li>До 8 огней могут гореть одновременно, чтобы игра оставалась быстрой на любом устройстве.</li></ul>
+<h2>Если не работает</h2>
+<ul><li><strong>Я не вижу света:</strong> темнота, скорее всего, равна 0. Свет виден только на более тёмной сцене.</li><li><strong>Свет не идёт за героем:</strong> прикрепи его к объекту, стоящему на герое (дочернему), а не к неподвижному объекту.</li><li><strong>Ночь недостаточно тёмная:</strong> увеличь темноту (до 100) и выбери более тёмный цвет.</li></ul>
+
+<div class="nav">
+<a href="../ru/particules-effets.html">← Частицы и эффекты</a>
+<a href="../ru/histoire-choix.html">Следующее руководство: История с выбором (визуальная новелла) →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../ru/index.html">Официальный сайт</a> · <a href="../../noeuds/ru.html">Справочник узлов</a></p>
+</footer>
+</body>
+</html>

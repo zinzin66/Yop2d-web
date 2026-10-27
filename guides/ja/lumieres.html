@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2D で光・影・昼夜のサイクルを加えるには？ | Yop2D ガイド</title>
+<meta name="description" content="Yop2D のゲームに命をふきこもう：暗い夜、主人公についてくるたいまつ、キャラの足もとのやわらかい影、そして自分で夜になる昼。コードは不要です。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/lumieres.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/lumieres.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/lumieres.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/lumieres.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/lumieres.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/lumieres.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/lumieres.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/lumieres.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/lumieres.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/lumieres.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "光・影・昼夜のサイクルを加えるには？",
+ "description": "Yop2D のゲームに命をふきこもう：暗い夜、主人公についてくるたいまつ、キャラの足もとのやわらかい影、そして自分で夜になる昼。コードは不要です。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "ゲームを暗くする",
+   "text": "ノード「暗さと光のふんいき」を加えます。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "たいまつをともす",
+   "text": "オブジェクトに「光源」を加えます。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "影をつける",
+   "text": "インスペクターで「オブジェクトの下の影」にチェックを入れます。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "1日を流す",
+   "text": "ノード「昼と夜のサイクル」を加えます。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>光・影・昼夜のサイクルを加えるには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../lumieres.html" hreflang="fr">Français</a> · <a href="../en/lumieres.html" hreflang="en">English</a> · <a href="../es/lumieres.html" hreflang="es">Español</a> · <a href="../de/lumieres.html" hreflang="de">Deutsch</a> · <a href="../it/lumieres.html" hreflang="it">Italiano</a> · <a href="../pt/lumieres.html" hreflang="pt">Português</a> · <a href="../ru/lumieres.html" hreflang="ru">Русский</a> · <a href="../zh/lumieres.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>ノードをいくつか使うだけで、平らなゲームが雰囲気たっぷりになります：暗い夜、主人公についてくるランタン、やわらかい影、ひとりでしずむ太陽。何も書く必要はありません。値を選ぶだけです。光は画面に描かれます（壁をよけることはしません）。だから、どのスマホでも軽く動きます。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>エディターで開いているプロジェクト。</li><li>暗い場所できれいに見える画像（たとえばライブラリの3Dパック）。ドット絵を大きく拡大するとぼやけます。ゲーム設定で<strong>ドット絵：くっきりピクセル</strong>をオンにしてください。</li></ul>
+</div>
+<h2>ステップ1：ゲームを暗くする</h2>
+<div class="method">
+<ol><li><strong>Blueprint</strong> を開き、「起動時」 のあとに 「暗さと光のふんいき」 を加えます。</li><li><strong>暗さ</strong>を選びます。0 は昼、100 は真っ暗です。場面がまだ見える夜にするなら 85 を試してください。</li><li><strong>夜の色</strong>を選びます。暗い青は自然で、黒はもっとこわく見えます。</li></ol>
+<div class="tip">👉 暗さと色はなめらかに変わります。30秒かければ、昼が夜になります。夕焼けのようです。</div>
+</div>
+<h2>ステップ2：たいまつをともす</h2>
+<div class="method">
+<ol><li>「光源（たいまつ、ランタン…）」 を加え、光をもつオブジェクト（たいまつ、まど、ランタン）を選びます。</li><li><strong>半径</strong>（中心からの距離、ピクセル）、<strong>明るさ</strong>（100 がふつう、300 まで強く）、<strong>色のかがやき</strong>を決めます。</li><li><strong>ゆらぎ</strong>を選びます。ろうそくはやさしい炎、たいまつは強い炎、ちかちかはこわれかけの電灯です。</li><li>光はそのオブジェクトについていきます。主人公についてくるランタンにするには、主人公の上に見えない小さなオブジェクト（子オブジェクト）を置き、それに光をつけます。</li></ol>
+<div class="tip">👉 <strong>点灯のしかた = 暗いときだけ</strong>にすると、日が暮れると光がひとりでつき、昼には消えます。ノードで光を消すには 「オブジェクトの光を消す」 を使います。</div>
+</div>
+<h2>ステップ3：影をつける</h2>
+<div class="method">
+<ol><li>場面でキャラを選び、<strong>インスペクター</strong>の<strong>見た目</strong>の部分を開きます。</li><li><strong>オブジェクトの下の影</strong>にチェックを入れ、<strong>濃さ</strong>と<strong>幅</strong>を決めます。</li><li>影はオブジェクトのどこへでもついていきます。ゲーム中にオンにしたいときは、ノード 「オブジェクトの下の影」 でも同じことができます。</li></ol>
+</div>
+<h2>ステップ4：1日を流す</h2>
+<div class="method">
+<ol><li>ゲームの始まりに 「昼と夜のサイクル」 を加えます。</li><li><strong>1日の長さ</strong>を選びます。30〜120秒だと生き生きして見えます。次に<strong>始まる時間</strong>（昼、夕方、真夜中、夜明け）と、<strong>ずっとくり返すか</strong>を選びます。</li><li>光を<strong>暗いときだけ</strong>にします。日が暮れると、ひとりでつきます。</li></ol>
+<div class="tip">👉 長さ 0 にすると、サイクルがその場で止まります。ポーズ中もサイクルは止まります。ある時間にジャンプしたいときは、別の始まる時間で 「昼と夜のサイクル」 をもう一度使います。サンプル「Day and night village」は5つのボタンでそれをしています。</div>
+</div>
+<h2>さらに進むには</h2>
+<ul><li>モデル<strong>たいまつと影</strong>と<strong>昼と夜</strong>（モデルのタブ）を開くと、すべて設定ずみの状態が見られます。</li><li>サンプル <strong>Day and night village</strong>（サンプルのタブ）をダウンロードしよう：3Dの村、夜にともるまど、ランタンをもつ騎士。</li><li>同時に最大8つの光がかがやけるので、どの端末でもゲームは軽いままです。</li></ul>
+<h2>うまくいかないとき</h2>
+<ul><li><strong>光が見えない：</strong>暗さがたぶん 0 です。光は、より暗い場面でしか見えません。</li><li><strong>光が主人公についてこない：</strong>動かないオブジェクトではなく、主人公の上に置いたオブジェクト（子オブジェクト）につけてください。</li><li><strong>夜が十分に暗くない：</strong>暗さを上げ（100 まで）、もっと暗い色を選んでください。</li></ul>
+
+<div class="nav">
+<a href="../ja/particules-effets.html">← パーティクルとエフェクト</a>
+<a href="../ja/histoire-choix.html">次のガイド： 選択肢のある物語（ビジュアルノベル） →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>
