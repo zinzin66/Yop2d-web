@@ -776,8 +776,8 @@
   "creare un arciere: vita 8, attacco 4, difesa 0, movimento 4, portata 3."
  ],
  "attaquer": [
-  "L'oggetto A attacca l'oggetto B: danno = attacco di A × potenza − difesa di B − difesa del terreno di B. Due uscite: «Ancora vivo» e «Senza vita» (il bersaglio viene distrutto se la casella è spuntata). Entrambi gli oggetti hanno bisogno di una scheda unità.",
-  "un eroe colpisce il mostro toccato."
+  "L'oggetto A attacca l'oggetto B: danno = attacco di A × potenza − difesa di B − difesa del terreno di B. Due uscite: «Ancora vivo» e «Senza vita» (il bersaglio viene distrutto se la casella è spuntata). Entrambi gli oggetti hanno bisogno di una scheda unità. In avanzato: bonus secondo i tag («cavalleria = 150»: 150 % di danno contro un oggetto con il tag cavalleria; un oggetto può avere più tag separati da virgole), un calcolo libero e una statistica consumata a ogni attacco («munizioni»: a 0 l'attacco non parte).",
+  "Una lancia contro la cavalleria: bonus «cavalleria = 150», cioè 150 % del danno; un arciere che consuma «munizioni»."
  ],
  "lumiere_ambiance": [
   "Oscura tutto il gioco (sotto i pulsanti e il punteggio) con il colore scelto. Oscurità 0 = pieno giorno, 100 = nero totale, tranne intorno alle fonti di luce. Il livello e il colore cambiano dolcemente: in 30 secondi si passa dal giorno al crepuscolo arancione e poi alla notte blu, come un tramonto.",
@@ -850,5 +850,13 @@
  "physique_test": [
   "Fa una domanda su un oggetto fisico e segue l'uscita «vero» o «falso»: poggia su qualcosa (per consentire un salto), tocca qualcosa, tocca qualcosa sopra, è a riposo (addormentato), si muove veloce, cade, sale. Per «si muove veloce», «cade» e «sale» la soglia in pixel al secondo si regola nelle impostazioni avanzate. Puoi anche leggere direttamente in una formula: oggetto.vitesse, oggetto.masse, oggetto.vitesseRotation.",
   "un salto da platform: «Pulsante salto» → Se l'oggetto poggia su qualcosa → velocità verso il basso = -900."
+ ],
+ "modifier_stat": [
+  "Cambia una statistica che hai inventato per un oggetto (munizioni, armatura, mana, carburante…): aggiungere, sottrarre o impostare un valore. Se non esiste ancora, viene creata a 0. Poi si legge ovunque: =arciere.munizioni.",
+  "Dopo uno sparo: Cambia una statistica → oggetto «arciere», statistica «munizioni», Sottrai 1."
+ ],
+ "si_stat": [
+  "Confronta una statistica di un oggetto con un valore e segue l'uscita «vero» o «falso»: per esempio «munizioni è maggiore di 0». Una statistica che non esiste vale 0.",
+  "Prima di sparare: Se la statistica «munizioni» dell'arciere è maggiore di 0 → spara; altrimenti → mostra «Frecce finite»."
  ]
 }

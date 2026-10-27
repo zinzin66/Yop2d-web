@@ -776,8 +776,8 @@
   "crear un arquero: vida 8, ataque 4, defensa 0, movimiento 4, alcance 3."
  ],
  "attaquer": [
-  "El objeto A ataca al objeto B: daño = ataque de A × potencia − defensa de B − defensa del terreno de B. Dos salidas: «Sigue con vida» y «Sin vida» (el objetivo se destruye si la casilla está marcada). Los dos objetos necesitan una ficha de unidad.",
-  "un héroe golpea al monstruo tocado."
+  "El objeto A ataca al objeto B: daño = ataque de A × potencia − defensa de B − defensa del terreno de B. Dos salidas: «Sigue vivo» y «Sin vida» (el objetivo se destruye si la casilla está marcada). Ambos objetos necesitan una ficha de unidad. En avanzado: bonus según los tags («caballeria = 150»: 150 % de daño contra un objeto con el tag caballeria; un objeto puede tener varios tags separados por comas), un cálculo libre y una estadística que se gasta en cada ataque («municion»: en 0 el ataque no se realiza).",
+  "Una lanza contra caballería: bonus «caballeria = 150», o sea 150 % de daño; un arquero que gasta «municion»."
  ],
  "lumiere_ambiance": [
   "Oscurece todo el juego (bajo los botones y la puntuación) con el color que elijas. Oscuridad 0 = pleno día, 100 = negro total, salvo alrededor de las fuentes de luz. El nivel y el color cambian suavemente: con 30 segundos se pasa del día al crepúsculo naranja y luego a la noche azul, como una puesta de sol.",
@@ -850,5 +850,13 @@
  "physique_test": [
   "Hace una pregunta sobre un objeto físico y sigue la salida «verdadero» o «falso»: ¿está apoyado en algo (para permitir un salto)?, ¿toca algo?, ¿toca algo por encima?, ¿está en reposo (dormido)?, ¿se mueve rápido?, ¿cae?, ¿sube? Para «se mueve rápido», «cae» y «sube» el umbral en píxeles por segundo se ajusta en avanzado. También puedes leer directamente en una fórmula: objeto.vitesse, objeto.masse, objeto.vitesseRotation.",
   "un salto de plataformas: «Botón de salto» → Si el objeto está apoyado en algo → velocidad hacia abajo = -900."
+ ],
+ "modifier_stat": [
+  "Cambia una estadística que inventaste para un objeto (munición, armadura, maná, combustible…): sumarle, restarle o ponerla en un valor. Si todavía no existe, se crea en 0. Luego se lee en cualquier parte: =arquero.municion.",
+  "Tras un disparo: Cambiar una estadística → objeto «arquero», estadística «municion», Restar 1."
+ ],
+ "si_stat": [
+  "Compara una estadística de un objeto con un valor y sigue la salida «verdadero» o «falso»: por ejemplo «municion es mayor que 0». Una estadística que no existe vale 0.",
+  "Antes de disparar: Si la estadística «municion» del arquero es mayor que 0 → disparar; si no → mostrar «Sin flechas»."
  ]
 }

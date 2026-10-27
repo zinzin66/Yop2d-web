@@ -776,8 +776,8 @@
   "criar um arqueiro: vida 8, ataque 4, defesa 0, movimento 4, alcance 3."
  ],
  "attaquer": [
-  "O objeto A ataca o objeto B: dano = ataque de A × poder − defesa de B − defesa do terreno de B. Duas saídas: «Ainda vivo» e «Sem vida» (o alvo é destruído se a caixa estiver marcada). Os dois objetos precisam de uma ficha de unidade.",
-  "um herói bate no monstro tocado."
+  "O objeto A ataca o objeto B: dano = ataque de A × poder − defesa de B − defesa do terreno de B. Duas saídas: «Ainda vivo» e «Sem vida» (o alvo é destruído se a caixa estiver marcada). Os dois objetos precisam de uma ficha de unidade. No avançado: bônus pelas tags («cavalaria = 150»: 150 % de dano contra um objeto com a tag cavalaria; um objeto pode ter várias tags separadas por vírgulas), um cálculo livre e uma estatística gasta a cada ataque («municao»: em 0 o ataque não acontece).",
+  "Uma lança contra cavalaria: bônus «cavalaria = 150», ou seja, 150 % de dano; um arqueiro que gasta «municao»."
  ],
  "lumiere_ambiance": [
   "Escurece todo o jogo (sob os botões e a pontuação) com a cor que escolher. Escuridão 0 = pleno dia, 100 = preto total, exceto em volta das fontes de luz. O nível e a cor mudam suavemente: com 30 segundos vai-se do dia ao crepúsculo laranja e depois à noite azul, como um pôr do sol.",
@@ -850,5 +850,13 @@
  "physique_test": [
   "Faz uma pergunta sobre um objeto físico e segue a saída «verdadeiro» ou «falso»: está apoiado em algo (para permitir um pulo)?, toca algo?, toca algo por cima?, está em repouso (dormindo)?, move-se rápido?, cai?, sobe? Para «move-se rápido», «cai» e «sobe» o limite em pixels por segundo se ajusta no avançado. Também dá para ler direto numa fórmula: objeto.vitesse, objeto.masse, objeto.vitesseRotation.",
   "um pulo de plataforma: «Botão de pulo» → Se o objeto está apoiado em algo → velocidade para baixo = -900."
+ ],
+ "modifier_stat": [
+  "Muda uma estatística que você inventou para um objeto (munição, armadura, mana, combustível…): somar, subtrair ou definir um valor. Se ainda não existe, é criada com 0. Depois dá para ler em qualquer lugar: =arqueiro.municao.",
+  "Depois de um tiro: Mudar uma estatística → objeto «arqueiro», estatística «municao», Subtrair 1."
+ ],
+ "si_stat": [
+  "Compara uma estatística de um objeto com um valor e segue a saída «verdadeiro» ou «falso»: por exemplo «municao é maior que 0». Uma estatística que não existe vale 0.",
+  "Antes de atirar: Se a estatística «municao» do arqueiro é maior que 0 → atirar; senão → mostrar «Sem flechas»."
  ]
 }

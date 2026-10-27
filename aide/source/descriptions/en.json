@@ -776,8 +776,8 @@
   "create an archer: health 8, attack 4, defense 0, movement 4, range 3."
  ],
  "attaquer": [
-  "Object A attacks object B: damage = A's attack × power − B's defense − the defense of B's terrain. Two outputs: \"Still alive\" and \"Out of health\" (the target is destroyed if the box is ticked). Both objects need a unit sheet.",
-  "a hero hits the touched monster."
+  "Object A attacks object B: damage = A's attack × power − B's defense − B's terrain defense. Two exits: “Still alive” and “Out of health” (the target is destroyed if the box is ticked). Both objects need a unit sheet. In advanced: bonuses by tag (“cavalry = 150”: 150% damage against an object with the cavalry tag; an object can have several tags separated by commas), a free formula, and a statistic used up at each attack (“ammo”: at 0 the attack no longer happens).",
+  "A spear against cavalry: bonus “cavalry = 150”, so 150% damage; an archer using up “ammo”."
  ],
  "lumiere_ambiance": [
   "Darkens the whole game (under the buttons and score) with the color you choose. Darkness 0 = full daylight, 100 = pitch black, except around light sources. The level and the color change smoothly: over 30 seconds you go from day to an orange dusk and then a blue night, like a sunset.",
@@ -850,5 +850,13 @@
  "physique_test": [
   "Asks a question about a physics object and follows the “true” or “false” exit: is it standing on something (to allow a jump), does it touch something, does it touch something above, is it at rest (asleep), is it moving fast, falling, rising. For “moves fast”, “falling” and “rising” the threshold in pixels per second is set in the advanced settings. You can also read values directly in a formula: object.vitesse, object.masse, object.vitesseRotation.",
   "a platformer jump: “Jump button” → If the object is standing on something → set downward speed to -900."
+ ],
+ "modifier_stat": [
+  "Changes a statistic you invented for an object (ammo, armor, mana, fuel…): add to it, subtract from it or set it to a value. If it does not exist yet, it is created at 0. You can then read it anywhere: =archer.ammo.",
+  "After a shot: Change a statistic → object “archer”, statistic “ammo”, Subtract 1."
+ ],
+ "si_stat": [
+  "Compares an object's statistic with a value and follows the “true” or “false” exit: for example “ammo is greater than 0”. A statistic that does not exist counts as 0.",
+  "Before shooting: If the archer's “ammo” statistic is greater than 0 → shoot; otherwise → show “Out of arrows”."
  ]
 }

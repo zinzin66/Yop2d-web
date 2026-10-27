@@ -776,8 +776,8 @@
   "créer un archer : vie 8, attaque 4, défense 0, mouvement 4, portée 3."
  ],
  "attaquer": [
-  "L'objet A attaque l'objet B : dégâts = attaque de A × puissance − défense de B − défense du terrain de B. Deux sorties : « Encore en vie » et « Plus de vie » (la cible est détruite si la case est cochée). Les deux objets doivent avoir une fiche d'unité.",
-  "un héros frappe le monstre touché."
+  "L'objet A attaque l'objet B : dégâts = attaque de A × puissance − défense de B − défense du terrain de B. Deux sorties : « Encore en vie » et « Plus de vie » (la cible est détruite si la case est cochée). Les deux objets doivent avoir une fiche d'unité. En avancé : des bonus selon les tags (« cavalerie = 150 » : 150 % de dégâts contre un objet qui a le tag cavalerie, un objet peut avoir plusieurs tags séparés par des virgules), un calcul libre, et une statistique consommée à chaque attaque (« munitions » : à 0 l'attaque ne part plus).",
+  "Une lance contre de la cavalerie : bonus « cavalerie = 150 », donc 150 % des dégâts ; un archer avec « munitions » consommées."
  ],
  "lumiere_ambiance": [
   "Assombrit tout le jeu (sous les boutons et le score) avec la couleur de ton choix. Obscurité 0 = plein jour, 100 = noir complet, sauf autour des sources de lumière. Le niveau et la couleur changent en douceur : avec 30 secondes, on passe du jour au crépuscule orange puis à la nuit bleue, comme un coucher de soleil.",
@@ -850,5 +850,13 @@
  "physique_test": [
   "Pose une question sur un objet physique et suit la sortie « vrai » ou « faux » : est-il posé sur quelque chose (pour autoriser un saut), touche-t-il quelque chose, touche-t-il quelque chose au-dessus, est-il au repos (endormi), bouge-t-il vite, tombe-t-il, monte-t-il. Pour « bouge vite », « tombe » et « monte », le seuil en pixels par seconde se règle en avancé. Tu peux aussi lire directement dans une formule : objet.vitesse, objet.masse, objet.vitesseRotation.",
   "un saut de plateforme : « Bouton saut » → Si l'objet est posé sur quelque chose → régler la vitesse vers le bas à -900."
+ ],
+ "modifier_stat": [
+  "Change une statistique que tu as inventée pour un objet (munitions, armure, mana, carburant…) : l'ajouter, la retirer ou la mettre à une valeur. Si elle n'existe pas encore, elle est créée à 0. Elle se lit ensuite partout : =archer.munitions.",
+  "Après un tir : Modifier une statistique → objet « archer », statistique « munitions », Retirer 1."
+ ],
+ "si_stat": [
+  "Compare une statistique d'un objet à une valeur et suit la sortie « vrai » ou « faux » : par exemple « munitions est plus grand que 0 ». Une statistique qui n'existe pas vaut 0.",
+  "Avant de tirer : Si la statistique « munitions » de l'archer est plus grande que 0 → tirer ; sinon → afficher « Plus de flèches »."
  ]
 }

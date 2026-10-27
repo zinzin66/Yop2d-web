@@ -776,8 +776,8 @@
   "einen Bogenschützen erstellen: Leben 8, Angriff 4, Verteidigung 0, Bewegung 4, Reichweite 3."
  ],
  "attaquer": [
-  "Objekt A greift Objekt B an: Schaden = Angriff von A × Stärke − Verteidigung von B − Geländeverteidigung von B. Zwei Ausgänge: „Noch am Leben“ und „Kein Leben mehr“ (das Ziel wird zerstört, wenn das Kästchen angehakt ist). Beide Objekte brauchen ein Einheitenblatt.",
-  "ein Held schlägt das berührte Monster."
+  "Objekt A greift Objekt B an: Schaden = Angriff von A × Stärke − Verteidigung von B − Geländeverteidigung von B. Zwei Ausgänge: „Noch am Leben“ und „Keine Leben mehr“ (das Ziel wird zerstört, wenn das Kästchen angehakt ist). Beide Objekte brauchen ein Einheitenblatt. Erweitert: Boni nach Tags („reiterei = 150“: 150 % Schaden gegen ein Objekt mit dem Tag reiterei; ein Objekt kann mehrere durch Kommas getrennte Tags haben), eine freie Formel und eine Statistik, die bei jedem Angriff verbraucht wird („munition“: bei 0 findet der Angriff nicht statt).",
+  "Ein Speer gegen Reiterei: Bonus „reiterei = 150“, also 150 % Schaden; ein Bogenschütze, der „munition“ verbraucht."
  ],
  "lumiere_ambiance": [
   "Verdunkelt das ganze Spiel (unter Buttons und Punktestand) in der gewählten Farbe. Dunkelheit 0 = voller Tag, 100 = völlig schwarz, außer rund um Lichtquellen. Stufe und Farbe ändern sich sanft: in 30 Sekunden geht es vom Tag über ein oranges Abendrot zur blauen Nacht, wie ein Sonnenuntergang.",
@@ -850,5 +850,13 @@
  "physique_test": [
   "Stellt eine Frage zu einem Physik-Objekt und folgt dem Ausgang „wahr“ oder „falsch“: steht es auf etwas (um einen Sprung zu erlauben), berührt es etwas, berührt es etwas darüber, ruht es (schläft), bewegt es sich schnell, fällt es, steigt es. Bei „bewegt sich schnell“, „fällt“ und „steigt“ stellst du die Schwelle in Pixel pro Sekunde in den erweiterten Einstellungen ein. Du kannst auch direkt in einer Formel lesen: objekt.vitesse, objekt.masse, objekt.vitesseRotation.",
   "ein Plattform-Sprung: „Sprungknopf“ → Wenn das Objekt auf etwas steht → Tempo nach unten auf -900."
+ ],
+ "modifier_stat": [
+  "Ändert eine Statistik, die du für ein Objekt erfunden hast (Munition, Rüstung, Mana, Treibstoff…): addieren, abziehen oder auf einen Wert setzen. Gibt es sie noch nicht, wird sie mit 0 angelegt. Danach kannst du sie überall lesen: =bogenschuetze.munition.",
+  "Nach einem Schuss: Statistik ändern → Objekt „bogenschuetze“, Statistik „munition“, Abziehen 1."
+ ],
+ "si_stat": [
+  "Vergleicht eine Statistik eines Objekts mit einem Wert und folgt dem Ausgang „wahr“ oder „falsch“: zum Beispiel „munition ist größer als 0“. Eine Statistik, die es nicht gibt, zählt als 0.",
+  "Vor dem Schuss: Wenn die Statistik „munition“ des Bogenschützen größer als 0 ist → schießen; sonst → „Keine Pfeile mehr“ zeigen."
  ]
 }
