@@ -3,7 +3,7 @@
 claude/discord-yop2d-config-ox8qgh, commit « Lumières et ombres »).
 Usage : python3 outils/creer_test_lumieres.py <clone de zinzin66/yop2d-moteur> <dossier packs (avec aventuriers/ et decors3d/)>
 Ce que fait le test : un cimetière la nuit (décor 3D en 5 couches, personnages 3D haute définition). 2 lanternes du décor qui éclairent,
-un voleur qui suit le doigt et porte une lanterne (objet ENFANT : la lumière le suit), un chevalier immobile. Les 2 ont une ombre douce.
+un voleur qui suit le doigt et porte une lanterne (objet ENFANT : la lumière le suit), un chevalier immobile. Les 2 ont une ombre douce posée avec la case « Ombre » de l'Inspecteur (aucun nœud).
 Boutons : Day / Sunset (jour -> crépuscule orange -> nuit bleue en 12 s) / Night (très sombre), Lantern off / on (éteint / rallume la lumière du ninja)."""
 import os, sys, tempfile
 SITE_RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,10 +29,11 @@ BLANC, OR = argb('#FFFFFF'), argb('#FFD166')
 objets = []
 for i, (nom, z) in enumerate((('ciel', -100), ('01_arbres_loin', -90), ('02_arbres', -80), ('03_cimetiere', -70), ('04_avant', 80))):
     objets.append(objet('decor_' + nom, -960, 0, DEC + nom + '.webp', 3840, 1080, z=z, prefixe=P))
-hero = objet('hero', 780, 660, AV + 'voleur/repos/voleur_repos_1.png', 214, 300, z=50, prefixe=P)
+OMBRE = dict(ombreActive=True, ombreForce=55.0, ombreLargeur=70.0, ombreDecalageY=-6.0)   # la case « Ombre » de l'Inspecteur
+hero = objet('hero', 780, 660, AV + 'voleur/repos/voleur_repos_1.png', 214, 300, z=50, prefixe=P, **OMBRE)
 objets += [hero,
            objet('lanterne', 175, 160, largeur=20, hauteur=20, z=51, prefixe=P, parentId=hero['id']),   # invisible : sert de point lumineux
-           objet('ami', 1250, 660, AV + 'chevalier/repos/chevalier_repos_1.png', 214, 300, z=50, prefixe=P),
+           objet('ami', 1250, 660, AV + 'chevalier/repos/chevalier_repos_1.png', 214, 300, z=50, prefixe=P, **OMBRE),
            objet('lampe_a', 226, 830, largeur=20, hauteur=20, z=5, prefixe=P),     # sur la lanterne du décor (à gauche)
            objet('lampe_b', 390, 735, largeur=20, hauteur=20, z=5, prefixe=P)]     # la petite lanterne plus loin
 objets += [texte('info', 500, 30, 920, 140, 'LIGHTS TEST\nTouch the screen: the thief follows your finger and carries a lantern.\nNight = pitch black. Sunset goes from day to night in 12 s.',
@@ -48,9 +49,7 @@ e = L.evenement('start', 'NoeudEventStart')
 L.chaine(e, [('nuit0', 'lumiere_ambiance', {'couleur': '#02040C', 'niveau': 92, 'duree': 0}),
              ('src_a', 'lumiere_source', {'couleur': '#FFC060', 'rayon': 430, 'intensite': 100, 'lueur': 100, 'vacillement': 'lv_bougie'}, 'lampe_a'),
              ('src_b', 'lumiere_source', {'couleur': '#FFC060', 'rayon': 300, 'intensite': 100, 'lueur': 80, 'vacillement': 'lv_bougie'}, 'lampe_b'),
-             ('src_h', 'lumiere_source', {'couleur': '#FFD890', 'rayon': 360, 'intensite': 110, 'lueur': 100, 'vacillement': 'lv_torche'}, 'lanterne'),
-             ('om_h', 'ombre_objet', {'ombre': 'o_oui', 'force': 55, 'largeur': 70, 'decalage_y': -6}, 'hero'),
-             ('om_m', 'ombre_objet', {'ombre': 'o_oui', 'force': 55, 'largeur': 70, 'decalage_y': -6}, 'ami')])
+             ('src_h', 'lumiere_source', {'couleur': '#FFD890', 'rayon': 360, 'intensite': 110, 'lueur': 100, 'vacillement': 'lv_torche'}, 'lanterne')])
 e = L.evenement('finger_down', 'NoeudEventDoigtAppuye', sortie='Sortie')
 L.action(e, 'follow', 'glisser_vers', {'x': '=doigt.x - hero.largeur / 2', 'y': 660, 'duree': 0.3}, 'hero')
 e = L.evenement('tap_jour', 'NoeudEventClicObjet', cible='btn_jour')
