@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutti i nodi di Yop2D (192) | Riferimento</title>
-<meta name="description" content="Elenco completo dei 192 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
+<title>Tutti i nodi di Yop2D (198) | Riferimento</title>
+<meta name="description" content="Elenco completo dei 198 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 192 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
+<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 198 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
 <p><strong>Categorie</strong></p>
 <nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-griglie-e-puzzle">Griglie e puzzle</a><a href="#c10-transizioni">Transizioni</a><a href="#c11-animazioni">Animazioni</a><a href="#c12-audio">Audio</a><a href="#c13-storia-e-dialoghi">Storia e dialoghi</a><a href="#c14-valori-fili-verdi">Valori (fili verdi)</a><a href="#c15-filtri-dello-schermo">Filtri dello schermo</a></nav>
 <h2 id="c1-eventi">Eventi</h2>
@@ -75,6 +75,9 @@
 <div class="fiche"><h3>Tasto indietro premuto</h3>
 <p>Parte quando il giocatore preme il tasto «indietro» del telefono (freccia o gesto). Ideale per aprire un menu di pausa o tornare alla schermata precedente. Senza questo nodo, il tasto indietro non fa nulla durante il gioco.</p>
 <p class="exemple"><b>Esempio:</b> indietro → «Metti in pausa il gioco», poi mostrare un menu «Riprendi / Esci».</p>
+</div>
+<div class="fiche"><h3>A ogni nuova scena</h3>
+<p>Parte ogni volta che si apre una nuova scena. Pensato per la «Logica globale» (che funziona in tutte le scene): per esempio mettere l'esercito scelto su ogni mappa. In una scena normale basta «All'avvio».</p>
 </div>
 <div class="fiche"><h3>Inizio Trascinamento</h3>
 <div class="schema"><b>Ingresso:</b> Oggetto</div>
@@ -236,6 +239,11 @@
 <div class="schema"><b>Ingressi:</b> Zoom (%, 100 = normale), Verso, Durata (secondi)</div>
 <p>Ingrandisce dolcemente tutto lo schermo del gioco (la scena, o lo sfondo e i personaggi di una storia) verso il centro, il viso, un lato, l'alto o il basso. 100 = tornare normale; il riquadro di dialogo e l'HUD non si muovono.</p>
 <p class="exemple"><b>Esempio:</b> zoom 140 verso il viso per 2 secondi quando Hana ha paura, poi zoom 100.</p>
+</div>
+<div class="fiche"><h3>Oscurità e atmosfera di luce</h3>
+<div class="schema"><b>Ingressi:</b> Colore della notte, Oscurità (%, 0 = giorno, 100 = quasi nero totale), Cambia in (secondi: 30 = un tramonto)</div>
+<p>Oscura tutto il gioco (sotto i pulsanti e il punteggio) con il colore scelto. Oscurità 0 = pieno giorno, 100 = nero totale, tranne intorno alle fonti di luce. Il livello e il colore cambiano dolcemente: in 30 secondi si passa dal giorno al crepuscolo arancione e poi alla notte blu, come un tramonto.</p>
+<p class="exemple"><b>Esempio:</b> un tramonto: «Oscurità e atmosfera di luce» arancione, oscurità 40, in 6 secondi; «Attendere» 6 secondi; poi «Oscurità e atmosfera di luce» blu notte, oscurità 90, in 6 secondi.</p>
 </div>
 <div class="fiche"><h3>Tremolio della camera</h3>
 <div class="schema"><b>Ingressi:</b> Intensità, Durata (millisecondi, 1000 = 1 s)</div>
@@ -477,6 +485,21 @@
 <div class="schema"><b>Ingressi:</b> Oggetto, Colore dei fulmini, Durata (secondi, 0 = infinita), Intensità (0 = ferma, da 1 a 3)</div>
 <p>Fulmini crepitano intorno all'oggetto: lampeggia del colore del fulmine, trema e lancia scintille. Durata 0 = infinita (recinto elettrico); intensità 0 = ferma.</p>
 <p class="exemple"><b>Esempio:</b> il mago tocca una trappola: «Folgorazione» sul mago (1 secondo), «Attendere» 1 secondo, poi «Ricomincia la scena».</p>
+</div>
+<div class="fiche"><h3>Fonte di luce (torcia, lanterna…)</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Colore della luce, Raggio (pixel: distanza dal centro), Illuminazione (%, 100 = normale, 200 = molto forte), Alone colorato (%, 0 = nessuno, 200 = molto forte), Tremolio, Spostamento orizzontale (pixel), Spostamento verticale (pixel, negativo = in alto)</div>
+<p>Aggancia una luce all'oggetto: lo segue quando si muove (torcia di un personaggio, lanterna, fuoco…), anche se l'oggetto è figlio di un altro. Impostazioni: colore, raggio in pixel (distanza dal centro), illuminazione (100 = normale, fino a 300: più forte e più lontano), alone colorato (0 = nessuno), tremolio (nessuno, candela, torcia, sfarfalla) e spostamento. Una luce per oggetto, al massimo 8 contemporaneamente. Buca l'oscurità di «Oscurità e atmosfera di luce»; senza oscurità aggiunge solo il suo alone.</p>
+<p class="exemple"><b>Esempio:</b> la torcia di un personaggio: su un oggetto «lanterna» figlio dell'eroe, raggio 360, tremolio «torcia».</p>
+</div>
+<div class="fiche"><h3>Spegni la luce dell'oggetto</h3>
+<div class="schema"><b>Ingresso:</b> Oggetto</div>
+<p>Spegne la luce agganciata all'oggetto. Per riaccenderla, usa di nuovo «Fonte di luce (torcia, lanterna…)».</p>
+<p class="exemple"><b>Esempio:</b> un pulsante «Lanterna» spegne la luce dell'eroe.</p>
+</div>
+<div class="fiche"><h3>Ombra sotto l'oggetto</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Ombra, Forza dell'ombra (%), Larghezza dell'ombra (% dell'oggetto), Spostamento verticale (pixel, negativo = in alto)</div>
+<p>Mette un'ombra morbida sotto l'oggetto (o la toglie con «No»). Segue l'oggetto quando si muove; si regolano forza e larghezza. Dà subito volume ai personaggi posati su uno sfondo.</p>
+<p class="exemple"><b>Esempio:</b> un'ombra sotto l'eroe: forza 50, larghezza 70.</p>
 </div>
 <div class="fiche"><h3>Scia dell'oggetto</h3>
 <div class="schema"><b>Ingressi:</b> Oggetto, Modello, Colore (vuoto = quello del modello), Dimensione (1 = normale)</div>
@@ -739,7 +762,7 @@
 <p class="exemple"><b>Esempio:</b> rifiutare di muovere un eroe che ha già giocato.</p>
 </div>
 <div class="fiche"><h3>Mostra le caselle raggiungibili</h3>
-<div class="schema"><b>Ingressi:</b> Oggetto, Tipo di zona, Numero di passi (o portata), Colore delle caselle, Visibilità delle caselle (0 = invisibile, 100 = piena), Cornice attorno a ogni casella, Scrivere i passi su ogni casella, I muri bloccano (movimento), Questi tag bloccano il passaggio (separati da virgola), Terreno che costa più passi (tag=costo, es. bosco=2, acqua=3), Nome della zona (facoltativo: per mostrarne più)</div>
+<div class="schema"><b>Ingressi:</b> Oggetto, Tipo di zona, Numero di passi (o portata), Colore delle caselle, Visibilità delle caselle (0 = invisibile, 100 = piena), Cornice attorno a ogni casella, Scrivere i passi su ogni casella, I muri bloccano (movimento), Questi tag bloccano il passaggio (separati da virgola), Terreno che costa più passi (tag=costo, es. bosco=2, acqua=3), Nome della zona (facoltativo: per mostrarne più), Forma della portata (attacco e salto), Portata minima (0 = nessuna; 2 = non le prime caselle), Le mie posizioni (colonna,riga; es. 2,1 ; -2,1 ; 0,3), Togliere la casella dove si trova l'oggetto</div>
 <p>Colora le caselle dove l'oggetto scelto può andare (o che può attaccare). I muri bloccano, e puoi aggiungere tag che bloccano (altre unità) e terreni che costano più passi (bosco=2). Colore, visibilità, cornice e numeri sono regolabili. «Nome della zona» permette di mostrarne più insieme (movimento in blu, attacco in rosso).</p>
 <p class="exemple"><b>Esempio:</b> mostrare la zona di movimento di un eroe quando viene toccato.</p>
 </div>
@@ -754,12 +777,12 @@
 <p class="exemple"><b>Esempio:</b> rifiutare un movimento troppo lontano con «troppo lontano!».</p>
 </div>
 <div class="fiche"><h3>Dai una scheda unità</h3>
-<div class="schema"><b>Ingressi:</b> Oggetto, Punti vita, Attacco, Difesa, Movimento (passi), Portata d'attacco (caselle)</div>
+<div class="schema"><b>Ingressi:</b> Oggetto, Punti vita, Attacco, Difesa, Movimento (passi), Portata d'attacco (caselle), Altre statistiche (es. munitions = 3, armure = 2)</div>
 <p>Dà all'oggetto la sua scheda: vita, attacco, difesa, movimento e portata (variabili d'oggetto «vie», «attaque», «defense», «mouvement», «portee»). Si possono leggere ovunque con una formula, per esempio =eroe.mouvement per i passi delle caselle raggiungibili. Metti questo nodo dopo «All'Avvio» di ogni unità, o in un prefab di unità riutilizzabile.</p>
 <p class="exemple"><b>Esempio:</b> creare un arciere: vita 8, attacco 4, difesa 0, movimento 4, portata 3.</p>
 </div>
 <div class="fiche"><h3>Attacca</h3>
-<div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B, Potenza dell'attacco (%), Conta la difesa del terreno del bersaglio, Sempre almeno 1 danno, Distruggi il bersaglio quando finisce la vita &nbsp;→&nbsp; <b>Uscite:</b> Ancora vivo / Senza vita</div>
+<div class="schema"><b>Ingressi:</b> Oggetto A, Oggetto B, Potenza dell'attacco (%), Conta la difesa del terreno del bersaglio, Sempre almeno 1 danno, Distruggi il bersaglio quando finisce la vita, Calcolo libero dei danni (es. attaquant.attaque * 2 - cible.armure); vuoto = calcolo normale &nbsp;→&nbsp; <b>Uscite:</b> Ancora vivo / Senza vita</div>
 <p>L'oggetto A attacca l'oggetto B: danno = attacco di A × potenza − difesa di B − difesa del terreno di B. Due uscite: «Ancora vivo» e «Senza vita» (il bersaglio viene distrutto se la casella è spuntata). Entrambi gli oggetti hanno bisogno di una scheda unità.</p>
 <p class="exemple"><b>Esempio:</b> un eroe colpisce il mostro toccato.</p>
 </div>
@@ -777,6 +800,11 @@
 <div class="schema"><b>Ingressi:</b> Oggetto, Vita restituita</div>
 <p>Restituisce punti vita all'oggetto, senza superare il suo massimo.</p>
 <p class="exemple"><b>Esempio:</b> una pozione che restituisce 5 punti vita all'eroe.</p>
+</div>
+<div class="fiche"><h3>Scegli un bersaglio</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Tag dei bersagli possibili (separati da virgola), Quale bersaglio scegliere?, Portata in caselle (0 = illimitata; es. =mostro.portee), Portata minima (0 = nessuna), Forma della portata, Le mie posizioni (colonna,riga; es. 2,1 ; -2,1), Statistica (per le regole «statistica», es. defense) &nbsp;→&nbsp; <b>Uscite:</b> Bersaglio trovato / Nessun bersaglio</div>
+<p>L'oggetto A cerca, tra gli oggetti con uno dei tag richiesti, quelli NELLA SUA PORTATA (stesse forme di «Mostra le caselle raggiungibili») e ne sceglie uno: il più vicino, quello con meno o più vita, o il valore più basso / alto di una statistica. Uscita «Bersaglio trovato»: diventa «l'oggetto coinvolto» (per Attacca, Vai verso…). Uscita «Nessun bersaglio»: nessuno a tiro. Perfetto per l'intelligenza di un mostro o di una torretta.</p>
+<p class="exemple"><b>Esempio:</b> un mostro: «Scegli un bersaglio» (tag «eroe», il più vicino), poi «Attacca» su «Bersaglio trovato».</p>
 </div>
 <div class="fiche"><h3>Riempire la griglia</h3>
 <div class="schema"><b>Ingressi:</b> Oggetto, Colonne, Righe, Oggetti modello (nomi separati da virgole)</div>

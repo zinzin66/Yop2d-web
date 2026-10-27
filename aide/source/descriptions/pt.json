@@ -778,5 +778,29 @@
  "attaquer": [
   "O objeto A ataca o objeto B: dano = ataque de A × poder − defesa de B − defesa do terreno de B. Duas saídas: «Ainda vivo» e «Sem vida» (o alvo é destruído se a caixa estiver marcada). Os dois objetos precisam de uma ficha de unidade.",
   "um herói bate no monstro tocado."
+ ],
+ "lumiere_ambiance": [
+  "Escurece todo o jogo (sob os botões e a pontuação) com a cor que escolher. Escuridão 0 = pleno dia, 100 = preto total, exceto em volta das fontes de luz. O nível e a cor mudam suavemente: com 30 segundos vai-se do dia ao crepúsculo laranja e depois à noite azul, como um pôr do sol.",
+  "um pôr do sol: [[lumiere_ambiance]] laranja, escuridão 40, em 6 segundos; [[attendre]] 6 segundos; depois [[lumiere_ambiance]] azul-noite, escuridão 90, em 6 segundos."
+ ],
+ "lumiere_source": [
+  "Prende uma luz ao objeto: ela o segue quando se move (tocha de um personagem, lanterna, fogo…), mesmo que o objeto seja filho de outro. Ajustes: cor, raio em pixels (distância do centro), iluminação (100 = normal, até 300: mais forte e mais longe), brilho colorido (0 = nenhum), oscilação (nenhuma, vela, tocha, pisca) e deslocamento. Uma luz por objeto, 8 no máximo ao mesmo tempo. Ela atravessa a escuridão de [[lumiere_ambiance]]; sem escuridão só acrescenta o brilho.",
+  "a tocha de um personagem: em um objeto « lanterna » filho do herói, raio 360, oscilação « tocha »."
+ ],
+ "lumiere_eteindre": [
+  "Apaga a luz presa ao objeto. Para acendê-la de novo, use [[lumiere_source]] outra vez.",
+  "um botão « Lanterna » apaga a luz do herói."
+ ],
+ "ombre_objet": [
+  "Põe uma sombra suave sob o objeto (ou a remove com « Não »). Ela segue o objeto quando ele se move; ajustam-se a força e a largura. Dá volume na hora aos personagens sobre um cenário.",
+  "uma sombra sob o herói: força 50, largura 70."
+ ],
+ "choisir_cible": [
+  "O objeto A procura, entre os objetos com uma das tags pedidas, os que estão DENTRO DO SEU ALCANCE (mesmas formas de «Mostrar casas alcançáveis») e escolhe um: o mais próximo, o que tem menos ou mais vida, ou o menor / maior valor de uma estatística. Saída «Alvo encontrado»: ele se torna «o objeto envolvido» (para Atacar, Ir até…). Saída «Nenhum alvo»: ninguém ao alcance. Perfeito para a inteligência de um monstro ou torre.",
+  "um monstro: [[choisir_cible]] (tag « heroi », a mais próxima), depois [[attaquer]] em « Alvo encontrado »."
+ ],
+ "NoeudEventNouvelleScene": [
+  "Roda sempre que uma nova cena é aberta. Feito para a «Lógica global» (que funciona em todas as cenas): por exemplo, colocar o exército escolhido em cada mapa. Numa cena comum, «Ao iniciar» basta.",
+  null
  ]
 }

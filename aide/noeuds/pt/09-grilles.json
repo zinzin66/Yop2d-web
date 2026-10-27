@@ -27,7 +27,7 @@
     },
     {
       "nom": "Mostrar casas alcançáveis",
-      "schema": "<b>Entradas:</b> Objeto, Tipo de zona, Número de passos (ou alcance), Cor das casas, Visibilidade das casas (0 = invisível, 100 = cheia), Moldura em cada casa, Escrever os passos em cada casa, As paredes bloqueiam (movimento), Estas tags bloqueiam a passagem (separadas por vírgula), Terreno que custa mais passos (tag=custo, ex. floresta=2, agua=3), Nome da zona (opcional: para mostrar várias)",
+      "schema": "<b>Entradas:</b> Objeto, Tipo de zona, Número de passos (ou alcance), Cor das casas, Visibilidade das casas (0 = invisível, 100 = cheia), Moldura em cada casa, Escrever os passos em cada casa, As paredes bloqueiam (movimento), Estas tags bloqueiam a passagem (separadas por vírgula), Terreno que custa mais passos (tag=custo, ex. floresta=2, agua=3), Nome da zona (opcional: para mostrar várias), Forma do alcance (ataque e salto), Alcance mínimo (0 = nenhum; 2 = sem as primeiras casas), Minhas posições (coluna,linha; ex. 2,1 ; -2,1 ; 0,3), Remover a casa onde o objeto está",
       "role": "Colore as casas para onde o objeto escolhido pode ir (ou atacar). As paredes bloqueiam, e você pode adicionar tags que bloqueiam (outras unidades) e terrenos que custam mais passos (floresta=2). Cor, visibilidade, moldura e números são ajustáveis. “Nome da zona” permite mostrar várias ao mesmo tempo (movimento em azul, ataque em vermelho).",
       "exemple": "mostrar a zona de movimento de um herói quando ele é tocado."
     },
@@ -45,13 +45,13 @@
     },
     {
       "nom": "Dar uma ficha de unidade",
-      "schema": "<b>Entradas:</b> Objeto, Pontos de vida, Ataque, Defesa, Movimento (passos), Alcance de ataque (casas)",
+      "schema": "<b>Entradas:</b> Objeto, Pontos de vida, Ataque, Defesa, Movimento (passos), Alcance de ataque (casas), Outras estatísticas (ex. munitions = 3, armure = 2)",
       "role": "Dá ao objeto sua ficha: vida, ataque, defesa, movimento e alcance (variáveis de objeto “vie”, “attaque”, “defense”, “mouvement”, “portee”). Podem ser lidas em qualquer lugar com uma fórmula, por exemplo =heroi.mouvement para os passos das casas alcançáveis. Coloque este nó depois de “Ao Iniciar” de cada unidade, ou em um prefab de unidade reutilizável.",
       "exemple": "criar um arqueiro: vida 8, ataque 4, defesa 0, movimento 4, alcance 3."
     },
     {
       "nom": "Atacar",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Poder do ataque (%), Contar a defesa do terreno do alvo, Sempre pelo menos 1 de dano, Destruir o alvo quando a vida acabar &nbsp;→&nbsp; <b>Saídas:</b> Ainda vivo / Sem vida",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Poder do ataque (%), Contar a defesa do terreno do alvo, Sempre pelo menos 1 de dano, Destruir o alvo quando a vida acabar, Cálculo de dano livre (ex. attaquant.attaque * 2 - cible.armure); vazio = cálculo normal &nbsp;→&nbsp; <b>Saídas:</b> Ainda vivo / Sem vida",
       "role": "O objeto A ataca o objeto B: dano = ataque de A × poder − defesa de B − defesa do terreno de B. Duas saídas: “Ainda vivo” e “Sem vida” (o alvo é destruído se a caixa estiver marcada). Os dois objetos precisam de uma ficha de unidade.",
       "exemple": "um herói bate no monstro tocado."
     },
@@ -72,6 +72,12 @@
       "schema": "<b>Entradas:</b> Objeto, Vida devolvida",
       "role": "Devolve pontos de vida ao objeto, sem passar do máximo.",
       "exemple": "uma poção que devolve 5 pontos de vida ao herói."
+    },
+    {
+      "nom": "Escolher um alvo",
+      "schema": "<b>Entradas:</b> Objeto, Tags dos alvos possíveis (separadas por vírgula), Qual alvo escolher?, Alcance em casas (0 = sem limite; ex. =monstro.portee), Alcance mínimo (0 = nenhum), Forma do alcance, Minhas posições (coluna,linha; ex. 2,1 ; -2,1), Estatística (para as regras «estatística», ex. defense) &nbsp;→&nbsp; <b>Saídas:</b> Alvo encontrado / Nenhum alvo",
+      "role": "O objeto A procura, entre os objetos com uma das tags pedidas, os que estão DENTRO DO SEU ALCANCE (mesmas formas de “Mostrar casas alcançáveis”) e escolhe um: o mais próximo, o que tem menos ou mais vida, ou o menor / maior valor de uma estatística. Saída “Alvo encontrado”: ele se torna “o objeto envolvido” (para Atacar, Ir até…). Saída “Nenhum alvo”: ninguém ao alcance. Perfeito para a inteligência de um monstro ou torre.",
+      "exemple": "um monstro: “Escolher um alvo” (tag “heroi”, a mais próxima), depois “Atacar” em “Alvo encontrado”."
     },
     {
       "nom": "Preencher a grade",

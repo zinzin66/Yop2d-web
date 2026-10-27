@@ -778,5 +778,29 @@
  "attaquer": [
   "Objekt A greift Objekt B an: Schaden = Angriff von A × Stärke − Verteidigung von B − Geländeverteidigung von B. Zwei Ausgänge: „Noch am Leben“ und „Kein Leben mehr“ (das Ziel wird zerstört, wenn das Kästchen angehakt ist). Beide Objekte brauchen ein Einheitenblatt.",
   "ein Held schlägt das berührte Monster."
+ ],
+ "lumiere_ambiance": [
+  "Verdunkelt das ganze Spiel (unter Buttons und Punktestand) in der gewählten Farbe. Dunkelheit 0 = voller Tag, 100 = völlig schwarz, außer rund um Lichtquellen. Stufe und Farbe ändern sich sanft: in 30 Sekunden geht es vom Tag über ein oranges Abendrot zur blauen Nacht, wie ein Sonnenuntergang.",
+  "ein Sonnenuntergang: [[lumiere_ambiance]] orange, Dunkelheit 40, in 6 Sekunden; [[attendre]] 6 Sekunden; dann [[lumiere_ambiance]] Nachtblau, Dunkelheit 90, in 6 Sekunden."
+ ],
+ "lumiere_source": [
+  "Hängt ein Licht an das Objekt: Es folgt dem Objekt, wenn es sich bewegt (Fackel einer Figur, Laterne, Feuer …), auch wenn das Objekt ein Kind eines anderen ist. Einstellungen: Farbe, Radius in Pixeln (Abstand vom Zentrum), Beleuchtung (100 = normal, bis 300: stärker und weiter), farbiger Schein (0 = keiner), Flackern (keins, Kerze, Fackel, flackert) und Versatz. Ein Licht pro Objekt, höchstens 8 gleichzeitig. Es durchdringt die Dunkelheit von [[lumiere_ambiance]]; ohne Dunkelheit fügt es nur seinen Schein hinzu.",
+  "die Fackel einer Figur: an einem Objekt « Laterne », Kind des Helden, Radius 360, Flackern « Fackel »."
+ ],
+ "lumiere_eteindre": [
+  "Schaltet das am Objekt befestigte Licht aus. Zum Wiedereinschalten nimmst du erneut [[lumiere_source]].",
+  "ein Button « Laterne » schaltet das Licht des Helden aus."
+ ],
+ "ombre_objet": [
+  "Legt einen weichen Schatten unter das Objekt (oder entfernt ihn mit « Nein »). Er folgt dem Objekt, wenn es sich bewegt; Stärke und Breite sind einstellbar. Er gibt Figuren vor einem Hintergrund sofort Tiefe.",
+  "ein Schatten unter dem Helden: Stärke 50, Breite 70."
+ ],
+ "choisir_cible": [
+  "Objekt A sucht unter den Objekten mit einem der gewünschten Tags diejenigen IN SEINER REICHWEITE (gleiche Formen wie bei «Erreichbare Felder zeigen») und wählt eines aus: das nächste, das mit den wenigsten oder meisten Leben oder den niedrigsten / höchsten Wert einer Statistik. Ausgang «Ziel gefunden»: es wird zum «beteiligten Objekt» (für Angreifen, Gehe zu…). Ausgang «Kein Ziel»: niemand in Reichweite. Perfekt für die Intelligenz eines Monsters oder Turms.",
+  "ein Monster: [[choisir_cible]] (Tag « held », der nächste), dann [[attaquer]] bei « Ziel gefunden »."
+ ],
+ "NoeudEventNouvelleScene": [
+  "Startet jedes Mal, wenn eine neue Szene geöffnet wird. Gedacht für die «Globale Logik» (die in allen Szenen läuft): zum Beispiel die gewählte Armee auf jeder Karte aufstellen. In einer normalen Szene reicht «Beim Start».",
+  null
  ]
 }

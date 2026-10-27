@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D 全部节点（192 个）| 参考</title>
-<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 192 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<title>Yop2D 全部节点（198 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 198 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 192 个节点，以及它们的设置（输入）和输出。</p>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 198 个节点，以及它们的设置（输入）和输出。</p>
 <p><strong>分类</strong></p>
 <nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-网格和益智">网格和益智</a><a href="#c10-转场">转场</a><a href="#c11-动画">动画</a><a href="#c12-音频">音频</a><a href="#c13-故事与对话">故事与对话</a><a href="#c14-数值-绿线">数值（绿线）</a><a href="#c15-屏幕滤镜">屏幕滤镜</a></nav>
 <h2 id="c1-事件">事件</h2>
@@ -75,6 +75,9 @@
 <div class="fiche"><h3>按下返回键</h3>
 <p>当玩家按下手机的返回键（箭头或手势）时运行。适合用来打开暂停菜单或回到上一个画面。如果游戏里没有这个节点，返回键在游戏中不起任何作用。</p>
 <p class="exemple"><b>示例：</b> 返回 → “暂停游戏”，然后显示“继续 / 退出”菜单。</p>
+</div>
+<div class="fiche"><h3>每次进入新场景</h3>
+<p>每次打开新场景时运行。专为“全局逻辑”（在所有场景中运行）设计：例如在每张地图上放置选好的军队。在普通场景里，用“开始时”就够了。</p>
 </div>
 <div class="fiche"><h3>开始拖拽</h3>
 <div class="schema"><b>输入：</b> 对象</div>
@@ -236,6 +239,11 @@
 <div class="schema"><b>输入：</b> 缩放（%，100 = 正常）, 朝向, 持续时间（秒）</div>
 <p>平滑放大整个游戏画面（场景，或故事的背景和角色），朝向中心、脸部、一侧、上方或下方。100 = 恢复正常；对话框和 HUD 不动。</p>
 <p class="exemple"><b>示例：</b> Hana 害怕时朝脸部缩放到 140，持续 2 秒，然后回到 100。</p>
+</div>
+<div class="fiche"><h3>黑暗与光线氛围</h3>
+<div class="schema"><b>输入：</b> 夜晚的颜色, 黑暗程度（%，0 = 白天，100 = 几乎漆黑）, 变化时间（秒：30 = 一次日落）</div>
+<p>用你选的颜色让整个游戏变暗（在按钮和分数下面）。黑暗程度 0 = 白天，100 = 全黑，光源周围除外。程度和颜色会平滑变化：用 30 秒就能从白天过渡到橙色黄昏，再到蓝色夜晚，就像日落。</p>
+<p class="exemple"><b>示例：</b> 日落：“黑暗与光线氛围” 橙色，黑暗程度 40，用 6 秒；“等待” 6 秒；然后 “黑暗与光线氛围” 夜蓝色，黑暗程度 90，用 6 秒。</p>
 </div>
 <div class="fiche"><h3>相机抖动</h3>
 <div class="schema"><b>输入：</b> 强度, 持续时间（毫秒，1000 = 1 秒）</div>
@@ -477,6 +485,21 @@
 <div class="schema"><b>输入：</b> 对象, 闪电颜色, 持续时间（秒，0 = 无限）, 强度（0 = 停止，1 到 3）</div>
 <p>闪电在对象周围噼啪作响：它以闪电颜色闪烁、抖动并迸出火花。持续时间 0 = 无限（电网）；强度 0 = 停止。</p>
 <p class="exemple"><b>示例：</b> 法师碰到陷阱：对法师使用 “触电”（1 秒），“等待” 1 秒，然后 “重新开始场景”。</p>
+</div>
+<div class="fiche"><h3>光源（火把、灯笼……）</h3>
+<div class="schema"><b>输入：</b> 对象, 光的颜色, 半径（像素：离中心的距离）, 照明强度（%，100 = 正常，200 = 很强）, 彩色光晕（%，0 = 无，200 = 很强）, 闪动, 水平偏移（像素）, 垂直偏移（像素，负数 = 向上）</div>
+<p>把一盏灯挂在物体上：物体移动时灯跟着走（角色的火把、灯笼、火焰……），即使该物体是另一个物体的子物体。可设置：颜色、半径（像素，离中心的距离）、照明（100 = 正常，最高 300：更强更远）、彩色光晕（0 = 无）、闪动（无、蜡烛、火把、闪烁）和偏移。每个物体一盏灯，同时最多 8 盏。它能穿透 “黑暗与光线氛围” 设置的黑暗；没有黑暗时只增加光晕。</p>
+<p class="exemple"><b>示例：</b> 角色的火把：放在作为主角子物体的“灯笼”物体上，半径 360，闪动选“火把”。</p>
+</div>
+<div class="fiche"><h3>关闭物体的光</h3>
+<div class="schema"><b>输入：</b> 对象</div>
+<p>关闭挂在物体上的灯。要重新打开，再次使用 “光源（火把、灯笼……）”。</p>
+<p class="exemple"><b>示例：</b> 一个“灯笼”按钮关闭主角的灯。</p>
+</div>
+<div class="fiche"><h3>物体下方的阴影</h3>
+<div class="schema"><b>输入：</b> 对象, 阴影, 阴影强度（%）, 阴影宽度（占物体的%）, 垂直偏移（像素，负数 = 向上）</div>
+<p>在物体下方放一个柔和的阴影（选“否”则去掉）。阴影会跟着物体移动，可以调整强度和宽度。它能立刻让站在背景上的角色更有立体感。</p>
+<p class="exemple"><b>示例：</b> 主角脚下的阴影：强度 50，宽度 70。</p>
 </div>
 <div class="fiche"><h3>对象拖尾</h3>
 <div class="schema"><b>输入：</b> 对象, 预设, 颜色（留空 = 预设颜色）, 大小（1 = 正常）</div>
@@ -739,7 +762,7 @@
 <p class="exemple"><b>示例：</b> 拒绝移动已经行动过的英雄。</p>
 </div>
 <div class="fiche"><h3>显示可到达的格子</h3>
-<div class="schema"><b>输入：</b> 对象, 区域类型, 步数（或射程）, 格子颜色, 格子可见度（0 = 隐形，100 = 实心）, 每个格子加边框, 在每个格子写步数, 墙壁阻挡（移动）, 这些标签会挡路（逗号分隔）, 更耗步数的地形（标签=消耗，如 forest=2, water=3）, 区域名称（可选：同时显示多个）</div>
+<div class="schema"><b>输入：</b> 对象, 区域类型, 步数（或射程）, 格子颜色, 格子可见度（0 = 隐形，100 = 实心）, 每个格子加边框, 在每个格子写步数, 墙壁阻挡（移动）, 这些标签会挡路（逗号分隔）, 更耗步数的地形（标签=消耗，如 forest=2, water=3）, 区域名称（可选：同时显示多个）, 射程形状（攻击和跳跃）, 最小射程（0 = 无；2 = 不含最近的格子）, 自定义位置（列,行；例如 2,1 ; -2,1 ; 0,3）, 去掉物体所在的格子</div>
 <p>给所选对象能走到（或能攻击到）的格子上色。墙会挡路；你还可以添加会挡路的标签（其他单位）和多耗步数的地形（森林=2）。颜色、可见度、边框和数字都能调整。「区域名」可以同时显示多个区域（移动用蓝色，攻击用红色）。</p>
 <p class="exemple"><b>示例：</b> 点中英雄时显示它的移动范围。</p>
 </div>
@@ -754,12 +777,12 @@
 <p class="exemple"><b>示例：</b> 用「太远了！」拒绝过远的移动。</p>
 </div>
 <div class="fiche"><h3>给单位卡</h3>
-<div class="schema"><b>输入：</b> 对象, 生命值, 攻击, 防御, 移动（步）, 攻击射程（格）</div>
+<div class="schema"><b>输入：</b> 对象, 生命值, 攻击, 防御, 移动（步）, 攻击射程（格）, 其他属性（例如 munitions = 3, armure = 2）</div>
 <p>给对象一张属性卡：生命、攻击、防御、移动和射程（对象变量「vie」「attaque」「defense」「mouvement」「portee」）。可以随处用公式读取，例如 =英雄.mouvement 就是可达格子的步数。把这个节点放在每个单位的 “启动时” 之后，或放进可重复使用的单位预制件里。</p>
 <p class="exemple"><b>示例：</b> 创建一个弓箭手：生命 8，攻击 4，防御 0，移动 4，射程 3。</p>
 </div>
 <div class="fiche"><h3>攻击</h3>
-<div class="schema"><b>输入：</b> 对象 A, 对象 B, 攻击强度（%）, 计入目标所在地形的防御, 至少造成 1 点伤害, 生命值耗尽时销毁目标 &nbsp;→&nbsp; <b>输出：</b> 还活着 / 生命值为 0</div>
+<div class="schema"><b>输入：</b> 对象 A, 对象 B, 攻击强度（%）, 计入目标所在地形的防御, 至少造成 1 点伤害, 生命值耗尽时销毁目标, 自定义伤害公式（例如 attaquant.attaque * 2 - cible.armure）；留空 = 正常计算 &nbsp;→&nbsp; <b>输出：</b> 还活着 / 生命值为 0</div>
 <p>对象 A 攻击对象 B：伤害 = A 的攻击 × 威力 − B 的防御 − B 所在地形的防御。有两个出口：「还活着」和「生命耗尽」（勾选后目标会被销毁）。两个对象都需要有单位属性卡。</p>
 <p class="exemple"><b>示例：</b> 英雄打点中的怪物。</p>
 </div>
@@ -777,6 +800,11 @@
 <div class="schema"><b>输入：</b> 对象, 恢复的生命值</div>
 <p>给对象恢复生命值，不会超过最大值。</p>
 <p class="exemple"><b>示例：</b> 一瓶给英雄恢复 5 点生命值的药水。</p>
+</div>
+<div class="fiche"><h3>选择目标</h3>
+<div class="schema"><b>输入：</b> 对象, 可能目标的标签（用逗号分隔）, 选哪个目标？, 射程（格数，0 = 不限；例如 =怪物.portee）, 最小射程（0 = 无）, 射程形状, 自定义位置（列,行；例如 2,1 ; -2,1）, 属性（用于“属性”规则，例如 defense） &nbsp;→&nbsp; <b>输出：</b> 找到目标 / 没有目标</div>
+<p>物体 A 在带有指定标签的物体中，找出在它射程内的（形状与“显示可到达的格子”相同），再选一个：最近的、生命值最低或最高的，或某个属性值最低 / 最高的。“找到目标”出口：它会成为“相关物体”（供攻击、走向…使用）。“没有目标”出口：射程内没有任何目标。非常适合怪物或炮塔的“头脑”。</p>
+<p class="exemple"><b>示例：</b> 怪物：“选择目标”（标签“英雄”，最近的），然后在“找到目标”后执行 “攻击”。</p>
 </div>
 <div class="fiche"><h3>填充网格</h3>
 <div class="schema"><b>输入：</b> 对象, 列数, 行数, 模板对象（名称用逗号分隔）</div>

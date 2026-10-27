@@ -205,6 +205,24 @@
       "exemple": "o mago toca numa armadilha: “Eletrocussão” no mago (1 segundo), “Esperar” 1 segundo, depois “Reiniciar a cena”."
     },
     {
+      "nom": "Fonte de luz (tocha, lanterna…)",
+      "schema": "<b>Entradas:</b> Objeto, Cor da luz, Raio (pixels: distância do centro), Iluminação (%, 100 = normal, 200 = muito forte), Brilho colorido (%, 0 = nenhum, 200 = muito forte), Oscilação, Deslocamento horizontal (pixels), Deslocamento vertical (pixels, negativo = para cima)",
+      "role": "Prende uma luz ao objeto: ela o segue quando se move (tocha de um personagem, lanterna, fogo…), mesmo que o objeto seja filho de outro. Ajustes: cor, raio em pixels (distância do centro), iluminação (100 = normal, até 300: mais forte e mais longe), brilho colorido (0 = nenhum), oscilação (nenhuma, vela, tocha, pisca) e deslocamento. Uma luz por objeto, 8 no máximo ao mesmo tempo. Ela atravessa a escuridão de “Escuridão e clima de luz”; sem escuridão só acrescenta o brilho.",
+      "exemple": "a tocha de um personagem: em um objeto “lanterna” filho do herói, raio 360, oscilação “tocha”."
+    },
+    {
+      "nom": "Apagar a luz do objeto",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Apaga a luz presa ao objeto. Para acendê-la de novo, use “Fonte de luz (tocha, lanterna…)” outra vez.",
+      "exemple": "um botão “Lanterna” apaga a luz do herói."
+    },
+    {
+      "nom": "Sombra sob o objeto",
+      "schema": "<b>Entradas:</b> Objeto, Sombra, Força da sombra (%), Largura da sombra (% do objeto), Deslocamento vertical (pixels, negativo = para cima)",
+      "role": "Põe uma sombra suave sob o objeto (ou a remove com “Não”). Ela segue o objeto quando ele se move; ajustam-se a força e a largura. Dá volume na hora aos personagens sobre um cenário.",
+      "exemple": "uma sombra sob o herói: força 50, largura 70."
+    },
+    {
       "nom": "Rastro do objeto",
       "schema": "<b>Entradas:</b> Objeto, Modelo, Cor (vazio = a do modelo), Tamanho (1 = normal)",
       "role": "O objeto deixa um rastro de partículas ao se mover (modelo, cor e tamanho à escolha). Colocado no modelo de um tiro, cada tiro o herda. Modelo “Nenhum” para removê-lo.",

@@ -205,6 +205,24 @@
       "exemple": "el mago toca una trampa: «Electrocución» sobre el mago (1 segundo), «Esperar» 1 segundo y luego «Reiniciar la escena»."
     },
     {
+      "nom": "Fuente de luz (antorcha, farol…)",
+      "schema": "<b>Entradas:</b> Objeto, Color de la luz, Radio (píxeles: distancia desde el centro), Iluminación (%, 100 = normal, 200 = muy fuerte), Resplandor de color (%, 0 = ninguno, 200 = muy fuerte), Parpadeo, Desplazamiento horizontal (píxeles), Desplazamiento vertical (píxeles, negativo = arriba)",
+      "role": "Une una luz al objeto: lo sigue cuando se mueve (antorcha de un personaje, farol, fuego…), aunque el objeto sea hijo de otro. Ajustes: color, radio en píxeles (distancia al centro), iluminación (100 = normal, hasta 300: más fuerte y más lejos), resplandor de color (0 = ninguno), parpadeo (ninguno, vela, antorcha, parpadea) y desplazamiento. Una luz por objeto, 8 como máximo a la vez. Atraviesa la oscuridad de «Oscuridad y ambiente de luz»; sin oscuridad solo añade su resplandor.",
+      "exemple": "la antorcha de un personaje: sobre un objeto «farol» hijo del héroe, radio 360, parpadeo «antorcha»."
+    },
+    {
+      "nom": "Apagar la luz del objeto",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Apaga la luz unida al objeto. Para encenderla de nuevo, usa otra vez «Fuente de luz (antorcha, farol…)».",
+      "exemple": "un botón «Farol» apaga la luz del héroe."
+    },
+    {
+      "nom": "Sombra bajo el objeto",
+      "schema": "<b>Entradas:</b> Objeto, Sombra, Fuerza de la sombra (%), Ancho de la sombra (% del objeto), Desplazamiento vertical (píxeles, negativo = arriba)",
+      "role": "Pone una sombra suave bajo el objeto (o la quita con «No»). Sigue al objeto cuando se mueve; se ajusta su fuerza y su anchura. Da volumen enseguida a los personajes sobre un fondo.",
+      "exemple": "una sombra bajo el héroe: fuerza 50, anchura 70."
+    },
+    {
       "nom": "Estela del objeto",
       "schema": "<b>Entradas:</b> Objeto, Modelo, Color (vacío = el del modelo), Tamaño (1 = normal)",
       "role": "El objeto deja una estela de partículas detrás al moverse (modelo, color y tamaño a elegir). Puesta en el modelo de un disparo, cada disparo la hereda. Modelo «Ninguno» para quitarla.",

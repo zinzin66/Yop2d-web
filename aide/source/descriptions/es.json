@@ -778,5 +778,29 @@
  "attaquer": [
   "El objeto A ataca al objeto B: daño = ataque de A × potencia − defensa de B − defensa del terreno de B. Dos salidas: «Sigue con vida» y «Sin vida» (el objetivo se destruye si la casilla está marcada). Los dos objetos necesitan una ficha de unidad.",
   "un héroe golpea al monstruo tocado."
+ ],
+ "lumiere_ambiance": [
+  "Oscurece todo el juego (bajo los botones y la puntuación) con el color que elijas. Oscuridad 0 = pleno día, 100 = negro total, salvo alrededor de las fuentes de luz. El nivel y el color cambian suavemente: con 30 segundos se pasa del día al crepúsculo naranja y luego a la noche azul, como una puesta de sol.",
+  "una puesta de sol: [[lumiere_ambiance]] naranja, oscuridad 40, en 6 segundos; [[attendre]] 6 segundos; luego [[lumiere_ambiance]] azul noche, oscuridad 90, en 6 segundos."
+ ],
+ "lumiere_source": [
+  "Une una luz al objeto: lo sigue cuando se mueve (antorcha de un personaje, farol, fuego…), aunque el objeto sea hijo de otro. Ajustes: color, radio en píxeles (distancia al centro), iluminación (100 = normal, hasta 300: más fuerte y más lejos), resplandor de color (0 = ninguno), parpadeo (ninguno, vela, antorcha, parpadea) y desplazamiento. Una luz por objeto, 8 como máximo a la vez. Atraviesa la oscuridad de [[lumiere_ambiance]]; sin oscuridad solo añade su resplandor.",
+  "la antorcha de un personaje: sobre un objeto « farol » hijo del héroe, radio 360, parpadeo « antorcha »."
+ ],
+ "lumiere_eteindre": [
+  "Apaga la luz unida al objeto. Para encenderla de nuevo, usa otra vez [[lumiere_source]].",
+  "un botón « Farol » apaga la luz del héroe."
+ ],
+ "ombre_objet": [
+  "Pone una sombra suave bajo el objeto (o la quita con « No »). Sigue al objeto cuando se mueve; se ajusta su fuerza y su anchura. Da volumen enseguida a los personajes sobre un fondo.",
+  "una sombra bajo el héroe: fuerza 50, anchura 70."
+ ],
+ "choisir_cible": [
+  "El objeto A busca, entre los objetos con alguna de las etiquetas pedidas, los que están DENTRO DE SU ALCANCE (mismas formas que «Mostrar casillas accesibles») y elige uno: el más cercano, el que tiene menos o más vida, o el valor más bajo / alto de una estadística. Salida «Objetivo encontrado»: pasa a ser «el objeto implicado» (para Atacar, Ir hacia…). Salida «Ningún objetivo»: nadie a tiro. Ideal para la inteligencia de un monstruo o una torreta.",
+  "un monstruo: [[choisir_cible]] (tag « heroe », la más cercana), luego [[attaquer]] en « Objetivo encontrado »."
+ ],
+ "NoeudEventNouvelleScene": [
+  "Se lanza cada vez que se abre una escena nueva. Pensado para la «Lógica global» (que funciona en todas las escenas): por ejemplo, colocar el ejército elegido en cada mapa. En una escena normal basta con «Al empezar».",
+  null
  ]
 }

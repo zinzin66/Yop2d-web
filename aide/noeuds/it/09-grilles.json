@@ -27,7 +27,7 @@
     },
     {
       "nom": "Mostra le caselle raggiungibili",
-      "schema": "<b>Ingressi:</b> Oggetto, Tipo di zona, Numero di passi (o portata), Colore delle caselle, Visibilità delle caselle (0 = invisibile, 100 = piena), Cornice attorno a ogni casella, Scrivere i passi su ogni casella, I muri bloccano (movimento), Questi tag bloccano il passaggio (separati da virgola), Terreno che costa più passi (tag=costo, es. bosco=2, acqua=3), Nome della zona (facoltativo: per mostrarne più)",
+      "schema": "<b>Ingressi:</b> Oggetto, Tipo di zona, Numero di passi (o portata), Colore delle caselle, Visibilità delle caselle (0 = invisibile, 100 = piena), Cornice attorno a ogni casella, Scrivere i passi su ogni casella, I muri bloccano (movimento), Questi tag bloccano il passaggio (separati da virgola), Terreno che costa più passi (tag=costo, es. bosco=2, acqua=3), Nome della zona (facoltativo: per mostrarne più), Forma della portata (attacco e salto), Portata minima (0 = nessuna; 2 = non le prime caselle), Le mie posizioni (colonna,riga; es. 2,1 ; -2,1 ; 0,3), Togliere la casella dove si trova l'oggetto",
       "role": "Colora le caselle dove l'oggetto scelto può andare (o che può attaccare). I muri bloccano, e puoi aggiungere tag che bloccano (altre unità) e terreni che costano più passi (bosco=2). Colore, visibilità, cornice e numeri sono regolabili. «Nome della zona» permette di mostrarne più insieme (movimento in blu, attacco in rosso).",
       "exemple": "mostrare la zona di movimento di un eroe quando viene toccato."
     },
@@ -45,13 +45,13 @@
     },
     {
       "nom": "Dai una scheda unità",
-      "schema": "<b>Ingressi:</b> Oggetto, Punti vita, Attacco, Difesa, Movimento (passi), Portata d'attacco (caselle)",
+      "schema": "<b>Ingressi:</b> Oggetto, Punti vita, Attacco, Difesa, Movimento (passi), Portata d'attacco (caselle), Altre statistiche (es. munitions = 3, armure = 2)",
       "role": "Dà all'oggetto la sua scheda: vita, attacco, difesa, movimento e portata (variabili d'oggetto «vie», «attaque», «defense», «mouvement», «portee»). Si possono leggere ovunque con una formula, per esempio =eroe.mouvement per i passi delle caselle raggiungibili. Metti questo nodo dopo «All'Avvio» di ogni unità, o in un prefab di unità riutilizzabile.",
       "exemple": "creare un arciere: vita 8, attacco 4, difesa 0, movimento 4, portata 3."
     },
     {
       "nom": "Attacca",
-      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Potenza dell'attacco (%), Conta la difesa del terreno del bersaglio, Sempre almeno 1 danno, Distruggi il bersaglio quando finisce la vita &nbsp;→&nbsp; <b>Uscite:</b> Ancora vivo / Senza vita",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Potenza dell'attacco (%), Conta la difesa del terreno del bersaglio, Sempre almeno 1 danno, Distruggi il bersaglio quando finisce la vita, Calcolo libero dei danni (es. attaquant.attaque * 2 - cible.armure); vuoto = calcolo normale &nbsp;→&nbsp; <b>Uscite:</b> Ancora vivo / Senza vita",
       "role": "L'oggetto A attacca l'oggetto B: danno = attacco di A × potenza − difesa di B − difesa del terreno di B. Due uscite: «Ancora vivo» e «Senza vita» (il bersaglio viene distrutto se la casella è spuntata). Entrambi gli oggetti hanno bisogno di una scheda unità.",
       "exemple": "un eroe colpisce il mostro toccato."
     },
@@ -72,6 +72,12 @@
       "schema": "<b>Ingressi:</b> Oggetto, Vita restituita",
       "role": "Restituisce punti vita all'oggetto, senza superare il suo massimo.",
       "exemple": "una pozione che restituisce 5 punti vita all'eroe."
+    },
+    {
+      "nom": "Scegli un bersaglio",
+      "schema": "<b>Ingressi:</b> Oggetto, Tag dei bersagli possibili (separati da virgola), Quale bersaglio scegliere?, Portata in caselle (0 = illimitata; es. =mostro.portee), Portata minima (0 = nessuna), Forma della portata, Le mie posizioni (colonna,riga; es. 2,1 ; -2,1), Statistica (per le regole «statistica», es. defense) &nbsp;→&nbsp; <b>Uscite:</b> Bersaglio trovato / Nessun bersaglio",
+      "role": "L'oggetto A cerca, tra gli oggetti con uno dei tag richiesti, quelli NELLA SUA PORTATA (stesse forme di «Mostra le caselle raggiungibili») e ne sceglie uno: il più vicino, quello con meno o più vita, o il valore più basso / alto di una statistica. Uscita «Bersaglio trovato»: diventa «l'oggetto coinvolto» (per Attacca, Vai verso…). Uscita «Nessun bersaglio»: nessuno a tiro. Perfetto per l'intelligenza di un mostro o di una torretta.",
+      "exemple": "un mostro: «Scegli un bersaglio» (tag «eroe», il più vicino), poi «Attacca» su «Bersaglio trovato»."
     },
     {
       "nom": "Riempire la griglia",

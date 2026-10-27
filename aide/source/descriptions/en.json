@@ -778,5 +778,29 @@
  "attaquer": [
   "Object A attacks object B: damage = A's attack × power − B's defense − the defense of B's terrain. Two outputs: \"Still alive\" and \"Out of health\" (the target is destroyed if the box is ticked). Both objects need a unit sheet.",
   "a hero hits the touched monster."
+ ],
+ "lumiere_ambiance": [
+  "Darkens the whole game (under the buttons and score) with the color you choose. Darkness 0 = full daylight, 100 = pitch black, except around light sources. The level and the color change smoothly: over 30 seconds you go from day to an orange dusk and then a blue night, like a sunset.",
+  "a sunset: [[lumiere_ambiance]] orange, darkness 40, over 6 seconds; [[attendre]] 6 seconds; then [[lumiere_ambiance]] night blue, darkness 90, over 6 seconds."
+ ],
+ "lumiere_source": [
+  "Attaches a light to the object: it follows the object when it moves (a character's torch, a lantern, a fire…), even if the object is the child of another. Settings: color, radius in pixels (distance from the center), lighting (100 = normal, up to 300: stronger and farther), colored glow (0 = none), flicker (none, candle, torch, flickers) and shift. One light per object, 8 at most at once. It cuts through the darkness set by [[lumiere_ambiance]]; without darkness it only adds its glow.",
+  "a character's torch: placed on a « lantern » object that is a child of the hero, radius 360, flicker « torch »."
+ ],
+ "lumiere_eteindre": [
+  "Turns off the light attached to the object. To turn it back on, use [[lumiere_source]] again.",
+  "a « Lantern » button turns off the hero's light."
+ ],
+ "ombre_objet": [
+  "Puts a soft shadow under the object (or removes it with « No »). It follows the object when it moves; you can set its strength and width. It instantly gives volume to characters standing on a backdrop.",
+  "a shadow under the hero: strength 50, width 70."
+ ],
+ "choisir_cible": [
+  "Object A looks among the objects that carry one of the requested tags for those WITHIN ITS RANGE (same shapes as “Show reachable cells”), then picks one: the closest, the one with the least or the most health, or the lowest / highest value of a statistic. “Target found” output: it becomes “the involved object” (for Attack, Go to…). “No target” output: nobody in range. Perfect for the intelligence of a monster or a turret.",
+  "a monster: [[choisir_cible]] (tag “hero”, the closest, range =monster.range), then [[attaquer]] on “Target found”."
+ ],
+ "NoeudEventNouvelleScene": [
+  "Runs every time a new scene opens. Made for the \"Global logic\" (which runs in every scene): for example, placing the chosen army on each map. In an ordinary scene, \"On start\" is enough.",
+  null
  ]
 }

@@ -778,5 +778,29 @@
  "attaquer": [
   "L'oggetto A attacca l'oggetto B: danno = attacco di A × potenza − difesa di B − difesa del terreno di B. Due uscite: «Ancora vivo» e «Senza vita» (il bersaglio viene distrutto se la casella è spuntata). Entrambi gli oggetti hanno bisogno di una scheda unità.",
   "un eroe colpisce il mostro toccato."
+ ],
+ "lumiere_ambiance": [
+  "Oscura tutto il gioco (sotto i pulsanti e il punteggio) con il colore scelto. Oscurità 0 = pieno giorno, 100 = nero totale, tranne intorno alle fonti di luce. Il livello e il colore cambiano dolcemente: in 30 secondi si passa dal giorno al crepuscolo arancione e poi alla notte blu, come un tramonto.",
+  "un tramonto: [[lumiere_ambiance]] arancione, oscurità 40, in 6 secondi; [[attendre]] 6 secondi; poi [[lumiere_ambiance]] blu notte, oscurità 90, in 6 secondi."
+ ],
+ "lumiere_source": [
+  "Aggancia una luce all'oggetto: lo segue quando si muove (torcia di un personaggio, lanterna, fuoco…), anche se l'oggetto è figlio di un altro. Impostazioni: colore, raggio in pixel (distanza dal centro), illuminazione (100 = normale, fino a 300: più forte e più lontano), alone colorato (0 = nessuno), tremolio (nessuno, candela, torcia, sfarfalla) e spostamento. Una luce per oggetto, al massimo 8 contemporaneamente. Buca l'oscurità di [[lumiere_ambiance]]; senza oscurità aggiunge solo il suo alone.",
+  "la torcia di un personaggio: su un oggetto « lanterna » figlio dell'eroe, raggio 360, tremolio « torcia »."
+ ],
+ "lumiere_eteindre": [
+  "Spegne la luce agganciata all'oggetto. Per riaccenderla, usa di nuovo [[lumiere_source]].",
+  "un pulsante « Lanterna » spegne la luce dell'eroe."
+ ],
+ "ombre_objet": [
+  "Mette un'ombra morbida sotto l'oggetto (o la toglie con « No »). Segue l'oggetto quando si muove; si regolano forza e larghezza. Dà subito volume ai personaggi posati su uno sfondo.",
+  "un'ombra sotto l'eroe: forza 50, larghezza 70."
+ ],
+ "choisir_cible": [
+  "L'oggetto A cerca, tra gli oggetti con uno dei tag richiesti, quelli NELLA SUA PORTATA (stesse forme di «Mostra le caselle raggiungibili») e ne sceglie uno: il più vicino, quello con meno o più vita, o il valore più basso / alto di una statistica. Uscita «Bersaglio trovato»: diventa «l'oggetto coinvolto» (per Attacca, Vai verso…). Uscita «Nessun bersaglio»: nessuno a tiro. Perfetto per l'intelligenza di un mostro o di una torretta.",
+  "un mostro: [[choisir_cible]] (tag « eroe », il più vicino), poi [[attaquer]] su « Bersaglio trovato »."
+ ],
+ "NoeudEventNouvelleScene": [
+  "Parte ogni volta che si apre una nuova scena. Pensato per la «Logica globale» (che funziona in tutte le scene): per esempio mettere l'esercito scelto su ogni mappa. In una scena normale basta «All'avvio».",
+  null
  ]
 }

@@ -27,7 +27,7 @@
     },
     {
       "nom": "Montrer les cases accessibles",
-      "schema": "<b>Entrées :</b> Objet, Type de zone, Nombre de pas (ou portée), Couleur des cases, Visibilité des cases (0 = invisible, 100 = pleine), Cadre autour de chaque case, Écrire le nombre de pas sur chaque case, Les murs bloquent (déplacement), Ces tags bloquent le passage (séparés par une virgule), Terrains qui coûtent plus de pas (tag=coût, ex. foret=2, eau=3), Nom de la zone (facultatif : pour en montrer plusieurs)",
+      "schema": "<b>Entrées :</b> Objet, Type de zone, Nombre de pas (ou portée), Couleur des cases, Visibilité des cases (0 = invisible, 100 = pleine), Cadre autour de chaque case, Écrire le nombre de pas sur chaque case, Les murs bloquent (déplacement), Ces tags bloquent le passage (séparés par une virgule), Terrains qui coûtent plus de pas (tag=coût, ex. foret=2, eau=3), Nom de la zone (facultatif : pour en montrer plusieurs), Forme de la portée (attaque et saut), Portée minimale (0 = aucune ; 2 = pas les 1res cases), Mes positions (colonne,ligne ; ex. 2,1 ; -2,1 ; 0,3), Retirer la case où se tient l'objet",
       "role": "Colore les cases où l'objet choisi peut aller (ou attaquer). Les murs bloquent, et tu peux ajouter des tags qui bloquent (autres unités) et des terrains qui coûtent plus de pas (foret=2). Couleur, visibilité, cadre et chiffres se règlent. « Nom de la zone » permet d'en montrer plusieurs (déplacement en bleu, attaque en rouge).",
       "exemple": "montrer la zone de déplacement d'un héros quand on le touche."
     },
@@ -45,13 +45,13 @@
     },
     {
       "nom": "Donner une fiche d'unité",
-      "schema": "<b>Entrées :</b> Objet, Points de vie, Attaque, Défense, Mouvement (pas), Portée d'attaque (cases)",
+      "schema": "<b>Entrées :</b> Objet, Points de vie, Attaque, Défense, Mouvement (pas), Portée d'attaque (cases), Autres statistiques (ex. munitions = 3, armure = 2)",
       "role": "Donne à l'objet sa fiche : vie, attaque, défense, mouvement et portée (variables d'objet « vie », « attaque », « defense », « mouvement », « portee »). Elles se lisent partout par formule, par exemple =hero.mouvement pour le nombre de pas des cases accessibles. Mets ce nœud « Au démarrage » de chaque unité, ou dans un prefab d'unité réutilisable.",
       "exemple": "créer un archer : vie 8, attaque 4, défense 0, mouvement 4, portée 3."
     },
     {
       "nom": "Attaquer",
-      "schema": "<b>Entrées :</b> Objet A, Objet B, Puissance de l'attaque (%), Compter la défense du terrain de la cible, Toujours au moins 1 dégât, Détruire la cible quand elle n'a plus de vie &nbsp;→&nbsp; <b>Sorties :</b> Encore en vie / Plus de vie",
+      "schema": "<b>Entrées :</b> Objet A, Objet B, Puissance de l'attaque (%), Compter la défense du terrain de la cible, Toujours au moins 1 dégât, Détruire la cible quand elle n'a plus de vie, Calcul des dégâts libre (ex. attaquant.attaque * 2 - cible.armure) ; vide = calcul normal &nbsp;→&nbsp; <b>Sorties :</b> Encore en vie / Plus de vie",
       "role": "L'objet A attaque l'objet B : dégâts = attaque de A × puissance − défense de B − défense du terrain de B. Deux sorties : « Encore en vie » et « Plus de vie » (la cible est détruite si la case est cochée). Les deux objets doivent avoir une fiche d'unité.",
       "exemple": "un héros frappe le monstre touché."
     },
@@ -72,6 +72,12 @@
       "schema": "<b>Entrées :</b> Objet, Vie rendue",
       "role": "Rend des points de vie à l'objet, sans dépasser sa vie maximum.",
       "exemple": "une potion qui rend 5 points de vie au héros."
+    },
+    {
+      "nom": "Choisir une cible",
+      "schema": "<b>Entrées :</b> Objet, Tags des cibles possibles (séparés par une virgule), Quelle cible choisir ?, Portée en cases (0 = sans limite ; ex. =monstre.portee), Portée minimale (0 = aucune), Forme de la portée, Mes positions (colonne,ligne ; ex. 2,1 ; -2,1), Statistique (pour les règles « statistique », ex. defense) &nbsp;→&nbsp; <b>Sorties :</b> Cible trouvée / Aucune cible",
+      "role": "L'objet A cherche, parmi les objets qui portent un des tags demandés, ceux qui sont DANS SA PORTÉE (mêmes formes que « Montrer les cases accessibles »), puis en choisit un : la plus proche, celle qui a le moins ou le plus de vie, ou la plus basse / haute valeur d'une statistique. Sortie « Cible trouvée » : elle devient « l'objet impliqué » (pour Attaquer, Aller vers…). Sortie « Aucune cible » : personne à portée. Parfait pour l'intelligence d'un monstre ou d'une tourelle.",
+      "exemple": "un monstre : « Choisir une cible » (tag « heros », la plus proche, portée =monstre.portee), puis « Attaquer » sur « Cible trouvée »."
     },
     {
       "nom": "Remplir la grille",

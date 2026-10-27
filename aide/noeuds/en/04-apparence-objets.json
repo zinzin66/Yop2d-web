@@ -205,6 +205,24 @@
       "exemple": "the wizard touches a trap: “Electrocution” on the wizard (1 second), “Wait” 1 second, then “Restart the scene”."
     },
     {
+      "nom": "Light source (torch, lantern…)",
+      "schema": "<b>Inputs:</b> Object, Light color, Radius (pixels: distance from the light's center), Lighting (%, 100 = normal, 200 = very strong), Colored glow (%, 0 = none, 200 = very strong), Flicker, Horizontal shift (pixels), Vertical shift (pixels, negative = up)",
+      "role": "Attaches a light to the object: it follows the object when it moves (a character's torch, a lantern, a fire…), even if the object is the child of another. Settings: color, radius in pixels (distance from the center), lighting (100 = normal, up to 300: stronger and farther), colored glow (0 = none), flicker (none, candle, torch, flickers) and shift. One light per object, 8 at most at once. It cuts through the darkness set by “Darkness and light mood”; without darkness it only adds its glow.",
+      "exemple": "a character's torch: placed on a “lantern” object that is a child of the hero, radius 360, flicker “torch”."
+    },
+    {
+      "nom": "Turn off the object's light",
+      "schema": "<b>Input:</b> Object",
+      "role": "Turns off the light attached to the object. To turn it back on, use “Light source (torch, lantern…)” again.",
+      "exemple": "a “Lantern” button turns off the hero's light."
+    },
+    {
+      "nom": "Shadow under the object",
+      "schema": "<b>Inputs:</b> Object, Shadow, Shadow strength (%), Shadow width (% of the object), Vertical shift (pixels, negative = up)",
+      "role": "Puts a soft shadow under the object (or removes it with “No”). It follows the object when it moves; you can set its strength and width. It instantly gives volume to characters standing on a backdrop.",
+      "exemple": "a shadow under the hero: strength 50, width 70."
+    },
+    {
       "nom": "Object trail",
       "schema": "<b>Inputs:</b> Object, Preset, Color (empty = preset's), Size (1 = normal)",
       "role": "The object leaves a trail of particles behind it when it moves (preset, color and size of your choice). Set on a shot's model, every shot inherits it. Preset “None” removes it.",

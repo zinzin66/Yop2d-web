@@ -27,7 +27,7 @@
     },
     {
       "nom": "Erreichbare Felder zeigen",
-      "schema": "<b>Eingänge:</b> Objekt, Zonentyp, Anzahl Schritte (oder Reichweite), Farbe der Felder, Sichtbarkeit der Felder (0 = unsichtbar, 100 = voll), Rahmen um jedes Feld, Schrittzahl auf jedes Feld schreiben, Wände blockieren (Bewegung), Diese Tags blockieren den Weg (mit Komma getrennt), Gelände mit mehr Schritten (Tag=Kosten, z. B. wald=2, wasser=3), Zonenname (optional: für mehrere)",
+      "schema": "<b>Eingänge:</b> Objekt, Zonentyp, Anzahl Schritte (oder Reichweite), Farbe der Felder, Sichtbarkeit der Felder (0 = unsichtbar, 100 = voll), Rahmen um jedes Feld, Schrittzahl auf jedes Feld schreiben, Wände blockieren (Bewegung), Diese Tags blockieren den Weg (mit Komma getrennt), Gelände mit mehr Schritten (Tag=Kosten, z. B. wald=2, wasser=3), Zonenname (optional: für mehrere), Form der Reichweite (Angriff und Sprung), Mindestreichweite (0 = keine; 2 = nicht die ersten Felder), Meine Positionen (Spalte,Zeile; z. B. 2,1 ; -2,1 ; 0,3), Das Feld des Objekts entfernen",
       "role": "Färbt die Felder ein, auf die das gewählte Objekt gehen (oder die es angreifen) kann. Wände blockieren, und du kannst blockierende Tags (andere Einheiten) und Gelände hinzufügen, das mehr Schritte kostet (Wald=2). Farbe, Sichtbarkeit, Rahmen und Zahlen sind einstellbar. Mit „Zonenname“ zeigst du mehrere gleichzeitig (Bewegung blau, Angriff rot).",
       "exemple": "die Bewegungszone eines Helden zeigen, wenn man ihn berührt."
     },
@@ -45,13 +45,13 @@
     },
     {
       "nom": "Einheitenblatt geben",
-      "schema": "<b>Eingänge:</b> Objekt, Lebenspunkte, Angriff, Verteidigung, Bewegung (Schritte), Angriffsreichweite (Felder)",
+      "schema": "<b>Eingänge:</b> Objekt, Lebenspunkte, Angriff, Verteidigung, Bewegung (Schritte), Angriffsreichweite (Felder), Weitere Statistiken (z. B. munitions = 3, armure = 2)",
       "role": "Gibt dem Objekt sein Blatt: Leben, Angriff, Verteidigung, Bewegung und Reichweite (Objektvariablen „vie“, „attaque“, „defense“, „mouvement“, „portee“). Sie sind überall mit einer Formel lesbar, z. B. =held.mouvement für die Schritte der erreichbaren Felder. Setze diesen Node nach „Beim Start“ jeder Einheit oder in ein wiederverwendbares Einheiten-Prefab.",
       "exemple": "einen Bogenschützen erstellen: Leben 8, Angriff 4, Verteidigung 0, Bewegung 4, Reichweite 3."
     },
     {
       "nom": "Angreifen",
-      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Angriffsstärke (%), Verteidigung des Geländes des Ziels zählen, Immer mindestens 1 Schaden, Ziel zerstören, wenn die Leben aufgebraucht sind &nbsp;→&nbsp; <b>Ausgänge:</b> Noch am Leben / Keine Leben mehr",
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Angriffsstärke (%), Verteidigung des Geländes des Ziels zählen, Immer mindestens 1 Schaden, Ziel zerstören, wenn die Leben aufgebraucht sind, Freie Schadensformel (z. B. attaquant.attaque * 2 - cible.armure); leer = normale Berechnung &nbsp;→&nbsp; <b>Ausgänge:</b> Noch am Leben / Keine Leben mehr",
       "role": "Objekt A greift Objekt B an: Schaden = Angriff von A × Stärke − Verteidigung von B − Geländeverteidigung von B. Zwei Ausgänge: „Noch am Leben“ und „Kein Leben mehr“ (das Ziel wird zerstört, wenn das Kästchen angehakt ist). Beide Objekte brauchen ein Einheitenblatt.",
       "exemple": "ein Held schlägt das berührte Monster."
     },
@@ -72,6 +72,12 @@
       "schema": "<b>Eingänge:</b> Objekt, Zurückgegebene Leben",
       "role": "Gibt dem Objekt Lebenspunkte zurück, ohne sein Maximum zu überschreiten.",
       "exemple": "ein Trank, der dem Helden 5 Lebenspunkte zurückgibt."
+    },
+    {
+      "nom": "Ziel wählen",
+      "schema": "<b>Eingänge:</b> Objekt, Tags möglicher Ziele (durch Komma getrennt), Welches Ziel wählen?, Reichweite in Feldern (0 = unbegrenzt; z. B. =monster.portee), Mindestreichweite (0 = keine), Form der Reichweite, Meine Positionen (Spalte,Zeile; z. B. 2,1 ; -2,1), Statistik (für die Statistik-Regeln, z. B. defense) &nbsp;→&nbsp; <b>Ausgänge:</b> Ziel gefunden / Kein Ziel",
+      "role": "Objekt A sucht unter den Objekten mit einem der gewünschten Tags diejenigen IN SEINER REICHWEITE (gleiche Formen wie bei „Erreichbare Felder zeigen“) und wählt eines aus: das nächste, das mit den wenigsten oder meisten Leben oder den niedrigsten / höchsten Wert einer Statistik. Ausgang „Ziel gefunden“: es wird zum „beteiligten Objekt“ (für Angreifen, Gehe zu…). Ausgang „Kein Ziel“: niemand in Reichweite. Perfekt für die Intelligenz eines Monsters oder Turms.",
+      "exemple": "ein Monster: „Ziel wählen“ (Tag „held“, der nächste), dann „Angreifen“ bei „Ziel gefunden“."
     },
     {
       "nom": "Raster füllen",

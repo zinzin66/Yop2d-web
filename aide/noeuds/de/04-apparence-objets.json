@@ -205,6 +205,24 @@
       "exemple": "der Zauberer berührt eine Falle: „Stromschlag“ auf den Zauberer (1 Sekunde), „Warten“ 1 Sekunde, dann „Szene neu starten“."
     },
     {
+      "nom": "Lichtquelle (Fackel, Laterne…)",
+      "schema": "<b>Eingänge:</b> Objekt, Lichtfarbe, Radius (Pixel: Abstand vom Zentrum), Beleuchtung (%, 100 = normal, 200 = sehr stark), Farbiger Schein (%, 0 = keiner, 200 = sehr stark), Flackern, Horizontal verschieben (Pixel), Vertikal verschieben (Pixel, negativ = nach oben)",
+      "role": "Hängt ein Licht an das Objekt: Es folgt dem Objekt, wenn es sich bewegt (Fackel einer Figur, Laterne, Feuer …), auch wenn das Objekt ein Kind eines anderen ist. Einstellungen: Farbe, Radius in Pixeln (Abstand vom Zentrum), Beleuchtung (100 = normal, bis 300: stärker und weiter), farbiger Schein (0 = keiner), Flackern (keins, Kerze, Fackel, flackert) und Versatz. Ein Licht pro Objekt, höchstens 8 gleichzeitig. Es durchdringt die Dunkelheit von „Dunkelheit und Lichtstimmung“; ohne Dunkelheit fügt es nur seinen Schein hinzu.",
+      "exemple": "die Fackel einer Figur: an einem Objekt „Laterne“, Kind des Helden, Radius 360, Flackern „Fackel“."
+    },
+    {
+      "nom": "Licht des Objekts ausschalten",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Schaltet das am Objekt befestigte Licht aus. Zum Wiedereinschalten nimmst du erneut „Lichtquelle (Fackel, Laterne…)“.",
+      "exemple": "ein Button „Laterne“ schaltet das Licht des Helden aus."
+    },
+    {
+      "nom": "Schatten unter dem Objekt",
+      "schema": "<b>Eingänge:</b> Objekt, Schatten, Schattenstärke (%), Schattenbreite (% des Objekts), Vertikal verschieben (Pixel, negativ = nach oben)",
+      "role": "Legt einen weichen Schatten unter das Objekt (oder entfernt ihn mit „Nein“). Er folgt dem Objekt, wenn es sich bewegt; Stärke und Breite sind einstellbar. Er gibt Figuren vor einem Hintergrund sofort Tiefe.",
+      "exemple": "ein Schatten unter dem Helden: Stärke 50, Breite 70."
+    },
+    {
       "nom": "Objektspur",
       "schema": "<b>Eingänge:</b> Objekt, Vorlage, Farbe (leer = wie Vorlage), Größe (1 = normal)",
       "role": "Das Objekt zieht beim Bewegen eine Partikelspur hinter sich her (Vorlage, Farbe und Größe wählbar). Auf die Vorlage eines Schusses gesetzt, erbt jeder Schuss sie. Vorlage „Keiner“ entfernt sie.",

@@ -27,7 +27,7 @@
     },
     {
       "nom": "Mostrar casillas accesibles",
-      "schema": "<b>Entradas:</b> Objeto, Tipo de zona, Número de pasos (o alcance), Color de las casillas, Visibilidad de las casillas (0 = invisible, 100 = sólida), Marco alrededor de cada casilla, Escribir los pasos en cada casilla, Los muros bloquean (movimiento), Estos tags bloquean el paso (separados por comas), Terreno que cuesta más pasos (tag=coste, p. ej. bosque=2, agua=3), Nombre de la zona (opcional: para mostrar varias)",
+      "schema": "<b>Entradas:</b> Objeto, Tipo de zona, Número de pasos (o alcance), Color de las casillas, Visibilidad de las casillas (0 = invisible, 100 = sólida), Marco alrededor de cada casilla, Escribir los pasos en cada casilla, Los muros bloquean (movimiento), Estos tags bloquean el paso (separados por comas), Terreno que cuesta más pasos (tag=coste, p. ej. bosque=2, agua=3), Nombre de la zona (opcional: para mostrar varias), Forma del alcance (ataque y salto), Alcance mínimo (0 = ninguno; 2 = sin las primeras casillas), Mis posiciones (columna,fila; p. ej. 2,1 ; -2,1 ; 0,3), Quitar la casilla donde está el objeto",
       "role": "Colorea las casillas a las que puede ir (o atacar) el objeto elegido. Los muros bloquean, y puedes añadir tags que bloquean (otras unidades) y terrenos que cuestan más pasos (bosque=2). El color, la visibilidad, el marco y los números se pueden ajustar. «Nombre de la zona» permite mostrar varias a la vez (movimiento en azul, ataque en rojo).",
       "exemple": "mostrar la zona de movimiento de un héroe al tocarlo."
     },
@@ -45,13 +45,13 @@
     },
     {
       "nom": "Dar una ficha de unidad",
-      "schema": "<b>Entradas:</b> Objeto, Puntos de vida, Ataque, Defensa, Movimiento (pasos), Alcance de ataque (casillas)",
+      "schema": "<b>Entradas:</b> Objeto, Puntos de vida, Ataque, Defensa, Movimiento (pasos), Alcance de ataque (casillas), Otras estadísticas (p. ej. munitions = 3, armure = 2)",
       "role": "Da al objeto su ficha: vida, ataque, defensa, movimiento y alcance (variables de objeto «vie», «attaque», «defense», «mouvement», «portee»). Se pueden leer donde quieras con una fórmula, por ejemplo =heroe.mouvement para los pasos de las casillas accesibles. Pon este nodo tras «Al Iniciar» de cada unidad, o en un prefab de unidad reutilizable.",
       "exemple": "crear un arquero: vida 8, ataque 4, defensa 0, movimiento 4, alcance 3."
     },
     {
       "nom": "Atacar",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Potencia del ataque (%), Contar la defensa del terreno del objetivo, Siempre al menos 1 de daño, Destruir el objetivo cuando se queda sin vida &nbsp;→&nbsp; <b>Salidas:</b> Sigue vivo / Sin vida",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Potencia del ataque (%), Contar la defensa del terreno del objetivo, Siempre al menos 1 de daño, Destruir el objetivo cuando se queda sin vida, Cálculo de daño libre (p. ej. attaquant.attaque * 2 - cible.armure); vacío = cálculo normal &nbsp;→&nbsp; <b>Salidas:</b> Sigue vivo / Sin vida",
       "role": "El objeto A ataca al objeto B: daño = ataque de A × potencia − defensa de B − defensa del terreno de B. Dos salidas: «Sigue con vida» y «Sin vida» (el objetivo se destruye si la casilla está marcada). Los dos objetos necesitan una ficha de unidad.",
       "exemple": "un héroe golpea al monstruo tocado."
     },
@@ -72,6 +72,12 @@
       "schema": "<b>Entradas:</b> Objeto, Vida devuelta",
       "role": "Devuelve puntos de vida al objeto, sin pasar de su máximo.",
       "exemple": "una poción que devuelve 5 puntos de vida al héroe."
+    },
+    {
+      "nom": "Elegir un objetivo",
+      "schema": "<b>Entradas:</b> Objeto, Etiquetas de los objetivos posibles (separadas por comas), ¿Qué objetivo elegir?, Alcance en casillas (0 = sin límite; p. ej. =monstruo.portee), Alcance mínimo (0 = ninguno), Forma del alcance, Mis posiciones (columna,fila; p. ej. 2,1 ; -2,1), Estadística (para las reglas «estadística», p. ej. defense) &nbsp;→&nbsp; <b>Salidas:</b> Objetivo encontrado / Ningún objetivo",
+      "role": "El objeto A busca, entre los objetos con alguna de las etiquetas pedidas, los que están DENTRO DE SU ALCANCE (mismas formas que «Mostrar casillas accesibles») y elige uno: el más cercano, el que tiene menos o más vida, o el valor más bajo / alto de una estadística. Salida «Objetivo encontrado»: pasa a ser «el objeto implicado» (para Atacar, Ir hacia…). Salida «Ningún objetivo»: nadie a tiro. Ideal para la inteligencia de un monstruo o una torreta.",
+      "exemple": "un monstruo: «Elegir un objetivo» (tag «heroe», la más cercana), luego «Atacar» en «Objetivo encontrado»."
     },
     {
       "nom": "Rellenar la cuadrícula",

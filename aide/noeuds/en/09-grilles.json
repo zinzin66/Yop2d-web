@@ -27,7 +27,7 @@
     },
     {
       "nom": "Show reachable cells",
-      "schema": "<b>Inputs:</b> Object, Zone type, Number of steps (or range), Color of the cells, Cell visibility (0 = invisible, 100 = solid), Frame around each cell, Write the step count on each cell, Walls block (movement), These tags block the way (separated by commas), Terrain costing more steps (tag=cost, e.g. forest=2, water=3), Zone name (optional: to show several)",
+      "schema": "<b>Inputs:</b> Object, Zone type, Number of steps (or range), Color of the cells, Cell visibility (0 = invisible, 100 = solid), Frame around each cell, Write the step count on each cell, Walls block (movement), These tags block the way (separated by commas), Terrain costing more steps (tag=cost, e.g. forest=2, water=3), Zone name (optional: to show several), Range shape (attack and jump), Minimum range (0 = none; 2 = not the first cells), My positions (column,row; e.g. 2,1 ; -2,1 ; 0,3), Remove the cell the object stands on",
       "role": "Colors the cells the chosen object can move to (or attack). Walls block, and you can add tags that block (other units) and terrains that cost more steps (forest=2). Color, visibility, frame and numbers are adjustable. \"Zone name\" lets you show several at once (movement in blue, attack in red).",
       "exemple": "show a hero's movement zone when it is touched."
     },
@@ -45,13 +45,13 @@
     },
     {
       "nom": "Give a unit sheet",
-      "schema": "<b>Inputs:</b> Object, Health points, Attack, Defense, Movement (steps), Attack range (cells)",
+      "schema": "<b>Inputs:</b> Object, Health points, Attack, Defense, Movement (steps), Attack range (cells), Other statistics (e.g. munitions = 3, armure = 2)",
       "role": "Gives the object its sheet: health, attack, defense, movement and range (object variables \"vie\", \"attaque\", \"defense\", \"mouvement\", \"portee\"). They can be read anywhere with a formula, e.g. =hero.mouvement for the number of steps of the reachable cells. Put this node \"At start\" of each unit, or in a reusable unit prefab.",
       "exemple": "create an archer: health 8, attack 4, defense 0, movement 4, range 3."
     },
     {
       "nom": "Attack",
-      "schema": "<b>Inputs:</b> Object A, Object B, Attack power (%), Count the defense of the target's terrain, Always at least 1 damage, Destroy the target when its health runs out &nbsp;→&nbsp; <b>Outputs:</b> Still alive / Out of health",
+      "schema": "<b>Inputs:</b> Object A, Object B, Attack power (%), Count the defense of the target's terrain, Always at least 1 damage, Destroy the target when its health runs out, Free damage formula (e.g. attacker.attaque * 2 - target.armure); empty = normal calculation &nbsp;→&nbsp; <b>Outputs:</b> Still alive / Out of health",
       "role": "Object A attacks object B: damage = A's attack × power − B's defense − the defense of B's terrain. Two outputs: \"Still alive\" and \"Out of health\" (the target is destroyed if the box is ticked). Both objects need a unit sheet.",
       "exemple": "a hero hits the touched monster."
     },
@@ -72,6 +72,12 @@
       "schema": "<b>Inputs:</b> Object, Health restored",
       "role": "Gives health points back to the object, without going over its maximum.",
       "exemple": "a potion that restores 5 health points to the hero."
+    },
+    {
+      "nom": "Choose a target",
+      "schema": "<b>Inputs:</b> Object, Tags of possible targets (comma-separated), Which target to pick?, Range in cells (0 = unlimited; e.g. =monster.portee), Minimum range (0 = none), Range shape, My positions (column,row; e.g. 2,1 ; -2,1), Statistic (for the “statistic” rules, e.g. defense) &nbsp;→&nbsp; <b>Outputs:</b> Target found / No target",
+      "role": "Object A looks among the objects that carry one of the requested tags for those WITHIN ITS RANGE (same shapes as “Show reachable cells”), then picks one: the closest, the one with the least or the most health, or the lowest / highest value of a statistic. “Target found” output: it becomes “the involved object” (for Attack, Go to…). “No target” output: nobody in range. Perfect for the intelligence of a monster or a turret.",
+      "exemple": "a monster: “Choose a target” (tag “hero”, the closest, range =monster.range), then “Attack” on “Target found”."
     },
     {
       "nom": "Fill the grid",

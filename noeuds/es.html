@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (192) | Referencia</title>
-<meta name="description" content="Lista completa de los 192 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (198) | Referencia</title>
+<meta name="description" content="Lista completa de los 198 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 192 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 198 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-transiciones">Transiciones</a><a href="#c11-animaciones">Animaciones</a><a href="#c12-audio">Audio</a><a href="#c13-historia-y-diálogos">Historia y diálogos</a><a href="#c14-valores-cables-verdes">Valores (cables verdes)</a><a href="#c15-filtros-de-pantalla">Filtros de pantalla</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -75,6 +75,9 @@
 <div class="fiche"><h3>Botón atrás pulsado</h3>
 <p>Se ejecuta cuando el jugador pulsa el botón «atrás» del teléfono (flecha o gesto). Ideal para abrir un menú de pausa o volver a la pantalla anterior. Sin este nodo, el botón atrás no hace nada durante el juego.</p>
 <p class="exemple"><b>Ejemplo:</b> atrás → «Pausar el juego» y mostrar un menú «Continuar / Salir».</p>
+</div>
+<div class="fiche"><h3>En cada escena nueva</h3>
+<p>Se lanza cada vez que se abre una escena nueva. Pensado para la «Lógica global» (que funciona en todas las escenas): por ejemplo, colocar el ejército elegido en cada mapa. En una escena normal basta con «Al empezar».</p>
 </div>
 <div class="fiche"><h3>Inicio de Arrastre</h3>
 <div class="schema"><b>Entrada:</b> Objeto</div>
@@ -236,6 +239,11 @@
 <div class="schema"><b>Entradas:</b> Zoom (%, 100 = normal), Hacia, Duración (segundos)</div>
 <p>Agranda suavemente toda la pantalla del juego (la escena, o el decorado y los personajes de una historia) hacia el centro, la cara, un lado, arriba o abajo. 100 = volver a lo normal; el cuadro de diálogo y el HUD no se mueven.</p>
 <p class="exemple"><b>Ejemplo:</b> zoom 140 hacia la cara durante 2 segundos cuando Hana tiene miedo, luego zoom 100.</p>
+</div>
+<div class="fiche"><h3>Oscuridad y ambiente de luz</h3>
+<div class="schema"><b>Entradas:</b> Color de la noche, Oscuridad (%, 0 = pleno día, 100 = casi negro total), Cambia en (segundos: 30 = un atardecer)</div>
+<p>Oscurece todo el juego (bajo los botones y la puntuación) con el color que elijas. Oscuridad 0 = pleno día, 100 = negro total, salvo alrededor de las fuentes de luz. El nivel y el color cambian suavemente: con 30 segundos se pasa del día al crepúsculo naranja y luego a la noche azul, como una puesta de sol.</p>
+<p class="exemple"><b>Ejemplo:</b> una puesta de sol: «Oscuridad y ambiente de luz» naranja, oscuridad 40, en 6 segundos; «Esperar» 6 segundos; luego «Oscuridad y ambiente de luz» azul noche, oscuridad 90, en 6 segundos.</p>
 </div>
 <div class="fiche"><h3>Temblor de cámara</h3>
 <div class="schema"><b>Entradas:</b> Intensidad, Duración (milisegundos, 1000 = 1 s)</div>
@@ -477,6 +485,21 @@
 <div class="schema"><b>Entradas:</b> Objeto, Color de los rayos, Duración (segundos, 0 = sin fin), Intensidad (0 = detener, 1 a 3)</div>
 <p>Rayos chisporrotean alrededor del objeto: parpadea con el color del rayo, tiembla y suelta chispas. Duración 0 = sin fin (valla eléctrica); intensidad 0 = detener.</p>
 <p class="exemple"><b>Ejemplo:</b> el mago toca una trampa: «Electrocución» sobre el mago (1 segundo), «Esperar» 1 segundo y luego «Reiniciar la escena».</p>
+</div>
+<div class="fiche"><h3>Fuente de luz (antorcha, farol…)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Color de la luz, Radio (píxeles: distancia desde el centro), Iluminación (%, 100 = normal, 200 = muy fuerte), Resplandor de color (%, 0 = ninguno, 200 = muy fuerte), Parpadeo, Desplazamiento horizontal (píxeles), Desplazamiento vertical (píxeles, negativo = arriba)</div>
+<p>Une una luz al objeto: lo sigue cuando se mueve (antorcha de un personaje, farol, fuego…), aunque el objeto sea hijo de otro. Ajustes: color, radio en píxeles (distancia al centro), iluminación (100 = normal, hasta 300: más fuerte y más lejos), resplandor de color (0 = ninguno), parpadeo (ninguno, vela, antorcha, parpadea) y desplazamiento. Una luz por objeto, 8 como máximo a la vez. Atraviesa la oscuridad de «Oscuridad y ambiente de luz»; sin oscuridad solo añade su resplandor.</p>
+<p class="exemple"><b>Ejemplo:</b> la antorcha de un personaje: sobre un objeto «farol» hijo del héroe, radio 360, parpadeo «antorcha».</p>
+</div>
+<div class="fiche"><h3>Apagar la luz del objeto</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>Apaga la luz unida al objeto. Para encenderla de nuevo, usa otra vez «Fuente de luz (antorcha, farol…)».</p>
+<p class="exemple"><b>Ejemplo:</b> un botón «Farol» apaga la luz del héroe.</p>
+</div>
+<div class="fiche"><h3>Sombra bajo el objeto</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Sombra, Fuerza de la sombra (%), Ancho de la sombra (% del objeto), Desplazamiento vertical (píxeles, negativo = arriba)</div>
+<p>Pone una sombra suave bajo el objeto (o la quita con «No»). Sigue al objeto cuando se mueve; se ajusta su fuerza y su anchura. Da volumen enseguida a los personajes sobre un fondo.</p>
+<p class="exemple"><b>Ejemplo:</b> una sombra bajo el héroe: fuerza 50, anchura 70.</p>
 </div>
 <div class="fiche"><h3>Estela del objeto</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Modelo, Color (vacío = el del modelo), Tamaño (1 = normal)</div>
@@ -739,7 +762,7 @@
 <p class="exemple"><b>Ejemplo:</b> rechazar mover a un héroe que ya jugó.</p>
 </div>
 <div class="fiche"><h3>Mostrar casillas accesibles</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Tipo de zona, Número de pasos (o alcance), Color de las casillas, Visibilidad de las casillas (0 = invisible, 100 = sólida), Marco alrededor de cada casilla, Escribir los pasos en cada casilla, Los muros bloquean (movimiento), Estos tags bloquean el paso (separados por comas), Terreno que cuesta más pasos (tag=coste, p. ej. bosque=2, agua=3), Nombre de la zona (opcional: para mostrar varias)</div>
+<div class="schema"><b>Entradas:</b> Objeto, Tipo de zona, Número de pasos (o alcance), Color de las casillas, Visibilidad de las casillas (0 = invisible, 100 = sólida), Marco alrededor de cada casilla, Escribir los pasos en cada casilla, Los muros bloquean (movimiento), Estos tags bloquean el paso (separados por comas), Terreno que cuesta más pasos (tag=coste, p. ej. bosque=2, agua=3), Nombre de la zona (opcional: para mostrar varias), Forma del alcance (ataque y salto), Alcance mínimo (0 = ninguno; 2 = sin las primeras casillas), Mis posiciones (columna,fila; p. ej. 2,1 ; -2,1 ; 0,3), Quitar la casilla donde está el objeto</div>
 <p>Colorea las casillas a las que puede ir (o atacar) el objeto elegido. Los muros bloquean, y puedes añadir tags que bloquean (otras unidades) y terrenos que cuestan más pasos (bosque=2). El color, la visibilidad, el marco y los números se pueden ajustar. «Nombre de la zona» permite mostrar varias a la vez (movimiento en azul, ataque en rojo).</p>
 <p class="exemple"><b>Ejemplo:</b> mostrar la zona de movimiento de un héroe al tocarlo.</p>
 </div>
@@ -754,12 +777,12 @@
 <p class="exemple"><b>Ejemplo:</b> rechazar un movimiento demasiado lejano con «¡demasiado lejos!».</p>
 </div>
 <div class="fiche"><h3>Dar una ficha de unidad</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Puntos de vida, Ataque, Defensa, Movimiento (pasos), Alcance de ataque (casillas)</div>
+<div class="schema"><b>Entradas:</b> Objeto, Puntos de vida, Ataque, Defensa, Movimiento (pasos), Alcance de ataque (casillas), Otras estadísticas (p. ej. munitions = 3, armure = 2)</div>
 <p>Da al objeto su ficha: vida, ataque, defensa, movimiento y alcance (variables de objeto «vie», «attaque», «defense», «mouvement», «portee»). Se pueden leer donde quieras con una fórmula, por ejemplo =heroe.mouvement para los pasos de las casillas accesibles. Pon este nodo tras «Al Iniciar» de cada unidad, o en un prefab de unidad reutilizable.</p>
 <p class="exemple"><b>Ejemplo:</b> crear un arquero: vida 8, ataque 4, defensa 0, movimiento 4, alcance 3.</p>
 </div>
 <div class="fiche"><h3>Atacar</h3>
-<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Potencia del ataque (%), Contar la defensa del terreno del objetivo, Siempre al menos 1 de daño, Destruir el objetivo cuando se queda sin vida &nbsp;→&nbsp; <b>Salidas:</b> Sigue vivo / Sin vida</div>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Potencia del ataque (%), Contar la defensa del terreno del objetivo, Siempre al menos 1 de daño, Destruir el objetivo cuando se queda sin vida, Cálculo de daño libre (p. ej. attaquant.attaque * 2 - cible.armure); vacío = cálculo normal &nbsp;→&nbsp; <b>Salidas:</b> Sigue vivo / Sin vida</div>
 <p>El objeto A ataca al objeto B: daño = ataque de A × potencia − defensa de B − defensa del terreno de B. Dos salidas: «Sigue con vida» y «Sin vida» (el objetivo se destruye si la casilla está marcada). Los dos objetos necesitan una ficha de unidad.</p>
 <p class="exemple"><b>Ejemplo:</b> un héroe golpea al monstruo tocado.</p>
 </div>
@@ -777,6 +800,11 @@
 <div class="schema"><b>Entradas:</b> Objeto, Vida devuelta</div>
 <p>Devuelve puntos de vida al objeto, sin pasar de su máximo.</p>
 <p class="exemple"><b>Ejemplo:</b> una poción que devuelve 5 puntos de vida al héroe.</p>
+</div>
+<div class="fiche"><h3>Elegir un objetivo</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Etiquetas de los objetivos posibles (separadas por comas), ¿Qué objetivo elegir?, Alcance en casillas (0 = sin límite; p. ej. =monstruo.portee), Alcance mínimo (0 = ninguno), Forma del alcance, Mis posiciones (columna,fila; p. ej. 2,1 ; -2,1), Estadística (para las reglas «estadística», p. ej. defense) &nbsp;→&nbsp; <b>Salidas:</b> Objetivo encontrado / Ningún objetivo</div>
+<p>El objeto A busca, entre los objetos con alguna de las etiquetas pedidas, los que están DENTRO DE SU ALCANCE (mismas formas que «Mostrar casillas accesibles») y elige uno: el más cercano, el que tiene menos o más vida, o el valor más bajo / alto de una estadística. Salida «Objetivo encontrado»: pasa a ser «el objeto implicado» (para Atacar, Ir hacia…). Salida «Ningún objetivo»: nadie a tiro. Ideal para la inteligencia de un monstruo o una torreta.</p>
+<p class="exemple"><b>Ejemplo:</b> un monstruo: «Elegir un objetivo» (tag «heroe», la más cercana), luego «Atacar» en «Objetivo encontrado».</p>
 </div>
 <div class="fiche"><h3>Rellenar la cuadrícula</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Columnas, Filas, Objetos modelo (nombres separados por comas)</div>
