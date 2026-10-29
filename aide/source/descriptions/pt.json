@@ -776,8 +776,8 @@
   "criar um arqueiro: vida 8, ataque 4, defesa 0, movimento 4, alcance 3."
  ],
  "attaquer": [
-  "O objeto A ataca o objeto B: dano = ataque de A × poder − defesa de B − defesa do terreno de B. Duas saídas: «Ainda vivo» e «Sem vida» (o alvo é destruído se a caixa estiver marcada). Os dois objetos precisam de uma ficha de unidade. No avançado: bônus pelas tags («cavalaria = 150»: 150 % de dano contra um objeto com a tag cavalaria; um objeto pode ter várias tags separadas por vírgulas), um cálculo livre e uma estatística gasta a cada ataque («municao»: em 0 o ataque não acontece).",
-  "Uma lança contra cavalaria: bônus «cavalaria = 150», ou seja, 150 % de dano; um arqueiro que gasta «municao»."
+  "O objeto A ataca o objeto B: dano = ataque de A × potência × bônus − defesa de B − defesa do terreno de B. Saídas «Ainda vivo» e «Sem vida» (o alvo é destruído se a caixa estiver marcada), e «Atacante destruído» se um contra-ataque o mata. Os dois objetos precisam de uma ficha de unidade. As regras «regle: lança > cavalaria = 150» de donnees.txt se aplicam sozinhas. No avançado: bônus por tags («cavalaria = 150»), PERFURAÇÃO (porcentagem da defesa ignorada, para uma lança ou besta), CONTRA-ATAQUE (porcentagem do ataque do alvo devolvida se sobreviver e o atacante estiver ao seu alcance), BÔNUS DE ALTURA (porcentagem de dano por nível de diferença: quem está mais alto bate mais forte), GUARDA (cada aliado vizinho com a tag escolhida soma defesa ao alvo: uma parede de escudos), um cálculo livre e uma estatística gasta a cada ataque (munição).",
+  "a lança (perfuração 40) contra a cavalaria pesada; o arqueiro na colina (altura +15 %)."
  ],
  "lumiere_ambiance": [
   "Escurece todo o jogo (sob os botões e a pontuação) com a cor que escolher. Escuridão 0 = pleno dia, 100 = preto total, exceto em volta das fontes de luz. O nível e a cor mudam suavemente: com 30 segundos vai-se do dia ao crepúsculo laranja e depois à noite azul, como um pôr do sol.",
@@ -870,5 +870,65 @@
  "camera_doigt": [
   "Ativa (ou desativa) a rolagem da tela com o dedo: ao arrastar na cena, a câmera se move. Um simples toque continua sendo um toque (uma torre, um botão). Os botões do HUD nunca rolam. A câmera não sai dos limites definidos em «Limites da câmera».",
   "Ao começar: Limites da câmera (0, 3840, 0, 1080) e depois Rolar a câmera com o dedo: o jogador arrasta um mapa de duas telas de largura."
+ ],
+ "appliquer_donnees": [
+  "Dá ao objeto A todos os valores de uma unidade ou arma escritos no arquivo donnees.txt (Assets → Diálogos, ou assets_ludexa/Textes/donnees.txt): vida, ataque, defesa, movimento, alcance, preço… e suas tags. Uma linha basta: «unite Cavaleiro: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=cavalaria pesado». Reequilibra-se o jogo editando o arquivo, sem mexer nos nós. Saídas «Encontrado» / «Não encontrado». O arquivo também pode conter «arme Espada: attaque=5», «etat Veneno: duree=3, degats=2», «regle: lança > cavalaria = 150» (um atacante com tag lança causa 150 % num alvo com tag cavalaria, aplicado automaticamente por «Atacar») e as alturas das casas.",
+  "no início do jogo, para cada herói: Aplicar dados «Cavaleiro»."
+ ],
+ "definir_hauteur": [
+  "Dá uma altura (um nível: 0 = plano, 1, 2, 3…) a um retângulo de casas da grade: coluna e linha iniciais, número de colunas e linhas. As alturas dão o bônus de altura de «Atacar» e bloqueiam a visão na névoa de guerra (uma colina esconde o que está atrás). Também podem ser escritas em donnees.txt («hauteur 3,4 = 2» ou um bloco «hauteurs:» com um dígito por casa). Leia-as com a fórmula hauteur(coluna, linha) ou com os nós verdes «Altura da casa tocada» / «Altura da casa sob um objeto».",
+  "uma colina de 3 x 2 casas na altura 2, para o arqueiro que ficar nela atacar mais forte."
+ ],
+ "valeur_hauteur_touchee": [
+  "Nó verde: a altura da casa que o dedo toca (0 se nada estiver definido). Conecte com 🔗 a um ajuste, por exemplo num «Se…».",
+  "mostrar «Colina!» ao tocar uma casa de altura 2."
+ ],
+ "valeur_hauteur_objet": [
+  "Nó verde: a altura da casa sob um objeto. Serve, por exemplo, para comparar a altura do atacante com a do alvo.",
+  "permitir o ataque à distância só de uma casa mais alta que o alvo."
+ ],
+ "donner_etat": [
+  "Dá um estado à unidade por um número de TURNOS: veneno (dano a cada turno), lento (o movimento cai), abençoado (o ataque sobe)… Tudo pode ser escrito em donnees.txt («etat Veneno: duree=3, degats=2», «etat Lento: duree=2, stat=mouvement, delta=-2»): então basta o nome do estado. O dano cai no início de cada turno da equipe da unidade e depois o estado perde um turno; no fim, a estatística alterada volta ao normal. Dar o mesmo estado de novo o prolonga em vez de dobrá-lo. A unidade guarda uma estatística «etat_<nome>» (turnos restantes), legível numa fórmula. Precisa de «Passar ao próximo turno».",
+  "uma flecha envenenada: Atacar → ainda vivo → dar o estado «Veneno» ao alvo."
+ ],
+ "retirer_etat": [
+  "Remove um estado da unidade (pelo nome), ou todos se o nome estiver vazio. A estatística alterada pelo estado volta na hora ao valor anterior.",
+  "um sacerdote que cura o veneno de um aliado."
+ ],
+ "si_etat": [
+  "Testa se a unidade tem um estado (ou qualquer um se o nome estiver vazio). Saídas «Verdadeiro» / «Falso».",
+  "não poder se mover se a unidade estiver «Congelada»."
+ ],
+ "effet_zone": [
+  "Atinge de uma vez todos os objetos ao redor do objeto A (no centro): dano, cura ou um estado. Ajustes: a força, o raio em casas, as tags afetadas (vazio = todos), a forma (losango ou quadrado com diagonais), a queda de força por casa de distância (explosão: quanto mais longe, menos dano) e se o objeto do centro também é atingido. O dano ignora a defesa. Uma bola de fogo, uma cura em grupo, um grito que assusta. Para contar vítimas numa condição use as fórmulas compter(\"tag\") e voisins(objeto, \"tag\", casas).",
+  "uma bola de fogo: raio 2, força 6, queda de 30 % por casa, nas unidades «inimigo»."
+ ],
+ "gagner_xp": [
+  "Dá experiência à unidade. Ao atingir o limite (limite × nível atual), a unidade sobe de nível, a experiência sobrando é guardada e os ganhos são somados («vie=2, attaque=1»; a vida máxima sobe junto com a vida). A unidade guarda as estatísticas «xp» e «niveau» (1 no início). Saídas «Subiu de nível» / «Sem subir de nível»: uma fanfarra ou mensagem ao subir.",
+  "um herói que ganha 30 de experiência por cada inimigo derrotado."
+ ],
+ "memoriser_position": [
+  "Memoriza a posição atual da unidade, antes de um movimento. Com «Cancelar o movimento», o jogador pode voltar atrás (como em Advance Wars ao tocar «Cancelar» antes de agir).",
+  "logo antes de «Ir para a casa»: Memorizar a posição."
+ ],
+ "annuler_deplacement": [
+  "Devolve a unidade à posição memorizada por «Memorizar a posição», apaga a marca de «já jogou» e zera suas estatísticas «bouge» e «agi». Saídas «Cancelado» / «Nada a cancelar».",
+  "um botão «Cancelar» no menu de ação da unidade."
+ ],
+ "ia_jouer": [
+  "Faz uma unidade jogar sozinha, como um computador. Ela olha aonde pode ir (movimento, paredes, terrenos, unidades que bloqueiam), procura os inimigos (suas tags) e escolhe a melhor casa de onde atacar conforme seu ESTILO: agressivo (o máximo de dano, acabar um alvo primeiro), prudente (evita o contra-ataque) ou defensivo (gosta de casas de alta defesa). Ninguém ao alcance: ela se aproxima do inimigo mais próximo. Ao chegar, sai «Chegou»: o objeto envolvido é o alvo escolhido e a estatística «cible_ia» da unidade vale 1 (pode atacar) ou 0 (só se aproximou). Usa o movimento, o alcance (e «portee_min») e a ficha da unidade. Saída «Sem inimigos» se não houver mais.",
+  "turno dos monstros: para cada monstro, Jogar como um computador (inimigos = jogador) → ao chegar, se cible_ia = 1, Atacar."
+ ],
+ "brouillard_maj": [
+  "Calcula o que a equipe vê e cobre o resto do mapa com um véu escuro: as unidades da equipe (tags) veem ao redor até sua estatística «vision» em casas (senão a visão padrão do nó). Uma parede do terreno, um terreno com a propriedade «bloque_vue = oui» (floresta densa) ou uma casa mais alta bloqueiam a visão. As casas já vistas ficam meio escuras (memória, opcional). As unidades com tags inimigas fora de vista são escondidas. Reexecute após cada movimento ou no início de um turno. A fórmula vue(coluna, linha) vale 1 se a casa é vista. «Remover a névoa de guerra» deixa tudo visível.",
+  "no início de cada turno do jogador: Atualizar a névoa (equipe jogador, inimigos inimigo, visão 3)."
+ ],
+ "brouillard_enlever": [
+  "Remove a névoa de guerra: todo o mapa fica visível de novo e as unidades escondidas reaparecem.",
+  "no fim do jogo, para mostrar todo o mapa."
+ ],
+ "couleur_equipe": [
+  "Um só desenho para todas as equipes: pinte as partes a colorir (capa, bandeira, penacho) com uma cor de referência (rosa vivo #FF00FF por padrão) e este nó substitui esse rosa pela cor da equipe para o objeto. As sombras e brilhos do desenho são mantidos (um rosa escuro vira azul escuro). A tolerância diz o quanto uma cor pode se afastar da referência e ainda ser substituída. Nada muda nas imagens: tudo acontece na exibição, então repita no início de cada partida.",
+  "dois exércitos com as mesmas imagens: jogador em azul, inimigo em vermelho."
  ]
 }

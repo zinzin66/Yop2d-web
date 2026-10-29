@@ -776,8 +776,8 @@
   "create an archer: health 8, attack 4, defense 0, movement 4, range 3."
  ],
  "attaquer": [
-  "Object A attacks object B: damage = A's attack × power − B's defense − B's terrain defense. Two exits: “Still alive” and “Out of health” (the target is destroyed if the box is ticked). Both objects need a unit sheet. In advanced: bonuses by tag (“cavalry = 150”: 150% damage against an object with the cavalry tag; an object can have several tags separated by commas), a free formula, and a statistic used up at each attack (“ammo”: at 0 the attack no longer happens).",
-  "A spear against cavalry: bonus “cavalry = 150”, so 150% damage; an archer using up “ammo”."
+  "Object A attacks object B: damage = A's attack × power × bonuses − B's defense − B's terrain defense. Exits “Still alive” and “Out of health” (the target is destroyed if the box is ticked), and “Attacker destroyed” if a counterattack kills it. Both objects need a unit sheet. The “regle: spear > cavalry = 150” rules of donnees.txt apply by themselves. In advanced: bonuses by tags (“cavalry = 150”), PIERCING (percentage of defense ignored, for a spear or a crossbow), COUNTERATTACK (percentage of the target's attack returned if it survives and the attacker is in its range), HEIGHT BONUS (percentage of damage per level of difference: the one higher up hits harder), GUARD (each adjacent ally with the chosen tag adds defense to the target: a shield wall), a free formula, and a statistic used up at each attack (ammo).",
+  "the spear (piercing 40) against heavy cavalry; the archer on the hill (height +15%)."
  ],
  "lumiere_ambiance": [
   "Darkens the whole game (under the buttons and score) with the color you choose. Darkness 0 = full daylight, 100 = pitch black, except around light sources. The level and the color change smoothly: over 30 seconds you go from day to an orange dusk and then a blue night, like a sunset.",
@@ -870,5 +870,65 @@
  "camera_doigt": [
   "Turns finger scrolling on (or off): dragging in the scene moves the camera. A simple tap is still a tap (a tower, a button). HUD buttons never scroll. The camera stays inside the limits set with “Camera limits”.",
   "On start: Camera limits (0, 3840, 0, 1080), then Scroll the camera with a finger: the player drags a map two screens wide."
+ ],
+ "appliquer_donnees": [
+  "Gives object A every value of a unit or weapon written in the donnees.txt file (Assets → Dialogues, or assets_ludexa/Textes/donnees.txt): health, attack, defense, movement, range, price… and its tags. One line is enough: “unite Knight: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=cavalry heavy”. You rebalance the game by editing the file, without touching the nodes. Exits “Found” / “Not found”. The file can also hold “arme Sword: attaque=5”, “etat Poison: duree=3, degats=2”, “regle: spear > cavalry = 150” (an attacker tagged spear deals 150% to a target tagged cavalry, applied automatically by “Attack”) and tile heights.",
+  "at the start of the game, for each hero: Apply data “Knight”."
+ ],
+ "definir_hauteur": [
+  "Gives a height (a level: 0 = flat, 1, 2, 3…) to a rectangle of grid tiles: start column and row, number of columns and rows. Heights drive the height bonus of “Attack” and block sight in the fog of war (a hill hides what is behind it). You can also write them in donnees.txt (“hauteur 3,4 = 2” or a “hauteurs:” block with one digit per tile). Read them with the formula hauteur(column, row) or with the green nodes “Height of the touched tile” / “Height of the tile under an object”.",
+  "a 3 x 2 tile hill at height 2, so an archer standing on it hits harder."
+ ],
+ "valeur_hauteur_touchee": [
+  "Green node: the height of the tile the finger touches (0 if nothing is defined). Plug it with 🔗 into a setting, for example in an “If…”.",
+  "show “Hill!” when a tile of height 2 is touched."
+ ],
+ "valeur_hauteur_objet": [
+  "Green node: the height of the tile under an object. Useful, for example, to compare the attacker's height with the target's.",
+  "only allow a ranged attack from a tile higher than the target."
+ ],
+ "donner_etat": [
+  "Gives the unit a state for a number of TURNS: poison (damage every turn), slow (movement drops), blessed (attack rises)… Everything can be written in donnees.txt (“etat Poison: duree=3, degats=2”, “etat Slow: duree=2, stat=mouvement, delta=-2”): then only the state's name is needed. Damage lands at the start of each turn of the unit's team, then the state loses a turn; at the end, the changed statistic goes back to normal. Giving the same state again extends it instead of doubling it. The unit keeps an “etat_<name>” statistic (turns left), readable in a formula. Needs “Go to next turn”.",
+  "a poisoned arrow: Attack → still alive → give the “Poison” state to the target."
+ ],
+ "retirer_etat": [
+  "Removes a state from the unit (by name), or every state if the name is empty. The statistic changed by the state goes straight back to its previous value.",
+  "a priest who cures an ally's poison."
+ ],
+ "si_etat": [
+  "Tests whether the unit has a state (or any state if the name is empty). Exits “True” / “False”.",
+  "cannot move if the unit is “Frozen”."
+ ],
+ "effet_zone": [
+  "Hits every object around object A (at the centre) at once: damage, heal or a state. Settings: the strength, the radius in tiles, the tags affected (empty = everyone), the shape (diamond or square with diagonals), the falloff per tile of distance (explosion: the further away, the weaker), and whether the centre object is hit too. Damage ignores defense. A fireball, a group heal, a scary shout. To count victims in a condition use the formulas compter(\"tag\") and voisins(object, \"tag\", tiles).",
+  "a fireball: radius 2, strength 6, falloff 30% per tile, on “enemy” units."
+ ],
+ "gagner_xp": [
+  "Gives the unit experience. When it reaches the threshold (threshold × current level) the unit moves up a level, spare experience is kept, and the gains are added (“vie=2, attaque=1”; maximum health rises along with health). The unit keeps the “xp” and “niveau” statistics (1 at the start). Exits “Level up” / “No level up”: play a fanfare or a message when it levels.",
+  "a hero who gains 30 experience for every enemy defeated."
+ ],
+ "memoriser_position": [
+  "Remembers the unit's current position, before a move. With “Cancel the move”, the player can go back (as in Advance Wars when you press “Cancel” before acting).",
+  "just before “Go to tile”: Remember the position."
+ ],
+ "annuler_deplacement": [
+  "Puts the unit back at the position remembered by “Remember the position”, clears its “has already played” mark and sets its “bouge” and “agi” statistics back to 0. Exits “Cancelled” / “Nothing to cancel”.",
+  "a “Cancel” button in the unit's action menu."
+ ],
+ "ia_jouer": [
+  "Makes a unit play by itself, like a computer. It looks at where it can go (movement, walls, terrain, blocking units), finds the enemies (their tags) and picks the best tile to attack from according to its STYLE: aggressive (most damage, finishing a target first), cautious (avoids the counterattack) or defensive (likes high-defense tiles). Nobody in range: it moves toward the nearest enemy. Once it arrives, the “Arrived” exit fires: the involved object is the chosen target and the unit's “cible_ia” statistic is 1 (can attack) or 0 (just moved closer). It uses the unit's movement, range (and “portee_min”) and unit sheet. Exit “No enemy” if there are none left.",
+  "monsters' turn: for each monster, Play like a computer (enemies = player) → on arrival, if cible_ia = 1, Attack."
+ ],
+ "brouillard_maj": [
+  "Works out what the team can see and covers the rest of the map with a dark veil: the team's units (tags) see around them up to their “vision” statistic in tiles (otherwise the node's default vision). A terrain wall, a terrain with the property “bloque_vue = oui” (dense forest) or a higher tile stops the view. Tiles already seen stay half dark (memory, optional). Units with enemy tags out of sight are hidden. Run it again after every move or at the start of a turn. The formula vue(column, row) is 1 when the tile is seen. “Remove the fog of war” makes everything visible.",
+  "at the start of each player turn: Update the fog (team player, enemies enemy, vision 3)."
+ ],
+ "brouillard_enlever": [
+  "Removes the fog of war: the whole map is visible again and hidden units reappear.",
+  "at the end of the game, to show the whole map."
+ ],
+ "couleur_equipe": [
+  "One drawing for all teams: paint the parts to colour (cloak, flag, plume) with a marker colour (bright pink #FF00FF by default), then this node replaces that pink with the team colour for the object. The drawing's shadows and highlights are kept (a dark pink becomes a dark blue). Tolerance says how far a colour may stray from the marker and still be replaced. Nothing is changed in the images: it all happens at display time, so do it again at the start of each game.",
+  "two armies with the same images: player in blue, enemy in red."
  ]
 }

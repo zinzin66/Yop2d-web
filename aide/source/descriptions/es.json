@@ -776,8 +776,8 @@
   "crear un arquero: vida 8, ataque 4, defensa 0, movimiento 4, alcance 3."
  ],
  "attaquer": [
-  "El objeto A ataca al objeto B: daño = ataque de A × potencia − defensa de B − defensa del terreno de B. Dos salidas: «Sigue vivo» y «Sin vida» (el objetivo se destruye si la casilla está marcada). Ambos objetos necesitan una ficha de unidad. En avanzado: bonus según los tags («caballeria = 150»: 150 % de daño contra un objeto con el tag caballeria; un objeto puede tener varios tags separados por comas), un cálculo libre y una estadística que se gasta en cada ataque («municion»: en 0 el ataque no se realiza).",
-  "Una lanza contra caballería: bonus «caballeria = 150», o sea 150 % de daño; un arquero que gasta «municion»."
+  "El objeto A ataca al objeto B: daño = ataque de A × potencia × bonus − defensa de B − defensa del terreno de B. Salidas «Sigue vivo» y «Sin vida» (el objetivo se destruye si la casilla está marcada), y «Atacante destruido» si un contraataque lo mata. Ambos objetos necesitan una ficha de unidad. Las reglas «regle: lanza > caballeria = 150» de donnees.txt se aplican solas. En avanzado: bonus según tags («caballeria = 150»), PERFORACIÓN (porcentaje de defensa ignorado, para una lanza o una ballesta), CONTRAATAQUE (porcentaje del ataque del objetivo devuelto si sobrevive y el atacante está a su alcance), BONUS DE ALTURA (porcentaje de daño por nivel de diferencia: el de arriba golpea más fuerte), GUARDIA (cada aliado vecino con el tag elegido suma defensa al objetivo: un muro de escudos), un cálculo libre y una estadística que se gasta en cada ataque (munición).",
+  "la lanza (perforación 40) contra la caballería pesada; el arquero en la colina (altura +15 %)."
  ],
  "lumiere_ambiance": [
   "Oscurece todo el juego (bajo los botones y la puntuación) con el color que elijas. Oscuridad 0 = pleno día, 100 = negro total, salvo alrededor de las fuentes de luz. El nivel y el color cambian suavemente: con 30 segundos se pasa del día al crepúsculo naranja y luego a la noche azul, como una puesta de sol.",
@@ -870,5 +870,65 @@
  "camera_doigt": [
   "Activa (o corta) el desplazamiento de la pantalla con el dedo: al arrastrar en la escena se mueve la cámara. Un simple toque sigue siendo un toque (una torre, un botón). Los botones del HUD nunca desplazan. La cámara no sale de los límites fijados con «Límites de la cámara».",
   "Al empezar: Límites de la cámara (0, 3840, 0, 1080) y luego Desplazar la cámara con el dedo: el jugador arrastra un mapa de dos pantallas de ancho."
+ ],
+ "appliquer_donnees": [
+  "Da al objeto A todos los valores de una unidad o arma escritos en el archivo donnees.txt (Assets → Diálogos, o assets_ludexa/Textes/donnees.txt): vida, ataque, defensa, movimiento, alcance, precio… y sus tags. Basta una línea: «unite Caballero: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=caballeria pesado». Se reequilibra el juego editando el archivo, sin tocar los nodos. Salidas «Encontrado» / «No encontrado». El archivo también puede contener «arme Espada: attaque=5», «etat Veneno: duree=3, degats=2», «regle: lanza > caballeria = 150» (un atacante con tag lanza hace 150 % a un objetivo con tag caballeria, aplicado automáticamente por «Atacar») y las alturas de las casillas.",
+  "al empezar la partida, para cada héroe: Aplicar datos «Caballero»."
+ ],
+ "definir_hauteur": [
+  "Da una altura (un nivel: 0 = llano, 1, 2, 3…) a un rectángulo de casillas de la cuadrícula: columna y fila de inicio, número de columnas y filas. Las alturas dan el bonus de altura de «Atacar» y detienen la vista en la niebla de guerra (una colina oculta lo que hay detrás). También se pueden escribir en donnees.txt («hauteur 3,4 = 2» o un bloque «hauteurs:» con una cifra por casilla). Léelas con la fórmula hauteur(columna, fila) o con los nodos verdes «Altura de la casilla tocada» / «Altura de la casilla bajo un objeto».",
+  "una colina de 3 x 2 casillas a altura 2, para que el arquero que se coloque ahí golpee más fuerte."
+ ],
+ "valeur_hauteur_touchee": [
+  "Nodo verde: la altura de la casilla que toca el dedo (0 si no hay nada definido). Conéctalo con 🔗 a un ajuste, por ejemplo en un «Si…».",
+  "mostrar «¡Colina!» al tocar una casilla de altura 2."
+ ],
+ "valeur_hauteur_objet": [
+  "Nodo verde: la altura de la casilla bajo un objeto. Sirve, por ejemplo, para comparar la altura del atacante con la del objetivo.",
+  "permitir el ataque a distancia solo desde una casilla más alta que el objetivo."
+ ],
+ "donner_etat": [
+  "Da un estado a la unidad durante un número de TURNOS: veneno (daño cada turno), lento (baja el movimiento), bendecido (sube el ataque)… Todo puede escribirse en donnees.txt («etat Veneno: duree=3, degats=2», «etat Lento: duree=2, stat=mouvement, delta=-2»): entonces basta el nombre del estado. El daño cae al inicio de cada turno del equipo de la unidad y luego el estado pierde un turno; al final, la estadística modificada vuelve a como estaba. Volver a dar el mismo estado lo prolonga en vez de duplicarlo. La unidad conserva una estadística «etat_<nombre>» (turnos restantes), legible en una fórmula. Requiere «Pasar al siguiente turno».",
+  "una flecha envenenada: Atacar → sigue vivo → dar el estado «Veneno» al objetivo."
+ ],
+ "retirer_etat": [
+  "Quita un estado de la unidad (por nombre), o todos si el nombre está vacío. La estadística modificada por el estado vuelve enseguida a su valor anterior.",
+  "un sacerdote que cura el veneno de un aliado."
+ ],
+ "si_etat": [
+  "Comprueba si la unidad tiene un estado (o cualquiera si el nombre está vacío). Salidas «Verdadero» / «Falso».",
+  "no poder moverse si la unidad está «Congelada»."
+ ],
+ "effet_zone": [
+  "Afecta de golpe a todos los objetos alrededor del objeto A (en el centro): daño, curación o un estado. Ajustes: la fuerza, el radio en casillas, los tags afectados (vacío = todos), la forma (rombo o cuadrado con diagonales), la reducción de fuerza por casilla de distancia (explosión: cuanto más lejos, menos daño) y si el objeto del centro también se ve afectado. El daño ignora la defensa. Una bola de fuego, una curación de grupo, un grito que asusta. Para contar víctimas en una condición usa las fórmulas compter(\"tag\") y voisins(objeto, \"tag\", casillas).",
+  "una bola de fuego: radio 2, fuerza 6, reducción 30 % por casilla, sobre unidades «enemigo»."
+ ],
+ "gagner_xp": [
+  "Da experiencia a la unidad. Al alcanzar el umbral (umbral × nivel actual), la unidad sube de nivel, la experiencia sobrante se conserva y se suman las ganancias («vie=2, attaque=1»; la vida máxima sube con la vida). La unidad guarda las estadísticas «xp» y «niveau» (1 al inicio). Salidas «Sube de nivel» / «Sin subir de nivel»: una fanfarria o un mensaje al subir.",
+  "un héroe que gana 30 de experiencia por cada enemigo derrotado."
+ ],
+ "memoriser_position": [
+  "Recuerda la posición actual de la unidad, antes de un movimiento. Con «Cancelar el movimiento», el jugador puede volver atrás (como en Advance Wars al pulsar «Cancelar» antes de actuar).",
+  "justo antes de «Ir a la casilla»: Recordar la posición."
+ ],
+ "annuler_deplacement": [
+  "Devuelve la unidad a la posición recordada por «Recordar la posición», borra su marca de «ya ha jugado» y pone a 0 sus estadísticas «bouge» y «agi». Salidas «Cancelado» / «Nada que cancelar».",
+  "un botón «Cancelar» en el menú de acción de la unidad."
+ ],
+ "ia_jouer": [
+  "Hace jugar a una unidad sola, como un ordenador. Mira adónde puede ir (movimiento, muros, terrenos, unidades que bloquean), busca a los enemigos (sus tags) y elige la mejor casilla desde donde atacar según su ESTILO: agresivo (el máximo daño, rematar un objetivo primero), prudente (evita el contraataque) o defensivo (le gustan las casillas de gran defensa). Si no hay nadie a su alcance, se acerca al enemigo más cercano. Al llegar, sale «Llegó»: el objeto implicado es el objetivo elegido y la estadística «cible_ia» de la unidad vale 1 (puede atacar) o 0 (solo se acercó). Usa su movimiento, alcance (y «portee_min») y su ficha de unidad. Salida «Sin enemigos» si ya no quedan.",
+  "turno de los monstruos: para cada monstruo, Jugar como un ordenador (enemigos = jugador) → al llegar, si cible_ia = 1, Atacar."
+ ],
+ "brouillard_maj": [
+  "Calcula lo que ve el equipo y cubre el resto del mapa con un velo oscuro: las unidades del equipo (tags) ven a su alrededor hasta su estadística «vision» en casillas (si no, la visión por defecto del nodo). Un muro del terreno, un terreno con la propiedad «bloque_vue = oui» (bosque denso) o una casilla más alta detienen la vista. Las casillas ya vistas quedan medio oscuras (memoria, opcional). Las unidades con tags enemigos fuera de vista se ocultan. Vuélvelo a lanzar tras cada movimiento o al inicio de un turno. La fórmula vue(columna, fila) vale 1 si la casilla se ve. «Quitar la niebla de guerra» lo hace todo visible.",
+  "al inicio de cada turno del jugador: Actualizar la niebla (equipo jugador, enemigos enemigo, visión 3)."
+ ],
+ "brouillard_enlever": [
+  "Quita la niebla de guerra: todo el mapa vuelve a ser visible y las unidades ocultas reaparecen.",
+  "al final de la partida, para mostrar todo el mapa."
+ ],
+ "couleur_equipe": [
+  "Un solo dibujo para todos los equipos: pinta las partes a colorear (capa, bandera, plumero) con un color de referencia (rosa vivo #FF00FF por defecto) y este nodo reemplaza ese rosa por el color del equipo para el objeto. Se conservan las sombras y brillos del dibujo (un rosa oscuro pasa a azul oscuro). La tolerancia indica cuánto puede alejarse un color del de referencia para ser reemplazado. No se cambia nada en las imágenes: todo ocurre al mostrarlas, así que hay que repetirlo al inicio de cada partida.",
+  "dos ejércitos con las mismas imágenes: jugador en azul, enemigo en rojo."
  ]
 }
