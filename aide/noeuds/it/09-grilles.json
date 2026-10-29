@@ -51,9 +51,80 @@
     },
     {
       "nom": "Attacca",
-      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Potenza dell'attacco (%), Conta la difesa del terreno del bersaglio, Sempre almeno 1 danno, Distruggi il bersaglio quando finisce la vita, Calcolo libero dei danni (es. attaquant.attaque * 2 - cible.armure); vuoto = calcolo normale &nbsp;→&nbsp; <b>Uscite:</b> Ancora vivo / Senza vita",
-      "role": "L'oggetto A attacca l'oggetto B: danno = attacco di A × potenza − difesa di B − difesa del terreno di B. Due uscite: «Ancora vivo» e «Senza vita» (il bersaglio viene distrutto se la casella è spuntata). Entrambi gli oggetti hanno bisogno di una scheda unità.",
-      "exemple": "un eroe colpisce il mostro toccato."
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Potenza dell'attacco (%), Conta la difesa del terreno del bersaglio, Sempre almeno 1 danno, Distruggi il bersaglio quando finisce la vita, Calcolo libero dei danni (es. attaquant.attaque * 2 - cible.armure); vuoto = calcolo normale, Bonus secondo i tag del bersaglio (es. cavalleria = 150, leggero = 120: % del danno), Bonus secondo i tag dell'attaccante (es. lancia = 130), Statistica consumata a ogni attacco (es. munizioni: a 0 niente attacco), Perforazione: % di difesa ignorata (0 = nessuna), Contrattacco: % dell'attacco del bersaglio se sopravvive e l'attaccante è a portata (0 = nessuno), Bonus di altezza: % di danno per livello di differenza (es. 15; sopra = più, sotto = meno), Guardia: tag degli alleati vicini che rafforzano la difesa del bersaglio (es. lancia), Guardia: difesa guadagnata per alleato vicino &nbsp;→&nbsp; <b>Uscite:</b> Ancora vivo / Senza vita / Attaccante distrutto (contrattacco)",
+      "role": "L'oggetto A attacca l'oggetto B: danni = attacco di A × potenza × bonus − difesa di B − difesa del terreno di B. Uscite «Ancora vivo» e «Senza vita» (il bersaglio è distrutto se la casella è spuntata) e «Attaccante distrutto» se un contrattacco lo uccide. Entrambi gli oggetti hanno bisogno di una scheda unità. Le regole «regle: lancia > cavalleria = 150» di donnees.txt si applicano da sole. In avanzato: bonus per tag («cavalleria = 150»), PERFORAZIONE (percentuale di difesa ignorata, per lancia o balestra), CONTRATTACCO (percentuale dell'attacco del bersaglio restituita se sopravvive e l'attaccante è a portata), BONUS DI ALTEZZA (percentuale di danni per livello di differenza: chi sta più in alto colpisce più forte), GUARDIA (ogni alleato vicino con il tag scelto aggiunge difesa al bersaglio: un muro di scudi), un calcolo libero e una statistica consumata a ogni attacco (munizioni).",
+      "exemple": "la lancia (perforazione 40) contro la cavalleria pesante; l'arciere sulla collina (altezza +15 %)."
+    },
+    {
+      "nom": "Applica dati (unità, arma)",
+      "schema": "<b>Ingressi:</b> Oggetto, Nome in donnees.txt (es. Cavaliere) &nbsp;→&nbsp; <b>Uscite:</b> Trovato / Non trovato",
+      "role": "Dà all'oggetto A tutti i valori di un'unità o arma scritti nel file donnees.txt (Assets → Dialoghi, o assets_ludexa/Textes/donnees.txt): vita, attacco, difesa, movimento, portata, prezzo… e i suoi tag. Basta una riga: «unite Cavaliere: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=cavalleria pesante». Si ribilancia il gioco modificando il file, senza toccare i nodi. Uscite «Trovato» / «Non trovato». Il file può contenere anche «arme Spada: attaque=5», «etat Veleno: duree=3, degats=2», «regle: lancia > cavalleria = 150» (un attaccante con tag lancia infligge il 150 % a un bersaglio con tag cavalleria, applicato automaticamente da «Attacca») e le altezze delle caselle.",
+      "exemple": "all'inizio della partita, per ogni eroe: Applica dati «Cavaliere»."
+    },
+    {
+      "nom": "Imposta l'altezza delle caselle",
+      "schema": "<b>Ingressi:</b> Colonna di partenza, Riga di partenza, Numero di colonne, Numero di righe, Altezza (0 = piano)",
+      "role": "Dà un'altezza (un livello: 0 = piano, 1, 2, 3…) a un rettangolo di caselle della griglia: colonna e riga di partenza, numero di colonne e righe. Le altezze danno il bonus di altezza di «Attacca» e fermano la vista nella nebbia di guerra (una collina nasconde ciò che c'è dietro). Si possono scrivere anche in donnees.txt («hauteur 3,4 = 2» o un blocco «hauteurs:» con una cifra per casella). Leggile con la formula hauteur(colonna, riga) o con i nodi verdi «Altezza della casella toccata» / «Altezza della casella sotto un oggetto».",
+      "exemple": "una collina di 3 x 2 caselle a altezza 2, così l'arciere che vi sta colpisce più forte."
+    },
+    {
+      "nom": "Dai uno stato (veleno, lento…)",
+      "schema": "<b>Ingressi:</b> Oggetto, Nome dello stato (es. Veleno; in donnees.txt), Durata in turni (vuoto = da donnees.txt), Danni a ogni turno (vuoto = donnees.txt), Statistica modificata (es. mouvement; vuoto = donnees.txt), Variazione di questa statistica (es. -2)",
+      "role": "Dà all'unità uno stato per un numero di TURNI: veleno (danni a ogni turno), lento (il movimento cala), benedetto (l'attacco sale)… Tutto può essere scritto in donnees.txt («etat Veleno: duree=3, degats=2», «etat Lento: duree=2, stat=mouvement, delta=-2»): basta allora il nome dello stato. I danni cadono all'inizio di ogni turno della squadra dell'unità, poi lo stato perde un turno; alla fine la statistica modificata torna com'era. Dare di nuovo lo stesso stato lo prolunga invece di raddoppiarlo. L'unità conserva una statistica «etat_<nome>» (turni rimasti), leggibile in una formula. Richiede «Passa al turno successivo».",
+      "exemple": "una freccia avvelenata: Attacca → ancora vivo → dare lo stato «Veleno» al bersaglio."
+    },
+    {
+      "nom": "Rimuovi uno stato",
+      "schema": "<b>Ingressi:</b> Oggetto, Nome dello stato (vuoto = tutti)",
+      "role": "Rimuove uno stato dall'unità (per nome), o tutti se il nome è vuoto. La statistica modificata dallo stato torna subito al valore precedente.",
+      "exemple": "un sacerdote che cura il veleno di un alleato."
+    },
+    {
+      "nom": "Se l'unità ha lo stato…",
+      "schema": "<b>Ingressi:</b> Oggetto, Nome dello stato (vuoto = tutti) &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso",
+      "role": "Controlla se l'unità ha uno stato (o uno qualsiasi se il nome è vuoto). Uscite «Vero» / «Falso».",
+      "exemple": "non poter muoversi se l'unità è «Congelata»."
+    },
+    {
+      "nom": "Effetto ad area attorno a un oggetto",
+      "schema": "<b>Ingressi:</b> Oggetto, Effetto, Forza (danni o cura), Raggio in caselle, Tag colpiti (vuoto = tutti), Nome dello stato (se l'effetto dà uno stato), Riduzione per casella di distanza (% della forza), Forma, Colpisce anche l'oggetto al centro",
+      "role": "Colpisce in una volta tutti gli oggetti attorno all'oggetto A (al centro): danni, cura o uno stato. Impostazioni: la forza, il raggio in caselle, i tag colpiti (vuoto = tutti), la forma (rombo o quadrato con diagonali), la riduzione di forza per casella di distanza (esplosione: più lontano, meno danni) e se anche l'oggetto al centro è colpito. I danni ignorano la difesa. Una palla di fuoco, una cura di gruppo, un urlo che spaventa. Per contare le vittime in una condizione usa le formule compter(\"tag\") e voisins(oggetto, \"tag\", caselle).",
+      "exemple": "una palla di fuoco: raggio 2, forza 6, riduzione 30 % per casella, sulle unità «nemico»."
+    },
+    {
+      "nom": "Guadagna esperienza",
+      "schema": "<b>Ingressi:</b> Oggetto, Esperienza guadagnata, Esperienza per il livello 2 (poi x livello), Guadagni per livello (es. vie=2, attaque=1) &nbsp;→&nbsp; <b>Uscite:</b> Sale di livello / Niente da annullare",
+      "role": "Dà esperienza all'unità. Raggiunta la soglia (soglia × livello attuale), l'unità sale di livello, l'esperienza in più viene conservata e i guadagni si sommano («vie=2, attaque=1»; la vita massima sale con la vita). L'unità conserva le statistiche «xp» e «niveau» (1 all'inizio). Uscite «Sale di livello» / «Nessun livello»: una fanfara o un messaggio quando sale.",
+      "exemple": "un eroe che guadagna 30 di esperienza per ogni nemico sconfitto."
+    },
+    {
+      "nom": "Memorizza la posizione",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Memorizza la posizione attuale dell'unità, prima di uno spostamento. Con «Annulla lo spostamento», il giocatore può tornare indietro (come in Advance Wars con «Annulla» prima di agire).",
+      "exemple": "subito prima di «Vai alla casella»: Memorizza la posizione."
+    },
+    {
+      "nom": "Annulla lo spostamento",
+      "schema": "<b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscite:</b> Annullato / Niente da annullare",
+      "role": "Rimette l'unità nella posizione memorizzata da «Memorizza la posizione», cancella il suo «ha già giocato» e riporta a 0 le statistiche «bouge» e «agi». Uscite «Annullato» / «Niente da annullare».",
+      "exemple": "un pulsante «Annulla» nel menu azioni dell'unità."
+    },
+    {
+      "nom": "Gioca come un computer (IA)",
+      "schema": "<b>Ingressi:</b> Oggetto, Tag dei nemici (es. giocatore), Stile di gioco, Velocità di movimento, Altri tag che bloccano il percorso (es. i suoi alleati) &nbsp;→&nbsp; <b>Uscite:</b> Arrivato / Nessun bersaglio",
+      "role": "Fa giocare un'unità da sola, come un computer. Guarda dove può andare (movimento, muri, terreni, unità che bloccano), cerca i nemici (i loro tag) e sceglie la migliore casella da cui attaccare in base al suo STILE: aggressivo (più danni, finire prima un bersaglio), prudente (evita il contrattacco) o difensivo (ama le caselle ad alta difesa). Nessuno a portata: si avvicina al nemico più vicino. All'arrivo parte l'uscita «Arrivato»: l'oggetto coinvolto è il bersaglio scelto e la statistica «cible_ia» dell'unità vale 1 (può attaccare) o 0 (solo avvicinata). Usa movimento, portata (e «portee_min») e scheda dell'unità. Uscita «Nessun nemico» se non ce ne sono più.",
+      "exemple": "turno dei mostri: per ogni mostro, Gioca come un computer (nemici = giocatore) → all'arrivo, se cible_ia = 1, Attacca."
+    },
+    {
+      "nom": "Aggiorna la nebbia di guerra",
+      "schema": "<b>Ingressi:</b> Tag della squadra che vede (es. giocatore), Tag dei nemici da nascondere fuori vista (es. nemico), Visione predefinita in caselle (altrimenti la statistica « vision » dell'unità), Oscurità delle caselle sconosciute (da 0 a 100), Ricorda le caselle già viste",
+      "role": "Calcola ciò che la squadra vede e copre il resto della mappa con un velo scuro: le unità della squadra (tag) vedono intorno a sé fino alla statistica «vision» in caselle (altrimenti la visione predefinita del nodo). Un muro del terreno, un terreno con la proprietà «bloque_vue = oui» (foresta fitta) o una casella più alta fermano la vista. Le caselle già viste restano mezze scure (memoria, facoltativa). Le unità con tag nemici fuori vista sono nascoste. Da rilanciare dopo ogni spostamento o a inizio turno. La formula vue(colonna, riga) vale 1 se la casella è vista. «Rimuovi la nebbia di guerra» rende tutto visibile.",
+      "exemple": "a inizio di ogni turno del giocatore: Aggiorna la nebbia (squadra giocatore, nemici nemico, visione 3)."
+    },
+    {
+      "nom": "Rimuovi la nebbia di guerra",
+      "role": "Rimuove la nebbia di guerra: tutta la mappa torna visibile e le unità nascoste riappaiono.",
+      "exemple": "a fine partita, per mostrare tutta la mappa."
     },
     {
       "nom": "Dai vita all'oggetto",
@@ -74,8 +145,20 @@
       "exemple": "una pozione che restituisce 5 punti vita all'eroe."
     },
     {
+      "nom": "Cambia una statistica",
+      "schema": "<b>Ingressi:</b> Oggetto, Nome della statistica (es. munizioni), Cosa fare, Di quanto",
+      "role": "Cambia una statistica che hai inventato per un oggetto (munizioni, armatura, mana, carburante…): aggiungere, sottrarre o impostare un valore. Se non esiste ancora, viene creata a 0. Poi si legge ovunque: =arciere.munizioni.",
+      "exemple": "Dopo uno sparo: Cambia una statistica → oggetto «arciere», statistica «munizioni», Sottrai 1."
+    },
+    {
+      "nom": "Se la statistica…",
+      "schema": "<b>Ingressi:</b> Oggetto, Nome della statistica (es. munizioni), Confronto, Valore &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso",
+      "role": "Confronta una statistica di un oggetto con un valore e segue l'uscita «vero» o «falso»: per esempio «munizioni è maggiore di 0». Una statistica che non esiste vale 0.",
+      "exemple": "Prima di sparare: Se la statistica «munizioni» dell'arciere è maggiore di 0 → spara; altrimenti → mostra «Frecce finite»."
+    },
+    {
       "nom": "Scegli un bersaglio",
-      "schema": "<b>Ingressi:</b> Oggetto, Tag dei bersagli possibili (separati da virgola), Quale bersaglio scegliere?, Portata in caselle (0 = illimitata; es. =mostro.portee), Portata minima (0 = nessuna), Forma della portata, Le mie posizioni (colonna,riga; es. 2,1 ; -2,1), Statistica (per le regole «statistica», es. defense) &nbsp;→&nbsp; <b>Uscite:</b> Bersaglio trovato / Nessun bersaglio",
+      "schema": "<b>Ingressi:</b> Oggetto, Tag dei bersagli possibili (separati da virgola), Quale bersaglio scegliere?, Portata in caselle (0 = illimitata; es. =mostro.portee), Portata minima (0 = nessuna), Forma della portata, Le mie posizioni (colonna,riga; es. 2,1 ; -2,1), Statistica (per le regole «statistica», es. defense), Portata in pixel, a cerchio (0 = usa la portata in caselle) &nbsp;→&nbsp; <b>Uscite:</b> Bersaglio trovato / Nessun bersaglio",
       "role": "L'oggetto A cerca, tra gli oggetti con uno dei tag richiesti, quelli NELLA SUA PORTATA (stesse forme di «Mostra le caselle raggiungibili») e ne sceglie uno: il più vicino, quello con meno o più vita, o il valore più basso / alto di una statistica. Uscita «Bersaglio trovato»: diventa «l'oggetto coinvolto» (per Attacca, Vai verso…). Uscita «Nessun bersaglio»: nessuno a tiro. Perfetto per l'intelligenza di un mostro o di una torretta.",
       "exemple": "un mostro: «Scegli un bersaglio» (tag «eroe», il più vicino), poi «Attacca» su «Bersaglio trovato»."
     },

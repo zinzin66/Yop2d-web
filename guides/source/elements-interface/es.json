@@ -1,0 +1,122 @@
+{
+  "titre_page": "¿Cómo hacer un menú con botones, un interruptor y un control deslizante en Yop2D? | Guía Yop2D",
+  "description": "Crea un menú de verdad en Yop2D: botones de todas las formas, interruptor, casilla, control deslizante, panel y contador, sin código. Cambia la forma, los colores, la imagen y el sonido desde un solo sitio.",
+  "h1": "¿Cómo hacer un menú con botones, un interruptor y un control deslizante?",
+  "carte": [
+    "Botones y elementos de interfaz",
+    "Un menú completo: botones, interruptor, control deslizante, todo se ajusta en un solo sitio."
+  ],
+  "etapes": [
+    [
+      "Añade un elemento",
+      "Toca + y luego «Elementos de interfaz» y elige un botón."
+    ],
+    [
+      "Cambia su estilo",
+      "Inspector > «Estilo del elemento…»: forma, colores, imagen, texto."
+    ],
+    [
+      "Lee su valor",
+      "Una fórmula lee =nombre.progression para un interruptor o un control deslizante."
+    ],
+    [
+      "Reacciona al toque",
+      "Añade [[NoeudEventClicObjet]] en el Blueprint."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Un menú de juego necesita botones bonitos y ajustes: un interruptor para el sonido, un control deslizante para el volumen, un contador para la puntuación. En Yop2D, cada elemento es **un solo objeto** con su texto dentro, y todo su aspecto se ajusta en una sola ventana. También puedes descargar el ejemplo **UI kit** (pestaña Ejemplos): muestra todos los elementos."
+    ],
+    [
+      "besoin",
+      [
+        "un proyecto abierto en el editor;",
+        "el ejemplo «UI kit» si quieres ver el resultado antes (opcional)."
+      ]
+    ],
+    [
+      "h2",
+      "Paso 1: añade un elemento"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Toca el **+** del editor y luego la sección **Elementos de interfaz**.",
+            "Elige entre **Botón**, **Interruptor**, **Casilla**, **Control deslizante**, **Panel** y **Contador**.",
+            "El elemento llega al centro de la pantalla: muévelo con el dedo y cambia su tamaño con los tiradores, como cualquier objeto."
+          ]
+        ],
+        [
+          "tip",
+          "El texto de un botón está dentro: escríbelo en el Inspector, ya no hace falta poner un texto encima del botón."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 2: cambia su estilo"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Selecciona el elemento y toca **Estilo del elemento…** en el Inspector.",
+            "En **Forma**, elige rectángulo, redondeado, píldora, círculo, esquinas cortadas o hexágono.",
+            "En **Imagen**, elige **Dentro de la forma** (la imagen conserva la forma), **Sustituye la forma** (la imagen ES el botón) o **Icono + texto**.",
+            "En **Colores y contorno**, ajusta el color, el **degradado**, el contorno, la **sombra** y el **halo luminoso (neón)**.",
+            "En **Texto**, elige la fuente, el tamaño, el color y el contorno de las letras."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 3: dale un comportamiento"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "En **Comportamiento**, activa **Se queda pulsado (ON / OFF)** para un botón que conserva su estado.",
+            "Elige un **sonido al tocar** y, si quieres, una **vibración**.",
+            "Para un control deslizante, ajusta el **valor mínimo**, el **valor máximo** y el **valor inicial**."
+          ]
+        ],
+        [
+          "tip",
+          "Un elemento **desactivado (gris)** ya no reacciona al toque: útil para un botón «Continuar» que aún no está disponible."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 4: lee el valor en el juego"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Un interruptor o una casilla vale su valor mínimo (apagado) o máximo (encendido); un control deslizante vale su posición.",
+            "En una fórmula, escribe **nombre_del_objeto.progression**: por ejemplo «=volumen.progression» en [[modifier_propriete]] de un texto para mostrar el volumen.",
+            "Para un botón, añade el evento [[NoeudEventClicObjet]] en el Blueprint y elige tu botón."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "Los botones antiguos de Yop2D siguen funcionando: estos nuevos elementos se añaden, no sustituyen nada."
+    ]
+  ]
+}

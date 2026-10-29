@@ -164,7 +164,7 @@
     },
     {
       "nom": "Tirer un objet",
-      "schema": "<b>Entrées :</b> Objet A, Objet B, Nom du modèle, Direction, Vitesse, Détruire hors de l'écran (oui / non)",
+      "schema": "<b>Entrées :</b> Objet A, Objet B, Nom du modèle, Direction, Vitesse, Détruire hors de l'écran (oui / non), Durée de vie du tir (secondes, 0 = sans limite)",
       "role": "Crée un projectile (l'objet nommé dans « Nom du modèle ») à l'endroit de l'objet A, et le lance à la vitesse choisie : 0°, 90°, 180°, 270°, vers l'objet B (« Vers la cible ») ou selon l'angle de A.",
       "exemple": "un vaisseau qui tire des lasers vers le haut (270)."
     },
@@ -179,6 +179,12 @@
       "schema": "<b>Entrées :</b> Objet, Délai (secondes)",
       "role": "Supprime l'objet choisi après un délai (en secondes). Pratique pour faire disparaître une explosion une fois son animation terminée.",
       "exemple": "après « Générer un clone (Spawner) » et « Jouer l'animation », l'image d'explosion est détruite 0,4 seconde plus tard."
+    },
+    {
+      "nom": "Couleur d'équipe (remplace le rose du dessin)",
+      "schema": "<b>Entrées :</b> Objet, Couleur de l'équipe, Couleur à remplacer dans le dessin (rose par défaut), Tolérance (1 à 100) : plus haut = remplace aussi les couleurs proches",
+      "role": "Un seul dessin pour toutes les équipes : peins les parties à colorer (manteau, drapeau, plumet) avec une couleur repère (par défaut le rose vif #FF00FF), puis ce nœud remplace ce rose par la couleur de l'équipe pour l'objet. Les ombres et les reflets du dessin sont gardés (un rose foncé devient un bleu foncé). La tolérance dit à quel point une couleur peut s'écarter du repère pour être remplacée. Rien n'est changé dans les images : tout se fait à l'affichage, donc à refaire au début de chaque partie.",
+      "exemple": "deux armées avec les mêmes images : joueur en bleu, ennemi en rouge."
     },
     {
       "nom": "Définir la Progression",

@@ -1,0 +1,71 @@
+{
+  "categorie": "Physik",
+  "noeuds": [
+    {
+      "nom": "Physikwelt einstellen",
+      "schema": "<b>Eingänge:</b> Schwerkraft nach unten (%, 100 = normal, 0 = Weltraum, negativ = nach oben), Schwerkraft nach rechts (%, negativ = links: ein ständiger Wind), Genauigkeit, Ruhende Objekte schlafen ein (schont das Handy)",
+      "role": "Stellt die Physikwelt der Szene ein: Schwerkraft nach unten (100 % = normal, 0 = Weltraum, negativ = Objekte fallen nach oben), seitliche Schwerkraft (ein ständiger Wind), Genauigkeit der Berechnung und ob ruhende Objekte einschlafen. Einmal verwenden, unter „Beim Start“. Wirkt nur auf Objekte mit dem Verhalten „Realistische Physik“ (⚙ Verhalten).",
+      "exemple": "ein Level auf dem Mond: Schwerkraft 20 %."
+    },
+    {
+      "nom": "Physik-Objekt einstellen",
+      "schema": "<b>Eingänge:</b> Objekt, Objekttyp, Material (Gewicht, Abprallen und Haftung auf einmal), Kontaktform, Gewicht (%, 100 = normal, leer = unverändert), Abprallen (0 bis 100, leer = unverändert), Haftung (0 = Eis, 100 = klebrig, leer = unverändert), Schwerkraft des Objekts (%, 0 = schwebt, leer = unverändert), Luftwiderstand (0 bis 20, leer = unverändert), Höchstgeschwindigkeit (Pixel pro Sekunde, 0 = unbegrenzt, leer = unverändert), Dreht sich nie, Geist (man geht hindurch), Sehr schnelles Objekt (geht nicht durch dünne Wände), Ebene des Objekts (1 bis 8, leer = unverändert)",
+      "role": "Ändert die Einstellungen eines Physik-Objekts während des Spiels: Typ (normal, fest, geführt oder keine Physik mehr), Material (Holz, Stein, Metall, Gummi, Ball, Eis, Feder), Form, Gewicht, Abprallen, Haftung, Schwerkraft, Luftwiderstand, Höchstgeschwindigkeit, ob es sich dreht, ob es ein Geist oder sehr schnell ist, seine Ebene. Leer oder auf „(nicht ändern)“ gelassene Einstellungen bleiben. Bei einem Objekt ohne Physik gibt die Wahl eines Typs ihm Physik.",
+      "exemple": "ein Ball, der zu Gummi wird (Material „Gummi“), wenn man einen Bonus einsammelt."
+    },
+    {
+      "nom": "Schieben (Physikkraft)",
+      "schema": "<b>Eingänge:</b> Objekt, Schub nach rechts (negativ = nach links), Schub nach unten (negativ = nach oben), Wie, Wo schieben (außerhalb der Mitte dreht sich das Objekt), Zählt das Gewicht?",
+      "role": "Schiebt ein Physik-Objekt mit einer Kraft. „Dauerschub“: in jedem Bild wiederholen (unter „Jedes Bild“ oder „Finger gedrückt“), das Objekt wird schneller, solange du schiebst (Rakete, Wind, Ventilator). „Ein Stoß“: gibt sofort Tempo (Sprung, Tritt). Standardmäßig wirkt es auf leichte und schwere Objekte gleich; in den erweiterten Einstellungen kann das Gewicht zählen, und außerhalb der Mitte schieben lässt das Objekt kreiseln. Werte: Pixel pro Sekunde (pro Sekunde zum Quadrat beim Dauerschub).",
+      "exemple": "ein Raketenspiel: „Finger gedrückt“ → dauerhaft nach oben schieben (-2500)."
+    },
+    {
+      "nom": "Tempo einstellen (Physik)",
+      "schema": "<b>Eingänge:</b> Objekt, Tempo nach rechts (Pixel pro Sekunde, leer = unverändert), Tempo nach unten (negativ = nach oben, leer = unverändert), Drehtempo (Grad pro Sekunde, leer = unverändert), Wie, Alles sofort anhalten?",
+      "role": "Stellt das Tempo eines Physik-Objekts ein, in Pixel pro Sekunde: nach rechts, nach unten (negativ = nach oben) und Drehung in Grad pro Sekunde. Leere Felder lassen dieses Tempo unverändert. „Ersetzen“ setzt genau dieses Tempo; „Addieren“ addiert es zum aktuellen. Die Option „Alles anhalten“ setzt alle Tempi auf null. Ideal für einen Sprung (Tempo nach unten -900), einen harten Stopp oder eine Figur mit gleichbleibendem Tempo.",
+      "exemple": "ein Plattform-Sprung: Tempo nach unten = -900, nur wenn „Wenn das Physik-Objekt…“ sagt, dass das Objekt steht."
+    },
+    {
+      "nom": "Abwerfen (Winkel und Tempo)",
+      "schema": "<b>Eingänge:</b> Objekt, Winkel (Grad: 0 = rechts, -90 = oben, 90 = unten, 180 = links), Startgeschwindigkeit (Pixel pro Sekunde), Wie",
+      "role": "Wirft ein Physik-Objekt in eine Richtung: du gibst den Winkel (0 = rechts, -90 = oben, 90 = unten, 180 = links) und das Starttempo an. Den Rest erledigt die Schwerkraft: das Objekt fliegt eine Kurve. Ideal für ein Schleuder-Spiel, eine Kanone, einen Ballwurf. Der Winkel kann eine Formel sein (z. B. der Winkel zwischen Objekt und Finger).",
+      "exemple": "eine Schleuder: beim Loslassen den Vogel im Winkel des Gummis abschießen."
+    },
+    {
+      "nom": "Explosion (Druckwelle)",
+      "schema": "<b>Eingänge:</b> Objekt, Zentrum: X-Position (leer = Mitte des Objekts), Zentrum: Y-Position (leer = Mitte des Objekts), Radius der Druckwelle (Pixel), Kraft im Zentrum (gegebenes Tempo, Pixel pro Sekunde), Nur Objekte mit diesem Tag (leer = alle)",
+      "role": "Lässt alle Physik-Objekte um einen Punkt wegfliegen: je näher am Zentrum, desto heftiger werden sie geschleudert, und sie fangen an zu kreiseln. Das Zentrum ist die Mitte des gewählten Objekts oder ein Punkt (x, y), wenn du einen einträgst. Du stellst Radius und Kraft (das Tempo im Zentrum) ein. Option: nur Objekte mit einem bestimmten Tag. Der Knoten zerstört nichts: kombiniere ihn mit „Partikeleffekt“ und „Objekt zerstören“ für eine echte Explosion.",
+      "exemple": "eine Bombe: beim Bodenkontakt Explosion mit Radius 500 und Kraft 1800, dann die Bombe zerstören."
+    },
+    {
+      "nom": "Zwei Objekte verbinden",
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Art der Verbindung, Name der Verbindung (zum späteren Einstellen oder Trennen), Punkt des Objekts A, an dem verbunden wird, Punkt des Objekts B (Stange, Feder, Seil), Punkt nach rechts verschieben (Pixel), Punkt nach unten verschieben (Pixel), Stoßen die beiden Objekte zusammen?, Länge (Pixel, 0 = Startabstand), Härte von Feder oder Federung (1 = weich, 10 = fest), Dämpfung (0 bis 100: höher = weniger Nachschwingen), Untere Grenze (Grad beim Scharnier, Pixel bei der Schiene; leer = keine), Obere Grenze (Grad oder Pixel; leer = keine), Richtung der Schiene oder Federung (Grad: 0 = waagerecht, 90 = senkrecht; leer = automatisch), Motor: Tempo (Grad pro Sekunde bei Scharnier oder Rad, Pixel pro Sekunde bei Schiene; 0 = kein Motor), Stärke von Motor oder Bremse (1 = schwach, 10 = normal, 100 = sehr stark)",
+      "role": "Verbindet zwei Objekte, sodass sie halten oder sich gemeinsam bewegen, wie im echten Leben. Art der Verbindung: Scharnier (dreht sich um einen Punkt: Tür, Pendel), starre Stange (feste Entfernung), Feder (elastisch, mit Härte), Seil (maximale Länge), Schiene (gleitet auf einer Bahn, mit Grenzen und Motor), Schweißnaht (zusammengeklebt), Rad mit Federung (Auto: A = die Karosserie, B = das Rad, mit Motor), Bremse (Draufsicht). Objekt B ist optional: ohne B hängt Objekt A an einem festen Punkt der Kulisse. Gib der Verbindung einen Namen, um sie später einzustellen („Verbindung einstellen“) oder zu trennen („Verbindung trennen“). In den erweiterten Einstellungen: Punkt auf jeder Seite, Grenzen, Richtung der Schiene, Motor, Kollision der beiden Objekte. Beide Objekte brauchen das Verhalten „Realistische Physik“ (außer einem festen Halter).",
+      "exemple": "ein Pendel: A = die Kugel, B = ein kleines festes Objekt oben, Typ „Scharnier“ oder „Starre Stange“; eine Brücke: Planken, durch Scharniere verbunden."
+    },
+    {
+      "nom": "Verbindung einstellen",
+      "schema": "<b>Eingänge:</b> Name der Verbindung, Motor: Tempo (0 = Motor stoppen, leer = unverändert), Motorstärke (leer = unverändert), Härte von Feder oder Federung (leer = unverändert), Neue Länge (Pixel, leer = unverändert), Neue untere Grenze (leer = unverändert), Neue obere Grenze (leer = unverändert), Grenzen",
+      "role": "Ändert eine mit „Zwei Objekte verbinden“ erstellte Verbindung (über ihren Namen gefunden): Motor starten, stoppen oder beschleunigen, Stärke, Härte einer Feder oder Federung, Länge von Stange oder Seil, Grenzen. Leere Felder bleiben wie zuvor. Beispiel: ein Auto, dessen Radmotor beim Tastendruck anspringt.",
+      "exemple": "Knopf „Gas“: Verbindung „hinterrad“ mit Motor = 720 einstellen; beim Loslassen: Motor = 0."
+    },
+    {
+      "nom": "Verbindung trennen",
+      "schema": "<b>Eingänge:</b> Name der zu trennenden Verbindung, Oder: Name eines Objekts, dessen Verbindungen alle getrennt werden",
+      "role": "Trennt eine Verbindung: schreibe ihren Namen, oder den Namen eines Objekts, um alle seine Verbindungen zu trennen. Die Objekte lösen sich und fallen jeweils für sich (eine einstürzende Brücke, ein gekapptes Seil, eine sich lösende Kabine).",
+      "exemple": "eine Brückenfalle: berührt der Held den Hebel, die Verbindung „planke_3“ trennen."
+    },
+    {
+      "nom": "Mit dem Finger greifen (Physik)",
+      "schema": "<b>Eingänge:</b> Aktion, Nur Objekte mit diesem Tag (leer = alle), Weichheit des Griffs",
+      "role": "Erlaubt, ein Physik-Objekt mit dem Finger zu greifen und zu ziehen, wie im echten Leben: das Objekt folgt dem Finger mit etwas Elastizität, schiebt andere und kann sich verkeilen. Unter „Finger gedrückt“ einsetzen (Aktion „Mit dem Finger greifen und ziehen“): solange der Finger aufliegt, wird das Objekt darunter gezogen; hebt sich der Finger, wird es von selbst losgelassen (oder die Aktion „Loslassen“ nutzen). Du kannst den Griff auf Objekte mit einem Tag beschränken und die Weichheit einstellen.",
+      "exemple": "ein Kistenrätsel: der Spieler verschiebt Kisten mit der Fingerspitze und baut einen Turm."
+    },
+    {
+      "nom": "Wenn das Physik-Objekt…",
+      "schema": "<b>Eingänge:</b> Objekt, Frage, Ab diesem Tempo zählt es (Pixel pro Sekunde) &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch",
+      "role": "Stellt eine Frage zu einem Physik-Objekt und folgt dem Ausgang „wahr“ oder „falsch“: steht es auf etwas (um einen Sprung zu erlauben), berührt es etwas, berührt es etwas darüber, ruht es (schläft), bewegt es sich schnell, fällt es, steigt es. Bei „bewegt sich schnell“, „fällt“ und „steigt“ stellst du die Schwelle in Pixel pro Sekunde in den erweiterten Einstellungen ein. Du kannst auch direkt in einer Formel lesen: objekt.vitesse, objekt.masse, objekt.vitesseRotation.",
+      "exemple": "ein Plattform-Sprung: „Sprungknopf“ → Wenn das Objekt auf etwas steht → Tempo nach unten auf -900."
+    }
+  ]
+}

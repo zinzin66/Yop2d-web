@@ -1,0 +1,71 @@
+{
+  "categorie": "Physique",
+  "noeuds": [
+    {
+      "nom": "Régler le monde physique",
+      "schema": "<b>Entrées :</b> Gravité vers le bas (%, 100 = normale, 0 = espace, négatif = vers le haut), Gravité vers la droite (%, négatif = gauche : un vent constant), Précision, Les objets immobiles s'endorment (plus léger pour le téléphone)",
+      "role": "Règle le monde physique de la scène : la gravité vers le bas (100 % = normale, 0 = espace, négatif = les objets tombent vers le haut), une gravité vers le côté (un vent qui souffle tout le temps), la précision du calcul et le sommeil des objets immobiles. À mettre une fois, sous « Au démarrage ». Ne concerne que les objets qui ont le comportement « Physique réaliste » (⚙ Comportement).",
+      "exemple": "un niveau sur la Lune : gravité 20 %."
+    },
+    {
+      "nom": "Régler un objet physique",
+      "schema": "<b>Entrées :</b> Objet, Type d'objet, Matière (poids, rebond et accroche d'un coup), Forme de contact, Poids (%, 100 = normal, vide = inchangé), Rebond (0 à 100, vide = inchangé), Accroche (0 = glace, 100 = colle, vide = inchangé), Gravité de l'objet (%, 0 = flotte, vide = inchangée), Freinage de l'air (0 à 20, vide = inchangé), Vitesse maximale (pixels par seconde, 0 = sans limite, vide = inchangée), Ne tourne jamais, Fantôme (on passe à travers), Objet très rapide (ne traverse pas un mur fin), Couche de l'objet (1 à 8, vide = inchangée)",
+      "role": "Change les réglages d'un objet physique en plein jeu : son type (normal, fixe, guidé, ou plus de physique), sa matière (bois, pierre, métal, caoutchouc, ballon, glace, plume), sa forme, son poids, son rebond, son accroche, sa gravité, le freinage de l'air, sa vitesse maximale, s'il tourne, s'il est un fantôme ou très rapide, sa couche. Chaque réglage laissé vide ou sur « (ne pas changer) » reste comme il est. Sur un objet qui n'a pas encore la physique, choisir un type la lui donne.",
+      "exemple": "une balle qui devient du caoutchouc (matière « Caoutchouc ») quand on ramasse un bonus."
+    },
+    {
+      "nom": "Pousser (force physique)",
+      "schema": "<b>Entrées :</b> Objet, Poussée vers la droite (négatif = vers la gauche), Poussée vers le bas (négatif = vers le haut), Comment, Où pousser (hors du centre, l'objet se met à tourner), Le poids compte-t-il ?",
+      "role": "Pousse un objet physique avec une force. « Poussée continue » : à répéter à chaque image (sous « À chaque image » ou « Doigt appuyé »), l'objet accélère tant que tu pousses (une fusée, un vent, un ventilateur). « Un coup » : ajoute tout de suite de la vitesse (un saut, un coup de pied). Par défaut, l'effet est le même sur un objet léger ou lourd ; en réglage avancé, tu peux dire que le poids compte, et pousser ailleurs qu'au centre pour faire tourner l'objet. Valeurs : pixels par seconde (par seconde au carré pour la poussée continue).",
+      "exemple": "un jeu de fusée : « Doigt appuyé » → pousser vers le haut (-2500) en continu."
+    },
+    {
+      "nom": "Régler la vitesse (physique)",
+      "schema": "<b>Entrées :</b> Objet, Vitesse vers la droite (pixels par seconde, vide = inchangée), Vitesse vers le bas (négatif = vers le haut, vide = inchangée), Vitesse de rotation (degrés par seconde, vide = inchangée), Comment, Tout arrêter d'un coup ?",
+      "role": "Règle la vitesse d'un objet physique, en pixels par seconde : vers la droite, vers le bas (négatif = vers le haut) et rotation en degrés par seconde. Chaque case laissée vide ne change pas cette vitesse. « Remplacer » donne exactement cette vitesse ; « Ajouter » la rajoute à la vitesse actuelle. L'option « Tout arrêter » remet toutes les vitesses à zéro. Parfait pour un saut (vitesse vers le bas à -900), un arrêt net ou un personnage qui avance à vitesse constante.",
+      "exemple": "un saut de plateforme : vitesse vers le bas = -900, seulement si « Si l'objet physique… » dit que l'objet est posé."
+    },
+    {
+      "nom": "Lancer (angle et vitesse)",
+      "schema": "<b>Entrées :</b> Objet, Angle (degrés : 0 = droite, -90 = haut, 90 = bas, 180 = gauche), Vitesse de départ (pixels par seconde), Comment",
+      "role": "Lance un objet physique dans une direction : tu donnes l'angle (0 = vers la droite, -90 = vers le haut, 90 = vers le bas, 180 = vers la gauche) et la vitesse de départ. Ensuite la gravité fait le reste : l'objet décrit une courbe. Idéal pour un jeu de lance-pierre, un canon, un lancer de ballon. L'angle peut être une formule (par exemple l'angle entre l'objet et le doigt).",
+      "exemple": "un lance-pierre : au relâchement du doigt, lancer l'oiseau avec l'angle de l'élastique."
+    },
+    {
+      "nom": "Explosion (souffle physique)",
+      "schema": "<b>Entrées :</b> Objet, Centre : position X (vide = au centre de l'objet), Centre : position Y (vide = au centre de l'objet), Rayon du souffle (pixels), Force au centre (vitesse donnée, pixels par seconde), Seulement les objets de ce tag (vide = tous)",
+      "role": "Fait souffler tous les objets physiques autour d'un point : plus ils sont près du centre, plus ils sont projetés fort, et ils se mettent à tourner. Le centre est le milieu de l'objet choisi, ou un point (x, y) si tu en écris un. Tu règles le rayon du souffle et la force (la vitesse donnée au centre). Option : seulement les objets d'un certain tag. Le nœud ne détruit rien : combine-le avec « Effet de particules » et « Détruire l'objet » pour une vraie explosion.",
+      "exemple": "une bombe : quand elle touche le sol, explosion de rayon 500 et force 1800, puis détruire la bombe."
+    },
+    {
+      "nom": "Relier deux objets",
+      "schema": "<b>Entrées :</b> Objet A, Objet B, Sorte de liaison, Nom de la liaison (pour la régler ou la couper plus tard), Point de l'objet A où se fait la liaison, Point de l'objet B (tige, ressort, corde), Décaler le point vers la droite (pixels), Décaler le point vers le bas (pixels), Les deux objets se heurtent-ils ?, Longueur (pixels, 0 = la distance de départ), Raideur du ressort ou de la suspension (1 = mou, 10 = ferme), Amortissement (0 à 100 : plus c'est haut, moins ça rebondit), Limite basse (degrés pour une charnière, pixels pour une glissière ; vide = aucune), Limite haute (degrés ou pixels ; vide = aucune), Direction du rail ou de la suspension (degrés : 0 = horizontal, 90 = vertical ; vide = automatique), Moteur : vitesse (degrés par seconde pour une charnière ou une roue, pixels par seconde pour une glissière ; 0 = pas de moteur), Force du moteur ou du frein (1 = faible, 10 = normale, 100 = très forte)",
+      "role": "Relie deux objets pour qu'ils se tiennent ou bougent ensemble, comme dans la vraie vie. Sorte de liaison : charnière (pivote autour d'un point : porte, balancier, pendule), tige rigide (distance fixe), ressort (élastique, avec raideur), corde (longueur maximale), glissière (coulisse sur un rail, avec limites et moteur), soudure (collés), roue avec suspension (voiture : A = la caisse, B = la roue, avec moteur), frein (vue de dessus). L'objet B est facultatif : sans B, l'objet A est accroché à un point fixe du décor. Donne un nom à la liaison pour la régler (« Régler une liaison ») ou la couper (« Couper une liaison ») plus tard. En réglages avancés : point de chaque côté, limites, direction du rail, moteur, collision entre les deux objets. Les deux objets doivent avoir le comportement « Physique réaliste » (sauf un support fixe).",
+      "exemple": "un pendule : A = la boule, B = un petit objet fixe en haut, type « Charnière » ou « Tige rigide » ; un pont : planches reliées par des charnières."
+    },
+    {
+      "nom": "Régler une liaison",
+      "schema": "<b>Entrées :</b> Nom de la liaison, Moteur : vitesse (0 = arrêter le moteur, vide = inchangée), Force du moteur (vide = inchangée), Raideur du ressort ou de la suspension (vide = inchangée), Nouvelle longueur (pixels, vide = inchangée), Nouvelle limite basse (vide = inchangée), Nouvelle limite haute (vide = inchangée), Limites",
+      "role": "Change une liaison déjà créée par « Relier deux objets » (on la retrouve par son nom) : démarrer, arrêter ou accélérer son moteur, régler sa force, la raideur d'un ressort ou d'une suspension, la longueur d'une tige ou d'une corde, les limites. Chaque case vide reste comme avant. Exemple : une voiture dont le moteur des roues démarre quand on appuie sur un bouton.",
+      "exemple": "bouton « Gaz » : régler la liaison « roue_arriere » avec moteur = 720 ; au relâchement : moteur = 0."
+    },
+    {
+      "nom": "Couper une liaison",
+      "schema": "<b>Entrées :</b> Nom de la liaison à couper, Ou : nom d'un objet dont on coupe toutes les liaisons",
+      "role": "Coupe une liaison : écris son nom, ou écris le nom d'un objet pour couper toutes ses liaisons. Les objets se séparent et retombent chacun de leur côté (un pont qui s'effondre, une corde coupée, une cabine qui se détache).",
+      "exemple": "un pont piégé : quand le héros touche le levier, couper la liaison « planche_3 »."
+    },
+    {
+      "nom": "Saisir avec le doigt (physique)",
+      "schema": "<b>Entrées :</b> Action, Seulement les objets de ce tag (vide = tous), Souplesse de la prise",
+      "role": "Permet de saisir un objet physique avec le doigt et de le tirer, comme dans la vraie vie : l'objet suit le doigt avec un peu d'élasticité, pousse les autres et peut se coincer. À mettre sous « Doigt appuyé » (action « Saisir et tirer ») : tant que le doigt est posé, l'objet sous le doigt est tiré ; dès que le doigt se lève, il est lâché tout seul (ou utilise l'action « Lâcher »). Tu peux limiter la prise aux objets d'un tag, et régler la souplesse de la prise.",
+      "exemple": "un puzzle de caisses : le joueur déplace les caisses du bout du doigt pour fabriquer une tour."
+    },
+    {
+      "nom": "Si l'objet physique…",
+      "schema": "<b>Entrées :</b> Objet, Question, Vitesse à partir de laquelle ça compte (pixels par seconde) &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux",
+      "role": "Pose une question sur un objet physique et suit la sortie « vrai » ou « faux » : est-il posé sur quelque chose (pour autoriser un saut), touche-t-il quelque chose, touche-t-il quelque chose au-dessus, est-il au repos (endormi), bouge-t-il vite, tombe-t-il, monte-t-il. Pour « bouge vite », « tombe » et « monte », le seuil en pixels par seconde se règle en avancé. Tu peux aussi lire directement dans une formule : objet.vitesse, objet.masse, objet.vitesseRotation.",
+      "exemple": "un saut de plateforme : « Bouton saut » → Si l'objet est posé sur quelque chose → régler la vitesse vers le bas à -900."
+    }
+  ]
+}

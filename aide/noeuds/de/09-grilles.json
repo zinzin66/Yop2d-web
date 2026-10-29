@@ -51,9 +51,80 @@
     },
     {
       "nom": "Angreifen",
-      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Angriffsstärke (%), Verteidigung des Geländes des Ziels zählen, Immer mindestens 1 Schaden, Ziel zerstören, wenn die Leben aufgebraucht sind, Freie Schadensformel (z. B. attaquant.attaque * 2 - cible.armure); leer = normale Berechnung &nbsp;→&nbsp; <b>Ausgänge:</b> Noch am Leben / Keine Leben mehr",
-      "role": "Objekt A greift Objekt B an: Schaden = Angriff von A × Stärke − Verteidigung von B − Geländeverteidigung von B. Zwei Ausgänge: „Noch am Leben“ und „Kein Leben mehr“ (das Ziel wird zerstört, wenn das Kästchen angehakt ist). Beide Objekte brauchen ein Einheitenblatt.",
-      "exemple": "ein Held schlägt das berührte Monster."
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Angriffsstärke (%), Verteidigung des Geländes des Ziels zählen, Immer mindestens 1 Schaden, Ziel zerstören, wenn die Leben aufgebraucht sind, Freie Schadensformel (z. B. attaquant.attaque * 2 - cible.armure); leer = normale Berechnung, Bonus nach Tags des Ziels (z. B. Reiterei = 150, leicht = 120: % des Schadens), Bonus nach Tags des Angreifers (z. B. Speer = 130), Statistik, die bei jedem Angriff verbraucht wird (z. B. Munition: bei 0 kein Angriff), Durchschlag: % der Verteidigung ignoriert (0 = keiner), Gegenangriff: % des Angriffs des Ziels, wenn es überlebt und der Angreifer in Reichweite ist (0 = keiner), Höhenbonus: % Schaden pro Höhenstufe (z. B. 15; oben = mehr, unten = weniger), Deckung: Tag benachbarter Verbündeter, die die Verteidigung des Ziels stärken (z. B. Speer), Deckung: Verteidigung pro benachbartem Verbündeten &nbsp;→&nbsp; <b>Ausgänge:</b> Noch am Leben / Keine Leben mehr / Angreifer zerstört (Gegenangriff)",
+      "role": "Objekt A greift Objekt B an: Schaden = Angriff von A × Stärke × Boni − Verteidigung von B − Geländeverteidigung von B. Ausgänge „Noch am Leben“ und „Keine Leben mehr“ (das Ziel wird zerstört, wenn das Feld angehakt ist) sowie „Angreifer zerstört“, wenn ihn ein Gegenangriff tötet. Beide Objekte brauchen ein Einheitenblatt. Die Regeln „regle: speer > reiterei = 150“ aus donnees.txt gelten automatisch. Erweitert: Boni nach Tags („reiterei = 150“), DURCHSCHLAG (Prozent der Verteidigung ignoriert, für Speer oder Armbrust), GEGENANGRIFF (Prozent des Angriffs des Ziels zurück, wenn es überlebt und der Angreifer in Reichweite ist), HÖHENBONUS (Prozent Schaden pro Höhenstufe: wer höher steht, trifft stärker), DECKUNG (jeder benachbarte Verbündete mit dem gewählten Tag erhöht die Verteidigung des Ziels: eine Schildmauer), eine freie Formel und eine Statistik, die bei jedem Angriff verbraucht wird (Munition).",
+      "exemple": "der Speer (Durchschlag 40) gegen schwere Reiterei; der Bogenschütze auf dem Hügel (Höhe +15 %)."
+    },
+    {
+      "nom": "Daten anwenden (Einheit, Waffe)",
+      "schema": "<b>Eingänge:</b> Objekt, Name in donnees.txt (z. B. Ritter) &nbsp;→&nbsp; <b>Ausgänge:</b> Gefunden / Nicht gefunden",
+      "role": "Gibt Objekt A alle Werte einer Einheit oder Waffe aus der Datei donnees.txt (Assets → Dialoge, oder assets_ludexa/Textes/donnees.txt): Leben, Angriff, Verteidigung, Bewegung, Reichweite, Preis… und ihre Tags. Eine Zeile genügt: „unite Ritter: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=reiterei schwer“. Das Spiel wird durch Bearbeiten der Datei ausbalanciert, ohne die Nodes anzufassen. Ausgänge „Gefunden“ / „Nicht gefunden“. Die Datei kann auch „arme Schwert: attaque=5“, „etat Gift: duree=3, degats=2“, „regle: speer > reiterei = 150“ (ein Angreifer mit Tag speer verursacht 150 % bei einem Ziel mit Tag reiterei, automatisch von „Angreifen“ angewendet) und die Höhen der Felder enthalten.",
+      "exemple": "zu Spielbeginn für jeden Helden: Daten anwenden „Ritter“."
+    },
+    {
+      "nom": "Höhe von Feldern festlegen",
+      "schema": "<b>Eingänge:</b> Startspalte, Startzeile, Anzahl Spalten, Anzahl Zeilen, Höhe (0 = flach)",
+      "role": "Gibt einem Rechteck von Rasterfeldern eine Höhe (Stufe: 0 = flach, 1, 2, 3…): Startspalte und -zeile, Anzahl Spalten und Zeilen. Die Höhen bestimmen den Höhenbonus von „Angreifen“ und blockieren die Sicht im Kriegsnebel (ein Hügel verdeckt, was dahinter liegt). Sie lassen sich auch in donnees.txt schreiben („hauteur 3,4 = 2“ oder ein Block „hauteurs:“ mit einer Ziffer pro Feld). Lies sie mit der Formel hauteur(Spalte, Zeile) oder mit den grünen Nodes „Höhe des berührten Feldes“ / „Höhe des Feldes unter einem Objekt“.",
+      "exemple": "ein Hügel aus 3 x 2 Feldern auf Höhe 2, damit ein Bogenschütze dort stärker trifft."
+    },
+    {
+      "nom": "Zustand geben (Gift, langsam…)",
+      "schema": "<b>Eingänge:</b> Objekt, Name des Zustands (z. B. Gift; in donnees.txt), Dauer in Runden (leer = aus donnees.txt), Schaden pro Runde (leer = donnees.txt), Geänderte Statistik (z. B. mouvement; leer = donnees.txt), Änderung dieser Statistik (z. B. -2)",
+      "role": "Gibt der Einheit einen Zustand für eine Anzahl RUNDEN: Gift (Schaden jede Runde), langsam (Bewegung sinkt), gesegnet (Angriff steigt)… Alles kann in donnees.txt stehen („etat Gift: duree=3, degats=2“, „etat Langsam: duree=2, stat=mouvement, delta=-2“): dann genügt der Name des Zustands. Der Schaden trifft zu Beginn jeder Runde des Teams der Einheit, danach verliert der Zustand eine Runde; am Ende kehrt die geänderte Statistik zurück. Denselben Zustand erneut zu geben verlängert ihn, statt ihn zu verdoppeln. Die Einheit behält eine Statistik „etat_<Name>“ (verbleibende Runden), in Formeln lesbar. Braucht „Zur nächsten Runde“.",
+      "exemple": "ein Giftpfeil: Angreifen → noch am Leben → der Zielperson den Zustand „Gift“ geben."
+    },
+    {
+      "nom": "Zustand entfernen",
+      "schema": "<b>Eingänge:</b> Objekt, Name des Zustands (leer = alle)",
+      "role": "Entfernt einen Zustand von der Einheit (nach Name) oder alle, wenn der Name leer ist. Die vom Zustand geänderte Statistik kehrt sofort auf den alten Wert zurück.",
+      "exemple": "ein Priester, der das Gift eines Verbündeten heilt."
+    },
+    {
+      "nom": "Wenn die Einheit den Zustand hat…",
+      "schema": "<b>Eingänge:</b> Objekt, Name des Zustands (leer = alle) &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch",
+      "role": "Prüft, ob die Einheit einen Zustand hat (oder irgendeinen, wenn der Name leer ist). Ausgänge „Wahr“ / „Falsch“.",
+      "exemple": "sich nicht bewegen können, wenn die Einheit „Gefroren“ ist."
+    },
+    {
+      "nom": "Flächeneffekt um ein Objekt",
+      "schema": "<b>Eingänge:</b> Objekt, Effekt, Stärke (Schaden oder Heilung), Radius in Feldern, Betroffene Tags (leer = alle), Name des Zustands (wenn der Effekt einen Zustand gibt), Abnahme pro Feld Entfernung (% der Stärke), Form, Trifft auch das Objekt in der Mitte",
+      "role": "Trifft auf einmal alle Objekte um Objekt A (in der Mitte): Schaden, Heilung oder ein Zustand. Einstellungen: die Stärke, der Radius in Feldern, die betroffenen Tags (leer = alle), die Form (Raute oder Quadrat mit Diagonalen), die Abnahme pro Feld Entfernung (Explosion: je weiter weg, desto schwächer) und ob das Objekt in der Mitte auch getroffen wird. Der Schaden ignoriert die Verteidigung. Ein Feuerball, eine Gruppenheilung, ein Furcht-Schrei. Um Opfer in einer Bedingung zu zählen, nutze die Formeln compter(\"tag\") und voisins(Objekt, \"tag\", Felder).",
+      "exemple": "ein Feuerball: Radius 2, Stärke 6, Abnahme 30 % pro Feld, auf „Gegner“-Einheiten."
+    },
+    {
+      "nom": "Erfahrung gewinnen",
+      "schema": "<b>Eingänge:</b> Objekt, Gewonnene Erfahrung, Erfahrung für Stufe 2 (danach x Stufe), Zuwachs pro Stufe (z. B. vie=2, attaque=1) &nbsp;→&nbsp; <b>Ausgänge:</b> Stufe aufgestiegen / Nichts rückgängig",
+      "role": "Gibt der Einheit Erfahrung. Erreicht sie die Schwelle (Schwelle × aktuelle Stufe), steigt die Einheit eine Stufe auf, überschüssige Erfahrung bleibt erhalten und die Zuwächse werden addiert („vie=2, attaque=1“; das maximale Leben steigt mit dem Leben). Die Einheit behält die Statistiken „xp“ und „niveau“ (anfangs 1). Ausgänge „Stufe aufgestiegen“ / „Kein Aufstieg“: eine Fanfare oder Nachricht beim Aufstieg.",
+      "exemple": "ein Held, der für jeden besiegten Gegner 30 Erfahrung bekommt."
+    },
+    {
+      "nom": "Position merken",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Merkt sich die aktuelle Position der Einheit vor einer Bewegung. Mit „Bewegung rückgängig“ kann der Spieler zurück (wie in Advance Wars bei „Abbrechen“ vor der Aktion).",
+      "exemple": "direkt vor „Zum Feld gehen“: Position merken."
+    },
+    {
+      "nom": "Bewegung rückgängig",
+      "schema": "<b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgänge:</b> Rückgängig / Nichts rückgängig",
+      "role": "Setzt die Einheit auf die von „Position merken“ gespeicherte Position zurück, löscht „hat schon gespielt“ und setzt die Statistiken „bouge“ und „agi“ auf 0. Ausgänge „Rückgängig“ / „Nichts rückgängig“.",
+      "exemple": "ein „Abbrechen“-Knopf im Aktionsmenü der Einheit."
+    },
+    {
+      "nom": "Wie ein Computer spielen (KI)",
+      "schema": "<b>Eingänge:</b> Objekt, Tags der Gegner (z. B. Spieler), Spielstil, Bewegungsgeschwindigkeit, Weitere Tags, die den Weg blockieren (z. B. eigene Verbündete) &nbsp;→&nbsp; <b>Ausgänge:</b> Angekommen / Kein Ziel",
+      "role": "Lässt eine Einheit wie ein Computer von allein spielen. Sie prüft, wohin sie gehen kann (Bewegung, Wände, Gelände, blockierende Einheiten), sucht die Gegner (ihre Tags) und wählt je nach STIL das beste Feld zum Angreifen: aggressiv (meister Schaden, ein Ziel zuerst erledigen), vorsichtig (meidet den Gegenangriff) oder defensiv (mag Felder mit hoher Verteidigung). Niemand in Reichweite: Sie nähert sich dem nächsten Gegner. Nach der Ankunft kommt der Ausgang „Angekommen“: Das beteiligte Objekt ist das gewählte Ziel und die Statistik „cible_ia“ der Einheit ist 1 (kann angreifen) oder 0 (nur genähert). Sie nutzt Bewegung, Reichweite (und „portee_min“) und das Einheitenblatt. Ausgang „Kein Gegner“, wenn keiner mehr da ist.",
+      "exemple": "Zug der Monster: für jedes Monster Wie ein Computer spielen (Gegner = Spieler) → bei Ankunft, wenn cible_ia = 1, Angreifen."
+    },
+    {
+      "nom": "Kriegsnebel aktualisieren",
+      "schema": "<b>Eingänge:</b> Tags des Teams, das sieht (z. B. Spieler), Tags der Gegner, die außer Sicht versteckt werden (z. B. Gegner), Standardsicht in Feldern (sonst die Statistik « vision » der Einheit), Dunkelheit unbekannter Felder (0 bis 100), Bereits gesehene Felder merken",
+      "role": "Berechnet, was das Team sieht, und bedeckt den Rest der Karte mit einem dunklen Schleier: Die Einheiten des Teams (Tags) sehen um sich herum bis zu ihrer Statistik „vision“ in Feldern (sonst die Standardsicht des Nodes). Eine Geländewand, ein Gelände mit der Eigenschaft „bloque_vue = oui“ (dichter Wald) oder ein höheres Feld blockiert die Sicht. Bereits gesehene Felder bleiben halbdunkel (Gedächtnis, optional). Einheiten mit Gegner-Tags außer Sicht werden versteckt. Nach jeder Bewegung oder zu Rundenbeginn erneut ausführen. Die Formel vue(Spalte, Zeile) ist 1, wenn das Feld gesehen wird. „Kriegsnebel entfernen“ macht alles sichtbar.",
+      "exemple": "zu Beginn jeder Spielerrunde: Nebel aktualisieren (Team Spieler, Gegner Gegner, Sicht 3)."
+    },
+    {
+      "nom": "Kriegsnebel entfernen",
+      "role": "Entfernt den Kriegsnebel: Die ganze Karte ist wieder sichtbar und versteckte Einheiten tauchen wieder auf.",
+      "exemple": "am Spielende, um die ganze Karte zu zeigen."
     },
     {
       "nom": "Objekt Leben geben",
@@ -74,8 +145,20 @@
       "exemple": "ein Trank, der dem Helden 5 Lebenspunkte zurückgibt."
     },
     {
+      "nom": "Statistik ändern",
+      "schema": "<b>Eingänge:</b> Objekt, Name der Statistik (z. B. Munition), Was tun, Um wie viel",
+      "role": "Ändert eine Statistik, die du für ein Objekt erfunden hast (Munition, Rüstung, Mana, Treibstoff…): addieren, abziehen oder auf einen Wert setzen. Gibt es sie noch nicht, wird sie mit 0 angelegt. Danach kannst du sie überall lesen: =bogenschuetze.munition.",
+      "exemple": "Nach einem Schuss: Statistik ändern → Objekt „bogenschuetze“, Statistik „munition“, Abziehen 1."
+    },
+    {
+      "nom": "Wenn die Statistik…",
+      "schema": "<b>Eingänge:</b> Objekt, Name der Statistik (z. B. Munition), Vergleich, Wert &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch",
+      "role": "Vergleicht eine Statistik eines Objekts mit einem Wert und folgt dem Ausgang „wahr“ oder „falsch“: zum Beispiel „munition ist größer als 0“. Eine Statistik, die es nicht gibt, zählt als 0.",
+      "exemple": "Vor dem Schuss: Wenn die Statistik „munition“ des Bogenschützen größer als 0 ist → schießen; sonst → „Keine Pfeile mehr“ zeigen."
+    },
+    {
       "nom": "Ziel wählen",
-      "schema": "<b>Eingänge:</b> Objekt, Tags möglicher Ziele (durch Komma getrennt), Welches Ziel wählen?, Reichweite in Feldern (0 = unbegrenzt; z. B. =monster.portee), Mindestreichweite (0 = keine), Form der Reichweite, Meine Positionen (Spalte,Zeile; z. B. 2,1 ; -2,1), Statistik (für die Statistik-Regeln, z. B. defense) &nbsp;→&nbsp; <b>Ausgänge:</b> Ziel gefunden / Kein Ziel",
+      "schema": "<b>Eingänge:</b> Objekt, Tags möglicher Ziele (durch Komma getrennt), Welches Ziel wählen?, Reichweite in Feldern (0 = unbegrenzt; z. B. =monster.portee), Mindestreichweite (0 = keine), Form der Reichweite, Meine Positionen (Spalte,Zeile; z. B. 2,1 ; -2,1), Statistik (für die Statistik-Regeln, z. B. defense), Reichweite in Pixeln als Kreis (0 = Reichweite in Feldern nutzen) &nbsp;→&nbsp; <b>Ausgänge:</b> Ziel gefunden / Kein Ziel",
       "role": "Objekt A sucht unter den Objekten mit einem der gewünschten Tags diejenigen IN SEINER REICHWEITE (gleiche Formen wie bei „Erreichbare Felder zeigen“) und wählt eines aus: das nächste, das mit den wenigsten oder meisten Leben oder den niedrigsten / höchsten Wert einer Statistik. Ausgang „Ziel gefunden“: es wird zum „beteiligten Objekt“ (für Angreifen, Gehe zu…). Ausgang „Kein Ziel“: niemand in Reichweite. Perfekt für die Intelligenz eines Monsters oder Turms.",
       "exemple": "ein Monster: „Ziel wählen“ (Tag „held“, der nächste), dann „Angreifen“ bei „Ziel gefunden“."
     },

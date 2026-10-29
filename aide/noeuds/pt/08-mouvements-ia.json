@@ -14,6 +14,18 @@
       "exemple": "parar a passarela quando o jogador aperta um botão."
     },
     {
+      "nom": "Seguir o percurso",
+      "schema": "<b>Entradas:</b> Objeto, Nome do percurso, Velocidade (pixels por segundo), Virar para onde vai (sim / não), Desvio lateral ao acaso (pixels, ±: cada um anda na sua faixa), Evitar os outros: desviar para não se sobrepor e ultrapassar os mais lentos (sim / não), Largura utilizável para desviar (pixels de cada lado do centro do caminho), Ângulo da imagem (0 = olha para a direita, 90 = para baixo) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou",
+      "role": "Faz o objeto seguir um percurso desenhado com a ferramenta “Percurso” de Assets: ele é colocado no ponto de início e avança de ponto em ponto na velocidade escolhida. Num cruzamento escolhe a saída como você configurou (ao acaso, um de cada vez, conforme uma variável). A saída “Chegou ao fim” é ativada ao alcançar um ponto sem saída. Com “Desvio lateral ao acaso”, cada objeto anda na sua própria faixa (deslocamento ao acaso): vários inimigos avançam lado a lado em vez de se sobrepor. Com “Evitar os outros”, um objeto que alcança um mais lento desvia, ultrapassa e volta à sua faixa; se o caminho for estreito demais, ele o segue.",
+      "exemple": "Aparece um inimigo: Seguir o percurso “Caminho_inimigos”, velocidade 150. Saída “Chegou ao fim” → Causar dano à base e depois Destruir o objeto."
+    },
+    {
+      "nom": "Parar o percurso",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Para o objeto onde está: ele deixa de seguir o percurso (a saída “Chegou ao fim” não será ativada).",
+      "exemple": "Uma armadilha congela um inimigo: Parar o percurso e depois Seguir o percurso para ele continuar."
+    },
+    {
       "nom": "Parar o objeto",
       "schema": "<b>Entrada:</b> Objeto",
       "role": "Para o objeto na hora: sem velocidade, empurrão, pulo ou movimento automático.",

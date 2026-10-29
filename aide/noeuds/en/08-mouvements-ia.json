@@ -14,6 +14,18 @@
       "exemple": "stop the platform when the player presses a button."
     },
     {
+      "nom": "Follow the path",
+      "schema": "<b>Inputs:</b> Object, Path name, Speed (pixels per second), Turn to face the way it goes (yes / no), Random side offset (pixels, ±: each one walks in its own lane), Avoid the others: step aside to avoid overlapping and overtake slower ones (yes / no), Usable width to step aside (pixels on each side of the road centre), Image angle (0 = faces right, 90 = faces down) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived",
+      "role": "Makes the object follow a path drawn with the “Path” tool in Assets: it is placed on the starting point, then moves from point to point at the chosen speed. At a crossroads it picks its exit as you set it (random, take turns, by a variable). The “Reached the end” exit fires when it reaches a point with no exit. With “Random side offset”, each object walks in its own lane (random shift): several enemies advance side by side instead of overlapping. With “Avoid the others”, an object that catches up with a slower one steps aside, overtakes it and returns to its lane; if the road is too narrow, it follows instead.",
+      "exemple": "An enemy appears: Follow the path “Enemy_path”, speed 150. “Reached the end” exit → Deal damage to the base, then Destroy the object."
+    },
+    {
+      "nom": "Stop following the path",
+      "schema": "<b>Input:</b> Object",
+      "role": "Stops the object where it is: it no longer follows its path (the “Reached the end” exit will not fire).",
+      "exemple": "An enemy is frozen by a trap: Stop the path, then later Follow the path again so it moves on."
+    },
+    {
       "nom": "Stop the object",
       "schema": "<b>Input:</b> Object",
       "role": "Stops the object dead: no more speed, push, jump or automatic movement.",

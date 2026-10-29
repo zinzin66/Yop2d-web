@@ -164,7 +164,7 @@
     },
     {
       "nom": "Shoot an object",
-      "schema": "<b>Inputs:</b> Object A, Object B, Model name, Direction, Speed, Destroy off screen (yes / no)",
+      "schema": "<b>Inputs:</b> Object A, Object B, Model name, Direction, Speed, Destroy off screen (yes / no), Shot lifetime (seconds, 0 = unlimited)",
       "role": "Creates a projectile (the object named in “Model name”) at object A, and launches it at the chosen speed: 0°, 90°, 180°, 270°, towards object B (“Toward target”) or along A's angle.",
       "exemple": "a ship firing lasers upwards (270)."
     },
@@ -179,6 +179,12 @@
       "schema": "<b>Inputs:</b> Object, Delay (seconds)",
       "role": "Removes the chosen object after a delay (in seconds). Handy to make an explosion disappear once its animation is over.",
       "exemple": "after “Generate clone (Spawner)” and “Play animation”, the explosion image is destroyed 0.4 seconds later."
+    },
+    {
+      "nom": "Team colour (replaces the pink in the drawing)",
+      "schema": "<b>Inputs:</b> Object, Team colour, Colour to replace in the drawing (pink by default), Tolerance (1 to 100): higher also replaces similar colours",
+      "role": "One drawing for all teams: paint the parts to colour (cloak, flag, plume) with a marker colour (bright pink #FF00FF by default), then this node replaces that pink with the team colour for the object. The drawing's shadows and highlights are kept (a dark pink becomes a dark blue). Tolerance says how far a colour may stray from the marker and still be replaced. Nothing is changed in the images: it all happens at display time, so do it again at the start of each game.",
+      "exemple": "two armies with the same images: player in blue, enemy in red."
     },
     {
       "nom": "Set Progress",

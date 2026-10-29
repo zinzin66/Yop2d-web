@@ -1,0 +1,122 @@
+{
+  "titre_page": "Wie baut man in Yop2D ein Menü mit Buttons, Schalter und Regler? | Yop2D-Anleitung",
+  "description": "Baue in Yop2D ein echtes Menü: Buttons in allen Formen, Schalter, Kontrollkästchen, Regler, Panel und Zähler, ganz ohne Code. Ändere Form, Farben, Bild und Ton an einer einzigen Stelle.",
+  "h1": "Wie baut man ein Menü mit Buttons, Schalter und Regler?",
+  "carte": [
+    "Buttons und Oberflächenelemente",
+    "Ein komplettes Menü: Buttons, Schalter, Regler – alles an einer Stelle einstellbar."
+  ],
+  "etapes": [
+    [
+      "Element hinzufügen",
+      "Tippe auf + und dann auf „Oberflächenelemente“ und wähle einen Button."
+    ],
+    [
+      "Stil ändern",
+      "Inspektor > „Elementstil…“: Form, Farben, Bild, Text."
+    ],
+    [
+      "Wert lesen",
+      "Eine Formel liest =name.progression bei einem Schalter oder Regler."
+    ],
+    [
+      "Auf Berührung reagieren",
+      "Füge [[NoeudEventClicObjet]] im Blueprint hinzu."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Ein Spielmenü braucht hübsche Buttons und Einstellungen: einen Schalter für den Ton, einen Regler für die Lautstärke, einen Zähler für die Punkte. In Yop2D ist jedes Element **ein einziges Objekt** mit seinem Text darin, und sein ganzes Aussehen wird in einem Fenster eingestellt. Du kannst auch das Beispiel **UI kit** herunterladen (Tab Beispiele): Es zeigt alle Elemente."
+    ],
+    [
+      "besoin",
+      [
+        "ein im Editor geöffnetes Projekt;",
+        "das Beispiel „UI kit“, wenn du das Ergebnis vorher sehen möchtest (optional)."
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 1: Element hinzufügen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Tippe im Editor auf **+** und dann auf den Bereich **Oberflächenelemente**.",
+            "Wähle zwischen **Button**, **Schalter**, **Kontrollkästchen**, **Regler**, **Panel** und **Zähler**.",
+            "Das Element erscheint in der Mitte des Bildschirms: Verschiebe es mit dem Finger und ändere die Größe mit den Griffen, wie bei jedem Objekt."
+          ]
+        ],
+        [
+          "tip",
+          "Der Text eines Buttons steckt im Button: Schreibe ihn im Inspektor, du musst keinen Text mehr über den Button legen."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 2: Stil ändern"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Wähle das Element aus und tippe im Inspektor auf **Elementstil…**.",
+            "Wähle bei **Form** Rechteck, abgerundet, Pille, Kreis, abgeschnittene Ecken oder Sechseck.",
+            "Wähle bei **Bild** **In der Form** (das Bild behält die Form), **Ersetzt die Form** (das Bild IST der Button) oder **Symbol + Text**.",
+            "Stelle bei **Farben und Kontur** die Farbe, den **Verlauf**, die Kontur, den **Schatten** und das **Leuchten (Neon)** ein.",
+            "Wähle bei **Text** Schriftart, Größe, Farbe und Kontur der Buchstaben."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 3: Verhalten festlegen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Aktiviere bei **Verhalten** **Bleibt gedrückt (AN / AUS)** für einen Button, der seinen Zustand behält.",
+            "Wähle einen **Ton bei Berührung** und, wenn du willst, eine **Vibration**.",
+            "Stelle bei einem Regler den **Mindestwert**, den **Höchstwert** und den **Startwert** ein."
+          ]
+        ],
+        [
+          "tip",
+          "Ein **deaktiviertes (graues)** Element reagiert nicht mehr auf Berührung: praktisch für einen Button „Weiter“, der noch nicht verfügbar ist."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 4: Wert im Spiel lesen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Ein Schalter oder Kontrollkästchen hat seinen Mindestwert (aus) oder Höchstwert (an); ein Regler hat seine Position.",
+            "Schreibe in einer Formel **objektname.progression**: zum Beispiel „=lautstaerke.progression“ in [[modifier_propriete]] eines Textes, um die Lautstärke anzuzeigen.",
+            "Füge bei einem Button das Ereignis [[NoeudEventClicObjet]] im Blueprint hinzu und wähle deinen Button."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "Die alten Yop2D-Buttons funktionieren weiter: Die neuen Elemente kommen dazu und ersetzen nichts."
+    ]
+  ]
+}

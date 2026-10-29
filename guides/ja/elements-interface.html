@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2Dでボタン・スイッチ・スライダーのあるメニューを作るには？ | Yop2Dガイド</title>
+<meta name="description" content="Yop2Dで本格的なメニューを作りましょう：いろいろな形のボタン、スイッチ、チェックボックス、スライダー、パネル、カウンター。コードは不要。形・色・画像・音を1か所で変更できます。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/elements-interface.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/elements-interface.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/elements-interface.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/elements-interface.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/elements-interface.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/elements-interface.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/elements-interface.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/elements-interface.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/elements-interface.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/elements-interface.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "ボタン・スイッチ・スライダーのあるメニューを作るには？",
+ "description": "Yop2Dで本格的なメニューを作りましょう：いろいろな形のボタン、スイッチ、チェックボックス、スライダー、パネル、カウンター。コードは不要。形・色・画像・音を1か所で変更できます。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "部品を追加する",
+   "text": "＋をタッチして「画面部品」を開き、ボタンを選びます。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "スタイルを変える",
+   "text": "インスペクター > 「要素のスタイル…」：形、色、画像、テキスト。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "値を読む",
+   "text": "数式で、スイッチやスライダーの値を =名前.progression で読めます。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "タッチに反応する",
+   "text": "Blueprintに「オブジェクトクリック時」を追加します。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>ボタン・スイッチ・スライダーのあるメニューを作るには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../elements-interface.html" hreflang="fr">Français</a> · <a href="../en/elements-interface.html" hreflang="en">English</a> · <a href="../es/elements-interface.html" hreflang="es">Español</a> · <a href="../de/elements-interface.html" hreflang="de">Deutsch</a> · <a href="../it/elements-interface.html" hreflang="it">Italiano</a> · <a href="../pt/elements-interface.html" hreflang="pt">Português</a> · <a href="../ru/elements-interface.html" hreflang="ru">Русский</a> · <a href="../zh/elements-interface.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>ゲームのメニューには、見栄えのよいボタンと設定が必要です：音のスイッチ、音量のスライダー、スコアのカウンター。Yop2Dでは、各部品は文字を中に持つ<strong>1つのオブジェクト</strong>で、見た目はすべて1つのウィンドウで設定します。サンプル<strong>UI kit</strong>（サンプルタブ）をダウンロードすると、すべての部品を見られます。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>エディターで開いたプロジェクト。</li><li>先に結果を見たい場合は、サンプル「UI kit」（任意）。</li></ul>
+</div>
+<h2>ステップ1：部品を追加する</h2>
+<div class="method">
+<ol><li>エディターの<strong>＋</strong>をタッチして、<strong>画面部品</strong>の項目を開きます。</li><li><strong>ボタン</strong>、<strong>スイッチ</strong>、<strong>チェックボックス</strong>、<strong>スライダー</strong>、<strong>パネル</strong>、<strong>カウンター</strong>から選びます。</li><li>部品は画面の中央に現れます。ほかのオブジェクトと同じように、指で動かし、ハンドルで大きさを変えられます。</li></ol>
+<div class="tip">👉 ボタンの文字はボタンの中にあります。インスペクターで入力するだけで、ボタンの上に文字を重ねる必要はありません。</div>
+</div>
+<h2>ステップ2：スタイルを変える</h2>
+<div class="method">
+<ol><li>部品を選んで、インスペクターの<strong>要素のスタイル…</strong>をタッチします。</li><li><strong>形</strong>では、四角、角丸、カプセル、円、角切り、六角形から選びます。</li><li><strong>画像</strong>では、<strong>形の中</strong>（画像は形のまま）、<strong>形を置き換える</strong>（画像がそのままボタン）、<strong>アイコン＋文字</strong>から選びます。</li><li><strong>色と輪郭</strong>では、色、<strong>グラデーション</strong>、輪郭、<strong>影</strong>、<strong>発光（ネオン）</strong>を設定します。</li><li><strong>テキスト</strong>では、フォント、大きさ、色、文字の輪郭を選びます。</li></ol>
+</div>
+<h2>ステップ3：動きを決める</h2>
+<div class="method">
+<ol><li><strong>動作</strong>で、状態を保つボタンには<strong>押したままにする（ON / OFF）</strong>をオンにします。</li><li><strong>タッチしたときの音</strong>を選び、必要なら<strong>バイブレーション</strong>も選びます。</li><li>スライダーでは、<strong>最小値</strong>、<strong>最大値</strong>、<strong>開始値</strong>を設定します。</li></ol>
+<div class="tip">👉 <strong>無効（グレー）</strong>の部品はタッチに反応しなくなります。まだ使えない「つづける」ボタンに便利です。</div>
+</div>
+<h2>ステップ4：ゲームの中で値を読む</h2>
+<div class="method">
+<ol><li>スイッチとチェックボックスは、最小値（オフ）か最大値（オン）になります。スライダーは位置が値です。</li><li>数式には<strong>オブジェクト名.progression</strong>と書きます。たとえば、テキストの「プロパティを変更」で「=volume.progression」と書くと音量を表示できます。</li><li>ボタンは、Blueprintにイベント「オブジェクトクリック時」を追加して、そのボタンを選びます。</li></ol>
+</div>
+<p>これまでのYop2Dのボタンもそのまま使えます。新しい部品は追加されるだけで、何も置き換えません。</p>
+
+<div class="nav">
+<a href="../ja/prefabs.html">← 既製のオブジェクト</a>
+<a href="../ja/musique.html">次のガイド： 自分の音楽を作ろう →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

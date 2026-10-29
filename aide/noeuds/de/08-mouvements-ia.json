@@ -14,6 +14,18 @@
       "exemple": "die Brücke anhalten, wenn der Spieler einen Knopf drückt."
     },
     {
+      "nom": "Dem Weg folgen",
+      "schema": "<b>Eingänge:</b> Objekt, Name des Wegs, Geschwindigkeit (Pixel pro Sekunde), In Laufrichtung drehen (ja / nein), Seitlicher Zufallsversatz (Pixel, ±: jeder geht auf seiner Spur), Anderen ausweichen: zur Seite gehen, um nicht zu überlappen, und langsamere überholen (ja / nein), Nutzbare Breite zum Ausweichen (Pixel auf jeder Seite der Wegmitte), Bildwinkel (0 = schaut nach rechts, 90 = nach unten) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen",
+      "role": "Lässt das Objekt einem Weg folgen, der mit dem Werkzeug „Weg“ in den Assets gezeichnet wurde: Es wird auf den Startpunkt gesetzt und geht dann mit der gewählten Geschwindigkeit von Punkt zu Punkt. An einer Kreuzung wählt es den Ausgang so, wie du es eingestellt hast (zufällig, reihum, nach einer Variable). Der Ausgang „Am Ende angekommen“ läuft, sobald es einen Punkt ohne Ausgang erreicht. Mit „Seitlicher Zufallsversatz“ geht jedes Objekt auf seiner eigenen Spur (zufällig verschoben): mehrere Gegner laufen nebeneinander statt übereinander. Mit „Anderen ausweichen“ geht ein Objekt, das ein langsameres einholt, zur Seite, überholt es und kehrt auf seine Spur zurück; ist der Weg zu schmal, folgt es.",
+      "exemple": "Ein Gegner erscheint: Dem Weg „Gegnerweg“ folgen, Geschwindigkeit 150. Ausgang „Am Ende angekommen“ → der Basis Schaden zufügen, dann das Objekt zerstören."
+    },
+    {
+      "nom": "Weg abbrechen",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Hält das Objekt an der Stelle an: Es folgt seinem Weg nicht mehr (der Ausgang „Am Ende angekommen“ läuft nicht).",
+      "exemple": "Eine Falle friert einen Gegner ein: Weg abbrechen, später wieder Dem Weg folgen, damit er weitergeht."
+    },
+    {
       "nom": "Objekt stoppen",
       "schema": "<b>Eingang:</b> Objekt",
       "role": "Stoppt das Objekt sofort: keine Geschwindigkeit, kein Schub, kein Sprung und keine automatische Bewegung mehr.",

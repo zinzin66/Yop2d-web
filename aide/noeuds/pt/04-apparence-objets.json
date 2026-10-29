@@ -164,7 +164,7 @@
     },
     {
       "nom": "Disparar um objeto",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade, Destruir fora da tela (sim / não)",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade, Destruir fora da tela (sim / não), Duração do tiro (segundos, 0 = sem limite)",
       "role": "Cria um projétil (o objeto indicado em “Nome do modelo”) no lugar do objeto A e o lança na velocidade escolhida: 0°, 90°, 180°, 270°, na direção do objeto B (“Em direção ao alvo”) ou no ângulo de A.",
       "exemple": "uma nave que atira lasers para cima (270)."
     },
@@ -179,6 +179,12 @@
       "schema": "<b>Entradas:</b> Objeto, Atraso (segundos)",
       "role": "Remove o objeto escolhido depois de um atraso (em segundos). Útil para fazer uma explosão sumir quando a animação termina.",
       "exemple": "depois de “Gerar clone (Spawner)” e “Reproduzir animação”, a imagem da explosão é destruída 0,4 segundo depois."
+    },
+    {
+      "nom": "Cor da equipe (substitui o rosa do desenho)",
+      "schema": "<b>Entradas:</b> Objeto, Cor da equipe, Cor a substituir no desenho (rosa por padrão), Tolerância (1 a 100): mais alta substitui também cores parecidas",
+      "role": "Um só desenho para todas as equipes: pinte as partes a colorir (capa, bandeira, penacho) com uma cor de referência (rosa vivo #FF00FF por padrão) e este nó substitui esse rosa pela cor da equipe para o objeto. As sombras e brilhos do desenho são mantidos (um rosa escuro vira azul escuro). A tolerância diz o quanto uma cor pode se afastar da referência e ainda ser substituída. Nada muda nas imagens: tudo acontece na exibição, então repita no início de cada partida.",
+      "exemple": "dois exércitos com as mesmas imagens: jogador em azul, inimigo em vermelho."
     },
     {
       "nom": "Definir o Progresso",

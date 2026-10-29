@@ -1,0 +1,122 @@
+{
+  "titre_page": "How to make a menu with buttons, a switch and a slider in Yop2D? | Yop2D Guide",
+  "description": "Build a real menu in Yop2D: buttons of every shape, switch, checkbox, slider, panel and counter, no code. Change the shape, colors, image and sound from one place.",
+  "h1": "How to make a menu with buttons, a switch and a slider?",
+  "carte": [
+    "Buttons and interface elements",
+    "A full menu: buttons, switch, slider, all set in one place."
+  ],
+  "etapes": [
+    [
+      "Add an element",
+      "Tap + then \"Interface elements\" and pick a button."
+    ],
+    [
+      "Change its style",
+      "Inspector > \"Element style…\": shape, colors, image, text."
+    ],
+    [
+      "Read its value",
+      "A formula reads =name.progression for a switch or a slider."
+    ],
+    [
+      "React to the touch",
+      "Add [[NoeudEventClicObjet]] in the Blueprint."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "A game menu needs good-looking buttons and settings: a switch for the sound, a slider for the volume, a counter for the score. In Yop2D, every element is **a single object** with its text inside, and its whole look is set in one window. You can also download the **UI kit** example (Examples tab): it shows every element."
+    ],
+    [
+      "besoin",
+      [
+        "a project open in the editor;",
+        "the \"UI kit\" example if you want to see the result first (optional)."
+      ]
+    ],
+    [
+      "h2",
+      "Step 1: add an element"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Tap the **+** of the editor, then the **Interface elements** section.",
+            "Choose between **Button**, **Switch**, **Checkbox**, **Slider**, **Panel** and **Counter**.",
+            "The element arrives in the middle of the screen: move it with your finger and resize it with the handles, like any object."
+          ]
+        ],
+        [
+          "tip",
+          "The text of a button is inside it: write it in the Inspector, no need to place a text on top of the button anymore."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 2: change its style"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Select the element and tap **Element style…** in the Inspector.",
+            "In **Shape**, choose rectangle, rounded, pill, circle, cut corners or hexagon.",
+            "In **Image**, choose **Inside the shape** (the image keeps the shape), **Replaces the shape** (the image IS the button) or **Icon + text**.",
+            "In **Colors and outline**, set the color, the **gradient**, the outline, the **shadow** and the **glow (neon)**.",
+            "In **Text**, choose the font, the size, the color and the outline of the letters."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 3: give it a behavior"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "In **Behavior**, turn on **Stays pressed (ON / OFF)** for a button that keeps its state.",
+            "Choose a **sound on touch** and, if you like, a **vibration**.",
+            "For a slider, set the **minimum value**, the **maximum value** and the **starting value**."
+          ]
+        ],
+        [
+          "tip",
+          "A **disabled (greyed)** element no longer reacts to touch: handy for a \"Continue\" button that is not available yet."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 4: read the value in the game"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "A switch or a checkbox equals its minimum value (off) or maximum value (on); a slider equals its position.",
+            "In a formula, write **object_name.progression**: for example \"=volume.progression\" in [[modifier_propriete]] of a text to display the volume.",
+            "For a button, add the event [[NoeudEventClicObjet]] in the Blueprint and choose your button."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "The old Yop2D buttons keep working: these new elements are added, they replace nothing."
+    ]
+  ]
+}

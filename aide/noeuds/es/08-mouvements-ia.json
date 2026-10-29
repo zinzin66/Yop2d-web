@@ -14,6 +14,18 @@
       "exemple": "parar la pasarela cuando el jugador pulsa un botón."
     },
     {
+      "nom": "Seguir el recorrido",
+      "schema": "<b>Entradas:</b> Objeto, Nombre del recorrido, Velocidad (píxeles por segundo), Girar hacia donde va (sí / no), Desvío lateral al azar (píxeles, ±: cada uno va por su carril), Evitar a los demás: apartarse para no superponerse y adelantar a los más lentos (sí / no), Ancho utilizable para apartarse (píxeles a cada lado del centro del camino), Ángulo de la imagen (0 = mira a la derecha, 90 = hacia abajo) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Llegó",
+      "role": "Hace que el objeto siga un recorrido dibujado con la herramienta «Recorrido» de Assets: se coloca en el punto de salida y avanza de punto en punto a la velocidad elegida. En un cruce elige su salida como la ajustaste (al azar, por turnos, según una variable). La salida «Llegó al final» se activa al alcanzar un punto sin salida. Con «Desvío lateral al azar», cada objeto va por su propio carril (desplazamiento al azar): varios enemigos avanzan lado a lado en vez de superponerse. Con «Evitar a los demás», un objeto que alcanza a uno más lento se aparta, lo adelanta y vuelve a su carril; si el camino es demasiado estrecho, lo sigue.",
+      "exemple": "Aparece un enemigo: Seguir el recorrido «Camino_enemigos», velocidad 150. Salida «Llegó al final» → Infligir daño a la base y luego Destruir el objeto."
+    },
+    {
+      "nom": "Detener el recorrido",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Detiene el objeto donde está: ya no sigue su recorrido (la salida «Llegó al final» no se activará).",
+      "exemple": "Una trampa congela a un enemigo: Detener el recorrido y más tarde Seguir el recorrido para que continúe."
+    },
+    {
       "nom": "Detener el objeto",
       "schema": "<b>Entrada:</b> Objeto",
       "role": "Detiene en seco el objeto: sin velocidad, empuje, salto ni movimiento automático.",

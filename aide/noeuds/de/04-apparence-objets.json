@@ -164,7 +164,7 @@
     },
     {
       "nom": "Ein Objekt abfeuern",
-      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit, Außerhalb des Bildschirms zerstören (ja / nein)",
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit, Außerhalb des Bildschirms zerstören (ja / nein), Lebensdauer des Schusses (Sekunden, 0 = unbegrenzt)",
       "role": "Erstellt ein Geschoss (das Objekt aus „Modellname“) bei Objekt A und schießt es mit der gewählten Geschwindigkeit ab: 0°, 90°, 180°, 270°, zu Objekt B („Zum Ziel“) oder im Winkel von A.",
       "exemple": "ein Raumschiff, das Laser nach oben schießt (270)."
     },
@@ -179,6 +179,12 @@
       "schema": "<b>Eingänge:</b> Objekt, Verzögerung (Sekunden)",
       "role": "Entfernt das gewählte Objekt nach einer Verzögerung (in Sekunden). Praktisch, damit eine Explosion nach ihrer Animation verschwindet.",
       "exemple": "nach „Klon erzeugen (Spawner)“ und „Animation abspielen“ wird das Explosionsbild 0,4 Sekunden später zerstört."
+    },
+    {
+      "nom": "Teamfarbe (ersetzt das Pink der Zeichnung)",
+      "schema": "<b>Eingänge:</b> Objekt, Teamfarbe, Zu ersetzende Farbe in der Zeichnung (standardmäßig Pink), Toleranz (1 bis 100): höher ersetzt auch ähnliche Farben",
+      "role": "Eine Zeichnung für alle Teams: Male die einzufärbenden Teile (Umhang, Fahne, Federbusch) in einer Markierungsfarbe (standardmäßig leuchtendes Pink #FF00FF); dieser Node ersetzt dann dieses Pink für das Objekt durch die Teamfarbe. Schatten und Lichter der Zeichnung bleiben erhalten (ein dunkles Pink wird dunkles Blau). Die Toleranz bestimmt, wie weit eine Farbe von der Markierung abweichen darf und trotzdem ersetzt wird. An den Bildern wird nichts geändert: Alles geschieht bei der Anzeige, also zu Beginn jeder Partie erneut ausführen.",
+      "exemple": "zwei Armeen mit denselben Bildern: Spieler in Blau, Gegner in Rot."
     },
     {
       "nom": "Fortschritt festlegen",

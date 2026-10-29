@@ -14,6 +14,18 @@
       "exemple": "stopper la passerelle quand le joueur appuie sur un bouton."
     },
     {
+      "nom": "Suivre le parcours",
+      "schema": "<b>Entrées :</b> Objet, Nom du parcours, Vitesse (pixels par seconde), Tourner dans le sens de la marche (oui / non), Écart de côté au hasard (pixels, ± : chacun marche sur sa voie), Éviter les autres : se décaler pour ne pas se superposer et dépasser les plus lents (oui / non), Largeur utilisable pour s'écarter (pixels de chaque côté du centre de la route), Angle de l'image (0 = elle regarde vers la droite, 90 = vers le bas) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé",
+      "role": "Fait suivre à l'objet un parcours dessiné avec l'outil « Parcours » des Assets : il est posé sur le point de départ, puis avance de point en point à la vitesse choisie. À un carrefour il choisit sa sortie comme tu l'as réglé (au hasard, chacun son tour, selon une variable). La sortie « Arrivé au bout » part quand il atteint un point sans sortie. Avec « Écart de côté », chaque objet marche sur sa propre voie (décalage au hasard) : plusieurs ennemis avancent côte à côte au lieu de se superposer. Avec « Éviter les autres », un objet qui en rattrape un plus lent se décale sur le côté, le dépasse puis revient sur sa voie ; si la route est trop étroite, il le suit.",
+      "exemple": "Un ennemi qui apparaît : Suivre le parcours « Chemin_ennemis », vitesse 150. Sortie « Arrivé au bout » → Infliger des dégâts à la base, puis Détruire l'objet."
+    },
+    {
+      "nom": "Arrêter le parcours",
+      "schema": "<b>Entrée :</b> Objet",
+      "role": "Arrête l'objet là où il est : il ne suit plus son parcours (la sortie « Arrivé au bout » ne partira pas).",
+      "exemple": "Un ennemi est gelé par un piège : Arrêter le parcours, puis plus tard Suivre le parcours pour qu'il reparte."
+    },
+    {
       "nom": "Arrêter l'objet",
       "schema": "<b>Entrée :</b> Objet",
       "role": "Arrête net l'objet : plus de vitesse, de poussée, de saut ni de déplacement automatique.",

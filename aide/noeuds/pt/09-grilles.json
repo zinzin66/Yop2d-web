@@ -51,9 +51,80 @@
     },
     {
       "nom": "Atacar",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Poder do ataque (%), Contar a defesa do terreno do alvo, Sempre pelo menos 1 de dano, Destruir o alvo quando a vida acabar, Cálculo de dano livre (ex. attaquant.attaque * 2 - cible.armure); vazio = cálculo normal &nbsp;→&nbsp; <b>Saídas:</b> Ainda vivo / Sem vida",
-      "role": "O objeto A ataca o objeto B: dano = ataque de A × poder − defesa de B − defesa do terreno de B. Duas saídas: “Ainda vivo” e “Sem vida” (o alvo é destruído se a caixa estiver marcada). Os dois objetos precisam de uma ficha de unidade.",
-      "exemple": "um herói bate no monstro tocado."
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Poder do ataque (%), Contar a defesa do terreno do alvo, Sempre pelo menos 1 de dano, Destruir o alvo quando a vida acabar, Cálculo de dano livre (ex. attaquant.attaque * 2 - cible.armure); vazio = cálculo normal, Bônus pelas tags do alvo (ex. cavalaria = 150, leve = 120: % do dano), Bônus pelas tags do atacante (ex. lança = 130), Estatística gasta a cada ataque (ex. munição: sem ataque em 0), Perfuração: % da defesa ignorado (0 = nenhum), Contra-ataque: % do ataque do alvo devolvido se sobreviver e o atacante estiver ao seu alcance (0 = nenhum), Bônus de altura: % de dano por nível de diferença (ex. 15; acima = mais, abaixo = menos), Guarda: tag dos aliados vizinhos que reforçam a defesa do alvo (ex. lança), Guarda: defesa ganha por aliado vizinho &nbsp;→&nbsp; <b>Saídas:</b> Ainda vivo / Sem vida / Atacante destruído (contra-ataque)",
+      "role": "O objeto A ataca o objeto B: dano = ataque de A × potência × bônus − defesa de B − defesa do terreno de B. Saídas “Ainda vivo” e “Sem vida” (o alvo é destruído se a caixa estiver marcada), e “Atacante destruído” se um contra-ataque o mata. Os dois objetos precisam de uma ficha de unidade. As regras “regle: lança > cavalaria = 150” de donnees.txt se aplicam sozinhas. No avançado: bônus por tags (“cavalaria = 150”), PERFURAÇÃO (porcentagem da defesa ignorada, para uma lança ou besta), CONTRA-ATAQUE (porcentagem do ataque do alvo devolvida se sobreviver e o atacante estiver ao seu alcance), BÔNUS DE ALTURA (porcentagem de dano por nível de diferença: quem está mais alto bate mais forte), GUARDA (cada aliado vizinho com a tag escolhida soma defesa ao alvo: uma parede de escudos), um cálculo livre e uma estatística gasta a cada ataque (munição).",
+      "exemple": "a lança (perfuração 40) contra a cavalaria pesada; o arqueiro na colina (altura +15 %)."
+    },
+    {
+      "nom": "Aplicar dados (unidade, arma)",
+      "schema": "<b>Entradas:</b> Objeto, Nome em donnees.txt (ex. Cavaleiro) &nbsp;→&nbsp; <b>Saídas:</b> Encontrado / Não encontrado",
+      "role": "Dá ao objeto A todos os valores de uma unidade ou arma escritos no arquivo donnees.txt (Assets → Diálogos, ou assets_ludexa/Textes/donnees.txt): vida, ataque, defesa, movimento, alcance, preço… e suas tags. Uma linha basta: “unite Cavaleiro: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=cavalaria pesado”. Reequilibra-se o jogo editando o arquivo, sem mexer nos nós. Saídas “Encontrado” / “Não encontrado”. O arquivo também pode conter “arme Espada: attaque=5”, “etat Veneno: duree=3, degats=2”, “regle: lança > cavalaria = 150” (um atacante com tag lança causa 150 % num alvo com tag cavalaria, aplicado automaticamente por “Atacar”) e as alturas das casas.",
+      "exemple": "no início do jogo, para cada herói: Aplicar dados “Cavaleiro”."
+    },
+    {
+      "nom": "Definir a altura das casas",
+      "schema": "<b>Entradas:</b> Coluna inicial, Linha inicial, Número de colunas, Número de linhas, Altura (0 = plano)",
+      "role": "Dá uma altura (um nível: 0 = plano, 1, 2, 3…) a um retângulo de casas da grade: coluna e linha iniciais, número de colunas e linhas. As alturas dão o bônus de altura de “Atacar” e bloqueiam a visão na névoa de guerra (uma colina esconde o que está atrás). Também podem ser escritas em donnees.txt (“hauteur 3,4 = 2” ou um bloco “hauteurs:” com um dígito por casa). Leia-as com a fórmula hauteur(coluna, linha) ou com os nós verdes “Altura da casa tocada” / “Altura da casa sob um objeto”.",
+      "exemple": "uma colina de 3 x 2 casas na altura 2, para o arqueiro que ficar nela atacar mais forte."
+    },
+    {
+      "nom": "Dar um estado (veneno, lento…)",
+      "schema": "<b>Entradas:</b> Objeto, Nome do estado (ex. Veneno; em donnees.txt), Duração em turnos (vazio = a de donnees.txt), Dano a cada turno (vazio = donnees.txt), Estatística alterada (ex. mouvement; vazio = donnees.txt), Mudança desta estatística (ex. -2)",
+      "role": "Dá um estado à unidade por um número de TURNOS: veneno (dano a cada turno), lento (o movimento cai), abençoado (o ataque sobe)… Tudo pode ser escrito em donnees.txt (“etat Veneno: duree=3, degats=2”, “etat Lento: duree=2, stat=mouvement, delta=-2”): então basta o nome do estado. O dano cai no início de cada turno da equipe da unidade e depois o estado perde um turno; no fim, a estatística alterada volta ao normal. Dar o mesmo estado de novo o prolonga em vez de dobrá-lo. A unidade guarda uma estatística “etat_<nome>” (turnos restantes), legível numa fórmula. Precisa de “Passar ao próximo turno”.",
+      "exemple": "uma flecha envenenada: Atacar → ainda vivo → dar o estado “Veneno” ao alvo."
+    },
+    {
+      "nom": "Remover um estado",
+      "schema": "<b>Entradas:</b> Objeto, Nome do estado (vazio = todos)",
+      "role": "Remove um estado da unidade (pelo nome), ou todos se o nome estiver vazio. A estatística alterada pelo estado volta na hora ao valor anterior.",
+      "exemple": "um sacerdote que cura o veneno de um aliado."
+    },
+    {
+      "nom": "Se a unidade tem o estado…",
+      "schema": "<b>Entradas:</b> Objeto, Nome do estado (vazio = todos) &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso",
+      "role": "Testa se a unidade tem um estado (ou qualquer um se o nome estiver vazio). Saídas “Verdadeiro” / “Falso”.",
+      "exemple": "não poder se mover se a unidade estiver “Congelada”."
+    },
+    {
+      "nom": "Efeito de área ao redor de um objeto",
+      "schema": "<b>Entradas:</b> Objeto, Efeito, Força (dano ou cura), Raio em casas, Tags afetadas (vazio = todos), Nome do estado (se o efeito dá um estado), Queda por casa de distância (% da força), Forma, Também atinge o objeto no centro",
+      "role": "Atinge de uma vez todos os objetos ao redor do objeto A (no centro): dano, cura ou um estado. Ajustes: a força, o raio em casas, as tags afetadas (vazio = todos), a forma (losango ou quadrado com diagonais), a queda de força por casa de distância (explosão: quanto mais longe, menos dano) e se o objeto do centro também é atingido. O dano ignora a defesa. Uma bola de fogo, uma cura em grupo, um grito que assusta. Para contar vítimas numa condição use as fórmulas compter(\"tag\") e voisins(objeto, \"tag\", casas).",
+      "exemple": "uma bola de fogo: raio 2, força 6, queda de 30 % por casa, nas unidades “inimigo”."
+    },
+    {
+      "nom": "Ganhar experiência",
+      "schema": "<b>Entradas:</b> Objeto, Experiência ganha, Experiência para o nível 2 (x nível depois), Ganhos por nível (ex. vie=2, attaque=1) &nbsp;→&nbsp; <b>Saídas:</b> Subiu de nível / Nada a cancelar",
+      "role": "Dá experiência à unidade. Ao atingir o limite (limite × nível atual), a unidade sobe de nível, a experiência sobrando é guardada e os ganhos são somados (“vie=2, attaque=1”; a vida máxima sobe junto com a vida). A unidade guarda as estatísticas “xp” e “niveau” (1 no início). Saídas “Subiu de nível” / “Sem subir de nível”: uma fanfarra ou mensagem ao subir.",
+      "exemple": "um herói que ganha 30 de experiência por cada inimigo derrotado."
+    },
+    {
+      "nom": "Memorizar a posição",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Memoriza a posição atual da unidade, antes de um movimento. Com “Cancelar o movimento”, o jogador pode voltar atrás (como em Advance Wars ao tocar “Cancelar” antes de agir).",
+      "exemple": "logo antes de “Ir para a casa”: Memorizar a posição."
+    },
+    {
+      "nom": "Cancelar o movimento",
+      "schema": "<b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saídas:</b> Cancelado / Nada a cancelar",
+      "role": "Devolve a unidade à posição memorizada por “Memorizar a posição”, apaga a marca de “já jogou” e zera suas estatísticas “bouge” e “agi”. Saídas “Cancelado” / “Nada a cancelar”.",
+      "exemple": "um botão “Cancelar” no menu de ação da unidade."
+    },
+    {
+      "nom": "Jogar como um computador (IA)",
+      "schema": "<b>Entradas:</b> Objeto, Tags dos inimigos (ex. jogador), Estilo de jogo, Velocidade do movimento, Outras tags que bloqueiam o caminho (ex. seus aliados) &nbsp;→&nbsp; <b>Saídas:</b> Chegou / Nenhum alvo",
+      "role": "Faz uma unidade jogar sozinha, como um computador. Ela olha aonde pode ir (movimento, paredes, terrenos, unidades que bloqueiam), procura os inimigos (suas tags) e escolhe a melhor casa de onde atacar conforme seu ESTILO: agressivo (o máximo de dano, acabar um alvo primeiro), prudente (evita o contra-ataque) ou defensivo (gosta de casas de alta defesa). Ninguém ao alcance: ela se aproxima do inimigo mais próximo. Ao chegar, sai “Chegou”: o objeto envolvido é o alvo escolhido e a estatística “cible_ia” da unidade vale 1 (pode atacar) ou 0 (só se aproximou). Usa o movimento, o alcance (e “portee_min”) e a ficha da unidade. Saída “Sem inimigos” se não houver mais.",
+      "exemple": "turno dos monstros: para cada monstro, Jogar como um computador (inimigos = jogador) → ao chegar, se cible_ia = 1, Atacar."
+    },
+    {
+      "nom": "Atualizar a névoa de guerra",
+      "schema": "<b>Entradas:</b> Tags da equipe que vê (ex. jogador), Tags dos inimigos a esconder fora de vista (ex. inimigo), Visão padrão em casas (senão a estatística « vision » da unidade), Escuridão das casas desconhecidas (0 a 100), Lembrar as casas já vistas",
+      "role": "Calcula o que a equipe vê e cobre o resto do mapa com um véu escuro: as unidades da equipe (tags) veem ao redor até sua estatística “vision” em casas (senão a visão padrão do nó). Uma parede do terreno, um terreno com a propriedade “bloque_vue = oui” (floresta densa) ou uma casa mais alta bloqueiam a visão. As casas já vistas ficam meio escuras (memória, opcional). As unidades com tags inimigas fora de vista são escondidas. Reexecute após cada movimento ou no início de um turno. A fórmula vue(coluna, linha) vale 1 se a casa é vista. “Remover a névoa de guerra” deixa tudo visível.",
+      "exemple": "no início de cada turno do jogador: Atualizar a névoa (equipe jogador, inimigos inimigo, visão 3)."
+    },
+    {
+      "nom": "Remover a névoa de guerra",
+      "role": "Remove a névoa de guerra: todo o mapa fica visível de novo e as unidades escondidas reaparecem.",
+      "exemple": "no fim do jogo, para mostrar todo o mapa."
     },
     {
       "nom": "Dar vida ao objeto",
@@ -74,8 +145,20 @@
       "exemple": "uma poção que devolve 5 pontos de vida ao herói."
     },
     {
+      "nom": "Mudar uma estatística",
+      "schema": "<b>Entradas:</b> Objeto, Nome da estatística (ex. munição), O que fazer, Quanto",
+      "role": "Muda uma estatística que você inventou para um objeto (munição, armadura, mana, combustível…): somar, subtrair ou definir um valor. Se ainda não existe, é criada com 0. Depois dá para ler em qualquer lugar: =arqueiro.municao.",
+      "exemple": "Depois de um tiro: Mudar uma estatística → objeto “arqueiro”, estatística “municao”, Subtrair 1."
+    },
+    {
+      "nom": "Se a estatística…",
+      "schema": "<b>Entradas:</b> Objeto, Nome da estatística (ex. munição), Comparação, Valor &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso",
+      "role": "Compara uma estatística de um objeto com um valor e segue a saída “verdadeiro” ou “falso”: por exemplo “municao é maior que 0”. Uma estatística que não existe vale 0.",
+      "exemple": "Antes de atirar: Se a estatística “municao” do arqueiro é maior que 0 → atirar; senão → mostrar “Sem flechas”."
+    },
+    {
       "nom": "Escolher um alvo",
-      "schema": "<b>Entradas:</b> Objeto, Tags dos alvos possíveis (separadas por vírgula), Qual alvo escolher?, Alcance em casas (0 = sem limite; ex. =monstro.portee), Alcance mínimo (0 = nenhum), Forma do alcance, Minhas posições (coluna,linha; ex. 2,1 ; -2,1), Estatística (para as regras «estatística», ex. defense) &nbsp;→&nbsp; <b>Saídas:</b> Alvo encontrado / Nenhum alvo",
+      "schema": "<b>Entradas:</b> Objeto, Tags dos alvos possíveis (separadas por vírgula), Qual alvo escolher?, Alcance em casas (0 = sem limite; ex. =monstro.portee), Alcance mínimo (0 = nenhum), Forma do alcance, Minhas posições (coluna,linha; ex. 2,1 ; -2,1), Estatística (para as regras «estatística», ex. defense), Alcance em pixels, em círculo (0 = usar o alcance em casas) &nbsp;→&nbsp; <b>Saídas:</b> Alvo encontrado / Nenhum alvo",
       "role": "O objeto A procura, entre os objetos com uma das tags pedidas, os que estão DENTRO DO SEU ALCANCE (mesmas formas de “Mostrar casas alcançáveis”) e escolhe um: o mais próximo, o que tem menos ou mais vida, ou o menor / maior valor de uma estatística. Saída “Alvo encontrado”: ele se torna “o objeto envolvido” (para Atacar, Ir até…). Saída “Nenhum alvo”: ninguém ao alcance. Perfeito para a inteligência de um monstro ou torre.",
       "exemple": "um monstro: “Escolher um alvo” (tag “heroi”, a mais próxima), depois “Atacar” em “Alvo encontrado”."
     },

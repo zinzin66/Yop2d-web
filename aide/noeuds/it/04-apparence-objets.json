@@ -164,7 +164,7 @@
     },
     {
       "nom": "Spara un oggetto",
-      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Nome del modello, Direzione, Velocità, Distruggi fuori dallo schermo (sì / no)",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Nome del modello, Direzione, Velocità, Distruggi fuori dallo schermo (sì / no), Durata del colpo (secondi, 0 = illimitata)",
       "role": "Crea un proiettile (l'oggetto indicato in «Nome del modello») nel punto dell'oggetto A e lo lancia alla velocità scelta: 0°, 90°, 180°, 270°, verso l'oggetto B («Verso il bersaglio») o secondo l'angolo di A.",
       "exemple": "un'astronave che spara laser verso l'alto (270)."
     },
@@ -179,6 +179,12 @@
       "schema": "<b>Ingressi:</b> Oggetto, Ritardo (secondi)",
       "role": "Elimina l'oggetto scelto dopo un ritardo (in secondi). Utile per far sparire un'esplosione quando la sua animazione è finita.",
       "exemple": "dopo «Genera clone (Spawner)» e «Riproduci animazione», l'immagine dell'esplosione viene distrutta 0,4 secondi dopo."
+    },
+    {
+      "nom": "Colore di squadra (sostituisce il rosa del disegno)",
+      "schema": "<b>Ingressi:</b> Oggetto, Colore della squadra, Colore da sostituire nel disegno (rosa predefinito), Tolleranza (da 1 a 100): più alta sostituisce anche colori simili",
+      "role": "Un solo disegno per tutte le squadre: dipingi le parti da colorare (mantello, bandiera, pennacchio) con un colore guida (rosa acceso #FF00FF di default) e questo nodo sostituisce quel rosa con il colore della squadra per l'oggetto. Ombre e riflessi del disegno restano (un rosa scuro diventa blu scuro). La tolleranza dice quanto un colore può discostarsi dalla guida per essere sostituito. Nulla cambia nelle immagini: tutto avviene in visualizzazione, quindi va rifatto all'inizio di ogni partita.",
+      "exemple": "due eserciti con le stesse immagini: giocatore in blu, nemico in rosso."
     },
     {
       "nom": "Imposta Progresso",

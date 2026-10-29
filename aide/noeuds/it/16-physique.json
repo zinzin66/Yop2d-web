@@ -1,0 +1,71 @@
+{
+  "categorie": "Fisica",
+  "noeuds": [
+    {
+      "nom": "Regola il mondo fisico",
+      "schema": "<b>Ingressi:</b> Gravità verso il basso (%, 100 = normale, 0 = spazio, negativo = verso l'alto), Gravità verso destra (%, negativo = sinistra: un vento costante), Precisione, Gli oggetti fermi si addormentano (più leggero per il telefono)",
+      "role": "Regola il mondo fisico della scena: la gravità verso il basso (100 % = normale, 0 = spazio, negativo = gli oggetti cadono verso l'alto), una gravità laterale (un vento costante), la precisione del calcolo e se gli oggetti fermi si addormentano. Da usare una volta, sotto «All'avvio». Riguarda solo gli oggetti con il comportamento «Fisica realistica» (⚙ Comportamento).",
+      "exemple": "un livello sulla Luna: gravità 20 %."
+    },
+    {
+      "nom": "Regola un oggetto fisico",
+      "schema": "<b>Ingressi:</b> Oggetto, Tipo di oggetto, Materiale (peso, rimbalzo e aderenza in un colpo), Forma di contatto, Peso (%, 100 = normale, vuoto = invariato), Rimbalzo (da 0 a 100, vuoto = invariato), Aderenza (0 = ghiaccio, 100 = appiccicoso, vuoto = invariato), Gravità dell'oggetto (%, 0 = galleggia, vuoto = invariato), Freno dell'aria (da 0 a 20, vuoto = invariato), Velocità massima (pixel al secondo, 0 = illimitata, vuoto = invariata), Non ruota mai, Fantasma (si attraversa), Oggetto velocissimo (non attraversa un muro sottile), Livello dell'oggetto (da 1 a 8, vuoto = invariato)",
+      "role": "Cambia le impostazioni di un oggetto fisico durante il gioco: tipo (normale, fisso, guidato o niente fisica), materiale (legno, pietra, metallo, gomma, pallone, ghiaccio, piuma), forma, peso, rimbalzo, aderenza, gravità, freno dell'aria, velocità massima, se ruota, se è un fantasma o velocissimo, il livello. Ciò che resta vuoto o su «(non cambiare)» rimane com'è. Su un oggetto senza fisica, scegliere un tipo gliela dà.",
+      "exemple": "una palla che diventa di gomma (materiale «Gomma») quando si prende un bonus."
+    },
+    {
+      "nom": "Spingere (forza fisica)",
+      "schema": "<b>Ingressi:</b> Oggetto, Spinta verso destra (negativo = sinistra), Spinta verso il basso (negativo = alto), Come, Dove spingere (fuori dal centro, l'oggetto ruota), Il peso conta?",
+      "role": "Spinge un oggetto fisico con una forza. «Spinta continua»: da ripetere a ogni immagine (sotto «A ogni immagine» o «Dito premuto»), l'oggetto accelera finché spingi (un razzo, un vento, un ventilatore). «Un colpo»: aggiunge subito velocità (un salto, un calcio). Per impostazione predefinita l'effetto è uguale su un oggetto leggero o pesante; nelle impostazioni avanzate il peso può contare e spingere fuori dal centro fa ruotare l'oggetto. Valori: pixel al secondo (al secondo quadrato per la spinta continua).",
+      "exemple": "un gioco di razzo: «Dito premuto» → spingere verso l'alto (-2500) in continuo."
+    },
+    {
+      "nom": "Regola la velocità (fisica)",
+      "schema": "<b>Ingressi:</b> Oggetto, Velocità verso destra (pixel al secondo, vuoto = invariata), Velocità verso il basso (negativo = alto, vuoto = invariata), Velocità di rotazione (gradi al secondo, vuoto = invariata), Come, Fermare tutto subito?",
+      "role": "Imposta la velocità di un oggetto fisico, in pixel al secondo: verso destra, verso il basso (negativo = alto) e rotazione in gradi al secondo. Le caselle vuote non cambiano quella velocità. «Sostituisci» dà esattamente quella velocità; «Aggiungi» la somma a quella attuale. L'opzione «Ferma tutto» azzera tutte le velocità. Perfetto per un salto (velocità verso il basso -900), un arresto netto o un personaggio a velocità costante.",
+      "exemple": "un salto da platform: velocità verso il basso = -900, solo se «Se l'oggetto fisico…» dice che l'oggetto poggia."
+    },
+    {
+      "nom": "Lancia (angolo e velocità)",
+      "schema": "<b>Ingressi:</b> Oggetto, Angolo (gradi: 0 = destra, -90 = alto, 90 = basso, 180 = sinistra), Velocità iniziale (pixel al secondo), Come",
+      "role": "Lancia un oggetto fisico in una direzione: dai l'angolo (0 = destra, -90 = alto, 90 = basso, 180 = sinistra) e la velocità iniziale. Poi la gravità fa il resto: l'oggetto descrive una curva. Ideale per un gioco di fionda, un cannone, un lancio di palla. L'angolo può essere una formula (ad esempio l'angolo tra l'oggetto e il dito).",
+      "exemple": "una fionda: al rilascio del dito, lanciare l'uccello con l'angolo dell'elastico."
+    },
+    {
+      "nom": "Esplosione (soffio fisico)",
+      "schema": "<b>Ingressi:</b> Oggetto, Centro: posizione X (vuoto = al centro dell'oggetto), Centro: posizione Y (vuoto = al centro dell'oggetto), Raggio del soffio (pixel), Forza al centro (velocità data, pixel al secondo), Solo gli oggetti con questo tag (vuoto = tutti)",
+      "role": "Fa soffiare tutti gli oggetti fisici attorno a un punto: più sono vicini al centro, più forte vengono scagliati, e iniziano a ruotare. Il centro è il mezzo dell'oggetto scelto, o un punto (x, y) se ne scrivi uno. Regoli il raggio e la forza (la velocità data al centro). Opzione: solo gli oggetti con un certo tag. Il nodo non distrugge nulla: combinalo con «Effetto particelle» e «Distruggi oggetto» per una vera esplosione.",
+      "exemple": "una bomba: toccando il suolo, esplosione di raggio 500 e forza 1800, poi distruggere la bomba."
+    },
+    {
+      "nom": "Collega due oggetti",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Tipo di collegamento, Nome del collegamento (per regolarlo o tagliarlo dopo), Punto dell'oggetto A dove avviene il collegamento, Punto dell'oggetto B (asta, molla, corda), Sposta il punto a destra (pixel), Sposta il punto in basso (pixel), I due oggetti si urtano?, Lunghezza (pixel, 0 = la distanza iniziale), Rigidità della molla o sospensione (1 = morbida, 10 = ferma), Smorzamento (da 0 a 100: più alto, meno rimbalza), Limite inferiore (gradi per cerniera, pixel per guida; vuoto = nessuno), Limite superiore (gradi o pixel; vuoto = nessuno), Direzione del binario o della sospensione (gradi: 0 = orizzontale, 90 = verticale; vuoto = automatico), Motore: velocità (gradi al secondo per cerniera o ruota, pixel al secondo per guida; 0 = nessun motore), Forza del motore o del freno (1 = debole, 10 = normale, 100 = fortissima)",
+      "role": "Collega due oggetti perché si reggano o si muovano insieme, come nella vita reale. Tipo di collegamento: cerniera (ruota attorno a un punto: porta, pendolo), asta rigida (distanza fissa), molla (elastica, con rigidità), corda (lunghezza massima), guida (scorre su un binario, con limiti e motore), saldatura (incollati), ruota con sospensione (auto: A = la carrozzeria, B = la ruota, con motore), freno (vista dall'alto). L'oggetto B è facoltativo: senza B, l'oggetto A è fissato a un punto fermo dello scenario. Dai un nome al collegamento per regolarlo («Regola un collegamento») o tagliarlo («Taglia un collegamento») dopo. Nelle impostazioni avanzate: punto di ogni lato, limiti, direzione del binario, motore, collisione tra i due oggetti. Entrambi gli oggetti devono avere il comportamento «Fisica realistica» (tranne un supporto fisso).",
+      "exemple": "un pendolo: A = la palla, B = un piccolo oggetto fisso in alto, tipo «Cerniera» o «Asta rigida»; un ponte: assi collegate da cerniere."
+    },
+    {
+      "nom": "Regola un collegamento",
+      "schema": "<b>Ingressi:</b> Nome del collegamento, Motore: velocità (0 = ferma il motore, vuoto = invariata), Forza del motore (vuoto = invariata), Rigidità di molla o sospensione (vuoto = invariata), Nuova lunghezza (pixel, vuoto = invariata), Nuovo limite inferiore (vuoto = invariato), Nuovo limite superiore (vuoto = invariato), Limiti",
+      "role": "Modifica un collegamento già creato da «Collega due oggetti» (si trova dal nome): avviare, fermare o accelerare il motore, regolarne la forza, la rigidità di una molla o sospensione, la lunghezza di un'asta o corda, i limiti. Le caselle vuote restano come prima. Esempio: un'auto il cui motore delle ruote parte premendo un pulsante.",
+      "exemple": "pulsante «Gas»: regolare il collegamento «ruota_dietro» con motore = 720; al rilascio: motore = 0."
+    },
+    {
+      "nom": "Taglia un collegamento",
+      "schema": "<b>Ingressi:</b> Nome del collegamento da tagliare, Oppure: nome di un oggetto di cui si tagliano tutti i collegamenti",
+      "role": "Taglia un collegamento: scrivi il suo nome, oppure il nome di un oggetto per tagliare tutti i suoi collegamenti. Gli oggetti si separano e ognuno cade per conto suo (un ponte che crolla, una corda tagliata, una cabina che si stacca).",
+      "exemple": "un ponte trappola: quando l'eroe tocca la leva, tagliare il collegamento «asse_3»."
+    },
+    {
+      "nom": "Afferra con il dito (fisica)",
+      "schema": "<b>Ingressi:</b> Azione, Solo gli oggetti con questo tag (vuoto = tutti), Morbidezza della presa",
+      "role": "Permette di afferrare un oggetto fisico con il dito e trascinarlo, come nella vita reale: l'oggetto segue il dito con un po' di elasticità, spinge gli altri e può incastrarsi. Mettilo sotto «Dito premuto» (azione «Afferra e trascina»): finché il dito è appoggiato, l'oggetto sotto viene trascinato; appena il dito si alza, viene lasciato da solo (o usa l'azione «Rilascia»). Puoi limitare la presa agli oggetti di un tag e regolare la morbidezza.",
+      "exemple": "un puzzle di casse: il giocatore sposta le casse con la punta del dito per costruire una torre."
+    },
+    {
+      "nom": "Se l'oggetto fisico…",
+      "schema": "<b>Ingressi:</b> Oggetto, Domanda, Velocità da cui conta (pixel al secondo) &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso",
+      "role": "Fa una domanda su un oggetto fisico e segue l'uscita «vero» o «falso»: poggia su qualcosa (per consentire un salto), tocca qualcosa, tocca qualcosa sopra, è a riposo (addormentato), si muove veloce, cade, sale. Per «si muove veloce», «cade» e «sale» la soglia in pixel al secondo si regola nelle impostazioni avanzate. Puoi anche leggere direttamente in una formula: oggetto.vitesse, oggetto.masse, oggetto.vitesseRotation.",
+      "exemple": "un salto da platform: «Pulsante salto» → Se l'oggetto poggia su qualcosa → velocità verso il basso = -900."
+    }
+  ]
+}
