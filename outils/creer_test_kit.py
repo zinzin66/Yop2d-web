@@ -50,11 +50,15 @@ objets.append(texte('msg', 40, 840, 1000, 80, 'Tap a button on the right', 34, B
 
 L = Logique()
 e = L.evenement('start', 'NoeudEventStart')
-L.chaine(e, [('d1', 'appliquer_donnees', {'nom': 'Lancier'}, 'lancier'), ('d2', 'appliquer_donnees', {'nom': 'Cavalier'}, 'cavalier'),
+prec = e
+for i, (nid, cle, regl, cible) in enumerate([('d1', 'appliquer_donnees', {'nom': 'Lancier'}, 'lancier'), ('d2', 'appliquer_donnees', {'nom': 'Cavalier'}, 'cavalier'),
              ('d3', 'appliquer_donnees', {'nom': 'Archer'}, 'archer'),
              ('s1', 'modifier_stat', {'stat': 'niveau', 'operation': 'st_o_fixer', 'valeur': 1}, 'lancier'),
              ('s2', 'modifier_stat', {'stat': 'xp', 'operation': 'st_o_fixer', 'valeur': 0}, 'lancier'),
-             ('s3', 'modifier_stat', {'stat': 'etat_poison', 'operation': 'st_o_fixer', 'valeur': 0}, 'cavalier')])
+             ('s3', 'modifier_stat', {'stat': 'etat_poison', 'operation': 'st_o_fixer', 'valeur': 0}, 'cavalier')]):
+    prec = L.action(prec, nid, cle, regl, cible)
+    if cle == 'appliquer_donnees':
+        prec = (nid, 'port_trouve', 0)
 e = L.evenement('frame', 'NoeudEventChaqueImage', sortie='Sortie')
 L.action(e, 'show', 'modifier_propriete', {'propriete': 'texte', 'valeur': '="lancier vie " + lancier.vie + " niv " + lancier.niveau + " xp " + lancier.xp + "   cavalier vie " + cavalier.vie + " poison " + cavalier.etat_poison + " mv " + cavalier.mouvement + "   archer vie " + archer.vie + "   tour " + numero_tour()'}, 'info')
 
@@ -87,14 +91,15 @@ for i, (nom, cle, reglages, a, b) in enumerate(BOUTONS):
         s = L.action((n[0], 'port_arrive', 0), 'si%d' % i, 'si_stat', {'stat': 'cible_ia', 'comparaison': 'st_c_ge', 'valeur': 1}, 'cavalier')
         at = L.action((s[0], 'port_vrai', 0), 'at%d' % i, 'attaquer', {'puissance': 100, 'terrain': 'o_non', 'minimum': 'o_oui', 'detruire': 'o_oui', 'riposte': 100}, 'cavalier')
         L.noeud('at%d' % i)['cibleNomB'] = '__OBJET_IMPLIQUE__'
-        L.action(at, 'm%d' % i, 'modifier_propriete', msg('AI attacked'), 'msg')
+        L.action((at[0], 'port_vivant', 0), 'm%d' % i, 'modifier_propriete', msg('AI attacked'), 'msg')
     elif cle == 'memoriser_position':
         p = L.action(n, 'pl%d' % i, 'placer_case', {'colonne': 4, 'ligne': 4}, 'lancier')
         L.action(p, 'm%d' % i, 'modifier_propriete', msg('Moved: now cancel it'), 'msg')
     elif cle == 'annuler_deplacement':
         L.action((n[0], 'port_fait', 0), 'm%d' % i, 'modifier_propriete', msg('Move cancelled'), 'msg')
     else:
-        L.action(n, 'm%d' % i, 'modifier_propriete', msg('Done: ' + nom.split(':')[0].split('(')[0]), 'msg')
+        sortie = {'attaquer': 'port_vivant', 'gagner_xp': 'port_niveau'}.get(cle)
+        L.action((n[0], sortie, 0) if sortie else n, 'm%d' % i, 'modifier_propriete', msg('Done: ' + nom.split(':')[0].split('(')[0]), 'msg')
 logique = L.ranger().json()
 with tempfile.TemporaryDirectory() as tmp:
     p = os.path.join(tmp, 'projet')
