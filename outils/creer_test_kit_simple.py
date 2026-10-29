@@ -66,9 +66,9 @@ def msg(txt):
     return {'propriete': 'texte', 'valeur': txt}
 def bouton(i, nom):
     bx, by = 1100, 220 + i * 150
-    objets.append(objet('b%d' % i, bx, by, largeur=780, hauteur=110, z=5, prefixe=P, afficherFondColore=True, couleur=argb('#2B3A55')))
-    objets.append(texte('t%d' % i, bx + 16, by + 28, 750, 60, nom, 30, BLANC, z=6, prefixe=P, cheminPolice=None))
-    return L.evenement('tap%d' % i, 'NoeudEventClicObjet', cible='b%d' % i)
+    objets.append(objet('b%d' % i, bx, by, largeur=780, hauteur=110, z=5, prefixe=P, afficherFondColore=True, couleur=argb('#2B3A55'), tag='btn%d' % i))
+    objets.append(texte('t%d' % i, bx + 16, by + 28, 750, 60, nom, 30, BLANC, z=6, prefixe=P, cheminPolice=None, tag='btn%d' % i))
+    return L.evenement('tap%d' % i, 'NoeudEventClicObjet', cible='tag:btn%d' % i)
 BLANC_TXT = 'Touche un bouton a droite. Pour recommencer : arrete le jeu (carre) puis relance (triangle).'
 # 1. attaque avec règle de tags, perforation et riposte
 e = bouton(0, '1. Le lancier attaque le cavalier')

@@ -80,9 +80,9 @@ BOUTONS = [
 ]
 for i, (nom, cle, reglages, a, b) in enumerate(BOUTONS):
     bx, by = 1100, 160 + i * 66
-    objets.append(objet('b%d' % i, bx, by, largeur=780, hauteur=60, z=5, prefixe=P, afficherFondColore=True, couleur=argb('#2B3A55')))
-    objets.append(texte('t%d' % i, bx + 12, by + 14, 760, 40, nom, 21, BLANC, z=6, prefixe=P, cheminPolice=None))
-    e = L.evenement('tap%d' % i, 'NoeudEventClicObjet', cible='b%d' % i)
+    objets.append(objet('b%d' % i, bx, by, largeur=780, hauteur=60, z=5, prefixe=P, afficherFondColore=True, couleur=argb('#2B3A55'), tag='btn%d' % i))
+    objets.append(texte('t%d' % i, bx + 12, by + 14, 760, 40, nom, 21, BLANC, z=6, prefixe=P, cheminPolice=None, tag='btn%d' % i))
+    e = L.evenement('tap%d' % i, 'NoeudEventClicObjet', cible='tag:btn%d' % i)
     n = L.action(e, 'a%d' % i, cle, reglages, a)
     if b:
         L.noeud('a%d' % i)['cibleNomB'] = b
