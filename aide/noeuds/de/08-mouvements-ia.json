@@ -14,6 +14,18 @@
       "exemple": "die Brücke anhalten, wenn der Spieler einen Knopf drückt."
     },
     {
+      "nom": "Dem Weg folgen",
+      "schema": "<b>Eingänge:</b> Objekt, Name des Wegs, Geschwindigkeit (Pixel pro Sekunde), In Laufrichtung drehen (ja / nein), Seitlicher Zufallsversatz (Pixel, ±: jeder geht auf seiner Spur), Anderen ausweichen: zur Seite gehen, um nicht zu überlappen, und langsamere überholen (ja / nein), Nutzbare Breite zum Ausweichen (Pixel auf jeder Seite der Wegmitte), Bildwinkel (0 = schaut nach rechts, 90 = nach unten) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen",
+      "role": "Lässt das Objekt einem Weg folgen, der mit dem Werkzeug „Weg“ in den Assets gezeichnet wurde: Es wird auf den Startpunkt gesetzt und geht dann mit der gewählten Geschwindigkeit von Punkt zu Punkt. An einer Kreuzung wählt es den Ausgang so, wie du es eingestellt hast (zufällig, reihum, nach einer Variable). Der Ausgang „Am Ende angekommen“ läuft, sobald es einen Punkt ohne Ausgang erreicht. Mit „Seitlicher Zufallsversatz“ geht jedes Objekt auf seiner eigenen Spur (zufällig verschoben): mehrere Gegner laufen nebeneinander statt übereinander. Mit „Anderen ausweichen“ geht ein Objekt, das ein langsameres einholt, zur Seite, überholt es und kehrt auf seine Spur zurück; ist der Weg zu schmal, folgt es.",
+      "exemple": "Ein Gegner erscheint: Dem Weg „Gegnerweg“ folgen, Geschwindigkeit 150. Ausgang „Am Ende angekommen“ → der Basis Schaden zufügen, dann das Objekt zerstören."
+    },
+    {
+      "nom": "Weg abbrechen",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Hält das Objekt an der Stelle an: Es folgt seinem Weg nicht mehr (der Ausgang „Am Ende angekommen“ läuft nicht).",
+      "exemple": "Eine Falle friert einen Gegner ein: Weg abbrechen, später wieder Dem Weg folgen, damit er weitergeht."
+    },
+    {
       "nom": "Objekt stoppen",
       "schema": "<b>Eingang:</b> Objekt",
       "role": "Stoppt das Objekt sofort: keine Geschwindigkeit, kein Schub, kein Sprung und keine automatische Bewegung mehr.",
@@ -33,13 +45,13 @@
     },
     {
       "nom": "Zu einem Objekt gehen (Weg)",
-      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Geschwindigkeit, Diagonalen (ja / nein) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen",
-      "role": "Objekt A geht zu Objekt B und findet selbst den kürzesten Weg, Feld für Feld, ohne durch Mauern zu gehen („feste“ Kacheln einer Kachelebene, feste physikalische Objekte). Der Weg wird neu berechnet, wenn B sich bewegt. „Angekommen“ startet, wenn A B berührt.",
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Geschwindigkeit, Diagonalen (ja / nein), Anhalten, Diese Tags blockieren den Weg (andere Einheiten, mit Komma getrennt) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen",
+      "role": "Objekt A geht zu Objekt B und findet selbst den kürzesten Weg, Feld für Feld, ohne durch Mauern zu gehen („feste“ Kacheln einer Kachelebene, feste physikalische Objekte). Der Weg wird neu berechnet, wenn B sich bewegt. „Angekommen“ startet, wenn A B berührt. Mit der Einstellung „Anhalten“ bleibt das Objekt auf einem Nachbarfeld stehen, schön zentriert (Rasterspiele); „Diese Tags blockieren den Weg“ lässt es andere Einheiten umgehen.",
       "exemple": "ein Geist, der den Spieler durch ein Labyrinth jagt."
     },
     {
       "nom": "Zu einem Punkt gehen (Weg)",
-      "schema": "<b>Eingänge:</b> Objekt, X-Position, Y-Position, Geschwindigkeit, Diagonalen (ja / nein) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen",
+      "schema": "<b>Eingänge:</b> Objekt, X-Position, Y-Position, Geschwindigkeit, Diagonalen (ja / nein), Diese Tags blockieren den Weg (andere Einheiten, mit Komma getrennt) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen",
       "role": "Objekt A geht auf dem kürzesten Weg (Feld für Feld) um die Mauern herum zum Punkt X, Y. Mit =doigt.x und =doigt.y geht es dorthin, wo der Bildschirm berührt wird. „Angekommen“ startet bei der Ankunft. Gibt es keinen Weg, bleibt es stehen.",
       "exemple": "auf ein Feld tippen, um den Helden dorthin zu schicken, in einem Strategiespiel oder einem Dungeon."
     },
@@ -48,6 +60,30 @@
       "schema": "<b>Eingang:</b> Objekt",
       "role": "Das Objekt folgt seinem Weg („Zu einem Objekt gehen (Weg)“ oder „Zu einem Punkt gehen (Weg)“) nicht mehr und bleibt stehen.",
       "exemple": "die Fliege hält an, wenn das Spiel gewonnen ist."
+    },
+    {
+      "nom": "Auf ein Feld setzen (Spalte, Zeile)",
+      "schema": "<b>Eingänge:</b> Objekt, Spalte (0 = die erste), Zeile (0 = die erste)",
+      "role": "Setzt Objekt A genau in die Mitte des gewählten Feldes (Spalte und Zeile, ab 0 oben links gezählt). Das Raster ist das der Tile-Karte der Szene. Mit dem Knopf 🔗 verbindest du „Berührte Spalte“ und „Berührte Zeile“, um es auf das berührte Feld zu schicken.",
+      "exemple": "eine Figur in einem Brettspiel auf das berührte Feld setzen."
+    },
+    {
+      "nom": "Auf seinem Feld zentrieren",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Objekt A bleibt in seinem Feld, geht aber genau in die Mitte zurück. Praktisch, wenn eine Bewegung zwischen zwei Feldern endete.",
+      "exemple": "einen Helden nach seiner Bewegung neu zentrieren."
+    },
+    {
+      "nom": "Zum Feld gehen (Weg)",
+      "schema": "<b>Eingänge:</b> Objekt, Spalte, Zeile, Geschwindigkeit, Diagonalen (ja / nein), Diese Tags blockieren den Weg (andere Einheiten, mit Komma getrennt) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen",
+      "role": "Das Objekt läuft zur MITTE des Feldes (Spalte, Zeile) und umgeht Wände, blockierendes Gelände und die Einheiten mit den angegebenen Tags. Standard: das berührte Feld. Ausgang „Angekommen“ einmal auf dem Feld.",
+      "exemple": "einen Helden auf ein berührtes blaues Feld schicken."
+    },
+    {
+      "nom": "Figur ein Feld bewegen",
+      "schema": "<b>Eingänge:</b> Objekt, Richtung, Geschwindigkeit, Diese Tags blockieren den Weg (andere Einheiten, mit Komma getrennt) &nbsp;→&nbsp; <b>Ausgänge:</b> Angekommen / Blockiert (Wand, Gelände, Einheit, Rand)",
+      "role": "Bewegt die Figur um ein Feld (oben, unten, links, rechts), schön zentriert. Ist das Feld eine Wand, ein blockierendes Gelände, eine Einheit (Tags) oder der Kartenrand: Ausgang „Blockiert“. Sonst „Angekommen“ am Ende des Schritts.",
+      "exemple": "eine Brettspielfigur mit den Knöpfen ◀ ▶ ▲ ▼ bewegen."
     },
     {
       "nom": "Objekt verfolgen",

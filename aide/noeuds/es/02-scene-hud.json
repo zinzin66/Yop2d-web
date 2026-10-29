@@ -85,6 +85,12 @@
       "exemple": "nivel de 6480 píxeles de ancho: X mínimo 0, X máximo 6480, Y mínimo 0, Y máximo 1080, con «Fijar la cámara» sobre el jugador."
     },
     {
+      "nom": "Desplazar la cámara con el dedo",
+      "schema": "<b>Entradas:</b> Activado (sí / no), Desplazar de lado (sí / no), Desplazar arriba y abajo (sí / no)",
+      "role": "Activa (o corta) el desplazamiento de la pantalla con el dedo: al arrastrar en la escena se mueve la cámara. Un simple toque sigue siendo un toque (una torre, un botón). Los botones del HUD nunca desplazan. La cámara no sale de los límites fijados con «Límites de la cámara».",
+      "exemple": "Al empezar: Límites de la cámara (0, 3840, 0, 1080) y luego Desplazar la cámara con el dedo: el jugador arrastra un mapa de dos pantallas de ancho."
+    },
+    {
       "nom": "Suavizado de cámara",
       "schema": "<b>Entrada:</b> Velocidad de seguimiento (0.01 a 1)",
       "role": "Ajusta la rapidez con la que la cámara alcanza al objeto seguido: 0.01 = muy suave, 1 = pegada al objeto.",
@@ -125,6 +131,18 @@
       "schema": "<b>Entradas:</b> Zoom (%, 100 = normal), Hacia, Duración (segundos)",
       "role": "Agranda suavemente toda la pantalla del juego (la escena, o el decorado y los personajes de una historia) hacia el centro, la cara, un lado, arriba o abajo. 100 = volver a lo normal; el cuadro de diálogo y el HUD no se mueven.",
       "exemple": "zoom 140 hacia la cara durante 2 segundos cuando Hana tiene miedo, luego zoom 100."
+    },
+    {
+      "nom": "Oscuridad y ambiente de luz",
+      "schema": "<b>Entradas:</b> Color de la noche, Oscuridad (%, 0 = pleno día, 100 = casi negro total), Cambia en (segundos: 30 = un atardecer)",
+      "role": "Oscurece todo el juego (bajo los botones y la puntuación) con el color que elijas. Oscuridad 0 = pleno día, 100 = negro total, salvo alrededor de las fuentes de luz. El nivel y el color cambian suavemente: con 30 segundos se pasa del día al crepúsculo naranja y luego a la noche azul, como una puesta de sol.",
+      "exemple": "una puesta de sol: «Oscuridad y ambiente de luz» naranja, oscuridad 40, en 6 segundos; «Esperar» 6 segundos; luego «Oscuridad y ambiente de luz» azul noche, oscuridad 90, en 6 segundos."
+    },
+    {
+      "nom": "Ciclo de día y noche",
+      "schema": "<b>Entradas:</b> Duración de un día completo (segundos, 0 = detener), Empezamos en…, Repetir sin fin (sí) o un solo día (no)",
+      "role": "Hace pasar todo el juego del día al atardecer naranja, a la noche azul, al amanecer y otra vez al día, solo. Eliges la duración de un día completo (de 30 a 120 segundos para un juego vivo), el momento de inicio y si el ciclo se repite sin fin. Con el juego en pausa el ciclo se congela. Duración 0 = detener el ciclo (el cielo se queda como está). Un ajuste manual con «Oscuridad y ambiente de luz» toma el control. Tus luces («Fuente de luz (antorcha, farol…)») siguen encendidas: se ven mejor de noche.",
+      "exemple": "un mundo vivo: al empezar, «Ciclo de día y noche» con 90 segundos, inicio «Pleno día», en bucle."
     },
     {
       "nom": "Temblor de cámara",

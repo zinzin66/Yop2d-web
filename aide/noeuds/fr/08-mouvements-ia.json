@@ -14,6 +14,18 @@
       "exemple": "stopper la passerelle quand le joueur appuie sur un bouton."
     },
     {
+      "nom": "Suivre le parcours",
+      "schema": "<b>Entrées :</b> Objet, Nom du parcours, Vitesse (pixels par seconde), Tourner dans le sens de la marche (oui / non), Écart de côté au hasard (pixels, ± : chacun marche sur sa voie), Éviter les autres : se décaler pour ne pas se superposer et dépasser les plus lents (oui / non), Largeur utilisable pour s'écarter (pixels de chaque côté du centre de la route), Angle de l'image (0 = elle regarde vers la droite, 90 = vers le bas) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé",
+      "role": "Fait suivre à l'objet un parcours dessiné avec l'outil « Parcours » des Assets : il est posé sur le point de départ, puis avance de point en point à la vitesse choisie. À un carrefour il choisit sa sortie comme tu l'as réglé (au hasard, chacun son tour, selon une variable). La sortie « Arrivé au bout » part quand il atteint un point sans sortie. Avec « Écart de côté », chaque objet marche sur sa propre voie (décalage au hasard) : plusieurs ennemis avancent côte à côte au lieu de se superposer. Avec « Éviter les autres », un objet qui en rattrape un plus lent se décale sur le côté, le dépasse puis revient sur sa voie ; si la route est trop étroite, il le suit.",
+      "exemple": "Un ennemi qui apparaît : Suivre le parcours « Chemin_ennemis », vitesse 150. Sortie « Arrivé au bout » → Infliger des dégâts à la base, puis Détruire l'objet."
+    },
+    {
+      "nom": "Arrêter le parcours",
+      "schema": "<b>Entrée :</b> Objet",
+      "role": "Arrête l'objet là où il est : il ne suit plus son parcours (la sortie « Arrivé au bout » ne partira pas).",
+      "exemple": "Un ennemi est gelé par un piège : Arrêter le parcours, puis plus tard Suivre le parcours pour qu'il reparte."
+    },
+    {
       "nom": "Arrêter l'objet",
       "schema": "<b>Entrée :</b> Objet",
       "role": "Arrête net l'objet : plus de vitesse, de poussée, de saut ni de déplacement automatique.",
@@ -33,13 +45,13 @@
     },
     {
       "nom": "Aller vers un objet (chemin)",
-      "schema": "<b>Entrées :</b> Objet A, Objet B, Vitesse, Diagonales (oui / non) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé",
-      "role": "L'objet A va vers l'objet B en trouvant tout seul le plus court chemin, case par case, sans traverser les murs (tuiles « Solide » d'un décor en tuiles, objets physiques fixes). Le chemin est recalculé quand B bouge. « Arrivé » se lance quand A touche B.",
+      "schema": "<b>Entrées :</b> Objet A, Objet B, Vitesse, Diagonales (oui / non), S'arrêter, Ces tags bloquent le chemin (autres unités, séparés par une virgule) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé",
+      "role": "L'objet A va vers l'objet B en trouvant tout seul le plus court chemin, case par case, sans traverser les murs (tuiles « Solide » d'un décor en tuiles, objets physiques fixes). Le chemin est recalculé quand B bouge. « Arrivé » se lance quand A touche B. Le réglage « S'arrêter » permet de s'arrêter sur une case voisine, bien centré (jeux sur grille) ; « Ces tags bloquent le chemin » fait contourner les autres unités.",
       "exemple": "un fantôme qui poursuit le joueur dans un labyrinthe."
     },
     {
       "nom": "Aller à un point (chemin)",
-      "schema": "<b>Entrées :</b> Objet, Position X, Position Y, Vitesse, Diagonales (oui / non) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé",
+      "schema": "<b>Entrées :</b> Objet, Position X, Position Y, Vitesse, Diagonales (oui / non), Ces tags bloquent le chemin (autres unités, séparés par une virgule) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé",
       "role": "L'objet A va jusqu'au point X, Y en contournant les murs, par le plus court chemin (case par case). Avec =doigt.x et =doigt.y, il va là où l'on touche l'écran. « Arrivé » se lance à l'arrivée. S'il n'y a aucun chemin, il reste sur place.",
       "exemple": "toucher une case pour y envoyer le héros, dans un jeu de stratégie ou un donjon."
     },
@@ -48,6 +60,30 @@
       "schema": "<b>Entrée :</b> Objet",
       "role": "L'objet arrête de suivre son chemin (« Aller vers un objet (chemin) » ou « Aller à un point (chemin) ») et reste là où il est.",
       "exemple": "la mouche s'arrête quand la partie est gagnée."
+    },
+    {
+      "nom": "Placer sur une case (colonne, ligne)",
+      "schema": "<b>Entrées :</b> Objet, Colonne (0 = la première), Ligne (0 = la première)",
+      "role": "Met l'objet A pile au milieu de la case choisie (colonne et ligne, comptées à partir de 0 en haut à gauche). La grille est celle du décor en tuiles de la scène. Avec le bouton 🔗, branche « Colonne touchée » et « Ligne touchée » pour l'envoyer sur la case que le doigt touche.",
+      "exemple": "déplacer un pion sur la case touchée dans un jeu de plateau."
+    },
+    {
+      "nom": "Centrer sur sa case",
+      "schema": "<b>Entrée :</b> Objet",
+      "role": "L'objet A reste dans sa case mais se remet pile au milieu. Pratique quand un déplacement s'est arrêté entre deux cases.",
+      "exemple": "recentrer un héros après son déplacement."
+    },
+    {
+      "nom": "Aller à la case (chemin)",
+      "schema": "<b>Entrées :</b> Objet, Colonne, Ligne, Vitesse, Diagonales (oui / non), Ces tags bloquent le chemin (autres unités, séparés par une virgule) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé",
+      "role": "L'objet marche jusqu'au CENTRE de la case (colonne, ligne) en contournant les murs, les terrains qui bloquent et les unités des tags indiqués. Par défaut : la case touchée par le doigt. Sortie « Arrivé » une fois sur la case.",
+      "exemple": "envoyer un héros sur une case bleue touchée."
+    },
+    {
+      "nom": "Déplacer le pion d'une case",
+      "schema": "<b>Entrées :</b> Objet, Direction, Vitesse, Ces tags bloquent le chemin (autres unités, séparés par une virgule) &nbsp;→&nbsp; <b>Sorties :</b> Arrivé / Bloqué (mur, terrain, unité, bord)",
+      "role": "Fait avancer le pion d'une case (haut, bas, gauche, droite), bien centré. Si la case est un mur, un terrain qui bloque, une unité (tags) ou le bord de la carte : sortie « Bloqué ». Sinon « Arrivé » à la fin du pas.",
+      "exemple": "déplacer un pion de jeu de plateau avec des boutons ◀ ▶ ▲ ▼."
     },
     {
       "nom": "Poursuivre un objet",

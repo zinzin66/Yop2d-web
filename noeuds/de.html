@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (166) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 166 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (230) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 230 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 166 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 230 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
-<nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-übergänge">Übergänge</a><a href="#c11-animationen">Animationen</a><a href="#c12-audio">Audio</a><a href="#c13-geschichte-und-dialoge">Geschichte und Dialoge</a><a href="#c14-werte-grüne-kabel">Werte (grüne Kabel)</a><a href="#c15-bildschirmfilter">Bildschirmfilter</a></nav>
+<nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-werte-grüne-kabel">Werte (grüne Kabel)</a><a href="#c11-übergänge">Übergänge</a><a href="#c12-animationen">Animationen</a><a href="#c13-audio">Audio</a><a href="#c14-geschichte-und-dialoge">Geschichte und Dialoge</a><a href="#c15-bildschirmfilter">Bildschirmfilter</a><a href="#c16-physik">Physik</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
 <div class="method">
 <div class="fiche"><h3>Beim Start</h3>
@@ -75,6 +75,9 @@
 <div class="fiche"><h3>Zurück-Taste gedrückt</h3>
 <p>Läuft, wenn der Spieler die Zurück-Taste seines Telefons drückt (Pfeil oder Wischgeste). Ideal, um ein Pausenmenü zu öffnen oder zum vorherigen Bildschirm zurückzukehren. Ohne diesen Knoten tut die Zurück-Taste im Spiel nichts.</p>
 <p class="exemple"><b>Beispiel:</b> Zurück → „Spiel pausieren“, dann ein Menü „Weiter / Beenden“ anzeigen.</p>
+</div>
+<div class="fiche"><h3>Bei jeder neuen Szene</h3>
+<p>Startet jedes Mal, wenn eine neue Szene geöffnet wird. Gedacht für die „Globale Logik“ (die in allen Szenen läuft): zum Beispiel die gewählte Armee auf jeder Karte aufstellen. In einer normalen Szene reicht „Beim Start“.</p>
 </div>
 <div class="fiche"><h3>Drag Start</h3>
 <div class="schema"><b>Eingang:</b> Objekt</div>
@@ -202,6 +205,11 @@
 <p>Hält die Kamera innerhalb der Levelränder: Sie zeigt nie die Leere dahinter. Alles 0 = keine Grenzen.</p>
 <p class="exemple"><b>Beispiel:</b> Level mit 6480 Pixel Breite: minimales X 0, maximales X 6480, minimales Y 0, maximales Y 1080, mit „Kamera fixieren“ auf dem Spieler.</p>
 </div>
+<div class="fiche"><h3>Kamera mit dem Finger verschieben</h3>
+<div class="schema"><b>Eingänge:</b> An (ja / nein), Seitlich verschieben (ja / nein), Nach oben und unten verschieben (ja / nein)</div>
+<p>Schaltet das Verschieben der Ansicht mit dem Finger ein (oder aus): Wer in der Szene wischt, bewegt die Kamera. Ein einfaches Tippen bleibt ein Tippen (ein Turm, ein Knopf). HUD-Knöpfe verschieben nie. Die Kamera bleibt in den Grenzen von „Kamerabegrenzung“.</p>
+<p class="exemple"><b>Beispiel:</b> Beim Start: Kamerabegrenzung (0, 3840, 0, 1080), dann Kamera mit dem Finger verschieben: Der Spieler zieht eine Karte, die zwei Bildschirme breit ist.</p>
+</div>
 <div class="fiche"><h3>Kamera-Glättung</h3>
 <div class="schema"><b>Eingang:</b> Folgegeschwindigkeit (0.01 bis 1)</div>
 <p>Legt fest, wie schnell die Kamera das verfolgte Objekt einholt: 0.01 = sehr weich, 1 = klebt am Objekt.</p>
@@ -236,6 +244,16 @@
 <div class="schema"><b>Eingänge:</b> Zoom (%, 100 = normal), Richtung, Dauer (Sekunden)</div>
 <p>Vergrößert sanft den ganzen Spielbildschirm (die Szene oder Hintergrund und Figuren einer Geschichte) zur Mitte, zum Gesicht, zu einer Seite, nach oben oder unten. 100 = wieder normal; Dialogkasten und HUD bewegen sich nicht.</p>
 <p class="exemple"><b>Beispiel:</b> Zoom 140 zum Gesicht für 2 Sekunden, wenn Hana Angst hat, dann Zoom 100.</p>
+</div>
+<div class="fiche"><h3>Dunkelheit und Lichtstimmung</h3>
+<div class="schema"><b>Eingänge:</b> Farbe der Nacht, Dunkelheit (%, 0 = Tag, 100 = fast tiefschwarz), Ändert sich in (Sekunden: 30 = ein Sonnenuntergang)</div>
+<p>Verdunkelt das ganze Spiel (unter Buttons und Punktestand) in der gewählten Farbe. Dunkelheit 0 = voller Tag, 100 = völlig schwarz, außer rund um Lichtquellen. Stufe und Farbe ändern sich sanft: in 30 Sekunden geht es vom Tag über ein oranges Abendrot zur blauen Nacht, wie ein Sonnenuntergang.</p>
+<p class="exemple"><b>Beispiel:</b> ein Sonnenuntergang: „Dunkelheit und Lichtstimmung“ orange, Dunkelheit 40, in 6 Sekunden; „Warten“ 6 Sekunden; dann „Dunkelheit und Lichtstimmung“ Nachtblau, Dunkelheit 90, in 6 Sekunden.</p>
+</div>
+<div class="fiche"><h3>Tag-Nacht-Zyklus</h3>
+<div class="schema"><b>Eingänge:</b> Dauer eines ganzen Tages (Sekunden, 0 = stoppen), Wir beginnen bei…, Endlos wiederholen (ja) oder nur ein Tag (nein)</div>
+<p>Lässt das ganze Spiel von allein vom Tag über einen orangen Abend zur blauen Nacht, zur Morgendämmerung und wieder zum Tag wechseln. Du wählst die Dauer eines ganzen Tages (30 bis 120 Sekunden für ein lebendiges Spiel), den Startzeitpunkt und ob sich der Zyklus endlos wiederholt. Bei Pause steht der Zyklus still. Dauer 0 = Zyklus anhalten (der Himmel bleibt, wie er ist). Eine manuelle Einstellung mit „Dunkelheit und Lichtstimmung“ übernimmt. Deine Lichter („Lichtquelle (Fackel, Laterne…)“) bleiben an: Nachts sieht man sie besser.</p>
+<p class="exemple"><b>Beispiel:</b> eine lebendige Welt: beim Start „Tag-Nacht-Zyklus“ mit 90 Sekunden, Start „Voller Tag“, Schleife.</p>
 </div>
 <div class="fiche"><h3>Kamera-Wackeln</h3>
 <div class="schema"><b>Eingänge:</b> Stärke, Dauer (Millisekunden, 1000 = 1 s)</div>
@@ -444,7 +462,7 @@
 <p class="exemple"><b>Beispiel:</b> einen Stein an zufälliger Stelle fallen lassen: X = random(0, 800).</p>
 </div>
 <div class="fiche"><h3>Ein Objekt abfeuern</h3>
-<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit, Außerhalb des Bildschirms zerstören (ja / nein)</div>
+<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit, Außerhalb des Bildschirms zerstören (ja / nein), Lebensdauer des Schusses (Sekunden, 0 = unbegrenzt)</div>
 <p>Erstellt ein Geschoss (das Objekt aus „Modellname“) bei Objekt A und schießt es mit der gewählten Geschwindigkeit ab: 0°, 90°, 180°, 270°, zu Objekt B („Zum Ziel“) oder im Winkel von A.</p>
 <p class="exemple"><b>Beispiel:</b> ein Raumschiff, das Laser nach oben schießt (270).</p>
 </div>
@@ -457,6 +475,11 @@
 <div class="schema"><b>Eingänge:</b> Objekt, Verzögerung (Sekunden)</div>
 <p>Entfernt das gewählte Objekt nach einer Verzögerung (in Sekunden). Praktisch, damit eine Explosion nach ihrer Animation verschwindet.</p>
 <p class="exemple"><b>Beispiel:</b> nach „Klon erzeugen (Spawner)“ und „Animation abspielen“ wird das Explosionsbild 0,4 Sekunden später zerstört.</p>
+</div>
+<div class="fiche"><h3>Teamfarbe (ersetzt das Pink der Zeichnung)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Teamfarbe, Zu ersetzende Farbe in der Zeichnung (standardmäßig Pink), Toleranz (1 bis 100): höher ersetzt auch ähnliche Farben</div>
+<p>Eine Zeichnung für alle Teams: Male die einzufärbenden Teile (Umhang, Fahne, Federbusch) in einer Markierungsfarbe (standardmäßig leuchtendes Pink #FF00FF); dieser Node ersetzt dann dieses Pink für das Objekt durch die Teamfarbe. Schatten und Lichter der Zeichnung bleiben erhalten (ein dunkles Pink wird dunkles Blau). Die Toleranz bestimmt, wie weit eine Farbe von der Markierung abweichen darf und trotzdem ersetzt wird. An den Bildern wird nichts geändert: Alles geschieht bei der Anzeige, also zu Beginn jeder Partie erneut ausführen.</p>
+<p class="exemple"><b>Beispiel:</b> zwei Armeen mit denselben Bildern: Spieler in Blau, Gegner in Rot.</p>
 </div>
 <div class="fiche"><h3>Fortschritt festlegen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Neuer Fortschritt</div>
@@ -477,6 +500,21 @@
 <div class="schema"><b>Eingänge:</b> Objekt, Blitzfarbe, Dauer (Sekunden, 0 = endlos), Stärke (0 = stoppen, 1 bis 3)</div>
 <p>Blitze knistern um das Objekt: Es blinkt in der Blitzfarbe, zittert und sprüht Funken. Dauer 0 = endlos (Elektrozaun); Stärke 0 = stoppen.</p>
 <p class="exemple"><b>Beispiel:</b> der Zauberer berührt eine Falle: „Stromschlag“ auf den Zauberer (1 Sekunde), „Warten“ 1 Sekunde, dann „Szene neu starten“.</p>
+</div>
+<div class="fiche"><h3>Lichtquelle (Fackel, Laterne…)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Lichtfarbe, Radius (Pixel: Abstand vom Zentrum), Beleuchtung (%, 100 = normal, 200 = sehr stark), Farbiger Schein (%, 0 = keiner, 200 = sehr stark), Flackern, Einschalten, Horizontal verschieben (Pixel), Vertikal verschieben (Pixel, negativ = nach oben)</div>
+<p>Hängt ein Licht an das Objekt: Es folgt dem Objekt, wenn es sich bewegt (Fackel einer Figur, Laterne, Feuer …), auch wenn das Objekt ein Kind eines anderen ist. Einstellungen: Farbe, Radius in Pixeln (Abstand vom Zentrum), Beleuchtung (100 = normal, bis 300: stärker und weiter), farbiger Schein (0 = keiner), Flackern (keins, Kerze, Fackel, flackert) und Versatz. Ein Licht pro Objekt, höchstens 8 gleichzeitig. Es durchdringt die Dunkelheit von „Dunkelheit und Lichtstimmung“; ohne Dunkelheit fügt es nur seinen Schein hinzu. Einstellung „Einschalten“: „Nur wenn es dunkel ist“ schaltet das Licht bei Einbruch der Nacht von allein ein (ideal mit „Tag-Nacht-Zyklus“).</p>
+<p class="exemple"><b>Beispiel:</b> die Fackel einer Figur: an einem Objekt „Laterne“, Kind des Helden, Radius 360, Flackern „Fackel“.</p>
+</div>
+<div class="fiche"><h3>Licht des Objekts ausschalten</h3>
+<div class="schema"><b>Eingang:</b> Objekt</div>
+<p>Schaltet das am Objekt befestigte Licht aus. Zum Wiedereinschalten nimmst du erneut „Lichtquelle (Fackel, Laterne…)“.</p>
+<p class="exemple"><b>Beispiel:</b> ein Button „Laterne“ schaltet das Licht des Helden aus.</p>
+</div>
+<div class="fiche"><h3>Schatten unter dem Objekt</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Schatten, Schattenstärke (%), Schattenbreite (% des Objekts), Vertikal verschieben (Pixel, negativ = nach oben)</div>
+<p>Legt einen weichen Schatten unter das Objekt (oder entfernt ihn mit „Nein“). Er folgt dem Objekt, wenn es sich bewegt; Stärke und Breite sind einstellbar. Er gibt Figuren vor einem Hintergrund sofort Tiefe. Sie lässt sich auch mit dem Kästchen „Schatten unter dem Objekt“ im Inspektor setzen, ganz ohne Knoten.</p>
+<p class="exemple"><b>Beispiel:</b> ein Schatten unter dem Helden: Stärke 50, Breite 70.</p>
 </div>
 <div class="fiche"><h3>Objektspur</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Vorlage, Farbe (leer = wie Vorlage), Größe (1 = normal)</div>
@@ -625,6 +663,16 @@
 <p>Stoppt die laufende Bewegung des Objekts. Es bleibt dort stehen, wo es ist.</p>
 <p class="exemple"><b>Beispiel:</b> die Brücke anhalten, wenn der Spieler einen Knopf drückt.</p>
 </div>
+<div class="fiche"><h3>Dem Weg folgen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Name des Wegs, Geschwindigkeit (Pixel pro Sekunde), In Laufrichtung drehen (ja / nein), Seitlicher Zufallsversatz (Pixel, ±: jeder geht auf seiner Spur), Anderen ausweichen: zur Seite gehen, um nicht zu überlappen, und langsamere überholen (ja / nein), Nutzbare Breite zum Ausweichen (Pixel auf jeder Seite der Wegmitte), Bildwinkel (0 = schaut nach rechts, 90 = nach unten) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
+<p>Lässt das Objekt einem Weg folgen, der mit dem Werkzeug „Weg“ in den Assets gezeichnet wurde: Es wird auf den Startpunkt gesetzt und geht dann mit der gewählten Geschwindigkeit von Punkt zu Punkt. An einer Kreuzung wählt es den Ausgang so, wie du es eingestellt hast (zufällig, reihum, nach einer Variable). Der Ausgang „Am Ende angekommen“ läuft, sobald es einen Punkt ohne Ausgang erreicht. Mit „Seitlicher Zufallsversatz“ geht jedes Objekt auf seiner eigenen Spur (zufällig verschoben): mehrere Gegner laufen nebeneinander statt übereinander. Mit „Anderen ausweichen“ geht ein Objekt, das ein langsameres einholt, zur Seite, überholt es und kehrt auf seine Spur zurück; ist der Weg zu schmal, folgt es.</p>
+<p class="exemple"><b>Beispiel:</b> Ein Gegner erscheint: Dem Weg „Gegnerweg“ folgen, Geschwindigkeit 150. Ausgang „Am Ende angekommen“ → der Basis Schaden zufügen, dann das Objekt zerstören.</p>
+</div>
+<div class="fiche"><h3>Weg abbrechen</h3>
+<div class="schema"><b>Eingang:</b> Objekt</div>
+<p>Hält das Objekt an der Stelle an: Es folgt seinem Weg nicht mehr (der Ausgang „Am Ende angekommen“ läuft nicht).</p>
+<p class="exemple"><b>Beispiel:</b> Eine Falle friert einen Gegner ein: Weg abbrechen, später wieder Dem Weg folgen, damit er weitergeht.</p>
+</div>
 <div class="fiche"><h3>Objekt stoppen</h3>
 <div class="schema"><b>Eingang:</b> Objekt</div>
 <p>Stoppt das Objekt sofort: keine Geschwindigkeit, kein Schub, kein Sprung und keine automatische Bewegung mehr.</p>
@@ -641,12 +689,12 @@
 <p class="exemple"><b>Beispiel:</b> eine Kugel oder ein fahrendes Auto.</p>
 </div>
 <div class="fiche"><h3>Zu einem Objekt gehen (Weg)</h3>
-<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Geschwindigkeit, Diagonalen (ja / nein) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
-<p>Objekt A geht zu Objekt B und findet selbst den kürzesten Weg, Feld für Feld, ohne durch Mauern zu gehen („feste“ Kacheln einer Kachelebene, feste physikalische Objekte). Der Weg wird neu berechnet, wenn B sich bewegt. „Angekommen“ startet, wenn A B berührt.</p>
+<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Geschwindigkeit, Diagonalen (ja / nein), Anhalten, Diese Tags blockieren den Weg (andere Einheiten, mit Komma getrennt) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
+<p>Objekt A geht zu Objekt B und findet selbst den kürzesten Weg, Feld für Feld, ohne durch Mauern zu gehen („feste“ Kacheln einer Kachelebene, feste physikalische Objekte). Der Weg wird neu berechnet, wenn B sich bewegt. „Angekommen“ startet, wenn A B berührt. Mit der Einstellung „Anhalten“ bleibt das Objekt auf einem Nachbarfeld stehen, schön zentriert (Rasterspiele); „Diese Tags blockieren den Weg“ lässt es andere Einheiten umgehen.</p>
 <p class="exemple"><b>Beispiel:</b> ein Geist, der den Spieler durch ein Labyrinth jagt.</p>
 </div>
 <div class="fiche"><h3>Zu einem Punkt gehen (Weg)</h3>
-<div class="schema"><b>Eingänge:</b> Objekt, X-Position, Y-Position, Geschwindigkeit, Diagonalen (ja / nein) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
+<div class="schema"><b>Eingänge:</b> Objekt, X-Position, Y-Position, Geschwindigkeit, Diagonalen (ja / nein), Diese Tags blockieren den Weg (andere Einheiten, mit Komma getrennt) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
 <p>Objekt A geht auf dem kürzesten Weg (Feld für Feld) um die Mauern herum zum Punkt X, Y. Mit =doigt.x und =doigt.y geht es dorthin, wo der Bildschirm berührt wird. „Angekommen“ startet bei der Ankunft. Gibt es keinen Weg, bleibt es stehen.</p>
 <p class="exemple"><b>Beispiel:</b> auf ein Feld tippen, um den Helden dorthin zu schicken, in einem Strategiespiel oder einem Dungeon.</p>
 </div>
@@ -654,6 +702,26 @@
 <div class="schema"><b>Eingang:</b> Objekt</div>
 <p>Das Objekt folgt seinem Weg („Zu einem Objekt gehen (Weg)“ oder „Zu einem Punkt gehen (Weg)“) nicht mehr und bleibt stehen.</p>
 <p class="exemple"><b>Beispiel:</b> die Fliege hält an, wenn das Spiel gewonnen ist.</p>
+</div>
+<div class="fiche"><h3>Auf ein Feld setzen (Spalte, Zeile)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Spalte (0 = die erste), Zeile (0 = die erste)</div>
+<p>Setzt Objekt A genau in die Mitte des gewählten Feldes (Spalte und Zeile, ab 0 oben links gezählt). Das Raster ist das der Tile-Karte der Szene. Mit dem Knopf 🔗 verbindest du „Berührte Spalte“ und „Berührte Zeile“, um es auf das berührte Feld zu schicken.</p>
+<p class="exemple"><b>Beispiel:</b> eine Figur in einem Brettspiel auf das berührte Feld setzen.</p>
+</div>
+<div class="fiche"><h3>Auf seinem Feld zentrieren</h3>
+<div class="schema"><b>Eingang:</b> Objekt</div>
+<p>Objekt A bleibt in seinem Feld, geht aber genau in die Mitte zurück. Praktisch, wenn eine Bewegung zwischen zwei Feldern endete.</p>
+<p class="exemple"><b>Beispiel:</b> einen Helden nach seiner Bewegung neu zentrieren.</p>
+</div>
+<div class="fiche"><h3>Zum Feld gehen (Weg)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Spalte, Zeile, Geschwindigkeit, Diagonalen (ja / nein), Diese Tags blockieren den Weg (andere Einheiten, mit Komma getrennt) &nbsp;→&nbsp; <b>Ausgänge:</b> Sofort / Angekommen</div>
+<p>Das Objekt läuft zur MITTE des Feldes (Spalte, Zeile) und umgeht Wände, blockierendes Gelände und die Einheiten mit den angegebenen Tags. Standard: das berührte Feld. Ausgang „Angekommen“ einmal auf dem Feld.</p>
+<p class="exemple"><b>Beispiel:</b> einen Helden auf ein berührtes blaues Feld schicken.</p>
+</div>
+<div class="fiche"><h3>Figur ein Feld bewegen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Richtung, Geschwindigkeit, Diese Tags blockieren den Weg (andere Einheiten, mit Komma getrennt) &nbsp;→&nbsp; <b>Ausgänge:</b> Angekommen / Blockiert (Wand, Gelände, Einheit, Rand)</div>
+<p>Bewegt die Figur um ein Feld (oben, unten, links, rechts), schön zentriert. Ist das Feld eine Wand, ein blockierendes Gelände, eine Einheit (Tags) oder der Kartenrand: Ausgang „Blockiert“. Sonst „Angekommen“ am Ende des Schritts.</p>
+<p class="exemple"><b>Beispiel:</b> eine Brettspielfigur mit den Knöpfen ◀ ▶ ▲ ▼ bewegen.</p>
 </div>
 <div class="fiche"><h3>Objekt verfolgen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Geschwindigkeit</div>
@@ -698,6 +766,140 @@
 </div>
 <h2 id="c9-raster-und-puzzles">Raster und Puzzles</h2>
 <div class="method">
+<div class="fiche"><h3>Zum nächsten Zug</h3>
+<div class="schema"><b>Eingang:</b> Teams der Reihe nach (Tags mit Komma getrennt)</div>
+<p>Gibt das Spiel an das nächste Team weiter. Schreibe die Teams der Reihe nach mit ihren Tags (z. B. spieler,gegner). Der erste Aufruf (zum Beispiel nach „Beim Start“) beginnt mit dem ersten Team; wenn alle gespielt haben, steigt die Zugnummer. Zu Beginn jedes Zugs läuft das lokale Ereignis „tour_&lt;Team&gt;“, falls es existiert (z. B. „tour_gegner“).</p>
+<p class="exemple"><b>Beispiel:</b> „Zum nächsten Zug“ auf den Knopf „Zug beenden“ legen.</p>
+</div>
+<div class="fiche"><h3>Wenn … am Zug ist</h3>
+<div class="schema"><b>Eingang:</b> Team (Tag) &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch</div>
+<p>Wahr, wenn das geschriebene Team (sein Tag) am Zug ist, sonst Falsch.</p>
+<p class="exemple"><b>Beispiel:</b> den Spieler seine Einheiten nur während seines eigenen Zugs berühren lassen.</p>
+</div>
+<div class="fiche"><h3>Als gespielt markieren</h3>
+<div class="schema"><b>Eingang:</b> Objekt</div>
+<p>Merkt sich, dass die Einheit (Objekt A) in diesem Zug gespielt hat. Alles wird gelöscht, wenn der nächste Zug beginnt.</p>
+<p class="exemple"><b>Beispiel:</b> verhindern, dass ein Held sich im selben Zug zweimal bewegt.</p>
+</div>
+<div class="fiche"><h3>Wenn die Einheit schon gespielt hat</h3>
+<div class="schema"><b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch</div>
+<p>Wahr, wenn die Einheit (Objekt A) in diesem Zug schon gespielt hat, sonst Falsch.</p>
+<p class="exemple"><b>Beispiel:</b> es ablehnen, einen Helden zu bewegen, der schon gespielt hat.</p>
+</div>
+<div class="fiche"><h3>Erreichbare Felder zeigen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Zonentyp, Anzahl Schritte (oder Reichweite), Farbe der Felder, Sichtbarkeit der Felder (0 = unsichtbar, 100 = voll), Rahmen um jedes Feld, Schrittzahl auf jedes Feld schreiben, Wände blockieren (Bewegung), Diese Tags blockieren den Weg (mit Komma getrennt), Gelände mit mehr Schritten (Tag=Kosten, z. B. wald=2, wasser=3), Zonenname (optional: für mehrere), Form der Reichweite (Angriff und Sprung), Mindestreichweite (0 = keine; 2 = nicht die ersten Felder), Meine Positionen (Spalte,Zeile; z. B. 2,1 ; -2,1 ; 0,3), Das Feld des Objekts entfernen</div>
+<p>Färbt die Felder ein, auf die das gewählte Objekt gehen (oder die es angreifen) kann. Wände blockieren, und du kannst blockierende Tags (andere Einheiten) und Gelände hinzufügen, das mehr Schritte kostet (Wald=2). Farbe, Sichtbarkeit, Rahmen und Zahlen sind einstellbar. Mit „Zonenname“ zeigst du mehrere gleichzeitig (Bewegung blau, Angriff rot).</p>
+<p class="exemple"><b>Beispiel:</b> die Bewegungszone eines Helden zeigen, wenn man ihn berührt.</p>
+</div>
+<div class="fiche"><h3>Felder verbergen</h3>
+<div class="schema"><b>Eingang:</b> Zonenname (optional)</div>
+<p>Löscht die gefärbten Felder (alle oder eine benannte Zone).</p>
+<p class="exemple"><b>Beispiel:</b> die Zone verbergen, wenn der Held angekommen ist.</p>
+</div>
+<div class="fiche"><h3>Wenn das Feld erreichbar ist</h3>
+<div class="schema"><b>Eingänge:</b> Spalte, Zeile, Zonenname (optional) &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch</div>
+<p>Wahr, wenn das Feld (Spalte, Zeile) eines der gezeigten Felder ist. Standard: das berührte Feld. Sonst Falsch.</p>
+<p class="exemple"><b>Beispiel:</b> eine zu weite Bewegung mit „zu weit!“ ablehnen.</p>
+</div>
+<div class="fiche"><h3>Einheitenblatt geben</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Lebenspunkte, Angriff, Verteidigung, Bewegung (Schritte), Angriffsreichweite (Felder), Weitere Statistiken (z. B. munitions = 3, armure = 2)</div>
+<p>Gibt dem Objekt sein Blatt: Leben, Angriff, Verteidigung, Bewegung und Reichweite (Objektvariablen „vie“, „attaque“, „defense“, „mouvement“, „portee“). Sie sind überall mit einer Formel lesbar, z. B. =held.mouvement für die Schritte der erreichbaren Felder. Setze diesen Node nach „Beim Start“ jeder Einheit oder in ein wiederverwendbares Einheiten-Prefab.</p>
+<p class="exemple"><b>Beispiel:</b> einen Bogenschützen erstellen: Leben 8, Angriff 4, Verteidigung 0, Bewegung 4, Reichweite 3.</p>
+</div>
+<div class="fiche"><h3>Angreifen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Angriffsstärke (%), Verteidigung des Geländes des Ziels zählen, Immer mindestens 1 Schaden, Ziel zerstören, wenn die Leben aufgebraucht sind, Freie Schadensformel (z. B. attaquant.attaque * 2 - cible.armure); leer = normale Berechnung, Bonus nach Tags des Ziels (z. B. Reiterei = 150, leicht = 120: % des Schadens), Bonus nach Tags des Angreifers (z. B. Speer = 130), Statistik, die bei jedem Angriff verbraucht wird (z. B. Munition: bei 0 kein Angriff), Durchschlag: % der Verteidigung ignoriert (0 = keiner), Gegenangriff: % des Angriffs des Ziels, wenn es überlebt und der Angreifer in Reichweite ist (0 = keiner), Höhenbonus: % Schaden pro Höhenstufe (z. B. 15; oben = mehr, unten = weniger), Deckung: Tag benachbarter Verbündeter, die die Verteidigung des Ziels stärken (z. B. Speer), Deckung: Verteidigung pro benachbartem Verbündeten &nbsp;→&nbsp; <b>Ausgänge:</b> Noch am Leben / Keine Leben mehr / Angreifer zerstört (Gegenangriff)</div>
+<p>Objekt A greift Objekt B an: Schaden = Angriff von A × Stärke × Boni − Verteidigung von B − Geländeverteidigung von B. Ausgänge „Noch am Leben“ und „Keine Leben mehr“ (das Ziel wird zerstört, wenn das Feld angehakt ist) sowie „Angreifer zerstört“, wenn ihn ein Gegenangriff tötet. Beide Objekte brauchen ein Einheitenblatt. Die Regeln „regle: speer &gt; reiterei = 150“ aus donnees.txt gelten automatisch. Erweitert: Boni nach Tags („reiterei = 150“), DURCHSCHLAG (Prozent der Verteidigung ignoriert, für Speer oder Armbrust), GEGENANGRIFF (Prozent des Angriffs des Ziels zurück, wenn es überlebt und der Angreifer in Reichweite ist), HÖHENBONUS (Prozent Schaden pro Höhenstufe: wer höher steht, trifft stärker), DECKUNG (jeder benachbarte Verbündete mit dem gewählten Tag erhöht die Verteidigung des Ziels: eine Schildmauer), eine freie Formel und eine Statistik, die bei jedem Angriff verbraucht wird (Munition).</p>
+<p class="exemple"><b>Beispiel:</b> der Speer (Durchschlag 40) gegen schwere Reiterei; der Bogenschütze auf dem Hügel (Höhe +15 %).</p>
+</div>
+<div class="fiche"><h3>Daten anwenden (Einheit, Waffe)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Name in donnees.txt (z. B. Ritter) &nbsp;→&nbsp; <b>Ausgänge:</b> Gefunden / Nicht gefunden</div>
+<p>Gibt Objekt A alle Werte einer Einheit oder Waffe aus der Datei donnees.txt (Assets → Dialoge, oder assets_ludexa/Textes/donnees.txt): Leben, Angriff, Verteidigung, Bewegung, Reichweite, Preis… und ihre Tags. Eine Zeile genügt: „unite Ritter: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=reiterei schwer“. Das Spiel wird durch Bearbeiten der Datei ausbalanciert, ohne die Nodes anzufassen. Ausgänge „Gefunden“ / „Nicht gefunden“. Die Datei kann auch „arme Schwert: attaque=5“, „etat Gift: duree=3, degats=2“, „regle: speer &gt; reiterei = 150“ (ein Angreifer mit Tag speer verursacht 150 % bei einem Ziel mit Tag reiterei, automatisch von „Angreifen“ angewendet) und die Höhen der Felder enthalten.</p>
+<p class="exemple"><b>Beispiel:</b> zu Spielbeginn für jeden Helden: Daten anwenden „Ritter“.</p>
+</div>
+<div class="fiche"><h3>Höhe von Feldern festlegen</h3>
+<div class="schema"><b>Eingänge:</b> Startspalte, Startzeile, Anzahl Spalten, Anzahl Zeilen, Höhe (0 = flach)</div>
+<p>Gibt einem Rechteck von Rasterfeldern eine Höhe (Stufe: 0 = flach, 1, 2, 3…): Startspalte und -zeile, Anzahl Spalten und Zeilen. Die Höhen bestimmen den Höhenbonus von „Angreifen“ und blockieren die Sicht im Kriegsnebel (ein Hügel verdeckt, was dahinter liegt). Sie lassen sich auch in donnees.txt schreiben („hauteur 3,4 = 2“ oder ein Block „hauteurs:“ mit einer Ziffer pro Feld). Lies sie mit der Formel hauteur(Spalte, Zeile) oder mit den grünen Nodes „Höhe des berührten Feldes“ / „Höhe des Feldes unter einem Objekt“.</p>
+<p class="exemple"><b>Beispiel:</b> ein Hügel aus 3 x 2 Feldern auf Höhe 2, damit ein Bogenschütze dort stärker trifft.</p>
+</div>
+<div class="fiche"><h3>Zustand geben (Gift, langsam…)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Name des Zustands (z. B. Gift; in donnees.txt), Dauer in Runden (leer = aus donnees.txt), Schaden pro Runde (leer = donnees.txt), Geänderte Statistik (z. B. mouvement; leer = donnees.txt), Änderung dieser Statistik (z. B. -2)</div>
+<p>Gibt der Einheit einen Zustand für eine Anzahl RUNDEN: Gift (Schaden jede Runde), langsam (Bewegung sinkt), gesegnet (Angriff steigt)… Alles kann in donnees.txt stehen („etat Gift: duree=3, degats=2“, „etat Langsam: duree=2, stat=mouvement, delta=-2“): dann genügt der Name des Zustands. Der Schaden trifft zu Beginn jeder Runde des Teams der Einheit, danach verliert der Zustand eine Runde; am Ende kehrt die geänderte Statistik zurück. Denselben Zustand erneut zu geben verlängert ihn, statt ihn zu verdoppeln. Die Einheit behält eine Statistik „etat_&lt;Name&gt;“ (verbleibende Runden), in Formeln lesbar. Braucht „Zur nächsten Runde“.</p>
+<p class="exemple"><b>Beispiel:</b> ein Giftpfeil: Angreifen → noch am Leben → der Zielperson den Zustand „Gift“ geben.</p>
+</div>
+<div class="fiche"><h3>Zustand entfernen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Name des Zustands (leer = alle)</div>
+<p>Entfernt einen Zustand von der Einheit (nach Name) oder alle, wenn der Name leer ist. Die vom Zustand geänderte Statistik kehrt sofort auf den alten Wert zurück.</p>
+<p class="exemple"><b>Beispiel:</b> ein Priester, der das Gift eines Verbündeten heilt.</p>
+</div>
+<div class="fiche"><h3>Wenn die Einheit den Zustand hat…</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Name des Zustands (leer = alle) &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch</div>
+<p>Prüft, ob die Einheit einen Zustand hat (oder irgendeinen, wenn der Name leer ist). Ausgänge „Wahr“ / „Falsch“.</p>
+<p class="exemple"><b>Beispiel:</b> sich nicht bewegen können, wenn die Einheit „Gefroren“ ist.</p>
+</div>
+<div class="fiche"><h3>Flächeneffekt um ein Objekt</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Effekt, Stärke (Schaden oder Heilung), Radius in Feldern, Betroffene Tags (leer = alle), Name des Zustands (wenn der Effekt einen Zustand gibt), Abnahme pro Feld Entfernung (% der Stärke), Form, Trifft auch das Objekt in der Mitte</div>
+<p>Trifft auf einmal alle Objekte um Objekt A (in der Mitte): Schaden, Heilung oder ein Zustand. Einstellungen: die Stärke, der Radius in Feldern, die betroffenen Tags (leer = alle), die Form (Raute oder Quadrat mit Diagonalen), die Abnahme pro Feld Entfernung (Explosion: je weiter weg, desto schwächer) und ob das Objekt in der Mitte auch getroffen wird. Der Schaden ignoriert die Verteidigung. Ein Feuerball, eine Gruppenheilung, ein Furcht-Schrei. Um Opfer in einer Bedingung zu zählen, nutze die Formeln compter("tag") und voisins(Objekt, "tag", Felder).</p>
+<p class="exemple"><b>Beispiel:</b> ein Feuerball: Radius 2, Stärke 6, Abnahme 30 % pro Feld, auf „Gegner“-Einheiten.</p>
+</div>
+<div class="fiche"><h3>Erfahrung gewinnen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Gewonnene Erfahrung, Erfahrung für Stufe 2 (danach x Stufe), Zuwachs pro Stufe (z. B. vie=2, attaque=1) &nbsp;→&nbsp; <b>Ausgänge:</b> Stufe aufgestiegen / Nichts rückgängig</div>
+<p>Gibt der Einheit Erfahrung. Erreicht sie die Schwelle (Schwelle × aktuelle Stufe), steigt die Einheit eine Stufe auf, überschüssige Erfahrung bleibt erhalten und die Zuwächse werden addiert („vie=2, attaque=1“; das maximale Leben steigt mit dem Leben). Die Einheit behält die Statistiken „xp“ und „niveau“ (anfangs 1). Ausgänge „Stufe aufgestiegen“ / „Kein Aufstieg“: eine Fanfare oder Nachricht beim Aufstieg.</p>
+<p class="exemple"><b>Beispiel:</b> ein Held, der für jeden besiegten Gegner 30 Erfahrung bekommt.</p>
+</div>
+<div class="fiche"><h3>Position merken</h3>
+<div class="schema"><b>Eingang:</b> Objekt</div>
+<p>Merkt sich die aktuelle Position der Einheit vor einer Bewegung. Mit „Bewegung rückgängig“ kann der Spieler zurück (wie in Advance Wars bei „Abbrechen“ vor der Aktion).</p>
+<p class="exemple"><b>Beispiel:</b> direkt vor „Zum Feld gehen“: Position merken.</p>
+</div>
+<div class="fiche"><h3>Bewegung rückgängig</h3>
+<div class="schema"><b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgänge:</b> Rückgängig / Nichts rückgängig</div>
+<p>Setzt die Einheit auf die von „Position merken“ gespeicherte Position zurück, löscht „hat schon gespielt“ und setzt die Statistiken „bouge“ und „agi“ auf 0. Ausgänge „Rückgängig“ / „Nichts rückgängig“.</p>
+<p class="exemple"><b>Beispiel:</b> ein „Abbrechen“-Knopf im Aktionsmenü der Einheit.</p>
+</div>
+<div class="fiche"><h3>Wie ein Computer spielen (KI)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Tags der Gegner (z. B. Spieler), Spielstil, Bewegungsgeschwindigkeit, Weitere Tags, die den Weg blockieren (z. B. eigene Verbündete) &nbsp;→&nbsp; <b>Ausgänge:</b> Angekommen / Kein Ziel</div>
+<p>Lässt eine Einheit wie ein Computer von allein spielen. Sie prüft, wohin sie gehen kann (Bewegung, Wände, Gelände, blockierende Einheiten), sucht die Gegner (ihre Tags) und wählt je nach STIL das beste Feld zum Angreifen: aggressiv (meister Schaden, ein Ziel zuerst erledigen), vorsichtig (meidet den Gegenangriff) oder defensiv (mag Felder mit hoher Verteidigung). Niemand in Reichweite: Sie nähert sich dem nächsten Gegner. Nach der Ankunft kommt der Ausgang „Angekommen“: Das beteiligte Objekt ist das gewählte Ziel und die Statistik „cible_ia“ der Einheit ist 1 (kann angreifen) oder 0 (nur genähert). Sie nutzt Bewegung, Reichweite (und „portee_min“) und das Einheitenblatt. Ausgang „Kein Gegner“, wenn keiner mehr da ist.</p>
+<p class="exemple"><b>Beispiel:</b> Zug der Monster: für jedes Monster Wie ein Computer spielen (Gegner = Spieler) → bei Ankunft, wenn cible_ia = 1, Angreifen.</p>
+</div>
+<div class="fiche"><h3>Kriegsnebel aktualisieren</h3>
+<div class="schema"><b>Eingänge:</b> Tags des Teams, das sieht (z. B. Spieler), Tags der Gegner, die außer Sicht versteckt werden (z. B. Gegner), Standardsicht in Feldern (sonst die Statistik « vision » der Einheit), Dunkelheit unbekannter Felder (0 bis 100), Bereits gesehene Felder merken</div>
+<p>Berechnet, was das Team sieht, und bedeckt den Rest der Karte mit einem dunklen Schleier: Die Einheiten des Teams (Tags) sehen um sich herum bis zu ihrer Statistik „vision“ in Feldern (sonst die Standardsicht des Nodes). Eine Geländewand, ein Gelände mit der Eigenschaft „bloque_vue = oui“ (dichter Wald) oder ein höheres Feld blockiert die Sicht. Bereits gesehene Felder bleiben halbdunkel (Gedächtnis, optional). Einheiten mit Gegner-Tags außer Sicht werden versteckt. Nach jeder Bewegung oder zu Rundenbeginn erneut ausführen. Die Formel vue(Spalte, Zeile) ist 1, wenn das Feld gesehen wird. „Kriegsnebel entfernen“ macht alles sichtbar.</p>
+<p class="exemple"><b>Beispiel:</b> zu Beginn jeder Spielerrunde: Nebel aktualisieren (Team Spieler, Gegner Gegner, Sicht 3).</p>
+</div>
+<div class="fiche"><h3>Kriegsnebel entfernen</h3>
+<p>Entfernt den Kriegsnebel: Die ganze Karte ist wieder sichtbar und versteckte Einheiten tauchen wieder auf.</p>
+<p class="exemple"><b>Beispiel:</b> am Spielende, um die ganze Karte zu zeigen.</p>
+</div>
+<div class="fiche"><h3>Objekt Leben geben</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Lebenspunkte</div>
+<p>Gibt dem gewählten Objekt Lebenspunkte (Objektvariable „vie“, und „vie_max“ für das Maximum). Überall mit einer Formel lesbar, z. B. =monster.vie, um sie in einen Text oder einen Balken zu schreiben.</p>
+<p class="exemple"><b>Beispiel:</b> einem Monster am Anfang 10 Lebenspunkte geben.</p>
+</div>
+<div class="fiche"><h3>Schaden zufügen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Schaden, Objekt zerstören, wenn die Leben aufgebraucht sind, Verteidigung des Geländes abziehen &nbsp;→&nbsp; <b>Ausgänge:</b> Noch am Leben / Keine Leben mehr</div>
+<p>Zieht dem Objekt Lebenspunkte ab (nie unter 0). Zwei Ausgänge: „Noch am Leben“ und „Kein Leben mehr“ (das Objekt wird zerstört, wenn das Kästchen angehakt ist; „das beteiligte Objekt“ bleibt das getroffene).</p>
+<p class="exemple"><b>Beispiel:</b> ein Held schlägt ein Monster: 3 Schaden, dann eine kleine Meldung je nach Ergebnis.</p>
+</div>
+<div class="fiche"><h3>Heilen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Zurückgegebene Leben</div>
+<p>Gibt dem Objekt Lebenspunkte zurück, ohne sein Maximum zu überschreiten.</p>
+<p class="exemple"><b>Beispiel:</b> ein Trank, der dem Helden 5 Lebenspunkte zurückgibt.</p>
+</div>
+<div class="fiche"><h3>Statistik ändern</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Name der Statistik (z. B. Munition), Was tun, Um wie viel</div>
+<p>Ändert eine Statistik, die du für ein Objekt erfunden hast (Munition, Rüstung, Mana, Treibstoff…): addieren, abziehen oder auf einen Wert setzen. Gibt es sie noch nicht, wird sie mit 0 angelegt. Danach kannst du sie überall lesen: =bogenschuetze.munition.</p>
+<p class="exemple"><b>Beispiel:</b> Nach einem Schuss: Statistik ändern → Objekt „bogenschuetze“, Statistik „munition“, Abziehen 1.</p>
+</div>
+<div class="fiche"><h3>Wenn die Statistik…</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Name der Statistik (z. B. Munition), Vergleich, Wert &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch</div>
+<p>Vergleicht eine Statistik eines Objekts mit einem Wert und folgt dem Ausgang „wahr“ oder „falsch“: zum Beispiel „munition ist größer als 0“. Eine Statistik, die es nicht gibt, zählt als 0.</p>
+<p class="exemple"><b>Beispiel:</b> Vor dem Schuss: Wenn die Statistik „munition“ des Bogenschützen größer als 0 ist → schießen; sonst → „Keine Pfeile mehr“ zeigen.</p>
+</div>
+<div class="fiche"><h3>Ziel wählen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Tags möglicher Ziele (durch Komma getrennt), Welches Ziel wählen?, Reichweite in Feldern (0 = unbegrenzt; z. B. =monster.portee), Mindestreichweite (0 = keine), Form der Reichweite, Meine Positionen (Spalte,Zeile; z. B. 2,1 ; -2,1), Statistik (für die Statistik-Regeln, z. B. defense), Reichweite in Pixeln als Kreis (0 = Reichweite in Feldern nutzen) &nbsp;→&nbsp; <b>Ausgänge:</b> Ziel gefunden / Kein Ziel</div>
+<p>Objekt A sucht unter den Objekten mit einem der gewünschten Tags diejenigen IN SEINER REICHWEITE (gleiche Formen wie bei „Erreichbare Felder zeigen“) und wählt eines aus: das nächste, das mit den wenigsten oder meisten Leben oder den niedrigsten / höchsten Wert einer Statistik. Ausgang „Ziel gefunden“: es wird zum „beteiligten Objekt“ (für Angreifen, Gehe zu…). Ausgang „Kein Ziel“: niemand in Reichweite. Perfekt für die Intelligenz eines Monsters oder Turms.</p>
+<p class="exemple"><b>Beispiel:</b> ein Monster: „Ziel wählen“ (Tag „held“, der nächste), dann „Angreifen“ bei „Ziel gefunden“.</p>
+</div>
 <div class="fiche"><h3>Raster füllen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Spalten, Zeilen, Vorlage-Objekte (Namen mit Kommas getrennt)</div>
 <p>Teilt Objekt A (das Spielbrett) in Spalten und Zeilen und legt in jedes Feld eine Kopie eines zufällig gewählten Vorlage-Objekts (mindestens 3 Vorlagen, Namen mit Kommas getrennt). Am Anfang gibt es nie eine Reihe, und die Teile fallen von oben herein. Vor „Auf dem Raster spielen (3 in einer Reihe)“ verwenden.</p>
@@ -719,7 +921,95 @@
 <p class="exemple"><b>Beispiel:</b> die Karten eines Memory-Spiels zu Beginn mischen oder die Becher eines Hütchenspiels.</p>
 </div>
 </div>
-<h2 id="c10-übergänge">Übergänge</h2>
+<h2 id="c10-werte-grüne-kabel">Werte (grüne Kabel)</h2>
+<div class="method">
+<div class="fiche"><h3>Höhe des berührten Feldes</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: die Höhe des Feldes, das der Finger berührt (0, wenn nichts festgelegt ist). Mit 🔗 an eine Einstellung anschließen, z. B. in einem „Wenn…“.</p>
+<p class="exemple"><b>Beispiel:</b> „Hügel!“ anzeigen, wenn ein Feld der Höhe 2 berührt wird.</p>
+</div>
+<div class="fiche"><h3>Höhe des Feldes unter einem Objekt</h3>
+<div class="schema"><b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: die Höhe des Feldes unter einem Objekt. Nützlich, um z. B. die Höhe von Angreifer und Ziel zu vergleichen.</p>
+<p class="exemple"><b>Beispiel:</b> Fernangriffe nur von einem höheren Feld als das Ziel erlauben.</p>
+</div>
+<div class="fiche"><h3>Zufallszahl</h3>
+<div class="schema"><b>Eingänge:</b> Von, Bis &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Knoten (Wert): liefert eine Zufallszahl zwischen „Von“ und „Bis“, bei jeder Verwendung neu gezogen. Schließe ihn mit dem Knopf 🔗 im Einstellungsfenster an eine Einstellung an.</p>
+<p class="exemple"><b>Beispiel:</b> eine Münze an einem zufälligen X zwischen 0 und 800 erscheinen lassen.</p>
+</div>
+<div class="fiche"><h3>Wert eines Objekts</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Was &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Knoten (Wert): liefert einen Wert des gewählten Objekts während des Spiels: seine x- oder y-Position, Breite, Drehung, Deckkraft…</p>
+<p class="exemple"><b>Beispiel:</b> eine Münze auf die Höhe des Spielers setzen (Y ← Wert eines Objekts: player, y).</p>
+</div>
+<div class="fiche"><h3>Wert einer Variable</h3>
+<div class="schema"><b>Eingang:</b> Variable &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Knoten (Wert): liefert den aktuellen Wert einer Variable (Punkte, Leben…) während des Spiels.</p>
+<p class="exemple"><b>Beispiel:</b> die Punkte in einem Text anzeigen (Text ← Wert einer Variable: score).</p>
+</div>
+<div class="fiche"><h3>Rechnung</h3>
+<div class="schema"><b>Eingänge:</b> A, Rechenart, B &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Knoten (Wert): rechnet A + B, A − B, A × B oder A ÷ B. A und B können Zahlen sein oder selbst ein grünes Kabel bekommen (Rechnungen in Kette).</p>
+<p class="exemple"><b>Beispiel:</b> doppelt so viele Punkte geben (Wert ← Rechnung: score × 2).</p>
+</div>
+<div class="fiche"><h3>Berührte Spalte</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node (Wert): liefert die Spalte des berührten Feldes (0 = die erste links). Mit dem Knopf 🔗 in eine Einstellung stecken.</p>
+<p class="exemple"><b>Beispiel:</b> wissen, welche Spalte berührt wurde, um einen Turm zu setzen.</p>
+</div>
+<div class="fiche"><h3>Berührte Zeile</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node (Wert): liefert die Zeile des berührten Feldes (0 = die erste oben). Mit dem Knopf 🔗 in eine Einstellung stecken.</p>
+<p class="exemple"><b>Beispiel:</b> wissen, welche Zeile berührt wurde, um ein Gebäude zu setzen.</p>
+</div>
+<div class="fiche"><h3>Spalte eines Objekts</h3>
+<div class="schema"><b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node (Wert): liefert die Spalte des Feldes, auf dem das gewählte Objekt steht (0 = die erste links).</p>
+<p class="exemple"><b>Beispiel:</b> wissen, in welcher Spalte der Held steht.</p>
+</div>
+<div class="fiche"><h3>Zeile eines Objekts</h3>
+<div class="schema"><b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node (Wert): liefert die Zeile des Feldes, auf dem das gewählte Objekt steht (0 = die erste oben).</p>
+<p class="exemple"><b>Beispiel:</b> wissen, in welcher Zeile der Held steht.</p>
+</div>
+<div class="fiche"><h3>Zugnummer</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: die aktuelle Zugnummer (1, 2, 3…), mit dem Knopf 🔗 einstecken.</p>
+<p class="exemple"><b>Beispiel:</b> „Zug 3“ in einem Text anzeigen.</p>
+</div>
+<div class="fiche"><h3>Schritte bis zum berührten Feld</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: die Anzahl Schritte bis zum berührten Feld (-1, wenn es außerhalb der Zone liegt). Praktisch, um die übrigen Schritte zu zählen.</p>
+<p class="exemple"><b>Beispiel:</b> übrige Schritte = Schritte der Einheit - diese Zahl.</p>
+</div>
+<div class="fiche"><h3>Gelände des berührten Feldes</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: der Name des Geländes des berührten Feldes („Wald“, „Wasser“…), oder nichts, wenn es keins gibt. Das Gelände wird im Tile-Editor festgelegt.</p>
+<p class="exemple"><b>Beispiel:</b> „Wald“ anzeigen, wenn ein Waldfeld berührt wird.</p>
+</div>
+<div class="fiche"><h3>Geländekosten des berührten Feldes</h3>
+<div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: die Schrittkosten des Geländes des berührten Feldes (1, wenn es keins gibt).</p>
+<p class="exemple"><b>Beispiel:</b> „das kostet 2 Schritte“ vor einer Bewegung sagen.</p>
+</div>
+<div class="fiche"><h3>Gelände unter einem Objekt</h3>
+<div class="schema"><b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: der Name des Geländes, auf dem das gewählte Objekt steht.</p>
+<p class="exemple"><b>Beispiel:</b> wissen, ob der Held im Wasser oder auf der Straße steht.</p>
+</div>
+<div class="fiche"><h3>Geländeverteidigung unter einem Objekt</h3>
+<div class="schema"><b>Eingang:</b> Objekt &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Node: der Verteidigungsbonus des Geländes unter dem gewählten Objekt.</p>
+<p class="exemple"><b>Beispiel:</b> den Verteidigungsbonus einer Einheit anzeigen.</p>
+</div>
+<div class="fiche"><h3>Abstand zwischen 2 Objekten</h3>
+<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
+<p>Grüner Knoten (Wert): liefert den Abstand (in Pixeln) zwischen den Mittelpunkten zweier Objekte während des Spiels.</p>
+<p class="exemple"><b>Beispiel:</b> den Bildschirm stärker wackeln lassen, wenn der Gegner nah ist.</p>
+</div>
+</div>
+<h2 id="c11-übergänge">Übergänge</h2>
 <div class="method">
 <div class="fiche"><h3>Bildschirmübergang (Kreis, Stern…)</h3>
 <div class="schema"><b>Eingänge:</b> Form, Richtung, Farbe, Dauer (Sekunden), Mitte: Objekt (Name; Kreis, Stern, Raute, Herz, Held) &nbsp;→&nbsp; <b>Ausgänge:</b> Weiter / Sofort</div>
@@ -732,7 +1022,7 @@
 <p class="exemple"><b>Beispiel:</b> die Tür wird berührt: zur Szene „Haus“ wechseln, mit einem Kreis, der sich um den Helden schließt.</p>
 </div>
 </div>
-<h2 id="c11-animationen">Animationen</h2>
+<h2 id="c12-animationen">Animationen</h2>
 <div class="method">
 <div class="fiche"><h3>Animation abspielen</h3>
 <div class="schema"><b>Eingänge:</b> Objekt, Animation, Tempo (Bilder/Sekunde), Wiederholen (ja / nein)</div>
@@ -760,7 +1050,7 @@
 <p class="exemple"><b>Beispiel:</b> schneller rennen = schnellere Animation.</p>
 </div>
 </div>
-<h2 id="c12-audio">Audio</h2>
+<h2 id="c13-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Sound abspielen</h3>
 <div class="schema"><b>Eingänge:</b> Sounddatei, Lautstärke (%, 100 = voll)</div>
@@ -777,7 +1067,7 @@
 <p class="exemple"><b>Beispiel:</b> Stille auf dem Game-Over-Bildschirm.</p>
 </div>
 </div>
-<h2 id="c13-geschichte-und-dialoge">Geschichte und Dialoge</h2>
+<h2 id="c14-geschichte-und-dialoge">Geschichte und Dialoge</h2>
 <div class="method">
 <div class="fiche"><h3>Einen Satz sagen</h3>
 <div class="schema"><b>Eingänge:</b> Wer spricht, Gefühl, Der Satz, Platz auf dem Bildschirm, Auftritt der Figur, Effekt, Ton oder Stimme, Weiter geht es &nbsp;→&nbsp; <b>Ausgang:</b> Danach</div>
@@ -859,34 +1149,6 @@
 <p class="exemple"><b>Beispiel:</b> „Wie heißt du?“ → Variable prenom → „Einen Satz sagen“ „Freut mich, {prenom}!“.</p>
 </div>
 </div>
-<h2 id="c14-werte-grüne-kabel">Werte (grüne Kabel)</h2>
-<div class="method">
-<div class="fiche"><h3>Zufallszahl</h3>
-<div class="schema"><b>Eingänge:</b> Von, Bis &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
-<p>Grüner Knoten (Wert): liefert eine Zufallszahl zwischen „Von“ und „Bis“, bei jeder Verwendung neu gezogen. Schließe ihn mit dem Knopf 🔗 im Einstellungsfenster an eine Einstellung an.</p>
-<p class="exemple"><b>Beispiel:</b> eine Münze an einem zufälligen X zwischen 0 und 800 erscheinen lassen.</p>
-</div>
-<div class="fiche"><h3>Wert eines Objekts</h3>
-<div class="schema"><b>Eingänge:</b> Objekt, Was &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
-<p>Grüner Knoten (Wert): liefert einen Wert des gewählten Objekts während des Spiels: seine x- oder y-Position, Breite, Drehung, Deckkraft…</p>
-<p class="exemple"><b>Beispiel:</b> eine Münze auf die Höhe des Spielers setzen (Y ← Wert eines Objekts: player, y).</p>
-</div>
-<div class="fiche"><h3>Wert einer Variable</h3>
-<div class="schema"><b>Eingang:</b> Variable &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
-<p>Grüner Knoten (Wert): liefert den aktuellen Wert einer Variable (Punkte, Leben…) während des Spiels.</p>
-<p class="exemple"><b>Beispiel:</b> die Punkte in einem Text anzeigen (Text ← Wert einer Variable: score).</p>
-</div>
-<div class="fiche"><h3>Rechnung</h3>
-<div class="schema"><b>Eingänge:</b> A, Rechenart, B &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
-<p>Grüner Knoten (Wert): rechnet A + B, A − B, A × B oder A ÷ B. A und B können Zahlen sein oder selbst ein grünes Kabel bekommen (Rechnungen in Kette).</p>
-<p class="exemple"><b>Beispiel:</b> doppelt so viele Punkte geben (Wert ← Rechnung: score × 2).</p>
-</div>
-<div class="fiche"><h3>Abstand zwischen 2 Objekten</h3>
-<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B &nbsp;→&nbsp; <b>Ausgang:</b> keiner (Ende des Skripts)</div>
-<p>Grüner Knoten (Wert): liefert den Abstand (in Pixeln) zwischen den Mittelpunkten zweier Objekte während des Spiels.</p>
-<p class="exemple"><b>Beispiel:</b> den Bildschirm stärker wackeln lassen, wenn der Gegner nah ist.</p>
-</div>
-</div>
 <h2 id="c15-bildschirmfilter">Bildschirmfilter</h2>
 <div class="method">
 <div class="fiche"><h3>Bildschirmfilter</h3>
@@ -898,6 +1160,64 @@
 <div class="schema"><b>Eingang:</b> Ausblenden (Sekunden) &nbsp;→&nbsp; <b>Ausgänge:</b> Danach / Wenn es vorbei ist</div>
 <p>Blendet den aktuellen Bildschirmfilter sanft aus. „Danach“ läuft sofort, „Wenn es vorbei ist“, sobald der Filter verschwunden ist.</p>
 <p class="exemple"><b>Beispiel:</b> der Held verlässt die Höhle: die Taschenlampe in 1 Sekunde ausblenden.</p>
+</div>
+</div>
+<h2 id="c16-physik">Physik</h2>
+<div class="method">
+<div class="fiche"><h3>Physikwelt einstellen</h3>
+<div class="schema"><b>Eingänge:</b> Schwerkraft nach unten (%, 100 = normal, 0 = Weltraum, negativ = nach oben), Schwerkraft nach rechts (%, negativ = links: ein ständiger Wind), Genauigkeit, Ruhende Objekte schlafen ein (schont das Handy)</div>
+<p>Stellt die Physikwelt der Szene ein: Schwerkraft nach unten (100 % = normal, 0 = Weltraum, negativ = Objekte fallen nach oben), seitliche Schwerkraft (ein ständiger Wind), Genauigkeit der Berechnung und ob ruhende Objekte einschlafen. Einmal verwenden, unter „Beim Start“. Wirkt nur auf Objekte mit dem Verhalten „Realistische Physik“ (⚙ Verhalten).</p>
+<p class="exemple"><b>Beispiel:</b> ein Level auf dem Mond: Schwerkraft 20 %.</p>
+</div>
+<div class="fiche"><h3>Physik-Objekt einstellen</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Objekttyp, Material (Gewicht, Abprallen und Haftung auf einmal), Kontaktform, Gewicht (%, 100 = normal, leer = unverändert), Abprallen (0 bis 100, leer = unverändert), Haftung (0 = Eis, 100 = klebrig, leer = unverändert), Schwerkraft des Objekts (%, 0 = schwebt, leer = unverändert), Luftwiderstand (0 bis 20, leer = unverändert), Höchstgeschwindigkeit (Pixel pro Sekunde, 0 = unbegrenzt, leer = unverändert), Dreht sich nie, Geist (man geht hindurch), Sehr schnelles Objekt (geht nicht durch dünne Wände), Ebene des Objekts (1 bis 8, leer = unverändert)</div>
+<p>Ändert die Einstellungen eines Physik-Objekts während des Spiels: Typ (normal, fest, geführt oder keine Physik mehr), Material (Holz, Stein, Metall, Gummi, Ball, Eis, Feder), Form, Gewicht, Abprallen, Haftung, Schwerkraft, Luftwiderstand, Höchstgeschwindigkeit, ob es sich dreht, ob es ein Geist oder sehr schnell ist, seine Ebene. Leer oder auf „(nicht ändern)“ gelassene Einstellungen bleiben. Bei einem Objekt ohne Physik gibt die Wahl eines Typs ihm Physik.</p>
+<p class="exemple"><b>Beispiel:</b> ein Ball, der zu Gummi wird (Material „Gummi“), wenn man einen Bonus einsammelt.</p>
+</div>
+<div class="fiche"><h3>Schieben (Physikkraft)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Schub nach rechts (negativ = nach links), Schub nach unten (negativ = nach oben), Wie, Wo schieben (außerhalb der Mitte dreht sich das Objekt), Zählt das Gewicht?</div>
+<p>Schiebt ein Physik-Objekt mit einer Kraft. „Dauerschub“: in jedem Bild wiederholen (unter „Jedes Bild“ oder „Finger gedrückt“), das Objekt wird schneller, solange du schiebst (Rakete, Wind, Ventilator). „Ein Stoß“: gibt sofort Tempo (Sprung, Tritt). Standardmäßig wirkt es auf leichte und schwere Objekte gleich; in den erweiterten Einstellungen kann das Gewicht zählen, und außerhalb der Mitte schieben lässt das Objekt kreiseln. Werte: Pixel pro Sekunde (pro Sekunde zum Quadrat beim Dauerschub).</p>
+<p class="exemple"><b>Beispiel:</b> ein Raketenspiel: „Finger gedrückt“ → dauerhaft nach oben schieben (-2500).</p>
+</div>
+<div class="fiche"><h3>Tempo einstellen (Physik)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Tempo nach rechts (Pixel pro Sekunde, leer = unverändert), Tempo nach unten (negativ = nach oben, leer = unverändert), Drehtempo (Grad pro Sekunde, leer = unverändert), Wie, Alles sofort anhalten?</div>
+<p>Stellt das Tempo eines Physik-Objekts ein, in Pixel pro Sekunde: nach rechts, nach unten (negativ = nach oben) und Drehung in Grad pro Sekunde. Leere Felder lassen dieses Tempo unverändert. „Ersetzen“ setzt genau dieses Tempo; „Addieren“ addiert es zum aktuellen. Die Option „Alles anhalten“ setzt alle Tempi auf null. Ideal für einen Sprung (Tempo nach unten -900), einen harten Stopp oder eine Figur mit gleichbleibendem Tempo.</p>
+<p class="exemple"><b>Beispiel:</b> ein Plattform-Sprung: Tempo nach unten = -900, nur wenn „Wenn das Physik-Objekt…“ sagt, dass das Objekt steht.</p>
+</div>
+<div class="fiche"><h3>Abwerfen (Winkel und Tempo)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Winkel (Grad: 0 = rechts, -90 = oben, 90 = unten, 180 = links), Startgeschwindigkeit (Pixel pro Sekunde), Wie</div>
+<p>Wirft ein Physik-Objekt in eine Richtung: du gibst den Winkel (0 = rechts, -90 = oben, 90 = unten, 180 = links) und das Starttempo an. Den Rest erledigt die Schwerkraft: das Objekt fliegt eine Kurve. Ideal für ein Schleuder-Spiel, eine Kanone, einen Ballwurf. Der Winkel kann eine Formel sein (z. B. der Winkel zwischen Objekt und Finger).</p>
+<p class="exemple"><b>Beispiel:</b> eine Schleuder: beim Loslassen den Vogel im Winkel des Gummis abschießen.</p>
+</div>
+<div class="fiche"><h3>Explosion (Druckwelle)</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Zentrum: X-Position (leer = Mitte des Objekts), Zentrum: Y-Position (leer = Mitte des Objekts), Radius der Druckwelle (Pixel), Kraft im Zentrum (gegebenes Tempo, Pixel pro Sekunde), Nur Objekte mit diesem Tag (leer = alle)</div>
+<p>Lässt alle Physik-Objekte um einen Punkt wegfliegen: je näher am Zentrum, desto heftiger werden sie geschleudert, und sie fangen an zu kreiseln. Das Zentrum ist die Mitte des gewählten Objekts oder ein Punkt (x, y), wenn du einen einträgst. Du stellst Radius und Kraft (das Tempo im Zentrum) ein. Option: nur Objekte mit einem bestimmten Tag. Der Knoten zerstört nichts: kombiniere ihn mit „Partikeleffekt“ und „Objekt zerstören“ für eine echte Explosion.</p>
+<p class="exemple"><b>Beispiel:</b> eine Bombe: beim Bodenkontakt Explosion mit Radius 500 und Kraft 1800, dann die Bombe zerstören.</p>
+</div>
+<div class="fiche"><h3>Zwei Objekte verbinden</h3>
+<div class="schema"><b>Eingänge:</b> Objekt A, Objekt B, Art der Verbindung, Name der Verbindung (zum späteren Einstellen oder Trennen), Punkt des Objekts A, an dem verbunden wird, Punkt des Objekts B (Stange, Feder, Seil), Punkt nach rechts verschieben (Pixel), Punkt nach unten verschieben (Pixel), Stoßen die beiden Objekte zusammen?, Länge (Pixel, 0 = Startabstand), Härte von Feder oder Federung (1 = weich, 10 = fest), Dämpfung (0 bis 100: höher = weniger Nachschwingen), Untere Grenze (Grad beim Scharnier, Pixel bei der Schiene; leer = keine), Obere Grenze (Grad oder Pixel; leer = keine), Richtung der Schiene oder Federung (Grad: 0 = waagerecht, 90 = senkrecht; leer = automatisch), Motor: Tempo (Grad pro Sekunde bei Scharnier oder Rad, Pixel pro Sekunde bei Schiene; 0 = kein Motor), Stärke von Motor oder Bremse (1 = schwach, 10 = normal, 100 = sehr stark)</div>
+<p>Verbindet zwei Objekte, sodass sie halten oder sich gemeinsam bewegen, wie im echten Leben. Art der Verbindung: Scharnier (dreht sich um einen Punkt: Tür, Pendel), starre Stange (feste Entfernung), Feder (elastisch, mit Härte), Seil (maximale Länge), Schiene (gleitet auf einer Bahn, mit Grenzen und Motor), Schweißnaht (zusammengeklebt), Rad mit Federung (Auto: A = die Karosserie, B = das Rad, mit Motor), Bremse (Draufsicht). Objekt B ist optional: ohne B hängt Objekt A an einem festen Punkt der Kulisse. Gib der Verbindung einen Namen, um sie später einzustellen („Verbindung einstellen“) oder zu trennen („Verbindung trennen“). In den erweiterten Einstellungen: Punkt auf jeder Seite, Grenzen, Richtung der Schiene, Motor, Kollision der beiden Objekte. Beide Objekte brauchen das Verhalten „Realistische Physik“ (außer einem festen Halter).</p>
+<p class="exemple"><b>Beispiel:</b> ein Pendel: A = die Kugel, B = ein kleines festes Objekt oben, Typ „Scharnier“ oder „Starre Stange“; eine Brücke: Planken, durch Scharniere verbunden.</p>
+</div>
+<div class="fiche"><h3>Verbindung einstellen</h3>
+<div class="schema"><b>Eingänge:</b> Name der Verbindung, Motor: Tempo (0 = Motor stoppen, leer = unverändert), Motorstärke (leer = unverändert), Härte von Feder oder Federung (leer = unverändert), Neue Länge (Pixel, leer = unverändert), Neue untere Grenze (leer = unverändert), Neue obere Grenze (leer = unverändert), Grenzen</div>
+<p>Ändert eine mit „Zwei Objekte verbinden“ erstellte Verbindung (über ihren Namen gefunden): Motor starten, stoppen oder beschleunigen, Stärke, Härte einer Feder oder Federung, Länge von Stange oder Seil, Grenzen. Leere Felder bleiben wie zuvor. Beispiel: ein Auto, dessen Radmotor beim Tastendruck anspringt.</p>
+<p class="exemple"><b>Beispiel:</b> Knopf „Gas“: Verbindung „hinterrad“ mit Motor = 720 einstellen; beim Loslassen: Motor = 0.</p>
+</div>
+<div class="fiche"><h3>Verbindung trennen</h3>
+<div class="schema"><b>Eingänge:</b> Name der zu trennenden Verbindung, Oder: Name eines Objekts, dessen Verbindungen alle getrennt werden</div>
+<p>Trennt eine Verbindung: schreibe ihren Namen, oder den Namen eines Objekts, um alle seine Verbindungen zu trennen. Die Objekte lösen sich und fallen jeweils für sich (eine einstürzende Brücke, ein gekapptes Seil, eine sich lösende Kabine).</p>
+<p class="exemple"><b>Beispiel:</b> eine Brückenfalle: berührt der Held den Hebel, die Verbindung „planke_3“ trennen.</p>
+</div>
+<div class="fiche"><h3>Mit dem Finger greifen (Physik)</h3>
+<div class="schema"><b>Eingänge:</b> Aktion, Nur Objekte mit diesem Tag (leer = alle), Weichheit des Griffs</div>
+<p>Erlaubt, ein Physik-Objekt mit dem Finger zu greifen und zu ziehen, wie im echten Leben: das Objekt folgt dem Finger mit etwas Elastizität, schiebt andere und kann sich verkeilen. Unter „Finger gedrückt“ einsetzen (Aktion „Mit dem Finger greifen und ziehen“): solange der Finger aufliegt, wird das Objekt darunter gezogen; hebt sich der Finger, wird es von selbst losgelassen (oder die Aktion „Loslassen“ nutzen). Du kannst den Griff auf Objekte mit einem Tag beschränken und die Weichheit einstellen.</p>
+<p class="exemple"><b>Beispiel:</b> ein Kistenrätsel: der Spieler verschiebt Kisten mit der Fingerspitze und baut einen Turm.</p>
+</div>
+<div class="fiche"><h3>Wenn das Physik-Objekt…</h3>
+<div class="schema"><b>Eingänge:</b> Objekt, Frage, Ab diesem Tempo zählt es (Pixel pro Sekunde) &nbsp;→&nbsp; <b>Ausgänge:</b> Wahr / Falsch</div>
+<p>Stellt eine Frage zu einem Physik-Objekt und folgt dem Ausgang „wahr“ oder „falsch“: steht es auf etwas (um einen Sprung zu erlauben), berührt es etwas, berührt es etwas darüber, ruht es (schläft), bewegt es sich schnell, fällt es, steigt es. Bei „bewegt sich schnell“, „fällt“ und „steigt“ stellst du die Schwelle in Pixel pro Sekunde in den erweiterten Einstellungen ein. Du kannst auch direkt in einer Formel lesen: objekt.vitesse, objekt.masse, objekt.vitesseRotation.</p>
+<p class="exemple"><b>Beispiel:</b> ein Plattform-Sprung: „Sprungknopf“ → Wenn das Objekt auf etwas steht → Tempo nach unten auf -900.</p>
 </div>
 </div>
 <div class="liens-bas">

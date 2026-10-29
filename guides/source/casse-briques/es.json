@@ -1,0 +1,740 @@
+{
+  "titre_page": "¿Cómo hacer un juego de rompeladrillos en Yop2D? | Guía Yop2D",
+  "description": "Haz un juego de rompeladrillos en Yop2D sin código: una pala que mueves con el dedo, muros invisibles, una pelota que rebota, ladrillos que romper, puntos y vidas con nodos.",
+  "h1": "¿Cómo hacer un juego de rompeladrillos?",
+  "carte": [
+    "Hacer un rompeladrillos",
+    "Pala con el dedo, pelota que rebota, ladrillos que romper, puntos y vidas."
+  ],
+  "etapes": [
+    [
+      "Colocar la pala",
+      "{{modifier_propriete}} (paddle, y = 1700) → {{garder_dans_ecran}}, con el comportamiento « Arrastrado con el dedo »."
+    ],
+    [
+      "Rodear la pantalla con muros invisibles",
+      "Cuatro {{lang:obj_prefix_zone}}s: left_wall, right_wall, top_wall y bottom_wall."
+    ],
+    [
+      "Lanzar la pelota",
+      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy); {{NoeudEventChaqueImage}} → {{pousser}} (ball)."
+    ],
+    [
+      "Rebotar en los muros y en la pala",
+      "{{NoeudEventCollisionAB}} (ball, left_wall) → {{modifier_variable}} (vx, 6)."
+    ],
+    [
+      "Romper los ladrillos",
+      "{{NoeudEventCollisionTag}} (ball, brick) → {{detruire_objet}} → {{ajouter_variable}} (score, 10)."
+    ],
+    [
+      "Vidas y fin de la partida",
+      "{{NoeudEventCollisionAB}} (ball, bottom_wall) → {{ajouter_variable}} (lives, -1) → {{recommencer_scene}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "En un rompeladrillos, una **pelota** rebota en los muros y en una **pala** que mueves con el dedo, y rompe **ladrillos**. Aquí la pelota avanza gracias a dos variables: **vx** (su velocidad hacia la derecha) y **vy** (su velocidad hacia abajo). Cuando toca un muro, simplemente le damos otro número."
+    ],
+    [
+      "besoin",
+      [
+        "una {{lang:obj_prefix_image}} llamada **paddle**, en la parte baja de la pantalla (por ejemplo 208 x 48 px, hacia y = 1700);",
+        "una {{lang:obj_prefix_image}} llamada **ball**, en medio de la pantalla (por ejemplo 44 x 44 px);",
+        "ladrillos: {{lang:obj_prefix_image}}s en la parte alta de la pantalla (por ejemplo 128 x 64 px, 8 por fila);",
+        "dos objetos {{lang:obj_prefix_texte}}: **scoreText** (texto « Puntos: 0 ») y **livesText** (texto « Vidas: 3 »), en la parte alta de la pantalla."
+      ]
+    ],
+    [
+      "tip",
+      "Esta guía está escrita para un juego **vertical de 1080 x 1920**. Las imágenes vienen del pack gratuito **Puzzle (brick breaker)** (Kenney, libre de derechos, CC0). Descárgalo en la **Biblioteca** de Yop2D, pestaña **Packs para descargar**: allí encontrarás **paddleBlu** (pala), **ballBlue** (pelota) y **element_blue_rectangle_glossy** (ladrillo, en azul, verde, rojo, amarillo, morado y gris). También puedes usar tus propios dibujos."
+    ],
+    [
+      "h2",
+      "Paso 1: etiquetas y variables"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Selecciona un ladrillo. En el inspector, campo **{{lang:insp_label_tag}}**, escribe **brick**. Haz lo mismo con cada ladrillo.",
+            "En el panel de la izquierda, abre la sección **{{lang:panneau_ress_variables}}** y crea cinco variables, todas con ámbito **{{lang:var_scope_locale}}** y tipo **{{lang:var_type_entier}}**:"
+          ]
+        ],
+        [
+          "ul",
+          [
+            "**score**: valor inicial **0**;",
+            "**lives**: valor inicial **3**;",
+            "**bricks**: el **número de ladrillos** de tu juego (por ejemplo **24**). Sirve para saber cuándo está todo roto;",
+            "**vx** y **vy**: valor inicial **0**. Es la velocidad de la pelota, se fija al empezar."
+          ]
+        ],
+        [
+          "tip",
+          "¿Un ladrillo más o menos? Cambia simplemente el valor inicial de **bricks**. Si el número es demasiado grande, nunca ganas; si es demasiado pequeño, ganas demasiado pronto."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 2: los muros invisibles"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "La pelota rebota en muros que no se ven: cuatro **{{lang:obj_prefix_zone}}s** colocadas alrededor de la pantalla. Una zona es invisible durante el juego, pero la pelota puede tocarla."
+        ],
+        [
+          "ol",
+          [
+            "Añade una {{lang:obj_prefix_zone}} llamada **left_wall**: X = `-300`, Y = `-400`, ancho `300`, alto `2800`.",
+            "Añade una {{lang:obj_prefix_zone}} llamada **right_wall**: X = `1080`, Y = `-400`, ancho `300`, alto `2800`.",
+            "Añade una {{lang:obj_prefix_zone}} llamada **top_wall**: X = `-300`, Y = `-300`, ancho `1680`, alto `300`.",
+            "Añade una {{lang:obj_prefix_zone}} llamada **bottom_wall**: X = `-300`, Y = `1920`, ancho `1680`, alto `300`."
+          ]
+        ],
+        [
+          "tip",
+          "Los muros son gruesos a propósito: una pelota rápida no puede atravesarlos. Los tres primeros devuelven la pelota; **bottom_wall** sirve para perder una vida."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 3: la pala sigue el dedo"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Selecciona **paddle**, toca **⚙ Comportement de l'objet** y elige **Arrastrado con el dedo**: el jugador la coge y la mueve.",
+            "Abre el **{{lang:titre_blueprint}}** de la escena y añade el evento **[[NoeudEventChaqueImage]]**.",
+            "Añade **[[modifier_propriete]]**: objetivo **paddle**, **Propiedad** = `y`, **Valor** = `1700`.",
+            "Añade **[[garder_dans_ecran]]**: objetivo **paddle**, **Margen** = `0`.",
+            "Une los tres nodos en orden."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_propriete}}",
+              "paddle · y · 1700"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{garder_dans_ecran}}",
+              "paddle · 0"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**¿Por qué estos dos nodos?** « Arrastrado con el dedo » permite mover la pala en todas direcciones. En cada imagen la devolvemos a la misma altura y le impedimos salir de la pantalla: solo se mueve de izquierda a derecha."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 4: la pelota sale"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Añade el evento **[[NoeudEventStart]]** y luego dos nodos **[[modifier_variable]]** seguidos: variable **vx**, valor `6`, después variable **vy**, valor `-9`.",
+            "Añade el evento **[[NoeudEventChaqueImage]]** y luego **[[pousser]]**: objetivo **ball**.",
+            "En la ventana de ajustes de **[[pousser]]**, toca el botón **🔗** junto a **Añadir X**, elige **[[valeur_variable]]** y luego elige la variable **vx** en el nodo verde que aparece.",
+            "Haz lo mismo con **Añadir Y** y la variable **vy**.",
+            "Une cada evento con sus nodos y lanza el juego: la pelota sube hacia la derecha y luego sale de la pantalla."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{pousser}}",
+              "ball · X ← vx · Y ← vy"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Un nodo verde** da un valor a un ajuste, sin escribir nada. Aquí, **[[valeur_variable]]** le dice a **[[pousser]]**: « avanza **vx** hacia la derecha y **vy** hacia abajo, en cada imagen »."
+        ],
+        [
+          "tip",
+          "**Negativo = arriba.** En Yop2D, Y crece hacia la parte baja de la pantalla: **vy = -9** envía la pelota hacia arriba."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 5: rebotar en los muros"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Cada muro da un número nuevo a la pelota. Añade tres eventos **[[NoeudEventCollisionAB]]** (**Objeto A** = **ball**):"
+        ],
+        [
+          "ol",
+          [
+            "**Objeto B** = **left_wall** → **[[modifier_variable]]**: variable **vx**, valor `6` (la pelota vuelve hacia la derecha).",
+            "**Objeto B** = **right_wall** → **[[modifier_variable]]**: variable **vx**, valor `-6` (la pelota vuelve hacia la izquierda).",
+            "**Objeto B** = **top_wall** → **[[modifier_variable]]**: variable **vy**, valor `9` (la pelota vuelve hacia abajo)."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · left_wall"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · right_wall"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · -6"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · top_wall"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 6: rebotar en la pala"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Añade el evento **[[NoeudEventCollisionAB]]**: **Objeto A** = **ball**, **Objeto B** = **paddle**.",
+            "Añade **[[modifier_variable]]**: variable **vy**, valor `-9` (la pelota vuelve a subir).",
+            "Añade un segundo **[[modifier_variable]]**: variable **vx**. Toca **🔗** junto al valor, elige **[[valeur_hasard]]** y ajusta **De** = `-6` y **A** = `6`.",
+            "Une los nodos en orden."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · paddle"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · ← número al azar (-6 a 6)"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "En cada rebote en la pala, la pelota sale en una **dirección al azar**: el juego nunca es igual dos veces."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 7: romper los ladrillos"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Añade el evento **[[NoeudEventCollisionTag]]**: objetivo **ball**, {{lang:Tag}} **brick**.",
+            "Añade **[[detruire_objet]]** y elige **{{lang:noeud_objet_implique_long}}** como objetivo: es el ladrillo que la pelota acaba de tocar.",
+            "Añade **[[condition]]** `=vy < 0` (« la pelota sube »). Salida **{{lang:port_vrai}}** → **[[modifier_variable]]**: variable **vy**, valor `9`. Salida **{{lang:port_faux}}** → **[[modifier_variable]]**: variable **vy**, valor `-9`.",
+            "Desde la salida **[[lang:port_ensuite]]** de la condición, añade **[[ajouter_variable]]**: variable **score**, **{{lang:ajouter_variable.valeur}} = 10**.",
+            "Añade **[[ajouter_variable]]**: variable **bricks**, **{{lang:ajouter_variable.valeur}} = -1**.",
+            "Añade **[[modifier_texte]]**: objetivo **scoreText**, **{{lang:modifier_texte.valeur}}** = `=\"Puntos: \" + score`."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "ball · brick"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_faux}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_ensuite}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "score · + 10"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "bricks · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**¿Por qué `=vy < 0`?** Si **vy** es menor que 0, la pelota sube: tras romper el ladrillo, baja. Si no, está bajando y vuelve a subir."
+        ],
+        [
+          "tip",
+          "**El signo = al principio del texto** le dice a Yop2D que **calcule** el texto en lugar de escribirlo tal cual (consulta la guía [Recoger monedas y contar puntos](guide:pieces-score))."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 8: ganar"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Después de **[[modifier_texte]]** del paso 7, añade:"
+        ],
+        [
+          "ol",
+          [
+            "**[[condition]]** `=bricks <= 0`.",
+            "En la salida **{{lang:port_vrai}}**: **[[modifier_variable]]** **vx** = `0`, **[[modifier_variable]]** **vy** = `0` (la pelota se detiene), luego **[[toast]]** con el mensaje **¡Has ganado!**, luego **[[attendre]]** 2 segundos y después **[[recommencer_scene]]**."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=bricks <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "¡Has ganado!"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[recommencer_scene]] devuelve los objetos a su sitio y las variables **{{lang:var_scope_locale}}** a su valor inicial: la partida empieza de nuevo con 3 vidas, 0 puntos y todos los ladrillos."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 9: vidas y Game Over"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Cuando la pelota toca **bottom_wall** (bajo la pantalla), el jugador pierde una vida."
+        ],
+        [
+          "ol",
+          [
+            "Añade el evento **[[NoeudEventCollisionAB]]**: **Objeto A** = **ball**, **Objeto B** = **bottom_wall**.",
+            "**[[ajouter_variable]]**: variable **lives**, **{{lang:ajouter_variable.valeur}} = -1**.",
+            "**[[modifier_texte]]**: objetivo **livesText**, **{{lang:modifier_texte.valeur}}** = `=\"Vidas: \" + lives`.",
+            "**[[condition]]** `=lives <= 0`.",
+            "Salida **{{lang:port_vrai}}** (sin vidas): **[[deplacer]]** la **ball** a X = `518`, Y = `1000`, **[[modifier_variable]]** **vx** = `0`, **[[modifier_variable]]** **vy** = `0` (la pelota vuelve al centro y se detiene), luego **[[toast]]** « ¡Fin de la partida! », **[[attendre]]** 2 segundos, **[[recommencer_scene]]**.",
+            "Salida **{{lang:port_faux}}** (quedan vidas): **[[deplacer]]** la **ball** a X = `518`, Y = `1000`, luego **[[modifier_variable]]** **vy** = `-9`, luego **[[modifier_variable]]** **vx** = `6`."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · bottom_wall"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "lives · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "livesText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "ball · 518 · 1000"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "¡Fin de la partida!"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_faux}}"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "ball · 518 · 1000"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**¿Por qué detener la pelota antes de esperar?** Durante los 2 segundos de espera el juego sigue funcionando. Si la pelota se quedara bajo la pantalla, haría perder una vida en cada imagen y el contador de vidas bajaría muchísimo. Devuelta al centro y quieta, ya no molesta."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Para ir más lejos"
+    ],
+    [
+      "ul",
+      [
+        "**Sonidos:** añade **[[jouer_son]]** después de **[[detruire_objet]]** (un « clac » al romper un ladrillo) y en el evento de la pala.",
+        "**Colores distintos:** da la misma etiqueta **brick** a todos los ladrillos, sea cual sea su color: un solo montaje basta.",
+        "**Una pelota más rápida:** cambia los números `6`, `-6`, `9` y `-9` en todas partes (por ejemplo `8`, `-8`, `12` y `-12`).",
+        "**Chispas:** añade un **[[effet_particules]]** al romper un ladrillo (consulta la guía [Partículas y efectos](guide:particules-effets))."
+      ]
+    ],
+    [
+      "h2",
+      "Si no funciona"
+    ],
+    [
+      "ul",
+      [
+        "**La pelota no se mueve:** comprueba que **vx** y **vy** cambian al empezar y que **[[pousser]]** está unido a los nodos verdes **[[valeur_variable]]** (toca **Añadir X**: la línea debe mostrar el hilo verde).",
+        "**La pelota atraviesa un muro o los ladrillos:** comprueba los nombres (**ball**, **paddle**, **left_wall**…) y la etiqueta **brick**, escrita igual en todas partes (sin mayúsculas). Si la pelota va muy rápido, haz los ladrillos un poco más grandes o ralentízala.",
+        "**La pala sube o baja:** el nodo **[[modifier_propriete]]** debe estar unido a **{{NoeudEventChaqueImage}}**, con **Propiedad** = `y`.",
+        "**Ganas demasiado pronto o nunca:** la variable **bricks** debe valer exactamente el número de ladrillos del juego.",
+        "**Para comparar**, abre el proyecto de prueba (sus nodos están ordenados por sección, con marcos y notas que explican cada parte)."
+      ]
+    ]
+  ]
+}

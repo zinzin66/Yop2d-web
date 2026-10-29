@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (166) | Reference</title>
-<meta name="description" content="Complete list of the 166 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (230) | Reference</title>
+<meta name="description" content="Complete list of the 230 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 166 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 230 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
-<nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-transitions">Transitions</a><a href="#c11-animations">Animations</a><a href="#c12-audio">Audio</a><a href="#c13-story-and-dialogues">Story and dialogues</a><a href="#c14-values-green-wires">Values (green wires)</a><a href="#c15-screen-filters">Screen filters</a></nav>
+<nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-values-green-wires">Values (green wires)</a><a href="#c11-transitions">Transitions</a><a href="#c12-animations">Animations</a><a href="#c13-audio">Audio</a><a href="#c14-story-and-dialogues">Story and dialogues</a><a href="#c15-screen-filters">Screen filters</a><a href="#c16-physics">Physics</a></nav>
 <h2 id="c1-events">Events</h2>
 <div class="method">
 <div class="fiche"><h3>On Start</h3>
@@ -75,6 +75,9 @@
 <div class="fiche"><h3>Back button pressed</h3>
 <p>Runs when the player presses the Back button of their phone (arrow or swipe gesture). Great for opening a pause menu or going back to the previous screen. Without this node, the Back button does nothing during the game.</p>
 <p class="exemple"><b>Example:</b> Back → “Pause the game”, then show a “Resume / Quit” menu.</p>
+</div>
+<div class="fiche"><h3>On every new scene</h3>
+<p>Runs every time a new scene opens. Made for the "Global logic" (which runs in every scene): for example, placing the chosen army on each map. In an ordinary scene, "On start" is enough.</p>
 </div>
 <div class="fiche"><h3>Drag Start</h3>
 <div class="schema"><b>Input:</b> Object</div>
@@ -202,6 +205,11 @@
 <p>Keeps the camera inside the level edges: it never shows the empty space beyond. All 0 = no limits.</p>
 <p class="exemple"><b>Example:</b> a level 6480 pixels wide: minimum X 0, maximum X 6480, minimum Y 0, maximum Y 1080, with “Follow with camera” on the player.</p>
 </div>
+<div class="fiche"><h3>Scroll the camera with a finger</h3>
+<div class="schema"><b>Inputs:</b> On (yes / no), Scroll sideways (yes / no), Scroll up and down (yes / no)</div>
+<p>Turns finger scrolling on (or off): dragging in the scene moves the camera. A simple tap is still a tap (a tower, a button). HUD buttons never scroll. The camera stays inside the limits set with “Camera limits”.</p>
+<p class="exemple"><b>Example:</b> On start: Camera limits (0, 3840, 0, 1080), then Scroll the camera with a finger: the player drags a map two screens wide.</p>
+</div>
 <div class="fiche"><h3>Camera smoothing</h3>
 <div class="schema"><b>Input:</b> Follow speed (0.01 to 1)</div>
 <p>Sets how fast the camera catches up with the followed object: 0.01 = very soft, 1 = stuck to the object.</p>
@@ -236,6 +244,16 @@
 <div class="schema"><b>Inputs:</b> Zoom (%, 100 = normal), Towards, Duration (seconds)</div>
 <p>Smoothly enlarges the whole game screen (the scene, or a story's background and characters) towards the center, the face, a side, the top or the bottom. 100 = back to normal; the dialogue box and the HUD don't move.</p>
 <p class="exemple"><b>Example:</b> zoom 140 towards the face for 2 seconds when Hana is scared, then zoom 100.</p>
+</div>
+<div class="fiche"><h3>Darkness and light mood</h3>
+<div class="schema"><b>Inputs:</b> Color of the night, Darkness (%, 0 = full day, 100 = almost pitch black), Changes over (seconds: 30 = a real sunset)</div>
+<p>Darkens the whole game (under the buttons and score) with the color you choose. Darkness 0 = full daylight, 100 = pitch black, except around light sources. The level and the color change smoothly: over 30 seconds you go from day to an orange dusk and then a blue night, like a sunset.</p>
+<p class="exemple"><b>Example:</b> a sunset: “Darkness and light mood” orange, darkness 40, over 6 seconds; “Wait” 6 seconds; then “Darkness and light mood” night blue, darkness 90, over 6 seconds.</p>
+</div>
+<div class="fiche"><h3>Day and night cycle</h3>
+<div class="schema"><b>Inputs:</b> Length of a full day (seconds, 0 = stop), We start at…, Repeat forever (yes) or one day only (no)</div>
+<p>Takes the whole game from day to an orange evening, a blue night, dawn, then day again, all by itself. You choose the length of a full day (30 to 120 seconds for a lively game), the starting moment and whether the cycle repeats forever. A paused game freezes the cycle. Length 0 = stop the cycle (the sky stays as it is). A manual setting with “Darkness and light mood” takes over. Your lights (“Light source (torch, lantern…)”) stay on: you see them better at night.</p>
+<p class="exemple"><b>Example:</b> a living world: on start, “Day and night cycle” with a length of 90 seconds, starting “Full day”, looping.</p>
 </div>
 <div class="fiche"><h3>Camera shake</h3>
 <div class="schema"><b>Inputs:</b> Strength, Duration (milliseconds, 1000 = 1 s)</div>
@@ -444,7 +462,7 @@
 <p class="exemple"><b>Example:</b> drop a rock at a random position: X = random(0, 800).</p>
 </div>
 <div class="fiche"><h3>Shoot an object</h3>
-<div class="schema"><b>Inputs:</b> Object A, Object B, Model name, Direction, Speed, Destroy off screen (yes / no)</div>
+<div class="schema"><b>Inputs:</b> Object A, Object B, Model name, Direction, Speed, Destroy off screen (yes / no), Shot lifetime (seconds, 0 = unlimited)</div>
 <p>Creates a projectile (the object named in “Model name”) at object A, and launches it at the chosen speed: 0°, 90°, 180°, 270°, towards object B (“Toward target”) or along A's angle.</p>
 <p class="exemple"><b>Example:</b> a ship firing lasers upwards (270).</p>
 </div>
@@ -457,6 +475,11 @@
 <div class="schema"><b>Inputs:</b> Object, Delay (seconds)</div>
 <p>Removes the chosen object after a delay (in seconds). Handy to make an explosion disappear once its animation is over.</p>
 <p class="exemple"><b>Example:</b> after “Generate clone (Spawner)” and “Play animation”, the explosion image is destroyed 0.4 seconds later.</p>
+</div>
+<div class="fiche"><h3>Team colour (replaces the pink in the drawing)</h3>
+<div class="schema"><b>Inputs:</b> Object, Team colour, Colour to replace in the drawing (pink by default), Tolerance (1 to 100): higher also replaces similar colours</div>
+<p>One drawing for all teams: paint the parts to colour (cloak, flag, plume) with a marker colour (bright pink #FF00FF by default), then this node replaces that pink with the team colour for the object. The drawing's shadows and highlights are kept (a dark pink becomes a dark blue). Tolerance says how far a colour may stray from the marker and still be replaced. Nothing is changed in the images: it all happens at display time, so do it again at the start of each game.</p>
+<p class="exemple"><b>Example:</b> two armies with the same images: player in blue, enemy in red.</p>
 </div>
 <div class="fiche"><h3>Set Progress</h3>
 <div class="schema"><b>Inputs:</b> Object, New progress</div>
@@ -477,6 +500,21 @@
 <div class="schema"><b>Inputs:</b> Object, Lightning color, Duration (seconds, 0 = endless), Intensity (0 = stop, 1 to 3)</div>
 <p>Lightning crackles around the object: it flashes in the lightning color, shakes and throws sparks. Duration 0 = endless (electric fence); intensity 0 = stop.</p>
 <p class="exemple"><b>Example:</b> the wizard touches a trap: “Electrocution” on the wizard (1 second), “Wait” 1 second, then “Restart the scene”.</p>
+</div>
+<div class="fiche"><h3>Light source (torch, lantern…)</h3>
+<div class="schema"><b>Inputs:</b> Object, Light color, Radius (pixels: distance from the light's center), Lighting (%, 100 = normal, 200 = very strong), Colored glow (%, 0 = none, 200 = very strong), Flicker, Switching on, Horizontal shift (pixels), Vertical shift (pixels, negative = up)</div>
+<p>Attaches a light to the object: it follows the object when it moves (a character's torch, a lantern, a fire…), even if the object is the child of another. Settings: color, radius in pixels (distance from the center), lighting (100 = normal, up to 300: stronger and farther), colored glow (0 = none), flicker (none, candle, torch, flickers) and shift. One light per object, 8 at most at once. It cuts through the darkness set by “Darkness and light mood”; without darkness it only adds its glow. “Switching on” setting: “Only when it is dark” turns the light on by itself at nightfall (ideal with “Day and night cycle”).</p>
+<p class="exemple"><b>Example:</b> a character's torch: placed on a “lantern” object that is a child of the hero, radius 360, flicker “torch”.</p>
+</div>
+<div class="fiche"><h3>Turn off the object's light</h3>
+<div class="schema"><b>Input:</b> Object</div>
+<p>Turns off the light attached to the object. To turn it back on, use “Light source (torch, lantern…)” again.</p>
+<p class="exemple"><b>Example:</b> a “Lantern” button turns off the hero's light.</p>
+</div>
+<div class="fiche"><h3>Shadow under the object</h3>
+<div class="schema"><b>Inputs:</b> Object, Shadow, Shadow strength (%), Shadow width (% of the object), Vertical shift (pixels, negative = up)</div>
+<p>Puts a soft shadow under the object (or removes it with “No”). It follows the object when it moves; you can set its strength and width. It instantly gives volume to characters standing on a backdrop. You can also tick the “Shadow under the object” box in the Inspector, with no node at all.</p>
+<p class="exemple"><b>Example:</b> a shadow under the hero: strength 50, width 70.</p>
 </div>
 <div class="fiche"><h3>Object trail</h3>
 <div class="schema"><b>Inputs:</b> Object, Preset, Color (empty = preset's), Size (1 = normal)</div>
@@ -625,6 +663,16 @@
 <p>Stops the movement running on the object. It stays where it is.</p>
 <p class="exemple"><b>Example:</b> stop the platform when the player presses a button.</p>
 </div>
+<div class="fiche"><h3>Follow the path</h3>
+<div class="schema"><b>Inputs:</b> Object, Path name, Speed (pixels per second), Turn to face the way it goes (yes / no), Random side offset (pixels, ±: each one walks in its own lane), Avoid the others: step aside to avoid overlapping and overtake slower ones (yes / no), Usable width to step aside (pixels on each side of the road centre), Image angle (0 = faces right, 90 = faces down) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
+<p>Makes the object follow a path drawn with the “Path” tool in Assets: it is placed on the starting point, then moves from point to point at the chosen speed. At a crossroads it picks its exit as you set it (random, take turns, by a variable). The “Reached the end” exit fires when it reaches a point with no exit. With “Random side offset”, each object walks in its own lane (random shift): several enemies advance side by side instead of overlapping. With “Avoid the others”, an object that catches up with a slower one steps aside, overtakes it and returns to its lane; if the road is too narrow, it follows instead.</p>
+<p class="exemple"><b>Example:</b> An enemy appears: Follow the path “Enemy_path”, speed 150. “Reached the end” exit → Deal damage to the base, then Destroy the object.</p>
+</div>
+<div class="fiche"><h3>Stop following the path</h3>
+<div class="schema"><b>Input:</b> Object</div>
+<p>Stops the object where it is: it no longer follows its path (the “Reached the end” exit will not fire).</p>
+<p class="exemple"><b>Example:</b> An enemy is frozen by a trap: Stop the path, then later Follow the path again so it moves on.</p>
+</div>
 <div class="fiche"><h3>Stop the object</h3>
 <div class="schema"><b>Input:</b> Object</div>
 <p>Stops the object dead: no more speed, push, jump or automatic movement.</p>
@@ -641,12 +689,12 @@
 <p class="exemple"><b>Example:</b> a bullet or a moving car.</p>
 </div>
 <div class="fiche"><h3>Go to an object (path)</h3>
-<div class="schema"><b>Inputs:</b> Object A, Object B, Speed, Diagonals (yes / no) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
-<p>Object A goes to object B, finding the shortest path by itself, square by square, without going through walls ("Solid" tiles of a tile layer, fixed physical objects). The path is updated when B moves. “Arrived” runs when A touches B.</p>
+<div class="schema"><b>Inputs:</b> Object A, Object B, Speed, Diagonals (yes / no), Stop, These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
+<p>Object A goes to object B, finding the shortest path by itself, square by square, without going through walls ("Solid" tiles of a tile layer, fixed physical objects). The path is updated when B moves. “Arrived” runs when A touches B. The "Stop" setting lets the object stop on a neighbouring cell, well centered (grid games); "These tags block the path" makes it go around other units.</p>
 <p class="exemple"><b>Example:</b> a ghost chasing the player through a maze.</p>
 </div>
 <div class="fiche"><h3>Go to a point (path)</h3>
-<div class="schema"><b>Inputs:</b> Object, X position, Y position, Speed, Diagonals (yes / no) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
+<div class="schema"><b>Inputs:</b> Object, X position, Y position, Speed, Diagonals (yes / no), These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
 <p>Object A goes to point X, Y around the walls, by the shortest path (square by square). With =doigt.x and =doigt.y, it goes where the screen is touched. “Arrived” runs on arrival. If there is no path, it stays where it is.</p>
 <p class="exemple"><b>Example:</b> tap a square to send the hero there, in a strategy game or a dungeon.</p>
 </div>
@@ -654,6 +702,26 @@
 <div class="schema"><b>Input:</b> Object</div>
 <p>The object stops following its path (“Go to an object (path)” or “Go to a point (path)”) and stays where it is.</p>
 <p class="exemple"><b>Example:</b> the fly stops when the game is won.</p>
+</div>
+<div class="fiche"><h3>Place on a cell (column, row)</h3>
+<div class="schema"><b>Inputs:</b> Object, Column (0 = the first), Row (0 = the first)</div>
+<p>Puts object A exactly in the middle of the chosen cell (column and row, counted from 0 at the top left). The grid is the one of the scene's tile map. With the 🔗 button, plug in “Touched column” and “Touched row” to send it to the cell the finger touches.</p>
+<p class="exemple"><b>Example:</b> move a piece to the touched cell in a board game.</p>
+</div>
+<div class="fiche"><h3>Center on its cell</h3>
+<div class="schema"><b>Input:</b> Object</div>
+<p>Object A stays in its cell but goes back exactly to the middle. Handy when a move stopped between two cells.</p>
+<p class="exemple"><b>Example:</b> re-center a hero after its move.</p>
+</div>
+<div class="fiche"><h3>Go to the cell (path)</h3>
+<div class="schema"><b>Inputs:</b> Object, Column, Row, Speed, Diagonals (yes / no), These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
+<p>The object walks to the CENTER of the cell (column, row), going around walls, blocking terrains and the units with the given tags. Default: the cell touched by the finger. "Arrived" output once on the cell.</p>
+<p class="exemple"><b>Example:</b> send a hero to a touched blue cell.</p>
+</div>
+<div class="fiche"><h3>Move the piece one cell</h3>
+<div class="schema"><b>Inputs:</b> Object, Direction, Speed, These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Arrived / Blocked (wall, terrain, unit, edge)</div>
+<p>Moves the piece one cell (up, down, left, right), well centered. If the cell is a wall, a blocking terrain, a unit (tags) or the edge of the map: "Blocked" output. Otherwise "Arrived" at the end of the step.</p>
+<p class="exemple"><b>Example:</b> move a board-game piece with ◀ ▶ ▲ ▼ buttons.</p>
 </div>
 <div class="fiche"><h3>Chase an object</h3>
 <div class="schema"><b>Inputs:</b> Object A, Object B, Speed</div>
@@ -698,6 +766,140 @@
 </div>
 <h2 id="c9-grids-and-puzzles">Grids and puzzles</h2>
 <div class="method">
+<div class="fiche"><h3>Go to the next turn</h3>
+<div class="schema"><b>Input:</b> Teams, in order (tags separated by a comma)</div>
+<p>Passes the game to the next team. Write the teams in order using their tags (e.g. player,enemy). The first call (for example after "At start") begins with the first team; when every team has played, the turn number goes up. At the start of each turn the local event "tour_&lt;team&gt;" runs if it exists (e.g. "tour_enemy").</p>
+<p class="exemple"><b>Example:</b> put "Go to the next turn" on the "End turn" button.</p>
+</div>
+<div class="fiche"><h3>If it is the turn of…</h3>
+<div class="schema"><b>Input:</b> Team (tag) &nbsp;→&nbsp; <b>Outputs:</b> True / False</div>
+<p>True if it is the turn of the team written (its tag), False otherwise.</p>
+<p class="exemple"><b>Example:</b> let the player touch their units only during their own turn.</p>
+</div>
+<div class="fiche"><h3>Mark as having played</h3>
+<div class="schema"><b>Input:</b> Object</div>
+<p>Remembers that the unit (object A) has played this turn. Everything is cleared when the next turn starts.</p>
+<p class="exemple"><b>Example:</b> stop a hero from moving twice in the same turn.</p>
+</div>
+<div class="fiche"><h3>If the unit has already played</h3>
+<div class="schema"><b>Input:</b> Object &nbsp;→&nbsp; <b>Outputs:</b> True / False</div>
+<p>True if the unit (object A) has already played this turn, False otherwise.</p>
+<p class="exemple"><b>Example:</b> refuse to move a hero that has already played.</p>
+</div>
+<div class="fiche"><h3>Show reachable cells</h3>
+<div class="schema"><b>Inputs:</b> Object, Zone type, Number of steps (or range), Color of the cells, Cell visibility (0 = invisible, 100 = solid), Frame around each cell, Write the step count on each cell, Walls block (movement), These tags block the way (separated by commas), Terrain costing more steps (tag=cost, e.g. forest=2, water=3), Zone name (optional: to show several), Range shape (attack and jump), Minimum range (0 = none; 2 = not the first cells), My positions (column,row; e.g. 2,1 ; -2,1 ; 0,3), Remove the cell the object stands on</div>
+<p>Colors the cells the chosen object can move to (or attack). Walls block, and you can add tags that block (other units) and terrains that cost more steps (forest=2). Color, visibility, frame and numbers are adjustable. "Zone name" lets you show several at once (movement in blue, attack in red).</p>
+<p class="exemple"><b>Example:</b> show a hero's movement zone when it is touched.</p>
+</div>
+<div class="fiche"><h3>Hide the cells</h3>
+<div class="schema"><b>Input:</b> Zone name (optional)</div>
+<p>Clears the colored cells (all of them, or one named zone).</p>
+<p class="exemple"><b>Example:</b> hide the zone once the hero has arrived.</p>
+</div>
+<div class="fiche"><h3>If the cell is reachable</h3>
+<div class="schema"><b>Inputs:</b> Column, Row, Zone name (optional) &nbsp;→&nbsp; <b>Outputs:</b> True / False</div>
+<p>True if the cell (column, row) is one of the shown cells. By default: the cell the finger touches. False otherwise.</p>
+<p class="exemple"><b>Example:</b> refuse a move that is too far with "too far!".</p>
+</div>
+<div class="fiche"><h3>Give a unit sheet</h3>
+<div class="schema"><b>Inputs:</b> Object, Health points, Attack, Defense, Movement (steps), Attack range (cells), Other statistics (e.g. munitions = 3, armure = 2)</div>
+<p>Gives the object its sheet: health, attack, defense, movement and range (object variables "vie", "attaque", "defense", "mouvement", "portee"). They can be read anywhere with a formula, e.g. =hero.mouvement for the number of steps of the reachable cells. Put this node "At start" of each unit, or in a reusable unit prefab.</p>
+<p class="exemple"><b>Example:</b> create an archer: health 8, attack 4, defense 0, movement 4, range 3.</p>
+</div>
+<div class="fiche"><h3>Attack</h3>
+<div class="schema"><b>Inputs:</b> Object A, Object B, Attack power (%), Count the defense of the target's terrain, Always at least 1 damage, Destroy the target when its health runs out, Free damage formula (e.g. attacker.attaque * 2 - target.armure); empty = normal calculation, Bonus by target tags (e.g. cavalry = 150, light = 120: % of damage), Bonus by attacker tags (e.g. spear = 130), Statistic used up at each attack (e.g. ammo: no attack at 0), Piercing: % of defense ignored (0 = none), Counterattack: % of the target's attack returned if it survives and the attacker is in its range (0 = none), Height bonus: % damage per level of difference (e.g. 15; higher = more, lower = less), Guard: tag of adjacent allies that strengthen the target's defense (e.g. spear), Guard: defense gained per adjacent ally &nbsp;→&nbsp; <b>Outputs:</b> Still alive / Out of health / Attacker destroyed (counterattack)</div>
+<p>Object A attacks object B: damage = A's attack × power × bonuses − B's defense − B's terrain defense. Exits “Still alive” and “Out of health” (the target is destroyed if the box is ticked), and “Attacker destroyed” if a counterattack kills it. Both objects need a unit sheet. The “regle: spear &gt; cavalry = 150” rules of donnees.txt apply by themselves. In advanced: bonuses by tags (“cavalry = 150”), PIERCING (percentage of defense ignored, for a spear or a crossbow), COUNTERATTACK (percentage of the target's attack returned if it survives and the attacker is in its range), HEIGHT BONUS (percentage of damage per level of difference: the one higher up hits harder), GUARD (each adjacent ally with the chosen tag adds defense to the target: a shield wall), a free formula, and a statistic used up at each attack (ammo).</p>
+<p class="exemple"><b>Example:</b> the spear (piercing 40) against heavy cavalry; the archer on the hill (height +15%).</p>
+</div>
+<div class="fiche"><h3>Apply data (unit, weapon)</h3>
+<div class="schema"><b>Inputs:</b> Object, Name in donnees.txt (e.g. Knight) &nbsp;→&nbsp; <b>Outputs:</b> Found / Not found</div>
+<p>Gives object A every value of a unit or weapon written in the donnees.txt file (Assets → Dialogues, or assets_ludexa/Textes/donnees.txt): health, attack, defense, movement, range, price… and its tags. One line is enough: “unite Knight: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=cavalry heavy”. You rebalance the game by editing the file, without touching the nodes. Exits “Found” / “Not found”. The file can also hold “arme Sword: attaque=5”, “etat Poison: duree=3, degats=2”, “regle: spear &gt; cavalry = 150” (an attacker tagged spear deals 150% to a target tagged cavalry, applied automatically by “Attack”) and tile heights.</p>
+<p class="exemple"><b>Example:</b> at the start of the game, for each hero: Apply data “Knight”.</p>
+</div>
+<div class="fiche"><h3>Set tile height</h3>
+<div class="schema"><b>Inputs:</b> Start column, Start row, Number of columns, Number of rows, Height (0 = flat)</div>
+<p>Gives a height (a level: 0 = flat, 1, 2, 3…) to a rectangle of grid tiles: start column and row, number of columns and rows. Heights drive the height bonus of “Attack” and block sight in the fog of war (a hill hides what is behind it). You can also write them in donnees.txt (“hauteur 3,4 = 2” or a “hauteurs:” block with one digit per tile). Read them with the formula hauteur(column, row) or with the green nodes “Height of the touched tile” / “Height of the tile under an object”.</p>
+<p class="exemple"><b>Example:</b> a 3 x 2 tile hill at height 2, so an archer standing on it hits harder.</p>
+</div>
+<div class="fiche"><h3>Give a state (poison, slow…)</h3>
+<div class="schema"><b>Inputs:</b> Object, State name (e.g. Poison; set in donnees.txt), Duration in turns (empty = from donnees.txt), Damage each turn (empty = donnees.txt), Statistic changed (e.g. mouvement; empty = donnees.txt), Change to this statistic (e.g. -2)</div>
+<p>Gives the unit a state for a number of TURNS: poison (damage every turn), slow (movement drops), blessed (attack rises)… Everything can be written in donnees.txt (“etat Poison: duree=3, degats=2”, “etat Slow: duree=2, stat=mouvement, delta=-2”): then only the state's name is needed. Damage lands at the start of each turn of the unit's team, then the state loses a turn; at the end, the changed statistic goes back to normal. Giving the same state again extends it instead of doubling it. The unit keeps an “etat_&lt;name&gt;” statistic (turns left), readable in a formula. Needs “Go to next turn”.</p>
+<p class="exemple"><b>Example:</b> a poisoned arrow: Attack → still alive → give the “Poison” state to the target.</p>
+</div>
+<div class="fiche"><h3>Remove a state</h3>
+<div class="schema"><b>Inputs:</b> Object, State name (empty = all)</div>
+<p>Removes a state from the unit (by name), or every state if the name is empty. The statistic changed by the state goes straight back to its previous value.</p>
+<p class="exemple"><b>Example:</b> a priest who cures an ally's poison.</p>
+</div>
+<div class="fiche"><h3>If the unit has the state…</h3>
+<div class="schema"><b>Inputs:</b> Object, State name (empty = all) &nbsp;→&nbsp; <b>Outputs:</b> True / False</div>
+<p>Tests whether the unit has a state (or any state if the name is empty). Exits “True” / “False”.</p>
+<p class="exemple"><b>Example:</b> cannot move if the unit is “Frozen”.</p>
+</div>
+<div class="fiche"><h3>Area effect around an object</h3>
+<div class="schema"><b>Inputs:</b> Object, Effect, Strength (damage or heal), Radius in tiles, Tags affected (empty = everyone), State name (if the effect gives a state), Falloff per tile of distance (% of strength), Shape, Also hits the object at the centre</div>
+<p>Hits every object around object A (at the centre) at once: damage, heal or a state. Settings: the strength, the radius in tiles, the tags affected (empty = everyone), the shape (diamond or square with diagonals), the falloff per tile of distance (explosion: the further away, the weaker), and whether the centre object is hit too. Damage ignores defense. A fireball, a group heal, a scary shout. To count victims in a condition use the formulas compter("tag") and voisins(object, "tag", tiles).</p>
+<p class="exemple"><b>Example:</b> a fireball: radius 2, strength 6, falloff 30% per tile, on “enemy” units.</p>
+</div>
+<div class="fiche"><h3>Gain experience</h3>
+<div class="schema"><b>Inputs:</b> Object, Experience gained, Experience to reach level 2 (x level afterwards), Gains at each level (e.g. vie=2, attaque=1) &nbsp;→&nbsp; <b>Outputs:</b> Level up / Nothing to cancel</div>
+<p>Gives the unit experience. When it reaches the threshold (threshold × current level) the unit moves up a level, spare experience is kept, and the gains are added (“vie=2, attaque=1”; maximum health rises along with health). The unit keeps the “xp” and “niveau” statistics (1 at the start). Exits “Level up” / “No level up”: play a fanfare or a message when it levels.</p>
+<p class="exemple"><b>Example:</b> a hero who gains 30 experience for every enemy defeated.</p>
+</div>
+<div class="fiche"><h3>Remember the position</h3>
+<div class="schema"><b>Input:</b> Object</div>
+<p>Remembers the unit's current position, before a move. With “Cancel the move”, the player can go back (as in Advance Wars when you press “Cancel” before acting).</p>
+<p class="exemple"><b>Example:</b> just before “Go to tile”: Remember the position.</p>
+</div>
+<div class="fiche"><h3>Cancel the move</h3>
+<div class="schema"><b>Input:</b> Object &nbsp;→&nbsp; <b>Outputs:</b> Cancelled / Nothing to cancel</div>
+<p>Puts the unit back at the position remembered by “Remember the position”, clears its “has already played” mark and sets its “bouge” and “agi” statistics back to 0. Exits “Cancelled” / “Nothing to cancel”.</p>
+<p class="exemple"><b>Example:</b> a “Cancel” button in the unit's action menu.</p>
+</div>
+<div class="fiche"><h3>Play like a computer (AI)</h3>
+<div class="schema"><b>Inputs:</b> Object, Enemy tags (e.g. player), Play style, Movement speed, Other tags that block the path (e.g. its own allies) &nbsp;→&nbsp; <b>Outputs:</b> Arrived / No target</div>
+<p>Makes a unit play by itself, like a computer. It looks at where it can go (movement, walls, terrain, blocking units), finds the enemies (their tags) and picks the best tile to attack from according to its STYLE: aggressive (most damage, finishing a target first), cautious (avoids the counterattack) or defensive (likes high-defense tiles). Nobody in range: it moves toward the nearest enemy. Once it arrives, the “Arrived” exit fires: the involved object is the chosen target and the unit's “cible_ia” statistic is 1 (can attack) or 0 (just moved closer). It uses the unit's movement, range (and “portee_min”) and unit sheet. Exit “No enemy” if there are none left.</p>
+<p class="exemple"><b>Example:</b> monsters' turn: for each monster, Play like a computer (enemies = player) → on arrival, if cible_ia = 1, Attack.</p>
+</div>
+<div class="fiche"><h3>Update the fog of war</h3>
+<div class="schema"><b>Inputs:</b> Tags of the team that sees (e.g. player), Tags of enemies to hide when out of sight (e.g. enemy), Default vision in tiles (otherwise the unit's "vision" statistic), Darkness of unknown tiles (0 to 100), Remember tiles already seen</div>
+<p>Works out what the team can see and covers the rest of the map with a dark veil: the team's units (tags) see around them up to their “vision” statistic in tiles (otherwise the node's default vision). A terrain wall, a terrain with the property “bloque_vue = oui” (dense forest) or a higher tile stops the view. Tiles already seen stay half dark (memory, optional). Units with enemy tags out of sight are hidden. Run it again after every move or at the start of a turn. The formula vue(column, row) is 1 when the tile is seen. “Remove the fog of war” makes everything visible.</p>
+<p class="exemple"><b>Example:</b> at the start of each player turn: Update the fog (team player, enemies enemy, vision 3).</p>
+</div>
+<div class="fiche"><h3>Remove the fog of war</h3>
+<p>Removes the fog of war: the whole map is visible again and hidden units reappear.</p>
+<p class="exemple"><b>Example:</b> at the end of the game, to show the whole map.</p>
+</div>
+<div class="fiche"><h3>Give health to the object</h3>
+<div class="schema"><b>Inputs:</b> Object, Health points</div>
+<p>Gives health points to the chosen object (object variable "vie", and "vie_max" for the maximum). Read it anywhere with a formula, e.g. =monster.vie, to write it in a text or a bar.</p>
+<p class="exemple"><b>Example:</b> give a monster 10 health points at the start.</p>
+</div>
+<div class="fiche"><h3>Deal damage</h3>
+<div class="schema"><b>Inputs:</b> Object, Damage, Destroy the object when its health runs out, Subtract the defense of the terrain it stands on &nbsp;→&nbsp; <b>Outputs:</b> Still alive / Out of health</div>
+<p>Removes health points from the object (never below 0). Two outputs: "Still alive" and "Out of health" (the object is destroyed if the box is ticked; "the involved object" stays the one hit).</p>
+<p class="exemple"><b>Example:</b> a hero hits a monster: 3 damage, then a small message depending on the result.</p>
+</div>
+<div class="fiche"><h3>Heal</h3>
+<div class="schema"><b>Inputs:</b> Object, Health restored</div>
+<p>Gives health points back to the object, without going over its maximum.</p>
+<p class="exemple"><b>Example:</b> a potion that restores 5 health points to the hero.</p>
+</div>
+<div class="fiche"><h3>Change a statistic</h3>
+<div class="schema"><b>Inputs:</b> Object, Statistic name (e.g. ammo), What to do, By how much</div>
+<p>Changes a statistic you invented for an object (ammo, armor, mana, fuel…): add to it, subtract from it or set it to a value. If it does not exist yet, it is created at 0. You can then read it anywhere: =archer.ammo.</p>
+<p class="exemple"><b>Example:</b> After a shot: Change a statistic → object “archer”, statistic “ammo”, Subtract 1.</p>
+</div>
+<div class="fiche"><h3>If the statistic…</h3>
+<div class="schema"><b>Inputs:</b> Object, Statistic name (e.g. ammo), Comparison, Value &nbsp;→&nbsp; <b>Outputs:</b> True / False</div>
+<p>Compares an object's statistic with a value and follows the “true” or “false” exit: for example “ammo is greater than 0”. A statistic that does not exist counts as 0.</p>
+<p class="exemple"><b>Example:</b> Before shooting: If the archer's “ammo” statistic is greater than 0 → shoot; otherwise → show “Out of arrows”.</p>
+</div>
+<div class="fiche"><h3>Choose a target</h3>
+<div class="schema"><b>Inputs:</b> Object, Tags of possible targets (comma-separated), Which target to pick?, Range in cells (0 = unlimited; e.g. =monster.portee), Minimum range (0 = none), Range shape, My positions (column,row; e.g. 2,1 ; -2,1), Statistic (for the “statistic” rules, e.g. defense), Range in pixels, as a circle (0 = use the range in cells) &nbsp;→&nbsp; <b>Outputs:</b> Target found / No target</div>
+<p>Object A looks among the objects that carry one of the requested tags for those WITHIN ITS RANGE (same shapes as “Show reachable cells”), then picks one: the closest, the one with the least or the most health, or the lowest / highest value of a statistic. “Target found” output: it becomes “the involved object” (for Attack, Go to…). “No target” output: nobody in range. Perfect for the intelligence of a monster or a turret.</p>
+<p class="exemple"><b>Example:</b> a monster: “Choose a target” (tag “hero”, the closest, range =monster.range), then “Attack” on “Target found”.</p>
+</div>
 <div class="fiche"><h3>Fill the grid</h3>
 <div class="schema"><b>Inputs:</b> Object, Columns, Rows, Model objects (names separated by commas)</div>
 <p>Splits object A (the board) into columns and rows and puts in each cell a copy of a model object picked at random (at least 3 models, names separated by commas). There is never a match at the start, and the pieces drop in from the top. Use it before “Play on the grid (match 3)”.</p>
@@ -719,7 +921,95 @@
 <p class="exemple"><b>Example:</b> shuffle the cards of a memory game at the start, or the cups of a shell game.</p>
 </div>
 </div>
-<h2 id="c10-transitions">Transitions</h2>
+<h2 id="c10-values-green-wires">Values (green wires)</h2>
+<div class="method">
+<div class="fiche"><h3>Height of the touched tile</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node: the height of the tile the finger touches (0 if nothing is defined). Plug it with 🔗 into a setting, for example in an “If…”.</p>
+<p class="exemple"><b>Example:</b> show “Hill!” when a tile of height 2 is touched.</p>
+</div>
+<div class="fiche"><h3>Height of the tile under an object</h3>
+<div class="schema"><b>Input:</b> Object &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node: the height of the tile under an object. Useful, for example, to compare the attacker's height with the target's.</p>
+<p class="exemple"><b>Example:</b> only allow a ranged attack from a tile higher than the target.</p>
+</div>
+<div class="fiche"><h3>Random number</h3>
+<div class="schema"><b>Inputs:</b> From, To &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node (value): gives a random number between "From" and "To", drawn again each time it is used. Connect it to a setting with the 🔗 button of the settings window.</p>
+<p class="exemple"><b>Example:</b> make a coin appear at a random X between 0 and 800.</p>
+</div>
+<div class="fiche"><h3>Object value</h3>
+<div class="schema"><b>Inputs:</b> Object, What &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node (value): gives a value of the chosen object during the game: its x or y position, width, rotation, opacity…</p>
+<p class="exemple"><b>Example:</b> put a coin at the same height as the player (Y ← object value: player, y).</p>
+</div>
+<div class="fiche"><h3>Variable value</h3>
+<div class="schema"><b>Input:</b> Variable &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node (value): gives the current value of a variable (score, lives…) during the game.</p>
+<p class="exemple"><b>Example:</b> show the score in a text (Text ← variable value: score).</p>
+</div>
+<div class="fiche"><h3>Calculation</h3>
+<div class="schema"><b>Inputs:</b> A, Operation, B &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node (value): calculates A + B, A − B, A × B or A ÷ B. A and B can be numbers, or receive a green wire themselves (chained calculations).</p>
+<p class="exemple"><b>Example:</b> give twice as many points (Value ← calculation: score × 2).</p>
+</div>
+<div class="fiche"><h3>Touched column</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node (value): gives the column of the cell the finger touches (0 = the first on the left). Plug it into a setting with the 🔗 button.</p>
+<p class="exemple"><b>Example:</b> know which column was touched to place a tower.</p>
+</div>
+<div class="fiche"><h3>Touched row</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node (value): gives the row of the cell the finger touches (0 = the first at the top). Plug it into a setting with the 🔗 button.</p>
+<p class="exemple"><b>Example:</b> know which row was touched to place a building.</p>
+</div>
+<div class="fiche"><h3>Object's column</h3>
+<div class="schema"><b>Input:</b> Object &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node (value): gives the column of the cell where the chosen object is (0 = the first on the left).</p>
+<p class="exemple"><b>Example:</b> know in which column the hero is.</p>
+</div>
+<div class="fiche"><h3>Object's row</h3>
+<div class="schema"><b>Input:</b> Object &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node (value): gives the row of the cell where the chosen object is (0 = the first at the top).</p>
+<p class="exemple"><b>Example:</b> know in which row the hero is.</p>
+</div>
+<div class="fiche"><h3>Turn number</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node: the current turn number (1, 2, 3…), plug it in with the 🔗 button.</p>
+<p class="exemple"><b>Example:</b> show "Turn 3" in a text.</p>
+</div>
+<div class="fiche"><h3>Steps to reach the touched cell</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node: the number of steps to reach the touched cell (-1 if it is outside the zone). Handy to count remaining steps.</p>
+<p class="exemple"><b>Example:</b> remaining steps = the unit's steps - this number.</p>
+</div>
+<div class="fiche"><h3>Terrain of the touched cell</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node: the name of the terrain of the touched cell ("Forest", "Water"…), or nothing if there is none. Terrains are set in the tile editor.</p>
+<p class="exemple"><b>Example:</b> show "Forest" when a forest cell is touched.</p>
+</div>
+<div class="fiche"><h3>Terrain cost of the touched cell</h3>
+<div class="schema"><b>Output:</b> none (end of script)</div>
+<p>Green node: the step cost of the terrain of the touched cell (1 if there is none).</p>
+<p class="exemple"><b>Example:</b> say "this costs 2 steps" before a move.</p>
+</div>
+<div class="fiche"><h3>Terrain under an object</h3>
+<div class="schema"><b>Input:</b> Object &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node: the name of the terrain the chosen object stands on.</p>
+<p class="exemple"><b>Example:</b> know whether the hero is in water or on the road.</p>
+</div>
+<div class="fiche"><h3>Terrain defense under an object</h3>
+<div class="schema"><b>Input:</b> Object &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node: the defense bonus of the terrain under the chosen object.</p>
+<p class="exemple"><b>Example:</b> show a unit's defense bonus.</p>
+</div>
+<div class="fiche"><h3>Distance between 2 objects</h3>
+<div class="schema"><b>Inputs:</b> Object A, Object B &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
+<p>Green node (value): gives the distance (in pixels) between the centers of two objects during the game.</p>
+<p class="exemple"><b>Example:</b> shake the screen harder when the enemy is close.</p>
+</div>
+</div>
+<h2 id="c11-transitions">Transitions</h2>
 <div class="method">
 <div class="fiche"><h3>Screen transition (circle, star…)</h3>
 <div class="schema"><b>Inputs:</b> Shape, Direction, Color, Duration (seconds), Center: object (name; circle, star, diamond, heart, hero) &nbsp;→&nbsp; <b>Outputs:</b> Next / Right away</div>
@@ -732,7 +1022,7 @@
 <p class="exemple"><b>Example:</b> the door is touched: go to the “House” scene with a circle closing on the hero.</p>
 </div>
 </div>
-<h2 id="c11-animations">Animations</h2>
+<h2 id="c12-animations">Animations</h2>
 <div class="method">
 <div class="fiche"><h3>Play animation</h3>
 <div class="schema"><b>Inputs:</b> Object, Animation, Speed (frames/second), Loop (yes / no)</div>
@@ -760,7 +1050,7 @@
 <p class="exemple"><b>Example:</b> running faster = faster animation.</p>
 </div>
 </div>
-<h2 id="c12-audio">Audio</h2>
+<h2 id="c13-audio">Audio</h2>
 <div class="method">
 <div class="fiche"><h3>Play sound</h3>
 <div class="schema"><b>Inputs:</b> Sound file, Volume (%, 100 = full)</div>
@@ -777,7 +1067,7 @@
 <p class="exemple"><b>Example:</b> silence on the Game Over screen.</p>
 </div>
 </div>
-<h2 id="c13-story-and-dialogues">Story and dialogues</h2>
+<h2 id="c14-story-and-dialogues">Story and dialogues</h2>
 <div class="method">
 <div class="fiche"><h3>Say a line</h3>
 <div class="schema"><b>Inputs:</b> Who speaks, Emotion, The line, Place on screen, Character entrance, Effect, Sound or voice, Next comes &nbsp;→&nbsp; <b>Output:</b> Then</div>
@@ -859,34 +1149,6 @@
 <p class="exemple"><b>Example:</b> "What's your name?" → variable prenom → “Say a line” "Nice to meet you, {prenom}!".</p>
 </div>
 </div>
-<h2 id="c14-values-green-wires">Values (green wires)</h2>
-<div class="method">
-<div class="fiche"><h3>Random number</h3>
-<div class="schema"><b>Inputs:</b> From, To &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
-<p>Green node (value): gives a random number between "From" and "To", drawn again each time it is used. Connect it to a setting with the 🔗 button of the settings window.</p>
-<p class="exemple"><b>Example:</b> make a coin appear at a random X between 0 and 800.</p>
-</div>
-<div class="fiche"><h3>Object value</h3>
-<div class="schema"><b>Inputs:</b> Object, What &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
-<p>Green node (value): gives a value of the chosen object during the game: its x or y position, width, rotation, opacity…</p>
-<p class="exemple"><b>Example:</b> put a coin at the same height as the player (Y ← object value: player, y).</p>
-</div>
-<div class="fiche"><h3>Variable value</h3>
-<div class="schema"><b>Input:</b> Variable &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
-<p>Green node (value): gives the current value of a variable (score, lives…) during the game.</p>
-<p class="exemple"><b>Example:</b> show the score in a text (Text ← variable value: score).</p>
-</div>
-<div class="fiche"><h3>Calculation</h3>
-<div class="schema"><b>Inputs:</b> A, Operation, B &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
-<p>Green node (value): calculates A + B, A − B, A × B or A ÷ B. A and B can be numbers, or receive a green wire themselves (chained calculations).</p>
-<p class="exemple"><b>Example:</b> give twice as many points (Value ← calculation: score × 2).</p>
-</div>
-<div class="fiche"><h3>Distance between 2 objects</h3>
-<div class="schema"><b>Inputs:</b> Object A, Object B &nbsp;→&nbsp; <b>Output:</b> none (end of script)</div>
-<p>Green node (value): gives the distance (in pixels) between the centers of two objects during the game.</p>
-<p class="exemple"><b>Example:</b> shake the screen harder when the enemy is close.</p>
-</div>
-</div>
 <h2 id="c15-screen-filters">Screen filters</h2>
 <div class="method">
 <div class="fiche"><h3>Screen filter</h3>
@@ -898,6 +1160,64 @@
 <div class="schema"><b>Input:</b> Fade out (seconds) &nbsp;→&nbsp; <b>Outputs:</b> Then / When it's over</div>
 <p>Gently fades out the current screen filter. “Then” runs right away, “When it's over” once the filter is gone.</p>
 <p class="exemple"><b>Example:</b> the hero leaves the cave: stop the flashlight in 1 second.</p>
+</div>
+</div>
+<h2 id="c16-physics">Physics</h2>
+<div class="method">
+<div class="fiche"><h3>Set the physics world</h3>
+<div class="schema"><b>Inputs:</b> Gravity downwards (%, 100 = normal, 0 = space, negative = upwards), Gravity to the right (%, negative = left: a constant wind), Precision, Resting objects fall asleep (lighter on the phone)</div>
+<p>Sets the physics world of the scene: gravity downwards (100% = normal, 0 = space, negative = objects fall upwards), sideways gravity (a wind that always blows), calculation precision and whether resting objects fall asleep. Use it once, under “At start”. It only affects objects that have the “Realistic physics” behavior (⚙ Behavior).</p>
+<p class="exemple"><b>Example:</b> a level on the Moon: gravity 20%.</p>
+</div>
+<div class="fiche"><h3>Adjust a physics object</h3>
+<div class="schema"><b>Inputs:</b> Object, Object type, Material (weight, bounce and grip at once), Contact shape, Weight (%, 100 = normal, empty = unchanged), Bounce (0 to 100, empty = unchanged), Grip (0 = ice, 100 = sticky, empty = unchanged), Object gravity (%, 0 = floats, empty = unchanged), Air drag (0 to 20, empty = unchanged), Top speed (pixels per second, 0 = no limit, empty = unchanged), Never rotates, Ghost (things pass through), Very fast object (never goes through a thin wall), Object layer (1 to 8, empty = unchanged)</div>
+<p>Changes the settings of a physics object during the game: its type (normal, fixed, guided, or no more physics), material (wood, stone, metal, rubber, ball, ice, feather), shape, weight, bounce, grip, gravity, air drag, top speed, whether it rotates, whether it is a ghost or very fast, its layer. Any setting left empty or on “(do not change)” stays as it is. On an object without physics yet, choosing a type gives it physics.</p>
+<p class="exemple"><b>Example:</b> a ball that turns into rubber (material “Rubber”) when a bonus is picked up.</p>
+</div>
+<div class="fiche"><h3>Push (physics force)</h3>
+<div class="schema"><b>Inputs:</b> Object, Push to the right (negative = to the left), Push downwards (negative = upwards), How, Where to push (off-center, the object starts to spin), Does weight matter?</div>
+<p>Pushes a physics object with a force. “Steady push”: repeat it every frame (under “Every frame” or “Finger down”), the object speeds up as long as you push (a rocket, a wind, a fan). “A hit”: adds speed at once (a jump, a kick). By default the effect is the same on a light or heavy object; in the advanced settings you can make weight matter, and push away from the center to make the object spin. Values: pixels per second (per second squared for the steady push).</p>
+<p class="exemple"><b>Example:</b> a rocket game: “Finger down” → push upwards (-2500) steadily.</p>
+</div>
+<div class="fiche"><h3>Set the speed (physics)</h3>
+<div class="schema"><b>Inputs:</b> Object, Speed to the right (pixels per second, empty = unchanged), Speed downwards (negative = upwards, empty = unchanged), Spin speed (degrees per second, empty = unchanged), How, Stop everything at once?</div>
+<p>Sets the speed of a physics object, in pixels per second: to the right, downwards (negative = upwards) and spin in degrees per second. Any box left empty leaves that speed unchanged. “Replace” gives exactly this speed; “Add” adds it to the current speed. The “Stop everything” option sets all speeds to zero. Perfect for a jump (downward speed of -900), a sharp stop or a character moving at constant speed.</p>
+<p class="exemple"><b>Example:</b> a platformer jump: downward speed = -900, only if “If the physics object…” says the object is standing on something.</p>
+</div>
+<div class="fiche"><h3>Launch (angle and speed)</h3>
+<div class="schema"><b>Inputs:</b> Object, Angle (degrees: 0 = right, -90 = up, 90 = down, 180 = left), Starting speed (pixels per second), How</div>
+<p>Launches a physics object in a direction: you give the angle (0 = to the right, -90 = up, 90 = down, 180 = to the left) and the starting speed. Gravity then does the rest: the object follows a curve. Ideal for a slingshot game, a cannon, a ball throw. The angle can be a formula (for example the angle between the object and the finger).</p>
+<p class="exemple"><b>Example:</b> a slingshot: when the finger lets go, launch the bird at the angle of the elastic.</p>
+</div>
+<div class="fiche"><h3>Explosion (physics blast)</h3>
+<div class="schema"><b>Inputs:</b> Object, Center: X position (empty = at the object's center), Center: Y position (empty = at the object's center), Blast radius (pixels), Force at the center (speed given, pixels per second), Only objects with this tag (empty = all)</div>
+<p>Blasts every physics object around a point: the closer to the center, the harder they are thrown, and they start to spin. The center is the middle of the chosen object, or an (x, y) point if you write one. You set the blast radius and the force (the speed given at the center). Option: only objects with a certain tag. The node destroys nothing: combine it with “Particle effect” and “Destroy object” for a real explosion.</p>
+<p class="exemple"><b>Example:</b> a bomb: when it touches the ground, explosion with radius 500 and force 1800, then destroy the bomb.</p>
+</div>
+<div class="fiche"><h3>Link two objects</h3>
+<div class="schema"><b>Inputs:</b> Object A, Object B, Kind of link, Link name (to adjust or cut it later), Point of object A where the link is made, Point of object B (rod, spring, rope), Shift the point to the right (pixels), Shift the point downwards (pixels), Do the two objects collide?, Length (pixels, 0 = the starting distance), Spring or suspension stiffness (1 = soft, 10 = firm), Damping (0 to 100: higher means less bouncing), Lower limit (degrees for a hinge, pixels for a slider; empty = none), Upper limit (degrees or pixels; empty = none), Rail or suspension direction (degrees: 0 = horizontal, 90 = vertical; empty = automatic), Motor: speed (degrees per second for a hinge or wheel, pixels per second for a slider; 0 = no motor), Motor or brake strength (1 = weak, 10 = normal, 100 = very strong)</div>
+<p>Links two objects so they hold or move together, like in real life. Kind of link: hinge (swings around a point: door, pendulum), rigid rod (fixed distance), spring (elastic, with stiffness), rope (maximum length), slider (slides along a rail, with limits and motor), weld (stuck together), wheel with suspension (car: A = the body, B = the wheel, with motor), brake (top view). Object B is optional: without B, object A is attached to a fixed point of the scenery. Give the link a name to adjust it (“Adjust a link”) or cut it (“Cut a link”) later. In the advanced settings: point on each side, limits, rail direction, motor, collision between the two objects. Both objects need the “Realistic physics” behavior (except a fixed support).</p>
+<p class="exemple"><b>Example:</b> a pendulum: A = the ball, B = a small fixed object at the top, type “Hinge” or “Rigid rod”; a bridge: planks linked by hinges.</p>
+</div>
+<div class="fiche"><h3>Adjust a link</h3>
+<div class="schema"><b>Inputs:</b> Link name, Motor: speed (0 = stop the motor, empty = unchanged), Motor strength (empty = unchanged), Spring or suspension stiffness (empty = unchanged), New length (pixels, empty = unchanged), New lower limit (empty = unchanged), New upper limit (empty = unchanged), Limits</div>
+<p>Changes a link already created by “Link two objects” (found by its name): start, stop or speed up its motor, set its strength, the stiffness of a spring or suspension, the length of a rod or rope, the limits. Any empty box stays as before. Example: a car whose wheel motor starts when a button is pressed.</p>
+<p class="exemple"><b>Example:</b> “Gas” button: adjust the link “rear_wheel” with motor = 720; on release: motor = 0.</p>
+</div>
+<div class="fiche"><h3>Cut a link</h3>
+<div class="schema"><b>Inputs:</b> Name of the link to cut, Or: name of an object whose links are all cut</div>
+<p>Cuts a link: write its name, or write an object's name to cut all of its links. The objects separate and each falls on its own (a collapsing bridge, a cut rope, a detaching cabin).</p>
+<p class="exemple"><b>Example:</b> a trapped bridge: when the hero touches the lever, cut the link “plank_3”.</p>
+</div>
+<div class="fiche"><h3>Grab with the finger (physics)</h3>
+<div class="schema"><b>Inputs:</b> Action, Only objects with this tag (empty = all), Softness of the grip</div>
+<p>Lets you grab a physics object with the finger and drag it, like in real life: the object follows the finger with a bit of elasticity, pushes the others and can get stuck. Put it under “Finger down” (action “Grab and drag”): while the finger is down, the object under it is dragged; as soon as the finger lifts, it is released by itself (or use the “Let go” action). You can restrict the grab to objects with a tag, and set the softness of the grip.</p>
+<p class="exemple"><b>Example:</b> a crate puzzle: the player moves crates with a fingertip to build a tower.</p>
+</div>
+<div class="fiche"><h3>If the physics object…</h3>
+<div class="schema"><b>Inputs:</b> Object, Question, Speed from which it counts (pixels per second) &nbsp;→&nbsp; <b>Outputs:</b> True / False</div>
+<p>Asks a question about a physics object and follows the “true” or “false” exit: is it standing on something (to allow a jump), does it touch something, does it touch something above, is it at rest (asleep), is it moving fast, falling, rising. For “moves fast”, “falling” and “rising” the threshold in pixels per second is set in the advanced settings. You can also read values directly in a formula: object.vitesse, object.masse, object.vitesseRotation.</p>
+<p class="exemple"><b>Example:</b> a platformer jump: “Jump button” → If the object is standing on something → set downward speed to -900.</p>
 </div>
 </div>
 <div class="liens-bas">

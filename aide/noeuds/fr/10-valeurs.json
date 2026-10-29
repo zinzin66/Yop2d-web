@@ -1,0 +1,107 @@
+{
+  "categorie": "Valeurs (fils verts)",
+  "noeuds": [
+    {
+      "nom": "Hauteur de la case touchée",
+      "schema": "<b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert : la hauteur de la case que le doigt touche (0 si rien n'est défini). À brancher avec 🔗 sur un réglage, par exemple dans un « Si… ».",
+      "exemple": "afficher « Colline ! » quand on touche une case de hauteur 2."
+    },
+    {
+      "nom": "Hauteur de la case sous un objet",
+      "schema": "<b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert : la hauteur de la case sous un objet. Sert par exemple à comparer la hauteur de l'attaquant et celle de la cible.",
+      "exemple": "n'autoriser l'attaque à distance que depuis une case plus haute que la cible."
+    },
+    {
+      "nom": "Nombre au hasard",
+      "schema": "<b>Entrées :</b> De, À &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert (valeur) : donne un nombre au hasard entre « De » et « À », tiré à nouveau à chaque utilisation. Branche-le sur un réglage avec le bouton 🔗 de la fenêtre de réglage.",
+      "exemple": "faire apparaître une pièce à un X au hasard entre 0 et 800."
+    },
+    {
+      "nom": "Valeur d'un objet",
+      "schema": "<b>Entrées :</b> Objet, Quoi &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert (valeur) : donne une valeur d'un objet choisi, pendant le jeu : sa position x ou y, sa largeur, sa rotation, son opacité…",
+      "exemple": "placer une pièce à la même hauteur que le joueur (Y ← valeur d'un objet : player, y)."
+    },
+    {
+      "nom": "Valeur d'une variable",
+      "schema": "<b>Entrée :</b> Variable &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert (valeur) : donne la valeur actuelle d'une variable (score, vies…), pendant le jeu.",
+      "exemple": "afficher le score dans un texte (Texte ← valeur d'une variable : score)."
+    },
+    {
+      "nom": "Calcul",
+      "schema": "<b>Entrées :</b> A, Opération, B &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert (valeur) : calcule A + B, A − B, A × B ou A ÷ B. A et B peuvent être des nombres, ou recevoir à leur tour un fil vert (calculs en chaîne).",
+      "exemple": "donner deux fois plus de points (Valeur ← calcul : score × 2)."
+    },
+    {
+      "nom": "Colonne touchée",
+      "schema": "<b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert (valeur) : donne la colonne de la case que le doigt touche (0 = la première à gauche). Branche-le sur un réglage avec le bouton 🔗.",
+      "exemple": "savoir dans quelle colonne on a touché pour poser une tourelle."
+    },
+    {
+      "nom": "Ligne touchée",
+      "schema": "<b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert (valeur) : donne la ligne de la case que le doigt touche (0 = la première en haut). Branche-le sur un réglage avec le bouton 🔗.",
+      "exemple": "savoir dans quelle ligne on a touché pour poser un bâtiment."
+    },
+    {
+      "nom": "Colonne d'un objet",
+      "schema": "<b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert (valeur) : donne la colonne de la case où se trouve l'objet choisi (0 = la première à gauche).",
+      "exemple": "savoir dans quelle colonne se trouve le héros."
+    },
+    {
+      "nom": "Ligne d'un objet",
+      "schema": "<b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert (valeur) : donne la ligne de la case où se trouve l'objet choisi (0 = la première en haut).",
+      "exemple": "savoir dans quelle ligne se trouve le héros."
+    },
+    {
+      "nom": "Numéro du tour",
+      "schema": "<b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert : le numéro du tour en cours (1, 2, 3…), à brancher avec le bouton 🔗.",
+      "exemple": "afficher « Tour 3 » dans un texte."
+    },
+    {
+      "nom": "Pas pour aller sur la case touchée",
+      "schema": "<b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert : le nombre de pas pour aller sur la case touchée (-1 si elle est hors zone). Pratique pour compter les pas restants.",
+      "exemple": "pas restants = pas de l'unité - ce nombre."
+    },
+    {
+      "nom": "Terrain de la case touchée",
+      "schema": "<b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert : le nom du terrain de la case touchée (« Forêt », « Eau »…), ou rien s'il n'y en a pas. Les terrains se règlent dans l'éditeur de tuiles.",
+      "exemple": "afficher « Forêt » quand on touche une case de forêt."
+    },
+    {
+      "nom": "Coût du terrain de la case touchée",
+      "schema": "<b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert : le coût en pas du terrain de la case touchée (1 s'il n'y en a pas).",
+      "exemple": "dire « ça coûte 2 pas » avant un déplacement."
+    },
+    {
+      "nom": "Terrain sous un objet",
+      "schema": "<b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert : le nom du terrain sur lequel se trouve l'objet choisi.",
+      "exemple": "savoir si le héros est dans l'eau ou sur la route."
+    },
+    {
+      "nom": "Défense du terrain sous un objet",
+      "schema": "<b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert : le bonus de défense du terrain sous l'objet choisi.",
+      "exemple": "afficher le bonus de défense d'une unité."
+    },
+    {
+      "nom": "Distance entre 2 objets",
+      "schema": "<b>Entrées :</b> Objet A, Objet B &nbsp;→&nbsp; <b>Sortie :</b> aucune (fin du script)",
+      "role": "Nœud vert (valeur) : donne la distance (en pixels) entre le centre de deux objets, pendant le jeu.",
+      "exemple": "faire trembler l'écran plus fort quand l'ennemi est proche."
+    }
+  ]
+}

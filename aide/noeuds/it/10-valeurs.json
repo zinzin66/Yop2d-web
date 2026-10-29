@@ -1,0 +1,107 @@
+{
+  "categorie": "Valori (fili verdi)",
+  "noeuds": [
+    {
+      "nom": "Altezza della casella toccata",
+      "schema": "<b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde: l'altezza della casella toccata dal dito (0 se non è definita). Collegalo con 🔗 a un'impostazione, per esempio in un «Se…».",
+      "exemple": "mostrare «Collina!» quando si tocca una casella di altezza 2."
+    },
+    {
+      "nom": "Altezza della casella sotto un oggetto",
+      "schema": "<b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde: l'altezza della casella sotto un oggetto. Serve, per esempio, a confrontare l'altezza dell'attaccante con quella del bersaglio.",
+      "exemple": "consentire l'attacco a distanza solo da una casella più alta del bersaglio."
+    },
+    {
+      "nom": "Numero a caso",
+      "schema": "<b>Ingressi:</b> Da, A &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde (valore): dà un numero a caso tra «Da» e «A», estratto di nuovo a ogni utilizzo. Collegalo a un'impostazione con il pulsante 🔗 della finestra delle impostazioni.",
+      "exemple": "far apparire una moneta a una X a caso tra 0 e 800."
+    },
+    {
+      "nom": "Valore di un oggetto",
+      "schema": "<b>Ingressi:</b> Oggetto, Cosa &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde (valore): dà un valore dell'oggetto scelto durante il gioco: la sua posizione x o y, larghezza, rotazione, opacità…",
+      "exemple": "mettere una moneta alla stessa altezza del giocatore (Y ← valore di un oggetto: player, y)."
+    },
+    {
+      "nom": "Valore di una variabile",
+      "schema": "<b>Ingresso:</b> Variabile &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde (valore): dà il valore attuale di una variabile (punteggio, vite…) durante il gioco.",
+      "exemple": "mostrare il punteggio in un testo (Testo ← valore di una variabile: score)."
+    },
+    {
+      "nom": "Calcolo",
+      "schema": "<b>Ingressi:</b> A, Operazione, B &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde (valore): calcola A + B, A − B, A × B o A ÷ B. A e B possono essere numeri, o ricevere a loro volta un filo verde (calcoli a catena).",
+      "exemple": "dare il doppio dei punti (Valore ← calcolo: score × 2)."
+    },
+    {
+      "nom": "Colonna toccata",
+      "schema": "<b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde (valore): dà la colonna della casella toccata dal dito (0 = la prima a sinistra). Collegalo a un'impostazione con il pulsante 🔗.",
+      "exemple": "sapere quale colonna è stata toccata per piazzare una torre."
+    },
+    {
+      "nom": "Riga toccata",
+      "schema": "<b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde (valore): dà la riga della casella toccata dal dito (0 = la prima in alto). Collegalo a un'impostazione con il pulsante 🔗.",
+      "exemple": "sapere quale riga è stata toccata per piazzare un edificio."
+    },
+    {
+      "nom": "Colonna di un oggetto",
+      "schema": "<b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde (valore): dà la colonna della casella in cui si trova l'oggetto scelto (0 = la prima a sinistra).",
+      "exemple": "sapere in quale colonna si trova l'eroe."
+    },
+    {
+      "nom": "Riga di un oggetto",
+      "schema": "<b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde (valore): dà la riga della casella in cui si trova l'oggetto scelto (0 = la prima in alto).",
+      "exemple": "sapere in quale riga si trova l'eroe."
+    },
+    {
+      "nom": "Numero del turno",
+      "schema": "<b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde: il numero del turno attuale (1, 2, 3…), collegalo con il pulsante 🔗.",
+      "exemple": "mostrare «Turno 3» in un testo."
+    },
+    {
+      "nom": "Passi per la casella toccata",
+      "schema": "<b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde: il numero di passi per raggiungere la casella toccata (-1 se è fuori dalla zona). Utile per contare i passi rimasti.",
+      "exemple": "passi rimasti = passi dell'unità - questo numero."
+    },
+    {
+      "nom": "Terreno della casella toccata",
+      "schema": "<b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde: il nome del terreno della casella toccata («Bosco», «Acqua»…), o niente se non c'è. I terreni si definiscono nell'editor di tile.",
+      "exemple": "mostrare «Bosco» quando si tocca una casella di bosco."
+    },
+    {
+      "nom": "Costo del terreno della casella toccata",
+      "schema": "<b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde: il costo in passi del terreno della casella toccata (1 se non c'è).",
+      "exemple": "dire «costa 2 passi» prima di muoversi."
+    },
+    {
+      "nom": "Terreno sotto un oggetto",
+      "schema": "<b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde: il nome del terreno su cui si trova l'oggetto scelto.",
+      "exemple": "sapere se l'eroe è nell'acqua o sulla strada."
+    },
+    {
+      "nom": "Difesa del terreno sotto un oggetto",
+      "schema": "<b>Ingresso:</b> Oggetto &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde: il bonus di difesa del terreno sotto l'oggetto scelto.",
+      "exemple": "mostrare il bonus di difesa di un'unità."
+    },
+    {
+      "nom": "Distanza tra 2 oggetti",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B &nbsp;→&nbsp; <b>Uscita:</b> nessuna (fine dello script)",
+      "role": "Nodo verde (valore): dà la distanza (in pixel) tra il centro di due oggetti durante il gioco.",
+      "exemple": "far tremare di più lo schermo quando il nemico è vicino."
+    }
+  ]
+}

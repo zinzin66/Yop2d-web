@@ -164,7 +164,7 @@
     },
     {
       "nom": "Disparar un objeto",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nombre del modelo, Dirección, Velocidad, Destruir fuera de la pantalla (sí / no)",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nombre del modelo, Dirección, Velocidad, Destruir fuera de la pantalla (sí / no), Vida del disparo (segundos, 0 = sin límite)",
       "role": "Crea un proyectil (el objeto indicado en «Nombre del modelo») en el sitio del objeto A y lo lanza a la velocidad elegida: 0°, 90°, 180°, 270°, hacia el objeto B («Hacia el objetivo») o según el ángulo de A.",
       "exemple": "una nave que dispara láseres hacia arriba (270)."
     },
@@ -179,6 +179,12 @@
       "schema": "<b>Entradas:</b> Objeto, Retraso (segundos)",
       "role": "Elimina el objeto elegido después de un retraso (en segundos). Útil para que una explosión desaparezca cuando termina su animación.",
       "exemple": "después de «Generar clon (Spawner)» y «Reproducir animación», la imagen de la explosión se destruye 0,4 segundos más tarde."
+    },
+    {
+      "nom": "Color de equipo (reemplaza el rosa del dibujo)",
+      "schema": "<b>Entradas:</b> Objeto, Color del equipo, Color a reemplazar en el dibujo (rosa por defecto), Tolerancia (1 a 100): más alta reemplaza también colores parecidos",
+      "role": "Un solo dibujo para todos los equipos: pinta las partes a colorear (capa, bandera, plumero) con un color de referencia (rosa vivo #FF00FF por defecto) y este nodo reemplaza ese rosa por el color del equipo para el objeto. Se conservan las sombras y brillos del dibujo (un rosa oscuro pasa a azul oscuro). La tolerancia indica cuánto puede alejarse un color del de referencia para ser reemplazado. No se cambia nada en las imágenes: todo ocurre al mostrarlas, así que hay que repetirlo al inicio de cada partida.",
+      "exemple": "dos ejércitos con las mismas imágenes: jugador en azul, enemigo en rojo."
     },
     {
       "nom": "Definir el Progreso",
@@ -203,6 +209,24 @@
       "schema": "<b>Entradas:</b> Objeto, Color de los rayos, Duración (segundos, 0 = sin fin), Intensidad (0 = detener, 1 a 3)",
       "role": "Rayos chisporrotean alrededor del objeto: parpadea con el color del rayo, tiembla y suelta chispas. Duración 0 = sin fin (valla eléctrica); intensidad 0 = detener.",
       "exemple": "el mago toca una trampa: «Electrocución» sobre el mago (1 segundo), «Esperar» 1 segundo y luego «Reiniciar la escena»."
+    },
+    {
+      "nom": "Fuente de luz (antorcha, farol…)",
+      "schema": "<b>Entradas:</b> Objeto, Color de la luz, Radio (píxeles: distancia desde el centro), Iluminación (%, 100 = normal, 200 = muy fuerte), Resplandor de color (%, 0 = ninguno, 200 = muy fuerte), Parpadeo, Encendido, Desplazamiento horizontal (píxeles), Desplazamiento vertical (píxeles, negativo = arriba)",
+      "role": "Une una luz al objeto: lo sigue cuando se mueve (antorcha de un personaje, farol, fuego…), aunque el objeto sea hijo de otro. Ajustes: color, radio en píxeles (distancia al centro), iluminación (100 = normal, hasta 300: más fuerte y más lejos), resplandor de color (0 = ninguno), parpadeo (ninguno, vela, antorcha, parpadea) y desplazamiento. Una luz por objeto, 8 como máximo a la vez. Atraviesa la oscuridad de «Oscuridad y ambiente de luz»; sin oscuridad solo añade su resplandor. Ajuste «Encendido»: «Solo cuando oscurece» enciende la luz sola al caer la noche (ideal con «Ciclo de día y noche»).",
+      "exemple": "la antorcha de un personaje: sobre un objeto «farol» hijo del héroe, radio 360, parpadeo «antorcha»."
+    },
+    {
+      "nom": "Apagar la luz del objeto",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Apaga la luz unida al objeto. Para encenderla de nuevo, usa otra vez «Fuente de luz (antorcha, farol…)».",
+      "exemple": "un botón «Farol» apaga la luz del héroe."
+    },
+    {
+      "nom": "Sombra bajo el objeto",
+      "schema": "<b>Entradas:</b> Objeto, Sombra, Fuerza de la sombra (%), Ancho de la sombra (% del objeto), Desplazamiento vertical (píxeles, negativo = arriba)",
+      "role": "Pone una sombra suave bajo el objeto (o la quita con «No»). Sigue al objeto cuando se mueve; se ajusta su fuerza y su anchura. Da volumen enseguida a los personajes sobre un fondo. También se activa con la casilla «Sombra bajo el objeto» del Inspector, sin ningún nodo.",
+      "exemple": "una sombra bajo el héroe: fuerza 50, anchura 70."
     },
     {
       "nom": "Estela del objeto",

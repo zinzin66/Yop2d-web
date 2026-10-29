@@ -2,6 +2,167 @@
   "categorie": "Grids and puzzles",
   "noeuds": [
     {
+      "nom": "Go to the next turn",
+      "schema": "<b>Input:</b> Teams, in order (tags separated by a comma)",
+      "role": "Passes the game to the next team. Write the teams in order using their tags (e.g. player,enemy). The first call (for example after \"At start\") begins with the first team; when every team has played, the turn number goes up. At the start of each turn the local event \"tour_<team>\" runs if it exists (e.g. \"tour_enemy\").",
+      "exemple": "put \"Go to the next turn\" on the \"End turn\" button."
+    },
+    {
+      "nom": "If it is the turn of…",
+      "schema": "<b>Input:</b> Team (tag) &nbsp;→&nbsp; <b>Outputs:</b> True / False",
+      "role": "True if it is the turn of the team written (its tag), False otherwise.",
+      "exemple": "let the player touch their units only during their own turn."
+    },
+    {
+      "nom": "Mark as having played",
+      "schema": "<b>Input:</b> Object",
+      "role": "Remembers that the unit (object A) has played this turn. Everything is cleared when the next turn starts.",
+      "exemple": "stop a hero from moving twice in the same turn."
+    },
+    {
+      "nom": "If the unit has already played",
+      "schema": "<b>Input:</b> Object &nbsp;→&nbsp; <b>Outputs:</b> True / False",
+      "role": "True if the unit (object A) has already played this turn, False otherwise.",
+      "exemple": "refuse to move a hero that has already played."
+    },
+    {
+      "nom": "Show reachable cells",
+      "schema": "<b>Inputs:</b> Object, Zone type, Number of steps (or range), Color of the cells, Cell visibility (0 = invisible, 100 = solid), Frame around each cell, Write the step count on each cell, Walls block (movement), These tags block the way (separated by commas), Terrain costing more steps (tag=cost, e.g. forest=2, water=3), Zone name (optional: to show several), Range shape (attack and jump), Minimum range (0 = none; 2 = not the first cells), My positions (column,row; e.g. 2,1 ; -2,1 ; 0,3), Remove the cell the object stands on",
+      "role": "Colors the cells the chosen object can move to (or attack). Walls block, and you can add tags that block (other units) and terrains that cost more steps (forest=2). Color, visibility, frame and numbers are adjustable. \"Zone name\" lets you show several at once (movement in blue, attack in red).",
+      "exemple": "show a hero's movement zone when it is touched."
+    },
+    {
+      "nom": "Hide the cells",
+      "schema": "<b>Input:</b> Zone name (optional)",
+      "role": "Clears the colored cells (all of them, or one named zone).",
+      "exemple": "hide the zone once the hero has arrived."
+    },
+    {
+      "nom": "If the cell is reachable",
+      "schema": "<b>Inputs:</b> Column, Row, Zone name (optional) &nbsp;→&nbsp; <b>Outputs:</b> True / False",
+      "role": "True if the cell (column, row) is one of the shown cells. By default: the cell the finger touches. False otherwise.",
+      "exemple": "refuse a move that is too far with \"too far!\"."
+    },
+    {
+      "nom": "Give a unit sheet",
+      "schema": "<b>Inputs:</b> Object, Health points, Attack, Defense, Movement (steps), Attack range (cells), Other statistics (e.g. munitions = 3, armure = 2)",
+      "role": "Gives the object its sheet: health, attack, defense, movement and range (object variables \"vie\", \"attaque\", \"defense\", \"mouvement\", \"portee\"). They can be read anywhere with a formula, e.g. =hero.mouvement for the number of steps of the reachable cells. Put this node \"At start\" of each unit, or in a reusable unit prefab.",
+      "exemple": "create an archer: health 8, attack 4, defense 0, movement 4, range 3."
+    },
+    {
+      "nom": "Attack",
+      "schema": "<b>Inputs:</b> Object A, Object B, Attack power (%), Count the defense of the target's terrain, Always at least 1 damage, Destroy the target when its health runs out, Free damage formula (e.g. attacker.attaque * 2 - target.armure); empty = normal calculation, Bonus by target tags (e.g. cavalry = 150, light = 120: % of damage), Bonus by attacker tags (e.g. spear = 130), Statistic used up at each attack (e.g. ammo: no attack at 0), Piercing: % of defense ignored (0 = none), Counterattack: % of the target's attack returned if it survives and the attacker is in its range (0 = none), Height bonus: % damage per level of difference (e.g. 15; higher = more, lower = less), Guard: tag of adjacent allies that strengthen the target's defense (e.g. spear), Guard: defense gained per adjacent ally &nbsp;→&nbsp; <b>Outputs:</b> Still alive / Out of health / Attacker destroyed (counterattack)",
+      "role": "Object A attacks object B: damage = A's attack × power × bonuses − B's defense − B's terrain defense. Exits “Still alive” and “Out of health” (the target is destroyed if the box is ticked), and “Attacker destroyed” if a counterattack kills it. Both objects need a unit sheet. The “regle: spear > cavalry = 150” rules of donnees.txt apply by themselves. In advanced: bonuses by tags (“cavalry = 150”), PIERCING (percentage of defense ignored, for a spear or a crossbow), COUNTERATTACK (percentage of the target's attack returned if it survives and the attacker is in its range), HEIGHT BONUS (percentage of damage per level of difference: the one higher up hits harder), GUARD (each adjacent ally with the chosen tag adds defense to the target: a shield wall), a free formula, and a statistic used up at each attack (ammo).",
+      "exemple": "the spear (piercing 40) against heavy cavalry; the archer on the hill (height +15%)."
+    },
+    {
+      "nom": "Apply data (unit, weapon)",
+      "schema": "<b>Inputs:</b> Object, Name in donnees.txt (e.g. Knight) &nbsp;→&nbsp; <b>Outputs:</b> Found / Not found",
+      "role": "Gives object A every value of a unit or weapon written in the donnees.txt file (Assets → Dialogues, or assets_ludexa/Textes/donnees.txt): health, attack, defense, movement, range, price… and its tags. One line is enough: “unite Knight: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=cavalry heavy”. You rebalance the game by editing the file, without touching the nodes. Exits “Found” / “Not found”. The file can also hold “arme Sword: attaque=5”, “etat Poison: duree=3, degats=2”, “regle: spear > cavalry = 150” (an attacker tagged spear deals 150% to a target tagged cavalry, applied automatically by “Attack”) and tile heights.",
+      "exemple": "at the start of the game, for each hero: Apply data “Knight”."
+    },
+    {
+      "nom": "Set tile height",
+      "schema": "<b>Inputs:</b> Start column, Start row, Number of columns, Number of rows, Height (0 = flat)",
+      "role": "Gives a height (a level: 0 = flat, 1, 2, 3…) to a rectangle of grid tiles: start column and row, number of columns and rows. Heights drive the height bonus of “Attack” and block sight in the fog of war (a hill hides what is behind it). You can also write them in donnees.txt (“hauteur 3,4 = 2” or a “hauteurs:” block with one digit per tile). Read them with the formula hauteur(column, row) or with the green nodes “Height of the touched tile” / “Height of the tile under an object”.",
+      "exemple": "a 3 x 2 tile hill at height 2, so an archer standing on it hits harder."
+    },
+    {
+      "nom": "Give a state (poison, slow…)",
+      "schema": "<b>Inputs:</b> Object, State name (e.g. Poison; set in donnees.txt), Duration in turns (empty = from donnees.txt), Damage each turn (empty = donnees.txt), Statistic changed (e.g. mouvement; empty = donnees.txt), Change to this statistic (e.g. -2)",
+      "role": "Gives the unit a state for a number of TURNS: poison (damage every turn), slow (movement drops), blessed (attack rises)… Everything can be written in donnees.txt (“etat Poison: duree=3, degats=2”, “etat Slow: duree=2, stat=mouvement, delta=-2”): then only the state's name is needed. Damage lands at the start of each turn of the unit's team, then the state loses a turn; at the end, the changed statistic goes back to normal. Giving the same state again extends it instead of doubling it. The unit keeps an “etat_<name>” statistic (turns left), readable in a formula. Needs “Go to next turn”.",
+      "exemple": "a poisoned arrow: Attack → still alive → give the “Poison” state to the target."
+    },
+    {
+      "nom": "Remove a state",
+      "schema": "<b>Inputs:</b> Object, State name (empty = all)",
+      "role": "Removes a state from the unit (by name), or every state if the name is empty. The statistic changed by the state goes straight back to its previous value.",
+      "exemple": "a priest who cures an ally's poison."
+    },
+    {
+      "nom": "If the unit has the state…",
+      "schema": "<b>Inputs:</b> Object, State name (empty = all) &nbsp;→&nbsp; <b>Outputs:</b> True / False",
+      "role": "Tests whether the unit has a state (or any state if the name is empty). Exits “True” / “False”.",
+      "exemple": "cannot move if the unit is “Frozen”."
+    },
+    {
+      "nom": "Area effect around an object",
+      "schema": "<b>Inputs:</b> Object, Effect, Strength (damage or heal), Radius in tiles, Tags affected (empty = everyone), State name (if the effect gives a state), Falloff per tile of distance (% of strength), Shape, Also hits the object at the centre",
+      "role": "Hits every object around object A (at the centre) at once: damage, heal or a state. Settings: the strength, the radius in tiles, the tags affected (empty = everyone), the shape (diamond or square with diagonals), the falloff per tile of distance (explosion: the further away, the weaker), and whether the centre object is hit too. Damage ignores defense. A fireball, a group heal, a scary shout. To count victims in a condition use the formulas compter(\"tag\") and voisins(object, \"tag\", tiles).",
+      "exemple": "a fireball: radius 2, strength 6, falloff 30% per tile, on “enemy” units."
+    },
+    {
+      "nom": "Gain experience",
+      "schema": "<b>Inputs:</b> Object, Experience gained, Experience to reach level 2 (x level afterwards), Gains at each level (e.g. vie=2, attaque=1) &nbsp;→&nbsp; <b>Outputs:</b> Level up / Nothing to cancel",
+      "role": "Gives the unit experience. When it reaches the threshold (threshold × current level) the unit moves up a level, spare experience is kept, and the gains are added (“vie=2, attaque=1”; maximum health rises along with health). The unit keeps the “xp” and “niveau” statistics (1 at the start). Exits “Level up” / “No level up”: play a fanfare or a message when it levels.",
+      "exemple": "a hero who gains 30 experience for every enemy defeated."
+    },
+    {
+      "nom": "Remember the position",
+      "schema": "<b>Input:</b> Object",
+      "role": "Remembers the unit's current position, before a move. With “Cancel the move”, the player can go back (as in Advance Wars when you press “Cancel” before acting).",
+      "exemple": "just before “Go to tile”: Remember the position."
+    },
+    {
+      "nom": "Cancel the move",
+      "schema": "<b>Input:</b> Object &nbsp;→&nbsp; <b>Outputs:</b> Cancelled / Nothing to cancel",
+      "role": "Puts the unit back at the position remembered by “Remember the position”, clears its “has already played” mark and sets its “bouge” and “agi” statistics back to 0. Exits “Cancelled” / “Nothing to cancel”.",
+      "exemple": "a “Cancel” button in the unit's action menu."
+    },
+    {
+      "nom": "Play like a computer (AI)",
+      "schema": "<b>Inputs:</b> Object, Enemy tags (e.g. player), Play style, Movement speed, Other tags that block the path (e.g. its own allies) &nbsp;→&nbsp; <b>Outputs:</b> Arrived / No target",
+      "role": "Makes a unit play by itself, like a computer. It looks at where it can go (movement, walls, terrain, blocking units), finds the enemies (their tags) and picks the best tile to attack from according to its STYLE: aggressive (most damage, finishing a target first), cautious (avoids the counterattack) or defensive (likes high-defense tiles). Nobody in range: it moves toward the nearest enemy. Once it arrives, the “Arrived” exit fires: the involved object is the chosen target and the unit's “cible_ia” statistic is 1 (can attack) or 0 (just moved closer). It uses the unit's movement, range (and “portee_min”) and unit sheet. Exit “No enemy” if there are none left.",
+      "exemple": "monsters' turn: for each monster, Play like a computer (enemies = player) → on arrival, if cible_ia = 1, Attack."
+    },
+    {
+      "nom": "Update the fog of war",
+      "schema": "<b>Inputs:</b> Tags of the team that sees (e.g. player), Tags of enemies to hide when out of sight (e.g. enemy), Default vision in tiles (otherwise the unit's \"vision\" statistic), Darkness of unknown tiles (0 to 100), Remember tiles already seen",
+      "role": "Works out what the team can see and covers the rest of the map with a dark veil: the team's units (tags) see around them up to their “vision” statistic in tiles (otherwise the node's default vision). A terrain wall, a terrain with the property “bloque_vue = oui” (dense forest) or a higher tile stops the view. Tiles already seen stay half dark (memory, optional). Units with enemy tags out of sight are hidden. Run it again after every move or at the start of a turn. The formula vue(column, row) is 1 when the tile is seen. “Remove the fog of war” makes everything visible.",
+      "exemple": "at the start of each player turn: Update the fog (team player, enemies enemy, vision 3)."
+    },
+    {
+      "nom": "Remove the fog of war",
+      "role": "Removes the fog of war: the whole map is visible again and hidden units reappear.",
+      "exemple": "at the end of the game, to show the whole map."
+    },
+    {
+      "nom": "Give health to the object",
+      "schema": "<b>Inputs:</b> Object, Health points",
+      "role": "Gives health points to the chosen object (object variable \"vie\", and \"vie_max\" for the maximum). Read it anywhere with a formula, e.g. =monster.vie, to write it in a text or a bar.",
+      "exemple": "give a monster 10 health points at the start."
+    },
+    {
+      "nom": "Deal damage",
+      "schema": "<b>Inputs:</b> Object, Damage, Destroy the object when its health runs out, Subtract the defense of the terrain it stands on &nbsp;→&nbsp; <b>Outputs:</b> Still alive / Out of health",
+      "role": "Removes health points from the object (never below 0). Two outputs: \"Still alive\" and \"Out of health\" (the object is destroyed if the box is ticked; \"the involved object\" stays the one hit).",
+      "exemple": "a hero hits a monster: 3 damage, then a small message depending on the result."
+    },
+    {
+      "nom": "Heal",
+      "schema": "<b>Inputs:</b> Object, Health restored",
+      "role": "Gives health points back to the object, without going over its maximum.",
+      "exemple": "a potion that restores 5 health points to the hero."
+    },
+    {
+      "nom": "Change a statistic",
+      "schema": "<b>Inputs:</b> Object, Statistic name (e.g. ammo), What to do, By how much",
+      "role": "Changes a statistic you invented for an object (ammo, armor, mana, fuel…): add to it, subtract from it or set it to a value. If it does not exist yet, it is created at 0. You can then read it anywhere: =archer.ammo.",
+      "exemple": "After a shot: Change a statistic → object “archer”, statistic “ammo”, Subtract 1."
+    },
+    {
+      "nom": "If the statistic…",
+      "schema": "<b>Inputs:</b> Object, Statistic name (e.g. ammo), Comparison, Value &nbsp;→&nbsp; <b>Outputs:</b> True / False",
+      "role": "Compares an object's statistic with a value and follows the “true” or “false” exit: for example “ammo is greater than 0”. A statistic that does not exist counts as 0.",
+      "exemple": "Before shooting: If the archer's “ammo” statistic is greater than 0 → shoot; otherwise → show “Out of arrows”."
+    },
+    {
+      "nom": "Choose a target",
+      "schema": "<b>Inputs:</b> Object, Tags of possible targets (comma-separated), Which target to pick?, Range in cells (0 = unlimited; e.g. =monster.portee), Minimum range (0 = none), Range shape, My positions (column,row; e.g. 2,1 ; -2,1), Statistic (for the “statistic” rules, e.g. defense), Range in pixels, as a circle (0 = use the range in cells) &nbsp;→&nbsp; <b>Outputs:</b> Target found / No target",
+      "role": "Object A looks among the objects that carry one of the requested tags for those WITHIN ITS RANGE (same shapes as “Show reachable cells”), then picks one: the closest, the one with the least or the most health, or the lowest / highest value of a statistic. “Target found” output: it becomes “the involved object” (for Attack, Go to…). “No target” output: nobody in range. Perfect for the intelligence of a monster or a turret.",
+      "exemple": "a monster: “Choose a target” (tag “hero”, the closest, range =monster.range), then “Attack” on “Target found”."
+    },
+    {
       "nom": "Fill the grid",
       "schema": "<b>Inputs:</b> Object, Columns, Rows, Model objects (names separated by commas)",
       "role": "Splits object A (the board) into columns and rows and puts in each cell a copy of a model object picked at random (at least 3 models, names separated by commas). There is never a match at the start, and the pieces drop in from the top. Use it before “Play on the grid (match 3)”.",

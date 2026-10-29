@@ -14,6 +14,18 @@
       "exemple": "fermare la passerella quando il giocatore preme un pulsante."
     },
     {
+      "nom": "Seguire il percorso",
+      "schema": "<b>Ingressi:</b> Oggetto, Nome del percorso, Velocità (pixel al secondo), Ruotare nella direzione di marcia (sì / no), Scostamento laterale casuale (pixel, ±: ognuno ha la sua corsia), Evitare gli altri: spostarsi per non sovrapporsi e superare i più lenti (sì / no), Larghezza utilizzabile per spostarsi (pixel per lato dal centro del percorso), Angolo dell'immagine (0 = guarda a destra, 90 = in basso) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato",
+      "role": "Fa seguire all'oggetto un percorso disegnato con lo strumento «Percorso» degli Asset: viene messo sul punto di partenza e avanza di punto in punto alla velocità scelta. A un incrocio sceglie l'uscita come hai impostato (a caso, a turno, in base a una variabile). L'uscita «Arrivato alla fine» parte quando raggiunge un punto senza uscita. Con «Scostamento laterale casuale» ogni oggetto cammina sulla sua corsia (spostamento casuale): più nemici avanzano fianco a fianco invece di sovrapporsi. Con «Evitare gli altri», un oggetto che raggiunge uno più lento si sposta di lato, lo supera e torna sulla sua corsia; se il percorso è troppo stretto, lo segue.",
+      "exemple": "Compare un nemico: Seguire il percorso «Strada_nemici», velocità 150. Uscita «Arrivato alla fine» → Infliggi danni alla base, poi Distruggi l'oggetto."
+    },
+    {
+      "nom": "Fermare il percorso",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "Ferma l'oggetto dove si trova: non segue più il suo percorso (l'uscita «Arrivato alla fine» non partirà).",
+      "exemple": "Una trappola congela un nemico: Fermare il percorso e poi Seguire il percorso perché riparta."
+    },
+    {
       "nom": "Ferma l'oggetto",
       "schema": "<b>Ingresso:</b> Oggetto",
       "role": "Ferma di colpo l'oggetto: niente più velocità, spinta, salto o movimento automatico.",
@@ -33,13 +45,13 @@
     },
     {
       "nom": "Andare verso un oggetto (percorso)",
-      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Velocità, Diagonali (sì / no) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato",
-      "role": "L'oggetto A va verso l'oggetto B trovando da solo il percorso più corto, casella per casella, senza attraversare i muri (tessere «Solide» di uno sfondo a tessere, oggetti fisici fissi). Il percorso viene ricalcolato quando B si muove. «Arrivato» parte quando A tocca B.",
+      "schema": "<b>Ingressi:</b> Oggetto A, Oggetto B, Velocità, Diagonali (sì / no), Fermarsi, Questi tag bloccano il percorso (altre unità, separati da virgola) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato",
+      "role": "L'oggetto A va verso l'oggetto B trovando da solo il percorso più corto, casella per casella, senza attraversare i muri (tessere «Solide» di uno sfondo a tessere, oggetti fisici fissi). Il percorso viene ricalcolato quando B si muove. «Arrivato» parte quando A tocca B. L'impostazione «Fermarsi» permette di fermarsi su una casella vicina, ben centrato (giochi su griglia); «Questi tag bloccano il percorso» fa aggirare le altre unità.",
       "exemple": "un fantasma che insegue il giocatore in un labirinto."
     },
     {
       "nom": "Andare a un punto (percorso)",
-      "schema": "<b>Ingressi:</b> Oggetto, Posizione X, Posizione Y, Velocità, Diagonali (sì / no) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato",
+      "schema": "<b>Ingressi:</b> Oggetto, Posizione X, Posizione Y, Velocità, Diagonali (sì / no), Questi tag bloccano il percorso (altre unità, separati da virgola) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato",
       "role": "L'oggetto A va fino al punto X, Y girando attorno ai muri, per il percorso più corto (casella per casella). Con =doigt.x e =doigt.y va dove si tocca lo schermo. «Arrivato» parte all'arrivo. Se non c'è nessun percorso, resta fermo.",
       "exemple": "toccare una casella per mandarci l'eroe, in un gioco di strategia o un dungeon."
     },
@@ -48,6 +60,30 @@
       "schema": "<b>Ingresso:</b> Oggetto",
       "role": "L'oggetto smette di seguire il suo percorso («Andare verso un oggetto (percorso)» o «Andare a un punto (percorso)») e resta dov'è.",
       "exemple": "la mosca si ferma quando la partita è vinta."
+    },
+    {
+      "nom": "Mettere su una casella (colonna, riga)",
+      "schema": "<b>Ingressi:</b> Oggetto, Colonna (0 = la prima), Riga (0 = la prima)",
+      "role": "Mette l'oggetto A esattamente al centro della casella scelta (colonna e riga, contate da 0 in alto a sinistra). La griglia è quella della mappa di tile della scena. Con il pulsante 🔗, collega «Colonna toccata» e «Riga toccata» per mandarlo sulla casella toccata dal dito.",
+      "exemple": "spostare una pedina sulla casella toccata in un gioco da tavolo."
+    },
+    {
+      "nom": "Centrare nella sua casella",
+      "schema": "<b>Ingresso:</b> Oggetto",
+      "role": "L'oggetto A resta nella sua casella ma torna esattamente al centro. Utile quando un movimento si è fermato tra due caselle.",
+      "exemple": "ricentrare un eroe dopo il suo movimento."
+    },
+    {
+      "nom": "Vai alla casella (percorso)",
+      "schema": "<b>Ingressi:</b> Oggetto, Colonna, Riga, Velocità, Diagonali (sì / no), Questi tag bloccano il percorso (altre unità, separati da virgola) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato",
+      "role": "L'oggetto cammina fino al CENTRO della casella (colonna, riga), aggirando muri, terreni che bloccano e le unità con i tag indicati. Di default: la casella toccata dal dito. Uscita «Arrivato» una volta sulla casella.",
+      "exemple": "mandare un eroe su una casella blu toccata."
+    },
+    {
+      "nom": "Muovi la pedina di una casella",
+      "schema": "<b>Ingressi:</b> Oggetto, Direzione, Velocità, Questi tag bloccano il percorso (altre unità, separati da virgola) &nbsp;→&nbsp; <b>Uscite:</b> Arrivato / Bloccato (muro, terreno, unità, bordo)",
+      "role": "Sposta la pedina di una casella (su, giù, sinistra, destra), ben centrata. Se la casella è un muro, un terreno che blocca, un'unità (tag) o il bordo della mappa: uscita «Bloccato». Altrimenti «Arrivato» alla fine del passo.",
+      "exemple": "muovere una pedina da gioco da tavolo con i pulsanti ◀ ▶ ▲ ▼."
     },
     {
       "nom": "Insegui un oggetto",

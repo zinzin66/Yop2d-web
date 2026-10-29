@@ -164,7 +164,7 @@
     },
     {
       "nom": "Ein Objekt abfeuern",
-      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit, Außerhalb des Bildschirms zerstören (ja / nein)",
+      "schema": "<b>Eingänge:</b> Objekt A, Objekt B, Modellname, Richtung, Geschwindigkeit, Außerhalb des Bildschirms zerstören (ja / nein), Lebensdauer des Schusses (Sekunden, 0 = unbegrenzt)",
       "role": "Erstellt ein Geschoss (das Objekt aus „Modellname“) bei Objekt A und schießt es mit der gewählten Geschwindigkeit ab: 0°, 90°, 180°, 270°, zu Objekt B („Zum Ziel“) oder im Winkel von A.",
       "exemple": "ein Raumschiff, das Laser nach oben schießt (270)."
     },
@@ -179,6 +179,12 @@
       "schema": "<b>Eingänge:</b> Objekt, Verzögerung (Sekunden)",
       "role": "Entfernt das gewählte Objekt nach einer Verzögerung (in Sekunden). Praktisch, damit eine Explosion nach ihrer Animation verschwindet.",
       "exemple": "nach „Klon erzeugen (Spawner)“ und „Animation abspielen“ wird das Explosionsbild 0,4 Sekunden später zerstört."
+    },
+    {
+      "nom": "Teamfarbe (ersetzt das Pink der Zeichnung)",
+      "schema": "<b>Eingänge:</b> Objekt, Teamfarbe, Zu ersetzende Farbe in der Zeichnung (standardmäßig Pink), Toleranz (1 bis 100): höher ersetzt auch ähnliche Farben",
+      "role": "Eine Zeichnung für alle Teams: Male die einzufärbenden Teile (Umhang, Fahne, Federbusch) in einer Markierungsfarbe (standardmäßig leuchtendes Pink #FF00FF); dieser Node ersetzt dann dieses Pink für das Objekt durch die Teamfarbe. Schatten und Lichter der Zeichnung bleiben erhalten (ein dunkles Pink wird dunkles Blau). Die Toleranz bestimmt, wie weit eine Farbe von der Markierung abweichen darf und trotzdem ersetzt wird. An den Bildern wird nichts geändert: Alles geschieht bei der Anzeige, also zu Beginn jeder Partie erneut ausführen.",
+      "exemple": "zwei Armeen mit denselben Bildern: Spieler in Blau, Gegner in Rot."
     },
     {
       "nom": "Fortschritt festlegen",
@@ -203,6 +209,24 @@
       "schema": "<b>Eingänge:</b> Objekt, Blitzfarbe, Dauer (Sekunden, 0 = endlos), Stärke (0 = stoppen, 1 bis 3)",
       "role": "Blitze knistern um das Objekt: Es blinkt in der Blitzfarbe, zittert und sprüht Funken. Dauer 0 = endlos (Elektrozaun); Stärke 0 = stoppen.",
       "exemple": "der Zauberer berührt eine Falle: „Stromschlag“ auf den Zauberer (1 Sekunde), „Warten“ 1 Sekunde, dann „Szene neu starten“."
+    },
+    {
+      "nom": "Lichtquelle (Fackel, Laterne…)",
+      "schema": "<b>Eingänge:</b> Objekt, Lichtfarbe, Radius (Pixel: Abstand vom Zentrum), Beleuchtung (%, 100 = normal, 200 = sehr stark), Farbiger Schein (%, 0 = keiner, 200 = sehr stark), Flackern, Einschalten, Horizontal verschieben (Pixel), Vertikal verschieben (Pixel, negativ = nach oben)",
+      "role": "Hängt ein Licht an das Objekt: Es folgt dem Objekt, wenn es sich bewegt (Fackel einer Figur, Laterne, Feuer …), auch wenn das Objekt ein Kind eines anderen ist. Einstellungen: Farbe, Radius in Pixeln (Abstand vom Zentrum), Beleuchtung (100 = normal, bis 300: stärker und weiter), farbiger Schein (0 = keiner), Flackern (keins, Kerze, Fackel, flackert) und Versatz. Ein Licht pro Objekt, höchstens 8 gleichzeitig. Es durchdringt die Dunkelheit von „Dunkelheit und Lichtstimmung“; ohne Dunkelheit fügt es nur seinen Schein hinzu. Einstellung „Einschalten“: „Nur wenn es dunkel ist“ schaltet das Licht bei Einbruch der Nacht von allein ein (ideal mit „Tag-Nacht-Zyklus“).",
+      "exemple": "die Fackel einer Figur: an einem Objekt „Laterne“, Kind des Helden, Radius 360, Flackern „Fackel“."
+    },
+    {
+      "nom": "Licht des Objekts ausschalten",
+      "schema": "<b>Eingang:</b> Objekt",
+      "role": "Schaltet das am Objekt befestigte Licht aus. Zum Wiedereinschalten nimmst du erneut „Lichtquelle (Fackel, Laterne…)“.",
+      "exemple": "ein Button „Laterne“ schaltet das Licht des Helden aus."
+    },
+    {
+      "nom": "Schatten unter dem Objekt",
+      "schema": "<b>Eingänge:</b> Objekt, Schatten, Schattenstärke (%), Schattenbreite (% des Objekts), Vertikal verschieben (Pixel, negativ = nach oben)",
+      "role": "Legt einen weichen Schatten unter das Objekt (oder entfernt ihn mit „Nein“). Er folgt dem Objekt, wenn es sich bewegt; Stärke und Breite sind einstellbar. Er gibt Figuren vor einem Hintergrund sofort Tiefe. Sie lässt sich auch mit dem Kästchen „Schatten unter dem Objekt“ im Inspektor setzen, ganz ohne Knoten.",
+      "exemple": "ein Schatten unter dem Helden: Stärke 50, Breite 70."
     },
     {
       "nom": "Objektspur",

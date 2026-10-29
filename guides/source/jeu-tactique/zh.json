@@ -1,0 +1,198 @@
+{
+  "titre_page": "如何在 Yop2D 里做回合制战术游戏？ | Yop2D 指南",
+  "description": "在 Yop2D 里不写代码，做一个网格上的战术游戏：回合、可到达的蓝色格子、地形、移动、攻击和生命值，全靠节点。",
+  "h1": "如何做战术游戏？",
+  "carte": [
+    "做一个战术游戏",
+    "网格上的回合、蓝色格子、地形、移动和攻击。"
+  ],
+  "etapes": [
+    [
+      "给每个单位一张卡",
+      "{{NoeudEventStart}} → {{definir_fiche}}（生命、攻击、防御、移动、射程）。"
+    ],
+    [
+      "开始玩家的回合",
+      "{{tour_suivant}}（joueur, ennemi）会运行本地事件 \"tour_joueur\"。"
+    ],
+    [
+      "显示英雄能去哪里",
+      "{{NoeudEventClicObjet}} → {{si_tour_de}} → {{montrer_cases}}."
+    ],
+    [
+      "让英雄走路",
+      "{{NoeudEventClicObjet}}（地形）→ {{si_case_accessible}} → {{chemin_vers_case}}。"
+    ],
+    [
+      "攻击",
+      "{{NoeudEventClicObjet}}（怪物）→ {{si_case_accessible}} → {{attaquer}}。"
+    ],
+    [
+      "怪物的回合",
+      "\"tour_ennemi\" → {{chemin_vers_objet}}（走到英雄旁边）→ {{attaquer}}。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "在**战术**游戏里，玩家在网格上**轮流**行动：选一个单位，看它能到达的格子，移动它，然后它攻击。本指南做出最简单的游戏：**一个英雄和一个怪物**。示例 **Tactics tutorial**（启动画面的**示例**标签）里已经全部做好了：打开它的 Blueprint，每一步都在一个**彩色框**里，框上有一个小小的**？**来解释。"
+    ],
+    [
+      "besoin",
+      [
+        "一张你选的图块地图（游戏的网格**就是**这张图块地图的网格）；",
+        "一个名为 **hero1**、标签为 **joueur** 的{{lang:obj_prefix_image}}，和一个名为 **foe1**、标签为 **ennemi** 的{{lang:obj_prefix_image}}；",
+        "一个名为 **terrain** 的{{lang:obj_prefix_zone}}，盖住整张地图（点它来选择格子）；",
+        "一个变量 **etat**（整数，局部），用来知道进行到哪一步：0 = 选英雄，1 = 已选英雄，2 = 英雄已移动。"
+      ]
+    ],
+    [
+      "tip",
+      "**地形**（森林、沙地、山……）在图块编辑器的**图块地形**部分设置：步数成本、是否挡路、防御加成。山会挡路，森林要花 2 步。"
+    ],
+    [
+      "h2",
+      "第 1 步：单位卡"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "添加事件 **[[NoeudEventStart]]**。",
+            "为 **hero1** 添加 **[[definir_fiche]]**：生命 `20`，攻击 `6`，防御 `2`，移动 `4`，射程 `1`。",
+            "再为 **foe1** 添加第二个 **[[definir_fiche]]**，填它自己的数字。",
+            "按顺序连接节点，再添加 **[[tour_suivant]]**，队伍填 `joueur,ennemi`。"
+          ]
+        ],
+        [
+          "tip",
+          "这张卡保存在对象里：你可以随处用公式读取它，例如 `=hero1.vie`。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 2 步：玩家的回合"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "添加事件 **[[NoeudEventPersonnalise]]**，名字写 `tour_joueur`。它会在玩家回合开始时自动运行。",
+            "用 **[[modifier_variable]]** 把 **etat** 设为 `0`，再用 **[[cacher_cases]]** 清除旧的格子。"
+          ]
+        ],
+        [
+          "p",
+          "对每个队伍，**[[tour_suivant]]** 会运行 \"tour_\" 加队伍名的本地事件：先是 `tour_joueur`，然后是 `tour_ennemi`。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 3 步：点英雄，看到蓝色格子"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "在 **hero1** 上添加 **[[NoeudEventClicObjet]]**。",
+            "添加队伍为 `joueur` 的 **[[si_tour_de]]**，然后在 **{{lang:port_vrai}}** 出口接一个 **[[condition]]** `etat < 2`。",
+            "添加 **[[modifier_variable]]**：**etat** = `1`。",
+            "在 **hero1** 上添加 **[[montrer_cases]]**：区域类型 **移动（墙壁会阻挡）**，步数 `=hero1.mouvement`，蓝色，**在每个格子写步数** = 是，**这些标签会挡路** = `joueur,ennemi`。"
+          ]
+        ],
+        [
+          "tip",
+          "格子上的数字是走到那里需要的**步数**。森林格要 2 步：英雄走不了那么远。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 4 步：点蓝色格子，英雄走过去"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "在 **terrain** 上添加 **[[NoeudEventClicObjet]]**，然后接一个 **[[condition]]** `etat = 1`。",
+            "添加 **[[si_case_accessible]]**。列和行都点 **🔗**，选择绿色节点 **[[valeur_colonne_touchee]]** 和 **[[valeur_ligne_touchee]]**：不用写公式。",
+            "在 **{{lang:port_vrai}}** 出口：**[[modifier_variable]]** **etat** = `4`（英雄正在走），然后在 **hero1** 上加 **[[chemin_vers_case]]**，用同样的绿色节点，并把**这些标签会挡住路径** 设为 `joueur,ennemi`。",
+            "在 **{{lang:port_arrive}}** 出口，用 **[[appeler_evenement]]** 调用本地事件 `apres_deplacement`。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 5 步：攻击范围，然后攻击"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "在本地事件 **apres_deplacement** 里：**[[cacher_cases]]**，**etat** = `2`，然后 **[[montrer_cases]]**，类型 **攻击/射程（越过墙壁）**，步数 `=hero1.portee`，红色，区域名 `attaque`。",
+            "在 **foe1** 上添加 **[[NoeudEventClicObjet]]**，接一个 **[[condition]]** `etat = 2`，再接区域名为 `attaque` 的 **[[si_case_accessible]]**。",
+            "在 **{{lang:port_vrai}}** 上：**[[attaquer]]**（对象 A = **hero1**，对象 B = **foe1**）。伤害 = 攻击 − 怪物的防御 − 怪物所在地形的防御。",
+            "出口 **还活着**：更新它的生命文字。出口 **生命值为 0**：怪物被销毁，加上胜利。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 6 步：怪物的回合"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "添加本地事件 `tour_ennemi`。",
+            "在 **foe1** 上添加 **[[chemin_vers_objet]]**，对象 B = **hero1**，**停下方式** = **停在相邻格子正中**，**这些标签会挡住路径** = `joueur,ennemi`。",
+            "在 **{{lang:port_arrive}}** 出口，调用一个本地事件，让 **foe1** **[[attaquer]]** **hero1**。",
+            "几秒后（**[[attendre]]**）：**[[chemin_arreter]]**，然后 **[[tour_suivant]]**：回合回到玩家。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "更进一步"
+    ],
+    [
+      "ul",
+      [
+        "**多个英雄：**添加 **[[marquer_joue]]** 和 **[[si_a_joue]]**，让英雄每回合只行动一次（示例 **Tactics demo** 就是这样做的）。",
+        "**生命条：**在文字或进度条里读取 `=hero1.vie` 和 `=hero1.vie_max`。",
+        "**治疗：** **[[soigner]]** 恢复生命值，但不会超过最大值。",
+        "**桌游：** **[[pion_une_case]]** 把棋子移动一格并居中对齐（◀ ▶ ▲ ▼ 按钮）。"
+      ]
+    ],
+    [
+      "h2",
+      "如果不起作用"
+    ],
+    [
+      "ul",
+      [
+        "**没有蓝色格子：**英雄必须有 **[[si_tour_de]]** 里写的标签，并且 **[[tour_suivant]]** 必须在开始时运行过。",
+        "**格子和图画对不上：**网格是场景里第一张图块地图的网格。没有图块地图时，格子是 80 px。",
+        "**英雄不动：**检查点的格子是不是蓝色，并且那一刻 **etat** 等于 `1`。",
+        "**对照检查：**打开示例 **Tactics tutorial**：Blueprint 的每一部分都在一个解释它的框里。"
+      ]
+    ]
+  ]
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment faire un jeu de tactique au tour par tour dans Yop2D ? | Guide Yop2D</title>
+<meta name="description" content="Faire un jeu de tactique sur une grille dans Yop2D, sans code : tours, cases accessibles en bleu, terrains, déplacement, attaque et vie avec les nœuds.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/jeu-tactique.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/jeu-tactique.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/jeu-tactique.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/jeu-tactique.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/jeu-tactique.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/jeu-tactique.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/jeu-tactique.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/jeu-tactique.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/jeu-tactique.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/jeu-tactique.html">
+<link rel="stylesheet" href="guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Comment faire un jeu de tactique ?",
+ "description": "Faire un jeu de tactique sur une grille dans Yop2D, sans code : tours, cases accessibles en bleu, terrains, déplacement, attaque et vie avec les nœuds.",
+ "inLanguage": "fr",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (moteur de jeu 2D sans code pour Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Donner une fiche à chaque unité",
+   "text": "Au Démarrage → Donner une fiche d'unité (vie, attaque, défense, mouvement, portée)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Passer au tour du joueur",
+   "text": "Passer au tour suivant (joueur, ennemi) lance l'événement local « tour_joueur »."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Montrer les cases où le héros peut aller",
+   "text": "Au Clic sur Objet → Si c'est le tour de… → Montrer les cases accessibles."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Faire marcher le héros",
+   "text": "Au Clic sur Objet (le terrain) → Si la case est accessible → Aller à la case (chemin)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Attaquer",
+   "text": "Au Clic sur Objet (le monstre) → Si la case est accessible → Attaquer."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Le tour des monstres",
+   "text": "« tour_ennemi » → Aller vers un objet (chemin) (à côté du héros) → Attaquer."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../fr/index.html">← Yop2D</a>
+<h1>Comment faire un jeu de tactique ?</h1>
+<p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/jeu-tactique.html" hreflang="en">English</a> · <a href="es/jeu-tactique.html" hreflang="es">Español</a> · <a href="de/jeu-tactique.html" hreflang="de">Deutsch</a> · <a href="it/jeu-tactique.html" hreflang="it">Italiano</a> · <a href="pt/jeu-tactique.html" hreflang="pt">Português</a> · <a href="ru/jeu-tactique.html" hreflang="ru">Русский</a> · <a href="zh/jeu-tactique.html" hreflang="zh">中文</a> · <a href="ja/jeu-tactique.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Dans un jeu de <strong>tactique</strong>, on joue <strong>chacun son tour</strong> sur une grille : on choisit une unité, on voit les cases où elle peut aller, on la déplace, puis elle attaque. Ce guide fait le jeu le plus simple possible : <strong>un héros et un monstre</strong>. Tout est déjà prêt dans l'exemple <strong>Tactics tutorial</strong> (onglet <strong>Exemples</strong> de l'écran de démarrage) : ouvre son Blueprint, chaque étape est dans un <strong>cadre de couleur</strong> avec un petit <strong>?</strong> qui l'explique.</p>
+<div class="besoin">
+<b>Il te faut :</b>
+<ul><li>un décor en tuiles de ton choix (la grille du jeu <strong>est</strong> la grille de ce décor) ;</li><li>une Image nommée <strong>hero1</strong> avec le tag <strong>joueur</strong>, et une autre nommée <strong>foe1</strong> avec le tag <strong>ennemi</strong> ;</li><li>une Zone nommée <strong>terrain</strong> qui couvre toute la carte (c'est elle qu'on touche pour choisir une case) ;</li><li>une variable <strong>etat</strong> (entier, locale) pour savoir où on en est : 0 = choisir un héros, 1 = héros choisi, 2 = héros déplacé.</li></ul>
+</div>
+<div class="tip">👉 Les <strong>terrains</strong> (forêt, sable, montagne…) se règlent dans l'éditeur de tuiles, partie <strong>Terrains des tuiles</strong> : coût en pas, case bloquée ou non, bonus de défense. La montagne bloque le passage, la forêt coûte 2 pas.</div>
+<h2>Étape 1 : les fiches des unités</h2>
+<div class="method">
+<ol><li>Ajoute l'événement <strong>« Au Démarrage »</strong>.</li><li>Ajoute <strong>« Donner une fiche d'unité »</strong> pour <strong>hero1</strong> : vie <code>20</code>, attaque <code>6</code>, défense <code>2</code>, mouvement <code>4</code>, portée <code>1</code>.</li><li>Ajoute un deuxième <strong>« Donner une fiche d'unité »</strong> pour <strong>foe1</strong>, avec ses propres nombres.</li><li>Relie les nœuds à la suite, puis ajoute <strong>« Passer au tour suivant »</strong> avec les équipes <code>joueur,ennemi</code>.</li></ol>
+<div class="tip">👉 La fiche est enregistrée dans l'objet : tu peux la relire partout avec une formule, par exemple <code>=hero1.vie</code>.</div>
+</div>
+<h2>Étape 2 : le tour du joueur</h2>
+<div class="method">
+<ol><li>Ajoute l'événement <strong>« Événement Local »</strong> et écris le nom <code>tour_joueur</code>. Il part tout seul au début du tour du joueur.</li><li>Mets <strong>etat</strong> à <code>0</code> avec <strong>« Modifier Variable »</strong>, puis <strong>« Cacher les cases »</strong> pour effacer les anciennes cases.</li></ol>
+<p>Pour chaque équipe, <strong>« Passer au tour suivant »</strong> lance l'événement local « tour_ » suivi du nom de l'équipe : <code>tour_joueur</code>, puis <code>tour_ennemi</code>.</p>
+</div>
+<h2>Étape 3 : toucher le héros, voir les cases bleues</h2>
+<div class="method">
+<ol><li>Ajoute <strong>« Au Clic sur Objet »</strong> sur <strong>hero1</strong>.</li><li>Ajoute <strong>« Si c'est le tour de… »</strong> avec l'équipe <code>joueur</code>, puis sur la sortie <strong>Vrai</strong> une <strong>« Condition »</strong> <code>etat &lt; 2</code>.</li><li>Ajoute <strong>« Modifier Variable »</strong> : <strong>etat</strong> = <code>1</code>.</li><li>Ajoute <strong>« Montrer les cases accessibles »</strong> sur <strong>hero1</strong> : type de zone <strong>Déplacement (les murs comptent)</strong>, nombre de pas <code>=hero1.mouvement</code>, couleur bleue, <strong>Écrire le nombre de pas sur chaque case</strong> = oui, <strong>Ces tags bloquent le passage</strong> = <code>joueur,ennemi</code>.</li></ol>
+<div class="tip">👉 Les chiffres sur les cases sont le <strong>nombre de pas</strong> pour y arriver. Les cases de forêt en coûtent 2 : le héros va moins loin.</div>
+</div>
+<h2>Étape 4 : toucher une case bleue, le héros marche</h2>
+<div class="method">
+<ol><li>Ajoute <strong>« Au Clic sur Objet »</strong> sur <strong>terrain</strong>, puis une <strong>« Condition »</strong> <code>etat = 1</code>.</li><li>Ajoute <strong>« Si la case est accessible »</strong>. Pour la colonne et la ligne, touche <strong>🔗</strong> et choisis les nœuds verts <strong>« Colonne touchée »</strong> et <strong>« Ligne touchée »</strong> : aucune formule à écrire.</li><li>Sur la sortie <strong>Vrai</strong> : <strong>« Modifier Variable »</strong> <strong>etat</strong> = <code>4</code> (le héros marche), puis <strong>« Aller à la case (chemin) »</strong> sur <strong>hero1</strong>, avec les mêmes nœuds verts et <strong>Ces tags bloquent le chemin</strong> = <code>joueur,ennemi</code>.</li><li>Sur la sortie <strong>Arrivé</strong>, appelle l'événement local <code>apres_deplacement</code> avec <strong>« Appeler un événement »</strong>.</li></ol>
+</div>
+<h2>Étape 5 : la zone d'attaque, puis l'attaque</h2>
+<div class="method">
+<ol><li>Dans l'événement local <strong>apres_deplacement</strong> : <strong>« Cacher les cases »</strong>, <strong>etat</strong> = <code>2</code>, puis <strong>« Montrer les cases accessibles »</strong> en type <strong>Attaque / portée (passe au-dessus des murs)</strong>, nombre de pas <code>=hero1.portee</code>, couleur rouge, avec le nom de zone <code>attaque</code>.</li><li>Ajoute <strong>« Au Clic sur Objet »</strong> sur <strong>foe1</strong>, une <strong>« Condition »</strong> <code>etat = 2</code> et <strong>« Si la case est accessible »</strong> avec le nom de zone <code>attaque</code>.</li><li>Sur <strong>Vrai</strong> : <strong>« Attaquer »</strong> (objet A = <strong>hero1</strong>, objet B = <strong>foe1</strong>). Les dégâts sont l'attaque, moins la défense du monstre, moins la défense de son terrain.</li><li>Sortie <strong>Encore en vie</strong> : mets à jour son texte de vie. Sortie <strong>Plus de vie</strong> : le monstre est détruit, ajoute la victoire.</li></ol>
+</div>
+<h2>Étape 6 : le tour des monstres</h2>
+<div class="method">
+<ol><li>Ajoute l'événement local <code>tour_ennemi</code>.</li><li>Ajoute <strong>« Aller vers un objet (chemin) »</strong> sur <strong>foe1</strong>, objet B = <strong>hero1</strong>, <strong>S'arrêter</strong> = <strong>Sur une case voisine, bien centré</strong>, <strong>Ces tags bloquent le chemin</strong> = <code>joueur,ennemi</code>.</li><li>Sur la sortie <strong>Arrivé</strong>, appelle un événement local où <strong>foe1</strong> <strong>« Attaquer »</strong> <strong>hero1</strong>.</li><li>Après quelques secondes (<strong>« Attendre »</strong>), <strong>« Arrêter le chemin »</strong> puis <strong>« Passer au tour suivant »</strong> : le tour revient au joueur.</li></ol>
+</div>
+<h2>Pour aller plus loin</h2>
+<ul><li><strong>Plusieurs héros :</strong> ajoute <strong>« Marquer comme ayant joué »</strong> et <strong>« Si l'unité a déjà joué »</strong> pour qu'un héros ne joue qu'une fois par tour (c'est ce que fait l'exemple <strong>Tactics demo</strong>).</li><li><strong>Une barre de vie :</strong> lis <code>=hero1.vie</code> et <code>=hero1.vie_max</code> dans un texte ou une barre de progression.</li><li><strong>Soigner :</strong> <strong>« Soigner »</strong> rend des points de vie sans dépasser le maximum.</li><li><strong>Un jeu de plateau :</strong> <strong>« Déplacer le pion d'une case »</strong> déplace une pièce d'une case, bien centrée (boutons ◀ ▶ ▲ ▼).</li></ul>
+<h2>Si ça ne marche pas</h2>
+<ul><li><strong>Aucune case bleue :</strong> le héros doit avoir le tag écrit dans <strong>« Si c'est le tour de… »</strong>, et <strong>« Passer au tour suivant »</strong> doit avoir été lancé au démarrage.</li><li><strong>Les cases ne correspondent pas au dessin :</strong> la grille est celle du premier décor en tuiles de la scène. Sans décor en tuiles, les cases font 80 px.</li><li><strong>Le héros ne bouge pas :</strong> vérifie que la case touchée est bleue, et que <strong>etat</strong> vaut bien <code>1</code> à ce moment-là.</li><li><strong>Pour comparer</strong>, ouvre l'exemple <strong>Tactics tutorial</strong> : chaque partie du Blueprint est dans un cadre qui l'explique.</li></ul>
+
+<div class="nav">
+<a href="casse-briques.html">← Faire un casse-briques</a>
+<a href="niveau-suivant.html">Guide suivant : Passer au niveau suivant →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="../fr/index.html">Site officiel</a> · <a href="../noeuds/fr.html">Référence des nœuds</a></p>
+</footer>
+</body>
+</html>

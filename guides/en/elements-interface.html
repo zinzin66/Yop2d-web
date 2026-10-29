@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to make a menu with buttons, a switch and a slider in Yop2D? | Yop2D Guide</title>
+<meta name="description" content="Build a real menu in Yop2D: buttons of every shape, switch, checkbox, slider, panel and counter, no code. Change the shape, colors, image and sound from one place.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/elements-interface.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/elements-interface.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/elements-interface.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/elements-interface.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/elements-interface.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/elements-interface.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/elements-interface.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/elements-interface.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/elements-interface.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/elements-interface.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to make a menu with buttons, a switch and a slider?",
+ "description": "Build a real menu in Yop2D: buttons of every shape, switch, checkbox, slider, panel and counter, no code. Change the shape, colors, image and sound from one place.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Add an element",
+   "text": "Tap + then \"Interface elements\" and pick a button."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Change its style",
+   "text": "Inspector > \"Element style…\": shape, colors, image, text."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Read its value",
+   "text": "A formula reads =name.progression for a switch or a slider."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "React to the touch",
+   "text": "Add “On Object Click” in the Blueprint."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to make a menu with buttons, a switch and a slider?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../elements-interface.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/elements-interface.html" hreflang="es">Español</a> · <a href="../de/elements-interface.html" hreflang="de">Deutsch</a> · <a href="../it/elements-interface.html" hreflang="it">Italiano</a> · <a href="../pt/elements-interface.html" hreflang="pt">Português</a> · <a href="../ru/elements-interface.html" hreflang="ru">Русский</a> · <a href="../zh/elements-interface.html" hreflang="zh">中文</a> · <a href="../ja/elements-interface.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>A game menu needs good-looking buttons and settings: a switch for the sound, a slider for the volume, a counter for the score. In Yop2D, every element is <strong>a single object</strong> with its text inside, and its whole look is set in one window. You can also download the <strong>UI kit</strong> example (Examples tab): it shows every element.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a project open in the editor;</li><li>the "UI kit" example if you want to see the result first (optional).</li></ul>
+</div>
+<h2>Step 1: add an element</h2>
+<div class="method">
+<ol><li>Tap the <strong>+</strong> of the editor, then the <strong>Interface elements</strong> section.</li><li>Choose between <strong>Button</strong>, <strong>Switch</strong>, <strong>Checkbox</strong>, <strong>Slider</strong>, <strong>Panel</strong> and <strong>Counter</strong>.</li><li>The element arrives in the middle of the screen: move it with your finger and resize it with the handles, like any object.</li></ol>
+<div class="tip">👉 The text of a button is inside it: write it in the Inspector, no need to place a text on top of the button anymore.</div>
+</div>
+<h2>Step 2: change its style</h2>
+<div class="method">
+<ol><li>Select the element and tap <strong>Element style…</strong> in the Inspector.</li><li>In <strong>Shape</strong>, choose rectangle, rounded, pill, circle, cut corners or hexagon.</li><li>In <strong>Image</strong>, choose <strong>Inside the shape</strong> (the image keeps the shape), <strong>Replaces the shape</strong> (the image IS the button) or <strong>Icon + text</strong>.</li><li>In <strong>Colors and outline</strong>, set the color, the <strong>gradient</strong>, the outline, the <strong>shadow</strong> and the <strong>glow (neon)</strong>.</li><li>In <strong>Text</strong>, choose the font, the size, the color and the outline of the letters.</li></ol>
+</div>
+<h2>Step 3: give it a behavior</h2>
+<div class="method">
+<ol><li>In <strong>Behavior</strong>, turn on <strong>Stays pressed (ON / OFF)</strong> for a button that keeps its state.</li><li>Choose a <strong>sound on touch</strong> and, if you like, a <strong>vibration</strong>.</li><li>For a slider, set the <strong>minimum value</strong>, the <strong>maximum value</strong> and the <strong>starting value</strong>.</li></ol>
+<div class="tip">👉 A <strong>disabled (greyed)</strong> element no longer reacts to touch: handy for a "Continue" button that is not available yet.</div>
+</div>
+<h2>Step 4: read the value in the game</h2>
+<div class="method">
+<ol><li>A switch or a checkbox equals its minimum value (off) or maximum value (on); a slider equals its position.</li><li>In a formula, write <strong>object_name.progression</strong>: for example "=volume.progression" in “Set a property” of a text to display the volume.</li><li>For a button, add the event “On Object Click” in the Blueprint and choose your button.</li></ol>
+</div>
+<p>The old Yop2D buttons keep working: these new elements are added, they replace nothing.</p>
+
+<div class="nav">
+<a href="../en/prefabs.html">← A ready-made object</a>
+<a href="../en/musique.html">Next guide: Create your music →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>

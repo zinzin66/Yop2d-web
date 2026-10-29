@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2Dでターン制タクティクスゲームを作るには？ | Yop2Dガイド</title>
+<meta name="description" content="Yop2Dで、コードなしでグリッド上のタクティクスゲームを作ります。ターン、行ける青いマス、地形、移動、攻撃、体力をノードで作ります。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/jeu-tactique.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/jeu-tactique.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/jeu-tactique.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/jeu-tactique.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/jeu-tactique.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/jeu-tactique.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/jeu-tactique.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/jeu-tactique.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/jeu-tactique.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/jeu-tactique.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "タクティクスゲームを作るには？",
+ "description": "Yop2Dで、コードなしでグリッド上のタクティクスゲームを作ります。ターン、行ける青いマス、地形、移動、攻撃、体力をノードで作ります。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "ユニットごとにカードをあたえる",
+   "text": "起動時 → ユニットカードをあたえる（体力、こうげき、ぼうぎょ、移動、射程）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "プレイヤーのターンを始める",
+   "text": "次のターンへ（joueur, ennemi）がローカルイベント \"tour_joueur\" を動かします。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ヒーローが行ける場所を見せる",
+   "text": "オブジェクトクリック時 → もし…の番なら → 行けるマスを表示."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ヒーローを歩かせる",
+   "text": "オブジェクトクリック時（地形）→ もしマスに行けるなら → マスへ行く（道）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "こうげきする",
+   "text": "オブジェクトクリック時（モンスター）→ もしマスに行けるなら → こうげきする。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "モンスターのターン",
+   "text": "\"tour_ennemi\" → オブジェクトへ行く（道さがし）（ヒーローのとなりへ）→ こうげきする。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>タクティクスゲームを作るには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../jeu-tactique.html" hreflang="fr">Français</a> · <a href="../en/jeu-tactique.html" hreflang="en">English</a> · <a href="../es/jeu-tactique.html" hreflang="es">Español</a> · <a href="../de/jeu-tactique.html" hreflang="de">Deutsch</a> · <a href="../it/jeu-tactique.html" hreflang="it">Italiano</a> · <a href="../pt/jeu-tactique.html" hreflang="pt">Português</a> · <a href="../ru/jeu-tactique.html" hreflang="ru">Русский</a> · <a href="../zh/jeu-tactique.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p><strong>タクティクス</strong>ゲームでは、プレイヤーがグリッド上で<strong>交代で</strong>動きます。ユニットを選び、行けるマスを見て、動かし、そのあとこうげきします。このガイドでは、いちばん簡単なゲーム（<strong>ヒーロー1人とモンスター1体</strong>）を作ります。すべてサンプル <strong>Tactics tutorial</strong>（スタート画面の<strong>サンプル</strong>タブ）にもう入っています。そのBlueprintを開くと、各ステップが<strong>色つきの枠</strong>に入っていて、小さな<strong>？</strong>が説明してくれます。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>好きなタイルマップ（ゲームのグリッドは、このタイルマップのグリッド<strong>そのもの</strong>です）。</li><li>タグ <strong>joueur</strong> がついた <strong>hero1</strong> という名前の画像と、タグ <strong>ennemi</strong> がついた <strong>foe1</strong> という名前の画像。</li><li>マップ全体をおおう <strong>terrain</strong> という名前のゾーン（マスを選ぶときにタッチするのはこれです）。</li><li>今どこまで進んだかを知るための変数 <strong>etat</strong>（整数、ローカル）：0 = ヒーローを選ぶ、1 = ヒーローを選んだ、2 = ヒーローが動いた。</li></ul>
+</div>
+<div class="tip">👉 <strong>地形</strong>（森、砂、山…）は、タイルエディタの<strong>タイルの地形</strong>の部分で決めます。歩数のコスト、通れるかどうか、ぼうぎょボーナス。山は通れず、森は2歩かかります。</div>
+<h2>ステップ1：ユニットのカード</h2>
+<div class="method">
+<ol><li>イベント <strong>「起動時」</strong> を追加します。</li><li><strong>hero1</strong> に <strong>「ユニットカードをあたえる」</strong> を追加：体力 <code>20</code>、こうげき <code>6</code>、ぼうぎょ <code>2</code>、移動 <code>4</code>、射程 <code>1</code>。</li><li><strong>foe1</strong> にも2つ目の <strong>「ユニットカードをあたえる」</strong> を追加し、それぞれの数字を入れます。</li><li>ノードを順番につなぎ、チームを <code>joueur,ennemi</code> にした <strong>「次のターンへ」</strong> を追加します。</li></ol>
+<div class="tip">👉 カードはオブジェクトの中に保存されます。式でどこからでも読めます。たとえば <code>=hero1.vie</code> です。</div>
+</div>
+<h2>ステップ2：プレイヤーのターン</h2>
+<div class="method">
+<ol><li>イベント <strong>「ローカルイベント」</strong> を追加し、名前に <code>tour_joueur</code> と書きます。プレイヤーのターンの始めに自動で動きます。</li><li><strong>「変数を変更」</strong> で <strong>etat</strong> を <code>0</code> にし、<strong>「マスを隠す」</strong> で前のマスを消します。</li></ol>
+<p>チームごとに、<strong>「次のターンへ」</strong> は "tour_" にチーム名をつけたローカルイベント（<code>tour_joueur</code>、次に <code>tour_ennemi</code>）を動かします。</p>
+</div>
+<h2>ステップ3：ヒーローをタッチして青いマスを見る</h2>
+<div class="method">
+<ol><li><strong>hero1</strong> に <strong>「オブジェクトクリック時」</strong> を追加します。</li><li>チーム <code>joueur</code> の <strong>「もし…の番なら」</strong> を追加し、<strong>真</strong> の出口に <strong>「条件」</strong> <code>etat &lt; 2</code> をつなぎます。</li><li><strong>「変数を変更」</strong> を追加：<strong>etat</strong> = <code>1</code>。</li><li><strong>hero1</strong> に <strong>「行けるマスを表示」</strong> を追加：ゾーンの種類 <strong>移動（壁は通れない）</strong>、歩数 <code>=hero1.mouvement</code>、青い色、<strong>各マスに歩数を表示</strong> = はい、<strong>通れなくするタグ</strong> = <code>joueur,ennemi</code>。</li></ol>
+<div class="tip">👉 マスの数字は、そこに着くのに必要な<strong>歩数</strong>です。森のマスは2かかるので、ヒーローはそんなに遠くへ行けません。</div>
+</div>
+<h2>ステップ4：青いマスをタッチして、ヒーローが歩く</h2>
+<div class="method">
+<ol><li><strong>terrain</strong> に <strong>「オブジェクトクリック時」</strong> を追加し、<strong>「条件」</strong> <code>etat = 1</code> をつなぎます。</li><li><strong>「もしマスに行けるなら」</strong> を追加します。列と行は <strong>🔗</strong> をタッチして、緑のノード <strong>「タッチした列」</strong> と <strong>「タッチした行」</strong> を選びます。式を書く必要はありません。</li><li><strong>真</strong> の出口：<strong>「変数を変更」</strong> <strong>etat</strong> = <code>4</code>（ヒーローが歩いている）、そのあと <strong>hero1</strong> に <strong>「マスへ行く（道）」</strong>。同じ緑のノードを使い、<strong>道をふさぐタグ</strong> = <code>joueur,ennemi</code> にします。</li><li><strong>とうちゃく</strong> の出口で、<strong>「イベントを呼ぶ」</strong> でローカルイベント <code>apres_deplacement</code> を呼びます。</li></ol>
+</div>
+<h2>ステップ5：こうげき範囲、そしてこうげき</h2>
+<div class="method">
+<ol><li>ローカルイベント <strong>apres_deplacement</strong> で：<strong>「マスを隠す」</strong>、<strong>etat</strong> = <code>2</code>、そのあと <strong>「行けるマスを表示」</strong> を種類 <strong>攻撃・射程（壁を越える）</strong>、歩数 <code>=hero1.portee</code>、赤い色、ゾーン名 <code>attaque</code> で追加します。</li><li><strong>foe1</strong> に <strong>「オブジェクトクリック時」</strong>、<strong>「条件」</strong> <code>etat = 2</code>、ゾーン名 <code>attaque</code> の <strong>「もしマスに行けるなら」</strong> を追加します。</li><li><strong>真</strong> で：<strong>「こうげきする」</strong>（オブジェクトA = <strong>hero1</strong>、オブジェクトB = <strong>foe1</strong>）。ダメージは、こうげきからモンスターのぼうぎょと、その地形のぼうぎょを引いたものです。</li><li>出口 <strong>まだ生きている</strong>：体力のテキストを更新します。出口 <strong>HPが0</strong>：モンスターは壊れるので、勝利を追加します。</li></ol>
+</div>
+<h2>ステップ6：モンスターのターン</h2>
+<div class="method">
+<ol><li>ローカルイベント <code>tour_ennemi</code> を追加します。</li><li><strong>foe1</strong> に <strong>「オブジェクトへ行く（道さがし）」</strong> を追加：オブジェクトB = <strong>hero1</strong>、<strong>止まり方</strong> = <strong>となりのマスのまん中</strong>、<strong>道をふさぐタグ</strong> = <code>joueur,ennemi</code>。</li><li><strong>とうちゃく</strong> の出口で、<strong>foe1</strong> が <strong>hero1</strong> を <strong>「こうげきする」</strong> するローカルイベントを呼びます。</li><li>数秒後（<strong>「待つ」</strong>）に <strong>「道さがしを止める」</strong>、そのあと <strong>「次のターンへ」</strong>：ターンがプレイヤーに戻ります。</li></ol>
+</div>
+<h2>さらに進むには</h2>
+<ul><li><strong>ヒーローが複数いるとき：</strong> <strong>「行動済みにする」</strong> と <strong>「もしユニットが行動済みなら」</strong> を追加すると、1ターンに1回だけ行動できます（サンプル <strong>Tactics demo</strong> がそうしています）。</li><li><strong>体力バー：</strong><code>=hero1.vie</code> と <code>=hero1.vie_max</code> をテキストや進行バーで読みます。</li><li><strong>回復：</strong> <strong>「かいふくする」</strong> は最大値を超えずに体力を戻します。</li><li><strong>ボードゲーム：</strong> <strong>「コマを1マス動かす」</strong> は駒を1マス、きれいに真ん中へ動かします（◀ ▶ ▲ ▼ ボタン）。</li></ul>
+<h2>うまくいかないとき</h2>
+<ul><li><strong>青いマスが出ない：</strong>ヒーローに <strong>「もし…の番なら」</strong> で書いたタグが必要で、<strong>「次のターンへ」</strong> が最初に動いている必要があります。</li><li><strong>マスが絵と合わない：</strong>グリッドは、シーンの最初のタイルマップのものです。タイルマップがないと、マスは80 pxです。</li><li><strong>ヒーローが動かない：</strong>タッチしたマスが青いか、その時 <strong>etat</strong> が <code>1</code> かを確かめます。</li><li><strong>くらべるには</strong>、サンプル <strong>Tactics tutorial</strong> を開きます。Blueprintの各部分が、説明する枠に入っています。</li></ul>
+
+<div class="nav">
+<a href="../ja/casse-briques.html">← ブロック崩しを作る</a>
+<a href="../ja/niveau-suivant.html">次のガイド： 次のステージに進む →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

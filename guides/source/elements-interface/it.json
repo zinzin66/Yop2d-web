@@ -1,0 +1,122 @@
+{
+  "titre_page": "Come fare un menu con pulsanti, interruttore e cursore in Yop2D? | Guida Yop2D",
+  "description": "Crea un vero menu in Yop2D: pulsanti di ogni forma, interruttore, casella, cursore, pannello e contatore, senza codice. Cambia forma, colori, immagine e suono da un solo punto.",
+  "h1": "Come fare un menu con pulsanti, interruttore e cursore?",
+  "carte": [
+    "Pulsanti ed elementi di interfaccia",
+    "Un menu completo: pulsanti, interruttore, cursore, tutto si regola in un solo punto."
+  ],
+  "etapes": [
+    [
+      "Aggiungi un elemento",
+      "Tocca + poi «Elementi di interfaccia» e scegli un pulsante."
+    ],
+    [
+      "Cambia il suo stile",
+      "Ispettore > «Stile dell'elemento…»: forma, colori, immagine, testo."
+    ],
+    [
+      "Leggi il suo valore",
+      "Una formula legge =nome.progression per un interruttore o un cursore."
+    ],
+    [
+      "Reagisci al tocco",
+      "Aggiungi [[NoeudEventClicObjet]] nel Blueprint."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Il menu di un gioco ha bisogno di pulsanti belli e di impostazioni: un interruttore per il suono, un cursore per il volume, un contatore per il punteggio. In Yop2D ogni elemento è **un solo oggetto** con il testo dentro, e tutto il suo aspetto si regola in una sola finestra. Puoi anche scaricare l'esempio **UI kit** (scheda Esempi): mostra tutti gli elementi."
+    ],
+    [
+      "besoin",
+      [
+        "un progetto aperto nell'editor;",
+        "l'esempio «UI kit» se vuoi vedere prima il risultato (facoltativo)."
+      ]
+    ],
+    [
+      "h2",
+      "Passo 1: aggiungi un elemento"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Tocca il **+** dell'editor, poi la sezione **Elementi di interfaccia**.",
+            "Scegli tra **Pulsante**, **Interruttore**, **Casella**, **Cursore**, **Pannello** e **Contatore**.",
+            "L'elemento arriva al centro dello schermo: spostalo con il dito e ridimensionalo con le maniglie, come qualsiasi oggetto."
+          ]
+        ],
+        [
+          "tip",
+          "Il testo di un pulsante è al suo interno: scrivilo nell'Ispettore, non serve più mettere un testo sopra il pulsante."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 2: cambia il suo stile"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Seleziona l'elemento e tocca **Stile dell'elemento…** nell'Ispettore.",
+            "In **Forma** scegli rettangolo, arrotondato, pillola, cerchio, angoli tagliati o esagono.",
+            "In **Immagine** scegli **Dentro la forma** (l'immagine mantiene la forma), **Sostituisce la forma** (l'immagine È il pulsante) o **Icona + testo**.",
+            "In **Colori e contorno** regola il colore, la **sfumatura**, il contorno, l'**ombra** e l'**alone luminoso (neon)**.",
+            "In **Testo** scegli il carattere, la dimensione, il colore e il contorno delle lettere."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 3: dagli un comportamento"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "In **Comportamento** attiva **Resta premuto (ON / OFF)** per un pulsante che mantiene il suo stato.",
+            "Scegli un **suono al tocco** e, se vuoi, una **vibrazione**.",
+            "Per un cursore regola il **valore minimo**, il **valore massimo** e il **valore iniziale**."
+          ]
+        ],
+        [
+          "tip",
+          "Un elemento **disattivato (grigio)** non reagisce più al tocco: comodo per un pulsante «Continua» non ancora disponibile."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 4: leggi il valore nel gioco"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Un interruttore o una casella vale il suo valore minimo (spento) o massimo (acceso); un cursore vale la sua posizione.",
+            "In una formula scrivi **nome_oggetto.progression**: ad esempio «=volume.progression» in [[modifier_propriete]] di un testo per mostrare il volume.",
+            "Per un pulsante aggiungi l'evento [[NoeudEventClicObjet]] nel Blueprint e scegli il tuo pulsante."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "I vecchi pulsanti di Yop2D continuano a funzionare: questi nuovi elementi si aggiungono, non sostituiscono nulla."
+    ]
+  ]
+}

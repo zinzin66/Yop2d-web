@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Cómo hacer un menú con botones, un interruptor y un control deslizante en Yop2D? | Guía Yop2D</title>
+<meta name="description" content="Crea un menú de verdad en Yop2D: botones de todas las formas, interruptor, casilla, control deslizante, panel y contador, sin código. Cambia la forma, los colores, la imagen y el sonido desde un solo sitio.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/es/elements-interface.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/elements-interface.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/elements-interface.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/elements-interface.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/elements-interface.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/elements-interface.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/elements-interface.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/elements-interface.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/elements-interface.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/elements-interface.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "¿Cómo hacer un menú con botones, un interruptor y un control deslizante?",
+ "description": "Crea un menú de verdad en Yop2D: botones de todas las formas, interruptor, casilla, control deslizante, panel y contador, sin código. Cambia la forma, los colores, la imagen y el sonido desde un solo sitio.",
+ "inLanguage": "es",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de juegos 2D sin código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Añade un elemento",
+   "text": "Toca + y luego «Elementos de interfaz» y elige un botón."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Cambia su estilo",
+   "text": "Inspector > «Estilo del elemento…»: forma, colores, imagen, texto."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Lee su valor",
+   "text": "Una fórmula lee =nombre.progression para un interruptor o un control deslizante."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Reacciona al toque",
+   "text": "Añade «Al Clic en Objeto» en el Blueprint."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../es/index.html">← Yop2D</a>
+<h1>¿Cómo hacer un menú con botones, un interruptor y un control deslizante?</h1>
+<p>Guía para principiantes · sin código</p>
+<p class="langues"><a href="../elements-interface.html" hreflang="fr">Français</a> · <a href="../en/elements-interface.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="../de/elements-interface.html" hreflang="de">Deutsch</a> · <a href="../it/elements-interface.html" hreflang="it">Italiano</a> · <a href="../pt/elements-interface.html" hreflang="pt">Português</a> · <a href="../ru/elements-interface.html" hreflang="ru">Русский</a> · <a href="../zh/elements-interface.html" hreflang="zh">中文</a> · <a href="../ja/elements-interface.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Un menú de juego necesita botones bonitos y ajustes: un interruptor para el sonido, un control deslizante para el volumen, un contador para la puntuación. En Yop2D, cada elemento es <strong>un solo objeto</strong> con su texto dentro, y todo su aspecto se ajusta en una sola ventana. También puedes descargar el ejemplo <strong>UI kit</strong> (pestaña Ejemplos): muestra todos los elementos.</p>
+<div class="besoin">
+<b>Necesitas:</b>
+<ul><li>un proyecto abierto en el editor;</li><li>el ejemplo «UI kit» si quieres ver el resultado antes (opcional).</li></ul>
+</div>
+<h2>Paso 1: añade un elemento</h2>
+<div class="method">
+<ol><li>Toca el <strong>+</strong> del editor y luego la sección <strong>Elementos de interfaz</strong>.</li><li>Elige entre <strong>Botón</strong>, <strong>Interruptor</strong>, <strong>Casilla</strong>, <strong>Control deslizante</strong>, <strong>Panel</strong> y <strong>Contador</strong>.</li><li>El elemento llega al centro de la pantalla: muévelo con el dedo y cambia su tamaño con los tiradores, como cualquier objeto.</li></ol>
+<div class="tip">👉 El texto de un botón está dentro: escríbelo en el Inspector, ya no hace falta poner un texto encima del botón.</div>
+</div>
+<h2>Paso 2: cambia su estilo</h2>
+<div class="method">
+<ol><li>Selecciona el elemento y toca <strong>Estilo del elemento…</strong> en el Inspector.</li><li>En <strong>Forma</strong>, elige rectángulo, redondeado, píldora, círculo, esquinas cortadas o hexágono.</li><li>En <strong>Imagen</strong>, elige <strong>Dentro de la forma</strong> (la imagen conserva la forma), <strong>Sustituye la forma</strong> (la imagen ES el botón) o <strong>Icono + texto</strong>.</li><li>En <strong>Colores y contorno</strong>, ajusta el color, el <strong>degradado</strong>, el contorno, la <strong>sombra</strong> y el <strong>halo luminoso (neón)</strong>.</li><li>En <strong>Texto</strong>, elige la fuente, el tamaño, el color y el contorno de las letras.</li></ol>
+</div>
+<h2>Paso 3: dale un comportamiento</h2>
+<div class="method">
+<ol><li>En <strong>Comportamiento</strong>, activa <strong>Se queda pulsado (ON / OFF)</strong> para un botón que conserva su estado.</li><li>Elige un <strong>sonido al tocar</strong> y, si quieres, una <strong>vibración</strong>.</li><li>Para un control deslizante, ajusta el <strong>valor mínimo</strong>, el <strong>valor máximo</strong> y el <strong>valor inicial</strong>.</li></ol>
+<div class="tip">👉 Un elemento <strong>desactivado (gris)</strong> ya no reacciona al toque: útil para un botón «Continuar» que aún no está disponible.</div>
+</div>
+<h2>Paso 4: lee el valor en el juego</h2>
+<div class="method">
+<ol><li>Un interruptor o una casilla vale su valor mínimo (apagado) o máximo (encendido); un control deslizante vale su posición.</li><li>En una fórmula, escribe <strong>nombre_del_objeto.progression</strong>: por ejemplo «=volumen.progression» en «Modificar una propiedad» de un texto para mostrar el volumen.</li><li>Para un botón, añade el evento «Al Clic en Objeto» en el Blueprint y elige tu botón.</li></ol>
+</div>
+<p>Los botones antiguos de Yop2D siguen funcionando: estos nuevos elementos se añaden, no sustituyen nada.</p>
+
+<div class="nav">
+<a href="../es/prefabs.html">← Un objeto listo para usar</a>
+<a href="../es/musique.html">Siguiente guía: Crea tu música →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de juegos 2D gratuito y sin código para Android · <a href="../../es/index.html">Sitio oficial</a> · <a href="../../noeuds/es.html">Referencia de nodos</a></p>
+</footer>
+</body>
+</html>

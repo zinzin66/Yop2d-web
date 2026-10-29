@@ -508,7 +508,7 @@
   "quand un ennemi explose : durée 0,06, vitesse 0,05."
  ],
  "chemin_vers_objet": [
-  "L'objet A va vers l'objet B en trouvant tout seul le plus court chemin, case par case, sans traverser les murs (tuiles « Solide » d'un décor en tuiles, objets physiques fixes). Le chemin est recalculé quand B bouge. [[lang:port_arrive]] se lance quand A touche B.",
+  "L'objet A va vers l'objet B en trouvant tout seul le plus court chemin, case par case, sans traverser les murs (tuiles « Solide » d'un décor en tuiles, objets physiques fixes). Le chemin est recalculé quand B bouge. [[lang:port_arrive]] se lance quand A touche B. Le réglage « S'arrêter » permet de s'arrêter sur une case voisine, bien centré (jeux sur grille) ; « Ces tags bloquent le chemin » fait contourner les autres unités.",
   "un fantôme qui poursuit le joueur dans un labyrinthe."
  ],
  "chemin_vers_point": [
@@ -674,5 +674,261 @@
  "charger_variables": [
   "Reprend les valeurs écrites par [[sauvegarder_variables]] (même nom de sauvegarde). Chaque variable qui existe encore retrouve sa valeur. Sortie « Chargé » si tout s'est bien passé, « Pas de sauvegarde » à la toute première partie. À mettre souvent juste après « Au démarrage ».",
   "Juste après [[NoeudEventStart]] : [[charger_variables]], puis [[modifier_propriete]] pour afficher le score retrouvé."
+ ],
+ "placer_case": [
+  "Met l'objet A pile au milieu de la case choisie (colonne et ligne, comptées à partir de 0 en haut à gauche). La grille est celle du décor en tuiles de la scène. Avec le bouton 🔗, branche [[valeur_colonne_touchee]] et [[valeur_ligne_touchee]] pour l'envoyer sur la case que le doigt touche.",
+  "déplacer un pion sur la case touchée dans un jeu de plateau."
+ ],
+ "centrer_case": [
+  "L'objet A reste dans sa case mais se remet pile au milieu. Pratique quand un déplacement s'est arrêté entre deux cases.",
+  "recentrer un héros après son déplacement."
+ ],
+ "valeur_colonne_touchee": [
+  "Nœud vert (valeur) : donne la colonne de la case que le doigt touche (0 = la première à gauche). Branche-le sur un réglage avec le bouton 🔗.",
+  "savoir dans quelle colonne on a touché pour poser une tourelle."
+ ],
+ "valeur_ligne_touchee": [
+  "Nœud vert (valeur) : donne la ligne de la case que le doigt touche (0 = la première en haut). Branche-le sur un réglage avec le bouton 🔗.",
+  "savoir dans quelle ligne on a touché pour poser un bâtiment."
+ ],
+ "valeur_colonne_objet": [
+  "Nœud vert (valeur) : donne la colonne de la case où se trouve l'objet choisi (0 = la première à gauche).",
+  "savoir dans quelle colonne se trouve le héros."
+ ],
+ "valeur_ligne_objet": [
+  "Nœud vert (valeur) : donne la ligne de la case où se trouve l'objet choisi (0 = la première en haut).",
+  "savoir dans quelle ligne se trouve le héros."
+ ],
+ "tour_suivant": [
+  "Fait passer le jeu à l'équipe suivante. Écris les équipes dans l'ordre, par leur tag (ex. joueur,ennemi). Le premier appel (par exemple après « Au démarrage ») commence par la première équipe ; quand toutes ont joué, le numéro du tour augmente. À chaque début de tour, l'événement local « tour_<équipe> » part s'il existe (ex. « tour_ennemi »).",
+  "mettre « Passer au tour suivant » sur le bouton « Fin du tour »."
+ ],
+ "si_tour_de": [
+  "Vrai si c'est le tour de l'équipe écrite (son tag), Faux sinon.",
+  "laisser le joueur toucher ses unités seulement pendant son tour."
+ ],
+ "marquer_joue": [
+  "Note que l'unité (objet A) a joué ce tour-ci. Tout est effacé au début du tour suivant.",
+  "empêcher un héros de bouger deux fois dans le même tour."
+ ],
+ "si_a_joue": [
+  "Vrai si l'unité (objet A) a déjà joué ce tour-ci, Faux sinon.",
+  "refuser de déplacer un héros qui a déjà joué."
+ ],
+ "valeur_numero_tour": [
+  "Nœud vert : le numéro du tour en cours (1, 2, 3…), à brancher avec le bouton 🔗.",
+  "afficher « Tour 3 » dans un texte."
+ ],
+ "montrer_cases": [
+  "Colore les cases où l'objet choisi peut aller (ou attaquer). Les murs bloquent, et tu peux ajouter des tags qui bloquent (autres unités) et des terrains qui coûtent plus de pas (foret=2). Couleur, visibilité, cadre et chiffres se règlent. « Nom de la zone » permet d'en montrer plusieurs (déplacement en bleu, attaque en rouge).",
+  "montrer la zone de déplacement d'un héros quand on le touche."
+ ],
+ "cacher_cases": [
+  "Efface les cases colorées (toutes, ou celles d'une zone nommée).",
+  "cacher la zone une fois le héros arrivé."
+ ],
+ "si_case_accessible": [
+  "Vrai si la case (colonne, ligne) fait partie des cases montrées. Par défaut : la case que le doigt touche. Faux sinon.",
+  "refuser un déplacement trop loin avec « trop loin ! »."
+ ],
+ "valeur_cout_case": [
+  "Nœud vert : le nombre de pas pour aller sur la case touchée (-1 si elle est hors zone). Pratique pour compter les pas restants.",
+  "pas restants = pas de l'unité - ce nombre."
+ ],
+ "definir_vie": [
+  "Donne des points de vie à l'objet choisi (variable d'objet « vie », et « vie_max » pour le maximum). On la lit partout avec une formule, par exemple =monstre.vie, pour l'écrire dans un texte ou dans une barre.",
+  "donner 10 points de vie à un monstre au démarrage."
+ ],
+ "infliger_degats": [
+  "Enlève des points de vie à l'objet (jamais en dessous de 0). Deux sorties : « Encore en vie » et « Plus de vie » (l'objet est détruit si la case est cochée ; « l'objet impliqué » reste celui touché).",
+  "un héros frappe un monstre : 3 dégâts, puis un petit message selon le résultat."
+ ],
+ "soigner": [
+  "Rend des points de vie à l'objet, sans dépasser sa vie maximum.",
+  "une potion qui rend 5 points de vie au héros."
+ ],
+ "valeur_terrain_touche": [
+  "Nœud vert : le nom du terrain de la case touchée (« Forêt », « Eau »…), ou rien s'il n'y en a pas. Les terrains se règlent dans l'éditeur de tuiles.",
+  "afficher « Forêt » quand on touche une case de forêt."
+ ],
+ "valeur_cout_terrain_touche": [
+  "Nœud vert : le coût en pas du terrain de la case touchée (1 s'il n'y en a pas).",
+  "dire « ça coûte 2 pas » avant un déplacement."
+ ],
+ "valeur_terrain_objet": [
+  "Nœud vert : le nom du terrain sur lequel se trouve l'objet choisi.",
+  "savoir si le héros est dans l'eau ou sur la route."
+ ],
+ "valeur_defense_objet": [
+  "Nœud vert : le bonus de défense du terrain sous l'objet choisi.",
+  "afficher le bonus de défense d'une unité."
+ ],
+ "chemin_vers_case": [
+  "L'objet marche jusqu'au CENTRE de la case (colonne, ligne) en contournant les murs, les terrains qui bloquent et les unités des tags indiqués. Par défaut : la case touchée par le doigt. Sortie « Arrivé » une fois sur la case.",
+  "envoyer un héros sur une case bleue touchée."
+ ],
+ "pion_une_case": [
+  "Fait avancer le pion d'une case (haut, bas, gauche, droite), bien centré. Si la case est un mur, un terrain qui bloque, une unité (tags) ou le bord de la carte : sortie « Bloqué ». Sinon « Arrivé » à la fin du pas.",
+  "déplacer un pion de jeu de plateau avec des boutons ◀ ▶ ▲ ▼."
+ ],
+ "definir_fiche": [
+  "Donne à l'objet sa fiche : vie, attaque, défense, mouvement et portée (variables d'objet « vie », « attaque », « defense », « mouvement », « portee »). Elles se lisent partout par formule, par exemple =hero.mouvement pour le nombre de pas des cases accessibles. Mets ce nœud « Au démarrage » de chaque unité, ou dans un prefab d'unité réutilisable.",
+  "créer un archer : vie 8, attaque 4, défense 0, mouvement 4, portée 3."
+ ],
+ "attaquer": [
+  "L'objet A attaque l'objet B : dégâts = attaque de A × puissance × bonus − défense de B − défense du terrain de B. Deux sorties : « Encore en vie » et « Plus de vie » (la cible est détruite si la case est cochée), et « Attaquant détruit » si une riposte le tue. Les deux objets doivent avoir une fiche d'unité. Les règles « regle: lance > cavalerie = 150 » de donnees.txt s'appliquent toutes seules. En avancé : bonus selon les tags (« cavalerie = 150 »), PERFORATION (pourcentage de la défense ignoré, pour une lance ou une arbalète), RIPOSTE (pourcentage de l'attaque de la cible rendu si elle survit et que l'attaquant est à sa portée), BONUS DE HAUTEUR (pourcentage de dégâts par niveau d'écart : celui d'en haut frappe plus fort), GARDE (chaque allié voisin portant le tag choisi ajoute de la défense à la cible : un mur de boucliers), un calcul libre, et une statistique consommée à chaque attaque (munitions).",
+  "la lance (perforation 40) contre la cavalerie lourde ; l'archer sur la colline (hauteur +15 %)."
+ ],
+ "lumiere_ambiance": [
+  "Assombrit tout le jeu (sous les boutons et le score) avec la couleur de ton choix. Obscurité 0 = plein jour, 100 = noir complet, sauf autour des sources de lumière. Le niveau et la couleur changent en douceur : avec 30 secondes, on passe du jour au crépuscule orange puis à la nuit bleue, comme un coucher de soleil.",
+  "un coucher de soleil : [[lumiere_ambiance]] orange, obscurité 40, en 6 secondes ; [[attendre]] 6 secondes ; puis [[lumiere_ambiance]] bleu nuit, obscurité 90, en 6 secondes."
+ ],
+ "lumiere_source": [
+  "Accroche une lumière à l'objet : elle le suit quand il bouge (torche d'un personnage, lanterne, feu…), même si l'objet est l'enfant d'un autre. Réglages : couleur, rayon en pixels (distance au centre), éclairage (100 = normal, jusqu'à 300 : plus fort et plus loin), lueur colorée (0 = aucune), vacillement (aucun, bougie, torche, clignote) et décalage. Une seule lumière par objet, 8 au plus en même temps. Elle perce l'obscurité posée par [[lumiere_ambiance]] ; sans obscurité, elle ajoute seulement sa lueur. Réglage « Allumage » : « Seulement quand il fait sombre » allume la lumière toute seule à la tombée de la nuit (idéal avec [[lumiere_cycle]]).",
+  "une torche de personnage : posée sur un objet « lanterne » enfant du héros, rayon 360, vacillement « torche »."
+ ],
+ "lumiere_eteindre": [
+  "Éteint la lumière accrochée à l'objet. Pour la rallumer, utilise de nouveau [[lumiere_source]].",
+  "un bouton « Lanterne » éteint la lumière du héros."
+ ],
+ "ombre_objet": [
+  "Pose une ombre douce sous l'objet (ou l'enlève avec « Non »). Elle suit l'objet quand il bouge ; on règle sa force et sa largeur. Elle donne tout de suite du volume aux personnages posés sur un décor. Elle se pose aussi avec la case « Ombre sous l'objet » de l'Inspecteur, sans aucun nœud.",
+  "une ombre sous le héros : force 50, largeur 70."
+ ],
+ "choisir_cible": [
+  "L'objet A cherche, parmi les objets qui portent un des tags demandés, ceux qui sont DANS SA PORTÉE (mêmes formes que « Montrer les cases accessibles »), puis en choisit un : la plus proche, celle qui a le moins ou le plus de vie, ou la plus basse / haute valeur d'une statistique. Sortie « Cible trouvée » : elle devient « l'objet impliqué » (pour Attaquer, Aller vers…). Sortie « Aucune cible » : personne à portée. Parfait pour l'intelligence d'un monstre ou d'une tourelle.",
+  "un monstre : [[choisir_cible]] (tag « heros », la plus proche, portée =monstre.portee), puis [[attaquer]] sur « Cible trouvée »."
+ ],
+ "NoeudEventNouvelleScene": [
+  "Se lance chaque fois qu'une nouvelle scène s'ouvre. Fait pour la « Logique globale » (qui tourne dans toutes les scènes) : par exemple placer l'armée choisie sur chaque carte. Dans une scène ordinaire, « Au démarrage » suffit.",
+  null
+ ],
+ "lumiere_cycle": [
+  "Fait passer tout le jeu du jour au soir orange, à la nuit bleue, à l'aube, puis au jour, tout seul. Tu choisis la durée d'une journée complète (30 à 120 secondes pour un jeu vivant), le moment de départ et si le cycle recommence sans fin. Le jeu en pause fige le cycle. Durée 0 = arrêter le cycle (le ciel reste comme il est). Un réglage à la main avec [[lumiere_ambiance]] reprend la main. Tes lumières ([[lumiere_source]]) restent allumées : on les voit mieux la nuit.",
+  "un monde vivant : au démarrage, [[lumiere_cycle]] avec une durée de 90 secondes, début « Plein jour », en boucle."
+ ],
+ "physique_monde": [
+  "Règle le monde physique de la scène : la gravité vers le bas (100 % = normale, 0 = espace, négatif = les objets tombent vers le haut), une gravité vers le côté (un vent qui souffle tout le temps), la précision du calcul et le sommeil des objets immobiles. À mettre une fois, sous « Au démarrage ». Ne concerne que les objets qui ont le comportement « Physique réaliste » (⚙ Comportement).",
+  "un niveau sur la Lune : gravité 20 %."
+ ],
+ "physique_changer": [
+  "Change les réglages d'un objet physique en plein jeu : son type (normal, fixe, guidé, ou plus de physique), sa matière (bois, pierre, métal, caoutchouc, ballon, glace, plume), sa forme, son poids, son rebond, son accroche, sa gravité, le freinage de l'air, sa vitesse maximale, s'il tourne, s'il est un fantôme ou très rapide, sa couche. Chaque réglage laissé vide ou sur « (ne pas changer) » reste comme il est. Sur un objet qui n'a pas encore la physique, choisir un type la lui donne.",
+  "une balle qui devient du caoutchouc (matière « Caoutchouc ») quand on ramasse un bonus."
+ ],
+ "physique_pousser": [
+  "Pousse un objet physique avec une force. « Poussée continue » : à répéter à chaque image (sous « À chaque image » ou « Doigt appuyé »), l'objet accélère tant que tu pousses (une fusée, un vent, un ventilateur). « Un coup » : ajoute tout de suite de la vitesse (un saut, un coup de pied). Par défaut, l'effet est le même sur un objet léger ou lourd ; en réglage avancé, tu peux dire que le poids compte, et pousser ailleurs qu'au centre pour faire tourner l'objet. Valeurs : pixels par seconde (par seconde au carré pour la poussée continue).",
+  "un jeu de fusée : « Doigt appuyé » → pousser vers le haut (-2500) en continu."
+ ],
+ "physique_vitesse": [
+  "Règle la vitesse d'un objet physique, en pixels par seconde : vers la droite, vers le bas (négatif = vers le haut) et rotation en degrés par seconde. Chaque case laissée vide ne change pas cette vitesse. « Remplacer » donne exactement cette vitesse ; « Ajouter » la rajoute à la vitesse actuelle. L'option « Tout arrêter » remet toutes les vitesses à zéro. Parfait pour un saut (vitesse vers le bas à -900), un arrêt net ou un personnage qui avance à vitesse constante.",
+  "un saut de plateforme : vitesse vers le bas = -900, seulement si [[physique_test]] dit que l'objet est posé."
+ ],
+ "physique_lancer": [
+  "Lance un objet physique dans une direction : tu donnes l'angle (0 = vers la droite, -90 = vers le haut, 90 = vers le bas, 180 = vers la gauche) et la vitesse de départ. Ensuite la gravité fait le reste : l'objet décrit une courbe. Idéal pour un jeu de lance-pierre, un canon, un lancer de ballon. L'angle peut être une formule (par exemple l'angle entre l'objet et le doigt).",
+  "un lance-pierre : au relâchement du doigt, lancer l'oiseau avec l'angle de l'élastique."
+ ],
+ "physique_explosion": [
+  "Fait souffler tous les objets physiques autour d'un point : plus ils sont près du centre, plus ils sont projetés fort, et ils se mettent à tourner. Le centre est le milieu de l'objet choisi, ou un point (x, y) si tu en écris un. Tu règles le rayon du souffle et la force (la vitesse donnée au centre). Option : seulement les objets d'un certain tag. Le nœud ne détruit rien : combine-le avec « Effet de particules » et « Détruire l'objet » pour une vraie explosion.",
+  "une bombe : quand elle touche le sol, explosion de rayon 500 et force 1800, puis détruire la bombe."
+ ],
+ "physique_lier": [
+  "Relie deux objets pour qu'ils se tiennent ou bougent ensemble, comme dans la vraie vie. Sorte de liaison : charnière (pivote autour d'un point : porte, balancier, pendule), tige rigide (distance fixe), ressort (élastique, avec raideur), corde (longueur maximale), glissière (coulisse sur un rail, avec limites et moteur), soudure (collés), roue avec suspension (voiture : A = la caisse, B = la roue, avec moteur), frein (vue de dessus). L'objet B est facultatif : sans B, l'objet A est accroché à un point fixe du décor. Donne un nom à la liaison pour la régler (« Régler une liaison ») ou la couper (« Couper une liaison ») plus tard. En réglages avancés : point de chaque côté, limites, direction du rail, moteur, collision entre les deux objets. Les deux objets doivent avoir le comportement « Physique réaliste » (sauf un support fixe).",
+  "un pendule : A = la boule, B = un petit objet fixe en haut, type « Charnière » ou « Tige rigide » ; un pont : planches reliées par des charnières."
+ ],
+ "physique_regler_liaison": [
+  "Change une liaison déjà créée par « Relier deux objets » (on la retrouve par son nom) : démarrer, arrêter ou accélérer son moteur, régler sa force, la raideur d'un ressort ou d'une suspension, la longueur d'une tige ou d'une corde, les limites. Chaque case vide reste comme avant. Exemple : une voiture dont le moteur des roues démarre quand on appuie sur un bouton.",
+  "bouton « Gaz » : régler la liaison « roue_arriere » avec moteur = 720 ; au relâchement : moteur = 0."
+ ],
+ "physique_couper": [
+  "Coupe une liaison : écris son nom, ou écris le nom d'un objet pour couper toutes ses liaisons. Les objets se séparent et retombent chacun de leur côté (un pont qui s'effondre, une corde coupée, une cabine qui se détache).",
+  "un pont piégé : quand le héros touche le levier, couper la liaison « planche_3 »."
+ ],
+ "physique_doigt": [
+  "Permet de saisir un objet physique avec le doigt et de le tirer, comme dans la vraie vie : l'objet suit le doigt avec un peu d'élasticité, pousse les autres et peut se coincer. À mettre sous « Doigt appuyé » (action « Saisir et tirer ») : tant que le doigt est posé, l'objet sous le doigt est tiré ; dès que le doigt se lève, il est lâché tout seul (ou utilise l'action « Lâcher »). Tu peux limiter la prise aux objets d'un tag, et régler la souplesse de la prise.",
+  "un puzzle de caisses : le joueur déplace les caisses du bout du doigt pour fabriquer une tour."
+ ],
+ "physique_test": [
+  "Pose une question sur un objet physique et suit la sortie « vrai » ou « faux » : est-il posé sur quelque chose (pour autoriser un saut), touche-t-il quelque chose, touche-t-il quelque chose au-dessus, est-il au repos (endormi), bouge-t-il vite, tombe-t-il, monte-t-il. Pour « bouge vite », « tombe » et « monte », le seuil en pixels par seconde se règle en avancé. Tu peux aussi lire directement dans une formule : objet.vitesse, objet.masse, objet.vitesseRotation.",
+  "un saut de plateforme : « Bouton saut » → Si l'objet est posé sur quelque chose → régler la vitesse vers le bas à -900."
+ ],
+ "modifier_stat": [
+  "Change une statistique que tu as inventée pour un objet (munitions, armure, mana, carburant…) : l'ajouter, la retirer ou la mettre à une valeur. Si elle n'existe pas encore, elle est créée à 0. Elle se lit ensuite partout : =archer.munitions.",
+  "Après un tir : Modifier une statistique → objet « archer », statistique « munitions », Retirer 1."
+ ],
+ "si_stat": [
+  "Compare une statistique d'un objet à une valeur et suit la sortie « vrai » ou « faux » : par exemple « munitions est plus grand que 0 ». Une statistique qui n'existe pas vaut 0.",
+  "Avant de tirer : Si la statistique « munitions » de l'archer est plus grande que 0 → tirer ; sinon → afficher « Plus de flèches »."
+ ],
+ "suivre_parcours": [
+  "Fait suivre à l'objet un parcours dessiné avec l'outil « Parcours » des Assets : il est posé sur le point de départ, puis avance de point en point à la vitesse choisie. À un carrefour il choisit sa sortie comme tu l'as réglé (au hasard, chacun son tour, selon une variable). La sortie « Arrivé au bout » part quand il atteint un point sans sortie. Avec « Écart de côté », chaque objet marche sur sa propre voie (décalage au hasard) : plusieurs ennemis avancent côte à côte au lieu de se superposer. Avec « Éviter les autres », un objet qui en rattrape un plus lent se décale sur le côté, le dépasse puis revient sur sa voie ; si la route est trop étroite, il le suit.",
+  "Un ennemi qui apparaît : Suivre le parcours « Chemin_ennemis », vitesse 150. Sortie « Arrivé au bout » → Infliger des dégâts à la base, puis Détruire l'objet."
+ ],
+ "arreter_parcours": [
+  "Arrête l'objet là où il est : il ne suit plus son parcours (la sortie « Arrivé au bout » ne partira pas).",
+  "Un ennemi est gelé par un piège : Arrêter le parcours, puis plus tard Suivre le parcours pour qu'il reparte."
+ ],
+ "camera_doigt": [
+  "Active (ou coupe) le défilement de l'écran au doigt : en glissant dans la scène, on déplace la caméra. Un simple toucher reste un toucher (une tour, un bouton). Les boutons du HUD ne font jamais défiler. La caméra ne sort pas des limites réglées avec « Limites de la caméra ».",
+  "Au démarrage : Limites de la caméra (0, 3840, 0, 1080), puis Faire défiler la caméra au doigt : le joueur fait glisser la carte de deux écrans de large."
+ ],
+ "appliquer_donnees": [
+  "Donne à l'objet A toutes les valeurs d'une unité ou d'une arme écrites dans le fichier donnees.txt (Assets → Dialogues, ou assets_ludexa/Textes/donnees.txt) : vie, attaque, défense, mouvement, portée, prix… et ses tags. Une ligne suffit : « unite Chevalier: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=cavalerie lourd ». On change l'équilibrage du jeu en modifiant le fichier, sans toucher aux nœuds. Sorties « Trouvé » / « Introuvable ». Le fichier peut aussi contenir « arme Epee: attaque=5 », « etat Poison: duree=3, degats=2 », « regle: lance > cavalerie = 150 » (un attaquant tag lance inflige 150 % à une cible tag cavalerie, appliqué automatiquement par « Attaquer ») et les hauteurs des cases.",
+  "au début de la partie, pour chaque héros : Appliquer des données « Chevalier »."
+ ],
+ "definir_hauteur": [
+  "Donne une hauteur (un niveau : 0 = plat, 1, 2, 3…) à un rectangle de cases de la grille : colonne et ligne de départ, nombre de colonnes et de lignes. Les hauteurs servent au bonus de hauteur de « Attaquer » et arrêtent la vue dans le brouillard de guerre (une colline cache ce qu'il y a derrière). On peut aussi les écrire dans donnees.txt (« hauteur 3,4 = 2 » ou un bloc « hauteurs: » avec un chiffre par case). Lis-les avec la formule hauteur(colonne, ligne) ou avec les nœuds verts « Hauteur de la case touchée » / « Hauteur de la case sous un objet ».",
+  "une colline de 3 x 2 cases à la hauteur 2, pour que l'archer qui s'y place frappe plus fort."
+ ],
+ "valeur_hauteur_touchee": [
+  "Nœud vert : la hauteur de la case que le doigt touche (0 si rien n'est défini). À brancher avec 🔗 sur un réglage, par exemple dans un « Si… ».",
+  "afficher « Colline ! » quand on touche une case de hauteur 2."
+ ],
+ "valeur_hauteur_objet": [
+  "Nœud vert : la hauteur de la case sous un objet. Sert par exemple à comparer la hauteur de l'attaquant et celle de la cible.",
+  "n'autoriser l'attaque à distance que depuis une case plus haute que la cible."
+ ],
+ "donner_etat": [
+  "Donne un état à l'unité pour un nombre de TOURS : poison (dégâts à chaque tour), lent (le mouvement baisse), béni (l'attaque monte)… Tout peut être écrit dans donnees.txt (« etat Poison: duree=3, degats=2 », « etat Lent: duree=2, stat=mouvement, delta=-2 ») : il suffit alors du nom de l'état. Les dégâts tombent au début de chaque tour de l'équipe de l'unité, puis l'état diminue d'un tour ; à la fin, la statistique modifiée revient comme avant. Redonner le même état le prolonge au lieu de le doubler. L'unité garde une statistique « etat_<nom> » (tours restants), lisible dans une formule. Demande « Passer au tour suivant ».",
+  "une flèche empoisonnée : Attaquer → Plus de vie ne part pas → Donner l'état « Poison » à la cible."
+ ],
+ "retirer_etat": [
+  "Retire un état de l'unité (par son nom), ou tous les états si le nom est vide. La statistique modifiée par l'état revient tout de suite à sa valeur d'avant.",
+  "un prêtre qui guérit le poison d'un allié."
+ ],
+ "si_etat": [
+  "Teste si l'unité a un état (ou n'importe quel état si le nom est vide). Sorties « Vrai » / « Faux ».",
+  "ne pas pouvoir se déplacer si l'unité est « Gelée »."
+ ],
+ "effet_zone": [
+  "Touche d'un coup tous les objets autour de l'objet A (au centre) : dégâts, soin ou état. Réglages : la force, le rayon en cases, les tags touchés (vide = tout le monde), la forme (en losange ou en carré avec les diagonales), la baisse de force par case de distance (explosion : plus on s'éloigne, moins ça fait mal), et si l'objet du centre est touché aussi. Les dégâts ignorent la défense. Une boule de feu, un soin de groupe, un cri qui effraie. Pour compter les victimes dans une condition, utilise les formules compter(\"tag\") et voisins(objet, \"tag\", cases).",
+  "une boule de feu : rayon 2, force 6, baisse 30 % par case, sur les unités « ennemi »."
+ ],
+ "gagner_xp": [
+  "Donne de l'expérience à l'unité. Quand elle atteint le palier (palier × niveau actuel), l'unité passe au niveau suivant, l'expérience en trop est gardée, et les gains sont ajoutés (« vie=2, attaque=1 » ; la vie maximum monte avec la vie). L'unité garde les statistiques « xp » et « niveau » (1 au départ). Sorties « Niveau gagné » / « Pas de niveau » : une fanfare ou un message quand elle monte.",
+  "un héros qui gagne 30 d'expérience à chaque ennemi vaincu."
+ ],
+ "memoriser_position": [
+  "Retient la position actuelle de l'unité, avant un déplacement. Avec « Annuler le déplacement », le joueur peut revenir en arrière (comme dans Advance Wars quand on touche « Annuler » avant d'agir).",
+  "juste avant « Aller à la case » : Mémoriser la position."
+ ],
+ "annuler_deplacement": [
+  "Remet l'unité à la position retenue par « Mémoriser la position », efface son « a déjà joué » et remet à 0 ses statistiques « bouge » et « agi ». Sorties « Annulé » / « Rien à annuler ».",
+  "un bouton « Annuler » dans le menu d'action de l'unité."
+ ],
+ "ia_jouer": [
+  "Fait jouer une unité toute seule, comme un ordinateur. Elle regarde où elle peut aller (mouvement, murs, terrains, unités qui bloquent), cherche les ennemis (leurs tags) et choisit la meilleure case d'où attaquer selon son STYLE : agressif (le plus de dégâts, achever une cible en priorité), prudent (évite la riposte) ou défensif (aime les cases à forte défense). Personne à portée : elle se rapproche de l'ennemi le plus proche. Une fois arrivée, la sortie « Arrivé » part : l'objet impliqué est la cible choisie et la statistique « cible_ia » de l'unité vaut 1 (on peut attaquer) ou 0 (juste rapprochée). Utilise son mouvement, sa portée (et « portee_min ») et sa fiche d'unité. Sortie « Aucun ennemi » s'il n'y en a plus.",
+  "tour des monstres : pour chaque monstre, Jouer comme un ordinateur (ennemis = joueur) → à l'arrivée, si cible_ia = 1, Attaquer."
+ ],
+ "brouillard_maj": [
+  "Calcule ce que voit l'équipe et recouvre le reste de la carte d'un voile sombre : les unités de l'équipe (tags) voient autour d'elles jusqu'à leur statistique « vision » en cases (sinon la vision par défaut du nœud). Un mur du terrain, un terrain avec la propriété « bloque_vue = oui » (forêt dense) ou une case plus haute arrête le regard. Les cases déjà vues restent à demi sombres (mémoire, au choix). Les unités des tags ennemis hors de vue sont cachées. À relancer après chaque déplacement ou début de tour. La formule vue(colonne, ligne) vaut 1 si la case est vue. « Enlever le brouillard de guerre » rend tout visible.",
+  "à chaque début de tour du joueur : Mettre à jour le brouillard (équipe joueur, ennemis ennemi, vision 3)."
+ ],
+ "brouillard_enlever": [
+  "Enlève le brouillard de guerre : toute la carte redevient visible et les unités cachées réapparaissent.",
+  "à la fin de la partie, pour montrer toute la carte."
+ ],
+ "couleur_equipe": [
+  "Un seul dessin pour toutes les équipes : peins les parties à colorer (manteau, drapeau, plumet) avec une couleur repère (par défaut le rose vif #FF00FF), puis ce nœud remplace ce rose par la couleur de l'équipe pour l'objet. Les ombres et les reflets du dessin sont gardés (un rose foncé devient un bleu foncé). La tolérance dit à quel point une couleur peut s'écarter du repère pour être remplacée. Rien n'est changé dans les images : tout se fait à l'affichage, donc à refaire au début de chaque partie.",
+  "deux armées avec les mêmes images : joueur en bleu, ennemi en rouge."
  ]
 }

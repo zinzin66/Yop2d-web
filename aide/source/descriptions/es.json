@@ -508,7 +508,7 @@
   "cuando explota un enemigo: duración 0,06, velocidad 0,05."
  ],
  "chemin_vers_objet": [
-  "El objeto A va hacia el objeto B encontrando solo el camino más corto, casilla a casilla, sin atravesar muros (baldosas «Sólidas» de un decorado de baldosas, objetos físicos fijos). El camino se recalcula cuando B se mueve. [[lang:port_arrive]] se activa cuando A toca a B.",
+  "El objeto A va hacia el objeto B encontrando solo el camino más corto, casilla a casilla, sin atravesar muros (baldosas «Sólidas» de un decorado de baldosas, objetos físicos fijos). El camino se recalcula cuando B se mueve. [[lang:port_arrive]] se activa cuando A toca a B. El ajuste «Detenerse» permite pararse en una casilla vecina, bien centrado (juegos de cuadrícula); «Estos tags bloquean el camino» hace rodear a otras unidades.",
   "un fantasma que persigue al jugador por un laberinto."
  ],
  "chemin_vers_point": [
@@ -674,5 +674,261 @@
  "charger_variables": [
   "Recupera los valores escritos por [[sauvegarder_variables]] (mismo nombre de partida). Cada variable que aún existe recupera su valor. Salida « Cargado » si todo fue bien, « Sin partida guardada » en la primera partida. Suele ponerse justo después de « Al empezar ».",
   "Justo después de [[NoeudEventStart]]: [[charger_variables]] y luego [[modifier_propriete]] para mostrar la puntuación recuperada."
+ ],
+ "placer_case": [
+  "Pone el objeto A justo en el centro de la casilla elegida (columna y fila, contadas desde 0 arriba a la izquierda). La cuadrícula es la del mapa de tiles de la escena. Con el botón 🔗, conecta [[valeur_colonne_touchee]] y [[valeur_ligne_touchee]] para enviarlo a la casilla que toca el dedo.",
+  "mover una pieza a la casilla tocada en un juego de mesa."
+ ],
+ "centrer_case": [
+  "El objeto A se queda en su casilla pero vuelve exactamente al centro. Útil cuando un movimiento se detuvo entre dos casillas.",
+  "recentrar a un héroe después de moverse."
+ ],
+ "valeur_colonne_touchee": [
+  "Nodo verde (valor): da la columna de la casilla que toca el dedo (0 = la primera a la izquierda). Conéctalo a un ajuste con el botón 🔗.",
+  "saber qué columna se tocó para colocar una torre."
+ ],
+ "valeur_ligne_touchee": [
+  "Nodo verde (valor): da la fila de la casilla que toca el dedo (0 = la primera arriba). Conéctalo a un ajuste con el botón 🔗.",
+  "saber qué fila se tocó para colocar un edificio."
+ ],
+ "valeur_colonne_objet": [
+  "Nodo verde (valor): da la columna de la casilla donde está el objeto elegido (0 = la primera a la izquierda).",
+  "saber en qué columna está el héroe."
+ ],
+ "valeur_ligne_objet": [
+  "Nodo verde (valor): da la fila de la casilla donde está el objeto elegido (0 = la primera arriba).",
+  "saber en qué fila está el héroe."
+ ],
+ "tour_suivant": [
+  "Pasa el juego al siguiente equipo. Escribe los equipos en orden con sus tags (por ejemplo jugador,enemigo). La primera vez (por ejemplo tras [[NoeudEventStart]]) empieza por el primer equipo; cuando todos han jugado, el número de turno sube. Al empezar cada turno se ejecuta el evento local «tour_<equipo>» si existe (por ejemplo «tour_enemigo»).",
+  "poner [[tour_suivant]] en el botón «Fin del turno»."
+ ],
+ "si_tour_de": [
+  "Verdadero si es el turno del equipo escrito (su tag), Falso si no.",
+  "dejar que el jugador toque sus unidades solo durante su turno."
+ ],
+ "marquer_joue": [
+  "Recuerda que la unidad (objeto A) ya jugó en este turno. Todo se borra al empezar el turno siguiente.",
+  "impedir que un héroe se mueva dos veces en el mismo turno."
+ ],
+ "si_a_joue": [
+  "Verdadero si la unidad (objeto A) ya jugó en este turno, Falso si no.",
+  "rechazar mover a un héroe que ya jugó."
+ ],
+ "valeur_numero_tour": [
+  "Nodo verde: el número del turno actual (1, 2, 3…), conéctalo con el botón 🔗.",
+  "mostrar «Turno 3» en un texto."
+ ],
+ "montrer_cases": [
+  "Colorea las casillas a las que puede ir (o atacar) el objeto elegido. Los muros bloquean, y puedes añadir tags que bloquean (otras unidades) y terrenos que cuestan más pasos (bosque=2). El color, la visibilidad, el marco y los números se pueden ajustar. «Nombre de la zona» permite mostrar varias a la vez (movimiento en azul, ataque en rojo).",
+  "mostrar la zona de movimiento de un héroe al tocarlo."
+ ],
+ "cacher_cases": [
+  "Borra las casillas coloreadas (todas, o una zona con nombre).",
+  "ocultar la zona cuando el héroe ha llegado."
+ ],
+ "si_case_accessible": [
+  "Verdadero si la casilla (columna, fila) es una de las casillas mostradas. Por defecto: la casilla que toca el dedo. Falso en caso contrario.",
+  "rechazar un movimiento demasiado lejano con «¡demasiado lejos!»."
+ ],
+ "valeur_cout_case": [
+  "Nodo verde: el número de pasos para llegar a la casilla tocada (-1 si está fuera de la zona). Útil para contar los pasos restantes.",
+  "pasos restantes = pasos de la unidad - este número."
+ ],
+ "definir_vie": [
+  "Da puntos de vida al objeto elegido (variable de objeto «vie», y «vie_max» para el máximo). Léela donde quieras con una fórmula, por ejemplo =monstruo.vie, para escribirla en un texto o una barra.",
+  "dar 10 puntos de vida a un monstruo al empezar."
+ ],
+ "infliger_degats": [
+  "Quita puntos de vida al objeto (nunca por debajo de 0). Dos salidas: «Sigue con vida» y «Sin vida» (el objeto se destruye si la casilla está marcada; «el objeto implicado» sigue siendo el golpeado).",
+  "un héroe golpea a un monstruo: 3 de daño y luego un mensaje según el resultado."
+ ],
+ "soigner": [
+  "Devuelve puntos de vida al objeto, sin pasar de su máximo.",
+  "una poción que devuelve 5 puntos de vida al héroe."
+ ],
+ "valeur_terrain_touche": [
+  "Nodo verde: el nombre del terreno de la casilla tocada («Bosque», «Agua»…), o nada si no hay. Los terrenos se definen en el editor de tiles.",
+  "mostrar «Bosque» al tocar una casilla de bosque."
+ ],
+ "valeur_cout_terrain_touche": [
+  "Nodo verde: el coste en pasos del terreno de la casilla tocada (1 si no hay).",
+  "decir «esto cuesta 2 pasos» antes de moverse."
+ ],
+ "valeur_terrain_objet": [
+  "Nodo verde: el nombre del terreno sobre el que está el objeto elegido.",
+  "saber si el héroe está en el agua o en el camino."
+ ],
+ "valeur_defense_objet": [
+  "Nodo verde: el bonus de defensa del terreno bajo el objeto elegido.",
+  "mostrar el bonus de defensa de una unidad."
+ ],
+ "chemin_vers_case": [
+  "El objeto camina hasta el CENTRO de la casilla (columna, fila), rodeando muros, terrenos que bloquean y las unidades con los tags indicados. Por defecto: la casilla que toca el dedo. Salida «Llegó» una vez en la casilla.",
+  "enviar a un héroe a una casilla azul tocada."
+ ],
+ "pion_une_case": [
+  "Mueve la pieza una casilla (arriba, abajo, izquierda, derecha), bien centrada. Si la casilla es un muro, un terreno que bloquea, una unidad (tags) o el borde del mapa: salida «Bloqueado». Si no, «Llegó» al final del paso.",
+  "mover una pieza de juego de mesa con botones ◀ ▶ ▲ ▼."
+ ],
+ "definir_fiche": [
+  "Da al objeto su ficha: vida, ataque, defensa, movimiento y alcance (variables de objeto «vie», «attaque», «defense», «mouvement», «portee»). Se pueden leer donde quieras con una fórmula, por ejemplo =heroe.mouvement para los pasos de las casillas accesibles. Pon este nodo tras [[NoeudEventStart]] de cada unidad, o en un prefab de unidad reutilizable.",
+  "crear un arquero: vida 8, ataque 4, defensa 0, movimiento 4, alcance 3."
+ ],
+ "attaquer": [
+  "El objeto A ataca al objeto B: daño = ataque de A × potencia × bonus − defensa de B − defensa del terreno de B. Salidas «Sigue vivo» y «Sin vida» (el objetivo se destruye si la casilla está marcada), y «Atacante destruido» si un contraataque lo mata. Ambos objetos necesitan una ficha de unidad. Las reglas «regle: lanza > caballeria = 150» de donnees.txt se aplican solas. En avanzado: bonus según tags («caballeria = 150»), PERFORACIÓN (porcentaje de defensa ignorado, para una lanza o una ballesta), CONTRAATAQUE (porcentaje del ataque del objetivo devuelto si sobrevive y el atacante está a su alcance), BONUS DE ALTURA (porcentaje de daño por nivel de diferencia: el de arriba golpea más fuerte), GUARDIA (cada aliado vecino con el tag elegido suma defensa al objetivo: un muro de escudos), un cálculo libre y una estadística que se gasta en cada ataque (munición).",
+  "la lanza (perforación 40) contra la caballería pesada; el arquero en la colina (altura +15 %)."
+ ],
+ "lumiere_ambiance": [
+  "Oscurece todo el juego (bajo los botones y la puntuación) con el color que elijas. Oscuridad 0 = pleno día, 100 = negro total, salvo alrededor de las fuentes de luz. El nivel y el color cambian suavemente: con 30 segundos se pasa del día al crepúsculo naranja y luego a la noche azul, como una puesta de sol.",
+  "una puesta de sol: [[lumiere_ambiance]] naranja, oscuridad 40, en 6 segundos; [[attendre]] 6 segundos; luego [[lumiere_ambiance]] azul noche, oscuridad 90, en 6 segundos."
+ ],
+ "lumiere_source": [
+  "Une una luz al objeto: lo sigue cuando se mueve (antorcha de un personaje, farol, fuego…), aunque el objeto sea hijo de otro. Ajustes: color, radio en píxeles (distancia al centro), iluminación (100 = normal, hasta 300: más fuerte y más lejos), resplandor de color (0 = ninguno), parpadeo (ninguno, vela, antorcha, parpadea) y desplazamiento. Una luz por objeto, 8 como máximo a la vez. Atraviesa la oscuridad de [[lumiere_ambiance]]; sin oscuridad solo añade su resplandor. Ajuste « Encendido »: « Solo cuando oscurece » enciende la luz sola al caer la noche (ideal con [[lumiere_cycle]]).",
+  "la antorcha de un personaje: sobre un objeto « farol » hijo del héroe, radio 360, parpadeo « antorcha »."
+ ],
+ "lumiere_eteindre": [
+  "Apaga la luz unida al objeto. Para encenderla de nuevo, usa otra vez [[lumiere_source]].",
+  "un botón « Farol » apaga la luz del héroe."
+ ],
+ "ombre_objet": [
+  "Pone una sombra suave bajo el objeto (o la quita con « No »). Sigue al objeto cuando se mueve; se ajusta su fuerza y su anchura. Da volumen enseguida a los personajes sobre un fondo. También se activa con la casilla « Sombra bajo el objeto » del Inspector, sin ningún nodo.",
+  "una sombra bajo el héroe: fuerza 50, anchura 70."
+ ],
+ "choisir_cible": [
+  "El objeto A busca, entre los objetos con alguna de las etiquetas pedidas, los que están DENTRO DE SU ALCANCE (mismas formas que «Mostrar casillas accesibles») y elige uno: el más cercano, el que tiene menos o más vida, o el valor más bajo / alto de una estadística. Salida «Objetivo encontrado»: pasa a ser «el objeto implicado» (para Atacar, Ir hacia…). Salida «Ningún objetivo»: nadie a tiro. Ideal para la inteligencia de un monstruo o una torreta.",
+  "un monstruo: [[choisir_cible]] (tag « heroe », la más cercana), luego [[attaquer]] en « Objetivo encontrado »."
+ ],
+ "NoeudEventNouvelleScene": [
+  "Se lanza cada vez que se abre una escena nueva. Pensado para la «Lógica global» (que funciona en todas las escenas): por ejemplo, colocar el ejército elegido en cada mapa. En una escena normal basta con «Al empezar».",
+  null
+ ],
+ "lumiere_cycle": [
+  "Hace pasar todo el juego del día al atardecer naranja, a la noche azul, al amanecer y otra vez al día, solo. Eliges la duración de un día completo (de 30 a 120 segundos para un juego vivo), el momento de inicio y si el ciclo se repite sin fin. Con el juego en pausa el ciclo se congela. Duración 0 = detener el ciclo (el cielo se queda como está). Un ajuste manual con [[lumiere_ambiance]] toma el control. Tus luces ([[lumiere_source]]) siguen encendidas: se ven mejor de noche.",
+  "un mundo vivo: al empezar, [[lumiere_cycle]] con 90 segundos, inicio « Pleno día », en bucle."
+ ],
+ "physique_monde": [
+  "Ajusta el mundo físico de la escena: la gravedad hacia abajo (100 % = normal, 0 = espacio, negativo = los objetos caen hacia arriba), una gravedad lateral (un viento constante), la precisión del cálculo y si los objetos quietos se duermen. Úsalo una vez, bajo «Al empezar». Solo afecta a los objetos con el comportamiento «Física realista» (⚙ Comportamiento).",
+  "un nivel en la Luna: gravedad 20 %."
+ ],
+ "physique_changer": [
+  "Cambia los ajustes de un objeto físico durante el juego: su tipo (normal, fijo, guiado o sin física), material (madera, piedra, metal, caucho, balón, hielo, pluma), forma, peso, rebote, agarre, gravedad, freno del aire, velocidad máxima, si gira, si es un fantasma o muy rápido, su capa. Lo que quede vacío o en «(no cambiar)» sigue igual. En un objeto sin física, elegir un tipo se la da.",
+  "una pelota que se vuelve de caucho (material «Caucho») al recoger un bonus."
+ ],
+ "physique_pousser": [
+  "Empuja un objeto físico con una fuerza. «Empuje continuo»: repítelo en cada imagen (bajo «En cada imagen» o «Dedo pulsado»), el objeto acelera mientras empujas (un cohete, un viento, un ventilador). «Un golpe»: añade velocidad de inmediato (un salto, una patada). Por defecto el efecto es igual en un objeto ligero o pesado; en los ajustes avanzados puedes hacer que el peso cuente y empujar fuera del centro para que gire. Valores: píxeles por segundo (por segundo al cuadrado en el empuje continuo).",
+  "un juego de cohete: «Dedo pulsado» → empujar hacia arriba (-2500) de forma continua."
+ ],
+ "physique_vitesse": [
+  "Ajusta la velocidad de un objeto físico, en píxeles por segundo: hacia la derecha, hacia abajo (negativo = arriba) y giro en grados por segundo. Las casillas vacías no cambian esa velocidad. «Reemplazar» da exactamente esa velocidad; «Añadir» la suma a la actual. La opción «Parar todo» pone todas las velocidades a cero. Ideal para un salto (velocidad hacia abajo de -900), una parada en seco o un personaje que avanza a velocidad constante.",
+  "un salto de plataformas: velocidad hacia abajo = -900, solo si [[physique_test]] dice que el objeto está apoyado."
+ ],
+ "physique_lancer": [
+  "Lanza un objeto físico en una dirección: das el ángulo (0 = derecha, -90 = arriba, 90 = abajo, 180 = izquierda) y la velocidad inicial. Después la gravedad hace el resto: el objeto describe una curva. Ideal para un juego de tirachinas, un cañón, un lanzamiento de balón. El ángulo puede ser una fórmula (por ejemplo el ángulo entre el objeto y el dedo).",
+  "un tirachinas: al soltar el dedo, lanzar el pájaro con el ángulo del elástico."
+ ],
+ "physique_explosion": [
+  "Hace soplar a todos los objetos físicos alrededor de un punto: cuanto más cerca del centro, más fuerte salen despedidos, y se ponen a girar. El centro es el medio del objeto elegido, o un punto (x, y) si lo escribes. Ajustas el radio y la fuerza (la velocidad dada en el centro). Opción: solo los objetos de cierto tag. El nodo no destruye nada: combínalo con «Efecto de partículas» y «Destruir objeto» para una explosión de verdad.",
+  "una bomba: al tocar el suelo, explosión de radio 500 y fuerza 1800, luego destruir la bomba."
+ ],
+ "physique_lier": [
+  "Une dos objetos para que se sostengan o se muevan juntos, como en la vida real. Tipo de unión: bisagra (gira alrededor de un punto: puerta, péndulo), barra rígida (distancia fija), resorte (elástico, con rigidez), cuerda (longitud máxima), corredera (desliza por un raíl, con límites y motor), soldadura (pegados), rueda con suspensión (coche: A = la carrocería, B = la rueda, con motor), freno (vista desde arriba). El objeto B es opcional: sin B, el objeto A queda sujeto a un punto fijo del decorado. Dale un nombre a la unión para ajustarla («Ajustar una unión») o cortarla («Cortar una unión») después. En ajustes avanzados: punto de cada lado, límites, dirección del raíl, motor, colisión entre los dos objetos. Ambos objetos necesitan el comportamiento «Física realista» (salvo un soporte fijo).",
+  "un péndulo: A = la bola, B = un objeto fijo pequeño arriba, tipo «Bisagra» o «Barra rígida»; un puente: tablones unidos con bisagras."
+ ],
+ "physique_regler_liaison": [
+  "Cambia una unión ya creada con «Unir dos objetos» (se encuentra por su nombre): arrancar, parar o acelerar su motor, ajustar su fuerza, la rigidez de un resorte o suspensión, la longitud de una barra o cuerda, los límites. Las casillas vacías siguen igual. Ejemplo: un coche cuyo motor de ruedas arranca al pulsar un botón.",
+  "botón «Gas»: ajustar la unión «rueda_trasera» con motor = 720; al soltar: motor = 0."
+ ],
+ "physique_couper": [
+  "Corta una unión: escribe su nombre, o escribe el nombre de un objeto para cortar todas sus uniones. Los objetos se separan y cada uno cae por su lado (un puente que se derrumba, una cuerda cortada, una cabina que se suelta).",
+  "un puente trampa: cuando el héroe toca la palanca, cortar la unión «tablón_3»."
+ ],
+ "physique_doigt": [
+  "Permite agarrar un objeto físico con el dedo y arrastrarlo, como en la vida real: el objeto sigue al dedo con algo de elasticidad, empuja a los demás y puede atascarse. Ponlo bajo «Dedo pulsado» (acción «Agarrar y arrastrar»): mientras el dedo está puesto se arrastra el objeto que hay debajo; al levantarlo se suelta solo (o usa la acción «Soltar»). Puedes limitar el agarre a objetos de un tag y ajustar la suavidad.",
+  "un puzle de cajas: el jugador mueve cajas con la yema del dedo para construir una torre."
+ ],
+ "physique_test": [
+  "Hace una pregunta sobre un objeto físico y sigue la salida «verdadero» o «falso»: ¿está apoyado en algo (para permitir un salto)?, ¿toca algo?, ¿toca algo por encima?, ¿está en reposo (dormido)?, ¿se mueve rápido?, ¿cae?, ¿sube? Para «se mueve rápido», «cae» y «sube» el umbral en píxeles por segundo se ajusta en avanzado. También puedes leer directamente en una fórmula: objeto.vitesse, objeto.masse, objeto.vitesseRotation.",
+  "un salto de plataformas: «Botón de salto» → Si el objeto está apoyado en algo → velocidad hacia abajo = -900."
+ ],
+ "modifier_stat": [
+  "Cambia una estadística que inventaste para un objeto (munición, armadura, maná, combustible…): sumarle, restarle o ponerla en un valor. Si todavía no existe, se crea en 0. Luego se lee en cualquier parte: =arquero.municion.",
+  "Tras un disparo: Cambiar una estadística → objeto «arquero», estadística «municion», Restar 1."
+ ],
+ "si_stat": [
+  "Compara una estadística de un objeto con un valor y sigue la salida «verdadero» o «falso»: por ejemplo «municion es mayor que 0». Una estadística que no existe vale 0.",
+  "Antes de disparar: Si la estadística «municion» del arquero es mayor que 0 → disparar; si no → mostrar «Sin flechas»."
+ ],
+ "suivre_parcours": [
+  "Hace que el objeto siga un recorrido dibujado con la herramienta «Recorrido» de Assets: se coloca en el punto de salida y avanza de punto en punto a la velocidad elegida. En un cruce elige su salida como la ajustaste (al azar, por turnos, según una variable). La salida «Llegó al final» se activa al alcanzar un punto sin salida. Con «Desvío lateral al azar», cada objeto va por su propio carril (desplazamiento al azar): varios enemigos avanzan lado a lado en vez de superponerse. Con «Evitar a los demás», un objeto que alcanza a uno más lento se aparta, lo adelanta y vuelve a su carril; si el camino es demasiado estrecho, lo sigue.",
+  "Aparece un enemigo: Seguir el recorrido «Camino_enemigos», velocidad 150. Salida «Llegó al final» → Infligir daño a la base y luego Destruir el objeto."
+ ],
+ "arreter_parcours": [
+  "Detiene el objeto donde está: ya no sigue su recorrido (la salida «Llegó al final» no se activará).",
+  "Una trampa congela a un enemigo: Detener el recorrido y más tarde Seguir el recorrido para que continúe."
+ ],
+ "camera_doigt": [
+  "Activa (o corta) el desplazamiento de la pantalla con el dedo: al arrastrar en la escena se mueve la cámara. Un simple toque sigue siendo un toque (una torre, un botón). Los botones del HUD nunca desplazan. La cámara no sale de los límites fijados con «Límites de la cámara».",
+  "Al empezar: Límites de la cámara (0, 3840, 0, 1080) y luego Desplazar la cámara con el dedo: el jugador arrastra un mapa de dos pantallas de ancho."
+ ],
+ "appliquer_donnees": [
+  "Da al objeto A todos los valores de una unidad o arma escritos en el archivo donnees.txt (Assets → Diálogos, o assets_ludexa/Textes/donnees.txt): vida, ataque, defensa, movimiento, alcance, precio… y sus tags. Basta una línea: «unite Caballero: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=caballeria pesado». Se reequilibra el juego editando el archivo, sin tocar los nodos. Salidas «Encontrado» / «No encontrado». El archivo también puede contener «arme Espada: attaque=5», «etat Veneno: duree=3, degats=2», «regle: lanza > caballeria = 150» (un atacante con tag lanza hace 150 % a un objetivo con tag caballeria, aplicado automáticamente por «Atacar») y las alturas de las casillas.",
+  "al empezar la partida, para cada héroe: Aplicar datos «Caballero»."
+ ],
+ "definir_hauteur": [
+  "Da una altura (un nivel: 0 = llano, 1, 2, 3…) a un rectángulo de casillas de la cuadrícula: columna y fila de inicio, número de columnas y filas. Las alturas dan el bonus de altura de «Atacar» y detienen la vista en la niebla de guerra (una colina oculta lo que hay detrás). También se pueden escribir en donnees.txt («hauteur 3,4 = 2» o un bloque «hauteurs:» con una cifra por casilla). Léelas con la fórmula hauteur(columna, fila) o con los nodos verdes «Altura de la casilla tocada» / «Altura de la casilla bajo un objeto».",
+  "una colina de 3 x 2 casillas a altura 2, para que el arquero que se coloque ahí golpee más fuerte."
+ ],
+ "valeur_hauteur_touchee": [
+  "Nodo verde: la altura de la casilla que toca el dedo (0 si no hay nada definido). Conéctalo con 🔗 a un ajuste, por ejemplo en un «Si…».",
+  "mostrar «¡Colina!» al tocar una casilla de altura 2."
+ ],
+ "valeur_hauteur_objet": [
+  "Nodo verde: la altura de la casilla bajo un objeto. Sirve, por ejemplo, para comparar la altura del atacante con la del objetivo.",
+  "permitir el ataque a distancia solo desde una casilla más alta que el objetivo."
+ ],
+ "donner_etat": [
+  "Da un estado a la unidad durante un número de TURNOS: veneno (daño cada turno), lento (baja el movimiento), bendecido (sube el ataque)… Todo puede escribirse en donnees.txt («etat Veneno: duree=3, degats=2», «etat Lento: duree=2, stat=mouvement, delta=-2»): entonces basta el nombre del estado. El daño cae al inicio de cada turno del equipo de la unidad y luego el estado pierde un turno; al final, la estadística modificada vuelve a como estaba. Volver a dar el mismo estado lo prolonga en vez de duplicarlo. La unidad conserva una estadística «etat_<nombre>» (turnos restantes), legible en una fórmula. Requiere «Pasar al siguiente turno».",
+  "una flecha envenenada: Atacar → sigue vivo → dar el estado «Veneno» al objetivo."
+ ],
+ "retirer_etat": [
+  "Quita un estado de la unidad (por nombre), o todos si el nombre está vacío. La estadística modificada por el estado vuelve enseguida a su valor anterior.",
+  "un sacerdote que cura el veneno de un aliado."
+ ],
+ "si_etat": [
+  "Comprueba si la unidad tiene un estado (o cualquiera si el nombre está vacío). Salidas «Verdadero» / «Falso».",
+  "no poder moverse si la unidad está «Congelada»."
+ ],
+ "effet_zone": [
+  "Afecta de golpe a todos los objetos alrededor del objeto A (en el centro): daño, curación o un estado. Ajustes: la fuerza, el radio en casillas, los tags afectados (vacío = todos), la forma (rombo o cuadrado con diagonales), la reducción de fuerza por casilla de distancia (explosión: cuanto más lejos, menos daño) y si el objeto del centro también se ve afectado. El daño ignora la defensa. Una bola de fuego, una curación de grupo, un grito que asusta. Para contar víctimas en una condición usa las fórmulas compter(\"tag\") y voisins(objeto, \"tag\", casillas).",
+  "una bola de fuego: radio 2, fuerza 6, reducción 30 % por casilla, sobre unidades «enemigo»."
+ ],
+ "gagner_xp": [
+  "Da experiencia a la unidad. Al alcanzar el umbral (umbral × nivel actual), la unidad sube de nivel, la experiencia sobrante se conserva y se suman las ganancias («vie=2, attaque=1»; la vida máxima sube con la vida). La unidad guarda las estadísticas «xp» y «niveau» (1 al inicio). Salidas «Sube de nivel» / «Sin subir de nivel»: una fanfarria o un mensaje al subir.",
+  "un héroe que gana 30 de experiencia por cada enemigo derrotado."
+ ],
+ "memoriser_position": [
+  "Recuerda la posición actual de la unidad, antes de un movimiento. Con «Cancelar el movimiento», el jugador puede volver atrás (como en Advance Wars al pulsar «Cancelar» antes de actuar).",
+  "justo antes de «Ir a la casilla»: Recordar la posición."
+ ],
+ "annuler_deplacement": [
+  "Devuelve la unidad a la posición recordada por «Recordar la posición», borra su marca de «ya ha jugado» y pone a 0 sus estadísticas «bouge» y «agi». Salidas «Cancelado» / «Nada que cancelar».",
+  "un botón «Cancelar» en el menú de acción de la unidad."
+ ],
+ "ia_jouer": [
+  "Hace jugar a una unidad sola, como un ordenador. Mira adónde puede ir (movimiento, muros, terrenos, unidades que bloquean), busca a los enemigos (sus tags) y elige la mejor casilla desde donde atacar según su ESTILO: agresivo (el máximo daño, rematar un objetivo primero), prudente (evita el contraataque) o defensivo (le gustan las casillas de gran defensa). Si no hay nadie a su alcance, se acerca al enemigo más cercano. Al llegar, sale «Llegó»: el objeto implicado es el objetivo elegido y la estadística «cible_ia» de la unidad vale 1 (puede atacar) o 0 (solo se acercó). Usa su movimiento, alcance (y «portee_min») y su ficha de unidad. Salida «Sin enemigos» si ya no quedan.",
+  "turno de los monstruos: para cada monstruo, Jugar como un ordenador (enemigos = jugador) → al llegar, si cible_ia = 1, Atacar."
+ ],
+ "brouillard_maj": [
+  "Calcula lo que ve el equipo y cubre el resto del mapa con un velo oscuro: las unidades del equipo (tags) ven a su alrededor hasta su estadística «vision» en casillas (si no, la visión por defecto del nodo). Un muro del terreno, un terreno con la propiedad «bloque_vue = oui» (bosque denso) o una casilla más alta detienen la vista. Las casillas ya vistas quedan medio oscuras (memoria, opcional). Las unidades con tags enemigos fuera de vista se ocultan. Vuélvelo a lanzar tras cada movimiento o al inicio de un turno. La fórmula vue(columna, fila) vale 1 si la casilla se ve. «Quitar la niebla de guerra» lo hace todo visible.",
+  "al inicio de cada turno del jugador: Actualizar la niebla (equipo jugador, enemigos enemigo, visión 3)."
+ ],
+ "brouillard_enlever": [
+  "Quita la niebla de guerra: todo el mapa vuelve a ser visible y las unidades ocultas reaparecen.",
+  "al final de la partida, para mostrar todo el mapa."
+ ],
+ "couleur_equipe": [
+  "Un solo dibujo para todos los equipos: pinta las partes a colorear (capa, bandera, plumero) con un color de referencia (rosa vivo #FF00FF por defecto) y este nodo reemplaza ese rosa por el color del equipo para el objeto. Se conservan las sombras y brillos del dibujo (un rosa oscuro pasa a azul oscuro). La tolerancia indica cuánto puede alejarse un color del de referencia para ser reemplazado. No se cambia nada en las imágenes: todo ocurre al mostrarlas, así que hay que repetirlo al inicio de cada partida.",
+  "dos ejércitos con las mismas imágenes: jugador en azul, enemigo en rojo."
  ]
 }

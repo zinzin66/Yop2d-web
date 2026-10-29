@@ -508,7 +508,7 @@
   "when an enemy explodes: duration 0.06, speed 0.05."
  ],
  "chemin_vers_objet": [
-  "Object A goes to object B, finding the shortest path by itself, square by square, without going through walls (\"Solid\" tiles of a tile layer, fixed physical objects). The path is updated when B moves. [[lang:port_arrive]] runs when A touches B.",
+  "Object A goes to object B, finding the shortest path by itself, square by square, without going through walls (\"Solid\" tiles of a tile layer, fixed physical objects). The path is updated when B moves. [[lang:port_arrive]] runs when A touches B. The \"Stop\" setting lets the object stop on a neighbouring cell, well centered (grid games); \"These tags block the path\" makes it go around other units.",
   "a ghost chasing the player through a maze."
  ],
  "chemin_vers_point": [
@@ -674,5 +674,261 @@
  "charger_variables": [
   "Brings back the values written by [[sauvegarder_variables]] (same save name). Every variable that still exists gets its saved value back. Output « Loaded » when it worked, « No save found » on the very first game. Often placed right after « At start ».",
   "Right after [[NoeudEventStart]]: [[charger_variables]], then [[modifier_propriete]] to show the score that was found."
+ ],
+ "placer_case": [
+  "Puts object A exactly in the middle of the chosen cell (column and row, counted from 0 at the top left). The grid is the one of the scene's tile map. With the 🔗 button, plug in [[valeur_colonne_touchee]] and [[valeur_ligne_touchee]] to send it to the cell the finger touches.",
+  "move a piece to the touched cell in a board game."
+ ],
+ "centrer_case": [
+  "Object A stays in its cell but goes back exactly to the middle. Handy when a move stopped between two cells.",
+  "re-center a hero after its move."
+ ],
+ "valeur_colonne_touchee": [
+  "Green node (value): gives the column of the cell the finger touches (0 = the first on the left). Plug it into a setting with the 🔗 button.",
+  "know which column was touched to place a tower."
+ ],
+ "valeur_ligne_touchee": [
+  "Green node (value): gives the row of the cell the finger touches (0 = the first at the top). Plug it into a setting with the 🔗 button.",
+  "know which row was touched to place a building."
+ ],
+ "valeur_colonne_objet": [
+  "Green node (value): gives the column of the cell where the chosen object is (0 = the first on the left).",
+  "know in which column the hero is."
+ ],
+ "valeur_ligne_objet": [
+  "Green node (value): gives the row of the cell where the chosen object is (0 = the first at the top).",
+  "know in which row the hero is."
+ ],
+ "tour_suivant": [
+  "Passes the game to the next team. Write the teams in order using their tags (e.g. player,enemy). The first call (for example after \"At start\") begins with the first team; when every team has played, the turn number goes up. At the start of each turn the local event \"tour_<team>\" runs if it exists (e.g. \"tour_enemy\").",
+  "put \"Go to the next turn\" on the \"End turn\" button."
+ ],
+ "si_tour_de": [
+  "True if it is the turn of the team written (its tag), False otherwise.",
+  "let the player touch their units only during their own turn."
+ ],
+ "marquer_joue": [
+  "Remembers that the unit (object A) has played this turn. Everything is cleared when the next turn starts.",
+  "stop a hero from moving twice in the same turn."
+ ],
+ "si_a_joue": [
+  "True if the unit (object A) has already played this turn, False otherwise.",
+  "refuse to move a hero that has already played."
+ ],
+ "valeur_numero_tour": [
+  "Green node: the current turn number (1, 2, 3…), plug it in with the 🔗 button.",
+  "show \"Turn 3\" in a text."
+ ],
+ "montrer_cases": [
+  "Colors the cells the chosen object can move to (or attack). Walls block, and you can add tags that block (other units) and terrains that cost more steps (forest=2). Color, visibility, frame and numbers are adjustable. \"Zone name\" lets you show several at once (movement in blue, attack in red).",
+  "show a hero's movement zone when it is touched."
+ ],
+ "cacher_cases": [
+  "Clears the colored cells (all of them, or one named zone).",
+  "hide the zone once the hero has arrived."
+ ],
+ "si_case_accessible": [
+  "True if the cell (column, row) is one of the shown cells. By default: the cell the finger touches. False otherwise.",
+  "refuse a move that is too far with \"too far!\"."
+ ],
+ "valeur_cout_case": [
+  "Green node: the number of steps to reach the touched cell (-1 if it is outside the zone). Handy to count remaining steps.",
+  "remaining steps = the unit's steps - this number."
+ ],
+ "definir_vie": [
+  "Gives health points to the chosen object (object variable \"vie\", and \"vie_max\" for the maximum). Read it anywhere with a formula, e.g. =monster.vie, to write it in a text or a bar.",
+  "give a monster 10 health points at the start."
+ ],
+ "infliger_degats": [
+  "Removes health points from the object (never below 0). Two outputs: \"Still alive\" and \"Out of health\" (the object is destroyed if the box is ticked; \"the involved object\" stays the one hit).",
+  "a hero hits a monster: 3 damage, then a small message depending on the result."
+ ],
+ "soigner": [
+  "Gives health points back to the object, without going over its maximum.",
+  "a potion that restores 5 health points to the hero."
+ ],
+ "valeur_terrain_touche": [
+  "Green node: the name of the terrain of the touched cell (\"Forest\", \"Water\"…), or nothing if there is none. Terrains are set in the tile editor.",
+  "show \"Forest\" when a forest cell is touched."
+ ],
+ "valeur_cout_terrain_touche": [
+  "Green node: the step cost of the terrain of the touched cell (1 if there is none).",
+  "say \"this costs 2 steps\" before a move."
+ ],
+ "valeur_terrain_objet": [
+  "Green node: the name of the terrain the chosen object stands on.",
+  "know whether the hero is in water or on the road."
+ ],
+ "valeur_defense_objet": [
+  "Green node: the defense bonus of the terrain under the chosen object.",
+  "show a unit's defense bonus."
+ ],
+ "chemin_vers_case": [
+  "The object walks to the CENTER of the cell (column, row), going around walls, blocking terrains and the units with the given tags. Default: the cell touched by the finger. \"Arrived\" output once on the cell.",
+  "send a hero to a touched blue cell."
+ ],
+ "pion_une_case": [
+  "Moves the piece one cell (up, down, left, right), well centered. If the cell is a wall, a blocking terrain, a unit (tags) or the edge of the map: \"Blocked\" output. Otherwise \"Arrived\" at the end of the step.",
+  "move a board-game piece with ◀ ▶ ▲ ▼ buttons."
+ ],
+ "definir_fiche": [
+  "Gives the object its sheet: health, attack, defense, movement and range (object variables \"vie\", \"attaque\", \"defense\", \"mouvement\", \"portee\"). They can be read anywhere with a formula, e.g. =hero.mouvement for the number of steps of the reachable cells. Put this node \"At start\" of each unit, or in a reusable unit prefab.",
+  "create an archer: health 8, attack 4, defense 0, movement 4, range 3."
+ ],
+ "attaquer": [
+  "Object A attacks object B: damage = A's attack × power × bonuses − B's defense − B's terrain defense. Exits “Still alive” and “Out of health” (the target is destroyed if the box is ticked), and “Attacker destroyed” if a counterattack kills it. Both objects need a unit sheet. The “regle: spear > cavalry = 150” rules of donnees.txt apply by themselves. In advanced: bonuses by tags (“cavalry = 150”), PIERCING (percentage of defense ignored, for a spear or a crossbow), COUNTERATTACK (percentage of the target's attack returned if it survives and the attacker is in its range), HEIGHT BONUS (percentage of damage per level of difference: the one higher up hits harder), GUARD (each adjacent ally with the chosen tag adds defense to the target: a shield wall), a free formula, and a statistic used up at each attack (ammo).",
+  "the spear (piercing 40) against heavy cavalry; the archer on the hill (height +15%)."
+ ],
+ "lumiere_ambiance": [
+  "Darkens the whole game (under the buttons and score) with the color you choose. Darkness 0 = full daylight, 100 = pitch black, except around light sources. The level and the color change smoothly: over 30 seconds you go from day to an orange dusk and then a blue night, like a sunset.",
+  "a sunset: [[lumiere_ambiance]] orange, darkness 40, over 6 seconds; [[attendre]] 6 seconds; then [[lumiere_ambiance]] night blue, darkness 90, over 6 seconds."
+ ],
+ "lumiere_source": [
+  "Attaches a light to the object: it follows the object when it moves (a character's torch, a lantern, a fire…), even if the object is the child of another. Settings: color, radius in pixels (distance from the center), lighting (100 = normal, up to 300: stronger and farther), colored glow (0 = none), flicker (none, candle, torch, flickers) and shift. One light per object, 8 at most at once. It cuts through the darkness set by [[lumiere_ambiance]]; without darkness it only adds its glow. « Switching on » setting: « Only when it is dark » turns the light on by itself at nightfall (ideal with [[lumiere_cycle]]).",
+  "a character's torch: placed on a « lantern » object that is a child of the hero, radius 360, flicker « torch »."
+ ],
+ "lumiere_eteindre": [
+  "Turns off the light attached to the object. To turn it back on, use [[lumiere_source]] again.",
+  "a « Lantern » button turns off the hero's light."
+ ],
+ "ombre_objet": [
+  "Puts a soft shadow under the object (or removes it with « No »). It follows the object when it moves; you can set its strength and width. It instantly gives volume to characters standing on a backdrop. You can also tick the « Shadow under the object » box in the Inspector, with no node at all.",
+  "a shadow under the hero: strength 50, width 70."
+ ],
+ "choisir_cible": [
+  "Object A looks among the objects that carry one of the requested tags for those WITHIN ITS RANGE (same shapes as “Show reachable cells”), then picks one: the closest, the one with the least or the most health, or the lowest / highest value of a statistic. “Target found” output: it becomes “the involved object” (for Attack, Go to…). “No target” output: nobody in range. Perfect for the intelligence of a monster or a turret.",
+  "a monster: [[choisir_cible]] (tag “hero”, the closest, range =monster.range), then [[attaquer]] on “Target found”."
+ ],
+ "NoeudEventNouvelleScene": [
+  "Runs every time a new scene opens. Made for the \"Global logic\" (which runs in every scene): for example, placing the chosen army on each map. In an ordinary scene, \"On start\" is enough.",
+  null
+ ],
+ "lumiere_cycle": [
+  "Takes the whole game from day to an orange evening, a blue night, dawn, then day again, all by itself. You choose the length of a full day (30 to 120 seconds for a lively game), the starting moment and whether the cycle repeats forever. A paused game freezes the cycle. Length 0 = stop the cycle (the sky stays as it is). A manual setting with [[lumiere_ambiance]] takes over. Your lights ([[lumiere_source]]) stay on: you see them better at night.",
+  "a living world: on start, [[lumiere_cycle]] with a length of 90 seconds, starting « Full day », looping."
+ ],
+ "physique_monde": [
+  "Sets the physics world of the scene: gravity downwards (100% = normal, 0 = space, negative = objects fall upwards), sideways gravity (a wind that always blows), calculation precision and whether resting objects fall asleep. Use it once, under “At start”. It only affects objects that have the “Realistic physics” behavior (⚙ Behavior).",
+  "a level on the Moon: gravity 20%."
+ ],
+ "physique_changer": [
+  "Changes the settings of a physics object during the game: its type (normal, fixed, guided, or no more physics), material (wood, stone, metal, rubber, ball, ice, feather), shape, weight, bounce, grip, gravity, air drag, top speed, whether it rotates, whether it is a ghost or very fast, its layer. Any setting left empty or on “(do not change)” stays as it is. On an object without physics yet, choosing a type gives it physics.",
+  "a ball that turns into rubber (material “Rubber”) when a bonus is picked up."
+ ],
+ "physique_pousser": [
+  "Pushes a physics object with a force. “Steady push”: repeat it every frame (under “Every frame” or “Finger down”), the object speeds up as long as you push (a rocket, a wind, a fan). “A hit”: adds speed at once (a jump, a kick). By default the effect is the same on a light or heavy object; in the advanced settings you can make weight matter, and push away from the center to make the object spin. Values: pixels per second (per second squared for the steady push).",
+  "a rocket game: “Finger down” → push upwards (-2500) steadily."
+ ],
+ "physique_vitesse": [
+  "Sets the speed of a physics object, in pixels per second: to the right, downwards (negative = upwards) and spin in degrees per second. Any box left empty leaves that speed unchanged. “Replace” gives exactly this speed; “Add” adds it to the current speed. The “Stop everything” option sets all speeds to zero. Perfect for a jump (downward speed of -900), a sharp stop or a character moving at constant speed.",
+  "a platformer jump: downward speed = -900, only if [[physique_test]] says the object is standing on something."
+ ],
+ "physique_lancer": [
+  "Launches a physics object in a direction: you give the angle (0 = to the right, -90 = up, 90 = down, 180 = to the left) and the starting speed. Gravity then does the rest: the object follows a curve. Ideal for a slingshot game, a cannon, a ball throw. The angle can be a formula (for example the angle between the object and the finger).",
+  "a slingshot: when the finger lets go, launch the bird at the angle of the elastic."
+ ],
+ "physique_explosion": [
+  "Blasts every physics object around a point: the closer to the center, the harder they are thrown, and they start to spin. The center is the middle of the chosen object, or an (x, y) point if you write one. You set the blast radius and the force (the speed given at the center). Option: only objects with a certain tag. The node destroys nothing: combine it with “Particle effect” and “Destroy object” for a real explosion.",
+  "a bomb: when it touches the ground, explosion with radius 500 and force 1800, then destroy the bomb."
+ ],
+ "physique_lier": [
+  "Links two objects so they hold or move together, like in real life. Kind of link: hinge (swings around a point: door, pendulum), rigid rod (fixed distance), spring (elastic, with stiffness), rope (maximum length), slider (slides along a rail, with limits and motor), weld (stuck together), wheel with suspension (car: A = the body, B = the wheel, with motor), brake (top view). Object B is optional: without B, object A is attached to a fixed point of the scenery. Give the link a name to adjust it (“Adjust a link”) or cut it (“Cut a link”) later. In the advanced settings: point on each side, limits, rail direction, motor, collision between the two objects. Both objects need the “Realistic physics” behavior (except a fixed support).",
+  "a pendulum: A = the ball, B = a small fixed object at the top, type “Hinge” or “Rigid rod”; a bridge: planks linked by hinges."
+ ],
+ "physique_regler_liaison": [
+  "Changes a link already created by “Link two objects” (found by its name): start, stop or speed up its motor, set its strength, the stiffness of a spring or suspension, the length of a rod or rope, the limits. Any empty box stays as before. Example: a car whose wheel motor starts when a button is pressed.",
+  "“Gas” button: adjust the link “rear_wheel” with motor = 720; on release: motor = 0."
+ ],
+ "physique_couper": [
+  "Cuts a link: write its name, or write an object's name to cut all of its links. The objects separate and each falls on its own (a collapsing bridge, a cut rope, a detaching cabin).",
+  "a trapped bridge: when the hero touches the lever, cut the link “plank_3”."
+ ],
+ "physique_doigt": [
+  "Lets you grab a physics object with the finger and drag it, like in real life: the object follows the finger with a bit of elasticity, pushes the others and can get stuck. Put it under “Finger down” (action “Grab and drag”): while the finger is down, the object under it is dragged; as soon as the finger lifts, it is released by itself (or use the “Let go” action). You can restrict the grab to objects with a tag, and set the softness of the grip.",
+  "a crate puzzle: the player moves crates with a fingertip to build a tower."
+ ],
+ "physique_test": [
+  "Asks a question about a physics object and follows the “true” or “false” exit: is it standing on something (to allow a jump), does it touch something, does it touch something above, is it at rest (asleep), is it moving fast, falling, rising. For “moves fast”, “falling” and “rising” the threshold in pixels per second is set in the advanced settings. You can also read values directly in a formula: object.vitesse, object.masse, object.vitesseRotation.",
+  "a platformer jump: “Jump button” → If the object is standing on something → set downward speed to -900."
+ ],
+ "modifier_stat": [
+  "Changes a statistic you invented for an object (ammo, armor, mana, fuel…): add to it, subtract from it or set it to a value. If it does not exist yet, it is created at 0. You can then read it anywhere: =archer.ammo.",
+  "After a shot: Change a statistic → object “archer”, statistic “ammo”, Subtract 1."
+ ],
+ "si_stat": [
+  "Compares an object's statistic with a value and follows the “true” or “false” exit: for example “ammo is greater than 0”. A statistic that does not exist counts as 0.",
+  "Before shooting: If the archer's “ammo” statistic is greater than 0 → shoot; otherwise → show “Out of arrows”."
+ ],
+ "suivre_parcours": [
+  "Makes the object follow a path drawn with the “Path” tool in Assets: it is placed on the starting point, then moves from point to point at the chosen speed. At a crossroads it picks its exit as you set it (random, take turns, by a variable). The “Reached the end” exit fires when it reaches a point with no exit. With “Random side offset”, each object walks in its own lane (random shift): several enemies advance side by side instead of overlapping. With “Avoid the others”, an object that catches up with a slower one steps aside, overtakes it and returns to its lane; if the road is too narrow, it follows instead.",
+  "An enemy appears: Follow the path “Enemy_path”, speed 150. “Reached the end” exit → Deal damage to the base, then Destroy the object."
+ ],
+ "arreter_parcours": [
+  "Stops the object where it is: it no longer follows its path (the “Reached the end” exit will not fire).",
+  "An enemy is frozen by a trap: Stop the path, then later Follow the path again so it moves on."
+ ],
+ "camera_doigt": [
+  "Turns finger scrolling on (or off): dragging in the scene moves the camera. A simple tap is still a tap (a tower, a button). HUD buttons never scroll. The camera stays inside the limits set with “Camera limits”.",
+  "On start: Camera limits (0, 3840, 0, 1080), then Scroll the camera with a finger: the player drags a map two screens wide."
+ ],
+ "appliquer_donnees": [
+  "Gives object A every value of a unit or weapon written in the donnees.txt file (Assets → Dialogues, or assets_ludexa/Textes/donnees.txt): health, attack, defense, movement, range, price… and its tags. One line is enough: “unite Knight: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=cavalry heavy”. You rebalance the game by editing the file, without touching the nodes. Exits “Found” / “Not found”. The file can also hold “arme Sword: attaque=5”, “etat Poison: duree=3, degats=2”, “regle: spear > cavalry = 150” (an attacker tagged spear deals 150% to a target tagged cavalry, applied automatically by “Attack”) and tile heights.",
+  "at the start of the game, for each hero: Apply data “Knight”."
+ ],
+ "definir_hauteur": [
+  "Gives a height (a level: 0 = flat, 1, 2, 3…) to a rectangle of grid tiles: start column and row, number of columns and rows. Heights drive the height bonus of “Attack” and block sight in the fog of war (a hill hides what is behind it). You can also write them in donnees.txt (“hauteur 3,4 = 2” or a “hauteurs:” block with one digit per tile). Read them with the formula hauteur(column, row) or with the green nodes “Height of the touched tile” / “Height of the tile under an object”.",
+  "a 3 x 2 tile hill at height 2, so an archer standing on it hits harder."
+ ],
+ "valeur_hauteur_touchee": [
+  "Green node: the height of the tile the finger touches (0 if nothing is defined). Plug it with 🔗 into a setting, for example in an “If…”.",
+  "show “Hill!” when a tile of height 2 is touched."
+ ],
+ "valeur_hauteur_objet": [
+  "Green node: the height of the tile under an object. Useful, for example, to compare the attacker's height with the target's.",
+  "only allow a ranged attack from a tile higher than the target."
+ ],
+ "donner_etat": [
+  "Gives the unit a state for a number of TURNS: poison (damage every turn), slow (movement drops), blessed (attack rises)… Everything can be written in donnees.txt (“etat Poison: duree=3, degats=2”, “etat Slow: duree=2, stat=mouvement, delta=-2”): then only the state's name is needed. Damage lands at the start of each turn of the unit's team, then the state loses a turn; at the end, the changed statistic goes back to normal. Giving the same state again extends it instead of doubling it. The unit keeps an “etat_<name>” statistic (turns left), readable in a formula. Needs “Go to next turn”.",
+  "a poisoned arrow: Attack → still alive → give the “Poison” state to the target."
+ ],
+ "retirer_etat": [
+  "Removes a state from the unit (by name), or every state if the name is empty. The statistic changed by the state goes straight back to its previous value.",
+  "a priest who cures an ally's poison."
+ ],
+ "si_etat": [
+  "Tests whether the unit has a state (or any state if the name is empty). Exits “True” / “False”.",
+  "cannot move if the unit is “Frozen”."
+ ],
+ "effet_zone": [
+  "Hits every object around object A (at the centre) at once: damage, heal or a state. Settings: the strength, the radius in tiles, the tags affected (empty = everyone), the shape (diamond or square with diagonals), the falloff per tile of distance (explosion: the further away, the weaker), and whether the centre object is hit too. Damage ignores defense. A fireball, a group heal, a scary shout. To count victims in a condition use the formulas compter(\"tag\") and voisins(object, \"tag\", tiles).",
+  "a fireball: radius 2, strength 6, falloff 30% per tile, on “enemy” units."
+ ],
+ "gagner_xp": [
+  "Gives the unit experience. When it reaches the threshold (threshold × current level) the unit moves up a level, spare experience is kept, and the gains are added (“vie=2, attaque=1”; maximum health rises along with health). The unit keeps the “xp” and “niveau” statistics (1 at the start). Exits “Level up” / “No level up”: play a fanfare or a message when it levels.",
+  "a hero who gains 30 experience for every enemy defeated."
+ ],
+ "memoriser_position": [
+  "Remembers the unit's current position, before a move. With “Cancel the move”, the player can go back (as in Advance Wars when you press “Cancel” before acting).",
+  "just before “Go to tile”: Remember the position."
+ ],
+ "annuler_deplacement": [
+  "Puts the unit back at the position remembered by “Remember the position”, clears its “has already played” mark and sets its “bouge” and “agi” statistics back to 0. Exits “Cancelled” / “Nothing to cancel”.",
+  "a “Cancel” button in the unit's action menu."
+ ],
+ "ia_jouer": [
+  "Makes a unit play by itself, like a computer. It looks at where it can go (movement, walls, terrain, blocking units), finds the enemies (their tags) and picks the best tile to attack from according to its STYLE: aggressive (most damage, finishing a target first), cautious (avoids the counterattack) or defensive (likes high-defense tiles). Nobody in range: it moves toward the nearest enemy. Once it arrives, the “Arrived” exit fires: the involved object is the chosen target and the unit's “cible_ia” statistic is 1 (can attack) or 0 (just moved closer). It uses the unit's movement, range (and “portee_min”) and unit sheet. Exit “No enemy” if there are none left.",
+  "monsters' turn: for each monster, Play like a computer (enemies = player) → on arrival, if cible_ia = 1, Attack."
+ ],
+ "brouillard_maj": [
+  "Works out what the team can see and covers the rest of the map with a dark veil: the team's units (tags) see around them up to their “vision” statistic in tiles (otherwise the node's default vision). A terrain wall, a terrain with the property “bloque_vue = oui” (dense forest) or a higher tile stops the view. Tiles already seen stay half dark (memory, optional). Units with enemy tags out of sight are hidden. Run it again after every move or at the start of a turn. The formula vue(column, row) is 1 when the tile is seen. “Remove the fog of war” makes everything visible.",
+  "at the start of each player turn: Update the fog (team player, enemies enemy, vision 3)."
+ ],
+ "brouillard_enlever": [
+  "Removes the fog of war: the whole map is visible again and hidden units reappear.",
+  "at the end of the game, to show the whole map."
+ ],
+ "couleur_equipe": [
+  "One drawing for all teams: paint the parts to colour (cloak, flag, plume) with a marker colour (bright pink #FF00FF by default), then this node replaces that pink with the team colour for the object. The drawing's shadows and highlights are kept (a dark pink becomes a dark blue). Tolerance says how far a colour may stray from the marker and still be replaced. Nothing is changed in the images: it all happens at display time, so do it again at the start of each game.",
+  "two armies with the same images: player in blue, enemy in red."
  ]
 }

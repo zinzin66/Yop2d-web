@@ -508,7 +508,7 @@
   "wenn ein Gegner explodiert: Dauer 0,06, Tempo 0,05."
  ],
  "chemin_vers_objet": [
-  "Objekt A geht zu Objekt B und findet selbst den kürzesten Weg, Feld für Feld, ohne durch Mauern zu gehen („feste“ Kacheln einer Kachelebene, feste physikalische Objekte). Der Weg wird neu berechnet, wenn B sich bewegt. [[lang:port_arrive]] startet, wenn A B berührt.",
+  "Objekt A geht zu Objekt B und findet selbst den kürzesten Weg, Feld für Feld, ohne durch Mauern zu gehen („feste“ Kacheln einer Kachelebene, feste physikalische Objekte). Der Weg wird neu berechnet, wenn B sich bewegt. [[lang:port_arrive]] startet, wenn A B berührt. Mit der Einstellung „Anhalten“ bleibt das Objekt auf einem Nachbarfeld stehen, schön zentriert (Rasterspiele); „Diese Tags blockieren den Weg“ lässt es andere Einheiten umgehen.",
   "ein Geist, der den Spieler durch ein Labyrinth jagt."
  ],
  "chemin_vers_point": [
@@ -674,5 +674,261 @@
  "charger_variables": [
   "Holt die Werte zurück, die [[sauvegarder_variables]] geschrieben hat (gleicher Name). Jede Variable, die noch existiert, bekommt ihren Wert zurück. Ausgang « Geladen », wenn es geklappt hat, « Kein Speicherstand » beim allerersten Spiel. Steht oft direkt nach « Beim Start ».",
   "Direkt nach [[NoeudEventStart]]: [[charger_variables]], dann [[modifier_propriete]], um den wiedergefundenen Punktestand anzuzeigen."
+ ],
+ "placer_case": [
+  "Setzt Objekt A genau in die Mitte des gewählten Feldes (Spalte und Zeile, ab 0 oben links gezählt). Das Raster ist das der Tile-Karte der Szene. Mit dem Knopf 🔗 verbindest du [[valeur_colonne_touchee]] und [[valeur_ligne_touchee]], um es auf das berührte Feld zu schicken.",
+  "eine Figur in einem Brettspiel auf das berührte Feld setzen."
+ ],
+ "centrer_case": [
+  "Objekt A bleibt in seinem Feld, geht aber genau in die Mitte zurück. Praktisch, wenn eine Bewegung zwischen zwei Feldern endete.",
+  "einen Helden nach seiner Bewegung neu zentrieren."
+ ],
+ "valeur_colonne_touchee": [
+  "Grüner Node (Wert): liefert die Spalte des berührten Feldes (0 = die erste links). Mit dem Knopf 🔗 in eine Einstellung stecken.",
+  "wissen, welche Spalte berührt wurde, um einen Turm zu setzen."
+ ],
+ "valeur_ligne_touchee": [
+  "Grüner Node (Wert): liefert die Zeile des berührten Feldes (0 = die erste oben). Mit dem Knopf 🔗 in eine Einstellung stecken.",
+  "wissen, welche Zeile berührt wurde, um ein Gebäude zu setzen."
+ ],
+ "valeur_colonne_objet": [
+  "Grüner Node (Wert): liefert die Spalte des Feldes, auf dem das gewählte Objekt steht (0 = die erste links).",
+  "wissen, in welcher Spalte der Held steht."
+ ],
+ "valeur_ligne_objet": [
+  "Grüner Node (Wert): liefert die Zeile des Feldes, auf dem das gewählte Objekt steht (0 = die erste oben).",
+  "wissen, in welcher Zeile der Held steht."
+ ],
+ "tour_suivant": [
+  "Gibt das Spiel an das nächste Team weiter. Schreibe die Teams der Reihe nach mit ihren Tags (z. B. spieler,gegner). Der erste Aufruf (zum Beispiel nach [[NoeudEventStart]]) beginnt mit dem ersten Team; wenn alle gespielt haben, steigt die Zugnummer. Zu Beginn jedes Zugs läuft das lokale Ereignis „tour_<Team>“, falls es existiert (z. B. „tour_gegner“).",
+  "[[tour_suivant]] auf den Knopf „Zug beenden“ legen."
+ ],
+ "si_tour_de": [
+  "Wahr, wenn das geschriebene Team (sein Tag) am Zug ist, sonst Falsch.",
+  "den Spieler seine Einheiten nur während seines eigenen Zugs berühren lassen."
+ ],
+ "marquer_joue": [
+  "Merkt sich, dass die Einheit (Objekt A) in diesem Zug gespielt hat. Alles wird gelöscht, wenn der nächste Zug beginnt.",
+  "verhindern, dass ein Held sich im selben Zug zweimal bewegt."
+ ],
+ "si_a_joue": [
+  "Wahr, wenn die Einheit (Objekt A) in diesem Zug schon gespielt hat, sonst Falsch.",
+  "es ablehnen, einen Helden zu bewegen, der schon gespielt hat."
+ ],
+ "valeur_numero_tour": [
+  "Grüner Node: die aktuelle Zugnummer (1, 2, 3…), mit dem Knopf 🔗 einstecken.",
+  "„Zug 3“ in einem Text anzeigen."
+ ],
+ "montrer_cases": [
+  "Färbt die Felder ein, auf die das gewählte Objekt gehen (oder die es angreifen) kann. Wände blockieren, und du kannst blockierende Tags (andere Einheiten) und Gelände hinzufügen, das mehr Schritte kostet (Wald=2). Farbe, Sichtbarkeit, Rahmen und Zahlen sind einstellbar. Mit „Zonenname“ zeigst du mehrere gleichzeitig (Bewegung blau, Angriff rot).",
+  "die Bewegungszone eines Helden zeigen, wenn man ihn berührt."
+ ],
+ "cacher_cases": [
+  "Löscht die gefärbten Felder (alle oder eine benannte Zone).",
+  "die Zone verbergen, wenn der Held angekommen ist."
+ ],
+ "si_case_accessible": [
+  "Wahr, wenn das Feld (Spalte, Zeile) eines der gezeigten Felder ist. Standard: das berührte Feld. Sonst Falsch.",
+  "eine zu weite Bewegung mit „zu weit!“ ablehnen."
+ ],
+ "valeur_cout_case": [
+  "Grüner Node: die Anzahl Schritte bis zum berührten Feld (-1, wenn es außerhalb der Zone liegt). Praktisch, um die übrigen Schritte zu zählen.",
+  "übrige Schritte = Schritte der Einheit - diese Zahl."
+ ],
+ "definir_vie": [
+  "Gibt dem gewählten Objekt Lebenspunkte (Objektvariable „vie“, und „vie_max“ für das Maximum). Überall mit einer Formel lesbar, z. B. =monster.vie, um sie in einen Text oder einen Balken zu schreiben.",
+  "einem Monster am Anfang 10 Lebenspunkte geben."
+ ],
+ "infliger_degats": [
+  "Zieht dem Objekt Lebenspunkte ab (nie unter 0). Zwei Ausgänge: „Noch am Leben“ und „Kein Leben mehr“ (das Objekt wird zerstört, wenn das Kästchen angehakt ist; „das beteiligte Objekt“ bleibt das getroffene).",
+  "ein Held schlägt ein Monster: 3 Schaden, dann eine kleine Meldung je nach Ergebnis."
+ ],
+ "soigner": [
+  "Gibt dem Objekt Lebenspunkte zurück, ohne sein Maximum zu überschreiten.",
+  "ein Trank, der dem Helden 5 Lebenspunkte zurückgibt."
+ ],
+ "valeur_terrain_touche": [
+  "Grüner Node: der Name des Geländes des berührten Feldes („Wald“, „Wasser“…), oder nichts, wenn es keins gibt. Das Gelände wird im Tile-Editor festgelegt.",
+  "„Wald“ anzeigen, wenn ein Waldfeld berührt wird."
+ ],
+ "valeur_cout_terrain_touche": [
+  "Grüner Node: die Schrittkosten des Geländes des berührten Feldes (1, wenn es keins gibt).",
+  "„das kostet 2 Schritte“ vor einer Bewegung sagen."
+ ],
+ "valeur_terrain_objet": [
+  "Grüner Node: der Name des Geländes, auf dem das gewählte Objekt steht.",
+  "wissen, ob der Held im Wasser oder auf der Straße steht."
+ ],
+ "valeur_defense_objet": [
+  "Grüner Node: der Verteidigungsbonus des Geländes unter dem gewählten Objekt.",
+  "den Verteidigungsbonus einer Einheit anzeigen."
+ ],
+ "chemin_vers_case": [
+  "Das Objekt läuft zur MITTE des Feldes (Spalte, Zeile) und umgeht Wände, blockierendes Gelände und die Einheiten mit den angegebenen Tags. Standard: das berührte Feld. Ausgang „Angekommen“ einmal auf dem Feld.",
+  "einen Helden auf ein berührtes blaues Feld schicken."
+ ],
+ "pion_une_case": [
+  "Bewegt die Figur um ein Feld (oben, unten, links, rechts), schön zentriert. Ist das Feld eine Wand, ein blockierendes Gelände, eine Einheit (Tags) oder der Kartenrand: Ausgang „Blockiert“. Sonst „Angekommen“ am Ende des Schritts.",
+  "eine Brettspielfigur mit den Knöpfen ◀ ▶ ▲ ▼ bewegen."
+ ],
+ "definir_fiche": [
+  "Gibt dem Objekt sein Blatt: Leben, Angriff, Verteidigung, Bewegung und Reichweite (Objektvariablen „vie“, „attaque“, „defense“, „mouvement“, „portee“). Sie sind überall mit einer Formel lesbar, z. B. =held.mouvement für die Schritte der erreichbaren Felder. Setze diesen Node nach [[NoeudEventStart]] jeder Einheit oder in ein wiederverwendbares Einheiten-Prefab.",
+  "einen Bogenschützen erstellen: Leben 8, Angriff 4, Verteidigung 0, Bewegung 4, Reichweite 3."
+ ],
+ "attaquer": [
+  "Objekt A greift Objekt B an: Schaden = Angriff von A × Stärke × Boni − Verteidigung von B − Geländeverteidigung von B. Ausgänge „Noch am Leben“ und „Keine Leben mehr“ (das Ziel wird zerstört, wenn das Feld angehakt ist) sowie „Angreifer zerstört“, wenn ihn ein Gegenangriff tötet. Beide Objekte brauchen ein Einheitenblatt. Die Regeln „regle: speer > reiterei = 150“ aus donnees.txt gelten automatisch. Erweitert: Boni nach Tags („reiterei = 150“), DURCHSCHLAG (Prozent der Verteidigung ignoriert, für Speer oder Armbrust), GEGENANGRIFF (Prozent des Angriffs des Ziels zurück, wenn es überlebt und der Angreifer in Reichweite ist), HÖHENBONUS (Prozent Schaden pro Höhenstufe: wer höher steht, trifft stärker), DECKUNG (jeder benachbarte Verbündete mit dem gewählten Tag erhöht die Verteidigung des Ziels: eine Schildmauer), eine freie Formel und eine Statistik, die bei jedem Angriff verbraucht wird (Munition).",
+  "der Speer (Durchschlag 40) gegen schwere Reiterei; der Bogenschütze auf dem Hügel (Höhe +15 %)."
+ ],
+ "lumiere_ambiance": [
+  "Verdunkelt das ganze Spiel (unter Buttons und Punktestand) in der gewählten Farbe. Dunkelheit 0 = voller Tag, 100 = völlig schwarz, außer rund um Lichtquellen. Stufe und Farbe ändern sich sanft: in 30 Sekunden geht es vom Tag über ein oranges Abendrot zur blauen Nacht, wie ein Sonnenuntergang.",
+  "ein Sonnenuntergang: [[lumiere_ambiance]] orange, Dunkelheit 40, in 6 Sekunden; [[attendre]] 6 Sekunden; dann [[lumiere_ambiance]] Nachtblau, Dunkelheit 90, in 6 Sekunden."
+ ],
+ "lumiere_source": [
+  "Hängt ein Licht an das Objekt: Es folgt dem Objekt, wenn es sich bewegt (Fackel einer Figur, Laterne, Feuer …), auch wenn das Objekt ein Kind eines anderen ist. Einstellungen: Farbe, Radius in Pixeln (Abstand vom Zentrum), Beleuchtung (100 = normal, bis 300: stärker und weiter), farbiger Schein (0 = keiner), Flackern (keins, Kerze, Fackel, flackert) und Versatz. Ein Licht pro Objekt, höchstens 8 gleichzeitig. Es durchdringt die Dunkelheit von [[lumiere_ambiance]]; ohne Dunkelheit fügt es nur seinen Schein hinzu. Einstellung « Einschalten »: « Nur wenn es dunkel ist » schaltet das Licht bei Einbruch der Nacht von allein ein (ideal mit [[lumiere_cycle]]).",
+  "die Fackel einer Figur: an einem Objekt « Laterne », Kind des Helden, Radius 360, Flackern « Fackel »."
+ ],
+ "lumiere_eteindre": [
+  "Schaltet das am Objekt befestigte Licht aus. Zum Wiedereinschalten nimmst du erneut [[lumiere_source]].",
+  "ein Button « Laterne » schaltet das Licht des Helden aus."
+ ],
+ "ombre_objet": [
+  "Legt einen weichen Schatten unter das Objekt (oder entfernt ihn mit « Nein »). Er folgt dem Objekt, wenn es sich bewegt; Stärke und Breite sind einstellbar. Er gibt Figuren vor einem Hintergrund sofort Tiefe. Sie lässt sich auch mit dem Kästchen « Schatten unter dem Objekt » im Inspektor setzen, ganz ohne Knoten.",
+  "ein Schatten unter dem Helden: Stärke 50, Breite 70."
+ ],
+ "choisir_cible": [
+  "Objekt A sucht unter den Objekten mit einem der gewünschten Tags diejenigen IN SEINER REICHWEITE (gleiche Formen wie bei «Erreichbare Felder zeigen») und wählt eines aus: das nächste, das mit den wenigsten oder meisten Leben oder den niedrigsten / höchsten Wert einer Statistik. Ausgang «Ziel gefunden»: es wird zum «beteiligten Objekt» (für Angreifen, Gehe zu…). Ausgang «Kein Ziel»: niemand in Reichweite. Perfekt für die Intelligenz eines Monsters oder Turms.",
+  "ein Monster: [[choisir_cible]] (Tag « held », der nächste), dann [[attaquer]] bei « Ziel gefunden »."
+ ],
+ "NoeudEventNouvelleScene": [
+  "Startet jedes Mal, wenn eine neue Szene geöffnet wird. Gedacht für die «Globale Logik» (die in allen Szenen läuft): zum Beispiel die gewählte Armee auf jeder Karte aufstellen. In einer normalen Szene reicht «Beim Start».",
+  null
+ ],
+ "lumiere_cycle": [
+  "Lässt das ganze Spiel von allein vom Tag über einen orangen Abend zur blauen Nacht, zur Morgendämmerung und wieder zum Tag wechseln. Du wählst die Dauer eines ganzen Tages (30 bis 120 Sekunden für ein lebendiges Spiel), den Startzeitpunkt und ob sich der Zyklus endlos wiederholt. Bei Pause steht der Zyklus still. Dauer 0 = Zyklus anhalten (der Himmel bleibt, wie er ist). Eine manuelle Einstellung mit [[lumiere_ambiance]] übernimmt. Deine Lichter ([[lumiere_source]]) bleiben an: Nachts sieht man sie besser.",
+  "eine lebendige Welt: beim Start [[lumiere_cycle]] mit 90 Sekunden, Start « Voller Tag », Schleife."
+ ],
+ "physique_monde": [
+  "Stellt die Physikwelt der Szene ein: Schwerkraft nach unten (100 % = normal, 0 = Weltraum, negativ = Objekte fallen nach oben), seitliche Schwerkraft (ein ständiger Wind), Genauigkeit der Berechnung und ob ruhende Objekte einschlafen. Einmal verwenden, unter „Beim Start“. Wirkt nur auf Objekte mit dem Verhalten „Realistische Physik“ (⚙ Verhalten).",
+  "ein Level auf dem Mond: Schwerkraft 20 %."
+ ],
+ "physique_changer": [
+  "Ändert die Einstellungen eines Physik-Objekts während des Spiels: Typ (normal, fest, geführt oder keine Physik mehr), Material (Holz, Stein, Metall, Gummi, Ball, Eis, Feder), Form, Gewicht, Abprallen, Haftung, Schwerkraft, Luftwiderstand, Höchstgeschwindigkeit, ob es sich dreht, ob es ein Geist oder sehr schnell ist, seine Ebene. Leer oder auf „(nicht ändern)“ gelassene Einstellungen bleiben. Bei einem Objekt ohne Physik gibt die Wahl eines Typs ihm Physik.",
+  "ein Ball, der zu Gummi wird (Material „Gummi“), wenn man einen Bonus einsammelt."
+ ],
+ "physique_pousser": [
+  "Schiebt ein Physik-Objekt mit einer Kraft. „Dauerschub“: in jedem Bild wiederholen (unter „Jedes Bild“ oder „Finger gedrückt“), das Objekt wird schneller, solange du schiebst (Rakete, Wind, Ventilator). „Ein Stoß“: gibt sofort Tempo (Sprung, Tritt). Standardmäßig wirkt es auf leichte und schwere Objekte gleich; in den erweiterten Einstellungen kann das Gewicht zählen, und außerhalb der Mitte schieben lässt das Objekt kreiseln. Werte: Pixel pro Sekunde (pro Sekunde zum Quadrat beim Dauerschub).",
+  "ein Raketenspiel: „Finger gedrückt“ → dauerhaft nach oben schieben (-2500)."
+ ],
+ "physique_vitesse": [
+  "Stellt das Tempo eines Physik-Objekts ein, in Pixel pro Sekunde: nach rechts, nach unten (negativ = nach oben) und Drehung in Grad pro Sekunde. Leere Felder lassen dieses Tempo unverändert. „Ersetzen“ setzt genau dieses Tempo; „Addieren“ addiert es zum aktuellen. Die Option „Alles anhalten“ setzt alle Tempi auf null. Ideal für einen Sprung (Tempo nach unten -900), einen harten Stopp oder eine Figur mit gleichbleibendem Tempo.",
+  "ein Plattform-Sprung: Tempo nach unten = -900, nur wenn [[physique_test]] sagt, dass das Objekt steht."
+ ],
+ "physique_lancer": [
+  "Wirft ein Physik-Objekt in eine Richtung: du gibst den Winkel (0 = rechts, -90 = oben, 90 = unten, 180 = links) und das Starttempo an. Den Rest erledigt die Schwerkraft: das Objekt fliegt eine Kurve. Ideal für ein Schleuder-Spiel, eine Kanone, einen Ballwurf. Der Winkel kann eine Formel sein (z. B. der Winkel zwischen Objekt und Finger).",
+  "eine Schleuder: beim Loslassen den Vogel im Winkel des Gummis abschießen."
+ ],
+ "physique_explosion": [
+  "Lässt alle Physik-Objekte um einen Punkt wegfliegen: je näher am Zentrum, desto heftiger werden sie geschleudert, und sie fangen an zu kreiseln. Das Zentrum ist die Mitte des gewählten Objekts oder ein Punkt (x, y), wenn du einen einträgst. Du stellst Radius und Kraft (das Tempo im Zentrum) ein. Option: nur Objekte mit einem bestimmten Tag. Der Knoten zerstört nichts: kombiniere ihn mit „Partikeleffekt“ und „Objekt zerstören“ für eine echte Explosion.",
+  "eine Bombe: beim Bodenkontakt Explosion mit Radius 500 und Kraft 1800, dann die Bombe zerstören."
+ ],
+ "physique_lier": [
+  "Verbindet zwei Objekte, sodass sie halten oder sich gemeinsam bewegen, wie im echten Leben. Art der Verbindung: Scharnier (dreht sich um einen Punkt: Tür, Pendel), starre Stange (feste Entfernung), Feder (elastisch, mit Härte), Seil (maximale Länge), Schiene (gleitet auf einer Bahn, mit Grenzen und Motor), Schweißnaht (zusammengeklebt), Rad mit Federung (Auto: A = die Karosserie, B = das Rad, mit Motor), Bremse (Draufsicht). Objekt B ist optional: ohne B hängt Objekt A an einem festen Punkt der Kulisse. Gib der Verbindung einen Namen, um sie später einzustellen („Verbindung einstellen“) oder zu trennen („Verbindung trennen“). In den erweiterten Einstellungen: Punkt auf jeder Seite, Grenzen, Richtung der Schiene, Motor, Kollision der beiden Objekte. Beide Objekte brauchen das Verhalten „Realistische Physik“ (außer einem festen Halter).",
+  "ein Pendel: A = die Kugel, B = ein kleines festes Objekt oben, Typ „Scharnier“ oder „Starre Stange“; eine Brücke: Planken, durch Scharniere verbunden."
+ ],
+ "physique_regler_liaison": [
+  "Ändert eine mit „Zwei Objekte verbinden“ erstellte Verbindung (über ihren Namen gefunden): Motor starten, stoppen oder beschleunigen, Stärke, Härte einer Feder oder Federung, Länge von Stange oder Seil, Grenzen. Leere Felder bleiben wie zuvor. Beispiel: ein Auto, dessen Radmotor beim Tastendruck anspringt.",
+  "Knopf „Gas“: Verbindung „hinterrad“ mit Motor = 720 einstellen; beim Loslassen: Motor = 0."
+ ],
+ "physique_couper": [
+  "Trennt eine Verbindung: schreibe ihren Namen, oder den Namen eines Objekts, um alle seine Verbindungen zu trennen. Die Objekte lösen sich und fallen jeweils für sich (eine einstürzende Brücke, ein gekapptes Seil, eine sich lösende Kabine).",
+  "eine Brückenfalle: berührt der Held den Hebel, die Verbindung „planke_3“ trennen."
+ ],
+ "physique_doigt": [
+  "Erlaubt, ein Physik-Objekt mit dem Finger zu greifen und zu ziehen, wie im echten Leben: das Objekt folgt dem Finger mit etwas Elastizität, schiebt andere und kann sich verkeilen. Unter „Finger gedrückt“ einsetzen (Aktion „Mit dem Finger greifen und ziehen“): solange der Finger aufliegt, wird das Objekt darunter gezogen; hebt sich der Finger, wird es von selbst losgelassen (oder die Aktion „Loslassen“ nutzen). Du kannst den Griff auf Objekte mit einem Tag beschränken und die Weichheit einstellen.",
+  "ein Kistenrätsel: der Spieler verschiebt Kisten mit der Fingerspitze und baut einen Turm."
+ ],
+ "physique_test": [
+  "Stellt eine Frage zu einem Physik-Objekt und folgt dem Ausgang „wahr“ oder „falsch“: steht es auf etwas (um einen Sprung zu erlauben), berührt es etwas, berührt es etwas darüber, ruht es (schläft), bewegt es sich schnell, fällt es, steigt es. Bei „bewegt sich schnell“, „fällt“ und „steigt“ stellst du die Schwelle in Pixel pro Sekunde in den erweiterten Einstellungen ein. Du kannst auch direkt in einer Formel lesen: objekt.vitesse, objekt.masse, objekt.vitesseRotation.",
+  "ein Plattform-Sprung: „Sprungknopf“ → Wenn das Objekt auf etwas steht → Tempo nach unten auf -900."
+ ],
+ "modifier_stat": [
+  "Ändert eine Statistik, die du für ein Objekt erfunden hast (Munition, Rüstung, Mana, Treibstoff…): addieren, abziehen oder auf einen Wert setzen. Gibt es sie noch nicht, wird sie mit 0 angelegt. Danach kannst du sie überall lesen: =bogenschuetze.munition.",
+  "Nach einem Schuss: Statistik ändern → Objekt „bogenschuetze“, Statistik „munition“, Abziehen 1."
+ ],
+ "si_stat": [
+  "Vergleicht eine Statistik eines Objekts mit einem Wert und folgt dem Ausgang „wahr“ oder „falsch“: zum Beispiel „munition ist größer als 0“. Eine Statistik, die es nicht gibt, zählt als 0.",
+  "Vor dem Schuss: Wenn die Statistik „munition“ des Bogenschützen größer als 0 ist → schießen; sonst → „Keine Pfeile mehr“ zeigen."
+ ],
+ "suivre_parcours": [
+  "Lässt das Objekt einem Weg folgen, der mit dem Werkzeug „Weg“ in den Assets gezeichnet wurde: Es wird auf den Startpunkt gesetzt und geht dann mit der gewählten Geschwindigkeit von Punkt zu Punkt. An einer Kreuzung wählt es den Ausgang so, wie du es eingestellt hast (zufällig, reihum, nach einer Variable). Der Ausgang „Am Ende angekommen“ läuft, sobald es einen Punkt ohne Ausgang erreicht. Mit „Seitlicher Zufallsversatz“ geht jedes Objekt auf seiner eigenen Spur (zufällig verschoben): mehrere Gegner laufen nebeneinander statt übereinander. Mit „Anderen ausweichen“ geht ein Objekt, das ein langsameres einholt, zur Seite, überholt es und kehrt auf seine Spur zurück; ist der Weg zu schmal, folgt es.",
+  "Ein Gegner erscheint: Dem Weg „Gegnerweg“ folgen, Geschwindigkeit 150. Ausgang „Am Ende angekommen“ → der Basis Schaden zufügen, dann das Objekt zerstören."
+ ],
+ "arreter_parcours": [
+  "Hält das Objekt an der Stelle an: Es folgt seinem Weg nicht mehr (der Ausgang „Am Ende angekommen“ läuft nicht).",
+  "Eine Falle friert einen Gegner ein: Weg abbrechen, später wieder Dem Weg folgen, damit er weitergeht."
+ ],
+ "camera_doigt": [
+  "Schaltet das Verschieben der Ansicht mit dem Finger ein (oder aus): Wer in der Szene wischt, bewegt die Kamera. Ein einfaches Tippen bleibt ein Tippen (ein Turm, ein Knopf). HUD-Knöpfe verschieben nie. Die Kamera bleibt in den Grenzen von „Kamerabegrenzung“.",
+  "Beim Start: Kamerabegrenzung (0, 3840, 0, 1080), dann Kamera mit dem Finger verschieben: Der Spieler zieht eine Karte, die zwei Bildschirme breit ist."
+ ],
+ "appliquer_donnees": [
+  "Gibt Objekt A alle Werte einer Einheit oder Waffe aus der Datei donnees.txt (Assets → Dialoge, oder assets_ludexa/Textes/donnees.txt): Leben, Angriff, Verteidigung, Bewegung, Reichweite, Preis… und ihre Tags. Eine Zeile genügt: „unite Ritter: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=reiterei schwer“. Das Spiel wird durch Bearbeiten der Datei ausbalanciert, ohne die Nodes anzufassen. Ausgänge „Gefunden“ / „Nicht gefunden“. Die Datei kann auch „arme Schwert: attaque=5“, „etat Gift: duree=3, degats=2“, „regle: speer > reiterei = 150“ (ein Angreifer mit Tag speer verursacht 150 % bei einem Ziel mit Tag reiterei, automatisch von „Angreifen“ angewendet) und die Höhen der Felder enthalten.",
+  "zu Spielbeginn für jeden Helden: Daten anwenden „Ritter“."
+ ],
+ "definir_hauteur": [
+  "Gibt einem Rechteck von Rasterfeldern eine Höhe (Stufe: 0 = flach, 1, 2, 3…): Startspalte und -zeile, Anzahl Spalten und Zeilen. Die Höhen bestimmen den Höhenbonus von „Angreifen“ und blockieren die Sicht im Kriegsnebel (ein Hügel verdeckt, was dahinter liegt). Sie lassen sich auch in donnees.txt schreiben („hauteur 3,4 = 2“ oder ein Block „hauteurs:“ mit einer Ziffer pro Feld). Lies sie mit der Formel hauteur(Spalte, Zeile) oder mit den grünen Nodes „Höhe des berührten Feldes“ / „Höhe des Feldes unter einem Objekt“.",
+  "ein Hügel aus 3 x 2 Feldern auf Höhe 2, damit ein Bogenschütze dort stärker trifft."
+ ],
+ "valeur_hauteur_touchee": [
+  "Grüner Node: die Höhe des Feldes, das der Finger berührt (0, wenn nichts festgelegt ist). Mit 🔗 an eine Einstellung anschließen, z. B. in einem „Wenn…“.",
+  "„Hügel!“ anzeigen, wenn ein Feld der Höhe 2 berührt wird."
+ ],
+ "valeur_hauteur_objet": [
+  "Grüner Node: die Höhe des Feldes unter einem Objekt. Nützlich, um z. B. die Höhe von Angreifer und Ziel zu vergleichen.",
+  "Fernangriffe nur von einem höheren Feld als das Ziel erlauben."
+ ],
+ "donner_etat": [
+  "Gibt der Einheit einen Zustand für eine Anzahl RUNDEN: Gift (Schaden jede Runde), langsam (Bewegung sinkt), gesegnet (Angriff steigt)… Alles kann in donnees.txt stehen („etat Gift: duree=3, degats=2“, „etat Langsam: duree=2, stat=mouvement, delta=-2“): dann genügt der Name des Zustands. Der Schaden trifft zu Beginn jeder Runde des Teams der Einheit, danach verliert der Zustand eine Runde; am Ende kehrt die geänderte Statistik zurück. Denselben Zustand erneut zu geben verlängert ihn, statt ihn zu verdoppeln. Die Einheit behält eine Statistik „etat_<Name>“ (verbleibende Runden), in Formeln lesbar. Braucht „Zur nächsten Runde“.",
+  "ein Giftpfeil: Angreifen → noch am Leben → der Zielperson den Zustand „Gift“ geben."
+ ],
+ "retirer_etat": [
+  "Entfernt einen Zustand von der Einheit (nach Name) oder alle, wenn der Name leer ist. Die vom Zustand geänderte Statistik kehrt sofort auf den alten Wert zurück.",
+  "ein Priester, der das Gift eines Verbündeten heilt."
+ ],
+ "si_etat": [
+  "Prüft, ob die Einheit einen Zustand hat (oder irgendeinen, wenn der Name leer ist). Ausgänge „Wahr“ / „Falsch“.",
+  "sich nicht bewegen können, wenn die Einheit „Gefroren“ ist."
+ ],
+ "effet_zone": [
+  "Trifft auf einmal alle Objekte um Objekt A (in der Mitte): Schaden, Heilung oder ein Zustand. Einstellungen: die Stärke, der Radius in Feldern, die betroffenen Tags (leer = alle), die Form (Raute oder Quadrat mit Diagonalen), die Abnahme pro Feld Entfernung (Explosion: je weiter weg, desto schwächer) und ob das Objekt in der Mitte auch getroffen wird. Der Schaden ignoriert die Verteidigung. Ein Feuerball, eine Gruppenheilung, ein Furcht-Schrei. Um Opfer in einer Bedingung zu zählen, nutze die Formeln compter(\"tag\") und voisins(Objekt, \"tag\", Felder).",
+  "ein Feuerball: Radius 2, Stärke 6, Abnahme 30 % pro Feld, auf „Gegner“-Einheiten."
+ ],
+ "gagner_xp": [
+  "Gibt der Einheit Erfahrung. Erreicht sie die Schwelle (Schwelle × aktuelle Stufe), steigt die Einheit eine Stufe auf, überschüssige Erfahrung bleibt erhalten und die Zuwächse werden addiert („vie=2, attaque=1“; das maximale Leben steigt mit dem Leben). Die Einheit behält die Statistiken „xp“ und „niveau“ (anfangs 1). Ausgänge „Stufe aufgestiegen“ / „Kein Aufstieg“: eine Fanfare oder Nachricht beim Aufstieg.",
+  "ein Held, der für jeden besiegten Gegner 30 Erfahrung bekommt."
+ ],
+ "memoriser_position": [
+  "Merkt sich die aktuelle Position der Einheit vor einer Bewegung. Mit „Bewegung rückgängig“ kann der Spieler zurück (wie in Advance Wars bei „Abbrechen“ vor der Aktion).",
+  "direkt vor „Zum Feld gehen“: Position merken."
+ ],
+ "annuler_deplacement": [
+  "Setzt die Einheit auf die von „Position merken“ gespeicherte Position zurück, löscht „hat schon gespielt“ und setzt die Statistiken „bouge“ und „agi“ auf 0. Ausgänge „Rückgängig“ / „Nichts rückgängig“.",
+  "ein „Abbrechen“-Knopf im Aktionsmenü der Einheit."
+ ],
+ "ia_jouer": [
+  "Lässt eine Einheit wie ein Computer von allein spielen. Sie prüft, wohin sie gehen kann (Bewegung, Wände, Gelände, blockierende Einheiten), sucht die Gegner (ihre Tags) und wählt je nach STIL das beste Feld zum Angreifen: aggressiv (meister Schaden, ein Ziel zuerst erledigen), vorsichtig (meidet den Gegenangriff) oder defensiv (mag Felder mit hoher Verteidigung). Niemand in Reichweite: Sie nähert sich dem nächsten Gegner. Nach der Ankunft kommt der Ausgang „Angekommen“: Das beteiligte Objekt ist das gewählte Ziel und die Statistik „cible_ia“ der Einheit ist 1 (kann angreifen) oder 0 (nur genähert). Sie nutzt Bewegung, Reichweite (und „portee_min“) und das Einheitenblatt. Ausgang „Kein Gegner“, wenn keiner mehr da ist.",
+  "Zug der Monster: für jedes Monster Wie ein Computer spielen (Gegner = Spieler) → bei Ankunft, wenn cible_ia = 1, Angreifen."
+ ],
+ "brouillard_maj": [
+  "Berechnet, was das Team sieht, und bedeckt den Rest der Karte mit einem dunklen Schleier: Die Einheiten des Teams (Tags) sehen um sich herum bis zu ihrer Statistik „vision“ in Feldern (sonst die Standardsicht des Nodes). Eine Geländewand, ein Gelände mit der Eigenschaft „bloque_vue = oui“ (dichter Wald) oder ein höheres Feld blockiert die Sicht. Bereits gesehene Felder bleiben halbdunkel (Gedächtnis, optional). Einheiten mit Gegner-Tags außer Sicht werden versteckt. Nach jeder Bewegung oder zu Rundenbeginn erneut ausführen. Die Formel vue(Spalte, Zeile) ist 1, wenn das Feld gesehen wird. „Kriegsnebel entfernen“ macht alles sichtbar.",
+  "zu Beginn jeder Spielerrunde: Nebel aktualisieren (Team Spieler, Gegner Gegner, Sicht 3)."
+ ],
+ "brouillard_enlever": [
+  "Entfernt den Kriegsnebel: Die ganze Karte ist wieder sichtbar und versteckte Einheiten tauchen wieder auf.",
+  "am Spielende, um die ganze Karte zu zeigen."
+ ],
+ "couleur_equipe": [
+  "Eine Zeichnung für alle Teams: Male die einzufärbenden Teile (Umhang, Fahne, Federbusch) in einer Markierungsfarbe (standardmäßig leuchtendes Pink #FF00FF); dieser Node ersetzt dann dieses Pink für das Objekt durch die Teamfarbe. Schatten und Lichter der Zeichnung bleiben erhalten (ein dunkles Pink wird dunkles Blau). Die Toleranz bestimmt, wie weit eine Farbe von der Markierung abweichen darf und trotzdem ersetzt wird. An den Bildern wird nichts geändert: Alles geschieht bei der Anzeige, also zu Beginn jeder Partie erneut ausführen.",
+  "zwei Armeen mit denselben Bildern: Spieler in Blau, Gegner in Rot."
  ]
 }

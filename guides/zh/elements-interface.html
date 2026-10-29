@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何在 Yop2D 中制作带按钮、开关和滑块的菜单？ | Yop2D 教程</title>
+<meta name="description" content="在 Yop2D 中制作真正的菜单：各种形状的按钮、开关、复选框、滑块、面板和计数器，无需代码。形状、颜色、图片和声音都在同一个地方修改。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/elements-interface.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/elements-interface.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/elements-interface.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/elements-interface.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/elements-interface.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/elements-interface.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/elements-interface.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/elements-interface.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/elements-interface.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/elements-interface.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何制作带按钮、开关和滑块的菜单？",
+ "description": "在 Yop2D 中制作真正的菜单：各种形状的按钮、开关、复选框、滑块、面板和计数器，无需代码。形状、颜色、图片和声音都在同一个地方修改。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "添加元素",
+   "text": "点 +，再点“界面元素”，选一个按钮。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "修改样式",
+   "text": "检查器 > “元素样式…”：形状、颜色、图片、文字。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "读取数值",
+   "text": "公式用 =名称.progression 读取开关或滑块的值。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "响应触摸",
+   "text": "在 Blueprint 中添加 “点击对象时”。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>如何制作带按钮、开关和滑块的菜单？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../elements-interface.html" hreflang="fr">Français</a> · <a href="../en/elements-interface.html" hreflang="en">English</a> · <a href="../es/elements-interface.html" hreflang="es">Español</a> · <a href="../de/elements-interface.html" hreflang="de">Deutsch</a> · <a href="../it/elements-interface.html" hreflang="it">Italiano</a> · <a href="../pt/elements-interface.html" hreflang="pt">Português</a> · <a href="../ru/elements-interface.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/elements-interface.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>游戏菜单需要好看的按钮和设置：用开关控制声音，用滑块控制音量，用计数器显示分数。在 Yop2D 中，每个元素都是<strong>一个对象</strong>，文字就在里面，整个外观在一个窗口里设置。你也可以下载示例 <strong>UI kit</strong>（示例标签页）：它展示了所有元素。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>编辑器中已打开的项目；</li><li>想先看看效果的话，可以使用示例“UI kit”（可选）。</li></ul>
+</div>
+<h2>第 1 步：添加元素</h2>
+<div class="method">
+<ol><li>点编辑器的 <strong>+</strong>，再点 <strong>界面元素</strong> 部分。</li><li>在 <strong>按钮</strong>、<strong>开关</strong>、<strong>复选框</strong>、<strong>滑块</strong>、<strong>面板</strong> 和 <strong>计数器</strong> 中选择。</li><li>元素会出现在屏幕中央：像其他对象一样，用手指移动它，用手柄调整大小。</li></ol>
+<div class="tip">👉 按钮的文字就在按钮里面：在检查器中输入即可，不用再在按钮上面放一个文字了。</div>
+</div>
+<h2>第 2 步：修改样式</h2>
+<div class="method">
+<ol><li>选中元素，点检查器中的 <strong>元素样式…</strong>。</li><li>在 <strong>形状</strong> 中选择矩形、圆角、胶囊、圆形、切角或六边形。</li><li>在 <strong>图片</strong> 中选择 <strong>在形状内</strong>（图片保持形状）、<strong>替换形状</strong>（图片就是按钮）或 <strong>图标 + 文字</strong>。</li><li>在 <strong>颜色和轮廓</strong> 中设置颜色、<strong>渐变</strong>、轮廓、<strong>阴影</strong> 和 <strong>发光（霓虹）</strong>。</li><li>在 <strong>文字</strong> 中选择字体、大小、颜色和文字轮廓。</li></ol>
+</div>
+<h2>第 3 步：设置行为</h2>
+<div class="method">
+<ol><li>在 <strong>行为</strong> 中，为需要保持状态的按钮打开 <strong>保持按下（开 / 关）</strong>。</li><li>选择 <strong>触摸时的声音</strong>，也可以加上 <strong>振动</strong>。</li><li>对于滑块，设置 <strong>最小值</strong>、<strong>最大值</strong> 和 <strong>起始值</strong>。</li></ol>
+<div class="tip">👉 <strong>禁用（灰色）</strong> 的元素不再响应触摸：适合用于尚不可用的“继续”按钮。</div>
+</div>
+<h2>第 4 步：在游戏中读取数值</h2>
+<div class="method">
+<ol><li>开关或复选框等于它的最小值（关）或最大值（开）；滑块等于它的位置。</li><li>在公式中写 <strong>对象名称.progression</strong>：例如在文字的 “修改属性” 中写“=volume.progression”来显示音量。</li><li>对于按钮，在 Blueprint 中添加事件 “点击对象时”，然后选择你的按钮。</li></ol>
+</div>
+<p>Yop2D 原来的按钮继续可用：这些新元素是新增的，不会替换任何东西。</p>
+
+<div class="nav">
+<a href="../zh/prefabs.html">← 现成对象</a>
+<a href="../zh/musique.html">下一篇： 创作你的音乐 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>

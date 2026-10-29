@@ -1,0 +1,71 @@
+{
+  "categorie": "Physics",
+  "noeuds": [
+    {
+      "nom": "Set the physics world",
+      "schema": "<b>Inputs:</b> Gravity downwards (%, 100 = normal, 0 = space, negative = upwards), Gravity to the right (%, negative = left: a constant wind), Precision, Resting objects fall asleep (lighter on the phone)",
+      "role": "Sets the physics world of the scene: gravity downwards (100% = normal, 0 = space, negative = objects fall upwards), sideways gravity (a wind that always blows), calculation precision and whether resting objects fall asleep. Use it once, under “At start”. It only affects objects that have the “Realistic physics” behavior (⚙ Behavior).",
+      "exemple": "a level on the Moon: gravity 20%."
+    },
+    {
+      "nom": "Adjust a physics object",
+      "schema": "<b>Inputs:</b> Object, Object type, Material (weight, bounce and grip at once), Contact shape, Weight (%, 100 = normal, empty = unchanged), Bounce (0 to 100, empty = unchanged), Grip (0 = ice, 100 = sticky, empty = unchanged), Object gravity (%, 0 = floats, empty = unchanged), Air drag (0 to 20, empty = unchanged), Top speed (pixels per second, 0 = no limit, empty = unchanged), Never rotates, Ghost (things pass through), Very fast object (never goes through a thin wall), Object layer (1 to 8, empty = unchanged)",
+      "role": "Changes the settings of a physics object during the game: its type (normal, fixed, guided, or no more physics), material (wood, stone, metal, rubber, ball, ice, feather), shape, weight, bounce, grip, gravity, air drag, top speed, whether it rotates, whether it is a ghost or very fast, its layer. Any setting left empty or on “(do not change)” stays as it is. On an object without physics yet, choosing a type gives it physics.",
+      "exemple": "a ball that turns into rubber (material “Rubber”) when a bonus is picked up."
+    },
+    {
+      "nom": "Push (physics force)",
+      "schema": "<b>Inputs:</b> Object, Push to the right (negative = to the left), Push downwards (negative = upwards), How, Where to push (off-center, the object starts to spin), Does weight matter?",
+      "role": "Pushes a physics object with a force. “Steady push”: repeat it every frame (under “Every frame” or “Finger down”), the object speeds up as long as you push (a rocket, a wind, a fan). “A hit”: adds speed at once (a jump, a kick). By default the effect is the same on a light or heavy object; in the advanced settings you can make weight matter, and push away from the center to make the object spin. Values: pixels per second (per second squared for the steady push).",
+      "exemple": "a rocket game: “Finger down” → push upwards (-2500) steadily."
+    },
+    {
+      "nom": "Set the speed (physics)",
+      "schema": "<b>Inputs:</b> Object, Speed to the right (pixels per second, empty = unchanged), Speed downwards (negative = upwards, empty = unchanged), Spin speed (degrees per second, empty = unchanged), How, Stop everything at once?",
+      "role": "Sets the speed of a physics object, in pixels per second: to the right, downwards (negative = upwards) and spin in degrees per second. Any box left empty leaves that speed unchanged. “Replace” gives exactly this speed; “Add” adds it to the current speed. The “Stop everything” option sets all speeds to zero. Perfect for a jump (downward speed of -900), a sharp stop or a character moving at constant speed.",
+      "exemple": "a platformer jump: downward speed = -900, only if “If the physics object…” says the object is standing on something."
+    },
+    {
+      "nom": "Launch (angle and speed)",
+      "schema": "<b>Inputs:</b> Object, Angle (degrees: 0 = right, -90 = up, 90 = down, 180 = left), Starting speed (pixels per second), How",
+      "role": "Launches a physics object in a direction: you give the angle (0 = to the right, -90 = up, 90 = down, 180 = to the left) and the starting speed. Gravity then does the rest: the object follows a curve. Ideal for a slingshot game, a cannon, a ball throw. The angle can be a formula (for example the angle between the object and the finger).",
+      "exemple": "a slingshot: when the finger lets go, launch the bird at the angle of the elastic."
+    },
+    {
+      "nom": "Explosion (physics blast)",
+      "schema": "<b>Inputs:</b> Object, Center: X position (empty = at the object's center), Center: Y position (empty = at the object's center), Blast radius (pixels), Force at the center (speed given, pixels per second), Only objects with this tag (empty = all)",
+      "role": "Blasts every physics object around a point: the closer to the center, the harder they are thrown, and they start to spin. The center is the middle of the chosen object, or an (x, y) point if you write one. You set the blast radius and the force (the speed given at the center). Option: only objects with a certain tag. The node destroys nothing: combine it with “Particle effect” and “Destroy object” for a real explosion.",
+      "exemple": "a bomb: when it touches the ground, explosion with radius 500 and force 1800, then destroy the bomb."
+    },
+    {
+      "nom": "Link two objects",
+      "schema": "<b>Inputs:</b> Object A, Object B, Kind of link, Link name (to adjust or cut it later), Point of object A where the link is made, Point of object B (rod, spring, rope), Shift the point to the right (pixels), Shift the point downwards (pixels), Do the two objects collide?, Length (pixels, 0 = the starting distance), Spring or suspension stiffness (1 = soft, 10 = firm), Damping (0 to 100: higher means less bouncing), Lower limit (degrees for a hinge, pixels for a slider; empty = none), Upper limit (degrees or pixels; empty = none), Rail or suspension direction (degrees: 0 = horizontal, 90 = vertical; empty = automatic), Motor: speed (degrees per second for a hinge or wheel, pixels per second for a slider; 0 = no motor), Motor or brake strength (1 = weak, 10 = normal, 100 = very strong)",
+      "role": "Links two objects so they hold or move together, like in real life. Kind of link: hinge (swings around a point: door, pendulum), rigid rod (fixed distance), spring (elastic, with stiffness), rope (maximum length), slider (slides along a rail, with limits and motor), weld (stuck together), wheel with suspension (car: A = the body, B = the wheel, with motor), brake (top view). Object B is optional: without B, object A is attached to a fixed point of the scenery. Give the link a name to adjust it (“Adjust a link”) or cut it (“Cut a link”) later. In the advanced settings: point on each side, limits, rail direction, motor, collision between the two objects. Both objects need the “Realistic physics” behavior (except a fixed support).",
+      "exemple": "a pendulum: A = the ball, B = a small fixed object at the top, type “Hinge” or “Rigid rod”; a bridge: planks linked by hinges."
+    },
+    {
+      "nom": "Adjust a link",
+      "schema": "<b>Inputs:</b> Link name, Motor: speed (0 = stop the motor, empty = unchanged), Motor strength (empty = unchanged), Spring or suspension stiffness (empty = unchanged), New length (pixels, empty = unchanged), New lower limit (empty = unchanged), New upper limit (empty = unchanged), Limits",
+      "role": "Changes a link already created by “Link two objects” (found by its name): start, stop or speed up its motor, set its strength, the stiffness of a spring or suspension, the length of a rod or rope, the limits. Any empty box stays as before. Example: a car whose wheel motor starts when a button is pressed.",
+      "exemple": "“Gas” button: adjust the link “rear_wheel” with motor = 720; on release: motor = 0."
+    },
+    {
+      "nom": "Cut a link",
+      "schema": "<b>Inputs:</b> Name of the link to cut, Or: name of an object whose links are all cut",
+      "role": "Cuts a link: write its name, or write an object's name to cut all of its links. The objects separate and each falls on its own (a collapsing bridge, a cut rope, a detaching cabin).",
+      "exemple": "a trapped bridge: when the hero touches the lever, cut the link “plank_3”."
+    },
+    {
+      "nom": "Grab with the finger (physics)",
+      "schema": "<b>Inputs:</b> Action, Only objects with this tag (empty = all), Softness of the grip",
+      "role": "Lets you grab a physics object with the finger and drag it, like in real life: the object follows the finger with a bit of elasticity, pushes the others and can get stuck. Put it under “Finger down” (action “Grab and drag”): while the finger is down, the object under it is dragged; as soon as the finger lifts, it is released by itself (or use the “Let go” action). You can restrict the grab to objects with a tag, and set the softness of the grip.",
+      "exemple": "a crate puzzle: the player moves crates with a fingertip to build a tower."
+    },
+    {
+      "nom": "If the physics object…",
+      "schema": "<b>Inputs:</b> Object, Question, Speed from which it counts (pixels per second) &nbsp;→&nbsp; <b>Outputs:</b> True / False",
+      "role": "Asks a question about a physics object and follows the “true” or “false” exit: is it standing on something (to allow a jump), does it touch something, does it touch something above, is it at rest (asleep), is it moving fast, falling, rising. For “moves fast”, “falling” and “rising” the threshold in pixels per second is set in the advanced settings. You can also read values directly in a formula: object.vitesse, object.masse, object.vitesseRotation.",
+      "exemple": "a platformer jump: “Jump button” → If the object is standing on something → set downward speed to -900."
+    }
+  ]
+}

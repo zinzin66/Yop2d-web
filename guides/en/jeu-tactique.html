@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to make a turn-based tactics game in Yop2D? | Yop2D Guide</title>
+<meta name="description" content="Make a tactics game on a grid in Yop2D, no code: turns, blue reachable cells, terrains, movement, attack and health with nodes.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/jeu-tactique.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/jeu-tactique.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/jeu-tactique.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/jeu-tactique.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/jeu-tactique.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/jeu-tactique.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/jeu-tactique.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/jeu-tactique.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/jeu-tactique.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/jeu-tactique.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to make a tactics game?",
+ "description": "Make a tactics game on a grid in Yop2D, no code: turns, blue reachable cells, terrains, movement, attack and health with nodes.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Give a sheet to each unit",
+   "text": "On Start → Give a unit sheet (health, attack, defense, movement, range)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Start the player's turn",
+   "text": "Go to the next turn (joueur, ennemi) runs the local event \"tour_joueur\"."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Show where the hero can go",
+   "text": "On Object Click → If it is the turn of… → Show reachable cells."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Make the hero walk",
+   "text": "On Object Click (the terrain) → If the cell is reachable → Go to the cell (path)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Attack",
+   "text": "On Object Click (the monster) → If the cell is reachable → Attack."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "The monsters' turn",
+   "text": "\"tour_ennemi\" → Go to an object (path) (next to the hero) → Attack."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to make a tactics game?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../jeu-tactique.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/jeu-tactique.html" hreflang="es">Español</a> · <a href="../de/jeu-tactique.html" hreflang="de">Deutsch</a> · <a href="../it/jeu-tactique.html" hreflang="it">Italiano</a> · <a href="../pt/jeu-tactique.html" hreflang="pt">Português</a> · <a href="../ru/jeu-tactique.html" hreflang="ru">Русский</a> · <a href="../zh/jeu-tactique.html" hreflang="zh">中文</a> · <a href="../ja/jeu-tactique.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>In a <strong>tactics</strong> game, players take <strong>turns</strong> on a grid: you choose a unit, see the cells it can reach, move it, then it attacks. This guide builds the simplest game possible: <strong>one hero and one monster</strong>. Everything is already done in the <strong>Tactics tutorial</strong> example (<strong>Examples</strong> tab of the start screen): open its Blueprint, each step is in a <strong>colored frame</strong> with a small <strong>?</strong> that explains it.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a tile map of your choice (the game grid <strong>is</strong> the grid of this tile map);</li><li>an Image named <strong>hero1</strong> with the tag <strong>joueur</strong>, and another named <strong>foe1</strong> with the tag <strong>ennemi</strong>;</li><li>a Zone named <strong>terrain</strong> covering the whole map (it is the one you touch to choose a cell);</li><li>a variable <strong>etat</strong> (integer, local) to know where we are: 0 = choose a hero, 1 = hero chosen, 2 = hero moved.</li></ul>
+</div>
+<div class="tip">👉 <strong>Terrains</strong> (forest, sand, mountain…) are set in the tile editor, <strong>Terrains of the tiles</strong> part: step cost, blocked or not, defense bonus. The mountain blocks the way, the forest costs 2 steps.</div>
+<h2>Step 1: the unit sheets</h2>
+<div class="method">
+<ol><li>Add the <strong>“On Start”</strong> event.</li><li>Add <strong>“Give a unit sheet”</strong> for <strong>hero1</strong>: health <code>20</code>, attack <code>6</code>, defense <code>2</code>, movement <code>4</code>, range <code>1</code>.</li><li>Add a second <strong>“Give a unit sheet”</strong> for <strong>foe1</strong>, with its own numbers.</li><li>Link the nodes in order, then add <strong>“Go to the next turn”</strong> with the teams <code>joueur,ennemi</code>.</li></ol>
+<div class="tip">👉 The sheet is stored in the object: you can read it anywhere with a formula, for example <code>=hero1.vie</code>.</div>
+</div>
+<h2>Step 2: the player's turn</h2>
+<div class="method">
+<ol><li>Add the <strong>“Local Event”</strong> event and write the name <code>tour_joueur</code>. It starts by itself at the beginning of the player's turn.</li><li>Set <strong>etat</strong> to <code>0</code> with <strong>“Modify Variable”</strong>, then <strong>“Hide the cells”</strong> to clear the old cells.</li></ol>
+<p>For each team, <strong>“Go to the next turn”</strong> runs the local event "tour_" followed by the team name: <code>tour_joueur</code>, then <code>tour_ennemi</code>.</p>
+</div>
+<h2>Step 3: touch the hero, see the blue cells</h2>
+<div class="method">
+<ol><li>Add <strong>“On Object Click”</strong> on <strong>hero1</strong>.</li><li>Add <strong>“If it is the turn of…”</strong> with the team <code>joueur</code>, then on the <strong>True</strong> output a <strong>“Condition”</strong> <code>etat &lt; 2</code>.</li><li>Add <strong>“Modify Variable”</strong>: <strong>etat</strong> = <code>1</code>.</li><li>Add <strong>“Show reachable cells”</strong> on <strong>hero1</strong>: zone type <strong>Movement (walls count)</strong>, number of steps <code>=hero1.mouvement</code>, blue color, <strong>Write the step count on each cell</strong> = yes, <strong>These tags block the way</strong> = <code>joueur,ennemi</code>.</li></ol>
+<div class="tip">👉 The numbers on the cells are the <strong>steps</strong> needed to get there. Forest cells cost 2: the hero goes less far.</div>
+</div>
+<h2>Step 4: touch a blue cell, the hero walks</h2>
+<div class="method">
+<ol><li>Add <strong>“On Object Click”</strong> on <strong>terrain</strong>, then a <strong>“Condition”</strong> <code>etat = 1</code>.</li><li>Add <strong>“If the cell is reachable”</strong>. For the column and the row, touch <strong>🔗</strong> and choose the green nodes <strong>“Touched column”</strong> and <strong>“Touched row”</strong>: no formula to write.</li><li>On the <strong>True</strong> output: <strong>“Modify Variable”</strong> <strong>etat</strong> = <code>4</code> (the hero is walking), then <strong>“Go to the cell (path)”</strong> on <strong>hero1</strong>, with the same green nodes and <strong>These tags block the path</strong> = <code>joueur,ennemi</code>.</li><li>On the <strong>Arrived</strong> output, call the local event <code>apres_deplacement</code> with <strong>“Call event”</strong>.</li></ol>
+</div>
+<h2>Step 5: the attack zone, then the attack</h2>
+<div class="method">
+<ol><li>In the local event <strong>apres_deplacement</strong>: <strong>“Hide the cells”</strong>, <strong>etat</strong> = <code>2</code>, then <strong>“Show reachable cells”</strong> with type <strong>Attack / range (goes over walls)</strong>, number of steps <code>=hero1.portee</code>, red color, with the zone name <code>attaque</code>.</li><li>Add <strong>“On Object Click”</strong> on <strong>foe1</strong>, a <strong>“Condition”</strong> <code>etat = 2</code> and <strong>“If the cell is reachable”</strong> with the zone name <code>attaque</code>.</li><li>On <strong>True</strong>: <strong>“Attack”</strong> (object A = <strong>hero1</strong>, object B = <strong>foe1</strong>). Damage is the attack, minus the monster's defense, minus its terrain's defense.</li><li><strong>Still alive</strong> output: update its health text. <strong>Out of health</strong> output: the monster is destroyed, add the victory.</li></ol>
+</div>
+<h2>Step 6: the monsters' turn</h2>
+<div class="method">
+<ol><li>Add the local event <code>tour_ennemi</code>.</li><li>Add <strong>“Go to an object (path)”</strong> on <strong>foe1</strong>, object B = <strong>hero1</strong>, <strong>Stop</strong> = <strong>On a neighbor cell, centered</strong>, <strong>These tags block the path</strong> = <code>joueur,ennemi</code>.</li><li>On the <strong>Arrived</strong> output, call a local event where <strong>foe1</strong> <strong>“Attack”</strong> <strong>hero1</strong>.</li><li>After a few seconds (<strong>“Wait”</strong>), <strong>“Stop the path”</strong> then <strong>“Go to the next turn”</strong>: the turn goes back to the player.</li></ol>
+</div>
+<h2>Going further</h2>
+<ul><li><strong>Several heroes:</strong> add <strong>“Mark as having played”</strong> and <strong>“If the unit has already played”</strong> so a hero plays only once per turn (this is what the <strong>Tactics demo</strong> example does).</li><li><strong>A health bar:</strong> read <code>=hero1.vie</code> and <code>=hero1.vie_max</code> in a text or a progress bar.</li><li><strong>Healing:</strong> <strong>“Heal”</strong> gives health back without going over the maximum.</li><li><strong>A board game:</strong> <strong>“Move the piece one cell”</strong> moves a piece one cell, well centered (◀ ▶ ▲ ▼ buttons).</li></ul>
+<h2>If it does not work</h2>
+<ul><li><strong>No blue cell:</strong> the hero must have the tag written in <strong>“If it is the turn of…”</strong>, and <strong>“Go to the next turn”</strong> must have been run at the start.</li><li><strong>The cells do not match the picture:</strong> the grid is the one of the first tile map of the scene. Without a tile map, cells are 80 px.</li><li><strong>The hero does not move:</strong> check that the touched cell is blue, and that <strong>etat</strong> is <code>1</code> at that moment.</li><li><strong>To compare</strong>, open the <strong>Tactics tutorial</strong> example: each part of the Blueprint is in a frame that explains it.</li></ul>
+
+<div class="nav">
+<a href="../en/casse-briques.html">← Make a brick breaker</a>
+<a href="../en/niveau-suivant.html">Next guide: Go to the next level →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>

@@ -14,6 +14,18 @@
       "exemple": "stop the platform when the player presses a button."
     },
     {
+      "nom": "Follow the path",
+      "schema": "<b>Inputs:</b> Object, Path name, Speed (pixels per second), Turn to face the way it goes (yes / no), Random side offset (pixels, ±: each one walks in its own lane), Avoid the others: step aside to avoid overlapping and overtake slower ones (yes / no), Usable width to step aside (pixels on each side of the road centre), Image angle (0 = faces right, 90 = faces down) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived",
+      "role": "Makes the object follow a path drawn with the “Path” tool in Assets: it is placed on the starting point, then moves from point to point at the chosen speed. At a crossroads it picks its exit as you set it (random, take turns, by a variable). The “Reached the end” exit fires when it reaches a point with no exit. With “Random side offset”, each object walks in its own lane (random shift): several enemies advance side by side instead of overlapping. With “Avoid the others”, an object that catches up with a slower one steps aside, overtakes it and returns to its lane; if the road is too narrow, it follows instead.",
+      "exemple": "An enemy appears: Follow the path “Enemy_path”, speed 150. “Reached the end” exit → Deal damage to the base, then Destroy the object."
+    },
+    {
+      "nom": "Stop following the path",
+      "schema": "<b>Input:</b> Object",
+      "role": "Stops the object where it is: it no longer follows its path (the “Reached the end” exit will not fire).",
+      "exemple": "An enemy is frozen by a trap: Stop the path, then later Follow the path again so it moves on."
+    },
+    {
       "nom": "Stop the object",
       "schema": "<b>Input:</b> Object",
       "role": "Stops the object dead: no more speed, push, jump or automatic movement.",
@@ -33,13 +45,13 @@
     },
     {
       "nom": "Go to an object (path)",
-      "schema": "<b>Inputs:</b> Object A, Object B, Speed, Diagonals (yes / no) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived",
-      "role": "Object A goes to object B, finding the shortest path by itself, square by square, without going through walls (\"Solid\" tiles of a tile layer, fixed physical objects). The path is updated when B moves. “Arrived” runs when A touches B.",
+      "schema": "<b>Inputs:</b> Object A, Object B, Speed, Diagonals (yes / no), Stop, These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived",
+      "role": "Object A goes to object B, finding the shortest path by itself, square by square, without going through walls (\"Solid\" tiles of a tile layer, fixed physical objects). The path is updated when B moves. “Arrived” runs when A touches B. The \"Stop\" setting lets the object stop on a neighbouring cell, well centered (grid games); \"These tags block the path\" makes it go around other units.",
       "exemple": "a ghost chasing the player through a maze."
     },
     {
       "nom": "Go to a point (path)",
-      "schema": "<b>Inputs:</b> Object, X position, Y position, Speed, Diagonals (yes / no) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived",
+      "schema": "<b>Inputs:</b> Object, X position, Y position, Speed, Diagonals (yes / no), These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived",
       "role": "Object A goes to point X, Y around the walls, by the shortest path (square by square). With =doigt.x and =doigt.y, it goes where the screen is touched. “Arrived” runs on arrival. If there is no path, it stays where it is.",
       "exemple": "tap a square to send the hero there, in a strategy game or a dungeon."
     },
@@ -48,6 +60,30 @@
       "schema": "<b>Input:</b> Object",
       "role": "The object stops following its path (“Go to an object (path)” or “Go to a point (path)”) and stays where it is.",
       "exemple": "the fly stops when the game is won."
+    },
+    {
+      "nom": "Place on a cell (column, row)",
+      "schema": "<b>Inputs:</b> Object, Column (0 = the first), Row (0 = the first)",
+      "role": "Puts object A exactly in the middle of the chosen cell (column and row, counted from 0 at the top left). The grid is the one of the scene's tile map. With the 🔗 button, plug in “Touched column” and “Touched row” to send it to the cell the finger touches.",
+      "exemple": "move a piece to the touched cell in a board game."
+    },
+    {
+      "nom": "Center on its cell",
+      "schema": "<b>Input:</b> Object",
+      "role": "Object A stays in its cell but goes back exactly to the middle. Handy when a move stopped between two cells.",
+      "exemple": "re-center a hero after its move."
+    },
+    {
+      "nom": "Go to the cell (path)",
+      "schema": "<b>Inputs:</b> Object, Column, Row, Speed, Diagonals (yes / no), These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived",
+      "role": "The object walks to the CENTER of the cell (column, row), going around walls, blocking terrains and the units with the given tags. Default: the cell touched by the finger. \"Arrived\" output once on the cell.",
+      "exemple": "send a hero to a touched blue cell."
+    },
+    {
+      "nom": "Move the piece one cell",
+      "schema": "<b>Inputs:</b> Object, Direction, Speed, These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Arrived / Blocked (wall, terrain, unit, edge)",
+      "role": "Moves the piece one cell (up, down, left, right), well centered. If the cell is a wall, a blocking terrain, a unit (tags) or the edge of the map: \"Blocked\" output. Otherwise \"Arrived\" at the end of the step.",
+      "exemple": "move a board-game piece with ◀ ▶ ▲ ▼ buttons."
     },
     {
       "nom": "Chase an object",

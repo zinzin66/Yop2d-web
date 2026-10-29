@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment faire un menu avec des boutons, un interrupteur et un curseur dans Yop2D ? | Guide Yop2D</title>
+<meta name="description" content="Crée un vrai menu dans Yop2D : boutons de toutes les formes, interrupteur, case à cocher, curseur, panneau et compteur, sans code. Change la forme, les couleurs, l&#x27;image et le son d&#x27;un seul endroit.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/elements-interface.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/elements-interface.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/elements-interface.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/elements-interface.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/elements-interface.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/elements-interface.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/elements-interface.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/elements-interface.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/elements-interface.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/elements-interface.html">
+<link rel="stylesheet" href="guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Comment faire un menu avec des boutons, un interrupteur et un curseur ?",
+ "description": "Crée un vrai menu dans Yop2D : boutons de toutes les formes, interrupteur, case à cocher, curseur, panneau et compteur, sans code. Change la forme, les couleurs, l'image et le son d'un seul endroit.",
+ "inLanguage": "fr",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (moteur de jeu 2D sans code pour Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Ajoute un élément",
+   "text": "Touche + puis « Éléments d'interface » et choisis un bouton."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Change son style",
+   "text": "Inspecteur > « Style de l'élément… » : forme, couleurs, image, texte."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Lis sa valeur",
+   "text": "Une formule lit =nom.progression pour un interrupteur ou un curseur."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Réagis au toucher",
+   "text": "Ajoute « Au Clic sur Objet » dans le Blueprint."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../fr/index.html">← Yop2D</a>
+<h1>Comment faire un menu avec des boutons, un interrupteur et un curseur ?</h1>
+<p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/elements-interface.html" hreflang="en">English</a> · <a href="es/elements-interface.html" hreflang="es">Español</a> · <a href="de/elements-interface.html" hreflang="de">Deutsch</a> · <a href="it/elements-interface.html" hreflang="it">Italiano</a> · <a href="pt/elements-interface.html" hreflang="pt">Português</a> · <a href="ru/elements-interface.html" hreflang="ru">Русский</a> · <a href="zh/elements-interface.html" hreflang="zh">中文</a> · <a href="ja/elements-interface.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Un menu de jeu a besoin de boutons jolis et de réglages : un interrupteur pour le son, un curseur pour le volume, un compteur pour le score. Dans Yop2D, chaque élément est <strong>un seul objet</strong> avec son texte dedans, et tout son aspect se règle dans une seule fenêtre. Tu peux aussi télécharger l'exemple <strong>UI kit</strong> (onglet Exemples) : il montre tous les éléments.</p>
+<div class="besoin">
+<b>Il te faut :</b>
+<ul><li>un projet ouvert dans l'éditeur ;</li><li>l'exemple « UI kit » si tu veux voir le résultat avant de commencer (facultatif).</li></ul>
+</div>
+<h2>Étape 1 : ajoute un élément</h2>
+<div class="method">
+<ol><li>Touche le <strong>+</strong> de l'éditeur, puis la section <strong>Éléments d'interface</strong>.</li><li>Choisis parmi : <strong>Bouton</strong>, <strong>Interrupteur</strong>, <strong>Case à cocher</strong>, <strong>Curseur</strong>, <strong>Panneau</strong> et <strong>Compteur</strong>.</li><li>L'élément arrive au centre de l'écran : déplace-le avec le doigt et agrandis-le avec les poignées, comme n'importe quel objet.</li></ol>
+<div class="tip">👉 Le texte d'un bouton est dedans : écris-le dans l'Inspecteur, plus besoin de poser un texte par-dessus le bouton.</div>
+</div>
+<h2>Étape 2 : change son style</h2>
+<div class="method">
+<ol><li>Sélectionne l'élément et touche <strong>Style de l'élément…</strong> dans l'Inspecteur.</li><li>Dans <strong>Forme</strong>, choisis rectangle, arrondi, pilule, rond, coins coupés ou hexagone.</li><li>Dans <strong>Image</strong>, choisis <strong>Dans la forme</strong> (l'image garde la forme), <strong>Remplace la forme</strong> (l'image EST le bouton) ou <strong>Icône + texte</strong>.</li><li>Dans <strong>Couleurs et contour</strong>, règle la couleur, le <strong>dégradé</strong>, le contour, l'<strong>ombre</strong> et le <strong>halo lumineux (néon)</strong>.</li><li>Dans <strong>Texte</strong>, choisis la police, la taille, la couleur et le contour des lettres.</li></ol>
+</div>
+<h2>Étape 3 : donne-lui un comportement</h2>
+<div class="method">
+<ol><li>Dans <strong>Comportement</strong>, active <strong>Reste enfoncé (ON / OFF)</strong> pour un bouton qui garde son état.</li><li>Choisis un <strong>son au toucher</strong> et, si tu veux, une <strong>vibration</strong>.</li><li>Pour un curseur, règle la <strong>valeur minimale</strong>, la <strong>valeur maximale</strong> et la <strong>valeur de départ</strong>.</li></ol>
+<div class="tip">👉 Un élément <strong>désactivé (grisé)</strong> ne réagit plus au toucher : pratique pour un bouton « Continuer » qui n'est pas encore disponible.</div>
+</div>
+<h2>Étape 4 : lis la valeur dans le jeu</h2>
+<div class="method">
+<ol><li>Un interrupteur ou une case vaut sa valeur minimale (éteint) ou maximale (allumé) ; un curseur vaut sa position.</li><li>Dans une formule, écris <strong>nom_de_l_objet.progression</strong> : par exemple « =volume.progression » dans « Modifier une propriété » du texte pour afficher le volume.</li><li>Pour un bouton, ajoute l'événement « Au Clic sur Objet » dans le Blueprint et choisis ton bouton.</li></ol>
+</div>
+<p>Les anciens boutons de Yop2D continuent de fonctionner : ces nouveaux éléments s'ajoutent, ils ne remplacent rien.</p>
+
+<div class="nav">
+<a href="prefabs.html">← Un objet prêt à l&#x27;emploi</a>
+<a href="musique.html">Guide suivant : Crée ta musique →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="../fr/index.html">Site officiel</a> · <a href="../noeuds/fr.html">Référence des nœuds</a></p>
+</footer>
+</body>
+</html>

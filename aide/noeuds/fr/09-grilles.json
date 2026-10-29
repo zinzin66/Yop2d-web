@@ -2,6 +2,167 @@
   "categorie": "Grilles et puzzles",
   "noeuds": [
     {
+      "nom": "Passer au tour suivant",
+      "schema": "<b>Entrée :</b> Équipes, dans l'ordre (tags séparés par une virgule)",
+      "role": "Fait passer le jeu à l'équipe suivante. Écris les équipes dans l'ordre, par leur tag (ex. joueur,ennemi). Le premier appel (par exemple après « Au démarrage ») commence par la première équipe ; quand toutes ont joué, le numéro du tour augmente. À chaque début de tour, l'événement local « tour_<équipe> » part s'il existe (ex. « tour_ennemi »).",
+      "exemple": "mettre « Passer au tour suivant » sur le bouton « Fin du tour »."
+    },
+    {
+      "nom": "Si c'est le tour de…",
+      "schema": "<b>Entrée :</b> Équipe (tag) &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux",
+      "role": "Vrai si c'est le tour de l'équipe écrite (son tag), Faux sinon.",
+      "exemple": "laisser le joueur toucher ses unités seulement pendant son tour."
+    },
+    {
+      "nom": "Marquer comme ayant joué",
+      "schema": "<b>Entrée :</b> Objet",
+      "role": "Note que l'unité (objet A) a joué ce tour-ci. Tout est effacé au début du tour suivant.",
+      "exemple": "empêcher un héros de bouger deux fois dans le même tour."
+    },
+    {
+      "nom": "Si l'unité a déjà joué",
+      "schema": "<b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux",
+      "role": "Vrai si l'unité (objet A) a déjà joué ce tour-ci, Faux sinon.",
+      "exemple": "refuser de déplacer un héros qui a déjà joué."
+    },
+    {
+      "nom": "Montrer les cases accessibles",
+      "schema": "<b>Entrées :</b> Objet, Type de zone, Nombre de pas (ou portée), Couleur des cases, Visibilité des cases (0 = invisible, 100 = pleine), Cadre autour de chaque case, Écrire le nombre de pas sur chaque case, Les murs bloquent (déplacement), Ces tags bloquent le passage (séparés par une virgule), Terrains qui coûtent plus de pas (tag=coût, ex. foret=2, eau=3), Nom de la zone (facultatif : pour en montrer plusieurs), Forme de la portée (attaque et saut), Portée minimale (0 = aucune ; 2 = pas les 1res cases), Mes positions (colonne,ligne ; ex. 2,1 ; -2,1 ; 0,3), Retirer la case où se tient l'objet",
+      "role": "Colore les cases où l'objet choisi peut aller (ou attaquer). Les murs bloquent, et tu peux ajouter des tags qui bloquent (autres unités) et des terrains qui coûtent plus de pas (foret=2). Couleur, visibilité, cadre et chiffres se règlent. « Nom de la zone » permet d'en montrer plusieurs (déplacement en bleu, attaque en rouge).",
+      "exemple": "montrer la zone de déplacement d'un héros quand on le touche."
+    },
+    {
+      "nom": "Cacher les cases",
+      "schema": "<b>Entrée :</b> Nom de la zone (facultatif)",
+      "role": "Efface les cases colorées (toutes, ou celles d'une zone nommée).",
+      "exemple": "cacher la zone une fois le héros arrivé."
+    },
+    {
+      "nom": "Si la case est accessible",
+      "schema": "<b>Entrées :</b> Colonne, Ligne, Nom de la zone (facultatif) &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux",
+      "role": "Vrai si la case (colonne, ligne) fait partie des cases montrées. Par défaut : la case que le doigt touche. Faux sinon.",
+      "exemple": "refuser un déplacement trop loin avec « trop loin ! »."
+    },
+    {
+      "nom": "Donner une fiche d'unité",
+      "schema": "<b>Entrées :</b> Objet, Points de vie, Attaque, Défense, Mouvement (pas), Portée d'attaque (cases), Autres statistiques (ex. munitions = 3, armure = 2)",
+      "role": "Donne à l'objet sa fiche : vie, attaque, défense, mouvement et portée (variables d'objet « vie », « attaque », « defense », « mouvement », « portee »). Elles se lisent partout par formule, par exemple =hero.mouvement pour le nombre de pas des cases accessibles. Mets ce nœud « Au démarrage » de chaque unité, ou dans un prefab d'unité réutilisable.",
+      "exemple": "créer un archer : vie 8, attaque 4, défense 0, mouvement 4, portée 3."
+    },
+    {
+      "nom": "Attaquer",
+      "schema": "<b>Entrées :</b> Objet A, Objet B, Puissance de l'attaque (%), Compter la défense du terrain de la cible, Toujours au moins 1 dégât, Détruire la cible quand elle n'a plus de vie, Calcul des dégâts libre (ex. attaquant.attaque * 2 - cible.armure) ; vide = calcul normal, Bonus selon les tags de la cible (ex. cavalerie = 150, leger = 120 : en % des dégâts), Bonus selon les tags de l'attaquant (ex. lance = 130), Statistique consommée à chaque attaque (ex. munitions : l'attaque ne part plus à 0), Perforation : % de la défense ignoré (0 = aucun), Riposte : % de l'attaque de la cible rendu si elle survit et que l'attaquant est à sa portée (0 = aucune), Bonus de hauteur : % de dégâts par niveau de différence (ex. 15 ; en haut = plus, en bas = moins), Garde : tag des alliés voisins qui renforcent la défense de la cible (ex. lance), Garde : défense gagnée par allié voisin &nbsp;→&nbsp; <b>Sorties :</b> Encore en vie / Plus de vie / Attaquant détruit (riposte)",
+      "role": "L'objet A attaque l'objet B : dégâts = attaque de A × puissance × bonus − défense de B − défense du terrain de B. Deux sorties : « Encore en vie » et « Plus de vie » (la cible est détruite si la case est cochée), et « Attaquant détruit » si une riposte le tue. Les deux objets doivent avoir une fiche d'unité. Les règles « regle: lance > cavalerie = 150 » de donnees.txt s'appliquent toutes seules. En avancé : bonus selon les tags (« cavalerie = 150 »), PERFORATION (pourcentage de la défense ignoré, pour une lance ou une arbalète), RIPOSTE (pourcentage de l'attaque de la cible rendu si elle survit et que l'attaquant est à sa portée), BONUS DE HAUTEUR (pourcentage de dégâts par niveau d'écart : celui d'en haut frappe plus fort), GARDE (chaque allié voisin portant le tag choisi ajoute de la défense à la cible : un mur de boucliers), un calcul libre, et une statistique consommée à chaque attaque (munitions).",
+      "exemple": "la lance (perforation 40) contre la cavalerie lourde ; l'archer sur la colline (hauteur +15 %)."
+    },
+    {
+      "nom": "Appliquer des données (unité, arme)",
+      "schema": "<b>Entrées :</b> Objet, Nom dans donnees.txt (ex. Chevalier) &nbsp;→&nbsp; <b>Sorties :</b> Trouvé / Introuvable",
+      "role": "Donne à l'objet A toutes les valeurs d'une unité ou d'une arme écrites dans le fichier donnees.txt (Assets → Dialogues, ou assets_ludexa/Textes/donnees.txt) : vie, attaque, défense, mouvement, portée, prix… et ses tags. Une ligne suffit : « unite Chevalier: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=cavalerie lourd ». On change l'équilibrage du jeu en modifiant le fichier, sans toucher aux nœuds. Sorties « Trouvé » / « Introuvable ». Le fichier peut aussi contenir « arme Epee: attaque=5 », « etat Poison: duree=3, degats=2 », « regle: lance > cavalerie = 150 » (un attaquant tag lance inflige 150 % à une cible tag cavalerie, appliqué automatiquement par « Attaquer ») et les hauteurs des cases.",
+      "exemple": "au début de la partie, pour chaque héros : Appliquer des données « Chevalier »."
+    },
+    {
+      "nom": "Définir la hauteur de cases",
+      "schema": "<b>Entrées :</b> Colonne de départ, Ligne de départ, Nombre de colonnes, Nombre de lignes, Hauteur (0 = plat)",
+      "role": "Donne une hauteur (un niveau : 0 = plat, 1, 2, 3…) à un rectangle de cases de la grille : colonne et ligne de départ, nombre de colonnes et de lignes. Les hauteurs servent au bonus de hauteur de « Attaquer » et arrêtent la vue dans le brouillard de guerre (une colline cache ce qu'il y a derrière). On peut aussi les écrire dans donnees.txt (« hauteur 3,4 = 2 » ou un bloc « hauteurs: » avec un chiffre par case). Lis-les avec la formule hauteur(colonne, ligne) ou avec les nœuds verts « Hauteur de la case touchée » / « Hauteur de la case sous un objet ».",
+      "exemple": "une colline de 3 x 2 cases à la hauteur 2, pour que l'archer qui s'y place frappe plus fort."
+    },
+    {
+      "nom": "Donner un état (poison, lent…)",
+      "schema": "<b>Entrées :</b> Objet, Nom de l'état (ex. Poison ; réglé dans donnees.txt), Durée en tours (vide = celle de donnees.txt), Dégâts à chaque tour (vide = donnees.txt), Statistique modifiée (ex. mouvement ; vide = donnees.txt), Changement de cette statistique (ex. -2)",
+      "role": "Donne un état à l'unité pour un nombre de TOURS : poison (dégâts à chaque tour), lent (le mouvement baisse), béni (l'attaque monte)… Tout peut être écrit dans donnees.txt (« etat Poison: duree=3, degats=2 », « etat Lent: duree=2, stat=mouvement, delta=-2 ») : il suffit alors du nom de l'état. Les dégâts tombent au début de chaque tour de l'équipe de l'unité, puis l'état diminue d'un tour ; à la fin, la statistique modifiée revient comme avant. Redonner le même état le prolonge au lieu de le doubler. L'unité garde une statistique « etat_<nom> » (tours restants), lisible dans une formule. Demande « Passer au tour suivant ».",
+      "exemple": "une flèche empoisonnée : Attaquer → Plus de vie ne part pas → Donner l'état « Poison » à la cible."
+    },
+    {
+      "nom": "Retirer un état",
+      "schema": "<b>Entrées :</b> Objet, Nom de l'état (vide = tous)",
+      "role": "Retire un état de l'unité (par son nom), ou tous les états si le nom est vide. La statistique modifiée par l'état revient tout de suite à sa valeur d'avant.",
+      "exemple": "un prêtre qui guérit le poison d'un allié."
+    },
+    {
+      "nom": "Si l'unité a l'état…",
+      "schema": "<b>Entrées :</b> Objet, Nom de l'état (vide = tous) &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux",
+      "role": "Teste si l'unité a un état (ou n'importe quel état si le nom est vide). Sorties « Vrai » / « Faux ».",
+      "exemple": "ne pas pouvoir se déplacer si l'unité est « Gelée »."
+    },
+    {
+      "nom": "Effet de zone autour d'un objet",
+      "schema": "<b>Entrées :</b> Objet, Effet, Force (dégâts ou soin), Rayon en cases, Tags touchés (vide = tout le monde), Nom de l'état (si l'effet donne un état), Baisse par case de distance (% de la force), Forme, Touche aussi l'objet au centre",
+      "role": "Touche d'un coup tous les objets autour de l'objet A (au centre) : dégâts, soin ou état. Réglages : la force, le rayon en cases, les tags touchés (vide = tout le monde), la forme (en losange ou en carré avec les diagonales), la baisse de force par case de distance (explosion : plus on s'éloigne, moins ça fait mal), et si l'objet du centre est touché aussi. Les dégâts ignorent la défense. Une boule de feu, un soin de groupe, un cri qui effraie. Pour compter les victimes dans une condition, utilise les formules compter(\"tag\") et voisins(objet, \"tag\", cases).",
+      "exemple": "une boule de feu : rayon 2, force 6, baisse 30 % par case, sur les unités « ennemi »."
+    },
+    {
+      "nom": "Gagner de l'expérience",
+      "schema": "<b>Entrées :</b> Objet, Expérience gagnée, Expérience pour passer au niveau 2 (x niveau ensuite), Gains à chaque niveau (ex. vie=2, attaque=1) &nbsp;→&nbsp; <b>Sorties :</b> Niveau gagné / Rien à annuler",
+      "role": "Donne de l'expérience à l'unité. Quand elle atteint le palier (palier × niveau actuel), l'unité passe au niveau suivant, l'expérience en trop est gardée, et les gains sont ajoutés (« vie=2, attaque=1 » ; la vie maximum monte avec la vie). L'unité garde les statistiques « xp » et « niveau » (1 au départ). Sorties « Niveau gagné » / « Pas de niveau » : une fanfare ou un message quand elle monte.",
+      "exemple": "un héros qui gagne 30 d'expérience à chaque ennemi vaincu."
+    },
+    {
+      "nom": "Mémoriser la position",
+      "schema": "<b>Entrée :</b> Objet",
+      "role": "Retient la position actuelle de l'unité, avant un déplacement. Avec « Annuler le déplacement », le joueur peut revenir en arrière (comme dans Advance Wars quand on touche « Annuler » avant d'agir).",
+      "exemple": "juste avant « Aller à la case » : Mémoriser la position."
+    },
+    {
+      "nom": "Annuler le déplacement",
+      "schema": "<b>Entrée :</b> Objet &nbsp;→&nbsp; <b>Sorties :</b> Annulé / Rien à annuler",
+      "role": "Remet l'unité à la position retenue par « Mémoriser la position », efface son « a déjà joué » et remet à 0 ses statistiques « bouge » et « agi ». Sorties « Annulé » / « Rien à annuler ».",
+      "exemple": "un bouton « Annuler » dans le menu d'action de l'unité."
+    },
+    {
+      "nom": "Jouer comme un ordinateur (IA)",
+      "schema": "<b>Entrées :</b> Objet, Tags des ennemis (ex. joueur), Style de jeu, Vitesse du déplacement, Autres tags qui bloquent le chemin (ex. ennemi : ses propres alliés) &nbsp;→&nbsp; <b>Sorties :</b> Arrivé / Aucune cible",
+      "role": "Fait jouer une unité toute seule, comme un ordinateur. Elle regarde où elle peut aller (mouvement, murs, terrains, unités qui bloquent), cherche les ennemis (leurs tags) et choisit la meilleure case d'où attaquer selon son STYLE : agressif (le plus de dégâts, achever une cible en priorité), prudent (évite la riposte) ou défensif (aime les cases à forte défense). Personne à portée : elle se rapproche de l'ennemi le plus proche. Une fois arrivée, la sortie « Arrivé » part : l'objet impliqué est la cible choisie et la statistique « cible_ia » de l'unité vaut 1 (on peut attaquer) ou 0 (juste rapprochée). Utilise son mouvement, sa portée (et « portee_min ») et sa fiche d'unité. Sortie « Aucun ennemi » s'il n'y en a plus.",
+      "exemple": "tour des monstres : pour chaque monstre, Jouer comme un ordinateur (ennemis = joueur) → à l'arrivée, si cible_ia = 1, Attaquer."
+    },
+    {
+      "nom": "Mettre à jour le brouillard de guerre",
+      "schema": "<b>Entrées :</b> Tags de l'équipe qui voit (ex. joueur), Tags des ennemis à cacher hors de vue (ex. ennemi), Vision par défaut en cases (sinon la statistique « vision » de l'unité), Obscurité des cases inconnues (0 à 100), Garder en mémoire les cases déjà vues",
+      "role": "Calcule ce que voit l'équipe et recouvre le reste de la carte d'un voile sombre : les unités de l'équipe (tags) voient autour d'elles jusqu'à leur statistique « vision » en cases (sinon la vision par défaut du nœud). Un mur du terrain, un terrain avec la propriété « bloque_vue = oui » (forêt dense) ou une case plus haute arrête le regard. Les cases déjà vues restent à demi sombres (mémoire, au choix). Les unités des tags ennemis hors de vue sont cachées. À relancer après chaque déplacement ou début de tour. La formule vue(colonne, ligne) vaut 1 si la case est vue. « Enlever le brouillard de guerre » rend tout visible.",
+      "exemple": "à chaque début de tour du joueur : Mettre à jour le brouillard (équipe joueur, ennemis ennemi, vision 3)."
+    },
+    {
+      "nom": "Enlever le brouillard de guerre",
+      "role": "Enlève le brouillard de guerre : toute la carte redevient visible et les unités cachées réapparaissent.",
+      "exemple": "à la fin de la partie, pour montrer toute la carte."
+    },
+    {
+      "nom": "Donner de la vie à l'objet",
+      "schema": "<b>Entrées :</b> Objet, Points de vie",
+      "role": "Donne des points de vie à l'objet choisi (variable d'objet « vie », et « vie_max » pour le maximum). On la lit partout avec une formule, par exemple =monstre.vie, pour l'écrire dans un texte ou dans une barre.",
+      "exemple": "donner 10 points de vie à un monstre au démarrage."
+    },
+    {
+      "nom": "Infliger des dégâts",
+      "schema": "<b>Entrées :</b> Objet, Dégâts, Détruire l'objet quand il n'a plus de vie, Retirer la défense du terrain où il se trouve &nbsp;→&nbsp; <b>Sorties :</b> Encore en vie / Plus de vie",
+      "role": "Enlève des points de vie à l'objet (jamais en dessous de 0). Deux sorties : « Encore en vie » et « Plus de vie » (l'objet est détruit si la case est cochée ; « l'objet impliqué » reste celui touché).",
+      "exemple": "un héros frappe un monstre : 3 dégâts, puis un petit message selon le résultat."
+    },
+    {
+      "nom": "Soigner",
+      "schema": "<b>Entrées :</b> Objet, Vie rendue",
+      "role": "Rend des points de vie à l'objet, sans dépasser sa vie maximum.",
+      "exemple": "une potion qui rend 5 points de vie au héros."
+    },
+    {
+      "nom": "Modifier une statistique",
+      "schema": "<b>Entrées :</b> Objet, Nom de la statistique (ex. munitions), Quoi faire, De combien",
+      "role": "Change une statistique que tu as inventée pour un objet (munitions, armure, mana, carburant…) : l'ajouter, la retirer ou la mettre à une valeur. Si elle n'existe pas encore, elle est créée à 0. Elle se lit ensuite partout : =archer.munitions.",
+      "exemple": "Après un tir : Modifier une statistique → objet « archer », statistique « munitions », Retirer 1."
+    },
+    {
+      "nom": "Si la statistique…",
+      "schema": "<b>Entrées :</b> Objet, Nom de la statistique (ex. munitions), Comparaison, Valeur &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux",
+      "role": "Compare une statistique d'un objet à une valeur et suit la sortie « vrai » ou « faux » : par exemple « munitions est plus grand que 0 ». Une statistique qui n'existe pas vaut 0.",
+      "exemple": "Avant de tirer : Si la statistique « munitions » de l'archer est plus grande que 0 → tirer ; sinon → afficher « Plus de flèches »."
+    },
+    {
+      "nom": "Choisir une cible",
+      "schema": "<b>Entrées :</b> Objet, Tags des cibles possibles (séparés par une virgule), Quelle cible choisir ?, Portée en cases (0 = sans limite ; ex. =monstre.portee), Portée minimale (0 = aucune), Forme de la portée, Mes positions (colonne,ligne ; ex. 2,1 ; -2,1), Statistique (pour les règles « statistique », ex. defense), Portée en pixels, en cercle (0 = utiliser la portée en cases) &nbsp;→&nbsp; <b>Sorties :</b> Cible trouvée / Aucune cible",
+      "role": "L'objet A cherche, parmi les objets qui portent un des tags demandés, ceux qui sont DANS SA PORTÉE (mêmes formes que « Montrer les cases accessibles »), puis en choisit un : la plus proche, celle qui a le moins ou le plus de vie, ou la plus basse / haute valeur d'une statistique. Sortie « Cible trouvée » : elle devient « l'objet impliqué » (pour Attaquer, Aller vers…). Sortie « Aucune cible » : personne à portée. Parfait pour l'intelligence d'un monstre ou d'une tourelle.",
+      "exemple": "un monstre : « Choisir une cible » (tag « heros », la plus proche, portée =monstre.portee), puis « Attaquer » sur « Cible trouvée »."
+    },
+    {
       "nom": "Remplir la grille",
       "schema": "<b>Entrées :</b> Objet, Colonnes, Lignes, Objets modèles (noms séparés par des virgules)",
       "role": "Découpe l'objet A (le plateau) en colonnes et lignes, et pose dans chaque case une copie d'un objet modèle tiré au hasard (au moins 3 modèles, noms séparés par des virgules). Il n'y a jamais d'alignement au départ, et les pièces tombent du haut à l'arrivée. À utiliser avant « Jouer sur la grille (aligner 3) ».",

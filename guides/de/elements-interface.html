@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie baut man in Yop2D ein Menü mit Buttons, Schalter und Regler? | Yop2D-Anleitung</title>
+<meta name="description" content="Baue in Yop2D ein echtes Menü: Buttons in allen Formen, Schalter, Kontrollkästchen, Regler, Panel und Zähler, ganz ohne Code. Ändere Form, Farben, Bild und Ton an einer einzigen Stelle.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/elements-interface.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/elements-interface.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/elements-interface.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/elements-interface.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/elements-interface.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/elements-interface.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/elements-interface.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/elements-interface.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/elements-interface.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/elements-interface.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie baut man ein Menü mit Buttons, Schalter und Regler?",
+ "description": "Baue in Yop2D ein echtes Menü: Buttons in allen Formen, Schalter, Kontrollkästchen, Regler, Panel und Zähler, ganz ohne Code. Ändere Form, Farben, Bild und Ton an einer einzigen Stelle.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Element hinzufügen",
+   "text": "Tippe auf + und dann auf „Oberflächenelemente“ und wähle einen Button."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Stil ändern",
+   "text": "Inspektor > „Elementstil…“: Form, Farben, Bild, Text."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Wert lesen",
+   "text": "Eine Formel liest =name.progression bei einem Schalter oder Regler."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Auf Berührung reagieren",
+   "text": "Füge „Bei Objektklick“ im Blueprint hinzu."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../de/index.html">← Yop2D</a>
+<h1>Wie baut man ein Menü mit Buttons, Schalter und Regler?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../elements-interface.html" hreflang="fr">Français</a> · <a href="../en/elements-interface.html" hreflang="en">English</a> · <a href="../es/elements-interface.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/elements-interface.html" hreflang="it">Italiano</a> · <a href="../pt/elements-interface.html" hreflang="pt">Português</a> · <a href="../ru/elements-interface.html" hreflang="ru">Русский</a> · <a href="../zh/elements-interface.html" hreflang="zh">中文</a> · <a href="../ja/elements-interface.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Ein Spielmenü braucht hübsche Buttons und Einstellungen: einen Schalter für den Ton, einen Regler für die Lautstärke, einen Zähler für die Punkte. In Yop2D ist jedes Element <strong>ein einziges Objekt</strong> mit seinem Text darin, und sein ganzes Aussehen wird in einem Fenster eingestellt. Du kannst auch das Beispiel <strong>UI kit</strong> herunterladen (Tab Beispiele): Es zeigt alle Elemente.</p>
+<div class="besoin">
+<b>Du brauchst:</b>
+<ul><li>ein im Editor geöffnetes Projekt;</li><li>das Beispiel „UI kit“, wenn du das Ergebnis vorher sehen möchtest (optional).</li></ul>
+</div>
+<h2>Schritt 1: Element hinzufügen</h2>
+<div class="method">
+<ol><li>Tippe im Editor auf <strong>+</strong> und dann auf den Bereich <strong>Oberflächenelemente</strong>.</li><li>Wähle zwischen <strong>Button</strong>, <strong>Schalter</strong>, <strong>Kontrollkästchen</strong>, <strong>Regler</strong>, <strong>Panel</strong> und <strong>Zähler</strong>.</li><li>Das Element erscheint in der Mitte des Bildschirms: Verschiebe es mit dem Finger und ändere die Größe mit den Griffen, wie bei jedem Objekt.</li></ol>
+<div class="tip">👉 Der Text eines Buttons steckt im Button: Schreibe ihn im Inspektor, du musst keinen Text mehr über den Button legen.</div>
+</div>
+<h2>Schritt 2: Stil ändern</h2>
+<div class="method">
+<ol><li>Wähle das Element aus und tippe im Inspektor auf <strong>Elementstil…</strong>.</li><li>Wähle bei <strong>Form</strong> Rechteck, abgerundet, Pille, Kreis, abgeschnittene Ecken oder Sechseck.</li><li>Wähle bei <strong>Bild</strong> <strong>In der Form</strong> (das Bild behält die Form), <strong>Ersetzt die Form</strong> (das Bild IST der Button) oder <strong>Symbol + Text</strong>.</li><li>Stelle bei <strong>Farben und Kontur</strong> die Farbe, den <strong>Verlauf</strong>, die Kontur, den <strong>Schatten</strong> und das <strong>Leuchten (Neon)</strong> ein.</li><li>Wähle bei <strong>Text</strong> Schriftart, Größe, Farbe und Kontur der Buchstaben.</li></ol>
+</div>
+<h2>Schritt 3: Verhalten festlegen</h2>
+<div class="method">
+<ol><li>Aktiviere bei <strong>Verhalten</strong> <strong>Bleibt gedrückt (AN / AUS)</strong> für einen Button, der seinen Zustand behält.</li><li>Wähle einen <strong>Ton bei Berührung</strong> und, wenn du willst, eine <strong>Vibration</strong>.</li><li>Stelle bei einem Regler den <strong>Mindestwert</strong>, den <strong>Höchstwert</strong> und den <strong>Startwert</strong> ein.</li></ol>
+<div class="tip">👉 Ein <strong>deaktiviertes (graues)</strong> Element reagiert nicht mehr auf Berührung: praktisch für einen Button „Weiter“, der noch nicht verfügbar ist.</div>
+</div>
+<h2>Schritt 4: Wert im Spiel lesen</h2>
+<div class="method">
+<ol><li>Ein Schalter oder Kontrollkästchen hat seinen Mindestwert (aus) oder Höchstwert (an); ein Regler hat seine Position.</li><li>Schreibe in einer Formel <strong>objektname.progression</strong>: zum Beispiel „=lautstaerke.progression“ in „Eigenschaft ändern“ eines Textes, um die Lautstärke anzuzeigen.</li><li>Füge bei einem Button das Ereignis „Bei Objektklick“ im Blueprint hinzu und wähle deinen Button.</li></ol>
+</div>
+<p>Die alten Yop2D-Buttons funktionieren weiter: Die neuen Elemente kommen dazu und ersetzen nichts.</p>
+
+<div class="nav">
+<a href="../de/prefabs.html">← Ein fertiges Objekt</a>
+<a href="../de/musique.html">Nächste Anleitung: Erstelle deine Musik →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../de/index.html">Offizielle Website</a> · <a href="../../noeuds/de.html">Knotenreferenz</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,740 @@
+{
+  "titre_page": "Come fare un gioco rompimattoni in Yop2D? | Guida Yop2D",
+  "description": "Fai un gioco rompimattoni in Yop2D senza codice: una racchetta che muovi con il dito, muri invisibili, una palla che rimbalza, mattoni da rompere, punteggio e vite con i nodi.",
+  "h1": "Come fare un gioco rompimattoni?",
+  "carte": [
+    "Fare un rompimattoni",
+    "Racchetta con il dito, palla che rimbalza, mattoni da rompere, punteggio e vite."
+  ],
+  "etapes": [
+    [
+      "Mettere la racchetta",
+      "{{modifier_propriete}} (paddle, y = 1700) → {{garder_dans_ecran}}, con il comportamento « Trascinato col dito »."
+    ],
+    [
+      "Circondare lo schermo con muri invisibili",
+      "Quattro {{lang:obj_prefix_zone}}: left_wall, right_wall, top_wall e bottom_wall."
+    ],
+    [
+      "Lanciare la palla",
+      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy); {{NoeudEventChaqueImage}} → {{pousser}} (ball)."
+    ],
+    [
+      "Rimbalzare sui muri e sulla racchetta",
+      "{{NoeudEventCollisionAB}} (ball, left_wall) → {{modifier_variable}} (vx, 6)."
+    ],
+    [
+      "Rompere i mattoni",
+      "{{NoeudEventCollisionTag}} (ball, brick) → {{detruire_objet}} → {{ajouter_variable}} (score, 10)."
+    ],
+    [
+      "Vite e fine della partita",
+      "{{NoeudEventCollisionAB}} (ball, bottom_wall) → {{ajouter_variable}} (lives, -1) → {{recommencer_scene}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "In un rompimattoni, una **palla** rimbalza sui muri e su una **racchetta** che muovi con il dito, e rompe i **mattoni**. Qui la palla si muove grazie a due variabili: **vx** (la sua velocità verso destra) e **vy** (la sua velocità verso il basso). Quando tocca un muro, le diamo semplicemente un altro numero."
+    ],
+    [
+      "besoin",
+      [
+        "un {{lang:obj_prefix_image}} chiamato **paddle**, in basso nello schermo (per esempio 208 x 48 px, verso y = 1700);",
+        "un {{lang:obj_prefix_image}} chiamato **ball**, al centro dello schermo (per esempio 44 x 44 px);",
+        "dei mattoni: {{lang:obj_prefix_image}} in alto nello schermo (per esempio 128 x 64 px, 8 per riga);",
+        "due oggetti {{lang:obj_prefix_texte}}: **scoreText** (testo « Punti: 0 ») e **livesText** (testo « Vite: 3 »), in alto nello schermo."
+      ]
+    ],
+    [
+      "tip",
+      "Questa guida è scritta per un gioco **verticale 1080 x 1920**. Le immagini vengono dal pacchetto gratuito **Puzzle (brick breaker)** (Kenney, libero da diritti, CC0). Scaricalo nella **Libreria** di Yop2D, scheda **Pacchetti da scaricare**: ci trovi **paddleBlu** (racchetta), **ballBlue** (palla) e **element_blue_rectangle_glossy** (mattone, in blu, verde, rosso, giallo, viola e grigio). Puoi anche usare i tuoi disegni."
+    ],
+    [
+      "h2",
+      "Passo 1: tag e variabili"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Seleziona un mattone. Nell'ispettore, campo **{{lang:insp_label_tag}}**, scrivi **brick**. Fai lo stesso per ogni mattone.",
+            "Nel pannello di sinistra, apri la sezione **{{lang:panneau_ress_variables}}** e crea cinque variabili, tutte con ambito **{{lang:var_scope_locale}}** e tipo **{{lang:var_type_entier}}**:"
+          ]
+        ],
+        [
+          "ul",
+          [
+            "**score**: valore iniziale **0**;",
+            "**lives**: valore iniziale **3**;",
+            "**bricks**: il **numero di mattoni** del tuo gioco (per esempio **24**). Serve a sapere quando è tutto rotto;",
+            "**vx** e **vy**: valore iniziale **0**. È la velocità della palla, si imposta all'avvio."
+          ]
+        ],
+        [
+          "tip",
+          "Un mattone in più o in meno? Cambia semplicemente il valore iniziale di **bricks**. Se il numero è troppo grande, non vinci mai; se è troppo piccolo, vinci troppo presto."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 2: i muri invisibili"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "La palla rimbalza su muri che non si vedono: quattro **{{lang:obj_prefix_zone}}** messe intorno allo schermo. Una zona è invisibile durante il gioco, ma la palla può toccarla."
+        ],
+        [
+          "ol",
+          [
+            "Aggiungi una {{lang:obj_prefix_zone}} chiamata **left_wall**: X = `-300`, Y = `-400`, larghezza `300`, altezza `2800`.",
+            "Aggiungi una {{lang:obj_prefix_zone}} chiamata **right_wall**: X = `1080`, Y = `-400`, larghezza `300`, altezza `2800`.",
+            "Aggiungi una {{lang:obj_prefix_zone}} chiamata **top_wall**: X = `-300`, Y = `-300`, larghezza `1680`, altezza `300`.",
+            "Aggiungi una {{lang:obj_prefix_zone}} chiamata **bottom_wall**: X = `-300`, Y = `1920`, larghezza `1680`, altezza `300`."
+          ]
+        ],
+        [
+          "tip",
+          "I muri sono spessi di proposito: una palla veloce non può attraversarli. I primi tre rimandano indietro la palla; **bottom_wall** serve a perdere una vita."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 3: la racchetta segue il dito"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Seleziona **paddle**, tocca **⚙ Comportement de l'objet** e scegli **Trascinato col dito**: il giocatore la prende e la sposta.",
+            "Apri il **{{lang:titre_blueprint}}** della scena e aggiungi l'evento **[[NoeudEventChaqueImage]]**.",
+            "Aggiungi **[[modifier_propriete]]**: bersaglio **paddle**, **Proprietà** = `y`, **Valore** = `1700`.",
+            "Aggiungi **[[garder_dans_ecran]]**: bersaglio **paddle**, **Margine** = `0`.",
+            "Collega i tre nodi in ordine."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_propriete}}",
+              "paddle · y · 1700"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{garder_dans_ecran}}",
+              "paddle · 0"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Perché questi due nodi?** « Trascinato col dito » permette di spostare la racchetta in ogni direzione. A ogni immagine la rimettiamo alla stessa altezza e le impediamo di uscire dallo schermo: si muove solo da sinistra a destra."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 4: la palla parte"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Aggiungi l'evento **[[NoeudEventStart]]**, poi due nodi **[[modifier_variable]]** uno dopo l'altro: variabile **vx**, valore `6`, poi variabile **vy**, valore `-9`.",
+            "Aggiungi l'evento **[[NoeudEventChaqueImage]]**, poi **[[pousser]]**: bersaglio **ball**.",
+            "Nella finestra delle impostazioni di **[[pousser]]**, tocca il pulsante **🔗** accanto a **Aggiungi X**, scegli **[[valeur_variable]]**, poi scegli la variabile **vx** nel nodo verde che appare.",
+            "Fai lo stesso per **Aggiungi Y** con la variabile **vy**.",
+            "Collega ogni evento ai suoi nodi e avvia il gioco: la palla sale verso destra, poi esce dallo schermo."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{pousser}}",
+              "ball · X ← vx · Y ← vy"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Un nodo verde** dà un valore a un'impostazione, senza scrivere nulla. Qui **[[valeur_variable]]** dice a **[[pousser]]**: « spostati di **vx** verso destra e di **vy** verso il basso, a ogni immagine »."
+        ],
+        [
+          "tip",
+          "**Negativo = verso l'alto.** In Yop2D, Y cresce verso il basso dello schermo: **vy = -9** manda la palla verso l'alto."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 5: rimbalzare sui muri"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Ogni muro dà alla palla un nuovo numero. Aggiungi tre eventi **[[NoeudEventCollisionAB]]** (**Oggetto A** = **ball**):"
+        ],
+        [
+          "ol",
+          [
+            "**Oggetto B** = **left_wall** → **[[modifier_variable]]**: variabile **vx**, valore `6` (la palla torna verso destra).",
+            "**Oggetto B** = **right_wall** → **[[modifier_variable]]**: variabile **vx**, valore `-6` (la palla torna verso sinistra).",
+            "**Oggetto B** = **top_wall** → **[[modifier_variable]]**: variabile **vy**, valore `9` (la palla torna verso il basso)."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · left_wall"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · right_wall"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · -6"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · top_wall"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 6: rimbalzare sulla racchetta"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Aggiungi l'evento **[[NoeudEventCollisionAB]]**: **Oggetto A** = **ball**, **Oggetto B** = **paddle**.",
+            "Aggiungi **[[modifier_variable]]**: variabile **vy**, valore `-9` (la palla torna verso l'alto).",
+            "Aggiungi un secondo **[[modifier_variable]]**: variabile **vx**. Tocca **🔗** accanto al valore, scegli **[[valeur_hasard]]**, poi imposta **Da** = `-6` e **A** = `6`.",
+            "Collega i nodi in ordine."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · paddle"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · ← numero a caso (da -6 a 6)"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "A ogni rimbalzo sulla racchetta, la palla parte in una **direzione a caso**: il gioco non è mai uguale due volte."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 7: rompere i mattoni"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Aggiungi l'evento **[[NoeudEventCollisionTag]]**: bersaglio **ball**, {{lang:Tag}} **brick**.",
+            "Aggiungi **[[detruire_objet]]** e scegli **{{lang:noeud_objet_implique_long}}** come bersaglio: è il mattone che la palla ha appena toccato.",
+            "Aggiungi **[[condition]]** `=vy < 0` (« la palla sale »). Uscita **{{lang:port_vrai}}** → **[[modifier_variable]]**: variabile **vy**, valore `9`. Uscita **{{lang:port_faux}}** → **[[modifier_variable]]**: variabile **vy**, valore `-9`.",
+            "Dall'uscita **[[lang:port_ensuite]]** della condizione, aggiungi **[[ajouter_variable]]**: variabile **score**, **{{lang:ajouter_variable.valeur}} = 10**.",
+            "Aggiungi **[[ajouter_variable]]**: variabile **bricks**, **{{lang:ajouter_variable.valeur}} = -1**.",
+            "Aggiungi **[[modifier_texte]]**: bersaglio **scoreText**, **{{lang:modifier_texte.valeur}}** = `=\"Punti: \" + score`."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "ball · brick"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_faux}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_ensuite}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "score · + 10"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "bricks · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Perché `=vy < 0`?** Se **vy** è minore di 0, la palla sale: dopo aver rotto il mattone, scende. Altrimenti sta scendendo, e poi risale."
+        ],
+        [
+          "tip",
+          "**Il segno = all'inizio del testo** dice a Yop2D di **calcolare** il testo invece di scriverlo così com'è (vedi la guida [Raccogliere monete e contare i punti](guide:pieces-score))."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 8: vincere"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Dopo **[[modifier_texte]]** del passo 7, aggiungi:"
+        ],
+        [
+          "ol",
+          [
+            "**[[condition]]** `=bricks <= 0`.",
+            "Sull'uscita **{{lang:port_vrai}}**: **[[modifier_variable]]** **vx** = `0`, **[[modifier_variable]]** **vy** = `0` (la palla si ferma), poi **[[toast]]** con il messaggio **Hai vinto!**, poi **[[attendre]]** 2 secondi, poi **[[recommencer_scene]]**."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=bricks <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "Hai vinto!"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[recommencer_scene]] rimette gli oggetti al loro posto e le variabili **{{lang:var_scope_locale}}** al loro valore iniziale: la partita ricomincia con 3 vite, 0 punti e tutti i mattoni."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 9: vite e Game Over"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Quando la palla tocca **bottom_wall** (sotto lo schermo), il giocatore perde una vita."
+        ],
+        [
+          "ol",
+          [
+            "Aggiungi l'evento **[[NoeudEventCollisionAB]]**: **Oggetto A** = **ball**, **Oggetto B** = **bottom_wall**.",
+            "**[[ajouter_variable]]**: variabile **lives**, **{{lang:ajouter_variable.valeur}} = -1**.",
+            "**[[modifier_texte]]**: bersaglio **livesText**, **{{lang:modifier_texte.valeur}}** = `=\"Vite: \" + lives`.",
+            "**[[condition]]** `=lives <= 0`.",
+            "Uscita **{{lang:port_vrai}}** (nessuna vita): **[[deplacer]]** la **ball** a X = `518`, Y = `1000`, **[[modifier_variable]]** **vx** = `0`, **[[modifier_variable]]** **vy** = `0` (la palla torna al centro e si ferma), poi **[[toast]]** « Partita finita! », **[[attendre]]** 2 secondi, **[[recommencer_scene]]**.",
+            "Uscita **{{lang:port_faux}}** (restano vite): **[[deplacer]]** la **ball** a X = `518`, Y = `1000`, poi **[[modifier_variable]]** **vy** = `-9`, poi **[[modifier_variable]]** **vx** = `6`."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · bottom_wall"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "lives · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "livesText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "ball · 518 · 1000"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "Partita finita!"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_faux}}"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "ball · 518 · 1000"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Perché fermare la palla prima di aspettare?** Durante i 2 secondi di attesa il gioco continua. Se la palla restasse sotto lo schermo, farebbe perdere una vita a ogni immagine e il contatore delle vite scenderebbe molto in basso. Rimessa al centro e ferma, non dà più fastidio."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Per andare oltre"
+    ],
+    [
+      "ul",
+      [
+        "**Suoni:** aggiungi **[[jouer_son]]** dopo **[[detruire_objet]]** (un « clac » quando un mattone si rompe) e nell'evento della racchetta.",
+        "**Colori diversi:** dai lo stesso tag **brick** a tutti i mattoni, qualunque sia il loro colore: basta una sola impostazione.",
+        "**Una palla più veloce:** cambia i numeri `6`, `-6`, `9` e `-9` dappertutto (per esempio `8`, `-8`, `12` e `-12`).",
+        "**Scintille:** aggiungi un **[[effet_particules]]** quando un mattone si rompe (vedi la guida [Particelle ed effetti](guide:particules-effets))."
+      ]
+    ],
+    [
+      "h2",
+      "Se non funziona"
+    ],
+    [
+      "ul",
+      [
+        "**La palla non si muove:** controlla che **vx** e **vy** cambino all'avvio e che **[[pousser]]** sia collegato ai nodi verdi **[[valeur_variable]]** (tocca **Aggiungi X**: la riga deve mostrare il filo verde).",
+        "**La palla attraversa un muro o i mattoni:** controlla i nomi (**ball**, **paddle**, **left_wall**…) e il tag **brick**, scritto uguale ovunque (senza maiuscole). Se la palla è molto veloce, ingrandisci un po' i mattoni o rallentala.",
+        "**La racchetta sale o scende:** il nodo **[[modifier_propriete]]** deve essere collegato a **{{NoeudEventChaqueImage}}**, con **Proprietà** = `y`.",
+        "**Vinci troppo presto o mai:** la variabile **bricks** deve valere esattamente il numero di mattoni del gioco.",
+        "**Per confrontare**, apri il progetto di prova (i suoi nodi sono ordinati per sezione, con cornici e note adesive che spiegano ogni parte)."
+      ]
+    ]
+  ]
+}

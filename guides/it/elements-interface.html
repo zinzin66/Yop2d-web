@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Come fare un menu con pulsanti, interruttore e cursore in Yop2D? | Guida Yop2D</title>
+<meta name="description" content="Crea un vero menu in Yop2D: pulsanti di ogni forma, interruttore, casella, cursore, pannello e contatore, senza codice. Cambia forma, colori, immagine e suono da un solo punto.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/it/elements-interface.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/elements-interface.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/elements-interface.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/elements-interface.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/elements-interface.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/elements-interface.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/elements-interface.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/elements-interface.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/elements-interface.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/elements-interface.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Come fare un menu con pulsanti, interruttore e cursore?",
+ "description": "Crea un vero menu in Yop2D: pulsanti di ogni forma, interruttore, casella, cursore, pannello e contatore, senza codice. Cambia forma, colori, immagine e suono da un solo punto.",
+ "inLanguage": "it",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motore di gioco 2D senza codice per Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Aggiungi un elemento",
+   "text": "Tocca + poi «Elementi di interfaccia» e scegli un pulsante."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Cambia il suo stile",
+   "text": "Ispettore > «Stile dell'elemento…»: forma, colori, immagine, testo."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Leggi il suo valore",
+   "text": "Una formula legge =nome.progression per un interruttore o un cursore."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Reagisci al tocco",
+   "text": "Aggiungi «Al Clic sull'Oggetto» nel Blueprint."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../it/index.html">← Yop2D</a>
+<h1>Come fare un menu con pulsanti, interruttore e cursore?</h1>
+<p>Guida per principianti · senza codice</p>
+<p class="langues"><a href="../elements-interface.html" hreflang="fr">Français</a> · <a href="../en/elements-interface.html" hreflang="en">English</a> · <a href="../es/elements-interface.html" hreflang="es">Español</a> · <a href="../de/elements-interface.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="../pt/elements-interface.html" hreflang="pt">Português</a> · <a href="../ru/elements-interface.html" hreflang="ru">Русский</a> · <a href="../zh/elements-interface.html" hreflang="zh">中文</a> · <a href="../ja/elements-interface.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Il menu di un gioco ha bisogno di pulsanti belli e di impostazioni: un interruttore per il suono, un cursore per il volume, un contatore per il punteggio. In Yop2D ogni elemento è <strong>un solo oggetto</strong> con il testo dentro, e tutto il suo aspetto si regola in una sola finestra. Puoi anche scaricare l'esempio <strong>UI kit</strong> (scheda Esempi): mostra tutti gli elementi.</p>
+<div class="besoin">
+<b>Ti serve:</b>
+<ul><li>un progetto aperto nell'editor;</li><li>l'esempio «UI kit» se vuoi vedere prima il risultato (facoltativo).</li></ul>
+</div>
+<h2>Passo 1: aggiungi un elemento</h2>
+<div class="method">
+<ol><li>Tocca il <strong>+</strong> dell'editor, poi la sezione <strong>Elementi di interfaccia</strong>.</li><li>Scegli tra <strong>Pulsante</strong>, <strong>Interruttore</strong>, <strong>Casella</strong>, <strong>Cursore</strong>, <strong>Pannello</strong> e <strong>Contatore</strong>.</li><li>L'elemento arriva al centro dello schermo: spostalo con il dito e ridimensionalo con le maniglie, come qualsiasi oggetto.</li></ol>
+<div class="tip">👉 Il testo di un pulsante è al suo interno: scrivilo nell'Ispettore, non serve più mettere un testo sopra il pulsante.</div>
+</div>
+<h2>Passo 2: cambia il suo stile</h2>
+<div class="method">
+<ol><li>Seleziona l'elemento e tocca <strong>Stile dell'elemento…</strong> nell'Ispettore.</li><li>In <strong>Forma</strong> scegli rettangolo, arrotondato, pillola, cerchio, angoli tagliati o esagono.</li><li>In <strong>Immagine</strong> scegli <strong>Dentro la forma</strong> (l'immagine mantiene la forma), <strong>Sostituisce la forma</strong> (l'immagine È il pulsante) o <strong>Icona + testo</strong>.</li><li>In <strong>Colori e contorno</strong> regola il colore, la <strong>sfumatura</strong>, il contorno, l'<strong>ombra</strong> e l'<strong>alone luminoso (neon)</strong>.</li><li>In <strong>Testo</strong> scegli il carattere, la dimensione, il colore e il contorno delle lettere.</li></ol>
+</div>
+<h2>Passo 3: dagli un comportamento</h2>
+<div class="method">
+<ol><li>In <strong>Comportamento</strong> attiva <strong>Resta premuto (ON / OFF)</strong> per un pulsante che mantiene il suo stato.</li><li>Scegli un <strong>suono al tocco</strong> e, se vuoi, una <strong>vibrazione</strong>.</li><li>Per un cursore regola il <strong>valore minimo</strong>, il <strong>valore massimo</strong> e il <strong>valore iniziale</strong>.</li></ol>
+<div class="tip">👉 Un elemento <strong>disattivato (grigio)</strong> non reagisce più al tocco: comodo per un pulsante «Continua» non ancora disponibile.</div>
+</div>
+<h2>Passo 4: leggi il valore nel gioco</h2>
+<div class="method">
+<ol><li>Un interruttore o una casella vale il suo valore minimo (spento) o massimo (acceso); un cursore vale la sua posizione.</li><li>In una formula scrivi <strong>nome_oggetto.progression</strong>: ad esempio «=volume.progression» in «Modifica una proprietà» di un testo per mostrare il volume.</li><li>Per un pulsante aggiungi l'evento «Al Clic sull'Oggetto» nel Blueprint e scegli il tuo pulsante.</li></ol>
+</div>
+<p>I vecchi pulsanti di Yop2D continuano a funzionare: questi nuovi elementi si aggiungono, non sostituiscono nulla.</p>
+
+<div class="nav">
+<a href="../it/prefabs.html">← Un oggetto già pronto</a>
+<a href="../it/musique.html">Guida successiva: Crea la tua musica →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motore di gioco 2D gratuito e senza codice per Android · <a href="../../it/index.html">Sito ufficiale</a> · <a href="../../noeuds/it.html">Riferimento dei nodi</a></p>
+</footer>
+</body>
+</html>

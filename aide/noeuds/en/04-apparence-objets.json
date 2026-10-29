@@ -164,7 +164,7 @@
     },
     {
       "nom": "Shoot an object",
-      "schema": "<b>Inputs:</b> Object A, Object B, Model name, Direction, Speed, Destroy off screen (yes / no)",
+      "schema": "<b>Inputs:</b> Object A, Object B, Model name, Direction, Speed, Destroy off screen (yes / no), Shot lifetime (seconds, 0 = unlimited)",
       "role": "Creates a projectile (the object named in “Model name”) at object A, and launches it at the chosen speed: 0°, 90°, 180°, 270°, towards object B (“Toward target”) or along A's angle.",
       "exemple": "a ship firing lasers upwards (270)."
     },
@@ -179,6 +179,12 @@
       "schema": "<b>Inputs:</b> Object, Delay (seconds)",
       "role": "Removes the chosen object after a delay (in seconds). Handy to make an explosion disappear once its animation is over.",
       "exemple": "after “Generate clone (Spawner)” and “Play animation”, the explosion image is destroyed 0.4 seconds later."
+    },
+    {
+      "nom": "Team colour (replaces the pink in the drawing)",
+      "schema": "<b>Inputs:</b> Object, Team colour, Colour to replace in the drawing (pink by default), Tolerance (1 to 100): higher also replaces similar colours",
+      "role": "One drawing for all teams: paint the parts to colour (cloak, flag, plume) with a marker colour (bright pink #FF00FF by default), then this node replaces that pink with the team colour for the object. The drawing's shadows and highlights are kept (a dark pink becomes a dark blue). Tolerance says how far a colour may stray from the marker and still be replaced. Nothing is changed in the images: it all happens at display time, so do it again at the start of each game.",
+      "exemple": "two armies with the same images: player in blue, enemy in red."
     },
     {
       "nom": "Set Progress",
@@ -203,6 +209,24 @@
       "schema": "<b>Inputs:</b> Object, Lightning color, Duration (seconds, 0 = endless), Intensity (0 = stop, 1 to 3)",
       "role": "Lightning crackles around the object: it flashes in the lightning color, shakes and throws sparks. Duration 0 = endless (electric fence); intensity 0 = stop.",
       "exemple": "the wizard touches a trap: “Electrocution” on the wizard (1 second), “Wait” 1 second, then “Restart the scene”."
+    },
+    {
+      "nom": "Light source (torch, lantern…)",
+      "schema": "<b>Inputs:</b> Object, Light color, Radius (pixels: distance from the light's center), Lighting (%, 100 = normal, 200 = very strong), Colored glow (%, 0 = none, 200 = very strong), Flicker, Switching on, Horizontal shift (pixels), Vertical shift (pixels, negative = up)",
+      "role": "Attaches a light to the object: it follows the object when it moves (a character's torch, a lantern, a fire…), even if the object is the child of another. Settings: color, radius in pixels (distance from the center), lighting (100 = normal, up to 300: stronger and farther), colored glow (0 = none), flicker (none, candle, torch, flickers) and shift. One light per object, 8 at most at once. It cuts through the darkness set by “Darkness and light mood”; without darkness it only adds its glow. “Switching on” setting: “Only when it is dark” turns the light on by itself at nightfall (ideal with “Day and night cycle”).",
+      "exemple": "a character's torch: placed on a “lantern” object that is a child of the hero, radius 360, flicker “torch”."
+    },
+    {
+      "nom": "Turn off the object's light",
+      "schema": "<b>Input:</b> Object",
+      "role": "Turns off the light attached to the object. To turn it back on, use “Light source (torch, lantern…)” again.",
+      "exemple": "a “Lantern” button turns off the hero's light."
+    },
+    {
+      "nom": "Shadow under the object",
+      "schema": "<b>Inputs:</b> Object, Shadow, Shadow strength (%), Shadow width (% of the object), Vertical shift (pixels, negative = up)",
+      "role": "Puts a soft shadow under the object (or removes it with “No”). It follows the object when it moves; you can set its strength and width. It instantly gives volume to characters standing on a backdrop. You can also tick the “Shadow under the object” box in the Inspector, with no node at all.",
+      "exemple": "a shadow under the hero: strength 50, width 70."
     },
     {
       "nom": "Object trail",

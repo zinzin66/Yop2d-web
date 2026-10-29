@@ -29,6 +29,7 @@ EVENEMENTS = [
     ("noeud_event_maintenu_objet", "NoeudEventMaintenuObjet"),
     ("noeud_event_doigt_appuye", "NoeudEventDoigtAppuye"),
     ("noeud_event_bouton_retour", "NoeudEventBoutonRetour"),
+    ("noeud_event_nouvelle_scene", "NoeudEventNouvelleScene"),
     ("noeud_debut_de_glisser", "NoeudEventDebutGlisser"),
     ("noeud_fin_de_glisser", "NoeudEventFinGlisser"),
     ("noeud_collision_ab", "NoeudEventCollisionAB"),

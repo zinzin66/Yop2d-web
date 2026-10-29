@@ -14,6 +14,18 @@
       "exemple": "parar a passarela quando o jogador aperta um botão."
     },
     {
+      "nom": "Seguir o percurso",
+      "schema": "<b>Entradas:</b> Objeto, Nome do percurso, Velocidade (pixels por segundo), Virar para onde vai (sim / não), Desvio lateral ao acaso (pixels, ±: cada um anda na sua faixa), Evitar os outros: desviar para não se sobrepor e ultrapassar os mais lentos (sim / não), Largura utilizável para desviar (pixels de cada lado do centro do caminho), Ângulo da imagem (0 = olha para a direita, 90 = para baixo) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou",
+      "role": "Faz o objeto seguir um percurso desenhado com a ferramenta “Percurso” de Assets: ele é colocado no ponto de início e avança de ponto em ponto na velocidade escolhida. Num cruzamento escolhe a saída como você configurou (ao acaso, um de cada vez, conforme uma variável). A saída “Chegou ao fim” é ativada ao alcançar um ponto sem saída. Com “Desvio lateral ao acaso”, cada objeto anda na sua própria faixa (deslocamento ao acaso): vários inimigos avançam lado a lado em vez de se sobrepor. Com “Evitar os outros”, um objeto que alcança um mais lento desvia, ultrapassa e volta à sua faixa; se o caminho for estreito demais, ele o segue.",
+      "exemple": "Aparece um inimigo: Seguir o percurso “Caminho_inimigos”, velocidade 150. Saída “Chegou ao fim” → Causar dano à base e depois Destruir o objeto."
+    },
+    {
+      "nom": "Parar o percurso",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Para o objeto onde está: ele deixa de seguir o percurso (a saída “Chegou ao fim” não será ativada).",
+      "exemple": "Uma armadilha congela um inimigo: Parar o percurso e depois Seguir o percurso para ele continuar."
+    },
+    {
       "nom": "Parar o objeto",
       "schema": "<b>Entrada:</b> Objeto",
       "role": "Para o objeto na hora: sem velocidade, empurrão, pulo ou movimento automático.",
@@ -33,13 +45,13 @@
     },
     {
       "nom": "Ir até um objeto (caminho)",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Velocidade, Diagonais (sim / não) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou",
-      "role": "O objeto A vai até o objeto B achando sozinho o caminho mais curto, casa por casa, sem atravessar paredes (ladrilhos “Sólidos” de um cenário de ladrilhos, objetos físicos fixos). O caminho é recalculado quando B se move. “Chegou” dispara quando A toca B.",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Velocidade, Diagonais (sim / não), Parar, Estas tags bloqueiam o caminho (outras unidades, separadas por vírgula) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou",
+      "role": "O objeto A vai até o objeto B achando sozinho o caminho mais curto, casa por casa, sem atravessar paredes (ladrilhos “Sólidos” de um cenário de ladrilhos, objetos físicos fixos). O caminho é recalculado quando B se move. “Chegou” dispara quando A toca B. O ajuste “Parar” permite parar em uma casa vizinha, bem centralizado (jogos de grade); “Estas tags bloqueiam o caminho” faz contornar outras unidades.",
       "exemple": "um fantasma que persegue o jogador num labirinto."
     },
     {
       "nom": "Ir até um ponto (caminho)",
-      "schema": "<b>Entradas:</b> Objeto, Posição X, Posição Y, Velocidade, Diagonais (sim / não) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou",
+      "schema": "<b>Entradas:</b> Objeto, Posição X, Posição Y, Velocidade, Diagonais (sim / não), Estas tags bloqueiam o caminho (outras unidades, separadas por vírgula) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou",
       "role": "O objeto A vai até o ponto X, Y contornando as paredes, pelo caminho mais curto (casa por casa). Com =doigt.x e =doigt.y, vai aonde a tela é tocada. “Chegou” dispara na chegada. Se não houver caminho, ele fica parado.",
       "exemple": "tocar numa casa para mandar o herói até lá, num jogo de estratégia ou numa masmorra."
     },
@@ -48,6 +60,30 @@
       "schema": "<b>Entrada:</b> Objeto",
       "role": "O objeto para de seguir o caminho (“Ir até um objeto (caminho)” ou “Ir até um ponto (caminho)”) e fica onde está.",
       "exemple": "a mosca para quando o jogo é vencido."
+    },
+    {
+      "nom": "Colocar em uma casa (coluna, linha)",
+      "schema": "<b>Entradas:</b> Objeto, Coluna (0 = a primeira), Linha (0 = a primeira)",
+      "role": "Coloca o objeto A exatamente no meio da casa escolhida (coluna e linha, contadas a partir de 0 no canto superior esquerdo). A grade é a do mapa de tiles da cena. Com o botão 🔗, ligue “Coluna tocada” e “Linha tocada” para enviá-lo à casa que o dedo toca.",
+      "exemple": "mover uma peça para a casa tocada em um jogo de tabuleiro."
+    },
+    {
+      "nom": "Centralizar na sua casa",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "O objeto A fica na sua casa, mas volta exatamente para o meio. Útil quando um movimento parou entre duas casas.",
+      "exemple": "recentralizar um herói depois do movimento."
+    },
+    {
+      "nom": "Ir para a casa (caminho)",
+      "schema": "<b>Entradas:</b> Objeto, Coluna, Linha, Velocidade, Diagonais (sim / não), Estas tags bloqueiam o caminho (outras unidades, separadas por vírgula) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou",
+      "role": "O objeto caminha até o CENTRO da casa (coluna, linha), contornando paredes, terrenos que bloqueiam e as unidades com as tags indicadas. Por padrão: a casa que o dedo toca. Saída “Chegou” uma vez na casa.",
+      "exemple": "enviar um herói a uma casa azul tocada."
+    },
+    {
+      "nom": "Mover a peça uma casa",
+      "schema": "<b>Entradas:</b> Objeto, Direção, Velocidade, Estas tags bloqueiam o caminho (outras unidades, separadas por vírgula) &nbsp;→&nbsp; <b>Saídas:</b> Chegou / Bloqueado (parede, terreno, unidade, borda)",
+      "role": "Move a peça uma casa (acima, abaixo, esquerda, direita), bem centrada. Se a casa for uma parede, um terreno que bloqueia, uma unidade (tags) ou a borda do mapa: saída “Bloqueado”. Senão, “Chegou” no fim do passo.",
+      "exemple": "mover uma peça de tabuleiro com botões ◀ ▶ ▲ ▼."
     },
     {
       "nom": "Perseguir um objeto",

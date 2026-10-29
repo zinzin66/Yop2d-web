@@ -164,7 +164,7 @@
     },
     {
       "nom": "Disparar um objeto",
-      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade, Destruir fora da tela (sim / não)",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade, Destruir fora da tela (sim / não), Duração do tiro (segundos, 0 = sem limite)",
       "role": "Cria um projétil (o objeto indicado em “Nome do modelo”) no lugar do objeto A e o lança na velocidade escolhida: 0°, 90°, 180°, 270°, na direção do objeto B (“Em direção ao alvo”) ou no ângulo de A.",
       "exemple": "uma nave que atira lasers para cima (270)."
     },
@@ -179,6 +179,12 @@
       "schema": "<b>Entradas:</b> Objeto, Atraso (segundos)",
       "role": "Remove o objeto escolhido depois de um atraso (em segundos). Útil para fazer uma explosão sumir quando a animação termina.",
       "exemple": "depois de “Gerar clone (Spawner)” e “Reproduzir animação”, a imagem da explosão é destruída 0,4 segundo depois."
+    },
+    {
+      "nom": "Cor da equipe (substitui o rosa do desenho)",
+      "schema": "<b>Entradas:</b> Objeto, Cor da equipe, Cor a substituir no desenho (rosa por padrão), Tolerância (1 a 100): mais alta substitui também cores parecidas",
+      "role": "Um só desenho para todas as equipes: pinte as partes a colorir (capa, bandeira, penacho) com uma cor de referência (rosa vivo #FF00FF por padrão) e este nó substitui esse rosa pela cor da equipe para o objeto. As sombras e brilhos do desenho são mantidos (um rosa escuro vira azul escuro). A tolerância diz o quanto uma cor pode se afastar da referência e ainda ser substituída. Nada muda nas imagens: tudo acontece na exibição, então repita no início de cada partida.",
+      "exemple": "dois exércitos com as mesmas imagens: jogador em azul, inimigo em vermelho."
     },
     {
       "nom": "Definir o Progresso",
@@ -203,6 +209,24 @@
       "schema": "<b>Entradas:</b> Objeto, Cor dos raios, Duração (segundos, 0 = sem fim), Intensidade (0 = parar, 1 a 3)",
       "role": "Raios estalam em volta do objeto: ele pisca na cor do raio, treme e solta faíscas. Duração 0 = sem fim (cerca elétrica); intensidade 0 = parar.",
       "exemple": "o mago toca numa armadilha: “Eletrocussão” no mago (1 segundo), “Esperar” 1 segundo, depois “Reiniciar a cena”."
+    },
+    {
+      "nom": "Fonte de luz (tocha, lanterna…)",
+      "schema": "<b>Entradas:</b> Objeto, Cor da luz, Raio (pixels: distância do centro), Iluminação (%, 100 = normal, 200 = muito forte), Brilho colorido (%, 0 = nenhum, 200 = muito forte), Oscilação, Acendimento, Deslocamento horizontal (pixels), Deslocamento vertical (pixels, negativo = para cima)",
+      "role": "Prende uma luz ao objeto: ela o segue quando se move (tocha de um personagem, lanterna, fogo…), mesmo que o objeto seja filho de outro. Ajustes: cor, raio em pixels (distância do centro), iluminação (100 = normal, até 300: mais forte e mais longe), brilho colorido (0 = nenhum), oscilação (nenhuma, vela, tocha, pisca) e deslocamento. Uma luz por objeto, 8 no máximo ao mesmo tempo. Ela atravessa a escuridão de “Escuridão e clima de luz”; sem escuridão só acrescenta o brilho. Ajuste “Acendimento”: “Só quando escurece” acende a luz sozinha ao cair da noite (ideal com “Ciclo de dia e noite”).",
+      "exemple": "a tocha de um personagem: em um objeto “lanterna” filho do herói, raio 360, oscilação “tocha”."
+    },
+    {
+      "nom": "Apagar a luz do objeto",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Apaga a luz presa ao objeto. Para acendê-la de novo, use “Fonte de luz (tocha, lanterna…)” outra vez.",
+      "exemple": "um botão “Lanterna” apaga a luz do herói."
+    },
+    {
+      "nom": "Sombra sob o objeto",
+      "schema": "<b>Entradas:</b> Objeto, Sombra, Força da sombra (%), Largura da sombra (% do objeto), Deslocamento vertical (pixels, negativo = para cima)",
+      "role": "Põe uma sombra suave sob o objeto (ou a remove com “Não”). Ela segue o objeto quando ele se move; ajustam-se a força e a largura. Dá volume na hora aos personagens sobre um cenário. Também se ativa com a caixa “Sombra sob o objeto” do Inspetor, sem nenhum nó.",
+      "exemple": "uma sombra sob o herói: força 50, largura 70."
     },
     {
       "nom": "Rastro do objeto",

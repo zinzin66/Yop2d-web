@@ -85,6 +85,12 @@
       "exemple": "niveau de 6480 pixels de large : X minimum 0, X maximum 6480, Y minimum 0, Y maximum 1080, avec « Fixer la caméra » sur le joueur."
     },
     {
+      "nom": "Faire défiler la caméra au doigt",
+      "schema": "<b>Entrées :</b> Activé (oui / non), Glisser de gauche à droite (oui / non), Glisser de haut en bas (oui / non)",
+      "role": "Active (ou coupe) le défilement de l'écran au doigt : en glissant dans la scène, on déplace la caméra. Un simple toucher reste un toucher (une tour, un bouton). Les boutons du HUD ne font jamais défiler. La caméra ne sort pas des limites réglées avec « Limites de la caméra ».",
+      "exemple": "Au démarrage : Limites de la caméra (0, 3840, 0, 1080), puis Faire défiler la caméra au doigt : le joueur fait glisser la carte de deux écrans de large."
+    },
+    {
       "nom": "Élasticité de la caméra",
       "schema": "<b>Entrée :</b> Vitesse de suivi (0.01 à 1)",
       "role": "Règle la vitesse à laquelle la caméra rattrape l'objet suivi : 0.01 = très souple, 1 = collée à l'objet.",
@@ -125,6 +131,18 @@
       "schema": "<b>Entrées :</b> Zoom (%, 100 = normal), Vers, Durée (secondes)",
       "role": "Grossit tout l'écran du jeu (la scène, ou le décor et les personnages d'une histoire) en douceur, vers le centre, le visage, un côté, le haut ou le bas. 100 = revenir à la normale ; la boîte de dialogue et le HUD ne bougent pas.",
       "exemple": "zoom 140 vers le visage pendant 2 secondes quand Hana a peur, puis zoom 100."
+    },
+    {
+      "nom": "Obscurité et ambiance de lumière",
+      "schema": "<b>Entrées :</b> Couleur de la nuit, Obscurité (%, 0 = plein jour, 100 = noir presque total), Change en (secondes : 30 = un vrai coucher de soleil)",
+      "role": "Assombrit tout le jeu (sous les boutons et le score) avec la couleur de ton choix. Obscurité 0 = plein jour, 100 = noir complet, sauf autour des sources de lumière. Le niveau et la couleur changent en douceur : avec 30 secondes, on passe du jour au crépuscule orange puis à la nuit bleue, comme un coucher de soleil.",
+      "exemple": "un coucher de soleil : « Obscurité et ambiance de lumière » orange, obscurité 40, en 6 secondes ; « Attendre » 6 secondes ; puis « Obscurité et ambiance de lumière » bleu nuit, obscurité 90, en 6 secondes."
+    },
+    {
+      "nom": "Cycle jour et nuit",
+      "schema": "<b>Entrées :</b> Durée d'une journée complète (secondes, 0 = arrêter), On commence au moment…, Recommencer sans fin (oui) ou une seule journée (non)",
+      "role": "Fait passer tout le jeu du jour au soir orange, à la nuit bleue, à l'aube, puis au jour, tout seul. Tu choisis la durée d'une journée complète (30 à 120 secondes pour un jeu vivant), le moment de départ et si le cycle recommence sans fin. Le jeu en pause fige le cycle. Durée 0 = arrêter le cycle (le ciel reste comme il est). Un réglage à la main avec « Obscurité et ambiance de lumière » reprend la main. Tes lumières (« Source de lumière (torche, lanterne…) ») restent allumées : on les voit mieux la nuit.",
+      "exemple": "un monde vivant : au démarrage, « Cycle jour et nuit » avec une durée de 90 secondes, début « Plein jour », en boucle."
     },
     {
       "nom": "Tremblement de la caméra",

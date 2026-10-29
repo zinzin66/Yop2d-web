@@ -1,0 +1,122 @@
+{
+  "titre_page": "Comment faire un menu avec des boutons, un interrupteur et un curseur dans Yop2D ? | Guide Yop2D",
+  "description": "Crée un vrai menu dans Yop2D : boutons de toutes les formes, interrupteur, case à cocher, curseur, panneau et compteur, sans code. Change la forme, les couleurs, l'image et le son d'un seul endroit.",
+  "h1": "Comment faire un menu avec des boutons, un interrupteur et un curseur ?",
+  "carte": [
+    "Boutons et éléments d'interface",
+    "Un menu complet : boutons, interrupteur, curseur, tout se règle au même endroit."
+  ],
+  "etapes": [
+    [
+      "Ajoute un élément",
+      "Touche + puis « Éléments d'interface » et choisis un bouton."
+    ],
+    [
+      "Change son style",
+      "Inspecteur > « Style de l'élément… » : forme, couleurs, image, texte."
+    ],
+    [
+      "Lis sa valeur",
+      "Une formule lit =nom.progression pour un interrupteur ou un curseur."
+    ],
+    [
+      "Réagis au toucher",
+      "Ajoute [[NoeudEventClicObjet]] dans le Blueprint."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Un menu de jeu a besoin de boutons jolis et de réglages : un interrupteur pour le son, un curseur pour le volume, un compteur pour le score. Dans Yop2D, chaque élément est **un seul objet** avec son texte dedans, et tout son aspect se règle dans une seule fenêtre. Tu peux aussi télécharger l'exemple **UI kit** (onglet Exemples) : il montre tous les éléments."
+    ],
+    [
+      "besoin",
+      [
+        "un projet ouvert dans l'éditeur ;",
+        "l'exemple « UI kit » si tu veux voir le résultat avant de commencer (facultatif)."
+      ]
+    ],
+    [
+      "h2",
+      "Étape 1 : ajoute un élément"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Touche le **+** de l'éditeur, puis la section **Éléments d'interface**.",
+            "Choisis parmi : **Bouton**, **Interrupteur**, **Case à cocher**, **Curseur**, **Panneau** et **Compteur**.",
+            "L'élément arrive au centre de l'écran : déplace-le avec le doigt et agrandis-le avec les poignées, comme n'importe quel objet."
+          ]
+        ],
+        [
+          "tip",
+          "Le texte d'un bouton est dedans : écris-le dans l'Inspecteur, plus besoin de poser un texte par-dessus le bouton."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 2 : change son style"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Sélectionne l'élément et touche **Style de l'élément…** dans l'Inspecteur.",
+            "Dans **Forme**, choisis rectangle, arrondi, pilule, rond, coins coupés ou hexagone.",
+            "Dans **Image**, choisis **Dans la forme** (l'image garde la forme), **Remplace la forme** (l'image EST le bouton) ou **Icône + texte**.",
+            "Dans **Couleurs et contour**, règle la couleur, le **dégradé**, le contour, l'**ombre** et le **halo lumineux (néon)**.",
+            "Dans **Texte**, choisis la police, la taille, la couleur et le contour des lettres."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 3 : donne-lui un comportement"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Dans **Comportement**, active **Reste enfoncé (ON / OFF)** pour un bouton qui garde son état.",
+            "Choisis un **son au toucher** et, si tu veux, une **vibration**.",
+            "Pour un curseur, règle la **valeur minimale**, la **valeur maximale** et la **valeur de départ**."
+          ]
+        ],
+        [
+          "tip",
+          "Un élément **désactivé (grisé)** ne réagit plus au toucher : pratique pour un bouton « Continuer » qui n'est pas encore disponible."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 4 : lis la valeur dans le jeu"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Un interrupteur ou une case vaut sa valeur minimale (éteint) ou maximale (allumé) ; un curseur vaut sa position.",
+            "Dans une formule, écris **nom_de_l_objet.progression** : par exemple « =volume.progression » dans [[modifier_propriete]] du texte pour afficher le volume.",
+            "Pour un bouton, ajoute l'événement [[NoeudEventClicObjet]] dans le Blueprint et choisis ton bouton."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "Les anciens boutons de Yop2D continuent de fonctionner : ces nouveaux éléments s'ajoutent, ils ne remplacent rien."
+    ]
+  ]
+}

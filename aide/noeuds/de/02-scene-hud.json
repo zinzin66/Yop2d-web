@@ -85,6 +85,12 @@
       "exemple": "Level mit 6480 Pixel Breite: minimales X 0, maximales X 6480, minimales Y 0, maximales Y 1080, mit „Kamera fixieren“ auf dem Spieler."
     },
     {
+      "nom": "Kamera mit dem Finger verschieben",
+      "schema": "<b>Eingänge:</b> An (ja / nein), Seitlich verschieben (ja / nein), Nach oben und unten verschieben (ja / nein)",
+      "role": "Schaltet das Verschieben der Ansicht mit dem Finger ein (oder aus): Wer in der Szene wischt, bewegt die Kamera. Ein einfaches Tippen bleibt ein Tippen (ein Turm, ein Knopf). HUD-Knöpfe verschieben nie. Die Kamera bleibt in den Grenzen von „Kamerabegrenzung“.",
+      "exemple": "Beim Start: Kamerabegrenzung (0, 3840, 0, 1080), dann Kamera mit dem Finger verschieben: Der Spieler zieht eine Karte, die zwei Bildschirme breit ist."
+    },
+    {
       "nom": "Kamera-Glättung",
       "schema": "<b>Eingang:</b> Folgegeschwindigkeit (0.01 bis 1)",
       "role": "Legt fest, wie schnell die Kamera das verfolgte Objekt einholt: 0.01 = sehr weich, 1 = klebt am Objekt.",
@@ -125,6 +131,18 @@
       "schema": "<b>Eingänge:</b> Zoom (%, 100 = normal), Richtung, Dauer (Sekunden)",
       "role": "Vergrößert sanft den ganzen Spielbildschirm (die Szene oder Hintergrund und Figuren einer Geschichte) zur Mitte, zum Gesicht, zu einer Seite, nach oben oder unten. 100 = wieder normal; Dialogkasten und HUD bewegen sich nicht.",
       "exemple": "Zoom 140 zum Gesicht für 2 Sekunden, wenn Hana Angst hat, dann Zoom 100."
+    },
+    {
+      "nom": "Dunkelheit und Lichtstimmung",
+      "schema": "<b>Eingänge:</b> Farbe der Nacht, Dunkelheit (%, 0 = Tag, 100 = fast tiefschwarz), Ändert sich in (Sekunden: 30 = ein Sonnenuntergang)",
+      "role": "Verdunkelt das ganze Spiel (unter Buttons und Punktestand) in der gewählten Farbe. Dunkelheit 0 = voller Tag, 100 = völlig schwarz, außer rund um Lichtquellen. Stufe und Farbe ändern sich sanft: in 30 Sekunden geht es vom Tag über ein oranges Abendrot zur blauen Nacht, wie ein Sonnenuntergang.",
+      "exemple": "ein Sonnenuntergang: „Dunkelheit und Lichtstimmung“ orange, Dunkelheit 40, in 6 Sekunden; „Warten“ 6 Sekunden; dann „Dunkelheit und Lichtstimmung“ Nachtblau, Dunkelheit 90, in 6 Sekunden."
+    },
+    {
+      "nom": "Tag-Nacht-Zyklus",
+      "schema": "<b>Eingänge:</b> Dauer eines ganzen Tages (Sekunden, 0 = stoppen), Wir beginnen bei…, Endlos wiederholen (ja) oder nur ein Tag (nein)",
+      "role": "Lässt das ganze Spiel von allein vom Tag über einen orangen Abend zur blauen Nacht, zur Morgendämmerung und wieder zum Tag wechseln. Du wählst die Dauer eines ganzen Tages (30 bis 120 Sekunden für ein lebendiges Spiel), den Startzeitpunkt und ob sich der Zyklus endlos wiederholt. Bei Pause steht der Zyklus still. Dauer 0 = Zyklus anhalten (der Himmel bleibt, wie er ist). Eine manuelle Einstellung mit „Dunkelheit und Lichtstimmung“ übernimmt. Deine Lichter („Lichtquelle (Fackel, Laterne…)“) bleiben an: Nachts sieht man sie besser.",
+      "exemple": "eine lebendige Welt: beim Start „Tag-Nacht-Zyklus“ mit 90 Sekunden, Start „Voller Tag“, Schleife."
     },
     {
       "nom": "Kamera-Wackeln",

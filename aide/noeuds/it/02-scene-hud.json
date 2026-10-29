@@ -85,6 +85,12 @@
       "exemple": "livello largo 6480 pixel: X minimo 0, X massimo 6480, Y minimo 0, Y massimo 1080, con «Fissa la camera» sul giocatore."
     },
     {
+      "nom": "Scorrere la camera col dito",
+      "schema": "<b>Ingressi:</b> Attivo (sì / no), Scorrere di lato (sì / no), Scorrere su e giù (sì / no)",
+      "role": "Attiva (o disattiva) lo scorrimento dello schermo col dito: trascinando nella scena si sposta la camera. Un semplice tocco resta un tocco (una torre, un pulsante). I pulsanti dell'HUD non fanno mai scorrere. La camera non esce dai limiti impostati con «Limiti della camera».",
+      "exemple": "All'avvio: Limiti della camera (0, 3840, 0, 1080), poi Scorrere la camera col dito: il giocatore trascina una mappa larga due schermi."
+    },
+    {
       "nom": "Morbidezza della camera",
       "schema": "<b>Ingresso:</b> Velocità di inseguimento (da 0.01 a 1)",
       "role": "Regola la velocità con cui la telecamera raggiunge l'oggetto seguito: 0.01 = molto morbida, 1 = attaccata all'oggetto.",
@@ -125,6 +131,18 @@
       "schema": "<b>Ingressi:</b> Zoom (%, 100 = normale), Verso, Durata (secondi)",
       "role": "Ingrandisce dolcemente tutto lo schermo del gioco (la scena, o lo sfondo e i personaggi di una storia) verso il centro, il viso, un lato, l'alto o il basso. 100 = tornare normale; il riquadro di dialogo e l'HUD non si muovono.",
       "exemple": "zoom 140 verso il viso per 2 secondi quando Hana ha paura, poi zoom 100."
+    },
+    {
+      "nom": "Oscurità e atmosfera di luce",
+      "schema": "<b>Ingressi:</b> Colore della notte, Oscurità (%, 0 = giorno, 100 = quasi nero totale), Cambia in (secondi: 30 = un tramonto)",
+      "role": "Oscura tutto il gioco (sotto i pulsanti e il punteggio) con il colore scelto. Oscurità 0 = pieno giorno, 100 = nero totale, tranne intorno alle fonti di luce. Il livello e il colore cambiano dolcemente: in 30 secondi si passa dal giorno al crepuscolo arancione e poi alla notte blu, come un tramonto.",
+      "exemple": "un tramonto: «Oscurità e atmosfera di luce» arancione, oscurità 40, in 6 secondi; «Attendere» 6 secondi; poi «Oscurità e atmosfera di luce» blu notte, oscurità 90, in 6 secondi."
+    },
+    {
+      "nom": "Ciclo giorno e notte",
+      "schema": "<b>Ingressi:</b> Durata di un giorno intero (secondi, 0 = ferma), Si inizia a…, Ripeti senza fine (sì) o un solo giorno (no)",
+      "role": "Fa passare tutto il gioco dal giorno alla sera arancione, alla notte blu, all'alba e di nuovo al giorno, da solo. Scegli la durata di un giorno intero (da 30 a 120 secondi per un gioco vivo), il momento di partenza e se il ciclo si ripete senza fine. Con il gioco in pausa il ciclo si ferma. Durata 0 = ferma il ciclo (il cielo resta com'è). Un'impostazione manuale con «Oscurità e atmosfera di luce» prende il controllo. Le tue luci («Fonte di luce (torcia, lanterna…)») restano accese: di notte si vedono meglio.",
+      "exemple": "un mondo vivo: all'avvio, «Ciclo giorno e notte» con 90 secondi, inizio «Pieno giorno», in loop."
     },
     {
       "nom": "Tremolio della camera",

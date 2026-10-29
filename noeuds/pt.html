@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos os nós do Yop2D (166) | Referência</title>
-<meta name="description" content="Lista completa dos 166 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
+<title>Todos os nós do Yop2D (230) | Referência</title>
+<meta name="description" content="Lista completa dos 230 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/pt.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,9 +36,9 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 166 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
+<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 230 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
 <p><strong>Categorias</strong></p>
-<nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-cena-e-hud">Cena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aparência-e-objetos">Aparência e Objetos</a><a href="#c5-variáveis-e-inventário">Variáveis e Inventário</a><a href="#c6-lógica-e-condições">Lógica e Condições</a><a href="#c7-textos-e-diálogos">Textos e Diálogos</a><a href="#c8-movimentos-e-ia">Movimentos e IA</a><a href="#c9-grades-e-quebra-cabeças">Grades e quebra-cabeças</a><a href="#c10-transições">Transições</a><a href="#c11-animações">Animações</a><a href="#c12-áudio">Áudio</a><a href="#c13-história-e-diálogos">História e diálogos</a><a href="#c14-valores-fios-verdes">Valores (fios verdes)</a><a href="#c15-filtros-de-tela">Filtros de tela</a></nav>
+<nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-cena-e-hud">Cena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aparência-e-objetos">Aparência e Objetos</a><a href="#c5-variáveis-e-inventário">Variáveis e Inventário</a><a href="#c6-lógica-e-condições">Lógica e Condições</a><a href="#c7-textos-e-diálogos">Textos e Diálogos</a><a href="#c8-movimentos-e-ia">Movimentos e IA</a><a href="#c9-grades-e-quebra-cabeças">Grades e quebra-cabeças</a><a href="#c10-valores-fios-verdes">Valores (fios verdes)</a><a href="#c11-transições">Transições</a><a href="#c12-animações">Animações</a><a href="#c13-áudio">Áudio</a><a href="#c14-história-e-diálogos">História e diálogos</a><a href="#c15-filtros-de-tela">Filtros de tela</a><a href="#c16-física">Física</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
 <div class="method">
 <div class="fiche"><h3>Ao Iniciar</h3>
@@ -75,6 +75,9 @@
 <div class="fiche"><h3>Botão voltar pressionado</h3>
 <p>Executa quando o jogador pressiona o botão “voltar” do telefone (seta ou gesto). Ótimo para abrir um menu de pausa ou voltar à tela anterior. Sem este nó, o botão voltar não faz nada durante o jogo.</p>
 <p class="exemple"><b>Exemplo:</b> voltar → “Pausar o jogo”, depois mostrar um menu “Continuar / Sair”.</p>
+</div>
+<div class="fiche"><h3>A cada nova cena</h3>
+<p>Roda sempre que uma nova cena é aberta. Feito para a “Lógica global” (que funciona em todas as cenas): por exemplo, colocar o exército escolhido em cada mapa. Numa cena comum, “Ao iniciar” basta.</p>
 </div>
 <div class="fiche"><h3>Início de Arrastar</h3>
 <div class="schema"><b>Entrada:</b> Objeto</div>
@@ -202,6 +205,11 @@
 <p>Impede a câmera de sair das bordas do nível: nunca mostra o vazio além. Tudo 0 = sem limites.</p>
 <p class="exemple"><b>Exemplo:</b> nível com 6480 pixels de largura: X mínimo 0, X máximo 6480, Y mínimo 0, Y máximo 1080, com “Fixar a câmera” no jogador.</p>
 </div>
+<div class="fiche"><h3>Rolar a câmera com o dedo</h3>
+<div class="schema"><b>Entradas:</b> Ativado (sim / não), Rolar para os lados (sim / não), Rolar para cima e para baixo (sim / não)</div>
+<p>Ativa (ou desativa) a rolagem da tela com o dedo: ao arrastar na cena, a câmera se move. Um simples toque continua sendo um toque (uma torre, um botão). Os botões do HUD nunca rolam. A câmera não sai dos limites definidos em “Limites da câmera”.</p>
+<p class="exemple"><b>Exemplo:</b> Ao começar: Limites da câmera (0, 3840, 0, 1080) e depois Rolar a câmera com o dedo: o jogador arrasta um mapa de duas telas de largura.</p>
+</div>
 <div class="fiche"><h3>Suavização da câmera</h3>
 <div class="schema"><b>Entrada:</b> Velocidade de seguimento (0.01 a 1)</div>
 <p>Ajusta a rapidez com que a câmera alcança o objeto seguido: 0.01 = bem suave, 1 = grudada no objeto.</p>
@@ -236,6 +244,16 @@
 <div class="schema"><b>Entradas:</b> Zoom (%, 100 = normal), Para, Duração (segundos)</div>
 <p>Aumenta suavemente toda a tela do jogo (a cena, ou o cenário e os personagens de uma história) para o centro, o rosto, um lado, o alto ou embaixo. 100 = voltar ao normal; a caixa de diálogo e o HUD não se mexem.</p>
 <p class="exemple"><b>Exemplo:</b> zoom 140 no rosto por 2 segundos quando a Hana tem medo, depois zoom 100.</p>
+</div>
+<div class="fiche"><h3>Escuridão e clima de luz</h3>
+<div class="schema"><b>Entradas:</b> Cor da noite, Escuridão (%, 0 = pleno dia, 100 = quase preto total), Muda em (segundos: 30 = um pôr do sol)</div>
+<p>Escurece todo o jogo (sob os botões e a pontuação) com a cor que escolher. Escuridão 0 = pleno dia, 100 = preto total, exceto em volta das fontes de luz. O nível e a cor mudam suavemente: com 30 segundos vai-se do dia ao crepúsculo laranja e depois à noite azul, como um pôr do sol.</p>
+<p class="exemple"><b>Exemplo:</b> um pôr do sol: “Escuridão e clima de luz” laranja, escuridão 40, em 6 segundos; “Esperar” 6 segundos; depois “Escuridão e clima de luz” azul-noite, escuridão 90, em 6 segundos.</p>
+</div>
+<div class="fiche"><h3>Ciclo de dia e noite</h3>
+<div class="schema"><b>Entradas:</b> Duração de um dia completo (segundos, 0 = parar), Começamos em…, Repetir sem fim (sim) ou um só dia (não)</div>
+<p>Faz todo o jogo passar do dia ao entardecer laranja, à noite azul, ao amanhecer e de novo ao dia, sozinho. Você escolhe a duração de um dia completo (30 a 120 segundos para um jogo vivo), o momento de início e se o ciclo se repete sem fim. Com o jogo em pausa o ciclo congela. Duração 0 = parar o ciclo (o céu fica como está). Um ajuste manual com “Escuridão e clima de luz” assume o controle. Suas luzes (“Fonte de luz (tocha, lanterna…)”) continuam acesas: veem-se melhor à noite.</p>
+<p class="exemple"><b>Exemplo:</b> um mundo vivo: ao começar, “Ciclo de dia e noite” com 90 segundos, início “Pleno dia”, em loop.</p>
 </div>
 <div class="fiche"><h3>Tremor da câmera</h3>
 <div class="schema"><b>Entradas:</b> Intensidade, Duração (milissegundos, 1000 = 1 s)</div>
@@ -444,7 +462,7 @@
 <p class="exemple"><b>Exemplo:</b> fazer cair uma pedra numa posição aleatória: X = random(0, 800).</p>
 </div>
 <div class="fiche"><h3>Disparar um objeto</h3>
-<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade, Destruir fora da tela (sim / não)</div>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Nome do modelo, Direção, Velocidade, Destruir fora da tela (sim / não), Duração do tiro (segundos, 0 = sem limite)</div>
 <p>Cria um projétil (o objeto indicado em “Nome do modelo”) no lugar do objeto A e o lança na velocidade escolhida: 0°, 90°, 180°, 270°, na direção do objeto B (“Em direção ao alvo”) ou no ângulo de A.</p>
 <p class="exemple"><b>Exemplo:</b> uma nave que atira lasers para cima (270).</p>
 </div>
@@ -457,6 +475,11 @@
 <div class="schema"><b>Entradas:</b> Objeto, Atraso (segundos)</div>
 <p>Remove o objeto escolhido depois de um atraso (em segundos). Útil para fazer uma explosão sumir quando a animação termina.</p>
 <p class="exemple"><b>Exemplo:</b> depois de “Gerar clone (Spawner)” e “Reproduzir animação”, a imagem da explosão é destruída 0,4 segundo depois.</p>
+</div>
+<div class="fiche"><h3>Cor da equipe (substitui o rosa do desenho)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Cor da equipe, Cor a substituir no desenho (rosa por padrão), Tolerância (1 a 100): mais alta substitui também cores parecidas</div>
+<p>Um só desenho para todas as equipes: pinte as partes a colorir (capa, bandeira, penacho) com uma cor de referência (rosa vivo #FF00FF por padrão) e este nó substitui esse rosa pela cor da equipe para o objeto. As sombras e brilhos do desenho são mantidos (um rosa escuro vira azul escuro). A tolerância diz o quanto uma cor pode se afastar da referência e ainda ser substituída. Nada muda nas imagens: tudo acontece na exibição, então repita no início de cada partida.</p>
+<p class="exemple"><b>Exemplo:</b> dois exércitos com as mesmas imagens: jogador em azul, inimigo em vermelho.</p>
 </div>
 <div class="fiche"><h3>Definir o Progresso</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Novo progresso</div>
@@ -477,6 +500,21 @@
 <div class="schema"><b>Entradas:</b> Objeto, Cor dos raios, Duração (segundos, 0 = sem fim), Intensidade (0 = parar, 1 a 3)</div>
 <p>Raios estalam em volta do objeto: ele pisca na cor do raio, treme e solta faíscas. Duração 0 = sem fim (cerca elétrica); intensidade 0 = parar.</p>
 <p class="exemple"><b>Exemplo:</b> o mago toca numa armadilha: “Eletrocussão” no mago (1 segundo), “Esperar” 1 segundo, depois “Reiniciar a cena”.</p>
+</div>
+<div class="fiche"><h3>Fonte de luz (tocha, lanterna…)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Cor da luz, Raio (pixels: distância do centro), Iluminação (%, 100 = normal, 200 = muito forte), Brilho colorido (%, 0 = nenhum, 200 = muito forte), Oscilação, Acendimento, Deslocamento horizontal (pixels), Deslocamento vertical (pixels, negativo = para cima)</div>
+<p>Prende uma luz ao objeto: ela o segue quando se move (tocha de um personagem, lanterna, fogo…), mesmo que o objeto seja filho de outro. Ajustes: cor, raio em pixels (distância do centro), iluminação (100 = normal, até 300: mais forte e mais longe), brilho colorido (0 = nenhum), oscilação (nenhuma, vela, tocha, pisca) e deslocamento. Uma luz por objeto, 8 no máximo ao mesmo tempo. Ela atravessa a escuridão de “Escuridão e clima de luz”; sem escuridão só acrescenta o brilho. Ajuste “Acendimento”: “Só quando escurece” acende a luz sozinha ao cair da noite (ideal com “Ciclo de dia e noite”).</p>
+<p class="exemple"><b>Exemplo:</b> a tocha de um personagem: em um objeto “lanterna” filho do herói, raio 360, oscilação “tocha”.</p>
+</div>
+<div class="fiche"><h3>Apagar a luz do objeto</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>Apaga a luz presa ao objeto. Para acendê-la de novo, use “Fonte de luz (tocha, lanterna…)” outra vez.</p>
+<p class="exemple"><b>Exemplo:</b> um botão “Lanterna” apaga a luz do herói.</p>
+</div>
+<div class="fiche"><h3>Sombra sob o objeto</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Sombra, Força da sombra (%), Largura da sombra (% do objeto), Deslocamento vertical (pixels, negativo = para cima)</div>
+<p>Põe uma sombra suave sob o objeto (ou a remove com “Não”). Ela segue o objeto quando ele se move; ajustam-se a força e a largura. Dá volume na hora aos personagens sobre um cenário. Também se ativa com a caixa “Sombra sob o objeto” do Inspetor, sem nenhum nó.</p>
+<p class="exemple"><b>Exemplo:</b> uma sombra sob o herói: força 50, largura 70.</p>
 </div>
 <div class="fiche"><h3>Rastro do objeto</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Modelo, Cor (vazio = a do modelo), Tamanho (1 = normal)</div>
@@ -625,6 +663,16 @@
 <p>Para o movimento em andamento no objeto. Ele fica onde está.</p>
 <p class="exemple"><b>Exemplo:</b> parar a passarela quando o jogador aperta um botão.</p>
 </div>
+<div class="fiche"><h3>Seguir o percurso</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Nome do percurso, Velocidade (pixels por segundo), Virar para onde vai (sim / não), Desvio lateral ao acaso (pixels, ±: cada um anda na sua faixa), Evitar os outros: desviar para não se sobrepor e ultrapassar os mais lentos (sim / não), Largura utilizável para desviar (pixels de cada lado do centro do caminho), Ângulo da imagem (0 = olha para a direita, 90 = para baixo) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou</div>
+<p>Faz o objeto seguir um percurso desenhado com a ferramenta “Percurso” de Assets: ele é colocado no ponto de início e avança de ponto em ponto na velocidade escolhida. Num cruzamento escolhe a saída como você configurou (ao acaso, um de cada vez, conforme uma variável). A saída “Chegou ao fim” é ativada ao alcançar um ponto sem saída. Com “Desvio lateral ao acaso”, cada objeto anda na sua própria faixa (deslocamento ao acaso): vários inimigos avançam lado a lado em vez de se sobrepor. Com “Evitar os outros”, um objeto que alcança um mais lento desvia, ultrapassa e volta à sua faixa; se o caminho for estreito demais, ele o segue.</p>
+<p class="exemple"><b>Exemplo:</b> Aparece um inimigo: Seguir o percurso “Caminho_inimigos”, velocidade 150. Saída “Chegou ao fim” → Causar dano à base e depois Destruir o objeto.</p>
+</div>
+<div class="fiche"><h3>Parar o percurso</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>Para o objeto onde está: ele deixa de seguir o percurso (a saída “Chegou ao fim” não será ativada).</p>
+<p class="exemple"><b>Exemplo:</b> Uma armadilha congela um inimigo: Parar o percurso e depois Seguir o percurso para ele continuar.</p>
+</div>
 <div class="fiche"><h3>Parar o objeto</h3>
 <div class="schema"><b>Entrada:</b> Objeto</div>
 <p>Para o objeto na hora: sem velocidade, empurrão, pulo ou movimento automático.</p>
@@ -641,12 +689,12 @@
 <p class="exemple"><b>Exemplo:</b> uma bala ou um carro andando.</p>
 </div>
 <div class="fiche"><h3>Ir até um objeto (caminho)</h3>
-<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Velocidade, Diagonais (sim / não) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou</div>
-<p>O objeto A vai até o objeto B achando sozinho o caminho mais curto, casa por casa, sem atravessar paredes (ladrilhos “Sólidos” de um cenário de ladrilhos, objetos físicos fixos). O caminho é recalculado quando B se move. “Chegou” dispara quando A toca B.</p>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Velocidade, Diagonais (sim / não), Parar, Estas tags bloqueiam o caminho (outras unidades, separadas por vírgula) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou</div>
+<p>O objeto A vai até o objeto B achando sozinho o caminho mais curto, casa por casa, sem atravessar paredes (ladrilhos “Sólidos” de um cenário de ladrilhos, objetos físicos fixos). O caminho é recalculado quando B se move. “Chegou” dispara quando A toca B. O ajuste “Parar” permite parar em uma casa vizinha, bem centralizado (jogos de grade); “Estas tags bloqueiam o caminho” faz contornar outras unidades.</p>
 <p class="exemple"><b>Exemplo:</b> um fantasma que persegue o jogador num labirinto.</p>
 </div>
 <div class="fiche"><h3>Ir até um ponto (caminho)</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Posição X, Posição Y, Velocidade, Diagonais (sim / não) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou</div>
+<div class="schema"><b>Entradas:</b> Objeto, Posição X, Posição Y, Velocidade, Diagonais (sim / não), Estas tags bloqueiam o caminho (outras unidades, separadas por vírgula) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou</div>
 <p>O objeto A vai até o ponto X, Y contornando as paredes, pelo caminho mais curto (casa por casa). Com =doigt.x e =doigt.y, vai aonde a tela é tocada. “Chegou” dispara na chegada. Se não houver caminho, ele fica parado.</p>
 <p class="exemple"><b>Exemplo:</b> tocar numa casa para mandar o herói até lá, num jogo de estratégia ou numa masmorra.</p>
 </div>
@@ -654,6 +702,26 @@
 <div class="schema"><b>Entrada:</b> Objeto</div>
 <p>O objeto para de seguir o caminho (“Ir até um objeto (caminho)” ou “Ir até um ponto (caminho)”) e fica onde está.</p>
 <p class="exemple"><b>Exemplo:</b> a mosca para quando o jogo é vencido.</p>
+</div>
+<div class="fiche"><h3>Colocar em uma casa (coluna, linha)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Coluna (0 = a primeira), Linha (0 = a primeira)</div>
+<p>Coloca o objeto A exatamente no meio da casa escolhida (coluna e linha, contadas a partir de 0 no canto superior esquerdo). A grade é a do mapa de tiles da cena. Com o botão 🔗, ligue “Coluna tocada” e “Linha tocada” para enviá-lo à casa que o dedo toca.</p>
+<p class="exemple"><b>Exemplo:</b> mover uma peça para a casa tocada em um jogo de tabuleiro.</p>
+</div>
+<div class="fiche"><h3>Centralizar na sua casa</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>O objeto A fica na sua casa, mas volta exatamente para o meio. Útil quando um movimento parou entre duas casas.</p>
+<p class="exemple"><b>Exemplo:</b> recentralizar um herói depois do movimento.</p>
+</div>
+<div class="fiche"><h3>Ir para a casa (caminho)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Coluna, Linha, Velocidade, Diagonais (sim / não), Estas tags bloqueiam o caminho (outras unidades, separadas por vírgula) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou</div>
+<p>O objeto caminha até o CENTRO da casa (coluna, linha), contornando paredes, terrenos que bloqueiam e as unidades com as tags indicadas. Por padrão: a casa que o dedo toca. Saída “Chegou” uma vez na casa.</p>
+<p class="exemple"><b>Exemplo:</b> enviar um herói a uma casa azul tocada.</p>
+</div>
+<div class="fiche"><h3>Mover a peça uma casa</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Direção, Velocidade, Estas tags bloqueiam o caminho (outras unidades, separadas por vírgula) &nbsp;→&nbsp; <b>Saídas:</b> Chegou / Bloqueado (parede, terreno, unidade, borda)</div>
+<p>Move a peça uma casa (acima, abaixo, esquerda, direita), bem centrada. Se a casa for uma parede, um terreno que bloqueia, uma unidade (tags) ou a borda do mapa: saída “Bloqueado”. Senão, “Chegou” no fim do passo.</p>
+<p class="exemple"><b>Exemplo:</b> mover uma peça de tabuleiro com botões ◀ ▶ ▲ ▼.</p>
 </div>
 <div class="fiche"><h3>Perseguir um objeto</h3>
 <div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Velocidade</div>
@@ -698,6 +766,140 @@
 </div>
 <h2 id="c9-grades-e-quebra-cabeças">Grades e quebra-cabeças</h2>
 <div class="method">
+<div class="fiche"><h3>Passar para o próximo turno</h3>
+<div class="schema"><b>Entrada:</b> Equipes, em ordem (tags separadas por vírgula)</div>
+<p>Passa o jogo para a próxima equipe. Escreva as equipes em ordem com suas tags (por exemplo jogador,inimigo). A primeira vez (por exemplo depois de “Ao Iniciar”) começa pela primeira equipe; quando todas jogaram, o número do turno aumenta. No início de cada turno, o evento local “tour_&lt;equipe&gt;” é executado se existir (por exemplo “tour_inimigo”).</p>
+<p class="exemple"><b>Exemplo:</b> colocar “Passar para o próximo turno” no botão “Fim do turno”.</p>
+</div>
+<div class="fiche"><h3>Se for a vez de…</h3>
+<div class="schema"><b>Entrada:</b> Equipe (tag) &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso</div>
+<p>Verdadeiro se for a vez da equipe escrita (sua tag), Falso caso contrário.</p>
+<p class="exemple"><b>Exemplo:</b> deixar o jogador tocar suas unidades só durante o seu turno.</p>
+</div>
+<div class="fiche"><h3>Marcar como já jogou</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>Lembra que a unidade (objeto A) já jogou neste turno. Tudo é apagado quando o próximo turno começa.</p>
+<p class="exemple"><b>Exemplo:</b> impedir que um herói se mova duas vezes no mesmo turno.</p>
+</div>
+<div class="fiche"><h3>Se a unidade já jogou</h3>
+<div class="schema"><b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso</div>
+<p>Verdadeiro se a unidade (objeto A) já jogou neste turno, Falso caso contrário.</p>
+<p class="exemple"><b>Exemplo:</b> recusar mover um herói que já jogou.</p>
+</div>
+<div class="fiche"><h3>Mostrar casas alcançáveis</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Tipo de zona, Número de passos (ou alcance), Cor das casas, Visibilidade das casas (0 = invisível, 100 = cheia), Moldura em cada casa, Escrever os passos em cada casa, As paredes bloqueiam (movimento), Estas tags bloqueiam a passagem (separadas por vírgula), Terreno que custa mais passos (tag=custo, ex. floresta=2, agua=3), Nome da zona (opcional: para mostrar várias), Forma do alcance (ataque e salto), Alcance mínimo (0 = nenhum; 2 = sem as primeiras casas), Minhas posições (coluna,linha; ex. 2,1 ; -2,1 ; 0,3), Remover a casa onde o objeto está</div>
+<p>Colore as casas para onde o objeto escolhido pode ir (ou atacar). As paredes bloqueiam, e você pode adicionar tags que bloqueiam (outras unidades) e terrenos que custam mais passos (floresta=2). Cor, visibilidade, moldura e números são ajustáveis. “Nome da zona” permite mostrar várias ao mesmo tempo (movimento em azul, ataque em vermelho).</p>
+<p class="exemple"><b>Exemplo:</b> mostrar a zona de movimento de um herói quando ele é tocado.</p>
+</div>
+<div class="fiche"><h3>Esconder as casas</h3>
+<div class="schema"><b>Entrada:</b> Nome da zona (opcional)</div>
+<p>Apaga as casas coloridas (todas, ou uma zona com nome).</p>
+<p class="exemple"><b>Exemplo:</b> esconder a zona quando o herói chegou.</p>
+</div>
+<div class="fiche"><h3>Se a casa for alcançável</h3>
+<div class="schema"><b>Entradas:</b> Coluna, Linha, Nome da zona (opcional) &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso</div>
+<p>Verdadeiro se a casa (coluna, linha) é uma das casas mostradas. Por padrão: a casa que o dedo toca. Falso caso contrário.</p>
+<p class="exemple"><b>Exemplo:</b> recusar um movimento longe demais com “longe demais!”.</p>
+</div>
+<div class="fiche"><h3>Dar uma ficha de unidade</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Pontos de vida, Ataque, Defesa, Movimento (passos), Alcance de ataque (casas), Outras estatísticas (ex. munitions = 3, armure = 2)</div>
+<p>Dá ao objeto sua ficha: vida, ataque, defesa, movimento e alcance (variáveis de objeto “vie”, “attaque”, “defense”, “mouvement”, “portee”). Podem ser lidas em qualquer lugar com uma fórmula, por exemplo =heroi.mouvement para os passos das casas alcançáveis. Coloque este nó depois de “Ao Iniciar” de cada unidade, ou em um prefab de unidade reutilizável.</p>
+<p class="exemple"><b>Exemplo:</b> criar um arqueiro: vida 8, ataque 4, defesa 0, movimento 4, alcance 3.</p>
+</div>
+<div class="fiche"><h3>Atacar</h3>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Poder do ataque (%), Contar a defesa do terreno do alvo, Sempre pelo menos 1 de dano, Destruir o alvo quando a vida acabar, Cálculo de dano livre (ex. attaquant.attaque * 2 - cible.armure); vazio = cálculo normal, Bônus pelas tags do alvo (ex. cavalaria = 150, leve = 120: % do dano), Bônus pelas tags do atacante (ex. lança = 130), Estatística gasta a cada ataque (ex. munição: sem ataque em 0), Perfuração: % da defesa ignorado (0 = nenhum), Contra-ataque: % do ataque do alvo devolvido se sobreviver e o atacante estiver ao seu alcance (0 = nenhum), Bônus de altura: % de dano por nível de diferença (ex. 15; acima = mais, abaixo = menos), Guarda: tag dos aliados vizinhos que reforçam a defesa do alvo (ex. lança), Guarda: defesa ganha por aliado vizinho &nbsp;→&nbsp; <b>Saídas:</b> Ainda vivo / Sem vida / Atacante destruído (contra-ataque)</div>
+<p>O objeto A ataca o objeto B: dano = ataque de A × potência × bônus − defesa de B − defesa do terreno de B. Saídas “Ainda vivo” e “Sem vida” (o alvo é destruído se a caixa estiver marcada), e “Atacante destruído” se um contra-ataque o mata. Os dois objetos precisam de uma ficha de unidade. As regras “regle: lança &gt; cavalaria = 150” de donnees.txt se aplicam sozinhas. No avançado: bônus por tags (“cavalaria = 150”), PERFURAÇÃO (porcentagem da defesa ignorada, para uma lança ou besta), CONTRA-ATAQUE (porcentagem do ataque do alvo devolvida se sobreviver e o atacante estiver ao seu alcance), BÔNUS DE ALTURA (porcentagem de dano por nível de diferença: quem está mais alto bate mais forte), GUARDA (cada aliado vizinho com a tag escolhida soma defesa ao alvo: uma parede de escudos), um cálculo livre e uma estatística gasta a cada ataque (munição).</p>
+<p class="exemple"><b>Exemplo:</b> a lança (perfuração 40) contra a cavalaria pesada; o arqueiro na colina (altura +15 %).</p>
+</div>
+<div class="fiche"><h3>Aplicar dados (unidade, arma)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Nome em donnees.txt (ex. Cavaleiro) &nbsp;→&nbsp; <b>Saídas:</b> Encontrado / Não encontrado</div>
+<p>Dá ao objeto A todos os valores de uma unidade ou arma escritos no arquivo donnees.txt (Assets → Diálogos, ou assets_ludexa/Textes/donnees.txt): vida, ataque, defesa, movimento, alcance, preço… e suas tags. Uma linha basta: “unite Cavaleiro: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=cavalaria pesado”. Reequilibra-se o jogo editando o arquivo, sem mexer nos nós. Saídas “Encontrado” / “Não encontrado”. O arquivo também pode conter “arme Espada: attaque=5”, “etat Veneno: duree=3, degats=2”, “regle: lança &gt; cavalaria = 150” (um atacante com tag lança causa 150 % num alvo com tag cavalaria, aplicado automaticamente por “Atacar”) e as alturas das casas.</p>
+<p class="exemple"><b>Exemplo:</b> no início do jogo, para cada herói: Aplicar dados “Cavaleiro”.</p>
+</div>
+<div class="fiche"><h3>Definir a altura das casas</h3>
+<div class="schema"><b>Entradas:</b> Coluna inicial, Linha inicial, Número de colunas, Número de linhas, Altura (0 = plano)</div>
+<p>Dá uma altura (um nível: 0 = plano, 1, 2, 3…) a um retângulo de casas da grade: coluna e linha iniciais, número de colunas e linhas. As alturas dão o bônus de altura de “Atacar” e bloqueiam a visão na névoa de guerra (uma colina esconde o que está atrás). Também podem ser escritas em donnees.txt (“hauteur 3,4 = 2” ou um bloco “hauteurs:” com um dígito por casa). Leia-as com a fórmula hauteur(coluna, linha) ou com os nós verdes “Altura da casa tocada” / “Altura da casa sob um objeto”.</p>
+<p class="exemple"><b>Exemplo:</b> uma colina de 3 x 2 casas na altura 2, para o arqueiro que ficar nela atacar mais forte.</p>
+</div>
+<div class="fiche"><h3>Dar um estado (veneno, lento…)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Nome do estado (ex. Veneno; em donnees.txt), Duração em turnos (vazio = a de donnees.txt), Dano a cada turno (vazio = donnees.txt), Estatística alterada (ex. mouvement; vazio = donnees.txt), Mudança desta estatística (ex. -2)</div>
+<p>Dá um estado à unidade por um número de TURNOS: veneno (dano a cada turno), lento (o movimento cai), abençoado (o ataque sobe)… Tudo pode ser escrito em donnees.txt (“etat Veneno: duree=3, degats=2”, “etat Lento: duree=2, stat=mouvement, delta=-2”): então basta o nome do estado. O dano cai no início de cada turno da equipe da unidade e depois o estado perde um turno; no fim, a estatística alterada volta ao normal. Dar o mesmo estado de novo o prolonga em vez de dobrá-lo. A unidade guarda uma estatística “etat_&lt;nome&gt;” (turnos restantes), legível numa fórmula. Precisa de “Passar ao próximo turno”.</p>
+<p class="exemple"><b>Exemplo:</b> uma flecha envenenada: Atacar → ainda vivo → dar o estado “Veneno” ao alvo.</p>
+</div>
+<div class="fiche"><h3>Remover um estado</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Nome do estado (vazio = todos)</div>
+<p>Remove um estado da unidade (pelo nome), ou todos se o nome estiver vazio. A estatística alterada pelo estado volta na hora ao valor anterior.</p>
+<p class="exemple"><b>Exemplo:</b> um sacerdote que cura o veneno de um aliado.</p>
+</div>
+<div class="fiche"><h3>Se a unidade tem o estado…</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Nome do estado (vazio = todos) &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso</div>
+<p>Testa se a unidade tem um estado (ou qualquer um se o nome estiver vazio). Saídas “Verdadeiro” / “Falso”.</p>
+<p class="exemple"><b>Exemplo:</b> não poder se mover se a unidade estiver “Congelada”.</p>
+</div>
+<div class="fiche"><h3>Efeito de área ao redor de um objeto</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Efeito, Força (dano ou cura), Raio em casas, Tags afetadas (vazio = todos), Nome do estado (se o efeito dá um estado), Queda por casa de distância (% da força), Forma, Também atinge o objeto no centro</div>
+<p>Atinge de uma vez todos os objetos ao redor do objeto A (no centro): dano, cura ou um estado. Ajustes: a força, o raio em casas, as tags afetadas (vazio = todos), a forma (losango ou quadrado com diagonais), a queda de força por casa de distância (explosão: quanto mais longe, menos dano) e se o objeto do centro também é atingido. O dano ignora a defesa. Uma bola de fogo, uma cura em grupo, um grito que assusta. Para contar vítimas numa condição use as fórmulas compter("tag") e voisins(objeto, "tag", casas).</p>
+<p class="exemple"><b>Exemplo:</b> uma bola de fogo: raio 2, força 6, queda de 30 % por casa, nas unidades “inimigo”.</p>
+</div>
+<div class="fiche"><h3>Ganhar experiência</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Experiência ganha, Experiência para o nível 2 (x nível depois), Ganhos por nível (ex. vie=2, attaque=1) &nbsp;→&nbsp; <b>Saídas:</b> Subiu de nível / Nada a cancelar</div>
+<p>Dá experiência à unidade. Ao atingir o limite (limite × nível atual), a unidade sobe de nível, a experiência sobrando é guardada e os ganhos são somados (“vie=2, attaque=1”; a vida máxima sobe junto com a vida). A unidade guarda as estatísticas “xp” e “niveau” (1 no início). Saídas “Subiu de nível” / “Sem subir de nível”: uma fanfarra ou mensagem ao subir.</p>
+<p class="exemple"><b>Exemplo:</b> um herói que ganha 30 de experiência por cada inimigo derrotado.</p>
+</div>
+<div class="fiche"><h3>Memorizar a posição</h3>
+<div class="schema"><b>Entrada:</b> Objeto</div>
+<p>Memoriza a posição atual da unidade, antes de um movimento. Com “Cancelar o movimento”, o jogador pode voltar atrás (como em Advance Wars ao tocar “Cancelar” antes de agir).</p>
+<p class="exemple"><b>Exemplo:</b> logo antes de “Ir para a casa”: Memorizar a posição.</p>
+</div>
+<div class="fiche"><h3>Cancelar o movimento</h3>
+<div class="schema"><b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saídas:</b> Cancelado / Nada a cancelar</div>
+<p>Devolve a unidade à posição memorizada por “Memorizar a posição”, apaga a marca de “já jogou” e zera suas estatísticas “bouge” e “agi”. Saídas “Cancelado” / “Nada a cancelar”.</p>
+<p class="exemple"><b>Exemplo:</b> um botão “Cancelar” no menu de ação da unidade.</p>
+</div>
+<div class="fiche"><h3>Jogar como um computador (IA)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Tags dos inimigos (ex. jogador), Estilo de jogo, Velocidade do movimento, Outras tags que bloqueiam o caminho (ex. seus aliados) &nbsp;→&nbsp; <b>Saídas:</b> Chegou / Nenhum alvo</div>
+<p>Faz uma unidade jogar sozinha, como um computador. Ela olha aonde pode ir (movimento, paredes, terrenos, unidades que bloqueiam), procura os inimigos (suas tags) e escolhe a melhor casa de onde atacar conforme seu ESTILO: agressivo (o máximo de dano, acabar um alvo primeiro), prudente (evita o contra-ataque) ou defensivo (gosta de casas de alta defesa). Ninguém ao alcance: ela se aproxima do inimigo mais próximo. Ao chegar, sai “Chegou”: o objeto envolvido é o alvo escolhido e a estatística “cible_ia” da unidade vale 1 (pode atacar) ou 0 (só se aproximou). Usa o movimento, o alcance (e “portee_min”) e a ficha da unidade. Saída “Sem inimigos” se não houver mais.</p>
+<p class="exemple"><b>Exemplo:</b> turno dos monstros: para cada monstro, Jogar como um computador (inimigos = jogador) → ao chegar, se cible_ia = 1, Atacar.</p>
+</div>
+<div class="fiche"><h3>Atualizar a névoa de guerra</h3>
+<div class="schema"><b>Entradas:</b> Tags da equipe que vê (ex. jogador), Tags dos inimigos a esconder fora de vista (ex. inimigo), Visão padrão em casas (senão a estatística « vision » da unidade), Escuridão das casas desconhecidas (0 a 100), Lembrar as casas já vistas</div>
+<p>Calcula o que a equipe vê e cobre o resto do mapa com um véu escuro: as unidades da equipe (tags) veem ao redor até sua estatística “vision” em casas (senão a visão padrão do nó). Uma parede do terreno, um terreno com a propriedade “bloque_vue = oui” (floresta densa) ou uma casa mais alta bloqueiam a visão. As casas já vistas ficam meio escuras (memória, opcional). As unidades com tags inimigas fora de vista são escondidas. Reexecute após cada movimento ou no início de um turno. A fórmula vue(coluna, linha) vale 1 se a casa é vista. “Remover a névoa de guerra” deixa tudo visível.</p>
+<p class="exemple"><b>Exemplo:</b> no início de cada turno do jogador: Atualizar a névoa (equipe jogador, inimigos inimigo, visão 3).</p>
+</div>
+<div class="fiche"><h3>Remover a névoa de guerra</h3>
+<p>Remove a névoa de guerra: todo o mapa fica visível de novo e as unidades escondidas reaparecem.</p>
+<p class="exemple"><b>Exemplo:</b> no fim do jogo, para mostrar todo o mapa.</p>
+</div>
+<div class="fiche"><h3>Dar vida ao objeto</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Pontos de vida</div>
+<p>Dá pontos de vida ao objeto escolhido (variável de objeto “vie”, e “vie_max” para o máximo). Leia em qualquer lugar com uma fórmula, por exemplo =monstro.vie, para escrever em um texto ou barra.</p>
+<p class="exemple"><b>Exemplo:</b> dar 10 pontos de vida a um monstro no início.</p>
+</div>
+<div class="fiche"><h3>Causar dano</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Dano, Destruir o objeto quando a vida acabar, Subtrair a defesa do terreno onde está &nbsp;→&nbsp; <b>Saídas:</b> Ainda vivo / Sem vida</div>
+<p>Tira pontos de vida do objeto (nunca abaixo de 0). Duas saídas: “Ainda vivo” e “Sem vida” (o objeto é destruído se a caixa estiver marcada; “o objeto envolvido” continua sendo o atingido).</p>
+<p class="exemple"><b>Exemplo:</b> um herói bate em um monstro: 3 de dano e depois uma mensagem conforme o resultado.</p>
+</div>
+<div class="fiche"><h3>Curar</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Vida devolvida</div>
+<p>Devolve pontos de vida ao objeto, sem passar do máximo.</p>
+<p class="exemple"><b>Exemplo:</b> uma poção que devolve 5 pontos de vida ao herói.</p>
+</div>
+<div class="fiche"><h3>Mudar uma estatística</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Nome da estatística (ex. munição), O que fazer, Quanto</div>
+<p>Muda uma estatística que você inventou para um objeto (munição, armadura, mana, combustível…): somar, subtrair ou definir um valor. Se ainda não existe, é criada com 0. Depois dá para ler em qualquer lugar: =arqueiro.municao.</p>
+<p class="exemple"><b>Exemplo:</b> Depois de um tiro: Mudar uma estatística → objeto “arqueiro”, estatística “municao”, Subtrair 1.</p>
+</div>
+<div class="fiche"><h3>Se a estatística…</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Nome da estatística (ex. munição), Comparação, Valor &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso</div>
+<p>Compara uma estatística de um objeto com um valor e segue a saída “verdadeiro” ou “falso”: por exemplo “municao é maior que 0”. Uma estatística que não existe vale 0.</p>
+<p class="exemple"><b>Exemplo:</b> Antes de atirar: Se a estatística “municao” do arqueiro é maior que 0 → atirar; senão → mostrar “Sem flechas”.</p>
+</div>
+<div class="fiche"><h3>Escolher um alvo</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Tags dos alvos possíveis (separadas por vírgula), Qual alvo escolher?, Alcance em casas (0 = sem limite; ex. =monstro.portee), Alcance mínimo (0 = nenhum), Forma do alcance, Minhas posições (coluna,linha; ex. 2,1 ; -2,1), Estatística (para as regras «estatística», ex. defense), Alcance em pixels, em círculo (0 = usar o alcance em casas) &nbsp;→&nbsp; <b>Saídas:</b> Alvo encontrado / Nenhum alvo</div>
+<p>O objeto A procura, entre os objetos com uma das tags pedidas, os que estão DENTRO DO SEU ALCANCE (mesmas formas de “Mostrar casas alcançáveis”) e escolhe um: o mais próximo, o que tem menos ou mais vida, ou o menor / maior valor de uma estatística. Saída “Alvo encontrado”: ele se torna “o objeto envolvido” (para Atacar, Ir até…). Saída “Nenhum alvo”: ninguém ao alcance. Perfeito para a inteligência de um monstro ou torre.</p>
+<p class="exemple"><b>Exemplo:</b> um monstro: “Escolher um alvo” (tag “heroi”, a mais próxima), depois “Atacar” em “Alvo encontrado”.</p>
+</div>
 <div class="fiche"><h3>Preencher a grade</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Colunas, Linhas, Objetos modelo (nomes separados por vírgulas)</div>
 <p>Divide o objeto A (o tabuleiro) em colunas e linhas e coloca em cada casa uma cópia de um objeto modelo sorteado (pelo menos 3 modelos, nomes separados por vírgulas). Nunca há alinhamento no início, e as peças caem de cima. Use antes de “Jogar na grade (alinhar 3)”.</p>
@@ -719,7 +921,95 @@
 <p class="exemple"><b>Exemplo:</b> embaralhar as cartas de um jogo da memória no início, ou os copos de um jogo de copinhos.</p>
 </div>
 </div>
-<h2 id="c10-transições">Transições</h2>
+<h2 id="c10-valores-fios-verdes">Valores (fios verdes)</h2>
+<div class="method">
+<div class="fiche"><h3>Altura da casa tocada</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: a altura da casa que o dedo toca (0 se nada estiver definido). Conecte com 🔗 a um ajuste, por exemplo num “Se…”.</p>
+<p class="exemple"><b>Exemplo:</b> mostrar “Colina!” ao tocar uma casa de altura 2.</p>
+</div>
+<div class="fiche"><h3>Altura da casa sob um objeto</h3>
+<div class="schema"><b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: a altura da casa sob um objeto. Serve, por exemplo, para comparar a altura do atacante com a do alvo.</p>
+<p class="exemple"><b>Exemplo:</b> permitir o ataque à distância só de uma casa mais alta que o alvo.</p>
+</div>
+<div class="fiche"><h3>Número aleatório</h3>
+<div class="schema"><b>Entradas:</b> De, Até &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): dá um número aleatório entre “De” e “Até”, sorteado de novo a cada uso. Ligue-o a um ajuste com o botão 🔗 da janela de ajustes.</p>
+<p class="exemple"><b>Exemplo:</b> fazer uma moeda aparecer num X aleatório entre 0 e 800.</p>
+</div>
+<div class="fiche"><h3>Valor de um objeto</h3>
+<div class="schema"><b>Entradas:</b> Objeto, O quê &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): dá um valor do objeto escolhido durante o jogo: sua posição x ou y, largura, rotação, opacidade…</p>
+<p class="exemple"><b>Exemplo:</b> colocar uma moeda na mesma altura do jogador (Y ← valor de um objeto: player, y).</p>
+</div>
+<div class="fiche"><h3>Valor de uma variável</h3>
+<div class="schema"><b>Entrada:</b> Variável &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): dá o valor atual de uma variável (pontuação, vidas…) durante o jogo.</p>
+<p class="exemple"><b>Exemplo:</b> mostrar a pontuação num texto (Texto ← valor de uma variável: score).</p>
+</div>
+<div class="fiche"><h3>Cálculo</h3>
+<div class="schema"><b>Entradas:</b> A, Operação, B &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): calcula A + B, A − B, A × B ou A ÷ B. A e B podem ser números, ou receber por sua vez um fio verde (cálculos em cadeia).</p>
+<p class="exemple"><b>Exemplo:</b> dar o dobro de pontos (Valor ← cálculo: score × 2).</p>
+</div>
+<div class="fiche"><h3>Coluna tocada</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): dá a coluna da casa que o dedo toca (0 = a primeira à esquerda). Ligue-o a um ajuste com o botão 🔗.</p>
+<p class="exemple"><b>Exemplo:</b> saber qual coluna foi tocada para colocar uma torre.</p>
+</div>
+<div class="fiche"><h3>Linha tocada</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): dá a linha da casa que o dedo toca (0 = a primeira no alto). Ligue-o a um ajuste com o botão 🔗.</p>
+<p class="exemple"><b>Exemplo:</b> saber qual linha foi tocada para colocar um edifício.</p>
+</div>
+<div class="fiche"><h3>Coluna de um objeto</h3>
+<div class="schema"><b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): dá a coluna da casa onde está o objeto escolhido (0 = a primeira à esquerda).</p>
+<p class="exemple"><b>Exemplo:</b> saber em que coluna está o herói.</p>
+</div>
+<div class="fiche"><h3>Linha de um objeto</h3>
+<div class="schema"><b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): dá a linha da casa onde está o objeto escolhido (0 = a primeira no alto).</p>
+<p class="exemple"><b>Exemplo:</b> saber em que linha está o herói.</p>
+</div>
+<div class="fiche"><h3>Número do turno</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: o número do turno atual (1, 2, 3…), ligue-o com o botão 🔗.</p>
+<p class="exemple"><b>Exemplo:</b> mostrar “Turno 3” em um texto.</p>
+</div>
+<div class="fiche"><h3>Passos para chegar à casa tocada</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: o número de passos para chegar à casa tocada (-1 se estiver fora da zona). Útil para contar os passos restantes.</p>
+<p class="exemple"><b>Exemplo:</b> passos restantes = passos da unidade - este número.</p>
+</div>
+<div class="fiche"><h3>Terreno da casa tocada</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: o nome do terreno da casa tocada (“Floresta”, “Água”…), ou nada se não houver. Os terrenos são definidos no editor de tiles.</p>
+<p class="exemple"><b>Exemplo:</b> mostrar “Floresta” ao tocar uma casa de floresta.</p>
+</div>
+<div class="fiche"><h3>Custo do terreno da casa tocada</h3>
+<div class="schema"><b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: o custo em passos do terreno da casa tocada (1 se não houver).</p>
+<p class="exemple"><b>Exemplo:</b> dizer “isto custa 2 passos” antes de mover.</p>
+</div>
+<div class="fiche"><h3>Terreno sob um objeto</h3>
+<div class="schema"><b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: o nome do terreno em que o objeto escolhido está.</p>
+<p class="exemple"><b>Exemplo:</b> saber se o herói está na água ou na estrada.</p>
+</div>
+<div class="fiche"><h3>Defesa do terreno sob um objeto</h3>
+<div class="schema"><b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde: o bônus de defesa do terreno sob o objeto escolhido.</p>
+<p class="exemple"><b>Exemplo:</b> mostrar o bônus de defesa de uma unidade.</p>
+</div>
+<div class="fiche"><h3>Distância entre 2 objetos</h3>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
+<p>Nó verde (valor): dá a distância (em pixels) entre o centro de dois objetos durante o jogo.</p>
+<p class="exemple"><b>Exemplo:</b> fazer a tela tremer mais quando o inimigo está perto.</p>
+</div>
+</div>
+<h2 id="c11-transições">Transições</h2>
 <div class="method">
 <div class="fiche"><h3>Transição de tela (círculo, estrela…)</h3>
 <div class="schema"><b>Entradas:</b> Forma, Sentido, Cor, Duração (segundos), Centro: objeto (nome; círculo, estrela, losango, coração, herói) &nbsp;→&nbsp; <b>Saídas:</b> Próximo / Imediato</div>
@@ -732,7 +1022,7 @@
 <p class="exemple"><b>Exemplo:</b> toca-se a porta: ir para a cena “Casa” com um círculo que se fecha sobre o herói.</p>
 </div>
 </div>
-<h2 id="c11-animações">Animações</h2>
+<h2 id="c12-animações">Animações</h2>
 <div class="method">
 <div class="fiche"><h3>Reproduzir animação</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Animação, Velocidade (quadros/segundo), Em loop (sim / não)</div>
@@ -760,7 +1050,7 @@
 <p class="exemple"><b>Exemplo:</b> correr mais rápido = animação mais rápida.</p>
 </div>
 </div>
-<h2 id="c12-áudio">Áudio</h2>
+<h2 id="c13-áudio">Áudio</h2>
 <div class="method">
 <div class="fiche"><h3>Tocar som</h3>
 <div class="schema"><b>Entradas:</b> Arquivo de som, Volume (%, 100 = máximo)</div>
@@ -777,7 +1067,7 @@
 <p class="exemple"><b>Exemplo:</b> silêncio na tela de Game Over.</p>
 </div>
 </div>
-<h2 id="c13-história-e-diálogos">História e diálogos</h2>
+<h2 id="c14-história-e-diálogos">História e diálogos</h2>
 <div class="method">
 <div class="fiche"><h3>Dizer uma frase</h3>
 <div class="schema"><b>Entradas:</b> Quem fala, Emoção, A frase, Lugar na tela, Entrada do personagem, Efeito, Som ou voz, A continuação vem &nbsp;→&nbsp; <b>Saída:</b> Depois</div>
@@ -859,34 +1149,6 @@
 <p class="exemple"><b>Exemplo:</b> “Como você se chama?” → variável prenom → “Dizer uma frase” “Prazer, {prenom}!”.</p>
 </div>
 </div>
-<h2 id="c14-valores-fios-verdes">Valores (fios verdes)</h2>
-<div class="method">
-<div class="fiche"><h3>Número aleatório</h3>
-<div class="schema"><b>Entradas:</b> De, Até &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
-<p>Nó verde (valor): dá um número aleatório entre “De” e “Até”, sorteado de novo a cada uso. Ligue-o a um ajuste com o botão 🔗 da janela de ajustes.</p>
-<p class="exemple"><b>Exemplo:</b> fazer uma moeda aparecer num X aleatório entre 0 e 800.</p>
-</div>
-<div class="fiche"><h3>Valor de um objeto</h3>
-<div class="schema"><b>Entradas:</b> Objeto, O quê &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
-<p>Nó verde (valor): dá um valor do objeto escolhido durante o jogo: sua posição x ou y, largura, rotação, opacidade…</p>
-<p class="exemple"><b>Exemplo:</b> colocar uma moeda na mesma altura do jogador (Y ← valor de um objeto: player, y).</p>
-</div>
-<div class="fiche"><h3>Valor de uma variável</h3>
-<div class="schema"><b>Entrada:</b> Variável &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
-<p>Nó verde (valor): dá o valor atual de uma variável (pontuação, vidas…) durante o jogo.</p>
-<p class="exemple"><b>Exemplo:</b> mostrar a pontuação num texto (Texto ← valor de uma variável: score).</p>
-</div>
-<div class="fiche"><h3>Cálculo</h3>
-<div class="schema"><b>Entradas:</b> A, Operação, B &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
-<p>Nó verde (valor): calcula A + B, A − B, A × B ou A ÷ B. A e B podem ser números, ou receber por sua vez um fio verde (cálculos em cadeia).</p>
-<p class="exemple"><b>Exemplo:</b> dar o dobro de pontos (Valor ← cálculo: score × 2).</p>
-</div>
-<div class="fiche"><h3>Distância entre 2 objetos</h3>
-<div class="schema"><b>Entradas:</b> Objeto A, Objeto B &nbsp;→&nbsp; <b>Saída:</b> nenhuma (fim do script)</div>
-<p>Nó verde (valor): dá a distância (em pixels) entre o centro de dois objetos durante o jogo.</p>
-<p class="exemple"><b>Exemplo:</b> fazer a tela tremer mais quando o inimigo está perto.</p>
-</div>
-</div>
 <h2 id="c15-filtros-de-tela">Filtros de tela</h2>
 <div class="method">
 <div class="fiche"><h3>Filtro de tela</h3>
@@ -898,6 +1160,64 @@
 <div class="schema"><b>Entrada:</b> Desaparecimento (segundos) &nbsp;→&nbsp; <b>Saídas:</b> Depois / Quando acabar</div>
 <p>Faz o filtro de tela atual desaparecer suavemente. “Depois” roda na hora, “Quando acabar” quando o filtro some.</p>
 <p class="exemple"><b>Exemplo:</b> o herói sai da caverna: apagar a lanterna em 1 segundo.</p>
+</div>
+</div>
+<h2 id="c16-física">Física</h2>
+<div class="method">
+<div class="fiche"><h3>Ajustar o mundo físico</h3>
+<div class="schema"><b>Entradas:</b> Gravidade para baixo (%, 100 = normal, 0 = espaço, negativo = para cima), Gravidade para a direita (%, negativo = esquerda: um vento constante), Precisão, Objetos parados dormem (mais leve para o celular)</div>
+<p>Ajusta o mundo físico da cena: a gravidade para baixo (100 % = normal, 0 = espaço, negativo = os objetos caem para cima), uma gravidade lateral (um vento constante), a precisão do cálculo e se os objetos parados dormem. Use uma vez, sob “Ao iniciar”. Só afeta objetos com o comportamento “Física realista” (⚙ Comportamento).</p>
+<p class="exemple"><b>Exemplo:</b> uma fase na Lua: gravidade 20 %.</p>
+</div>
+<div class="fiche"><h3>Ajustar um objeto físico</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Tipo de objeto, Material (peso, quique e aderência de uma vez), Forma de contato, Peso (%, 100 = normal, vazio = sem mudança), Quique (0 a 100, vazio = sem mudança), Aderência (0 = gelo, 100 = gruda, vazio = sem mudança), Gravidade do objeto (%, 0 = flutua, vazio = sem mudança), Freio do ar (0 a 20, vazio = sem mudança), Velocidade máxima (pixels por segundo, 0 = sem limite, vazio = sem mudança), Nunca gira, Fantasma (se atravessa), Objeto muito rápido (não atravessa uma parede fina), Camada do objeto (1 a 8, vazio = sem mudança)</div>
+<p>Muda os ajustes de um objeto físico durante o jogo: o tipo (normal, fixo, guiado ou sem física), material (madeira, pedra, metal, borracha, bola, gelo, pena), forma, peso, quique, aderência, gravidade, freio do ar, velocidade máxima, se gira, se é fantasma ou muito rápido, a camada. O que ficar vazio ou em “(não mudar)” continua igual. Num objeto sem física, escolher um tipo dá física a ele.</p>
+<p class="exemple"><b>Exemplo:</b> uma bola que vira borracha (material “Borracha”) quando se pega um bônus.</p>
+</div>
+<div class="fiche"><h3>Empurrar (força física)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Empurrão para a direita (negativo = esquerda), Empurrão para baixo (negativo = cima), Como, Onde empurrar (fora do centro, o objeto gira), O peso conta?</div>
+<p>Empurra um objeto físico com uma força. “Empurrão contínuo”: repita a cada imagem (sob “A cada imagem” ou “Dedo pressionado”), o objeto acelera enquanto você empurra (um foguete, um vento, um ventilador). “Uma pancada”: acrescenta velocidade na hora (um pulo, um chute). Por padrão o efeito é igual em objeto leve ou pesado; nos ajustes avançados o peso pode contar e dá para empurrar fora do centro para girar. Valores: pixels por segundo (por segundo ao quadrado no contínuo).</p>
+<p class="exemple"><b>Exemplo:</b> um jogo de foguete: “Dedo pressionado” → empurrar para cima (-2500) continuamente.</p>
+</div>
+<div class="fiche"><h3>Ajustar a velocidade (física)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Velocidade para a direita (pixels por segundo, vazio = sem mudança), Velocidade para baixo (negativo = cima, vazio = sem mudança), Velocidade de giro (graus por segundo, vazio = sem mudança), Como, Parar tudo de uma vez?</div>
+<p>Ajusta a velocidade de um objeto físico, em pixels por segundo: para a direita, para baixo (negativo = cima) e giro em graus por segundo. Campos vazios não mudam aquela velocidade. “Substituir” dá exatamente essa velocidade; “Somar” soma à atual. A opção “Parar tudo” zera todas as velocidades. Ótimo para um pulo (velocidade para baixo de -900), uma parada seca ou um personagem que anda em velocidade constante.</p>
+<p class="exemple"><b>Exemplo:</b> um pulo de plataforma: velocidade para baixo = -900, só se “Se o objeto físico…” disser que o objeto está apoiado.</p>
+</div>
+<div class="fiche"><h3>Lançar (ângulo e velocidade)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Ângulo (graus: 0 = direita, -90 = cima, 90 = baixo, 180 = esquerda), Velocidade inicial (pixels por segundo), Como</div>
+<p>Lança um objeto físico numa direção: você dá o ângulo (0 = direita, -90 = cima, 90 = baixo, 180 = esquerda) e a velocidade inicial. Depois a gravidade faz o resto: o objeto descreve uma curva. Ideal para um jogo de estilingue, um canhão, um arremesso de bola. O ângulo pode ser uma fórmula (por exemplo o ângulo entre o objeto e o dedo).</p>
+<p class="exemple"><b>Exemplo:</b> um estilingue: ao soltar o dedo, lançar o pássaro no ângulo do elástico.</p>
+</div>
+<div class="fiche"><h3>Explosão (sopro físico)</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Centro: posição X (vazio = no centro do objeto), Centro: posição Y (vazio = no centro do objeto), Raio do sopro (pixels), Força no centro (velocidade dada, pixels por segundo), Só os objetos com esta tag (vazio = todos)</div>
+<p>Faz soprar todos os objetos físicos em volta de um ponto: quanto mais perto do centro, mais forte são arremessados, e começam a girar. O centro é o meio do objeto escolhido, ou um ponto (x, y) se você escrever um. Você ajusta o raio e a força (a velocidade dada no centro). Opção: só os objetos de certa tag. O nó não destrói nada: combine com “Efeito de partículas” e “Destruir objeto” para uma explosão de verdade.</p>
+<p class="exemple"><b>Exemplo:</b> uma bomba: ao tocar o chão, explosão de raio 500 e força 1800, depois destruir a bomba.</p>
+</div>
+<div class="fiche"><h3>Ligar dois objetos</h3>
+<div class="schema"><b>Entradas:</b> Objeto A, Objeto B, Tipo de ligação, Nome da ligação (para ajustar ou cortar depois), Ponto do objeto A onde a ligação é feita, Ponto do objeto B (haste, mola, corda), Deslocar o ponto para a direita (pixels), Deslocar o ponto para baixo (pixels), Os dois objetos colidem?, Comprimento (pixels, 0 = a distância inicial), Rigidez da mola ou da suspensão (1 = macio, 10 = firme), Amortecimento (0 a 100: mais alto, menos quica), Limite inferior (graus na dobradiça, pixels na corrediça; vazio = nenhum), Limite superior (graus ou pixels; vazio = nenhum), Direção do trilho ou da suspensão (graus: 0 = horizontal, 90 = vertical; vazio = automático), Motor: velocidade (graus por segundo na dobradiça ou roda, pixels por segundo na corrediça; 0 = sem motor), Força do motor ou do freio (1 = fraca, 10 = normal, 100 = muito forte)</div>
+<p>Liga dois objetos para que se segurem ou se movam juntos, como na vida real. Tipo de ligação: dobradiça (gira em torno de um ponto: porta, pêndulo), haste rígida (distância fixa), mola (elástica, com rigidez), corda (comprimento máximo), corrediça (desliza num trilho, com limites e motor), solda (colados), roda com suspensão (carro: A = a carroceria, B = a roda, com motor), freio (vista de cima). O objeto B é opcional: sem B, o objeto A fica preso a um ponto fixo do cenário. Dê um nome à ligação para ajustá-la (“Ajustar uma ligação”) ou cortá-la (“Cortar uma ligação”) depois. Nos ajustes avançados: ponto de cada lado, limites, direção do trilho, motor, colisão entre os dois objetos. Os dois objetos precisam do comportamento “Física realista” (exceto um suporte fixo).</p>
+<p class="exemple"><b>Exemplo:</b> um pêndulo: A = a bola, B = um objeto fixo pequeno no alto, tipo “Dobradiça” ou “Haste rígida”; uma ponte: tábuas ligadas por dobradiças.</p>
+</div>
+<div class="fiche"><h3>Ajustar uma ligação</h3>
+<div class="schema"><b>Entradas:</b> Nome da ligação, Motor: velocidade (0 = parar o motor, vazio = sem mudança), Força do motor (vazio = sem mudança), Rigidez da mola ou suspensão (vazio = sem mudança), Novo comprimento (pixels, vazio = sem mudança), Novo limite inferior (vazio = sem mudança), Novo limite superior (vazio = sem mudança), Limites</div>
+<p>Muda uma ligação já criada por “Ligar dois objetos” (achada pelo nome): ligar, parar ou acelerar o motor, ajustar a força, a rigidez de uma mola ou suspensão, o comprimento de uma haste ou corda, os limites. Campos vazios ficam como antes. Exemplo: um carro cujo motor das rodas liga ao apertar um botão.</p>
+<p class="exemple"><b>Exemplo:</b> botão “Acelerar”: ajustar a ligação “roda_traseira” com motor = 720; ao soltar: motor = 0.</p>
+</div>
+<div class="fiche"><h3>Cortar uma ligação</h3>
+<div class="schema"><b>Entradas:</b> Nome da ligação a cortar, Ou: nome de um objeto cujas ligações são todas cortadas</div>
+<p>Corta uma ligação: escreva o nome dela, ou o nome de um objeto para cortar todas as ligações dele. Os objetos se separam e cada um cai para seu lado (uma ponte que desaba, uma corda cortada, uma cabine que se solta).</p>
+<p class="exemple"><b>Exemplo:</b> uma ponte armadilha: quando o herói toca a alavanca, cortar a ligação “tabua_3”.</p>
+</div>
+<div class="fiche"><h3>Agarrar com o dedo (física)</h3>
+<div class="schema"><b>Entradas:</b> Ação, Só os objetos com esta tag (vazio = todos), Maciez da pegada</div>
+<p>Permite agarrar um objeto físico com o dedo e arrastá-lo, como na vida real: o objeto segue o dedo com um pouco de elasticidade, empurra os outros e pode ficar preso. Coloque sob “Dedo pressionado” (ação “Agarrar e arrastar”): enquanto o dedo está apoiado, o objeto sob ele é arrastado; ao levantar, é solto sozinho (ou use a ação “Soltar”). Pode limitar a objetos de uma tag e ajustar a maciez da pegada.</p>
+<p class="exemple"><b>Exemplo:</b> um quebra-cabeça de caixas: o jogador move caixas com a ponta do dedo para construir uma torre.</p>
+</div>
+<div class="fiche"><h3>Se o objeto físico…</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Pergunta, Velocidade a partir da qual conta (pixels por segundo) &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso</div>
+<p>Faz uma pergunta sobre um objeto físico e segue a saída “verdadeiro” ou “falso”: está apoiado em algo (para permitir um pulo)?, toca algo?, toca algo por cima?, está em repouso (dormindo)?, move-se rápido?, cai?, sobe? Para “move-se rápido”, “cai” e “sobe” o limite em pixels por segundo se ajusta no avançado. Também dá para ler direto numa fórmula: objeto.vitesse, objeto.masse, objeto.vitesseRotation.</p>
+<p class="exemple"><b>Exemplo:</b> um pulo de plataforma: “Botão de pulo” → Se o objeto está apoiado em algo → velocidade para baixo = -900.</p>
 </div>
 </div>
 <div class="liens-bas">

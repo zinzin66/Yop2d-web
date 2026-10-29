@@ -85,6 +85,12 @@
       "exemple": "nível com 6480 pixels de largura: X mínimo 0, X máximo 6480, Y mínimo 0, Y máximo 1080, com “Fixar a câmera” no jogador."
     },
     {
+      "nom": "Rolar a câmera com o dedo",
+      "schema": "<b>Entradas:</b> Ativado (sim / não), Rolar para os lados (sim / não), Rolar para cima e para baixo (sim / não)",
+      "role": "Ativa (ou desativa) a rolagem da tela com o dedo: ao arrastar na cena, a câmera se move. Um simples toque continua sendo um toque (uma torre, um botão). Os botões do HUD nunca rolam. A câmera não sai dos limites definidos em “Limites da câmera”.",
+      "exemple": "Ao começar: Limites da câmera (0, 3840, 0, 1080) e depois Rolar a câmera com o dedo: o jogador arrasta um mapa de duas telas de largura."
+    },
+    {
       "nom": "Suavização da câmera",
       "schema": "<b>Entrada:</b> Velocidade de seguimento (0.01 a 1)",
       "role": "Ajusta a rapidez com que a câmera alcança o objeto seguido: 0.01 = bem suave, 1 = grudada no objeto.",
@@ -125,6 +131,18 @@
       "schema": "<b>Entradas:</b> Zoom (%, 100 = normal), Para, Duração (segundos)",
       "role": "Aumenta suavemente toda a tela do jogo (a cena, ou o cenário e os personagens de uma história) para o centro, o rosto, um lado, o alto ou embaixo. 100 = voltar ao normal; a caixa de diálogo e o HUD não se mexem.",
       "exemple": "zoom 140 no rosto por 2 segundos quando a Hana tem medo, depois zoom 100."
+    },
+    {
+      "nom": "Escuridão e clima de luz",
+      "schema": "<b>Entradas:</b> Cor da noite, Escuridão (%, 0 = pleno dia, 100 = quase preto total), Muda em (segundos: 30 = um pôr do sol)",
+      "role": "Escurece todo o jogo (sob os botões e a pontuação) com a cor que escolher. Escuridão 0 = pleno dia, 100 = preto total, exceto em volta das fontes de luz. O nível e a cor mudam suavemente: com 30 segundos vai-se do dia ao crepúsculo laranja e depois à noite azul, como um pôr do sol.",
+      "exemple": "um pôr do sol: “Escuridão e clima de luz” laranja, escuridão 40, em 6 segundos; “Esperar” 6 segundos; depois “Escuridão e clima de luz” azul-noite, escuridão 90, em 6 segundos."
+    },
+    {
+      "nom": "Ciclo de dia e noite",
+      "schema": "<b>Entradas:</b> Duração de um dia completo (segundos, 0 = parar), Começamos em…, Repetir sem fim (sim) ou um só dia (não)",
+      "role": "Faz todo o jogo passar do dia ao entardecer laranja, à noite azul, ao amanhecer e de novo ao dia, sozinho. Você escolhe a duração de um dia completo (30 a 120 segundos para um jogo vivo), o momento de início e se o ciclo se repete sem fim. Com o jogo em pausa o ciclo congela. Duração 0 = parar o ciclo (o céu fica como está). Um ajuste manual com “Escuridão e clima de luz” assume o controle. Suas luzes (“Fonte de luz (tocha, lanterna…)”) continuam acesas: veem-se melhor à noite.",
+      "exemple": "um mundo vivo: ao começar, “Ciclo de dia e noite” com 90 segundos, início “Pleno dia”, em loop."
     },
     {
       "nom": "Tremor da câmera",

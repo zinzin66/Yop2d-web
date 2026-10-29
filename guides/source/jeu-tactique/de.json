@@ -1,0 +1,198 @@
+{
+  "titre_page": "Wie macht man ein rundenbasiertes Taktikspiel in Yop2D? | Yop2D-Anleitung",
+  "description": "Mach in Yop2D ein Taktikspiel auf einem Raster, ohne Code: Runden, erreichbare blaue Felder, Gelände, Bewegung, Angriff und Leben mit Nodes.",
+  "h1": "Wie macht man ein Taktikspiel?",
+  "carte": [
+    "Ein Taktikspiel machen",
+    "Runden, blaue Felder, Gelände, Bewegung und Angriff auf einem Raster."
+  ],
+  "etapes": [
+    [
+      "Jeder Einheit ein Blatt geben",
+      "{{NoeudEventStart}} → {{definir_fiche}} (Leben, Angriff, Verteidigung, Bewegung, Reichweite)."
+    ],
+    [
+      "Den Zug des Spielers beginnen",
+      "{{tour_suivant}} (joueur, ennemi) startet das lokale Ereignis \"tour_joueur\"."
+    ],
+    [
+      "Zeigen, wohin der Held gehen kann",
+      "{{NoeudEventClicObjet}} → {{si_tour_de}} → {{montrer_cases}}."
+    ],
+    [
+      "Den Helden laufen lassen",
+      "{{NoeudEventClicObjet}} (das Gelände) → {{si_case_accessible}} → {{chemin_vers_case}}."
+    ],
+    [
+      "Angreifen",
+      "{{NoeudEventClicObjet}} (das Monster) → {{si_case_accessible}} → {{attaquer}}."
+    ],
+    [
+      "Der Zug der Monster",
+      "\"tour_ennemi\" → {{chemin_vers_objet}} (neben den Helden) → {{attaquer}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "In einem **Taktik**spiel spielen die Spieler **abwechselnd** auf einem Raster: Du wählst eine Einheit, siehst die Felder, die sie erreichen kann, bewegst sie, dann greift sie an. Diese Anleitung baut das einfachste mögliche Spiel: **ein Held und ein Monster**. Alles ist schon im Beispiel **Tactics tutorial** fertig (Reiter **Beispiele** des Startbildschirms): Öffne sein Blueprint, jeder Schritt steckt in einem **farbigen Rahmen** mit einem kleinen **?**, das ihn erklärt."
+    ],
+    [
+      "besoin",
+      [
+        "eine Tile-Karte deiner Wahl (das Spielraster **ist** das Raster dieser Tile-Karte);",
+        "ein {{lang:obj_prefix_image}} namens **hero1** mit dem Tag **joueur** und ein weiteres namens **foe1** mit dem Tag **ennemi**;",
+        "eine {{lang:obj_prefix_zone}} namens **terrain**, die die ganze Karte bedeckt (sie berührt man, um ein Feld zu wählen);",
+        "eine Variable **etat** (Ganzzahl, lokal), um zu wissen, wo wir sind: 0 = einen Helden wählen, 1 = Held gewählt, 2 = Held bewegt."
+      ]
+    ],
+    [
+      "tip",
+      "Das **Gelände** (Wald, Sand, Berg …) stellst du im Tile-Editor im Teil **Gelände der Tiles** ein: Schrittkosten, blockiert oder nicht, Verteidigungsbonus. Der Berg versperrt den Weg, der Wald kostet 2 Schritte."
+    ],
+    [
+      "h2",
+      "Schritt 1: die Einheitenblätter"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge das Ereignis **[[NoeudEventStart]]** hinzu.",
+            "Füge **[[definir_fiche]]** für **hero1** hinzu: Leben `20`, Angriff `6`, Verteidigung `2`, Bewegung `4`, Reichweite `1`.",
+            "Füge ein zweites **[[definir_fiche]]** für **foe1** hinzu, mit eigenen Zahlen.",
+            "Verbinde die Nodes der Reihe nach und füge **[[tour_suivant]]** mit den Teams `joueur,ennemi` hinzu."
+          ]
+        ],
+        [
+          "tip",
+          "Das Blatt wird im Objekt gespeichert: Du kannst es überall mit einer Formel lesen, zum Beispiel `=hero1.vie`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 2: der Zug des Spielers"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge das Ereignis **[[NoeudEventPersonnalise]]** hinzu und schreibe den Namen `tour_joueur`. Es startet von selbst zu Beginn des Spielerzugs.",
+            "Setze **etat** mit **[[modifier_variable]]** auf `0`, dann **[[cacher_cases]]**, um die alten Felder zu löschen."
+          ]
+        ],
+        [
+          "p",
+          "Für jedes Team startet **[[tour_suivant]]** das lokale Ereignis \"tour_\" gefolgt vom Teamnamen: `tour_joueur`, dann `tour_ennemi`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 3: Held berühren, blaue Felder sehen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge **[[NoeudEventClicObjet]]** auf **hero1** hinzu.",
+            "Füge **[[si_tour_de]]** mit dem Team `joueur` hinzu, dann am Ausgang **{{lang:port_vrai}}** eine **[[condition]]** `etat < 2`.",
+            "Füge **[[modifier_variable]]** hinzu: **etat** = `1`.",
+            "Füge **[[montrer_cases]]** auf **hero1** hinzu: Zonentyp **Bewegung (Wände zählen)**, Schrittzahl `=hero1.mouvement`, Farbe blau, **Schrittzahl auf jedes Feld schreiben** = ja, **Diese Tags blockieren den Weg** = `joueur,ennemi`."
+          ]
+        ],
+        [
+          "tip",
+          "Die Zahlen auf den Feldern sind die nötigen **Schritte**. Waldfelder kosten 2: Der Held kommt weniger weit."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 4: blaues Feld berühren, der Held läuft"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge **[[NoeudEventClicObjet]]** auf **terrain** hinzu, dann eine **[[condition]]** `etat = 1`.",
+            "Füge **[[si_case_accessible]]** hinzu. Für Spalte und Zeile berührst du **🔗** und wählst die grünen Nodes **[[valeur_colonne_touchee]]** und **[[valeur_ligne_touchee]]**: keine Formel zu schreiben.",
+            "Am Ausgang **{{lang:port_vrai}}**: **[[modifier_variable]]** **etat** = `4` (der Held läuft), dann **[[chemin_vers_case]]** auf **hero1**, mit denselben grünen Nodes und **Diese Tags blockieren den Weg** = `joueur,ennemi`.",
+            "Rufe am Ausgang **{{lang:port_arrive}}** das lokale Ereignis `apres_deplacement` mit **[[appeler_evenement]]** auf."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 5: die Angriffszone, dann der Angriff"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Im lokalen Ereignis **apres_deplacement**: **[[cacher_cases]]**, **etat** = `2`, dann **[[montrer_cases]]** mit Typ **Angriff / Reichweite (über Wände hinweg)**, Schrittzahl `=hero1.portee`, Farbe rot, mit dem Zonennamen `attaque`.",
+            "Füge **[[NoeudEventClicObjet]]** auf **foe1** hinzu, eine **[[condition]]** `etat = 2` und **[[si_case_accessible]]** mit dem Zonennamen `attaque`.",
+            "Bei **{{lang:port_vrai}}**: **[[attaquer]]** (Objekt A = **hero1**, Objekt B = **foe1**). Der Schaden ist der Angriff minus die Verteidigung des Monsters minus die Verteidigung seines Geländes.",
+            "Ausgang **Noch am Leben**: seinen Lebenstext aktualisieren. Ausgang **Keine Leben mehr**: Das Monster wird zerstört, füge den Sieg hinzu."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 6: der Zug der Monster"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge das lokale Ereignis `tour_ennemi` hinzu.",
+            "Füge **[[chemin_vers_objet]]** auf **foe1** hinzu, Objekt B = **hero1**, **Anhalten** = **Auf einem Nachbarfeld, zentriert**, **Diese Tags blockieren den Weg** = `joueur,ennemi`.",
+            "Rufe am Ausgang **{{lang:port_arrive}}** ein lokales Ereignis auf, in dem **foe1** **hero1** **[[attaquer]]**.",
+            "Nach ein paar Sekunden (**[[attendre]]**): **[[chemin_arreter]]**, dann **[[tour_suivant]]**: Der Zug geht zurück an den Spieler."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Weiter gehen"
+    ],
+    [
+      "ul",
+      [
+        "**Mehrere Helden:** Füge **[[marquer_joue]]** und **[[si_a_joue]]** hinzu, damit ein Held nur einmal pro Zug spielt (das macht das Beispiel **Tactics demo**).",
+        "**Eine Lebensleiste:** Lies `=hero1.vie` und `=hero1.vie_max` in einem Text oder einem Fortschrittsbalken.",
+        "**Heilen:** **[[soigner]]** gibt Leben zurück, ohne das Maximum zu überschreiten.",
+        "**Ein Brettspiel:** **[[pion_une_case]]** bewegt eine Figur um ein Feld, schön zentriert (Knöpfe ◀ ▶ ▲ ▼)."
+      ]
+    ],
+    [
+      "h2",
+      "Wenn es nicht funktioniert"
+    ],
+    [
+      "ul",
+      [
+        "**Kein blaues Feld:** Der Held muss das in **[[si_tour_de]]** geschriebene Tag haben, und **[[tour_suivant]]** muss beim Start ausgeführt worden sein.",
+        "**Die Felder passen nicht zum Bild:** Das Raster ist das der ersten Tile-Karte der Szene. Ohne Tile-Karte sind die Felder 80 px groß.",
+        "**Der Held bewegt sich nicht:** Prüfe, ob das berührte Feld blau ist und **etat** in diesem Moment `1` ist.",
+        "**Zum Vergleichen** öffne das Beispiel **Tactics tutorial**: Jeder Teil des Blueprints steckt in einem Rahmen, der ihn erklärt."
+      ]
+    ]
+  ]
+}

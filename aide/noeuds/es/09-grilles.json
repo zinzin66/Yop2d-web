@@ -2,6 +2,167 @@
   "categorie": "Cuadrículas y puzles",
   "noeuds": [
     {
+      "nom": "Pasar al siguiente turno",
+      "schema": "<b>Entrada:</b> Equipos, en orden (tags separados por coma)",
+      "role": "Pasa el juego al siguiente equipo. Escribe los equipos en orden con sus tags (por ejemplo jugador,enemigo). La primera vez (por ejemplo tras «Al Iniciar») empieza por el primer equipo; cuando todos han jugado, el número de turno sube. Al empezar cada turno se ejecuta el evento local «tour_<equipo>» si existe (por ejemplo «tour_enemigo»).",
+      "exemple": "poner «Pasar al siguiente turno» en el botón «Fin del turno»."
+    },
+    {
+      "nom": "Si es el turno de…",
+      "schema": "<b>Entrada:</b> Equipo (tag) &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso",
+      "role": "Verdadero si es el turno del equipo escrito (su tag), Falso si no.",
+      "exemple": "dejar que el jugador toque sus unidades solo durante su turno."
+    },
+    {
+      "nom": "Marcar como ya jugado",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Recuerda que la unidad (objeto A) ya jugó en este turno. Todo se borra al empezar el turno siguiente.",
+      "exemple": "impedir que un héroe se mueva dos veces en el mismo turno."
+    },
+    {
+      "nom": "Si la unidad ya jugó",
+      "schema": "<b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso",
+      "role": "Verdadero si la unidad (objeto A) ya jugó en este turno, Falso si no.",
+      "exemple": "rechazar mover a un héroe que ya jugó."
+    },
+    {
+      "nom": "Mostrar casillas accesibles",
+      "schema": "<b>Entradas:</b> Objeto, Tipo de zona, Número de pasos (o alcance), Color de las casillas, Visibilidad de las casillas (0 = invisible, 100 = sólida), Marco alrededor de cada casilla, Escribir los pasos en cada casilla, Los muros bloquean (movimiento), Estos tags bloquean el paso (separados por comas), Terreno que cuesta más pasos (tag=coste, p. ej. bosque=2, agua=3), Nombre de la zona (opcional: para mostrar varias), Forma del alcance (ataque y salto), Alcance mínimo (0 = ninguno; 2 = sin las primeras casillas), Mis posiciones (columna,fila; p. ej. 2,1 ; -2,1 ; 0,3), Quitar la casilla donde está el objeto",
+      "role": "Colorea las casillas a las que puede ir (o atacar) el objeto elegido. Los muros bloquean, y puedes añadir tags que bloquean (otras unidades) y terrenos que cuestan más pasos (bosque=2). El color, la visibilidad, el marco y los números se pueden ajustar. «Nombre de la zona» permite mostrar varias a la vez (movimiento en azul, ataque en rojo).",
+      "exemple": "mostrar la zona de movimiento de un héroe al tocarlo."
+    },
+    {
+      "nom": "Ocultar las casillas",
+      "schema": "<b>Entrada:</b> Nombre de la zona (opcional)",
+      "role": "Borra las casillas coloreadas (todas, o una zona con nombre).",
+      "exemple": "ocultar la zona cuando el héroe ha llegado."
+    },
+    {
+      "nom": "Si la casilla es accesible",
+      "schema": "<b>Entradas:</b> Columna, Fila, Nombre de la zona (opcional) &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso",
+      "role": "Verdadero si la casilla (columna, fila) es una de las casillas mostradas. Por defecto: la casilla que toca el dedo. Falso en caso contrario.",
+      "exemple": "rechazar un movimiento demasiado lejano con «¡demasiado lejos!»."
+    },
+    {
+      "nom": "Dar una ficha de unidad",
+      "schema": "<b>Entradas:</b> Objeto, Puntos de vida, Ataque, Defensa, Movimiento (pasos), Alcance de ataque (casillas), Otras estadísticas (p. ej. munitions = 3, armure = 2)",
+      "role": "Da al objeto su ficha: vida, ataque, defensa, movimiento y alcance (variables de objeto «vie», «attaque», «defense», «mouvement», «portee»). Se pueden leer donde quieras con una fórmula, por ejemplo =heroe.mouvement para los pasos de las casillas accesibles. Pon este nodo tras «Al Iniciar» de cada unidad, o en un prefab de unidad reutilizable.",
+      "exemple": "crear un arquero: vida 8, ataque 4, defensa 0, movimiento 4, alcance 3."
+    },
+    {
+      "nom": "Atacar",
+      "schema": "<b>Entradas:</b> Objeto A, Objeto B, Potencia del ataque (%), Contar la defensa del terreno del objetivo, Siempre al menos 1 de daño, Destruir el objetivo cuando se queda sin vida, Cálculo de daño libre (p. ej. attaquant.attaque * 2 - cible.armure); vacío = cálculo normal, Bonus según los tags del objetivo (ej. caballeria = 150, ligero = 120: % del daño), Bonus según los tags del atacante (ej. lanza = 130), Estadística que se gasta en cada ataque (ej. munición: sin ataque en 0), Perforación: % de defensa ignorado (0 = ninguno), Contraataque: % del ataque del objetivo devuelto si sobrevive y el atacante está a su alcance (0 = ninguno), Bonus de altura: % de daño por nivel de diferencia (ej. 15; arriba = más, abajo = menos), Guardia: tag de aliados vecinos que refuerzan la defensa del objetivo (ej. lanza), Guardia: defensa ganada por aliado vecino &nbsp;→&nbsp; <b>Salidas:</b> Sigue vivo / Sin vida / Atacante destruido (contraataque)",
+      "role": "El objeto A ataca al objeto B: daño = ataque de A × potencia × bonus − defensa de B − defensa del terreno de B. Salidas «Sigue vivo» y «Sin vida» (el objetivo se destruye si la casilla está marcada), y «Atacante destruido» si un contraataque lo mata. Ambos objetos necesitan una ficha de unidad. Las reglas «regle: lanza > caballeria = 150» de donnees.txt se aplican solas. En avanzado: bonus según tags («caballeria = 150»), PERFORACIÓN (porcentaje de defensa ignorado, para una lanza o una ballesta), CONTRAATAQUE (porcentaje del ataque del objetivo devuelto si sobrevive y el atacante está a su alcance), BONUS DE ALTURA (porcentaje de daño por nivel de diferencia: el de arriba golpea más fuerte), GUARDIA (cada aliado vecino con el tag elegido suma defensa al objetivo: un muro de escudos), un cálculo libre y una estadística que se gasta en cada ataque (munición).",
+      "exemple": "la lanza (perforación 40) contra la caballería pesada; el arquero en la colina (altura +15 %)."
+    },
+    {
+      "nom": "Aplicar datos (unidad, arma)",
+      "schema": "<b>Entradas:</b> Objeto, Nombre en donnees.txt (ej. Caballero) &nbsp;→&nbsp; <b>Salidas:</b> Encontrado / No encontrado",
+      "role": "Da al objeto A todos los valores de una unidad o arma escritos en el archivo donnees.txt (Assets → Diálogos, o assets_ludexa/Textes/donnees.txt): vida, ataque, defensa, movimiento, alcance, precio… y sus tags. Basta una línea: «unite Caballero: vie=12, attaque=5, defense=2, mouvement=4, portee=1, tags=caballeria pesado». Se reequilibra el juego editando el archivo, sin tocar los nodos. Salidas «Encontrado» / «No encontrado». El archivo también puede contener «arme Espada: attaque=5», «etat Veneno: duree=3, degats=2», «regle: lanza > caballeria = 150» (un atacante con tag lanza hace 150 % a un objetivo con tag caballeria, aplicado automáticamente por «Atacar») y las alturas de las casillas.",
+      "exemple": "al empezar la partida, para cada héroe: Aplicar datos «Caballero»."
+    },
+    {
+      "nom": "Definir la altura de casillas",
+      "schema": "<b>Entradas:</b> Columna de inicio, Fila de inicio, Número de columnas, Número de filas, Altura (0 = llano)",
+      "role": "Da una altura (un nivel: 0 = llano, 1, 2, 3…) a un rectángulo de casillas de la cuadrícula: columna y fila de inicio, número de columnas y filas. Las alturas dan el bonus de altura de «Atacar» y detienen la vista en la niebla de guerra (una colina oculta lo que hay detrás). También se pueden escribir en donnees.txt («hauteur 3,4 = 2» o un bloque «hauteurs:» con una cifra por casilla). Léelas con la fórmula hauteur(columna, fila) o con los nodos verdes «Altura de la casilla tocada» / «Altura de la casilla bajo un objeto».",
+      "exemple": "una colina de 3 x 2 casillas a altura 2, para que el arquero que se coloque ahí golpee más fuerte."
+    },
+    {
+      "nom": "Dar un estado (veneno, lento…)",
+      "schema": "<b>Entradas:</b> Objeto, Nombre del estado (ej. Veneno; en donnees.txt), Duración en turnos (vacío = la de donnees.txt), Daño cada turno (vacío = donnees.txt), Estadística modificada (ej. mouvement; vacío = donnees.txt), Cambio de esta estadística (ej. -2)",
+      "role": "Da un estado a la unidad durante un número de TURNOS: veneno (daño cada turno), lento (baja el movimiento), bendecido (sube el ataque)… Todo puede escribirse en donnees.txt («etat Veneno: duree=3, degats=2», «etat Lento: duree=2, stat=mouvement, delta=-2»): entonces basta el nombre del estado. El daño cae al inicio de cada turno del equipo de la unidad y luego el estado pierde un turno; al final, la estadística modificada vuelve a como estaba. Volver a dar el mismo estado lo prolonga en vez de duplicarlo. La unidad conserva una estadística «etat_<nombre>» (turnos restantes), legible en una fórmula. Requiere «Pasar al siguiente turno».",
+      "exemple": "una flecha envenenada: Atacar → sigue vivo → dar el estado «Veneno» al objetivo."
+    },
+    {
+      "nom": "Quitar un estado",
+      "schema": "<b>Entradas:</b> Objeto, Nombre del estado (vacío = todos)",
+      "role": "Quita un estado de la unidad (por nombre), o todos si el nombre está vacío. La estadística modificada por el estado vuelve enseguida a su valor anterior.",
+      "exemple": "un sacerdote que cura el veneno de un aliado."
+    },
+    {
+      "nom": "Si la unidad tiene el estado…",
+      "schema": "<b>Entradas:</b> Objeto, Nombre del estado (vacío = todos) &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso",
+      "role": "Comprueba si la unidad tiene un estado (o cualquiera si el nombre está vacío). Salidas «Verdadero» / «Falso».",
+      "exemple": "no poder moverse si la unidad está «Congelada»."
+    },
+    {
+      "nom": "Efecto de área alrededor de un objeto",
+      "schema": "<b>Entradas:</b> Objeto, Efecto, Fuerza (daño o curación), Radio en casillas, Tags afectados (vacío = todos), Nombre del estado (si el efecto da un estado), Reducción por casilla de distancia (% de la fuerza), Forma, También afecta al objeto del centro",
+      "role": "Afecta de golpe a todos los objetos alrededor del objeto A (en el centro): daño, curación o un estado. Ajustes: la fuerza, el radio en casillas, los tags afectados (vacío = todos), la forma (rombo o cuadrado con diagonales), la reducción de fuerza por casilla de distancia (explosión: cuanto más lejos, menos daño) y si el objeto del centro también se ve afectado. El daño ignora la defensa. Una bola de fuego, una curación de grupo, un grito que asusta. Para contar víctimas en una condición usa las fórmulas compter(\"tag\") y voisins(objeto, \"tag\", casillas).",
+      "exemple": "una bola de fuego: radio 2, fuerza 6, reducción 30 % por casilla, sobre unidades «enemigo»."
+    },
+    {
+      "nom": "Ganar experiencia",
+      "schema": "<b>Entradas:</b> Objeto, Experiencia ganada, Experiencia para el nivel 2 (x nivel después), Ganancias por nivel (ej. vie=2, attaque=1) &nbsp;→&nbsp; <b>Salidas:</b> Sube de nivel / Nada que cancelar",
+      "role": "Da experiencia a la unidad. Al alcanzar el umbral (umbral × nivel actual), la unidad sube de nivel, la experiencia sobrante se conserva y se suman las ganancias («vie=2, attaque=1»; la vida máxima sube con la vida). La unidad guarda las estadísticas «xp» y «niveau» (1 al inicio). Salidas «Sube de nivel» / «Sin subir de nivel»: una fanfarria o un mensaje al subir.",
+      "exemple": "un héroe que gana 30 de experiencia por cada enemigo derrotado."
+    },
+    {
+      "nom": "Recordar la posición",
+      "schema": "<b>Entrada:</b> Objeto",
+      "role": "Recuerda la posición actual de la unidad, antes de un movimiento. Con «Cancelar el movimiento», el jugador puede volver atrás (como en Advance Wars al pulsar «Cancelar» antes de actuar).",
+      "exemple": "justo antes de «Ir a la casilla»: Recordar la posición."
+    },
+    {
+      "nom": "Cancelar el movimiento",
+      "schema": "<b>Entrada:</b> Objeto &nbsp;→&nbsp; <b>Salidas:</b> Cancelado / Nada que cancelar",
+      "role": "Devuelve la unidad a la posición recordada por «Recordar la posición», borra su marca de «ya ha jugado» y pone a 0 sus estadísticas «bouge» y «agi». Salidas «Cancelado» / «Nada que cancelar».",
+      "exemple": "un botón «Cancelar» en el menú de acción de la unidad."
+    },
+    {
+      "nom": "Jugar como un ordenador (IA)",
+      "schema": "<b>Entradas:</b> Objeto, Tags de enemigos (ej. jugador), Estilo de juego, Velocidad de movimiento, Otros tags que bloquean el camino (ej. sus aliados) &nbsp;→&nbsp; <b>Salidas:</b> Llegó / Ningún objetivo",
+      "role": "Hace jugar a una unidad sola, como un ordenador. Mira adónde puede ir (movimiento, muros, terrenos, unidades que bloquean), busca a los enemigos (sus tags) y elige la mejor casilla desde donde atacar según su ESTILO: agresivo (el máximo daño, rematar un objetivo primero), prudente (evita el contraataque) o defensivo (le gustan las casillas de gran defensa). Si no hay nadie a su alcance, se acerca al enemigo más cercano. Al llegar, sale «Llegó»: el objeto implicado es el objetivo elegido y la estadística «cible_ia» de la unidad vale 1 (puede atacar) o 0 (solo se acercó). Usa su movimiento, alcance (y «portee_min») y su ficha de unidad. Salida «Sin enemigos» si ya no quedan.",
+      "exemple": "turno de los monstruos: para cada monstruo, Jugar como un ordenador (enemigos = jugador) → al llegar, si cible_ia = 1, Atacar."
+    },
+    {
+      "nom": "Actualizar la niebla de guerra",
+      "schema": "<b>Entradas:</b> Tags del equipo que ve (ej. jugador), Tags de enemigos a ocultar fuera de vista (ej. enemigo), Visión por defecto en casillas (si no, la estadística « vision » de la unidad), Oscuridad de las casillas desconocidas (0 a 100), Recordar las casillas ya vistas",
+      "role": "Calcula lo que ve el equipo y cubre el resto del mapa con un velo oscuro: las unidades del equipo (tags) ven a su alrededor hasta su estadística «vision» en casillas (si no, la visión por defecto del nodo). Un muro del terreno, un terreno con la propiedad «bloque_vue = oui» (bosque denso) o una casilla más alta detienen la vista. Las casillas ya vistas quedan medio oscuras (memoria, opcional). Las unidades con tags enemigos fuera de vista se ocultan. Vuélvelo a lanzar tras cada movimiento o al inicio de un turno. La fórmula vue(columna, fila) vale 1 si la casilla se ve. «Quitar la niebla de guerra» lo hace todo visible.",
+      "exemple": "al inicio de cada turno del jugador: Actualizar la niebla (equipo jugador, enemigos enemigo, visión 3)."
+    },
+    {
+      "nom": "Quitar la niebla de guerra",
+      "role": "Quita la niebla de guerra: todo el mapa vuelve a ser visible y las unidades ocultas reaparecen.",
+      "exemple": "al final de la partida, para mostrar todo el mapa."
+    },
+    {
+      "nom": "Dar vida al objeto",
+      "schema": "<b>Entradas:</b> Objeto, Puntos de vida",
+      "role": "Da puntos de vida al objeto elegido (variable de objeto «vie», y «vie_max» para el máximo). Léela donde quieras con una fórmula, por ejemplo =monstruo.vie, para escribirla en un texto o una barra.",
+      "exemple": "dar 10 puntos de vida a un monstruo al empezar."
+    },
+    {
+      "nom": "Infligir daño",
+      "schema": "<b>Entradas:</b> Objeto, Daño, Destruir el objeto cuando se queda sin vida, Restar la defensa del terreno donde está &nbsp;→&nbsp; <b>Salidas:</b> Sigue vivo / Sin vida",
+      "role": "Quita puntos de vida al objeto (nunca por debajo de 0). Dos salidas: «Sigue con vida» y «Sin vida» (el objeto se destruye si la casilla está marcada; «el objeto implicado» sigue siendo el golpeado).",
+      "exemple": "un héroe golpea a un monstruo: 3 de daño y luego un mensaje según el resultado."
+    },
+    {
+      "nom": "Curar",
+      "schema": "<b>Entradas:</b> Objeto, Vida devuelta",
+      "role": "Devuelve puntos de vida al objeto, sin pasar de su máximo.",
+      "exemple": "una poción que devuelve 5 puntos de vida al héroe."
+    },
+    {
+      "nom": "Cambiar una estadística",
+      "schema": "<b>Entradas:</b> Objeto, Nombre de la estadística (ej. munición), Qué hacer, Cuánto",
+      "role": "Cambia una estadística que inventaste para un objeto (munición, armadura, maná, combustible…): sumarle, restarle o ponerla en un valor. Si todavía no existe, se crea en 0. Luego se lee en cualquier parte: =arquero.municion.",
+      "exemple": "Tras un disparo: Cambiar una estadística → objeto «arquero», estadística «municion», Restar 1."
+    },
+    {
+      "nom": "Si la estadística…",
+      "schema": "<b>Entradas:</b> Objeto, Nombre de la estadística (ej. munición), Comparación, Valor &nbsp;→&nbsp; <b>Salidas:</b> Verdadero / Falso",
+      "role": "Compara una estadística de un objeto con un valor y sigue la salida «verdadero» o «falso»: por ejemplo «municion es mayor que 0». Una estadística que no existe vale 0.",
+      "exemple": "Antes de disparar: Si la estadística «municion» del arquero es mayor que 0 → disparar; si no → mostrar «Sin flechas»."
+    },
+    {
+      "nom": "Elegir un objetivo",
+      "schema": "<b>Entradas:</b> Objeto, Etiquetas de los objetivos posibles (separadas por comas), ¿Qué objetivo elegir?, Alcance en casillas (0 = sin límite; p. ej. =monstruo.portee), Alcance mínimo (0 = ninguno), Forma del alcance, Mis posiciones (columna,fila; p. ej. 2,1 ; -2,1), Estadística (para las reglas «estadística», p. ej. defense), Alcance en píxeles, en círculo (0 = usar el alcance en casillas) &nbsp;→&nbsp; <b>Salidas:</b> Objetivo encontrado / Ningún objetivo",
+      "role": "El objeto A busca, entre los objetos con alguna de las etiquetas pedidas, los que están DENTRO DE SU ALCANCE (mismas formas que «Mostrar casillas accesibles») y elige uno: el más cercano, el que tiene menos o más vida, o el valor más bajo / alto de una estadística. Salida «Objetivo encontrado»: pasa a ser «el objeto implicado» (para Atacar, Ir hacia…). Salida «Ningún objetivo»: nadie a tiro. Ideal para la inteligencia de un monstruo o una torreta.",
+      "exemple": "un monstruo: «Elegir un objetivo» (tag «heroe», la más cercana), luego «Atacar» en «Objetivo encontrado»."
+    },
+    {
       "nom": "Rellenar la cuadrícula",
       "schema": "<b>Entradas:</b> Objeto, Columnas, Filas, Objetos modelo (nombres separados por comas)",
       "role": "Divide el objeto A (el tablero) en columnas y filas y pone en cada casilla una copia de un objeto modelo elegido al azar (al menos 3 modelos, nombres separados por comas). Nunca hay alineaciones al empezar, y las piezas caen desde arriba. Úsalo antes de «Jugar en la cuadrícula (unir 3)».",
