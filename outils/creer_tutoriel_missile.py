@@ -44,6 +44,9 @@ t = L.action(('s_clock', 'port_a_chaque_fois', 1), 'm_left', 'missile_guide',
              {'modele': 'missile_modele', 'angle': 200, 'vitesse': 9, 'virage': 2.2, 'attente': 0.35, 'duree_vie': 3.2}, 'foe')
 t = L.action(t, 'm_right', 'missile_guide', {'modele': 'missile_modele', 'angle': 340, 'vitesse': 9, 'virage': 2.2, 'attente': 0.35, 'duree_vie': 3.2}, 'foe')
 L.action(t, 'm_snd', 'jouer_son', {'fichier': SON + 'laser.ogg', 'volume': 60})
+# objet B = la CIBLE que le missile vise (sans elle il part tout droit selon son angle de départ)
+L.noeud('m_left')['cibleNomB'] = 'player'
+L.noeud('m_right')['cibleNomB'] = 'player'
 
 e = L.evenement('finger', 'NoeudEventDoigtAppuye', sortie='Sortie')
 L.action(e, 'f_move', 'glisser_vers', {'x': '=doigt.x - 75', 'y': '=doigt.y - 200', 'duree': 0.15}, 'player')
