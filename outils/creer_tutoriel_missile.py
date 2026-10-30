@@ -102,7 +102,9 @@ TEXTES = {
 with tempfile.TemporaryDirectory() as tmp:
     p = os.path.join(tmp, 'projet')
     logique = L.json(); logique['notes'] = notes
-    ecrire_projet(p, [scene('Jeu', objets, P)], {'Jeu': logique}, variables(P, [('vies', 3)]), ANIMS, TEXTES)
+    ecrire_projet(p, [scene('Jeu', objets, P)], {'Jeu': logique}, variables(P, [('vies', 3)]), ANIMS, TEXTES, largeur=1080, hauteur=1920)
+    # jeu VERTICAL (comme Space 1) : sans cela le projet s'ouvrait en paysage et tout était de travers
+    rg = os.path.join(p, 'reglages.json'); r = json.load(open(rg)); r['adaptation'] = 'etirer'; ecrire(rg, r)
     ecrire(os.path.join(p, 'meta.json'), {'nom': 'Missile tutorial', 'dateCreation': '2026-10-30 12:00:00', 'dateModif': '2026-10-30 12:00:00'})
     # images de l'utilisateur, prises dans l'exemple Space 1
     with zipfile.ZipFile(os.path.join(SITE, 'exemples', 'space_1-1.zip')) as z:
