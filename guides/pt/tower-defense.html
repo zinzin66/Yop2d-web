@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como fazer um tower defense no Yop2D? | Guia Yop2D</title>
+<meta name="description" content="Faça um jogo de tower defense no Yop2D, sem código: desenhe o caminho dos inimigos, envie ondas, construa torres que escolhem um alvo e atiram, e conte créditos e vidas da base com nós.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/pt/tower-defense.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/tower-defense.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/tower-defense.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/tower-defense.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/tower-defense.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/tower-defense.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/tower-defense.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/tower-defense.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/tower-defense.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/tower-defense.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Como fazer um tower defense?",
+ "description": "Faça um jogo de tower defense no Yop2D, sem código: desenhe o caminho dos inimigos, envie ondas, construa torres que escolhem um alvo e atiram, e conte créditos e vidas da base com nós.",
+ "inLanguage": "pt",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de jogos 2D sem código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Desenhar o caminho",
+   "text": "Em Assets, ferramenta “Percurso”: coloque pontos, ligue-os, escolha o início."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Criar a cena Enemy",
+   "text": "Ao Iniciar → Dar vida ao objeto → Seguir o percurso (percurso “Path”)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Enviar as ondas",
+   "text": "Repetir (a cada 1,5 segundo) → Colocar uma cópia de uma cena (Enemy)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Criar a cena Tower",
+   "text": "Repetir → Escolher um alvo → Virar para → Recarga → Disparar um objeto."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Acertar os inimigos",
+   "text": "Se o objeto tocar no Tag (enemy, bullet) → Causar dano."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Construir torres com créditos",
+   "text": "Ao Clicar no Objeto (spot) → Adicionar à Variável (credits, -50) → Colocar uma cópia de uma cena (Tower)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Vidas da base e fim de jogo",
+   "text": "Seguir o percurso (chegou ao fim) → Adicionar à Variável (base_life, -1) → Chamar evento."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../pt/index.html">← Yop2D</a>
+<h1>Como fazer um tower defense?</h1>
+<p>Guia para iniciantes · sem código</p>
+<p class="langues"><a href="../tower-defense.html" hreflang="fr">Français</a> · <a href="../en/tower-defense.html" hreflang="en">English</a> · <a href="../es/tower-defense.html" hreflang="es">Español</a> · <a href="../de/tower-defense.html" hreflang="de">Deutsch</a> · <a href="../it/tower-defense.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="../ru/tower-defense.html" hreflang="ru">Русский</a> · <a href="../zh/tower-defense.html" hreflang="zh">中文</a> · <a href="../ja/tower-defense.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Em um tower defense, <strong>inimigos</strong> andam por um <strong>caminho</strong> e você constrói <strong>torres</strong> que atiram neles antes que cheguem à sua <strong>base</strong>. Aqui os inimigos seguem um caminho que você mesmo desenha, cada torre escolhe o inimigo mais próximo e atira nele, e os <strong>créditos</strong> pagam as novas torres.</p>
+<div class="besoin">
+<b>Você precisa de:</b>
+<ul><li>uma Imagem chamada <strong>map</strong>: o fundo do jogo, 1920 x 1080 px, com uma estrada desenhada;</li><li>algumas Imagems para os locais de construção (por exemplo 120 x 120 px);</li><li>uma Imagem para o <strong>enemy</strong> (por exemplo 64 x 64 px), uma para a <strong>tower</strong> (120 x 120 px), uma para o <strong>cannon</strong> (90 x 34 px, virado para a direita) e uma para a <strong>bullet</strong> (24 x 24 px);</li><li>dois objetos Texto: <strong>creditsText</strong> e <strong>lifeText</strong>, no alto da tela.</li></ul>
+</div>
+<div class="tip">👉 Este guia foi escrito para um jogo <strong>na horizontal de 1920 x 1080</strong>. O exemplo <strong>Tower defense (cubes)</strong> (aba Exemplos) tem imagens prontas na pasta <strong>Images/TD</strong>: abra-o e copie para o seu projeto as que você gostar. Você também pode desenhar as suas, o guia funciona com qualquer estilo. As cenas <strong>Enemy</strong> e <strong>Tower</strong> são copiadas muitas vezes no jogo: veja o guia <a href="../pt/prefabs.html">Um objeto pronto</a>.</div>
+<h2>Passo 1: as variáveis</h2>
+<div class="method">
+<ol><li>No painel da esquerda, abra a seção <strong>Variáveis</strong> e crie duas variáveis, ambas com escopo <strong>Global</strong> (todas as cenas podem usá-las) e do tipo <strong>Inteiro</strong>:</li></ol>
+<ul><li><strong>credits</strong>: valor inicial <strong>150</strong> (o dinheiro para construir torres);</li><li><strong>base_life</strong>: valor inicial <strong>20</strong> (quantos inimigos sua base aguenta).</li></ul>
+</div>
+<h2>Passo 2: desenhar o caminho</h2>
+<div class="method">
+<p>Os inimigos seguem um <strong>caminho</strong>: pontos ligados entre si. Você o desenha em cima do seu mapa com a ferramenta Percurso.</p>
+<ol><li>Abra a janela de <strong>Assets</strong> (painel Recursos) e toque em <strong>Percurso</strong>. O editor de percursos se abre, com a sua cena ao fundo.</li><li>Toque em <strong>Novo percurso</strong> e dê o nome <strong>Path</strong>.</li><li>Com a ferramenta <strong>Colocar pontos</strong>, toque na cena para colocar um primeiro ponto à esquerda, por onde os inimigos entram: é o <strong>Início</strong>. Continue tocando ao longo da sua estrada: cada novo ponto é ligado ao anterior.</li><li>Coloque o último ponto na sua base: ele não tem saída, é a <strong>Chegada</strong>.</li><li>Toque em <strong>Ver passar</strong> para ver um ponto percorrer o caminho. Depois feche o editor: o percurso é salvo sozinho.</li></ol>
+<div class="tip">👉 Para mudar o início, toque em um ponto e escolha <strong>Fazer deste ponto o início</strong>. Para mover um ponto use a ferramenta <strong>Mover</strong>; para remover um, use <strong>Apagar</strong>.</div>
+</div>
+<h2>Passo 3: a cena Enemy</h2>
+<div class="method">
+<p>Um inimigo é uma <strong>cena</strong> à parte: cada inimigo que você envia ao jogo é uma <strong>cópia</strong> dela, com a sua própria vida. Você a constrói uma só vez.</p>
+<ol><li>Crie uma nova cena chamada <strong>Enemy</strong> (menu <strong>＋</strong>, depois <strong>Criar uma cena</strong>).</li><li>Na cena <strong>Enemy</strong>, adicione uma Imagem chamada <strong>enemy</strong> em X = <code>0</code>, Y = <code>0</code>, e dê a ela a tag <strong>enemy</strong>.</li><li>Abra o <strong>Blueprint</strong> da cena <strong>Enemy</strong> e adicione o evento <strong>“Ao Iniciar”</strong>.</li><li>Adicione <strong>“Dar vida ao objeto”</strong>: alvo <strong>enemy</strong>, <strong>Pontos de vida</strong> = <code>3</code> (o inimigo aguenta 3 golpes).</li><li>Adicione <strong>“Seguir o percurso”</strong>: alvo <strong>enemy</strong>, <strong>Nome do percurso</strong> = <strong>Path</strong>, <strong>Velocidade (pixels por segundo)</strong> = <code>150</code>.</li><li>Ligue os três nós em ordem.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Ao Iniciar</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Dar vida ao objeto</b><span>enemy · 3</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Seguir o percurso</b><span>enemy · Path · 150</span></div>
+</div>
+</div>
+<h2>Passo 4: enviar as ondas</h2>
+<div class="method">
+<p>Volte agora para a sua cena principal (<strong>Game</strong>) e envie os inimigos um depois do outro.</p>
+<ol><li>Abra o <strong>Blueprint</strong> da cena <strong>Game</strong> e adicione o evento <strong>“Ao Iniciar”</strong>.</li><li>Adicione dois nós <strong>“Modificar Variável”</strong>: <strong>credits</strong> = <code>150</code>, depois <strong>base_life</strong> = <code>20</code>. Assim cada novo jogo começa limpo, mesmo depois de um Game Over.</li><li>Adicione <strong>“Esperar”</strong>: <strong>Duração (segundos)</strong> = <code>3</code> (uma pausa antes do primeiro inimigo).</li><li>Adicione <strong>“Repetir”</strong>: <strong>A cada (segundos)</strong> = <code>1.5</code>, <strong>Número de vezes (0 = sem fim)</strong> = <code>15</code>, <strong>Nome do temporizador (opcional)</strong> = <code>waves</code>.</li><li>Na saída <strong>A cada vez</strong>, adicione <strong>“Colocar uma cópia de uma cena”</strong>: cena <strong>Enemy</strong>. Deixe X e Y como estão: o inimigo vai sozinho para o início do caminho.</li><li>Ligue os nós em ordem.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Ao Iniciar</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variável</b><span>credits · 150</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variável</b><span>base_life · 20</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Esperar</b><span>3</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Repetir</b><span>1.5 · 15</span></div>
+<div class="fleche"><em>A cada vez</em> →</div>
+<div class="noeud"><b>Colocar uma cópia de uma cena</b><span>Enemy</span></div>
+</div>
+<p>Execute o jogo: um inimigo aparece a cada segundo e meio e anda pelo seu caminho até o fim (por enquanto nada acontece quando ele chega).</p>
+</div>
+<h2>Passo 5: a cena Tower</h2>
+<div class="method">
+<p>Uma torre também é uma <strong>cena</strong>. Ela procura o inimigo mais próximo ao alcance, vira o canhão para ele e atira.</p>
+<ol><li>Crie uma nova cena chamada <strong>Tower</strong>. Adicione uma Imagem <strong>tower</strong> em X = <code>0</code>, Y = <code>0</code>, depois uma Imagem <strong>cannon</strong> em X = <code>15</code>, Y = <code>43</code>, na frente dela.</li><li>Na cena <strong>Game</strong>, adicione uma Imagem chamada <strong>bullet</strong> <strong>fora da tela</strong> (por exemplo X = <code>-300</code>, Y = <code>-300</code>) e dê a ela a tag <strong>bullet</strong>: é o modelo que a torre copia a cada tiro.</li><li>Abra o <strong>Blueprint</strong> da cena <strong>Tower</strong> e adicione o evento <strong>“Ao Iniciar”</strong>, depois <strong>“Repetir”</strong>: <strong>A cada (segundos)</strong> = <code>0.2</code>, <strong>Número de vezes (0 = sem fim)</strong> = <code>0</code> (sem fim). A torre olha ao redor 5 vezes por segundo.</li><li>Na saída <strong>A cada vez</strong>, adicione <strong>“Escolher um alvo”</strong>: alvo <strong>tower</strong>, <strong>Tags dos alvos possíveis (separadas por vírgula)</strong> = <code>enemy</code>, <strong>Qual alvo escolher?</strong> = <strong>“A mais próxima”</strong>, e nas configurações avançadas <strong>Alcance em pixels, em círculo (0 = usar o alcance em casas)</strong> = <code>330</code>.</li><li>Na saída <strong>Alvo encontrado</strong>, adicione <strong>“Virar para”</strong>: alvo <strong>cannon</strong>, e como segundo objeto escolha <strong>O objeto implicado no evento</strong> (o inimigo que foi escolhido).</li><li>Adicione <strong>“Recarga”</strong>: alvo <strong>cannon</strong>, <strong>Atraso (segundos)</strong> = <code>1.2</code> (no máximo um tiro a cada 1,2 segundo).</li><li>Na saída <strong>Pronto</strong>, adicione <strong>“Disparar um objeto”</strong>: alvo <strong>cannon</strong>, <strong>Nome do modelo</strong> = <code>bullet</code>, <strong>Velocidade</strong> = <code>14</code>, <strong>Duração do tiro (segundos, 0 = sem limite)</strong> = <code>1.6</code>, <strong>Destruir fora da tela (sim / não)</strong> = não. Deixe <strong>Direção</strong> como está: a bala sai na direção para a qual o canhão está virado.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Ao Iniciar</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Repetir</b><span>0.2 · sem fim</span></div>
+<div class="fleche"><em>A cada vez</em> →</div>
+<div class="noeud"><b>Escolher um alvo</b><span>tower · enemy · 330</span></div>
+<div class="fleche"><em>Alvo encontrado</em> →</div>
+<div class="noeud"><b>Virar para</b><span>cannon</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Recarga</b><span>cannon · 1.2</span></div>
+<div class="fleche"><em>Pronto</em> →</div>
+<div class="noeud"><b>Disparar um objeto</b><span>cannon · bullet</span></div>
+</div>
+<div class="tip">👉 Coloque uma <strong>Tower</strong> à mão na cena <strong>Game</strong> para testá-la (menu <strong>＋</strong> → a cena <strong>Tower</strong>): ela deve atirar em todo inimigo que passar a menos de 330 pixels.</div>
+</div>
+<h2>Passo 6: acertar os inimigos</h2>
+<div class="method">
+<p>Esta parte vai na cena <strong>Enemy</strong>: é o inimigo que sabe quando uma bala o toca.</p>
+<ol><li>Abra o <strong>Blueprint</strong> da cena <strong>Enemy</strong> e adicione o evento <strong>“Se o objeto tocar no Tag”</strong>: alvo <strong>enemy</strong>, Tag <strong>bullet</strong>.</li><li>Adicione <strong>“Destruir Objeto”</strong> e escolha <strong>O objeto implicado no evento</strong> como alvo: é a bala, que desaparece.</li><li>Adicione <strong>“Causar dano”</strong>: alvo <strong>enemy</strong>, <strong>Dano</strong> = <code>1</code>. Por padrão, o inimigo é destruído quando sua vida chega a zero.</li><li>Na saída <strong>Sem vida</strong>, adicione <strong>“Adicionar à Variável”</strong>: variável <strong>credits</strong>, valor <code>15</code> (a recompensa).</li><li>Ligue os nós em ordem.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Se o objeto tocar no Tag</b><span>enemy · bullet</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Destruir Objeto</b><span>bullet</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Causar dano</b><span>enemy · 1</span></div>
+<div class="fleche"><em>Sem vida</em> →</div>
+<div class="noeud"><b>Adicionar à Variável</b><span>credits · 15</span></div>
+</div>
+</div>
+<h2>Passo 7: construir torres</h2>
+<div class="method">
+<p>O jogador constrói uma torre tocando em um <strong>local de construção</strong>. Custa 50 créditos.</p>
+<ol><li>Selecione cada local de construção e dê a ele a tag <strong>spot</strong> no Inspetor.</li><li>Na cena <strong>Game</strong>, adicione o evento <strong>“Ao Clicar no Objeto”</strong> e escolha <strong># spot</strong> como objeto (todos os objetos com a tag <strong>spot</strong>).</li><li>Adicione <strong>“Condição”</strong> <code>=credits &gt;= 50</code>.</li><li>Na saída <strong>Verdadeiro</strong>: <strong>“Adicionar à Variável”</strong>: variável <strong>credits</strong>, valor <code>-50</code>.</li><li>Depois <strong>“Colocar uma cópia de uma cena”</strong>: cena <strong>Tower</strong>. Para <strong>X</strong>, toque em <strong>🔗</strong>, escolha <strong>“Valor de um objeto”</strong>, objeto <strong>O objeto implicado no evento</strong>, <strong>O quê</strong> = <code>x</code>. Faça o mesmo para <strong>Y</strong> com <code>y</code>: a torre aparece exatamente onde o jogador tocou.</li><li>Adicione <strong>“Destruir Objeto”</strong> com <strong>O objeto implicado no evento</strong> como alvo: o local de construção desaparece.</li><li>Na saída <strong>Falso</strong>: <strong>“Mensagem curta embaixo da tela”</strong> com a mensagem <strong>Créditos insuficientes</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Ao Clicar no Objeto</b><span># spot</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condição</b><span>=credits &gt;= 50</span></div>
+<div class="fleche"><em>Verdadeiro</em> →</div>
+<div class="noeud"><b>Adicionar à Variável</b><span>credits · -50</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Colocar uma cópia de uma cena</b><span>Tower</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Destruir Objeto</b><span>spot</span></div>
+</div>
+</div>
+<h2>Passo 8: os números na tela</h2>
+<div class="method">
+<ol><li>Na cena <strong>Game</strong>, adicione o evento <strong>“A cada frame”</strong>.</li><li>Adicione <strong>“Modificar Texto”</strong>: alvo <strong>creditsText</strong>, <strong>Novo texto</strong> = <code>="Créditos: " + credits</code>.</li><li>Adicione um segundo <strong>“Modificar Texto”</strong>: alvo <strong>lifeText</strong>, <strong>Novo texto</strong> = <code>="Base: " + base_life</code>.</li><li>Ligue os três nós em ordem.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>A cada frame</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Texto</b><span>creditsText</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Texto</b><span>lifeText</span></div>
+</div>
+</div>
+<h2>Passo 9: vidas da base e fim de jogo</h2>
+<div class="method">
+<p>Quando um inimigo chega ao fim do caminho, sua base perde uma vida. Quando ela não tem mais nenhuma, o jogo acaba.</p>
+<ol><li>Na cena <strong>Enemy</strong>, pegue o nó <strong>“Seguir o percurso”</strong> do passo 3. Na sua saída <strong>Chegou</strong>, adicione <strong>“Adicionar à Variável”</strong>: variável <strong>base_life</strong>, valor <code>-1</code>.</li><li>Adicione <strong>“Destruir Objeto”</strong>: alvo <strong>enemy</strong>.</li><li>Adicione <strong>“Condição”</strong> <code>=base_life &lt;= 0</code>. Na saída <strong>Verdadeiro</strong>, adicione <strong>“Chamar evento”</strong> com o nome de evento <strong>game_over</strong>.</li><li>Na cena <strong>Game</strong>, adicione o evento <strong>“Evento Local”</strong> com o mesmo nome <strong>game_over</strong>.</li><li>Adicione <strong>“Parar um temporizador”</strong>: <strong>Nome (vazio = todos)</strong> = <code>waves</code> (nenhum inimigo é mais enviado), depois <strong>“Destruir por Tag”</strong>: <strong>Tag a destruir</strong> = <code>enemy</code>.</li><li>Adicione <strong>“Mensagem curta embaixo da tela”</strong> com a mensagem <strong>Fim de jogo</strong>, depois <strong>“Esperar”</strong> <code>2</code> segundos, depois <strong>“Reiniciar a cena”</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Seguir o percurso</b><span>enemy</span></div>
+<div class="fleche"><em>Chegou</em> →</div>
+<div class="noeud"><b>Adicionar à Variável</b><span>base_life · -1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Destruir Objeto</b><span>enemy</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condição</b><span>=base_life &lt;= 0</span></div>
+<div class="fleche"><em>Verdadeiro</em> →</div>
+<div class="noeud"><b>Chamar evento</b><span>game_over</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Evento Local</b><span>game_over</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Parar um temporizador</b><span>waves</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Destruir por Tag</b><span>enemy</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Mensagem curta embaixo da tela</b><span>Fim de jogo</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Esperar</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Reiniciar a cena</b></div>
+</div>
+<p>Jogue: construa uma ou duas torres com seus créditos e veja como elas seguram os inimigos. Deixe alguns passarem para ver a base perder suas vidas.</p>
+</div>
+<h2>Para ir mais longe</h2>
+<ul><li><strong>Vitória:</strong> conte os inimigos com uma variável (+1 quando um morre ou chega). Quando o número chega ao total enviado, mostre uma mensagem e ganhe.</li><li><strong>Melhorar uma torre:</strong> toque em uma torre para abrir uma janelinha com um botão “Melhorar” que custa créditos e muda a imagem do canhão e a cadência de tiro. Abra o exemplo <strong>Tower defense (cubes)</strong> para ver como.</li><li><strong>Vários tipos de inimigos:</strong> faça uma segunda cena (<strong>Enemy2</strong>) com mais vida e outra velocidade, e deixe cada onda enviar um ou outro (abra o exemplo <strong>Tower defense (cubes)</strong> para ver como).</li><li><strong>Cruzamentos:</strong> na ferramenta Percurso, toque em um ponto e escolha <strong>Este ponto é um cruzamento</strong>: os inimigos escolhem uma estrada ao acaso, e os ramos podem se juntar de novo.</li><li><strong>Várias pistas, sem engarrafamento:</strong> em <strong>“Seguir o percurso”</strong>, coloque <strong>Desvio lateral ao acaso (pixels, ±: cada um anda na sua faixa)</strong> e <strong>Evitar os outros: desviar para não se sobrepor e ultrapassar os mais lentos (sim / não)</strong> em sim: os inimigos andam lado a lado e se ultrapassam.</li><li><strong>Um mapa grande:</strong> faça seu mapa duas vezes mais largo e adicione <strong>“Limites da câmera”</strong> e <strong>“Rolar a câmera com o dedo”</strong> no início para o jogador rolar o mapa com um dedo.</li><li><strong>Sons e faíscas:</strong> adicione <strong>“Tocar som”</strong> a cada tiro e um <strong>“Efeito de partículas”</strong> quando um inimigo morre (veja o guia <a href="../pt/particules-effets.html">Partículas e efeitos</a>).</li></ul>
+<h2>Se não funcionar</h2>
+<ul><li><strong>Os inimigos não se mexem:</strong> verifique se o ajuste <strong>Nome do percurso</strong> é o nome do seu caminho (<strong>Path</strong>) e se o caminho tem um Início. Verifique se a cena <strong>Enemy</strong> tem o seu evento <strong>“Ao Iniciar”</strong>.</li><li><strong>A torre não atira:</strong> verifique a tag <strong>enemy</strong> no inimigo, o nome <strong>bullet</strong> em <strong>“Disparar um objeto”</strong> e se o objeto <strong>bullet</strong> está na cena <strong>Game</strong> (fora da tela, mas não apagado). Aumente <strong>Alcance em pixels, em círculo (0 = usar o alcance em casas)</strong> se os inimigos ficarem fora de alcance.</li><li><strong>As balas não machucam:</strong> a bala deve ter a tag <strong>bullet</strong>, e o evento <strong>“Se o objeto tocar no Tag”</strong> deve estar na cena <strong>Enemy</strong>, não em <strong>Game</strong>.</li><li><strong>A torre aparece no lugar errado:</strong> para <strong>X</strong> e <strong>Y</strong> de <strong>“Colocar uma cópia de uma cena”</strong>, use os nós verdes <strong>“Valor de um objeto”</strong> com <strong>O objeto implicado no evento</strong>, como no passo 7.</li><li><strong>Os créditos ou as vidas da base não mudam:</strong> verifique se as variáveis <strong>credits</strong> e <strong>base_life</strong> têm o escopo <strong>Global</strong>.</li></ul>
+
+<div class="nav">
+<a href="../pt/casse-briques.html">← Fazer um quebra-tijolos</a>
+<a href="../pt/jeu-tactique.html">Próximo guia: Fazer um jogo de tática →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de jogos 2D gratuito e sem código para Android · <a href="../../pt/index.html">Site oficial</a> · <a href="../../noeuds/pt.html">Referência de nós</a></p>
+</footer>
+</body>
+</html>
