@@ -1,0 +1,198 @@
+{
+  "titre_page": "Comment faire un jeu de tactique au tour par tour dans Yop2D ? | Guide Yop2D",
+  "description": "Faire un jeu de tactique sur une grille dans Yop2D, sans code : tours, cases accessibles en bleu, terrains, déplacement, attaque et vie avec les nœuds.",
+  "h1": "Comment faire un jeu de tactique ?",
+  "carte": [
+    "Faire un jeu de tactique",
+    "Tours, cases bleues, terrains, déplacement et attaque sur une grille."
+  ],
+  "etapes": [
+    [
+      "Donner une fiche à chaque unité",
+      "{{NoeudEventStart}} → {{definir_fiche}} (vie, attaque, défense, mouvement, portée)."
+    ],
+    [
+      "Passer au tour du joueur",
+      "{{tour_suivant}} (joueur, ennemi) lance l'événement local « tour_joueur »."
+    ],
+    [
+      "Montrer les cases où le héros peut aller",
+      "{{NoeudEventClicObjet}} → {{si_tour_de}} → {{montrer_cases}}."
+    ],
+    [
+      "Faire marcher le héros",
+      "{{NoeudEventClicObjet}} (le terrain) → {{si_case_accessible}} → {{chemin_vers_case}}."
+    ],
+    [
+      "Attaquer",
+      "{{NoeudEventClicObjet}} (le monstre) → {{si_case_accessible}} → {{attaquer}}."
+    ],
+    [
+      "Le tour des monstres",
+      "« tour_ennemi » → {{chemin_vers_objet}} (à côté du héros) → {{attaquer}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Dans un jeu de **tactique**, on joue **chacun son tour** sur une grille : on choisit une unité, on voit les cases où elle peut aller, on la déplace, puis elle attaque. Ce guide fait le jeu le plus simple possible : **un héros et un monstre**. Tout est déjà prêt dans l'exemple **Tactics tutorial** (onglet **Exemples** de l'écran de démarrage) : ouvre son Blueprint, chaque étape est dans un **cadre de couleur** avec un petit **?** qui l'explique."
+    ],
+    [
+      "besoin",
+      [
+        "un décor en tuiles de ton choix (la grille du jeu **est** la grille de ce décor) ;",
+        "une {{lang:obj_prefix_image}} nommée **hero1** avec le tag **joueur**, et une autre nommée **foe1** avec le tag **ennemi** ;",
+        "une {{lang:obj_prefix_zone}} nommée **terrain** qui couvre toute la carte (c'est elle qu'on touche pour choisir une case) ;",
+        "une variable **etat** (entier, locale) pour savoir où on en est : 0 = choisir un héros, 1 = héros choisi, 2 = héros déplacé."
+      ]
+    ],
+    [
+      "tip",
+      "Les **terrains** (forêt, sable, montagne…) se règlent dans l'éditeur de tuiles, partie **Terrains des tuiles** : coût en pas, case bloquée ou non, bonus de défense. La montagne bloque le passage, la forêt coûte 2 pas."
+    ],
+    [
+      "h2",
+      "Étape 1 : les fiches des unités"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Ajoute l'événement **[[NoeudEventStart]]**.",
+            "Ajoute **[[definir_fiche]]** pour **hero1** : vie `20`, attaque `6`, défense `2`, mouvement `4`, portée `1`.",
+            "Ajoute un deuxième **[[definir_fiche]]** pour **foe1**, avec ses propres nombres.",
+            "Relie les nœuds à la suite, puis ajoute **[[tour_suivant]]** avec les équipes `joueur,ennemi`."
+          ]
+        ],
+        [
+          "tip",
+          "La fiche est enregistrée dans l'objet : tu peux la relire partout avec une formule, par exemple `=hero1.vie`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 2 : le tour du joueur"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Ajoute l'événement **[[NoeudEventPersonnalise]]** et écris le nom `tour_joueur`. Il part tout seul au début du tour du joueur.",
+            "Mets **etat** à `0` avec **[[modifier_variable]]**, puis **[[cacher_cases]]** pour effacer les anciennes cases."
+          ]
+        ],
+        [
+          "p",
+          "Pour chaque équipe, **[[tour_suivant]]** lance l'événement local « tour_ » suivi du nom de l'équipe : `tour_joueur`, puis `tour_ennemi`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 3 : toucher le héros, voir les cases bleues"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Ajoute **[[NoeudEventClicObjet]]** sur **hero1**.",
+            "Ajoute **[[si_tour_de]]** avec l'équipe `joueur`, puis sur la sortie **{{lang:port_vrai}}** une **[[condition]]** `etat < 2`.",
+            "Ajoute **[[modifier_variable]]** : **etat** = `1`.",
+            "Ajoute **[[montrer_cases]]** sur **hero1** : type de zone **Déplacement (les murs comptent)**, nombre de pas `=hero1.mouvement`, couleur bleue, **Écrire le nombre de pas sur chaque case** = oui, **Ces tags bloquent le passage** = `joueur,ennemi`."
+          ]
+        ],
+        [
+          "tip",
+          "Les chiffres sur les cases sont le **nombre de pas** pour y arriver. Les cases de forêt en coûtent 2 : le héros va moins loin."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 4 : toucher une case bleue, le héros marche"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Ajoute **[[NoeudEventClicObjet]]** sur **terrain**, puis une **[[condition]]** `etat = 1`.",
+            "Ajoute **[[si_case_accessible]]**. Pour la colonne et la ligne, touche **🔗** et choisis les nœuds verts **[[valeur_colonne_touchee]]** et **[[valeur_ligne_touchee]]** : aucune formule à écrire.",
+            "Sur la sortie **{{lang:port_vrai}}** : **[[modifier_variable]]** **etat** = `4` (le héros marche), puis **[[chemin_vers_case]]** sur **hero1**, avec les mêmes nœuds verts et **Ces tags bloquent le chemin** = `joueur,ennemi`.",
+            "Sur la sortie **{{lang:port_arrive}}**, appelle l'événement local `apres_deplacement` avec **[[appeler_evenement]]**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 5 : la zone d'attaque, puis l'attaque"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Dans l'événement local **apres_deplacement** : **[[cacher_cases]]**, **etat** = `2`, puis **[[montrer_cases]]** en type **Attaque / portée (passe au-dessus des murs)**, nombre de pas `=hero1.portee`, couleur rouge, avec le nom de zone `attaque`.",
+            "Ajoute **[[NoeudEventClicObjet]]** sur **foe1**, une **[[condition]]** `etat = 2` et **[[si_case_accessible]]** avec le nom de zone `attaque`.",
+            "Sur **{{lang:port_vrai}}** : **[[attaquer]]** (objet A = **hero1**, objet B = **foe1**). Les dégâts sont l'attaque, moins la défense du monstre, moins la défense de son terrain.",
+            "Sortie **Encore en vie** : mets à jour son texte de vie. Sortie **Plus de vie** : le monstre est détruit, ajoute la victoire."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 6 : le tour des monstres"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Ajoute l'événement local `tour_ennemi`.",
+            "Ajoute **[[chemin_vers_objet]]** sur **foe1**, objet B = **hero1**, **S'arrêter** = **Sur une case voisine, bien centré**, **Ces tags bloquent le chemin** = `joueur,ennemi`.",
+            "Sur la sortie **{{lang:port_arrive}}**, appelle un événement local où **foe1** **[[attaquer]]** **hero1**.",
+            "Après quelques secondes (**[[attendre]]**), **[[chemin_arreter]]** puis **[[tour_suivant]]** : le tour revient au joueur."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Pour aller plus loin"
+    ],
+    [
+      "ul",
+      [
+        "**Plusieurs héros :** ajoute **[[marquer_joue]]** et **[[si_a_joue]]** pour qu'un héros ne joue qu'une fois par tour (c'est ce que fait l'exemple **Tactics demo**).",
+        "**Une barre de vie :** lis `=hero1.vie` et `=hero1.vie_max` dans un texte ou une barre de progression.",
+        "**Soigner :** **[[soigner]]** rend des points de vie sans dépasser le maximum.",
+        "**Un jeu de plateau :** **[[pion_une_case]]** déplace une pièce d'une case, bien centrée (boutons ◀ ▶ ▲ ▼)."
+      ]
+    ],
+    [
+      "h2",
+      "Si ça ne marche pas"
+    ],
+    [
+      "ul",
+      [
+        "**Aucune case bleue :** le héros doit avoir le tag écrit dans **[[si_tour_de]]**, et **[[tour_suivant]]** doit avoir été lancé au démarrage.",
+        "**Les cases ne correspondent pas au dessin :** la grille est celle du premier décor en tuiles de la scène. Sans décor en tuiles, les cases font 80 px.",
+        "**Le héros ne bouge pas :** vérifie que la case touchée est bleue, et que **etat** vaut bien `1` à ce moment-là.",
+        "**Pour comparer**, ouvre l'exemple **Tactics tutorial** : chaque partie du Blueprint est dans un cadre qui l'explique."
+      ]
+    ]
+  ]
+}

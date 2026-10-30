@@ -1,0 +1,740 @@
+{
+  "titre_page": "Yop2D でブロック崩しを作るには？ | Yop2D ガイド",
+  "description": "Yop2D でコードなしにブロック崩しを作ろう：指で動かすパドル、見えない壁、はね返るボール、こわすブロック、ノードで点数とライフ。",
+  "h1": "ブロック崩しを作るには？",
+  "carte": [
+    "ブロック崩しを作る",
+    "指で動かすパドル、はね返るボール、こわすブロック、点数とライフ。"
+  ],
+  "etapes": [
+    [
+      "パドルを置く",
+      "{{modifier_propriete}} (paddle, y = 1700) → {{garder_dans_ecran}}、動き方は « 指でドラッグ »。"
+    ],
+    [
+      "画面を見えない壁でかこむ",
+      "{{lang:obj_prefix_zone}}を 4 つ：left_wall、right_wall、top_wall、bottom_wall。"
+    ],
+    [
+      "ボールを発射する",
+      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy); {{NoeudEventChaqueImage}} → {{pousser}} (ball)."
+    ],
+    [
+      "壁とパドルではね返る",
+      "{{NoeudEventCollisionAB}} (ball, left_wall) → {{modifier_variable}} (vx, 6)."
+    ],
+    [
+      "ブロックをこわす",
+      "{{NoeudEventCollisionTag}} (ball, brick) → {{detruire_objet}} → {{ajouter_variable}} (score, 10)."
+    ],
+    [
+      "ライフとゲームオーバー",
+      "{{NoeudEventCollisionAB}} (ball, bottom_wall) → {{ajouter_variable}} (lives, -1) → {{recommencer_scene}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "ブロック崩しでは、**ボール**が壁と、指で動かす**パドル**ではね返り、**ブロック**をこわします。ここでは 2 つの変数でボールを動かします。**vx**（右向きの速さ）と **vy**（下向きの速さ）です。壁にふれたら、ほかの数字をあげるだけです。"
+    ],
+    [
+      "besoin",
+      [
+        "**paddle** という名前の{{lang:obj_prefix_image}}を、画面の下に置きます（たとえば 208 x 48 px、y = 1700 あたり）。",
+        "**ball** という名前の{{lang:obj_prefix_image}}を、画面の真ん中に置きます（たとえば 44 x 44 px）。",
+        "ブロック：画面の上にならべる{{lang:obj_prefix_image}}（たとえば 128 x 64 px、1 列に 8 個）。",
+        "{{lang:obj_prefix_texte}}オブジェクトを 2 つ：**scoreText**（テキスト « 点数：0 »）と **livesText**（テキスト « ライフ：3 »）を、画面の上に置きます。"
+      ]
+    ],
+    [
+      "tip",
+      "このガイドは **1080 x 1920 の縦向き**のゲーム用に書かれています。画像は無料のパック **Puzzle (brick breaker)**（Kenney、自由に使える、CC0）のものです。Yop2D の**ライブラリ**の**ダウンロードできるパック**タブからダウンロードしてください。**paddleBlu**（パドル）、**ballBlue**（ボール）、**element_blue_rectangle_glossy**（ブロック、青・緑・赤・黄・紫・灰色）が入っています。自分で描いた絵も使えます。"
+    ],
+    [
+      "h2",
+      "ステップ 1：タグと変数"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "ブロックを 1 つ選びます。インスペクターの **{{lang:insp_label_tag}}** 欄に **brick** と書きます。すべてのブロックで同じようにします。",
+            "左のパネルで **{{lang:panneau_ress_variables}}** のセクションを開き、変数を 5 つ作ります。どれも範囲は **{{lang:var_scope_locale}}**、タイプは **{{lang:var_type_entier}}** です。"
+          ]
+        ],
+        [
+          "ul",
+          [
+            "**score**：初期値 **0**。",
+            "**lives**：初期値 **3**。",
+            "**bricks**：ゲームの**ブロックの数**（たとえば **24**）。すべてこわれたかどうかを知るために使います。",
+            "**vx** と **vy**：初期値 **0**。ボールの速さで、ゲーム開始時に決めます。"
+          ]
+        ],
+        [
+          "tip",
+          "ブロックを増やしたり減らしたりしたい？ **bricks** の初期値を変えるだけです。数が大きすぎると勝てず、小さすぎると早く勝ってしまいます。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 2：見えない壁"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "ボールは見えない壁ではね返ります。画面のまわりに{{lang:obj_prefix_zone}}を 4 つ置きます。ゾーンはゲーム中は見えませんが、ボールはふれることができます。"
+        ],
+        [
+          "ol",
+          [
+            "**left_wall** という名前の{{lang:obj_prefix_zone}}を追加します：X = `-300`、Y = `-400`、幅 `300`、高さ `2800`。",
+            "**right_wall** という名前の{{lang:obj_prefix_zone}}を追加します：X = `1080`、Y = `-400`、幅 `300`、高さ `2800`。",
+            "**top_wall** という名前の{{lang:obj_prefix_zone}}を追加します：X = `-300`、Y = `-300`、幅 `1680`、高さ `300`。",
+            "**bottom_wall** という名前の{{lang:obj_prefix_zone}}を追加します：X = `-300`、Y = `1920`、幅 `1680`、高さ `300`。"
+          ]
+        ],
+        [
+          "tip",
+          "壁はわざと厚くしてあります。速いボールもすりぬけられません。はじめの 3 つはボールをはね返し、**bottom_wall** はライフを失うために使います。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 3：パドルが指についてくる"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "**paddle** を選び、**⚙ Comportement de l'objet** をタッチして、**指でドラッグ** を選びます。プレイヤーがパドルをつかんで動かせます。",
+            "シーンの**{{lang:titre_blueprint}}**を開き、イベント **[[NoeudEventChaqueImage]]** を追加します。",
+            "**[[modifier_propriete]]** を追加します：対象 **paddle**、**プロパティ** = `y`、**値** = `1700`。",
+            "**[[garder_dans_ecran]]** を追加します：対象 **paddle**、**余白** = `0`。",
+            "3 つのノードを順番につなぎます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_propriete}}",
+              "paddle · y · 1700"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{garder_dans_ecran}}",
+              "paddle · 0"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**なぜこの 2 つのノード？** « 指でドラッグ » だと、パドルはどの向きにも動いてしまいます。フレームごとに同じ高さにもどし、画面の外に出ないようにすると、左右にしか動きません。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 4：ボールが動きだす"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "イベント **[[NoeudEventStart]]** を追加し、続けて **[[modifier_variable]]** を 2 つつなげます：変数 **vx**、値 `6`、次に変数 **vy**、値 `-9`。",
+            "イベント **[[NoeudEventChaqueImage]]** を追加し、続けて **[[pousser]]**：対象 **ball**。",
+            "**[[pousser]]** の設定ウィンドウで、**X を加算** の横の **🔗** ボタンをタッチし、**[[valeur_variable]]** を選びます。出てきた緑のノードで変数 **vx** を選びます。",
+            "**Y を加算** でも同じようにして、変数 **vy** を選びます。",
+            "それぞれのイベントをノードにつないでゲームを実行します。ボールは右上に飛んで、画面の外に出ていきます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{pousser}}",
+              "ball · X ← vx · Y ← vy"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**緑のノード**は、何も書かずに設定に値をあたえます。ここでは **[[valeur_variable]]** が **[[pousser]]** に « フレームごとに、右へ **vx**、下へ **vy** 動いてね » と伝えます。"
+        ],
+        [
+          "tip",
+          "**マイナス = 上。** Yop2D では Y が画面の下に向かって大きくなります。**vy = -9** でボールは上に飛びます。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 5：壁ではね返る"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "それぞれの壁が、ボールに新しい数字をあたえます。イベント **[[NoeudEventCollisionAB]]** を 3 つ追加します（**オブジェクト A** = **ball**）。"
+        ],
+        [
+          "ol",
+          [
+            "**オブジェクト B** = **left_wall** → **[[modifier_variable]]**：変数 **vx**、値 `6`（ボールは右にもどる）。",
+            "**オブジェクト B** = **right_wall** → **[[modifier_variable]]**：変数 **vx**、値 `-6`（ボールは左にもどる）。",
+            "**オブジェクト B** = **top_wall** → **[[modifier_variable]]**：変数 **vy**、値 `9`（ボールは下にもどる）。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · left_wall"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · right_wall"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · -6"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · top_wall"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 6：パドルではね返る"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "イベント **[[NoeudEventCollisionAB]]** を追加します：**オブジェクト A** = **ball**、**オブジェクト B** = **paddle**。",
+            "**[[modifier_variable]]** を追加します：変数 **vy**、値 `-9`（ボールが上にもどる）。",
+            "2 つ目の **[[modifier_variable]]** を追加します：変数 **vx**。値の横の **🔗** をタッチし、**[[valeur_hasard]]** を選んで、**から** = `-6`、**まで** = `6` にします。",
+            "ノードを順番につなぎます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · paddle"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · ← ランダムな数（-6 から 6）"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "パドルではね返るたびに、ボールは**ランダムな向き**に飛びます。ゲームは 2 回と同じになりません。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 7：ブロックをこわす"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "イベント **[[NoeudEventCollisionTag]]** を追加します：対象 **ball**、{{lang:Tag}} **brick**。",
+            "**[[detruire_objet]]** を追加し、対象に **{{lang:noeud_objet_implique_long}}** を選びます。ボールがいまふれたブロックのことです。",
+            "**[[condition]]** `=vy < 0` を追加します（« ボールが上に向かっている »）。出力 **{{lang:port_vrai}}** → **[[modifier_variable]]**：変数 **vy**、値 `9`。出力 **{{lang:port_faux}}** → **[[modifier_variable]]**：変数 **vy**、値 `-9`。",
+            "条件の **[[lang:port_ensuite]]** の出力から、**[[ajouter_variable]]** を追加します：変数 **score**、**{{lang:ajouter_variable.valeur}} = 10**。",
+            "**[[ajouter_variable]]** を追加します：変数 **bricks**、**{{lang:ajouter_variable.valeur}} = -1**。",
+            "**[[modifier_texte]]** を追加します：対象 **scoreText**、**{{lang:modifier_texte.valeur}}** = `=\"点数：\" + score`。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "ball · brick"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "{{lang:noeud_objet_implique}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_faux}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=vy < 0"
+            ],
+            [
+              "→",
+              "{{lang:port_ensuite}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "score · + 10"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "bricks · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**なぜ `=vy < 0`？** **vy** が 0 より小さいとき、ボールは上に向かっています。ブロックをこわしたあと、下に向かいます。そうでなければ下に向かっているので、上にもどります。"
+        ],
+        [
+          "tip",
+          "**テキストの最初の = の記号**は、テキストをそのまま書くのではなく**計算する**ことを Yop2D に伝えます（ガイド[コインを集めて点数を数える](guide:pieces-score)を見てください）。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 8：勝つ"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "ステップ 7 の **[[modifier_texte]]** のあとに、次を追加します。"
+        ],
+        [
+          "ol",
+          [
+            "**[[condition]]** `=bricks <= 0`.",
+            "**{{lang:port_vrai}}** の出力で：**[[modifier_variable]]** **vx** = `0`、**[[modifier_variable]]** **vy** = `0`（ボールが止まる）、次に **[[toast]]** でメッセージ **勝ったよ！**、次に **[[attendre]]** 2 秒、最後に **[[recommencer_scene]]**。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_texte}}",
+              "scoreText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=bricks <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "勝ったよ！"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[recommencer_scene]] は、オブジェクトを元の場所にもどし、**{{lang:var_scope_locale}}** の変数を初期値にもどします。ライフ 3、0 点、すべてのブロックで、ゲームが最初からやり直しになります。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 9：ライフとゲームオーバー"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "ボールが **bottom_wall**（画面の下）にふれると、プレイヤーはライフを 1 つ失います。"
+        ],
+        [
+          "ol",
+          [
+            "イベント **[[NoeudEventCollisionAB]]** を追加します：**オブジェクト A** = **ball**、**オブジェクト B** = **bottom_wall**。",
+            "**[[ajouter_variable]]**：変数 **lives**、**{{lang:ajouter_variable.valeur}} = -1**。",
+            "**[[modifier_texte]]**：対象 **livesText**、**{{lang:modifier_texte.valeur}}** = `=\"ライフ：\" + lives`。",
+            "**[[condition]]** `=lives <= 0`.",
+            "出力 **{{lang:port_vrai}}**（ライフなし）：**[[deplacer]]** **ball** を X = `518`、Y = `1000` へ、**[[modifier_variable]]** **vx** = `0`、**[[modifier_variable]]** **vy** = `0`（ボールを真ん中にもどして止める）、次に **[[toast]]** « ゲームオーバー！ »、**[[attendre]]** 2 秒、**[[recommencer_scene]]**。",
+            "出力 **{{lang:port_faux}}**（ライフが残っている）：**[[deplacer]]** **ball** を X = `518`、Y = `1000` へ、次に **[[modifier_variable]]** **vy** = `-9`、次に **[[modifier_variable]]** **vx** = `6`。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "ball · bottom_wall"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "lives · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "livesText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "ball · 518 · 1000"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "ゲームオーバー！"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "cond",
+              "{{condition}}",
+              "=lives <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_faux}}"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "ball · 518 · 1000"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · -9"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**なぜ待つ前にボールを止めるの？** 2 秒待っているあいだも、ゲームは動き続けています。ボールが画面の下に残ったままだと、フレームごとにライフが減り、ライフの数がとても小さくなってしまいます。真ん中にもどして止めておけば、じゃまをしません。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "さらに進むために"
+    ],
+    [
+      "ul",
+      [
+        "**音：** **[[detruire_objet]]** のあとに **[[jouer_son]]** を追加します（ブロックがこわれるときの「カチッ」）。パドルのイベントにも追加できます。",
+        "**いろいろな色：** 色がちがっても、すべてのブロックに同じタグ **brick** をつければ、設定は 1 つで足ります。",
+        "**もっと速いボール：** 数字 `6`、`-6`、`9`、`-9` を全部変えます（たとえば `8`、`-8`、`12`、`-12`）。",
+        "**火花：** ブロックがこわれるときに **[[effet_particules]]** を追加します（ガイド[パーティクルとエフェクト](guide:particules-effets)を見てください）。"
+      ]
+    ],
+    [
+      "h2",
+      "うまく動かないときは"
+    ],
+    [
+      "ul",
+      [
+        "**ボールが動かない：** 開始時に **vx** と **vy** が変わっているか、**[[pousser]]** が緑の **[[valeur_variable]]** ノードにつながっているかを確かめます（**X を加算** をタッチ：その行に緑の線が見えるはずです）。",
+        "**ボールが壁やブロックをすりぬける：** 名前（**ball**、**paddle**、**left_wall**…）とタグ **brick** が、どこでも同じ書き方（大文字なし）か確かめます。ボールが速すぎるときは、ブロックを少し大きくするか、ボールをおそくします。",
+        "**パドルが上や下に動く：** **[[modifier_propriete]]** ノードは **{{NoeudEventChaqueImage}}** につなぎ、**プロパティ** = `y` にします。",
+        "**勝つのが早すぎる、または勝てない：** 変数 **bricks** は、ゲームのブロックの数とちょうど同じ値にします。",
+        "**くらべるには**、テストプロジェクトを開きます（ノードはパートごとに整理され、枠とふせんで各部分を説明しています）。"
+      ]
+    ]
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "titre_page": "Como adicionar luzes, sombras e um ciclo de dia e noite no Yop2D? | Guia Yop2D",
+  "description": "Dê vida ao seu jogo no Yop2D: uma noite escura, uma tocha que segue seu herói, sombras suaves sob os personagens e um dia que vira noite sozinho. Sem código.",
+  "h1": "Como adicionar luzes, sombras e um ciclo de dia e noite?",
+  "carte": [
+    "Luzes, sombras, dia e noite",
+    "Escureça o jogo, acenda uma tocha e deixe o dia passar."
+  ],
+  "etapes": [
+    [
+      "Escurecer o jogo",
+      "Adicione o nó « Escuridão e clima de luz »."
+    ],
+    [
+      "Acender uma tocha",
+      "Adicione « Fonte de luz » a um objeto."
+    ],
+    [
+      "Adicionar uma sombra",
+      "Marque « Sombra sob o objeto » no Inspetor."
+    ],
+    [
+      "Deixar o dia passar",
+      "Adicione o nó « Ciclo de dia e noite »."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Com alguns nós, um jogo deixa de ser chapado e ganha atmosfera: uma noite escura, uma lanterna que segue seu herói, sombras suaves e um sol que se põe sozinho. Nada para escrever: você só escolhe valores. As luzes são desenhadas na tela (não contornam paredes), o que mantém o jogo rápido em qualquer celular."
+    ],
+    [
+      "besoin",
+      [
+        "um projeto aberto no editor;",
+        "imagens que fiquem boas no escuro (os packs 3D da biblioteca, por exemplo). Uma imagem de pixel art muito ampliada fica borrada: ative **Pixel art: pixels nítidos** nos ajustes do jogo."
+      ]
+    ],
+    [
+      "h2",
+      "Passo 1: escurecer o jogo"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Abra o **Blueprint** e adicione [[lumiere_ambiance]] depois de [[NoeudEventStart]].",
+            "Escolha a **escuridão**: 0 é pleno dia, 100 é preto total. Para uma noite em que ainda se veja a cena, tente 85.",
+            "Escolha a **cor da noite**: um azul escuro parece natural, o preto dá mais medo."
+          ]
+        ],
+        [
+          "tip",
+          "A escuridão e a cor mudam suavemente. Com 30 segundos, um dia vira noite, como um pôr do sol."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 2: acender uma tocha"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Adicione [[lumiere_source]] e escolha o objeto que carrega a luz: uma tocha, uma janela, uma lanterna.",
+            "Ajuste o **raio** (a distância do centro, em pixels), a **iluminação** (100 é normal, até 300 para uma luz mais forte) e o **brilho colorido**.",
+            "Escolha a **oscilação**: vela para uma chama suave, tocha para uma chama forte, pisca para uma lâmpada falhando.",
+            "A luz segue o objeto. Para uma lanterna que segue seu herói, coloque um pequeno objeto invisível no herói (um objeto filho) e acenda esse objeto."
+          ]
+        ],
+        [
+          "tip",
+          "Com **Acendimento = Só quando escurece**, a luz acende sozinha ao cair da noite e apaga de dia. Use [[lumiere_eteindre]] para apagar uma luz com um nó."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 3: adicionar uma sombra"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Selecione um personagem na cena e abra o **Inspetor**, parte **Aparência**.",
+            "Marque **Sombra sob o objeto**: ajuste sua **força** e sua **largura**.",
+            "A sombra segue o objeto por toda parte. O nó [[ombre_objet]] faz o mesmo, se você preferir ligá-la durante o jogo."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 4: deixar o dia passar"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Adicione [[lumiere_cycle]] no início do jogo.",
+            "Escolha a **duração de um dia completo**: de 30 a 120 segundos parece vivo. Depois o **momento de início** (pleno dia, tarde, noite profunda ou amanhecer) e se **repete sem fim**.",
+            "Coloque suas luzes em **Só quando escurece**: elas acendem sozinhas ao cair da noite."
+          ]
+        ],
+        [
+          "tip",
+          "Duração 0 para o ciclo onde está. Um jogo em pausa também congela o ciclo. Para pular para um momento, use [[lumiere_cycle]] de novo com outro momento de início: o exemplo « Day and night village » faz isso com 5 botões."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Para ir além"
+    ],
+    [
+      "ul",
+      [
+        "Abra os modelos **Tocha e sombras** e **Dia e noite** (aba Modelos) para ver tudo já configurado.",
+        "Baixe o exemplo **Day and night village** (aba Exemplos): uma vila em 3D, janelas que acendem à noite e um cavaleiro com uma lanterna.",
+        "Até 8 luzes podem brilhar ao mesmo tempo, para o jogo continuar rápido em todos os aparelhos."
+      ]
+    ],
+    [
+      "h2",
+      "Se não funcionar"
+    ],
+    [
+      "ul",
+      [
+        "**Não vejo nenhuma luz:** a escuridão provavelmente está em 0. Uma luz só aparece numa cena mais escura.",
+        "**A luz não segue meu herói:** prenda-a a um objeto colocado no herói (um objeto filho), não a um objeto fixo.",
+        "**A noite não está escura o bastante:** aumente a escuridão (até 100) e escolha uma cor mais escura."
+      ]
+    ]
+  ]
+}

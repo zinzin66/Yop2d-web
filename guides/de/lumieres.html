@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie füge ich in Yop2D Licht, Schatten und einen Tag-Nacht-Zyklus hinzu? | Yop2D-Anleitung</title>
+<meta name="description" content="Erwecke dein Spiel in Yop2D zum Leben: eine dunkle Nacht, eine Fackel, die deinem Helden folgt, weiche Schatten unter den Figuren und ein Tag, der von allein zur Nacht wird. Ohne Code.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/lumieres.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/lumieres.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/lumieres.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/lumieres.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/lumieres.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/lumieres.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/lumieres.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/lumieres.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/lumieres.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/lumieres.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie füge ich Licht, Schatten und einen Tag-Nacht-Zyklus hinzu?",
+ "description": "Erwecke dein Spiel in Yop2D zum Leben: eine dunkle Nacht, eine Fackel, die deinem Helden folgt, weiche Schatten unter den Figuren und ein Tag, der von allein zur Nacht wird. Ohne Code.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Das Spiel verdunkeln",
+   "text": "Füge den Knoten „Dunkelheit und Lichtstimmung“ hinzu."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Eine Fackel anzünden",
+   "text": "Füge „Lichtquelle“ an einem Objekt hinzu."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Einen Schatten hinzufügen",
+   "text": "Setze im Inspektor das Häkchen bei „Schatten unter dem Objekt“."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Den Tag vergehen lassen",
+   "text": "Füge den Knoten „Tag-Nacht-Zyklus“ hinzu."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../de/index.html">← Yop2D</a>
+<h1>Wie füge ich Licht, Schatten und einen Tag-Nacht-Zyklus hinzu?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../lumieres.html" hreflang="fr">Français</a> · <a href="../en/lumieres.html" hreflang="en">English</a> · <a href="../es/lumieres.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/lumieres.html" hreflang="it">Italiano</a> · <a href="../pt/lumieres.html" hreflang="pt">Português</a> · <a href="../ru/lumieres.html" hreflang="ru">Русский</a> · <a href="../zh/lumieres.html" hreflang="zh">中文</a> · <a href="../ja/lumieres.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Mit ein paar Knoten wird ein Spiel von flach zu stimmungsvoll: eine dunkle Nacht, eine Laterne, die deinem Helden folgt, weiche Schatten und eine Sonne, die von allein untergeht. Du musst nichts schreiben: Du wählst nur Werte. Die Lichter werden auf den Bildschirm gezeichnet (sie umgehen keine Wände), so bleibt das Spiel auf jedem Handy schnell.</p>
+<div class="besoin">
+<b>Du brauchst:</b>
+<ul><li>ein im Editor geöffnetes Projekt;</li><li>Bilder, die im Dunkeln gut aussehen (zum Beispiel die 3D-Packs der Bibliothek). Ein stark vergrößertes Pixel-Art-Bild wirkt unscharf: Aktiviere <strong>Pixel-Art: scharfe Pixel</strong> in den Spieleinstellungen.</li></ul>
+</div>
+<h2>Schritt 1: das Spiel verdunkeln</h2>
+<div class="method">
+<ol><li>Öffne den <strong>Blueprint</strong> und füge „Dunkelheit und Lichtstimmung“ nach „Beim Start“ hinzu.</li><li>Wähle die <strong>Dunkelheit</strong>: 0 ist voller Tag, 100 ist völlig schwarz. Für eine Nacht, in der man die Szene noch sieht, probiere 85.</li><li>Wähle die <strong>Farbe der Nacht</strong>: Ein dunkles Blau wirkt natürlich, Schwarz ist gruseliger.</li></ol>
+<div class="tip">👉 Dunkelheit und Farbe ändern sich sanft. Mit 30 Sekunden wird aus einem Tag eine Nacht, wie bei einem Sonnenuntergang.</div>
+</div>
+<h2>Schritt 2: eine Fackel anzünden</h2>
+<div class="method">
+<ol><li>Füge „Lichtquelle (Fackel, Laterne…)“ hinzu und wähle das Objekt, das das Licht trägt: eine Fackel, ein Fenster, eine Laterne.</li><li>Stelle den <strong>Radius</strong> (Abstand vom Zentrum, in Pixeln), die <strong>Beleuchtung</strong> (100 ist normal, bis 300 für ein stärkeres Licht) und den <strong>farbigen Schein</strong> ein.</li><li>Wähle das <strong>Flackern</strong>: Kerze für eine sanfte Flamme, Fackel für eine kräftige, flackert für eine defekte Lampe.</li><li>Das Licht folgt seinem Objekt. Für eine Laterne, die deinem Helden folgt, setze ein kleines unsichtbares Objekt auf den Helden (ein Kindobjekt) und zünde dieses Objekt an.</li></ol>
+<div class="tip">👉 Mit <strong>Einschalten = Nur wenn es dunkel ist</strong> geht das Licht bei Einbruch der Nacht von allein an und tagsüber aus. Mit „Licht des Objekts ausschalten“ schaltest du ein Licht per Knoten aus.</div>
+</div>
+<h2>Schritt 3: einen Schatten hinzufügen</h2>
+<div class="method">
+<ol><li>Wähle eine Figur in der Szene und öffne den <strong>Inspektor</strong>, Teil <strong>Aussehen</strong>.</li><li>Setze das Häkchen bei <strong>Schatten unter dem Objekt</strong>: Stelle <strong>Stärke</strong> und <strong>Breite</strong> ein.</li><li>Der Schatten folgt dem Objekt überallhin. Der Knoten „Schatten unter dem Objekt“ macht dasselbe, falls du ihn lieber während des Spiels einschaltest.</li></ol>
+</div>
+<h2>Schritt 4: den Tag vergehen lassen</h2>
+<div class="method">
+<ol><li>Füge „Tag-Nacht-Zyklus“ am Anfang des Spiels hinzu.</li><li>Wähle die <strong>Dauer eines ganzen Tages</strong>: 30 bis 120 Sekunden wirken lebendig. Dann den <strong>Startzeitpunkt</strong> (voller Tag, Abend, tiefe Nacht oder Morgendämmerung) und ob er sich <strong>endlos wiederholt</strong>.</li><li>Stelle deine Lichter auf <strong>Nur wenn es dunkel ist</strong>: Sie gehen bei Einbruch der Nacht von allein an.</li></ol>
+<div class="tip">👉 Dauer 0 hält den Zyklus an, wo er ist. Ein pausiertes Spiel friert den Zyklus ebenfalls ein. Um zu einem Zeitpunkt zu springen, nutze „Tag-Nacht-Zyklus“ erneut mit einem anderen Startzeitpunkt: Das Beispiel „Day and night village“ macht das mit 5 Buttons.</div>
+</div>
+<h2>Zum Weitermachen</h2>
+<ul><li>Öffne die Vorlagen <strong>Fackel und Schatten</strong> und <strong>Tag und Nacht</strong> (Reiter Vorlagen), um alles schon eingestellt zu sehen.</li><li>Lade das Beispiel <strong>Day and night village</strong> herunter (Reiter Beispiele): ein 3D-Dorf, Fenster, die nachts aufleuchten, und ein Ritter mit Laterne.</li><li>Bis zu 8 Lichter können gleichzeitig leuchten, damit das Spiel auf jedem Gerät schnell bleibt.</li></ul>
+<h2>Wenn es nicht funktioniert</h2>
+<ul><li><strong>Ich sehe kein Licht:</strong> Die Dunkelheit steht wahrscheinlich auf 0. Ein Licht sieht man nur in einer dunkleren Szene.</li><li><strong>Das Licht folgt meinem Helden nicht:</strong> Hänge es an ein Objekt, das auf dem Helden liegt (ein Kindobjekt), nicht an ein festes Objekt.</li><li><strong>Die Nacht ist nicht dunkel genug:</strong> Erhöhe die Dunkelheit (bis 100) und wähle eine dunklere Farbe.</li></ul>
+
+<div class="nav">
+<a href="../de/particules-effets.html">← Partikel und Effekte</a>
+<a href="../de/histoire-choix.html">Nächste Anleitung: Geschichte mit Entscheidungen (Visual Novel) →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../de/index.html">Offizielle Website</a> · <a href="../../noeuds/de.html">Knotenreferenz</a></p>
+</footer>
+</body>
+</html>

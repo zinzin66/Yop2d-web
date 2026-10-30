@@ -1,0 +1,198 @@
+{
+  "titre_page": "Come fare un gioco tattico a turni in Yop2D? | Guida Yop2D",
+  "description": "Fai un gioco tattico su una griglia in Yop2D, senza codice: turni, caselle blu raggiungibili, terreni, movimento, attacco e vita con i nodi.",
+  "h1": "Come fare un gioco tattico?",
+  "carte": [
+    "Fare un gioco tattico",
+    "Turni, caselle blu, terreni, movimento e attacco su una griglia."
+  ],
+  "etapes": [
+    [
+      "Dare una scheda a ogni unità",
+      "{{NoeudEventStart}} → {{definir_fiche}} (vita, attacco, difesa, movimento, portata)."
+    ],
+    [
+      "Iniziare il turno del giocatore",
+      "{{tour_suivant}} (joueur, ennemi) avvia l'evento locale \"tour_joueur\"."
+    ],
+    [
+      "Mostrare dove può andare l'eroe",
+      "{{NoeudEventClicObjet}} → {{si_tour_de}} → {{montrer_cases}}."
+    ],
+    [
+      "Far camminare l'eroe",
+      "{{NoeudEventClicObjet}} (il terreno) → {{si_case_accessible}} → {{chemin_vers_case}}."
+    ],
+    [
+      "Attaccare",
+      "{{NoeudEventClicObjet}} (il mostro) → {{si_case_accessible}} → {{attaquer}}."
+    ],
+    [
+      "Il turno dei mostri",
+      "\"tour_ennemi\" → {{chemin_vers_objet}} (accanto all'eroe) → {{attaquer}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "In un gioco **tattico**, i giocatori giocano a **turni** su una griglia: scegli un'unità, vedi le caselle che può raggiungere, la muovi e poi attacca. Questa guida costruisce il gioco più semplice possibile: **un eroe e un mostro**. Tutto è già pronto nell'esempio **Tactics tutorial** (scheda **Esempi** della schermata iniziale): apri il suo Blueprint, ogni passo è in un **riquadro colorato** con un piccolo **?** che lo spiega."
+    ],
+    [
+      "besoin",
+      [
+        "una mappa di tile a tua scelta (la griglia del gioco **è** la griglia di questa mappa di tile);",
+        "un'{{lang:obj_prefix_image}} chiamata **hero1** con il tag **joueur**, e un'altra chiamata **foe1** con il tag **ennemi**;",
+        "una {{lang:obj_prefix_zone}} chiamata **terrain** che copre tutta la mappa (è quella che si tocca per scegliere una casella);",
+        "una variabile **etat** (intero, locale) per sapere a che punto siamo: 0 = scegliere un eroe, 1 = eroe scelto, 2 = eroe spostato."
+      ]
+    ],
+    [
+      "tip",
+      "I **terreni** (bosco, sabbia, montagna…) si impostano nell'editor di tile, nella parte **Terreni dei tile**: costo in passi, bloccato o no, bonus di difesa. La montagna blocca il passaggio, il bosco costa 2 passi."
+    ],
+    [
+      "h2",
+      "Passo 1: le schede delle unità"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Aggiungi l'evento **[[NoeudEventStart]]**.",
+            "Aggiungi **[[definir_fiche]]** per **hero1**: vita `20`, attacco `6`, difesa `2`, movimento `4`, portata `1`.",
+            "Aggiungi un secondo **[[definir_fiche]]** per **foe1**, con i suoi numeri.",
+            "Collega i nodi in ordine e aggiungi **[[tour_suivant]]** con le squadre `joueur,ennemi`."
+          ]
+        ],
+        [
+          "tip",
+          "La scheda è salvata nell'oggetto: puoi leggerla ovunque con una formula, per esempio `=hero1.vie`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 2: il turno del giocatore"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Aggiungi l'evento **[[NoeudEventPersonnalise]]** e scrivi il nome `tour_joueur`. Parte da solo all'inizio del turno del giocatore.",
+            "Metti **etat** a `0` con **[[modifier_variable]]**, poi **[[cacher_cases]]** per cancellare le vecchie caselle."
+          ]
+        ],
+        [
+          "p",
+          "Per ogni squadra, **[[tour_suivant]]** avvia l'evento locale \"tour_\" seguito dal nome della squadra: `tour_joueur`, poi `tour_ennemi`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 3: tocca l'eroe e guarda le caselle blu"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Aggiungi **[[NoeudEventClicObjet]]** su **hero1**.",
+            "Aggiungi **[[si_tour_de]]** con la squadra `joueur` e, sull'uscita **{{lang:port_vrai}}**, una **[[condition]]** `etat < 2`.",
+            "Aggiungi **[[modifier_variable]]**: **etat** = `1`.",
+            "Aggiungi **[[montrer_cases]]** su **hero1**: tipo di zona **Movimento (i muri contano)**, numero di passi `=hero1.mouvement`, colore blu, **Scrivere i passi su ogni casella** = sì, **Questi tag bloccano il passaggio** = `joueur,ennemi`."
+          ]
+        ],
+        [
+          "tip",
+          "I numeri sulle caselle sono i **passi** necessari per arrivarci. Le caselle di bosco costano 2: l'eroe va meno lontano."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 4: tocca una casella blu e l'eroe cammina"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Aggiungi **[[NoeudEventClicObjet]]** su **terrain**, poi una **[[condition]]** `etat = 1`.",
+            "Aggiungi **[[si_case_accessible]]**. Per la colonna e la riga, tocca **🔗** e scegli i nodi verdi **[[valeur_colonne_touchee]]** e **[[valeur_ligne_touchee]]**: nessuna formula da scrivere.",
+            "Sull'uscita **{{lang:port_vrai}}**: **[[modifier_variable]]** **etat** = `4` (l'eroe cammina), poi **[[chemin_vers_case]]** su **hero1**, con gli stessi nodi verdi e **Questi tag bloccano il percorso** = `joueur,ennemi`.",
+            "Sull'uscita **{{lang:port_arrive}}**, chiama l'evento locale `apres_deplacement` con **[[appeler_evenement]]**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 5: la zona d'attacco, poi l'attacco"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Nell'evento locale **apres_deplacement**: **[[cacher_cases]]**, **etat** = `2`, poi **[[montrer_cases]]** con tipo **Attacco / portata (supera i muri)**, numero di passi `=hero1.portee`, colore rosso, con il nome di zona `attaque`.",
+            "Aggiungi **[[NoeudEventClicObjet]]** su **foe1**, una **[[condition]]** `etat = 2` e **[[si_case_accessible]]** con il nome di zona `attaque`.",
+            "Su **{{lang:port_vrai}}**: **[[attaquer]]** (oggetto A = **hero1**, oggetto B = **foe1**). Il danno è l'attacco, meno la difesa del mostro, meno la difesa del suo terreno.",
+            "Uscita **Ancora vivo**: aggiorna il suo testo di vita. Uscita **Senza vita**: il mostro è distrutto, aggiungi la vittoria."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 6: il turno dei mostri"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Aggiungi l'evento locale `tour_ennemi`.",
+            "Aggiungi **[[chemin_vers_objet]]** su **foe1**, oggetto B = **hero1**, **Fermarsi** = **Su una casella vicina, centrato**, **Questi tag bloccano il percorso** = `joueur,ennemi`.",
+            "Sull'uscita **{{lang:port_arrive}}**, chiama un evento locale in cui **foe1** **[[attaquer]]** **hero1**.",
+            "Dopo qualche secondo (**[[attendre]]**), **[[chemin_arreter]]** poi **[[tour_suivant]]**: il turno torna al giocatore."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Andare oltre"
+    ],
+    [
+      "ul",
+      [
+        "**Più eroi:** aggiungi **[[marquer_joue]]** e **[[si_a_joue]]** perché un eroe giochi una sola volta per turno (è ciò che fa l'esempio **Tactics demo**).",
+        "**Una barra della vita:** leggi `=hero1.vie` e `=hero1.vie_max` in un testo o in una barra di avanzamento.",
+        "**Curare:** **[[soigner]]** restituisce vita senza superare il massimo.",
+        "**Un gioco da tavolo:** **[[pion_une_case]]** sposta una pedina di una casella, ben centrata (pulsanti ◀ ▶ ▲ ▼)."
+      ]
+    ],
+    [
+      "h2",
+      "Se non funziona"
+    ],
+    [
+      "ul",
+      [
+        "**Nessuna casella blu:** l'eroe deve avere il tag scritto in **[[si_tour_de]]**, e **[[tour_suivant]]** deve essere stato avviato all'inizio.",
+        "**Le caselle non corrispondono al disegno:** la griglia è quella della prima mappa di tile della scena. Senza mappa di tile, le caselle sono di 80 px.",
+        "**L'eroe non si muove:** controlla che la casella toccata sia blu e che **etat** valga `1` in quel momento.",
+        "**Per confrontare**, apri l'esempio **Tactics tutorial**: ogni parte del Blueprint è in un riquadro che la spiega."
+      ]
+    ]
+  ]
+}

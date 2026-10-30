@@ -1,0 +1,198 @@
+{
+  "titre_page": "How to make a turn-based tactics game in Yop2D? | Yop2D Guide",
+  "description": "Make a tactics game on a grid in Yop2D, no code: turns, blue reachable cells, terrains, movement, attack and health with nodes.",
+  "h1": "How to make a tactics game?",
+  "carte": [
+    "Make a tactics game",
+    "Turns, blue cells, terrains, movement and attack on a grid."
+  ],
+  "etapes": [
+    [
+      "Give a sheet to each unit",
+      "{{NoeudEventStart}} → {{definir_fiche}} (health, attack, defense, movement, range)."
+    ],
+    [
+      "Start the player's turn",
+      "{{tour_suivant}} (joueur, ennemi) runs the local event \"tour_joueur\"."
+    ],
+    [
+      "Show where the hero can go",
+      "{{NoeudEventClicObjet}} → {{si_tour_de}} → {{montrer_cases}}."
+    ],
+    [
+      "Make the hero walk",
+      "{{NoeudEventClicObjet}} (the terrain) → {{si_case_accessible}} → {{chemin_vers_case}}."
+    ],
+    [
+      "Attack",
+      "{{NoeudEventClicObjet}} (the monster) → {{si_case_accessible}} → {{attaquer}}."
+    ],
+    [
+      "The monsters' turn",
+      "\"tour_ennemi\" → {{chemin_vers_objet}} (next to the hero) → {{attaquer}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "In a **tactics** game, players take **turns** on a grid: you choose a unit, see the cells it can reach, move it, then it attacks. This guide builds the simplest game possible: **one hero and one monster**. Everything is already done in the **Tactics tutorial** example (**Examples** tab of the start screen): open its Blueprint, each step is in a **colored frame** with a small **?** that explains it."
+    ],
+    [
+      "besoin",
+      [
+        "a tile map of your choice (the game grid **is** the grid of this tile map);",
+        "an {{lang:obj_prefix_image}} named **hero1** with the tag **joueur**, and another named **foe1** with the tag **ennemi**;",
+        "a {{lang:obj_prefix_zone}} named **terrain** covering the whole map (it is the one you touch to choose a cell);",
+        "a variable **etat** (integer, local) to know where we are: 0 = choose a hero, 1 = hero chosen, 2 = hero moved."
+      ]
+    ],
+    [
+      "tip",
+      "**Terrains** (forest, sand, mountain…) are set in the tile editor, **Terrains of the tiles** part: step cost, blocked or not, defense bonus. The mountain blocks the way, the forest costs 2 steps."
+    ],
+    [
+      "h2",
+      "Step 1: the unit sheets"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Add the **[[NoeudEventStart]]** event.",
+            "Add **[[definir_fiche]]** for **hero1**: health `20`, attack `6`, defense `2`, movement `4`, range `1`.",
+            "Add a second **[[definir_fiche]]** for **foe1**, with its own numbers.",
+            "Link the nodes in order, then add **[[tour_suivant]]** with the teams `joueur,ennemi`."
+          ]
+        ],
+        [
+          "tip",
+          "The sheet is stored in the object: you can read it anywhere with a formula, for example `=hero1.vie`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 2: the player's turn"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Add the **[[NoeudEventPersonnalise]]** event and write the name `tour_joueur`. It starts by itself at the beginning of the player's turn.",
+            "Set **etat** to `0` with **[[modifier_variable]]**, then **[[cacher_cases]]** to clear the old cells."
+          ]
+        ],
+        [
+          "p",
+          "For each team, **[[tour_suivant]]** runs the local event \"tour_\" followed by the team name: `tour_joueur`, then `tour_ennemi`."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 3: touch the hero, see the blue cells"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Add **[[NoeudEventClicObjet]]** on **hero1**.",
+            "Add **[[si_tour_de]]** with the team `joueur`, then on the **{{lang:port_vrai}}** output a **[[condition]]** `etat < 2`.",
+            "Add **[[modifier_variable]]**: **etat** = `1`.",
+            "Add **[[montrer_cases]]** on **hero1**: zone type **Movement (walls count)**, number of steps `=hero1.mouvement`, blue color, **Write the step count on each cell** = yes, **These tags block the way** = `joueur,ennemi`."
+          ]
+        ],
+        [
+          "tip",
+          "The numbers on the cells are the **steps** needed to get there. Forest cells cost 2: the hero goes less far."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 4: touch a blue cell, the hero walks"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Add **[[NoeudEventClicObjet]]** on **terrain**, then a **[[condition]]** `etat = 1`.",
+            "Add **[[si_case_accessible]]**. For the column and the row, touch **🔗** and choose the green nodes **[[valeur_colonne_touchee]]** and **[[valeur_ligne_touchee]]**: no formula to write.",
+            "On the **{{lang:port_vrai}}** output: **[[modifier_variable]]** **etat** = `4` (the hero is walking), then **[[chemin_vers_case]]** on **hero1**, with the same green nodes and **These tags block the path** = `joueur,ennemi`.",
+            "On the **{{lang:port_arrive}}** output, call the local event `apres_deplacement` with **[[appeler_evenement]]**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 5: the attack zone, then the attack"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "In the local event **apres_deplacement**: **[[cacher_cases]]**, **etat** = `2`, then **[[montrer_cases]]** with type **Attack / range (goes over walls)**, number of steps `=hero1.portee`, red color, with the zone name `attaque`.",
+            "Add **[[NoeudEventClicObjet]]** on **foe1**, a **[[condition]]** `etat = 2` and **[[si_case_accessible]]** with the zone name `attaque`.",
+            "On **{{lang:port_vrai}}**: **[[attaquer]]** (object A = **hero1**, object B = **foe1**). Damage is the attack, minus the monster's defense, minus its terrain's defense.",
+            "**Still alive** output: update its health text. **Out of health** output: the monster is destroyed, add the victory."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 6: the monsters' turn"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Add the local event `tour_ennemi`.",
+            "Add **[[chemin_vers_objet]]** on **foe1**, object B = **hero1**, **Stop** = **On a neighbor cell, centered**, **These tags block the path** = `joueur,ennemi`.",
+            "On the **{{lang:port_arrive}}** output, call a local event where **foe1** **[[attaquer]]** **hero1**.",
+            "After a few seconds (**[[attendre]]**), **[[chemin_arreter]]** then **[[tour_suivant]]**: the turn goes back to the player."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Going further"
+    ],
+    [
+      "ul",
+      [
+        "**Several heroes:** add **[[marquer_joue]]** and **[[si_a_joue]]** so a hero plays only once per turn (this is what the **Tactics demo** example does).",
+        "**A health bar:** read `=hero1.vie` and `=hero1.vie_max` in a text or a progress bar.",
+        "**Healing:** **[[soigner]]** gives health back without going over the maximum.",
+        "**A board game:** **[[pion_une_case]]** moves a piece one cell, well centered (◀ ▶ ▲ ▼ buttons)."
+      ]
+    ],
+    [
+      "h2",
+      "If it does not work"
+    ],
+    [
+      "ul",
+      [
+        "**No blue cell:** the hero must have the tag written in **[[si_tour_de]]**, and **[[tour_suivant]]** must have been run at the start.",
+        "**The cells do not match the picture:** the grid is the one of the first tile map of the scene. Without a tile map, cells are 80 px.",
+        "**The hero does not move:** check that the touched cell is blue, and that **etat** is `1` at that moment.",
+        "**To compare**, open the **Tactics tutorial** example: each part of the Blueprint is in a frame that explains it."
+      ]
+    ]
+  ]
+}

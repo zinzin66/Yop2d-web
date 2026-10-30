@@ -1,0 +1,145 @@
+{
+  "titre_page": "¿Cómo añadir luces, sombras y un ciclo de día y noche en Yop2D? | Guía Yop2D",
+  "description": "Da vida a tu juego en Yop2D: una noche oscura, una antorcha que sigue a tu héroe, sombras suaves bajo los personajes y un día que se convierte en noche solo. Sin código.",
+  "h1": "¿Cómo añadir luces, sombras y un ciclo de día y noche?",
+  "carte": [
+    "Luces, sombras, día y noche",
+    "Oscurece el juego, enciende una antorcha y deja pasar el día."
+  ],
+  "etapes": [
+    [
+      "Oscurecer el juego",
+      "Añade el nodo « Oscuridad y ambiente de luz »."
+    ],
+    [
+      "Encender una antorcha",
+      "Añade « Fuente de luz » a un objeto."
+    ],
+    [
+      "Añadir una sombra",
+      "Marca « Sombra bajo el objeto » en el Inspector."
+    ],
+    [
+      "Dejar pasar el día",
+      "Añade el nodo « Ciclo de día y noche »."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Con unos pocos nodos, un juego pasa de plano a lleno de atmósfera: una noche oscura, un farol que sigue a tu héroe, sombras suaves y un sol que se pone solo. No hay nada que escribir: solo eliges valores. Las luces se dibujan en la pantalla (no rodean las paredes), lo que mantiene el juego rápido en cualquier móvil."
+    ],
+    [
+      "besoin",
+      [
+        "un proyecto abierto en el editor;",
+        "imágenes que se vean bien en la oscuridad (los packs 3D de la biblioteca, por ejemplo). Una imagen de pixel art muy ampliada se ve borrosa: activa **Pixel art: píxeles nítidos** en los ajustes del juego."
+      ]
+    ],
+    [
+      "h2",
+      "Paso 1: oscurecer el juego"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Abre el **Blueprint** y añade [[lumiere_ambiance]] después de [[NoeudEventStart]].",
+            "Elige la **oscuridad**: 0 es pleno día, 100 es negro total. Para una noche en la que aún se vea la escena, prueba 85.",
+            "Elige el **color de la noche**: un azul oscuro se ve natural, el negro da más miedo."
+          ]
+        ],
+        [
+          "tip",
+          "La oscuridad y el color cambian suavemente. Con 30 segundos, un día se convierte en noche, como un atardecer."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 2: encender una antorcha"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Añade [[lumiere_source]] y elige el objeto que lleva la luz: una antorcha, una ventana, un farol.",
+            "Ajusta el **radio** (la distancia al centro, en píxeles), la **iluminación** (100 es normal, hasta 300 para una luz más fuerte) y el **resplandor de color**.",
+            "Elige el **parpadeo**: vela para una llama suave, antorcha para una llama fuerte, parpadea para una lámpara que falla.",
+            "La luz sigue a su objeto. Para un farol que siga a tu héroe, pon un pequeño objeto invisible sobre el héroe (un objeto hijo) y enciende ese objeto."
+          ]
+        ],
+        [
+          "tip",
+          "Con **Encendido = Solo cuando oscurece**, la luz se enciende sola al caer la noche y se apaga de día. Usa [[lumiere_eteindre]] para apagar una luz con un nodo."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 3: añadir una sombra"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Selecciona un personaje en la escena y abre el **Inspector**, parte **Apariencia**.",
+            "Marca **Sombra bajo el objeto**: ajusta su **fuerza** y su **anchura**.",
+            "La sombra sigue al objeto a todas partes. El nodo [[ombre_objet]] hace lo mismo, si prefieres activarla durante el juego."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 4: dejar pasar el día"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Añade [[lumiere_cycle]] al empezar el juego.",
+            "Elige la **duración de un día completo**: de 30 a 120 segundos se siente vivo. Luego el **momento de inicio** (pleno día, tarde, plena noche o amanecer) y si **se repite sin fin**.",
+            "Pon tus luces en **Solo cuando oscurece**: se encienden solas al caer la noche."
+          ]
+        ],
+        [
+          "tip",
+          "Duración 0 detiene el ciclo donde está. Un juego en pausa también congela el ciclo. Para saltar a un momento, usa otra vez [[lumiere_cycle]] con otro momento de inicio: el ejemplo « Day and night village » lo hace con 5 botones."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Para ir más lejos"
+    ],
+    [
+      "ul",
+      [
+        "Abre los modelos **Antorcha y sombras** y **Día y noche** (pestaña Modelos) para verlo todo ya preparado.",
+        "Descarga el ejemplo **Day and night village** (pestaña Ejemplos): un pueblo en 3D, ventanas que se encienden de noche y un caballero con un farol.",
+        "Hasta 8 luces pueden brillar a la vez, para que el juego siga rápido en todos los dispositivos."
+      ]
+    ],
+    [
+      "h2",
+      "Si no funciona"
+    ],
+    [
+      "ul",
+      [
+        "**No veo ninguna luz:** la oscuridad probablemente está en 0. Una luz solo se ve en una escena más oscura.",
+        "**La luz no sigue a mi héroe:** únela a un objeto colocado sobre el héroe (un objeto hijo), no a un objeto fijo.",
+        "**La noche no es lo bastante oscura:** sube la oscuridad (hasta 100) y elige un color más oscuro."
+      ]
+    ]
+  ]
+}

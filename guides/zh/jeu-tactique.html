@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何在 Yop2D 里做回合制战术游戏？ | Yop2D 指南</title>
+<meta name="description" content="在 Yop2D 里不写代码，做一个网格上的战术游戏：回合、可到达的蓝色格子、地形、移动、攻击和生命值，全靠节点。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/jeu-tactique.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/jeu-tactique.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/jeu-tactique.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/jeu-tactique.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/jeu-tactique.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/jeu-tactique.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/jeu-tactique.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/jeu-tactique.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/jeu-tactique.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/jeu-tactique.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何做战术游戏？",
+ "description": "在 Yop2D 里不写代码，做一个网格上的战术游戏：回合、可到达的蓝色格子、地形、移动、攻击和生命值，全靠节点。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "给每个单位一张卡",
+   "text": "启动时 → 给单位卡（生命、攻击、防御、移动、射程）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "开始玩家的回合",
+   "text": "进入下一回合（joueur, ennemi）会运行本地事件 \"tour_joueur\"。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "显示英雄能去哪里",
+   "text": "点击对象时 → 如果轮到…… → 显示可到达的格子."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "让英雄走路",
+   "text": "点击对象时（地形）→ 如果格子可到达 → 走到格子（寻路）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "攻击",
+   "text": "点击对象时（怪物）→ 如果格子可到达 → 攻击。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "怪物的回合",
+   "text": "\"tour_ennemi\" → 走向对象（寻路）（走到英雄旁边）→ 攻击。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>如何做战术游戏？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../jeu-tactique.html" hreflang="fr">Français</a> · <a href="../en/jeu-tactique.html" hreflang="en">English</a> · <a href="../es/jeu-tactique.html" hreflang="es">Español</a> · <a href="../de/jeu-tactique.html" hreflang="de">Deutsch</a> · <a href="../it/jeu-tactique.html" hreflang="it">Italiano</a> · <a href="../pt/jeu-tactique.html" hreflang="pt">Português</a> · <a href="../ru/jeu-tactique.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/jeu-tactique.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>在<strong>战术</strong>游戏里，玩家在网格上<strong>轮流</strong>行动：选一个单位，看它能到达的格子，移动它，然后它攻击。本指南做出最简单的游戏：<strong>一个英雄和一个怪物</strong>。示例 <strong>Tactics tutorial</strong>（启动画面的<strong>示例</strong>标签）里已经全部做好了：打开它的 Blueprint，每一步都在一个<strong>彩色框</strong>里，框上有一个小小的<strong>？</strong>来解释。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>一张你选的图块地图（游戏的网格<strong>就是</strong>这张图块地图的网格）；</li><li>一个名为 <strong>hero1</strong>、标签为 <strong>joueur</strong> 的图像，和一个名为 <strong>foe1</strong>、标签为 <strong>ennemi</strong> 的图像；</li><li>一个名为 <strong>terrain</strong> 的区域，盖住整张地图（点它来选择格子）；</li><li>一个变量 <strong>etat</strong>（整数，局部），用来知道进行到哪一步：0 = 选英雄，1 = 已选英雄，2 = 英雄已移动。</li></ul>
+</div>
+<div class="tip">👉 <strong>地形</strong>（森林、沙地、山……）在图块编辑器的<strong>图块地形</strong>部分设置：步数成本、是否挡路、防御加成。山会挡路，森林要花 2 步。</div>
+<h2>第 1 步：单位卡</h2>
+<div class="method">
+<ol><li>添加事件 <strong>“启动时”</strong>。</li><li>为 <strong>hero1</strong> 添加 <strong>“给单位卡”</strong>：生命 <code>20</code>，攻击 <code>6</code>，防御 <code>2</code>，移动 <code>4</code>，射程 <code>1</code>。</li><li>再为 <strong>foe1</strong> 添加第二个 <strong>“给单位卡”</strong>，填它自己的数字。</li><li>按顺序连接节点，再添加 <strong>“进入下一回合”</strong>，队伍填 <code>joueur,ennemi</code>。</li></ol>
+<div class="tip">👉 这张卡保存在对象里：你可以随处用公式读取它，例如 <code>=hero1.vie</code>。</div>
+</div>
+<h2>第 2 步：玩家的回合</h2>
+<div class="method">
+<ol><li>添加事件 <strong>“本地事件”</strong>，名字写 <code>tour_joueur</code>。它会在玩家回合开始时自动运行。</li><li>用 <strong>“修改变量”</strong> 把 <strong>etat</strong> 设为 <code>0</code>，再用 <strong>“隐藏格子”</strong> 清除旧的格子。</li></ol>
+<p>对每个队伍，<strong>“进入下一回合”</strong> 会运行 "tour_" 加队伍名的本地事件：先是 <code>tour_joueur</code>，然后是 <code>tour_ennemi</code>。</p>
+</div>
+<h2>第 3 步：点英雄，看到蓝色格子</h2>
+<div class="method">
+<ol><li>在 <strong>hero1</strong> 上添加 <strong>“点击对象时”</strong>。</li><li>添加队伍为 <code>joueur</code> 的 <strong>“如果轮到……”</strong>，然后在 <strong>真</strong> 出口接一个 <strong>“条件”</strong> <code>etat &lt; 2</code>。</li><li>添加 <strong>“修改变量”</strong>：<strong>etat</strong> = <code>1</code>。</li><li>在 <strong>hero1</strong> 上添加 <strong>“显示可到达的格子”</strong>：区域类型 <strong>移动（墙壁会阻挡）</strong>，步数 <code>=hero1.mouvement</code>，蓝色，<strong>在每个格子写步数</strong> = 是，<strong>这些标签会挡路</strong> = <code>joueur,ennemi</code>。</li></ol>
+<div class="tip">👉 格子上的数字是走到那里需要的<strong>步数</strong>。森林格要 2 步：英雄走不了那么远。</div>
+</div>
+<h2>第 4 步：点蓝色格子，英雄走过去</h2>
+<div class="method">
+<ol><li>在 <strong>terrain</strong> 上添加 <strong>“点击对象时”</strong>，然后接一个 <strong>“条件”</strong> <code>etat = 1</code>。</li><li>添加 <strong>“如果格子可到达”</strong>。列和行都点 <strong>🔗</strong>，选择绿色节点 <strong>“点中的列”</strong> 和 <strong>“点中的行”</strong>：不用写公式。</li><li>在 <strong>真</strong> 出口：<strong>“修改变量”</strong> <strong>etat</strong> = <code>4</code>（英雄正在走），然后在 <strong>hero1</strong> 上加 <strong>“走到格子（寻路）”</strong>，用同样的绿色节点，并把<strong>这些标签会挡住路径</strong> 设为 <code>joueur,ennemi</code>。</li><li>在 <strong>到达</strong> 出口，用 <strong>“调用事件”</strong> 调用本地事件 <code>apres_deplacement</code>。</li></ol>
+</div>
+<h2>第 5 步：攻击范围，然后攻击</h2>
+<div class="method">
+<ol><li>在本地事件 <strong>apres_deplacement</strong> 里：<strong>“隐藏格子”</strong>，<strong>etat</strong> = <code>2</code>，然后 <strong>“显示可到达的格子”</strong>，类型 <strong>攻击/射程（越过墙壁）</strong>，步数 <code>=hero1.portee</code>，红色，区域名 <code>attaque</code>。</li><li>在 <strong>foe1</strong> 上添加 <strong>“点击对象时”</strong>，接一个 <strong>“条件”</strong> <code>etat = 2</code>，再接区域名为 <code>attaque</code> 的 <strong>“如果格子可到达”</strong>。</li><li>在 <strong>真</strong> 上：<strong>“攻击”</strong>（对象 A = <strong>hero1</strong>，对象 B = <strong>foe1</strong>）。伤害 = 攻击 − 怪物的防御 − 怪物所在地形的防御。</li><li>出口 <strong>还活着</strong>：更新它的生命文字。出口 <strong>生命值为 0</strong>：怪物被销毁，加上胜利。</li></ol>
+</div>
+<h2>第 6 步：怪物的回合</h2>
+<div class="method">
+<ol><li>添加本地事件 <code>tour_ennemi</code>。</li><li>在 <strong>foe1</strong> 上添加 <strong>“走向对象（寻路）”</strong>，对象 B = <strong>hero1</strong>，<strong>停下方式</strong> = <strong>停在相邻格子正中</strong>，<strong>这些标签会挡住路径</strong> = <code>joueur,ennemi</code>。</li><li>在 <strong>到达</strong> 出口，调用一个本地事件，让 <strong>foe1</strong> <strong>“攻击”</strong> <strong>hero1</strong>。</li><li>几秒后（<strong>“等待”</strong>）：<strong>“停止寻路”</strong>，然后 <strong>“进入下一回合”</strong>：回合回到玩家。</li></ol>
+</div>
+<h2>更进一步</h2>
+<ul><li><strong>多个英雄：</strong>添加 <strong>“标记为已行动”</strong> 和 <strong>“如果该单位已行动”</strong>，让英雄每回合只行动一次（示例 <strong>Tactics demo</strong> 就是这样做的）。</li><li><strong>生命条：</strong>在文字或进度条里读取 <code>=hero1.vie</code> 和 <code>=hero1.vie_max</code>。</li><li><strong>治疗：</strong> <strong>“治疗”</strong> 恢复生命值，但不会超过最大值。</li><li><strong>桌游：</strong> <strong>“把棋子移动一格”</strong> 把棋子移动一格并居中对齐（◀ ▶ ▲ ▼ 按钮）。</li></ul>
+<h2>如果不起作用</h2>
+<ul><li><strong>没有蓝色格子：</strong>英雄必须有 <strong>“如果轮到……”</strong> 里写的标签，并且 <strong>“进入下一回合”</strong> 必须在开始时运行过。</li><li><strong>格子和图画对不上：</strong>网格是场景里第一张图块地图的网格。没有图块地图时，格子是 80 px。</li><li><strong>英雄不动：</strong>检查点的格子是不是蓝色，并且那一刻 <strong>etat</strong> 等于 <code>1</code>。</li><li><strong>对照检查：</strong>打开示例 <strong>Tactics tutorial</strong>：Blueprint 的每一部分都在一个解释它的框里。</li></ul>
+
+<div class="nav">
+<a href="../zh/casse-briques.html">← 制作打砖块</a>
+<a href="../zh/niveau-suivant.html">下一篇： 进入下一关 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>
