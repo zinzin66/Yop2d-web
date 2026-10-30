@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2D でタワーディフェンスを作るには？ | Yop2D ガイド</title>
+<meta name="description" content="Yop2D でコードなしにタワーディフェンスを作ろう：敵の通り道を描き、ウェーブを送り出し、ターゲットを選んで撃つタワーを建て、ノードでクレジットと基地のライフを数えます。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/tower-defense.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/tower-defense.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/tower-defense.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/tower-defense.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/tower-defense.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/tower-defense.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/tower-defense.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/tower-defense.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/tower-defense.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/tower-defense.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "タワーディフェンスの作り方は？",
+ "description": "Yop2D でコードなしにタワーディフェンスを作ろう：敵の通り道を描き、ウェーブを送り出し、ターゲットを選んで撃つタワーを建て、ノードでクレジットと基地のライフを数えます。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "道を描く",
+   "text": "Assets の「ルート」ツール：点を置いて、つなげて、スタートを選びます。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Enemy シーンを作る",
+   "text": "起動時 → オブジェクトにHPをあたえる → ルートをたどる（ルート「Path」）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ウェーブを送り出す",
+   "text": "繰り返す（1.5 秒ごと）→ シーンのコピーを配置（Enemy）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Tower シーンを作る",
+   "text": "繰り返す → ターゲットを選ぶ → 向きを合わせる → クールダウン → オブジェクトを発射."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "敵に当てる",
+   "text": "オブジェクトがタグに触れた場合（enemy、bullet）→ ダメージをあたえる。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "クレジットでタワーを建てる",
+   "text": "オブジェクトクリック時（spot）→ 変数に加算（credits、-50）→ シーンのコピーを配置（Tower）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "基地のライフとゲームオーバー",
+   "text": "ルートをたどる（ゴールについた）→ 変数に加算（base_life、-1）→ イベントを呼ぶ。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>タワーディフェンスの作り方は？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../tower-defense.html" hreflang="fr">Français</a> · <a href="../en/tower-defense.html" hreflang="en">English</a> · <a href="../es/tower-defense.html" hreflang="es">Español</a> · <a href="../de/tower-defense.html" hreflang="de">Deutsch</a> · <a href="../it/tower-defense.html" hreflang="it">Italiano</a> · <a href="../pt/tower-defense.html" hreflang="pt">Português</a> · <a href="../ru/tower-defense.html" hreflang="ru">Русский</a> · <a href="../zh/tower-defense.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>タワーディフェンスでは、<strong>敵</strong>が<strong>道</strong>に沿って進み、あなたは<strong>基地</strong>にたどり着く前に撃つ<strong>タワー</strong>を建てます。ここでは、敵は自分で描いた道をたどり、各タワーは一番近い敵を選んで撃ち、<strong>クレジット</strong>で新しいタワーを建てます。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li><strong>map</strong> という名前の画像：ゲームの背景（1920 x 1080 px）で、道が描かれたもの；</li><li>建設場所用の画像がいくつか（例：120 x 120 px）；</li><li><strong>enemy</strong> 用の画像（例：64 x 64 px）、<strong>tower</strong> 用（120 x 120 px）、<strong>cannon</strong> 用（90 x 34 px、右向き）、<strong>bullet</strong> 用（24 x 24 px）；</li><li>テキストオブジェクトが 2 つ：<strong>creditsText</strong> と <strong>lifeText</strong>（画面の上のほう）。</li></ul>
+</div>
+<div class="tip">👉 このガイドは <strong>1920 x 1080 の横向き</strong>のゲーム用です。サンプル <strong>Tower defense (cubes)</strong>（「サンプル」タブ）のフォルダ <strong>Images/TD</strong> に、できあがった画像が入っています：開いて、気に入ったものを自分のプロジェクトにコピーしましょう。自分で描いた画像でも、どんなスタイルでも使えます。シーン <strong>Enemy</strong> と <strong>Tower</strong> はゲーム中に何度もコピーされます：ガイド <a href="../ja/prefabs.html">既製のオブジェクト</a> を見てください。</div>
+<h2>ステップ 1：変数</h2>
+<div class="method">
+<ol><li>左のパネルで <strong>変数</strong> のセクションを開き、変数を 2 つ作ります。どちらも範囲は <strong>グローバル</strong>（すべてのシーンから使える）、型は <strong>整数</strong> です：</li></ol>
+<ul><li><strong>credits</strong>：初期値 <strong>150</strong>（タワーを建てるお金）；</li><li><strong>base_life</strong>：初期値 <strong>20</strong>（基地が耐えられる敵の数）。</li></ul>
+</div>
+<h2>ステップ 2：道を描く</h2>
+<div class="method">
+<p>敵は<strong>道</strong>をたどります：つながった点でできています。ルートツールで、マップの上に描きます。</p>
+<ol><li><strong>Assets</strong> ウィンドウ（リソースパネル）を開いて<strong>ルート</strong>をタップします。ルートエディタが開き、後ろにシーンが見えます。</li><li><strong>新しいルート</strong>をタップして、名前を <strong>Path</strong> にします。</li><li><strong>点を置く</strong>ツールで、敵が入ってくる左側のシーンをタップして最初の点を置きます：これが<strong>スタート</strong>です。道に沿ってタップし続けると、新しい点は前の点とつながります。</li><li>最後の点を基地の上に置きます：出口がなく、これが<strong>ゴール</strong>です。</li><li><strong>ながれを見る</strong>をタップすると、点が道を進むのが見えます。そのあとエディタを閉じます：ルートは自動で保存されます。</li></ol>
+<div class="tip">👉 スタートを変えるには、点をタップして<strong>この点をスタートにする</strong>を選びます。点を動かすには<strong>うごかす</strong>ツール、消すには<strong>けす</strong>を使います。</div>
+</div>
+<h2>ステップ 3：Enemy シーン</h2>
+<div class="method">
+<p>敵は独立した<strong>シーン</strong>です：ゲームに送り出す敵はすべてそのシーンの<strong>コピー</strong>で、それぞれ自分のライフを持ちます。作るのは 1 回だけです。</p>
+<ol><li><strong>Enemy</strong> という名前の新しいシーンを作ります（メニュー <strong>＋</strong>、次に <strong>シーンを作成</strong>）。</li><li>シーン <strong>Enemy</strong> に、<strong>enemy</strong> という名前の画像を X = <code>0</code>、Y = <code>0</code> に追加し、タグ <strong>enemy</strong> を付けます。</li><li>シーン <strong>Enemy</strong> の <strong>ブループリント</strong> を開き、イベント <strong>「起動時」</strong> を追加します。</li><li><strong>「オブジェクトにHPをあたえる」</strong> を追加：対象 <strong>enemy</strong>、<strong>HP</strong> = <code>3</code>（敵は 3 発に耐えます）。</li><li><strong>「ルートをたどる」</strong> を追加：対象 <strong>enemy</strong>、<strong>ルートの名前</strong> = <strong>Path</strong>、<strong>はやさ（1びょうあたりのピクセル）</strong> = <code>150</code>。</li><li>3 つのノードを順番につなぎます。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>起動時</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>オブジェクトにHPをあたえる</b><span>enemy · 3</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>ルートをたどる</b><span>enemy · Path · 150</span></div>
+</div>
+</div>
+<h2>ステップ 4：ウェーブを送り出す</h2>
+<div class="method">
+<p>メインのシーン（<strong>Game</strong>）に戻って、敵を 1 体ずつ送り出します。</p>
+<ol><li>シーン <strong>Game</strong> の <strong>ブループリント</strong> を開き、イベント <strong>「起動時」</strong> を追加します。</li><li><strong>「変数を変更」</strong> ノードを 2 つ追加：<strong>credits</strong> = <code>150</code>、次に <strong>base_life</strong> = <code>20</code>。こうすると、ゲームオーバーのあとでも新しいゲームは毎回きれいな状態で始まります。</li><li><strong>「待つ」</strong> を追加：<strong>時間（秒）</strong> = <code>3</code>（最初の敵の前の間）。</li><li><strong>「繰り返す」</strong> を追加：<strong>間隔（秒）</strong> = <code>1.5</code>、<strong>回数（0 = 無限）</strong> = <code>15</code>、<strong>タイマー名（省略可）</strong> = <code>waves</code>。</li><li><strong>毎回</strong> の出力から <strong>「シーンのコピーを配置」</strong> を追加：シーン <strong>Enemy</strong>。X と Y はそのままにします：敵は自分で道のスタートに移動します。</li><li>ノードを順番につなぎます。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>起動時</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>credits · 150</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>base_life · 20</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>待つ</b><span>3</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>繰り返す</b><span>1.5 · 15</span></div>
+<div class="fleche"><em>毎回</em> →</div>
+<div class="noeud"><b>シーンのコピーを配置</b><span>Enemy</span></div>
+</div>
+<p>ゲームを動かします：敵が 1.5 秒ごとに現れ、道に沿ってゴールまで歩きます（ゴールについても、まだ何も起きません）。</p>
+</div>
+<h2>ステップ 5：Tower シーン</h2>
+<div class="method">
+<p>タワーも<strong>シーン</strong>です。射程内で一番近い敵を探し、砲身をそちらに向けて撃ちます。</p>
+<ol><li><strong>Tower</strong> という名前の新しいシーンを作ります。画像 <strong>tower</strong> を X = <code>0</code>、Y = <code>0</code> に追加し、その手前の X = <code>15</code>、Y = <code>43</code> に画像 <strong>cannon</strong> を追加します。</li><li>シーン <strong>Game</strong> に、<strong>bullet</strong> という名前の画像を<strong>画面の外</strong>（例：X = <code>-300</code>、Y = <code>-300</code>）に追加し、タグ <strong>bullet</strong> を付けます：タワーが撃つたびにコピーするお手本です。</li><li>シーン <strong>Tower</strong> の <strong>ブループリント</strong> を開き、イベント <strong>「起動時」</strong> を追加し、続けて <strong>「繰り返す」</strong>：<strong>間隔（秒）</strong> = <code>0.2</code>、<strong>回数（0 = 無限）</strong> = <code>0</code>（ずっと）。タワーは 1 秒に 5 回まわりを見ます。</li><li><strong>毎回</strong> の出力から <strong>「ターゲットを選ぶ」</strong> を追加：対象 <strong>tower</strong>、<strong>ターゲット候補のタグ（カンマ区切り）</strong> = <code>enemy</code>、<strong>どのターゲットを選ぶ？</strong> = <strong>「いちばん近い」</strong>、そして詳細設定で <strong>ピクセルの円形はんい（0＝マス数のはんいを使う）</strong> = <code>330</code>。</li><li><strong>ターゲット発見</strong> の出力から <strong>「向きを合わせる」</strong> を追加：対象 <strong>cannon</strong>、2 つめのオブジェクトには <strong>イベントに関与するオブジェクト</strong>（選ばれた敵）を選びます。</li><li><strong>「クールダウン」</strong> を追加：対象 <strong>cannon</strong>、<strong>遅延（秒）</strong> = <code>1.2</code>（多くても 1.2 秒に 1 回の発射）。</li><li><strong>準備完了</strong> の出力から <strong>「オブジェクトを発射」</strong> を追加：対象 <strong>cannon</strong>、<strong>モデル名</strong> = <code>bullet</code>、<strong>速度</strong> = <code>14</code>、<strong>たまの寿命（秒、0＝ずっと）</strong> = <code>1.6</code>、<strong>画面外で消す（はい / いいえ）</strong> = いいえ。<strong>方向</strong> はそのままにします：弾は砲身が向いている方向に飛びます。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>起動時</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>繰り返す</b><span>0.2 · ずっと</span></div>
+<div class="fleche"><em>毎回</em> →</div>
+<div class="noeud"><b>ターゲットを選ぶ</b><span>tower · enemy · 330</span></div>
+<div class="fleche"><em>ターゲット発見</em> →</div>
+<div class="noeud"><b>向きを合わせる</b><span>cannon</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>クールダウン</b><span>cannon · 1.2</span></div>
+<div class="fleche"><em>準備完了</em> →</div>
+<div class="noeud"><b>オブジェクトを発射</b><span>cannon · bullet</span></div>
+</div>
+<div class="tip">👉 試すために、シーン <strong>Game</strong> に <strong>Tower</strong> を手で置いてみましょう（メニュー <strong>＋</strong> → シーン <strong>Tower</strong>）：330 ピクセル以内を通る敵すべてを撃つはずです。</div>
+</div>
+<h2>ステップ 6：敵に当てる</h2>
+<div class="method">
+<p>この部分はシーン <strong>Enemy</strong> に入れます：弾が当たったことを知っているのは敵です。</p>
+<ol><li>シーン <strong>Enemy</strong> の <strong>ブループリント</strong> を開き、イベント <strong>「オブジェクトがタグに触れた場合」</strong> を追加します：対象 <strong>enemy</strong>、タグ <strong>bullet</strong>。</li><li><strong>「オブジェクトを破壊」</strong> を追加し、対象に <strong>イベントに関与するオブジェクト</strong> を選びます：消える弾のことです。</li><li><strong>「ダメージをあたえる」</strong> を追加：対象 <strong>enemy</strong>、<strong>ダメージ</strong> = <code>1</code>。初期設定では、ライフがゼロになると敵は壊れます。</li><li><strong>HPが0</strong> の出力から <strong>「変数に加算」</strong> を追加：変数 <strong>credits</strong>、値 <code>15</code>（ごほうび）。</li><li>ノードを順番につなぎます。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>オブジェクトがタグに触れた場合</b><span>enemy · bullet</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>オブジェクトを破壊</b><span>bullet</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>ダメージをあたえる</b><span>enemy · 1</span></div>
+<div class="fleche"><em>HPが0</em> →</div>
+<div class="noeud"><b>変数に加算</b><span>credits · 15</span></div>
+</div>
+</div>
+<h2>ステップ 7：タワーを建てる</h2>
+<div class="method">
+<p>プレイヤーは<strong>建設場所</strong>をタップしてタワーを建てます。50 クレジットかかります。</p>
+<ol><li>建設場所を 1 つずつ選び、インスペクターでタグ <strong>spot</strong> を付けます。</li><li>シーン <strong>Game</strong> で、イベント <strong>「オブジェクトクリック時」</strong> を追加し、オブジェクトに <strong># spot</strong>（タグ <strong>spot</strong> を持つすべてのオブジェクト）を選びます。</li><li><strong>「条件」</strong> <code>=credits &gt;= 50</code> を追加します。</li><li><strong>真</strong> の出力：<strong>「変数に加算」</strong>：変数 <strong>credits</strong>、値 <code>-50</code>。</li><li>次に <strong>「シーンのコピーを配置」</strong>：シーン <strong>Tower</strong>。<strong>X</strong> は <strong>🔗</strong> をタップして <strong>「オブジェクトの値」</strong> を選び、オブジェクト <strong>イベントに関与するオブジェクト</strong>、<strong>なに</strong> = <code>x</code> にします。<strong>Y</strong> も <code>y</code> で同じようにします：タワーはプレイヤーがタップした場所にぴったり現れます。</li><li><strong>「オブジェクトを破壊」</strong> を追加し、対象を <strong>イベントに関与するオブジェクト</strong> にします：建設場所が消えます。</li><li><strong>偽</strong> の出力：<strong>「画面下の小さなメッセージ」</strong>、メッセージは<strong>クレジットが足りません</strong>。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>オブジェクトクリック時</b><span># spot</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>条件</b><span>=credits &gt;= 50</span></div>
+<div class="fleche"><em>真</em> →</div>
+<div class="noeud"><b>変数に加算</b><span>credits · -50</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>シーンのコピーを配置</b><span>Tower</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>オブジェクトを破壊</b><span>spot</span></div>
+</div>
+</div>
+<h2>ステップ 8：画面の数字</h2>
+<div class="method">
+<ol><li>シーン <strong>Game</strong> で、イベント <strong>「毎フレーム」</strong> を追加します。</li><li><strong>「テキストを変更」</strong> を追加：対象 <strong>creditsText</strong>、<strong>新しいテキスト</strong> = <code>="クレジット：" + credits</code>。</li><li>2 つめの <strong>「テキストを変更」</strong> を追加：対象 <strong>lifeText</strong>、<strong>新しいテキスト</strong> = <code>="基地：" + base_life</code>。</li><li>3 つのノードを順番につなぎます。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>毎フレーム</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>テキストを変更</b><span>creditsText</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>テキストを変更</b><span>lifeText</span></div>
+</div>
+</div>
+<h2>ステップ 9：基地のライフとゲームオーバー</h2>
+<div class="method">
+<p>敵が道のゴールにたどり着くと、基地のライフが 1 つ減ります。ライフがなくなるとゲームオーバーです。</p>
+<ol><li>シーン <strong>Enemy</strong> で、ステップ 3 の <strong>「ルートをたどる」</strong> ノードを使います。その <strong>とうちゃく</strong> の出力から <strong>「変数に加算」</strong> を追加：変数 <strong>base_life</strong>、値 <code>-1</code>。</li><li><strong>「オブジェクトを破壊」</strong> を追加：対象 <strong>enemy</strong>。</li><li><strong>「条件」</strong> <code>=base_life &lt;= 0</code> を追加します。<strong>真</strong> の出力に、イベント名 <strong>game_over</strong> で <strong>「イベントを呼ぶ」</strong> を追加します。</li><li>シーン <strong>Game</strong> に、同じ名前 <strong>game_over</strong> のイベント <strong>「ローカルイベント」</strong> を追加します。</li><li><strong>「タイマーを止める」</strong> を追加：<strong>名前（空 = すべて）</strong> = <code>waves</code>（もう敵を送り出しません）、続けて <strong>「タグで破壊」</strong>：<strong>破棄するタグ</strong> = <code>enemy</code>。</li><li>メッセージ<strong>ゲームオーバー</strong>で <strong>「画面下の小さなメッセージ」</strong> を追加し、次に <strong>「待つ」</strong> <code>2</code> 秒、そして <strong>「シーンをやり直す」</strong>。</li></ol>
+<div class="chaine">
+<div class="noeud"><b>ルートをたどる</b><span>enemy</span></div>
+<div class="fleche"><em>とうちゃく</em> →</div>
+<div class="noeud"><b>変数に加算</b><span>base_life · -1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>オブジェクトを破壊</b><span>enemy</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>条件</b><span>=base_life &lt;= 0</span></div>
+<div class="fleche"><em>真</em> →</div>
+<div class="noeud"><b>イベントを呼ぶ</b><span>game_over</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>ローカルイベント</b><span>game_over</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>タイマーを止める</b><span>waves</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>タグで破壊</b><span>enemy</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>画面下の小さなメッセージ</b><span>ゲームオーバー</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>待つ</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>シーンをやり直す</b></div>
+</div>
+<p>遊んでみましょう：クレジットでタワーを 1、2 基建てて、敵を止めるのを見てください。何体か通して、基地のライフが減るのも確かめましょう。</p>
+</div>
+<h2>さらに進むには</h2>
+<ul><li><strong>勝利：</strong>変数で敵を数えます（1 体倒れる、またはゴールにつくたびに +1）。送り出した総数になったら、メッセージを出して勝ちにします。</li><li><strong>タワーを強くする：</strong>タワーをタップして、クレジットがかかる「強化」ボタンのある小さなウィンドウを開き、砲身の画像と連射の速さを変えます。サンプル <strong>Tower defense (cubes)</strong> を開いて作り方を見てください。</li><li><strong>敵の種類を増やす：</strong>ライフが多く速さの違う 2 つめのシーン（<strong>Enemy2</strong>）を作り、ウェーブごとにどちらかを送り出します（サンプル <strong>Tower defense (cubes)</strong> を開いて作り方を見てください）。</li><li><strong>分かれ道：</strong>ルートツールで点をタップして<strong>この点は分かれ道です</strong>を選びます：敵はランダムに道を選び、枝はまた合流できます。</li><li><strong>複数のレーン、渋滞なし：</strong> <strong>「ルートをたどる」</strong> で <strong>よこへのランダムなずれ（ピクセル、±：それぞれ自分のレーンを歩く）</strong> と <strong>ほかをよける：重ならないよう横にずれて、おそいものを追いこす（はい / いいえ）</strong> を「はい」にします：敵は横に並んで歩き、追い越します。</li><li><strong>大きなマップ：</strong>マップを 2 倍の幅にして、開始時に <strong>「カメラの範囲」</strong> と <strong>「指でカメラを動かす」</strong> を追加し、プレイヤーが指でマップをスクロールできるようにします。</li><li><strong>音と火花：</strong>撃つたびに <strong>「効果音を再生」</strong> を、敵が倒れたら <strong>「パーティクル効果」</strong> を追加します（ガイド <a href="../ja/particules-effets.html">パーティクルとエフェクト</a> を見てください）。</li></ul>
+<h2>うまく動かないときは</h2>
+<ul><li><strong>敵が動かない：</strong>設定 <strong>ルートの名前</strong> が道の名前（<strong>Path</strong>）になっているか、道にスタートがあるかを確かめます。シーン <strong>Enemy</strong> にイベント <strong>「起動時」</strong> があるかも確かめます。</li><li><strong>タワーが撃たない：</strong>敵のタグ <strong>enemy</strong>、<strong>「オブジェクトを発射」</strong> の名前 <strong>bullet</strong>、そしてオブジェクト <strong>bullet</strong> がシーン <strong>Game</strong> にあること（画面の外で、消されていない）を確かめます。敵が射程の外のままなら <strong>ピクセルの円形はんい（0＝マス数のはんいを使う）</strong> を大きくします。</li><li><strong>弾がダメージを与えない：</strong>弾にはタグ <strong>bullet</strong> が必要で、イベント <strong>「オブジェクトがタグに触れた場合」</strong> は <strong>Game</strong> ではなくシーン <strong>Enemy</strong> に入れます。</li><li><strong>タワーが違う場所に出る：</strong> <strong>「シーンのコピーを配置」</strong> の <strong>X</strong> と <strong>Y</strong> には、ステップ 7 のように、緑の <strong>「オブジェクトの値」</strong> ノードと <strong>イベントに関与するオブジェクト</strong> を使います。</li><li><strong>クレジットや基地のライフが変わらない：</strong>変数 <strong>credits</strong> と <strong>base_life</strong> の範囲が <strong>グローバル</strong> になっているか確かめます。</li></ul>
+
+<div class="nav">
+<a href="../ja/casse-briques.html">← ブロック崩しを作る</a>
+<a href="../ja/jeu-tactique.html">次のガイド： タクティクスゲームを作る →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

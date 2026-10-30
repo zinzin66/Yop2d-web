@@ -1,0 +1,635 @@
+{
+  "titre_page": "Yop2D でタワーディフェンスを作るには？ | Yop2D ガイド",
+  "description": "Yop2D でコードなしにタワーディフェンスを作ろう：敵の通り道を描き、ウェーブを送り出し、ターゲットを選んで撃つタワーを建て、ノードでクレジットと基地のライフを数えます。",
+  "h1": "タワーディフェンスの作り方は？",
+  "carte": [
+    "タワーディフェンスを作る",
+    "道を描いて、ウェーブを送り出し、撃って基地を守るタワーを建てよう。"
+  ],
+  "etapes": [
+    [
+      "道を描く",
+      "Assets の「ルート」ツール：点を置いて、つなげて、スタートを選びます。"
+    ],
+    [
+      "Enemy シーンを作る",
+      "{{NoeudEventStart}} → {{definir_vie}} → {{suivre_parcours}}（ルート「Path」）。"
+    ],
+    [
+      "ウェーブを送り出す",
+      "{{repeter}}（1.5 秒ごと）→ {{placer_copie_scene}}（Enemy）。"
+    ],
+    [
+      "Tower シーンを作る",
+      "{{repeter}} → {{choisir_cible}} → {{orienter_vers}} → {{cooldown}} → {{tirer}}."
+    ],
+    [
+      "敵に当てる",
+      "{{NoeudEventCollisionTag}}（enemy、bullet）→ {{infliger_degats}}。"
+    ],
+    [
+      "クレジットでタワーを建てる",
+      "{{NoeudEventClicObjet}}（spot）→ {{ajouter_variable}}（credits、-50）→ {{placer_copie_scene}}（Tower）。"
+    ],
+    [
+      "基地のライフとゲームオーバー",
+      "{{suivre_parcours}}（ゴールについた）→ {{ajouter_variable}}（base_life、-1）→ {{appeler_evenement}}。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "タワーディフェンスでは、**敵**が**道**に沿って進み、あなたは**基地**にたどり着く前に撃つ**タワー**を建てます。ここでは、敵は自分で描いた道をたどり、各タワーは一番近い敵を選んで撃ち、**クレジット**で新しいタワーを建てます。"
+    ],
+    [
+      "besoin",
+      [
+        "**map** という名前の{{lang:obj_prefix_image}}：ゲームの背景（1920 x 1080 px）で、道が描かれたもの；",
+        "建設場所用の{{lang:obj_prefix_image}}がいくつか（例：120 x 120 px）；",
+        "**enemy** 用の{{lang:obj_prefix_image}}（例：64 x 64 px）、**tower** 用（120 x 120 px）、**cannon** 用（90 x 34 px、右向き）、**bullet** 用（24 x 24 px）；",
+        "{{lang:obj_prefix_texte}}オブジェクトが 2 つ：**creditsText** と **lifeText**（画面の上のほう）。"
+      ]
+    ],
+    [
+      "tip",
+      "このガイドは **1920 x 1080 の横向き**のゲーム用です。サンプル **Tower defense (cubes)**（「サンプル」タブ）のフォルダ **Images/TD** に、できあがった画像が入っています：開いて、気に入ったものを自分のプロジェクトにコピーしましょう。自分で描いた画像でも、どんなスタイルでも使えます。シーン **Enemy** と **Tower** はゲーム中に何度もコピーされます：ガイド [既製のオブジェクト](guide:prefabs) を見てください。"
+    ],
+    [
+      "h2",
+      "ステップ 1：変数"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "左のパネルで **{{lang:panneau_ress_variables}}** のセクションを開き、変数を 2 つ作ります。どちらも範囲は **{{lang:var_scope_globale}}**（すべてのシーンから使える）、型は **{{lang:var_type_entier}}** です："
+          ]
+        ],
+        [
+          "ul",
+          [
+            "**credits**：初期値 **150**（タワーを建てるお金）；",
+            "**base_life**：初期値 **20**（基地が耐えられる敵の数）。"
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 2：道を描く"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "敵は**道**をたどります：つながった点でできています。ルートツールで、マップの上に描きます。"
+        ],
+        [
+          "ol",
+          [
+            "**Assets** ウィンドウ（リソースパネル）を開いて**ルート**をタップします。ルートエディタが開き、後ろにシーンが見えます。",
+            "**新しいルート**をタップして、名前を **Path** にします。",
+            "**点を置く**ツールで、敵が入ってくる左側のシーンをタップして最初の点を置きます：これが**スタート**です。道に沿ってタップし続けると、新しい点は前の点とつながります。",
+            "最後の点を基地の上に置きます：出口がなく、これが**ゴール**です。",
+            "**ながれを見る**をタップすると、点が道を進むのが見えます。そのあとエディタを閉じます：ルートは自動で保存されます。"
+          ]
+        ],
+        [
+          "tip",
+          "スタートを変えるには、点をタップして**この点をスタートにする**を選びます。点を動かすには**うごかす**ツール、消すには**けす**を使います。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 3：Enemy シーン"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "敵は独立した**シーン**です：ゲームに送り出す敵はすべてそのシーンの**コピー**で、それぞれ自分のライフを持ちます。作るのは 1 回だけです。"
+        ],
+        [
+          "ol",
+          [
+            "**Enemy** という名前の新しいシーンを作ります（メニュー **＋**、次に **{{lang:popup_creer_scene_titre}}**）。",
+            "シーン **Enemy** に、**enemy** という名前の{{lang:obj_prefix_image}}を X = `0`、Y = `0` に追加し、タグ **enemy** を付けます。",
+            "シーン **Enemy** の **{{lang:titre_blueprint}}** を開き、イベント **[[NoeudEventStart]]** を追加します。",
+            "**[[definir_vie]]** を追加：対象 **enemy**、**{{lang:definir_vie.vie}}** = `3`（敵は 3 発に耐えます）。",
+            "**[[suivre_parcours]]** を追加：対象 **enemy**、**{{lang:suivre_parcours.parcours}}** = **Path**、**{{lang:suivre_parcours.vitesse}}** = `150`。",
+            "3 つのノードを順番につなぎます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{definir_vie}}",
+              "enemy · 3"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{suivre_parcours}}",
+              "enemy · Path · 150"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 4：ウェーブを送り出す"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "メインのシーン（**Game**）に戻って、敵を 1 体ずつ送り出します。"
+        ],
+        [
+          "ol",
+          [
+            "シーン **Game** の **{{lang:titre_blueprint}}** を開き、イベント **[[NoeudEventStart]]** を追加します。",
+            "**[[modifier_variable]]** ノードを 2 つ追加：**credits** = `150`、次に **base_life** = `20`。こうすると、ゲームオーバーのあとでも新しいゲームは毎回きれいな状態で始まります。",
+            "**[[attendre]]** を追加：**{{lang:attendre.duree}}** = `3`（最初の敵の前の間）。",
+            "**[[repeter]]** を追加：**{{lang:repeter.delai}}** = `1.5`、**{{lang:repeter.repetitions}}** = `15`、**{{lang:repeter.nom}}** = `waves`。",
+            "**{{lang:port_a_chaque_fois}}** の出力から **[[placer_copie_scene]]** を追加：シーン **Enemy**。X と Y はそのままにします：敵は自分で道のスタートに移動します。",
+            "ノードを順番につなぎます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "credits · 150"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "base_life · 20"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "3"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{repeter}}",
+              "1.5 · 15"
+            ],
+            [
+              "→",
+              "{{lang:port_a_chaque_fois}}"
+            ],
+            [
+              "n",
+              "{{placer_copie_scene}}",
+              "Enemy"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "ゲームを動かします：敵が 1.5 秒ごとに現れ、道に沿ってゴールまで歩きます（ゴールについても、まだ何も起きません）。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 5：Tower シーン"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "タワーも**シーン**です。射程内で一番近い敵を探し、砲身をそちらに向けて撃ちます。"
+        ],
+        [
+          "ol",
+          [
+            "**Tower** という名前の新しいシーンを作ります。{{lang:obj_prefix_image}} **tower** を X = `0`、Y = `0` に追加し、その手前の X = `15`、Y = `43` に{{lang:obj_prefix_image}} **cannon** を追加します。",
+            "シーン **Game** に、**bullet** という名前の{{lang:obj_prefix_image}}を**画面の外**（例：X = `-300`、Y = `-300`）に追加し、タグ **bullet** を付けます：タワーが撃つたびにコピーするお手本です。",
+            "シーン **Tower** の **{{lang:titre_blueprint}}** を開き、イベント **[[NoeudEventStart]]** を追加し、続けて **[[repeter]]**：**{{lang:repeter.delai}}** = `0.2`、**{{lang:repeter.repetitions}}** = `0`（ずっと）。タワーは 1 秒に 5 回まわりを見ます。",
+            "**{{lang:port_a_chaque_fois}}** の出力から **[[choisir_cible]]** を追加：対象 **tower**、**{{lang:choisir_cible.tag}}** = `enemy`、**{{lang:choisir_cible.regle}}** = **[[lang:option.cb_proche]]**、そして詳細設定で **{{lang:choisir_cible.portee_px}}** = `330`。",
+            "**{{lang:port_trouvee}}** の出力から **[[orienter_vers]]** を追加：対象 **cannon**、2 つめのオブジェクトには **{{lang:noeud_objet_implique_long}}**（選ばれた敵）を選びます。",
+            "**[[cooldown]]** を追加：対象 **cannon**、**{{lang:cooldown.delai}}** = `1.2`（多くても 1.2 秒に 1 回の発射）。",
+            "**{{lang:port_pret}}** の出力から **[[tirer]]** を追加：対象 **cannon**、**{{lang:tirer.modele}}** = `bullet`、**{{lang:tirer.vitesse}}** = `14`、**{{lang:tirer.duree_vie}}** = `1.6`、**{{lang:tirer.detruire_hors_ecran}}** = いいえ。**{{lang:tirer.direction}}** はそのままにします：弾は砲身が向いている方向に飛びます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{repeter}}",
+              "0.2 · ずっと"
+            ],
+            [
+              "→",
+              "{{lang:port_a_chaque_fois}}"
+            ],
+            [
+              "n",
+              "{{choisir_cible}}",
+              "tower · enemy · 330"
+            ],
+            [
+              "→",
+              "{{lang:port_trouvee}}"
+            ],
+            [
+              "n",
+              "{{orienter_vers}}",
+              "cannon"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{cooldown}}",
+              "cannon · 1.2"
+            ],
+            [
+              "→",
+              "{{lang:port_pret}}"
+            ],
+            [
+              "n",
+              "{{tirer}}",
+              "cannon · bullet"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "試すために、シーン **Game** に **Tower** を手で置いてみましょう（メニュー **＋** → シーン **Tower**）：330 ピクセル以内を通る敵すべてを撃つはずです。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 6：敵に当てる"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "この部分はシーン **Enemy** に入れます：弾が当たったことを知っているのは敵です。"
+        ],
+        [
+          "ol",
+          [
+            "シーン **Enemy** の **{{lang:titre_blueprint}}** を開き、イベント **[[NoeudEventCollisionTag]]** を追加します：対象 **enemy**、{{lang:Tag}} **bullet**。",
+            "**[[detruire_objet]]** を追加し、対象に **{{lang:noeud_objet_implique_long}}** を選びます：消える弾のことです。",
+            "**[[infliger_degats]]** を追加：対象 **enemy**、**{{lang:infliger_degats.degats}}** = `1`。初期設定では、ライフがゼロになると敵は壊れます。",
+            "**{{lang:port_detruit}}** の出力から **[[ajouter_variable]]** を追加：変数 **credits**、値 `15`（ごほうび）。",
+            "ノードを順番につなぎます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "enemy · bullet"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "bullet"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{infliger_degats}}",
+              "enemy · 1"
+            ],
+            [
+              "→",
+              "{{lang:port_detruit}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "credits · 15"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 7：タワーを建てる"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "プレイヤーは**建設場所**をタップしてタワーを建てます。50 クレジットかかります。"
+        ],
+        [
+          "ol",
+          [
+            "建設場所を 1 つずつ選び、インスペクターでタグ **spot** を付けます。",
+            "シーン **Game** で、イベント **[[NoeudEventClicObjet]]** を追加し、オブジェクトに **# spot**（タグ **spot** を持つすべてのオブジェクト）を選びます。",
+            "**[[condition]]** `=credits >= 50` を追加します。",
+            "**{{lang:port_vrai}}** の出力：**[[ajouter_variable]]**：変数 **credits**、値 `-50`。",
+            "次に **[[placer_copie_scene]]**：シーン **Tower**。**X** は **🔗** をタップして **[[valeur_objet]]** を選び、オブジェクト **{{lang:noeud_objet_implique_long}}**、**{{lang:valeur_objet.propriete}}** = `x` にします。**Y** も `y` で同じようにします：タワーはプレイヤーがタップした場所にぴったり現れます。",
+            "**[[detruire_objet]]** を追加し、対象を **{{lang:noeud_objet_implique_long}}** にします：建設場所が消えます。",
+            "**{{lang:port_faux}}** の出力：**[[toast]]**、メッセージは**クレジットが足りません**。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventClicObjet}}",
+              "# spot"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=credits >= 50"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "credits · -50"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{placer_copie_scene}}",
+              "Tower"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "spot"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 8：画面の数字"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "シーン **Game** で、イベント **[[NoeudEventChaqueImage]]** を追加します。",
+            "**[[modifier_texte]]** を追加：対象 **creditsText**、**{{lang:modifier_texte.valeur}}** = `=\"クレジット：\" + credits`。",
+            "2 つめの **[[modifier_texte]]** を追加：対象 **lifeText**、**{{lang:modifier_texte.valeur}}** = `=\"基地：\" + base_life`。",
+            "3 つのノードを順番につなぎます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "creditsText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "lifeText"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 9：基地のライフとゲームオーバー"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "敵が道のゴールにたどり着くと、基地のライフが 1 つ減ります。ライフがなくなるとゲームオーバーです。"
+        ],
+        [
+          "ol",
+          [
+            "シーン **Enemy** で、ステップ 3 の **[[suivre_parcours]]** ノードを使います。その **{{lang:port_arrive}}** の出力から **[[ajouter_variable]]** を追加：変数 **base_life**、値 `-1`。",
+            "**[[detruire_objet]]** を追加：対象 **enemy**。",
+            "**[[condition]]** `=base_life <= 0` を追加します。**{{lang:port_vrai}}** の出力に、イベント名 **game_over** で **[[appeler_evenement]]** を追加します。",
+            "シーン **Game** に、同じ名前 **game_over** のイベント **[[NoeudEventPersonnalise]]** を追加します。",
+            "**[[arreter_minuteur]]** を追加：**{{lang:arreter_minuteur.nom}}** = `waves`（もう敵を送り出しません）、続けて **[[detruire_par_tag]]**：**{{lang:detruire_par_tag.tag}}** = `enemy`。",
+            "メッセージ**ゲームオーバー**で **[[toast]]** を追加し、次に **[[attendre]]** `2` 秒、そして **[[recommencer_scene]]**。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{suivre_parcours}}",
+              "enemy"
+            ],
+            [
+              "→",
+              "{{lang:port_arrive}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "base_life · -1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "enemy"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=base_life <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{appeler_evenement}}",
+              "game_over"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventPersonnalise}}",
+              "game_over"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{arreter_minuteur}}",
+              "waves"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_par_tag}}",
+              "enemy"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "ゲームオーバー"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "遊んでみましょう：クレジットでタワーを 1、2 基建てて、敵を止めるのを見てください。何体か通して、基地のライフが減るのも確かめましょう。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "さらに進むには"
+    ],
+    [
+      "ul",
+      [
+        "**勝利：**変数で敵を数えます（1 体倒れる、またはゴールにつくたびに +1）。送り出した総数になったら、メッセージを出して勝ちにします。",
+        "**タワーを強くする：**タワーをタップして、クレジットがかかる「強化」ボタンのある小さなウィンドウを開き、砲身の画像と連射の速さを変えます。サンプル **Tower defense (cubes)** を開いて作り方を見てください。",
+        "**敵の種類を増やす：**ライフが多く速さの違う 2 つめのシーン（**Enemy2**）を作り、ウェーブごとにどちらかを送り出します（サンプル **Tower defense (cubes)** を開いて作り方を見てください）。",
+        "**分かれ道：**ルートツールで点をタップして**この点は分かれ道です**を選びます：敵はランダムに道を選び、枝はまた合流できます。",
+        "**複数のレーン、渋滞なし：** **[[suivre_parcours]]** で **{{lang:suivre_parcours.ecart}}** と **{{lang:suivre_parcours.eviter}}** を「はい」にします：敵は横に並んで歩き、追い越します。",
+        "**大きなマップ：**マップを 2 倍の幅にして、開始時に **[[limites_camera]]** と **[[camera_doigt]]** を追加し、プレイヤーが指でマップをスクロールできるようにします。",
+        "**音と火花：**撃つたびに **[[jouer_son]]** を、敵が倒れたら **[[effet_particules]]** を追加します（ガイド [パーティクルとエフェクト](guide:particules-effets) を見てください）。"
+      ]
+    ],
+    [
+      "h2",
+      "うまく動かないときは"
+    ],
+    [
+      "ul",
+      [
+        "**敵が動かない：**設定 **{{lang:suivre_parcours.parcours}}** が道の名前（**Path**）になっているか、道にスタートがあるかを確かめます。シーン **Enemy** にイベント **[[NoeudEventStart]]** があるかも確かめます。",
+        "**タワーが撃たない：**敵のタグ **enemy**、**[[tirer]]** の名前 **bullet**、そしてオブジェクト **bullet** がシーン **Game** にあること（画面の外で、消されていない）を確かめます。敵が射程の外のままなら **{{lang:choisir_cible.portee_px}}** を大きくします。",
+        "**弾がダメージを与えない：**弾にはタグ **bullet** が必要で、イベント **[[NoeudEventCollisionTag]]** は **Game** ではなくシーン **Enemy** に入れます。",
+        "**タワーが違う場所に出る：** **[[placer_copie_scene]]** の **X** と **Y** には、ステップ 7 のように、緑の **[[valeur_objet]]** ノードと **{{lang:noeud_objet_implique_long}}** を使います。",
+        "**クレジットや基地のライフが変わらない：**変数 **credits** と **base_life** の範囲が **{{lang:var_scope_globale}}** になっているか確かめます。"
+      ]
+    ]
+  ]
+}

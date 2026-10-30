@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何在 Yop2D 中制作塔防游戏？ | Yop2D 指南</title>
+<meta name="description" content="在 Yop2D 中制作塔防游戏，无需代码：画出敌人的路线、派出敌人波次、建造会选择目标并射击的塔，并用节点统计金币和基地生命。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/tower-defense.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/tower-defense.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/tower-defense.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/tower-defense.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/tower-defense.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/tower-defense.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/tower-defense.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/tower-defense.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/tower-defense.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/tower-defense.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何制作塔防游戏？",
+ "description": "在 Yop2D 中制作塔防游戏，无需代码：画出敌人的路线、派出敌人波次、建造会选择目标并射击的塔，并用节点统计金币和基地生命。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "画出路线",
+   "text": "在 Assets 中使用“路线”工具：放置点、连接它们、选择起点。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "创建 Enemy 场景",
+   "text": "启动时 → 给物体生命值 → 沿路线前进（路线“Path”）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "派出敌人波次",
+   "text": "重复（每 1.5 秒）→ 放置场景副本（Enemy）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "创建 Tower 场景",
+   "text": "重复 → 选择目标 → 朝向 → 冷却 → 发射对象."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "击中敌人",
+   "text": "如果对象碰到标签（enemy、bullet）→ 造成伤害。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "用金币建造塔",
+   "text": "点击对象时（spot）→ 增加变量值（credits，-50）→ 放置场景副本（Tower）。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "基地生命与游戏结束",
+   "text": "沿路线前进（到达终点）→ 增加变量值（base_life，-1）→ 调用事件。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>如何制作塔防游戏？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../tower-defense.html" hreflang="fr">Français</a> · <a href="../en/tower-defense.html" hreflang="en">English</a> · <a href="../es/tower-defense.html" hreflang="es">Español</a> · <a href="../de/tower-defense.html" hreflang="de">Deutsch</a> · <a href="../it/tower-defense.html" hreflang="it">Italiano</a> · <a href="../pt/tower-defense.html" hreflang="pt">Português</a> · <a href="../ru/tower-defense.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/tower-defense.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>在塔防游戏中，<strong>敌人</strong>沿着<strong>路线</strong>前进，你建造<strong>塔</strong>，在敌人到达你的<strong>基地</strong>之前向它们射击。这里的敌人沿着你亲手画的路线前进，每座塔会选择最近的敌人并向它开火，<strong>金币</strong>用来建造新的塔。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>一个名为 <strong>map</strong> 的图像：游戏背景，1920 x 1080 px，上面画着一条道路；</li><li>几个用作建造位置的图像（例如 120 x 120 px）；</li><li>一个代表 <strong>enemy</strong> 的图像（例如 64 x 64 px），一个代表 <strong>tower</strong>（120 x 120 px），一个代表 <strong>cannon</strong>（90 x 34 px，朝右）和一个代表 <strong>bullet</strong>（24 x 24 px）；</li><li>两个文本对象：<strong>creditsText</strong> 和 <strong>lifeText</strong>，放在屏幕上方。</li></ul>
+</div>
+<div class="tip">👉 本指南针对 <strong>1920 x 1080 横屏</strong>游戏编写。示例 <strong>Tower defense (cubes)</strong>（“示例”标签）在文件夹 <strong>Images/TD</strong> 中带有现成的图片：打开它，把喜欢的图片复制到你的项目里。你也可以画自己的图片，本指南适用于任何风格。场景 <strong>Enemy</strong> 和 <strong>Tower</strong> 会在游戏中被多次复制：参见指南 <a href="../zh/prefabs.html">现成对象</a>。</div>
+<h2>第 1 步：变量</h2>
+<div class="method">
+<ol><li>在左侧面板中打开 <strong>变量</strong> 部分，创建两个变量，作用域都是 <strong>全局</strong>（所有场景都能使用），类型为 <strong>整数</strong>：</li></ol>
+<ul><li><strong>credits</strong>：初始值 <strong>150</strong>（建造塔的金币）；</li><li><strong>base_life</strong>：初始值 <strong>20</strong>（你的基地能承受多少个敌人）。</li></ul>
+</div>
+<h2>第 2 步：画出路线</h2>
+<div class="method">
+<p>敌人沿着一条<strong>路线</strong>前进：由相互连接的点组成。你用“路线”工具把它画在地图上面。</p>
+<ol><li>打开 <strong>Assets</strong> 窗口（资源面板），点按<strong>路线</strong>。路线编辑器打开，背景是你的场景。</li><li>点按<strong>新路线</strong>，命名为 <strong>Path</strong>。</li><li>用<strong>放置点</strong>工具点按场景，在左侧敌人进入的地方放第一个点：它就是<strong>起点</strong>。沿着你的道路继续点按：每个新点都会连接到前一个点。</li><li>把最后一个点放在你的基地上：它没有出口，是<strong>终点</strong>。</li><li>点按<strong>预览</strong>，看一个点沿着路线走一遍。然后关闭编辑器：路线会自动保存。</li></ol>
+<div class="tip">👉 要更改起点，点按一个点并选择<strong>设为起点</strong>。移动点用<strong>移动</strong>工具；删除点用<strong>擦除</strong>。</div>
+</div>
+<h2>第 3 步：Enemy 场景</h2>
+<div class="method">
+<p>敌人是单独的一个<strong>场景</strong>：你送进游戏的每个敌人都是它的一个<strong>副本</strong>，各有自己的生命。你只需要建一次。</p>
+<ol><li>创建一个名为 <strong>Enemy</strong> 的新场景（菜单 <strong>＋</strong>，然后 <strong>创建场景</strong>）。</li><li>在场景 <strong>Enemy</strong> 中，在 X = <code>0</code>、Y = <code>0</code> 处添加一个名为 <strong>enemy</strong> 的图像，并给它标签 <strong>enemy</strong>。</li><li>打开场景 <strong>Enemy</strong> 的 <strong>蓝图</strong>，添加事件 <strong>“启动时”</strong>。</li><li>添加 <strong>“给物体生命值”</strong>：目标 <strong>enemy</strong>，<strong>生命值</strong> = <code>3</code>（敌人能承受 3 次攻击）。</li><li>添加 <strong>“沿路线前进”</strong>：目标 <strong>enemy</strong>，<strong>路线名称</strong> = <strong>Path</strong>，<strong>速度（像素/秒）</strong> = <code>150</code>。</li><li>按顺序连接这三个节点。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>启动时</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>给物体生命值</b><span>enemy · 3</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>沿路线前进</b><span>enemy · Path · 150</span></div>
+</div>
+</div>
+<h2>第 4 步：派出敌人波次</h2>
+<div class="method">
+<p>现在回到你的主场景（<strong>Game</strong>），让敌人一个接一个出发。</p>
+<ol><li>打开场景 <strong>Game</strong> 的 <strong>蓝图</strong>，添加事件 <strong>“启动时”</strong>。</li><li>添加两个 <strong>“修改变量”</strong> 节点：<strong>credits</strong> = <code>150</code>，然后 <strong>base_life</strong> = <code>20</code>。这样每局新游戏都从干净的状态开始，即使在 Game Over 之后也是如此。</li><li>添加 <strong>“等待”</strong>：<strong>时长（秒）</strong> = <code>3</code>（第一个敌人出现前的停顿）。</li><li>添加 <strong>“重复”</strong>：<strong>每隔（秒）</strong> = <code>1.5</code>，<strong>次数（0 = 无限）</strong> = <code>15</code>，<strong>计时器名称（可选）</strong> = <code>waves</code>。</li><li>从 <strong>每次</strong> 输出添加 <strong>“放置场景副本”</strong>：场景 <strong>Enemy</strong>。X 和 Y 保持不变：敌人会自己移到路线的起点。</li><li>按顺序连接这些节点。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>启动时</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>credits · 150</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>base_life · 20</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>等待</b><span>3</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>重复</b><span>1.5 · 15</span></div>
+<div class="fleche"><em>每次</em> →</div>
+<div class="noeud"><b>放置场景副本</b><span>Enemy</span></div>
+</div>
+<p>运行游戏：每隔一秒半出现一个敌人，沿着你的路线走到终点（它到达时暂时什么都不会发生）。</p>
+</div>
+<h2>第 5 步：Tower 场景</h2>
+<div class="method">
+<p>塔也是一个<strong>场景</strong>。它在射程内寻找最近的敌人，把炮管转向它并开火。</p>
+<ol><li>创建一个名为 <strong>Tower</strong> 的新场景。在 X = <code>0</code>、Y = <code>0</code> 处添加一个图像 <strong>tower</strong>，然后在它前面的 X = <code>15</code>、Y = <code>43</code> 处添加一个图像 <strong>cannon</strong>。</li><li>在场景 <strong>Game</strong> 中，在<strong>屏幕之外</strong>（例如 X = <code>-300</code>、Y = <code>-300</code>）添加一个名为 <strong>bullet</strong> 的图像，并给它标签 <strong>bullet</strong>：这是塔每次射击时复制的模型。</li><li>打开场景 <strong>Tower</strong> 的 <strong>蓝图</strong>，添加事件 <strong>“启动时”</strong>，然后添加 <strong>“重复”</strong>：<strong>每隔（秒）</strong> = <code>0.2</code>，<strong>次数（0 = 无限）</strong> = <code>0</code>（无限）。塔每秒环顾 5 次。</li><li>从 <strong>每次</strong> 输出添加 <strong>“选择目标”</strong>：目标 <strong>tower</strong>，<strong>可能目标的标签（用逗号分隔）</strong> = <code>enemy</code>，<strong>选哪个目标？</strong> = <strong>“最近的”</strong>，并在高级设置中设置 <strong>以像素计的圆形射程（0 = 使用格数射程）</strong> = <code>330</code>。</li><li>从 <strong>找到目标</strong> 输出添加 <strong>“朝向”</strong>：目标 <strong>cannon</strong>，第二个对象选择 <strong>事件中涉及的对象</strong>（被选中的敌人）。</li><li>添加 <strong>“冷却”</strong>：目标 <strong>cannon</strong>，<strong>延迟（秒）</strong> = <code>1.2</code>（最多每 1.2 秒射击一次）。</li><li>从 <strong>就绪</strong> 输出添加 <strong>“发射对象”</strong>：目标 <strong>cannon</strong>，<strong>模型名称</strong> = <code>bullet</code>，<strong>速度</strong> = <code>14</code>，<strong>子弹存活时间（秒，0 = 不限）</strong> = <code>1.6</code>，<strong>离开屏幕后销毁（是 / 否）</strong> = 否。保持 <strong>方向</strong> 不变：子弹朝炮管所指的方向飞出。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>启动时</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>重复</b><span>0.2 · 无限</span></div>
+<div class="fleche"><em>每次</em> →</div>
+<div class="noeud"><b>选择目标</b><span>tower · enemy · 330</span></div>
+<div class="fleche"><em>找到目标</em> →</div>
+<div class="noeud"><b>朝向</b><span>cannon</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>冷却</b><span>cannon · 1.2</span></div>
+<div class="fleche"><em>就绪</em> →</div>
+<div class="noeud"><b>发射对象</b><span>cannon · bullet</span></div>
+</div>
+<div class="tip">👉 手动在场景 <strong>Game</strong> 中放一座 <strong>Tower</strong> 来测试（菜单 <strong>＋</strong> → 场景 <strong>Tower</strong>）：它应该向每个在 330 像素内经过的敌人射击。</div>
+</div>
+<h2>第 6 步：击中敌人</h2>
+<div class="method">
+<p>这一部分放在场景 <strong>Enemy</strong> 中：知道子弹何时击中自己的是敌人。</p>
+<ol><li>打开场景 <strong>Enemy</strong> 的 <strong>蓝图</strong>，添加事件 <strong>“如果对象碰到标签”</strong>：目标 <strong>enemy</strong>，标签 <strong>bullet</strong>。</li><li>添加 <strong>“销毁对象”</strong>，并选择 <strong>事件中涉及的对象</strong> 作为目标：它就是那颗子弹，会消失。</li><li>添加 <strong>“造成伤害”</strong>：目标 <strong>enemy</strong>，<strong>伤害</strong> = <code>1</code>。默认情况下，敌人的生命降到零时会被摧毁。</li><li>从 <strong>生命值为 0</strong> 输出添加 <strong>“增加变量值”</strong>：变量 <strong>credits</strong>，值 <code>15</code>（奖励）。</li><li>按顺序连接这些节点。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>如果对象碰到标签</b><span>enemy · bullet</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>销毁对象</b><span>bullet</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>造成伤害</b><span>enemy · 1</span></div>
+<div class="fleche"><em>生命值为 0</em> →</div>
+<div class="noeud"><b>增加变量值</b><span>credits · 15</span></div>
+</div>
+</div>
+<h2>第 7 步：建造塔</h2>
+<div class="method">
+<p>玩家点按一个<strong>建造位置</strong>来建造塔。需要 50 金币。</p>
+<ol><li>选中每个建造位置，在检查器中给它标签 <strong>spot</strong>。</li><li>在场景 <strong>Game</strong> 中添加事件 <strong>“点击对象时”</strong>，并选择 <strong># spot</strong> 作为对象（所有带标签 <strong>spot</strong> 的对象）。</li><li>添加 <strong>“条件”</strong> <code>=credits &gt;= 50</code>。</li><li>在 <strong>真</strong> 输出：<strong>“增加变量值”</strong>：变量 <strong>credits</strong>，值 <code>-50</code>。</li><li>然后 <strong>“放置场景副本”</strong>：场景 <strong>Tower</strong>。对于 <strong>X</strong>，点按 <strong>🔗</strong>，选择 <strong>“对象的数值”</strong>，对象 <strong>事件中涉及的对象</strong>，<strong>什么</strong> = <code>x</code>。对 <strong>Y</strong> 也一样，用 <code>y</code>：塔会正好出现在玩家点按的位置。</li><li>添加 <strong>“销毁对象”</strong>，目标选择 <strong>事件中涉及的对象</strong>：建造位置消失。</li><li>在 <strong>假</strong> 输出：<strong>“屏幕底部小提示”</strong>，消息为<strong>金币不足</strong>。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>点击对象时</b><span># spot</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>条件</b><span>=credits &gt;= 50</span></div>
+<div class="fleche"><em>真</em> →</div>
+<div class="noeud"><b>增加变量值</b><span>credits · -50</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>放置场景副本</b><span>Tower</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>销毁对象</b><span>spot</span></div>
+</div>
+</div>
+<h2>第 8 步：屏幕上的数字</h2>
+<div class="method">
+<ol><li>在场景 <strong>Game</strong> 中添加事件 <strong>“每帧”</strong>。</li><li>添加 <strong>“修改文本”</strong>：目标 <strong>creditsText</strong>，<strong>新文本</strong> = <code>="金币：" + credits</code>。</li><li>再添加一个 <strong>“修改文本”</strong>：目标 <strong>lifeText</strong>，<strong>新文本</strong> = <code>="基地：" + base_life</code>。</li><li>按顺序连接这三个节点。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>每帧</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改文本</b><span>creditsText</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改文本</b><span>lifeText</span></div>
+</div>
+</div>
+<h2>第 9 步：基地生命与游戏结束</h2>
+<div class="method">
+<p>敌人走到路线终点时，你的基地会失去一点生命。基地生命耗尽时，游戏结束。</p>
+<ol><li>在场景 <strong>Enemy</strong> 中，找到第 3 步的 <strong>“沿路线前进”</strong> 节点。从它的 <strong>到达</strong> 输出添加 <strong>“增加变量值”</strong>：变量 <strong>base_life</strong>，值 <code>-1</code>。</li><li>添加 <strong>“销毁对象”</strong>：目标 <strong>enemy</strong>。</li><li>添加 <strong>“条件”</strong> <code>=base_life &lt;= 0</code>。在 <strong>真</strong> 输出添加 <strong>“调用事件”</strong>，事件名为 <strong>game_over</strong>。</li><li>在场景 <strong>Game</strong> 中添加事件 <strong>“本地事件”</strong>，使用同样的名称 <strong>game_over</strong>。</li><li>添加 <strong>“停止计时器”</strong>：<strong>名称（留空 = 全部）</strong> = <code>waves</code>（不再派出敌人），然后添加 <strong>“按标签销毁”</strong>：<strong>要销毁的标签</strong> = <code>enemy</code>。</li><li>添加 <strong>“屏幕底部小提示”</strong>，消息为<strong>游戏结束</strong>，然后 <strong>“等待”</strong> <code>2</code> 秒，再 <strong>“重新开始场景”</strong>。</li></ol>
+<div class="chaine">
+<div class="noeud"><b>沿路线前进</b><span>enemy</span></div>
+<div class="fleche"><em>到达</em> →</div>
+<div class="noeud"><b>增加变量值</b><span>base_life · -1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>销毁对象</b><span>enemy</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>条件</b><span>=base_life &lt;= 0</span></div>
+<div class="fleche"><em>真</em> →</div>
+<div class="noeud"><b>调用事件</b><span>game_over</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>本地事件</b><span>game_over</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>停止计时器</b><span>waves</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>按标签销毁</b><span>enemy</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>屏幕底部小提示</b><span>游戏结束</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>等待</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>重新开始场景</b></div>
+</div>
+<p>开始玩吧：用金币建一两座塔，看看它们怎么拦住敌人。放几个过去，看看基地怎样失去生命。</p>
+</div>
+<h2>更进一步</h2>
+<ul><li><strong>胜利：</strong>用变量统计敌人（一个死亡或到达时加 1）。当数字达到你派出的总数时，显示消息并获胜。</li><li><strong>升级塔：</strong>点按一座塔，打开一个带“升级”按钮的小窗口，升级要花金币，并更换炮管图片和射速。打开示例 <strong>Tower defense (cubes)</strong> 看看是怎么做的。</li><li><strong>多种敌人：</strong>再做一个场景（<strong>Enemy2</strong>），生命更多、速度不同，让每一波派出其中一种或另一种（打开示例 <strong>Tower defense (cubes)</strong> 看看是怎么做的）。</li><li><strong>路口：</strong>在路线工具中点按一个点并选择<strong>这个点是路口</strong>：敌人随机选择一条路，分支之后还可以汇合。</li><li><strong>多条车道，不堵车：</strong>在 <strong>“沿路线前进”</strong> 中，把 <strong>随机侧向偏移（像素，±：每个单位走自己的车道）</strong> 和 <strong>避让其他单位：侧身避免重叠并超过较慢的单位（是 / 否）</strong> 设为是：敌人并排行走并互相超越。</li><li><strong>大地图：</strong>把地图做成两倍宽，然后在开始时添加 <strong>“相机边界”</strong> 和 <strong>“用手指拖动相机”</strong>，让玩家用手指滚动地图。</li><li><strong>声音和火花：</strong>每次射击时添加 <strong>“播放音效”</strong>，敌人死亡时添加 <strong>“粒子效果”</strong>（参见指南 <a href="../zh/particules-effets.html">粒子和特效</a>）。</li></ul>
+<h2>如果不起作用</h2>
+<ul><li><strong>敌人不动：</strong>检查 <strong>路线名称</strong> 设置是否是你路线的名称（<strong>Path</strong>），并且路线有起点。检查场景 <strong>Enemy</strong> 是否有它的 <strong>“启动时”</strong> 事件。</li><li><strong>塔不射击：</strong>检查敌人身上的标签 <strong>enemy</strong>、<strong>“发射对象”</strong> 里的名称 <strong>bullet</strong>，以及对象 <strong>bullet</strong> 是否在场景 <strong>Game</strong> 中（在屏幕外，但没有被删除）。如果敌人一直在射程之外，请调大 <strong>以像素计的圆形射程（0 = 使用格数射程）</strong>。</li><li><strong>子弹没有伤害：</strong>子弹必须有标签 <strong>bullet</strong>，并且事件 <strong>“如果对象碰到标签”</strong> 必须在场景 <strong>Enemy</strong> 中，而不是在 <strong>Game</strong> 中。</li><li><strong>塔出现在错误的位置：</strong>对于 <strong>“放置场景副本”</strong> 的 <strong>X</strong> 和 <strong>Y</strong>，使用绿色的 <strong>“对象的数值”</strong> 节点并选择 <strong>事件中涉及的对象</strong>，就像第 7 步那样。</li><li><strong>金币或基地生命不变：</strong>检查变量 <strong>credits</strong> 和 <strong>base_life</strong> 的作用域是否为 <strong>全局</strong>。</li></ul>
+
+<div class="nav">
+<a href="../zh/casse-briques.html">← 制作打砖块</a>
+<a href="../zh/jeu-tactique.html">下一篇： 做一个战术游戏 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>

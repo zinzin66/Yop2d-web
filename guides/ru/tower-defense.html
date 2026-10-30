@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как сделать tower defense в Yop2D? | Руководство Yop2D</title>
+<meta name="description" content="Сделай игру tower defense в Yop2D без кода: нарисуй путь врагов, запускай волны, строй башни, которые выбирают цель и стреляют, и считай кредиты и жизни базы с помощью узлов.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/tower-defense.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/tower-defense.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/tower-defense.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/tower-defense.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/tower-defense.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/tower-defense.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/tower-defense.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/tower-defense.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/tower-defense.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/tower-defense.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Как сделать tower defense?",
+ "description": "Сделай игру tower defense в Yop2D без кода: нарисуй путь врагов, запускай волны, строй башни, которые выбирают цель и стреляют, и считай кредиты и жизни базы с помощью узлов.",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Нарисовать путь",
+   "text": "В Assets инструмент «Маршрут»: ставь точки, соединяй их, выбери старт."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Создать сцену Enemy",
+   "text": "При старте → Дать объекту здоровье → Идти по маршруту (маршрут «Path»)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Запустить волны",
+   "text": "Повторять (каждые 1,5 секунды) → Разместить копию сцены (Enemy)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Создать сцену Tower",
+   "text": "Повторять → Выбрать цель → Повернуть к → Перезарядка → Стрелять объектом."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Попасть во врагов",
+   "text": "Если объект касается тега (enemy, bullet) → Нанести урон."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Строить башни за кредиты",
+   "text": "Клик по объекту (spot) → Добавить к переменной (credits, -50) → Разместить копию сцены (Tower)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Жизни базы и конец игры",
+   "text": "Идти по маршруту (дошёл до конца) → Добавить к переменной (base_life, -1) → Вызвать событие."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ru/index.html">← Yop2D</a>
+<h1>Как сделать tower defense?</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../tower-defense.html" hreflang="fr">Français</a> · <a href="../en/tower-defense.html" hreflang="en">English</a> · <a href="../es/tower-defense.html" hreflang="es">Español</a> · <a href="../de/tower-defense.html" hreflang="de">Deutsch</a> · <a href="../it/tower-defense.html" hreflang="it">Italiano</a> · <a href="../pt/tower-defense.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/tower-defense.html" hreflang="zh">中文</a> · <a href="../ja/tower-defense.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>В tower defense <strong>враги</strong> идут по <strong>пути</strong>, а ты строишь <strong>башни</strong>, которые стреляют в них, пока они не дошли до твоей <strong>базы</strong>. Здесь враги идут по пути, который ты рисуешь сам, каждая башня выбирает ближайшего врага и стреляет в него, а <strong>кредиты</strong> оплачивают новые башни.</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>Изображение с именем <strong>map</strong>: фон игры, 1920 x 1080 px, с нарисованной дорогой;</li><li>несколько Изображение для мест застройки (например, 120 x 120 px);</li><li>Изображение для <strong>enemy</strong> (например, 64 x 64 px), одно для <strong>tower</strong> (120 x 120 px), одно для <strong>cannon</strong> (90 x 34 px, смотрит вправо) и одно для <strong>bullet</strong> (24 x 24 px);</li><li>два объекта Текст: <strong>creditsText</strong> и <strong>lifeText</strong>, вверху экрана.</li></ul>
+</div>
+<div class="tip">👉 Это руководство написано для игры в <strong>горизонтальном формате 1920 x 1080</strong>. Пример <strong>Tower defense (cubes)</strong> (вкладка «Примеры») содержит готовые картинки в папке <strong>Images/TD</strong>: открой его и скопируй в свой проект те, что нравятся. Можно нарисовать и свои, руководство подходит для любого стиля. Сцены <strong>Enemy</strong> и <strong>Tower</strong> копируются в игру много раз: смотри руководство <a href="../ru/prefabs.html">Готовый объект</a>.</div>
+<h2>Шаг 1: переменные</h2>
+<div class="method">
+<ol><li>В левой панели открой раздел <strong>Переменные</strong> и создай две переменные, обе с областью <strong>Глобальная</strong> (их могут использовать все сцены) и типом <strong>Целое</strong>:</li></ol>
+<ul><li><strong>credits</strong>: начальное значение <strong>150</strong> (деньги на постройку башен);</li><li><strong>base_life</strong>: начальное значение <strong>20</strong> (сколько врагов выдержит твоя база).</li></ul>
+</div>
+<h2>Шаг 2: нарисовать путь</h2>
+<div class="method">
+<p>Враги идут по <strong>пути</strong>: точки, соединённые между собой. Ты рисуешь его поверх своей карты инструментом «Маршрут».</p>
+<ol><li>Открой окно <strong>Assets</strong> (панель «Ресурсы») и нажми <strong>Маршрут</strong>. Откроется редактор маршрутов, а на заднем плане будет твоя сцена.</li><li>Нажми <strong>Новый маршрут</strong> и назови его <strong>Path</strong>.</li><li>Инструментом <strong>Ставить точки</strong> коснись сцены, чтобы поставить первую точку слева, где входят враги: это <strong>Старт</strong>. Продолжай касаться вдоль дороги: каждая новая точка соединяется с предыдущей.</li><li>Поставь последнюю точку на свою базу: у неё нет выхода, это <strong>Финиш</strong>.</li><li>Нажми <strong>Посмотреть</strong>, чтобы увидеть, как точка проходит по пути. Затем закрой редактор: маршрут сохранится сам.</li></ol>
+<div class="tip">👉 Чтобы сменить старт, коснись точки и выбери <strong>Сделать эту точку стартом</strong>. Чтобы переместить точку, возьми инструмент <strong>Двигать</strong>; чтобы убрать, используй <strong>Стереть</strong>.</div>
+</div>
+<h2>Шаг 3: сцена Enemy</h2>
+<div class="method">
+<p>Враг — это отдельная <strong>сцена</strong>: каждый враг, которого ты отправляешь в игру, — её <strong>копия</strong> со своей жизнью. Ты строишь её один раз.</p>
+<ol><li>Создай новую сцену с именем <strong>Enemy</strong> (меню <strong>＋</strong>, затем <strong>Создать сцену</strong>).</li><li>В сцене <strong>Enemy</strong> добавь Изображение с именем <strong>enemy</strong> в X = <code>0</code>, Y = <code>0</code> и дай ей тег <strong>enemy</strong>.</li><li>Открой <strong>Blueprint</strong> сцены <strong>Enemy</strong> и добавь событие <strong>«При старте»</strong>.</li><li>Добавь <strong>«Дать объекту здоровье»</strong>: цель <strong>enemy</strong>, <strong>Очки здоровья</strong> = <code>3</code> (враг выдерживает 3 попадания).</li><li>Добавь <strong>«Идти по маршруту»</strong>: цель <strong>enemy</strong>, <strong>Название маршрута</strong> = <strong>Path</strong>, <strong>Скорость (пикселей в секунду)</strong> = <code>150</code>.</li><li>Соедини три узла по порядку.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>При старте</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Дать объекту здоровье</b><span>enemy · 3</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Идти по маршруту</b><span>enemy · Path · 150</span></div>
+</div>
+</div>
+<h2>Шаг 4: запустить волны</h2>
+<div class="method">
+<p>Теперь вернись в главную сцену (<strong>Game</strong>) и отправляй врагов один за другим.</p>
+<ol><li>Открой <strong>Blueprint</strong> сцены <strong>Game</strong> и добавь событие <strong>«При старте»</strong>.</li><li>Добавь два узла <strong>«Изменить переменную»</strong>: <strong>credits</strong> = <code>150</code>, затем <strong>base_life</strong> = <code>20</code>. Так каждая новая игра начинается с чистого листа, даже после Game Over.</li><li>Добавь <strong>«Ждать»</strong>: <strong>Длительность (секунды)</strong> = <code>3</code> (пауза перед первым врагом).</li><li>Добавь <strong>«Повторять»</strong>: <strong>Каждые (секунды)</strong> = <code>1.5</code>, <strong>Сколько раз (0 = бесконечно)</strong> = <code>15</code>, <strong>Имя таймера (необязательно)</strong> = <code>waves</code>.</li><li>С выхода <strong>Каждый раз</strong> добавь <strong>«Разместить копию сцены»</strong>: сцена <strong>Enemy</strong>. Оставь X и Y как есть: враг сам встанет на старт пути.</li><li>Соедини узлы по порядку.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>При старте</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>credits · 150</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>base_life · 20</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Ждать</b><span>3</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Повторять</b><span>1.5 · 15</span></div>
+<div class="fleche"><em>Каждый раз</em> →</div>
+<div class="noeud"><b>Разместить копию сцены</b><span>Enemy</span></div>
+</div>
+<p>Запусти игру: враг появляется каждые полторы секунды и идёт по твоему пути до конца (пока при этом ничего не происходит).</p>
+</div>
+<h2>Шаг 5: сцена Tower</h2>
+<div class="method">
+<p>Башня — тоже <strong>сцена</strong>. Она ищет ближайшего врага в зоне досягаемости, поворачивает пушку к нему и стреляет.</p>
+<ol><li>Создай новую сцену с именем <strong>Tower</strong>. Добавь Изображение <strong>tower</strong> в X = <code>0</code>, Y = <code>0</code>, затем Изображение <strong>cannon</strong> в X = <code>15</code>, Y = <code>43</code>, перед ней.</li><li>В сцене <strong>Game</strong> добавь Изображение с именем <strong>bullet</strong> <strong>за пределами экрана</strong> (например, X = <code>-300</code>, Y = <code>-300</code>) и дай ей тег <strong>bullet</strong>: это образец, который башня копирует при каждом выстреле.</li><li>Открой <strong>Blueprint</strong> сцены <strong>Tower</strong> и добавь событие <strong>«При старте»</strong>, затем <strong>«Повторять»</strong>: <strong>Каждые (секунды)</strong> = <code>0.2</code>, <strong>Сколько раз (0 = бесконечно)</strong> = <code>0</code> (бесконечно). Башня осматривается 5 раз в секунду.</li><li>С выхода <strong>Каждый раз</strong> добавь <strong>«Выбрать цель»</strong>: цель <strong>tower</strong>, <strong>Теги возможных целей (через запятую)</strong> = <code>enemy</code>, <strong>Какую цель выбрать?</strong> = <strong>«Ближайшая»</strong>, а в дополнительных настройках <strong>Дальность в пикселях по кругу (0 = дальность в клетках)</strong> = <code>330</code>.</li><li>С выхода <strong>Цель найдена</strong> добавь <strong>«Повернуть к»</strong>: цель <strong>cannon</strong>, а вторым объектом выбери <strong>Объект, участвующий в событии</strong> (выбранный враг).</li><li>Добавь <strong>«Перезарядка»</strong>: цель <strong>cannon</strong>, <strong>Задержка (секунды)</strong> = <code>1.2</code> (не чаще одного выстрела в 1,2 секунды).</li><li>С выхода <strong>Готово</strong> добавь <strong>«Стрелять объектом»</strong>: цель <strong>cannon</strong>, <strong>Имя модели</strong> = <code>bullet</code>, <strong>Скорость</strong> = <code>14</code>, <strong>Время жизни выстрела (секунды, 0 = без предела)</strong> = <code>1.6</code>, <strong>Уничтожать за экраном (да / нет)</strong> = нет. Оставь <strong>Направление</strong> как есть: снаряд вылетает туда, куда смотрит пушка.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>При старте</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Повторять</b><span>0.2 · бесконечно</span></div>
+<div class="fleche"><em>Каждый раз</em> →</div>
+<div class="noeud"><b>Выбрать цель</b><span>tower · enemy · 330</span></div>
+<div class="fleche"><em>Цель найдена</em> →</div>
+<div class="noeud"><b>Повернуть к</b><span>cannon</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Перезарядка</b><span>cannon · 1.2</span></div>
+<div class="fleche"><em>Готово</em> →</div>
+<div class="noeud"><b>Стрелять объектом</b><span>cannon · bullet</span></div>
+</div>
+<div class="tip">👉 Поставь <strong>Tower</strong> вручную в сцену <strong>Game</strong>, чтобы проверить её (меню <strong>＋</strong> → сцена <strong>Tower</strong>): она должна стрелять в каждого врага, проходящего ближе 330 пикселей.</div>
+</div>
+<h2>Шаг 6: попасть во врагов</h2>
+<div class="method">
+<p>Эта часть находится в сцене <strong>Enemy</strong>: именно враг знает, когда в него попадает снаряд.</p>
+<ol><li>Открой <strong>Blueprint</strong> сцены <strong>Enemy</strong> и добавь событие <strong>«Если объект касается тега»</strong>: цель <strong>enemy</strong>, Тег <strong>bullet</strong>.</li><li>Добавь <strong>«Уничтожить объект»</strong> и выбери <strong>Объект, участвующий в событии</strong> целью: это снаряд, он исчезает.</li><li>Добавь <strong>«Нанести урон»</strong>: цель <strong>enemy</strong>, <strong>Урон</strong> = <code>1</code>. По умолчанию враг уничтожается, когда его жизнь доходит до нуля.</li><li>С выхода <strong>Здоровья нет</strong> добавь <strong>«Добавить к переменной»</strong>: переменная <strong>credits</strong>, значение <code>15</code> (награда).</li><li>Соедини узлы по порядку.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Если объект касается тега</b><span>enemy · bullet</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Уничтожить объект</b><span>bullet</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Нанести урон</b><span>enemy · 1</span></div>
+<div class="fleche"><em>Здоровья нет</em> →</div>
+<div class="noeud"><b>Добавить к переменной</b><span>credits · 15</span></div>
+</div>
+</div>
+<h2>Шаг 7: строить башни</h2>
+<div class="method">
+<p>Игрок строит башню, коснувшись <strong>места застройки</strong>. Это стоит 50 кредитов.</p>
+<ol><li>Выбери каждое место застройки и дай ему в Инспекторе тег <strong>spot</strong>.</li><li>В сцене <strong>Game</strong> добавь событие <strong>«Клик по объекту»</strong> и выбери объектом <strong># spot</strong> (все объекты с тегом <strong>spot</strong>).</li><li>Добавь <strong>«Условие»</strong> <code>=credits &gt;= 50</code>.</li><li>На выходе <strong>Истина</strong>: <strong>«Добавить к переменной»</strong>: переменная <strong>credits</strong>, значение <code>-50</code>.</li><li>Затем <strong>«Разместить копию сцены»</strong>: сцена <strong>Tower</strong>. Для <strong>X</strong> коснись <strong>🔗</strong>, выбери <strong>«Значение объекта»</strong>, объект <strong>Объект, участвующий в событии</strong>, <strong>Что</strong> = <code>x</code>. Сделай то же для <strong>Y</strong> с <code>y</code>: башня появляется ровно там, где коснулся игрок.</li><li>Добавь <strong>«Уничтожить объект»</strong> с целью <strong>Объект, участвующий в событии</strong>: место застройки исчезает.</li><li>На выходе <strong>Ложь</strong>: <strong>«Короткое сообщение внизу экрана»</strong> с сообщением <strong>Не хватает кредитов</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Клик по объекту</b><span># spot</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Условие</b><span>=credits &gt;= 50</span></div>
+<div class="fleche"><em>Истина</em> →</div>
+<div class="noeud"><b>Добавить к переменной</b><span>credits · -50</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Разместить копию сцены</b><span>Tower</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Уничтожить объект</b><span>spot</span></div>
+</div>
+</div>
+<h2>Шаг 8: цифры на экране</h2>
+<div class="method">
+<ol><li>В сцене <strong>Game</strong> добавь событие <strong>«Каждый кадр»</strong>.</li><li>Добавь <strong>«Изменить текст»</strong>: цель <strong>creditsText</strong>, <strong>Новый текст</strong> = <code>="Кредиты: " + credits</code>.</li><li>Добавь второй <strong>«Изменить текст»</strong>: цель <strong>lifeText</strong>, <strong>Новый текст</strong> = <code>="База: " + base_life</code>.</li><li>Соедини три узла по порядку.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Каждый кадр</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить текст</b><span>creditsText</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить текст</b><span>lifeText</span></div>
+</div>
+</div>
+<h2>Шаг 9: жизни базы и конец игры</h2>
+<div class="method">
+<p>Когда враг доходит до конца пути, твоя база теряет жизнь. Когда жизней не остаётся, игра окончена.</p>
+<ol><li>В сцене <strong>Enemy</strong> возьми узел <strong>«Идти по маршруту»</strong> из шага 3. С его выхода <strong>Прибыл</strong> добавь <strong>«Добавить к переменной»</strong>: переменная <strong>base_life</strong>, значение <code>-1</code>.</li><li>Добавь <strong>«Уничтожить объект»</strong>: цель <strong>enemy</strong>.</li><li>Добавь <strong>«Условие»</strong> <code>=base_life &lt;= 0</code>. На выходе <strong>Истина</strong> добавь <strong>«Вызвать событие»</strong> с именем события <strong>game_over</strong>.</li><li>В сцене <strong>Game</strong> добавь событие <strong>«Локальное событие»</strong> с тем же именем <strong>game_over</strong>.</li><li>Добавь <strong>«Остановить таймер»</strong>: <strong>Имя (пусто = все)</strong> = <code>waves</code> (больше враги не посылаются), затем <strong>«Уничтожить по тегу»</strong>: <strong>Тег для уничтожения</strong> = <code>enemy</code>.</li><li>Добавь <strong>«Короткое сообщение внизу экрана»</strong> с сообщением <strong>Игра окончена</strong>, затем <strong>«Ждать»</strong> <code>2</code> секунды, затем <strong>«Перезапустить сцену»</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Идти по маршруту</b><span>enemy</span></div>
+<div class="fleche"><em>Прибыл</em> →</div>
+<div class="noeud"><b>Добавить к переменной</b><span>base_life · -1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Уничтожить объект</b><span>enemy</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Условие</b><span>=base_life &lt;= 0</span></div>
+<div class="fleche"><em>Истина</em> →</div>
+<div class="noeud"><b>Вызвать событие</b><span>game_over</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Локальное событие</b><span>game_over</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Остановить таймер</b><span>waves</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Уничтожить по тегу</b><span>enemy</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Короткое сообщение внизу экрана</b><span>Игра окончена</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Ждать</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Перезапустить сцену</b></div>
+</div>
+<p>Играй: построй одну-две башни на свои кредиты и смотри, как они останавливают врагов. Пропусти нескольких, чтобы увидеть, как база теряет жизни.</p>
+</div>
+<h2>Что дальше</h2>
+<ul><li><strong>Победа:</strong> считай врагов переменной (+1, когда один погибает или доходит). Когда число достигает всего отправленного, покажи сообщение и выиграй.</li><li><strong>Улучшить башню:</strong> коснись башни, чтобы открыть маленькое окно с кнопкой «Улучшить», которая стоит кредитов и меняет картинку пушки и скорострельность. Открой пример <strong>Tower defense (cubes)</strong>, чтобы посмотреть, как это сделано.</li><li><strong>Несколько типов врагов:</strong> сделай вторую сцену (<strong>Enemy2</strong>) с большей жизнью и другой скоростью и пусть каждая волна посылает то одного, то другого (открой пример <strong>Tower defense (cubes)</strong>, чтобы посмотреть, как).</li><li><strong>Развилки:</strong> в инструменте «Маршрут» коснись точки и выбери <strong>Эта точка — развилка</strong>: враги выбирают дорогу случайно, а ветки могут снова сойтись.</li><li><strong>Несколько полос без пробок:</strong> в <strong>«Идти по маршруту»</strong> поставь <strong>Случайное смещение в сторону (пиксели, ±: у каждого своя полоса)</strong> и <strong>Обходить других: сдвигаться, чтобы не накладываться, и обгонять медленных (да / нет)</strong> на да: враги идут рядом и обгоняют друг друга.</li><li><strong>Большая карта:</strong> сделай карту вдвое шире, затем добавь при запуске <strong>«Границы камеры»</strong> и <strong>«Прокручивать камеру пальцем»</strong>, чтобы игрок двигал карту пальцем.</li><li><strong>Звуки и искры:</strong> добавь <strong>«Воспроизвести звук»</strong> при каждом выстреле и <strong>«Эффект частиц»</strong>, когда враг погибает (смотри руководство <a href="../ru/particules-effets.html">Частицы и эффекты</a>).</li></ul>
+<h2>Если не работает</h2>
+<ul><li><strong>Враги не двигаются:</strong> проверь, что настройка <strong>Название маршрута</strong> — это имя твоего пути (<strong>Path</strong>) и что у пути есть Старт. Проверь, что у сцены <strong>Enemy</strong> есть событие <strong>«При старте»</strong>.</li><li><strong>Башня не стреляет:</strong> проверь тег <strong>enemy</strong> у врага, имя <strong>bullet</strong> в <strong>«Стрелять объектом»</strong> и что объект <strong>bullet</strong> лежит в сцене <strong>Game</strong> (за экраном, но не удалён). Увеличь <strong>Дальность в пикселях по кругу (0 = дальность в клетках)</strong>, если враги остаются вне досягаемости.</li><li><strong>Снаряды не наносят урон:</strong> у снаряда должен быть тег <strong>bullet</strong>, а событие <strong>«Если объект касается тега»</strong> должно быть в сцене <strong>Enemy</strong>, а не в <strong>Game</strong>.</li><li><strong>Башня появляется не там:</strong> для <strong>X</strong> и <strong>Y</strong> узла <strong>«Разместить копию сцены»</strong> используй зелёные узлы <strong>«Значение объекта»</strong> с <strong>Объект, участвующий в событии</strong>, как в шаге 7.</li><li><strong>Кредиты или жизни базы не меняются:</strong> проверь, что у переменных <strong>credits</strong> и <strong>base_life</strong> область <strong>Глобальная</strong>.</li></ul>
+
+<div class="nav">
+<a href="../ru/casse-briques.html">← Сделать арканоид</a>
+<a href="../ru/jeu-tactique.html">Следующее руководство: Сделать тактическую игру →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../ru/index.html">Официальный сайт</a> · <a href="../../noeuds/ru.html">Справочник узлов</a></p>
+</footer>
+</body>
+</html>

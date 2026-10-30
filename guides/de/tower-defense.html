@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie macht man ein Tower Defense in Yop2D? | Yop2D-Anleitung</title>
+<meta name="description" content="Mach ein Tower-Defense-Spiel in Yop2D, ohne Code: den Weg der Gegner zeichnen, Wellen schicken, Türme bauen, die ein Ziel wählen und schießen, und Credits und Basisleben mit Knoten zählen.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/tower-defense.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/tower-defense.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/tower-defense.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/tower-defense.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/tower-defense.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/tower-defense.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/tower-defense.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/tower-defense.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/tower-defense.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/tower-defense.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie macht man ein Tower Defense?",
+ "description": "Mach ein Tower-Defense-Spiel in Yop2D, ohne Code: den Weg der Gegner zeichnen, Wellen schicken, Türme bauen, die ein Ziel wählen und schießen, und Credits und Basisleben mit Knoten zählen.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Den Weg zeichnen",
+   "text": "In Assets das Werkzeug „Weg“: Punkte setzen, verbinden, den Start wählen."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Die Szene Enemy erstellen",
+   "text": "Beim Start → Objekt Leben geben → Dem Weg folgen (Weg „Path“)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Die Wellen schicken",
+   "text": "Wiederholen (alle 1,5 Sekunden) → Kopie einer Szene platzieren (Enemy)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Die Szene Tower erstellen",
+   "text": "Wiederholen → Ziel wählen → Ausrichten auf → Abklingzeit → Ein Objekt abfeuern."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Die Gegner treffen",
+   "text": "Wenn Objekt Tag berührt (enemy, bullet) → Schaden zufügen."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Türme mit Credits bauen",
+   "text": "Bei Objektklick (spot) → Zu Variable hinzufügen (credits, -50) → Kopie einer Szene platzieren (Tower)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Basisleben und Spielende",
+   "text": "Dem Weg folgen (am Ende angekommen) → Zu Variable hinzufügen (base_life, -1) → Ereignis aufrufen."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../de/index.html">← Yop2D</a>
+<h1>Wie macht man ein Tower Defense?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../tower-defense.html" hreflang="fr">Français</a> · <a href="../en/tower-defense.html" hreflang="en">English</a> · <a href="../es/tower-defense.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/tower-defense.html" hreflang="it">Italiano</a> · <a href="../pt/tower-defense.html" hreflang="pt">Português</a> · <a href="../ru/tower-defense.html" hreflang="ru">Русский</a> · <a href="../zh/tower-defense.html" hreflang="zh">中文</a> · <a href="../ja/tower-defense.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Bei einem Tower Defense laufen <strong>Gegner</strong> auf einem <strong>Weg</strong>, und du baust <strong>Türme</strong>, die auf sie schießen, bevor sie deine <strong>Basis</strong> erreichen. Hier folgen die Gegner einem Weg, den du selbst zeichnest, jeder Turm wählt den nächsten Gegner und schießt auf ihn, und <strong>Credits</strong> bezahlen neue Türme.</p>
+<div class="besoin">
+<b>Du brauchst:</b>
+<ul><li>ein Bild namens <strong>map</strong>: der Hintergrund des Spiels, 1920 x 1080 px, mit einer gezeichneten Straße;</li><li>ein paar Bilds für die Bauplätze (zum Beispiel 120 x 120 px);</li><li>ein Bild für den <strong>enemy</strong> (zum Beispiel 64 x 64 px), eins für den <strong>tower</strong> (120 x 120 px), eins für die <strong>cannon</strong> (90 x 34 px, nach rechts blickend) und eins für die <strong>bullet</strong> (24 x 24 px);</li><li>zwei Text-Objekte: <strong>creditsText</strong> und <strong>lifeText</strong>, oben auf dem Bildschirm.</li></ul>
+</div>
+<div class="tip">👉 Diese Anleitung ist für ein Spiel im <strong>Querformat 1920 x 1080</strong> geschrieben. Das Beispiel <strong>Tower defense (cubes)</strong> (Tab Beispiele) enthält fertige Bilder im Ordner <strong>Images/TD</strong>: Öffne es und kopiere die, die dir gefallen, in dein Projekt. Du kannst auch eigene zeichnen, die Anleitung funktioniert mit jedem Stil. Die Szenen <strong>Enemy</strong> und <strong>Tower</strong> werden viele Male ins Spiel kopiert: siehe die Anleitung <a href="../de/prefabs.html">Ein fertiges Objekt</a>.</div>
+<h2>Schritt 1: Die Variablen</h2>
+<div class="method">
+<ol><li>Öffne im linken Panel den Bereich <strong>Variablen</strong> und erstelle zwei Variablen, beide mit Gültigkeitsbereich <strong>Global</strong> (alle Szenen können sie nutzen) und vom Typ <strong>Ganze Zahl</strong>:</li></ol>
+<ul><li><strong>credits</strong>: Startwert <strong>150</strong> (das Geld zum Türmebauen);</li><li><strong>base_life</strong>: Startwert <strong>20</strong> (wie viele Gegner deine Basis aushält).</li></ul>
+</div>
+<h2>Schritt 2: Den Weg zeichnen</h2>
+<div class="method">
+<p>Die Gegner folgen einem <strong>Weg</strong>: Punkten, die miteinander verbunden sind. Du zeichnest ihn mit dem Weg-Werkzeug über deine Karte.</p>
+<ol><li>Öffne das <strong>Assets</strong>-Fenster (Ressourcen-Panel) und tippe auf <strong>Weg</strong>. Der Wegeditor öffnet sich, mit deiner Szene im Hintergrund.</li><li>Tippe auf <strong>Neuer Weg</strong> und nenne ihn <strong>Path</strong>.</li><li>Tippe mit dem Werkzeug <strong>Punkte setzen</strong> auf die Szene, um links einen ersten Punkt zu setzen, wo die Gegner hereinkommen: Das ist der <strong>Start</strong>. Tippe weiter entlang deiner Straße: Jeder neue Punkt wird mit dem vorherigen verbunden.</li><li>Setze den letzten Punkt auf deine Basis: Er hat keinen Ausgang, es ist das <strong>Ziel</strong>.</li><li>Tippe auf <strong>Durchlaufen</strong>, um einen Punkt den Weg entlanglaufen zu sehen. Schließe dann den Editor: Der Weg wird von selbst gespeichert.</li></ol>
+<div class="tip">👉 Um den Start zu ändern, tippe auf einen Punkt und wähle <strong>Diesen Punkt zum Start machen</strong>. Zum Verschieben eines Punkts nimm das Werkzeug <strong>Verschieben</strong>, zum Entfernen <strong>Löschen</strong>.</div>
+</div>
+<h2>Schritt 3: Die Szene Enemy</h2>
+<div class="method">
+<p>Ein Gegner ist eine eigene <strong>Szene</strong>: Jeder Gegner, den du ins Spiel schickst, ist eine <strong>Kopie</strong> davon, mit eigenem Leben. Du baust sie nur einmal.</p>
+<ol><li>Erstelle eine neue Szene namens <strong>Enemy</strong> (Menü <strong>＋</strong>, dann <strong>Szene erstellen</strong>).</li><li>Füge in der Szene <strong>Enemy</strong> ein Bild namens <strong>enemy</strong> bei X = <code>0</code>, Y = <code>0</code> hinzu und gib ihm den Tag <strong>enemy</strong>.</li><li>Öffne das <strong>Blueprint</strong> der Szene <strong>Enemy</strong> und füge das Ereignis <strong>„Beim Start“</strong> hinzu.</li><li>Füge <strong>„Objekt Leben geben“</strong> hinzu: Ziel <strong>enemy</strong>, <strong>Lebenspunkte</strong> = <code>3</code> (der Gegner hält 3 Treffer aus).</li><li>Füge <strong>„Dem Weg folgen“</strong> hinzu: Ziel <strong>enemy</strong>, <strong>Name des Wegs</strong> = <strong>Path</strong>, <strong>Geschwindigkeit (Pixel pro Sekunde)</strong> = <code>150</code>.</li><li>Verbinde die drei Knoten der Reihe nach.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Beim Start</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Objekt Leben geben</b><span>enemy · 3</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Dem Weg folgen</b><span>enemy · Path · 150</span></div>
+</div>
+</div>
+<h2>Schritt 4: Die Wellen schicken</h2>
+<div class="method">
+<p>Geh jetzt zurück zu deiner Hauptszene (<strong>Game</strong>) und schicke die Gegner nacheinander los.</p>
+<ol><li>Öffne das <strong>Blueprint</strong> der Szene <strong>Game</strong> und füge das Ereignis <strong>„Beim Start“</strong> hinzu.</li><li>Füge zwei <strong>„Variable ändern“</strong>-Knoten hinzu: <strong>credits</strong> = <code>150</code>, dann <strong>base_life</strong> = <code>20</code>. So beginnt jedes neue Spiel sauber, auch nach einem Game Over.</li><li>Füge <strong>„Warten“</strong> hinzu: <strong>Dauer (Sekunden)</strong> = <code>3</code> (eine Pause vor dem ersten Gegner).</li><li>Füge <strong>„Wiederholen“</strong> hinzu: <strong>Alle (Sekunden)</strong> = <code>1.5</code>, <strong>Anzahl (0 = endlos)</strong> = <code>15</code>, <strong>Name des Timers (optional)</strong> = <code>waves</code>.</li><li>Füge am Ausgang <strong>Jedes Mal</strong> <strong>„Kopie einer Szene platzieren“</strong> hinzu: Szene <strong>Enemy</strong>. Lass X und Y unverändert: Der Gegner setzt sich von selbst an den Start des Wegs.</li><li>Verbinde die Knoten der Reihe nach.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Beim Start</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Variable ändern</b><span>credits · 150</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Variable ändern</b><span>base_life · 20</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Warten</b><span>3</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Wiederholen</b><span>1.5 · 15</span></div>
+<div class="fleche"><em>Jedes Mal</em> →</div>
+<div class="noeud"><b>Kopie einer Szene platzieren</b><span>Enemy</span></div>
+</div>
+<p>Starte das Spiel: Alle anderthalb Sekunden erscheint ein Gegner und läuft deinen Weg bis zum Ende entlang (wenn er ankommt, passiert noch nichts).</p>
+</div>
+<h2>Schritt 5: Die Szene Tower</h2>
+<div class="method">
+<p>Ein Turm ist ebenfalls eine <strong>Szene</strong>. Er sucht den nächsten Gegner in Reichweite, dreht sein Rohr zu ihm und schießt.</p>
+<ol><li>Erstelle eine neue Szene namens <strong>Tower</strong>. Füge ein Bild <strong>tower</strong> bei X = <code>0</code>, Y = <code>0</code> hinzu, dann ein Bild <strong>cannon</strong> bei X = <code>15</code>, Y = <code>43</code>, davor.</li><li>Füge in der Szene <strong>Game</strong> ein Bild namens <strong>bullet</strong> <strong>außerhalb des Bildschirms</strong> hinzu (zum Beispiel X = <code>-300</code>, Y = <code>-300</code>) und gib ihm den Tag <strong>bullet</strong>: Es ist das Modell, das der Turm bei jedem Schuss kopiert.</li><li>Öffne das <strong>Blueprint</strong> der Szene <strong>Tower</strong> und füge das Ereignis <strong>„Beim Start“</strong> hinzu, dann <strong>„Wiederholen“</strong>: <strong>Alle (Sekunden)</strong> = <code>0.2</code>, <strong>Anzahl (0 = endlos)</strong> = <code>0</code> (endlos). Der Turm schaut 5 Mal pro Sekunde um sich.</li><li>Füge am Ausgang <strong>Jedes Mal</strong> <strong>„Ziel wählen“</strong> hinzu: Ziel <strong>tower</strong>, <strong>Tags möglicher Ziele (durch Komma getrennt)</strong> = <code>enemy</code>, <strong>Welches Ziel wählen?</strong> = <strong>„Das nächste“</strong>, und in den erweiterten Einstellungen <strong>Reichweite in Pixeln als Kreis (0 = Reichweite in Feldern nutzen)</strong> = <code>330</code>.</li><li>Füge am Ausgang <strong>Ziel gefunden</strong> <strong>„Ausrichten auf“</strong> hinzu: Ziel <strong>cannon</strong>, und wähle als zweites Objekt <strong>Das beteiligte Objekt</strong> (der gewählte Gegner).</li><li>Füge <strong>„Abklingzeit“</strong> hinzu: Ziel <strong>cannon</strong>, <strong>Verzögerung (Sekunden)</strong> = <code>1.2</code> (höchstens ein Schuss alle 1,2 Sekunden).</li><li>Füge am Ausgang <strong>Bereit</strong> <strong>„Ein Objekt abfeuern“</strong> hinzu: Ziel <strong>cannon</strong>, <strong>Modellname</strong> = <code>bullet</code>, <strong>Geschwindigkeit</strong> = <code>14</code>, <strong>Lebensdauer des Schusses (Sekunden, 0 = unbegrenzt)</strong> = <code>1.6</code>, <strong>Außerhalb des Bildschirms zerstören (ja / nein)</strong> = nein. Lass <strong>Richtung</strong> unverändert: Die Kugel fliegt in die Richtung, in die das Rohr zeigt.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Beim Start</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Wiederholen</b><span>0.2 · endlos</span></div>
+<div class="fleche"><em>Jedes Mal</em> →</div>
+<div class="noeud"><b>Ziel wählen</b><span>tower · enemy · 330</span></div>
+<div class="fleche"><em>Ziel gefunden</em> →</div>
+<div class="noeud"><b>Ausrichten auf</b><span>cannon</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Abklingzeit</b><span>cannon · 1.2</span></div>
+<div class="fleche"><em>Bereit</em> →</div>
+<div class="noeud"><b>Ein Objekt abfeuern</b><span>cannon · bullet</span></div>
+</div>
+<div class="tip">👉 Setze zum Testen einen <strong>Tower</strong> von Hand in die Szene <strong>Game</strong> (Menü <strong>＋</strong> → die Szene <strong>Tower</strong>): Er sollte auf jeden Gegner schießen, der näher als 330 Pixel vorbeikommt.</div>
+</div>
+<h2>Schritt 6: Die Gegner treffen</h2>
+<div class="method">
+<p>Dieser Teil kommt in die Szene <strong>Enemy</strong>: Der Gegner weiß, wann ihn eine Kugel trifft.</p>
+<ol><li>Öffne das <strong>Blueprint</strong> der Szene <strong>Enemy</strong> und füge das Ereignis <strong>„Wenn Objekt Tag berührt“</strong> hinzu: Ziel <strong>enemy</strong>, Tag <strong>bullet</strong>.</li><li>Füge <strong>„Objekt zerstören“</strong> hinzu und wähle <strong>Das beteiligte Objekt</strong> als Ziel: Das ist die Kugel, die verschwindet.</li><li>Füge <strong>„Schaden zufügen“</strong> hinzu: Ziel <strong>enemy</strong>, <strong>Schaden</strong> = <code>1</code>. Standardmäßig wird der Gegner zerstört, wenn sein Leben null erreicht.</li><li>Füge am Ausgang <strong>Keine Leben mehr</strong> <strong>„Zu Variable hinzufügen“</strong> hinzu: Variable <strong>credits</strong>, Wert <code>15</code> (die Belohnung).</li><li>Verbinde die Knoten der Reihe nach.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Wenn Objekt Tag berührt</b><span>enemy · bullet</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Objekt zerstören</b><span>bullet</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Schaden zufügen</b><span>enemy · 1</span></div>
+<div class="fleche"><em>Keine Leben mehr</em> →</div>
+<div class="noeud"><b>Zu Variable hinzufügen</b><span>credits · 15</span></div>
+</div>
+</div>
+<h2>Schritt 7: Türme bauen</h2>
+<div class="method">
+<p>Der Spieler baut einen Turm, indem er einen <strong>Bauplatz</strong> antippt. Das kostet 50 Credits.</p>
+<ol><li>Wähle jeden Bauplatz aus und gib ihm im Inspektor den Tag <strong>spot</strong>.</li><li>Füge in der Szene <strong>Game</strong> das Ereignis <strong>„Bei Objektklick“</strong> hinzu und wähle <strong># spot</strong> als Objekt (alle Objekte mit dem Tag <strong>spot</strong>).</li><li>Füge <strong>„Bedingung“</strong> <code>=credits &gt;= 50</code> hinzu.</li><li>Am Ausgang <strong>Wahr</strong>: <strong>„Zu Variable hinzufügen“</strong>: Variable <strong>credits</strong>, Wert <code>-50</code>.</li><li>Dann <strong>„Kopie einer Szene platzieren“</strong>: Szene <strong>Tower</strong>. Tippe bei <strong>X</strong> auf <strong>🔗</strong>, wähle <strong>„Wert eines Objekts“</strong>, Objekt <strong>Das beteiligte Objekt</strong>, <strong>Was</strong> = <code>x</code>. Mach dasselbe für <strong>Y</strong> mit <code>y</code>: Der Turm erscheint genau dort, wo der Spieler getippt hat.</li><li>Füge <strong>„Objekt zerstören“</strong> mit <strong>Das beteiligte Objekt</strong> als Ziel hinzu: Der Bauplatz verschwindet.</li><li>Am Ausgang <strong>Falsch</strong>: <strong>„Kurze Nachricht unten am Bildschirm“</strong> mit der Nachricht <strong>Nicht genug Credits</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Bei Objektklick</b><span># spot</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Bedingung</b><span>=credits &gt;= 50</span></div>
+<div class="fleche"><em>Wahr</em> →</div>
+<div class="noeud"><b>Zu Variable hinzufügen</b><span>credits · -50</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Kopie einer Szene platzieren</b><span>Tower</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Objekt zerstören</b><span>spot</span></div>
+</div>
+</div>
+<h2>Schritt 8: Die Zahlen auf dem Bildschirm</h2>
+<div class="method">
+<ol><li>Füge in der Szene <strong>Game</strong> das Ereignis <strong>„Jeden Frame“</strong> hinzu.</li><li>Füge <strong>„Text ändern“</strong> hinzu: Ziel <strong>creditsText</strong>, <strong>Neuer Text</strong> = <code>="Credits: " + credits</code>.</li><li>Füge einen zweiten <strong>„Text ändern“</strong> hinzu: Ziel <strong>lifeText</strong>, <strong>Neuer Text</strong> = <code>="Basis: " + base_life</code>.</li><li>Verbinde die drei Knoten der Reihe nach.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Jeden Frame</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Text ändern</b><span>creditsText</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Text ändern</b><span>lifeText</span></div>
+</div>
+</div>
+<h2>Schritt 9: Basisleben und Spielende</h2>
+<div class="method">
+<p>Wenn ein Gegner das Ende des Wegs erreicht, verliert deine Basis ein Leben. Hat sie keins mehr, ist das Spiel vorbei.</p>
+<ol><li>Nimm in der Szene <strong>Enemy</strong> den Knoten <strong>„Dem Weg folgen“</strong> aus Schritt 3. Füge an seinem Ausgang <strong>Angekommen</strong> <strong>„Zu Variable hinzufügen“</strong> hinzu: Variable <strong>base_life</strong>, Wert <code>-1</code>.</li><li>Füge <strong>„Objekt zerstören“</strong> hinzu: Ziel <strong>enemy</strong>.</li><li>Füge <strong>„Bedingung“</strong> <code>=base_life &lt;= 0</code> hinzu. Füge am Ausgang <strong>Wahr</strong> <strong>„Ereignis aufrufen“</strong> mit dem Ereignisnamen <strong>game_over</strong> hinzu.</li><li>Füge in der Szene <strong>Game</strong> das Ereignis <strong>„Lokales Ereignis“</strong> mit demselben Namen <strong>game_over</strong> hinzu.</li><li>Füge <strong>„Timer stoppen“</strong> hinzu: <strong>Name (leer = alle)</strong> = <code>waves</code> (es werden keine Gegner mehr geschickt), dann <strong>„Zerstören nach Tag“</strong>: <strong>Zu zerstörender Tag</strong> = <code>enemy</code>.</li><li>Füge <strong>„Kurze Nachricht unten am Bildschirm“</strong> mit der Nachricht <strong>Spiel vorbei</strong> hinzu, dann <strong>„Warten“</strong> <code>2</code> Sekunden, dann <strong>„Szene neu starten“</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Dem Weg folgen</b><span>enemy</span></div>
+<div class="fleche"><em>Angekommen</em> →</div>
+<div class="noeud"><b>Zu Variable hinzufügen</b><span>base_life · -1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Objekt zerstören</b><span>enemy</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Bedingung</b><span>=base_life &lt;= 0</span></div>
+<div class="fleche"><em>Wahr</em> →</div>
+<div class="noeud"><b>Ereignis aufrufen</b><span>game_over</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Lokales Ereignis</b><span>game_over</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Timer stoppen</b><span>waves</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Zerstören nach Tag</b><span>enemy</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Kurze Nachricht unten am Bildschirm</b><span>Spiel vorbei</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Warten</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Szene neu starten</b></div>
+</div>
+<p>Spiel: Baue mit deinen Credits ein oder zwei Türme und sieh zu, wie sie die Gegner aufhalten. Lass ein paar durch, um zu sehen, wie die Basis ihre Leben verliert.</p>
+</div>
+<h2>Weiter gehen</h2>
+<ul><li><strong>Sieg:</strong> Zähle die Gegner mit einer Variable (+1, wenn einer stirbt oder ankommt). Wenn die Zahl die Gesamtzahl der geschickten Gegner erreicht, zeige eine Nachricht und gewinne.</li><li><strong>Einen Turm verbessern:</strong> Tippe auf einen Turm, um ein kleines Fenster mit einem Knopf „Verbessern“ zu öffnen, der Credits kostet und das Rohrbild und die Schussfolge ändert. Öffne das Beispiel <strong>Tower defense (cubes)</strong>, um zu sehen, wie.</li><li><strong>Mehrere Gegnertypen:</strong> Mach eine zweite Szene (<strong>Enemy2</strong>) mit mehr Leben und anderer Geschwindigkeit und lass jede Welle den einen oder den anderen schicken (öffne das Beispiel <strong>Tower defense (cubes)</strong>, um zu sehen, wie).</li><li><strong>Kreuzungen:</strong> Tippe im Weg-Werkzeug auf einen Punkt und wähle <strong>Dieser Punkt ist eine Kreuzung</strong>: Die Gegner wählen zufällig eine Straße, und die Zweige können sich wieder vereinen.</li><li><strong>Mehrere Spuren, kein Stau:</strong> Stelle in <strong>„Dem Weg folgen“</strong> <strong>Seitlicher Zufallsversatz (Pixel, ±: jeder geht auf seiner Spur)</strong> und <strong>Anderen ausweichen: zur Seite gehen, um nicht zu überlappen, und langsamere überholen (ja / nein)</strong> auf ja: Die Gegner laufen nebeneinander und überholen sich.</li><li><strong>Eine große Karte:</strong> Mach deine Karte doppelt so breit und füge dann beim Start <strong>„Kameragrenzen“</strong> und <strong>„Kamera mit dem Finger verschieben“</strong> hinzu, damit der Spieler die Karte mit einem Finger verschiebt.</li><li><strong>Sounds und Funken:</strong> Füge bei jedem Schuss <strong>„Sound abspielen“</strong> hinzu und einen <strong>„Partikeleffekt“</strong>, wenn ein Gegner stirbt (siehe die Anleitung <a href="../de/particules-effets.html">Partikel und Effekte</a>).</li></ul>
+<h2>Wenn es nicht funktioniert</h2>
+<ul><li><strong>Die Gegner bewegen sich nicht:</strong> Prüfe, ob die Einstellung <strong>Name des Wegs</strong> der Name deines Wegs (<strong>Path</strong>) ist und der Weg einen Start hat. Prüfe, ob die Szene <strong>Enemy</strong> ihr Ereignis <strong>„Beim Start“</strong> hat.</li><li><strong>Der Turm schießt nicht:</strong> Prüfe den Tag <strong>enemy</strong> am Gegner, den Namen <strong>bullet</strong> in <strong>„Ein Objekt abfeuern“</strong> und ob das Objekt <strong>bullet</strong> in der Szene <strong>Game</strong> liegt (außerhalb des Bildschirms, aber nicht gelöscht). Erhöhe <strong>Reichweite in Pixeln als Kreis (0 = Reichweite in Feldern nutzen)</strong>, wenn die Gegner außer Reichweite bleiben.</li><li><strong>Die Kugeln tun nicht weh:</strong> Die Kugel muss den Tag <strong>bullet</strong> haben, und das Ereignis <strong>„Wenn Objekt Tag berührt“</strong> muss in der Szene <strong>Enemy</strong> liegen, nicht in <strong>Game</strong>.</li><li><strong>Der Turm erscheint am falschen Ort:</strong> Nimm für <strong>X</strong> und <strong>Y</strong> von <strong>„Kopie einer Szene platzieren“</strong> die grünen <strong>„Wert eines Objekts“</strong>-Knoten mit <strong>Das beteiligte Objekt</strong>, wie in Schritt 7.</li><li><strong>Die Credits oder das Basisleben ändern sich nicht:</strong> Prüfe, ob die Variablen <strong>credits</strong> und <strong>base_life</strong> den Gültigkeitsbereich <strong>Global</strong> haben.</li></ul>
+
+<div class="nav">
+<a href="../de/casse-briques.html">← Ein Breakout-Spiel machen</a>
+<a href="../de/jeu-tactique.html">Nächste Anleitung: Ein Taktikspiel machen →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../de/index.html">Offizielle Website</a> · <a href="../../noeuds/de.html">Knotenreferenz</a></p>
+</footer>
+</body>
+</html>

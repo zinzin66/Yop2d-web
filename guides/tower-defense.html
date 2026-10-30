@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment faire un tower defense dans Yop2D ? | Guide Yop2D</title>
+<meta name="description" content="Faire un jeu de tower defense dans Yop2D, sans code : dessiner le chemin des ennemis, envoyer des vagues, construire des tours qui choisissent une cible et tirent, compter les crédits et les vies de la base avec les nœuds.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/tower-defense.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/tower-defense.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/tower-defense.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/tower-defense.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/tower-defense.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/tower-defense.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/tower-defense.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/tower-defense.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/tower-defense.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/tower-defense.html">
+<link rel="stylesheet" href="guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Comment faire un tower defense ?",
+ "description": "Faire un jeu de tower defense dans Yop2D, sans code : dessiner le chemin des ennemis, envoyer des vagues, construire des tours qui choisissent une cible et tirent, compter les crédits et les vies de la base avec les nœuds.",
+ "inLanguage": "fr",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (moteur de jeu 2D sans code pour Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Dessiner le chemin",
+   "text": "Dans Assets, outil « Parcours » : pose des points, relie-les, choisis le départ."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Créer la scène Ennemi",
+   "text": "Au Démarrage → Donner de la vie à l'objet → Suivre le parcours (parcours « Chemin »)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Envoyer les vagues",
+   "text": "Répéter (toutes les 1,5 seconde) → Placer une copie d'une scène (Ennemi)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Créer la scène Tour",
+   "text": "Répéter → Choisir une cible → Orienter vers → Cooldown → Tirer un objet."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Toucher les ennemis",
+   "text": "Si objet touche Tag (ennemi, balle) → Infliger des dégâts."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Construire des tours avec des crédits",
+   "text": "Au Clic sur Objet (emplacement) → Ajouter à Variable (credits, -50) → Placer une copie d'une scène (Tour)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Vies de la base et fin de partie",
+   "text": "Suivre le parcours (arrivé au bout) → Ajouter à Variable (vie_base, -1) → Appeler un événement."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../fr/index.html">← Yop2D</a>
+<h1>Comment faire un tower defense ?</h1>
+<p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/tower-defense.html" hreflang="en">English</a> · <a href="es/tower-defense.html" hreflang="es">Español</a> · <a href="de/tower-defense.html" hreflang="de">Deutsch</a> · <a href="it/tower-defense.html" hreflang="it">Italiano</a> · <a href="pt/tower-defense.html" hreflang="pt">Português</a> · <a href="ru/tower-defense.html" hreflang="ru">Русский</a> · <a href="zh/tower-defense.html" hreflang="zh">中文</a> · <a href="ja/tower-defense.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Dans un tower defense, des <strong>ennemis</strong> avancent le long d'un <strong>chemin</strong> et tu construis des <strong>tours</strong> qui leur tirent dessus avant qu'ils n'atteignent ta <strong>base</strong>. Ici, les ennemis suivent un chemin que tu dessines toi-même, chaque tour choisit l'ennemi le plus proche et lui tire dessus, et les <strong>crédits</strong> paient les nouvelles tours.</p>
+<div class="besoin">
+<b>Il te faut :</b>
+<ul><li>une Image nommée <strong>carte</strong> : le fond du jeu, 1920 x 1080 px, avec une route dessinée dessus ;</li><li>quelques Images pour les emplacements de construction (par exemple 120 x 120 px) ;</li><li>une Image pour l'<strong>ennemi</strong> (par exemple 64 x 64 px), une pour la <strong>tour</strong> (120 x 120 px), une pour le <strong>canon</strong> (90 x 34 px, tourné vers la droite) et une pour la <strong>balle</strong> (24 x 24 px) ;</li><li>deux objets Texte : <strong>texteCredits</strong> et <strong>texteVie</strong>, en haut de l'écran.</li></ul>
+</div>
+<div class="tip">👉 Ce guide est écrit pour un jeu en <strong>paysage de 1920 x 1080</strong>. L'exemple <strong>Tower defense (cubes)</strong> (onglet Exemples) contient des images toutes faites dans le dossier <strong>Images/TD</strong> : ouvre-le et copie dans ton projet celles qui te plaisent. Tu peux aussi dessiner les tiennes, le guide marche avec n'importe quel style. Les scènes <strong>Ennemi</strong> et <strong>Tour</strong> sont copiées de nombreuses fois dans le jeu : voir le guide <a href="prefabs.html">Objets prêts à l'emploi (prefabs)</a>.</div>
+<h2>Étape 1 : les variables</h2>
+<div class="method">
+<ol><li>Dans le panneau de gauche, ouvre la section <strong>Variables</strong> et crée deux variables, toutes deux de portée <strong>Globale</strong> (toutes les scènes peuvent les utiliser) et de type <strong>Entier</strong> :</li></ol>
+<ul><li><strong>credits</strong> : valeur de départ <strong>150</strong> (l'argent pour construire des tours) ;</li><li><strong>vie_base</strong> : valeur de départ <strong>20</strong> (combien d'ennemis ta base peut encaisser).</li></ul>
+</div>
+<h2>Étape 2 : dessiner le chemin</h2>
+<div class="method">
+<p>Les ennemis suivent un <strong>chemin</strong> : des points reliés entre eux. Tu le dessines par-dessus ta carte avec l'outil Parcours.</p>
+<ol><li>Ouvre la fenêtre <strong>Assets</strong> (panneau Ressources) et touche <strong>Parcours</strong>. L'éditeur de parcours s'ouvre, avec ta scène en arrière-plan.</li><li>Touche <strong>Nouveau parcours</strong> et nomme-le <strong>Chemin</strong>.</li><li>Avec l'outil <strong>Poser des points</strong>, touche la scène pour poser un premier point à gauche, là où les ennemis entrent : c'est le <strong>Départ</strong>. Continue de toucher le long de ta route : chaque nouveau point est relié au précédent.</li><li>Mets le dernier point sur ta base : il n'a pas de sortie, c'est l'<strong>Arrivée</strong>.</li><li>Touche <strong>Voir passer</strong> pour voir un point parcourir le chemin. Puis ferme l'éditeur : le parcours s'enregistre tout seul.</li></ol>
+<div class="tip">👉 Pour changer le départ, touche un point et choisis <strong>Faire de ce point le départ</strong>. Pour déplacer un point, utilise l'outil <strong>Déplacer</strong> ; pour en retirer un, utilise <strong>Gommer</strong>.</div>
+</div>
+<h2>Étape 3 : la scène Ennemi</h2>
+<div class="method">
+<p>Un ennemi est une <strong>scène</strong> à part : chaque ennemi envoyé dans le jeu en est une <strong>copie</strong>, avec sa propre vie. Tu la construis une seule fois.</p>
+<ol><li>Crée une nouvelle scène nommée <strong>Ennemi</strong> (menu <strong>＋</strong>, puis <strong>Créer une scène</strong>).</li><li>Dans la scène <strong>Ennemi</strong>, ajoute une Image nommée <strong>ennemi</strong> en X = <code>0</code>, Y = <code>0</code>, et donne-lui le tag <strong>ennemi</strong>.</li><li>Ouvre le <strong>Blueprint</strong> de la scène <strong>Ennemi</strong> et ajoute l'événement <strong>« Au Démarrage »</strong>.</li><li>Ajoute <strong>« Donner de la vie à l'objet »</strong> : cible <strong>ennemi</strong>, <strong>Points de vie</strong> = <code>3</code> (l'ennemi encaisse 3 coups).</li><li>Ajoute <strong>« Suivre le parcours »</strong> : cible <strong>ennemi</strong>, <strong>Nom du parcours</strong> = <strong>Chemin</strong>, <strong>Vitesse (pixels par seconde)</strong> = <code>150</code>.</li><li>Relie les trois nœuds dans l'ordre.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Au Démarrage</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Donner de la vie à l'objet</b><span>ennemi · 3</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Suivre le parcours</b><span>ennemi · Chemin · 150</span></div>
+</div>
+</div>
+<h2>Étape 4 : envoyer les vagues</h2>
+<div class="method">
+<p>Reviens maintenant à ta scène principale (<strong>Jeu</strong>) et envoie les ennemis les uns après les autres.</p>
+<ol><li>Ouvre le <strong>Blueprint</strong> de la scène <strong>Jeu</strong> et ajoute l'événement <strong>« Au Démarrage »</strong>.</li><li>Ajoute deux nœuds <strong>« Modifier Variable »</strong> : <strong>credits</strong> = <code>150</code>, puis <strong>vie_base</strong> = <code>20</code>. Ils remettent chaque nouvelle partie à zéro, même après un Game Over.</li><li>Ajoute <strong>« Attendre »</strong> : <strong>Durée (secondes)</strong> = <code>3</code> (une pause avant le premier ennemi).</li><li>Ajoute <strong>« Répéter »</strong> : <strong>Toutes les (secondes)</strong> = <code>1.5</code>, <strong>Nombre de fois (0 = sans fin)</strong> = <code>15</code>, <strong>Nom du minuteur (facultatif)</strong> = <code>vagues</code>.</li><li>Depuis la sortie <strong>À chaque fois</strong>, ajoute <strong>« Placer une copie d'une scène »</strong> : scène <strong>Ennemi</strong>. Laisse X et Y tels quels : l'ennemi se place tout seul au départ du chemin.</li><li>Relie les nœuds dans l'ordre.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Au Démarrage</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>credits · 150</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vie_base · 20</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Attendre</b><span>3</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Répéter</b><span>1.5 · 15</span></div>
+<div class="fleche"><em>À chaque fois</em> →</div>
+<div class="noeud"><b>Placer une copie d'une scène</b><span>Ennemi</span></div>
+</div>
+<p>Lance le jeu : un ennemi apparaît toutes les secondes et demie et marche le long de ton chemin jusqu'au bout (rien ne se passe encore quand il arrive).</p>
+</div>
+<h2>Étape 5 : la scène Tour</h2>
+<div class="method">
+<p>Une tour est aussi une <strong>scène</strong>. Elle cherche l'ennemi le plus proche à portée, tourne son canon vers lui et tire.</p>
+<ol><li>Crée une nouvelle scène nommée <strong>Tour</strong>. Ajoute une Image <strong>tour</strong> en X = <code>0</code>, Y = <code>0</code>, puis une Image <strong>canon</strong> en X = <code>15</code>, Y = <code>43</code>, devant elle.</li><li>Dans la scène <strong>Jeu</strong>, ajoute une Image nommée <strong>balle</strong> <strong>hors de l'écran</strong> (par exemple X = <code>-300</code>, Y = <code>-300</code>) et donne-lui le tag <strong>balle</strong> : c'est le modèle que la tour copie à chaque tir.</li><li>Ouvre le <strong>Blueprint</strong> de la scène <strong>Tour</strong> et ajoute l'événement <strong>« Au Démarrage »</strong>, puis <strong>« Répéter »</strong> : <strong>Toutes les (secondes)</strong> = <code>0.2</code>, <strong>Nombre de fois (0 = sans fin)</strong> = <code>0</code> (sans fin). La tour regarde autour d'elle 5 fois par seconde.</li><li>Depuis la sortie <strong>À chaque fois</strong>, ajoute <strong>« Choisir une cible »</strong> : cible <strong>tour</strong>, <strong>Tags des cibles possibles (séparés par une virgule)</strong> = <code>ennemi</code>, <strong>Quelle cible choisir ?</strong> = <strong>« La plus proche »</strong>, et dans les réglages avancés <strong>Portée en pixels, en cercle (0 = utiliser la portée en cases)</strong> = <code>330</code>.</li><li>Depuis la sortie <strong>Cible trouvée</strong>, ajoute <strong>« Orienter vers »</strong> : cible <strong>canon</strong>, et comme second objet choisis <strong>L'objet impliqué dans l'événement</strong> (l'ennemi qui a été choisi).</li><li>Ajoute <strong>« Cooldown »</strong> : cible <strong>canon</strong>, <strong>Délai (secondes)</strong> = <code>1.2</code> (un tir toutes les 1,2 secondes au maximum).</li><li>Depuis la sortie <strong>Prêt</strong>, ajoute <strong>« Tirer un objet »</strong> : cible <strong>canon</strong>, <strong>Nom du modèle</strong> = <code>balle</code>, <strong>Vitesse</strong> = <code>14</code>, <strong>Durée de vie du tir (secondes, 0 = sans limite)</strong> = <code>1.6</code>, <strong>Détruire hors de l'écran (oui / non)</strong> = non. Laisse <strong>Direction</strong> tel quel : la balle part dans la direction vers laquelle le canon est tourné.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Au Démarrage</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Répéter</b><span>0.2 · sans fin</span></div>
+<div class="fleche"><em>À chaque fois</em> →</div>
+<div class="noeud"><b>Choisir une cible</b><span>tour · ennemi · 330</span></div>
+<div class="fleche"><em>Cible trouvée</em> →</div>
+<div class="noeud"><b>Orienter vers</b><span>canon</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Cooldown</b><span>canon · 1.2</span></div>
+<div class="fleche"><em>Prêt</em> →</div>
+<div class="noeud"><b>Tirer un objet</b><span>canon · balle</span></div>
+</div>
+<div class="tip">👉 Place une <strong>Tour</strong> à la main dans la scène <strong>Jeu</strong> pour la tester (menu <strong>＋</strong> → la scène <strong>Tour</strong>) : elle doit tirer sur chaque ennemi qui passe à moins de 330 pixels.</div>
+</div>
+<h2>Étape 6 : toucher les ennemis</h2>
+<div class="method">
+<p>Cette partie se met dans la scène <strong>Ennemi</strong> : c'est l'ennemi qui sait quand une balle le touche.</p>
+<ol><li>Ouvre le <strong>Blueprint</strong> de la scène <strong>Ennemi</strong> et ajoute l'événement <strong>« Si objet touche Tag »</strong> : cible <strong>ennemi</strong>, Tag <strong>balle</strong>.</li><li>Ajoute <strong>« Détruire Objet »</strong> et choisis <strong>L'objet impliqué dans l'événement</strong> comme cible : c'est la balle, qui disparaît.</li><li>Ajoute <strong>« Infliger des dégâts »</strong> : cible <strong>ennemi</strong>, <strong>Dégâts</strong> = <code>1</code>. Par défaut, l'ennemi est détruit quand sa vie tombe à zéro.</li><li>Depuis la sortie <strong>Plus de vie</strong>, ajoute <strong>« Ajouter à Variable »</strong> : variable <strong>credits</strong>, valeur <code>15</code> (la récompense).</li><li>Relie les nœuds dans l'ordre.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Si objet touche Tag</b><span>ennemi · balle</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Détruire Objet</b><span>balle</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Infliger des dégâts</b><span>ennemi · 1</span></div>
+<div class="fleche"><em>Plus de vie</em> →</div>
+<div class="noeud"><b>Ajouter à Variable</b><span>credits · 15</span></div>
+</div>
+</div>
+<h2>Étape 7 : construire des tours</h2>
+<div class="method">
+<p>Le joueur construit une tour en touchant un <strong>emplacement de construction</strong>. Cela coûte 50 crédits.</p>
+<ol><li>Sélectionne chaque emplacement et donne-lui le tag <strong>emplacement</strong> dans l'Inspecteur.</li><li>Dans la scène <strong>Jeu</strong>, ajoute l'événement <strong>« Au Clic sur Objet »</strong> et choisis <strong># emplacement</strong> comme objet (tous les objets qui ont le tag <strong>emplacement</strong>).</li><li>Ajoute <strong>« Condition »</strong> <code>=credits &gt;= 50</code>.</li><li>Sur la sortie <strong>Vrai</strong> : <strong>« Ajouter à Variable »</strong> : variable <strong>credits</strong>, valeur <code>-50</code>.</li><li>Puis <strong>« Placer une copie d'une scène »</strong> : scène <strong>Tour</strong>. Pour <strong>X</strong>, touche <strong>🔗</strong>, choisis <strong>« Valeur d'un objet »</strong>, objet <strong>L'objet impliqué dans l'événement</strong>, <strong>Quoi</strong> = <code>x</code>. Fais pareil pour <strong>Y</strong> avec <code>y</code> : la tour apparaît exactement là où le joueur a touché.</li><li>Ajoute <strong>« Détruire Objet »</strong> avec <strong>L'objet impliqué dans l'événement</strong> comme cible : l'emplacement de construction disparaît.</li><li>Sur la sortie <strong>Faux</strong> : <strong>« Petit message en bas de l'écran »</strong> avec le message <strong>Pas assez de crédits</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Au Clic sur Objet</b><span># emplacement</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condition</b><span>=credits &gt;= 50</span></div>
+<div class="fleche"><em>Vrai</em> →</div>
+<div class="noeud"><b>Ajouter à Variable</b><span>credits · -50</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Placer une copie d'une scène</b><span>Tour</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Détruire Objet</b><span>emplacement</span></div>
+</div>
+</div>
+<h2>Étape 8 : les chiffres à l'écran</h2>
+<div class="method">
+<ol><li>Dans la scène <strong>Jeu</strong>, ajoute l'événement <strong>« À chaque image »</strong>.</li><li>Ajoute <strong>« Modifier Texte »</strong> : cible <strong>texteCredits</strong>, <strong>Nouveau texte</strong> = <code>="Crédits : " + credits</code>.</li><li>Ajoute un second <strong>« Modifier Texte »</strong> : cible <strong>texteVie</strong>, <strong>Nouveau texte</strong> = <code>="Base : " + vie_base</code>.</li><li>Relie les trois nœuds dans l'ordre.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>À chaque image</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Texte</b><span>texteCredits</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Texte</b><span>texteVie</span></div>
+</div>
+</div>
+<h2>Étape 9 : vies de la base et fin de partie</h2>
+<div class="method">
+<p>Quand un ennemi arrive au bout du chemin, ta base perd une vie. Quand elle n'en a plus, la partie est perdue.</p>
+<ol><li>Dans la scène <strong>Ennemi</strong>, reprends le nœud <strong>« Suivre le parcours »</strong> de l'étape 3. Depuis sa sortie <strong>Arrivé</strong>, ajoute <strong>« Ajouter à Variable »</strong> : variable <strong>vie_base</strong>, valeur <code>-1</code>.</li><li>Ajoute <strong>« Détruire Objet »</strong> : cible <strong>ennemi</strong>.</li><li>Ajoute <strong>« Condition »</strong> <code>=vie_base &lt;= 0</code>. Sur la sortie <strong>Vrai</strong>, ajoute <strong>« Appeler un événement »</strong> avec le nom d'événement <strong>fin_de_partie</strong>.</li><li>Dans la scène <strong>Jeu</strong>, ajoute l'événement <strong>« Événement Local »</strong> avec le même nom <strong>fin_de_partie</strong>.</li><li>Ajoute <strong>« Arrêter un minuteur »</strong> : <strong>Nom du minuteur (vide = tous)</strong> = <code>vagues</code> (plus aucun ennemi n'est envoyé), puis <strong>« Détruire par Tag »</strong> : <strong>Tag à détruire</strong> = <code>ennemi</code>.</li><li>Ajoute <strong>« Petit message en bas de l'écran »</strong> avec le message <strong>Partie perdue</strong>, puis <strong>« Attendre »</strong> <code>2</code> secondes, puis <strong>« Recommencer la scène »</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Suivre le parcours</b><span>ennemi</span></div>
+<div class="fleche"><em>Arrivé</em> →</div>
+<div class="noeud"><b>Ajouter à Variable</b><span>vie_base · -1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Détruire Objet</b><span>ennemi</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condition</b><span>=vie_base &lt;= 0</span></div>
+<div class="fleche"><em>Vrai</em> →</div>
+<div class="noeud"><b>Appeler un événement</b><span>fin_de_partie</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Événement Local</b><span>fin_de_partie</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Arrêter un minuteur</b><span>vagues</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Détruire par Tag</b><span>ennemi</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Petit message en bas de l'écran</b><span>Partie perdue</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Attendre</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Recommencer la scène</b></div>
+</div>
+<p>Joue : construis une ou deux tours avec tes crédits, puis regarde-les arrêter les ennemis. Laisse-en passer quelques-uns pour voir la base perdre ses vies.</p>
+</div>
+<h2>Pour aller plus loin</h2>
+<ul><li><strong>Victoire :</strong> compte les ennemis avec une variable (+1 quand l'un meurt ou arrive). Quand le nombre atteint le total envoyé, affiche un message et gagne.</li><li><strong>Améliorer une tour :</strong> touche une tour pour ouvrir une petite fenêtre avec un bouton « Améliorer » qui coûte des crédits et change l'image du canon et la cadence de tir. Ouvre l'exemple <strong>Tower defense (cubes)</strong> pour voir comment.</li><li><strong>Plusieurs types d'ennemis :</strong> fais une deuxième scène (<strong>Ennemi2</strong>) avec plus de vie et une autre vitesse, et laisse chaque vague envoyer l'un ou l'autre (ouvre l'exemple <strong>Tower defense (cubes)</strong> pour voir comment).</li><li><strong>Carrefours :</strong> dans l'outil Parcours, touche un point et choisis <strong>Ce point est un carrefour</strong> : les ennemis choisissent une route au hasard, et les branches peuvent se rejoindre.</li><li><strong>Plusieurs voies, sans embouteillage :</strong> dans <strong>« Suivre le parcours »</strong>, mets <strong>Écart de côté au hasard (pixels, ± : chacun marche sur sa voie)</strong> et <strong>Éviter les autres : se décaler pour ne pas se superposer et dépasser les plus lents (oui / non)</strong> sur oui : les ennemis marchent côte à côte et se dépassent.</li><li><strong>Une grande carte :</strong> fais ta carte deux fois plus large, puis ajoute <strong>« Limites de la caméra »</strong> et <strong>« Faire défiler la caméra au doigt »</strong> au démarrage pour que le joueur fasse défiler la carte avec un doigt.</li><li><strong>Sons et étincelles :</strong> ajoute <strong>« Jouer un son »</strong> à chaque tir et un <strong>« Effet de particules »</strong> quand un ennemi meurt (voir le guide <a href="particules-effets.html">Particules et effets</a>).</li></ul>
+<h2>Si ça ne marche pas</h2>
+<ul><li><strong>Les ennemis ne bougent pas :</strong> vérifie que le réglage <strong>Nom du parcours</strong> est bien le nom de ton chemin (<strong>Chemin</strong>), et que le chemin a un Départ. Vérifie que la scène <strong>Ennemi</strong> a son événement <strong>« Au Démarrage »</strong>.</li><li><strong>La tour ne tire pas :</strong> vérifie le tag <strong>ennemi</strong> sur l'ennemi, le nom <strong>balle</strong> dans <strong>« Tirer un objet »</strong>, et que l'objet <strong>balle</strong> est dans la scène <strong>Jeu</strong> (hors de l'écran, mais pas supprimé). Augmente <strong>Portée en pixels, en cercle (0 = utiliser la portée en cases)</strong> si les ennemis restent hors de portée.</li><li><strong>Les balles ne font pas mal :</strong> la balle doit avoir le tag <strong>balle</strong>, et l'événement <strong>« Si objet touche Tag »</strong> doit être dans la scène <strong>Ennemi</strong>, pas dans <strong>Jeu</strong>.</li><li><strong>La tour apparaît au mauvais endroit :</strong> pour <strong>X</strong> et <strong>Y</strong> de <strong>« Placer une copie d'une scène »</strong>, utilise les nœuds verts <strong>« Valeur d'un objet »</strong> avec <strong>L'objet impliqué dans l'événement</strong>, comme à l'étape 7.</li><li><strong>Les crédits ou les vies de la base ne changent pas :</strong> vérifie que les variables <strong>credits</strong> et <strong>vie_base</strong> ont la portée <strong>Globale</strong>.</li></ul>
+
+<div class="nav">
+<a href="casse-briques.html">← Faire un casse-briques</a>
+<a href="jeu-tactique.html">Guide suivant : Faire un jeu de tactique →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="../fr/index.html">Site officiel</a> · <a href="../noeuds/fr.html">Référence des nœuds</a></p>
+</footer>
+</body>
+</html>
