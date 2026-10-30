@@ -1,0 +1,145 @@
+{
+  "titre_page": "How to add lights, shadows and a day and night cycle in Yop2D? | Yop2D Guide",
+  "description": "Make your game come alive in Yop2D: a dark night, a torch that follows your hero, soft shadows under the characters and a day that turns into night by itself. No code.",
+  "h1": "How to add lights, shadows and a day and night cycle?",
+  "carte": [
+    "Lights, shadows, day and night",
+    "Darken the game, light a torch and let the day pass."
+  ],
+  "etapes": [
+    [
+      "Darken the game",
+      "Add the node \"Darkness and light mood\"."
+    ],
+    [
+      "Light a torch",
+      "Add \"Light source\" on an object."
+    ],
+    [
+      "Add a shadow",
+      "Tick \"Shadow under the object\" in the Inspector."
+    ],
+    [
+      "Let the day pass",
+      "Add the node \"Day and night cycle\"."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "With a few nodes, a game goes from flat to atmospheric: a dark night, a lantern that follows your hero, soft shadows and a sun that sets by itself. Nothing to write: you only choose values. The lights are drawn on the screen (they do not go around walls), which keeps the game fast on every phone."
+    ],
+    [
+      "besoin",
+      [
+        "a project open in the editor;",
+        "images that look good in the dark (the 3D packs of the library, for example). A pixel art image enlarged a lot looks blurry: turn on **Pixel art** in the game settings."
+      ]
+    ],
+    [
+      "h2",
+      "Step 1: darken the game"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Open the **Blueprint** and add [[lumiere_ambiance]] after [[NoeudEventStart]].",
+            "Choose the **darkness**: 0 is full day, 100 is pitch black. For a night where you still see the scene, try 85.",
+            "Choose the **color of the night**: a dark blue looks natural, black makes it scarier."
+          ]
+        ],
+        [
+          "tip",
+          "The darkness and the color change smoothly. Use a length of 30 seconds to turn a day into a night, like a sunset."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 2: light a torch"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Add [[lumiere_source]] and choose the object that carries the light: a torch, a window, a lantern.",
+            "Set the **radius** (the distance from the center, in pixels), the **lighting** (100 is normal, up to 300 for a stronger light) and the **colored glow**.",
+            "Choose the **flicker**: candle for a soft flame, torch for a strong one, flickers for a failing lamp.",
+            "The light follows its object. To make a lantern that follows your hero, put a small invisible object on the hero (a child object) and light that object."
+          ]
+        ],
+        [
+          "tip",
+          "With **Switching on = Only when it is dark**, the light turns on by itself when the night falls and turns off during the day. Use [[lumiere_eteindre]] to turn a light off with a node."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 3: add a shadow"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Select a character in the scene and open the **Inspector**, part **Appearance**.",
+            "Tick **Shadow under the object**: set its **strength** and its **width**.",
+            "The shadow follows the object everywhere. The node [[ombre_objet]] does the same, if you prefer to switch it on during the game."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 4: let the day pass"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Add [[lumiere_cycle]] at the start of the game.",
+            "Choose the **length of a full day**: 30 to 120 seconds feel alive. Then the **starting moment** (full day, evening, deep night or dawn) and whether it **repeats forever**.",
+            "Put your lights on **Only when it is dark**: they turn on at nightfall, all by themselves."
+          ]
+        ],
+        [
+          "tip",
+          "Length 0 stops the cycle where it is. A game on pause freezes the cycle too. To jump to a moment, use [[lumiere_cycle]] again with another starting moment: the example \"Day and night village\" does it with 5 buttons."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "To go further"
+    ],
+    [
+      "ul",
+      [
+        "Open the models **Torch and shadows** and **Day and night** (Models tab) to see everything already set up.",
+        "Download the example **Day and night village** (Examples tab): a 3D village, windows that light up at night and a knight with a lantern.",
+        "Up to 8 lights can shine at the same time, so the game stays fast on every device."
+      ]
+    ],
+    [
+      "h2",
+      "If it does not work"
+    ],
+    [
+      "ul",
+      [
+        "**I do not see any light:** the darkness is probably 0. A light only shows on a darker scene.",
+        "**The light does not follow my hero:** attach it to an object placed on the hero (a child object), not to a fixed object.",
+        "**The night is not dark enough:** raise the darkness (up to 100) and choose a darker color."
+      ]
+    ]
+  ]
+}

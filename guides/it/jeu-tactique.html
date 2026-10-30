@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Come fare un gioco tattico a turni in Yop2D? | Guida Yop2D</title>
+<meta name="description" content="Fai un gioco tattico su una griglia in Yop2D, senza codice: turni, caselle blu raggiungibili, terreni, movimento, attacco e vita con i nodi.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/it/jeu-tactique.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/jeu-tactique.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/jeu-tactique.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/jeu-tactique.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/jeu-tactique.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/jeu-tactique.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/jeu-tactique.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/jeu-tactique.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/jeu-tactique.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/jeu-tactique.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Come fare un gioco tattico?",
+ "description": "Fai un gioco tattico su una griglia in Yop2D, senza codice: turni, caselle blu raggiungibili, terreni, movimento, attacco e vita con i nodi.",
+ "inLanguage": "it",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motore di gioco 2D senza codice per Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Dare una scheda a ogni unità",
+   "text": "All'Avvio → Dai una scheda unità (vita, attacco, difesa, movimento, portata)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Iniziare il turno del giocatore",
+   "text": "Passa al turno successivo (joueur, ennemi) avvia l'evento locale \"tour_joueur\"."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Mostrare dove può andare l'eroe",
+   "text": "Al Clic sull'Oggetto → Se è il turno di… → Mostra le caselle raggiungibili."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Far camminare l'eroe",
+   "text": "Al Clic sull'Oggetto (il terreno) → Se la casella è raggiungibile → Vai alla casella (percorso)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Attaccare",
+   "text": "Al Clic sull'Oggetto (il mostro) → Se la casella è raggiungibile → Attacca."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Il turno dei mostri",
+   "text": "\"tour_ennemi\" → Andare verso un oggetto (percorso) (accanto all'eroe) → Attacca."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../it/index.html">← Yop2D</a>
+<h1>Come fare un gioco tattico?</h1>
+<p>Guida per principianti · senza codice</p>
+<p class="langues"><a href="../jeu-tactique.html" hreflang="fr">Français</a> · <a href="../en/jeu-tactique.html" hreflang="en">English</a> · <a href="../es/jeu-tactique.html" hreflang="es">Español</a> · <a href="../de/jeu-tactique.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="../pt/jeu-tactique.html" hreflang="pt">Português</a> · <a href="../ru/jeu-tactique.html" hreflang="ru">Русский</a> · <a href="../zh/jeu-tactique.html" hreflang="zh">中文</a> · <a href="../ja/jeu-tactique.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>In un gioco <strong>tattico</strong>, i giocatori giocano a <strong>turni</strong> su una griglia: scegli un'unità, vedi le caselle che può raggiungere, la muovi e poi attacca. Questa guida costruisce il gioco più semplice possibile: <strong>un eroe e un mostro</strong>. Tutto è già pronto nell'esempio <strong>Tactics tutorial</strong> (scheda <strong>Esempi</strong> della schermata iniziale): apri il suo Blueprint, ogni passo è in un <strong>riquadro colorato</strong> con un piccolo <strong>?</strong> che lo spiega.</p>
+<div class="besoin">
+<b>Ti serve:</b>
+<ul><li>una mappa di tile a tua scelta (la griglia del gioco <strong>è</strong> la griglia di questa mappa di tile);</li><li>un'Immagine chiamata <strong>hero1</strong> con il tag <strong>joueur</strong>, e un'altra chiamata <strong>foe1</strong> con il tag <strong>ennemi</strong>;</li><li>una Zona chiamata <strong>terrain</strong> che copre tutta la mappa (è quella che si tocca per scegliere una casella);</li><li>una variabile <strong>etat</strong> (intero, locale) per sapere a che punto siamo: 0 = scegliere un eroe, 1 = eroe scelto, 2 = eroe spostato.</li></ul>
+</div>
+<div class="tip">👉 I <strong>terreni</strong> (bosco, sabbia, montagna…) si impostano nell'editor di tile, nella parte <strong>Terreni dei tile</strong>: costo in passi, bloccato o no, bonus di difesa. La montagna blocca il passaggio, il bosco costa 2 passi.</div>
+<h2>Passo 1: le schede delle unità</h2>
+<div class="method">
+<ol><li>Aggiungi l'evento <strong>«All'Avvio»</strong>.</li><li>Aggiungi <strong>«Dai una scheda unità»</strong> per <strong>hero1</strong>: vita <code>20</code>, attacco <code>6</code>, difesa <code>2</code>, movimento <code>4</code>, portata <code>1</code>.</li><li>Aggiungi un secondo <strong>«Dai una scheda unità»</strong> per <strong>foe1</strong>, con i suoi numeri.</li><li>Collega i nodi in ordine e aggiungi <strong>«Passa al turno successivo»</strong> con le squadre <code>joueur,ennemi</code>.</li></ol>
+<div class="tip">👉 La scheda è salvata nell'oggetto: puoi leggerla ovunque con una formula, per esempio <code>=hero1.vie</code>.</div>
+</div>
+<h2>Passo 2: il turno del giocatore</h2>
+<div class="method">
+<ol><li>Aggiungi l'evento <strong>«Evento Locale»</strong> e scrivi il nome <code>tour_joueur</code>. Parte da solo all'inizio del turno del giocatore.</li><li>Metti <strong>etat</strong> a <code>0</code> con <strong>«Modifica Variabile»</strong>, poi <strong>«Nascondi le caselle»</strong> per cancellare le vecchie caselle.</li></ol>
+<p>Per ogni squadra, <strong>«Passa al turno successivo»</strong> avvia l'evento locale "tour_" seguito dal nome della squadra: <code>tour_joueur</code>, poi <code>tour_ennemi</code>.</p>
+</div>
+<h2>Passo 3: tocca l'eroe e guarda le caselle blu</h2>
+<div class="method">
+<ol><li>Aggiungi <strong>«Al Clic sull'Oggetto»</strong> su <strong>hero1</strong>.</li><li>Aggiungi <strong>«Se è il turno di…»</strong> con la squadra <code>joueur</code> e, sull'uscita <strong>Vero</strong>, una <strong>«Condizione»</strong> <code>etat &lt; 2</code>.</li><li>Aggiungi <strong>«Modifica Variabile»</strong>: <strong>etat</strong> = <code>1</code>.</li><li>Aggiungi <strong>«Mostra le caselle raggiungibili»</strong> su <strong>hero1</strong>: tipo di zona <strong>Movimento (i muri contano)</strong>, numero di passi <code>=hero1.mouvement</code>, colore blu, <strong>Scrivere i passi su ogni casella</strong> = sì, <strong>Questi tag bloccano il passaggio</strong> = <code>joueur,ennemi</code>.</li></ol>
+<div class="tip">👉 I numeri sulle caselle sono i <strong>passi</strong> necessari per arrivarci. Le caselle di bosco costano 2: l'eroe va meno lontano.</div>
+</div>
+<h2>Passo 4: tocca una casella blu e l'eroe cammina</h2>
+<div class="method">
+<ol><li>Aggiungi <strong>«Al Clic sull'Oggetto»</strong> su <strong>terrain</strong>, poi una <strong>«Condizione»</strong> <code>etat = 1</code>.</li><li>Aggiungi <strong>«Se la casella è raggiungibile»</strong>. Per la colonna e la riga, tocca <strong>🔗</strong> e scegli i nodi verdi <strong>«Colonna toccata»</strong> e <strong>«Riga toccata»</strong>: nessuna formula da scrivere.</li><li>Sull'uscita <strong>Vero</strong>: <strong>«Modifica Variabile»</strong> <strong>etat</strong> = <code>4</code> (l'eroe cammina), poi <strong>«Vai alla casella (percorso)»</strong> su <strong>hero1</strong>, con gli stessi nodi verdi e <strong>Questi tag bloccano il percorso</strong> = <code>joueur,ennemi</code>.</li><li>Sull'uscita <strong>Arrivato</strong>, chiama l'evento locale <code>apres_deplacement</code> con <strong>«Chiama evento»</strong>.</li></ol>
+</div>
+<h2>Passo 5: la zona d'attacco, poi l'attacco</h2>
+<div class="method">
+<ol><li>Nell'evento locale <strong>apres_deplacement</strong>: <strong>«Nascondi le caselle»</strong>, <strong>etat</strong> = <code>2</code>, poi <strong>«Mostra le caselle raggiungibili»</strong> con tipo <strong>Attacco / portata (supera i muri)</strong>, numero di passi <code>=hero1.portee</code>, colore rosso, con il nome di zona <code>attaque</code>.</li><li>Aggiungi <strong>«Al Clic sull'Oggetto»</strong> su <strong>foe1</strong>, una <strong>«Condizione»</strong> <code>etat = 2</code> e <strong>«Se la casella è raggiungibile»</strong> con il nome di zona <code>attaque</code>.</li><li>Su <strong>Vero</strong>: <strong>«Attacca»</strong> (oggetto A = <strong>hero1</strong>, oggetto B = <strong>foe1</strong>). Il danno è l'attacco, meno la difesa del mostro, meno la difesa del suo terreno.</li><li>Uscita <strong>Ancora vivo</strong>: aggiorna il suo testo di vita. Uscita <strong>Senza vita</strong>: il mostro è distrutto, aggiungi la vittoria.</li></ol>
+</div>
+<h2>Passo 6: il turno dei mostri</h2>
+<div class="method">
+<ol><li>Aggiungi l'evento locale <code>tour_ennemi</code>.</li><li>Aggiungi <strong>«Andare verso un oggetto (percorso)»</strong> su <strong>foe1</strong>, oggetto B = <strong>hero1</strong>, <strong>Fermarsi</strong> = <strong>Su una casella vicina, centrato</strong>, <strong>Questi tag bloccano il percorso</strong> = <code>joueur,ennemi</code>.</li><li>Sull'uscita <strong>Arrivato</strong>, chiama un evento locale in cui <strong>foe1</strong> <strong>«Attacca»</strong> <strong>hero1</strong>.</li><li>Dopo qualche secondo (<strong>«Attendere»</strong>), <strong>«Fermare il percorso»</strong> poi <strong>«Passa al turno successivo»</strong>: il turno torna al giocatore.</li></ol>
+</div>
+<h2>Andare oltre</h2>
+<ul><li><strong>Più eroi:</strong> aggiungi <strong>«Segna come già giocato»</strong> e <strong>«Se l'unità ha già giocato»</strong> perché un eroe giochi una sola volta per turno (è ciò che fa l'esempio <strong>Tactics demo</strong>).</li><li><strong>Una barra della vita:</strong> leggi <code>=hero1.vie</code> e <code>=hero1.vie_max</code> in un testo o in una barra di avanzamento.</li><li><strong>Curare:</strong> <strong>«Curare»</strong> restituisce vita senza superare il massimo.</li><li><strong>Un gioco da tavolo:</strong> <strong>«Muovi la pedina di una casella»</strong> sposta una pedina di una casella, ben centrata (pulsanti ◀ ▶ ▲ ▼).</li></ul>
+<h2>Se non funziona</h2>
+<ul><li><strong>Nessuna casella blu:</strong> l'eroe deve avere il tag scritto in <strong>«Se è il turno di…»</strong>, e <strong>«Passa al turno successivo»</strong> deve essere stato avviato all'inizio.</li><li><strong>Le caselle non corrispondono al disegno:</strong> la griglia è quella della prima mappa di tile della scena. Senza mappa di tile, le caselle sono di 80 px.</li><li><strong>L'eroe non si muove:</strong> controlla che la casella toccata sia blu e che <strong>etat</strong> valga <code>1</code> in quel momento.</li><li><strong>Per confrontare</strong>, apri l'esempio <strong>Tactics tutorial</strong>: ogni parte del Blueprint è in un riquadro che la spiega.</li></ul>
+
+<div class="nav">
+<a href="../it/casse-briques.html">← Fare un rompimattoni</a>
+<a href="../it/niveau-suivant.html">Guida successiva: Passare al livello successivo →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motore di gioco 2D gratuito e senza codice per Android · <a href="../../it/index.html">Sito ufficiale</a> · <a href="../../noeuds/it.html">Riferimento dei nodi</a></p>
+</footer>
+</body>
+</html>

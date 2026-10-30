@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment faire un casse-briques dans Yop2D ? | Guide Yop2D</title>
+<meta name="description" content="Faire un jeu de casse-briques dans Yop2D, sans code : raquette au doigt, murs invisibles, balle qui rebondit, briques à détruire, score et vies avec les nœuds.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/casse-briques.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/casse-briques.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/casse-briques.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/casse-briques.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/casse-briques.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/casse-briques.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/casse-briques.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/casse-briques.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/casse-briques.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/casse-briques.html">
+<link rel="stylesheet" href="guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Comment faire un casse-briques ?",
+ "description": "Faire un jeu de casse-briques dans Yop2D, sans code : raquette au doigt, murs invisibles, balle qui rebondit, briques à détruire, score et vies avec les nœuds.",
+ "inLanguage": "fr",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (moteur de jeu 2D sans code pour Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Poser la raquette",
+   "text": "Modifier une propriété (raquette, y = 1700) → Garder dans l'écran, avec le comportement « Glissé avec le doigt »."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Entourer l'écran de murs invisibles",
+   "text": "Quatre Zones : mur_gauche, mur_droit, mur_haut et mur_bas."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Lancer la balle",
+   "text": "Au Démarrage → Modifier Variable (vx, vy) ; À chaque image → Pousser objet (balle)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Rebondir sur les murs et la raquette",
+   "text": "Collision A/B (balle, mur_gauche) → Modifier Variable (vx, 6)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Casser les briques",
+   "text": "Si objet touche Tag (balle, brique) → Détruire Objet → Ajouter à Variable (score, 10)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Les vies et la fin",
+   "text": "Collision A/B (balle, mur_bas) → Ajouter à Variable (vies, -1) → Recommencer la scène."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../fr/index.html">← Yop2D</a>
+<h1>Comment faire un casse-briques ?</h1>
+<p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/casse-briques.html" hreflang="en">English</a> · <a href="es/casse-briques.html" hreflang="es">Español</a> · <a href="de/casse-briques.html" hreflang="de">Deutsch</a> · <a href="it/casse-briques.html" hreflang="it">Italiano</a> · <a href="pt/casse-briques.html" hreflang="pt">Português</a> · <a href="ru/casse-briques.html" hreflang="ru">Русский</a> · <a href="zh/casse-briques.html" hreflang="zh">中文</a> · <a href="ja/casse-briques.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Dans un casse-briques, une <strong>balle</strong> rebondit sur des murs et sur une <strong>raquette</strong> que tu déplaces au doigt, et casse des <strong>briques</strong>. Ici, la balle avance grâce à deux variables, <strong>vx</strong> (sa vitesse vers la droite) et <strong>vy</strong> (sa vitesse vers le bas). Quand elle touche un mur, on lui donne simplement un autre nombre.</p>
+<div class="besoin">
+<b>Il te faut :</b>
+<ul><li>une Image nommée <strong>raquette</strong>, en bas de l'écran (par exemple 208 x 48 px, vers y = 1700) ;</li><li>une Image nommée <strong>balle</strong>, au milieu de l'écran (par exemple 44 x 44 px) ;</li><li>des briques : des Images en haut de l'écran (par exemple 128 x 64 px, 8 par ligne) ;</li><li>deux objets Texte : <strong>texteScore</strong> (texte « Score : 0 ») et <strong>texteVies</strong> (texte « Vies : 3 »), en haut de l'écran.</li></ul>
+</div>
+<div class="tip">👉 Ce guide est écrit pour un jeu en <strong>portrait de 1080 x 1920</strong>. Les images viennent du pack gratuit <strong>Puzzle (casse-briques)</strong> (Kenney, libre de droits, CC0). Télécharge-le dans la <strong>Bibliothèque</strong> de Yop2D, onglet <strong>Packs à télécharger</strong> : tu y trouves <strong>paddleBlu</strong> (raquette), <strong>ballBlue</strong> (balle) et <strong>element_blue_rectangle_glossy</strong> (brique, en bleu, vert, rouge, jaune, violet et gris). Tu peux aussi utiliser tes propres dessins.</div>
+<h2>Étape 1 : les tags et les variables</h2>
+<div class="method">
+<ol><li>Sélectionne une brique. Dans l'inspecteur, champ <strong>Tag (Étiquette)</strong>, écris <strong>brique</strong>. Fais pareil pour chaque brique.</li><li>Dans le panneau de gauche, ouvre la section <strong>Variables</strong> et crée cinq variables, toutes en portée <strong>Locale</strong> et type <strong>Entier</strong> :</li></ol>
+<ul><li><strong>score</strong> : valeur initiale <strong>0</strong> ;</li><li><strong>vies</strong> : valeur initiale <strong>3</strong> ;</li><li><strong>briques</strong> : le <strong>nombre de briques</strong> de ton jeu (par exemple <strong>24</strong>). Elle sert à savoir quand tout est cassé ;</li><li><strong>vx</strong> et <strong>vy</strong> : valeur initiale <strong>0</strong>. C'est la vitesse de la balle, on la règle au démarrage.</li></ul>
+<div class="tip">👉 Une brique de plus ou de moins ? Change simplement la valeur de départ de <strong>briques</strong>. Si le nombre est trop grand, la victoire n'arrive jamais ; s'il est trop petit, elle arrive trop tôt.</div>
+</div>
+<h2>Étape 2 : les murs invisibles</h2>
+<div class="method">
+<p>La balle rebondit sur des murs que l'on ne voit pas : quatre <strong>Zones</strong> posées autour de l'écran. Une zone est invisible pendant le jeu, mais la balle peut la toucher.</p>
+<ol><li>Ajoute une Zone nommée <strong>mur_gauche</strong> : X = <code>-300</code>, Y = <code>-400</code>, largeur <code>300</code>, hauteur <code>2800</code>.</li><li>Ajoute une Zone nommée <strong>mur_droit</strong> : X = <code>1080</code>, Y = <code>-400</code>, largeur <code>300</code>, hauteur <code>2800</code>.</li><li>Ajoute une Zone nommée <strong>mur_haut</strong> : X = <code>-300</code>, Y = <code>-300</code>, largeur <code>1680</code>, hauteur <code>300</code>.</li><li>Ajoute une Zone nommée <strong>mur_bas</strong> : X = <code>-300</code>, Y = <code>1920</code>, largeur <code>1680</code>, hauteur <code>300</code>.</li></ol>
+<div class="tip">👉 Les murs sont épais exprès : une balle rapide ne peut pas passer au travers. Les trois premiers renvoient la balle ; <strong>mur_bas</strong> sert à perdre une vie.</div>
+</div>
+<h2>Étape 3 : la raquette suit le doigt</h2>
+<div class="method">
+<ol><li>Sélectionne <strong>raquette</strong>, touche <strong>⚙ Comportement de l'objet</strong> et choisis <strong>Glissé avec le doigt</strong> : le joueur la prend et la déplace.</li><li>Ouvre le <strong>Blueprint</strong> de la scène et ajoute l'événement <strong>« À chaque image »</strong>.</li><li>Ajoute <strong>« Modifier une propriété »</strong> : cible <strong>raquette</strong>, <strong>Propriété</strong> = <code>y</code>, <strong>Valeur</strong> = <code>1700</code>.</li><li>Ajoute <strong>« Garder dans l'écran »</strong> : cible <strong>raquette</strong>, <strong>Marge</strong> = <code>0</code>.</li><li>Relie les trois nœuds dans l'ordre.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>À chaque image</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier une propriété</b><span>raquette · y · 1700</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Garder dans l'écran</b><span>raquette · 0</span></div>
+</div>
+<div class="tip">👉 <strong>Pourquoi ces deux nœuds ?</strong> « Glissé avec le doigt » permet de déplacer la raquette dans tous les sens. À chaque image, on la remet à la même hauteur, et on l'empêche de sortir de l'écran : elle ne bouge que de gauche à droite.</div>
+</div>
+<h2>Étape 4 : la balle part</h2>
+<div class="method">
+<ol><li>Ajoute l'événement <strong>« Au Démarrage »</strong>, puis deux nœuds <strong>« Modifier Variable »</strong> à la suite : variable <strong>vx</strong>, valeur <code>6</code>, puis variable <strong>vy</strong>, valeur <code>-9</code>.</li><li>Ajoute l'événement <strong>« À chaque image »</strong>, puis <strong>« Pousser objet »</strong> : cible <strong>balle</strong>.</li><li>Dans la fenêtre de réglage de <strong>« Pousser objet »</strong>, touche le bouton <strong>🔗</strong> à côté de <strong>Ajout X</strong>, choisis <strong>« Valeur d'une variable »</strong>, puis choisis la variable <strong>vx</strong> dans le nœud vert qui apparaît.</li><li>Fais pareil pour <strong>Ajout Y</strong> avec la variable <strong>vy</strong>.</li><li>Relie chaque événement à ses nœuds et lance le jeu : la balle monte vers la droite, puis sort de l'écran.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Au Démarrage</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vy · -9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>À chaque image</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Pousser objet</b><span>balle · X ← vx · Y ← vy</span></div>
+</div>
+<div class="tip">👉 <strong>Un nœud vert</strong> donne une valeur à un réglage, sans rien écrire. Ici, <strong>« Valeur d'une variable »</strong> dit à <strong>« Pousser objet »</strong> : « avance de <strong>vx</strong> vers la droite et de <strong>vy</strong> vers le bas, à chaque image ».</div>
+<div class="tip">👉 <strong>Négatif = vers le haut.</strong> Dans Yop2D, Y grandit vers le bas de l'écran : <strong>vy = -9</strong> envoie la balle vers le haut.</div>
+</div>
+<h2>Étape 5 : rebondir sur les murs</h2>
+<div class="method">
+<p>Chaque mur donne un nouveau nombre à la balle. Ajoute trois événements <strong>« Collision A/B »</strong> (<strong>Objet A</strong> = <strong>balle</strong>) :</p>
+<ol><li><strong>Objet B</strong> = <strong>mur_gauche</strong> → <strong>« Modifier Variable »</strong> : variable <strong>vx</strong>, valeur <code>6</code> (la balle repart vers la droite).</li><li><strong>Objet B</strong> = <strong>mur_droit</strong> → <strong>« Modifier Variable »</strong> : variable <strong>vx</strong>, valeur <code>-6</code> (la balle repart vers la gauche).</li><li><strong>Objet B</strong> = <strong>mur_haut</strong> → <strong>« Modifier Variable »</strong> : variable <strong>vy</strong>, valeur <code>9</code> (la balle repart vers le bas).</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>balle · mur_gauche</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vx · 6</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>balle · mur_droit</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vx · -6</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>balle · mur_haut</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vy · 9</span></div>
+</div>
+</div>
+<h2>Étape 6 : rebondir sur la raquette</h2>
+<div class="method">
+<ol><li>Ajoute l'événement <strong>« Collision A/B »</strong> : <strong>Objet A</strong> = <strong>balle</strong>, <strong>Objet B</strong> = <strong>raquette</strong>.</li><li>Ajoute <strong>« Modifier Variable »</strong> : variable <strong>vy</strong>, valeur <code>-9</code> (la balle repart vers le haut).</li><li>Ajoute un second <strong>« Modifier Variable »</strong> : variable <strong>vx</strong>. Touche <strong>🔗</strong> à côté de la valeur, choisis <strong>« Nombre au hasard »</strong>, puis règle <strong>De</strong> = <code>-6</code> et <strong>À</strong> = <code>6</code>.</li><li>Relie les nœuds dans l'ordre.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>balle · raquette</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vy · -9</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vx · ← nombre au hasard (-6 à 6)</span></div>
+</div>
+<div class="tip">👉 À chaque rebond sur la raquette, la balle part dans une <strong>direction au hasard</strong> : le jeu n'est jamais deux fois pareil.</div>
+</div>
+<h2>Étape 7 : casser les briques</h2>
+<div class="method">
+<ol><li>Ajoute l'événement <strong>« Si objet touche Tag »</strong> : cible <strong>balle</strong>, Tag <strong>brique</strong>.</li><li>Ajoute <strong>« Détruire Objet »</strong> et choisis comme cible <strong>L'objet impliqué dans l'événement</strong> : c'est la brique que la balle vient de toucher.</li><li>Ajoute <strong>« Condition »</strong> <code>=vy &lt; 0</code> (« la balle monte »). Sortie <strong>Vrai</strong> → <strong>« Modifier Variable »</strong> : variable <strong>vy</strong>, valeur <code>9</code>. Sortie <strong>Faux</strong> → <strong>« Modifier Variable »</strong> : variable <strong>vy</strong>, valeur <code>-9</code>.</li><li>Depuis la sortie <strong>« Ensuite »</strong> de la condition, ajoute <strong>« Ajouter à Variable »</strong> : variable <strong>score</strong>, <strong>Valeur à ajouter = 10</strong>.</li><li>Ajoute <strong>« Ajouter à Variable »</strong> : variable <strong>briques</strong>, <strong>Valeur à ajouter = -1</strong>.</li><li>Ajoute <strong>« Modifier Texte »</strong> : cible <strong>texteScore</strong>, <strong>Nouveau texte</strong> = <code>="Score : " + score</code>.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Si objet touche Tag</b><span>balle · brique</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Détruire Objet</b><span>Objet Impliqué</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condition</b><span>=vy &lt; 0</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condition</b><span>=vy &lt; 0</span></div>
+<div class="fleche"><em>Vrai</em> →</div>
+<div class="noeud"><b>Modifier Variable</b><span>vy · 9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condition</b><span>=vy &lt; 0</span></div>
+<div class="fleche"><em>Faux</em> →</div>
+<div class="noeud"><b>Modifier Variable</b><span>vy · -9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condition</b><span>=vy &lt; 0</span></div>
+<div class="fleche"><em>Ensuite</em> →</div>
+<div class="noeud"><b>Ajouter à Variable</b><span>score · + 10</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Ajouter à Variable</b><span>briques · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Texte</b><span>texteScore</span></div>
+</div>
+<div class="tip">👉 <strong>Pourquoi <code>=vy &lt; 0</code> ?</strong> Si <strong>vy</strong> est plus petit que 0, la balle monte : après avoir cassé la brique, elle repart vers le bas. Sinon elle descend, et repart vers le haut.</div>
+<div class="tip">👉 <strong>Le signe = au début du texte</strong> dit à Yop2D de <strong>calculer</strong> le texte au lieu de l'écrire tel quel (voir le guide <a href="pieces-score.html">Ramasser des pièces et compter les points</a>).</div>
+</div>
+<h2>Étape 8 : gagner</h2>
+<div class="method">
+<p>Après <strong>« Modifier Texte »</strong> de l'étape 7, ajoute :</p>
+<ol><li><strong>« Condition »</strong> <code>=briques &lt;= 0</code>.</li><li>Sur la sortie <strong>Vrai</strong> : <strong>« Modifier Variable »</strong> <strong>vx</strong> = <code>0</code>, <strong>« Modifier Variable »</strong> <strong>vy</strong> = <code>0</code> (la balle s'arrête), puis <strong>« Petit message en bas de l'écran »</strong> avec le message <strong>Gagné !</strong>, puis <strong>« Attendre »</strong> 2 secondes, puis <strong>« Recommencer la scène »</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>Modifier Texte</b><span>texteScore</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condition</b><span>=briques &lt;= 0</span></div>
+<div class="fleche"><em>Vrai</em> →</div>
+<div class="noeud"><b>Modifier Variable</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Petit message en bas de l'écran</b><span>Gagné !</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Attendre</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Recommencer la scène</b></div>
+</div>
+<div class="tip">👉 « Recommencer la scène » remet les objets à leur place et les variables <strong>Locales</strong> à leur valeur de départ : la partie recommence avec 3 vies, 0 point et toutes les briques.</div>
+</div>
+<h2>Étape 9 : les vies et le Game Over</h2>
+<div class="method">
+<p>Quand la balle touche <strong>mur_bas</strong> (sous l'écran), le joueur perd une vie.</p>
+<ol><li>Ajoute l'événement <strong>« Collision A/B »</strong> : <strong>Objet A</strong> = <strong>balle</strong>, <strong>Objet B</strong> = <strong>mur_bas</strong>.</li><li><strong>« Ajouter à Variable »</strong> : variable <strong>vies</strong>, <strong>Valeur à ajouter = -1</strong>.</li><li><strong>« Modifier Texte »</strong> : cible <strong>texteVies</strong>, <strong>Nouveau texte</strong> = <code>="Vies : " + vies</code>.</li><li><strong>« Condition »</strong> <code>=vies &lt;= 0</code>.</li><li>Sortie <strong>Vrai</strong> (plus de vie) : <strong>« Déplacer Objet »</strong> la <strong>balle</strong> à X = <code>518</code>, Y = <code>1000</code>, <strong>« Modifier Variable »</strong> <strong>vx</strong> = <code>0</code>, <strong>« Modifier Variable »</strong> <strong>vy</strong> = <code>0</code> (la balle est remise au milieu et s'arrête), puis <strong>« Petit message en bas de l'écran »</strong> « Perdu ! », <strong>« Attendre »</strong> 2 secondes, <strong>« Recommencer la scène »</strong>.</li><li>Sortie <strong>Faux</strong> (il reste des vies) : <strong>« Déplacer Objet »</strong> la <strong>balle</strong> à X = <code>518</code>, Y = <code>1000</code>, puis <strong>« Modifier Variable »</strong> <strong>vy</strong> = <code>-9</code>, puis <strong>« Modifier Variable »</strong> <strong>vx</strong> = <code>6</code>.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>balle · mur_bas</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Ajouter à Variable</b><span>vies · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Texte</b><span>texteVies</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>Condition</b><span>=vies &lt;= 0</span></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condition</b><span>=vies &lt;= 0</span></div>
+<div class="fleche"><em>Vrai</em> →</div>
+<div class="noeud"><b>Déplacer Objet</b><span>balle · 518 · 1000</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Petit message en bas de l'écran</b><span>Perdu !</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Attendre</b><span>2</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Recommencer la scène</b></div>
+</div>
+<div class="chaine">
+<div class="noeud condition"><b>Condition</b><span>=vies &lt;= 0</span></div>
+<div class="fleche"><em>Faux</em> →</div>
+<div class="noeud"><b>Déplacer Objet</b><span>balle · 518 · 1000</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vy · -9</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modifier Variable</b><span>vx · 6</span></div>
+</div>
+<div class="tip">👉 <strong>Pourquoi arrêter la balle avant d'attendre ?</strong> Pendant les 2 secondes d'attente, le jeu continue. Si la balle restait sous l'écran, elle ferait perdre une vie à chaque image, et le compteur de vies descendrait très bas. Remise au milieu et immobile, elle ne gêne plus.</div>
+</div>
+<h2>Pour aller plus loin</h2>
+<ul><li><strong>Des sons :</strong> ajoute <strong>« Jouer un son »</strong> après <strong>« Détruire Objet »</strong> (un « clac » quand une brique casse) et dans l'événement de la raquette.</li><li><strong>Des couleurs différentes :</strong> donne le même tag <strong>brique</strong> à toutes les briques, quelle que soit leur couleur : un seul montage suffit.</li><li><strong>Une balle plus rapide :</strong> change les nombres <code>6</code>, <code>-6</code>, <code>9</code> et <code>-9</code> partout (par exemple <code>8</code>, <code>-8</code>, <code>12</code> et <code>-12</code>).</li><li><strong>Des étincelles :</strong> ajoute un <strong>« Effet de particules »</strong> quand une brique casse (voir le guide <a href="particules-effets.html">Particules et effets</a>).</li></ul>
+<h2>Si ça ne marche pas</h2>
+<ul><li><strong>La balle ne bouge pas :</strong> vérifie que <strong>vx</strong> et <strong>vy</strong> changent au démarrage, et que <strong>« Pousser objet »</strong> est bien relié aux nœuds verts <strong>« Valeur d'une variable »</strong> (touche <strong>Ajout X</strong> : la ligne doit montrer le fil vert).</li><li><strong>La balle traverse un mur ou les briques :</strong> vérifie les noms (<strong>balle</strong>, <strong>raquette</strong>, <strong>mur_gauche</strong>…) et le tag <strong>brique</strong>, écrits pareil partout (sans accent, sans majuscule). Si la balle va très vite, grossis un peu les briques ou ralentis-la.</li><li><strong>La raquette monte ou descend :</strong> le nœud <strong>« Modifier une propriété »</strong> doit être relié à <strong>À chaque image</strong>, avec <strong>Propriété</strong> = <code>y</code>.</li><li><strong>La victoire arrive trop tôt ou jamais :</strong> la variable <strong>briques</strong> doit valoir exactement le nombre de briques du jeu.</li><li><strong>Pour comparer</strong>, ouvre le projet de test (ses nœuds sont rangés par section, avec des cadres et des post-it qui expliquent chaque partie).</li></ul>
+
+<div class="nav">
+<a href="vie-game-over.html">← Perdre de la vie et Game Over</a>
+<a href="jeu-tactique.html">Guide suivant : Faire un jeu de tactique →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="../fr/index.html">Site officiel</a> · <a href="../noeuds/fr.html">Référence des nœuds</a></p>
+</footer>
+</body>
+</html>

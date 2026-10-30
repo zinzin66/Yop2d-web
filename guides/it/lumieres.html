@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Come aggiungere luci, ombre e un ciclo giorno e notte in Yop2D? | Guida Yop2D</title>
+<meta name="description" content="Dai vita al tuo gioco in Yop2D: una notte buia, una torcia che segue il tuo eroe, ombre morbide sotto i personaggi e un giorno che diventa notte da solo. Senza codice.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/it/lumieres.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/lumieres.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/lumieres.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/lumieres.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/lumieres.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/lumieres.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/lumieres.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/lumieres.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/lumieres.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/lumieres.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Come aggiungere luci, ombre e un ciclo giorno e notte?",
+ "description": "Dai vita al tuo gioco in Yop2D: una notte buia, una torcia che segue il tuo eroe, ombre morbide sotto i personaggi e un giorno che diventa notte da solo. Senza codice.",
+ "inLanguage": "it",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motore di gioco 2D senza codice per Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Oscurare il gioco",
+   "text": "Aggiungi il nodo «Oscurità e atmosfera di luce»."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Accendere una torcia",
+   "text": "Aggiungi «Fonte di luce» a un oggetto."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Aggiungere un'ombra",
+   "text": "Spunta «Ombra sotto l'oggetto» nell'Ispettore."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Lasciar passare il giorno",
+   "text": "Aggiungi il nodo «Ciclo giorno e notte»."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../it/index.html">← Yop2D</a>
+<h1>Come aggiungere luci, ombre e un ciclo giorno e notte?</h1>
+<p>Guida per principianti · senza codice</p>
+<p class="langues"><a href="../lumieres.html" hreflang="fr">Français</a> · <a href="../en/lumieres.html" hreflang="en">English</a> · <a href="../es/lumieres.html" hreflang="es">Español</a> · <a href="../de/lumieres.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="../pt/lumieres.html" hreflang="pt">Português</a> · <a href="../ru/lumieres.html" hreflang="ru">Русский</a> · <a href="../zh/lumieres.html" hreflang="zh">中文</a> · <a href="../ja/lumieres.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Con pochi nodi, un gioco passa da piatto a pieno di atmosfera: una notte buia, una lanterna che segue il tuo eroe, ombre morbide e un sole che tramonta da solo. Non c'è niente da scrivere: scegli solo dei valori. Le luci sono disegnate sullo schermo (non aggirano i muri), così il gioco resta veloce su ogni telefono.</p>
+<div class="besoin">
+<b>Ti serve:</b>
+<ul><li>un progetto aperto nell'editor;</li><li>immagini che stiano bene al buio (i pack 3D della libreria, per esempio). Un'immagine pixel art molto ingrandita appare sfocata: attiva <strong>Pixel art: pixel nitidi</strong> nelle impostazioni del gioco.</li></ul>
+</div>
+<h2>Passo 1: oscurare il gioco</h2>
+<div class="method">
+<ol><li>Apri il <strong>Blueprint</strong> e aggiungi «Oscurità e atmosfera di luce» dopo «All'Avvio».</li><li>Scegli l'<strong>oscurità</strong>: 0 è pieno giorno, 100 è nero totale. Per una notte in cui si vede ancora la scena, prova 85.</li><li>Scegli il <strong>colore della notte</strong>: un blu scuro sembra naturale, il nero fa più paura.</li></ol>
+<div class="tip">👉 L'oscurità e il colore cambiano dolcemente. Con 30 secondi, un giorno diventa notte, come un tramonto.</div>
+</div>
+<h2>Passo 2: accendere una torcia</h2>
+<div class="method">
+<ol><li>Aggiungi «Fonte di luce (torcia, lanterna…)» e scegli l'oggetto che porta la luce: una torcia, una finestra, una lanterna.</li><li>Imposta il <strong>raggio</strong> (la distanza dal centro, in pixel), l'<strong>illuminazione</strong> (100 è normale, fino a 300 per una luce più forte) e l'<strong>alone colorato</strong>.</li><li>Scegli il <strong>tremolio</strong>: candela per una fiamma morbida, torcia per una fiamma forte, sfarfalla per una lampada difettosa.</li><li>La luce segue il suo oggetto. Per una lanterna che segua il tuo eroe, metti un piccolo oggetto invisibile sull'eroe (un oggetto figlio) e accendi quell'oggetto.</li></ol>
+<div class="tip">👉 Con <strong>Accensione = Solo quando fa buio</strong>, la luce si accende da sola al calar della notte e si spegne di giorno. Usa «Spegni la luce dell'oggetto» per spegnere una luce con un nodo.</div>
+</div>
+<h2>Passo 3: aggiungere un'ombra</h2>
+<div class="method">
+<ol><li>Seleziona un personaggio nella scena e apri l'<strong>Ispettore</strong>, parte <strong>Aspetto</strong>.</li><li>Spunta <strong>Ombra sotto l'oggetto</strong>: imposta la sua <strong>forza</strong> e la sua <strong>larghezza</strong>.</li><li>L'ombra segue l'oggetto dappertutto. Il nodo «Ombra sotto l'oggetto» fa lo stesso, se preferisci attivarla durante il gioco.</li></ol>
+</div>
+<h2>Passo 4: lasciar passare il giorno</h2>
+<div class="method">
+<ol><li>Aggiungi «Ciclo giorno e notte» all'inizio del gioco.</li><li>Scegli la <strong>durata di un giorno intero</strong>: da 30 a 120 secondi sembra vivo. Poi il <strong>momento di partenza</strong> (pieno giorno, sera, notte fonda o alba) e se <strong>si ripete senza fine</strong>.</li><li>Metti le tue luci su <strong>Solo quando fa buio</strong>: si accendono da sole al calar della notte.</li></ol>
+<div class="tip">👉 Durata 0 ferma il ciclo dov'è. Anche un gioco in pausa blocca il ciclo. Per saltare a un momento, usa di nuovo «Ciclo giorno e notte» con un altro momento di partenza: l'esempio «Day and night village» lo fa con 5 pulsanti.</div>
+</div>
+<h2>Per andare oltre</h2>
+<ul><li>Apri i modelli <strong>Torcia e ombre</strong> e <strong>Giorno e notte</strong> (scheda Modelli) per vedere tutto già impostato.</li><li>Scarica l'esempio <strong>Day and night village</strong> (scheda Esempi): un villaggio in 3D, finestre che si accendono di notte e un cavaliere con una lanterna.</li><li>Fino a 8 luci possono brillare insieme, così il gioco resta veloce su ogni dispositivo.</li></ul>
+<h2>Se non funziona</h2>
+<ul><li><strong>Non vedo nessuna luce:</strong> l'oscurità probabilmente è a 0. Una luce si vede solo su una scena più scura.</li><li><strong>La luce non segue il mio eroe:</strong> agganciala a un oggetto posato sull'eroe (un oggetto figlio), non a un oggetto fisso.</li><li><strong>La notte non è abbastanza buia:</strong> alza l'oscurità (fino a 100) e scegli un colore più scuro.</li></ul>
+
+<div class="nav">
+<a href="../it/particules-effets.html">← Particelle ed effetti</a>
+<a href="../it/histoire-choix.html">Guida successiva: Storia a scelte (visual novel) →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motore di gioco 2D gratuito e senza codice per Android · <a href="../../it/index.html">Sito ufficiale</a> · <a href="../../noeuds/it.html">Riferimento dei nodi</a></p>
+</footer>
+</body>
+</html>

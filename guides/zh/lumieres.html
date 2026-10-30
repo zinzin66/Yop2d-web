@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何在 Yop2D 中添加灯光、阴影和昼夜循环？ | Yop2D 教程</title>
+<meta name="description" content="让你的 Yop2D 游戏活起来：黑暗的夜晚、跟着主角的火把、角色脚下柔和的阴影，还有自己变成黑夜的白天。无需代码。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/lumieres.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/lumieres.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/lumieres.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/lumieres.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/lumieres.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/lumieres.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/lumieres.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/lumieres.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/lumieres.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/lumieres.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何添加灯光、阴影和昼夜循环？",
+ "description": "让你的 Yop2D 游戏活起来：黑暗的夜晚、跟着主角的火把、角色脚下柔和的阴影，还有自己变成黑夜的白天。无需代码。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "让游戏变暗",
+   "text": "添加节点“黑暗与光线氛围”。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "点亮火把",
+   "text": "在物体上添加“光源”。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "添加阴影",
+   "text": "在检查器中勾选“物体下方的阴影”。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "让一天流逝",
+   "text": "添加节点“昼夜循环”。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>如何添加灯光、阴影和昼夜循环？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../lumieres.html" hreflang="fr">Français</a> · <a href="../en/lumieres.html" hreflang="en">English</a> · <a href="../es/lumieres.html" hreflang="es">Español</a> · <a href="../de/lumieres.html" hreflang="de">Deutsch</a> · <a href="../it/lumieres.html" hreflang="it">Italiano</a> · <a href="../pt/lumieres.html" hreflang="pt">Português</a> · <a href="../ru/lumieres.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/lumieres.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>只需几个节点，游戏就能从平淡变得很有氛围：黑暗的夜晚、跟着主角的灯笼、柔和的阴影，还有自己落下的太阳。不用写任何东西：你只需选择数值。灯光是画在屏幕上的（不会绕过墙壁），所以游戏在所有手机上都保持流畅。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>编辑器中已打开的一个项目；</li><li>在黑暗中好看的图片（例如素材库里的 3D 素材包）。放大很多倍的像素画会显得模糊：请在游戏设置中打开<strong>像素画：像素清晰</strong>。</li></ul>
+</div>
+<h2>第 1 步：让游戏变暗</h2>
+<div class="method">
+<ol><li>打开 <strong>Blueprint</strong>，在 “启动时” 之后添加 “黑暗与光线氛围”。</li><li>选择<strong>黑暗程度</strong>：0 是白天，100 是全黑。想要夜里还能看见场景，可以试试 85。</li><li>选择<strong>夜晚的颜色</strong>：深蓝看起来自然，黑色更吓人。</li></ol>
+<div class="tip">👉 黑暗程度和颜色会平滑变化。用 30 秒，白天就会变成黑夜，就像日落。</div>
+</div>
+<h2>第 2 步：点亮火把</h2>
+<div class="method">
+<ol><li>添加 “光源（火把、灯笼……）”，并选择携带灯光的物体：火把、窗户或灯笼。</li><li>设置<strong>半径</strong>（离中心的距离，单位像素）、<strong>照明</strong>（100 为正常，最高 300，光更强更远）和<strong>彩色光晕</strong>。</li><li>选择<strong>闪动</strong>：蜡烛是柔和的火苗，火把是强烈的火苗，闪烁适合接触不良的灯。</li><li>灯光会跟着它的物体。想让灯笼跟着主角，就在主角身上放一个看不见的小物体（子物体），然后点亮这个物体。</li></ol>
+<div class="tip">👉 设置为<strong>点亮方式 = 只在天黑时</strong>后，灯会在夜幕降临时自己亮起，白天熄灭。用 “关闭物体的光” 可以用节点关灯。</div>
+</div>
+<h2>第 3 步：添加阴影</h2>
+<div class="method">
+<ol><li>在场景中选中一个角色，打开<strong>检查器</strong>的<strong>外观</strong>部分。</li><li>勾选<strong>物体下方的阴影</strong>：设置它的<strong>强度</strong>和<strong>宽度</strong>。</li><li>阴影会处处跟着物体。如果你想在游戏中再打开阴影，节点 “物体下方的阴影” 可以做同样的事。</li></ol>
+</div>
+<h2>第 4 步：让一天流逝</h2>
+<div class="method">
+<ol><li>在游戏开始时添加 “昼夜循环”。</li><li>选择<strong>一整天的时长</strong>：30 到 120 秒会显得很有生气。然后选择<strong>起始时刻</strong>（白天、傍晚、深夜或黎明）以及<strong>是否无限循环</strong>。</li><li>把你的灯设为<strong>只在天黑时</strong>：它们会在夜幕降临时自己亮起。</li></ol>
+<div class="tip">👉 时长 0 会让循环停在当前状态。游戏暂停时循环也会暂停。想跳到某个时刻，再用一次 “昼夜循环” 并换一个起始时刻：示例“Day and night village”用 5 个按钮做到了这一点。</div>
+</div>
+<h2>进一步探索</h2>
+<ul><li>打开模板<strong>火把和阴影</strong>与<strong>昼夜</strong>（模板标签页），看看已经设置好的效果。</li><li>下载示例 <strong>Day and night village</strong>（示例标签页）：一个 3D 村庄、夜里亮起的窗户，以及提着灯笼的骑士。</li><li>最多可同时点亮 8 盏灯，让游戏在所有设备上都保持流畅。</li></ul>
+<h2>如果不起作用</h2>
+<ul><li><strong>我看不到任何光：</strong>黑暗程度可能是 0。灯光只在较暗的场景中才看得见。</li><li><strong>灯光没有跟着主角：</strong>把它挂到主角身上的物体（子物体）上，而不是固定的物体上。</li><li><strong>夜晚不够黑：</strong>提高黑暗程度（最高 100），并选择更深的颜色。</li></ul>
+
+<div class="nav">
+<a href="../zh/particules-effets.html">← 粒子和特效</a>
+<a href="../zh/histoire-choix.html">下一篇： 选择式故事（视觉小说） →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>
