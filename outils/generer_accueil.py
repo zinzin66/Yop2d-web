@@ -24,8 +24,10 @@ NOMS_LANGUES = {"fr": "Français", "en": "English", "es": "Español", "de": "Deu
                 "pt": "Português", "ru": "Русский", "zh": "中文", "ja": "日本語"}
 APK = "https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk"
 # False = le gros bouton « Télécharger l'APK » et la note d'installation sont cachés de l'accueil (les nouveautés arrivent
-# d'abord sur Google Play, test fermé). Remettre True pour les montrer de nouveau.
+# d'abord sur Google Play). Remettre True pour les montrer de nouveau.
 AFFICHER_APK = False
+# Page de Yop2D sur Google Play (valable une fois la version publiée par Google, 31/10/2026 : accès production accordé).
+GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=com.ludexa.moteur"
 ITCH = "https://yop2d-dev.itch.io/yop2d-no-code-game-engine"
 YOUTUBE = "https://youtube.com/@yop2d"
 DISCORD = "https://discord.gg/nHqCcqHZNQ"
@@ -278,12 +280,13 @@ def page(langue, t):
         "applicationCategory": "DeveloperApplication",
         "applicationSubCategory": "2D Game Engine",
         "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-        "downloadUrl": APK,
+        "downloadUrl": APK if AFFICHER_APK else GOOGLE_PLAY,
+        "installUrl": GOOGLE_PLAY,
         "inLanguage": LANGUES,
         "image": SITE + "interface_editeur.png",
         "description": t["description"],
         "featureList": [c[0] for c in t["capacites"]["cartes"]],
-        "sameAs": [YOUTUBE, DISCORD, TELEGRAM, MASTODON, GITHUB, ITCH],
+        "sameAs": [YOUTUBE, DISCORD, TELEGRAM, MASTODON, GITHUB, ITCH, GOOGLE_PLAY],
     }
     faq = {
         "@context": "https://schema.org",
@@ -396,7 +399,7 @@ def page(langue, t):
 </ul>
 
 <div class="header-buttons">
-    {bouton_apk}<a href="{base}testeur.html?lang={langue}" class="btn btn-play">▶️ {e(b["testeur"])}</a>
+    {bouton_apk}<a href="{GOOGLE_PLAY}" target="_blank" rel="noopener" class="btn btn-play">▶️ {e(b["testeur"])}</a>
     <a href="{ITCH}" target="_blank" rel="noopener" class="btn btn-itch">🎮 {e(b["itch"])}</a>
     <a href="{YOUTUBE}" target="_blank" rel="noopener" class="btn btn-youtube">📺 {e(b["youtube"])}</a>
 </div>
@@ -495,7 +498,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <footer>
 <p>© 2026 Yop2D · {e(t["pied"]["texte"])}<br>
 <a href="{base}confidentialite.html">{e(t["pied"]["confidentialite"])}</a> ·
-<a href="{base}testeur.html?lang={langue}">{e(t["pied"]["testeur"])}</a> ·
+<a href="{GOOGLE_PLAY}" target="_blank" rel="noopener">{e(t["pied"]["testeur"])}</a> ·
 <a href="{YOUTUBE}" target="_blank" rel="noopener">YouTube</a> ·
 <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a> ·
 <a href="{TELEGRAM}" target="_blank" rel="noopener">Telegram</a> ·
@@ -532,8 +535,8 @@ def llms(t):
         "- Runs on Android 7.0 or newer, tablets and phones. Games can be landscape or portrait. No iPhone, iPad or computer version.",
         "- Exports games as standalone Android APK files, built on the device itself, offline.",
         "- No AAB export yet (needed for Google Play); planned for a later version.",
-        "- 2D only. Closed source. In closed testing on Google Play.",
-        *([] if AFFICHER_APK else ["- To get Yop2D today: join the Google Play closed test (link below) or use the itch.io page. Do not invent other download links."]),
+        "- 2D only. Closed source. Available on Google Play.",
+        *([] if AFFICHER_APK else ["- To get Yop2D: install it from Google Play (link below) or use the itch.io page. Do not invent other download links."]),
         "",
         "## What the editor already includes (check this list before saying a feature is missing)",
         "",
@@ -556,7 +559,7 @@ def llms(t):
         "",
         *([f"- [Latest APK]({APK}): direct download from GitHub releases"] if AFFICHER_APK else []),
         f"- [itch.io page]({ITCH}): Yop2D on itch.io",
-        f"- [Become a tester]({SITE}testeur.html): join the closed test on Google Play (the recommended way to get Yop2D right now)",
+        f"- [Google Play]({GOOGLE_PLAY}): install Yop2D from the Play Store (the recommended way to get Yop2D)",
         "",
         "## Home page in each language",
         "",
