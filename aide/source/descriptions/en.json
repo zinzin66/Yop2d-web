@@ -508,11 +508,11 @@
   "when an enemy explodes: duration 0.06, speed 0.05."
  ],
  "chemin_vers_objet": [
-  "Object A goes to object B, finding the shortest path by itself, square by square, without going through walls (\"Solid\" tiles of a tile layer, fixed physical objects). The path is updated when B moves. [[lang:port_arrive]] runs when A touches B. The \"Stop\" setting lets the object stop on a neighbouring cell, well centered (grid games); \"These tags block the path\" makes it go around other units.",
+  "Object A goes to object B, finding the shortest path by itself, square by square, without going through walls (\"Solid\" tiles of a tile layer, fixed physical objects). The path is updated when B moves. [[lang:port_arrive]] runs when A touches B. The \"Stop\" setting lets the object stop on a neighbouring cell, well centered (grid games); \"These tags block the path\" makes it go around other units. In the advanced settings, “Stay in the shown zone” limits the path to the cells shown by “Show reachable cells”: the object never walks through a cell outside its range.",
   "a ghost chasing the player through a maze."
  ],
  "chemin_vers_point": [
-  "Object A goes to point X, Y around the walls, by the shortest path (square by square). With =doigt.x and =doigt.y, it goes where the screen is touched. [[lang:port_arrive]] runs on arrival. If there is no path, it stays where it is.",
+  "Object A goes to point X, Y around the walls, by the shortest path (square by square). With =doigt.x and =doigt.y, it goes where the screen is touched. [[lang:port_arrive]] runs on arrival. If there is no path, it stays where it is. In the advanced settings, “Stay in the shown zone” limits the path to the cells shown by “Show reachable cells”: the object never walks through a cell outside its range.",
   "tap a square to send the hero there, in a strategy game or a dungeon."
  ],
  "chemin_arreter": [
@@ -764,7 +764,7 @@
   "show a unit's defense bonus."
  ],
  "chemin_vers_case": [
-  "The object walks to the CENTER of the cell (column, row), going around walls, blocking terrains and the units with the given tags. Default: the cell touched by the finger. \"Arrived\" output once on the cell.",
+  "The object walks to the CENTER of the cell (column, row), going around walls, blocking terrains and the units with the given tags. Default: the cell touched by the finger. \"Arrived\" output once on the cell. In the advanced settings, “Stay in the shown zone” limits the path to the cells shown by “Show reachable cells”: the object never walks through a cell outside its range.",
   "send a hero to a touched blue cell."
  ],
  "pion_une_case": [
@@ -930,5 +930,21 @@
  "couleur_equipe": [
   "One drawing for all teams: paint the parts to colour (cloak, flag, plume) with a marker colour (bright pink #FF00FF by default), then this node replaces that pink with the team colour for the object. The drawing's shadows and highlights are kept (a dark pink becomes a dark blue). Tolerance says how far a colour may stray from the marker and still be replaced. Nothing is changed in the images: it all happens at display time, so do it again at the start of each game.",
   "two armies with the same images: player in blue, enemy in red."
+ ],
+ "selectionner_objet": [
+  "Keeps an object in memory as “the selected object” (for example the chosen unit). Unlike “the involved object”, it does not change when you touch something else: other nodes aim at it with the target “The selected object”. If you don't pick an object, it is the one you just touched.",
+  "“On click on # unit” then Select the object; then touching a cell moves “The selected object”."
+ ],
+ "deselectionner_objet": [
+  "Forgets the selected object: nothing is selected anymore (for example when the player cancels, or at the end of the turn).",
+  "A “Cancel” button: Deselect."
+ ],
+ "si_objet_selectionne": [
+  "Checks whether an object is selected. The True output runs if there is one, the False output if not.",
+  "Touching a cell: if an object is selected, move it; otherwise do nothing."
+ ],
+ "si_est_selectionne": [
+  "Checks whether the targeted object IS the selected object. Handy to deselect a unit when it is touched a second time.",
+  "On click on # unit (involved object): if this object is the selected one → Deselect; otherwise → Select."
  ]
 }

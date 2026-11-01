@@ -508,11 +508,11 @@
   "cuando explota un enemigo: duración 0,06, velocidad 0,05."
  ],
  "chemin_vers_objet": [
-  "El objeto A va hacia el objeto B encontrando solo el camino más corto, casilla a casilla, sin atravesar muros (baldosas «Sólidas» de un decorado de baldosas, objetos físicos fijos). El camino se recalcula cuando B se mueve. [[lang:port_arrive]] se activa cuando A toca a B. El ajuste «Detenerse» permite pararse en una casilla vecina, bien centrado (juegos de cuadrícula); «Estos tags bloquean el camino» hace rodear a otras unidades.",
+  "El objeto A va hacia el objeto B encontrando solo el camino más corto, casilla a casilla, sin atravesar muros (baldosas «Sólidas» de un decorado de baldosas, objetos físicos fijos). El camino se recalcula cuando B se mueve. [[lang:port_arrive]] se activa cuando A toca a B. El ajuste «Detenerse» permite pararse en una casilla vecina, bien centrado (juegos de cuadrícula); «Estos tags bloquean el camino» hace rodear a otras unidades. En avanzado, «Quedarse en la zona mostrada» limita el camino a las casillas mostradas por «Mostrar casillas accesibles»: el objeto nunca pasa por una casilla fuera de su alcance.",
   "un fantasma que persigue al jugador por un laberinto."
  ],
  "chemin_vers_point": [
-  "El objeto A va hasta el punto X, Y rodeando los muros, por el camino más corto (casilla a casilla). Con =doigt.x y =doigt.y va donde se toca la pantalla. [[lang:port_arrive]] se activa al llegar. Si no hay camino, se queda quieto.",
+  "El objeto A va hasta el punto X, Y rodeando los muros, por el camino más corto (casilla a casilla). Con =doigt.x y =doigt.y va donde se toca la pantalla. [[lang:port_arrive]] se activa al llegar. Si no hay camino, se queda quieto. En avanzado, «Quedarse en la zona mostrada» limita el camino a las casillas mostradas por «Mostrar casillas accesibles»: el objeto nunca pasa por una casilla fuera de su alcance.",
   "tocar una casilla para enviar allí al héroe, en un juego de estrategia o una mazmorra."
  ],
  "chemin_arreter": [
@@ -764,7 +764,7 @@
   "mostrar el bonus de defensa de una unidad."
  ],
  "chemin_vers_case": [
-  "El objeto camina hasta el CENTRO de la casilla (columna, fila), rodeando muros, terrenos que bloquean y las unidades con los tags indicados. Por defecto: la casilla que toca el dedo. Salida «Llegó» una vez en la casilla.",
+  "El objeto camina hasta el CENTRO de la casilla (columna, fila), rodeando muros, terrenos que bloquean y las unidades con los tags indicados. Por defecto: la casilla que toca el dedo. Salida «Llegó» una vez en la casilla. En avanzado, «Quedarse en la zona mostrada» limita el camino a las casillas mostradas por «Mostrar casillas accesibles»: el objeto nunca pasa por una casilla fuera de su alcance.",
   "enviar a un héroe a una casilla azul tocada."
  ],
  "pion_une_case": [
@@ -930,5 +930,21 @@
  "couleur_equipe": [
   "Un solo dibujo para todos los equipos: pinta las partes a colorear (capa, bandera, plumero) con un color de referencia (rosa vivo #FF00FF por defecto) y este nodo reemplaza ese rosa por el color del equipo para el objeto. Se conservan las sombras y brillos del dibujo (un rosa oscuro pasa a azul oscuro). La tolerancia indica cuánto puede alejarse un color del de referencia para ser reemplazado. No se cambia nada en las imágenes: todo ocurre al mostrarlas, así que hay que repetirlo al inicio de cada partida.",
   "dos ejércitos con las mismas imágenes: jugador en azul, enemigo en rojo."
+ ],
+ "selectionner_objet": [
+  "Guarda un objeto en memoria como «el objeto seleccionado» (por ejemplo la unidad elegida). A diferencia del «objeto involucrado», no cambia cuando tocas otra cosa: los demás nodos lo apuntan con el objetivo «El objeto seleccionado». Si no eliges ningún objeto, es el que acabas de tocar.",
+  "«Al hacer clic en # unidad» y Seleccionar el objeto; después, tocar una casilla mueve «El objeto seleccionado»."
+ ],
+ "deselectionner_objet": [
+  "Olvida el objeto seleccionado: ya no hay ninguno elegido (por ejemplo al cancelar o al final del turno).",
+  "Un botón «Cancelar»: Deseleccionar."
+ ],
+ "si_objet_selectionne": [
+  "Comprueba si hay un objeto seleccionado. Sale por Verdadero si lo hay y por Falso si no.",
+  "Tocar una casilla: si hay un objeto seleccionado, moverlo; si no, no hacer nada."
+ ],
+ "si_est_selectionne": [
+  "Comprueba si el objeto elegido ES el objeto seleccionado. Útil para deseleccionar una unidad al tocarla por segunda vez.",
+  "Al hacer clic en # unidad (objeto involucrado): si es el seleccionado → Deseleccionar; si no → Seleccionar."
  ]
 }

@@ -508,11 +508,11 @@
   "quand un ennemi explose : durée 0,06, vitesse 0,05."
  ],
  "chemin_vers_objet": [
-  "L'objet A va vers l'objet B en trouvant tout seul le plus court chemin, case par case, sans traverser les murs (tuiles « Solide » d'un décor en tuiles, objets physiques fixes). Le chemin est recalculé quand B bouge. [[lang:port_arrive]] se lance quand A touche B. Le réglage « S'arrêter » permet de s'arrêter sur une case voisine, bien centré (jeux sur grille) ; « Ces tags bloquent le chemin » fait contourner les autres unités.",
+  "L'objet A va vers l'objet B en trouvant tout seul le plus court chemin, case par case, sans traverser les murs (tuiles « Solide » d'un décor en tuiles, objets physiques fixes). Le chemin est recalculé quand B bouge. [[lang:port_arrive]] se lance quand A touche B. Le réglage « S'arrêter » permet de s'arrêter sur une case voisine, bien centré (jeux sur grille) ; « Ces tags bloquent le chemin » fait contourner les autres unités. En avancé, « Rester dans la zone montrée » limite le trajet aux cases montrées par « Montrer les cases accessibles » : l'objet ne passe jamais par une case hors de sa portée.",
   "un fantôme qui poursuit le joueur dans un labyrinthe."
  ],
  "chemin_vers_point": [
-  "L'objet A va jusqu'au point X, Y en contournant les murs, par le plus court chemin (case par case). Avec =doigt.x et =doigt.y, il va là où l'on touche l'écran. [[lang:port_arrive]] se lance à l'arrivée. S'il n'y a aucun chemin, il reste sur place.",
+  "L'objet A va jusqu'au point X, Y en contournant les murs, par le plus court chemin (case par case). Avec =doigt.x et =doigt.y, il va là où l'on touche l'écran. [[lang:port_arrive]] se lance à l'arrivée. S'il n'y a aucun chemin, il reste sur place. En avancé, « Rester dans la zone montrée » limite le trajet aux cases montrées par « Montrer les cases accessibles » : l'objet ne passe jamais par une case hors de sa portée.",
   "toucher une case pour y envoyer le héros, dans un jeu de stratégie ou un donjon."
  ],
  "chemin_arreter": [
@@ -764,7 +764,7 @@
   "afficher le bonus de défense d'une unité."
  ],
  "chemin_vers_case": [
-  "L'objet marche jusqu'au CENTRE de la case (colonne, ligne) en contournant les murs, les terrains qui bloquent et les unités des tags indiqués. Par défaut : la case touchée par le doigt. Sortie « Arrivé » une fois sur la case.",
+  "L'objet marche jusqu'au CENTRE de la case (colonne, ligne) en contournant les murs, les terrains qui bloquent et les unités des tags indiqués. Par défaut : la case touchée par le doigt. Sortie « Arrivé » une fois sur la case. En avancé, « Rester dans la zone montrée » limite le trajet aux cases montrées par « Montrer les cases accessibles » : l'objet ne passe jamais par une case hors de sa portée.",
   "envoyer un héros sur une case bleue touchée."
  ],
  "pion_une_case": [
@@ -930,5 +930,21 @@
  "couleur_equipe": [
   "Un seul dessin pour toutes les équipes : peins les parties à colorer (manteau, drapeau, plumet) avec une couleur repère (par défaut le rose vif #FF00FF), puis ce nœud remplace ce rose par la couleur de l'équipe pour l'objet. Les ombres et les reflets du dessin sont gardés (un rose foncé devient un bleu foncé). La tolérance dit à quel point une couleur peut s'écarter du repère pour être remplacée. Rien n'est changé dans les images : tout se fait à l'affichage, donc à refaire au début de chaque partie.",
   "deux armées avec les mêmes images : joueur en bleu, ennemi en rouge."
+ ],
+ "selectionner_objet": [
+  "Garde un objet en mémoire comme « l'objet sélectionné » (par exemple l'unité choisie). Contrairement à « l'objet impliqué », il ne change pas quand tu touches autre chose : les autres nœuds le visent avec la cible « L'objet sélectionné ». Si tu ne choisis pas d'objet, c'est celui que tu viens de toucher.",
+  "« Au clic sur # unite » puis Sélectionner l'objet ; ensuite, toucher une case déplace « L'objet sélectionné »."
+ ],
+ "deselectionner_objet": [
+  "Oublie l'objet sélectionné : plus aucun objet n'est choisi (par exemple quand on annule, ou à la fin du tour).",
+  "Un bouton « Annuler » : Désélectionner."
+ ],
+ "si_objet_selectionne": [
+  "Vérifie si un objet est sélectionné. La sortie Vrai part s'il y en a un, la sortie Faux sinon.",
+  "Toucher une case : si un objet est sélectionné, le déplacer ; sinon, ne rien faire."
+ ],
+ "si_est_selectionne": [
+  "Vérifie si l'objet visé EST l'objet sélectionné. Pratique pour désélectionner une unité quand on la touche une deuxième fois.",
+  "Au clic sur # unite (objet impliqué) : Si cet objet est le sélectionné → Désélectionner ; sinon → Sélectionner."
  ]
 }

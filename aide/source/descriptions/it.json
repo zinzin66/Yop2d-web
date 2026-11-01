@@ -508,11 +508,11 @@
   "quando esplode un nemico: durata 0,06, velocità 0,05."
  ],
  "chemin_vers_objet": [
-  "L'oggetto A va verso l'oggetto B trovando da solo il percorso più corto, casella per casella, senza attraversare i muri (tessere «Solide» di uno sfondo a tessere, oggetti fisici fissi). Il percorso viene ricalcolato quando B si muove. [[lang:port_arrive]] parte quando A tocca B. L'impostazione «Fermarsi» permette di fermarsi su una casella vicina, ben centrato (giochi su griglia); «Questi tag bloccano il percorso» fa aggirare le altre unità.",
+  "L'oggetto A va verso l'oggetto B trovando da solo il percorso più corto, casella per casella, senza attraversare i muri (tessere «Solide» di uno sfondo a tessere, oggetti fisici fissi). Il percorso viene ricalcolato quando B si muove. [[lang:port_arrive]] parte quando A tocca B. L'impostazione «Fermarsi» permette di fermarsi su una casella vicina, ben centrato (giochi su griglia); «Questi tag bloccano il percorso» fa aggirare le altre unità. Nelle impostazioni avanzate, «Restare nella zona mostrata» limita il percorso alle caselle mostrate da «Mostra le caselle raggiungibili»: l'oggetto non passa mai per una casella fuori dalla sua portata.",
   "un fantasma che insegue il giocatore in un labirinto."
  ],
  "chemin_vers_point": [
-  "L'oggetto A va fino al punto X, Y girando attorno ai muri, per il percorso più corto (casella per casella). Con =doigt.x e =doigt.y va dove si tocca lo schermo. [[lang:port_arrive]] parte all'arrivo. Se non c'è nessun percorso, resta fermo.",
+  "L'oggetto A va fino al punto X, Y girando attorno ai muri, per il percorso più corto (casella per casella). Con =doigt.x e =doigt.y va dove si tocca lo schermo. [[lang:port_arrive]] parte all'arrivo. Se non c'è nessun percorso, resta fermo. Nelle impostazioni avanzate, «Restare nella zona mostrata» limita il percorso alle caselle mostrate da «Mostra le caselle raggiungibili»: l'oggetto non passa mai per una casella fuori dalla sua portata.",
   "toccare una casella per mandarci l'eroe, in un gioco di strategia o un dungeon."
  ],
  "chemin_arreter": [
@@ -764,7 +764,7 @@
   "mostrare il bonus di difesa di un'unità."
  ],
  "chemin_vers_case": [
-  "L'oggetto cammina fino al CENTRO della casella (colonna, riga), aggirando muri, terreni che bloccano e le unità con i tag indicati. Di default: la casella toccata dal dito. Uscita «Arrivato» una volta sulla casella.",
+  "L'oggetto cammina fino al CENTRO della casella (colonna, riga), aggirando muri, terreni che bloccano e le unità con i tag indicati. Di default: la casella toccata dal dito. Uscita «Arrivato» una volta sulla casella. Nelle impostazioni avanzate, «Restare nella zona mostrata» limita il percorso alle caselle mostrate da «Mostra le caselle raggiungibili»: l'oggetto non passa mai per una casella fuori dalla sua portata.",
   "mandare un eroe su una casella blu toccata."
  ],
  "pion_une_case": [
@@ -930,5 +930,21 @@
  "couleur_equipe": [
   "Un solo disegno per tutte le squadre: dipingi le parti da colorare (mantello, bandiera, pennacchio) con un colore guida (rosa acceso #FF00FF di default) e questo nodo sostituisce quel rosa con il colore della squadra per l'oggetto. Ombre e riflessi del disegno restano (un rosa scuro diventa blu scuro). La tolleranza dice quanto un colore può discostarsi dalla guida per essere sostituito. Nulla cambia nelle immagini: tutto avviene in visualizzazione, quindi va rifatto all'inizio di ogni partita.",
   "due eserciti con le stesse immagini: giocatore in blu, nemico in rosso."
+ ],
+ "selectionner_objet": [
+  "Tiene in memoria un oggetto come «l'oggetto selezionato» (per esempio l'unità scelta). A differenza dell'«oggetto coinvolto», non cambia quando tocchi altro: gli altri nodi lo puntano con il bersaglio «L'oggetto selezionato». Se non scegli un oggetto, è quello che hai appena toccato.",
+  "«Al clic su # unità» poi Seleziona l'oggetto; poi toccare una casella sposta «L'oggetto selezionato»."
+ ],
+ "deselectionner_objet": [
+  "Dimentica l'oggetto selezionato: nessun oggetto è più scelto (per esempio quando si annulla o a fine turno).",
+  "Un pulsante «Annulla»: Deseleziona."
+ ],
+ "si_objet_selectionne": [
+  "Controlla se c'è un oggetto selezionato. Esce da Vero se c'è, da Falso altrimenti.",
+  "Toccare una casella: se c'è un oggetto selezionato, spostarlo; altrimenti non fare nulla."
+ ],
+ "si_est_selectionne": [
+  "Controlla se l'oggetto scelto È l'oggetto selezionato. Utile per deselezionare un'unità quando la si tocca una seconda volta.",
+  "Al clic su # unità (oggetto coinvolto): se è quello selezionato → Deseleziona; altrimenti → Seleziona."
  ]
 }

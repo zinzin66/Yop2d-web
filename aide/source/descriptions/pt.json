@@ -508,11 +508,11 @@
   "quando um inimigo explode: duração 0,06, velocidade 0,05."
  ],
  "chemin_vers_objet": [
-  "O objeto A vai até o objeto B achando sozinho o caminho mais curto, casa por casa, sem atravessar paredes (ladrilhos «Sólidos» de um cenário de ladrilhos, objetos físicos fixos). O caminho é recalculado quando B se move. [[lang:port_arrive]] dispara quando A toca B. O ajuste «Parar» permite parar em uma casa vizinha, bem centralizado (jogos de grade); «Estas tags bloqueiam o caminho» faz contornar outras unidades.",
+  "O objeto A vai até o objeto B achando sozinho o caminho mais curto, casa por casa, sem atravessar paredes (ladrilhos «Sólidos» de um cenário de ladrilhos, objetos físicos fixos). O caminho é recalculado quando B se move. [[lang:port_arrive]] dispara quando A toca B. O ajuste «Parar» permite parar em uma casa vizinha, bem centralizado (jogos de grade); «Estas tags bloqueiam o caminho» faz contornar outras unidades. Em avançado, «Ficar na zona mostrada» limita o caminho às casas mostradas por «Mostrar casas alcançáveis»: o objeto nunca passa por uma casa fora do seu alcance.",
   "um fantasma que persegue o jogador num labirinto."
  ],
  "chemin_vers_point": [
-  "O objeto A vai até o ponto X, Y contornando as paredes, pelo caminho mais curto (casa por casa). Com =doigt.x e =doigt.y, vai aonde a tela é tocada. [[lang:port_arrive]] dispara na chegada. Se não houver caminho, ele fica parado.",
+  "O objeto A vai até o ponto X, Y contornando as paredes, pelo caminho mais curto (casa por casa). Com =doigt.x e =doigt.y, vai aonde a tela é tocada. [[lang:port_arrive]] dispara na chegada. Se não houver caminho, ele fica parado. Em avançado, «Ficar na zona mostrada» limita o caminho às casas mostradas por «Mostrar casas alcançáveis»: o objeto nunca passa por uma casa fora do seu alcance.",
   "tocar numa casa para mandar o herói até lá, num jogo de estratégia ou numa masmorra."
  ],
  "chemin_arreter": [
@@ -764,7 +764,7 @@
   "mostrar o bônus de defesa de uma unidade."
  ],
  "chemin_vers_case": [
-  "O objeto caminha até o CENTRO da casa (coluna, linha), contornando paredes, terrenos que bloqueiam e as unidades com as tags indicadas. Por padrão: a casa que o dedo toca. Saída «Chegou» uma vez na casa.",
+  "O objeto caminha até o CENTRO da casa (coluna, linha), contornando paredes, terrenos que bloqueiam e as unidades com as tags indicadas. Por padrão: a casa que o dedo toca. Saída «Chegou» uma vez na casa. Em avançado, «Ficar na zona mostrada» limita o caminho às casas mostradas por «Mostrar casas alcançáveis»: o objeto nunca passa por uma casa fora do seu alcance.",
   "enviar um herói a uma casa azul tocada."
  ],
  "pion_une_case": [
@@ -930,5 +930,21 @@
  "couleur_equipe": [
   "Um só desenho para todas as equipes: pinte as partes a colorir (capa, bandeira, penacho) com uma cor de referência (rosa vivo #FF00FF por padrão) e este nó substitui esse rosa pela cor da equipe para o objeto. As sombras e brilhos do desenho são mantidos (um rosa escuro vira azul escuro). A tolerância diz o quanto uma cor pode se afastar da referência e ainda ser substituída. Nada muda nas imagens: tudo acontece na exibição, então repita no início de cada partida.",
   "dois exércitos com as mesmas imagens: jogador em azul, inimigo em vermelho."
+ ],
+ "selectionner_objet": [
+  "Guarda um objeto na memória como «o objeto selecionado» (por exemplo a unidade escolhida). Ao contrário do «objeto envolvido», ele não muda quando você toca em outra coisa: os outros nós o miram com o alvo «O objeto selecionado». Se você não escolher um objeto, é o que você acabou de tocar.",
+  "«Ao clicar em # unidade» e Selecionar o objeto; depois, tocar numa casa move «O objeto selecionado»."
+ ],
+ "deselectionner_objet": [
+  "Esquece o objeto selecionado: nenhum objeto fica escolhido (por exemplo ao cancelar ou no fim do turno).",
+  "Um botão «Cancelar»: Desmarcar."
+ ],
+ "si_objet_selectionne": [
+  "Verifica se há um objeto selecionado. Sai por Verdadeiro se houver e por Falso se não houver.",
+  "Tocar numa casa: se há um objeto selecionado, movê-lo; senão, não fazer nada."
+ ],
+ "si_est_selectionne": [
+  "Verifica se o objeto escolhido É o objeto selecionado. Útil para desmarcar uma unidade ao tocá-la pela segunda vez.",
+  "Ao clicar em # unidade (objeto envolvido): se for o selecionado → Desmarcar; senão → Selecionar."
  ]
 }
