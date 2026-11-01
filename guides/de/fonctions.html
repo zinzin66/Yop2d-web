@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie erstellt man eigene Bausteine mit Funktionen? | Yop2D-Anleitung</title>
+<meta name="description" content="Fasse Knoten in einer Funktion zusammen, rufe sie aus jeder Szene auf und füge Einstellungen (Eingaben) hinzu, um in Yop2D eigene Bausteine zu bauen, ohne Code.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/fonctions.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/fonctions.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/fonctions.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/fonctions.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/fonctions.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/fonctions.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/fonctions.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/fonctions.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/fonctions.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/fonctions.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie erstellt man eigene Bausteine (Funktionen)?",
+ "description": "Fasse Knoten in einer Funktion zusammen, rufe sie aus jeder Szene auf und füge Einstellungen (Eingaben) hinzu, um in Yop2D eigene Bausteine zu bauen, ohne Code.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Funktion erstellen",
+   "text": "Ressourcen → Funktionen → ＋, dann ihren Blueprint öffnen."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Knoten hineinsetzen",
+   "text": "Ein Startereignis, dann die gewünschten Knoten."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Aufrufen",
+   "text": "Der Knoten „Funktion aufrufen“ in einer Szene."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Einstellungen hinzufügen",
+   "text": "Eingaben: ein Name, ein Typ, ein Startwert."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../de/index.html">← Yop2D</a>
+<h1>Wie erstellt man eigene Bausteine (Funktionen)?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../fonctions.html" hreflang="fr">Français</a> · <a href="../en/fonctions.html" hreflang="en">English</a> · <a href="../es/fonctions.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/fonctions.html" hreflang="it">Italiano</a> · <a href="../pt/fonctions.html" hreflang="pt">Português</a> · <a href="../ru/fonctions.html" hreflang="ru">Русский</a> · <a href="../zh/fonctions.html" hreflang="zh">中文</a> · <a href="../ja/fonctions.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Eine <strong>Funktion</strong> ist eine kleine Gruppe von Knoten, der du einen Namen gibst. Du baust sie nur einmal und startest sie jederzeit mit einem einzigen Knoten, aus jeder Szene. So baust du <strong>eigene Bausteine</strong>: Du musst nicht zehnmal dasselbe machen, und deine Blueprints bleiben übersichtlich.</p>
+<div class="besoin">
+<b>Du brauchst:</b>
+<ul><li>ein im Editor geöffnetes Projekt.</li></ul>
+</div>
+<h2>Schritt 1: die Funktion erstellen</h2>
+<div class="method">
+<ol><li>Öffne das Fenster <strong>Ressourcen</strong> (links im Editor) und klappe den Teil <strong>Funktionen</strong> auf.</li><li>Tippe auf <strong>＋</strong>, schreibe einen kurzen Namen (zum Beispiel <code>Punkte_geben</code>) und bestätige.</li><li>Tippe auf den Namen deiner Funktion, um sie auszuwählen, und dann auf die Schaltfläche, die ihren Blueprint öffnet (das Symbol verbundener Knoten).</li></ol>
+<div class="tip">👉 Eine Funktion ist eine Datei deines Projekts: Sie wird mit deinem Spiel exportiert und funktioniert in allen Szenen.</div>
+</div>
+<h2>Schritt 2: Knoten hineinsetzen</h2>
+<div class="method">
+<ol><li>Du bist im Blueprint der Funktion (der Titel lautet „Funktion: …“). Setze das Ereignis „Beim Start“: Hier beginnt die Funktion.</li><li>Verbinde dann die gewünschten Knoten. Im Beispiel: „Zu Variable hinzufügen“ (Variable <code>score</code>), danach „Kurze Nachricht unten am Bildschirm“.</li><li>Speichere mit 💾.</li></ol>
+</div>
+<h2>Schritt 3: die Funktion aufrufen</h2>
+<div class="method">
+<ol><li>Füge im Blueprint einer Szene den Knoten „Funktion aufrufen“ hinzu.</li><li>Tippe auf die Zeile <strong>Funktion</strong> und wähle deine Funktion.</li><li>Wenn dieser Knoten erreicht wird, laufen die Knoten der Funktion ab, danach geht der Blueprint weiter.</li></ol>
+<div class="tip">👉 Pass auf, dass du „Funktion aufrufen“ nicht versehentlich unter „Jeden Frame“ setzt: Die Funktion würde in jedem Bild neu starten.</div>
+</div>
+<h2>Schritt 4: Einstellungen hinzufügen (die Eingaben)</h2>
+<p>Ohne Einstellungen macht eine Funktion immer dasselbe. Mit <strong>Eingaben</strong> stellst du sie bei jedem Aufruf ein: wie viele Punkte, welche Nachricht, welches Tempo…</p>
+<div class="method">
+<ol><li>Tippe im Blueprint der Funktion auf die Schaltfläche <strong>Eingaben der Funktion</strong> (ein Regler-Symbol in der oberen Leiste).</li><li>Tippe auf <strong>+ Eingabe hinzufügen</strong>. Gib ihr einen <strong>Namen</strong> (zum Beispiel <code>punkte</code>), einen <strong>Typ</strong> (Zahl, Text oder Ja / nein) und einen <strong>Startwert</strong> (zum Beispiel 10). Bestätige und speichere mit 💾.</li><li>Verwende die Eingabe in der Funktion, indem du <code>=punkte</code> statt einer Zahl schreibst. Setze zum Beispiel <code>=punkte</code> in den Wert von „Zu Variable hinzufügen“. Für eine Nachricht setze <code>=nachricht</code> in die Texteinstellung von „Kurze Nachricht unten am Bildschirm“.</li><li>Gehe zurück zum Blueprint der Szene: Der Knoten „Funktion aufrufen“ zeigt jetzt eine Zeile pro Eingabe. Ändere den Wert: hier 50 Punkte, dort 10 Punkte.</li></ol>
+<div class="tip">👉 Eine Eingabe kann auch eine Rechnung erhalten, zum Beispiel <code>=score * 2</code>. Lässt du die Zeile unverändert, wird der Startwert benutzt. In der Funktion hat eine Eingabe Vorrang vor einer Variablen mit demselben Namen.</div>
+</div>
+<h2>Wenn es nicht funktioniert</h2>
+<ul><li><strong>„Funktion nicht gefunden“:</strong> Sie wurde umbenannt oder gelöscht. Wähle sie in „Funktion aufrufen“ neu aus.</li><li><strong>Nichts passiert:</strong> Prüfe, ob am Anfang der Funktion ein Ereignis „Beim Start“ steht und ob du mit 💾 gespeichert hast.</li><li><strong>Die Einstellungszeilen erscheinen nicht:</strong> Speichere zuerst die Funktion mit ihren Eingaben und öffne dann den Knoten „Funktion aufrufen“ erneut.</li><li><strong>Ein Eingabename wird abgelehnt:</strong> Schreibe ihn als ein Wort (Buchstaben, Ziffern und _), ohne Leerzeichen.</li><li><strong>Eine Funktion, die sich selbst aufruft:</strong> Yop2D hört nach einigen Aufrufen auf, damit das Spiel nicht hängt.</li></ul>
+
+<div class="nav">
+<a href="../de/prefabs.html">← Ein fertiges Objekt</a>
+<a href="../de/elements-interface.html">Nächste Anleitung: Buttons und Oberflächenelemente →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../de/index.html">Offizielle Website</a> · <a href="../../noeuds/de.html">Knotenreferenz</a></p>
+</footer>
+</body>
+</html>

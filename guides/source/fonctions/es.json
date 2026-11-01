@@ -1,0 +1,138 @@
+{
+ "titre_page": "¿Cómo crear tus propios bloques con funciones? | Guía de Yop2D",
+ "description": "Agrupa nodos en una función, llámala desde cualquier escena y añade ajustes (entradas) para crear tus propios bloques en Yop2D, sin código.",
+ "h1": "¿Cómo crear tus propios bloques (las funciones)?",
+ "carte": [
+  "Crea tus propios bloques",
+  "Agrupa nodos en una función y reutilízala en todas partes, con sus ajustes."
+ ],
+ "etapes": [
+  [
+   "Crear la función",
+   "Recursos → Funciones → ＋, y abre su Blueprint."
+  ],
+  [
+   "Poner nodos dentro",
+   "Un evento de inicio y los nodos que quieras."
+  ],
+  [
+   "Llamarla",
+   "El nodo « Llamar función » en una escena."
+  ],
+  [
+   "Añadir ajustes",
+   "Las entradas: un nombre, un tipo, un valor inicial."
+  ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "Una **función** es un pequeño grupo de nodos al que le pones un nombre. La haces una sola vez y la lanzas cuando quieras con un solo nodo, desde cualquier escena. Es tu forma de crear **tus propios bloques**: no repites diez veces lo mismo y tus Blueprints quedan ordenados."
+  ],
+  [
+   "besoin",
+   [
+    "un proyecto abierto en el editor."
+   ]
+  ],
+  [
+   "h2",
+   "Paso 1: crear la función"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Abre el panel **Recursos** (a la izquierda del editor) y despliega la parte **Funciones**.",
+      "Toca **＋**, escribe un nombre corto (por ejemplo `Dar_puntos`) y confirma.",
+      "Toca el nombre de tu función para elegirla y luego el botón que abre su Blueprint (el icono de nodos unidos)."
+     ]
+    ],
+    [
+     "tip",
+     "Una función es un archivo de tu proyecto: se exporta con tu juego y funciona en todas las escenas."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Paso 2: poner nodos dentro"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Estás en el Blueprint de la función (el título dice « Función: … »). Coloca el evento [[NoeudEventStart]]: ahí empieza la función.",
+      "Después conecta los nodos que quieras. Para el ejemplo: [[ajouter_variable]] (variable `score`) y luego [[toast]].",
+      "Guarda con 💾."
+     ]
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Paso 3: llamar a la función"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "En el Blueprint de una escena, añade el nodo [[appeler_fonction]].",
+      "Toca la línea **Función** y elige tu función.",
+      "Cuando se llega a este nodo, se ejecutan los nodos de la función y el Blueprint continúa."
+     ]
+    ],
+    [
+     "tip",
+     "Cuidado con poner [[appeler_fonction]] bajo [[NoeudEventChaqueImage]] sin querer: la función volvería a empezar en cada imagen."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Paso 4: añadir ajustes (las entradas)"
+  ],
+  [
+   "p",
+   "Sin ajustes, una función hace siempre lo mismo. Las **entradas** te dejan ajustarla en cada llamada: cuántos puntos, qué mensaje, qué velocidad…"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "En el Blueprint de la función, toca el botón **Entradas de la función** (un icono de deslizadores, en la barra superior).",
+      "Toca **+ Añadir una entrada**. Dale un **nombre** (por ejemplo `puntos`), un **tipo** (Número, Texto o Sí / no) y un **valor inicial** (por ejemplo 10). Confirma y guarda con 💾.",
+      "Dentro de la función, usa la entrada escribiendo `=puntos` en lugar de un número. Por ejemplo, pon `=puntos` en el valor de [[ajouter_variable]]. Para un mensaje, pon `=mensaje` en el ajuste de texto de [[toast]].",
+      "Vuelve al Blueprint de la escena: el nodo [[appeler_fonction]] muestra ahora una línea por entrada. Cambia el valor: 50 puntos aquí, 10 puntos allá."
+     ]
+    ],
+    [
+     "tip",
+     "Una entrada también puede recibir un cálculo, por ejemplo `=score * 2`. Si dejas la línea como está, se usa el valor inicial. Dentro de la función, una entrada tiene prioridad sobre una variable con el mismo nombre."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Si no funciona"
+  ],
+  [
+   "ul",
+   [
+    "**« Función no encontrada »:** se renombró o se eliminó. Elígela de nuevo en [[appeler_fonction]].",
+    "**No pasa nada:** comprueba que hay un evento [[NoeudEventStart]] al principio de la función y que guardaste con 💾.",
+    "**No aparecen las líneas de ajustes:** guarda primero la función con sus entradas y vuelve a abrir el nodo [[appeler_fonction]].",
+    "**Se rechaza el nombre de una entrada:** escríbelo en una sola palabra (letras, números y _), sin espacios.",
+    "**Una función que se llama a sí misma:** Yop2D se detiene tras unas cuantas llamadas para no bloquear el juego."
+   ]
+  ]
+ ]
+}

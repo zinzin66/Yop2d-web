@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>関数で自分だけのブロックを作るには？ | Yop2D ガイド</title>
+<meta name="description" content="ノードを関数にまとめ、どのシーンからでも呼び出し、設定（入力）を加えて、Yop2D でコードなしに自分のブロックを作ります。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/fonctions.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/fonctions.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/fonctions.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/fonctions.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/fonctions.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/fonctions.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/fonctions.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/fonctions.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/fonctions.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/fonctions.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "自分のブロック（関数）を作るには？",
+ "description": "ノードを関数にまとめ、どのシーンからでも呼び出し、設定（入力）を加えて、Yop2D でコードなしに自分のブロックを作ります。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "関数を作る",
+   "text": "リソース → 関数 → ＋、そのBlueprintを開きます。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ノードを入れる",
+   "text": "開始イベントと、好きなノード。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "呼び出す",
+   "text": "シーンで「関数を呼ぶ」ノードを使います。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "設定を加える",
+   "text": "入力：名前、種類、初期値。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>自分のブロック（関数）を作るには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../fonctions.html" hreflang="fr">Français</a> · <a href="../en/fonctions.html" hreflang="en">English</a> · <a href="../es/fonctions.html" hreflang="es">Español</a> · <a href="../de/fonctions.html" hreflang="de">Deutsch</a> · <a href="../it/fonctions.html" hreflang="it">Italiano</a> · <a href="../pt/fonctions.html" hreflang="pt">Português</a> · <a href="../ru/fonctions.html" hreflang="ru">Русский</a> · <a href="../zh/fonctions.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p><strong>関数</strong>は、名前をつけたノードの小さなグループです。一度作れば、どのシーンからでも1つのノードでいつでも実行できます。これが<strong>自分だけのブロック</strong>を作る方法です。同じことを何度も作り直さずにすみ、Blueprintもすっきりします。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>エディターで開いているプロジェクト。</li></ul>
+</div>
+<h2>ステップ1：関数を作る</h2>
+<div class="method">
+<ol><li><strong>リソース</strong>パネル（エディターの左側）を開き、<strong>関数</strong>の部分を開きます。</li><li><strong>＋</strong>をタップし、短い名前（例：<code>ポイントを渡す</code>）を入力して確定します。</li><li>関数の名前をタップして選び、そのBlueprintを開くボタン（つながったノードのアイコン）をタップします。</li></ol>
+<div class="tip">👉 関数はプロジェクトのファイルです。ゲームと一緒に書き出され、すべてのシーンで動きます。</div>
+</div>
+<h2>ステップ2：ノードを入れる</h2>
+<div class="method">
+<ol><li>関数のBlueprintにいます（タイトルは「関数: …」）。イベント「起動時」を置きます。関数はここから始まります。</li><li>あとは好きなノードをつなぎます。例：「変数に加算」（変数 <code>score</code>）、次に「画面下の小さなメッセージ」。</li><li>💾 で保存します。</li></ol>
+</div>
+<h2>ステップ3：関数を呼び出す</h2>
+<div class="method">
+<ol><li>シーンのBlueprintで、ノード「関数を呼ぶ」を追加します。</li><li><strong>関数</strong>の行をタップして、作った関数を選びます。</li><li>このノードに来ると関数のノードが実行され、そのあとBlueprintが続きます。</li></ol>
+<div class="tip">👉 「関数を呼ぶ」を「毎フレーム」の下に置かないよう気をつけてください。フレームごとに関数がやり直されます。</div>
+</div>
+<h2>ステップ4：設定（入力）を加える</h2>
+<p>設定がないと、関数はいつも同じことをします。<strong>入力</strong>を使うと、呼び出すたびに調整できます。何ポイントか、どのメッセージか、どの速さか…</p>
+<div class="method">
+<ol><li>関数のBlueprintで、<strong>関数の入力</strong>ボタン（上のバーにあるスライダーのアイコン）をタップします。</li><li><strong>+ 入力を追加</strong>をタップします。<strong>名前</strong>（例：<code>ポイント</code>）、<strong>種類</strong>（数、テキスト、はい / いいえ）、<strong>初期値</strong>（例：10）を決めます。確定して 💾 で保存します。</li><li>関数の中では、数字の代わりに <code>=ポイント</code> と書いて入力を使います。たとえば「変数に加算」の値に <code>=ポイント</code> を入れます。メッセージなら「画面下の小さなメッセージ」のテキスト設定に <code>=メッセージ</code> と入れます。</li><li>シーンのBlueprintに戻ると、ノード「関数を呼ぶ」に入力ごとの行が表示されています。値を変えます。ここは50ポイント、あちらは10ポイント。</li></ol>
+<div class="tip">👉 入力には <code>=score * 2</code> のような計算も入れられます。行をそのままにすると、初期値が使われます。関数の中では、入力が同じ名前の変数より優先されます。</div>
+</div>
+<h2>うまくいかないとき</h2>
+<ul><li><strong>「関数が見つかりません」：</strong>名前を変えたか、削除しました。「関数を呼ぶ」で選び直してください。</li><li><strong>何も起きない：</strong>関数の最初にイベント「起動時」があるか、💾 で保存したか確認します。</li><li><strong>設定の行が出てこない：</strong>まず入力つきで関数を保存し、ノード「関数を呼ぶ」を開き直します。</li><li><strong>入力の名前が受け付けられない：</strong>スペースなしの1つの単語（文字、数字、_）で書いてください。</li><li><strong>自分自身を呼ぶ関数：</strong>ゲームが止まらないよう、Yop2Dは数回の呼び出しで止まります。</li></ul>
+
+<div class="nav">
+<a href="../ja/prefabs.html">← 既製のオブジェクト</a>
+<a href="../ja/elements-interface.html">次のガイド： ボタンと画面部品 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

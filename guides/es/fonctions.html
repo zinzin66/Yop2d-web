@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Cómo crear tus propios bloques con funciones? | Guía de Yop2D</title>
+<meta name="description" content="Agrupa nodos en una función, llámala desde cualquier escena y añade ajustes (entradas) para crear tus propios bloques en Yop2D, sin código.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/es/fonctions.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/fonctions.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/fonctions.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/fonctions.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/fonctions.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/fonctions.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/fonctions.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/fonctions.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/fonctions.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/fonctions.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "¿Cómo crear tus propios bloques (las funciones)?",
+ "description": "Agrupa nodos en una función, llámala desde cualquier escena y añade ajustes (entradas) para crear tus propios bloques en Yop2D, sin código.",
+ "inLanguage": "es",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de juegos 2D sin código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Crear la función",
+   "text": "Recursos → Funciones → ＋, y abre su Blueprint."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Poner nodos dentro",
+   "text": "Un evento de inicio y los nodos que quieras."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Llamarla",
+   "text": "El nodo «Llamar función» en una escena."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Añadir ajustes",
+   "text": "Las entradas: un nombre, un tipo, un valor inicial."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../es/index.html">← Yop2D</a>
+<h1>¿Cómo crear tus propios bloques (las funciones)?</h1>
+<p>Guía para principiantes · sin código</p>
+<p class="langues"><a href="../fonctions.html" hreflang="fr">Français</a> · <a href="../en/fonctions.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="../de/fonctions.html" hreflang="de">Deutsch</a> · <a href="../it/fonctions.html" hreflang="it">Italiano</a> · <a href="../pt/fonctions.html" hreflang="pt">Português</a> · <a href="../ru/fonctions.html" hreflang="ru">Русский</a> · <a href="../zh/fonctions.html" hreflang="zh">中文</a> · <a href="../ja/fonctions.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Una <strong>función</strong> es un pequeño grupo de nodos al que le pones un nombre. La haces una sola vez y la lanzas cuando quieras con un solo nodo, desde cualquier escena. Es tu forma de crear <strong>tus propios bloques</strong>: no repites diez veces lo mismo y tus Blueprints quedan ordenados.</p>
+<div class="besoin">
+<b>Necesitas:</b>
+<ul><li>un proyecto abierto en el editor.</li></ul>
+</div>
+<h2>Paso 1: crear la función</h2>
+<div class="method">
+<ol><li>Abre el panel <strong>Recursos</strong> (a la izquierda del editor) y despliega la parte <strong>Funciones</strong>.</li><li>Toca <strong>＋</strong>, escribe un nombre corto (por ejemplo <code>Dar_puntos</code>) y confirma.</li><li>Toca el nombre de tu función para elegirla y luego el botón que abre su Blueprint (el icono de nodos unidos).</li></ol>
+<div class="tip">👉 Una función es un archivo de tu proyecto: se exporta con tu juego y funciona en todas las escenas.</div>
+</div>
+<h2>Paso 2: poner nodos dentro</h2>
+<div class="method">
+<ol><li>Estás en el Blueprint de la función (el título dice «Función: …»). Coloca el evento «Al Iniciar»: ahí empieza la función.</li><li>Después conecta los nodos que quieras. Para el ejemplo: «Añadir a Variable» (variable <code>score</code>) y luego «Mensaje corto abajo de la pantalla».</li><li>Guarda con 💾.</li></ol>
+</div>
+<h2>Paso 3: llamar a la función</h2>
+<div class="method">
+<ol><li>En el Blueprint de una escena, añade el nodo «Llamar función».</li><li>Toca la línea <strong>Función</strong> y elige tu función.</li><li>Cuando se llega a este nodo, se ejecutan los nodos de la función y el Blueprint continúa.</li></ol>
+<div class="tip">👉 Cuidado con poner «Llamar función» bajo «Cada fotograma» sin querer: la función volvería a empezar en cada imagen.</div>
+</div>
+<h2>Paso 4: añadir ajustes (las entradas)</h2>
+<p>Sin ajustes, una función hace siempre lo mismo. Las <strong>entradas</strong> te dejan ajustarla en cada llamada: cuántos puntos, qué mensaje, qué velocidad…</p>
+<div class="method">
+<ol><li>En el Blueprint de la función, toca el botón <strong>Entradas de la función</strong> (un icono de deslizadores, en la barra superior).</li><li>Toca <strong>+ Añadir una entrada</strong>. Dale un <strong>nombre</strong> (por ejemplo <code>puntos</code>), un <strong>tipo</strong> (Número, Texto o Sí / no) y un <strong>valor inicial</strong> (por ejemplo 10). Confirma y guarda con 💾.</li><li>Dentro de la función, usa la entrada escribiendo <code>=puntos</code> en lugar de un número. Por ejemplo, pon <code>=puntos</code> en el valor de «Añadir a Variable». Para un mensaje, pon <code>=mensaje</code> en el ajuste de texto de «Mensaje corto abajo de la pantalla».</li><li>Vuelve al Blueprint de la escena: el nodo «Llamar función» muestra ahora una línea por entrada. Cambia el valor: 50 puntos aquí, 10 puntos allá.</li></ol>
+<div class="tip">👉 Una entrada también puede recibir un cálculo, por ejemplo <code>=score * 2</code>. Si dejas la línea como está, se usa el valor inicial. Dentro de la función, una entrada tiene prioridad sobre una variable con el mismo nombre.</div>
+</div>
+<h2>Si no funciona</h2>
+<ul><li><strong>«Función no encontrada»:</strong> se renombró o se eliminó. Elígela de nuevo en «Llamar función».</li><li><strong>No pasa nada:</strong> comprueba que hay un evento «Al Iniciar» al principio de la función y que guardaste con 💾.</li><li><strong>No aparecen las líneas de ajustes:</strong> guarda primero la función con sus entradas y vuelve a abrir el nodo «Llamar función».</li><li><strong>Se rechaza el nombre de una entrada:</strong> escríbelo en una sola palabra (letras, números y _), sin espacios.</li><li><strong>Una función que se llama a sí misma:</strong> Yop2D se detiene tras unas cuantas llamadas para no bloquear el juego.</li></ul>
+
+<div class="nav">
+<a href="../es/prefabs.html">← Un objeto listo para usar</a>
+<a href="../es/elements-interface.html">Siguiente guía: Botones y elementos de interfaz →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de juegos 2D gratuito y sin código para Android · <a href="../../es/index.html">Sitio oficial</a> · <a href="../../noeuds/es.html">Referencia de nodos</a></p>
+</footer>
+</body>
+</html>

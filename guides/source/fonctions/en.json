@@ -1,0 +1,138 @@
+{
+ "titre_page": "How to make your own blocks with functions? | Yop2D guide",
+ "description": "Group nodes into a function, call it from any scene and add settings (inputs) to make your own blocks in Yop2D, without code.",
+ "h1": "How to make your own blocks (functions)?",
+ "carte": [
+  "Make your own blocks",
+  "Group nodes into a function and reuse it everywhere, with its own settings."
+ ],
+ "etapes": [
+  [
+   "Create the function",
+   "Resources → Functions → ＋, then open its Blueprint."
+  ],
+  [
+   "Put nodes inside",
+   "A start event, then the nodes you want."
+  ],
+  [
+   "Call it",
+   "The “Call function” node in a scene."
+  ],
+  [
+   "Add settings",
+   "Inputs: a name, a type, a starting value."
+  ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "A **function** is a small group of nodes that you give a name to. You build it once, then run it whenever you want with a single node, from any scene. It is your way of making **your own blocks**: you don't redo the same thing ten times and your Blueprints stay tidy."
+  ],
+  [
+   "besoin",
+   [
+    "a project open in the editor."
+   ]
+  ],
+  [
+   "h2",
+   "Step 1: create the function"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Open the **Resources** panel (on the left of the editor) and unfold the **Functions** part.",
+      "Tap **＋**, type a short name (for example `Give_points`) and confirm.",
+      "Tap your function's name to select it, then the button that opens its Blueprint (the icon of linked nodes)."
+     ]
+    ],
+    [
+     "tip",
+     "A function is a file of your project: it is exported with your game and works in every scene."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 2: put nodes inside"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "You are in the function's Blueprint (the title says “Function: …”). Place the [[NoeudEventStart]] event: this is where the function starts.",
+      "Then connect the nodes you want. For this example: [[ajouter_variable]] (variable `score`), then [[toast]].",
+      "Save with 💾."
+     ]
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 3: call the function"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "In a scene's Blueprint, add the [[appeler_fonction]] node.",
+      "Tap the **Function** line and choose your function.",
+      "When this node is reached, the function's nodes run, then the Blueprint carries on."
+     ]
+    ],
+    [
+     "tip",
+     "Be careful not to put [[appeler_fonction]] under [[NoeudEventChaqueImage]] by accident: the function would start again on every frame."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 4: add settings (inputs)"
+  ],
+  [
+   "p",
+   "Without settings, a function always does the same thing. **Inputs** let you set it on every call: how many points, which message, what speed…"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "In the function's Blueprint, tap the **Function inputs** button (a sliders icon, in the top bar).",
+      "Tap **+ Add an input**. Give it a **name** (for example `points`), a **type** (Number, Text or Yes / no) and a **starting value** (for example 10). Confirm, then save with 💾.",
+      "Inside the function, use the input by writing `=points` in place of a number. For example, put `=points` in the value of [[ajouter_variable]]. For a message, put `=message` in the text setting of [[toast]].",
+      "Go back to the scene's Blueprint: the [[appeler_fonction]] node now shows one line per input. Change the value: 50 points here, 10 points elsewhere."
+     ]
+    ],
+    [
+     "tip",
+     "An input can also receive a calculation, for example `=score * 2`. If you leave the line as it is, the starting value is used. Inside the function, an input takes priority over a variable with the same name."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "If it doesn't work"
+  ],
+  [
+   "ul",
+   [
+    "**“Function not found”:** it was renamed or deleted. Choose it again in [[appeler_fonction]].",
+    "**Nothing happens:** check that there is a [[NoeudEventStart]] event at the start of the function, and that you saved with 💾.",
+    "**The setting lines don't appear:** save the function with its inputs first, then reopen the [[appeler_fonction]] node.",
+    "**An input name is refused:** write it as one word (letters, digits and _), without spaces.",
+    "**A function that calls itself:** Yop2D stops after a few calls so the game doesn't freeze."
+   ]
+  ]
+ ]
+}

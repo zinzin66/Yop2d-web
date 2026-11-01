@@ -1,0 +1,138 @@
+{
+ "titre_page": "Come creare i tuoi blocchi con le funzioni? | Guida Yop2D",
+ "description": "Raggruppa i nodi in una funzione, richiamala da qualsiasi scena e aggiungi impostazioni (ingressi) per creare i tuoi blocchi in Yop2D, senza codice.",
+ "h1": "Come creare i tuoi blocchi (le funzioni)?",
+ "carte": [
+  "Crea i tuoi blocchi",
+  "Raggruppa i nodi in una funzione e riusala ovunque, con le sue impostazioni."
+ ],
+ "etapes": [
+  [
+   "Creare la funzione",
+   "Risorse → Funzioni → ＋, poi apri il suo Blueprint."
+  ],
+  [
+   "Mettere dei nodi dentro",
+   "Un evento di partenza, poi i nodi che vuoi."
+  ],
+  [
+   "Richiamarla",
+   "Il nodo « Chiama funzione » in una scena."
+  ],
+  [
+   "Aggiungere impostazioni",
+   "Gli ingressi: un nome, un tipo, un valore iniziale."
+  ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "Una **funzione** è un piccolo gruppo di nodi a cui dai un nome. La costruisci una sola volta e poi la avvii quando vuoi con un solo nodo, da qualsiasi scena. È il tuo modo di creare **i tuoi blocchi**: non rifai dieci volte la stessa cosa e i tuoi Blueprint restano ordinati."
+  ],
+  [
+   "besoin",
+   [
+    "un progetto aperto nell'editor."
+   ]
+  ],
+  [
+   "h2",
+   "Passo 1: creare la funzione"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Apri il pannello **Risorse** (a sinistra nell'editor) e apri la parte **Funzioni**.",
+      "Tocca **＋**, scrivi un nome breve (per esempio `Dai_punti`) e conferma.",
+      "Tocca il nome della tua funzione per sceglierla, poi il pulsante che apre il suo Blueprint (l'icona dei nodi collegati)."
+     ]
+    ],
+    [
+     "tip",
+     "Una funzione è un file del tuo progetto: viene esportata con il tuo gioco e funziona in tutte le scene."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Passo 2: mettere dei nodi dentro"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Sei nel Blueprint della funzione (il titolo dice « Funzione: … »). Posiziona l'evento [[NoeudEventStart]]: da lì parte la funzione.",
+      "Poi collega i nodi che vuoi. Per l'esempio: [[ajouter_variable]] (variabile `score`), poi [[toast]].",
+      "Salva con 💾."
+     ]
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Passo 3: richiamare la funzione"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Nel Blueprint di una scena, aggiungi il nodo [[appeler_fonction]].",
+      "Tocca la riga **Funzione** e scegli la tua funzione.",
+      "Quando si arriva a questo nodo, i nodi della funzione partono, poi il Blueprint continua."
+     ]
+    ],
+    [
+     "tip",
+     "Attenzione a non mettere [[appeler_fonction]] sotto [[NoeudEventChaqueImage]] senza volerlo: la funzione ripartirebbe a ogni fotogramma."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Passo 4: aggiungere impostazioni (gli ingressi)"
+  ],
+  [
+   "p",
+   "Senza impostazioni, una funzione fa sempre la stessa cosa. Gli **ingressi** ti permettono di regolarla a ogni chiamata: quanti punti, quale messaggio, che velocità…"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Nel Blueprint della funzione, tocca il pulsante **Ingressi della funzione** (un'icona di cursori, nella barra in alto).",
+      "Tocca **+ Aggiungi un ingresso**. Dagli un **nome** (per esempio `punti`), un **tipo** (Numero, Testo o Sì / no) e un **valore iniziale** (per esempio 10). Conferma e salva con 💾.",
+      "Dentro la funzione, usa l'ingresso scrivendo `=punti` al posto di un numero. Per esempio, metti `=punti` nel valore di [[ajouter_variable]]. Per un messaggio, metti `=messaggio` nell'impostazione del testo di [[toast]].",
+      "Torna al Blueprint della scena: il nodo [[appeler_fonction]] ora mostra una riga per ingresso. Cambia il valore: 50 punti qui, 10 punti altrove."
+     ]
+    ],
+    [
+     "tip",
+     "Un ingresso può anche ricevere un calcolo, per esempio `=score * 2`. Se lasci la riga com'è, viene usato il valore iniziale. Dentro la funzione, un ingresso ha la precedenza su una variabile con lo stesso nome."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Se non funziona"
+  ],
+  [
+   "ul",
+   [
+    "**« Funzione non trovata »:** è stata rinominata o eliminata. Sceglila di nuovo in [[appeler_fonction]].",
+    "**Non succede niente:** controlla che ci sia un evento [[NoeudEventStart]] all'inizio della funzione e che tu abbia salvato con 💾.",
+    "**Le righe delle impostazioni non compaiono:** salva prima la funzione con i suoi ingressi, poi riapri il nodo [[appeler_fonction]].",
+    "**Il nome di un ingresso è rifiutato:** scrivilo in una sola parola (lettere, numeri e _), senza spazi.",
+    "**Una funzione che richiama se stessa:** Yop2D si ferma dopo alcune chiamate per non bloccare il gioco."
+   ]
+  ]
+ ]
+}
