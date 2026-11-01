@@ -1,33 +1,33 @@
 {
- "titre_page": "Wie erstellt man eigene Bausteine mit Funktionen? | Yop2D-Anleitung",
- "description": "Fasse Knoten in einer Funktion zusammen, rufe sie aus jeder Szene auf und füge Einstellungen (Eingaben) hinzu, um in Yop2D eigene Bausteine zu bauen, ohne Code.",
- "h1": "Wie erstellt man eigene Bausteine (Funktionen)?",
+ "titre_page": "Wie erstellt man eigene Knoten mit „Meine Knoten“? | Yop2D-Anleitung",
+ "description": "Fasse Knoten in einem eigenen Knoten zusammen, starte ihn aus jeder Szene und füge Einstellungen hinzu, um in Yop2D eigene Bausteine zu bauen, ohne Code (Programmierer sagen „Funktion“).",
+ "h1": "Wie erstellt man eigene Knoten (Meine Knoten)?",
  "carte": [
-  "Eigene Bausteine bauen",
-  "Fasse Knoten in einer Funktion zusammen und nutze sie überall, mit eigenen Einstellungen."
+  "Eigene Knoten bauen",
+  "Fasse Knoten zu einem eigenen Knoten zusammen und nutze ihn überall, mit eigenen Einstellungen."
  ],
  "etapes": [
   [
-   "Funktion erstellen",
-   "Ressourcen → Funktionen → ＋, dann ihren Blueprint öffnen."
+   "Deinen Knoten erstellen",
+   "Ressourcen → Meine Knoten → ＋, dann seinen Blueprint öffnen."
   ],
   [
    "Knoten hineinsetzen",
    "Ein Startereignis, dann die gewünschten Knoten."
   ],
   [
-   "Aufrufen",
-   "Der Knoten « Funktion aufrufen » in einer Szene."
+   "Ihn starten",
+   "Der Knoten « Einen meiner Knoten starten » in einer Szene."
   ],
   [
    "Einstellungen hinzufügen",
-   "Eingaben: ein Name, ein Typ, ein Startwert."
+   "Ein Name, ein Typ, ein Startwert."
   ]
  ],
  "blocs": [
   [
    "p",
-   "Eine **Funktion** ist eine kleine Gruppe von Knoten, der du einen Namen gibst. Du baust sie nur einmal und startest sie jederzeit mit einem einzigen Knoten, aus jeder Szene. So baust du **eigene Bausteine**: Du musst nicht zehnmal dasselbe machen, und deine Blueprints bleiben übersichtlich."
+   "**Ein eigener Knoten** ist eine kleine Gruppe von Knoten, der du einen Namen gibst (Programmierer sagen „Funktion“). Du baust ihn nur einmal und startest ihn jederzeit mit einem einzigen Knoten, aus jeder Szene. So baust du **eigene Bausteine**: Du musst nicht zehnmal dasselbe machen, und deine Blueprints bleiben übersichtlich."
   ],
   [
    "besoin",
@@ -37,7 +37,7 @@
   ],
   [
    "h2",
-   "Schritt 1: die Funktion erstellen"
+   "Schritt 1: deinen Knoten erstellen"
   ],
   [
    "bloc",
@@ -45,14 +45,14 @@
     [
      "ol",
      [
-      "Öffne das Fenster **Ressourcen** (links im Editor) und klappe den Teil **Funktionen** auf.",
+      "Öffne das Fenster **Ressourcen** (links im Editor) und klappe den Teil **Meine Knoten** auf.",
       "Tippe auf **＋**, schreibe einen kurzen Namen (zum Beispiel `Punkte_geben`) und bestätige.",
-      "Tippe auf den Namen deiner Funktion, um sie auszuwählen, und dann auf die Schaltfläche, die ihren Blueprint öffnet (das Symbol verbundener Knoten)."
+      "Tippe auf den Namen deines Knotens, um ihn auszuwählen, und dann auf die Schaltfläche, die seinen Blueprint öffnet (das Symbol verbundener Knoten)."
      ]
     ],
     [
      "tip",
-     "Eine Funktion ist eine Datei deines Projekts: Sie wird mit deinem Spiel exportiert und funktioniert in allen Szenen."
+     "Dein Knoten ist eine Datei deines Projekts: Er wird mit deinem Spiel exportiert und funktioniert in allen Szenen."
     ]
    ]
   ],
@@ -66,7 +66,7 @@
     [
      "ol",
      [
-      "Du bist im Blueprint der Funktion (der Titel lautet « Funktion: … »). Setze das Ereignis [[NoeudEventStart]]: Hier beginnt die Funktion.",
+      "Du bist im Blueprint deines Knotens (der Titel lautet « Mein Knoten: … »). Setze das Ereignis [[NoeudEventStart]]: Hier beginnt dein Knoten.",
       "Verbinde dann die gewünschten Knoten. Im Beispiel: [[ajouter_variable]] (Variable `score`), danach [[toast]].",
       "Speichere mit 💾."
      ]
@@ -75,7 +75,7 @@
   ],
   [
    "h2",
-   "Schritt 3: die Funktion aufrufen"
+   "Schritt 3: deinen Knoten starten"
   ],
   [
    "bloc",
@@ -84,23 +84,23 @@
      "ol",
      [
       "Füge im Blueprint einer Szene den Knoten [[appeler_fonction]] hinzu.",
-      "Tippe auf die Zeile **Funktion** und wähle deine Funktion.",
-      "Wenn dieser Knoten erreicht wird, laufen die Knoten der Funktion ab, danach geht der Blueprint weiter."
+      "Tippe auf die Auswahlzeile und wähle deinen Knoten.",
+      "Wenn dieser Knoten erreicht wird, laufen die Knoten ab, die du hineingesetzt hast, danach geht der Blueprint weiter."
      ]
     ],
     [
      "tip",
-     "Pass auf, dass du [[appeler_fonction]] nicht versehentlich unter [[NoeudEventChaqueImage]] setzt: Die Funktion würde in jedem Bild neu starten."
+     "Pass auf, dass du [[appeler_fonction]] nicht versehentlich unter [[NoeudEventChaqueImage]] setzt: Dein Knoten würde in jedem Bild neu starten."
     ]
    ]
   ],
   [
    "h2",
-   "Schritt 4: Einstellungen hinzufügen (die Eingaben)"
+   "Schritt 4: Einstellungen hinzufügen"
   ],
   [
    "p",
-   "Ohne Einstellungen macht eine Funktion immer dasselbe. Mit **Eingaben** stellst du sie bei jedem Aufruf ein: wie viele Punkte, welche Nachricht, welches Tempo…"
+   "Ohne Einstellungen macht dein Knoten immer dasselbe. Mit **Einstellungen** regelst du ihn jedes Mal neu: wie viele Punkte, welche Nachricht, welches Tempo…"
   ],
   [
    "bloc",
@@ -108,15 +108,15 @@
     [
      "ol",
      [
-      "Tippe im Blueprint der Funktion auf die Schaltfläche **Eingaben der Funktion** (ein Regler-Symbol in der oberen Leiste).",
+      "Tippe im Blueprint deines Knotens auf die Schaltfläche **Einstellungen meines Knotens** (ein Regler-Symbol in der oberen Leiste).",
       "Tippe auf **+ Eingabe hinzufügen**. Gib ihr einen **Namen** (zum Beispiel `punkte`), einen **Typ** (Zahl, Text oder Ja / nein) und einen **Startwert** (zum Beispiel 10). Bestätige und speichere mit 💾.",
-      "Verwende die Eingabe in der Funktion, indem du `=punkte` statt einer Zahl schreibst. Setze zum Beispiel `=punkte` in den Wert von [[ajouter_variable]]. Für eine Nachricht setze `=nachricht` in die Texteinstellung von [[toast]].",
-      "Gehe zurück zum Blueprint der Szene: Der Knoten [[appeler_fonction]] zeigt jetzt eine Zeile pro Eingabe. Ändere den Wert: hier 50 Punkte, dort 10 Punkte."
+      "Verwende die Einstellung in deinem Knoten, indem du `=punkte` statt einer Zahl schreibst. Setze zum Beispiel `=punkte` in den Wert von [[ajouter_variable]]. Für eine Nachricht setze `=nachricht` in die Texteinstellung von [[toast]].",
+      "Gehe zurück zum Blueprint der Szene: Der Knoten [[appeler_fonction]] zeigt jetzt eine Zeile pro Einstellung. Ändere den Wert: hier 50 Punkte, dort 10 Punkte."
      ]
     ],
     [
      "tip",
-     "Eine Eingabe kann auch eine Rechnung erhalten, zum Beispiel `=score * 2`. Lässt du die Zeile unverändert, wird der Startwert benutzt. In der Funktion hat eine Eingabe Vorrang vor einer Variablen mit demselben Namen."
+     "Eine Einstellung kann auch eine Rechnung erhalten, zum Beispiel `=score * 2`. Lässt du die Zeile unverändert, wird der Startwert benutzt. In deinem Knoten hat eine Einstellung Vorrang vor einer Variablen mit demselben Namen."
     ]
    ]
   ],
@@ -127,11 +127,11 @@
   [
    "ul",
    [
-    "**« Funktion nicht gefunden »:** Sie wurde umbenannt oder gelöscht. Wähle sie in [[appeler_fonction]] neu aus.",
-    "**Nichts passiert:** Prüfe, ob am Anfang der Funktion ein Ereignis [[NoeudEventStart]] steht und ob du mit 💾 gespeichert hast.",
-    "**Die Einstellungszeilen erscheinen nicht:** Speichere zuerst die Funktion mit ihren Eingaben und öffne dann den Knoten [[appeler_fonction]] erneut.",
-    "**Ein Eingabename wird abgelehnt:** Schreibe ihn als ein Wort (Buchstaben, Ziffern und _), ohne Leerzeichen.",
-    "**Eine Funktion, die sich selbst aufruft:** Yop2D hört nach einigen Aufrufen auf, damit das Spiel nicht hängt."
+    "**« Knoten nicht gefunden »:** Er wurde umbenannt oder gelöscht. Wähle ihn in [[appeler_fonction]] neu aus.",
+    "**Nichts passiert:** Prüfe, ob am Anfang deines Knotens ein Ereignis [[NoeudEventStart]] steht und ob du mit 💾 gespeichert hast.",
+    "**Die Einstellungszeilen erscheinen nicht:** Speichere zuerst deinen Knoten mit seinen Einstellungen und öffne dann den Knoten [[appeler_fonction]] erneut.",
+    "**Ein Name wird abgelehnt:** Schreibe ihn als ein Wort (Buchstaben, Ziffern und _), ohne Leerzeichen.",
+    "**Ein Knoten, der sich selbst startet:** Yop2D hört nach einigen Aufrufen auf, damit das Spiel nicht hängt."
    ]
   ]
  ]

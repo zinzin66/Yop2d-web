@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (230) | Reference</title>
-<meta name="description" content="Complete list of the 230 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (231) | Reference</title>
+<meta name="description" content="Complete list of the 231 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 230 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 231 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-values-green-wires">Values (green wires)</a><a href="#c11-transitions">Transitions</a><a href="#c12-animations">Animations</a><a href="#c13-audio">Audio</a><a href="#c14-story-and-dialogues">Story and dialogues</a><a href="#c15-screen-filters">Screen filters</a><a href="#c16-physics">Physics</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -47,7 +47,7 @@
 </div>
 <div class="fiche"><h3>Every frame</h3>
 <p>Runs over and over, on every frame of the game (about 60 times per second).</p>
-<p class="exemple"><b>Example:</b> follow the finger or check a condition all the time. Avoid putting “Play music” or “Call function” under it.</p>
+<p class="exemple"><b>Example:</b> follow the finger or check a condition all the time. Avoid putting “Play music” or “Run one of my nodes” under it.</p>
 </div>
 <div class="fiche"><h3>End of Click</h3>
 <p>Runs when the player lifts their finger from the screen, anywhere.</p>
@@ -196,7 +196,7 @@
 <p class="exemple"><b>Example:</b> ="health = " + vie, to check a value while testing.</p>
 </div>
 <div class="fiche"><h3>Follow with camera</h3>
-<div class="schema"><b>Inputs:</b> Object, Follow X (yes / no), Follow Y (yes / no), Parallax X only (yes / no)</div>
+<div class="schema"><b>Inputs:</b> Object, Follow X (yes / no), Follow Y (yes / no), Parallax X only (yes / no), Object lower on screen (pixels, 0 = centre, 300 = towards the bottom), Object further right on screen (pixels, 0 = centre, negative = left)</div>
 <p>The camera follows the chosen object. You can make it follow only horizontally or vertically. With no object, the camera stops following.</p>
 <p class="exemple"><b>Example:</b> follow the player through a big platform level.</p>
 </div>
@@ -477,7 +477,7 @@
 <p class="exemple"><b>Example:</b> after “Generate clone (Spawner)” and “Play animation”, the explosion image is destroyed 0.4 seconds later.</p>
 </div>
 <div class="fiche"><h3>Team colour (replaces the pink in the drawing)</h3>
-<div class="schema"><b>Inputs:</b> Object, Team colour, Colour to replace in the drawing (pink by default), Tolerance (1 to 100): higher also replaces similar colours</div>
+<div class="schema"><b>Inputs:</b> Object, Team colour, Colour to replace in the drawing (pink by default), Tolerance (1 to 100): higher also replaces similar colours, Shades replaced (1 to 100): 100 = every shade of this hue, small = only the exact marker colour</div>
 <p>One drawing for all teams: paint the parts to colour (cloak, flag, plume) with a marker colour (bright pink #FF00FF by default), then this node replaces that pink with the team colour for the object. The drawing's shadows and highlights are kept (a dark pink becomes a dark blue). Tolerance says how far a colour may stray from the marker and still be replaced. Nothing is changed in the images: it all happens at display time, so do it again at the start of each game.</p>
 <p class="exemple"><b>Example:</b> two armies with the same images: player in blue, enemy in red.</p>
 </div>
@@ -597,10 +597,10 @@
 <p>True if the object moved since the previous frame, False otherwise.</p>
 <p class="exemple"><b>Example:</b> play the walking animation only when the character moves.</p>
 </div>
-<div class="fiche"><h3>Call function</h3>
+<div class="fiche"><h3>Run one of my nodes</h3>
 <div class="schema"><b>Input:</b> Function</div>
-<p>Runs a function (a Blueprint created in the Functions section), then continues. Do not put it under “Every frame”.</p>
-<p class="exemple"><b>Example:</b> a “LoseLife” function used by several enemies.</p>
+<p>Runs one of your nodes (a Blueprint made in the My nodes section), then continues. If it has settings, a line appears for each. Do not put it under “Every frame”.</p>
+<p class="exemple"><b>Example:</b> a “LoseLife” node used by several enemies.</p>
 </div>
 <div class="fiche"><h3>Call event</h3>
 <div class="schema"><b>Input:</b> Event name</div>
@@ -662,6 +662,9 @@
 <div class="schema"><b>Input:</b> Object</div>
 <p>Stops the movement running on the object. It stays where it is.</p>
 <p class="exemple"><b>Example:</b> stop the platform when the player presses a button.</p>
+</div>
+<div class="fiche"><h3>Spin the object continuously</h3>
+<div class="schema"><b>Inputs:</b> Object, Spin speed (degrees per second, negative = other way, 0 = stop)</div>
 </div>
 <div class="fiche"><h3>Follow the path</h3>
 <div class="schema"><b>Inputs:</b> Object, Path name, Speed (pixels per second), Turn to face the way it goes (yes / no), Random side offset (pixels, ±: each one walks in its own lane), Avoid the others: step aside to avoid overlapping and overtake slower ones (yes / no), Usable width to step aside (pixels on each side of the road centre), Image angle (0 = faces right, 90 = faces down) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived</div>
@@ -787,7 +790,7 @@
 <p class="exemple"><b>Example:</b> refuse to move a hero that has already played.</p>
 </div>
 <div class="fiche"><h3>Show reachable cells</h3>
-<div class="schema"><b>Inputs:</b> Object, Zone type, Number of steps (or range), Color of the cells, Cell visibility (0 = invisible, 100 = solid), Frame around each cell, Write the step count on each cell, Walls block (movement), These tags block the way (separated by commas), Terrain costing more steps (tag=cost, e.g. forest=2, water=3), Zone name (optional: to show several), Range shape (attack and jump), Minimum range (0 = none; 2 = not the first cells), My positions (column,row; e.g. 2,1 ; -2,1 ; 0,3), Remove the cell the object stands on</div>
+<div class="schema"><b>Inputs:</b> Object, Zone type, Number of steps (or range), Color of the cells, Cell visibility (0 = invisible, 100 = solid), Frame around each cell, Write the step count on each cell, Walls block (movement), These tags block the way (separated by commas), This unit's own costs (tag or terrain name = cost, x = forbidden; e.g. forest=2, Mountain=3, Water=x), Zone name (optional: to show several), Range shape (attack and jump), Minimum range (0 = none; 2 = not the first cells), My positions (column,row; e.g. 2,1 ; -2,1 ; 0,3), Remove the cell the object stands on</div>
 <p>Colors the cells the chosen object can move to (or attack). Walls block, and you can add tags that block (other units) and terrains that cost more steps (forest=2). Color, visibility, frame and numbers are adjustable. "Zone name" lets you show several at once (movement in blue, attack in red).</p>
 <p class="exemple"><b>Example:</b> show a hero's movement zone when it is touched.</p>
 </div>
@@ -1215,7 +1218,7 @@
 <p class="exemple"><b>Example:</b> a crate puzzle: the player moves crates with a fingertip to build a tower.</p>
 </div>
 <div class="fiche"><h3>If the physics object…</h3>
-<div class="schema"><b>Inputs:</b> Object, Question, Speed from which it counts (pixels per second) &nbsp;→&nbsp; <b>Outputs:</b> True / False</div>
+<div class="schema"><b>Inputs:</b> Object, Question, Speed from which it counts (pixels per second), Grace time (seconds, for “has just touched the ground”) &nbsp;→&nbsp; <b>Outputs:</b> True / False</div>
 <p>Asks a question about a physics object and follows the “true” or “false” exit: is it standing on something (to allow a jump), does it touch something, does it touch something above, is it at rest (asleep), is it moving fast, falling, rising. For “moves fast”, “falling” and “rising” the threshold in pixels per second is set in the advanced settings. You can also read values directly in a formula: object.vitesse, object.masse, object.vitesseRotation.</p>
 <p class="exemple"><b>Example:</b> a platformer jump: “Jump button” → If the object is standing on something → set downward speed to -900.</p>
 </div>

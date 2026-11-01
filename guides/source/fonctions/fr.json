@@ -1,33 +1,33 @@
 {
- "titre_page": "Comment créer ses propres blocs avec les fonctions ? | Guide Yop2D",
- "description": "Regroupe des nœuds dans une fonction, appelle-la depuis n'importe quelle scène et ajoute des réglages (entrées) pour créer tes propres blocs dans Yop2D, sans code.",
- "h1": "Comment créer ses propres blocs (les fonctions) ?",
+ "titre_page": "Comment créer ses propres nœuds avec « Mes nœuds » ? | Guide Yop2D",
+ "description": "Regroupe des nœuds dans un nœud à toi, lance-le depuis n'importe quelle scène et ajoute des réglages pour créer tes propres blocs dans Yop2D, sans code (les programmeurs disent « fonction »).",
+ "h1": "Comment créer ses propres nœuds (Mes nœuds) ?",
  "carte": [
-  "Crée tes propres blocs",
-  "Regroupe des nœuds dans une fonction et réutilise-la partout, avec ses réglages."
+  "Crée tes propres nœuds",
+  "Regroupe des nœuds dans un seul nœud à toi et réutilise-le partout, avec ses réglages."
  ],
  "etapes": [
   [
-   "Créer la fonction",
-   "Ressources → Fonctions → ＋, puis ouvre son Blueprint."
+   "Créer ton nœud",
+   "Ressources → Mes nœuds → ＋, puis ouvre son Blueprint."
   ],
   [
    "Mettre des nœuds dedans",
    "Un événement de départ, puis les nœuds que tu veux."
   ],
   [
-   "L'appeler",
-   "Le nœud « Appeler une fonction » dans une scène."
+   "Le lancer",
+   "Le nœud « Lancer un de mes nœuds » dans une scène."
   ],
   [
    "Ajouter des réglages",
-   "Les entrées : un nom, un type, une valeur de départ."
+   "Un nom, un type, une valeur de départ."
   ]
  ],
  "blocs": [
   [
    "p",
-   "Une **fonction**, c'est un petit groupe de nœuds auquel tu donnes un nom. Tu le fabriques une seule fois, puis tu le lances quand tu veux avec un seul nœud, depuis n'importe quelle scène. C'est ta façon de créer **tes propres blocs** : tu ne refais pas dix fois la même chose et tes Blueprints restent propres."
+   "Un **nœud à toi**, c'est un petit groupe de nœuds auquel tu donnes un nom (les programmeurs disent une « fonction »). Tu le fabriques une seule fois, puis tu le lances quand tu veux avec un seul nœud, depuis n'importe quelle scène. C'est ta façon de créer **tes propres blocs** : tu ne refais pas dix fois la même chose et tes Blueprints restent propres."
   ],
   [
    "besoin",
@@ -37,7 +37,7 @@
   ],
   [
    "h2",
-   "Étape 1 : créer la fonction"
+   "Étape 1 : créer ton nœud"
   ],
   [
    "bloc",
@@ -45,14 +45,14 @@
     [
      "ol",
      [
-      "Ouvre le panneau **Ressources** (à gauche de l'éditeur) et déplie la partie **Fonctions**.",
+      "Ouvre le panneau **Ressources** (à gauche de l'éditeur) et déplie la partie **Mes nœuds**.",
       "Touche **＋**, écris un nom court (par exemple `Donner_des_points`) et valide.",
-      "Touche le nom de ta fonction pour la choisir, puis le bouton qui ouvre son Blueprint (l'icône des nœuds reliés)."
+      "Touche le nom de ton nœud pour le choisir, puis le bouton qui ouvre son Blueprint (l'icône des nœuds reliés)."
      ]
     ],
     [
      "tip",
-     "Une fonction est un fichier de ton projet : elle est exportée avec ton jeu et marche dans toutes les scènes."
+     "Ton nœud est un fichier de ton projet : il est exporté avec ton jeu et marche dans toutes les scènes."
     ]
    ]
   ],
@@ -66,7 +66,7 @@
     [
      "ol",
      [
-      "Tu es dans le Blueprint de la fonction (le titre dit « Fonction : … »). Place l'événement [[NoeudEventStart]] : c'est par là que la fonction commence.",
+      "Tu es dans le Blueprint de ton nœud (le titre dit « Mon nœud : … »). Place l'événement [[NoeudEventStart]] : c'est par là que ton nœud commence.",
       "Relie ensuite les nœuds que tu veux. Pour l'exemple : [[ajouter_variable]] (variable `score`), puis [[toast]].",
       "Enregistre avec 💾."
      ]
@@ -75,7 +75,7 @@
   ],
   [
    "h2",
-   "Étape 3 : appeler la fonction"
+   "Étape 3 : lancer ton nœud"
   ],
   [
    "bloc",
@@ -84,23 +84,23 @@
      "ol",
      [
       "Dans le Blueprint d'une scène, ajoute le nœud [[appeler_fonction]].",
-      "Touche la ligne **Fonction** et choisis ta fonction.",
-      "Quand ce nœud est atteint, les nœuds de la fonction se lancent, puis le Blueprint continue."
+      "Touche la ligne du choix et choisis ton nœud.",
+      "Quand ce nœud est atteint, les nœuds que tu as mis dedans se lancent, puis le Blueprint continue."
      ]
     ],
     [
      "tip",
-     "Fais attention de ne pas mettre [[appeler_fonction]] sous [[NoeudEventChaqueImage]] sans le vouloir : la fonction repartirait à chaque image."
+     "Fais attention de ne pas mettre [[appeler_fonction]] sous [[NoeudEventChaqueImage]] sans le vouloir : ton nœud repartirait à chaque image."
     ]
    ]
   ],
   [
    "h2",
-   "Étape 4 : ajouter des réglages (les entrées)"
+   "Étape 4 : ajouter des réglages"
   ],
   [
    "p",
-   "Sans réglage, une fonction fait toujours la même chose. Les **entrées** te laissent la régler à chaque appel : combien de points, quel message, quelle vitesse…"
+   "Sans réglage, ton nœud fait toujours la même chose. Les **réglages** te laissent le régler à chaque fois : combien de points, quel message, quelle vitesse…"
   ],
   [
    "bloc",
@@ -108,15 +108,15 @@
     [
      "ol",
      [
-      "Dans le Blueprint de la fonction, touche le bouton **Entrées de la fonction** (une icône de curseurs, dans la barre du haut).",
+      "Dans le Blueprint de ton nœud, touche le bouton **Réglages de mon nœud** (une icône de curseurs, dans la barre du haut).",
       "Touche **+ Ajouter une entrée**. Donne-lui un **nom** (par exemple `points`), un **type** (Nombre, Texte ou Oui / non) et une **valeur de départ** (par exemple 10). Valide, puis enregistre avec 💾.",
-      "Dans la fonction, utilise l'entrée en écrivant `=points` à la place d'un nombre. Par exemple, mets `=points` dans la valeur de [[ajouter_variable]]. Pour un message, mets `=message` dans le réglage du texte de [[toast]].",
-      "Retourne dans le Blueprint de la scène : le nœud [[appeler_fonction]] affiche maintenant une ligne par entrée. Change la valeur : 50 points ici, 10 points ailleurs."
+      "Dans ton nœud, utilise le réglage en écrivant `=points` à la place d'un nombre. Par exemple, mets `=points` dans la valeur de [[ajouter_variable]]. Pour un message, mets `=message` dans le réglage du texte de [[toast]].",
+      "Retourne dans le Blueprint de la scène : le nœud [[appeler_fonction]] affiche maintenant une ligne par réglage. Change la valeur : 50 points ici, 10 points ailleurs."
      ]
     ],
     [
      "tip",
-     "Une entrée peut aussi recevoir un calcul, par exemple `=score * 2`. Si tu laisses la ligne telle quelle, c'est la valeur de départ qui est utilisée. Dans la fonction, une entrée passe avant une variable du même nom."
+     "Un réglage peut aussi recevoir un calcul, par exemple `=score * 2`. Si tu laisses la ligne telle quelle, c'est la valeur de départ qui est utilisée. Dans ton nœud, un réglage passe avant une variable du même nom."
     ]
    ]
   ],
@@ -127,11 +127,11 @@
   [
    "ul",
    [
-    "**« Fonction introuvable » :** elle a été renommée ou supprimée. Choisis-la de nouveau dans [[appeler_fonction]].",
-    "**Rien ne se passe :** vérifie qu'il y a un événement [[NoeudEventStart]] au début de la fonction, et que tu as enregistré avec 💾.",
-    "**Les lignes de réglage n'apparaissent pas :** enregistre d'abord la fonction avec ses entrées, puis rouvre le nœud [[appeler_fonction]].",
-    "**Un nom d'entrée refusé :** écris-le en un seul mot (lettres, chiffres et _), sans espace.",
-    "**Une fonction qui s'appelle elle-même :** Yop2D s'arrête après quelques appels pour ne pas bloquer le jeu."
+    "**« Nœud introuvable » :** il a été renommé ou supprimé. Choisis-le de nouveau dans [[appeler_fonction]].",
+    "**Rien ne se passe :** vérifie qu'il y a un événement [[NoeudEventStart]] au début de ton nœud, et que tu as enregistré avec 💾.",
+    "**Les lignes de réglage n'apparaissent pas :** enregistre d'abord ton nœud avec ses réglages, puis rouvre le nœud [[appeler_fonction]].",
+    "**Un nom de réglage refusé :** écris-le en un seul mot (lettres, chiffres et _), sans espace.",
+    "**Un nœud qui se lance lui-même :** Yop2D s'arrête après quelques appels pour ne pas bloquer le jeu."
    ]
   ]
  ]

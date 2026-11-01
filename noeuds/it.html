@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutti i nodi di Yop2D (230) | Riferimento</title>
-<meta name="description" content="Elenco completo dei 230 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
+<title>Tutti i nodi di Yop2D (231) | Riferimento</title>
+<meta name="description" content="Elenco completo dei 231 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 230 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
+<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 231 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
 <p><strong>Categorie</strong></p>
 <nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-griglie-e-puzzle">Griglie e puzzle</a><a href="#c10-valori-fili-verdi">Valori (fili verdi)</a><a href="#c11-transizioni">Transizioni</a><a href="#c12-animazioni">Animazioni</a><a href="#c13-audio">Audio</a><a href="#c14-storia-e-dialoghi">Storia e dialoghi</a><a href="#c15-filtri-dello-schermo">Filtri dello schermo</a><a href="#c16-fisica">Fisica</a></nav>
 <h2 id="c1-eventi">Eventi</h2>
@@ -47,7 +47,7 @@
 </div>
 <div class="fiche"><h3>Ogni frame</h3>
 <p>Si avvia di continuo, a ogni fotogramma del gioco (circa 60 volte al secondo).</p>
-<p class="exemple"><b>Esempio:</b> seguire il dito o controllare una condizione in ogni momento. Evita di metterci sotto «Riproduci musica» o «Chiama funzione».</p>
+<p class="exemple"><b>Esempio:</b> seguire il dito o controllare una condizione in ogni momento. Evita di metterci sotto «Riproduci musica» o «Avvia uno dei miei nodi».</p>
 </div>
 <div class="fiche"><h3>Fine del Clic</h3>
 <p>Si avvia quando il giocatore solleva il dito dallo schermo, in qualsiasi punto.</p>
@@ -196,7 +196,7 @@
 <p class="exemple"><b>Esempio:</b> ="vita = " + vie, per controllare un valore durante un test.</p>
 </div>
 <div class="fiche"><h3>Fissa la camera</h3>
-<div class="schema"><b>Ingressi:</b> Oggetto, Segui X (sì / no), Segui Y (sì / no), Parallasse solo X (sì / no)</div>
+<div class="schema"><b>Ingressi:</b> Oggetto, Segui X (sì / no), Segui Y (sì / no), Parallasse solo X (sì / no), Oggetto più in basso sullo schermo (pixel, 0 = centro, 300 = verso il basso), Oggetto più a destra sullo schermo (pixel, 0 = centro, negativo = sinistra)</div>
 <p>La telecamera segue l'oggetto scelto, anche solo in orizzontale o in verticale. Senza oggetto, la telecamera non segue più niente.</p>
 <p class="exemple"><b>Esempio:</b> seguire il giocatore in un grande livello a piattaforme.</p>
 </div>
@@ -477,7 +477,7 @@
 <p class="exemple"><b>Esempio:</b> dopo «Genera clone (Spawner)» e «Riproduci animazione», l'immagine dell'esplosione viene distrutta 0,4 secondi dopo.</p>
 </div>
 <div class="fiche"><h3>Colore di squadra (sostituisce il rosa del disegno)</h3>
-<div class="schema"><b>Ingressi:</b> Oggetto, Colore della squadra, Colore da sostituire nel disegno (rosa predefinito), Tolleranza (da 1 a 100): più alta sostituisce anche colori simili</div>
+<div class="schema"><b>Ingressi:</b> Oggetto, Colore della squadra, Colore da sostituire nel disegno (rosa predefinito), Tolleranza (da 1 a 100): più alta sostituisce anche colori simili, Sfumature sostituite (da 1 a 100): 100 = tutte le sfumature di questo colore, piccolo = solo il colore esatto del segnaposto</div>
 <p>Un solo disegno per tutte le squadre: dipingi le parti da colorare (mantello, bandiera, pennacchio) con un colore guida (rosa acceso #FF00FF di default) e questo nodo sostituisce quel rosa con il colore della squadra per l'oggetto. Ombre e riflessi del disegno restano (un rosa scuro diventa blu scuro). La tolleranza dice quanto un colore può discostarsi dalla guida per essere sostituito. Nulla cambia nelle immagini: tutto avviene in visualizzazione, quindi va rifatto all'inizio di ogni partita.</p>
 <p class="exemple"><b>Esempio:</b> due eserciti con le stesse immagini: giocatore in blu, nemico in rosso.</p>
 </div>
@@ -597,10 +597,10 @@
 <p>«Vero» se l'oggetto si è mosso dal fotogramma precedente, altrimenti «Falso».</p>
 <p class="exemple"><b>Esempio:</b> animare la camminata solo quando il personaggio si muove.</p>
 </div>
-<div class="fiche"><h3>Chiama funzione</h3>
+<div class="fiche"><h3>Avvia uno dei miei nodi</h3>
 <div class="schema"><b>Ingresso:</b> Funzione</div>
-<p>Esegue una funzione (un Blueprint creato nella sezione Funzioni), poi continua. Da non mettere sotto «Ogni frame».</p>
-<p class="exemple"><b>Esempio:</b> una funzione «PerdiVita» usata da più nemici.</p>
+<p>Avvia uno dei tuoi nodi (un Blueprint creato nella sezione I miei nodi) e poi continua. Se ha impostazioni, compare una riga per ciascuna. Non metterlo sotto «Ogni frame».</p>
+<p class="exemple"><b>Esempio:</b> un nodo «PerdiVita» usato da più nemici.</p>
 </div>
 <div class="fiche"><h3>Chiama evento</h3>
 <div class="schema"><b>Ingresso:</b> Nome dell'evento</div>
@@ -662,6 +662,9 @@
 <div class="schema"><b>Ingresso:</b> Oggetto</div>
 <p>Ferma il movimento in corso sull'oggetto. Resta dov'è.</p>
 <p class="exemple"><b>Esempio:</b> fermare la passerella quando il giocatore preme un pulsante.</p>
+</div>
+<div class="fiche"><h3>Far girare l'oggetto di continuo</h3>
+<div class="schema"><b>Ingressi:</b> Oggetto, Velocità di rotazione (gradi al secondo, negativo = senso opposto, 0 = fermare)</div>
 </div>
 <div class="fiche"><h3>Seguire il percorso</h3>
 <div class="schema"><b>Ingressi:</b> Oggetto, Nome del percorso, Velocità (pixel al secondo), Ruotare nella direzione di marcia (sì / no), Scostamento laterale casuale (pixel, ±: ognuno ha la sua corsia), Evitare gli altri: spostarsi per non sovrapporsi e superare i più lenti (sì / no), Larghezza utilizzabile per spostarsi (pixel per lato dal centro del percorso), Angolo dell'immagine (0 = guarda a destra, 90 = in basso) &nbsp;→&nbsp; <b>Uscite:</b> Subito / Arrivato</div>
@@ -1215,7 +1218,7 @@
 <p class="exemple"><b>Esempio:</b> un puzzle di casse: il giocatore sposta le casse con la punta del dito per costruire una torre.</p>
 </div>
 <div class="fiche"><h3>Se l'oggetto fisico…</h3>
-<div class="schema"><b>Ingressi:</b> Oggetto, Domanda, Velocità da cui conta (pixel al secondo) &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso</div>
+<div class="schema"><b>Ingressi:</b> Oggetto, Domanda, Velocità da cui conta (pixel al secondo), Margine di grazia (secondi, per «ha appena toccato il suolo») &nbsp;→&nbsp; <b>Uscite:</b> Vero / Falso</div>
 <p>Fa una domanda su un oggetto fisico e segue l'uscita «vero» o «falso»: poggia su qualcosa (per consentire un salto), tocca qualcosa, tocca qualcosa sopra, è a riposo (addormentato), si muove veloce, cade, sale. Per «si muove veloce», «cade» e «sale» la soglia in pixel al secondo si regola nelle impostazioni avanzate. Puoi anche leggere direttamente in una formula: oggetto.vitesse, oggetto.masse, oggetto.vitesseRotation.</p>
 <p class="exemple"><b>Esempio:</b> un salto da platform: «Pulsante salto» → Se l'oggetto poggia su qualcosa → velocità verso il basso = -900.</p>
 </div>

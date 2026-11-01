@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tous les nœuds de Yop2D (230) | Référence</title>
-<meta name="description" content="Liste complète des 230 nœuds visuels de Yop2D, moteur de jeu 2D sans code pour Android : rôle, réglages, sorties et exemple de chaque nœud.">
+<title>Tous les nœuds de Yop2D (231) | Référence</title>
+<meta name="description" content="Liste complète des 231 nœuds visuels de Yop2D, moteur de jeu 2D sans code pour Android : rôle, réglages, sorties et exemple de chaque nœud.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><strong>Français</strong> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les 230 nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.</p>
+<p>Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les 231 nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.</p>
 <p><strong>Catégories</strong></p>
 <nav class="sommaire"><a href="#c1-événements">Événements</a><a href="#c2-scène-hud">Scène &amp; HUD</a><a href="#c3-temps">Temps</a><a href="#c4-apparence-objets">Apparence &amp; Objets</a><a href="#c5-variables-inventaire">Variables &amp; Inventaire</a><a href="#c6-logique-conditions">Logique &amp; Conditions</a><a href="#c7-textes-dialogues">Textes &amp; Dialogues</a><a href="#c8-mouvements-ia">Mouvements &amp; IA</a><a href="#c9-grilles-et-puzzles">Grilles et puzzles</a><a href="#c10-valeurs-fils-verts">Valeurs (fils verts)</a><a href="#c11-transitions">Transitions</a><a href="#c12-animations">Animations</a><a href="#c13-audio">Audio</a><a href="#c14-histoire-et-dialogues">Histoire et dialogues</a><a href="#c15-filtres-d-écran">Filtres d'écran</a><a href="#c16-physique">Physique</a></nav>
 <h2 id="c1-événements">Événements</h2>
@@ -47,7 +47,7 @@
 </div>
 <div class="fiche"><h3>À chaque image</h3>
 <p>Se lance en boucle, à chaque image du jeu (environ 60 fois par seconde).</p>
-<p class="exemple"><b>Exemple :</b> suivre la position du doigt ou vérifier une condition en permanence. Évite d'y mettre « Jouer la musique » ou « Appeler une fonction ».</p>
+<p class="exemple"><b>Exemple :</b> suivre la position du doigt ou vérifier une condition en permanence. Évite d'y mettre « Jouer la musique » ou « Lancer un de mes nœuds ».</p>
 </div>
 <div class="fiche"><h3>Fin de Clic</h3>
 <p>Se lance quand le joueur lève le doigt de l'écran, n'importe où.</p>
@@ -196,7 +196,7 @@
 <p class="exemple"><b>Exemple :</b> ="vie = " + vie, pour vérifier une valeur pendant un test.</p>
 </div>
 <div class="fiche"><h3>Fixer la caméra</h3>
-<div class="schema"><b>Entrées :</b> Objet, Suivre en X (oui / non), Suivre en Y (oui / non), Parallaxe en X seulement (oui / non)</div>
+<div class="schema"><b>Entrées :</b> Objet, Suivre en X (oui / non), Suivre en Y (oui / non), Parallaxe en X seulement (oui / non), Objet plus bas à l'écran (pixels, 0 = au centre, 300 = vers le bas), Objet plus à droite à l'écran (pixels, 0 = au centre, négatif = à gauche)</div>
 <p>La caméra suit l'objet choisi. Tu peux la faire suivre seulement à l'horizontale ou à la verticale. Sans objet, la caméra ne suit plus rien.</p>
 <p class="exemple"><b>Exemple :</b> suivre le joueur dans un grand niveau de plateforme.</p>
 </div>
@@ -477,7 +477,7 @@
 <p class="exemple"><b>Exemple :</b> après « Générer un clone (Spawner) » et « Jouer l'animation », l'image d'explosion est détruite 0,4 seconde plus tard.</p>
 </div>
 <div class="fiche"><h3>Couleur d'équipe (remplace le rose du dessin)</h3>
-<div class="schema"><b>Entrées :</b> Objet, Couleur de l'équipe, Couleur à remplacer dans le dessin (rose par défaut), Tolérance (1 à 100) : plus haut = remplace aussi les couleurs proches</div>
+<div class="schema"><b>Entrées :</b> Objet, Couleur de l'équipe, Couleur à remplacer dans le dessin (rose par défaut), Tolérance (1 à 100) : plus haut = remplace aussi les couleurs proches, Nuances gardées (1 à 100) : 100 = tous les ombrages de cette teinte, petit = seulement la couleur exacte du repère</div>
 <p>Un seul dessin pour toutes les équipes : peins les parties à colorer (manteau, drapeau, plumet) avec une couleur repère (par défaut le rose vif #FF00FF), puis ce nœud remplace ce rose par la couleur de l'équipe pour l'objet. Les ombres et les reflets du dessin sont gardés (un rose foncé devient un bleu foncé). La tolérance dit à quel point une couleur peut s'écarter du repère pour être remplacée. Rien n'est changé dans les images : tout se fait à l'affichage, donc à refaire au début de chaque partie.</p>
 <p class="exemple"><b>Exemple :</b> deux armées avec les mêmes images : joueur en bleu, ennemi en rouge.</p>
 </div>
@@ -597,10 +597,10 @@
 <p>Vrai si l'objet a bougé depuis l'image précédente, Faux sinon.</p>
 <p class="exemple"><b>Exemple :</b> jouer l'animation de marche seulement quand le personnage bouge.</p>
 </div>
-<div class="fiche"><h3>Appeler une fonction</h3>
+<div class="fiche"><h3>Lancer un de mes nœuds</h3>
 <div class="schema"><b>Entrée :</b> Fonction</div>
-<p>Lance une fonction (un Blueprint créé dans la section Fonctions), puis continue. À ne pas mettre sous « À chaque image ».</p>
-<p class="exemple"><b>Exemple :</b> une fonction « PerdreVie » utilisée par plusieurs ennemis.</p>
+<p>Lance un de tes nœuds (un Blueprint créé dans la section Mes nœuds), puis continue. S'il a des réglages, une ligne apparaît pour chacun. À ne pas mettre sous « À chaque image ».</p>
+<p class="exemple"><b>Exemple :</b> un nœud « PerdreVie » utilisé par plusieurs ennemis.</p>
 </div>
 <div class="fiche"><h3>Appeler un événement</h3>
 <div class="schema"><b>Entrée :</b> Nom de l'événement</div>
@@ -662,6 +662,9 @@
 <div class="schema"><b>Entrée :</b> Objet</div>
 <p>Arrête le mouvement en cours sur l'objet. Il reste là où il est.</p>
 <p class="exemple"><b>Exemple :</b> stopper la passerelle quand le joueur appuie sur un bouton.</p>
+</div>
+<div class="fiche"><h3>Faire tourner l'objet en continu</h3>
+<div class="schema"><b>Entrées :</b> Objet, Vitesse de rotation (degrés par seconde, négatif = sens inverse, 0 = arrêter)</div>
 </div>
 <div class="fiche"><h3>Suivre le parcours</h3>
 <div class="schema"><b>Entrées :</b> Objet, Nom du parcours, Vitesse (pixels par seconde), Tourner dans le sens de la marche (oui / non), Écart de côté au hasard (pixels, ± : chacun marche sur sa voie), Éviter les autres : se décaler pour ne pas se superposer et dépasser les plus lents (oui / non), Largeur utilisable pour s'écarter (pixels de chaque côté du centre de la route), Angle de l'image (0 = elle regarde vers la droite, 90 = vers le bas) &nbsp;→&nbsp; <b>Sorties :</b> Tout de suite / Arrivé</div>
@@ -787,7 +790,7 @@
 <p class="exemple"><b>Exemple :</b> refuser de déplacer un héros qui a déjà joué.</p>
 </div>
 <div class="fiche"><h3>Montrer les cases accessibles</h3>
-<div class="schema"><b>Entrées :</b> Objet, Type de zone, Nombre de pas (ou portée), Couleur des cases, Visibilité des cases (0 = invisible, 100 = pleine), Cadre autour de chaque case, Écrire le nombre de pas sur chaque case, Les murs bloquent (déplacement), Ces tags bloquent le passage (séparés par une virgule), Terrains qui coûtent plus de pas (tag=coût, ex. foret=2, eau=3), Nom de la zone (facultatif : pour en montrer plusieurs), Forme de la portée (attaque et saut), Portée minimale (0 = aucune ; 2 = pas les 1res cases), Mes positions (colonne,ligne ; ex. 2,1 ; -2,1 ; 0,3), Retirer la case où se tient l'objet</div>
+<div class="schema"><b>Entrées :</b> Objet, Type de zone, Nombre de pas (ou portée), Couleur des cases, Visibilité des cases (0 = invisible, 100 = pleine), Cadre autour de chaque case, Écrire le nombre de pas sur chaque case, Les murs bloquent (déplacement), Ces tags bloquent le passage (séparés par une virgule), Coûts propres à cette unité (nom d'un tag ou d'un terrain = coût, x = interdit ; ex. foret=2, Montagne=3, Eau=x), Nom de la zone (facultatif : pour en montrer plusieurs), Forme de la portée (attaque et saut), Portée minimale (0 = aucune ; 2 = pas les 1res cases), Mes positions (colonne,ligne ; ex. 2,1 ; -2,1 ; 0,3), Retirer la case où se tient l'objet</div>
 <p>Colore les cases où l'objet choisi peut aller (ou attaquer). Les murs bloquent, et tu peux ajouter des tags qui bloquent (autres unités) et des terrains qui coûtent plus de pas (foret=2). Couleur, visibilité, cadre et chiffres se règlent. « Nom de la zone » permet d'en montrer plusieurs (déplacement en bleu, attaque en rouge).</p>
 <p class="exemple"><b>Exemple :</b> montrer la zone de déplacement d'un héros quand on le touche.</p>
 </div>
@@ -1215,7 +1218,7 @@
 <p class="exemple"><b>Exemple :</b> un puzzle de caisses : le joueur déplace les caisses du bout du doigt pour fabriquer une tour.</p>
 </div>
 <div class="fiche"><h3>Si l'objet physique…</h3>
-<div class="schema"><b>Entrées :</b> Objet, Question, Vitesse à partir de laquelle ça compte (pixels par seconde) &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux</div>
+<div class="schema"><b>Entrées :</b> Objet, Question, Vitesse à partir de laquelle ça compte (pixels par seconde), Marge de grâce (secondes, pour « a touché le sol à l'instant ») &nbsp;→&nbsp; <b>Sorties :</b> Vrai / Faux</div>
 <p>Pose une question sur un objet physique et suit la sortie « vrai » ou « faux » : est-il posé sur quelque chose (pour autoriser un saut), touche-t-il quelque chose, touche-t-il quelque chose au-dessus, est-il au repos (endormi), bouge-t-il vite, tombe-t-il, monte-t-il. Pour « bouge vite », « tombe » et « monte », le seuil en pixels par seconde se règle en avancé. Tu peux aussi lire directement dans une formule : objet.vitesse, objet.masse, objet.vitesseRotation.</p>
 <p class="exemple"><b>Exemple :</b> un saut de plateforme : « Bouton saut » → Si l'objet est posé sur quelque chose → régler la vitesse vers le bas à -900.</p>
 </div>

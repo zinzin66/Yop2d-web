@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos os nós do Yop2D (230) | Referência</title>
-<meta name="description" content="Lista completa dos 230 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
+<title>Todos os nós do Yop2D (231) | Referência</title>
+<meta name="description" content="Lista completa dos 231 nós visuais do Yop2D, motor de jogos 2D sem código para Android: função, ajustes, saídas e um exemplo de cada nó.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/pt.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 230 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
+<p>O Yop2D é um motor de jogos 2D gratuito e sem código para Android. A lógica de um jogo é montada com nós (blocos visuais) ligados no Blueprint: os eventos iniciam uma cadeia, depois vêm as ações e condições. Esta página descreve os 231 nós do editor, com seus ajustes (entradas) e suas saídas.</p>
 <p><strong>Categorias</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-cena-e-hud">Cena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aparência-e-objetos">Aparência e Objetos</a><a href="#c5-variáveis-e-inventário">Variáveis e Inventário</a><a href="#c6-lógica-e-condições">Lógica e Condições</a><a href="#c7-textos-e-diálogos">Textos e Diálogos</a><a href="#c8-movimentos-e-ia">Movimentos e IA</a><a href="#c9-grades-e-quebra-cabeças">Grades e quebra-cabeças</a><a href="#c10-valores-fios-verdes">Valores (fios verdes)</a><a href="#c11-transições">Transições</a><a href="#c12-animações">Animações</a><a href="#c13-áudio">Áudio</a><a href="#c14-história-e-diálogos">História e diálogos</a><a href="#c15-filtros-de-tela">Filtros de tela</a><a href="#c16-física">Física</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -47,7 +47,7 @@
 </div>
 <div class="fiche"><h3>A cada frame</h3>
 <p>Roda sem parar, a cada quadro do jogo (cerca de 60 vezes por segundo).</p>
-<p class="exemple"><b>Exemplo:</b> seguir o dedo ou verificar uma condição o tempo todo. Evite colocar “Tocar música” ou “Chamar função” embaixo dele.</p>
+<p class="exemple"><b>Exemplo:</b> seguir o dedo ou verificar uma condição o tempo todo. Evite colocar “Tocar música” ou “Usar um dos meus nós” embaixo dele.</p>
 </div>
 <div class="fiche"><h3>Fim de Clique</h3>
 <p>Roda quando o jogador tira o dedo da tela, em qualquer lugar.</p>
@@ -196,7 +196,7 @@
 <p class="exemple"><b>Exemplo:</b> ="vida = " + vie, para conferir um valor durante um teste.</p>
 </div>
 <div class="fiche"><h3>Fixar a câmera</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Seguir em X (sim / não), Seguir em Y (sim / não), Paralaxe só em X (sim / não)</div>
+<div class="schema"><b>Entradas:</b> Objeto, Seguir em X (sim / não), Seguir em Y (sim / não), Paralaxe só em X (sim / não), Objeto mais embaixo na tela (pixels, 0 = centro, 300 = para baixo), Objeto mais à direita na tela (pixels, 0 = centro, negativo = esquerda)</div>
 <p>A câmera segue o objeto escolhido, se quiser só na horizontal ou só na vertical. Sem objeto, a câmera para de seguir.</p>
 <p class="exemple"><b>Exemplo:</b> seguir o jogador numa fase grande de plataforma.</p>
 </div>
@@ -477,7 +477,7 @@
 <p class="exemple"><b>Exemplo:</b> depois de “Gerar clone (Spawner)” e “Reproduzir animação”, a imagem da explosão é destruída 0,4 segundo depois.</p>
 </div>
 <div class="fiche"><h3>Cor da equipe (substitui o rosa do desenho)</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Cor da equipe, Cor a substituir no desenho (rosa por padrão), Tolerância (1 a 100): mais alta substitui também cores parecidas</div>
+<div class="schema"><b>Entradas:</b> Objeto, Cor da equipe, Cor a substituir no desenho (rosa por padrão), Tolerância (1 a 100): mais alta substitui também cores parecidas, Tons substituídos (1 a 100): 100 = todos os tons desta cor, pequeno = só a cor exata do marcador</div>
 <p>Um só desenho para todas as equipes: pinte as partes a colorir (capa, bandeira, penacho) com uma cor de referência (rosa vivo #FF00FF por padrão) e este nó substitui esse rosa pela cor da equipe para o objeto. As sombras e brilhos do desenho são mantidos (um rosa escuro vira azul escuro). A tolerância diz o quanto uma cor pode se afastar da referência e ainda ser substituída. Nada muda nas imagens: tudo acontece na exibição, então repita no início de cada partida.</p>
 <p class="exemple"><b>Exemplo:</b> dois exércitos com as mesmas imagens: jogador em azul, inimigo em vermelho.</p>
 </div>
@@ -597,10 +597,10 @@
 <p>“Verdadeiro” se o objeto se mexeu desde o quadro anterior, senão “Falso”.</p>
 <p class="exemple"><b>Exemplo:</b> tocar a animação de andar só quando o personagem se mexe.</p>
 </div>
-<div class="fiche"><h3>Chamar função</h3>
+<div class="fiche"><h3>Usar um dos meus nós</h3>
 <div class="schema"><b>Entrada:</b> Função</div>
-<p>Roda uma função (um Blueprint criado na seção Funções) e depois continua. Não coloque embaixo de “A cada frame”.</p>
-<p class="exemple"><b>Exemplo:</b> uma função “PerderVida” usada por vários inimigos.</p>
+<p>Executa um dos seus nós (um Blueprint criado na seção Meus nós) e continua. Se tiver ajustes, aparece uma linha para cada um. Não o coloque sob “A cada frame”.</p>
+<p class="exemple"><b>Exemplo:</b> um nó “PerderVida” usado por vários inimigos.</p>
 </div>
 <div class="fiche"><h3>Chamar evento</h3>
 <div class="schema"><b>Entrada:</b> Nome do evento</div>
@@ -662,6 +662,9 @@
 <div class="schema"><b>Entrada:</b> Objeto</div>
 <p>Para o movimento em andamento no objeto. Ele fica onde está.</p>
 <p class="exemple"><b>Exemplo:</b> parar a passarela quando o jogador aperta um botão.</p>
+</div>
+<div class="fiche"><h3>Girar o objeto sem parar</h3>
+<div class="schema"><b>Entradas:</b> Objeto, Velocidade de giro (graus por segundo, negativo = sentido contrário, 0 = parar)</div>
 </div>
 <div class="fiche"><h3>Seguir o percurso</h3>
 <div class="schema"><b>Entradas:</b> Objeto, Nome do percurso, Velocidade (pixels por segundo), Virar para onde vai (sim / não), Desvio lateral ao acaso (pixels, ±: cada um anda na sua faixa), Evitar os outros: desviar para não se sobrepor e ultrapassar os mais lentos (sim / não), Largura utilizável para desviar (pixels de cada lado do centro do caminho), Ângulo da imagem (0 = olha para a direita, 90 = para baixo) &nbsp;→&nbsp; <b>Saídas:</b> Imediato / Chegou</div>
@@ -1215,7 +1218,7 @@
 <p class="exemple"><b>Exemplo:</b> um quebra-cabeça de caixas: o jogador move caixas com a ponta do dedo para construir uma torre.</p>
 </div>
 <div class="fiche"><h3>Se o objeto físico…</h3>
-<div class="schema"><b>Entradas:</b> Objeto, Pergunta, Velocidade a partir da qual conta (pixels por segundo) &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso</div>
+<div class="schema"><b>Entradas:</b> Objeto, Pergunta, Velocidade a partir da qual conta (pixels por segundo), Margem de graça (segundos, para «acabou de tocar o chão») &nbsp;→&nbsp; <b>Saídas:</b> Verdadeiro / Falso</div>
 <p>Faz uma pergunta sobre um objeto físico e segue a saída “verdadeiro” ou “falso”: está apoiado em algo (para permitir um pulo)?, toca algo?, toca algo por cima?, está em repouso (dormindo)?, move-se rápido?, cai?, sobe? Para “move-se rápido”, “cai” e “sobe” o limite em pixels por segundo se ajusta no avançado. Também dá para ler direto numa fórmula: objeto.vitesse, objeto.masse, objeto.vitesseRotation.</p>
 <p class="exemple"><b>Exemplo:</b> um pulo de plataforma: “Botão de pulo” → Se o objeto está apoiado em algo → velocidade para baixo = -900.</p>
 </div>
