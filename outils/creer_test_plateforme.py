@@ -33,7 +33,7 @@ objets = [
     # les 3 perles (tag « piece »)
     ph_objet('piece1', 640, SOL - 110, 'Objets/perle_or.png', 4, tag='piece'),
     ph_objet('piece2', 930, SOL - 330, 'Objets/perle_or.png', 4, tag='piece'),
-    ph_objet('piece3', 1290, SOL - 150 - 100, 'Objets/perle_or.png', 4, tag='piece'),
+    ph_objet('piece3', 1290, SOL - 150 - 250, 'Objets/perle_or.png', 4, tag='piece'),
     # la tortue : va-et-vient toute seule sur le bloc (comportement « Patrouille »), tag « ennemi »
     objet('tortue', 1180, SOL - 150 - 114, PH + 'Monstres/tortue_marche_1.png', 180, 114, z=60, prefixe=P,
           comportement='patrouille', vitesseComportement=4.0, animationsAuto=True, estPhysique=True,
@@ -46,9 +46,9 @@ objets = [
           couleur=argb('#0E141E', 150)),
     objet('btn_jump', 1920 - TB - 40, 1080 - TB - 30, BTN, TB, TB, z=60, prefixe=P),
     # le score : un petit panneau sombre + le texte
-    objet('panneau_score', 40, 40, largeur=440, hauteur=110, z=40, prefixe=P, afficherFondColore=True,
+    objet('panneau_score', 40, 40, largeur=520, hauteur=130, z=40, prefixe=P, afficherFondColore=True,
           couleur=argb('#0E141E', 190)),
-    texte('texteScore', 60, 55, 400, 80, 'Pièces : 0', 56, BLANC, prefixe=P, cheminPolice=None),
+    texte('texteScore', 60, 55, 480, 100, 'Pièces : 0', 72, BLANC, z=60, prefixe=P, cheminPolice=None),
 ]
 
 # ------------------------------------------------------------------ les nœuds
@@ -61,8 +61,8 @@ t = L.chaine(e, [('piece_detruire', 'detruire_objet', {}, '__OBJET_IMPLIQUE__'),
                  ('piece_score', 'ajouter_variable', {'valeur': 1}, None, 'score'),
                  ('piece_texte', 'modifier_texte', {'valeur': '="Pièces : " + score'}, 'texteScore'),
                  ('piece_toutes', 'condition', {'condition': '=score >= 3'})])
-L.chaine(VRAI(t), [('victoire_message', 'toast', {'message': 'Bravo ! Tu as les 3 perles !'}),
-                   ('victoire_attente', 'attendre', {'duree': 3}),
+L.chaine(VRAI(t), [('victoire_message', 'modifier_texte', {'valeur': 'BRAVO'}, 'texteScore'),
+                   ('victoire_attente', 'attendre', {'duree': 6}),
                    ('victoire_recommencer', 'recommencer_scene')])
 
 # 2. Le héros touche la tortue : petit message, puis on recommence
