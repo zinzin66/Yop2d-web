@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faire un jeu de plateforme dans Yop2D : tutoriel complet, sans code | Guide Yop2D</title>
+<meta name="description" content="Tutoriel pas à pas pour faire un petit jeu de plateforme sans code avec Yop2D : sol, héros qui saute, perles à ramasser, ennemi qui patrouille et score.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/plateforme.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/plateforme.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/plateforme.html">
+<link rel="stylesheet" href="guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Ton premier jeu de plateforme",
+ "description": "Tutoriel pas à pas pour faire un petit jeu de plateforme sans code avec Yop2D : sol, héros qui saute, perles à ramasser, ennemi qui patrouille et score.",
+ "inLanguage": "fr",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (moteur de jeu 2D sans code pour Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Poser le décor et le sol",
+   "text": "Un fond, un sol avec le comportement « Sol / mur » et un bloc en hauteur."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Créer le héros",
+   "text": "Un personnage animé avec le comportement « Personnage de plateforme », un joystick et un bouton de saut."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Ajouter la tortue",
+   "text": "Un ennemi avec le comportement « Patrouille (va-et-vient) » et le tag ennemi."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Placer les trois perles",
+   "text": "Trois perles avec le tag piece."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Afficher le score",
+   "text": "Une variable score et un texte qui la montre."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Relier les nœuds",
+   "text": "Si objet touche Tag → Détruire Objet → Ajouter à Variable → Modifier Texte."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Jouer",
+   "text": "Ramasse les trois perles pour gagner."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../fr/index.html">← Yop2D</a>
+<h1>Ton premier jeu de plateforme</h1>
+<p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/plateforme.html" hreflang="en">English</a></p>
+</header>
+<main>
+<p>Dans ce tutoriel, tu fais un <strong>petit jeu de plateforme</strong> en une demi-heure, sans écrire une ligne de code : un héros qui court et qui saute, <strong>trois perles</strong> à ramasser, une <strong>tortue</strong> qui va et vient sur un bloc, et un <strong>score</strong>. Si tu es bloqué, tu peux comparer avec le <a href="https://zinzin66.github.io/Yop2d-web/tests/plateforme-tuto-test.zip">projet terminé</a> (à importer dans Yop2D : ses nœuds sont rangés avec des cadres et des post-it qui expliquent tout).</p>
+<figure class="capture"><a href="img/plateforme_jeu.png"><img src="img/plateforme_jeu.png" alt="Capture du jeu de plateforme : le héros, des perles, une tortue sur un bloc et le score en haut à gauche" loading="lazy"></a><figcaption>Le jeu terminé : le score est en haut à gauche.</figcaption></figure>
+<div class="besoin">
+<b>Il te faut :</b>
+<ul><li>un jeu vide en <strong>paysage</strong> (touche <strong>Nouveau jeu</strong> sur l'écran de démarrage) ;</li><li>les images du thème <strong>Préhistoire</strong> de la <strong>Bibliothèque Yop2D</strong> (gratuites, libres de droits) : fond, sol, héros, tortue et perle ;</li><li>un peu de temps : chaque étape est courte.</li></ul>
+</div>
+<div class="tip">👉 Les captures de ce tutoriel sont en anglais. Chez toi, les mêmes boutons sont écrits dans la langue de Yop2D, à la même place.</div>
+<h2>Étape 1 : le décor, le sol et un bloc</h2>
+<div class="method">
+<ol><li>Touche <strong>Objet</strong> (en haut à gauche), puis <strong>Image</strong>. La <strong>Bibliothèque Yop2D</strong> s'ouvre : choisis le thème <strong>Préhistoire</strong>, le dossier <strong>Fonds</strong>, puis le fond <strong>jungle</strong>. Il se place tout seul derrière.</li><li>Refais <strong>Objet → Image</strong> et prends un <strong>sol d'herbe</strong> dans <strong>Sols et plateformes</strong>. Place-le tout en bas et étire-le sur la largeur de l'écran. Nomme-le <strong>sol</strong> dans l'inspecteur.</li><li>Touche <strong>⚙ Comportement</strong> (dans l'inspecteur) et choisis <strong>Sol / mur</strong> : le héros marchera dessus et ne le traversera pas.</li><li>Ajoute une petite <strong>plateforme d'herbe</strong> et place-la plus haut, à droite, à environ 150 pixels au-dessus du sol. Donne-lui aussi le comportement <strong>Sol / mur</strong>. Nomme-la <strong>bloc</strong>.</li></ol>
+</div>
+<figure class="capture"><a href="img/plateforme_comp_sol.png"><img src="img/plateforme_comp_sol.png" alt="Fenêtre Comportement de l&#x27;objet sol avec « Sol / mur » choisi" loading="lazy"></a><figcaption>Le comportement « Sol / mur » : l'objet ne bouge pas, on marche dessus.</figcaption></figure>
+<div class="tip">👉 Le héros saute environ 200 pixels de haut : un bloc à 150 pixels au-dessus du sol reste facile à atteindre. Si tu le places plus haut, il faudra une autre plateforme pour y monter.</div>
+<h2>Étape 2 : le héros</h2>
+<div class="method">
+<ol><li><strong>Objet → Image → Bibliothèque</strong>, thème <strong>Préhistoire</strong>, dossier <strong>Personnages</strong>. Choisis l'homme des cavernes avec <strong>Avec ses animations</strong> : l'image et les animations (repos, marche…) sont ajoutées d'un coup. Pose-le sur le sol et nomme-le <strong>player</strong>.</li><li><strong>⚙ Comportement → Personnage de plateforme</strong> : il marche, saute et tombe.</li><li>Ajoute un Joystick en bas à gauche, et un <strong>bouton</strong> rond en bas à droite pour sauter. Dans la fenêtre du comportement, choisis ce bouton comme <strong>bouton de saut</strong>. Le guide <a href="deplacer-personnage.html">Faire bouger un personnage</a> détaille le joystick et le saut.</li></ol>
+</div>
+<figure class="capture"><a href="img/plateforme_comp_heros.png"><img src="img/plateforme_comp_heros.png" alt="Fenêtre Comportement de l&#x27;objet player avec « Personnage de plateforme » choisi" loading="lazy"></a><figcaption>Le comportement « Personnage de plateforme » pour le héros.</figcaption></figure>
+<figure class="capture"><a href="img/plateforme_editeur.png"><img src="img/plateforme_editeur.png" alt="Éditeur de Yop2D avec les repères : bouton Objet, liste des objets, carte Comportement, bouton Jouer" loading="lazy"></a><figcaption>L'éditeur : 1 le bouton <strong>Objet</strong> pour ajouter, 2 la <strong>liste des objets</strong> de la scène, 3 la carte <strong>Comportement</strong> de l'objet choisi, 4 le bouton <strong>Jouer</strong>.</figcaption></figure>
+<div class="tip">👉 Touche <strong>Jouer</strong> (4) pour essayer : le héros doit marcher, sauter et rester sur le sol. Touche ■ pour revenir à l'éditeur.</div>
+<h2>Étape 3 : la tortue qui patrouille</h2>
+<div class="method">
+<ol><li><strong>Objet → Image → Bibliothèque</strong>, thème <strong>Préhistoire</strong>, dossier <strong>Monstres</strong> : prends la <strong>tortue</strong> et pose-la <strong>sur le bloc</strong>. Nomme-la <strong>tortue</strong>.</li><li><strong>⚙ Comportement → Patrouille (va-et-vient)</strong> : elle marche toute seule d'un côté puis de l'autre, et fait demi-tour au bord du bloc. Aucun nœud n'est nécessaire pour ça.</li><li>Dans l'inspecteur, partie <strong>Pour les nœuds</strong>, écris le tag <strong>ennemi</strong>. Tu en auras besoin à l'étape 6.</li></ol>
+</div>
+<figure class="capture"><a href="img/plateforme_comp_tortue.png"><img src="img/plateforme_comp_tortue.png" alt="Fenêtre Comportement de l&#x27;objet tortue avec « Patrouille » choisi" loading="lazy"></a><figcaption>Le comportement « Patrouille (va-et-vient) » : parfait pour un ennemi.</figcaption></figure>
+<div class="tip">👉 Sur le bloc, laisse un peu de place des deux côtés de la tortue : elle fait demi-tour juste avant le bord.</div>
+<h2>Étape 4 : les trois perles</h2>
+<div class="method">
+<ol><li><strong>Objet → Image → Bibliothèque</strong>, thème <strong>Préhistoire</strong>, dossier <strong>Objets</strong> : prends la <strong>perle d'or</strong>. Pose-la à portée de saut, par exemple sur le sol. Nomme-la <strong>piece1</strong>.</li><li>Dans l'inspecteur, partie <strong>Pour les nœuds</strong>, écris le tag <strong>piece</strong> (sans accent, tout en minuscules).</li><li>Touche <strong>Copier</strong> (en haut) deux fois : les copies s'ajoutent près de l'original. Déplace-les : une en l'air au-dessus du sol, la dernière <strong>au-dessus du bloc</strong>, assez haut pour que la tortue ne la touche pas. Elles gardent le même tag <strong>piece</strong>.</li></ol>
+</div>
+<figure class="capture"><a href="img/plateforme_tag.png"><img src="img/plateforme_tag.png" alt="Inspecteur de la perle piece1 avec le tag piece" loading="lazy"></a><figcaption>Le tag <strong>piece</strong> sur chaque perle : une seule règle servira pour les trois.</figcaption></figure>
+<div class="tip">👉 Un <strong>tag</strong> est un nom de famille. Ici les trois perles portent le même, donc tu ne construis les nœuds qu'une seule fois.</div>
+<h2>Étape 5 : le score</h2>
+<div class="method">
+<ol><li>Dans le panneau de gauche, section <strong>Variables</strong>, touche <strong>+</strong> et crée une variable <strong>score</strong> : type <strong>entier</strong>, valeur de départ <strong>0</strong>, portée <strong>locale</strong> à la scène.</li><li><strong>Objet → Texte</strong> : écris <strong>Pièces : 0</strong>, mets-le en haut à gauche et nomme-le <strong>texteScore</strong>. Pour que le texte reste lisible, agrandis-le (taille de police 60 à 70) ; si tu mets un petit <strong>panneau sombre</strong> derrière, vérifie que le texte est <strong>devant</strong> (son <strong>Z</strong> doit être plus grand que celui du panneau).</li></ol>
+</div>
+<figure class="capture"><a href="img/plateforme_variable.png"><img src="img/plateforme_variable.png" alt="Panneau de gauche de l&#x27;éditeur avec la variable score et le bouton plus" loading="lazy"></a><figcaption>La variable <strong>score</strong> (1) se crée avec le bouton <strong>+</strong>.</figcaption></figure>
+<h2>Étape 6 : les nœuds</h2>
+<p>Il reste à dire au jeu ce qui se passe quand le héros touche quelque chose. Touche <strong>Blueprint</strong> (en haut à droite) : l'écran des nœuds s'ouvre. Pour poser un nœud, ouvre une catégorie à gauche et touche-le ; pour relier deux nœuds, tire un fil de la sortie du premier vers l'entrée du suivant.</p>
+<div class="method">
+<ol><li><strong>Quand le héros touche une perle.</strong> Pose l'événement Si objet touche Tag : réglage <strong>Objet A</strong> = <strong>player</strong>, <strong>Tag</strong> = <strong>piece</strong>. Relie-le dans l'ordre à : Détruire Objet (sur <strong>L'objet impliqué</strong>, c'est-à-dire la perle touchée), Ajouter à Variable (variable <strong>score</strong>, valeur <strong>1</strong>), puis Modifier Texte (objet <strong>texteScore</strong>, texte écrit avec la valeur <code>="Pièces : " + score</code>, qui montre le score).</li><li><strong>Quand le score arrive à 3.</strong> Ajoute à la suite un nœud Condition avec <code>=score &gt;= 3</code>. Sur sa sortie <strong>Vrai</strong>, relie : Modifier Texte (texteScore, texte <strong>BRAVO</strong>), Attendre (6 secondes) puis Recommencer la scène.</li><li><strong>Quand le héros touche la tortue.</strong> Deuxième événement Si objet touche Tag : <strong>Objet A</strong> = <strong>player</strong>, <strong>Tag</strong> = <strong>ennemi</strong>. À la suite : Flash de l'écran, Petit message en bas de l'écran (un petit message « Aïe ! »), Attendre (1 seconde) puis Recommencer la scène.</li><li><strong>Rester dans l'écran.</strong> Un événement À chaque image relié à Garder dans l'écran (objet <strong>player</strong>) empêche le héros de sortir du niveau.</li></ol>
+</div>
+<figure class="capture"><a href="img/plateforme_noeud.png"><img src="img/plateforme_noeud.png" alt="Fenêtre de réglage du nœud « Si un objet touche un tag » : Objet A player, Tag piece" loading="lazy"></a><figcaption>La fenêtre de réglage de l'événement : 1 l'objet qui touche (<strong>player</strong>), 2 le tag touché (<strong>piece</strong>).</figcaption></figure>
+<figure class="capture"><a href="img/plateforme_blueprint.png"><img src="img/plateforme_blueprint.png" alt="Écran Blueprint du jeu : trois groupes de nœuds dans des cadres colorés, avec des post-it" loading="lazy"></a><figcaption>Le Blueprint terminé : un cadre par idée (perles, ennemi, rester dans l'écran).</figcaption></figure>
+<div class="tip">👉 Dans la fenêtre d'un nœud, tu n'as pas besoin de taper les noms des objets : touche-les dans la liste de gauche. Pense à <strong>enregistrer</strong> (💾) avant de revenir à l'éditeur.</div>
+<h2>Étape 7 : jouer !</h2>
+<p>Touche <strong>Jouer</strong>. Cours, saute, ramasse les perles : le texte en haut à gauche compte. Monte sur le bloc pour prendre la dernière perle sans toucher la tortue. Au bout de trois perles, <strong>BRAVO</strong> s'affiche, puis le jeu recommence.</p>
+<figure class="capture"><a href="img/plateforme_bravo.png"><img src="img/plateforme_bravo.png" alt="Le jeu après trois perles : le texte BRAVO en haut à gauche" loading="lazy"></a><figcaption>Trois perles ramassées : <strong>BRAVO</strong>.</figcaption></figure>
+<h2>Pour aller plus loin</h2>
+<ul><li>Ajoute d'autres perles, d'autres tortues, d'autres blocs : les nœuds déjà faits marchent tout seuls grâce aux <strong>tags</strong>.</li><li>Ajoute des <strong>sons</strong> (un « ding » à chaque perle) avec le nœud Jouer un son, ou une <strong>musique</strong> de fond.</li><li>Donne des <strong>vies</strong> au héros : <a href="vie-game-over.html">Faire perdre de la vie au joueur</a>.</li><li>Passe à un <strong>autre niveau</strong> quand on gagne : <a href="niveau-suivant.html">Passer au niveau suivant</a>.</li></ul>
+
+<div class="nav">
+<a href="index.html">← Tous les guides</a>
+<a href="deplacer-personnage.html">Guide suivant : Déplacer un personnage →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="../fr/index.html">Site officiel</a> · <a href="../noeuds/fr.html">Référence des nœuds</a></p>
+</footer>
+</body>
+</html>
