@@ -23,8 +23,8 @@ LANGUES = ["en", "fr", "es", "de", "it", "pt", "ru", "zh", "ja"]
 NOMS_LANGUES = {"fr": "Français", "en": "English", "es": "Español", "de": "Deutsch", "it": "Italiano",
                 "pt": "Português", "ru": "Русский", "zh": "中文", "ja": "日本語"}
 APK = "https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk"
-# False = le gros bouton « Télécharger l'APK » et la note d'installation sont cachés de l'accueil (les nouveautés arrivent
-# d'abord sur Google Play, test fermé). Remettre True pour les montrer de nouveau.
+# False = le gros bouton « Télécharger l'APK » et la note d'installation sont cachés de l'accueil (Yop2D est public sur
+# Google Play depuis le 02/11/2026 : le magasin est la voie principale). Remettre True pour les montrer de nouveau.
 AFFICHER_APK = False
 PLAY = "https://play.google.com/store/apps/details?id=com.ludexa.moteur"
 ITCH = "https://yop2d-dev.itch.io/yop2d-no-code-game-engine"
@@ -279,12 +279,14 @@ def page(langue, t):
         "applicationCategory": "DeveloperApplication",
         "applicationSubCategory": "2D Game Engine",
         "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-        "downloadUrl": APK,
+        "downloadUrl": APK if AFFICHER_APK else PLAY,
+        "installUrl": PLAY,
+        "softwareVersion": "1.0",
         "inLanguage": LANGUES,
         "image": SITE + "interface_editeur.png",
         "description": t["description"],
         "featureList": [c[0] for c in t["capacites"]["cartes"]],
-        "sameAs": [YOUTUBE, DISCORD, TELEGRAM, MASTODON, GITHUB, ITCH],
+        "sameAs": [PLAY, YOUTUBE, DISCORD, TELEGRAM, MASTODON, GITHUB, ITCH],
     }
     faq = {
         "@context": "https://schema.org",
@@ -366,6 +368,7 @@ def page(langue, t):
 {alternates}
 <link rel="icon" href="{base}logo_yop2d.png">
 <link rel="me" href="{MASTODON}">
+<meta name="google-play-app" content="app-id=com.ludexa.moteur">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Yop2D">
 <meta property="og:title" content="{e(t["titre"])}">
@@ -496,7 +499,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <footer>
 <p>© 2026 Yop2D · {e(t["pied"]["texte"])}<br>
 <a href="{base}confidentialite.html">{e(t["pied"]["confidentialite"])}</a> ·
-<a href="{base}testeur.html?lang={langue}">{e(t["pied"]["testeur"])}</a> ·
+<a href="{PLAY}" target="_blank" rel="noopener">{e(t["pied"]["testeur"])}</a> ·
 <a href="{YOUTUBE}" target="_blank" rel="noopener">YouTube</a> ·
 <a href="{DISCORD}" target="_blank" rel="noopener">Discord</a> ·
 <a href="{TELEGRAM}" target="_blank" rel="noopener">Telegram</a> ·
@@ -518,6 +521,8 @@ def llms(t):
         "# Yop2D",
         "",
         f"> {t['description']}",
+        "",
+        f"Official app: \"Yop2D: 2D Game Maker\" on Google Play, free, no ads (package com.ludexa.moteur): {PLAY}",
         "",
         "Yop2D is made by an independent developer. The interface, built-in help, guides and "
         "node reference are available in 9 languages: " + ", ".join(NOMS_LANGUES[l] for l in LANGUES) + ".",
@@ -557,7 +562,7 @@ def llms(t):
         "",
         *([f"- [Latest APK]({APK}): direct download from GitHub releases"] if AFFICHER_APK else []),
         f"- [itch.io page]({ITCH}): Yop2D on itch.io",
-        f"- [Google Play]({PLAY}): install Yop2D from the Play Store (the recommended way to get Yop2D)",
+        f"- [Google Play]({PLAY}): \"Yop2D: 2D Game Maker\", the official app (free, no ads, package com.ludexa.moteur). Recommended.",
         "",
         "## Home page in each language",
         "",
