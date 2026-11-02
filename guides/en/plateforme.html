@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to make a platformer in Yop2D: full no-code tutorial | Yop2D Guide</title>
+<meta name="description" content="Step-by-step tutorial to make a small no-code platformer with Yop2D: ground, a hero who jumps, pearls to collect, a patrolling enemy and a score.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/plateforme.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/plateforme.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/plateforme.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Your first platformer game",
+ "description": "Step-by-step tutorial to make a small no-code platformer with Yop2D: ground, a hero who jumps, pearls to collect, a patrolling enemy and a score.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Place the background and the ground",
+   "text": "A background, a ground with the \"Ground / wall\" behavior and a raised block."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Create the hero",
+   "text": "An animated character with the \"Platform character\" behavior, a joystick and a jump button."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Add the turtle",
+   "text": "An enemy with the \"Patrol (back and forth)\" behavior and the tag ennemi."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Place the three pearls",
+   "text": "Three pearls with the tag piece."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Show the score",
+   "text": "A score variable and a text that displays it."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Connect the nodes",
+   "text": "If object touches Tag → Destroy Object → Add to Variable → Modify Text."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Play",
+   "text": "Collect the three pearls to win."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>Your first platformer game</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../plateforme.html" hreflang="fr">Français</a> · <strong>English</strong></p>
+</header>
+<main>
+<p>In this tutorial you make a <strong>small platformer</strong> in about half an hour, without writing any code: a hero who runs and jumps, <strong>three pearls</strong> to collect, a <strong>turtle</strong> that walks back and forth on a block, and a <strong>score</strong>. If you get stuck, compare with the <a href="https://zinzin66.github.io/Yop2d-web/tests/plateforme-tuto-test.zip">finished project</a> (import it into Yop2D: its nodes are tidied up with frames and sticky notes that explain everything).</p>
+<figure class="capture"><a href="../img/plateforme_jeu.png"><img src="../img/plateforme_jeu.png" alt="Screenshot of the platformer: the hero, pearls, a turtle on a block and the score at the top left" loading="lazy"></a><figcaption>The finished game: the score is at the top left.</figcaption></figure>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>an empty game in <strong>landscape</strong> (tap <strong>New game</strong> on the start screen);</li><li>the images of the <strong>Prehistory</strong> theme in the <strong>Yop2D Library</strong> (free, royalty-free): background, ground, hero, turtle and pearl;</li><li>a little time: every step is short.</li></ul>
+</div>
+<div class="tip">👉 The screenshots are in English. On your device the same buttons are written in the language of Yop2D, in the same place.</div>
+<h2>Step 1: the background, the ground and a block</h2>
+<div class="method">
+<ol><li>Tap <strong>Object</strong> (top left), then <strong>Image</strong>. The <strong>Yop2D Library</strong> opens: choose the <strong>Prehistory</strong> theme, the <strong>Backgrounds</strong> folder, then the <strong>jungle</strong> background. It places itself behind everything.</li><li>Do <strong>Object → Image</strong> again and take a <strong>grass ground</strong> in <strong>Ground and platforms</strong>. Place it at the very bottom and stretch it across the screen. Name it <strong>sol</strong> in the inspector.</li><li>Tap <strong>⚙ Behavior</strong> (in the inspector) and choose <strong>Ground / wall</strong>: the hero will walk on it and not fall through.</li><li>Add a small <strong>grass platform</strong> and place it higher, on the right, about 150 pixels above the ground. Give it the <strong>Ground / wall</strong> behavior too. Name it <strong>bloc</strong>.</li></ol>
+</div>
+<figure class="capture"><a href="../img/plateforme_comp_sol.png"><img src="../img/plateforme_comp_sol.png" alt="Object behavior window of the ground object with &quot;Ground / wall&quot; selected" loading="lazy"></a><figcaption>The "Ground / wall" behavior: the object does not move, you walk on it.</figcaption></figure>
+<div class="tip">👉 The hero jumps about 200 pixels high: a block 150 pixels above the ground is easy to reach. If you place it higher, you will need another platform to climb.</div>
+<h2>Step 2: the hero</h2>
+<div class="method">
+<ol><li><strong>Object → Image → Library</strong>, <strong>Prehistory</strong> theme, <strong>Characters</strong> folder. Choose the caveman with <strong>With its animations</strong>: the image and the animations (idle, walk…) are added at once. Put him on the ground and name him <strong>player</strong>.</li><li><strong>⚙ Behavior → Platform character</strong>: he walks, jumps and falls.</li><li>Add a Joystick at the bottom left and a round <strong>button</strong> at the bottom right for jumping. In the behavior window, choose this button as the <strong>jump button</strong>. The guide <a href="../en/deplacer-personnage.html">Moving a character</a>" explains the joystick and jumping.</li></ol>
+</div>
+<figure class="capture"><a href="../img/plateforme_comp_heros.png"><img src="../img/plateforme_comp_heros.png" alt="Object behavior window of the player object with &quot;Platform character&quot; selected" loading="lazy"></a><figcaption>The "Platform character" behavior for the hero.</figcaption></figure>
+<figure class="capture"><a href="../img/plateforme_editeur.png"><img src="../img/plateforme_editeur.png" alt="Yop2D editor with markers: Object button, object list, Behavior card, Play button" loading="lazy"></a><figcaption>The editor: 1 the <strong>Object</strong> button to add things, 2 the <strong>list of objects</strong> in the scene, 3 the <strong>Behavior</strong> card of the selected object, 4 the <strong>Play</strong> button.</figcaption></figure>
+<div class="tip">👉 Tap <strong>Play</strong> (4) to try: the hero should walk, jump and stay on the ground. Tap ■ to go back to the editor.</div>
+<h2>Step 3: the patrolling turtle</h2>
+<div class="method">
+<ol><li><strong>Object → Image → Library</strong>, <strong>Prehistory</strong> theme, <strong>Monsters</strong> folder: take the <strong>turtle</strong> and place it <strong>on the block</strong>. Name it <strong>tortue</strong>.</li><li><strong>⚙ Behavior → Patrol (back and forth)</strong>: it walks by itself one way then the other and turns around at the edge of the block. No node needed.</li><li>In the inspector, <strong>For the nodes</strong> section, write the tag <strong>ennemi</strong>. You will need it in step 6.</li></ol>
+</div>
+<figure class="capture"><a href="../img/plateforme_comp_tortue.png"><img src="../img/plateforme_comp_tortue.png" alt="Object behavior window of the turtle with &quot;Patrol&quot; selected" loading="lazy"></a><figcaption>The "Patrol (back and forth)" behavior: perfect for an enemy.</figcaption></figure>
+<div class="tip">👉 On the block, leave a little room on each side of the turtle: it turns around just before the edge.</div>
+<h2>Step 4: the three pearls</h2>
+<div class="method">
+<ol><li><strong>Object → Image → Library</strong>, <strong>Prehistory</strong> theme, <strong>Objects</strong> folder: take the <strong>gold pearl</strong>. Place it within jumping reach, for example on the ground. Name it <strong>piece1</strong>.</li><li>In the inspector, <strong>For the nodes</strong> section, write the tag <strong>piece</strong> (no accent, all lowercase).</li><li>Tap <strong>Copy</strong> (at the top) twice: the copies appear near the original. Move them: one in the air above the ground, the last one <strong>above the block</strong>, high enough that the turtle cannot touch it. They keep the same tag <strong>piece</strong>.</li></ol>
+</div>
+<figure class="capture"><a href="../img/plateforme_tag.png"><img src="../img/plateforme_tag.png" alt="Inspector of the pearl piece1 showing the tag piece" loading="lazy"></a><figcaption>The tag <strong>piece</strong> on each pearl: one single rule will serve all three.</figcaption></figure>
+<div class="tip">👉 A <strong>tag</strong> is a family name. Here the three pearls share the same one, so you only build the nodes once.</div>
+<h2>Step 5: the score</h2>
+<div class="method">
+<ol><li>In the left panel, <strong>Variables</strong> section, tap <strong>+</strong> and create a variable <strong>score</strong>: type <strong>integer</strong>, starting value <strong>0</strong>, <strong>local</strong> to the scene.</li><li><strong>Object → Text</strong>: write <strong>Pièces : 0</strong>, put it at the top left and name it <strong>texteScore</strong>. To keep it readable, make it bigger (font size 60 to 70); if you put a small <strong>dark panel</strong> behind it, check that the text is <strong>in front</strong> (its <strong>Z</strong> must be higher than the panel's).</li></ol>
+</div>
+<figure class="capture"><a href="../img/plateforme_variable.png"><img src="../img/plateforme_variable.png" alt="Left panel of the editor with the score variable and the plus button" loading="lazy"></a><figcaption>The <strong>score</strong> variable (1) is created with the <strong>+</strong> button.</figcaption></figure>
+<h2>Step 6: the nodes</h2>
+<p>Now tell the game what happens when the hero touches something. Tap <strong>Blueprint</strong> (top right): the node screen opens. To place a node, open a category on the left and tap it; to connect two nodes, drag a wire from the output of the first to the input of the next.</p>
+<div class="method">
+<ol><li><strong>When the hero touches a pearl.</strong> Place the If object touches Tag event: <strong>Object A</strong> = <strong>player</strong>, <strong>Tag</strong> = <strong>piece</strong>. Connect, in order: Destroy Object (on <strong>The involved object</strong>, i.e. the pearl just touched), Add to Variable (variable <strong>score</strong>, value <strong>1</strong>), then Modify Text (object <strong>texteScore</strong>, text written with the value <code>="Pièces : " + score</code>, which shows the score).</li><li><strong>When the score reaches 3.</strong> Add a Condition node after it with <code>=score &gt;= 3</code>. On its <strong>True</strong> output, connect: Modify Text (texteScore, text <strong>BRAVO</strong>), Wait (6 seconds) then Restart the scene.</li><li><strong>When the hero touches the turtle.</strong> A second If object touches Tag event: <strong>Object A</strong> = <strong>player</strong>, <strong>Tag</strong> = <strong>ennemi</strong>. After it: Screen flash, Small message at the bottom of the screen (a small "Ouch!" message), Wait (1 second) then Restart the scene.</li><li><strong>Stay inside the screen.</strong> A Every frame event connected to Clamp to screen (object <strong>player</strong>) keeps the hero from leaving the level.</li></ol>
+</div>
+<figure class="capture"><a href="../img/plateforme_noeud.png"><img src="../img/plateforme_noeud.png" alt="Settings window of the &quot;If an object touches a tag&quot; node: Object A player, Tag piece" loading="lazy"></a><figcaption>The event's settings window: 1 the object that touches (<strong>player</strong>), 2 the tag touched (<strong>piece</strong>).</figcaption></figure>
+<figure class="capture"><a href="../img/plateforme_blueprint.png"><img src="../img/plateforme_blueprint.png" alt="Blueprint screen of the game: three groups of nodes in colored frames with sticky notes" loading="lazy"></a><figcaption>The finished Blueprint: one frame per idea (pearls, enemy, stay inside the screen).</figcaption></figure>
+<div class="tip">👉 In a node's window you do not have to type object names: tap them in the left list. Remember to <strong>save</strong> (💾) before going back to the editor.</div>
+<h2>Step 7: play!</h2>
+<p>Tap <strong>Play</strong>. Run, jump, collect the pearls: the text at the top left counts them. Climb onto the block to take the last pearl without touching the turtle. After three pearls, <strong>BRAVO</strong> appears, then the game restarts.</p>
+<figure class="capture"><a href="../img/plateforme_bravo.png"><img src="../img/plateforme_bravo.png" alt="The game after three pearls: the text BRAVO at the top left" loading="lazy"></a><figcaption>Three pearls collected: <strong>BRAVO</strong>.</figcaption></figure>
+<h2>Going further</h2>
+<ul><li>Add more pearls, turtles and blocks: the nodes you already built keep working thanks to the <strong>tags</strong>.</li><li>Add <strong>sounds</strong> (a "ding" for each pearl) with the Play sound node, or a background <strong>music</strong>.</li><li>Give the hero <strong>lives</strong>: <a href="../en/vie-game-over.html">Losing lives and game over</a>.</li><li>Go to a <strong>next level</strong> when you win: <a href="../en/niveau-suivant.html">Going to the next level</a>.</li></ul>
+
+<div class="nav">
+<a href="index.html">← All guides</a>
+<a href="../en/deplacer-personnage.html">Next guide: Move a character →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>
