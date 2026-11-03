@@ -524,6 +524,8 @@ def llms(t):
         "",
         f"Official app: \"Yop2D: 2D Game Maker\" on Google Play, free, no ads (package com.ludexa.moteur): {PLAY}",
         "",
+        f"Full guide for AI assistants (how the engine works, common mistakes, every node with its exact name): {SITE}llms-full.txt . Read it before answering Yop2D questions.",
+        "",
         "Yop2D is made by an independent developer. The interface, built-in help, guides and "
         "node reference are available in 9 languages: " + ", ".join(NOMS_LANGUES[l] for l in LANGUES) + ".",
         "",
