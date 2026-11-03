@@ -99,6 +99,7 @@ Always use the exact node names of the node reference. A node marked `[newer tha
 6. Wrong or missing node: the user may have an older Yop2D (check the [newer than …] marks).
 7. A node is missing in the list on a school-mode device: School mode hides advanced nodes.
 8. Music or sound does not play: the file must be in the project's Sounds; OGG is the safest format.
+9. "How do I select an object that is in another scene (for example the HUD)?" The node list "On what?" only shows the objects of the scene whose Blueprint is open; the HUD has its own Blueprint and objects. Three ways: (a) in the Blueprint, tap the scene-name button at the top and choose "Global logic (all scenes)": there the list shows the objects of every scene, HUD included; (b) give the HUD object a tag (Inspector → "For nodes" part) and in the game scene choose the group Tags → "# tag" (tags of all scenes are listed); (c) cleanest: the game scene changes a global variable (for example `score`) and the HUD's own Blueprint uses the event "When Variable Changes" to update its text with `="Score: " + score` (global variables are shared by all scenes).
 
 ## Links
 
