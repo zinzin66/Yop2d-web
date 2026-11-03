@@ -6,7 +6,7 @@
 
 - Yop2D is a **no-code** 2D game engine for Android. Users build games by touching and connecting **nodes** (a visual script called the **Blueprint**). **Never write programming code** (no Java, no Python, no Unity or Godot code). Give numbered steps using the exact names of buttons, nodes and settings.
 - **Use only the nodes listed at the end of this file.** Never invent a node, a setting or a button. If you are not sure something exists, say so and suggest asking on the Yop2D Discord.
-- Node names change with the interface language. The names below are the English ones. Other languages: https://zinzin66.github.io/Yop2d-web/noeuds/fr.html (also es, de, it, pt, ru, zh, ja).
+- Node names change with the interface language. The list below uses the English names; the table "Node names in every language" at the end gives the exact name in the 8 other languages. **Reply in the user's language and copy the node names from that table: never translate a name yourself.** Do not confuse "Go to a point (path)" / "Go to an object (path)" (automatic pathfinding) with "Follow the path" (a hand-made path from the Assets Path editor). Do not assume the user has the newest version: the version they tell you decides which nodes exist.
 - Some nodes are marked **[newer than 1.0.1142]**: they are NOT in the public Google Play version yet, only in the Discord test version. If the user cannot find one, tell them to update Yop2D or join the test version.
 - The user is usually a beginner on a **phone or tablet** (touch screen, no mouse). Keep answers short and simple. Do not use jargon without explaining it.
 - Ask for what you need: the Yop2D version (start screen), which scene the node is in, the exact settings of the node, and what they expected versus what happens. The best thing a user can paste is the text of their Blueprint: in the Blueprint, the `{ }` button shows the nodes of the current scene as text.
@@ -418,3 +418,290 @@ Always use the exact node names of the node reference. A node marked `[newer tha
 - **Cut a link** [newer than 1.0.1142] (Inputs: Name of the link to cut, Or: name of an object whose links are all cut): Cuts a link: write its name, or write an object's name to cut all of its links. The objects separate and each falls on its own (a collapsing bridge, a cut rope, a detaching cabin). Example: a trapped bridge: when the hero touches the lever, cut the link “plank_3”.
 - **Grab with the finger (physics)** [newer than 1.0.1142] (Inputs: Action, Only objects with this tag (empty = all), Softness of the grip): Lets you grab a physics object with the finger and drag it, like in real life: the object follows the finger with a bit of elasticity, pushes the others and can get stuck. Put it under “Finger down” (action “Grab and drag”): while the finger is down, the object under it is dragged; as soon as the finger lifts, it is released by itself (or use the “Let go” action). You can restrict the grab to objects with a tag, and set the softness of the grip. Example: a crate puzzle: the player moves crates with a fingertip to build a tower.
 - **If the physics object…** [newer than 1.0.1142] (Inputs: Object, Question, Speed from which it counts (pixels per second), Grace time (seconds, for “has just touched the ground”)  →  Outputs: True / False): Asks a question about a physics object and follows the “true” or “false” exit: is it standing on something (to allow a jump), does it touch something, does it touch something above, is it at rest (asleep), is it moving fast, falling, rising. For “moves fast”, “falling” and “rising” the threshold in pixels per second is set in the advanced settings. You can also read values directly in a formula: object.vitesse, object.masse, object.vitesseRotation. Example: a platformer jump: “Jump button” → If the object is standing on something → set downward speed to -900.
+
+## Node names in every language
+
+The user's Yop2D may be in any of 9 languages. When the user writes in another language, use the node names from this table and never translate a node name yourself. English name first, then the exact name in fr, es, de, it, pt, ru, zh, ja.
+
+### Events
+
+- **On Start** → fr: Au Démarrage | es: Al Iniciar | de: Beim Start | it: All'Avvio | pt: Ao Iniciar | ru: При старте | zh: 启动时 | ja: 起動時
+- **Every frame** → fr: À chaque image | es: Cada fotograma | de: Jeden Frame | it: Ogni frame | pt: A cada frame | ru: Каждый кадр | zh: 每帧 | ja: 毎フレーム
+- **End of Click** → fr: Fin de Clic | es: Fin de Clic | de: Ende des Klicks | it: Fine del Clic | pt: Fim de Clique | ru: Конец клика | zh: 点击结束 | ja: クリック終了
+- **On Object Click** → fr: Au Clic sur Objet | es: Al Clic en Objeto | de: Bei Objektklick | it: Al Clic sull'Oggetto | pt: Ao Clicar no Objeto | ru: Клик по объекту | zh: 点击对象时 | ja: オブジェクトクリック時
+- **Object Released** → fr: Fin de Clic sur Objet | es: Fin de Clic en Objeto | de: Klick auf Objekt beendet | it: Fine del Clic su Oggetto | pt: Fim do Clique no Objeto | ru: Конец клика по объекту | zh: 松开物体 | ja: オブジェクトを離した時
+- **Object Held Down** → fr: Maintenu sur Objet | es: Objeto Mantenido Pulsado | de: Objekt gehalten | it: Oggetto Tenuto Premuto | pt: Objeto Mantido Pressionado | ru: Объект удерживается | zh: 按住物体 | ja: オブジェクトを押している間
+- **Finger held down** → fr: Doigt appuyé | es: Dedo presionado | de: Finger gedrückt | it: Dito premuto | pt: Dedo pressionado | ru: Палец нажат | zh: 手指按住 | ja: 指で押している間
+- **Back button pressed** → fr: Bouton retour pressé | es: Botón atrás pulsado | de: Zurück-Taste gedrückt | it: Tasto indietro premuto | pt: Botão voltar pressionado | ru: Нажата кнопка «Назад» | zh: 按下返回键 | ja: 戻るボタンを押したとき
+- **On every new scene** → fr: À chaque nouvelle scène | es: En cada escena nueva | de: Bei jeder neuen Szene | it: A ogni nuova scena | pt: A cada nova cena | ru: При каждой новой сцене | zh: 每次进入新场景 | ja: 新しいシーンが始まるたび
+- **Drag Start** → fr: Début de Glisser | es: Inicio de Arrastre | de: Drag Start | it: Inizio Trascinamento | pt: Início de Arrastar | ru: Начало перетаскивания | zh: 开始拖拽 | ja: ドラッグ開始
+- **Drag End** → fr: Fin de Glisser | es: Fin de Arrastre | de: Drag Ende | it: Fine Trascinamento | pt: Fim de Arrastar | ru: Конец перетаскивания | zh: 结束拖拽 | ja: ドラッグ終了
+- **Collision A/B** → fr: Collision A/B | es: Colisión A/B | de: Kollision A/B | it: Collisione A/B | pt: Colisão A/B | ru: Столкновение A/B | zh: 碰撞 A/B | ja: 衝突 A/B
+- **Exit Zone** → fr: Sortie de zone | es: Salida de zona | de: Zone verlassen | it: Esci dalla Zona | pt: Saída de zona | ru: Выход из зоны | zh: 离开区域 | ja: ゾーンから出る
+- **On Hover** → fr: Au Survol | es: Al Pasar por Encima | de: Beim Hovern | it: Al Passaggio del Mouse | pt: Ao Passar o Mouse | ru: Наведение мыши | zh: 鼠标悬停 | ja: ホバー時
+- **End of Hover** → fr: Fin de Survol | es: Fin de Pasar por Encima | de: Hover Ende | it: Fine Passaggio del Mouse | pt: Fim de Passar o Mouse | ru: Конец наведения | zh: 悬停结束 | ja: ホバー終了
+- **On Impact (Physics)** → fr: Au Choc (Physique) | es: Al Impacto (Física) | de: Bei Aufprall (Physik) | it: All'Impatto (Fisica) | pt: Ao Impacto (Física) | ru: Столкновение (Физика) | zh: 物理撞击 | ja: 物理的な衝突時
+- **When Variable Changes** → fr: Quand Variable Change | es: Cuando Variable Cambia | de: Wenn Variable ändert | it: Quando la Variabile Cambia | pt: Quando Variável Muda | ru: Переменная изменена | zh: 当变量改变时 | ja: 変数が変更された時
+- **Local Event** → fr: Événement Local | es: Evento Local | de: Lokales Ereignis | it: Evento Locale | pt: Evento Local | ru: Локальное событие | zh: 本地事件 | ja: ローカルイベント
+- **On Action Click (Adventure)** → fr: Au Clic Action (Aventure) | es: Al Clic Acción (Aventura) | de: Bei Klick auf Aktion (Adventure) | it: Al Clic Azione (Avventura) | pt: Ao Clicar Ação (Aventura) | ru: Клик Действия (Adventure) | zh: 点击操作按钮 (冒险) | ja: アクションボタンクリック時 (アドベンチャー)
+- **If object touches Tag** → fr: Si objet touche Tag | es: Si el objeto toca el Tag | de: Wenn Objekt Tag berührt | it: Se l'oggetto tocca il Tag | pt: Se o objeto tocar no Tag | ru: Если объект касается тега | zh: 如果对象碰到标签 | ja: オブジェクトがタグに触れた場合
+
+### Scene & HUD
+
+- **Go to scene** → fr: Changer de scène | es: Ir a la escena | de: Zur Szene wechseln | it: Vai alla scena | pt: Ir para a cena | ru: Перейти к сцене | zh: 切换场景 | ja: シーンを切り替える
+- **Go to scene (by name)** → fr: Aller à la scène (par son nom) | es: Ir a la escena (por nombre) | de: Zur Szene (nach Name) | it: Vai alla scena (per nome) | pt: Ir para a cena (pelo nome) | ru: Перейти к сцене (по имени) | zh: 按名称切换场景 | ja: 名前でシーンへ移動
+- **Next scene** → fr: Scène suivante | es: Escena siguiente | de: Nächste Szene | it: Scena successiva | pt: Cena seguinte | ru: Следующая сцена | zh: 下一个场景 | ja: 次のシーン
+- **Previous scene** → fr: Scène précédente | es: Escena anterior | de: Vorherige Szene | it: Scena precedente | pt: Cena anterior | ru: Предыдущая сцена | zh: 上一个场景 | ja: 前のシーン
+- **Restart the scene** → fr: Recommencer la scène | es: Reiniciar la escena | de: Szene neu starten | it: Ricomincia la scena | pt: Reiniciar a cena | ru: Перезапустить сцену | zh: 重新开始场景 | ja: シーンをやり直す
+- **Open a HUD** → fr: Ouvrir un HUD | es: Abrir un HUD | de: HUD öffnen | it: Apri un HUD | pt: Abrir um HUD | ru: Открыть HUD | zh: 打开 HUD | ja: HUDを開く
+- **Close the HUD** → fr: Fermer le HUD | es: Cerrar el HUD | de: HUD schließen | it: Chiudi l'HUD | pt: Fechar o HUD | ru: Закрыть HUD | zh: 关闭 HUD | ja: HUDを閉じる
+- **Place a copy of a scene** → fr: Placer une copie d'une scène | es: Colocar una copia de una escena | de: Kopie einer Szene platzieren | it: Posiziona una copia di una scena | pt: Colocar uma cópia de uma cena | ru: Разместить копию сцены | zh: 放置场景副本 | ja: シーンのコピーを配置
+- **Destroy the copies of a scene** → fr: Détruire les copies d'une scène | es: Destruir las copias de una escena | de: Kopien einer Szene zerstören | it: Distruggi le copie di una scena | pt: Destruir as cópias de uma cena | ru: Уничтожить копии сцены | zh: 销毁场景副本 | ja: シーンのコピーを破棄
+- **Quit the game** → fr: Quitter le jeu | es: Salir del juego | de: Spiel beenden | it: Esci dal gioco | pt: Sair do jogo | ru: Выйти из игры | zh: 退出游戏 | ja: ゲームを終了
+- **Small message at the bottom of the screen** → fr: Petit message en bas de l'écran | es: Mensaje corto abajo de la pantalla | de: Kurze Nachricht unten am Bildschirm | it: Messaggio breve in fondo allo schermo | pt: Mensagem curta embaixo da tela | ru: Короткое сообщение внизу экрана | zh: 屏幕底部小提示 | ja: 画面下の小さなメッセージ
+- **Write to the log (for debugging)** → fr: Noter dans le journal (pour déboguer) | es: Anotar en el registro (para depurar) | de: Ins Protokoll schreiben (zur Fehlersuche) | it: Annota nel registro (per il debug) | pt: Anotar no registro (para depurar) | ru: Записать в журнал (для отладки) | zh: 写入日志（用于调试） | ja: ログに書く（デバッグ用）
+- **Follow with camera** → fr: Fixer la caméra | es: Fijar la cámara | de: Kamera fixieren | it: Fissa la camera | pt: Fixar a câmera | ru: Закрепить камеру | zh: 锁定相机 | ja: カメラを固定
+- **Camera limits** → fr: Limites de la caméra | es: Límites de la cámara | de: Kameragrenzen | it: Limiti della telecamera | pt: Limites da câmera | ru: Границы камеры | zh: 相机边界 | ja: カメラの範囲
+- **Scroll the camera with a finger** → fr: Faire défiler la caméra au doigt | es: Desplazar la cámara con el dedo | de: Kamera mit dem Finger verschieben | it: Scorrere la camera col dito | pt: Rolar a câmera com o dedo | ru: Прокручивать камеру пальцем | zh: 用手指拖动相机 | ja: 指でカメラを動かす
+- **Camera smoothing** → fr: Élasticité de la caméra | es: Suavizado de cámara | de: Kamera-Glättung | it: Morbidezza della camera | pt: Suavização da câmera | ru: Плавность камеры | zh: 相机平滑 | ja: カメラの滑らかさ
+- **Screen flash** → fr: Flash de l'écran | es: Destello de pantalla | de: Bildschirmblitz | it: Flash dello schermo | pt: Flash da tela | ru: Вспышка экрана | zh: 屏幕闪光 | ja: 画面フラッシュ
+- **Screen tint** → fr: Teinte de l'écran | es: Tinte de pantalla | de: Bildschirmtönung | it: Tinta dello schermo | pt: Tonalidade da tela | ru: Оттенок экрана | zh: 屏幕色调 | ja: 画面の色合い
+- **Vignette** → fr: Bords assombris | es: Bordes oscurecidos | de: Abgedunkelte Ränder | it: Bordi scuriti | pt: Bordas escurecidas | ru: Затемнение краёв | zh: 暗角 | ja: 周辺減光
+- **Screen fade** → fr: Fondu de l'écran | es: Fundido de pantalla | de: Bildschirmüberblendung | it: Dissolvenza dello schermo | pt: Esmaecimento da tela | ru: Затемнение экрана | zh: 屏幕淡入淡出 | ja: 画面フェード
+- **Atmosphere (rain, snow, night…)** → fr: Ambiance (pluie, neige, nuit…) | es: Ambiente (lluvia, nieve, noche…) | de: Stimmung (Regen, Schnee, Nacht…) | it: Atmosfera (pioggia, neve, notte…) | pt: Ambiente (chuva, neve, noite…) | ru: Атмосфера (дождь, снег, ночь…) | zh: 氛围（雨、雪、夜晚……） | ja: ふんいき（雨、雪、夜…）
+- **Zoom the screen** → fr: Zoomer l'écran | es: Hacer zoom en la pantalla | de: Bildschirm zoomen | it: Zoomare lo schermo | pt: Dar zoom na tela | ru: Приблизить экран | zh: 缩放画面 | ja: 画面をズーム
+- **Darkness and light mood** → fr: Obscurité et ambiance de lumière | es: Oscuridad y ambiente de luz | de: Dunkelheit und Lichtstimmung | it: Oscurità e atmosfera di luce | pt: Escuridão e clima de luz | ru: Темнота и световая атмосфера | zh: 黑暗与光线氛围 | ja: 暗さと光のふんいき
+- **Day and night cycle** → fr: Cycle jour et nuit | es: Ciclo de día y noche | de: Tag-Nacht-Zyklus | it: Ciclo giorno e notte | pt: Ciclo de dia e noite | ru: Смена дня и ночи | zh: 昼夜循环 | ja: 昼と夜のサイクル
+- **Camera shake** → fr: Tremblement de la caméra | es: Temblor de cámara | de: Kamera-Wackeln | it: Tremolio della camera | pt: Tremor da câmera | ru: Тряска камеры | zh: 相机抖动 | ja: カメラの振動
+- **Vibration** → fr: Vibration | es: Vibración | de: Vibration | it: Vibrazione | pt: Vibração | ru: Вибрация | zh: 振动 | ja: バイブレーション
+- **Save state** → fr: Sauvegarder l'état | es: Guardar estado | de: Zustand speichern | it: Salva stato | pt: Salvar estado | ru: Сохранить состояние | zh: 保存状态 | ja: 状態を保存
+- **Restore state** → fr: Restaurer l'état | es: Restaurar estado | de: Zustand wiederherstellen | it: Ripristina stato | pt: Restaurar estado | ru: Восстановить состояние | zh: 恢复状态 | ja: 状態を復元
+- **Save variables to a file** → fr: Sauvegarder les variables dans un fichier | es: Guardar variables en un archivo | de: Variablen in einer Datei speichern | it: Salva le variabili in un file | pt: Salvar variáveis em um arquivo | ru: Сохранить переменные в файл | zh: 把变量保存到文件 | ja: 変数をファイルに保存
+- **Load variables from a file** → fr: Charger les variables depuis un fichier | es: Cargar variables desde un archivo | de: Variablen aus einer Datei laden | it: Carica le variabili da un file | pt: Carregar variáveis de um arquivo | ru: Загрузить переменные из файла | zh: 从文件加载变量 | ja: ファイルから変数を読み込む
+
+### Time
+
+- **Wait** → fr: Attendre | es: Esperar | de: Warten | it: Attendere | pt: Esperar | ru: Ждать | zh: 等待 | ja: 待つ
+- **Repeat** → fr: Répéter | es: Repetir | de: Wiederholen | it: Ripetere | pt: Repetir | ru: Повторять | zh: 重复 | ja: 繰り返す
+- **Countdown** → fr: Compte à rebours | es: Cuenta atrás | de: Countdown | it: Conto alla rovescia | pt: Contagem regressiva | ru: Обратный отсчёт | zh: 倒计时 | ja: カウントダウン
+- **Stop a timer** → fr: Arrêter un minuteur | es: Detener un temporizador | de: Timer stoppen | it: Ferma un timer | pt: Parar um temporizador | ru: Остановить таймер | zh: 停止计时器 | ja: タイマーを止める
+- **Game speed (slow motion)** → fr: Vitesse du jeu (ralenti) | es: Velocidad del juego (cámara lenta) | de: Spielgeschwindigkeit (Zeitlupe) | it: Velocità del gioco (rallentatore) | pt: Velocidade do jogo (câmera lenta) | ru: Скорость игры (замедление) | zh: 游戏速度（慢动作） | ja: ゲーム速度（スロー）
+- **Pause the game** → fr: Mettre le jeu en pause | es: Pausar el juego | de: Spiel pausieren | it: Metti in pausa il gioco | pt: Pausar o jogo | ru: Поставить игру на паузу | zh: 暂停游戏 | ja: ゲームを一時停止
+- **Resume the game** → fr: Reprendre le jeu | es: Reanudar el juego | de: Spiel fortsetzen | it: Riprendi il gioco | pt: Retomar o jogo | ru: Продолжить игру | zh: 继续游戏 | ja: ゲームを再開
+- **Hit stop** → fr: Arrêt sur image (impact) | es: Pausa de impacto | de: Trefferstopp | it: Pausa d'impatto | pt: Pausa de impacto | ru: Стоп-кадр при ударе | zh: 打击停顿 | ja: ヒットストップ
+
+### Appearance & Objects
+
+- **Move Object** → fr: Déplacer Objet | es: Mover Objeto | de: Objekt bewegen | it: Sposta Oggetto | pt: Mover Objeto | ru: Переместить | zh: 移动对象 | ja: オブジェクトを移動
+- **Push object** → fr: Pousser objet | es: Empujar objeto | de: Objekt schieben | it: Spingi l'oggetto | pt: Empurrar objeto | ru: Толкнуть объект | zh: 推动对象 | ja: オブジェクトを押す
+- **Set a property** → fr: Modifier une propriété | es: Modificar una propiedad | de: Eigenschaft ändern | it: Modifica una proprietà | pt: Modificar uma propriedade | ru: Изменить свойство | zh: 修改属性 | ja: プロパティを変更
+- **Rotation** → fr: Rotation | es: Rotación | de: Rotation | it: Rotazione | pt: Rotação | ru: Вращение | zh: 旋转 | ja: 回転
+- **Transparency** → fr: Transparence | es: Transparencia | de: Transparenz | it: Trasparenza | pt: Transparência | ru: Прозрачность | zh: 透明度 | ja: 透明度
+- **Visibility** → fr: Visibilité | es: Visibilidad | de: Sichtbarkeit | it: Visibilità | pt: Visibilidade | ru: Видимость | zh: 可见性 | ja: 可視性
+- **Give a tag (object family)** → fr: Donner un tag (famille d'objets) | es: Dar una etiqueta (familia de objetos) | de: Tag geben (Objektfamilie) | it: Dare un tag (famiglia di oggetti) | pt: Dar uma tag (família de objetos) | ru: Присвоить тег (семейство объектов) | zh: 设置标签（对象分组） | ja: タグをつける（オブジェクトの仲間）
+- **Bring to front / send back** → fr: Mettre devant / derrière | es: Poner delante / detrás | de: Nach vorne / nach hinten | it: Metti davanti / dietro | pt: Colocar na frente / atrás | ru: Вперёд / назад | zh: 移到前面 / 后面 | ja: 前へ / 後ろへ
+- **Grow / shrink** → fr: Agrandir / rétrécir | es: Agrandar / encoger | de: Vergrößern / verkleinern | it: Ingrandire / rimpicciolire | pt: Aumentar / diminuir | ru: Увеличить / уменьшить | zh: 放大 / 缩小 | ja: 大きく / 小さく
+- **Destroy Object** → fr: Détruire Objet | es: Destruir Objeto | de: Objekt zerstören | it: Distruggi Oggetto | pt: Destruir Objeto | ru: Уничтожить объект | zh: 销毁对象 | ja: オブジェクトを破壊
+- **Destroy by Tag** → fr: Détruire par Tag | es: Destruir por Tag | de: Zerstören nach Tag | it: Distruggi tramite Tag | pt: Destruir por Tag | ru: Уничтожить по тегу | zh: 按标签销毁 | ja: タグで破壊
+- **Change Image** → fr: Changer Image | es: Cambiar Imagen | de: Bild ändern | it: Cambia Immagine | pt: Mudar Imagem | ru: Изменить изображение | zh: 更换图像 | ja: 画像を変更
+- **Modify Color** → fr: Modifier Couleur | es: Modificar Color | de: Farbe ändern | it: Modifica Colore | pt: Modificar Cor | ru: Изменить цвет | zh: 修改颜色 | ja: 色を変更
+- **Generate clone (Spawner)** → fr: Générer un clone (Spawner) | es: Generar clon (Spawner) | de: Klon erzeugen (Spawner) | it: Genera clone (Spawner) | pt: Gerar clone (Spawner) | ru: Клонировать (Spawner) | zh: 生成克隆 (生成器) | ja: クローンを生成 (スポナー)
+- **Color Filter** → fr: Filtre Couleur | es: Filtro de Color | de: Farbfilter | it: Filtro Colore | pt: Filtro de Cor | ru: Цветовой фильтр | zh: 颜色滤镜 | ja: カラーフィルター
+- **Color blending (light effect)** → fr: Mélange des couleurs (effet lumineux) | es: Mezcla de colores (efecto luminoso) | de: Farbmischung (Lichteffekt) | it: Miscela dei colori (effetto luminoso) | pt: Mistura de cores (efeito de luz) | ru: Смешивание цветов (световой эффект) | zh: 颜色混合（发光效果） | ja: 色の混ぜ方（光の効果）
+- **Mirror Effect / Invert** → fr: Effet Miroir / Inverser | es: Efecto Espejo / Invertir | de: Spiegeleffekt / Umkehren | it: Effetto Specchio / Inverti | pt: Efeito Espelho / Inverter | ru: Эффект зеркала / Отразить | zh: 镜像效果 / 翻转 | ja: ミラー効果 / 反転
+- **Lock / unlock the object** → fr: Bloquer / débloquer l'objet | es: Bloquear / desbloquear el objeto | de: Objekt sperren / entsperren | it: Blocca / sblocca l'oggetto | pt: Bloquear / desbloquear o objeto | ru: Заблокировать / разблокировать объект | zh: 锁定 / 解锁对象 | ja: オブジェクトをロック / 解除
+- **Background scrolling (depth)** → fr: Défilement du décor (profondeur) | es: Desplazamiento del fondo (profundidad) | de: Hintergrund-Bildlauf (Tiefe) | it: Scorrimento dello sfondo (profondità) | pt: Rolagem do cenário (profundidade) | ru: Прокрутка фона (глубина) | zh: 背景滚动（远近感） | ja: 背景のスクロール（奥行き）
+- **Link two objects** → fr: Lier deux objets | es: Vincular dos objetos | de: Zwei Objekte verknüpfen | it: Collega due oggetti | pt: Vincular dois objetos | ru: Связать два объекта | zh: 链接两个对象 | ja: 2つのオブジェクトをリンク
+- **Glowing halo** → fr: Halo lumineux | es: Halo luminoso | de: Leuchtender Schein | it: Alone luminoso | pt: Halo luminoso | ru: Светящийся ореол | zh: 发光光晕 | ja: 光るオーラ
+- **Particle effect** → fr: Effet de particules | es: Efecto de partículas | de: Partikeleffekt | it: Effetto particellare | pt: Efeito de partículas | ru: Эффект частиц | zh: 粒子效果 | ja: パーティクル効果
+- **Particles on / off** → fr: Allumer / éteindre les particules | es: Encender / apagar partículas | de: Partikel ein / aus | it: Accendi / spegni particelle | pt: Ligar / desligar partículas | ru: Включить / выключить частицы | zh: 开启 / 关闭粒子 | ja: パーティクルのオン / オフ
+- **Particle burst** → fr: Salve de particules | es: Ráfaga de partículas | de: Partikelstoß | it: Raffica di particelle | pt: Rajada de partículas | ru: Залп частиц | zh: 粒子爆发 | ja: パーティクル一斉放出
+- **Change particle preset** → fr: Changer le modèle de particules | es: Cambiar el modelo de partículas | de: Partikelvorlage ändern | it: Cambia il modello di particelle | pt: Mudar o modelo de partículas | ru: Сменить шаблон частиц | zh: 更改粒子预设 | ja: パーティクルのプリセットを変更
+- **Blink** → fr: Clignoter | es: Parpadear | de: Blinken | it: Lampeggiare | pt: Piscar | ru: Мигать | zh: 闪烁 | ja: 点滅する
+- **Create a copy of the object** → fr: Créer une copie de l'objet | es: Crear una copia del objeto | de: Eine Kopie des Objekts erstellen | it: Crea una copia dell'oggetto | pt: Criar uma cópia do objeto | ru: Создать копию объекта | zh: 创建对象的副本 | ja: オブジェクトのコピーを作る
+- **Shoot an object** → fr: Tirer un objet | es: Disparar un objeto | de: Ein Objekt abfeuern | it: Spara un oggetto | pt: Disparar um objeto | ru: Стрелять объектом | zh: 发射对象 | ja: オブジェクトを発射
+- **Launch a guided missile (curve)** → fr: Lancer un missile guidé (courbe) | es: Lanzar un misil guiado (curva) | de: Lenkrakete abfeuern (Kurve) | it: Lanciare un missile guidato (curva) | pt: Lançar um míssil guiado (curva) | ru: Запустить управляемую ракету (дуга) | zh: 发射制导导弹（弧线） | ja: 誘導ミサイルを撃つ（カーブ）
+- **Destroy the object after a delay (seconds)** → fr: Détruire l'objet après un délai (secondes) | es: Destruir el objeto tras un retraso (segundos) | de: Objekt nach einer Verzögerung zerstören (Sekunden) | it: Distruggere l'oggetto dopo un ritardo (secondi) | pt: Destruir o objeto após um atraso (segundos) | ru: Уничтожить объект через время (секунды) | zh: 延迟后销毁对象（秒） | ja: 一定時間後にオブジェクトを消す（秒）
+- **Team colour (replaces the pink in the drawing)** → fr: Couleur d'équipe (remplace le rose du dessin) | es: Color de equipo (reemplaza el rosa del dibujo) | de: Teamfarbe (ersetzt das Pink der Zeichnung) | it: Colore di squadra (sostituisce il rosa del disegno) | pt: Cor da equipe (substitui o rosa do desenho) | ru: Цвет команды (заменяет розовый на рисунке) | zh: 队伍颜色（替换图中的粉色） | ja: チームカラー（絵のピンクをおきかえる）
+- **Set Progress** → fr: Définir la Progression | es: Definir el Progreso | de: Fortschritt festlegen | it: Imposta Progresso | pt: Definir o Progresso | ru: Задать прогресс | zh: 设置进度 | ja: 進捗を設定
+- **Screen wrap** → fr: Traverser l'écran | es: Atravesar pantalla | de: Bildschirm durchqueren | it: Attraversa schermo | pt: Atravessar tela | ru: Пройти сквозь экран | zh: 屏幕穿透 | ja: 画面をループする
+- **Clamp to screen** → fr: Garder dans l'écran | es: Mantener en pantalla | de: Im Bildschirm behalten | it: Mantieni nello schermo | pt: Manter na tela | ru: Удерживать в экране | zh: 保持在屏幕内 | ja: 画面内に収める
+- **Electrocution** → fr: Électrocution | es: Electrocución | de: Stromschlag | it: Folgorazione | pt: Eletrocussão | ru: Удар током | zh: 触电 | ja: 感電
+- **Light source (torch, lantern…)** → fr: Source de lumière (torche, lanterne…) | es: Fuente de luz (antorcha, farol…) | de: Lichtquelle (Fackel, Laterne…) | it: Fonte di luce (torcia, lanterna…) | pt: Fonte de luz (tocha, lanterna…) | ru: Источник света (факел, фонарь…) | zh: 光源（火把、灯笼……） | ja: 光源（たいまつ、ランタン…）
+- **Turn off the object's light** → fr: Éteindre la lumière de l'objet | es: Apagar la luz del objeto | de: Licht des Objekts ausschalten | it: Spegni la luce dell'oggetto | pt: Apagar a luz do objeto | ru: Погасить свет объекта | zh: 关闭物体的光 | ja: オブジェクトの光を消す
+- **Shadow under the object** → fr: Ombre sous l'objet | es: Sombra bajo el objeto | de: Schatten unter dem Objekt | it: Ombra sotto l'oggetto | pt: Sombra sob o objeto | ru: Тень под объектом | zh: 物体下方的阴影 | ja: オブジェクトの下の影
+- **Object trail** → fr: Traînée derrière l'objet | es: Estela del objeto | de: Objektspur | it: Scia dell'oggetto | pt: Rastro do objeto | ru: Шлейф за объектом | zh: 对象拖尾 | ja: オブジェクトの軌跡
+- **Create object** → fr: Créer un objet | es: Crear objeto | de: Objekt erstellen | it: Crea oggetto | pt: Criar objeto | ru: Создать объект | zh: 创建对象 | ja: オブジェクトを作成
+- **Fade** → fr: Fondu | es: Fundido | de: Überblendung | it: Dissolvenza | pt: Esmaecer | ru: Затухание | zh: 淡入淡出 | ja: フェード
+
+### Variables & Inventory
+
+- **Modify Variable** → fr: Modifier Variable | es: Modificar Variable | de: Variable ändern | it: Modifica Variabile | pt: Modificar Variável | ru: Изменить переменную | zh: 修改变量 | ja: 変数を変更
+- **Add to Variable** → fr: Ajouter à Variable | es: Añadir a Variable | de: Zu Variable hinzufügen | it: Aggiungi alla Variabile | pt: Adicionar à Variável | ru: Добавить к переменной | zh: 增加变量值 | ja: 変数に加算
+- **Keep a variable between two values** → fr: Garder une variable entre deux valeurs | es: Mantener una variable entre dos valores | de: Variable zwischen zwei Werten halten | it: Tenere una variabile tra due valori | pt: Manter uma variável entre dois valores | ru: Держать переменную между двумя значениями | zh: 让变量保持在两个值之间 | ja: 変数を2つの値の間に保つ
+- **Random number** → fr: Nombre aléatoire | es: Número aleatorio | de: Zufallszahl | it: Numero casuale | pt: Número aleatório | ru: Случайное число | zh: 随机数 | ja: ランダムな数
+- **Add to inventory** → fr: Ajouter à l'inventaire | es: Añadir al inventario | de: Zum Inventar hinzufügen | it: Aggiungi all'inventario | pt: Adicionar ao inventário | ru: Добавить в инвентарь | zh: 加入物品栏 | ja: インベントリに追加
+- **Remove from inventory** → fr: Retirer de l'inventaire | es: Quitar del inventario | de: Aus dem Inventar entfernen | it: Rimuovi dall'inventario | pt: Remover do inventário | ru: Убрать из инвентаря | zh: 从物品栏移除 | ja: インベントリから削除
+- **If in inventory** → fr: Si dans l'inventaire | es: Si está en el inventario | de: Wenn im Inventar | it: Se è nell'inventario | pt: Se está no inventário | ru: Если в инвентаре | zh: 如果在物品栏中 | ja: インベントリにあるなら
+- **Combine two objects** → fr: Combiner deux objets | es: Combinar dos objetos | de: Zwei Objekte kombinieren | it: Combina due oggetti | pt: Combinar dois objetos | ru: Объединить два объекта | zh: 合并两个对象 | ja: 2つのオブジェクトを合わせる
+
+### Logic & Conditions
+
+- **Condition** → fr: Condition | es: Condición | de: Bedingung | it: Condizione | pt: Condição | ru: Условие | zh: 条件 | ja: 条件
+- **If joystick** → fr: Si joystick | es: Si joystick | de: Wenn Joystick | it: Se joystick | pt: Se joystick | ru: Если джойстик | zh: 如果摇杆 | ja: ジョイスティックが
+- **If on ground** → fr: Si au sol | es: Si está en el suelo | de: Wenn am Boden | it: Se è a terra | pt: Se está no chão | ru: Если на земле | zh: 如果在地面 | ja: 地面にいるなら
+- **If moving** → fr: Si en mouvement | es: Si se mueve | de: Wenn in Bewegung | it: Se in movimento | pt: Se está em movimento | ru: Если движется | zh: 如果在移动 | ja: 動いているなら
+- **Run one of my nodes** → fr: Lancer un de mes nœuds | es: Usar uno de mis nodos | de: Einen meiner Knoten starten | it: Avvia uno dei miei nodi | pt: Usar um dos meus nós | ru: Запустить один из моих узлов | zh: 运行我的节点 | ja: マイノードを実行
+- **Call event** → fr: Appeler un événement | es: Llamar evento | de: Ereignis aufrufen | it: Chiama evento | pt: Chamar evento | ru: Вызвать событие | zh: 调用事件 | ja: イベントを呼ぶ
+- **Sequence** → fr: Séquence | es: Secuencia | de: Sequenz | it: Sequenza | pt: Sequência | ru: Последовательность | zh: 顺序 | ja: シーケンス
+- **Cooldown** → fr: Cooldown | es: Enfriamiento | de: Abklingzeit | it: Ricarica | pt: Recarga | ru: Перезарядка | zh: 冷却 | ja: クールダウン
+- **If off-screen** → fr: Si hors écran | es: Si fuera de pantalla | de: Wenn außerhalb des Bildschirms | it: Se fuori schermo | pt: Se fora da tela | ru: Если за пределами экрана | zh: 如果在屏幕外 | ja: 画面外にいるなら
+- **If / Else** → fr: Si / Sinon | es: Si / Si no | de: Wenn / Sonst | it: Se / Altrimenti | pt: Se / Senão | ru: Если / Иначе | zh: 如果 / 否则 | ja: もし / それ以外
+- **By value** → fr: Selon la valeur | es: Según el valor | de: Je nach Wert | it: In base al valore | pt: Conforme o valor | ru: По значению | zh: 按值 | ja: 値によって
+
+### Texts & Dialogues
+
+- **Modify Text** → fr: Modifier Texte | es: Modificar Texto | de: Text ändern | it: Modifica Testo | pt: Modificar Texto | ru: Изменить текст | zh: 修改文本 | ja: テキストを変更
+- **Show dialogue** → fr: Afficher un dialogue | es: Mostrar diálogo | de: Dialog anzeigen | it: Mostra dialogo | pt: Mostrar diálogo | ru: Показать диалог | zh: 显示对话 | ja: ダイアログを表示
+- **Append to text** → fr: Ajouter au texte | es: Añadir al texto | de: Text anhängen | it: Aggiungi al testo | pt: Adicionar ao texto | ru: Добавить к тексту | zh: 追加到文本 | ja: テキストに追加
+
+### Movements & AI
+
+- **Play movement (steps)** → fr: Jouer le mouvement (étapes) | es: Reproducir movimiento (etapas) | de: Bewegung abspielen (Etappen) | it: Riprodurre il movimento (tappe) | pt: Reproduzir movimento (etapas) | ru: Запустить движение (этапы) | zh: 播放动作（步骤） | ja: 動きを再生（ステップ）
+- **Stop the movement** → fr: Arrêter le mouvement | es: Detener el movimiento | de: Bewegung stoppen | it: Fermare il movimento | pt: Parar o movimento | ru: Остановить движение | zh: 停止动作 | ja: 動きを止める
+- **Spin the object continuously** → fr: Faire tourner l'objet en continu | es: Hacer girar el objeto sin parar | de: Objekt ununterbrochen drehen | it: Far girare l'oggetto di continuo | pt: Girar o objeto sem parar | ru: Непрерывно вращать объект | zh: 让对象持续旋转 | ja: オブジェクトをずっと回す
+- **Follow the path** → fr: Suivre le parcours | es: Seguir el recorrido | de: Dem Weg folgen | it: Seguire il percorso | pt: Seguir o percurso | ru: Идти по маршруту | zh: 沿路线前进 | ja: ルートをたどる
+- **Stop following the path** → fr: Arrêter le parcours | es: Detener el recorrido | de: Weg abbrechen | it: Fermare il percorso | pt: Parar o percurso | ru: Остановить маршрут | zh: 停止路线 | ja: ルートをやめる
+- **Stop the object** → fr: Arrêter l'objet | es: Detener el objeto | de: Objekt stoppen | it: Ferma l'oggetto | pt: Parar o objeto | ru: Остановить объект | zh: 停止对象 | ja: オブジェクトを停止
+- **Stop movements** → fr: Stopper les mouvements | es: Detener movimientos | de: Bewegungen stoppen | it: Ferma i movimenti | pt: Parar movimentos | ru: Остановить движение | zh: 停止移动 | ja: 移動を停止
+- **Move forward continuously** → fr: Avancer en continu | es: Avanzar continuamente | de: Kontinuierlich vorwärts | it: Avanza continuamente | pt: Avançar continuamente | ru: Двигаться вперед | zh: 持续前进 | ja: 継続的に前進
+- **Go to an object (path)** → fr: Aller vers un objet (chemin) | es: Ir hacia un objeto (camino) | de: Zu einem Objekt gehen (Weg) | it: Andare verso un oggetto (percorso) | pt: Ir até um objeto (caminho) | ru: Идти к объекту (путь) | zh: 走向对象（寻路） | ja: オブジェクトへ行く（道さがし）
+- **Go to a point (path)** → fr: Aller à un point (chemin) | es: Ir a un punto (camino) | de: Zu einem Punkt gehen (Weg) | it: Andare a un punto (percorso) | pt: Ir até um ponto (caminho) | ru: Идти к точке (путь) | zh: 走到某个点（寻路） | ja: 場所へ行く（道さがし）
+- **Stop the path** → fr: Arrêter le chemin | es: Detener el camino | de: Weg stoppen | it: Fermare il percorso | pt: Parar o caminho | ru: Остановить путь | zh: 停止寻路 | ja: 道さがしを止める
+- **Place on a cell (column, row)** → fr: Placer sur une case (colonne, ligne) | es: Colocar en una casilla (columna, fila) | de: Auf ein Feld setzen (Spalte, Zeile) | it: Mettere su una casella (colonna, riga) | pt: Colocar em uma casa (coluna, linha) | ru: Поставить на клетку (столбец, строка) | zh: 放到某个格子（列，行） | ja: マスに置く（列、行）
+- **Center on its cell** → fr: Centrer sur sa case | es: Centrar en su casilla | de: Auf seinem Feld zentrieren | it: Centrare nella sua casella | pt: Centralizar na sua casa | ru: Выровнять по своей клетке | zh: 对齐到自己格子的中心 | ja: 自分のマスの真ん中に合わせる
+- **Go to the cell (path)** → fr: Aller à la case (chemin) | es: Ir a la casilla (camino) | de: Zum Feld gehen (Weg) | it: Vai alla casella (percorso) | pt: Ir para a casa (caminho) | ru: Идти к клетке (путь) | zh: 走到格子（寻路） | ja: マスへ行く（道）
+- **Move the piece one cell** → fr: Déplacer le pion d'une case | es: Mover la ficha una casilla | de: Figur ein Feld bewegen | it: Muovi la pedina di una casella | pt: Mover a peça uma casa | ru: Сдвинуть фишку на клетку | zh: 把棋子移动一格 | ja: コマを1マス動かす
+- **Chase an object** → fr: Poursuivre un objet | es: Perseguir un objeto | de: Objekt verfolgen | it: Insegui un oggetto | pt: Perseguir um objeto | ru: Преследовать | zh: 追踪对象 | ja: オブジェクトを追跡
+- **Flee an object** → fr: Fuir un objet | es: Huir de un objeto | de: Vor Objekt fliehen | it: Fuggi da un oggetto | pt: Fugir de um objeto | ru: Убегать | zh: 躲避对象 | ja: オブジェクトから逃げる
+- **Push at an angle** → fr: Pousser selon un angle | es: Empujar según un ángulo | de: In einem Winkel schieben | it: Spingi con un angolo | pt: Empurrar em um ângulo | ru: Толкнуть под углом | zh: 按角度推动 | ja: 角度を付けて押す
+- **Impulse (jump)** → fr: Impulsion (saut) | es: Impulso (salto) | de: Impuls (Sprung) | it: Impulso (salto) | pt: Impulso (salto) | ru: Импульс (прыжок) | zh: 冲力（跳跃） | ja: インパルス（ジャンプ）
+- **Change the behavior** → fr: Changer le comportement | es: Cambiar el comportamiento | de: Verhalten ändern | it: Cambia il comportamento | pt: Mudar o comportamento | ru: Изменить поведение | zh: 改变行为 | ja: ふるまいを変える
+- **Bounce around** → fr: Sautiller | es: Saltar | de: Hüpfen | it: Saltellare | pt: Saltitar | ru: Подпрыгивать | zh: 蹦跳 | ja: ぴょんぴょん跳ねる
+- **Face towards** → fr: Orienter vers | es: Orientar hacia | de: Ausrichten auf | it: Orienta verso | pt: Virar para | ru: Повернуть к | zh: 朝向 | ja: 向きを合わせる
+- **Glide to** → fr: Glisser vers | es: Deslizar hacia | de: Gleiten nach | it: Scivola verso | pt: Deslizar para | ru: Скользить к | zh: 滑向 | ja: スライド移動
+
+### Grids and puzzles
+
+- **Go to the next turn** → fr: Passer au tour suivant | es: Pasar al siguiente turno | de: Zum nächsten Zug | it: Passa al turno successivo | pt: Passar para o próximo turno | ru: Перейти к следующему ходу | zh: 进入下一回合 | ja: 次のターンへ
+- **If it is the turn of…** → fr: Si c'est le tour de… | es: Si es el turno de… | de: Wenn … am Zug ist | it: Se è il turno di… | pt: Se for a vez de… | ru: Если ходит… | zh: 如果轮到…… | ja: もし…の番なら
+- **Mark as having played** → fr: Marquer comme ayant joué | es: Marcar como ya jugado | de: Als gespielt markieren | it: Segna come già giocato | pt: Marcar como já jogou | ru: Отметить как сходившего | zh: 标记为已行动 | ja: 行動済みにする
+- **If the unit has already played** → fr: Si l'unité a déjà joué | es: Si la unidad ya jugó | de: Wenn die Einheit schon gespielt hat | it: Se l'unità ha già giocato | pt: Se a unidade já jogou | ru: Если юнит уже ходил | zh: 如果该单位已行动 | ja: もしユニットが行動済みなら
+- **Select the object** → fr: Sélectionner l'objet | es: Seleccionar el objeto | de: Objekt auswählen | it: Seleziona l'oggetto | pt: Selecionar o objeto | ru: Выбрать объект | zh: 选中对象 | ja: オブジェクトを選ぶ
+- **Deselect** → fr: Désélectionner | es: Deseleccionar | de: Auswahl aufheben | it: Deseleziona | pt: Desmarcar | ru: Снять выбор | zh: 取消选中 | ja: 選択をやめる
+- **If an object is selected** → fr: Si un objet est sélectionné | es: Si hay un objeto seleccionado | de: Wenn ein Objekt gewählt ist | it: Se un oggetto è selezionato | pt: Se há um objeto selecionado | ru: Если объект выбран | zh: 如果有选中的对象 | ja: もしオブジェクトが選ばれているなら
+- **If this object is the selected one** → fr: Si cet objet est le sélectionné | es: Si este objeto es el seleccionado | de: Wenn dieses Objekt das gewählte ist | it: Se questo oggetto è quello selezionato | pt: Se este objeto é o selecionado | ru: Если это выбранный объект | zh: 如果这个对象就是选中的 | ja: もしこのオブジェクトが選ばれたものなら
+- **Show reachable cells** → fr: Montrer les cases accessibles | es: Mostrar casillas accesibles | de: Erreichbare Felder zeigen | it: Mostra le caselle raggiungibili | pt: Mostrar casas alcançáveis | ru: Показать доступные клетки | zh: 显示可到达的格子 | ja: 行けるマスを表示
+- **Hide the cells** → fr: Cacher les cases | es: Ocultar las casillas | de: Felder verbergen | it: Nascondi le caselle | pt: Esconder as casas | ru: Скрыть клетки | zh: 隐藏格子 | ja: マスを隠す
+- **If the cell is reachable** → fr: Si la case est accessible | es: Si la casilla es accesible | de: Wenn das Feld erreichbar ist | it: Se la casella è raggiungibile | pt: Se a casa for alcançável | ru: Если клетка доступна | zh: 如果格子可到达 | ja: もしマスに行けるなら
+- **Give a unit sheet** → fr: Donner une fiche d'unité | es: Dar una ficha de unidad | de: Einheitenblatt geben | it: Dai una scheda unità | pt: Dar uma ficha de unidade | ru: Дать карточку юнита | zh: 给单位卡 | ja: ユニットカードをあたえる
+- **Attack** → fr: Attaquer | es: Atacar | de: Angreifen | it: Attacca | pt: Atacar | ru: Атаковать | zh: 攻击 | ja: こうげきする
+- **Apply data (unit, weapon)** → fr: Appliquer des données (unité, arme) | es: Aplicar datos (unidad, arma) | de: Daten anwenden (Einheit, Waffe) | it: Applica dati (unità, arma) | pt: Aplicar dados (unidade, arma) | ru: Применить данные (юнит, оружие) | zh: 应用数据（单位、武器） | ja: データをあてる（ユニット・ぶき）
+- **Set tile height** → fr: Définir la hauteur de cases | es: Definir la altura de casillas | de: Höhe von Feldern festlegen | it: Imposta l'altezza delle caselle | pt: Definir a altura das casas | ru: Задать высоту клеток | zh: 设置格子高度 | ja: マスの高さをきめる
+- **Give a state (poison, slow…)** → fr: Donner un état (poison, lent…) | es: Dar un estado (veneno, lento…) | de: Zustand geben (Gift, langsam…) | it: Dai uno stato (veleno, lento…) | pt: Dar um estado (veneno, lento…) | ru: Наложить состояние (яд, замедление…) | zh: 施加状态（中毒、减速…） | ja: じょうたいをあたえる（どく・おそい…）
+- **Remove a state** → fr: Retirer un état | es: Quitar un estado | de: Zustand entfernen | it: Rimuovi uno stato | pt: Remover um estado | ru: Снять состояние | zh: 移除状态 | ja: じょうたいをとりのぞく
+- **If the unit has the state…** → fr: Si l'unité a l'état… | es: Si la unidad tiene el estado… | de: Wenn die Einheit den Zustand hat… | it: Se l'unità ha lo stato… | pt: Se a unidade tem o estado… | ru: Если у юнита состояние… | zh: 如果单位处于状态… | ja: もしユニットがじょうたいなら…
+- **Area effect around an object** → fr: Effet de zone autour d'un objet | es: Efecto de área alrededor de un objeto | de: Flächeneffekt um ein Objekt | it: Effetto ad area attorno a un oggetto | pt: Efeito de área ao redor de um objeto | ru: Эффект области вокруг объекта | zh: 物体周围的范围效果 | ja: オブジェクトのまわりのはんいこうか
+- **Gain experience** → fr: Gagner de l'expérience | es: Ganar experiencia | de: Erfahrung gewinnen | it: Guadagna esperienza | pt: Ganhar experiência | ru: Получить опыт | zh: 获得经验 | ja: けいけんちをえる
+- **Remember the position** → fr: Mémoriser la position | es: Recordar la posición | de: Position merken | it: Memorizza la posizione | pt: Memorizar a posição | ru: Запомнить позицию | zh: 记住位置 | ja: いちをおぼえる
+- **Cancel the move** → fr: Annuler le déplacement | es: Cancelar el movimiento | de: Bewegung rückgängig | it: Annulla lo spostamento | pt: Cancelar o movimento | ru: Отменить перемещение | zh: 撤销移动 | ja: いどうをとりけす
+- **Play like a computer (AI)** → fr: Jouer comme un ordinateur (IA) | es: Jugar como un ordenador (IA) | de: Wie ein Computer spielen (KI) | it: Gioca come un computer (IA) | pt: Jogar como um computador (IA) | ru: Играть как компьютер (ИИ) | zh: 像电脑一样行动（AI） | ja: コンピューターのように動く（AI）
+- **Update the fog of war** → fr: Mettre à jour le brouillard de guerre | es: Actualizar la niebla de guerra | de: Kriegsnebel aktualisieren | it: Aggiorna la nebbia di guerra | pt: Atualizar a névoa de guerra | ru: Обновить туман войны | zh: 更新战争迷雾 | ja: 戦場のきりを更新する
+- **Remove the fog of war** → fr: Enlever le brouillard de guerre | es: Quitar la niebla de guerra | de: Kriegsnebel entfernen | it: Rimuovi la nebbia di guerra | pt: Remover a névoa de guerra | ru: Убрать туман войны | zh: 移除战争迷雾 | ja: 戦場のきりを消す
+- **Give health to the object** → fr: Donner de la vie à l'objet | es: Dar vida al objeto | de: Objekt Leben geben | it: Dai vita all'oggetto | pt: Dar vida ao objeto | ru: Дать объекту здоровье | zh: 给物体生命值 | ja: オブジェクトにHPをあたえる
+- **Deal damage** → fr: Infliger des dégâts | es: Infligir daño | de: Schaden zufügen | it: Infliggi danni | pt: Causar dano | ru: Нанести урон | zh: 造成伤害 | ja: ダメージをあたえる
+- **Heal** → fr: Soigner | es: Curar | de: Heilen | it: Curare | pt: Curar | ru: Лечить | zh: 治疗 | ja: かいふくする
+- **Change a statistic** → fr: Modifier une statistique | es: Cambiar una estadística | de: Statistik ändern | it: Cambia una statistica | pt: Mudar uma estatística | ru: Изменить характеристику | zh: 修改属性 | ja: ステータスを変える
+- **If the statistic…** → fr: Si la statistique… | es: Si la estadística… | de: Wenn die Statistik… | it: Se la statistica… | pt: Se a estatística… | ru: Если характеристика… | zh: 如果属性… | ja: もしステータスが…
+- **Choose a target** → fr: Choisir une cible | es: Elegir un objetivo | de: Ziel wählen | it: Scegli un bersaglio | pt: Escolher um alvo | ru: Выбрать цель | zh: 选择目标 | ja: ターゲットを選ぶ
+- **Fill the grid** → fr: Remplir la grille | es: Rellenar la cuadrícula | de: Raster füllen | it: Riempire la griglia | pt: Preencher a grade | ru: Заполнить сетку | zh: 填充网格 | ja: グリッドをうめる
+- **Play on the grid (match 3)** → fr: Jouer sur la grille (aligner 3) | es: Jugar en la cuadrícula (unir 3) | de: Auf dem Raster spielen (3 in einer Reihe) | it: Giocare sulla griglia (allinea 3) | pt: Jogar na grade (alinhar 3) | ru: Играть на сетке (три в ряд) | zh: 在网格上游戏（三消） | ja: グリッドで遊ぶ（3つそろえる）
+- **Shuffle the grid** → fr: Mélanger la grille | es: Mezclar la cuadrícula | de: Raster mischen | it: Mescolare la griglia | pt: Embaralhar a grade | ru: Перемешать сетку | zh: 打乱网格 | ja: グリッドをまぜる
+- **Shuffle places** → fr: Mélanger les places | es: Mezclar los lugares | de: Plätze mischen | it: Mescolare i posti | pt: Embaralhar os lugares | ru: Перемешать места | zh: 打乱位置 | ja: 場所をまぜる
+
+### Values (green wires)
+
+- **Height of the touched tile** → fr: Hauteur de la case touchée | es: Altura de la casilla tocada | de: Höhe des berührten Feldes | it: Altezza della casella toccata | pt: Altura da casa tocada | ru: Высота выбранной клетки | zh: 被点击格子的高度 | ja: タッチしたマスの高さ
+- **Height of the tile under an object** → fr: Hauteur de la case sous un objet | es: Altura de la casilla bajo un objeto | de: Höhe des Feldes unter einem Objekt | it: Altezza della casella sotto un oggetto | pt: Altura da casa sob um objeto | ru: Высота клетки под объектом | zh: 物体下方格子的高度 | ja: オブジェクトの下のマスの高さ
+- **Random number** → fr: Nombre au hasard | es: Número al azar | de: Zufallszahl | it: Numero a caso | pt: Número aleatório | ru: Случайное число | zh: 随机数 | ja: ランダムな数
+- **Object value** → fr: Valeur d'un objet | es: Valor de un objeto | de: Wert eines Objekts | it: Valore di un oggetto | pt: Valor de um objeto | ru: Значение объекта | zh: 对象的数值 | ja: オブジェクトの値
+- **Variable value** → fr: Valeur d'une variable | es: Valor de una variable | de: Wert einer Variable | it: Valore di una variabile | pt: Valor de uma variável | ru: Значение переменной | zh: 变量的值 | ja: 変数の値
+- **Calculation** → fr: Calcul | es: Cálculo | de: Rechnung | it: Calcolo | pt: Cálculo | ru: Вычисление | zh: 计算 | ja: 計算
+- **Touched column** → fr: Colonne touchée | es: Columna tocada | de: Berührte Spalte | it: Colonna toccata | pt: Coluna tocada | ru: Нажатый столбец | zh: 点中的列 | ja: タッチした列
+- **Touched row** → fr: Ligne touchée | es: Fila tocada | de: Berührte Zeile | it: Riga toccata | pt: Linha tocada | ru: Нажатая строка | zh: 点中的行 | ja: タッチした行
+- **Object's column** → fr: Colonne d'un objet | es: Columna de un objeto | de: Spalte eines Objekts | it: Colonna di un oggetto | pt: Coluna de um objeto | ru: Столбец объекта | zh: 对象所在的列 | ja: オブジェクトの列
+- **Object's row** → fr: Ligne d'un objet | es: Fila de un objeto | de: Zeile eines Objekts | it: Riga di un oggetto | pt: Linha de um objeto | ru: Строка объекта | zh: 对象所在的行 | ja: オブジェクトの行
+- **Turn number** → fr: Numéro du tour | es: Número del turno | de: Zugnummer | it: Numero del turno | pt: Número do turno | ru: Номер хода | zh: 回合数 | ja: ターン数
+- **Steps to reach the touched cell** → fr: Pas pour aller sur la case touchée | es: Pasos para llegar a la casilla tocada | de: Schritte bis zum berührten Feld | it: Passi per la casella toccata | pt: Passos para chegar à casa tocada | ru: Шагов до выбранной клетки | zh: 到触摸格子的步数 | ja: タッチしたマスまでの歩数
+- **Terrain of the touched cell** → fr: Terrain de la case touchée | es: Terreno de la casilla tocada | de: Gelände des berührten Feldes | it: Terreno della casella toccata | pt: Terreno da casa tocada | ru: Местность выбранной клетки | zh: 触摸格子的地形 | ja: タッチしたマスの地形
+- **Terrain cost of the touched cell** → fr: Coût du terrain de la case touchée | es: Coste del terreno de la casilla tocada | de: Geländekosten des berührten Feldes | it: Costo del terreno della casella toccata | pt: Custo do terreno da casa tocada | ru: Цена местности выбранной клетки | zh: 触摸格子的地形消耗 | ja: タッチしたマスの地形コスト
+- **Terrain under an object** → fr: Terrain sous un objet | es: Terreno bajo un objeto | de: Gelände unter einem Objekt | it: Terreno sotto un oggetto | pt: Terreno sob um objeto | ru: Местность под объектом | zh: 物体下方的地形 | ja: オブジェクトの下の地形
+- **Terrain defense under an object** → fr: Défense du terrain sous un objet | es: Defensa del terreno bajo un objeto | de: Geländeverteidigung unter einem Objekt | it: Difesa del terreno sotto un oggetto | pt: Defesa do terreno sob um objeto | ru: Защита местности под объектом | zh: 物体下方地形的防御 | ja: オブジェクトの下の地形の防御
+- **Distance between 2 objects** → fr: Distance entre 2 objets | es: Distancia entre 2 objetos | de: Abstand zwischen 2 Objekten | it: Distanza tra 2 oggetti | pt: Distância entre 2 objetos | ru: Расстояние между 2 объектами | zh: 两个对象的距离 | ja: 2つのオブジェクトの距離
+
+### Transitions
+
+- **Screen transition (circle, star…)** → fr: Transition de l'écran (rond, étoile…) | es: Transición de pantalla (círculo, estrella…) | de: Bildschirmübergang (Kreis, Stern…) | it: Transizione dello schermo (cerchio, stella…) | pt: Transição de tela (círculo, estrela…) | ru: Переход экрана (круг, звезда…) | zh: 画面转场（圆形、星形……） | ja: 画面の切りかえ（まる、星…）
+- **Go to scene with a transition** → fr: Changer de scène avec transition | es: Ir a la escena con transición | de: Mit Übergang zur Szene wechseln | it: Vai alla scena con transizione | pt: Ir para a cena com transição | ru: Перейти к сцене с переходом | zh: 带转场切换场景 | ja: 切りかえ効果つきでシーンへ
+
+### Animations
+
+- **Play animation** → fr: Jouer l'animation | es: Reproducir animación | de: Animation abspielen | it: Riproduci animazione | pt: Reproduzir animação | ru: Запустить анимацию | zh: 播放动画 | ja: アニメを再生
+- **Stop animation** → fr: Arrêter l'animation | es: Detener animación | de: Animation stoppen | it: Ferma animazione | pt: Parar animação | ru: Остановить анимацию | zh: 停止动画 | ja: アニメを停止
+- **Pause animation** → fr: Pause de l'animation | es: Pausar animación | de: Animation pausieren | it: Metti in pausa l'animazione | pt: Pausar animação | ru: Пауза анимации | zh: 暂停动画 | ja: アニメを一時停止
+- **Resume animation** → fr: Reprendre l'animation | es: Reanudar animación | de: Animation fortsetzen | it: Riprendi animazione | pt: Retomar animação | ru: Продолжить анимацию | zh: 继续动画 | ja: アニメを再開
+- **Animation speed** → fr: Vitesse de l'animation | es: Velocidad de animación | de: Animationstempo | it: Velocità animazione | pt: Velocidade da animação | ru: Скорость анимации | zh: 动画速度 | ja: アニメの速さ
+
+### Audio
+
+- **Play sound** → fr: Jouer un son | es: Reproducir sonido | de: Sound abspielen | it: Riproduci suono | pt: Tocar som | ru: Воспроизвести звук | zh: 播放音效 | ja: 効果音を再生
+- **Play music** → fr: Jouer la musique | es: Reproducir música | de: Musik abspielen | it: Riproduci musica | pt: Tocar música | ru: Включить музыку | zh: 播放音乐 | ja: 音楽を再生
+- **Stop music** → fr: Arrêter la musique | es: Detener música | de: Musik stoppen | it: Ferma la musica | pt: Parar música | ru: Остановить музыку | zh: 停止音乐 | ja: 音楽を停止
+
+### Story and dialogues
+
+- **Say a line** → fr: Dire une phrase | es: Decir una frase | de: Einen Satz sagen | it: Dire una frase | pt: Dizer uma frase | ru: Сказать фразу | zh: 说一句话 | ja: セリフを言う
+- **Ask a choice** → fr: Poser un choix | es: Proponer una elección | de: Eine Wahl stellen | it: Proporre una scelta | pt: Propor uma escolha | ru: Предложить выбор | zh: 提出选择 | ja: 選択肢を出す
+- **Change the background** → fr: Changer le décor | es: Cambiar el decorado | de: Hintergrund wechseln | it: Cambiare lo sfondo | pt: Mudar o cenário | ru: Сменить фон | zh: 更换背景 | ja: 背景を変える
+- **Pass through the scenery** → fr: Passage dans le décor | es: Pasar por el decorado | de: Durch den Hintergrund ziehen | it: Passare nello sfondo | pt: Passar pelo cenário | ru: Пролёт по фону | zh: 穿过背景 | ja: 背景を横切る
+- **Stop the passing images** → fr: Arrêter les passages dans le décor | es: Detener las imágenes que pasan | de: Vorbeiziehende Bilder stoppen | it: Fermare le immagini che passano | pt: Parar as imagens que passam | ru: Остановить пролетающие картинки | zh: 停止经过的图片 | ja: 横切る画像を止める
+- **Show / hide a character** → fr: Montrer / cacher un personnage | es: Mostrar / ocultar un personaje | de: Figur zeigen / verstecken | it: Mostrare / nascondere un personaggio | pt: Mostrar / esconder um personagem | ru: Показать / скрыть персонажа | zh: 显示 / 隐藏角色 | ja: キャラを出す / 消す
+- **Animate a character** → fr: Animer un personnage | es: Animar un personaje | de: Figur animieren | it: Animare un personaggio | pt: Animar um personagem | ru: Анимировать персонажа | zh: 让角色动起来 | ja: キャラを動かす
+- **Novel mode (full-screen text)** → fr: Mode roman (texte plein écran) | es: Modo novela (texto a pantalla completa) | de: Romanmodus (Text im Vollbild) | it: Modalità romanzo (testo a schermo intero) | pt: Modo romance (texto em tela cheia) | ru: Режим романа (текст на весь экран) | zh: 小说模式（全屏文字） | ja: ノベルモード（全画面テキスト）
+- **SMS mode (phone conversation)** → fr: Mode SMS (conversation sur téléphone) | es: Modo SMS (conversación en el móvil) | de: SMS-Modus (Chat am Handy) | it: Modalità SMS (conversazione sul telefono) | pt: Modo SMS (conversa no celular) | ru: Режим SMS (переписка на телефоне) | zh: 短信模式（手机聊天） | ja: SMSモード（スマホで会話）
+- **Unlock an achievement** → fr: Débloquer un succès | es: Desbloquear un logro | de: Erfolg freischalten | it: Sbloccare un obiettivo | pt: Desbloquear uma conquista | ru: Открыть достижение | zh: 解锁成就 | ja: 実績を解除する
+- **Replayable scene (gallery)** → fr: Scène à rejouer (galerie) | es: Escena rejugable (galería) | de: Wiederholbare Szene (Galerie) | it: Scena da rigiocare (galleria) | pt: Cena para rever (galeria) | ru: Сцена для повтора (галерея) | zh: 可重播场景（画廊） | ja: リプレイできる場面（ギャラリー）
+- **End the story** → fr: Terminer l'histoire | es: Terminar la historia | de: Geschichte beenden | it: Terminare la storia | pt: Terminar a história | ru: Завершить историю | zh: 结束故事 | ja: 物語を終える
+- **Friendship (hearts)** → fr: Amitié (cœurs) | es: Amistad (corazones) | de: Freundschaft (Herzen) | it: Amicizia (cuori) | pt: Amizade (corações) | ru: Дружба (сердечки) | zh: 友情（爱心） | ja: 友情（ハート）
+- **If the friendship…** → fr: Si l'amitié… | es: Si la amistad… | de: Wenn die Freundschaft… | it: Se l'amicizia… | pt: Se a amizade… | ru: Если дружба… | zh: 如果友情…… | ja: もし友情が…
+- **Story title screen** → fr: Écran titre de l'histoire | es: Pantalla de título de la historia | de: Titelbildschirm der Geschichte | it: Schermata del titolo della storia | pt: Tela de título da história | ru: Титульный экран истории | zh: 故事标题画面 | ja: 物語のタイトル画面
+- **Ask the player for a text (name…)** → fr: Demander un texte au joueur (prénom…) | es: Pedir un texto al jugador (nombre…) | de: Spieler nach einem Text fragen (Name…) | it: Chiedere un testo al giocatore (nome…) | pt: Pedir um texto ao jogador (nome…) | ru: Спросить текст у игрока (имя…) | zh: 让玩家输入文字（名字……） | ja: プレイヤーに文字を書いてもらう（名前…）
+
+### Screen filters
+
+- **Screen filter** → fr: Filtre d'écran | es: Filtro de pantalla | de: Bildschirmfilter | it: Filtro dello schermo | pt: Filtro de tela | ru: Фильтр экрана | zh: 屏幕滤镜 | ja: 画面フィルター
+- **Stop the filter** → fr: Arrêter le filtre | es: Detener el filtro | de: Filter stoppen | it: Ferma il filtro | pt: Parar o filtro | ru: Остановить фильтр | zh: 停止滤镜 | ja: フィルターを止める
+
+### Physics
+
+- **Set the physics world** → fr: Régler le monde physique | es: Ajustar el mundo físico | de: Physikwelt einstellen | it: Regola il mondo fisico | pt: Ajustar o mundo físico | ru: Настроить физический мир | zh: 设置物理世界 | ja: 物理の世界を設定
+- **Adjust a physics object** → fr: Régler un objet physique | es: Ajustar un objeto físico | de: Physik-Objekt einstellen | it: Regola un oggetto fisico | pt: Ajustar um objeto físico | ru: Настроить физический объект | zh: 设置物理物体 | ja: 物理オブジェクトを設定
+- **Push (physics force)** → fr: Pousser (force physique) | es: Empujar (fuerza física) | de: Schieben (Physikkraft) | it: Spingere (forza fisica) | pt: Empurrar (força física) | ru: Толкать (физическая сила) | zh: 推动（物理力） | ja: 押す（物理の力）
+- **Set the speed (physics)** → fr: Régler la vitesse (physique) | es: Ajustar la velocidad (física) | de: Tempo einstellen (Physik) | it: Regola la velocità (fisica) | pt: Ajustar a velocidade (física) | ru: Задать скорость (физика) | zh: 设置速度（物理） | ja: 速さを決める（物理）
+- **Launch (angle and speed)** → fr: Lancer (angle et vitesse) | es: Lanzar (ángulo y velocidad) | de: Abwerfen (Winkel und Tempo) | it: Lancia (angolo e velocità) | pt: Lançar (ângulo e velocidade) | ru: Бросить (угол и скорость) | zh: 发射（角度和速度） | ja: 投げる（角度と速さ）
+- **Explosion (physics blast)** → fr: Explosion (souffle physique) | es: Explosión (onda física) | de: Explosion (Druckwelle) | it: Esplosione (soffio fisico) | pt: Explosão (sopro físico) | ru: Взрыв (взрывная волна) | zh: 爆炸（物理冲击波） | ja: 爆発（ふきとばし）
+- **Link two objects** → fr: Relier deux objets | es: Unir dos objetos | de: Zwei Objekte verbinden | it: Collega due oggetti | pt: Ligar dois objetos | ru: Соединить два объекта | zh: 连接两个物体 | ja: 2つのオブジェクトをつなぐ
+- **Adjust a link** → fr: Régler une liaison | es: Ajustar una unión | de: Verbindung einstellen | it: Regola un collegamento | pt: Ajustar uma ligação | ru: Настроить связь | zh: 调整连接 | ja: つなぎを調整
+- **Cut a link** → fr: Couper une liaison | es: Cortar una unión | de: Verbindung trennen | it: Taglia un collegamento | pt: Cortar uma ligação | ru: Разорвать связь | zh: 切断连接 | ja: つなぎを切る
+- **Grab with the finger (physics)** → fr: Saisir avec le doigt (physique) | es: Agarrar con el dedo (física) | de: Mit dem Finger greifen (Physik) | it: Afferra con il dito (fisica) | pt: Agarrar com o dedo (física) | ru: Схватить пальцем (физика) | zh: 用手指抓取（物理） | ja: 指でつかむ（物理）
+- **If the physics object…** → fr: Si l'objet physique… | es: Si el objeto físico… | de: Wenn das Physik-Objekt… | it: Se l'oggetto fisico… | pt: Se o objeto físico… | ru: Если физический объект… | zh: 如果物理物体… | ja: もし物理オブジェクトが…
