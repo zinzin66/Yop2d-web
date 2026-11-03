@@ -15,6 +15,7 @@ TEXTE = """# Yop2D, full guide for AI assistants
 
 ## How to answer a Yop2D user
 
+- **Never answer "this is not possible in Yop2D" before reading the sections "Which tool for which need" and "Frequent mistakes" below.** Many things that look impossible have a ready solution there (for example using objects of another scene, see below). If you still find no way, say you are not sure and suggest the Yop2D Discord instead of saying it is impossible.
 - Yop2D is a **no-code** 2D game engine for Android. Users build games by touching and connecting **nodes** (a visual script called the **Blueprint**). **Never write programming code** (no Java, no Python, no Unity or Godot code). Give numbered steps using the exact names of buttons, nodes and settings.
 - **Use only the nodes listed at the end of this file.** Never invent a node, a setting or a button. If you are not sure something exists, say so and suggest asking on the Yop2D Discord.
 - Node names change with the interface language. The list below uses the English names; the table "Node names in every language" at the end gives the exact name in the 8 other languages. **Reply in the user's language and copy the node names from that table: never translate a name yourself.** Do not confuse "Go to a point (path)" / "Go to an object (path)" (automatic pathfinding) with "Follow the path" (a hand-made path from the Assets Path editor). Do not assume the user has the newest version: the version they tell you decides which nodes exist.
@@ -58,7 +59,7 @@ TEXTE = """# Yop2D, full guide for AI assistants
 - Touch a node's frame to open its **settings window**: ① On what? (which object), ② Settings. The left list inserts objects, variables, tags and values.
 - Dropping a wire into empty space opens a list of nodes to add. The wand button tidies the nodes. The ⬚ button selects several nodes to copy, paste or delete. Note and frame tools add sticky notes and titled frames to explain the nodes.
 - **"The involved object"** (in English; "L'objet impliqué" in French) is the other object in a touch or click event: for "If object touches Tag", it is the object that was touched. This is how one setup affects the right pearl, enemy or card. "The selected object" is the one chosen with the selection nodes.
-- A node only works in the scene whose Blueprint contains it (the Blueprint button shows the scene name; the HUD has its own Blueprint, where button clicks must be). There is also a **global logic** that runs in every scene (the first line of the scene list in the Blueprint) and **My nodes** (reusable nodes you build yourself, with settings).
+- A node only works in the scene whose Blueprint contains it (the Blueprint button shows the scene name; the HUD has its own Blueprint, where button clicks must be). **But a node CAN act on objects of another scene** (for example the HUD from the game scene): use the global logic, a tag, or a global variable with the event "When Variable Changes" (details in "Frequent mistakes", item 9). There is also a **global logic** that runs in every scene (the first line of the scene list in the Blueprint) and **My nodes** (reusable nodes you build yourself, with settings).
 - To react to a click on several objects, use the target `tag:name`. For several objects at once in touch events, put the same tag on all.
 - Prefabs: objects inside a prefab are renamed when placed ("_2"), so formulas must not name them; read variables of the object the node targets.
 - Dialogues and translations: `dialogues.txt` (Assets) holds `key = text` and `key.en = …`, `key.fr = …`; the "Show a dialogue" node reads them in the language of the phone or of a `langue` variable.
@@ -81,6 +82,9 @@ Always use the exact node names of the node reference. A node marked `[newer tha
 - Touching an enemy hurts: event **If object touches Tag**, then "Add to Variable" (`vies`, -1) and a Condition `=vies <= 0`.
 - Health bar, damage, healing: **Give health to the object**, **Deal damage**, **Heal**; health is the object variable `vie`.
 - Turn-based tactics on a grid: **Go to the next turn**, **Show reachable cells**, **Attack**, **Give a unit sheet**, **Choose a target**, **Play like a computer (AI)**. If the attack range/zone does not appear: check that the range number is not 0 or empty, that the minimum range is smaller than the range, that a "custom" shape has positions written, that the zone name is not the same as the movement zone (the second replaces the first), and that nothing calls **Hide the cells** right after.
+
+**Using objects of another scene (HUD, other level)**
+- Pick them with the Blueprint button that shows the scene name → "Global logic (all scenes)" (its object list contains every scene's objects), or give them a tag and target `# tag` from any scene, or share a global variable and react to it with the event "When Variable Changes". Never say it is impossible.
 
 **Showing and saving things**
 - Score or any number on screen: "Modify Text" / "Set a property" on a text with `="Score: " + score`.
