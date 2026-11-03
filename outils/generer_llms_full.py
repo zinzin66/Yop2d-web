@@ -228,8 +228,25 @@ def noms_frequents():
     return "\n".join(lignes)
 
 
+def noms_interface():
+    """Boutons / fenêtres de l'appli dans les 9 langues (aide/source/noms_interface.json, fait par extraire_noms_interface.py)."""
+    chemin = os.path.join(RACINE, "aide", "source", "noms_interface.json")
+    if not os.path.exists(chemin):
+        return ""
+    with open(chemin, encoding="utf-8") as f:
+        items = json.load(f)
+    lignes = ["## App buttons and windows, in every language", "",
+              "Use these exact names for the buttons and menus of the app (never translate them yourself). English first, then fr, es, de, it, pt, ru, zh, ja.", ""]
+    for it in items:
+        n = it["noms"]
+        autres = " | ".join(f"{lg}: {n[lg]}" for lg in LANGUES[1:])
+        lignes.append(f"- {it['role']}: **{n['en']}** → fr: {n['fr']} | " + autres.split(" | ", 0)[0].replace(f"fr: {n['fr']} | ", "") if False else
+                      f"- {it['role']}: **{n['en']}** → " + " | ".join(f"{lg}: {n[lg]}" for lg in ["fr", "es", "de", "it", "pt", "ru", "zh", "ja"]))
+    return "\n".join(lignes)
+
+
 def main():
-    sortie = TEXTE.replace("{site}", SITE).replace("{NOMS_FREQUENTS}", noms_frequents())
+    sortie = TEXTE.replace("{site}", SITE).replace("{NOMS_FREQUENTS}", noms_frequents() + "\n\n" + noms_interface())
     sortie += "\n## Guides\n\n" + "\n".join(guides()) + "\n"
     sortie += ("\n## Node names in every language\n\n"
                "The user's Yop2D may be in any of 9 languages. When the user writes in another language, use the node names "
