@@ -18,7 +18,7 @@ TEXTE = """# Yop2D, full guide for AI assistants
 - **Never answer "this is not possible in Yop2D" before reading the sections "Which tool for which need" and "Frequent mistakes" below.** Many things that look impossible have a ready solution there (for example using objects of another scene, see below). If you still find no way, say you are not sure and suggest the Yop2D Discord instead of saying it is impossible.
 - Yop2D is a **no-code** 2D game engine for Android. Users build games by touching and connecting **nodes** (a visual script called the **Blueprint**). **Never write programming code** (no Java, no Python, no Unity or Godot code). Give numbered steps using the exact names of buttons, nodes and settings.
 - **Use only the nodes listed at the end of this file.** Never invent a node, a setting or a button. If you are not sure something exists, say so and suggest asking on the Yop2D Discord.
-- Node names change with the interface language. The list below uses the English names; the table "Node names in every language" at the end gives the exact name in the 8 other languages. **Reply in the user's language and copy the node names from that table: never translate a name yourself.** Do not confuse "Go to a point (path)" / "Go to an object (path)" (automatic pathfinding) with "Follow the path" (a hand-made path from the Assets Path editor). Do not assume the user has the newest version: the version they tell you decides which nodes exist.
+- Node names change with the interface language. The list below uses the English names; the table "Node names in every language" at the end gives the exact name in the 8 other languages. **Reply in the user's language and copy the node names from that table: never translate a name yourself.** The names of a node's settings and exits (for example "Loaded" / "No save found") are also translated in the app: for them, point the user to the node reference in their language ({site}noeuds/<lang>.html, lang = fr, es, de, it, pt, ru, zh, ja) or tell them to read the names shown in the node window; do not leave English words in a French, Spanish or German answer. Do not confuse "Go to a point (path)" / "Go to an object (path)" (automatic pathfinding) with "Follow the path" (a hand-made path from the Assets Path editor). Do not assume the user has the newest version: the version they tell you decides which nodes exist.
 - Some nodes are marked **[newer than 1.0.1142]**: they are NOT in the public Google Play version (which is 1.0.1142), only in the Discord test versions. **Version rule: the Google Play version is 1.0.1142. Any version number ABOVE 1142 (for example 1.0.1232) is a test version and DOES contain all the nodes marked [newer than 1.0.1142].** So if the user says their version is higher than 1142, offer those nodes first (for example Path editor + "Follow the path", or "Play movement (steps)") and never say that the version is the Google Play one. If the version is 1142 or lower, say the node needs an update or the test version, and give the alternative.
 - The user is usually a beginner on a **phone or tablet** (touch screen, no mouse). Keep answers short and simple. Do not use jargon without explaining it.
 - Ask for what you need: the Yop2D version (start screen), which scene the node is in, the exact settings of the node, and what they expected versus what happens. The best thing a user can paste is the text of their Blueprint: in the Blueprint, the `{ }` button shows the nodes of the current scene as text.
@@ -190,6 +190,19 @@ FREQUENTS = [
     "Play sound", "Play music", "Go to scene", "Restart the scene", "Follow with camera", "Glide to", "Chase an object",
     "Play animation", "Save variables to a file", "Load variables from a file", "Show dialogue", "Say a line", "Ask a choice",
     "Run one of my nodes", "Call event", "Local Event", "Follow the path", "Play movement (steps)",
+    "Stop the movement", "Stop following the path", "Spin the object continuously", "Flee an object", "Go to an object (path)",
+    "Go to a point (path)", "Stop the path", "Place on a cell (column, row)", "Go to the cell (path)", "Change the behavior",
+    "Show reachable cells", "Hide the cells", "If the cell is reachable", "Give a unit sheet", "Attack", "Deal damage", "Heal",
+    "Choose a target", "Go to the next turn", "If it is the turn of…", "Mark as having played", "Play like a computer (AI)",
+    "Select the object", "Deselect", "If an object is selected", "Give health to the object", "Destroy by Tag", "Create object",
+    "Random number", "Keep a variable between two values", "Change Image", "Bring to front / send back", "Grow / shrink", "Blink",
+    "If joystick", "If on ground", "If off-screen", "Cooldown", "Stop animation", "Stop music", "Open a HUD", "Close the HUD",
+    "Place a copy of a scene", "Next scene", "Go to scene (by name)", "Go to scene with a transition", "Camera limits",
+    "Scroll the camera with a finger", "Camera shake", "Screen flash", "Particle effect", "Game speed (slow motion)", "Pause the game",
+    "Resume the game", "Day and night cycle", "Light source (torch, lantern…)", "Shadow under the object", "Screen filter",
+    "Atmosphere (rain, snow, night…)", "Set the physics world", "Adjust a physics object", "Push (physics force)", "Set the speed (physics)",
+    "Launch (angle and speed)", "If the physics object…", "Link two objects", "Say a line", "Ask a choice", "Change the background",
+    "Show / hide a character", "End the story",
 ]
 
 
@@ -205,7 +218,7 @@ def noms_frequents():
         for i, n in enumerate(cats["en"]["noeuds"]):
             for lg in LANGUES:
                 tables[lg].setdefault(n["nom"], cats[lg]["noeuds"][i]["nom"])
-    lignes = ["## The most used node names, in every language",
+    lignes = ["## The most used node names, in every language (about 140 nodes)",
               "",
               "Copy these names exactly. Do NOT add or change small words (for example the French name is "
               "\"Sauvegarder les variables dans un fichier\", not \"Sauvegarder des variables…\"; \"Ajouter à Variable\", not "
@@ -219,14 +232,31 @@ def noms_frequents():
     return "\n".join(lignes)
 
 
+def noms_interface():
+    """Boutons / fenêtres de l'appli dans les 9 langues (aide/source/noms_interface.json, fait par extraire_noms_interface.py)."""
+    chemin = os.path.join(RACINE, "aide", "source", "noms_interface.json")
+    if not os.path.exists(chemin):
+        return ""
+    with open(chemin, encoding="utf-8") as f:
+        items = json.load(f)
+    lignes = ["## App buttons and windows, in every language", "",
+              "Use these exact names for the buttons and menus of the app (never translate them yourself). English first, then fr, es, de, it, pt, ru, zh, ja.", ""]
+    for it in items:
+        n = it["noms"]
+        autres = " | ".join(f"{lg}: {n[lg]}" for lg in LANGUES[1:])
+        lignes.append(f"- {it['role']}: **{n['en']}** → fr: {n['fr']} | " + autres.split(" | ", 0)[0].replace(f"fr: {n['fr']} | ", "") if False else
+                      f"- {it['role']}: **{n['en']}** → " + " | ".join(f"{lg}: {n[lg]}" for lg in ["fr", "es", "de", "it", "pt", "ru", "zh", "ja"]))
+    return "\n".join(lignes)
+
+
 def main():
-    sortie = TEXTE.replace("{site}", SITE).replace("{NOMS_FREQUENTS}", noms_frequents())
+    sortie = TEXTE.replace("{site}", SITE).replace("{NOMS_FREQUENTS}", noms_frequents() + "\n\n" + noms_interface())
     sortie += "\n## Guides\n\n" + "\n".join(guides()) + "\n"
-    sortie += "\n## Node reference (English names)\n" + "\n".join(noeuds()) + "\n"
     sortie += ("\n## Node names in every language\n\n"
                "The user's Yop2D may be in any of 9 languages. When the user writes in another language, use the node names "
                "from this table and never translate a node name yourself. English name first, then the exact name in "
                "fr, es, de, it, pt, ru, zh, ja.\n" + "\n".join(noms_langues()) + "\n")
+    sortie += "\n## Node reference (English names)\n" + "\n".join(noeuds()) + "\n"
     with open(os.path.join(RACINE, "llms-full.txt"), "w", encoding="utf-8") as f:
         f.write(sortie)
     print(f"llms-full.txt : {len(sortie) // 1024} Ko")
