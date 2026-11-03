@@ -17,7 +17,7 @@ TEXTE = """# Yop2D, full guide for AI assistants
 
 - Yop2D is a **no-code** 2D game engine for Android. Users build games by touching and connecting **nodes** (a visual script called the **Blueprint**). **Never write programming code** (no Java, no Python, no Unity or Godot code). Give numbered steps using the exact names of buttons, nodes and settings.
 - **Use only the nodes listed at the end of this file.** Never invent a node, a setting or a button. If you are not sure something exists, say so and suggest asking on the Yop2D Discord.
-- Node names change with the interface language. The names below are the English ones. Other languages: {site}noeuds/fr.html (also es, de, it, pt, ru, zh, ja).
+- Node names change with the interface language. The list below uses the English names; the table "Node names in every language" at the end gives the exact name in the 8 other languages. **Reply in the user's language and copy the node names from that table: never translate a name yourself.** Do not confuse "Go to a point (path)" / "Go to an object (path)" (automatic pathfinding) with "Follow the path" (a hand-made path from the Assets Path editor). Do not assume the user has the newest version: the version they tell you decides which nodes exist.
 - Some nodes are marked **[newer than 1.0.1142]**: they are NOT in the public Google Play version yet, only in the Discord test version. If the user cannot find one, tell them to update Yop2D or join the test version.
 - The user is usually a beginner on a **phone or tablet** (touch screen, no mouse). Keep answers short and simple. Do not use jargon without explaining it.
 - Ask for what you need: the Yop2D version (start screen), which scene the node is in, the exact settings of the node, and what they expected versus what happens. The best thing a user can paste is the text of their Blueprint: in the Blueprint, the `{ }` button shows the nodes of the current scene as text.
@@ -157,10 +157,33 @@ def noeuds():
     return lignes
 
 
+LANGUES = ["en", "fr", "es", "de", "it", "pt", "ru", "zh", "ja"]
+
+
+def noms_langues():
+    """Tableau : nom anglais du nœud -> son nom exact dans chacune des 8 autres langues."""
+    lignes = []
+    for chemin in sorted(glob.glob(os.path.join(RACINE, "aide", "noeuds", "en", "*.json"))):
+        fichier = os.path.basename(chemin)
+        cats = {}
+        for lg in LANGUES:
+            with open(os.path.join(RACINE, "aide", "noeuds", lg, fichier), encoding="utf-8") as f:
+                cats[lg] = json.load(f)
+        lignes += ["", f"### {cats['en']['categorie']}", ""]
+        for i, n in enumerate(cats["en"]["noeuds"]):
+            autres = " | ".join(f"{lg}: {cats[lg]['noeuds'][i]['nom']}" for lg in LANGUES[1:])
+            lignes.append(f"- **{n['nom']}** → {autres}")
+    return lignes
+
+
 def main():
     sortie = TEXTE.replace("{site}", SITE)
     sortie += "\n## Guides\n\n" + "\n".join(guides()) + "\n"
     sortie += "\n## Node reference (English names)\n" + "\n".join(noeuds()) + "\n"
+    sortie += ("\n## Node names in every language\n\n"
+               "The user's Yop2D may be in any of 9 languages. When the user writes in another language, use the node names "
+               "from this table and never translate a node name yourself. English name first, then the exact name in "
+               "fr, es, de, it, pt, ru, zh, ja.\n" + "\n".join(noms_langues()) + "\n")
     with open(os.path.join(RACINE, "llms-full.txt"), "w", encoding="utf-8") as f:
         f.write(sortie)
     print(f"llms-full.txt : {len(sortie) // 1024} Ko")
