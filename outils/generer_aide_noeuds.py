@@ -29,6 +29,7 @@ EVENEMENTS = [
     ("noeud_event_maintenu_objet", "NoeudEventMaintenuObjet"),
     ("noeud_event_doigt_appuye", "NoeudEventDoigtAppuye"),
     ("noeud_event_bouton_retour", "NoeudEventBoutonRetour"),
+    ("noeud_event_nouvelle_scene", "NoeudEventNouvelleScene"),
     ("noeud_debut_de_glisser", "NoeudEventDebutGlisser"),
     ("noeud_fin_de_glisser", "NoeudEventFinGlisser"),
     ("noeud_collision_ab", "NoeudEventCollisionAB"),
@@ -154,6 +155,28 @@ def schema(langue, cibles, reglages, sorties, tr):
     return ARRIVEE.join(morceaux)
 
 
+NOTICE = {
+    "fr": "Pas encore dans la version Google Play {v} : disponible dans la version de test (Discord), il arrive avec la prochaine mise à jour.",
+    "en": "Not in the Google Play version {v} yet: available in the test version (Discord), coming with the next update.",
+    "es": "Aún no está en la versión de Google Play {v}: disponible en la versión de prueba (Discord), llegará con la próxima actualización.",
+    "de": "Noch nicht in der Google-Play-Version {v}: in der Testversion (Discord) verfügbar, kommt mit dem nächsten Update.",
+    "it": "Non ancora nella versione Google Play {v}: disponibile nella versione di prova (Discord), arriva con il prossimo aggiornamento.",
+    "pt": "Ainda não está na versão do Google Play {v}: disponível na versão de teste (Discord), chega na próxima atualização.",
+    "ru": "Пока нет в версии Google Play {v}: доступно в тестовой версии (Discord), появится в следующем обновлении.",
+    "zh": "Google Play 版本 {v} 中还没有：测试版（Discord）可用，将随下次更新推出。",
+    "ja": "Google Play 版 {v} にはまだありません。テスト版（Discord）で使えて、次のアップデートで届きます。",
+}
+
+
+def lire_nouveautes():
+    chemin = os.path.join(RACINE, "aide", "source", "nouveautes.json")
+    if not os.path.exists(chemin):
+        return "", set()
+    with open(chemin, encoding="utf-8") as f:
+        d = json.load(f)
+    return d.get("depuis", ""), set(d.get("noms_en", []))
+
+
 def main():
     if len(sys.argv) != 2:
         sys.exit(__doc__)
@@ -188,6 +211,7 @@ def main():
         if n["categorie"] not in ordre_categories:
             ordre_categories.append(n["categorie"])
 
+    depuis, nouveaux_en = lire_nouveautes()
     manques = []
     for l in LANGUES:
         dossier = os.path.join(RACINE, "aide", "noeuds", l)
@@ -219,6 +243,9 @@ def main():
                     entree["role"] = remplir(d[0], langue_texte, tr, noms_noeuds)
                     if len(d) > 1 and d[1]:
                         entree["exemple"] = remplir(d[1], langue_texte, tr, noms_noeuds)
+                if nouveaux_en and tr.get(n["cle_nom"], "en") in nouveaux_en:
+                    entree["nouveau"] = depuis
+                    entree["role"] = NOTICE[l].format(v=depuis) + (" " + entree["role"] if entree.get("role") else "")
                 liste.append(entree)
             slug = re.sub(r"[^a-z0-9]+", "-", cat.replace("cat_", "")).strip("-")
             with open(os.path.join(dossier, f"{i:02d}-{slug}.json"), "w", encoding="utf-8") as f:

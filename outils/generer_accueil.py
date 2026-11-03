@@ -213,7 +213,7 @@ def nombre_noeuds():
     for nom in os.listdir(dossier):
         if nom.endswith(".json"):
             with open(os.path.join(dossier, nom), encoding="utf-8") as f:
-                total += len(json.load(f)["noeuds"])
+                total += sum(1 for n in json.load(f)["noeuds"] if not n.get("nouveau"))   # sans les nœuds pas encore publics
     return total
 
 
@@ -603,11 +603,18 @@ def llms(t):
     lignes += [f"- [All nodes, {NOMS_LANGUES[l]}]({SITE}noeuds/{l}.html)" for l in LANGUES]
     dossier = os.path.join(RACINE, "aide", "noeuds", "en")
     lignes += ["", "Node categories and node names (as shown in the English editor):", ""]
+    depuis_nv = ""
+    chemin_nv = os.path.join(RACINE, "aide", "source", "nouveautes.json")
+    if os.path.exists(chemin_nv):
+        with open(chemin_nv, encoding="utf-8") as f:
+            depuis_nv = json.load(f).get("depuis", "")
+    if depuis_nv:
+        lignes += [f"Nodes marked \"[newer than {depuis_nv}]\" are NOT in the public Google Play version {depuis_nv} yet: they exist in the Discord test version and arrive with the next update. If the user has {depuis_nv}, tell them to update or join the test version first.", ""]
     for nom in sorted(os.listdir(dossier)):
         if nom.endswith(".json"):
             with open(os.path.join(dossier, nom), encoding="utf-8") as f:
                 cat = json.load(f)
-            lignes.append(f"- {cat['categorie']}: " + "; ".join(n["nom"] for n in cat["noeuds"]))
+            lignes.append(f"- {cat['categorie']}: " + "; ".join(n["nom"] + (f" [newer than {n['nouveau']}]" if n.get("nouveau") else "") for n in cat["noeuds"]))
     lignes += ["", "## Comparison with other engines", "", comp["intro"], ""]
     for ligne in comp["lignes"]:
         lignes.append(f"- {ligne[0]}: " + "; ".join(f"{c}: {v}" for c, v in zip(comp["colonnes"][1:], ligne[1:])))
