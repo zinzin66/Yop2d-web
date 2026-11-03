@@ -62,15 +62,43 @@ TEXTE = """# Yop2D, full guide for AI assistants
 - Dialogues and translations: `dialogues.txt` (Assets) holds `key = text` and `key.en = …`, `key.fr = …`; the "Show a dialogue" node reads them in the language of the phone or of a `langue` variable.
 - A project opened in an **older** Yop2D loses nodes it does not know when saved. Update Yop2D before opening projects made with a newer version.
 
-## Frequent recipes (beginner level)
+## Which tool for which need (answer with these, do not invent nodes)
 
-- **Collect items**: give items a tag (`piece`). Event "If object touches Tag" (object A = player, tag = piece) → "Destroy object" on **the involved object** → "Add to variable" (score, 1) → "Set a property" on a text with value `="Score: " + score`.
-- **Win after N items**: add a Condition `=score >= N`, then show a text, wait, and restart or go to the next scene.
-- **Enemy that walks by itself**: behavior Patrol (no node). Touching it: event "If object touches Tag" with tag `ennemi` → flash, wait, "Restart the scene". Lives: variable `vies`, "Add to variable" (-1), Condition `=vies <= 0`.
+Always use the exact node names of the node reference. A node marked `[newer than 1.0.1142]` is NOT in the Google Play version: say so and tell the user to update Yop2D (or use the alternative given here).
+
+**Moving things**
+- Enemy that walks by itself on a platform: behavior **Patrol (back and forth)** in the object's Behavior window. It turns around at the edge of the ground or at a wall. It has no pause and no fixed points.
+- Go back and forth between two points WITH a pause at each end: **Play movement (steps)** `[newer than 1.0.1142]` with a movement made in the Assets "Movement" editor (each step has a duration; looping), or **Follow the path** `[newer than 1.0.1142]` with a path from the Assets "Path" editor (each point has a waiting time). On the Play Store version: "Glide to" point B, "Wait", "Glide to" point A, "Wait", then "Call event" with a "Local Event" that restarts the same chain (avoid a "Repeat" with a fixed time, it drifts when the pauses change).
+- Enemy that chases the hero: **Chase an object**; flee: **Flee an object**. On a grid/maze: **Go to an object (path)**.
+- Move to the finger: **Glide to** with `=doigt.x` / `=doigt.y`.
+- Moving platform / lift: behavior **Elevator (back and forth)** (Behavior window) or a movement (steps) on a Ground object with "Carries what stands on it".
+- Bouncing ball without gravity: no ready behavior; use variables `vx` / `vy` with "Push object" and "Collision A/B" (see the guide "Breakout").
+- Camera: **Follow with camera**, **Camera limits** (enlarge them when the level is longer!), **Scroll the camera with a finger**.
+
+**Fighting and lives**
+- Touching an enemy hurts: event **If object touches Tag**, then "Add to Variable" (`vies`, -1) and a Condition `=vies <= 0`.
+- Health bar, damage, healing: **Give health to the object**, **Deal damage**, **Heal**; health is the object variable `vie`.
+- Turn-based tactics on a grid: **Go to the next turn**, **Show reachable cells**, **Attack**, **Give a unit sheet**, **Choose a target**, **Play like a computer (AI)**. If the attack range/zone does not appear: check that the range number is not 0 or empty, that the minimum range is smaller than the range, that a "custom" shape has positions written, that the zone name is not the same as the movement zone (the second replaces the first), and that nothing calls **Hide the cells** right after.
+
+**Showing and saving things**
+- Score or any number on screen: "Modify Text" / "Set a property" on a text with `="Score: " + score`.
+- Keep the score after closing the game: **Save variables to a file** then **Load variables from a file** (not "Save state", which only lasts until the game is closed).
+- Dialogues in several languages: `dialogues.txt` + **Show dialogue**.
+- Story with choices (visual novel): **Say a line**, **Ask a choice**, **Change the background**, **Story title screen**.
+- Day/night, torches, shadows: **Day and night cycle**, **Light source (torch, lantern…)**, **Shadow under the object** (or the Shadow checkbox in the Inspector) `[newer than 1.0.1142]`.
+
+**Sound and effects**
+- Music at start: event **On Start** → **Play music** (loop). Own music: Assets → Music editor. Own sound effects: Assets → "Sound FX" editor.
+- Explosion, sparks, rain: **Particle effect**; screen shake: **Camera shake**; slow motion: **Game speed (slow motion)**.
+
+**Recipes**
+- **Collect items**: give items a tag (`piece`). Event "If object touches Tag" (object A = player, tag = piece) → "Destroy Object" on **the involved object** → "Add to Variable" (score, 1) → "Set a property" on a text with value `="Score: " + score`.
+- **Win after N items**: Condition `=score >= N`, then show a text, "Wait", and "Restart the scene" or "Next scene".
 - **Platformer**: ground and platforms have behavior Ground / wall; the hero has Platform character; joystick (object to move = hero) and a jump button.
-- **Shoot**: the "Shoot" node with a model object; "Cooldown" limits the rate.
+- **Shoot**: **Shoot an object** with a model object; **Cooldown** limits the rate.
 - **Next level**: one scene per level, an arrival zone, "Go to scene".
-- **Save a score**: "Save variables" / "Load variables" nodes (they survive closing the game).
+- **Reuse a set of nodes**: Resources → My nodes (then "Run one of my nodes", with settings).
+- **Tower defense / paths**: **Follow the path** `[newer than 1.0.1142]` with a path that has a crossroads.
 
 ## Frequent mistakes to check first
 
