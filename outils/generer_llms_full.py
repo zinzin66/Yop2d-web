@@ -24,6 +24,8 @@ TEXTE = """# Yop2D, full guide for AI assistants
 - Always suggest the built-in checks when something does not work: **menu ☰ → Check my game** (lists missing variables, objects, files and unconnected nodes), and the detailed log (start screen → 🐞 button → tick "detailed log", play, then Copy).
 - If the question is about making a whole kind of game, point to the matching guide (list below) before improvising.
 
+{NOMS_FREQUENTS}
+
 ## The big picture
 
 - A **project** contains one or more **scenes** (levels, menus). A special scene called a **HUD** can be shown over a game scene for score, buttons and joystick. The start scene is the first one in the Scenes list (the star marks it).
@@ -177,8 +179,44 @@ def noms_langues():
     return lignes
 
 
+FREQUENTS = [
+    "On Start", "Every frame", "On Object Click", "If object touches Tag", "Collision A/B", "Back button pressed",
+    "Move Object", "Push object", "Set a property", "Destroy Object", "Give a tag (object family)", "Create a copy of the object",
+    "Shoot an object", "Add to Variable", "Modify Variable", "Condition", "If / Else", "Wait", "Repeat", "Modify Text",
+    "Play sound", "Play music", "Go to scene", "Restart the scene", "Follow with camera", "Glide to", "Chase an object",
+    "Play animation", "Save variables to a file", "Load variables from a file", "Show dialogue", "Say a line", "Ask a choice",
+    "Run one of my nodes", "Call event", "Local Event", "Follow the path", "Play movement (steps)",
+]
+
+
+def noms_frequents():
+    """Les noms les plus utilisés, dans les 9 langues (même ordre dans tous les fichiers d'aide)."""
+    tables = {lg: {} for lg in LANGUES}
+    for chemin in sorted(glob.glob(os.path.join(RACINE, "aide", "noeuds", "en", "*.json"))):
+        fichier = os.path.basename(chemin)
+        cats = {}
+        for lg in LANGUES:
+            with open(os.path.join(RACINE, "aide", "noeuds", lg, fichier), encoding="utf-8") as f:
+                cats[lg] = json.load(f)
+        for i, n in enumerate(cats["en"]["noeuds"]):
+            for lg in LANGUES:
+                tables[lg].setdefault(n["nom"], cats[lg]["noeuds"][i]["nom"])
+    lignes = ["## The most used node names, in every language",
+              "",
+              "Copy these names exactly. Do NOT add or change small words (for example the French name is "
+              "\"Sauvegarder les variables dans un fichier\", not \"Sauvegarder des variables…\"; \"Ajouter à Variable\", not "
+              "\"Ajouter à la variable\"). In French the word is \"nœud\" (not \"node\"). The full table is at the end of this file.",
+              ""]
+    for en in FREQUENTS:
+        if en not in tables["en"]:
+            continue
+        autres = " | ".join(f"{lg}: {tables[lg][en]}" for lg in LANGUES[1:])
+        lignes.append(f"- **{en}** → {autres}")
+    return "\n".join(lignes)
+
+
 def main():
-    sortie = TEXTE.replace("{site}", SITE)
+    sortie = TEXTE.replace("{site}", SITE).replace("{NOMS_FREQUENTS}", noms_frequents())
     sortie += "\n## Guides\n\n" + "\n".join(guides()) + "\n"
     sortie += "\n## Node reference (English names)\n" + "\n".join(noeuds()) + "\n"
     sortie += ("\n## Node names in every language\n\n"
