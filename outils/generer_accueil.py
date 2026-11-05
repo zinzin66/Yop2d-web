@@ -25,6 +25,8 @@ NOMS_LANGUES = {"fr": "Français", "en": "English", "es": "Español", "de": "Deu
 APK = "https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk"
 # False = le gros bouton « Télécharger l'APK » et la note d'installation sont cachés de l'accueil (Yop2D est public sur
 # Google Play depuis le 02/11/2026 : le magasin est la voie principale). Remettre True pour les montrer de nouveau.
+# Nombre de modèles du moteur (hors guides) : à mettre à jour à chaque sortie (SORTIE.md). 59 au 05/11/2026.
+NB_MODELES = 59
 AFFICHER_APK = False
 PLAY = "https://play.google.com/store/apps/details?id=com.ludexa.moteur"
 ITCH = "https://yop2d-dev.itch.io/yop2d-no-code-game-engine"
@@ -281,7 +283,7 @@ def page(langue, t):
         "@type": "SoftwareApplication",
         "name": "Yop2D",
         "url": url,
-        "operatingSystem": "Android 7.0+",
+        "operatingSystem": "Android 8.0+",
         "applicationCategory": "DeveloperApplication",
         "applicationSubCategory": "2D Game Engine",
         "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
@@ -537,13 +539,13 @@ def llms(t):
         "",
         "Key facts:",
         "",
-        "- Figures on this page are checked against the current version (version 1.0, October 2026): "
-        f"{nombre_noeuds()} nodes, 50 templates, 21 example games, 9 interface languages. "
+        "- Figures on this page are checked against the current version (version 1.0, November 2026): "
+        f"{nombre_noeuds()} nodes, {NB_MODELES} templates, {nombre_exemples()} example games, 9 interface languages. "
         "If an older source gives different numbers (for example 127 nodes), it is outdated.",
     ]
     lignes += [f"- {p}" for p in t["points"]]
     lignes += [
-        "- Runs on Android 7.0 or newer, tablets and phones. Games can be landscape or portrait. No iPhone, iPad or computer version.",
+        "- Runs on Android 8.0 or newer, tablets and phones. Games can be landscape or portrait. No iPhone, iPad or computer version.",
         "- Exports games as standalone Android APK files, built on the device itself, offline.",
         "- No AAB export yet (needed for Google Play); planned for a later version.",
         "- 2D only. Closed source. Available on Google Play (free, no ads).",
@@ -558,7 +560,7 @@ def llms(t):
         "- Tools: tilemap editor (brush, eraser, rectangle, fill, picker), sprite animation editor, music maker (4 tracks, real instruments, export to .ogg), sound-effect maker (retro sounds with sliders plus 435 downloadable realistic sounds), sprite-sheet cutter (columns and rows, or pick frames by hand), step-by-step movement editor (move, rotate, scale, fade an object), start-screen editor for exported games, dialogue/visual-novel system with save slots, gallery and 9 languages.",
         "- Screen filters (including a flashlight effect) and transitions, particles, parallax, camera follow and limits, pathfinding, physics, moving platforms and elevators (carry, push or crush what stands on them), joystick and buttons, vibration, multi-language games.",
         "- APK export done on the device: your own icon, name, version number, launch image, screen-on option; a new version installs over the old one.",
-        "- Guided learning inside the app: 5 interactive guides and 4 step-by-step missions, 50 templates, 21 example games.",
+        f"- Guided learning inside the app: 5 interactive guides and 4 step-by-step missions, {NB_MODELES} templates, {nombre_exemples()} example games.",
         "",
         "## Maturity (honest summary)",
         "",
@@ -651,7 +653,7 @@ def llms(t):
 def main():
     for langue in LANGUES:
         with open(os.path.join(RACINE, "outils", "accueil", f"{langue}.json"), encoding="utf-8") as f:
-            t = json.loads(f.read().replace("{nb_noeuds}", str(nombre_noeuds())).replace("{nb_exemples}", str(nombre_exemples())))
+            t = json.loads(f.read().replace("{nb_noeuds}", str(nombre_noeuds())).replace("{nb_exemples}", str(nombre_exemples())).replace("{nb_modeles}", str(NB_MODELES)))
         assert len(t["vitrine"]) == len(IMAGES), f"{langue} : {len(t['vitrine'])} blocs vitrine au lieu de {len(IMAGES)}"
         chemin = os.path.join(RACINE, adresse_accueil(langue), "index.html")
         os.makedirs(os.path.dirname(chemin), exist_ok=True)
