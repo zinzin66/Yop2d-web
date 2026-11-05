@@ -1,9 +1,10 @@
 # Demandes des utilisateurs (Discord, testeurs)
 
 Liste à relire facilement. Le détail technique est dans le `CLAUDE.md` du moteur (dépôt privé `yop2d-moteur`).
-Mise à jour : 07/11/2026 (statistiques).
+Mise à jour : 07/11/2026.
 
 ## Encore ouvert
+- **Abandon d'Android 7 (décision du 07/11/2026)** : trop lent pour un moteur avec des effets, aucun testeur ne l'a. Côté moteur : `minSdk` 26 dans le même build que PostHog (consignes dans `Doc/STATISTIQUES_POSTHOG.md`, dépôt privé). Les joueurs sur Android 7 gardent leur version actuelle, sans nouvelles mises à jour. **Côté site, À FAIRE LE JOUR DE LA PUBLICATION** (pas avant, car la version Play actuelle accepte encore Android 7) : remplacer « Android 7+ » par « Android 8+ » dans l'accueil (`outils/accueil/<langue>.json`, 9 langues, et `generer_accueil.py`), les FAQ, `llms.txt` (relancer `generer_accueil.py`), la page testeurs, `CLAUDE.md` (« Faits à respecter ») ; et, à la main par l'utilisateur : fiche Google Play et page itch.io. Publier la mise à jour avec un **déploiement progressif** (20 à 50 % des joueurs puis 100 %) et regarder *Android vitals* de la console.
 - **Plateaux hexagonaux ou en isométrique** avec un ancrage « pieds » (un objet qui dépasse de sa case) : idée Discord récente.
 - **Gyroscope** : contrôler un personnage en inclinant l'appareil : idée Discord récente.
 - **AdMob** (publicité dans les jeux exportés) : pas avant l'AAB des jeux. Le site dit « jamais de pub » pour Yop2D lui-même : décider de la formulation avant d'en parler.
