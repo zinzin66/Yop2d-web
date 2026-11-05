@@ -16,23 +16,20 @@
     {
       "nom": "Spin the object continuously",
       "schema": "<b>Inputs:</b> Object, Spin speed (degrees per second, negative = other way, 0 = stop)",
-      "role": "Not in the Google Play version 1.0.1142 yet: available in the test version (Discord), coming with the next update. Makes the object spin on itself without stopping, at the speed you choose in degrees per second. A negative number spins the other way, 0 stops the rotation. The movement follows game time: it stops while the game is paused.",
-      "exemple": "A spinning saw: \"At start\" → this node on the saw, speed 360.",
-      "nouveau": "1.0.1142"
+      "role": "Makes the object spin on itself without stopping, at the speed you choose in degrees per second. A negative number spins the other way, 0 stops the rotation. The movement follows game time: it stops while the game is paused.",
+      "exemple": "A spinning saw: \"At start\" → this node on the saw, speed 360."
     },
     {
       "nom": "Follow the path",
       "schema": "<b>Inputs:</b> Object, Path name, Speed (pixels per second), Turn to face the way it goes (yes / no), Random side offset (pixels, ±: each one walks in its own lane), Avoid the others: step aside to avoid overlapping and overtake slower ones (yes / no), Usable width to step aside (pixels on each side of the road centre), Image angle (0 = faces right, 90 = faces down) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived",
-      "role": "Not in the Google Play version 1.0.1142 yet: available in the test version (Discord), coming with the next update. Makes the object follow a path drawn with the “Path” tool in Assets: it is placed on the starting point, then moves from point to point at the chosen speed. At a crossroads it picks its exit as you set it (random, take turns, by a variable). The “Reached the end” exit fires when it reaches a point with no exit. With “Random side offset”, each object walks in its own lane (random shift): several enemies advance side by side instead of overlapping. With “Avoid the others”, an object that catches up with a slower one steps aside, overtakes it and returns to its lane; if the road is too narrow, it follows instead.",
-      "exemple": "An enemy appears: Follow the path “Enemy_path”, speed 150. “Reached the end” exit → Deal damage to the base, then Destroy the object.",
-      "nouveau": "1.0.1142"
+      "role": "Makes the object follow a path drawn with the “Path” tool in Assets: it is placed on the starting point, then moves from point to point at the chosen speed. At a crossroads it picks its exit as you set it (random, take turns, by a variable). The “Reached the end” exit fires when it reaches a point with no exit. With “Random side offset”, each object walks in its own lane (random shift): several enemies advance side by side instead of overlapping. With “Avoid the others”, an object that catches up with a slower one steps aside, overtakes it and returns to its lane; if the road is too narrow, it follows instead.",
+      "exemple": "An enemy appears: Follow the path “Enemy_path”, speed 150. “Reached the end” exit → Deal damage to the base, then Destroy the object."
     },
     {
       "nom": "Stop following the path",
       "schema": "<b>Input:</b> Object",
-      "role": "Not in the Google Play version 1.0.1142 yet: available in the test version (Discord), coming with the next update. Stops the object where it is: it no longer follows its path (the “Reached the end” exit will not fire).",
-      "exemple": "An enemy is frozen by a trap: Stop the path, then later Follow the path again so it moves on.",
-      "nouveau": "1.0.1142"
+      "role": "Stops the object where it is: it no longer follows its path (the “Reached the end” exit will not fire).",
+      "exemple": "An enemy is frozen by a trap: Stop the path, then later Follow the path again so it moves on."
     },
     {
       "nom": "Stop the object",
@@ -73,30 +70,26 @@
     {
       "nom": "Place on a cell (column, row)",
       "schema": "<b>Inputs:</b> Object, Column (0 = the first), Row (0 = the first)",
-      "role": "Not in the Google Play version 1.0.1142 yet: available in the test version (Discord), coming with the next update. Puts object A exactly in the middle of the chosen cell (column and row, counted from 0 at the top left). The grid is the one of the scene's tile map. With the 🔗 button, plug in “Touched column” and “Touched row” to send it to the cell the finger touches.",
-      "exemple": "move a piece to the touched cell in a board game.",
-      "nouveau": "1.0.1142"
+      "role": "Puts object A exactly in the middle of the chosen cell (column and row, counted from 0 at the top left). The grid is the one of the scene's tile map. With the 🔗 button, plug in “Touched column” and “Touched row” to send it to the cell the finger touches.",
+      "exemple": "move a piece to the touched cell in a board game."
     },
     {
       "nom": "Center on its cell",
       "schema": "<b>Input:</b> Object",
-      "role": "Not in the Google Play version 1.0.1142 yet: available in the test version (Discord), coming with the next update. Object A stays in its cell but goes back exactly to the middle. Handy when a move stopped between two cells.",
-      "exemple": "re-center a hero after its move.",
-      "nouveau": "1.0.1142"
+      "role": "Object A stays in its cell but goes back exactly to the middle. Handy when a move stopped between two cells.",
+      "exemple": "re-center a hero after its move."
     },
     {
       "nom": "Go to the cell (path)",
       "schema": "<b>Inputs:</b> Object, Column, Row, Speed, Diagonals (yes / no), These tags block the path (other units, separated by commas), Stay in the shown zone (the path never leaves the range), Name of the zone to respect (empty = the unnamed zone) &nbsp;→&nbsp; <b>Outputs:</b> Right away / Arrived",
-      "role": "Not in the Google Play version 1.0.1142 yet: available in the test version (Discord), coming with the next update. The object walks to the CENTER of the cell (column, row), going around walls, blocking terrains and the units with the given tags. Default: the cell touched by the finger. \"Arrived\" output once on the cell. In the advanced settings, “Stay in the shown zone” limits the path to the cells shown by “Show reachable cells”: the object never walks through a cell outside its range.",
-      "exemple": "send a hero to a touched blue cell.",
-      "nouveau": "1.0.1142"
+      "role": "The object walks to the CENTER of the cell (column, row), going around walls, blocking terrains and the units with the given tags. Default: the cell touched by the finger. \"Arrived\" output once on the cell. In the advanced settings, “Stay in the shown zone” limits the path to the cells shown by “Show reachable cells”: the object never walks through a cell outside its range.",
+      "exemple": "send a hero to a touched blue cell."
     },
     {
       "nom": "Move the piece one cell",
       "schema": "<b>Inputs:</b> Object, Direction, Speed, These tags block the path (other units, separated by commas) &nbsp;→&nbsp; <b>Outputs:</b> Arrived / Blocked (wall, terrain, unit, edge)",
-      "role": "Not in the Google Play version 1.0.1142 yet: available in the test version (Discord), coming with the next update. Moves the piece one cell (up, down, left, right), well centered. If the cell is a wall, a blocking terrain, a unit (tags) or the edge of the map: \"Blocked\" output. Otherwise \"Arrived\" at the end of the step.",
-      "exemple": "move a board-game piece with ◀ ▶ ▲ ▼ buttons.",
-      "nouveau": "1.0.1142"
+      "role": "Moves the piece one cell (up, down, left, right), well centered. If the cell is a wall, a blocking terrain, a unit (tags) or the edge of the map: \"Blocked\" output. Otherwise \"Arrived\" at the end of the step.",
+      "exemple": "move a board-game piece with ◀ ▶ ▲ ▼ buttons."
     },
     {
       "nom": "Chase an object",

@@ -1,0 +1,635 @@
+{
+  "titre_page": "How to make a tower defense in Yop2D? | Yop2D guide",
+  "description": "Make a tower defense game in Yop2D, with no code: draw the enemies' path, send waves, build towers that pick a target and shoot, and count credits and base lives with nodes.",
+  "h1": "How to make a tower defense?",
+  "carte": [
+    "Make a tower defense",
+    "Draw a path, send waves, build towers that shoot and defend your base."
+  ],
+  "etapes": [
+    [
+      "Draw the path",
+      "In Assets, tool « Path »: place points, link them, choose the start."
+    ],
+    [
+      "Create the Enemy scene",
+      "{{NoeudEventStart}} → {{definir_vie}} → {{suivre_parcours}} (path « Path »)."
+    ],
+    [
+      "Send the waves",
+      "{{repeter}} (every 1.5 seconds) → {{placer_copie_scene}} (Enemy)."
+    ],
+    [
+      "Create the Tower scene",
+      "{{repeter}} → {{choisir_cible}} → {{orienter_vers}} → {{cooldown}} → {{tirer}}."
+    ],
+    [
+      "Hit the enemies",
+      "{{NoeudEventCollisionTag}} (enemy, bullet) → {{infliger_degats}}."
+    ],
+    [
+      "Build towers with credits",
+      "{{NoeudEventClicObjet}} (spot) → {{ajouter_variable}} (credits, -50) → {{placer_copie_scene}} (Tower)."
+    ],
+    [
+      "Base lives and game over",
+      "{{suivre_parcours}} (reached the end) → {{ajouter_variable}} (base_life, -1) → {{appeler_evenement}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "In a tower defense, **enemies** walk along a **path** and you build **towers** that shoot them before they reach your **base**. Here the enemies follow a path you draw yourself, each tower picks the closest enemy and fires at it, and **credits** pay for new towers."
+    ],
+    [
+      "besoin",
+      [
+        "an {{lang:obj_prefix_image}} named **map**: the background of the game, 1920 x 1080 px, with a road drawn on it;",
+        "a few {{lang:obj_prefix_image}}s for the build spots (for example 120 x 120 px);",
+        "an {{lang:obj_prefix_image}} for the **enemy** (for example 64 x 64 px), one for the **tower** (120 x 120 px), one for the **cannon** (90 x 34 px, pointing right) and one for the **bullet** (24 x 24 px);",
+        "two {{lang:obj_prefix_texte}} objects: **creditsText** and **lifeText**, at the top of the screen."
+      ]
+    ],
+    [
+      "tip",
+      "This guide is written for a **1920 x 1080 landscape** game. The example **Tower defense (cubes)** (Examples tab) contains ready-made images in the folder **Images/TD**: open it and copy the ones you like into your project. You can also draw your own, the guide works with any style. The scenes **Enemy** and **Tower** are copied into the game many times: see the guide [Ready-made objects (prefabs)](guide:prefabs)."
+    ],
+    [
+      "h2",
+      "Step 1: the variables"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "In the left panel, open the **{{lang:panneau_ress_variables}}** section and create two variables, both with scope **{{lang:var_scope_globale}}** (all the scenes can use them) and type **{{lang:var_type_entier}}**:"
+          ]
+        ],
+        [
+          "ul",
+          [
+            "**credits**: starting value **150** (the money to build towers);",
+            "**base_life**: starting value **20** (how many enemies your base can take)."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 2: draw the path"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "The enemies follow a **path**: points linked together. You draw it on top of your map with the Path tool."
+        ],
+        [
+          "ol",
+          [
+            "Open the **Assets** window (Resources panel) and touch **Path**. The path editor opens, with your scene in the background.",
+            "Touch **New path** and name it **Path**.",
+            "With the tool **Place points**, touch the scene to place a first point on the left, where the enemies come in: it is the **Start**. Keep touching along your road: each new point is linked to the previous one.",
+            "Put the last point on your base: it has no exit, it is the **End**.",
+            "Touch **Watch it go** to see a dot travel along the path. Then close the editor: the path is saved by itself."
+          ]
+        ],
+        [
+          "tip",
+          "To change the start, touch a point and choose **Make this point the start**. To move a point, use the tool **Move**; to remove one, use **Erase**."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 3: the Enemy scene"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "An enemy is a **scene** of its own: every enemy you send into the game is a **copy** of it, with its own life. You build it once."
+        ],
+        [
+          "ol",
+          [
+            "Create a new scene named **Enemy** (menu **＋**, then **{{lang:popup_creer_scene_titre}}**).",
+            "In the scene **Enemy**, add an {{lang:obj_prefix_image}} named **enemy** at X = `0`, Y = `0`, and give it the tag **enemy**.",
+            "Open the **{{lang:titre_blueprint}}** of the scene **Enemy** and add the **[[NoeudEventStart]]** event.",
+            "Add **[[definir_vie]]**: target **enemy**, **{{lang:definir_vie.vie}}** = `3` (the enemy takes 3 hits).",
+            "Add **[[suivre_parcours]]**: target **enemy**, **{{lang:suivre_parcours.parcours}}** = **Path**, **{{lang:suivre_parcours.vitesse}}** = `150`.",
+            "Link the three nodes in order."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{definir_vie}}",
+              "enemy · 3"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{suivre_parcours}}",
+              "enemy · Path · 150"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 4: send the waves"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Now go back to your main scene (**Game**) and send enemies one after the other."
+        ],
+        [
+          "ol",
+          [
+            "Open the **{{lang:titre_blueprint}}** of the scene **Game** and add the **[[NoeudEventStart]]** event.",
+            "Add two **[[modifier_variable]]** nodes: **credits** = `150`, then **base_life** = `20`. They start every new game clean, even after a Game Over.",
+            "Add **[[attendre]]**: **{{lang:attendre.duree}}** = `3` (a pause before the first enemy).",
+            "Add **[[repeter]]**: **{{lang:repeter.delai}}** = `1.5`, **{{lang:repeter.repetitions}}** = `15`, **{{lang:repeter.nom}}** = `waves`.",
+            "From the **{{lang:port_a_chaque_fois}}** output, add **[[placer_copie_scene]]**: scene **Enemy**. Leave X and Y as they are: the enemy goes to the start of the path by itself.",
+            "Link the nodes in order."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "credits · 150"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "base_life · 20"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "3"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{repeter}}",
+              "1.5 · 15"
+            ],
+            [
+              "→",
+              "{{lang:port_a_chaque_fois}}"
+            ],
+            [
+              "n",
+              "{{placer_copie_scene}}",
+              "Enemy"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "Run the game: an enemy appears every second and a half and walks along your path to the end (nothing happens when it arrives yet)."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 5: the Tower scene"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "A tower is also a **scene**. It looks for the closest enemy in range, turns its cannon toward it and fires."
+        ],
+        [
+          "ol",
+          [
+            "Create a new scene named **Tower**. Add an {{lang:obj_prefix_image}} **tower** at X = `0`, Y = `0`, then an {{lang:obj_prefix_image}} **cannon** at X = `15`, Y = `43`, in front of it.",
+            "In the scene **Game**, add an {{lang:obj_prefix_image}} named **bullet** **outside the screen** (for example X = `-300`, Y = `-300`) and give it the tag **bullet**: it is the model the tower copies at each shot.",
+            "Open the **{{lang:titre_blueprint}}** of the scene **Tower** and add the **[[NoeudEventStart]]** event, then **[[repeter]]**: **{{lang:repeter.delai}}** = `0.2`, **{{lang:repeter.repetitions}}** = `0` (endless). The tower looks around 5 times per second.",
+            "From the **{{lang:port_a_chaque_fois}}** output, add **[[choisir_cible]]**: target **tower**, **{{lang:choisir_cible.tag}}** = `enemy`, **{{lang:choisir_cible.regle}}** = **[[lang:option.cb_proche]]**, and in the advanced settings **{{lang:choisir_cible.portee_px}}** = `330`.",
+            "From the **{{lang:port_trouvee}}** output, add **[[orienter_vers]]**: target **cannon**, and as the second object choose **{{lang:noeud_objet_implique_long}}** (the enemy that was chosen).",
+            "Add **[[cooldown]]**: target **cannon**, **{{lang:cooldown.delai}}** = `1.2` (one shot every 1.2 seconds at most).",
+            "From the **{{lang:port_pret}}** output, add **[[tirer]]**: target **cannon**, **{{lang:tirer.modele}}** = `bullet`, **{{lang:tirer.vitesse}}** = `14`, **{{lang:tirer.duree_vie}}** = `1.6`, **{{lang:tirer.detruire_hors_ecran}}** = no. Leave **{{lang:tirer.direction}}** as it is: the bullet leaves in the direction the cannon is facing."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{repeter}}",
+              "0.2 · endless"
+            ],
+            [
+              "→",
+              "{{lang:port_a_chaque_fois}}"
+            ],
+            [
+              "n",
+              "{{choisir_cible}}",
+              "tower · enemy · 330"
+            ],
+            [
+              "→",
+              "{{lang:port_trouvee}}"
+            ],
+            [
+              "n",
+              "{{orienter_vers}}",
+              "cannon"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{cooldown}}",
+              "cannon · 1.2"
+            ],
+            [
+              "→",
+              "{{lang:port_pret}}"
+            ],
+            [
+              "n",
+              "{{tirer}}",
+              "cannon · bullet"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "Place a **Tower** by hand into the scene **Game** to test it (menu **＋** → the scene **Tower**): it should shoot at every enemy that passes within 330 pixels."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 6: hit the enemies"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "This part goes in the scene **Enemy**: it is the enemy that knows when a bullet touches it."
+        ],
+        [
+          "ol",
+          [
+            "Open the **{{lang:titre_blueprint}}** of the scene **Enemy** and add the **[[NoeudEventCollisionTag]]** event: target **enemy**, {{lang:Tag}} **bullet**.",
+            "Add **[[detruire_objet]]** and choose **{{lang:noeud_objet_implique_long}}** as the target: it is the bullet, which disappears.",
+            "Add **[[infliger_degats]]**: target **enemy**, **{{lang:infliger_degats.degats}}** = `1`. By default the enemy is destroyed when its life reaches zero.",
+            "From the **{{lang:port_detruit}}** output, add **[[ajouter_variable]]**: variable **credits**, value `15` (the reward).",
+            "Link the nodes in order."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "enemy · bullet"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "bullet"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{infliger_degats}}",
+              "enemy · 1"
+            ],
+            [
+              "→",
+              "{{lang:port_detruit}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "credits · 15"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 7: build towers"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "The player builds a tower by touching a **build spot**. It costs 50 credits."
+        ],
+        [
+          "ol",
+          [
+            "Select each build spot and give it the tag **spot** in the Inspector.",
+            "In the scene **Game**, add the **[[NoeudEventClicObjet]]** event and choose **# spot** as the object (every object with the tag **spot**).",
+            "Add **[[condition]]** `=credits >= 50`.",
+            "On the **{{lang:port_vrai}}** output: **[[ajouter_variable]]**: variable **credits**, value `-50`.",
+            "Then **[[placer_copie_scene]]**: scene **Tower**. For **X**, touch **🔗**, choose **[[valeur_objet]]**, object **{{lang:noeud_objet_implique_long}}**, **{{lang:valeur_objet.propriete}}** = `x`. Do the same for **Y** with `y`: the tower appears exactly where the player touched.",
+            "Add **[[detruire_objet]]** with **{{lang:noeud_objet_implique_long}}** as the target: the build spot disappears.",
+            "On the **{{lang:port_faux}}** output: **[[toast]]** with the message **Not enough credits**."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventClicObjet}}",
+              "# spot"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=credits >= 50"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "credits · -50"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{placer_copie_scene}}",
+              "Tower"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "spot"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 8: the numbers on screen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "In the scene **Game**, add the **[[NoeudEventChaqueImage]]** event.",
+            "Add **[[modifier_texte]]**: target **creditsText**, **{{lang:modifier_texte.valeur}}** = `=\"Credits: \" + credits`.",
+            "Add a second **[[modifier_texte]]**: target **lifeText**, **{{lang:modifier_texte.valeur}}** = `=\"Base: \" + base_life`.",
+            "Link the three nodes in order."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "creditsText"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "lifeText"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 9: base lives and game over"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "When an enemy reaches the end of the path, your base loses a life. When the base has none left, the game is over."
+        ],
+        [
+          "ol",
+          [
+            "In the scene **Enemy**, take the **[[suivre_parcours]]** node of step 3. From its **{{lang:port_arrive}}** output, add **[[ajouter_variable]]**: variable **base_life**, value `-1`.",
+            "Add **[[detruire_objet]]**: target **enemy**.",
+            "Add **[[condition]]** `=base_life <= 0`. On the **{{lang:port_vrai}}** output, add **[[appeler_evenement]]** with the event name **game_over**.",
+            "In the scene **Game**, add the **[[NoeudEventPersonnalise]]** event with the same name **game_over**.",
+            "Add **[[arreter_minuteur]]**: **{{lang:arreter_minuteur.nom}}** = `waves` (no more enemies are sent), then **[[detruire_par_tag]]**: **{{lang:detruire_par_tag.tag}}** = `enemy`.",
+            "Add **[[toast]]** with the message **Game over**, then **[[attendre]]** `2` seconds, then **[[recommencer_scene]]**."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{suivre_parcours}}",
+              "enemy"
+            ],
+            [
+              "→",
+              "{{lang:port_arrive}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "base_life · -1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "enemy"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=base_life <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{appeler_evenement}}",
+              "game_over"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventPersonnalise}}",
+              "game_over"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{arreter_minuteur}}",
+              "waves"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_par_tag}}",
+              "enemy"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "Game over"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "Play: build a tower or two with your credits, then watch them stop the enemies. Let a few get through to see the base lose its lives."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Going further"
+    ],
+    [
+      "ul",
+      [
+        "**Victory:** count the enemies with a variable (+1 when one dies or arrives). When the number reaches the total you sent, show a message and win.",
+        "**Upgrade a tower:** touch a tower to open a small window with a button « Upgrade » that costs credits and changes the cannon image and the speed of fire. Open the example **Tower defense (cubes)** to see how.",
+        "**Several enemy types:** make a second scene (**Enemy2**) with more life and another speed, and let each wave send one or the other (open the example **Tower defense (cubes)** to see how).",
+        "**Crossroads:** in the Path tool, touch a point and choose **This point is a crossroads**: the enemies pick a road at random, and the branches can join again.",
+        "**Several lanes and no traffic jams:** in **[[suivre_parcours]]**, set **{{lang:suivre_parcours.ecart}}** and **{{lang:suivre_parcours.eviter}}** to yes: the enemies walk side by side and overtake each other.",
+        "**A big map:** make your map twice as wide, then add **[[limites_camera]]** and **[[camera_doigt]]** at the start so the player scrolls the map with a finger.",
+        "**Sounds and sparks:** add **[[jouer_son]]** at each shot and an **[[effet_particules]]** when an enemy dies (see the guide [Particles and effects](guide:particules-effets))."
+      ]
+    ],
+    [
+      "h2",
+      "If it doesn't work"
+    ],
+    [
+      "ul",
+      [
+        "**The enemies don't move:** check that the **{{lang:suivre_parcours.parcours}}** setting is the name of your path (**Path**), and that the path has a Start. Check that the scene **Enemy** has its **[[NoeudEventStart]]** event.",
+        "**The tower doesn't shoot:** check the tag **enemy** on the enemy, the name **bullet** in **[[tirer]]**, and that the **bullet** object is in the scene **Game** (outside the screen, but not deleted). Raise **{{lang:choisir_cible.portee_px}}** if the enemies stay out of range.",
+        "**The bullets don't hurt:** the bullet must have the tag **bullet**, and the event **[[NoeudEventCollisionTag]]** must be in the scene **Enemy**, not in **Game**.",
+        "**The tower appears in the wrong place:** for **X** and **Y** of **[[placer_copie_scene]]**, use the green **[[valeur_objet]]** nodes with **{{lang:noeud_objet_implique_long}}**, as in step 7.",
+        "**The credits or the base lives don't change:** check that the variables **credits** and **base_life** have the scope **{{lang:var_scope_globale}}**."
+      ]
+    ]
+  ]
+}

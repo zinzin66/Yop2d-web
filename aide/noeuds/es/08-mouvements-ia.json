@@ -16,23 +16,20 @@
     {
       "nom": "Hacer girar el objeto sin parar",
       "schema": "<b>Entradas:</b> Objeto, Velocidad de giro (grados por segundo, negativo = sentido contrario, 0 = parar)",
-      "role": "Aún no está en la versión de Google Play 1.0.1142: disponible en la versión de prueba (Discord), llegará con la próxima actualización. Hace girar el objeto sobre sí mismo sin parar, a la velocidad elegida en grados por segundo. Un número negativo gira al revés, 0 detiene la rotación. El movimiento sigue el tiempo del juego: se detiene cuando el juego está en pausa.",
-      "exemple": "Una sierra que gira: «Al empezar» → este nodo sobre la sierra, velocidad 360.",
-      "nouveau": "1.0.1142"
+      "role": "Hace girar el objeto sobre sí mismo sin parar, a la velocidad elegida en grados por segundo. Un número negativo gira al revés, 0 detiene la rotación. El movimiento sigue el tiempo del juego: se detiene cuando el juego está en pausa.",
+      "exemple": "Una sierra que gira: «Al empezar» → este nodo sobre la sierra, velocidad 360."
     },
     {
       "nom": "Seguir el recorrido",
       "schema": "<b>Entradas:</b> Objeto, Nombre del recorrido, Velocidad (píxeles por segundo), Girar hacia donde va (sí / no), Desvío lateral al azar (píxeles, ±: cada uno va por su carril), Evitar a los demás: apartarse para no superponerse y adelantar a los más lentos (sí / no), Ancho utilizable para apartarse (píxeles a cada lado del centro del camino), Ángulo de la imagen (0 = mira a la derecha, 90 = hacia abajo) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Llegó",
-      "role": "Aún no está en la versión de Google Play 1.0.1142: disponible en la versión de prueba (Discord), llegará con la próxima actualización. Hace que el objeto siga un recorrido dibujado con la herramienta «Recorrido» de Assets: se coloca en el punto de salida y avanza de punto en punto a la velocidad elegida. En un cruce elige su salida como la ajustaste (al azar, por turnos, según una variable). La salida «Llegó al final» se activa al alcanzar un punto sin salida. Con «Desvío lateral al azar», cada objeto va por su propio carril (desplazamiento al azar): varios enemigos avanzan lado a lado en vez de superponerse. Con «Evitar a los demás», un objeto que alcanza a uno más lento se aparta, lo adelanta y vuelve a su carril; si el camino es demasiado estrecho, lo sigue.",
-      "exemple": "Aparece un enemigo: Seguir el recorrido «Camino_enemigos», velocidad 150. Salida «Llegó al final» → Infligir daño a la base y luego Destruir el objeto.",
-      "nouveau": "1.0.1142"
+      "role": "Hace que el objeto siga un recorrido dibujado con la herramienta «Recorrido» de Assets: se coloca en el punto de salida y avanza de punto en punto a la velocidad elegida. En un cruce elige su salida como la ajustaste (al azar, por turnos, según una variable). La salida «Llegó al final» se activa al alcanzar un punto sin salida. Con «Desvío lateral al azar», cada objeto va por su propio carril (desplazamiento al azar): varios enemigos avanzan lado a lado en vez de superponerse. Con «Evitar a los demás», un objeto que alcanza a uno más lento se aparta, lo adelanta y vuelve a su carril; si el camino es demasiado estrecho, lo sigue.",
+      "exemple": "Aparece un enemigo: Seguir el recorrido «Camino_enemigos», velocidad 150. Salida «Llegó al final» → Infligir daño a la base y luego Destruir el objeto."
     },
     {
       "nom": "Detener el recorrido",
       "schema": "<b>Entrada:</b> Objeto",
-      "role": "Aún no está en la versión de Google Play 1.0.1142: disponible en la versión de prueba (Discord), llegará con la próxima actualización. Detiene el objeto donde está: ya no sigue su recorrido (la salida «Llegó al final» no se activará).",
-      "exemple": "Una trampa congela a un enemigo: Detener el recorrido y más tarde Seguir el recorrido para que continúe.",
-      "nouveau": "1.0.1142"
+      "role": "Detiene el objeto donde está: ya no sigue su recorrido (la salida «Llegó al final» no se activará).",
+      "exemple": "Una trampa congela a un enemigo: Detener el recorrido y más tarde Seguir el recorrido para que continúe."
     },
     {
       "nom": "Detener el objeto",
@@ -73,30 +70,26 @@
     {
       "nom": "Colocar en una casilla (columna, fila)",
       "schema": "<b>Entradas:</b> Objeto, Columna (0 = la primera), Fila (0 = la primera)",
-      "role": "Aún no está en la versión de Google Play 1.0.1142: disponible en la versión de prueba (Discord), llegará con la próxima actualización. Pone el objeto A justo en el centro de la casilla elegida (columna y fila, contadas desde 0 arriba a la izquierda). La cuadrícula es la del mapa de tiles de la escena. Con el botón 🔗, conecta «Columna tocada» y «Fila tocada» para enviarlo a la casilla que toca el dedo.",
-      "exemple": "mover una pieza a la casilla tocada en un juego de mesa.",
-      "nouveau": "1.0.1142"
+      "role": "Pone el objeto A justo en el centro de la casilla elegida (columna y fila, contadas desde 0 arriba a la izquierda). La cuadrícula es la del mapa de tiles de la escena. Con el botón 🔗, conecta «Columna tocada» y «Fila tocada» para enviarlo a la casilla que toca el dedo.",
+      "exemple": "mover una pieza a la casilla tocada en un juego de mesa."
     },
     {
       "nom": "Centrar en su casilla",
       "schema": "<b>Entrada:</b> Objeto",
-      "role": "Aún no está en la versión de Google Play 1.0.1142: disponible en la versión de prueba (Discord), llegará con la próxima actualización. El objeto A se queda en su casilla pero vuelve exactamente al centro. Útil cuando un movimiento se detuvo entre dos casillas.",
-      "exemple": "recentrar a un héroe después de moverse.",
-      "nouveau": "1.0.1142"
+      "role": "El objeto A se queda en su casilla pero vuelve exactamente al centro. Útil cuando un movimiento se detuvo entre dos casillas.",
+      "exemple": "recentrar a un héroe después de moverse."
     },
     {
       "nom": "Ir a la casilla (camino)",
       "schema": "<b>Entradas:</b> Objeto, Columna, Fila, Velocidad, Diagonales (sí / no), Estos tags bloquean el camino (otras unidades, separados por comas), Quedarse en la zona mostrada (el camino nunca sale del alcance), Nombre de la zona a respetar (vacío = la zona sin nombre) &nbsp;→&nbsp; <b>Salidas:</b> Enseguida / Llegó",
-      "role": "Aún no está en la versión de Google Play 1.0.1142: disponible en la versión de prueba (Discord), llegará con la próxima actualización. El objeto camina hasta el CENTRO de la casilla (columna, fila), rodeando muros, terrenos que bloquean y las unidades con los tags indicados. Por defecto: la casilla que toca el dedo. Salida «Llegó» una vez en la casilla. En avanzado, «Quedarse en la zona mostrada» limita el camino a las casillas mostradas por «Mostrar casillas accesibles»: el objeto nunca pasa por una casilla fuera de su alcance.",
-      "exemple": "enviar a un héroe a una casilla azul tocada.",
-      "nouveau": "1.0.1142"
+      "role": "El objeto camina hasta el CENTRO de la casilla (columna, fila), rodeando muros, terrenos que bloquean y las unidades con los tags indicados. Por defecto: la casilla que toca el dedo. Salida «Llegó» una vez en la casilla. En avanzado, «Quedarse en la zona mostrada» limita el camino a las casillas mostradas por «Mostrar casillas accesibles»: el objeto nunca pasa por una casilla fuera de su alcance.",
+      "exemple": "enviar a un héroe a una casilla azul tocada."
     },
     {
       "nom": "Mover la ficha una casilla",
       "schema": "<b>Entradas:</b> Objeto, Dirección, Velocidad, Estos tags bloquean el camino (otras unidades, separados por comas) &nbsp;→&nbsp; <b>Salidas:</b> Llegó / Bloqueado (muro, terreno, unidad, borde)",
-      "role": "Aún no está en la versión de Google Play 1.0.1142: disponible en la versión de prueba (Discord), llegará con la próxima actualización. Mueve la pieza una casilla (arriba, abajo, izquierda, derecha), bien centrada. Si la casilla es un muro, un terreno que bloquea, una unidad (tags) o el borde del mapa: salida «Bloqueado». Si no, «Llegó» al final del paso.",
-      "exemple": "mover una pieza de juego de mesa con botones ◀ ▶ ▲ ▼.",
-      "nouveau": "1.0.1142"
+      "role": "Mueve la pieza una casilla (arriba, abajo, izquierda, derecha), bien centrada. Si la casilla es un muro, un terreno que bloquea, una unidad (tags) o el borde del mapa: salida «Bloqueado». Si no, «Llegó» al final del paso.",
+      "exemple": "mover una pieza de juego de mesa con botones ◀ ▶ ▲ ▼."
     },
     {
       "nom": "Perseguir un objeto",

@@ -1,0 +1,635 @@
+{
+  "titre_page": "Comment faire un tower defense dans Yop2D ? | Guide Yop2D",
+  "description": "Faire un jeu de tower defense dans Yop2D, sans code : dessiner le chemin des ennemis, envoyer des vagues, construire des tours qui choisissent une cible et tirent, compter les crédits et les vies de la base avec les nœuds.",
+  "h1": "Comment faire un tower defense ?",
+  "carte": [
+    "Faire un tower defense",
+    "Dessine un chemin, envoie des vagues, construis des tours qui tirent et défendent ta base."
+  ],
+  "etapes": [
+    [
+      "Dessiner le chemin",
+      "Dans Assets, outil « Parcours » : pose des points, relie-les, choisis le départ."
+    ],
+    [
+      "Créer la scène Ennemi",
+      "{{NoeudEventStart}} → {{definir_vie}} → {{suivre_parcours}} (parcours « Chemin »)."
+    ],
+    [
+      "Envoyer les vagues",
+      "{{repeter}} (toutes les 1,5 seconde) → {{placer_copie_scene}} (Ennemi)."
+    ],
+    [
+      "Créer la scène Tour",
+      "{{repeter}} → {{choisir_cible}} → {{orienter_vers}} → {{cooldown}} → {{tirer}}."
+    ],
+    [
+      "Toucher les ennemis",
+      "{{NoeudEventCollisionTag}} (ennemi, balle) → {{infliger_degats}}."
+    ],
+    [
+      "Construire des tours avec des crédits",
+      "{{NoeudEventClicObjet}} (emplacement) → {{ajouter_variable}} (credits, -50) → {{placer_copie_scene}} (Tour)."
+    ],
+    [
+      "Vies de la base et fin de partie",
+      "{{suivre_parcours}} (arrivé au bout) → {{ajouter_variable}} (vie_base, -1) → {{appeler_evenement}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Dans un tower defense, des **ennemis** avancent le long d'un **chemin** et tu construis des **tours** qui leur tirent dessus avant qu'ils n'atteignent ta **base**. Ici, les ennemis suivent un chemin que tu dessines toi-même, chaque tour choisit l'ennemi le plus proche et lui tire dessus, et les **crédits** paient les nouvelles tours."
+    ],
+    [
+      "besoin",
+      [
+        "une {{lang:obj_prefix_image}} nommée **carte** : le fond du jeu, 1920 x 1080 px, avec une route dessinée dessus ;",
+        "quelques {{lang:obj_prefix_image}}s pour les emplacements de construction (par exemple 120 x 120 px) ;",
+        "une {{lang:obj_prefix_image}} pour l'**ennemi** (par exemple 64 x 64 px), une pour la **tour** (120 x 120 px), une pour le **canon** (90 x 34 px, tourné vers la droite) et une pour la **balle** (24 x 24 px) ;",
+        "deux objets {{lang:obj_prefix_texte}} : **texteCredits** et **texteVie**, en haut de l'écran."
+      ]
+    ],
+    [
+      "tip",
+      "Ce guide est écrit pour un jeu en **paysage de 1920 x 1080**. L'exemple **Tower defense (cubes)** (onglet Exemples) contient des images toutes faites dans le dossier **Images/TD** : ouvre-le et copie dans ton projet celles qui te plaisent. Tu peux aussi dessiner les tiennes, le guide marche avec n'importe quel style. Les scènes **Ennemi** et **Tour** sont copiées de nombreuses fois dans le jeu : voir le guide [Objets prêts à l'emploi (prefabs)](guide:prefabs)."
+    ],
+    [
+      "h2",
+      "Étape 1 : les variables"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Dans le panneau de gauche, ouvre la section **{{lang:panneau_ress_variables}}** et crée deux variables, toutes deux de portée **{{lang:var_scope_globale}}** (toutes les scènes peuvent les utiliser) et de type **{{lang:var_type_entier}}** :"
+          ]
+        ],
+        [
+          "ul",
+          [
+            "**credits** : valeur de départ **150** (l'argent pour construire des tours) ;",
+            "**vie_base** : valeur de départ **20** (combien d'ennemis ta base peut encaisser)."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 2 : dessiner le chemin"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Les ennemis suivent un **chemin** : des points reliés entre eux. Tu le dessines par-dessus ta carte avec l'outil Parcours."
+        ],
+        [
+          "ol",
+          [
+            "Ouvre la fenêtre **Assets** (panneau Ressources) et touche **Parcours**. L'éditeur de parcours s'ouvre, avec ta scène en arrière-plan.",
+            "Touche **Nouveau parcours** et nomme-le **Chemin**.",
+            "Avec l'outil **Poser des points**, touche la scène pour poser un premier point à gauche, là où les ennemis entrent : c'est le **Départ**. Continue de toucher le long de ta route : chaque nouveau point est relié au précédent.",
+            "Mets le dernier point sur ta base : il n'a pas de sortie, c'est l'**Arrivée**.",
+            "Touche **Voir passer** pour voir un point parcourir le chemin. Puis ferme l'éditeur : le parcours s'enregistre tout seul."
+          ]
+        ],
+        [
+          "tip",
+          "Pour changer le départ, touche un point et choisis **Faire de ce point le départ**. Pour déplacer un point, utilise l'outil **Déplacer** ; pour en retirer un, utilise **Gommer**."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 3 : la scène Ennemi"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Un ennemi est une **scène** à part : chaque ennemi envoyé dans le jeu en est une **copie**, avec sa propre vie. Tu la construis une seule fois."
+        ],
+        [
+          "ol",
+          [
+            "Crée une nouvelle scène nommée **Ennemi** (menu **＋**, puis **{{lang:popup_creer_scene_titre}}**).",
+            "Dans la scène **Ennemi**, ajoute une {{lang:obj_prefix_image}} nommée **ennemi** en X = `0`, Y = `0`, et donne-lui le tag **ennemi**.",
+            "Ouvre le **{{lang:titre_blueprint}}** de la scène **Ennemi** et ajoute l'événement **[[NoeudEventStart]]**.",
+            "Ajoute **[[definir_vie]]** : cible **ennemi**, **{{lang:definir_vie.vie}}** = `3` (l'ennemi encaisse 3 coups).",
+            "Ajoute **[[suivre_parcours]]** : cible **ennemi**, **{{lang:suivre_parcours.parcours}}** = **Chemin**, **{{lang:suivre_parcours.vitesse}}** = `150`.",
+            "Relie les trois nœuds dans l'ordre."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{definir_vie}}",
+              "ennemi · 3"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{suivre_parcours}}",
+              "ennemi · Chemin · 150"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 4 : envoyer les vagues"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Reviens maintenant à ta scène principale (**Jeu**) et envoie les ennemis les uns après les autres."
+        ],
+        [
+          "ol",
+          [
+            "Ouvre le **{{lang:titre_blueprint}}** de la scène **Jeu** et ajoute l'événement **[[NoeudEventStart]]**.",
+            "Ajoute deux nœuds **[[modifier_variable]]** : **credits** = `150`, puis **vie_base** = `20`. Ils remettent chaque nouvelle partie à zéro, même après un Game Over.",
+            "Ajoute **[[attendre]]** : **{{lang:attendre.duree}}** = `3` (une pause avant le premier ennemi).",
+            "Ajoute **[[repeter]]** : **{{lang:repeter.delai}}** = `1.5`, **{{lang:repeter.repetitions}}** = `15`, **{{lang:repeter.nom}}** = `vagues`.",
+            "Depuis la sortie **{{lang:port_a_chaque_fois}}**, ajoute **[[placer_copie_scene]]** : scène **Ennemi**. Laisse X et Y tels quels : l'ennemi se place tout seul au départ du chemin.",
+            "Relie les nœuds dans l'ordre."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "credits · 150"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vie_base · 20"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "3"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{repeter}}",
+              "1.5 · 15"
+            ],
+            [
+              "→",
+              "{{lang:port_a_chaque_fois}}"
+            ],
+            [
+              "n",
+              "{{placer_copie_scene}}",
+              "Ennemi"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "Lance le jeu : un ennemi apparaît toutes les secondes et demie et marche le long de ton chemin jusqu'au bout (rien ne se passe encore quand il arrive)."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 5 : la scène Tour"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Une tour est aussi une **scène**. Elle cherche l'ennemi le plus proche à portée, tourne son canon vers lui et tire."
+        ],
+        [
+          "ol",
+          [
+            "Crée une nouvelle scène nommée **Tour**. Ajoute une {{lang:obj_prefix_image}} **tour** en X = `0`, Y = `0`, puis une {{lang:obj_prefix_image}} **canon** en X = `15`, Y = `43`, devant elle.",
+            "Dans la scène **Jeu**, ajoute une {{lang:obj_prefix_image}} nommée **balle** **hors de l'écran** (par exemple X = `-300`, Y = `-300`) et donne-lui le tag **balle** : c'est le modèle que la tour copie à chaque tir.",
+            "Ouvre le **{{lang:titre_blueprint}}** de la scène **Tour** et ajoute l'événement **[[NoeudEventStart]]**, puis **[[repeter]]** : **{{lang:repeter.delai}}** = `0.2`, **{{lang:repeter.repetitions}}** = `0` (sans fin). La tour regarde autour d'elle 5 fois par seconde.",
+            "Depuis la sortie **{{lang:port_a_chaque_fois}}**, ajoute **[[choisir_cible]]** : cible **tour**, **{{lang:choisir_cible.tag}}** = `ennemi`, **{{lang:choisir_cible.regle}}** = **[[lang:option.cb_proche]]**, et dans les réglages avancés **{{lang:choisir_cible.portee_px}}** = `330`.",
+            "Depuis la sortie **{{lang:port_trouvee}}**, ajoute **[[orienter_vers]]** : cible **canon**, et comme second objet choisis **{{lang:noeud_objet_implique_long}}** (l'ennemi qui a été choisi).",
+            "Ajoute **[[cooldown]]** : cible **canon**, **{{lang:cooldown.delai}}** = `1.2` (un tir toutes les 1,2 secondes au maximum).",
+            "Depuis la sortie **{{lang:port_pret}}**, ajoute **[[tirer]]** : cible **canon**, **{{lang:tirer.modele}}** = `balle`, **{{lang:tirer.vitesse}}** = `14`, **{{lang:tirer.duree_vie}}** = `1.6`, **{{lang:tirer.detruire_hors_ecran}}** = non. Laisse **{{lang:tirer.direction}}** tel quel : la balle part dans la direction vers laquelle le canon est tourné."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{repeter}}",
+              "0.2 · sans fin"
+            ],
+            [
+              "→",
+              "{{lang:port_a_chaque_fois}}"
+            ],
+            [
+              "n",
+              "{{choisir_cible}}",
+              "tour · ennemi · 330"
+            ],
+            [
+              "→",
+              "{{lang:port_trouvee}}"
+            ],
+            [
+              "n",
+              "{{orienter_vers}}",
+              "canon"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{cooldown}}",
+              "canon · 1.2"
+            ],
+            [
+              "→",
+              "{{lang:port_pret}}"
+            ],
+            [
+              "n",
+              "{{tirer}}",
+              "canon · balle"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "Place une **Tour** à la main dans la scène **Jeu** pour la tester (menu **＋** → la scène **Tour**) : elle doit tirer sur chaque ennemi qui passe à moins de 330 pixels."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 6 : toucher les ennemis"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Cette partie se met dans la scène **Ennemi** : c'est l'ennemi qui sait quand une balle le touche."
+        ],
+        [
+          "ol",
+          [
+            "Ouvre le **{{lang:titre_blueprint}}** de la scène **Ennemi** et ajoute l'événement **[[NoeudEventCollisionTag]]** : cible **ennemi**, {{lang:Tag}} **balle**.",
+            "Ajoute **[[detruire_objet]]** et choisis **{{lang:noeud_objet_implique_long}}** comme cible : c'est la balle, qui disparaît.",
+            "Ajoute **[[infliger_degats]]** : cible **ennemi**, **{{lang:infliger_degats.degats}}** = `1`. Par défaut, l'ennemi est détruit quand sa vie tombe à zéro.",
+            "Depuis la sortie **{{lang:port_detruit}}**, ajoute **[[ajouter_variable]]** : variable **credits**, valeur `15` (la récompense).",
+            "Relie les nœuds dans l'ordre."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "ennemi · balle"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "balle"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{infliger_degats}}",
+              "ennemi · 1"
+            ],
+            [
+              "→",
+              "{{lang:port_detruit}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "credits · 15"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 7 : construire des tours"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Le joueur construit une tour en touchant un **emplacement de construction**. Cela coûte 50 crédits."
+        ],
+        [
+          "ol",
+          [
+            "Sélectionne chaque emplacement et donne-lui le tag **emplacement** dans l'Inspecteur.",
+            "Dans la scène **Jeu**, ajoute l'événement **[[NoeudEventClicObjet]]** et choisis **# emplacement** comme objet (tous les objets qui ont le tag **emplacement**).",
+            "Ajoute **[[condition]]** `=credits >= 50`.",
+            "Sur la sortie **{{lang:port_vrai}}** : **[[ajouter_variable]]** : variable **credits**, valeur `-50`.",
+            "Puis **[[placer_copie_scene]]** : scène **Tour**. Pour **X**, touche **🔗**, choisis **[[valeur_objet]]**, objet **{{lang:noeud_objet_implique_long}}**, **{{lang:valeur_objet.propriete}}** = `x`. Fais pareil pour **Y** avec `y` : la tour apparaît exactement là où le joueur a touché.",
+            "Ajoute **[[detruire_objet]]** avec **{{lang:noeud_objet_implique_long}}** comme cible : l'emplacement de construction disparaît.",
+            "Sur la sortie **{{lang:port_faux}}** : **[[toast]]** avec le message **Pas assez de crédits**."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventClicObjet}}",
+              "# emplacement"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=credits >= 50"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "credits · -50"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{placer_copie_scene}}",
+              "Tour"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "emplacement"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 8 : les chiffres à l'écran"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Dans la scène **Jeu**, ajoute l'événement **[[NoeudEventChaqueImage]]**.",
+            "Ajoute **[[modifier_texte]]** : cible **texteCredits**, **{{lang:modifier_texte.valeur}}** = `=\"Crédits : \" + credits`.",
+            "Ajoute un second **[[modifier_texte]]** : cible **texteVie**, **{{lang:modifier_texte.valeur}}** = `=\"Base : \" + vie_base`.",
+            "Relie les trois nœuds dans l'ordre."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "texteCredits"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "texteVie"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 9 : vies de la base et fin de partie"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Quand un ennemi arrive au bout du chemin, ta base perd une vie. Quand elle n'en a plus, la partie est perdue."
+        ],
+        [
+          "ol",
+          [
+            "Dans la scène **Ennemi**, reprends le nœud **[[suivre_parcours]]** de l'étape 3. Depuis sa sortie **{{lang:port_arrive}}**, ajoute **[[ajouter_variable]]** : variable **vie_base**, valeur `-1`.",
+            "Ajoute **[[detruire_objet]]** : cible **ennemi**.",
+            "Ajoute **[[condition]]** `=vie_base <= 0`. Sur la sortie **{{lang:port_vrai}}**, ajoute **[[appeler_evenement]]** avec le nom d'événement **fin_de_partie**.",
+            "Dans la scène **Jeu**, ajoute l'événement **[[NoeudEventPersonnalise]]** avec le même nom **fin_de_partie**.",
+            "Ajoute **[[arreter_minuteur]]** : **{{lang:arreter_minuteur.nom}}** = `vagues` (plus aucun ennemi n'est envoyé), puis **[[detruire_par_tag]]** : **{{lang:detruire_par_tag.tag}}** = `ennemi`.",
+            "Ajoute **[[toast]]** avec le message **Partie perdue**, puis **[[attendre]]** `2` secondes, puis **[[recommencer_scene]]**."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{suivre_parcours}}",
+              "ennemi"
+            ],
+            [
+              "→",
+              "{{lang:port_arrive}}"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "vie_base · -1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_objet}}",
+              "ennemi"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=vie_base <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{appeler_evenement}}",
+              "fin_de_partie"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventPersonnalise}}",
+              "fin_de_partie"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{arreter_minuteur}}",
+              "vagues"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{detruire_par_tag}}",
+              "ennemi"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{toast}}",
+              "Partie perdue"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "2"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}"
+            ]
+          ]
+        ],
+        [
+          "p",
+          "Joue : construis une ou deux tours avec tes crédits, puis regarde-les arrêter les ennemis. Laisse-en passer quelques-uns pour voir la base perdre ses vies."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Pour aller plus loin"
+    ],
+    [
+      "ul",
+      [
+        "**Victoire :** compte les ennemis avec une variable (+1 quand l'un meurt ou arrive). Quand le nombre atteint le total envoyé, affiche un message et gagne.",
+        "**Améliorer une tour :** touche une tour pour ouvrir une petite fenêtre avec un bouton « Améliorer » qui coûte des crédits et change l'image du canon et la cadence de tir. Ouvre l'exemple **Tower defense (cubes)** pour voir comment.",
+        "**Plusieurs types d'ennemis :** fais une deuxième scène (**Ennemi2**) avec plus de vie et une autre vitesse, et laisse chaque vague envoyer l'un ou l'autre (ouvre l'exemple **Tower defense (cubes)** pour voir comment).",
+        "**Carrefours :** dans l'outil Parcours, touche un point et choisis **Ce point est un carrefour** : les ennemis choisissent une route au hasard, et les branches peuvent se rejoindre.",
+        "**Plusieurs voies, sans embouteillage :** dans **[[suivre_parcours]]**, mets **{{lang:suivre_parcours.ecart}}** et **{{lang:suivre_parcours.eviter}}** sur oui : les ennemis marchent côte à côte et se dépassent.",
+        "**Une grande carte :** fais ta carte deux fois plus large, puis ajoute **[[limites_camera]]** et **[[camera_doigt]]** au démarrage pour que le joueur fasse défiler la carte avec un doigt.",
+        "**Sons et étincelles :** ajoute **[[jouer_son]]** à chaque tir et un **[[effet_particules]]** quand un ennemi meurt (voir le guide [Particules et effets](guide:particules-effets))."
+      ]
+    ],
+    [
+      "h2",
+      "Si ça ne marche pas"
+    ],
+    [
+      "ul",
+      [
+        "**Les ennemis ne bougent pas :** vérifie que le réglage **{{lang:suivre_parcours.parcours}}** est bien le nom de ton chemin (**Chemin**), et que le chemin a un Départ. Vérifie que la scène **Ennemi** a son événement **[[NoeudEventStart]]**.",
+        "**La tour ne tire pas :** vérifie le tag **ennemi** sur l'ennemi, le nom **balle** dans **[[tirer]]**, et que l'objet **balle** est dans la scène **Jeu** (hors de l'écran, mais pas supprimé). Augmente **{{lang:choisir_cible.portee_px}}** si les ennemis restent hors de portée.",
+        "**Les balles ne font pas mal :** la balle doit avoir le tag **balle**, et l'événement **[[NoeudEventCollisionTag]]** doit être dans la scène **Ennemi**, pas dans **Jeu**.",
+        "**La tour apparaît au mauvais endroit :** pour **X** et **Y** de **[[placer_copie_scene]]**, utilise les nœuds verts **[[valeur_objet]]** avec **{{lang:noeud_objet_implique_long}}**, comme à l'étape 7.",
+        "**Les crédits ou les vies de la base ne changent pas :** vérifie que les variables **credits** et **vie_base** ont la portée **{{lang:var_scope_globale}}**."
+      ]
+    ]
+  ]
+}
