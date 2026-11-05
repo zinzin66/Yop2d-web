@@ -217,6 +217,12 @@ def nombre_noeuds():
     return total
 
 
+def nombre_exemples():
+    """Nombre d'exemples téléchargeables (exemples/exemples.json) : remplace {nb_exemples} dans les textes."""
+    with open(os.path.join(RACINE, "exemples", "exemples.json"), encoding="utf-8") as f:
+        return len(json.load(f)["exemples"])
+
+
 def cartes_guides(langue):
     dossier = os.path.join(RACINE, "aide", "guides", langue)
     cartes = []
@@ -645,7 +651,7 @@ def llms(t):
 def main():
     for langue in LANGUES:
         with open(os.path.join(RACINE, "outils", "accueil", f"{langue}.json"), encoding="utf-8") as f:
-            t = json.loads(f.read().replace("{nb_noeuds}", str(nombre_noeuds())))
+            t = json.loads(f.read().replace("{nb_noeuds}", str(nombre_noeuds())).replace("{nb_exemples}", str(nombre_exemples())))
         assert len(t["vitrine"]) == len(IMAGES), f"{langue} : {len(t['vitrine'])} blocs vitrine au lieu de {len(IMAGES)}"
         chemin = os.path.join(RACINE, adresse_accueil(langue), "index.html")
         os.makedirs(os.path.dirname(chemin), exist_ok=True)

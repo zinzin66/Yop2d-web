@@ -21,7 +21,7 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
 - Accueil (présentation, comparatif avec d'autres moteurs, FAQ) en 9 langues,
   **généré** par `python3 outils/generer_accueil.py` depuis `outils/accueil/<langue>.json`.
   Anglais : `index.html` (racine) ; autres : `<langue>/index.html` (ex. `/fr/`).
-  Dans les textes, `@/` = racine du site ; `{nb_noeuds}` = nombre de nœuds de l'aide (calculé). La racine envoie vers `/<langue>/` si
+  Dans les textes, `@/` = racine du site ; `{nb_noeuds}` = nombre de nœuds de l'aide (calculé) ; `{nb_exemples}` = nombre d'exemples de `exemples/exemples.json` (calculé, plus besoin d'écrire « vingt et un » à la main). La racine envoie vers `/<langue>/` si
   `?lang=xx` ou si le visiteur a déjà choisi une langue (clé `yop2d-langue`),
   sinon propose la langue du téléphone dans un bandeau. Captures : liste `IMAGES`
   du script, toutes en `.png` à la racine (depuis le 30/09/2026), dans l'ordre des blocs « vitrine » :
