@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как сделать Pong в Yop2D? | Руководство Yop2D</title>
+<meta name="description" content="Сделай игру Pong в Yop2D без кода: ракетка, которая следует за пальцем, робот-соперник, отскоки, ворота и счёт с помощью узлов.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pong.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pong.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pong.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pong.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pong.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pong.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pong.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pong.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pong.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pong.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Как сделать Pong?",
+ "description": "Сделай игру Pong в Yop2D без кода: ракетка, которая следует за пальцем, робот-соперник, отскоки, ворота и счёт с помощью узлов.",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Расставить объекты и дать им имена",
+   "text": "Мяч, твоя ракетка (Player), робот (Bot), две стены и двое ворот — с точными именами и поведением «Декор»."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Запустить мяч",
+   "text": "При старте → Изменить переменную (vx, vy); Каждый кадр → Толкнуть объект (Ball)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Двигать мою ракетку",
+   "text": "Палец нажат → Переместить (Player, x = doigt.x) → Удерживать в экране."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Заставить мяч отскакивать",
+   "text": "Столкновение A/B (стена или ракетка, Ball) → Изменить переменную (vx или vy)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Заставить робота играть",
+   "text": "Каждый кадр → Изменить свойство (Bot, x) → Удерживать в экране."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Считать голы",
+   "text": "Столкновение A/B (ворота, Ball) → Добавить к переменной → Изменить текст → новая подача."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ru/index.html">← Yop2D</a>
+<h1>Как сделать Pong?</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../pong.html" hreflang="fr">Français</a> · <a href="../en/pong.html" hreflang="en">English</a> · <a href="../es/pong.html" hreflang="es">Español</a> · <a href="../de/pong.html" hreflang="de">Deutsch</a> · <a href="../it/pong.html" hreflang="it">Italiano</a> · <a href="../pt/pong.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/pong.html" hreflang="zh">中文</a> · <a href="../ja/pong.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>В Pong <strong>мяч</strong> отскакивает между твоей <strong>ракеткой</strong> (внизу) и ракеткой <strong>робота</strong> (вверху). Когда мяч пролетает за ракеткой, другой игрок получает очко. Как и в <a href="../ru/casse-briques.html">руководстве по арканоиду</a>, мяч двигается благодаря двум переменным: <strong>vx</strong> (его скорость в сторону) и <strong>vy</strong> (его скорость вверх или вниз).</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>Изображение с именем <strong>Ball</strong>, в середине экрана (например, 60 x 60 px);</li><li>Изображение с именем <strong>Player</strong>, внизу (например, 200 x 80 px, около y = 1690);</li><li>Изображение с именем <strong>Bot</strong>, вверху (тот же размер, y = 140);</li><li>два объекта Текст с именами <strong>ScorePlayer</strong> и <strong>ScoreBot</strong>, с текстом 0;</li><li>четыре Зона с именами <strong>WallLeft</strong>, <strong>WallRight</strong>, <strong>GoalPlayer</strong> и <strong>GoalBot</strong>.</li></ul>
+</div>
+<div class="tip">👉 Это руководство написано для игры в <strong>портретной ориентации 1080 x 1920</strong>. Для картинок возьми бесплатный пакет <strong>Puzzle (арканоид)</strong> (Kenney, свободная лицензия, CC0) в <strong>Библиотеке</strong>, вкладка <strong>Пакеты для скачивания</strong>: <strong>paddleBlu</strong> (твоя ракетка), <strong>paddleRed</strong> (робот), <strong>ballBlue</strong> (мяч). Можно использовать и собственные рисунки.</div>
+<h2>Шаг 1: имена, поведение и переменные</h2>
+<div class="method">
+<ol><li>Выбери каждый объект и впиши его имя в инспекторе — точно так, как в списке выше. Имя с пробелом или с другой буквой узлы не найдут.</li><li>Выбери <strong>Ball</strong>, нажми <strong>⚙ Поведение объекта</strong> и выбери <strong>Декор</strong>. Сделай то же для <strong>Player</strong> и <strong>Bot</strong>: двигать их будут только узлы.</li><li>В разделе <strong>Переменные</strong> создай две переменные типа <strong>Число</strong>, область <strong>Локальная</strong>: <strong>vx</strong> и <strong>vy</strong>, начальное значение <strong>0</strong>. Создай ещё две типа <strong>Целое</strong>, область <strong>Локальная</strong>: <strong>scorePlayer</strong> и <strong>scoreBot</strong>, начальное значение <strong>0</strong>.</li></ol>
+<div class="tip">👉 <strong>Самая частая ошибка:</strong> забытое имя или забытое поведение. Ничего не ломается, но ничего не происходит. Если игра ничего не делает, сначала проверь этот шаг.</div>
+</div>
+<h2>Шаг 2: стены и ворота</h2>
+<div class="method">
+<p>Мяч отскакивает от стен, которых не видно: четыре <strong>Зона</strong> вокруг экрана. Зона невидима во время игры, но мяч может её касаться.</p>
+<ol><li>Добавь Зона с именем <strong>WallLeft</strong>: X = <code>-300</code>, Y = <code>-400</code>, ширина <code>300</code>, высота <code>2800</code>.</li><li>Добавь Зона с именем <strong>WallRight</strong>: X = <code>1080</code>, Y = <code>-400</code>, ширина <code>300</code>, высота <code>2800</code>.</li><li>Добавь Зона с именем <strong>GoalBot</strong>: X = <code>-300</code>, Y = <code>-300</code>, ширина <code>1680</code>, высота <code>300</code> (над экраном).</li><li>Добавь Зона с именем <strong>GoalPlayer</strong>: X = <code>-300</code>, Y = <code>1920</code>, ширина <code>1680</code>, высота <code>300</code> (под экраном).</li></ol>
+<div class="tip">👉 Стены нарочно толстые: быстрый мяч не пролетит сквозь них. Две стены возвращают мяч; двое ворот будут считать очки.</div>
+</div>
+<h2>Шаг 3: мяч стартует и движется</h2>
+<div class="method">
+<ol><li>Добавь событие <strong>«При старте»</strong>, затем два узла <strong>«Изменить переменную»</strong> подряд: переменная <strong>vx</strong>, значение <code>6</code>, затем переменная <strong>vy</strong>, значение <code>9</code>.</li><li>Добавь событие <strong>«Каждый кадр»</strong>, затем <strong>«Толкнуть объект»</strong>: цель <strong>Ball</strong>, <strong>Добавить X</strong> = <code>vx</code>, <strong>Добавить Y</strong> = <code>vy</code>. Просто впиши эти два имени в поля.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>При старте</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vy · 9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Каждый кадр</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Толкнуть объект</b><span>Ball · vx · vy</span></div>
+</div>
+<div class="tip">👉 <strong>Как он движется?</strong> <strong>«Каждый кадр»</strong> срабатывает примерно 60 раз в секунду. Каждый раз мяч смещается на <strong>vx</strong> пикселей в сторону и на <strong>vy</strong> пикселей вверх или вниз. При 0 и 0 он останавливается. Чтобы изменить направление, мы меняем только эти два числа: именно это и делают отскоки.</div>
+</div>
+<h2>Шаг 4: моя ракетка следует за пальцем</h2>
+<div class="method">
+<ol><li>Добавь событие <strong>«Палец нажат»</strong>: оно повторяется, пока палец касается экрана.</li><li>Добавь <strong>«Переместить»</strong>: цель <strong>Player</strong>, <strong>X</strong> = <code>doigt.x - Player.largeur / 2</code>, <strong>Y</strong> = <code>1690</code>. Положение пальца есть в списке слева в окне настройки; мы вычитаем половину ширины ракетки, чтобы палец был в её центре.</li><li>Добавь <strong>«Удерживать в экране»</strong>: цель <strong>Player</strong>, <strong>Отступ</strong> = <code>0</code>, чтобы ракетка не выходила за края.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Палец нажат</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Переместить</b><span>Player · doigt.x · 1690</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Удерживать в экране</b><span>Player · 0</span></div>
+</div>
+</div>
+<h2>Шаг 5: отскоки</h2>
+<div class="method">
+<p>Отскок — это просто новое число для <strong>vx</strong> или <strong>vy</strong>. Мы используем <strong>random(a, b)</strong>, которая выбирает число между a и b: ни один отскок не повторяется.</p>
+<ol><li><strong>«Столкновение A/B»</strong> (<strong>Объект A</strong> = <strong>WallLeft</strong>, <strong>Объект B</strong> = <strong>Ball</strong>) → <strong>«Изменить переменную»</strong>: <strong>vx</strong> = <code>random(4, 12)</code>. Положительное число: мяч летит вправо.</li><li><strong>«Столкновение A/B»</strong> (<strong>WallRight</strong>, <strong>Ball</strong>) → <strong>«Изменить переменную»</strong>: <strong>vx</strong> = <code>-random(4, 12)</code>. Знак минус делает число отрицательным: мяч летит влево.</li><li><strong>«Столкновение A/B»</strong> (<strong>Ball</strong>, <strong>Player</strong>) → <strong>«Изменить переменную»</strong>: <strong>vy</strong> = <code>random(-13, -9)</code> (мяч летит вверх), затем <strong>«Изменить переменную»</strong>: <strong>vx</strong> = <code>Ball.x / 10 - Player.x / 10 - 7</code>.</li><li><strong>«Столкновение A/B»</strong> (<strong>Ball</strong>, <strong>Bot</strong>) → <strong>«Изменить переменную»</strong>: <strong>vy</strong> = <code>random(9, 13)</code> (мяч летит вниз), затем <strong>«Изменить переменную»</strong>: <strong>vx</strong> = <code>random(-6, 6)</code>.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Столкновение A/B</b><span>WallLeft · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vx · random(4, 12)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Столкновение A/B</b><span>WallRight · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vx · -random(4, 12)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Столкновение A/B</b><span>Ball · Player</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vy · random(-13, -9)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vx · Ball.x / 10 - Player.x / 10 - 7</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Столкновение A/B</b><span>Ball · Bot</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vy · random(9, 13)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vx · random(-6, 6)</span></div>
+</div>
+<div class="tip">👉 <strong>Зачем такой расчёт для ракетки?</strong> Он сравнивает положение мяча и ракетки: в центре мяч летит прямо, у края — в сторону. <code>-7</code> учитывает, что ракетка шире мяча (тогда центр даёт 0).</div>
+</div>
+<h2>Шаг 6: робот гонится за мячом</h2>
+<div class="method">
+<p>Робот не очень умён: на каждом кадре он немного приближается к мячу.</p>
+<ol><li>Добавь событие <strong>«Каждый кадр»</strong>, затем <strong>«Изменить свойство»</strong>: цель <strong>Bot</strong>, <strong>Свойство</strong> = <code>x</code>, <strong>Значение</strong> = <code>Bot.x * 0.94 + Ball.x * 0.06 - 6</code>.</li><li>Добавь <strong>«Удерживать в экране»</strong>: цель <strong>Bot</strong>, <strong>Отступ</strong> = <code>0</code>.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Каждый кадр</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить свойство</b><span>Bot · x</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Удерживать в экране</b><span>Bot · 0</span></div>
+</div>
+<div class="tip">👉 <strong>Как это работает?</strong> Робот сохраняет 94 % своего места и берёт 6 % места мяча (<code>- 6</code> центрирует его на мяче). При <code>0.06</code> он достаточно медленный, чтобы его можно было обыграть. Попробуй <code>0.03</code> и <code>0.97</code> (очень легко) или <code>0.15</code> и <code>0.85</code> (очень трудно): два числа должны давать в сумме 1, а <code>- 6</code> становится <code>- 3</code> или <code>- 15</code>.</div>
+<div class="tip">👉 <strong>Внимание:</strong> не пиши положение в «скорость X». Скорость — маленькое число, положение — большое: робот не будет двигаться.</div>
+</div>
+<h2>Шаг 7: голы и счёт</h2>
+<div class="method">
+<ol><li><strong>«Столкновение A/B»</strong> (<strong>GoalBot</strong>, <strong>Ball</strong>) → <strong>«Добавить к переменной»</strong>: переменная <strong>scorePlayer</strong>, <strong>Добавляемое значение = 1</strong> → <strong>«Изменить текст»</strong>: цель <strong>ScorePlayer</strong>, <strong>Новый текст</strong> = <code>=scorePlayer</code>.</li><li>То же для робота: <strong>«Столкновение A/B»</strong> (<strong>GoalPlayer</strong>, <strong>Ball</strong>) → <strong>«Добавить к переменной»</strong>: <strong>scoreBot</strong> + 1 → <strong>«Изменить текст»</strong>: цель <strong>ScoreBot</strong>, <code>=scoreBot</code>.</li><li>Чтобы подать мяч снова, добавь подряд: <strong>«Изменить переменную»</strong> <strong>vx</strong> = <code>0</code>, <strong>«Изменить переменную»</strong> <strong>vy</strong> = <code>0</code>, <strong>«Переместить»</strong> <strong>Ball</strong> в X = <code>510</code>, Y = <code>930</code>, <strong>«Ждать»</strong> 1 секунду, затем <strong>«Изменить переменную»</strong> <strong>vx</strong> = <code>6</code> и <strong>«Изменить переменную»</strong> <strong>vy</strong> = <code>9</code>.</li><li>Соедини конец обоих голов с <strong>первым узлом</strong> этой подачи: один вход может принимать несколько проводов.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Столкновение A/B</b><span>GoalBot · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Добавить к переменной</b><span>scorePlayer · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить текст</b><span>ScorePlayer</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Столкновение A/B</b><span>GoalPlayer · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Добавить к переменной</b><span>scoreBot · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить текст</b><span>ScoreBot</span></div>
+</div>
+<div class="chaine">
+<div class="noeud"><b>Изменить переменную</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Переместить</b><span>Ball · 510 · 930</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Ждать</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Изменить переменную</b><span>vy · 9</span></div>
+</div>
+<div class="tip">👉 <strong>Знак = в начале текста</strong> говорит Yop2D <strong>вычислить</strong> значение, а не записывать его как есть (см. руководство <a href="../ru/pieces-score.html">Сбор монет и подсчёт очков</a>).</div>
+</div>
+<h2>Что дальше</h2>
+<ul><li><strong>Победа при 5 очках:</strong> после каждого гола добавь <strong>«Условие»</strong> <code>=scorePlayer &gt;= 5</code>, затем <strong>«Короткое сообщение внизу экрана»</strong> и <strong>«Перезапустить сцену»</strong> (см. руководство <a href="../ru/vie-game-over.html">Жизни и Game Over</a>).</li><li><strong>Звуки:</strong> добавь <strong>«Воспроизвести звук»</strong> после каждого отскока.</li><li><strong>Свой стиль:</strong> поменяй картинки и фон; имена остаются теми же.</li><li><strong>Игра ничего не делает?</strong> Вернись к шагу 1: не хватает имени или поведения. <strong>Робот не двигается?</strong> Проверь, что у него поведение <strong>Декор</strong> и что формула стоит в поле <strong>Значение</strong>.</li></ul>
+
+<div class="nav">
+<a href="../ru/casse-briques.html">← Сделать арканоид</a>
+<a href="../ru/jeu-tactique.html">Следующее руководство: Сделать тактическую игру →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../ru/index.html">Официальный сайт</a> · <a href="../../noeuds/ru.html">Справочник узлов</a></p>
+</footer>
+</body>
+</html>

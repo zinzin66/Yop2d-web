@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Cómo hacer un Pong en Yop2D? | Guía Yop2D</title>
+<meta name="description" content="Haz un juego de Pong en Yop2D sin código: una paleta que sigue tu dedo, un robot rival, rebotes, porterías y marcadores con nodos.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/es/pong.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pong.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pong.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pong.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pong.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pong.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pong.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pong.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pong.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pong.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "¿Cómo hacer un Pong?",
+ "description": "Haz un juego de Pong en Yop2D sin código: una paleta que sigue tu dedo, un robot rival, rebotes, porterías y marcadores con nodos.",
+ "inLanguage": "es",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de juegos 2D sin código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Colocar y nombrar los objetos",
+   "text": "Una pelota, tu paleta (Player), un robot (Bot), dos paredes y dos porterías, con sus nombres exactos y el comportamiento Decorado."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Lanzar la pelota",
+   "text": "Al Iniciar → Modificar Variable (vx, vy); Cada fotograma → Empujar objeto (Ball)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Mover mi paleta",
+   "text": "Dedo presionado → Mover Objeto (Player, x = doigt.x) → Mantener en pantalla."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Hacer rebotar la pelota",
+   "text": "Colisión A/B (pared o paleta, Ball) → Modificar Variable (vx o vy)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Hacer jugar al robot",
+   "text": "Cada fotograma → Modificar una propiedad (Bot, x) → Mantener en pantalla."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Contar los goles",
+   "text": "Colisión A/B (portería, Ball) → Añadir a Variable → Modificar Texto → volver a sacar."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../es/index.html">← Yop2D</a>
+<h1>¿Cómo hacer un Pong?</h1>
+<p>Guía para principiantes · sin código</p>
+<p class="langues"><a href="../pong.html" hreflang="fr">Français</a> · <a href="../en/pong.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="../de/pong.html" hreflang="de">Deutsch</a> · <a href="../it/pong.html" hreflang="it">Italiano</a> · <a href="../pt/pong.html" hreflang="pt">Português</a> · <a href="../ru/pong.html" hreflang="ru">Русский</a> · <a href="../zh/pong.html" hreflang="zh">中文</a> · <a href="../ja/pong.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>En un Pong, una <strong>pelota</strong> rebota entre tu <strong>paleta</strong> (abajo) y la de un <strong>robot</strong> (arriba). Cuando la pelota pasa por detrás de una paleta, el otro jugador marca un punto. Como en la <a href="../es/casse-briques.html">guía del rompe-ladrillos</a>, la pelota se mueve gracias a dos variables: <strong>vx</strong> (su velocidad hacia los lados) y <strong>vy</strong> (su velocidad hacia arriba o abajo).</p>
+<div class="besoin">
+<b>Necesitas:</b>
+<ul><li>una Imagen llamada <strong>Ball</strong>, en medio de la pantalla (por ejemplo 60 x 60 px);</li><li>una Imagen llamada <strong>Player</strong>, abajo (por ejemplo 200 x 80 px, hacia y = 1690);</li><li>una Imagen llamada <strong>Bot</strong>, arriba (mismo tamaño, y = 140);</li><li>dos objetos Texto llamados <strong>ScorePlayer</strong> y <strong>ScoreBot</strong>, con el texto 0;</li><li>cuatro Zonas llamadas <strong>WallLeft</strong>, <strong>WallRight</strong>, <strong>GoalPlayer</strong> y <strong>GoalBot</strong>.</li></ul>
+</div>
+<div class="tip">👉 Esta guía está escrita para un juego <strong>vertical de 1080 x 1920</strong>. Para las imágenes, usa el pack gratuito <strong>Puzzle (rompe-ladrillos)</strong> (Kenney, libre de derechos, CC0) en la <strong>Biblioteca</strong>, pestaña <strong>Packs para descargar</strong>: <strong>paddleBlu</strong> (tu paleta), <strong>paddleRed</strong> (el robot), <strong>ballBlue</strong> (la pelota). También puedes usar tus propios dibujos.</div>
+<h2>Paso 1: los nombres, los comportamientos y las variables</h2>
+<div class="method">
+<ol><li>Selecciona cada objeto y escribe su nombre en el inspector, exactamente como en la lista de arriba. Un nombre con un espacio o con otra letra no será encontrado por los nodos.</li><li>Selecciona <strong>Ball</strong>, toca <strong>⚙ Comportamiento del objeto</strong> y elige <strong>Decorado</strong>. Haz lo mismo con <strong>Player</strong> y <strong>Bot</strong>: solo los nodos los moverán.</li><li>En la sección <strong>Variables</strong>, crea dos variables de tipo <strong>Número</strong>, ámbito <strong>Local</strong>: <strong>vx</strong> y <strong>vy</strong>, valor inicial <strong>0</strong>. Crea otras dos de tipo <strong>Entero</strong>, ámbito <strong>Local</strong>: <strong>scorePlayer</strong> y <strong>scoreBot</strong>, valor inicial <strong>0</strong>.</li></ol>
+<div class="tip">👉 <strong>El error más común:</strong> un nombre olvidado o un comportamiento olvidado. Nada se rompe, pero no pasa nada. Si tu juego no hace nada, revisa primero este paso.</div>
+</div>
+<h2>Paso 2: las paredes y las porterías</h2>
+<div class="method">
+<p>La pelota rebota en paredes que no se ven: cuatro <strong>Zonas</strong> colocadas alrededor de la pantalla. Una zona es invisible durante el juego, pero la pelota puede tocarla.</p>
+<ol><li>Añade una Zona llamada <strong>WallLeft</strong>: X = <code>-300</code>, Y = <code>-400</code>, ancho <code>300</code>, alto <code>2800</code>.</li><li>Añade una Zona llamada <strong>WallRight</strong>: X = <code>1080</code>, Y = <code>-400</code>, ancho <code>300</code>, alto <code>2800</code>.</li><li>Añade una Zona llamada <strong>GoalBot</strong>: X = <code>-300</code>, Y = <code>-300</code>, ancho <code>1680</code>, alto <code>300</code> (encima de la pantalla).</li><li>Añade una Zona llamada <strong>GoalPlayer</strong>: X = <code>-300</code>, Y = <code>1920</code>, ancho <code>1680</code>, alto <code>300</code> (debajo de la pantalla).</li></ol>
+<div class="tip">👉 Las paredes son gruesas a propósito: una pelota rápida no puede atravesarlas. Las dos paredes devuelven la pelota; las dos porterías contarán los puntos.</div>
+</div>
+<h2>Paso 3: la pelota sale y avanza</h2>
+<div class="method">
+<ol><li>Añade el evento <strong>«Al Iniciar»</strong>, y después dos nodos <strong>«Modificar Variable»</strong> seguidos: variable <strong>vx</strong>, valor <code>6</code>, y luego variable <strong>vy</strong>, valor <code>9</code>.</li><li>Añade el evento <strong>«Cada fotograma»</strong>, y después <strong>«Empujar objeto»</strong>: objetivo <strong>Ball</strong>, <strong>Añadir X</strong> = <code>vx</code>, <strong>Añadir Y</strong> = <code>vy</code>. Escribe simplemente los dos nombres en las casillas.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Al Iniciar</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variable</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variable</b><span>vy · 9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Cada fotograma</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Empujar objeto</b><span>Ball · vx · vy</span></div>
+</div>
+<div class="tip">👉 <strong>¿Cómo avanza?</strong> <strong>«Cada fotograma»</strong> salta unas 60 veces por segundo. Cada vez, la pelota avanza <strong>vx</strong> píxeles hacia el lado y <strong>vy</strong> píxeles hacia arriba o abajo. Con 0 y 0, se para. Para cambiar su dirección, solo cambiamos estos dos números: es lo que harán los rebotes.</div>
+</div>
+<h2>Paso 4: mi paleta sigue mi dedo</h2>
+<div class="method">
+<ol><li>Añade el evento <strong>«Dedo presionado»</strong>: se repite mientras tu dedo está en la pantalla.</li><li>Añade <strong>«Mover Objeto»</strong>: objetivo <strong>Player</strong>, <strong>X</strong> = <code>doigt.x - Player.largeur / 2</code>, <strong>Y</strong> = <code>1690</code>. La posición del dedo está en la lista de la izquierda de la ventana de ajustes; quitamos la mitad del ancho de la paleta para que el dedo quede en su centro.</li><li>Añade <strong>«Mantener en pantalla»</strong>: objetivo <strong>Player</strong>, <strong>Margen</strong> = <code>0</code>, para que la paleta no salga por los lados.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Dedo presionado</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Mover Objeto</b><span>Player · doigt.x · 1690</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Mantener en pantalla</b><span>Player · 0</span></div>
+</div>
+</div>
+<h2>Paso 5: los rebotes</h2>
+<div class="method">
+<p>Un rebote es solo un número nuevo para <strong>vx</strong> o <strong>vy</strong>. Usamos <strong>random(a, b)</strong>, que elige un número entre a y b: ningún rebote es igual.</p>
+<ol><li><strong>«Colisión A/B»</strong> (<strong>Objeto A</strong> = <strong>WallLeft</strong>, <strong>Objeto B</strong> = <strong>Ball</strong>) → <strong>«Modificar Variable»</strong>: <strong>vx</strong> = <code>random(4, 12)</code>. Un número positivo: la pelota va hacia la derecha.</li><li><strong>«Colisión A/B»</strong> (<strong>WallRight</strong>, <strong>Ball</strong>) → <strong>«Modificar Variable»</strong>: <strong>vx</strong> = <code>-random(4, 12)</code>. El signo menos lo hace negativo: la pelota va hacia la izquierda.</li><li><strong>«Colisión A/B»</strong> (<strong>Ball</strong>, <strong>Player</strong>) → <strong>«Modificar Variable»</strong>: <strong>vy</strong> = <code>random(-13, -9)</code> (la pelota sube), y después <strong>«Modificar Variable»</strong>: <strong>vx</strong> = <code>Ball.x / 10 - Player.x / 10 - 7</code>.</li><li><strong>«Colisión A/B»</strong> (<strong>Ball</strong>, <strong>Bot</strong>) → <strong>«Modificar Variable»</strong>: <strong>vy</strong> = <code>random(9, 13)</code> (la pelota baja), y después <strong>«Modificar Variable»</strong>: <strong>vx</strong> = <code>random(-6, 6)</code>.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Colisión A/B</b><span>WallLeft · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variable</b><span>vx · random(4, 12)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Colisión A/B</b><span>WallRight · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variable</b><span>vx · -random(4, 12)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Colisión A/B</b><span>Ball · Player</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variable</b><span>vy · random(-13, -9)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variable</b><span>vx · Ball.x / 10 - Player.x / 10 - 7</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Colisión A/B</b><span>Ball · Bot</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variable</b><span>vy · random(9, 13)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variable</b><span>vx · random(-6, 6)</span></div>
+</div>
+<div class="tip">👉 <strong>¿Por qué este cálculo para la paleta?</strong> Compara la posición de la pelota con la de la paleta: en el centro, la pelota sale recta; cerca de un borde, sale hacia el lado. El <code>-7</code> compensa que la paleta es más ancha que la pelota (así el centro da 0).</div>
+</div>
+<h2>Paso 6: el robot persigue la pelota</h2>
+<div class="method">
+<p>El robot no es muy listo: en cada imagen, se acerca un poco a la pelota.</p>
+<ol><li>Añade el evento <strong>«Cada fotograma»</strong>, y después <strong>«Modificar una propiedad»</strong>: objetivo <strong>Bot</strong>, <strong>Propiedad</strong> = <code>x</code>, <strong>Valor</strong> = <code>Bot.x * 0.94 + Ball.x * 0.06 - 6</code>.</li><li>Añade <strong>«Mantener en pantalla»</strong>: objetivo <strong>Bot</strong>, <strong>Margen</strong> = <code>0</code>.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Cada fotograma</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar una propiedad</b><span>Bot · x</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Mantener en pantalla</b><span>Bot · 0</span></div>
+</div>
+<div class="tip">👉 <strong>¿Cómo funciona?</strong> El robot conserva el 94 % de su sitio y toma el 6 % del sitio de la pelota (el <code>- 6</code> lo centra en la pelota). Con <code>0.06</code>, es lo bastante lento como para ganarle. Prueba <code>0.03</code> y <code>0.97</code> (muy fácil) o <code>0.15</code> y <code>0.85</code> (muy difícil): los dos números deben sumar 1, y el <code>- 6</code> pasa a ser <code>- 3</code> o <code>- 15</code>.</div>
+<div class="tip">👉 <strong>Ojo:</strong> no escribas una posición en «velocidad X». Una velocidad es un número pequeño, una posición es un número grande: el robot no se movería.</div>
+</div>
+<h2>Paso 7: los goles y los marcadores</h2>
+<div class="method">
+<ol><li><strong>«Colisión A/B»</strong> (<strong>GoalBot</strong>, <strong>Ball</strong>) → <strong>«Añadir a Variable»</strong>: variable <strong>scorePlayer</strong>, <strong>Valor a añadir = 1</strong> → <strong>«Modificar Texto»</strong>: objetivo <strong>ScorePlayer</strong>, <strong>Texto nuevo</strong> = <code>=scorePlayer</code>.</li><li>Igual para el robot: <strong>«Colisión A/B»</strong> (<strong>GoalPlayer</strong>, <strong>Ball</strong>) → <strong>«Añadir a Variable»</strong>: <strong>scoreBot</strong> + 1 → <strong>«Modificar Texto»</strong>: objetivo <strong>ScoreBot</strong>, <code>=scoreBot</code>.</li><li>Para volver a sacar, añade a continuación: <strong>«Modificar Variable»</strong> <strong>vx</strong> = <code>0</code>, <strong>«Modificar Variable»</strong> <strong>vy</strong> = <code>0</code>, <strong>«Mover Objeto»</strong> <strong>Ball</strong> a X = <code>510</code>, Y = <code>930</code>, <strong>«Esperar»</strong> 1 segundo, y después <strong>«Modificar Variable»</strong> <strong>vx</strong> = <code>6</code> y <strong>«Modificar Variable»</strong> <strong>vy</strong> = <code>9</code>.</li><li>Conecta el final de las dos porterías con el <strong>primer nodo</strong> de este saque: una entrada puede recibir varios hilos.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Colisión A/B</b><span>GoalBot · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Añadir a Variable</b><span>scorePlayer · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Texto</b><span>ScorePlayer</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Colisión A/B</b><span>GoalPlayer · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Añadir a Variable</b><span>scoreBot · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Texto</b><span>ScoreBot</span></div>
+</div>
+<div class="chaine">
+<div class="noeud"><b>Modificar Variable</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variable</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Mover Objeto</b><span>Ball · 510 · 930</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Esperar</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variable</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modificar Variable</b><span>vy · 9</span></div>
+</div>
+<div class="tip">👉 <strong>El signo = al principio del texto</strong> le dice a Yop2D que <strong>calcule</strong> el valor en lugar de escribirlo tal cual (mira la guía <a href="../es/pieces-score.html">Recoger monedas y contar puntos</a>).</div>
+</div>
+<h2>Para ir más lejos</h2>
+<ul><li><strong>Ganar a 5 puntos:</strong> después de cada gol, añade una <strong>«Condición»</strong> <code>=scorePlayer &gt;= 5</code>, y después un <strong>«Mensaje corto abajo de la pantalla»</strong> y <strong>«Reiniciar la escena»</strong> (mira la guía <a href="../es/vie-game-over.html">Vidas y Game Over</a>).</li><li><strong>Sonidos:</strong> añade <strong>«Reproducir sonido»</strong> después de cada rebote.</li><li><strong>Tu estilo:</strong> cambia las imágenes y el fondo; los nombres siguen siendo los mismos.</li><li><strong>¿El juego no hace nada?</strong> Vuelve al paso 1: falta un nombre o un comportamiento. <strong>¿El robot no se mueve?</strong> Comprueba que su comportamiento es <strong>Decorado</strong> y que la fórmula está en <strong>Valor</strong>.</li></ul>
+
+<div class="nav">
+<a href="../es/casse-briques.html">← Hacer un rompeladrillos</a>
+<a href="../es/jeu-tactique.html">Siguiente guía: Hacer un juego de tácticas →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de juegos 2D gratuito y sin código para Android · <a href="../../es/index.html">Sitio oficial</a> · <a href="../../noeuds/es.html">Referencia de nodos</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,510 @@
+{
+  "titre_page": "Yop2D で Pong を作るには？ | Yop2D ガイド",
+  "description": "Yop2D でコードなしで Pong ゲームを作ります。指についてくるラケット、ロボットの対戦相手、はね返り、ゴール、スコアをノードで作ります。",
+  "h1": "Pong を作るには？",
+  "carte": [
+    "Pong を作る",
+    "指で動かすラケット、ロボットの対戦相手、ゴールとスコア。"
+  ],
+  "etapes": [
+    [
+      "オブジェクトを置いて名前をつける",
+      "ボール、自分のラケット（Player）、ロボット（Bot）、壁2つ、ゴール2つ。名前は正確に、ふるまいは「かざり」にします。"
+    ],
+    [
+      "ボールを出発させる",
+      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy)；{{NoeudEventChaqueImage}} → {{pousser}} (Ball)。"
+    ],
+    [
+      "自分のラケットを動かす",
+      "{{NoeudEventDoigtAppuye}} → {{deplacer}} (Player, x = doigt.x) → {{garder_dans_ecran}}。"
+    ],
+    [
+      "ボールをはね返らせる",
+      "{{NoeudEventCollisionAB}} (壁またはラケット, Ball) → {{modifier_variable}} (vx または vy)。"
+    ],
+    [
+      "ロボットを動かす",
+      "{{NoeudEventChaqueImage}} → {{modifier_propriete}} (Bot, x) → {{garder_dans_ecran}}。"
+    ],
+    [
+      "ゴールを数える",
+      "{{NoeudEventCollisionAB}} (ゴール, Ball) → {{ajouter_variable}} → {{modifier_texte}} → サーブをやり直す。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Pong では、**ボール**が自分の**ラケット**（下）と**ロボット**のラケット（上）の間をはね返ります。ボールがラケットの後ろを通ると、相手に1点が入ります。[ブロック崩しのガイド](guide:casse-briques)と同じように、ボールは2つの変数で動きます。**vx**（横の速さ）と **vy**（上か下への速さ）です。"
+    ],
+    [
+      "besoin",
+      [
+        "**Ball** という名前の{{lang:obj_prefix_image}}。画面の真ん中に置きます（例：60 x 60 px）。",
+        "**Player** という名前の{{lang:obj_prefix_image}}。下のほうに置きます（例：200 x 80 px、y = 1690 あたり）。",
+        "**Bot** という名前の{{lang:obj_prefix_image}}。上のほうに置きます（同じ大きさ、y = 140）。",
+        "**ScorePlayer** と **ScoreBot** という名前の{{lang:obj_prefix_texte}}オブジェクト2つ。文字は 0 にします。",
+        "**WallLeft**、**WallRight**、**GoalPlayer**、**GoalBot** という名前の{{lang:obj_prefix_zone}}4つ。"
+      ]
+    ],
+    [
+      "tip",
+      "このガイドは**縦向き 1080 x 1920** のゲーム用です。画像には、**ライブラリ**の**ダウンロードできるパック**タブにある無料の **Puzzle（ブロック崩し）**パック（Kenney、著作権フリー、CC0）を使えます。**paddleBlu**（自分のラケット）、**paddleRed**（ロボット）、**ballBlue**（ボール）です。自分で描いた絵も使えます。"
+    ],
+    [
+      "h2",
+      "ステップ 1：名前、ふるまい、変数"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "それぞれのオブジェクトを選び、インスペクターで名前を上のリストとまったく同じに書きます。スペースが入っていたり文字が違ったりすると、ノードは見つけられません。",
+            "**Ball** を選び、**⚙ オブジェクトのふるまい**をタッチして**かざり**を選びます。**Player** と **Bot** にも同じようにします。動かすのはノードだけです。",
+            "**{{lang:panneau_ress_variables}}** のセクションで、**{{lang:var_type_chiffre}}**型・**{{lang:var_scope_locale}}**範囲の変数を2つ作ります。**vx** と **vy**、初期値は **0** です。さらに**{{lang:var_type_entier}}**型・**{{lang:var_scope_locale}}**範囲の変数を2つ作ります。**scorePlayer** と **scoreBot**、初期値は **0** です。"
+          ]
+        ],
+        [
+          "tip",
+          "**いちばん多い間違い：**名前を忘れる、ふるまいを忘れる。何もこわれませんが、何も起こりません。ゲームが動かないときは、まずこのステップを確認しましょう。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 2：壁とゴール"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "ボールは見えない壁ではね返ります。画面のまわりに{{lang:obj_prefix_zone}}を4つ置きます。ゾーンはゲーム中は見えませんが、ボールはさわることができます。"
+        ],
+        [
+          "ol",
+          [
+            "**WallLeft** という名前の{{lang:obj_prefix_zone}}を追加：X = `-300`、Y = `-400`、幅 `300`、高さ `2800`。",
+            "**WallRight** という名前の{{lang:obj_prefix_zone}}を追加：X = `1080`、Y = `-400`、幅 `300`、高さ `2800`。",
+            "**GoalBot** という名前の{{lang:obj_prefix_zone}}を追加：X = `-300`、Y = `-300`、幅 `1680`、高さ `300`（画面の上）。",
+            "**GoalPlayer** という名前の{{lang:obj_prefix_zone}}を追加：X = `-300`、Y = `1920`、幅 `1680`、高さ `300`（画面の下）。"
+          ]
+        ],
+        [
+          "tip",
+          "壁はわざと厚くしてあります。速いボールでも通りぬけられません。2つの壁はボールをはね返し、2つのゴールは点数を数えます。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 3：ボールが出発して動く"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "イベント **[[NoeudEventStart]]** を追加し、続けて **[[modifier_variable]]** ノードを2つつなげます。変数 **vx**、値 `6`、次に変数 **vy**、値 `9`。",
+            "イベント **[[NoeudEventChaqueImage]]** を追加し、続けて **[[pousser]]** を追加します。対象は **Ball**、**X を加算** = `vx`、**Y を加算** = `vy`。この2つの名前をそのまま欄に書きます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{pousser}}",
+              "Ball · vx · vy"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**どうやって動くの？** **[[NoeudEventChaqueImage]]** は1秒に約60回動きます。そのたびに、ボールは横へ **vx** ピクセル、上か下へ **vy** ピクセル進みます。0 と 0 なら止まります。向きを変えるには、この2つの数字を変えるだけ。はね返りはそれをします。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 4：自分のラケットが指についてくる"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "イベント **[[NoeudEventDoigtAppuye]]** を追加します。指が画面にある間、くり返し動きます。",
+            "**[[deplacer]]** を追加します。対象は **Player**、**X** = `doigt.x - Player.largeur / 2`、**Y** = `1690`。指の位置は設定ウィンドウの左のリストにあります。ラケットの幅の半分を引いて、指がラケットの真ん中にくるようにします。",
+            "**[[garder_dans_ecran]]** を追加します。対象は **Player**、**余白** = `0`。ラケットが横から出ないようにします。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventDoigtAppuye}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "Player · doigt.x · 1690"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{garder_dans_ecran}}",
+              "Player · 0"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 5：はね返り"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "はね返りは、**vx** か **vy** に新しい数字を入れるだけです。**random(a, b)** は a と b の間の数字を選ぶので、はね返りが毎回ちがいます。"
+        ],
+        [
+          "ol",
+          [
+            "**[[NoeudEventCollisionAB]]**（**オブジェクト A** = **WallLeft**、**オブジェクト B** = **Ball**）→ **[[modifier_variable]]**：**vx** = `random(4, 12)`。正の数：ボールは右へ行きます。",
+            "**[[NoeudEventCollisionAB]]**（**WallRight**、**Ball**）→ **[[modifier_variable]]**：**vx** = `-random(4, 12)`。マイナスで負の数になり、ボールは左へ行きます。",
+            "**[[NoeudEventCollisionAB]]**（**Ball**、**Player**）→ **[[modifier_variable]]**：**vy** = `random(-13, -9)`（ボールは上へ）、次に **[[modifier_variable]]**：**vx** = `Ball.x / 10 - Player.x / 10 - 7`。",
+            "**[[NoeudEventCollisionAB]]**（**Ball**、**Bot**）→ **[[modifier_variable]]**：**vy** = `random(9, 13)`（ボールは下へ）、次に **[[modifier_variable]]**：**vx** = `random(-6, 6)`。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "WallLeft · Ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · random(4, 12)"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "WallRight · Ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · -random(4, 12)"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "Ball · Player"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · random(-13, -9)"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · Ball.x / 10 - Player.x / 10 - 7"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "Ball · Bot"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · random(9, 13)"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · random(-6, 6)"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**ラケットの計算はなぜこれ？** ボールとラケットの位置を比べます。真ん中ならまっすぐ、はしに近いほど横に飛びます。`-7` は、ラケットがボールより広いぶんを直します（真ん中が 0 になります）。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 6：ロボットがボールを追う"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "ロボットはかしこくありません。1コマごとに、ボールに少しだけ近づきます。"
+        ],
+        [
+          "ol",
+          [
+            "イベント **[[NoeudEventChaqueImage]]** を追加し、続けて **[[modifier_propriete]]** を追加します。対象は **Bot**、**プロパティ** = `x`、**値** = `Bot.x * 0.94 + Ball.x * 0.06 - 6`。",
+            "**[[garder_dans_ecran]]** を追加します。対象は **Bot**、**余白** = `0`。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_propriete}}",
+              "Bot · x"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{garder_dans_ecran}}",
+              "Bot · 0"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**どういうしくみ？** ロボットは自分の位置の 94 % を残し、ボールの位置の 6 % を取り入れます（`- 6` でボールの真ん中に合わせます）。`0.06` なら、勝てるくらいゆっくりです。`0.03` と `0.97`（とてもかんたん）や、`0.15` と `0.85`（とてもむずかしい）も試してみましょう。2つの数字は足して 1 にし、`- 6` は `- 3` や `- 15` に変えます。"
+        ],
+        [
+          "tip",
+          "**注意：**「X の速さ」に位置を書かないでください。速さは小さな数字、位置は大きな数字です。ロボットが動かなくなります。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "ステップ 7：ゴールとスコア"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "**[[NoeudEventCollisionAB]]**（**GoalBot**、**Ball**）→ **[[ajouter_variable]]**：変数 **scorePlayer**、**{{lang:ajouter_variable.valeur}} = 1** → **[[modifier_texte]]**：対象 **ScorePlayer**、**{{lang:modifier_texte.valeur}}** = `=scorePlayer`。",
+            "ロボットも同じです。**[[NoeudEventCollisionAB]]**（**GoalPlayer**、**Ball**）→ **[[ajouter_variable]]**：**scoreBot** + 1 → **[[modifier_texte]]**：対象 **ScoreBot**、`=scoreBot`。",
+            "サーブをやり直すには、続けてこう追加します。**[[modifier_variable]]** **vx** = `0`、**[[modifier_variable]]** **vy** = `0`、**[[deplacer]]** **Ball** を X = `510`、Y = `930` へ、**[[attendre]]** 1 秒、次に **[[modifier_variable]]** **vx** = `6` と **[[modifier_variable]]** **vy** = `9`。",
+            "2つのゴールの終わりを、このサーブの**最初のノード**につなぎます。入口には何本もの線をつなげられます。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "GoalBot · Ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "scorePlayer · + 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "ScorePlayer"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "GoalPlayer · Ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "scoreBot · + 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "ScoreBot"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "Ball · 510 · 930"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**文字の最初の = ** は、書いたとおりではなく**計算**した値を使うよう Yop2D に伝えます（ガイド[コインを集めて点数を数える](guide:pieces-score)を見てください）。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "もっと先へ"
+    ],
+    [
+      "ul",
+      [
+        "**5点で勝ち：**ゴールのたびに **[[condition]]** `=scorePlayer >= 5` を追加し、次に **[[toast]]** と **[[recommencer_scene]]** を追加します（ガイド[ライフとゲームオーバー](guide:vie-game-over)を見てください）。",
+        "**音：**はね返りのたびに **[[jouer_son]]** を追加しましょう。",
+        "**自分らしく：**画像と背景を変えてみましょう。名前はそのままです。",
+        "**ゲームが動かない？**ステップ 1 にもどりましょう。名前かふるまいが足りません。**ロボットが動かない？**ふるまいが**かざり**で、式が**値**に入っているか確認します。"
+      ]
+    ]
+  ]
+}

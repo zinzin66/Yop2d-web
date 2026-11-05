@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何在 Yop2D 中制作 Pong？ | Yop2D 指南</title>
+<meta name="description" content="在 Yop2D 中无需代码制作 Pong 游戏：跟着手指移动的球拍、机器人对手、反弹、球门和比分，全部用节点完成。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pong.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pong.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pong.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pong.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pong.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pong.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pong.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pong.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pong.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pong.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何制作 Pong？",
+ "description": "在 Yop2D 中无需代码制作 Pong 游戏：跟着手指移动的球拍、机器人对手、反弹、球门和比分，全部用节点完成。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "放置对象并命名",
+   "text": "一个球、你的球拍（Player）、一个机器人（Bot）、两面墙和两个球门，名字要完全一致，行为设为“装饰”。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "让球出发",
+   "text": "启动时 → 修改变量 (vx, vy)；每帧 → 推动对象 (Ball)。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "移动我的球拍",
+   "text": "手指按住 → 移动对象 (Player, x = doigt.x) → 保持在屏幕内。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "让球反弹",
+   "text": "碰撞 A/B (墙或球拍, Ball) → 修改变量 (vx 或 vy)。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "让机器人上场",
+   "text": "每帧 → 修改属性 (Bot, x) → 保持在屏幕内。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "统计进球",
+   "text": "碰撞 A/B (球门, Ball) → 增加变量值 → 修改文本 → 重新发球。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>如何制作 Pong？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../pong.html" hreflang="fr">Français</a> · <a href="../en/pong.html" hreflang="en">English</a> · <a href="../es/pong.html" hreflang="es">Español</a> · <a href="../de/pong.html" hreflang="de">Deutsch</a> · <a href="../it/pong.html" hreflang="it">Italiano</a> · <a href="../pt/pong.html" hreflang="pt">Português</a> · <a href="../ru/pong.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/pong.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>在 Pong 里，一个<strong>球</strong>在你的<strong>球拍</strong>（下方）和<strong>机器人</strong>的球拍（上方）之间来回反弹。球从一方球拍后面飞过时，另一方得一分。和<a href="../zh/casse-briques.html">打砖块指南</a>一样，球靠两个变量移动：<strong>vx</strong>（向两侧的速度）和 <strong>vy</strong>（向上或向下的速度）。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>一个名为 <strong>Ball</strong> 的图像，放在屏幕中间（例如 60 x 60 px）；</li><li>一个名为 <strong>Player</strong> 的图像，放在下方（例如 200 x 80 px，约 y = 1690）；</li><li>一个名为 <strong>Bot</strong> 的图像，放在上方（大小相同，y = 140）；</li><li>两个名为 <strong>ScorePlayer</strong> 和 <strong>ScoreBot</strong> 的文本对象，文字为 0；</li><li>四个名为 <strong>WallLeft</strong>、<strong>WallRight</strong>、<strong>GoalPlayer</strong> 和 <strong>GoalBot</strong> 的区域。</li></ul>
+</div>
+<div class="tip">👉 本指南针对 <strong>1080 x 1920 的竖屏</strong>游戏。图片可以使用免费的 <strong>Puzzle（打砖块）</strong>素材包（Kenney，免版权，CC0），在<strong>资源库</strong>的<strong>可下载素材包</strong>标签中：<strong>paddleBlu</strong>（你的球拍）、<strong>paddleRed</strong>（机器人）、<strong>ballBlue</strong>（球）。你也可以用自己的图。</div>
+<h2>第 1 步：名称、行为和变量</h2>
+<div class="method">
+<ol><li>选中每个对象，在检查器里写下它的名称，要和上面的列表完全一致。名称里有空格或字母不同，节点就找不到它。</li><li>选中 <strong>Ball</strong>，点击 <strong>⚙ 物体行为</strong>，选择<strong>装饰</strong>。对 <strong>Player</strong> 和 <strong>Bot</strong> 做同样的事：只有节点会移动它们。</li><li>在 <strong>变量</strong> 部分，创建两个类型为<strong>数字</strong>、范围为<strong>局部</strong>的变量：<strong>vx</strong> 和 <strong>vy</strong>，初始值 <strong>0</strong>。再创建两个类型为<strong>整数</strong>、范围为<strong>局部</strong>的变量：<strong>scorePlayer</strong> 和 <strong>scoreBot</strong>，初始值 <strong>0</strong>。</li></ol>
+<div class="tip">👉 <strong>最常见的错误：</strong>忘了名称或忘了行为。什么都不会坏，但什么也不会发生。如果游戏没有反应，先检查这一步。</div>
+</div>
+<h2>第 2 步：墙和球门</h2>
+<div class="method">
+<p>球会在看不见的墙上反弹：在屏幕周围放四个<strong>区域</strong>。区域在游戏中是不可见的，但球可以碰到它。</p>
+<ol><li>添加一个名为 <strong>WallLeft</strong> 的区域：X = <code>-300</code>，Y = <code>-400</code>，宽 <code>300</code>，高 <code>2800</code>。</li><li>添加一个名为 <strong>WallRight</strong> 的区域：X = <code>1080</code>，Y = <code>-400</code>，宽 <code>300</code>，高 <code>2800</code>。</li><li>添加一个名为 <strong>GoalBot</strong> 的区域：X = <code>-300</code>，Y = <code>-300</code>，宽 <code>1680</code>，高 <code>300</code>（在屏幕上方）。</li><li>添加一个名为 <strong>GoalPlayer</strong> 的区域：X = <code>-300</code>，Y = <code>1920</code>，宽 <code>1680</code>，高 <code>300</code>（在屏幕下方）。</li></ol>
+<div class="tip">👉 墙故意做得很厚：快速的球穿不过去。两面墙把球弹回去；两个球门负责计分。</div>
+</div>
+<h2>第 3 步：球出发并移动</h2>
+<div class="method">
+<ol><li>添加事件 <strong>“启动时”</strong>，然后依次添加两个 <strong>“修改变量”</strong> 节点：变量 <strong>vx</strong>，值 <code>6</code>；再是变量 <strong>vy</strong>，值 <code>9</code>。</li><li>添加事件 <strong>“每帧”</strong>，然后添加 <strong>“推动对象”</strong>：目标 <strong>Ball</strong>，<strong>增加 X</strong> = <code>vx</code>，<strong>增加 Y</strong> = <code>vy</code>。直接把这两个名称写进输入框。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>启动时</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vy · 9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>每帧</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>推动对象</b><span>Ball · vx · vy</span></div>
+</div>
+<div class="tip">👉 <strong>它怎么移动？</strong> <strong>“每帧”</strong> 每秒触发约 60 次。每次，球向侧面移动 <strong>vx</strong> 像素，向上或向下移动 <strong>vy</strong> 像素。如果都是 0，球就停下。要改变方向，只需改变这两个数字：反弹就是这么做的。</div>
+</div>
+<h2>第 4 步：我的球拍跟着手指</h2>
+<div class="method">
+<ol><li>添加事件 <strong>“手指按住”</strong>：手指在屏幕上时它会不断重复。</li><li>添加 <strong>“移动对象”</strong>：目标 <strong>Player</strong>，<strong>X</strong> = <code>doigt.x - Player.largeur / 2</code>，<strong>Y</strong> = <code>1690</code>。手指位置在设置窗口左侧的列表里；减去球拍宽度的一半，让手指位于球拍中心。</li><li>添加 <strong>“保持在屏幕内”</strong>：目标 <strong>Player</strong>，<strong>边距</strong> = <code>0</code>，让球拍不会从两侧跑出去。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>手指按住</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>移动对象</b><span>Player · doigt.x · 1690</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>保持在屏幕内</b><span>Player · 0</span></div>
+</div>
+</div>
+<h2>第 5 步：反弹</h2>
+<div class="method">
+<p>反弹其实就是给 <strong>vx</strong> 或 <strong>vy</strong> 一个新数字。我们用 <strong>random(a, b)</strong>，它会在 a 和 b 之间选一个数：每次反弹都不一样。</p>
+<ol><li><strong>“碰撞 A/B”</strong>（<strong>对象 A</strong> = <strong>WallLeft</strong>，<strong>对象 B</strong> = <strong>Ball</strong>）→ <strong>“修改变量”</strong>：<strong>vx</strong> = <code>random(4, 12)</code>。正数：球向右飞。</li><li><strong>“碰撞 A/B”</strong>（<strong>WallRight</strong>，<strong>Ball</strong>）→ <strong>“修改变量”</strong>：<strong>vx</strong> = <code>-random(4, 12)</code>。负号让它变成负数：球向左飞。</li><li><strong>“碰撞 A/B”</strong>（<strong>Ball</strong>，<strong>Player</strong>）→ <strong>“修改变量”</strong>：<strong>vy</strong> = <code>random(-13, -9)</code>（球向上飞），再 <strong>“修改变量”</strong>：<strong>vx</strong> = <code>Ball.x / 10 - Player.x / 10 - 7</code>。</li><li><strong>“碰撞 A/B”</strong>（<strong>Ball</strong>，<strong>Bot</strong>）→ <strong>“修改变量”</strong>：<strong>vy</strong> = <code>random(9, 13)</code>（球向下飞），再 <strong>“修改变量”</strong>：<strong>vx</strong> = <code>random(-6, 6)</code>。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>碰撞 A/B</b><span>WallLeft · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vx · random(4, 12)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>碰撞 A/B</b><span>WallRight · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vx · -random(4, 12)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>碰撞 A/B</b><span>Ball · Player</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vy · random(-13, -9)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vx · Ball.x / 10 - Player.x / 10 - 7</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>碰撞 A/B</b><span>Ball · Bot</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vy · random(9, 13)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vx · random(-6, 6)</span></div>
+</div>
+<div class="tip">👉 <strong>球拍为什么用这个算式？</strong>它比较球和球拍的位置：打在中间，球直着飞；靠近边缘，球斜着飞。<code>-7</code> 用来抵消球拍比球宽的差别（这样中间得到 0）。</div>
+</div>
+<h2>第 6 步：机器人追球</h2>
+<div class="method">
+<p>机器人不聪明：每一帧，它只是朝球靠近一点点。</p>
+<ol><li>添加事件 <strong>“每帧”</strong>，然后添加 <strong>“修改属性”</strong>：目标 <strong>Bot</strong>，<strong>属性</strong> = <code>x</code>，<strong>值</strong> = <code>Bot.x * 0.94 + Ball.x * 0.06 - 6</code>。</li><li>添加 <strong>“保持在屏幕内”</strong>：目标 <strong>Bot</strong>，<strong>边距</strong> = <code>0</code>。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>每帧</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改属性</b><span>Bot · x</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>保持在屏幕内</b><span>Bot · 0</span></div>
+</div>
+<div class="tip">👉 <strong>它是怎么工作的？</strong>机器人保留自己位置的 94 %，再取球位置的 6 %（<code>- 6</code> 让它对准球的中心）。用 <code>0.06</code> 时它够慢，可以被打败。试试 <code>0.03</code> 和 <code>0.97</code>（很容易），或 <code>0.15</code> 和 <code>0.85</code>（很难）：两个数加起来必须是 1，<code>- 6</code> 也要换成 <code>- 3</code> 或 <code>- 15</code>。</div>
+<div class="tip">👉 <strong>注意：</strong>不要把位置写进“X 速度”。速度是小数字，位置是大数字：机器人就不会动了。</div>
+</div>
+<h2>第 7 步：进球和比分</h2>
+<div class="method">
+<ol><li><strong>“碰撞 A/B”</strong>（<strong>GoalBot</strong>，<strong>Ball</strong>）→ <strong>“增加变量值”</strong>：变量 <strong>scorePlayer</strong>，<strong>要增加的值 = 1</strong> → <strong>“修改文本”</strong>：目标 <strong>ScorePlayer</strong>，<strong>新文本</strong> = <code>=scorePlayer</code>。</li><li>机器人同理：<strong>“碰撞 A/B”</strong>（<strong>GoalPlayer</strong>，<strong>Ball</strong>）→ <strong>“增加变量值”</strong>：<strong>scoreBot</strong> + 1 → <strong>“修改文本”</strong>：目标 <strong>ScoreBot</strong>，<code>=scoreBot</code>。</li><li>要重新发球，依次添加：<strong>“修改变量”</strong> <strong>vx</strong> = <code>0</code>，<strong>“修改变量”</strong> <strong>vy</strong> = <code>0</code>，<strong>“移动对象”</strong> <strong>Ball</strong> 到 X = <code>510</code>、Y = <code>930</code>，<strong>“等待”</strong> 1 秒，然后 <strong>“修改变量”</strong> <strong>vx</strong> = <code>6</code> 和 <strong>“修改变量”</strong> <strong>vy</strong> = <code>9</code>。</li><li>把两个球门的末端都连到这段发球的<strong>第一个节点</strong>：一个输入可以接收多根线。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>碰撞 A/B</b><span>GoalBot · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>增加变量值</b><span>scorePlayer · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改文本</b><span>ScorePlayer</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>碰撞 A/B</b><span>GoalPlayer · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>增加变量值</b><span>scoreBot · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改文本</b><span>ScoreBot</span></div>
+</div>
+<div class="chaine">
+<div class="noeud"><b>修改变量</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>移动对象</b><span>Ball · 510 · 930</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>等待</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>修改变量</b><span>vy · 9</span></div>
+</div>
+<div class="tip">👉 <strong>文字开头的 = 号</strong>告诉 Yop2D 去<strong>计算</strong>这个值，而不是原样写出来（见指南<a href="../zh/pieces-score.html">收集金币并计分</a>）。</div>
+</div>
+<h2>继续深入</h2>
+<ul><li><strong>5 分获胜：</strong>每次进球后，添加一个 <strong>“条件”</strong> <code>=scorePlayer &gt;= 5</code>，再加 <strong>“屏幕底部小提示”</strong> 和 <strong>“重新开始场景”</strong>（见指南<a href="../zh/vie-game-over.html">生命与 Game Over</a>）。</li><li><strong>音效：</strong>在每次反弹后添加 <strong>“播放音效”</strong>。</li><li><strong>你自己的风格：</strong>换掉图片和背景；名称保持不变。</li><li><strong>游戏没有反应？</strong>回到第 1 步：少了名称或行为。<strong>机器人不动？</strong>检查它的行为是不是<strong>装饰</strong>，以及公式是否写在<strong>值</strong>里。</li></ul>
+
+<div class="nav">
+<a href="../zh/casse-briques.html">← 制作打砖块</a>
+<a href="../zh/jeu-tactique.html">下一篇： 做一个战术游戏 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>

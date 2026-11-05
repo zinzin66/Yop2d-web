@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yop2D で Pong を作るには？ | Yop2D ガイド</title>
+<meta name="description" content="Yop2D でコードなしで Pong ゲームを作ります。指についてくるラケット、ロボットの対戦相手、はね返り、ゴール、スコアをノードで作ります。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pong.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pong.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pong.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pong.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pong.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pong.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pong.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pong.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pong.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pong.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Pong を作るには？",
+ "description": "Yop2D でコードなしで Pong ゲームを作ります。指についてくるラケット、ロボットの対戦相手、はね返り、ゴール、スコアをノードで作ります。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "オブジェクトを置いて名前をつける",
+   "text": "ボール、自分のラケット（Player）、ロボット（Bot）、壁2つ、ゴール2つ。名前は正確に、ふるまいは「かざり」にします。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ボールを出発させる",
+   "text": "起動時 → 変数を変更 (vx, vy)；毎フレーム → オブジェクトを押す (Ball)。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "自分のラケットを動かす",
+   "text": "指で押している間 → オブジェクトを移動 (Player, x = doigt.x) → 画面内に収める。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ボールをはね返らせる",
+   "text": "衝突 A/B (壁またはラケット, Ball) → 変数を変更 (vx または vy)。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ロボットを動かす",
+   "text": "毎フレーム → プロパティを変更 (Bot, x) → 画面内に収める。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ゴールを数える",
+   "text": "衝突 A/B (ゴール, Ball) → 変数に加算 → テキストを変更 → サーブをやり直す。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>Pong を作るには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../pong.html" hreflang="fr">Français</a> · <a href="../en/pong.html" hreflang="en">English</a> · <a href="../es/pong.html" hreflang="es">Español</a> · <a href="../de/pong.html" hreflang="de">Deutsch</a> · <a href="../it/pong.html" hreflang="it">Italiano</a> · <a href="../pt/pong.html" hreflang="pt">Português</a> · <a href="../ru/pong.html" hreflang="ru">Русский</a> · <a href="../zh/pong.html" hreflang="zh">中文</a> · <strong>日本語</strong></p>
+</header>
+<main>
+<p>Pong では、<strong>ボール</strong>が自分の<strong>ラケット</strong>（下）と<strong>ロボット</strong>のラケット（上）の間をはね返ります。ボールがラケットの後ろを通ると、相手に1点が入ります。<a href="../ja/casse-briques.html">ブロック崩しのガイド</a>と同じように、ボールは2つの変数で動きます。<strong>vx</strong>（横の速さ）と <strong>vy</strong>（上か下への速さ）です。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li><strong>Ball</strong> という名前の画像。画面の真ん中に置きます（例：60 x 60 px）。</li><li><strong>Player</strong> という名前の画像。下のほうに置きます（例：200 x 80 px、y = 1690 あたり）。</li><li><strong>Bot</strong> という名前の画像。上のほうに置きます（同じ大きさ、y = 140）。</li><li><strong>ScorePlayer</strong> と <strong>ScoreBot</strong> という名前のテキストオブジェクト2つ。文字は 0 にします。</li><li><strong>WallLeft</strong>、<strong>WallRight</strong>、<strong>GoalPlayer</strong>、<strong>GoalBot</strong> という名前のゾーン4つ。</li></ul>
+</div>
+<div class="tip">👉 このガイドは<strong>縦向き 1080 x 1920</strong> のゲーム用です。画像には、<strong>ライブラリ</strong>の<strong>ダウンロードできるパック</strong>タブにある無料の <strong>Puzzle（ブロック崩し）</strong>パック（Kenney、著作権フリー、CC0）を使えます。<strong>paddleBlu</strong>（自分のラケット）、<strong>paddleRed</strong>（ロボット）、<strong>ballBlue</strong>（ボール）です。自分で描いた絵も使えます。</div>
+<h2>ステップ 1：名前、ふるまい、変数</h2>
+<div class="method">
+<ol><li>それぞれのオブジェクトを選び、インスペクターで名前を上のリストとまったく同じに書きます。スペースが入っていたり文字が違ったりすると、ノードは見つけられません。</li><li><strong>Ball</strong> を選び、<strong>⚙ オブジェクトのふるまい</strong>をタッチして<strong>かざり</strong>を選びます。<strong>Player</strong> と <strong>Bot</strong> にも同じようにします。動かすのはノードだけです。</li><li><strong>変数</strong> のセクションで、<strong>数値</strong>型・<strong>ローカル</strong>範囲の変数を2つ作ります。<strong>vx</strong> と <strong>vy</strong>、初期値は <strong>0</strong> です。さらに<strong>整数</strong>型・<strong>ローカル</strong>範囲の変数を2つ作ります。<strong>scorePlayer</strong> と <strong>scoreBot</strong>、初期値は <strong>0</strong> です。</li></ol>
+<div class="tip">👉 <strong>いちばん多い間違い：</strong>名前を忘れる、ふるまいを忘れる。何もこわれませんが、何も起こりません。ゲームが動かないときは、まずこのステップを確認しましょう。</div>
+</div>
+<h2>ステップ 2：壁とゴール</h2>
+<div class="method">
+<p>ボールは見えない壁ではね返ります。画面のまわりにゾーンを4つ置きます。ゾーンはゲーム中は見えませんが、ボールはさわることができます。</p>
+<ol><li><strong>WallLeft</strong> という名前のゾーンを追加：X = <code>-300</code>、Y = <code>-400</code>、幅 <code>300</code>、高さ <code>2800</code>。</li><li><strong>WallRight</strong> という名前のゾーンを追加：X = <code>1080</code>、Y = <code>-400</code>、幅 <code>300</code>、高さ <code>2800</code>。</li><li><strong>GoalBot</strong> という名前のゾーンを追加：X = <code>-300</code>、Y = <code>-300</code>、幅 <code>1680</code>、高さ <code>300</code>（画面の上）。</li><li><strong>GoalPlayer</strong> という名前のゾーンを追加：X = <code>-300</code>、Y = <code>1920</code>、幅 <code>1680</code>、高さ <code>300</code>（画面の下）。</li></ol>
+<div class="tip">👉 壁はわざと厚くしてあります。速いボールでも通りぬけられません。2つの壁はボールをはね返し、2つのゴールは点数を数えます。</div>
+</div>
+<h2>ステップ 3：ボールが出発して動く</h2>
+<div class="method">
+<ol><li>イベント <strong>「起動時」</strong> を追加し、続けて <strong>「変数を変更」</strong> ノードを2つつなげます。変数 <strong>vx</strong>、値 <code>6</code>、次に変数 <strong>vy</strong>、値 <code>9</code>。</li><li>イベント <strong>「毎フレーム」</strong> を追加し、続けて <strong>「オブジェクトを押す」</strong> を追加します。対象は <strong>Ball</strong>、<strong>X を加算</strong> = <code>vx</code>、<strong>Y を加算</strong> = <code>vy</code>。この2つの名前をそのまま欄に書きます。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>起動時</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>vy · 9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>毎フレーム</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>オブジェクトを押す</b><span>Ball · vx · vy</span></div>
+</div>
+<div class="tip">👉 <strong>どうやって動くの？</strong> <strong>「毎フレーム」</strong> は1秒に約60回動きます。そのたびに、ボールは横へ <strong>vx</strong> ピクセル、上か下へ <strong>vy</strong> ピクセル進みます。0 と 0 なら止まります。向きを変えるには、この2つの数字を変えるだけ。はね返りはそれをします。</div>
+</div>
+<h2>ステップ 4：自分のラケットが指についてくる</h2>
+<div class="method">
+<ol><li>イベント <strong>「指で押している間」</strong> を追加します。指が画面にある間、くり返し動きます。</li><li><strong>「オブジェクトを移動」</strong> を追加します。対象は <strong>Player</strong>、<strong>X</strong> = <code>doigt.x - Player.largeur / 2</code>、<strong>Y</strong> = <code>1690</code>。指の位置は設定ウィンドウの左のリストにあります。ラケットの幅の半分を引いて、指がラケットの真ん中にくるようにします。</li><li><strong>「画面内に収める」</strong> を追加します。対象は <strong>Player</strong>、<strong>余白</strong> = <code>0</code>。ラケットが横から出ないようにします。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>指で押している間</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>オブジェクトを移動</b><span>Player · doigt.x · 1690</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>画面内に収める</b><span>Player · 0</span></div>
+</div>
+</div>
+<h2>ステップ 5：はね返り</h2>
+<div class="method">
+<p>はね返りは、<strong>vx</strong> か <strong>vy</strong> に新しい数字を入れるだけです。<strong>random(a, b)</strong> は a と b の間の数字を選ぶので、はね返りが毎回ちがいます。</p>
+<ol><li><strong>「衝突 A/B」</strong>（<strong>オブジェクト A</strong> = <strong>WallLeft</strong>、<strong>オブジェクト B</strong> = <strong>Ball</strong>）→ <strong>「変数を変更」</strong>：<strong>vx</strong> = <code>random(4, 12)</code>。正の数：ボールは右へ行きます。</li><li><strong>「衝突 A/B」</strong>（<strong>WallRight</strong>、<strong>Ball</strong>）→ <strong>「変数を変更」</strong>：<strong>vx</strong> = <code>-random(4, 12)</code>。マイナスで負の数になり、ボールは左へ行きます。</li><li><strong>「衝突 A/B」</strong>（<strong>Ball</strong>、<strong>Player</strong>）→ <strong>「変数を変更」</strong>：<strong>vy</strong> = <code>random(-13, -9)</code>（ボールは上へ）、次に <strong>「変数を変更」</strong>：<strong>vx</strong> = <code>Ball.x / 10 - Player.x / 10 - 7</code>。</li><li><strong>「衝突 A/B」</strong>（<strong>Ball</strong>、<strong>Bot</strong>）→ <strong>「変数を変更」</strong>：<strong>vy</strong> = <code>random(9, 13)</code>（ボールは下へ）、次に <strong>「変数を変更」</strong>：<strong>vx</strong> = <code>random(-6, 6)</code>。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>衝突 A/B</b><span>WallLeft · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>vx · random(4, 12)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>衝突 A/B</b><span>WallRight · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>vx · -random(4, 12)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>衝突 A/B</b><span>Ball · Player</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>vy · random(-13, -9)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>vx · Ball.x / 10 - Player.x / 10 - 7</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>衝突 A/B</b><span>Ball · Bot</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>vy · random(9, 13)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>vx · random(-6, 6)</span></div>
+</div>
+<div class="tip">👉 <strong>ラケットの計算はなぜこれ？</strong> ボールとラケットの位置を比べます。真ん中ならまっすぐ、はしに近いほど横に飛びます。<code>-7</code> は、ラケットがボールより広いぶんを直します（真ん中が 0 になります）。</div>
+</div>
+<h2>ステップ 6：ロボットがボールを追う</h2>
+<div class="method">
+<p>ロボットはかしこくありません。1コマごとに、ボールに少しだけ近づきます。</p>
+<ol><li>イベント <strong>「毎フレーム」</strong> を追加し、続けて <strong>「プロパティを変更」</strong> を追加します。対象は <strong>Bot</strong>、<strong>プロパティ</strong> = <code>x</code>、<strong>値</strong> = <code>Bot.x * 0.94 + Ball.x * 0.06 - 6</code>。</li><li><strong>「画面内に収める」</strong> を追加します。対象は <strong>Bot</strong>、<strong>余白</strong> = <code>0</code>。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>毎フレーム</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>プロパティを変更</b><span>Bot · x</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>画面内に収める</b><span>Bot · 0</span></div>
+</div>
+<div class="tip">👉 <strong>どういうしくみ？</strong> ロボットは自分の位置の 94 % を残し、ボールの位置の 6 % を取り入れます（<code>- 6</code> でボールの真ん中に合わせます）。<code>0.06</code> なら、勝てるくらいゆっくりです。<code>0.03</code> と <code>0.97</code>（とてもかんたん）や、<code>0.15</code> と <code>0.85</code>（とてもむずかしい）も試してみましょう。2つの数字は足して 1 にし、<code>- 6</code> は <code>- 3</code> や <code>- 15</code> に変えます。</div>
+<div class="tip">👉 <strong>注意：</strong>「X の速さ」に位置を書かないでください。速さは小さな数字、位置は大きな数字です。ロボットが動かなくなります。</div>
+</div>
+<h2>ステップ 7：ゴールとスコア</h2>
+<div class="method">
+<ol><li><strong>「衝突 A/B」</strong>（<strong>GoalBot</strong>、<strong>Ball</strong>）→ <strong>「変数に加算」</strong>：変数 <strong>scorePlayer</strong>、<strong>加算する値 = 1</strong> → <strong>「テキストを変更」</strong>：対象 <strong>ScorePlayer</strong>、<strong>新しいテキスト</strong> = <code>=scorePlayer</code>。</li><li>ロボットも同じです。<strong>「衝突 A/B」</strong>（<strong>GoalPlayer</strong>、<strong>Ball</strong>）→ <strong>「変数に加算」</strong>：<strong>scoreBot</strong> + 1 → <strong>「テキストを変更」</strong>：対象 <strong>ScoreBot</strong>、<code>=scoreBot</code>。</li><li>サーブをやり直すには、続けてこう追加します。<strong>「変数を変更」</strong> <strong>vx</strong> = <code>0</code>、<strong>「変数を変更」</strong> <strong>vy</strong> = <code>0</code>、<strong>「オブジェクトを移動」</strong> <strong>Ball</strong> を X = <code>510</code>、Y = <code>930</code> へ、<strong>「待つ」</strong> 1 秒、次に <strong>「変数を変更」</strong> <strong>vx</strong> = <code>6</code> と <strong>「変数を変更」</strong> <strong>vy</strong> = <code>9</code>。</li><li>2つのゴールの終わりを、このサーブの<strong>最初のノード</strong>につなぎます。入口には何本もの線をつなげられます。</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>衝突 A/B</b><span>GoalBot · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数に加算</b><span>scorePlayer · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>テキストを変更</b><span>ScorePlayer</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>衝突 A/B</b><span>GoalPlayer · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数に加算</b><span>scoreBot · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>テキストを変更</b><span>ScoreBot</span></div>
+</div>
+<div class="chaine">
+<div class="noeud"><b>変数を変更</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>オブジェクトを移動</b><span>Ball · 510 · 930</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>待つ</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>変数を変更</b><span>vy · 9</span></div>
+</div>
+<div class="tip">👉 <strong>文字の最初の = </strong> は、書いたとおりではなく<strong>計算</strong>した値を使うよう Yop2D に伝えます（ガイド<a href="../ja/pieces-score.html">コインを集めて点数を数える</a>を見てください）。</div>
+</div>
+<h2>もっと先へ</h2>
+<ul><li><strong>5点で勝ち：</strong>ゴールのたびに <strong>「条件」</strong> <code>=scorePlayer &gt;= 5</code> を追加し、次に <strong>「画面下の小さなメッセージ」</strong> と <strong>「シーンをやり直す」</strong> を追加します（ガイド<a href="../ja/vie-game-over.html">ライフとゲームオーバー</a>を見てください）。</li><li><strong>音：</strong>はね返りのたびに <strong>「効果音を再生」</strong> を追加しましょう。</li><li><strong>自分らしく：</strong>画像と背景を変えてみましょう。名前はそのままです。</li><li><strong>ゲームが動かない？</strong>ステップ 1 にもどりましょう。名前かふるまいが足りません。<strong>ロボットが動かない？</strong>ふるまいが<strong>かざり</strong>で、式が<strong>値</strong>に入っているか確認します。</li></ul>
+
+<div class="nav">
+<a href="../ja/casse-briques.html">← ブロック崩しを作る</a>
+<a href="../ja/jeu-tactique.html">次のガイド： タクティクスゲームを作る →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

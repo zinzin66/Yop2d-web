@@ -1,0 +1,510 @@
+{
+  "titre_page": "如何在 Yop2D 中制作 Pong？ | Yop2D 指南",
+  "description": "在 Yop2D 中无需代码制作 Pong 游戏：跟着手指移动的球拍、机器人对手、反弹、球门和比分，全部用节点完成。",
+  "h1": "如何制作 Pong？",
+  "carte": [
+    "制作 Pong",
+    "手指控制球拍、机器人对手、球门和比分。"
+  ],
+  "etapes": [
+    [
+      "放置对象并命名",
+      "一个球、你的球拍（Player）、一个机器人（Bot）、两面墙和两个球门，名字要完全一致，行为设为“装饰”。"
+    ],
+    [
+      "让球出发",
+      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy)；{{NoeudEventChaqueImage}} → {{pousser}} (Ball)。"
+    ],
+    [
+      "移动我的球拍",
+      "{{NoeudEventDoigtAppuye}} → {{deplacer}} (Player, x = doigt.x) → {{garder_dans_ecran}}。"
+    ],
+    [
+      "让球反弹",
+      "{{NoeudEventCollisionAB}} (墙或球拍, Ball) → {{modifier_variable}} (vx 或 vy)。"
+    ],
+    [
+      "让机器人上场",
+      "{{NoeudEventChaqueImage}} → {{modifier_propriete}} (Bot, x) → {{garder_dans_ecran}}。"
+    ],
+    [
+      "统计进球",
+      "{{NoeudEventCollisionAB}} (球门, Ball) → {{ajouter_variable}} → {{modifier_texte}} → 重新发球。"
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "在 Pong 里，一个**球**在你的**球拍**（下方）和**机器人**的球拍（上方）之间来回反弹。球从一方球拍后面飞过时，另一方得一分。和[打砖块指南](guide:casse-briques)一样，球靠两个变量移动：**vx**（向两侧的速度）和 **vy**（向上或向下的速度）。"
+    ],
+    [
+      "besoin",
+      [
+        "一个名为 **Ball** 的{{lang:obj_prefix_image}}，放在屏幕中间（例如 60 x 60 px）；",
+        "一个名为 **Player** 的{{lang:obj_prefix_image}}，放在下方（例如 200 x 80 px，约 y = 1690）；",
+        "一个名为 **Bot** 的{{lang:obj_prefix_image}}，放在上方（大小相同，y = 140）；",
+        "两个名为 **ScorePlayer** 和 **ScoreBot** 的{{lang:obj_prefix_texte}}对象，文字为 0；",
+        "四个名为 **WallLeft**、**WallRight**、**GoalPlayer** 和 **GoalBot** 的{{lang:obj_prefix_zone}}。"
+      ]
+    ],
+    [
+      "tip",
+      "本指南针对 **1080 x 1920 的竖屏**游戏。图片可以使用免费的 **Puzzle（打砖块）**素材包（Kenney，免版权，CC0），在**资源库**的**可下载素材包**标签中：**paddleBlu**（你的球拍）、**paddleRed**（机器人）、**ballBlue**（球）。你也可以用自己的图。"
+    ],
+    [
+      "h2",
+      "第 1 步：名称、行为和变量"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "选中每个对象，在检查器里写下它的名称，要和上面的列表完全一致。名称里有空格或字母不同，节点就找不到它。",
+            "选中 **Ball**，点击 **⚙ 物体行为**，选择**装饰**。对 **Player** 和 **Bot** 做同样的事：只有节点会移动它们。",
+            "在 **{{lang:panneau_ress_variables}}** 部分，创建两个类型为**{{lang:var_type_chiffre}}**、范围为**{{lang:var_scope_locale}}**的变量：**vx** 和 **vy**，初始值 **0**。再创建两个类型为**{{lang:var_type_entier}}**、范围为**{{lang:var_scope_locale}}**的变量：**scorePlayer** 和 **scoreBot**，初始值 **0**。"
+          ]
+        ],
+        [
+          "tip",
+          "**最常见的错误：**忘了名称或忘了行为。什么都不会坏，但什么也不会发生。如果游戏没有反应，先检查这一步。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 2 步：墙和球门"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "球会在看不见的墙上反弹：在屏幕周围放四个**{{lang:obj_prefix_zone}}**。区域在游戏中是不可见的，但球可以碰到它。"
+        ],
+        [
+          "ol",
+          [
+            "添加一个名为 **WallLeft** 的{{lang:obj_prefix_zone}}：X = `-300`，Y = `-400`，宽 `300`，高 `2800`。",
+            "添加一个名为 **WallRight** 的{{lang:obj_prefix_zone}}：X = `1080`，Y = `-400`，宽 `300`，高 `2800`。",
+            "添加一个名为 **GoalBot** 的{{lang:obj_prefix_zone}}：X = `-300`，Y = `-300`，宽 `1680`，高 `300`（在屏幕上方）。",
+            "添加一个名为 **GoalPlayer** 的{{lang:obj_prefix_zone}}：X = `-300`，Y = `1920`，宽 `1680`，高 `300`（在屏幕下方）。"
+          ]
+        ],
+        [
+          "tip",
+          "墙故意做得很厚：快速的球穿不过去。两面墙把球弹回去；两个球门负责计分。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 3 步：球出发并移动"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "添加事件 **[[NoeudEventStart]]**，然后依次添加两个 **[[modifier_variable]]** 节点：变量 **vx**，值 `6`；再是变量 **vy**，值 `9`。",
+            "添加事件 **[[NoeudEventChaqueImage]]**，然后添加 **[[pousser]]**：目标 **Ball**，**增加 X** = `vx`，**增加 Y** = `vy`。直接把这两个名称写进输入框。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{pousser}}",
+              "Ball · vx · vy"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**它怎么移动？** **[[NoeudEventChaqueImage]]** 每秒触发约 60 次。每次，球向侧面移动 **vx** 像素，向上或向下移动 **vy** 像素。如果都是 0，球就停下。要改变方向，只需改变这两个数字：反弹就是这么做的。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 4 步：我的球拍跟着手指"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "添加事件 **[[NoeudEventDoigtAppuye]]**：手指在屏幕上时它会不断重复。",
+            "添加 **[[deplacer]]**：目标 **Player**，**X** = `doigt.x - Player.largeur / 2`，**Y** = `1690`。手指位置在设置窗口左侧的列表里；减去球拍宽度的一半，让手指位于球拍中心。",
+            "添加 **[[garder_dans_ecran]]**：目标 **Player**，**边距** = `0`，让球拍不会从两侧跑出去。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventDoigtAppuye}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "Player · doigt.x · 1690"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{garder_dans_ecran}}",
+              "Player · 0"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 5 步：反弹"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "反弹其实就是给 **vx** 或 **vy** 一个新数字。我们用 **random(a, b)**，它会在 a 和 b 之间选一个数：每次反弹都不一样。"
+        ],
+        [
+          "ol",
+          [
+            "**[[NoeudEventCollisionAB]]**（**对象 A** = **WallLeft**，**对象 B** = **Ball**）→ **[[modifier_variable]]**：**vx** = `random(4, 12)`。正数：球向右飞。",
+            "**[[NoeudEventCollisionAB]]**（**WallRight**，**Ball**）→ **[[modifier_variable]]**：**vx** = `-random(4, 12)`。负号让它变成负数：球向左飞。",
+            "**[[NoeudEventCollisionAB]]**（**Ball**，**Player**）→ **[[modifier_variable]]**：**vy** = `random(-13, -9)`（球向上飞），再 **[[modifier_variable]]**：**vx** = `Ball.x / 10 - Player.x / 10 - 7`。",
+            "**[[NoeudEventCollisionAB]]**（**Ball**，**Bot**）→ **[[modifier_variable]]**：**vy** = `random(9, 13)`（球向下飞），再 **[[modifier_variable]]**：**vx** = `random(-6, 6)`。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "WallLeft · Ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · random(4, 12)"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "WallRight · Ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · -random(4, 12)"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "Ball · Player"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · random(-13, -9)"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · Ball.x / 10 - Player.x / 10 - 7"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "Ball · Bot"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · random(9, 13)"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · random(-6, 6)"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**球拍为什么用这个算式？**它比较球和球拍的位置：打在中间，球直着飞；靠近边缘，球斜着飞。`-7` 用来抵消球拍比球宽的差别（这样中间得到 0）。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 6 步：机器人追球"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "机器人不聪明：每一帧，它只是朝球靠近一点点。"
+        ],
+        [
+          "ol",
+          [
+            "添加事件 **[[NoeudEventChaqueImage]]**，然后添加 **[[modifier_propriete]]**：目标 **Bot**，**属性** = `x`，**值** = `Bot.x * 0.94 + Ball.x * 0.06 - 6`。",
+            "添加 **[[garder_dans_ecran]]**：目标 **Bot**，**边距** = `0`。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_propriete}}",
+              "Bot · x"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{garder_dans_ecran}}",
+              "Bot · 0"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**它是怎么工作的？**机器人保留自己位置的 94 %，再取球位置的 6 %（`- 6` 让它对准球的中心）。用 `0.06` 时它够慢，可以被打败。试试 `0.03` 和 `0.97`（很容易），或 `0.15` 和 `0.85`（很难）：两个数加起来必须是 1，`- 6` 也要换成 `- 3` 或 `- 15`。"
+        ],
+        [
+          "tip",
+          "**注意：**不要把位置写进“X 速度”。速度是小数字，位置是大数字：机器人就不会动了。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "第 7 步：进球和比分"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "**[[NoeudEventCollisionAB]]**（**GoalBot**，**Ball**）→ **[[ajouter_variable]]**：变量 **scorePlayer**，**{{lang:ajouter_variable.valeur}} = 1** → **[[modifier_texte]]**：目标 **ScorePlayer**，**{{lang:modifier_texte.valeur}}** = `=scorePlayer`。",
+            "机器人同理：**[[NoeudEventCollisionAB]]**（**GoalPlayer**，**Ball**）→ **[[ajouter_variable]]**：**scoreBot** + 1 → **[[modifier_texte]]**：目标 **ScoreBot**，`=scoreBot`。",
+            "要重新发球，依次添加：**[[modifier_variable]]** **vx** = `0`，**[[modifier_variable]]** **vy** = `0`，**[[deplacer]]** **Ball** 到 X = `510`、Y = `930`，**[[attendre]]** 1 秒，然后 **[[modifier_variable]]** **vx** = `6` 和 **[[modifier_variable]]** **vy** = `9`。",
+            "把两个球门的末端都连到这段发球的**第一个节点**：一个输入可以接收多根线。"
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "GoalBot · Ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "scorePlayer · + 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "ScorePlayer"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "GoalPlayer · Ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "scoreBot · + 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "ScoreBot"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "Ball · 510 · 930"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**文字开头的 = 号**告诉 Yop2D 去**计算**这个值，而不是原样写出来（见指南[收集金币并计分](guide:pieces-score)）。"
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "继续深入"
+    ],
+    [
+      "ul",
+      [
+        "**5 分获胜：**每次进球后，添加一个 **[[condition]]** `=scorePlayer >= 5`，再加 **[[toast]]** 和 **[[recommencer_scene]]**（见指南[生命与 Game Over](guide:vie-game-over)）。",
+        "**音效：**在每次反弹后添加 **[[jouer_son]]**。",
+        "**你自己的风格：**换掉图片和背景；名称保持不变。",
+        "**游戏没有反应？**回到第 1 步：少了名称或行为。**机器人不动？**检查它的行为是不是**装饰**，以及公式是否写在**值**里。"
+      ]
+    ]
+  ]
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to make a Pong game in Yop2D? | Yop2D guide</title>
+<meta name="description" content="Make a Pong game in Yop2D with no code: a paddle that follows your finger, a robot opponent, bounces, goals and scores with nodes.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/pong.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pong.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pong.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pong.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pong.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pong.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pong.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pong.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pong.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pong.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to make a Pong game?",
+ "description": "Make a Pong game in Yop2D with no code: a paddle that follows your finger, a robot opponent, bounces, goals and scores with nodes.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Place and name the objects",
+   "text": "A ball, your paddle (Player), a robot (Bot), two walls and two goals, with their exact names and the Scenery behavior."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Launch the ball",
+   "text": "On Start → Modify Variable (vx, vy); Every frame → Push object (Ball)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Move my paddle",
+   "text": "Finger held down → Move Object (Player, x = doigt.x) → Clamp to screen."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Make the ball bounce",
+   "text": "Collision A/B (wall or paddle, Ball) → Modify Variable (vx or vy)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Make the robot play",
+   "text": "Every frame → Set a property (Bot, x) → Clamp to screen."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Count the goals",
+   "text": "Collision A/B (goal, Ball) → Add to Variable → Modify Text → serve again."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to make a Pong game?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../pong.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/pong.html" hreflang="es">Español</a> · <a href="../de/pong.html" hreflang="de">Deutsch</a> · <a href="../it/pong.html" hreflang="it">Italiano</a> · <a href="../pt/pong.html" hreflang="pt">Português</a> · <a href="../ru/pong.html" hreflang="ru">Русский</a> · <a href="../zh/pong.html" hreflang="zh">中文</a> · <a href="../ja/pong.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>In a Pong game, a <strong>ball</strong> bounces between your <strong>paddle</strong> (at the bottom) and the paddle of a <strong>robot</strong> (at the top). When the ball goes behind a paddle, the other player scores. As in the <a href="../en/casse-briques.html">brick breaker guide</a>, the ball moves thanks to two variables: <strong>vx</strong> (its speed sideways) and <strong>vy</strong> (its speed up or down).</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>an Image named <strong>Ball</strong>, in the middle of the screen (for example 60 x 60 px);</li><li>an Image named <strong>Player</strong>, near the bottom (for example 200 x 80 px, around y = 1690);</li><li>an Image named <strong>Bot</strong>, near the top (same size, y = 140);</li><li>two Text objects named <strong>ScorePlayer</strong> and <strong>ScoreBot</strong>, with the text 0;</li><li>four Zones named <strong>WallLeft</strong>, <strong>WallRight</strong>, <strong>GoalPlayer</strong> and <strong>GoalBot</strong>.</li></ul>
+</div>
+<div class="tip">👉 This guide is written for a <strong>portrait game of 1080 x 1920</strong>. For the pictures, take the free <strong>Puzzle (brick breaker)</strong> pack (Kenney, CC0) in the <strong>Library</strong>, <strong>Packs to download</strong> tab: <strong>paddleBlu</strong> (your paddle), <strong>paddleRed</strong> (the robot), <strong>ballBlue</strong> (the ball). You can also use your own drawings.</div>
+<h2>Step 1: names, behaviors and variables</h2>
+<div class="method">
+<ol><li>Select each object and write its name in the Inspector, exactly as in the list above. A name with a space or a different letter will not be found by the nodes.</li><li>Select <strong>Ball</strong>, touch <strong>⚙ Object behavior</strong> and choose <strong>Scenery</strong>. Do the same for <strong>Player</strong> and <strong>Bot</strong>: only the nodes will move them.</li><li>In the <strong>Variables</strong> section, create two variables of type <strong>Number</strong>, scope <strong>Local</strong>: <strong>vx</strong> and <strong>vy</strong>, start value <strong>0</strong>. Create two more of type <strong>Integer</strong>, scope <strong>Local</strong>: <strong>scorePlayer</strong> and <strong>scoreBot</strong>, start value <strong>0</strong>.</li></ol>
+<div class="tip">👉 <strong>The most common mistake:</strong> a forgotten name or a forgotten behavior. Nothing breaks, but nothing happens. If your game does nothing, check this step first.</div>
+</div>
+<h2>Step 2: walls and goals</h2>
+<div class="method">
+<p>The ball bounces on walls that you cannot see: four <strong>Zones</strong> around the screen. A zone is invisible during the game, but the ball can touch it.</p>
+<ol><li>Add a Zone named <strong>WallLeft</strong>: X = <code>-300</code>, Y = <code>-400</code>, width <code>300</code>, height <code>2800</code>.</li><li>Add a Zone named <strong>WallRight</strong>: X = <code>1080</code>, Y = <code>-400</code>, width <code>300</code>, height <code>2800</code>.</li><li>Add a Zone named <strong>GoalBot</strong>: X = <code>-300</code>, Y = <code>-300</code>, width <code>1680</code>, height <code>300</code> (above the screen).</li><li>Add a Zone named <strong>GoalPlayer</strong>: X = <code>-300</code>, Y = <code>1920</code>, width <code>1680</code>, height <code>300</code> (below the screen).</li></ol>
+<div class="tip">👉 The walls are thick on purpose: a fast ball cannot pass through them. The two walls send the ball back; the two goals will count the points.</div>
+</div>
+<h2>Step 3: the ball starts and moves</h2>
+<div class="method">
+<ol><li>Add the event <strong>“On Start”</strong>, then two <strong>“Modify Variable”</strong> nodes in a row: variable <strong>vx</strong>, value <code>6</code>, then variable <strong>vy</strong>, value <code>9</code>.</li><li>Add the event <strong>“Every frame”</strong>, then <strong>“Push object”</strong>: target <strong>Ball</strong>, <strong>Add X</strong> = <code>vx</code>, <strong>Add Y</strong> = <code>vy</code>. Just write the two names in the fields.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>On Start</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vy · 9</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Every frame</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Push object</b><span>Ball · vx · vy</span></div>
+</div>
+<div class="tip">👉 <strong>How does it move?</strong> <strong>“Every frame”</strong> runs about 60 times per second. Each time, the ball moves by <strong>vx</strong> pixels sideways and <strong>vy</strong> pixels up or down. With 0 and 0, it stops. To change its direction, we only change these two numbers: that is what the bounces will do.</div>
+</div>
+<h2>Step 4: my paddle follows my finger</h2>
+<div class="method">
+<ol><li>Add the event <strong>“Finger held down”</strong>: it repeats while your finger is on the screen.</li><li>Add <strong>“Move Object”</strong>: target <strong>Player</strong>, <strong>X</strong> = <code>doigt.x - Player.largeur / 2</code>, <strong>Y</strong> = <code>1690</code>. The finger position is in the list on the left of the settings window; we remove half of the paddle width so that the finger is at its centre.</li><li>Add <strong>“Clamp to screen”</strong>: target <strong>Player</strong>, <strong>Margin</strong> = <code>0</code>, so that the paddle cannot leave through the sides.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Finger held down</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Move Object</b><span>Player · doigt.x · 1690</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Clamp to screen</b><span>Player · 0</span></div>
+</div>
+</div>
+<h2>Step 5: the bounces</h2>
+<div class="method">
+<p>A bounce is just a new number for <strong>vx</strong> or <strong>vy</strong>. We use <strong>random(a, b)</strong>, which picks a number between a and b: no bounce is the same.</p>
+<ol><li><strong>“Collision A/B”</strong> (<strong>Object A</strong> = <strong>WallLeft</strong>, <strong>Object B</strong> = <strong>Ball</strong>) → <strong>“Modify Variable”</strong>: <strong>vx</strong> = <code>random(4, 12)</code>. A positive number: the ball goes right.</li><li><strong>“Collision A/B”</strong> (<strong>WallRight</strong>, <strong>Ball</strong>) → <strong>“Modify Variable”</strong>: <strong>vx</strong> = <code>-random(4, 12)</code>. The minus sign makes it negative: the ball goes left.</li><li><strong>“Collision A/B”</strong> (<strong>Ball</strong>, <strong>Player</strong>) → <strong>“Modify Variable”</strong>: <strong>vy</strong> = <code>random(-13, -9)</code> (the ball goes up), then <strong>“Modify Variable”</strong>: <strong>vx</strong> = <code>Ball.x / 10 - Player.x / 10 - 7</code>.</li><li><strong>“Collision A/B”</strong> (<strong>Ball</strong>, <strong>Bot</strong>) → <strong>“Modify Variable”</strong>: <strong>vy</strong> = <code>random(9, 13)</code> (the ball comes down), then <strong>“Modify Variable”</strong>: <strong>vx</strong> = <code>random(-6, 6)</code>.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>WallLeft · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · random(4, 12)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>WallRight · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · -random(4, 12)</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>Ball · Player</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vy · random(-13, -9)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · Ball.x / 10 - Player.x / 10 - 7</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>Ball · Bot</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vy · random(9, 13)</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · random(-6, 6)</span></div>
+</div>
+<div class="tip">👉 <strong>Why this calculation for the paddle?</strong> It compares the position of the ball with the position of the paddle: in the centre, the ball goes straight; near an edge, it goes sideways. The <code>-7</code> compensates for the paddle being wider than the ball (so the centre gives 0).</div>
+</div>
+<h2>Step 6: the robot chases the ball</h2>
+<div class="method">
+<p>The robot is not clever: on every frame, it moves a little towards the ball.</p>
+<ol><li>Add the event <strong>“Every frame”</strong>, then <strong>“Set a property”</strong>: target <strong>Bot</strong>, <strong>Property</strong> = <code>x</code>, <strong>Value</strong> = <code>Bot.x * 0.94 + Ball.x * 0.06 - 6</code>.</li><li>Add <strong>“Clamp to screen”</strong>: target <strong>Bot</strong>, <strong>Margin</strong> = <code>0</code>.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Every frame</b></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Set a property</b><span>Bot · x</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Clamp to screen</b><span>Bot · 0</span></div>
+</div>
+<div class="tip">👉 <strong>How does it work?</strong> The robot keeps 94 % of its own place and takes 6 % of the place of the ball (the <code>- 6</code> centres it on the ball). With <code>0.06</code>, it is slow enough to be beaten. Try <code>0.03</code> and <code>0.97</code> (very easy) or <code>0.15</code> and <code>0.85</code> (very hard): the two numbers must add up to 1, and the <code>- 6</code> becomes <code>- 3</code> or <code>- 15</code>.</div>
+<div class="tip">👉 <strong>Careful:</strong> do not write a position in "speed X". A speed is a small number, a position is a big one: the robot would not move.</div>
+</div>
+<h2>Step 7: goals and scores</h2>
+<div class="method">
+<ol><li><strong>“Collision A/B”</strong> (<strong>GoalBot</strong>, <strong>Ball</strong>) → <strong>“Add to Variable”</strong>: variable <strong>scorePlayer</strong>, <strong>Value to add = 1</strong> → <strong>“Modify Text”</strong>: target <strong>ScorePlayer</strong>, <strong>New text</strong> = <code>=scorePlayer</code>.</li><li>Same for the robot: <strong>“Collision A/B”</strong> (<strong>GoalPlayer</strong>, <strong>Ball</strong>) → <strong>“Add to Variable”</strong>: <strong>scoreBot</strong> + 1 → <strong>“Modify Text”</strong>: target <strong>ScoreBot</strong>, <code>=scoreBot</code>.</li><li>To serve again, add in a row: <strong>“Modify Variable”</strong> <strong>vx</strong> = <code>0</code>, <strong>“Modify Variable”</strong> <strong>vy</strong> = <code>0</code>, <strong>“Move Object”</strong> <strong>Ball</strong> to X = <code>510</code>, Y = <code>930</code>, <strong>“Wait”</strong> 1 second, then <strong>“Modify Variable”</strong> <strong>vx</strong> = <code>6</code> and <strong>“Modify Variable”</strong> <strong>vy</strong> = <code>9</code>.</li><li>Link the end of the two goals to the <strong>first node</strong> of this serve: an input can receive several wires.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>GoalBot · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Add to Variable</b><span>scorePlayer · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Text</b><span>ScorePlayer</span></div>
+</div>
+<div class="chaine">
+<div class="noeud evenement"><b>Collision A/B</b><span>GoalPlayer · Ball</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Add to Variable</b><span>scoreBot · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Text</b><span>ScoreBot</span></div>
+</div>
+<div class="chaine">
+<div class="noeud"><b>Modify Variable</b><span>vx · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vy · 0</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Move Object</b><span>Ball · 510 · 930</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Wait</b><span>1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vx · 6</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>Modify Variable</b><span>vy · 9</span></div>
+</div>
+<div class="tip">👉 <strong>The <code>=</code> in front of the text</strong> tells Yop2D to calculate the value instead of writing it as it is (see the guide <a href="../en/pieces-score.html">Collecting coins and counting points</a>).</div>
+</div>
+<h2>Go further</h2>
+<ul><li><strong>Win at 5 points:</strong> after each goal, add a <strong>“Condition”</strong> <code>=scorePlayer &gt;= 5</code>, then a <strong>“Small message at the bottom of the screen”</strong> and <strong>“Restart the scene”</strong> (see the guide <a href="../en/vie-game-over.html">Lives and Game Over</a>).</li><li><strong>Sounds:</strong> add <strong>“Play sound”</strong> after each bounce.</li><li><strong>Your own look:</strong> change the pictures and the background; the names stay the same.</li><li><strong>The game does nothing?</strong> Go back to step 1: a name or a behavior is missing. <strong>The robot does not move?</strong> Check that its behavior is <strong>Scenery</strong> and that the formula is in <strong>Value</strong>.</li></ul>
+
+<div class="nav">
+<a href="../en/casse-briques.html">← Make a brick breaker</a>
+<a href="../en/jeu-tactique.html">Next guide: Make a tactics game →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>
