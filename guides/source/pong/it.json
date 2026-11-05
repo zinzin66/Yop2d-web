@@ -1,0 +1,510 @@
+{
+  "titre_page": "Come fare un Pong in Yop2D? | Guida Yop2D",
+  "description": "Fai un gioco Pong in Yop2D senza codice: una racchetta che segue il dito, un robot avversario, rimbalzi, porte e punteggi con i nodi.",
+  "h1": "Come fare un Pong?",
+  "carte": [
+    "Fare un Pong",
+    "Racchetta col dito, robot avversario, porte e punteggi."
+  ],
+  "etapes": [
+    [
+      "Posizionare e nominare gli oggetti",
+      "Una palla, la tua racchetta (Player), un robot (Bot), due muri e due porte, con i loro nomi esatti e il comportamento Decorazione."
+    ],
+    [
+      "Lanciare la palla",
+      "{{NoeudEventStart}} → {{modifier_variable}} (vx, vy); {{NoeudEventChaqueImage}} → {{pousser}} (Ball)."
+    ],
+    [
+      "Muovere la mia racchetta",
+      "{{NoeudEventDoigtAppuye}} → {{deplacer}} (Player, x = doigt.x) → {{garder_dans_ecran}}."
+    ],
+    [
+      "Far rimbalzare la palla",
+      "{{NoeudEventCollisionAB}} (muro o racchetta, Ball) → {{modifier_variable}} (vx o vy)."
+    ],
+    [
+      "Far giocare il robot",
+      "{{NoeudEventChaqueImage}} → {{modifier_propriete}} (Bot, x) → {{garder_dans_ecran}}."
+    ],
+    [
+      "Contare i gol",
+      "{{NoeudEventCollisionAB}} (porta, Ball) → {{ajouter_variable}} → {{modifier_texte}} → rimessa in gioco."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "In un Pong, una **palla** rimbalza tra la tua **racchetta** (in basso) e quella di un **robot** (in alto). Quando la palla passa dietro una racchetta, l'altro giocatore segna un punto. Come nella [guida del rompimattoni](guide:casse-briques), la palla si muove grazie a due variabili: **vx** (la sua velocità di lato) e **vy** (la sua velocità verso l'alto o il basso)."
+    ],
+    [
+      "besoin",
+      [
+        "una {{lang:obj_prefix_image}} chiamata **Ball**, al centro dello schermo (per esempio 60 x 60 px);",
+        "una {{lang:obj_prefix_image}} chiamata **Player**, in basso (per esempio 200 x 80 px, verso y = 1690);",
+        "una {{lang:obj_prefix_image}} chiamata **Bot**, in alto (stessa dimensione, y = 140);",
+        "due oggetti {{lang:obj_prefix_texte}} chiamati **ScorePlayer** e **ScoreBot**, con il testo 0;",
+        "quattro {{lang:obj_prefix_zone}} chiamate **WallLeft**, **WallRight**, **GoalPlayer** e **GoalBot**."
+      ]
+    ],
+    [
+      "tip",
+      "Questa guida è scritta per un gioco **verticale di 1080 x 1920**. Per le immagini, prendi il pacchetto gratuito **Puzzle (rompimattoni)** (Kenney, libero da diritti, CC0) nella **Libreria**, scheda **Pacchetti da scaricare**: **paddleBlu** (la tua racchetta), **paddleRed** (il robot), **ballBlue** (la palla). Puoi anche usare i tuoi disegni."
+    ],
+    [
+      "h2",
+      "Passo 1: i nomi, i comportamenti e le variabili"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Seleziona ogni oggetto e scrivi il suo nome nell'ispettore, esattamente come nell'elenco qui sopra. Un nome con uno spazio o con un'altra lettera non sarà trovato dai nodi.",
+            "Seleziona **Ball**, tocca **⚙ Comportamento dell'oggetto** e scegli **Decorazione**. Fai lo stesso per **Player** e **Bot**: solo i nodi li sposteranno.",
+            "Nella sezione **{{lang:panneau_ress_variables}}**, crea due variabili di tipo **{{lang:var_type_chiffre}}**, ambito **{{lang:var_scope_locale}}**: **vx** e **vy**, valore iniziale **0**. Creane altre due di tipo **{{lang:var_type_entier}}**, ambito **{{lang:var_scope_locale}}**: **scorePlayer** e **scoreBot**, valore iniziale **0**."
+          ]
+        ],
+        [
+          "tip",
+          "**L'errore più comune:** un nome dimenticato o un comportamento dimenticato. Niente si rompe, ma non succede niente. Se il tuo gioco non fa nulla, controlla prima questo passo."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 2: i muri e le porte"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "La palla rimbalza su muri che non si vedono: quattro **{{lang:obj_prefix_zone}}** messe attorno allo schermo. Una zona è invisibile durante il gioco, ma la palla può toccarla."
+        ],
+        [
+          "ol",
+          [
+            "Aggiungi una {{lang:obj_prefix_zone}} chiamata **WallLeft**: X = `-300`, Y = `-400`, larghezza `300`, altezza `2800`.",
+            "Aggiungi una {{lang:obj_prefix_zone}} chiamata **WallRight**: X = `1080`, Y = `-400`, larghezza `300`, altezza `2800`.",
+            "Aggiungi una {{lang:obj_prefix_zone}} chiamata **GoalBot**: X = `-300`, Y = `-300`, larghezza `1680`, altezza `300` (sopra lo schermo).",
+            "Aggiungi una {{lang:obj_prefix_zone}} chiamata **GoalPlayer**: X = `-300`, Y = `1920`, larghezza `1680`, altezza `300` (sotto lo schermo)."
+          ]
+        ],
+        [
+          "tip",
+          "I muri sono spessi apposta: una palla veloce non può attraversarli. I due muri rimandano la palla; le due porte conteranno i punti."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 3: la palla parte e avanza"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Aggiungi l'evento **[[NoeudEventStart]]**, poi due nodi **[[modifier_variable]]** di seguito: variabile **vx**, valore `6`, poi variabile **vy**, valore `9`.",
+            "Aggiungi l'evento **[[NoeudEventChaqueImage]]**, poi **[[pousser]]**: bersaglio **Ball**, **Aggiungi X** = `vx`, **Aggiungi Y** = `vy`. Scrivi semplicemente i due nomi nelle caselle."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventStart}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{pousser}}",
+              "Ball · vx · vy"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Come avanza?** **[[NoeudEventChaqueImage]]** parte circa 60 volte al secondo. Ogni volta, la palla avanza di **vx** pixel di lato e di **vy** pixel verso l'alto o il basso. Con 0 e 0, si ferma. Per cambiare la sua direzione, cambiamo solo questi due numeri: è quello che faranno i rimbalzi."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 4: la mia racchetta segue il dito"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Aggiungi l'evento **[[NoeudEventDoigtAppuye]]**: si ripete finché il tuo dito è sullo schermo.",
+            "Aggiungi **[[deplacer]]**: bersaglio **Player**, **X** = `doigt.x - Player.largeur / 2`, **Y** = `1690`. La posizione del dito si trova nell'elenco a sinistra della finestra delle impostazioni; togliamo metà della larghezza della racchetta perché il dito sia al suo centro.",
+            "Aggiungi **[[garder_dans_ecran]]**: bersaglio **Player**, **Margine** = `0`, perché la racchetta non esca dai lati."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventDoigtAppuye}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "Player · doigt.x · 1690"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{garder_dans_ecran}}",
+              "Player · 0"
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 5: i rimbalzi"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Un rimbalzo è solo un nuovo numero per **vx** o **vy**. Usiamo **random(a, b)**, che sceglie un numero tra a e b: nessun rimbalzo è uguale."
+        ],
+        [
+          "ol",
+          [
+            "**[[NoeudEventCollisionAB]]** (**Oggetto A** = **WallLeft**, **Oggetto B** = **Ball**) → **[[modifier_variable]]**: **vx** = `random(4, 12)`. Un numero positivo: la palla va verso destra.",
+            "**[[NoeudEventCollisionAB]]** (**WallRight**, **Ball**) → **[[modifier_variable]]**: **vx** = `-random(4, 12)`. Il segno meno lo rende negativo: la palla va verso sinistra.",
+            "**[[NoeudEventCollisionAB]]** (**Ball**, **Player**) → **[[modifier_variable]]**: **vy** = `random(-13, -9)` (la palla sale), poi **[[modifier_variable]]**: **vx** = `Ball.x / 10 - Player.x / 10 - 7`.",
+            "**[[NoeudEventCollisionAB]]** (**Ball**, **Bot**) → **[[modifier_variable]]**: **vy** = `random(9, 13)` (la palla scende), poi **[[modifier_variable]]**: **vx** = `random(-6, 6)`."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "WallLeft · Ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · random(4, 12)"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "WallRight · Ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · -random(4, 12)"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "Ball · Player"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · random(-13, -9)"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · Ball.x / 10 - Player.x / 10 - 7"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "Ball · Bot"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · random(9, 13)"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · random(-6, 6)"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Perché questo calcolo per la racchetta?** Confronta la posizione della palla con quella della racchetta: al centro, la palla parte dritta; vicino a un bordo, parte di lato. Il `-7` compensa il fatto che la racchetta è più larga della palla (così il centro dà 0)."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 6: il robot insegue la palla"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "Il robot non è furbo: a ogni immagine, si avvicina un po' alla palla."
+        ],
+        [
+          "ol",
+          [
+            "Aggiungi l'evento **[[NoeudEventChaqueImage]]**, poi **[[modifier_propriete]]**: bersaglio **Bot**, **Proprietà** = `x`, **Valore** = `Bot.x * 0.94 + Ball.x * 0.06 - 6`.",
+            "Aggiungi **[[garder_dans_ecran]]**: bersaglio **Bot**, **Margine** = `0`."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventChaqueImage}}"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_propriete}}",
+              "Bot · x"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{garder_dans_ecran}}",
+              "Bot · 0"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Come funziona?** Il robot tiene il 94 % del suo posto e prende il 6 % del posto della palla (il `- 6` lo centra sulla palla). Con `0.06`, è abbastanza lento da poter essere battuto. Prova `0.03` e `0.97` (molto facile) o `0.15` e `0.85` (molto difficile): i due numeri devono fare 1 insieme, e il `- 6` diventa `- 3` o `- 15`."
+        ],
+        [
+          "tip",
+          "**Attenzione:** non scrivere una posizione in « velocità X ». Una velocità è un numero piccolo, una posizione è un numero grande: il robot non si muoverebbe."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 7: i gol e i punteggi"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "**[[NoeudEventCollisionAB]]** (**GoalBot**, **Ball**) → **[[ajouter_variable]]**: variabile **scorePlayer**, **{{lang:ajouter_variable.valeur}} = 1** → **[[modifier_texte]]**: bersaglio **ScorePlayer**, **{{lang:modifier_texte.valeur}}** = `=scorePlayer`.",
+            "Lo stesso per il robot: **[[NoeudEventCollisionAB]]** (**GoalPlayer**, **Ball**) → **[[ajouter_variable]]**: **scoreBot** + 1 → **[[modifier_texte]]**: bersaglio **ScoreBot**, `=scoreBot`.",
+            "Per rimettere in gioco, aggiungi di seguito: **[[modifier_variable]]** **vx** = `0`, **[[modifier_variable]]** **vy** = `0`, **[[deplacer]]** **Ball** a X = `510`, Y = `930`, **[[attendre]]** 1 secondo, poi **[[modifier_variable]]** **vx** = `6` e **[[modifier_variable]]** **vy** = `9`.",
+            "Collega la fine delle due porte al **primo nodo** di questa rimessa: un ingresso può ricevere più fili."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "GoalBot · Ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "scorePlayer · + 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "ScorePlayer"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "GoalPlayer · Ball"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "scoreBot · + 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_texte}}",
+              "ScoreBot"
+            ]
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 0"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{deplacer}}",
+              "Ball · 510 · 930"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{attendre}}",
+              "1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vx · 6"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_variable}}",
+              "vy · 9"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "**Il segno = all'inizio del testo** dice a Yop2D di **calcolare** il valore invece di scriverlo così com'è (vedi la guida [Raccogliere monete e contare i punti](guide:pieces-score))."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Per andare oltre"
+    ],
+    [
+      "ul",
+      [
+        "**Vincere a 5 punti:** dopo ogni gol, aggiungi una **[[condition]]** `=scorePlayer >= 5`, poi un **[[toast]]** e **[[recommencer_scene]]** (vedi la guida [Vite e Game Over](guide:vie-game-over)).",
+        "**Suoni:** aggiungi **[[jouer_son]]** dopo ogni rimbalzo.",
+        "**Il tuo stile:** cambia le immagini e lo sfondo; i nomi restano gli stessi.",
+        "**Il gioco non fa niente?** Torna al passo 1: manca un nome o un comportamento. **Il robot non si muove?** Controlla che il suo comportamento sia **Decorazione** e che la formula sia in **Valore**."
+      ]
+    ]
+  ]
+}
