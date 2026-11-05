@@ -45,6 +45,7 @@ Déjà fait :
 - fenêtres coupées par les boutons d'Android : réglé (« Ya se arregló el problema »).
 
 ## Autres demandes, déjà réalisées
+- **Miroir de l'image du héros** (05/11/2026, utilisateur Discord : le garçon du pack « cartoon » marchait à l'envers) : réglage « Son image regarde : à gauche / à droite » dans ⚙ Comportement (Plateforme et Vue de dessus), ajouté dans le moteur (`Doc/MIROIR_IMAGE_HEROS.md`, dépôt privé), **pas encore publié** (build de test à faire, puis prochaine mise à jour). Les packs ne sont pas modifiés. À la sortie : phrase dans le guide « comportements » (9 langues) et, peut-être, une ligne dans la FAQ. Idée pour plus tard : un indice « regarde à gauche » dans le pack pour régler le champ tout seul.
 - Russe : langue des jeux exportés et retour à l'écran titre.
 - Personnaliser les boutons « Nouvelle partie ».
 - Nœud « Bouton retour pressé ».
