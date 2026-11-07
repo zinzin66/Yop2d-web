@@ -90,6 +90,11 @@ header p { font-size: 1.25rem; max-width: 680px; margin: 0 auto; opacity: 0.95; 
 .btn-itch { background: #fa5c5c; }
 .btn-play { background: #16a34a; }
 .btn-youtube { background: var(--youtube-color); }
+.ia-box { max-width: 760px; margin: 1.5rem auto 0; background: rgba(0,0,0,0.25); border-radius: 14px; padding: 1rem 1.2rem; text-align: left; }
+.ia-box h2 { font-size: 1.15rem; margin: 0 0 0.5rem; padding: 0; border: 0; color: #ffffff; text-align: left; }
+.ia-box p { margin: 0 0 0.6rem; font-size: 0.95rem; }
+.ia-box code { display: block; background: rgba(255,255,255,0.15); border-radius: 8px; padding: 0.6rem 0.8rem; font-size: 0.9rem; word-break: break-word; user-select: all; }
+.ia-box button { margin-top: 0.7rem; background: #ffffff; color: #1e293b; border: 0; border-radius: 30px; padding: 0.5rem 1.2rem; font-size: 0.95rem; font-weight: bold; cursor: pointer; }
 .btn-discord { background: var(--discord-color); }
 .btn-telegram { background: var(--telegram-color); }
 .btn-mastodon { background: var(--mastodon-color); }
@@ -233,6 +238,25 @@ def cartes_guides(langue):
             with open(os.path.join(dossier, nom), encoding="utf-8") as f:
                 cartes.append(json.load(f))
     return cartes
+
+
+def bloc_ia(ia):
+    """Encadré de l'accueil : une phrase à coller au début d'une question posée à une IA (elles répondent souvent de mémoire)."""
+    ok = json.dumps(ia["copie"], ensure_ascii=False)
+    return f"""<div class="ia-box" id="ia-box">
+<h2>🤖 {e(ia["titre"])}</h2>
+<p>{e(ia["aide"])}</p>
+<code id="ia-phrase">{e(ia["phrase"])}</code>
+<button type="button" id="ia-copier">{e(ia["copier"])}</button>
+<script>
+document.getElementById("ia-copier").addEventListener("click", function() {{
+  var b = this, texte = document.getElementById("ia-phrase").textContent, avant = b.textContent;
+  function fait() {{ b.textContent = {ok}; setTimeout(function() {{ b.textContent = avant; }}, 2000); }}
+  if (navigator.clipboard && navigator.clipboard.writeText) {{ navigator.clipboard.writeText(texte).then(fait, function() {{}}); }}
+  else {{ var z = document.createElement("textarea"); z.value = texte; document.body.appendChild(z); z.select(); try {{ document.execCommand("copy"); fait(); }} catch (x) {{}} document.body.removeChild(z); }}
+}});
+</script>
+</div>"""
 
 
 def bloc_ecole(ec, base):
@@ -412,6 +436,8 @@ def page(langue, t):
     <a href="{ITCH}" target="_blank" rel="noopener" class="btn btn-itch">🎮 {e(b["itch"])}</a>
     <a href="{YOUTUBE}" target="_blank" rel="noopener" class="btn btn-youtube">📺 {e(b["youtube"])}</a>
 </div>
+
+{bloc_ia(t["ia"])}
 
 <div class="lang-badge" id="dl-total" style="display:none;margin-top:1.5rem">⬇ <span id="dl-n"></span> · {e(t["alt_badge"])}</div>
 <script>
