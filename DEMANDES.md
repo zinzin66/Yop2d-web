@@ -65,3 +65,10 @@ Déjà fait :
 
 ## Exemples du site à publier avec la sortie
 - Bounce, Flock, Crystal breaker : `moteur_min` provisoire **1235** dans `outils/exemples/source.json` (mettre le build de sortie). Images de Flock : autorisées.
+
+
+## Session du 06-07/11/2026 : exemple « Lanterne » et pistes (à ne pas perdre)
+- **Exemple « Lanterne »** (vieux robot dans une caverne, jeu de démonstration pour des vidéos) : fabriqué avec l'utilisateur (scripts dans `outils/lanterne/` du dépôt privé du moteur). À PUBLIER plus tard comme exemple du site (zip à demander à l'utilisateur, `moteur_min` = build de sortie contenant : physique pilotée, nœud Flou, propriété vitesseMarche, œil des dossiers) ; images générées par l'utilisateur avec une IA (droits à vérifier avant de les mettre en ligne).
+- **Idées demandées** : nœud ou réglage pour la vitesse selon une variable (la propriété `vitesseMarche` existe) ; vraies voix de Robi en ANGLAIS ; sons d'ambiance (gouttes, chaînes) et musique sombre ; carte du parcours en prefab ; la loupe et la carte (boutons du HUD) ; prefab « fenêtre d'alerte » (fond + titre + clic) réutilisable.
+- **Doc à écrire à la prochaine sortie** : guide « Flou et profondeur » (nœud Flou, plans à vitesses différentes, objets de premier plan), guide « Personnage sur des pentes » (physique pilotée, animations downhill / uphill, astuces pour cacher le contact), guide « HUD et fenêtres » (visées par nom, pause, mouvements), l'œil des dossiers.
+- **URGENT : plantages signalés par Google Play (07/11/2026)** : message de Google « trop de plantages, Yop2D sera moins visible ». Traiter dans une conversation à part (Play Console → Android vitals → plantages et ANR : lire les piles d'erreurs, comparer avec les correctifs déjà faits dans la branche `mise-a-jour-1-0` du moteur, publier vite une version corrigée avec déploiement progressif).
