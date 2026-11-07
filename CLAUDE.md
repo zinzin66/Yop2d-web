@@ -269,6 +269,8 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   33 cartes dont « Filtres d'écran et transitions », « Plein écran sur tous les téléphones », « Le bouton retour du téléphone » ;
   16 exemples avec Filters showcase), llms.txt, exemple Filters showcase (moteur_min 1072).
 
+- 07/11/2026 : SORTIE 1.0.1254 (build normal + AAB, envoyée à Google Play le 07/11, en vérification ; déploiement progressif prévu à 20 %). Cause : message Google « trop de plantages » (Android vitals : 5 utilisateurs seulement, tous sur la 1142 du canal « Tests fermés » ; une seule personne suffit à dépasser le seuil). Correctifs du moteur : boucle de nœuds sans « Attendre » arrêtée après 400 nœuds (au lieu d'un StackOverflowError), sons de la Bibliothèque et musique préparés en arrière-plan (ANR). Site (branche ccr-f7072937-okoblj, PAS de fusion avant que Google ait publié) : aide des nœuds 236 (nœud « Flou de l'objet » décrit en 9 langues, repris du moteur), pages noeuds/, accueil et llms.txt régénérés ; 59 modèles et 31 exemples déjà bons. Brouillon v1.0.1254 créé dans zinzin66/yop2d (jamais publié : AFFICHER_APK reste False).
+
 ## Moteurs de recherche
 - Google Search Console : propriété `https://zinzin66.github.io/Yop2d-web/`, fichiers
   `google74fcdd47f85fa058.html` et `google55621bdcee9caacd.html` (ne pas supprimer).
