@@ -72,3 +72,19 @@ Déjà fait :
 - **Idées demandées** : nœud ou réglage pour la vitesse selon une variable (la propriété `vitesseMarche` existe) ; vraies voix de Robi en ANGLAIS ; sons d'ambiance (gouttes, chaînes) et musique sombre ; carte du parcours en prefab ; la loupe et la carte (boutons du HUD) ; prefab « fenêtre d'alerte » (fond + titre + clic) réutilisable.
 - **Doc à écrire à la prochaine sortie** : guide « Flou et profondeur » (nœud Flou, plans à vitesses différentes, objets de premier plan), guide « Personnage sur des pentes » (physique pilotée, animations downhill / uphill, astuces pour cacher le contact), guide « HUD et fenêtres » (visées par nom, pause, mouvements), l'œil des dossiers.
 - **URGENT : plantages signalés par Google Play (07/11/2026)** : message de Google « trop de plantages, Yop2D sera moins visible ». Traiter dans une conversation à part (Play Console → Android vitals → plantages et ANR : lire les piles d'erreurs, comparer avec les correctifs déjà faits dans la branche `mise-a-jour-1-0` du moteur, publier vite une version corrigée avec déploiement progressif).
+
+## Idées de Claude : ce qui manque à Yop2D (07/11/2026, analyse du code du moteur, branche main)
+Question de l'utilisateur : « que manque-t-il à un moteur 2D que je n'aurais pas pensé ? ». Réponse après lecture du moteur (166 nœuds). La 3D (comme Star2D) a été jugée **non prioritaire** : Yop2D reste 2D, avec la vue isométrique pour le relief.
+
+**Déjà fait (ne pas refaire)** : lumières et ombres 2D (Source de lumière, Ombre sous l'objet, Obscurité, Cycle jour et nuit, Halo), succès (seulement pour les histoires), journal de débogage + « Vérifier mon jeu », sauvegardes (variables et état), vibration, pause / ralenti, caméra, physique complète, tour par tour, grilles, brouillard de guerre, IA, recherche de chemin.
+
+**Absent du moteur, par ordre de priorité proposé** :
+1. **Export AAB** pour les jeux des utilisateurs (`ExportateurAPK.java` ne fabrique et ne signe que des APK : impossible de publier sur Google Play).
+2. **Capteurs du téléphone** (pencher, secouer : aucun usage de l'accéléromètre ni du gyroscope). Petit chantier, très visible : jeux d'équilibre, de course, labyrinthes.
+3. **Manette de jeu** (boutons et sticks : seuls le toucher et la souris sont lus dans `VueJeu.java`).
+4. **Partage d'un projet en un bouton** (message, lien) + galerie communautaire de jeux et prefabs (chaque jeu partagé fait connaître le moteur).
+5. **Export web (HTML5)** : jouer dans un navigateur sans installer. Gros chantier, plus tard.
+6. **Débogage en temps réel** : allumer les nœuds en cours d'exécution, valeurs des variables en direct.
+7. Plus tard : pubs et achats **au choix** dans les jeux des utilisateurs (Yop2D lui-même reste sans pub), classements en ligne, animation par squelette, import Tiled / Aseprite, multijoueur (très demandé mais très difficile).
+
+Prochaine étape proposée : commencer par les capteurs (le plus petit pour l'effet obtenu), puis l'AAB.
