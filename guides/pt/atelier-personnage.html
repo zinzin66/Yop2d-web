@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como animar um personagem a partir de uma única imagem? | Guia do Yop2D</title>
+<meta name="description" content="No Yop2D, carregue uma única imagem do seu personagem: a Oficina de personagem coloca um esqueleto, recorta as partes e cria as animações de repouso, andar, correr, pulo, ataque e dano.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/pt/atelier-personnage.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/atelier-personnage.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/atelier-personnage.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/atelier-personnage.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/atelier-personnage.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/atelier-personnage.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/atelier-personnage.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/atelier-personnage.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/atelier-personnage.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/atelier-personnage.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Como animar um personagem a partir de uma única imagem?",
+ "description": "No Yop2D, carregue uma única imagem do seu personagem: a Oficina de personagem coloca um esqueleto, recorta as partes e cria as animações de repouso, andar, correr, pulo, ataque e dano.",
+ "inLanguage": "pt",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de jogos 2D sem código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Abrir a oficina",
+   "text": "Janela de Assets → botão “Personagem”, e escolha a imagem."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Colocar o esqueleto e os contornos",
+   "text": "Deslize os pontos sobre as articulações e contorne cada parte."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Criar as animações",
+   "text": "Escolha os movimentos, toque em “Criar as imagens” e reproduza-os com um nó."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../pt/index.html">← Yop2D</a>
+<h1>Como animar um personagem a partir de uma única imagem?</h1>
+<p>Guia para iniciantes · sem código</p>
+<p class="langues"><a href="../atelier-personnage.html" hreflang="fr">Français</a> · <a href="../en/atelier-personnage.html" hreflang="en">English</a> · <a href="../es/atelier-personnage.html" hreflang="es">Español</a> · <a href="../de/atelier-personnage.html" hreflang="de">Deutsch</a> · <a href="../it/atelier-personnage.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="../ru/atelier-personnage.html" hreflang="ru">Русский</a> · <a href="../zh/atelier-personnage.html" hreflang="zh">中文</a> · <a href="../ja/atelier-personnage.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Desenhar um ciclo de caminhada imagem por imagem leva muito tempo. Com a <strong>Oficina de personagem</strong>, basta <strong>uma única imagem</strong> do seu personagem de lado: o Yop2D o corta em partes (cabeça, corpo, braços, pernas), move as articulações e fabrica as imagens das animações <strong>Repouso</strong>, <strong>Andar</strong>, <strong>Correr</strong>, <strong>Pulo</strong>, <strong>Ataque</strong> e <strong>Atingido</strong>.</p>
+<div class="besoin">
+<b>Você precisa de:</b>
+<ul><li>um projeto aberto no editor;</li><li>uma imagem do seu personagem de lado (de preferência um PNG com fundo transparente), com os braços e as pernas bem visíveis.</li></ul>
+</div>
+<h2>Etapa 1: abrir a oficina e escolher a imagem</h2>
+<div class="method">
+<ol><li>Abra a janela de <strong>Assets</strong> (painel de Recursos).</li><li>No alto, toque no botão <strong>Personagem</strong>, ao lado de <strong>Folha</strong>.</li><li>Toque em <strong>Escolher a imagem do personagem</strong>.</li><li>Seu personagem olha para a esquerda? Toque em <strong>Inverter a imagem (espelho)</strong>: ele precisa olhar para a direita para trabalhar, e suas imagens finais olharão para a esquerda como deve ser.</li></ol>
+<div class="tip">👉 A qualquer momento, os botões ↶ e ↷ da barra superior desfazem e refazem o que você acabou de fazer.</div>
+</div>
+<h2>Etapa 2: colocar o esqueleto</h2>
+<div class="method">
+<ol><li>Toque em <strong>Posicionar o esqueleto para mim</strong>: o Yop2D tenta adivinhar onde estão o pescoço, os ombros, os cotovelos, as mãos, os quadris, os joelhos e os pés.</li><li>Corrija o que estiver errado: deslize cada ponto sobre a articulação certa. Uma lupa aparece acima do seu dedo para você ver o que está fazendo.</li><li>Toque em <strong>Seguinte ▶</strong>.</li></ol>
+</div>
+<h2>Etapa 3: contornar cada parte</h2>
+<div class="method">
+<ol><li>Toque em uma parte na lista ou na imagem (cabeça, tronco, braço, antebraço, coxa, panturrilha, pé…).</li><li>Arraste os pontos para o contorno seguir o desenho. Um pequeno “+” no meio de um lado adiciona um ponto; <strong>Remover o ponto escolhido</strong> remove um.</li><li>Não quer fazer tudo à mão? <strong>Contorno automático</strong> sugere um contorno para a parte escolhida.</li><li>Para uma manga curta, marque <strong>Esta parte fica no corpo</strong>. Deixe desmarcado se o braço inteiro deve se mexer; senão você verá dois braços.</li></ol>
+</div>
+<h2>Etapa 4: tapar os buracos (opcional)</h2>
+<p>Quando um braço ou uma perna se mexe, surge um buraco onde ele estava. Esta etapa mostra o personagem em movimento para você ver os buracos.</p>
+<div class="method">
+<ol><li><strong>1. Escolher a área modelo</strong>: toque em uma área limpa do desenho, por exemplo a roupa.</li><li><strong>2. Pintar sobre o buraco</strong>: o Yop2D copia a área escolhida. Duas outras maneiras: <strong>2b. Pintar com a cor da área</strong>, ou <strong>2c. Preencher colocando pontos</strong> ao redor do buraco e depois <strong>Preencher a área</strong>.</li><li><strong>3. Borracha</strong>: apaga o que sobra ou pende.</li><li>Se errar, <strong>Desfazer o último traço</strong> ou <strong>Apagar tudo</strong>.</li></ol>
+</div>
+<h2>Etapa 5: escolher os movimentos</h2>
+<div class="method">
+<ol><li>Escolha um movimento: <strong>Repouso</strong>, <strong>Andar</strong>, <strong>Correr</strong>, <strong>Pulo</strong>, <strong>Ataque</strong> ou <strong>Atingido</strong>. A prévia se repete em ciclo.</li><li>Ajuste a <strong>Velocidade</strong> (imagens por segundo) e a <strong>Amplitude do movimento</strong> (em porcentagem): quanto maior, mais os braços e as pernas se mexem.</li></ol>
+</div>
+<h2>Etapa 6: criar as imagens</h2>
+<div class="method">
+<ol><li>Escreva o <strong>Nome do personagem</strong>.</li><li>Marque os movimentos a criar.</li><li>Toque em <strong>Criar as imagens</strong>. Elas ficam na pasta Images do seu projeto, com o nome do personagem, e as animações são adicionadas à lista.</li></ol>
+<div class="tip">👉 Os nomes das animações são escolhidos para o comportamento “Personagem de plataforma” reconhecê-los sozinho: andar, pular, repouso… se encadeiam sem nenhum nó a mais.</div>
+</div>
+<h2>Tocar as animações no seu jogo</h2>
+<div class="method">
+<ol><li>Coloque seu personagem na cena.</li><li>No Blueprint, adicione “Reproduzir animação” e escolha a animação criada (o andar, por exemplo), ou dê ao objeto o comportamento “Personagem de plataforma” (veja o guia (guide:comportements)).</li></ol>
+</div>
+<h2>Limites a conhecer</h2>
+<ul><li><strong>Só vista de lado:</strong> ainda não há vista de frente.</li><li><strong>O resultado é bom, não perfeito:</strong> o Yop2D adivinha mais ou menos bem. Dedique alguns minutos a corrigir o esqueleto e os contornos.</li><li><strong>Uma parte escondida atrás do corpo</strong> deixa um buraco quando se mexe: é para isso que serve a etapa “tapar os buracos”.</li><li><strong>Precisa de uma animação muito precisa?</strong> Desenhe-a imagem por imagem no editor de animações, ou corte uma folha de imagens com <strong>Folha</strong>.</li></ul>
+<h2>Se não funcionar</h2>
+<ul><li><strong>O esqueleto está torto:</strong> mova os pontos à mão, ou toque de novo em <strong>Posicionar o esqueleto para mim</strong> depois de colocar a imagem no sentido certo.</li><li><strong>Aparecem dois braços:</strong> desmarque <strong>Esta parte fica no corpo</strong> no braço.</li><li><strong>“Escolha pelo menos um movimento”:</strong> marque ao menos um movimento antes de criar as imagens.</li></ul>
+
+<div class="nav">
+<a href="../pt/musique.html">← Crie a sua música</a>
+<a href="../pt/interface-demarrage.html">Próximo guia: A tela inicial em imagens →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de jogos 2D gratuito e sem código para Android · <a href="../../pt/index.html">Site oficial</a> · <a href="../../noeuds/pt.html">Referência de nós</a></p>
+</footer>
+</body>
+</html>

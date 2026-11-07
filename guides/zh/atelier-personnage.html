@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何用一张图片让角色动起来？ | Yop2D 指南</title>
+<meta name="description" content="在 Yop2D 中载入一张角色图片：角色工坊会摆放骨架、切出各个部分，并生成待机、走路、跑步、跳跃、攻击和受伤动画。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/atelier-personnage.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/atelier-personnage.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/atelier-personnage.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/atelier-personnage.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/atelier-personnage.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/atelier-personnage.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/atelier-personnage.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/atelier-personnage.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/atelier-personnage.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/atelier-personnage.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何用一张图片让角色动起来？",
+ "description": "在 Yop2D 中载入一张角色图片：角色工坊会摆放骨架、切出各个部分，并生成待机、走路、跑步、跳跃、攻击和受伤动画。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "打开工坊",
+   "text": "Assets 窗口 → “角色”按钮，然后选择图片。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "摆放骨架和轮廓",
+   "text": "把圆点拖到关节上，并圈出每个部分。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "创建动画",
+   "text": "选择动作，点“生成图片”，再用节点播放。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>如何用一张图片让角色动起来？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../atelier-personnage.html" hreflang="fr">Français</a> · <a href="../en/atelier-personnage.html" hreflang="en">English</a> · <a href="../es/atelier-personnage.html" hreflang="es">Español</a> · <a href="../de/atelier-personnage.html" hreflang="de">Deutsch</a> · <a href="../it/atelier-personnage.html" hreflang="it">Italiano</a> · <a href="../pt/atelier-personnage.html" hreflang="pt">Português</a> · <a href="../ru/atelier-personnage.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/atelier-personnage.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>一帧一帧地画走路动作要花很长时间。有了<strong>角色工坊</strong>，只需要<strong>一张</strong>侧面的角色图片：Yop2D 会把角色切成几部分（头、身体、手臂、腿），让关节动起来，并生成<strong>待机</strong>、<strong>走路</strong>、<strong>跑步</strong>、<strong>跳跃</strong>、<strong>攻击</strong>和<strong>受伤</strong>动画的图片。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>编辑器中已打开的项目；</li><li>一张角色的侧面图片（最好是透明背景的 PNG），手臂和腿要清楚可见。</li></ul>
+</div>
+<h2>第 1 步：打开工坊并选择图片</h2>
+<div class="method">
+<ol><li>打开 <strong>Assets</strong> 窗口（资源面板）。</li><li>在上方点击<strong>角色</strong>按钮，它在<strong>图集</strong>旁边。</li><li>点击<strong>选择角色图片</strong>。</li><li>你的角色朝左吗？点击<strong>镜像翻转图片</strong>：工作时它必须朝右，而生成的最终图片会正确地朝左。</li></ol>
+<div class="tip">👉 随时可以用顶部栏的 ↶ 和 ↷ 按钮撤销和重做刚才的操作。</div>
+</div>
+<h2>第 2 步：摆放骨架</h2>
+<div class="method">
+<ol><li>点击<strong>帮我摆放骨架</strong>：Yop2D 会尝试猜出脖子、肩膀、手肘、手、臀部、膝盖和脚的位置。</li><li>把不对的地方改过来：把每个圆点拖到正确的关节上。手指上方会出现放大镜，让你看清自己在做什么。</li><li>点击<strong>下一步 ▶</strong>。</li></ol>
+</div>
+<h2>第 3 步：圈出每个部分</h2>
+<div class="method">
+<ol><li>在列表或图片上点击一个部分（头、躯干、上臂、前臂、大腿、小腿、脚……）。</li><li>拖动它的点，让轮廓贴合图案。一条边中间的小“+”可以添加一个点；<strong>删除所选的点</strong>可以删掉一个。</li><li>不想全部手动完成？<strong>自动轮廓</strong>会为所选部分提供一个轮廓。</li><li>对于短袖，请勾选<strong>此部分留在身体上</strong>。如果整条手臂都要动，就不要勾选，否则你会看到两条手臂。</li></ol>
+</div>
+<h2>第 4 步：填补空洞（可选）</h2>
+<p>手臂或腿动起来时，原来的位置会出现空洞。这一步会显示动作中的角色，让你看到空洞。</p>
+<div class="method">
+<ol><li><strong>1. 选择样本区域</strong>：点击图案上干净的区域，例如衣服。</li><li><strong>2. 涂抹空洞</strong>：Yop2D 会复制你选的区域。另外两种方式：<strong>2b. 用样本区域的颜色涂画</strong>，或者在空洞周围<strong>2c. 放点填充</strong>，再点<strong>填充区域</strong>。</li><li><strong>3. 橡皮擦</strong>：擦掉多出来或垂下来的部分。</li><li>如果弄错了，点<strong>撤销上一笔</strong>或<strong>全部清除</strong>。</li></ol>
+</div>
+<h2>第 5 步：选择动作</h2>
+<div class="method">
+<ol><li>选择一个动作：<strong>待机</strong>、<strong>走路</strong>、<strong>跑步</strong>、<strong>跳跃</strong>、<strong>攻击</strong>或<strong>受伤</strong>。预览会循环播放。</li><li>调整<strong>速度</strong>（每秒帧数）和<strong>动作幅度</strong>（百分比）：数值越大，手臂和腿动得越多。</li></ol>
+</div>
+<h2>第 6 步：生成图片</h2>
+<div class="method">
+<ol><li>填写<strong>角色名称</strong>。</li><li>勾选要生成的动作。</li><li>点击<strong>生成图片</strong>。图片会存放在项目的 Images 文件夹中，以角色名称命名，动画也会加入列表。</li></ol>
+<div class="tip">👉 动画的名称是特意取的，这样“平台角色”行为就能自动识别它们：走路、跳跃、待机……无需额外节点就能衔接。</div>
+</div>
+<h2>在游戏中播放动画</h2>
+<div class="method">
+<ol><li>把角色放进场景。</li><li>在 Blueprint 中添加“播放动画”，选择你创建的动画（例如走路），或者给对象设置“平台角色”行为（见指南 (guide:comportements)）。</li></ol>
+</div>
+<h2>需要了解的限制</h2>
+<ul><li><strong>只有侧面视角：</strong>暂时没有正面视角。</li><li><strong>结果不错，但不完美：</strong>Yop2D 的猜测有时准有时不准。花几分钟修正骨架和轮廓吧。</li><li><strong>藏在身体后面的部分</strong>在动起来时会留下空洞：“填补空洞”这一步就是为此准备的。</li><li><strong>需要非常精确的动画？</strong>可以在动画编辑器中逐帧绘制，或用<strong>图集</strong>切分一张图片表。</li></ul>
+<h2>如果不起作用</h2>
+<ul><li><strong>骨架歪了：</strong>手动移动圆点，或者把图片调整到正确方向后再次点击<strong>帮我摆放骨架</strong>。</li><li><strong>出现了两条手臂：</strong>请取消勾选手臂的<strong>此部分留在身体上</strong>。</li><li><strong>“请至少选择一个动作”：</strong>生成图片前至少勾选一个动作。</li></ul>
+
+<div class="nav">
+<a href="../zh/musique.html">← 创作你的音乐</a>
+<a href="../zh/interface-demarrage.html">下一篇： 图解启动界面 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>
