@@ -74,7 +74,7 @@ Déjà fait :
 - **URGENT : plantages signalés par Google Play (07/11/2026)** : message de Google « trop de plantages, Yop2D sera moins visible ». Traiter dans une conversation à part (Play Console → Android vitals → plantages et ANR : lire les piles d'erreurs, comparer avec les correctifs déjà faits dans la branche `mise-a-jour-1-0` du moteur, publier vite une version corrigée avec déploiement progressif).
 
 ## Idées de Claude : ce qui manque à Yop2D (07/11/2026, analyse du code du moteur, branche main)
-Question de l'utilisateur : « que manque-t-il à un moteur 2D que je n'aurais pas pensé ? ». Réponse après lecture du moteur (166 nœuds). La 3D (comme Star2D) a été jugée **non prioritaire** : Yop2D reste 2D, avec la vue isométrique pour le relief.
+Question de l'utilisateur : « que manque-t-il à un moteur 2D que je n'aurais pas pensé ? ». Réponse après lecture du moteur. **ATTENTION : la 1re lecture portait sur le `main` du moteur, qui est VIEUX (27/09) ; la branche à jour est `mise-a-jour-1-0`. Les manques ci-dessous ont été revérifiés sur cette branche.** L'animation par squelette existe déjà (« Atelier personnage », voir le guide `atelier-personnage`) ; l'aide des nœuds du site est à jour (236). La 3D (comme Star2D) a été jugée **non prioritaire** : Yop2D reste 2D, avec la vue isométrique pour le relief.
 
 **Déjà fait (ne pas refaire)** : lumières et ombres 2D (Source de lumière, Ombre sous l'objet, Obscurité, Cycle jour et nuit, Halo), succès (seulement pour les histoires), journal de débogage + « Vérifier mon jeu », sauvegardes (variables et état), vibration, pause / ralenti, caméra, physique complète, tour par tour, grilles, brouillard de guerre, IA, recherche de chemin.
 
@@ -85,6 +85,6 @@ Question de l'utilisateur : « que manque-t-il à un moteur 2D que je n'aurais p
 4. **Partage d'un projet en un bouton** (message, lien) + galerie communautaire de jeux et prefabs (chaque jeu partagé fait connaître le moteur).
 5. **Export web (HTML5)** : jouer dans un navigateur sans installer. Gros chantier, plus tard.
 6. **Débogage en temps réel** : allumer les nœuds en cours d'exécution, valeurs des variables en direct.
-7. Plus tard : pubs et achats **au choix** dans les jeux des utilisateurs (Yop2D lui-même reste sans pub), classements en ligne, animation par squelette, import Tiled / Aseprite, multijoueur (très demandé mais très difficile).
+7. Plus tard : pubs et achats **au choix** dans les jeux des utilisateurs (Yop2D lui-même reste sans pub), classements en ligne, import Tiled / Aseprite, multijoueur (très demandé mais très difficile).
 
 Prochaine étape proposée : commencer par les capteurs (le plus petit pour l'effet obtenu), puis l'AAB.
