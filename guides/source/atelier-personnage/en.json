@@ -1,0 +1,199 @@
+{
+ "titre_page": "How to animate a character from a single image? | Yop2D Guide",
+ "description": "In Yop2D, load a single image of your character: the Character workshop places a skeleton, cuts out the parts and creates the idle, walk, run, jump, attack and hit animations.",
+ "h1": "How to animate a character from a single image?",
+ "carte": [
+  "Animate your character",
+  "One image is enough: the Character workshop creates walking, jumping, attacking…"
+ ],
+ "etapes": [
+  [
+   "Open the workshop",
+   "Assets window → \"Character\" button, then pick the image."
+  ],
+  [
+   "Place the skeleton and outlines",
+   "Slide the dots onto the joints and outline each part."
+  ],
+  [
+   "Create the animations",
+   "Choose the movements, touch \"Create the pictures\", then play them with a node."
+  ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "Drawing a walk cycle frame by frame takes a very long time. With the **Character workshop**, a **single image** of your character seen from the side is enough: Yop2D cuts it into parts (head, body, arms, legs), moves the joints and makes the frames of the **Idle**, **Walk**, **Run**, **Jump**, **Attack** and **Hit** animations."
+  ],
+  [
+   "besoin",
+   [
+    "a project open in the editor;",
+    "an image of your character seen from the side (preferably a PNG with a transparent background), with the arms and legs clearly visible."
+   ]
+  ],
+  [
+   "h2",
+   "Step 1: open the workshop and pick the image"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Open the **Assets** window (Resources panel).",
+      "At the top, touch the **Character** button, next to **Sheet**.",
+      "Touch **Choose the character picture**.",
+      "Does your character look left? Touch **Flip the picture (mirror)**: it must look to the right to work, and your final images will look left as they should."
+     ]
+    ],
+    [
+     "tip",
+     "At any time, the ↶ and ↷ buttons in the top bar undo and redo what you just did."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 2: place the skeleton"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Touch **Place the skeleton for me**: Yop2D tries to guess where the neck, shoulders, elbows, hands, hips, knees and feet are.",
+      "Fix whatever is wrong: slide each dot onto the right joint. A magnifier appears above your finger so you can see what you are doing.",
+      "Touch **Next ▶**."
+     ]
+    ]
+   ]
+  ],
+  [
+   "image",
+   "atelier_squelette.jpg",
+   "Step 1 of the Character workshop: the skeleton placed on the character, with the magnifier above the finger",
+   "Screenshot of the Character workshop: the dots sit on the joints; the magnifier helps to place the point you are dragging."
+  ],
+  [
+   "h2",
+   "Step 3: outline each part"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Touch a part in the list or on the image (head, torso, upper arm, forearm, thigh, calf, foot…).",
+      "Drag its points so the outline follows the drawing. A small \"+\" in the middle of a side adds a point; **Remove the chosen point** removes one.",
+      "Do not want to do it all by hand? **Automatic outline** suggests an outline for the chosen part.",
+      "For a short sleeve, tick **This part stays on the body**. Leave it unticked if the whole arm must move, otherwise you will see two arms."
+     ]
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 4: fill the holes (optional)"
+  ],
+  [
+   "p",
+   "When an arm or a leg moves, a hole appears where it used to be. This step shows the character in motion so you can see the holes."
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "**1. Pick the source area**: touch a clean area of the drawing, for example the clothes.",
+      "**2. Paint over the hole**: Yop2D copies the area you picked. Two other ways: **2b. Paint with the area's color**, or **2c. Fill by placing points** around the hole, then **Fill the area**.",
+      "**3. Eraser**: removes what sticks out or hangs.",
+      "If you make a mistake, **Undo last stroke** or **Clear all**."
+     ]
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 5: choose the movements"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Choose a movement: **Idle**, **Walk**, **Run**, **Jump**, **Attack** or **Hit**. The preview loops.",
+      "Set the **Speed** (frames per second) and the **Movement size** (in percent): the bigger it is, the more the arms and legs move."
+     ]
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 6: create the images"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Write the **Character name**.",
+      "Tick the movements to create.",
+      "Touch **Create the pictures**. They are stored in the Images folder of your project, under the character's name, and the animations are added to the list."
+     ]
+    ],
+    [
+     "tip",
+     "The animation names are chosen so that the \"Platform character\" behavior recognizes them by itself: walk, jump, idle… chain together with no extra node."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Playing the animations in your game"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Place your character in the scene.",
+      "In the Blueprint, add [[jouer_animation]] and choose the animation you created (the walk, for example), or give the object the \"Platform character\" behavior (see the [guide](guide:comportements))."
+     ]
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Limits to know"
+  ],
+  [
+   "ul",
+   [
+    "**Side view only:** no front view yet.",
+    "**The result is good, not perfect:** Yop2D guesses more or less well. Take a few minutes to fix the skeleton and the outlines.",
+    "**A part hidden behind the body** leaves a hole when it moves: that is what the \"fill the holes\" step is for.",
+    "**Need a very precise animation?** Draw it frame by frame in the animation editor, or cut an image sheet with **Sheet**."
+   ]
+  ],
+  [
+   "h2",
+   "If it does not work"
+  ],
+  [
+   "ul",
+   [
+    "**The skeleton is crooked:** move the dots by hand, or touch **Place the skeleton for me** again after putting the image the right way round.",
+    "**Two arms appear:** untick **This part stays on the body** for the arm.",
+    "**\"Choose at least one movement\":** tick at least one movement before creating the images."
+   ]
+  ]
+ ]
+}

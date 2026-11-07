@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to animate a character from a single image? | Yop2D Guide</title>
+<meta name="description" content="In Yop2D, load a single image of your character: the Character workshop places a skeleton, cuts out the parts and creates the idle, walk, run, jump, attack and hit animations.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/atelier-personnage.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/atelier-personnage.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/atelier-personnage.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/atelier-personnage.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/atelier-personnage.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/atelier-personnage.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/atelier-personnage.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/atelier-personnage.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/atelier-personnage.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/atelier-personnage.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to animate a character from a single image?",
+ "description": "In Yop2D, load a single image of your character: the Character workshop places a skeleton, cuts out the parts and creates the idle, walk, run, jump, attack and hit animations.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Open the workshop",
+   "text": "Assets window → \"Character\" button, then pick the image."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Place the skeleton and outlines",
+   "text": "Slide the dots onto the joints and outline each part."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Create the animations",
+   "text": "Choose the movements, touch \"Create the pictures\", then play them with a node."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to animate a character from a single image?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../atelier-personnage.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/atelier-personnage.html" hreflang="es">Español</a> · <a href="../de/atelier-personnage.html" hreflang="de">Deutsch</a> · <a href="../it/atelier-personnage.html" hreflang="it">Italiano</a> · <a href="../pt/atelier-personnage.html" hreflang="pt">Português</a> · <a href="../ru/atelier-personnage.html" hreflang="ru">Русский</a> · <a href="../zh/atelier-personnage.html" hreflang="zh">中文</a> · <a href="../ja/atelier-personnage.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Drawing a walk cycle frame by frame takes a very long time. With the <strong>Character workshop</strong>, a <strong>single image</strong> of your character seen from the side is enough: Yop2D cuts it into parts (head, body, arms, legs), moves the joints and makes the frames of the <strong>Idle</strong>, <strong>Walk</strong>, <strong>Run</strong>, <strong>Jump</strong>, <strong>Attack</strong> and <strong>Hit</strong> animations.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a project open in the editor;</li><li>an image of your character seen from the side (preferably a PNG with a transparent background), with the arms and legs clearly visible.</li></ul>
+</div>
+<h2>Step 1: open the workshop and pick the image</h2>
+<div class="method">
+<ol><li>Open the <strong>Assets</strong> window (Resources panel).</li><li>At the top, touch the <strong>Character</strong> button, next to <strong>Sheet</strong>.</li><li>Touch <strong>Choose the character picture</strong>.</li><li>Does your character look left? Touch <strong>Flip the picture (mirror)</strong>: it must look to the right to work, and your final images will look left as they should.</li></ol>
+<div class="tip">👉 At any time, the ↶ and ↷ buttons in the top bar undo and redo what you just did.</div>
+</div>
+<h2>Step 2: place the skeleton</h2>
+<div class="method">
+<ol><li>Touch <strong>Place the skeleton for me</strong>: Yop2D tries to guess where the neck, shoulders, elbows, hands, hips, knees and feet are.</li><li>Fix whatever is wrong: slide each dot onto the right joint. A magnifier appears above your finger so you can see what you are doing.</li><li>Touch <strong>Next ▶</strong>.</li></ol>
+</div>
+<figure class="capture"><a href="../img/atelier_squelette.jpg"><img src="../img/atelier_squelette.jpg" alt="Step 1 of the Character workshop: the skeleton placed on the character, with the magnifier above the finger" loading="lazy"></a><figcaption>Screenshot of the Character workshop: the dots sit on the joints; the magnifier helps to place the point you are dragging.</figcaption></figure>
+<h2>Step 3: outline each part</h2>
+<div class="method">
+<ol><li>Touch a part in the list or on the image (head, torso, upper arm, forearm, thigh, calf, foot…).</li><li>Drag its points so the outline follows the drawing. A small "+" in the middle of a side adds a point; <strong>Remove the chosen point</strong> removes one.</li><li>Do not want to do it all by hand? <strong>Automatic outline</strong> suggests an outline for the chosen part.</li><li>For a short sleeve, tick <strong>This part stays on the body</strong>. Leave it unticked if the whole arm must move, otherwise you will see two arms.</li></ol>
+</div>
+<h2>Step 4: fill the holes (optional)</h2>
+<p>When an arm or a leg moves, a hole appears where it used to be. This step shows the character in motion so you can see the holes.</p>
+<div class="method">
+<ol><li><strong>1. Pick the source area</strong>: touch a clean area of the drawing, for example the clothes.</li><li><strong>2. Paint over the hole</strong>: Yop2D copies the area you picked. Two other ways: <strong>2b. Paint with the area's color</strong>, or <strong>2c. Fill by placing points</strong> around the hole, then <strong>Fill the area</strong>.</li><li><strong>3. Eraser</strong>: removes what sticks out or hangs.</li><li>If you make a mistake, <strong>Undo last stroke</strong> or <strong>Clear all</strong>.</li></ol>
+</div>
+<h2>Step 5: choose the movements</h2>
+<div class="method">
+<ol><li>Choose a movement: <strong>Idle</strong>, <strong>Walk</strong>, <strong>Run</strong>, <strong>Jump</strong>, <strong>Attack</strong> or <strong>Hit</strong>. The preview loops.</li><li>Set the <strong>Speed</strong> (frames per second) and the <strong>Movement size</strong> (in percent): the bigger it is, the more the arms and legs move.</li></ol>
+</div>
+<h2>Step 6: create the images</h2>
+<div class="method">
+<ol><li>Write the <strong>Character name</strong>.</li><li>Tick the movements to create.</li><li>Touch <strong>Create the pictures</strong>. They are stored in the Images folder of your project, under the character's name, and the animations are added to the list.</li></ol>
+<div class="tip">👉 The animation names are chosen so that the "Platform character" behavior recognizes them by itself: walk, jump, idle… chain together with no extra node.</div>
+</div>
+<h2>Playing the animations in your game</h2>
+<div class="method">
+<ol><li>Place your character in the scene.</li><li>In the Blueprint, add “Play animation” and choose the animation you created (the walk, for example), or give the object the "Platform character" behavior (see the <a href="../en/comportements.html">guide</a>).</li></ol>
+</div>
+<h2>Limits to know</h2>
+<ul><li><strong>Side view only:</strong> no front view yet.</li><li><strong>The result is good, not perfect:</strong> Yop2D guesses more or less well. Take a few minutes to fix the skeleton and the outlines.</li><li><strong>A part hidden behind the body</strong> leaves a hole when it moves: that is what the "fill the holes" step is for.</li><li><strong>Need a very precise animation?</strong> Draw it frame by frame in the animation editor, or cut an image sheet with <strong>Sheet</strong>.</li></ul>
+<h2>If it does not work</h2>
+<ul><li><strong>The skeleton is crooked:</strong> move the dots by hand, or touch <strong>Place the skeleton for me</strong> again after putting the image the right way round.</li><li><strong>Two arms appear:</strong> untick <strong>This part stays on the body</strong> for the arm.</li><li><strong>"Choose at least one movement":</strong> tick at least one movement before creating the images.</li></ul>
+
+<div class="nav">
+<a href="../en/musique.html">← Create your music</a>
+<a href="../en/interface-demarrage.html">Next guide: The start screen in pictures →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>
