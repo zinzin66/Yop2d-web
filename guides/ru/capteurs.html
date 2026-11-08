@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как использовать наклон и встряхивание телефона? | Руководство Yop2D</title>
+<meta name="description" content="В Yop2D телефон может управлять игрой: считывай наклон в формуле, двигай персонажа наклоном, катай шарик и реагируй на встряхивание.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/capteurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/capteurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/capteurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/capteurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/capteurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/capteurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/capteurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/capteurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/capteurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/capteurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Как использовать наклон и встряхивание телефона?",
+ "description": "В Yop2D телефон может управлять игрой: считывай наклон в формуле, двигай персонажа наклоном, катай шарик и реагируй на встряхивание.",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Считать наклон",
+   "text": "Группа «Наклон телефона» в левой панели."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Двигать персонажа",
+   "text": "⚙ Поведение → Управление → Наклон."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Катить шарик",
+   "text": "Реалистичная физика → галочка «Шарик: катится при наклоне телефона»."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Реагировать на встряску",
+   "text": "Событие «Телефон встряхнули»."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ru/index.html">← Yop2D</a>
+<h1>Как использовать наклон и встряхивание телефона?</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../capteurs.html" hreflang="fr">Français</a> · <a href="../en/capteurs.html" hreflang="en">English</a> · <a href="../es/capteurs.html" hreflang="es">Español</a> · <a href="../de/capteurs.html" hreflang="de">Deutsch</a> · <a href="../it/capteurs.html" hreflang="it">Italiano</a> · <a href="../pt/capteurs.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/capteurs.html" hreflang="zh">中文</a> · <a href="../ja/capteurs.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Телефон чувствует, когда его наклоняют или встряхивают. Yop2D позволяет использовать это <strong>без кода</strong>: персонаж идёт при наклоне, шарик катится по лабиринту, кубик бросается при встряхивании.</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>проект, открытый в редакторе;</li><li>телефон или планшет: датчик — это датчик самого устройства.</li></ul>
+</div>
+<h2>Шаг 1: считать наклон в формуле</h2>
+<div class="method">
+<ol><li>Открой узел с полем формулы, например «Изменить свойство».</li><li>В левой панели открой группу <strong>Наклон телефона</strong>.</li><li>Нажми <strong>inclinaison.x</strong> (влево-вправо) или <strong>inclinaison.y</strong> (верх-низ экрана): формула запишется сама.</li></ol>
+<div class="tip">👉 Значения идут от -1 до 1. <strong>0</strong> — так, как ты держал телефон при запуске игры; <strong>1</strong> — наклон до упора (около 30°) вправо для x и к низу экрана для y. Работает и в портретной, и в альбомной ориентации.</div>
+</div>
+<h2>Шаг 2: персонаж, который идёт при наклоне</h2>
+<div class="method">
+<ol><li>Выбери персонажа и нажми <strong>Поведение объекта</strong> в инспекторе.</li><li>Выбери персонажа-платформера или с видом сверху.</li><li>В строке <strong>Управление</strong> нажми <strong>Наклон</strong>.</li><li>Настрой <strong>Чувствительность</strong>: мягкая, обычная или сильная.</li><li>Для платформера добавь кнопку прыжка: наклон не заставляет прыгать.</li></ol>
+</div>
+<p>Шаблон «Движение наклоном» показывает всё это в готовом виде.</p>
+<h2>Шаг 3: катящийся шарик</h2>
+<div class="method">
+<ol><li>Создай круглый объект (картинку шарика или цветной круг).</li><li>Нажми <strong>Поведение объекта</strong>, затем <strong>Реалистичная физика</strong>.</li><li>Отметь <strong>Шарик: катится при наклоне телефона</strong>. Yop2D сам настроит круглую форму, отскок и гравитацию.</li><li>Добавь стены: объекты с тем же поведением, поставленные на <strong>Неподвижный</strong>.</li><li>Если шарик слишком быстрый или медленный, измени <strong>Чувствительность</strong>.</li></ol>
+</div>
+<p>В шаблоне «Лабиринт с шариком» есть шарик, стены, чёрные дыры, после которых уровень начинается заново, и зелёный круг, до которого нужно добраться.</p>
+<h2>Шаг 4: реагировать на встряску</h2>
+<div class="method">
+<ol><li>В Blueprint добавь событие «Телефон встряхнули».</li><li>Подключи его к чему захочешь: перемешать, бросить кубик, уронить предметы…</li><li>Встряхни телефон: нужны <strong>два коротких резких толчка</strong>. Простого движения мало, а между двумя встряхиваниями выдерживается секунда паузы.</li></ol>
+</div>
+<p>Шаблон «Встряхни, чтобы бросить кубик» при каждом встряхивании записывает в текст кубика случайное число random(1, 6).</p>
+<h2>Обнулить наклон</h2>
+<p>Нулём считается положение телефона при запуске игры. Чтобы задать его заново (игрок сменил позу, новый уровень), добавь узел «Обнулить наклон».</p>
+<ul><li><strong>Экран не поворачивается:</strong> если игра использует наклон, экран остаётся в начальном положении, иначе он переворачивался бы при наклоне.</li><li><strong>Устройство без датчика:</strong> значение остаётся 0, ничего не двигается.</li></ul>
+
+<div class="nav">
+<a href="../ru/atelier-personnage.html">← Оживи своего персонажа</a>
+<a href="../ru/interface-demarrage.html">Следующее руководство: Стартовый экран в картинках →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../ru/index.html">Официальный сайт</a> · <a href="../../noeuds/ru.html">Справочник узлов</a></p>
+</footer>
+</body>
+</html>

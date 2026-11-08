@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Cómo usar la inclinación y la sacudida del teléfono? | Guía Yop2D</title>
+<meta name="description" content="En Yop2D tu teléfono puede controlar el juego: lee la inclinación en una fórmula, mueve un personaje inclinando, haz rodar una canica y reacciona a una sacudida.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/es/capteurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/capteurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/capteurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/capteurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/capteurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/capteurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/capteurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/capteurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/capteurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/capteurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "¿Cómo usar la inclinación y la sacudida del teléfono?",
+ "description": "En Yop2D tu teléfono puede controlar el juego: lee la inclinación en una fórmula, mueve un personaje inclinando, haz rodar una canica y reacciona a una sacudida.",
+ "inLanguage": "es",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de juegos 2D sin código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Leer la inclinación",
+   "text": "Grupo «Teléfono inclinado» del panel izquierdo."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Mover un personaje",
+   "text": "⚙ Comportamiento → Controles → Inclinar."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Hacer rodar una canica",
+   "text": "Física realista → casilla «Canica: rueda al inclinar el teléfono»."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Reaccionar a una sacudida",
+   "text": "Evento «Teléfono sacudido»."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../es/index.html">← Yop2D</a>
+<h1>¿Cómo usar la inclinación y la sacudida del teléfono?</h1>
+<p>Guía para principiantes · sin código</p>
+<p class="langues"><a href="../capteurs.html" hreflang="fr">Français</a> · <a href="../en/capteurs.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="../de/capteurs.html" hreflang="de">Deutsch</a> · <a href="../it/capteurs.html" hreflang="it">Italiano</a> · <a href="../pt/capteurs.html" hreflang="pt">Português</a> · <a href="../ru/capteurs.html" hreflang="ru">Русский</a> · <a href="../zh/capteurs.html" hreflang="zh">中文</a> · <a href="../ja/capteurs.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Tu teléfono sabe cuándo lo inclinas o lo sacudes. Yop2D te deja usarlo <strong>sin escribir código</strong>: un personaje que camina al inclinar, una canica que rueda por un laberinto, un dado que se tira al sacudir.</p>
+<div class="besoin">
+<b>Necesitas:</b>
+<ul><li>un proyecto abierto en el editor;</li><li>un teléfono o una tablet: el sensor es el del aparato.</li></ul>
+</div>
+<h2>Paso 1: leer la inclinación en una fórmula</h2>
+<div class="method">
+<ol><li>Abre un nodo que tenga un campo de fórmula, por ejemplo «Modificar una propiedad».</li><li>En el panel izquierdo, abre el grupo <strong>Teléfono inclinado</strong>.</li><li>Toca <strong>inclinaison.x</strong> (izquierda-derecha) o <strong>inclinaison.y</strong> (arriba-abajo de la pantalla): la fórmula se escribe sola.</li></ol>
+<div class="tip">👉 Los valores van de -1 a 1. <strong>0</strong> = como sostenías el teléfono al empezar el juego; <strong>1</strong> = inclinado a fondo (unos 30°) hacia la derecha en x, hacia abajo de la pantalla en y. Funciona en vertical y en horizontal.</div>
+</div>
+<h2>Paso 2: un personaje que camina al inclinar</h2>
+<div class="method">
+<ol><li>Elige tu personaje y toca <strong>Comportamiento del objeto</strong> en el Inspector.</li><li>Elige un personaje de plataformas o de vista cenital.</li><li>En la línea <strong>Controles</strong>, toca <strong>Inclinar</strong>.</li><li>Ajusta la <strong>Sensibilidad</strong>: suave, normal o fuerte.</li><li>Para un personaje de plataformas, añade un botón de salto: inclinar no hace saltar.</li></ol>
+</div>
+<p>La plantilla «Moverse inclinando» lo muestra todo ya preparado.</p>
+<h2>Paso 3: una canica que rueda</h2>
+<div class="method">
+<ol><li>Crea un objeto redondo (una imagen de canica o un círculo de color).</li><li>Toca <strong>Comportamiento del objeto</strong> y luego <strong>Física realista</strong>.</li><li>Marca <strong>Canica: rueda al inclinar el teléfono</strong>. Yop2D ajusta solo la forma redonda, el rebote y la gravedad.</li><li>Pon paredes: objetos con el mismo comportamiento, ajustados a <strong>Fijo</strong>.</li><li>Si la canica va muy rápida o muy lenta, cambia la <strong>Sensibilidad</strong>.</li></ol>
+</div>
+<p>La plantilla «Laberinto de canica» tiene una canica, paredes, agujeros negros que reinician y un círculo verde que alcanzar.</p>
+<h2>Paso 4: reaccionar a una sacudida</h2>
+<div class="method">
+<ol><li>En el Blueprint, añade el evento «Teléfono sacudido».</li><li>Conéctalo a lo que quieras: mezclar, tirar un dado, hacer caer objetos…</li><li>Sacude el teléfono: hacen falta <strong>dos golpes secos y rápidos</strong>. Un simple movimiento no basta y se impone un segundo de descanso entre dos sacudidas.</li></ol>
+</div>
+<p>La plantilla «Sacude para tirar el dado» escribe un número al azar, random(1, 6), en el texto de un dado en cada sacudida.</p>
+<h2>Poner la inclinación a cero</h2>
+<p>El cero es la posición del teléfono al iniciar el juego. Para rehacerlo (el jugador cambia de postura, nuevo nivel), añade el nodo «Poner la inclinación a cero».</p>
+<ul><li><strong>La pantalla no gira:</strong> cuando un juego usa la inclinación, la pantalla se queda en su posición inicial; si no, giraría al inclinar.</li><li><strong>Aparato sin sensor:</strong> el valor se queda en 0 y nada se mueve.</li></ul>
+
+<div class="nav">
+<a href="../es/atelier-personnage.html">← Anima a tu personaje</a>
+<a href="../es/interface-demarrage.html">Siguiente guía: La pantalla de inicio en imágenes →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de juegos 2D gratuito y sin código para Android · <a href="../../es/index.html">Sitio oficial</a> · <a href="../../noeuds/es.html">Referencia de nodos</a></p>
+</footer>
+</body>
+</html>

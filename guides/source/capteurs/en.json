@@ -1,0 +1,143 @@
+{
+ "titre_page": "How to use phone tilt and shake? | Yop2D guide",
+ "description": "In Yop2D your phone can drive the game: read the tilt in a formula, move a character by tilting, roll a marble and react to a shake.",
+ "h1": "How to use phone tilt and shake?",
+ "carte": [
+  "Tilt and shake",
+  "Move a character, roll a marble or throw a die by shaking the phone."
+ ],
+ "etapes": [
+  [
+   "Read the tilt",
+   "“Tilting the phone” group in the left panel."
+  ],
+  [
+   "Move a character",
+   "⚙ Behavior → Controls → Tilt."
+  ],
+  [
+   "Roll a marble",
+   "Realistic physics → “Marble: rolls when you tilt the phone” box."
+  ],
+  [
+   "React to a shake",
+   "“Phone shaken” event."
+  ]
+ ],
+ "blocs": [
+  [
+   "p",
+   "Your phone knows when you tilt or shake it. Yop2D lets you use that **without writing code**: a character that walks when you tilt, a marble that rolls through a maze, a die that rolls when you shake."
+  ],
+  [
+   "besoin",
+   [
+    "a project open in the editor;",
+    "a phone or tablet: the sensor is the device's own."
+   ]
+  ],
+  [
+   "h2",
+   "Step 1: read the tilt in a formula"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Open a node that has a formula field, for example [[modifier_propriete]].",
+      "In the left panel, open the **Tilting the phone** group.",
+      "Tap **inclinaison.x** (left-right) or **inclinaison.y** (top-bottom of the screen): the formula writes itself."
+     ]
+    ],
+    [
+     "tip",
+     "Values go from -1 to 1. **0** = the way you held your phone when the game started; **1** = fully tilted (about 30°) to the right for x, toward the bottom of the screen for y. It works in portrait and landscape."
+    ]
+   ]
+  ],
+  [
+   "h2",
+   "Step 2: a character that walks when you tilt"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Pick your character, then tap **Object behavior** in the Inspector.",
+      "Choose a platform character or a top-down character.",
+      "On the **Controls** line, tap **Tilt**.",
+      "Set the **Sensitivity**: gentle, normal or strong.",
+      "For a platform character, add a jump button: tilting does not make it jump."
+     ]
+    ]
+   ]
+  ],
+  [
+   "p",
+   "The “Move by tilting” template shows all this ready to use."
+  ],
+  [
+   "h2",
+   "Step 3: a rolling marble"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "Create a round object (a marble picture or a colored circle).",
+      "Tap **Object behavior**, then **Realistic physics**.",
+      "Tick **Marble: rolls when you tilt the phone**. Yop2D sets the round shape, the bounce and the gravity for you.",
+      "Add walls: objects with the same behavior, set to **Fixed**.",
+      "If the marble is too fast or too slow, change the **Sensitivity**."
+     ]
+    ]
+   ]
+  ],
+  [
+   "p",
+   "The “Marble maze” template has a marble, walls, black holes that restart the level and a green circle to reach."
+  ],
+  [
+   "h2",
+   "Step 4: react to a shake"
+  ],
+  [
+   "bloc",
+   [
+    [
+     "ol",
+     [
+      "In the Blueprint, add the [[lang:noeud_event_secousse]] event.",
+      "Connect it to whatever you want: shuffle, roll a die, knock objects down…",
+      "Shake your phone: it takes **two quick, sharp jolts**. A simple move is not enough, and one second of rest is enforced between two shakes."
+     ]
+    ]
+   ]
+  ],
+  [
+   "p",
+   "The “Shake to roll the die” template writes a random number, random(1, 6), in a die's text on every shake."
+  ],
+  [
+   "h2",
+   "Reset the tilt to zero"
+  ],
+  [
+   "p",
+   "The zero is the phone's position when the game starts. To redo it (the player changes posture, new level), add the [[recalibrer_inclinaison]] node."
+  ],
+  [
+   "ul",
+   [
+    "**The screen does not rotate:** when a game uses tilt, the screen stays in its starting position, otherwise it would flip while you tilt.",
+    "**Device without a sensor:** the value stays at 0 and nothing moves."
+   ]
+  ]
+ ]
+}

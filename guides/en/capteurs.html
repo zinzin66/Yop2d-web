@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to use phone tilt and shake? | Yop2D guide</title>
+<meta name="description" content="In Yop2D your phone can drive the game: read the tilt in a formula, move a character by tilting, roll a marble and react to a shake.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/capteurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/capteurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/capteurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/capteurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/capteurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/capteurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/capteurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/capteurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/capteurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/capteurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to use phone tilt and shake?",
+ "description": "In Yop2D your phone can drive the game: read the tilt in a formula, move a character by tilting, roll a marble and react to a shake.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Read the tilt",
+   "text": "“Tilting the phone” group in the left panel."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Move a character",
+   "text": "⚙ Behavior → Controls → Tilt."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Roll a marble",
+   "text": "Realistic physics → “Marble: rolls when you tilt the phone” box."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "React to a shake",
+   "text": "“Phone shaken” event."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to use phone tilt and shake?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../capteurs.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/capteurs.html" hreflang="es">Español</a> · <a href="../de/capteurs.html" hreflang="de">Deutsch</a> · <a href="../it/capteurs.html" hreflang="it">Italiano</a> · <a href="../pt/capteurs.html" hreflang="pt">Português</a> · <a href="../ru/capteurs.html" hreflang="ru">Русский</a> · <a href="../zh/capteurs.html" hreflang="zh">中文</a> · <a href="../ja/capteurs.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Your phone knows when you tilt or shake it. Yop2D lets you use that <strong>without writing code</strong>: a character that walks when you tilt, a marble that rolls through a maze, a die that rolls when you shake.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a project open in the editor;</li><li>a phone or tablet: the sensor is the device's own.</li></ul>
+</div>
+<h2>Step 1: read the tilt in a formula</h2>
+<div class="method">
+<ol><li>Open a node that has a formula field, for example “Set a property”.</li><li>In the left panel, open the <strong>Tilting the phone</strong> group.</li><li>Tap <strong>inclinaison.x</strong> (left-right) or <strong>inclinaison.y</strong> (top-bottom of the screen): the formula writes itself.</li></ol>
+<div class="tip">👉 Values go from -1 to 1. <strong>0</strong> = the way you held your phone when the game started; <strong>1</strong> = fully tilted (about 30°) to the right for x, toward the bottom of the screen for y. It works in portrait and landscape.</div>
+</div>
+<h2>Step 2: a character that walks when you tilt</h2>
+<div class="method">
+<ol><li>Pick your character, then tap <strong>Object behavior</strong> in the Inspector.</li><li>Choose a platform character or a top-down character.</li><li>On the <strong>Controls</strong> line, tap <strong>Tilt</strong>.</li><li>Set the <strong>Sensitivity</strong>: gentle, normal or strong.</li><li>For a platform character, add a jump button: tilting does not make it jump.</li></ol>
+</div>
+<p>The “Move by tilting” template shows all this ready to use.</p>
+<h2>Step 3: a rolling marble</h2>
+<div class="method">
+<ol><li>Create a round object (a marble picture or a colored circle).</li><li>Tap <strong>Object behavior</strong>, then <strong>Realistic physics</strong>.</li><li>Tick <strong>Marble: rolls when you tilt the phone</strong>. Yop2D sets the round shape, the bounce and the gravity for you.</li><li>Add walls: objects with the same behavior, set to <strong>Fixed</strong>.</li><li>If the marble is too fast or too slow, change the <strong>Sensitivity</strong>.</li></ol>
+</div>
+<p>The “Marble maze” template has a marble, walls, black holes that restart the level and a green circle to reach.</p>
+<h2>Step 4: react to a shake</h2>
+<div class="method">
+<ol><li>In the Blueprint, add the “Phone shaken” event.</li><li>Connect it to whatever you want: shuffle, roll a die, knock objects down…</li><li>Shake your phone: it takes <strong>two quick, sharp jolts</strong>. A simple move is not enough, and one second of rest is enforced between two shakes.</li></ol>
+</div>
+<p>The “Shake to roll the die” template writes a random number, random(1, 6), in a die's text on every shake.</p>
+<h2>Reset the tilt to zero</h2>
+<p>The zero is the phone's position when the game starts. To redo it (the player changes posture, new level), add the “Reset the tilt to zero” node.</p>
+<ul><li><strong>The screen does not rotate:</strong> when a game uses tilt, the screen stays in its starting position, otherwise it would flip while you tilt.</li><li><strong>Device without a sensor:</strong> the value stays at 0 and nothing moves.</li></ul>
+
+<div class="nav">
+<a href="../en/atelier-personnage.html">← Animate your character</a>
+<a href="../en/interface-demarrage.html">Next guide: The start screen in pictures →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>

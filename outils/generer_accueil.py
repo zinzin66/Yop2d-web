@@ -26,7 +26,7 @@ APK = "https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk"
 # False = le gros bouton « Télécharger l'APK » et la note d'installation sont cachés de l'accueil (Yop2D est public sur
 # Google Play depuis le 02/11/2026 : le magasin est la voie principale). Remettre True pour les montrer de nouveau.
 # Nombre de modèles du moteur (hors guides) : à mettre à jour à chaque sortie (SORTIE.md). 59 au 05/11/2026.
-NB_MODELES = 59
+NB_MODELES = 63
 AFFICHER_APK = False
 PLAY = "https://play.google.com/store/apps/details?id=com.ludexa.moteur"
 ITCH = "https://yop2d-dev.itch.io/yop2d-no-code-game-engine"
@@ -583,7 +583,7 @@ def llms(t):
         "- Copy, paste, duplicate and multi-select of objects and of nodes; lock objects; folders to organise objects and files; grid snapping; zoom and pan; Z-order; parent/child objects; several scenes per game, scenes that can be placed inside other scenes (prefabs).",
         "- Instant test on the device with the play button, no export needed; a 'Check my game' button that finds missing variables, objects or files in plain words.",
         "- Built-in library: images, animated characters, sounds, music, fonts, ready-made titles, plus downloadable packs and ready-made objects.",
-        "- Tools: tilemap editor (brush, eraser, rectangle, fill, picker), sprite animation editor, music maker (4 tracks, real instruments, export to .ogg), sound-effect maker (retro sounds with sliders plus 435 downloadable realistic sounds), sprite-sheet cutter (columns and rows, or pick frames by hand), character workshop (one side-view picture of your hero becomes idle, walk, run, jump, attack and hit animations: skeleton, outlines, hole filling), step-by-step movement editor (move, rotate, scale, fade an object), start-screen editor for exported games, dialogue/visual-novel system with save slots, gallery and 9 languages.",
+        "- Tools: tilemap editor (brush, eraser, rectangle, fill, picker), sprite animation editor, music maker (4 tracks, real instruments, export to .ogg), sound-effect maker (retro sounds with sliders plus 435 downloadable realistic sounds), sprite-sheet cutter (columns and rows, or pick frames by hand), phone sensors (tilt formulas inclinaison.x / inclinaison.y, 'Tilt' controls for characters, a rolling-marble behavior, a 'Phone shaken' event, a 'Reset the tilt to zero' node), character workshop (one side-view picture of your hero becomes idle, walk, run, jump, attack and hit animations: skeleton, outlines, hole filling), step-by-step movement editor (move, rotate, scale, fade an object), start-screen editor for exported games, dialogue/visual-novel system with save slots, gallery and 9 languages.",
         "- Screen filters (including a flashlight effect) and transitions, particles, parallax, camera follow and limits, pathfinding, physics, moving platforms and elevators (carry, push or crush what stands on them), joystick and buttons, vibration, multi-language games.",
         "- APK export done on the device: your own icon, name, version number, launch image, screen-on option; a new version installs over the old one.",
         f"- Guided learning inside the app: 5 interactive guides and 4 step-by-step missions, {NB_MODELES} templates, {nombre_exemples()} example games.",

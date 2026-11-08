@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie nutzt man Neigung und Schütteln des Handys? | Yop2D-Anleitung</title>
+<meta name="description" content="In Yop2D kann dein Handy das Spiel steuern: Neigung in einer Formel lesen, eine Figur durch Neigen bewegen, eine Murmel rollen lassen und auf Schütteln reagieren.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/capteurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/capteurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/capteurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/capteurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/capteurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/capteurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/capteurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/capteurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/capteurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/capteurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie nutzt man Neigung und Schütteln des Handys?",
+ "description": "In Yop2D kann dein Handy das Spiel steuern: Neigung in einer Formel lesen, eine Figur durch Neigen bewegen, eine Murmel rollen lassen und auf Schütteln reagieren.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Neigung lesen",
+   "text": "Gruppe „Handy neigen“ im linken Bereich."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Eine Figur bewegen",
+   "text": "⚙ Verhalten → Steuerung → Neigen."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Eine Murmel rollen lassen",
+   "text": "Realistische Physik → Kästchen „Murmel: rollt, wenn du das Handy neigst“."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Auf Schütteln reagieren",
+   "text": "Ereignis „Handy geschüttelt“."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../de/index.html">← Yop2D</a>
+<h1>Wie nutzt man Neigung und Schütteln des Handys?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../capteurs.html" hreflang="fr">Français</a> · <a href="../en/capteurs.html" hreflang="en">English</a> · <a href="../es/capteurs.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/capteurs.html" hreflang="it">Italiano</a> · <a href="../pt/capteurs.html" hreflang="pt">Português</a> · <a href="../ru/capteurs.html" hreflang="ru">Русский</a> · <a href="../zh/capteurs.html" hreflang="zh">中文</a> · <a href="../ja/capteurs.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Dein Handy merkt, wenn du es neigst oder schüttelst. Yop2D lässt dich das <strong>ohne Code</strong> nutzen: eine Figur, die beim Neigen läuft, eine Murmel, die durch ein Labyrinth rollt, ein Würfel, der beim Schütteln fällt.</p>
+<div class="besoin">
+<b>Du brauchst:</b>
+<ul><li>ein im Editor geöffnetes Projekt;</li><li>ein Handy oder Tablet: der Sensor gehört zum Gerät.</li></ul>
+</div>
+<h2>Schritt 1: Neigung in einer Formel lesen</h2>
+<div class="method">
+<ol><li>Öffne einen Knoten mit einem Formelfeld, zum Beispiel „Eigenschaft ändern“.</li><li>Öffne im linken Bereich die Gruppe <strong>Handy neigen</strong>.</li><li>Tippe auf <strong>inclinaison.x</strong> (links-rechts) oder <strong>inclinaison.y</strong> (oben-unten auf dem Bildschirm): Die Formel schreibt sich selbst.</li></ol>
+<div class="tip">👉 Die Werte gehen von -1 bis 1. <strong>0</strong> = so, wie du das Handy beim Spielstart gehalten hast; <strong>1</strong> = voll geneigt (etwa 30°) nach rechts bei x, zum unteren Bildschirmrand bei y. Es funktioniert im Hoch- und Querformat.</div>
+</div>
+<h2>Schritt 2: eine Figur, die beim Neigen läuft</h2>
+<div class="method">
+<ol><li>Wähle deine Figur und tippe im Inspektor auf <strong>Verhalten des Objekts</strong>.</li><li>Wähle eine Plattform-Figur oder eine Figur in der Draufsicht.</li><li>Tippe in der Zeile <strong>Steuerung</strong> auf <strong>Neigen</strong>.</li><li>Stelle die <strong>Empfindlichkeit</strong> ein: sanft, normal oder stark.</li><li>Bei einer Plattform-Figur brauchst du einen Sprungknopf: Neigen lässt sie nicht springen.</li></ol>
+</div>
+<p>Die Vorlage „Durch Neigen bewegen“ zeigt das alles fertig.</p>
+<h2>Schritt 3: eine rollende Murmel</h2>
+<div class="method">
+<ol><li>Erstelle ein rundes Objekt (ein Murmelbild oder einen farbigen Kreis).</li><li>Tippe auf <strong>Verhalten des Objekts</strong>, dann auf <strong>Realistische Physik</strong>.</li><li>Hake <strong>Murmel: rollt, wenn du das Handy neigst</strong> an. Yop2D stellt runde Form, Abprallen und Schwerkraft selbst ein.</li><li>Setze Wände: Objekte mit demselben Verhalten, auf <strong>Fest</strong> gestellt.</li><li>Ist die Murmel zu schnell oder zu langsam, ändere die <strong>Empfindlichkeit</strong>.</li></ol>
+</div>
+<p>Die Vorlage „Murmel-Labyrinth“ enthält eine Murmel, Wände, schwarze Löcher, die neu starten, und einen grünen Kreis als Ziel.</p>
+<h2>Schritt 4: auf Schütteln reagieren</h2>
+<div class="method">
+<ol><li>Füge im Blueprint das Ereignis „Handy geschüttelt“ hinzu.</li><li>Verbinde es mit dem, was du willst: mischen, würfeln, Objekte umwerfen…</li><li>Schüttle dein Handy: Es braucht <strong>zwei kurze, kräftige Stöße</strong>. Eine einfache Bewegung reicht nicht, und zwischen zwei Schüttelbewegungen liegt eine Sekunde Pause.</li></ol>
+</div>
+<p>Die Vorlage „Schütteln zum Würfeln“ schreibt bei jedem Schütteln eine Zufallszahl, random(1, 6), in den Text eines Würfels.</p>
+<h2>Neigung auf Null setzen</h2>
+<p>Die Null ist die Handyhaltung beim Spielstart. Um sie neu zu setzen (der Spieler ändert die Haltung, neues Level), füge den Knoten „Neigung auf Null setzen“ hinzu.</p>
+<ul><li><strong>Der Bildschirm dreht sich nicht:</strong> Nutzt ein Spiel die Neigung, bleibt der Bildschirm in der Startlage, sonst würde er beim Neigen kippen.</li><li><strong>Gerät ohne Sensor:</strong> Der Wert bleibt 0 und nichts bewegt sich.</li></ul>
+
+<div class="nav">
+<a href="../de/atelier-personnage.html">← Animiere deine Figur</a>
+<a href="../de/interface-demarrage.html">Nächste Anleitung: Der Startbildschirm in Bildern →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../de/index.html">Offizielle Website</a> · <a href="../../noeuds/de.html">Knotenreferenz</a></p>
+</footer>
+</body>
+</html>

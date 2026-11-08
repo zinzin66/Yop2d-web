@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Come usare l&#x27;inclinazione e la scossa del telefono? | Guida Yop2D</title>
+<meta name="description" content="In Yop2D il tuo telefono può guidare il gioco: leggi l&#x27;inclinazione in una formula, muovi un personaggio inclinando, fai rotolare una biglia e reagisci a una scossa.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/it/capteurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/capteurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/capteurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/capteurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/capteurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/capteurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/capteurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/capteurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/capteurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/capteurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Come usare l'inclinazione e la scossa del telefono?",
+ "description": "In Yop2D il tuo telefono può guidare il gioco: leggi l'inclinazione in una formula, muovi un personaggio inclinando, fai rotolare una biglia e reagisci a una scossa.",
+ "inLanguage": "it",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motore di gioco 2D senza codice per Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Leggere l'inclinazione",
+   "text": "Gruppo «Telefono inclinato» del pannello a sinistra."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Muovere un personaggio",
+   "text": "⚙ Comportamento → Comandi → Inclinare."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Far rotolare una biglia",
+   "text": "Fisica realistica → casella «Biglia: rotola quando inclini il telefono»."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Reagire a una scossa",
+   "text": "Evento «Telefono scosso»."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../it/index.html">← Yop2D</a>
+<h1>Come usare l'inclinazione e la scossa del telefono?</h1>
+<p>Guida per principianti · senza codice</p>
+<p class="langues"><a href="../capteurs.html" hreflang="fr">Français</a> · <a href="../en/capteurs.html" hreflang="en">English</a> · <a href="../es/capteurs.html" hreflang="es">Español</a> · <a href="../de/capteurs.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="../pt/capteurs.html" hreflang="pt">Português</a> · <a href="../ru/capteurs.html" hreflang="ru">Русский</a> · <a href="../zh/capteurs.html" hreflang="zh">中文</a> · <a href="../ja/capteurs.html" hreflang="ja">日本語</a></p>
+</header>
+<main>
+<p>Il tuo telefono sa quando lo inclini o lo scuoti. Yop2D ti lascia usarlo <strong>senza scrivere codice</strong>: un personaggio che cammina quando inclini, una biglia che rotola in un labirinto, un dado che si tira scuotendo.</p>
+<div class="besoin">
+<b>Ti serve:</b>
+<ul><li>un progetto aperto nell'editor;</li><li>un telefono o un tablet: il sensore è quello del dispositivo.</li></ul>
+</div>
+<h2>Passo 1: leggere l'inclinazione in una formula</h2>
+<div class="method">
+<ol><li>Apri un nodo con un campo formula, per esempio «Modifica una proprietà».</li><li>Nel pannello a sinistra apri il gruppo <strong>Telefono inclinato</strong>.</li><li>Tocca <strong>inclinaison.x</strong> (sinistra-destra) o <strong>inclinaison.y</strong> (alto-basso dello schermo): la formula si scrive da sola.</li></ol>
+<div class="tip">👉 I valori vanno da -1 a 1. <strong>0</strong> = come tenevi il telefono all'avvio del gioco; <strong>1</strong> = inclinato al massimo (circa 30°) verso destra per x, verso il basso dello schermo per y. Funziona in verticale e in orizzontale.</div>
+</div>
+<h2>Passo 2: un personaggio che cammina quando inclini</h2>
+<div class="method">
+<ol><li>Scegli il tuo personaggio e tocca <strong>Comportamento dell'oggetto</strong> nell'Ispettore.</li><li>Scegli un personaggio da piattaforma o in vista dall'alto.</li><li>Sulla riga <strong>Comandi</strong>, tocca <strong>Inclinare</strong>.</li><li>Regola la <strong>Sensibilità</strong>: dolce, normale o forte.</li><li>Per un personaggio da piattaforma, aggiungi un pulsante di salto: inclinare non fa saltare.</li></ol>
+</div>
+<p>Il modello «Muoversi inclinando» mostra tutto già pronto.</p>
+<h2>Passo 3: una biglia che rotola</h2>
+<div class="method">
+<ol><li>Crea un oggetto rotondo (un'immagine di biglia o un cerchio colorato).</li><li>Tocca <strong>Comportamento dell'oggetto</strong>, poi <strong>Fisica realistica</strong>.</li><li>Spunta <strong>Biglia: rotola quando inclini il telefono</strong>. Yop2D regola da solo la forma rotonda, il rimbalzo e la gravità.</li><li>Metti dei muri: oggetti con lo stesso comportamento, impostati su <strong>Fisso</strong>.</li><li>Se la biglia è troppo veloce o lenta, cambia la <strong>Sensibilità</strong>.</li></ol>
+</div>
+<p>Il modello «Labirinto con biglia» contiene una biglia, muri, buchi neri che fanno ricominciare e un cerchio verde da raggiungere.</p>
+<h2>Passo 4: reagire a una scossa</h2>
+<div class="method">
+<ol><li>Nel Blueprint aggiungi l'evento «Telefono scosso».</li><li>Collegalo a ciò che vuoi: mescolare, tirare un dado, far cadere oggetti…</li><li>Scuoti il telefono: servono <strong>due scosse rapide e secche</strong>. Un semplice movimento non basta, e c'è un secondo di pausa tra due scosse.</li></ol>
+</div>
+<p>Il modello «Scuoti per tirare il dado» scrive un numero a caso, random(1, 6), nel testo di un dado a ogni scossa.</p>
+<h2>Azzerare l'inclinazione</h2>
+<p>Lo zero è la posizione del telefono all'avvio del gioco. Per rifarlo (il giocatore cambia postura, nuovo livello), aggiungi il nodo «Azzerare l'inclinazione».</p>
+<ul><li><strong>Lo schermo non ruota:</strong> quando un gioco usa l'inclinazione, lo schermo resta nella posizione iniziale, altrimenti si capovolgerebbe inclinando.</li><li><strong>Dispositivo senza sensore:</strong> il valore resta 0 e nulla si muove.</li></ul>
+
+<div class="nav">
+<a href="../it/atelier-personnage.html">← Anima il tuo personaggio</a>
+<a href="../it/interface-demarrage.html">Guida successiva: La schermata iniziale in immagini →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motore di gioco 2D gratuito e senza codice per Android · <a href="../../it/index.html">Sito ufficiale</a> · <a href="../../noeuds/it.html">Riferimento dei nodi</a></p>
+</footer>
+</body>
+</html>
