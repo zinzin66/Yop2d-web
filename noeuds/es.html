@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todos los nodos de Yop2D (236) | Referencia</title>
-<meta name="description" content="Lista completa de los 236 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
+<title>Todos los nodos de Yop2D (238) | Referencia</title>
+<meta name="description" content="Lista completa de los 238 nodos visuales de Yop2D, motor de juegos 2D sin código para Android: función, ajustes, salidas y un ejemplo de cada nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/es.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 236 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
+<p>Yop2D es un motor de juegos 2D gratuito y sin código para Android. La lógica de un juego se construye con nodos (bloques visuales) unidos en el Blueprint: los eventos inician una cadena y luego siguen las acciones y condiciones. Esta página describe los 238 nodos del editor, con sus ajustes (entradas) y sus salidas.</p>
 <p><strong>Categorías</strong></p>
 <nav class="sommaire"><a href="#c1-eventos">Eventos</a><a href="#c2-escena-y-hud">Escena y HUD</a><a href="#c3-tiempo">Tiempo</a><a href="#c4-apariencia-y-objetos">Apariencia y Objetos</a><a href="#c5-variables-e-inventario">Variables e Inventario</a><a href="#c6-lógica-y-condiciones">Lógica y Condiciones</a><a href="#c7-textos-y-diálogos">Textos y Diálogos</a><a href="#c8-movimientos-e-ia">Movimientos e IA</a><a href="#c9-cuadrículas-y-puzles">Cuadrículas y puzles</a><a href="#c10-valores-cables-verdes">Valores (cables verdes)</a><a href="#c11-transiciones">Transiciones</a><a href="#c12-animaciones">Animaciones</a><a href="#c13-audio">Audio</a><a href="#c14-historia-y-diálogos">Historia y diálogos</a><a href="#c15-filtros-de-pantalla">Filtros de pantalla</a><a href="#c16-física">Física</a></nav>
 <h2 id="c1-eventos">Eventos</h2>
@@ -75,6 +75,10 @@
 <div class="fiche"><h3>Botón atrás pulsado</h3>
 <p>Se ejecuta cuando el jugador pulsa el botón «atrás» del teléfono (flecha o gesto). Ideal para abrir un menú de pausa o volver a la pantalla anterior. Sin este nodo, el botón atrás no hace nada durante el juego.</p>
 <p class="exemple"><b>Ejemplo:</b> atrás → «Pausar el juego» y mostrar un menú «Continuar / Salir».</p>
+</div>
+<div class="fiche"><h3>Teléfono sacudido</h3>
+<p>Requiere la versión 1261 de Yop2D o una más reciente (el último número de la versión, por ejemplo 1.0.1261). Si tu versión es anterior, actualiza Yop2D. Se lanza cuando el jugador sacude su teléfono o tablet. Ideal para mezclar, tirar un dado o hacer caer objetos. Hacen falta dos sacudidas rápidas: un simple movimiento no basta.</p>
+<p class="exemple"><b>Ejemplo:</b> Un dado: «Teléfono sacudido» → «Modificar una propiedad» del texto del dado con random(1, 6).</p>
 </div>
 <div class="fiche"><h3>En cada escena nueva</h3>
 <p>Se lanza cada vez que se abre una escena nueva. Pensado para la «Lógica global» (que funciona en todas las escenas): por ejemplo, colocar el ejército elegido en cada mapa. En una escena normal basta con «Al empezar».</p>
@@ -184,6 +188,10 @@
 <div class="schema"><b>Salida:</b> ninguna (fin del script)</div>
 <p>Cierra el juego exportado. En el editor no cierra nada: usa el botón de parada.</p>
 <p class="exemple"><b>Ejemplo:</b> un botón «Salir» en el menú principal.</p>
+</div>
+<div class="fiche"><h3>Poner la inclinación a cero</h3>
+<p>Requiere la versión 1262 de Yop2D o una más reciente (el último número de la versión, por ejemplo 1.0.1262). Si tu versión es anterior, actualiza Yop2D. La forma en que el jugador sostiene el teléfono en este momento pasa a ser el «cero» de la inclinación: inclinaison.x e inclinaison.y valen 0, y los objetos controlados con «Inclinar» o las canicas se quedan quietos. Útil cuando el jugador se acomoda o al empezar un nivel. Sin este nodo, el cero es la posición del teléfono al iniciar el juego.</p>
+<p class="exemple"><b>Ejemplo:</b> Un botón «Recentrar» → este nodo: la canica se calma, aunque el jugador haya cambiado de postura.</p>
 </div>
 <div class="fiche"><h3>Mensaje corto abajo de la pantalla</h3>
 <div class="schema"><b>Entrada:</b> Mensaje</div>

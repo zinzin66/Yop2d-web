@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yop2D 全部节点（236 个）| 参考</title>
-<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 236 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
+<title>Yop2D 全部节点（238 个）| 参考</title>
+<meta name="description" content="Yop2D（无需代码的 Android 2D 游戏引擎）全部 238 个可视化节点的完整列表：每个节点的作用、设置、输出和示例。">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/zh.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 236 个节点，以及它们的设置（输入）和输出。</p>
+<p>Yop2D 是一款免费、无需代码的 Android 2D 游戏引擎。游戏逻辑由在 Blueprint 中相互连接的节点（可视化积木块）组成：事件启动一条链，接着是动作和条件。本页介绍编辑器中的全部 238 个节点，以及它们的设置（输入）和输出。</p>
 <p><strong>分类</strong></p>
 <nav class="sommaire"><a href="#c1-事件">事件</a><a href="#c2-场景与-hud">场景与 HUD</a><a href="#c3-时间">时间</a><a href="#c4-外观与对象">外观与对象</a><a href="#c5-变量与背包">变量与背包</a><a href="#c6-逻辑与条件">逻辑与条件</a><a href="#c7-文本与对话">文本与对话</a><a href="#c8-移动与-ai">移动与 AI</a><a href="#c9-网格和益智">网格和益智</a><a href="#c10-数值-绿线">数值（绿线）</a><a href="#c11-转场">转场</a><a href="#c12-动画">动画</a><a href="#c13-音频">音频</a><a href="#c14-故事与对话">故事与对话</a><a href="#c15-屏幕滤镜">屏幕滤镜</a><a href="#c16-物理">物理</a></nav>
 <h2 id="c1-事件">事件</h2>
@@ -75,6 +75,10 @@
 <div class="fiche"><h3>按下返回键</h3>
 <p>当玩家按下手机的返回键（箭头或手势）时运行。适合用来打开暂停菜单或回到上一个画面。如果游戏里没有这个节点，返回键在游戏中不起任何作用。</p>
 <p class="exemple"><b>示例：</b> 返回 → “暂停游戏”，然后显示“继续 / 退出”菜单。</p>
+</div>
+<div class="fiche"><h3>摇晃手机</h3>
+<p>需要 Yop2D 1261 或更新的版本（版本号的最后一个数字，例如 1.0.1261）。如果你的版本更旧，请更新 Yop2D。 当玩家摇晃手机或平板时运行。适合洗牌、掷骰子或让物体掉落。需要两下短促有力的摇动，普通移动不会触发。</p>
+<p class="exemple"><b>示例：</b> 骰子：“摇晃手机” → 用 random(1, 6) 对骰子的文字执行 “修改属性”。</p>
 </div>
 <div class="fiche"><h3>每次进入新场景</h3>
 <p>每次打开新场景时运行。专为“全局逻辑”（在所有场景中运行）设计：例如在每张地图上放置选好的军队。在普通场景里，用“开始时”就够了。</p>
@@ -184,6 +188,10 @@
 <div class="schema"><b>输出：</b> 无（脚本结束）</div>
 <p>关闭导出的游戏。在编辑器里不会关闭任何东西：请用停止按钮。</p>
 <p class="exemple"><b>示例：</b> 主菜单里的“退出”按钮。</p>
+</div>
+<div class="fiche"><h3>将倾斜归零</h3>
+<p>需要 Yop2D 1262 或更新的版本（版本号的最后一个数字，例如 1.0.1262）。如果你的版本更旧，请更新 Yop2D。 把玩家此刻拿手机的姿势当作倾斜的“零点”：inclinaison.x 和 inclinaison.y 变成 0，用“倾斜”控制的对象和弹珠都会停住。适合玩家换了姿势，或在关卡开始时使用。没有这个节点时，零点就是游戏启动时手机的姿势。</p>
+<p class="exemple"><b>示例：</b> 一个“重新对齐”按钮 → 这个节点：即使玩家换了姿势，弹珠也会安静下来。</p>
 </div>
 <div class="fiche"><h3>屏幕底部小提示</h3>
 <div class="schema"><b>输入：</b> 消息</div>

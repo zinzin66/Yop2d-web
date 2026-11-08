@@ -1,0 +1,144 @@
+{
+  "depuis": 1262,
+  "titre_page": "¿Cómo usar la inclinación y la sacudida del teléfono? | Guía Yop2D",
+  "description": "En Yop2D tu teléfono puede controlar el juego: lee la inclinación en una fórmula, mueve un personaje inclinando, haz rodar una canica y reacciona a una sacudida.",
+  "h1": "¿Cómo usar la inclinación y la sacudida del teléfono?",
+  "carte": [
+    "Inclina y sacude",
+    "Mueve un personaje, haz rodar una canica o tira un dado sacudiendo el teléfono."
+  ],
+  "etapes": [
+    [
+      "Leer la inclinación",
+      "Grupo «Teléfono inclinado» del panel izquierdo."
+    ],
+    [
+      "Mover un personaje",
+      "⚙ Comportamiento → Controles → Inclinar."
+    ],
+    [
+      "Hacer rodar una canica",
+      "Física realista → casilla «Canica: rueda al inclinar el teléfono»."
+    ],
+    [
+      "Reaccionar a una sacudida",
+      "Evento «Teléfono sacudido»."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Tu teléfono sabe cuándo lo inclinas o lo sacudes. Yop2D te deja usarlo **sin escribir código**: un personaje que camina al inclinar, una canica que rueda por un laberinto, un dado que se tira al sacudir."
+    ],
+    [
+      "besoin",
+      [
+        "un proyecto abierto en el editor;",
+        "un teléfono o una tablet: el sensor es el del aparato."
+      ]
+    ],
+    [
+      "h2",
+      "Paso 1: leer la inclinación en una fórmula"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Abre un nodo que tenga un campo de fórmula, por ejemplo [[modifier_propriete]].",
+            "En el panel izquierdo, abre el grupo **Teléfono inclinado**.",
+            "Toca **inclinaison.x** (izquierda-derecha) o **inclinaison.y** (arriba-abajo de la pantalla): la fórmula se escribe sola."
+          ]
+        ],
+        [
+          "tip",
+          "Los valores van de -1 a 1. **0** = como sostenías el teléfono al empezar el juego; **1** = inclinado a fondo (unos 30°) hacia la derecha en x, hacia abajo de la pantalla en y. Funciona en vertical y en horizontal."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Paso 2: un personaje que camina al inclinar"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Elige tu personaje y toca **Comportamiento del objeto** en el Inspector.",
+            "Elige un personaje de plataformas o de vista cenital.",
+            "En la línea **Controles**, toca **Inclinar**.",
+            "Ajusta la **Sensibilidad**: suave, normal o fuerte.",
+            "Para un personaje de plataformas, añade un botón de salto: inclinar no hace saltar."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "La plantilla «Moverse inclinando» lo muestra todo ya preparado."
+    ],
+    [
+      "h2",
+      "Paso 3: una canica que rueda"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Crea un objeto redondo (una imagen de canica o un círculo de color).",
+            "Toca **Comportamiento del objeto** y luego **Física realista**.",
+            "Marca **Canica: rueda al inclinar el teléfono**. Yop2D ajusta solo la forma redonda, el rebote y la gravedad.",
+            "Pon paredes: objetos con el mismo comportamiento, ajustados a **Fijo**.",
+            "Si la canica va muy rápida o muy lenta, cambia la **Sensibilidad**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "La plantilla «Laberinto de canica» tiene una canica, paredes, agujeros negros que reinician y un círculo verde que alcanzar."
+    ],
+    [
+      "h2",
+      "Paso 4: reaccionar a una sacudida"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "En el Blueprint, añade el evento [[lang:noeud_event_secousse]].",
+            "Conéctalo a lo que quieras: mezclar, tirar un dado, hacer caer objetos…",
+            "Sacude el teléfono: hacen falta **dos golpes secos y rápidos**. Un simple movimiento no basta y se impone un segundo de descanso entre dos sacudidas."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "La plantilla «Sacude para tirar el dado» escribe un número al azar, random(1, 6), en el texto de un dado en cada sacudida."
+    ],
+    [
+      "h2",
+      "Poner la inclinación a cero"
+    ],
+    [
+      "p",
+      "El cero es la posición del teléfono al iniciar el juego. Para rehacerlo (el jugador cambia de postura, nuevo nivel), añade el nodo [[recalibrer_inclinaison]]."
+    ],
+    [
+      "ul",
+      [
+        "**La pantalla no gira:** cuando un juego usa la inclinación, la pantalla se queda en su posición inicial; si no, giraría al inclinar.",
+        "**Aparato sin sensor:** el valor se queda en 0 y nada se mueve."
+      ]
+    ]
+  ]
+}

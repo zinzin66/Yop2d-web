@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كيف تستخدم إمالة الهاتف وهزّه؟ | دليل Yop2D</title>
+<meta name="description" content="في Yop2D يمكن لهاتفك أن يقود اللعبة: اقرأ الإمالة في صيغة، حرّك شخصية بإمالتها، دحرج كرة وتفاعل مع الهز.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ar/capteurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/capteurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/capteurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/capteurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/capteurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/capteurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/capteurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/capteurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/capteurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/capteurs.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/capteurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "كيف تستخدم إمالة الهاتف وهزّه؟",
+ "description": "في Yop2D يمكن لهاتفك أن يقود اللعبة: اقرأ الإمالة في صيغة، حرّك شخصية بإمالتها، دحرج كرة وتفاعل مع الهز.",
+ "inLanguage": "ar",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (محرك ألعاب ثنائية الأبعاد بلا برمجة لأندرويد)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "اقرأ الإمالة",
+   "text": "مجموعة «إمالة الهاتف» في اللوحة اليسرى."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "حرّك شخصية",
+   "text": "⚙ السلوك ← التحكم ← إمالة."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "دحرج كرة",
+   "text": "الفيزياء الواقعية ← مربع «كرة: تتدحرج عندما تميل الهاتف»."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "تفاعل مع الهز",
+   "text": "حدث «تم هز الهاتف»."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ar/index.html">← Yop2D</a>
+<h1>كيف تستخدم إمالة الهاتف وهزّه؟</h1>
+<p>دليل للمبتدئين · بلا برمجة</p>
+<p class="langues"><a href="../capteurs.html" hreflang="fr">Français</a> · <a href="../en/capteurs.html" hreflang="en">English</a> · <a href="../es/capteurs.html" hreflang="es">Español</a> · <a href="../de/capteurs.html" hreflang="de">Deutsch</a> · <a href="../it/capteurs.html" hreflang="it">Italiano</a> · <a href="../pt/capteurs.html" hreflang="pt">Português</a> · <a href="../ru/capteurs.html" hreflang="ru">Русский</a> · <a href="../zh/capteurs.html" hreflang="zh">中文</a> · <a href="../ja/capteurs.html" hreflang="ja">日本語</a> · <strong>العربية</strong></p>
+</header>
+<main>
+<p class="depuis">ℹ️ يتطلب Yop2D بالإصدار 1262 أو أحدث (الرقم الأخير من رقم الإصدار، مثلاً 1.0.1262). إن كان إصدارك أقدم فحدّث Yop2D.</p>
+<p>يعرف هاتفك متى تميله أو تهزه. يتيح لك Yop2D استخدام ذلك <strong>دون كتابة شيفرة</strong>: شخصية تمشي عندما تميل، وكرة تتدحرج في متاهة، ونرد يُرمى عندما تهز.</p>
+<div class="besoin">
+<b>ما تحتاجه:</b>
+<ul><li>مشروع مفتوح في المحرر؛</li><li>هاتف أو جهاز لوحي: المستشعر هو مستشعر الجهاز نفسه.</li></ul>
+</div>
+<h2>الخطوة 1: اقرأ الإمالة في صيغة</h2>
+<div class="method">
+<ol><li>افتح عقدة فيها حقل صيغة، مثلاً «تعديل خاصية».</li><li>في اللوحة اليسرى، افتح مجموعة <strong>إمالة الهاتف</strong>.</li><li>المس <strong>inclinaison.x</strong> (يمين-يسار) أو <strong>inclinaison.y</strong> (أعلى-أسفل الشاشة): تُكتب الصيغة وحدها.</li></ol>
+<div class="tip">👉 تتراوح القيم من -1 إلى 1. <strong>0</strong> = الطريقة التي كنت تمسك بها هاتفك عند بدء اللعبة؛ <strong>1</strong> = إمالة كاملة (نحو 30°) نحو اليمين لـ x، ونحو أسفل الشاشة لـ y. يعمل في الوضع العمودي والأفقي.</div>
+</div>
+<h2>الخطوة 2: شخصية تمشي عندما تميل</h2>
+<div class="method">
+<ol><li>اختر شخصيتك، ثم المس <strong>سلوك الكائن</strong> في المفتش.</li><li>اختر شخصية منصات أو شخصية بمنظر علوي.</li><li>في سطر <strong>التحكم</strong>، المس <strong>إمالة</strong>.</li><li>اضبط <strong>الحساسية</strong>: خفيفة أو عادية أو قوية.</li><li>لشخصية منصات، أضف زر قفز: الإمالة لا تجعلها تقفز.</li></ol>
+</div>
+<p>يعرض نموذج «التحرك بالإمالة» كل هذا جاهزاً للاستخدام.</p>
+<h2>الخطوة 3: كرة تتدحرج</h2>
+<div class="method">
+<ol><li>أنشئ كائناً دائرياً (صورة كرة أو دائرة ملونة).</li><li>المس <strong>سلوك الكائن</strong>، ثم <strong>فيزياء واقعية</strong>.</li><li>حدّد <strong>كرة: تتدحرج عندما تميل الهاتف</strong>. يضبط Yop2D الشكل الدائري والارتداد والجاذبية لك.</li><li>أضف جدراناً: كائنات بالسلوك نفسه، مضبوطة على <strong>ثابت</strong>.</li><li>إن كانت الكرة سريعة جداً أو بطيئة جداً، غيّر <strong>الحساسية</strong>.</li></ol>
+</div>
+<p>يحتوي نموذج «متاهة الكرة» على كرة وجدران وثقوب سوداء تعيد المستوى ودائرة خضراء للوصول إليها.</p>
+<h2>الخطوة 4: تفاعل مع الهز</h2>
+<div class="method">
+<ol><li>في Blueprint، أضف الحدث «تم هز الهاتف».</li><li>اربطه بما تريد: خلط، رمي نرد، إسقاط أشياء…</li><li>هزّ هاتفك: يحتاج إلى <strong>هزتين قويتين سريعتين</strong>. حركة بسيطة لا تكفي، وتُفرض ثانية راحة بين هزتين.</li></ol>
+</div>
+<p>يكتب نموذج «هز لرمي النرد» رقماً عشوائياً، random(1, 6)، في نص النرد عند كل هزة.</p>
+<h2>أعد الإمالة إلى الصفر</h2>
+<p>الصفر هو وضع الهاتف عند بدء اللعبة. لإعادته (غيّر اللاعب وضعيته، مستوى جديد)، أضف العقدة «إعادة الإمالة إلى الصفر».</p>
+<ul><li><strong>لا تدور الشاشة:</strong> عندما تستخدم لعبة الإمالة، تبقى الشاشة في وضعها الابتدائي، وإلا انقلبت أثناء إمالتك.</li><li><strong>جهاز بلا مستشعر:</strong> تبقى القيمة 0 ولا يتحرك شيء.</li></ul>
+
+<div class="nav">
+<a href="../ar/vie-game-over.html">→ فقدان الصحة ونهاية اللعبة</a>
+<a href="index.html">كل الأدلة →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D، محرك ألعاب ثنائية الأبعاد مجاني وبلا برمجة لأندرويد · <a href="../../ar/index.html">الموقع الرسمي</a> · <a href="../../noeuds/ar.html">مرجع العقد</a></p>
+</footer>
+</body>
+</html>

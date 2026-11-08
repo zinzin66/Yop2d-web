@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment utiliser l&#x27;inclinaison et la secousse du téléphone ? | Guide Yop2D</title>
+<meta name="description" content="Dans Yop2D, ton téléphone peut piloter le jeu : lis l&#x27;inclinaison dans une formule, déplace un personnage en l&#x27;inclinant, fais rouler une bille et réagis à une secousse.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/capteurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/capteurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/capteurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/capteurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/capteurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/capteurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/capteurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/capteurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/capteurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/capteurs.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/capteurs.html">
+<link rel="stylesheet" href="guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Comment utiliser l'inclinaison et la secousse du téléphone ?",
+ "description": "Dans Yop2D, ton téléphone peut piloter le jeu : lis l'inclinaison dans une formule, déplace un personnage en l'inclinant, fais rouler une bille et réagis à une secousse.",
+ "inLanguage": "fr",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (moteur de jeu 2D sans code pour Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Lire l'inclinaison",
+   "text": "Groupe « Téléphone penché » du panneau de gauche."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Déplacer un personnage",
+   "text": "⚙ Comportement → Commandes → Incliner."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Faire rouler une bille",
+   "text": "Physique réaliste → case « Bille : roule quand on penche le téléphone »."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Réagir à une secousse",
+   "text": "Événement « Téléphone secoué »."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../fr/index.html">← Yop2D</a>
+<h1>Comment utiliser l'inclinaison et la secousse du téléphone ?</h1>
+<p>Guide débutant · sans code</p>
+<p class="langues"><strong>Français</strong> · <a href="en/capteurs.html" hreflang="en">English</a> · <a href="es/capteurs.html" hreflang="es">Español</a> · <a href="de/capteurs.html" hreflang="de">Deutsch</a> · <a href="it/capteurs.html" hreflang="it">Italiano</a> · <a href="pt/capteurs.html" hreflang="pt">Português</a> · <a href="ru/capteurs.html" hreflang="ru">Русский</a> · <a href="zh/capteurs.html" hreflang="zh">中文</a> · <a href="ja/capteurs.html" hreflang="ja">日本語</a> · <a href="ar/capteurs.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ Demande la version 1262 de Yop2D ou plus récente (le dernier nombre du numéro de version, par exemple 1.0.1262). Si ta version est plus ancienne, mets Yop2D à jour.</p>
+<p>Ton téléphone sait quand tu le penches ou le secoues. Yop2D te laisse t'en servir <strong>sans écrire de code</strong> : un personnage qui marche quand on incline, une bille qui roule dans un labyrinthe, un dé qui se lance quand on secoue.</p>
+<div class="besoin">
+<b>Il te faut :</b>
+<ul><li>un projet ouvert dans l'éditeur ;</li><li>un téléphone ou une tablette : le capteur est celui de l'appareil.</li></ul>
+</div>
+<h2>Étape 1 : lire l'inclinaison dans une formule</h2>
+<div class="method">
+<ol><li>Ouvre un nœud qui a un champ de formule, par exemple « Modifier une propriété ».</li><li>Dans le panneau de gauche, ouvre le groupe <strong>Téléphone penché</strong>.</li><li>Touche <strong>inclinaison.x</strong> (gauche-droite) ou <strong>inclinaison.y</strong> (haut-bas de l'écran) : la formule s'écrit toute seule.</li></ol>
+<div class="tip">👉 Les valeurs vont de -1 à 1. <strong>0</strong> = comme tu tenais ton téléphone au lancement du jeu ; <strong>1</strong> = penché à fond (environ 30°) vers la droite pour x, vers le bas de l'écran pour y. Ça marche en portrait comme en paysage.</div>
+</div>
+<h2>Étape 2 : un personnage qui marche quand on incline</h2>
+<div class="method">
+<ol><li>Choisis ton personnage, puis touche <strong>Comportement de l'objet</strong> dans l'Inspecteur.</li><li>Choisis un personnage de plateforme ou de vue de dessus.</li><li>Sur la ligne <strong>Commandes</strong>, touche <strong>Incliner</strong>.</li><li>Règle la <strong>Sensibilité</strong> : douce, normale ou forte.</li><li>Pour un personnage de plateforme, ajoute un bouton de saut : pencher ne fait pas sauter.</li></ol>
+</div>
+<p>Le modèle « Se déplacer en inclinant » montre tout cela déjà prêt.</p>
+<h2>Étape 3 : une bille qui roule</h2>
+<div class="method">
+<ol><li>Crée un objet rond (une image de bille ou un rond de couleur).</li><li>Touche <strong>Comportement de l'objet</strong>, puis <strong>Physique réaliste</strong>.</li><li>Coche <strong>Bille : roule quand on penche le téléphone</strong>. Yop2D règle tout seul la forme ronde, le rebond et la gravité.</li><li>Pose des murs : des objets avec le même comportement, réglés sur <strong>Fixe</strong>.</li><li>Si la bille est trop vive ou trop lente, change la <strong>Sensibilité</strong>.</li></ol>
+</div>
+<p>Le modèle « Labyrinthe à bille » contient une bille, des murs, des trous noirs qui font recommencer et un rond vert à atteindre.</p>
+<h2>Étape 4 : réagir à une secousse</h2>
+<div class="method">
+<ol><li>Dans le Blueprint, ajoute l'événement « Téléphone secoué ».</li><li>Relie-le à ce que tu veux : mélanger, lancer un dé, faire tomber des objets…</li><li>Secoue ton téléphone : il faut <strong>deux petits coups secs</strong>. Un simple mouvement ne suffit pas, et une seconde de repos est imposée entre deux secousses.</li></ol>
+</div>
+<p>Le modèle « Secouer pour lancer le dé » écrit un nombre au hasard, random(1, 6), dans le texte d'un dé à chaque secousse.</p>
+<h2>Remettre l'inclinaison à zéro</h2>
+<p>Le zéro est la position du téléphone au lancement du jeu. Pour le refaire (le joueur change de posture, nouveau niveau), ajoute le nœud « Remettre l'inclinaison à zéro ».</p>
+<ul><li><strong>L'écran ne tourne pas :</strong> quand un jeu utilise l'inclinaison, l'écran reste dans la position de départ, sinon il basculerait en penchant.</li><li><strong>Appareil sans capteur :</strong> la valeur reste à 0 et rien ne bouge.</li></ul>
+
+<div class="nav">
+<a href="atelier-personnage.html">← Anime ton personnage</a>
+<a href="interface-demarrage.html">Guide suivant : L&#x27;écran de démarrage en images →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, moteur de jeu 2D gratuit et sans code pour Android · <a href="../fr/index.html">Site officiel</a> · <a href="../noeuds/fr.html">Référence des nœuds</a></p>
+</footer>
+</body>
+</html>

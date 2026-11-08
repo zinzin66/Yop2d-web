@@ -1,0 +1,144 @@
+{
+  "depuis": 1262,
+  "titre_page": "Comment utiliser l'inclinaison et la secousse du téléphone ? | Guide Yop2D",
+  "description": "Dans Yop2D, ton téléphone peut piloter le jeu : lis l'inclinaison dans une formule, déplace un personnage en l'inclinant, fais rouler une bille et réagis à une secousse.",
+  "h1": "Comment utiliser l'inclinaison et la secousse du téléphone ?",
+  "carte": [
+    "Penche et secoue",
+    "Déplace un personnage, fais rouler une bille ou lance un dé en secouant le téléphone."
+  ],
+  "etapes": [
+    [
+      "Lire l'inclinaison",
+      "Groupe « Téléphone penché » du panneau de gauche."
+    ],
+    [
+      "Déplacer un personnage",
+      "⚙ Comportement → Commandes → Incliner."
+    ],
+    [
+      "Faire rouler une bille",
+      "Physique réaliste → case « Bille : roule quand on penche le téléphone »."
+    ],
+    [
+      "Réagir à une secousse",
+      "Événement « Téléphone secoué »."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Ton téléphone sait quand tu le penches ou le secoues. Yop2D te laisse t'en servir **sans écrire de code** : un personnage qui marche quand on incline, une bille qui roule dans un labyrinthe, un dé qui se lance quand on secoue."
+    ],
+    [
+      "besoin",
+      [
+        "un projet ouvert dans l'éditeur ;",
+        "un téléphone ou une tablette : le capteur est celui de l'appareil."
+      ]
+    ],
+    [
+      "h2",
+      "Étape 1 : lire l'inclinaison dans une formule"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Ouvre un nœud qui a un champ de formule, par exemple [[modifier_propriete]].",
+            "Dans le panneau de gauche, ouvre le groupe **Téléphone penché**.",
+            "Touche **inclinaison.x** (gauche-droite) ou **inclinaison.y** (haut-bas de l'écran) : la formule s'écrit toute seule."
+          ]
+        ],
+        [
+          "tip",
+          "Les valeurs vont de -1 à 1. **0** = comme tu tenais ton téléphone au lancement du jeu ; **1** = penché à fond (environ 30°) vers la droite pour x, vers le bas de l'écran pour y. Ça marche en portrait comme en paysage."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 2 : un personnage qui marche quand on incline"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Choisis ton personnage, puis touche **Comportement de l'objet** dans l'Inspecteur.",
+            "Choisis un personnage de plateforme ou de vue de dessus.",
+            "Sur la ligne **Commandes**, touche **Incliner**.",
+            "Règle la **Sensibilité** : douce, normale ou forte.",
+            "Pour un personnage de plateforme, ajoute un bouton de saut : pencher ne fait pas sauter."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "Le modèle « Se déplacer en inclinant » montre tout cela déjà prêt."
+    ],
+    [
+      "h2",
+      "Étape 3 : une bille qui roule"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Crée un objet rond (une image de bille ou un rond de couleur).",
+            "Touche **Comportement de l'objet**, puis **Physique réaliste**.",
+            "Coche **Bille : roule quand on penche le téléphone**. Yop2D règle tout seul la forme ronde, le rebond et la gravité.",
+            "Pose des murs : des objets avec le même comportement, réglés sur **Fixe**.",
+            "Si la bille est trop vive ou trop lente, change la **Sensibilité**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "Le modèle « Labyrinthe à bille » contient une bille, des murs, des trous noirs qui font recommencer et un rond vert à atteindre."
+    ],
+    [
+      "h2",
+      "Étape 4 : réagir à une secousse"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Dans le Blueprint, ajoute l'événement [[lang:noeud_event_secousse]].",
+            "Relie-le à ce que tu veux : mélanger, lancer un dé, faire tomber des objets…",
+            "Secoue ton téléphone : il faut **deux petits coups secs**. Un simple mouvement ne suffit pas, et une seconde de repos est imposée entre deux secousses."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "Le modèle « Secouer pour lancer le dé » écrit un nombre au hasard, random(1, 6), dans le texte d'un dé à chaque secousse."
+    ],
+    [
+      "h2",
+      "Remettre l'inclinaison à zéro"
+    ],
+    [
+      "p",
+      "Le zéro est la position du téléphone au lancement du jeu. Pour le refaire (le joueur change de posture, nouveau niveau), ajoute le nœud [[recalibrer_inclinaison]]."
+    ],
+    [
+      "ul",
+      [
+        "**L'écran ne tourne pas :** quand un jeu utilise l'inclinaison, l'écran reste dans la position de départ, sinon il basculerait en penchant.",
+        "**Appareil sans capteur :** la valeur reste à 0 et rien ne bouge."
+      ]
+    ]
+  ]
+}

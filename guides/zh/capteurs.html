@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何使用手机的倾斜和摇晃？ | Yop2D 指南</title>
+<meta name="description" content="在 Yop2D 里，手机可以控制游戏：在公式里读取倾斜、倾斜来移动角色、让弹珠滚动，并对摇晃做出反应。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/capteurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/capteurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/capteurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/capteurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/capteurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/capteurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/capteurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/capteurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/capteurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/capteurs.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/capteurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何使用手机的倾斜和摇晃？",
+ "description": "在 Yop2D 里，手机可以控制游戏：在公式里读取倾斜、倾斜来移动角色、让弹珠滚动，并对摇晃做出反应。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "读取倾斜",
+   "text": "左侧面板的“倾斜手机”组。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "移动角色",
+   "text": "⚙ 行为 → 操控 → 倾斜。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "让弹珠滚动",
+   "text": "真实物理 → “弹珠：倾斜手机时滚动”选项。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "对摇晃做出反应",
+   "text": "“摇晃手机”事件。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>如何使用手机的倾斜和摇晃？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../capteurs.html" hreflang="fr">Français</a> · <a href="../en/capteurs.html" hreflang="en">English</a> · <a href="../es/capteurs.html" hreflang="es">Español</a> · <a href="../de/capteurs.html" hreflang="de">Deutsch</a> · <a href="../it/capteurs.html" hreflang="it">Italiano</a> · <a href="../pt/capteurs.html" hreflang="pt">Português</a> · <a href="../ru/capteurs.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/capteurs.html" hreflang="ja">日本語</a> · <a href="../ar/capteurs.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ 需要 Yop2D 1262 或更新的版本（版本号的最后一个数字，例如 1.0.1262）。如果你的版本更旧，请更新 Yop2D。</p>
+<p>手机知道你什么时候倾斜或摇晃它。Yop2D 让你<strong>不用写代码</strong>就能使用：倾斜时角色走路，弹珠在迷宫里滚动，摇一摇就掷骰子。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>在编辑器中打开的项目；</li><li>一部手机或平板：传感器就是设备自带的。</li></ul>
+</div>
+<h2>第 1 步：在公式里读取倾斜</h2>
+<div class="method">
+<ol><li>打开一个带公式输入框的节点，例如 “修改属性”。</li><li>在左侧面板中打开“<strong>倾斜手机</strong>”组。</li><li>点 <strong>inclinaison.x</strong>（左右）或 <strong>inclinaison.y</strong>（屏幕上下）：公式会自动写好。</li></ol>
+<div class="tip">👉 数值范围是 -1 到 1。<strong>0</strong> = 游戏开始时你拿手机的姿势；<strong>1</strong> = 倾斜到底（约 30°），x 是向右，y 是向屏幕下方。竖屏和横屏都能用。</div>
+</div>
+<h2>第 2 步：倾斜时会走路的角色</h2>
+<div class="method">
+<ol><li>选中你的角色，然后在检查器中点 <strong>物体行为</strong>。</li><li>选择平台角色或俯视角色。</li><li>在 <strong>操控</strong> 一行点 <strong>倾斜</strong>。</li><li>设置<strong>灵敏度</strong>：柔和、正常或强。</li><li>平台角色要另加一个跳跃按钮：倾斜不会让它跳。</li></ol>
+</div>
+<p>模板“倾斜移动”已经把这一切做好了。</p>
+<h2>第 3 步：会滚动的弹珠</h2>
+<div class="method">
+<ol><li>创建一个圆形对象（弹珠图片或彩色圆）。</li><li>点 <strong>物体行为</strong>，再点 <strong>真实物理</strong>。</li><li>勾选“<strong>弹珠：倾斜手机时滚动</strong>”。Yop2D 会自动设置圆形、弹跳和重力。</li><li>放上墙：使用相同行为的对象，设为<strong>固定</strong>。</li><li>弹珠太快或太慢，就改<strong>灵敏度</strong>。</li></ol>
+</div>
+<p>模板“弹珠迷宫”里有弹珠、墙、会让关卡重来的黑洞，以及要到达的绿色圆圈。</p>
+<h2>第 4 步：对摇晃做出反应</h2>
+<div class="method">
+<ol><li>在 Blueprint 里添加事件 “摇晃手机”。</li><li>把它接到你想要的东西上：洗牌、掷骰子、让物体掉落……</li><li>摇一摇手机：需要<strong>两下短促有力的摇动</strong>。普通移动不够，而且两次摇晃之间会强制间隔一秒。</li></ol>
+</div>
+<p>模板“摇一摇掷骰子”每次摇晃都会把随机数 random(1, 6) 写进骰子的文字里。</p>
+<h2>把倾斜归零</h2>
+<p>零点就是游戏开始时手机的姿势。要重新设定（玩家换了姿势、新关卡），添加节点 “将倾斜归零”。</p>
+<ul><li><strong>屏幕不会旋转：</strong>游戏使用倾斜时，屏幕会保持开始时的方向，否则一倾斜就会翻转。</li><li><strong>没有传感器的设备：</strong>数值一直是 0，什么都不会动。</li></ul>
+
+<div class="nav">
+<a href="../zh/atelier-personnage.html">← 让你的角色动起来</a>
+<a href="../zh/interface-demarrage.html">下一篇： 图解启动界面 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>

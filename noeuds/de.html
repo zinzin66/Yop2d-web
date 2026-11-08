@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alle Yop2D-Knoten (236) | Referenz</title>
-<meta name="description" content="Vollständige Liste der 236 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
+<title>Alle Yop2D-Knoten (238) | Referenz</title>
+<meta name="description" content="Vollständige Liste der 238 visuellen Knoten von Yop2D, der 2D-Spiel-Engine ohne Code für Android: Aufgabe, Einstellungen, Ausgänge und ein Beispiel für jeden Knoten.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/de.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 236 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
+<p>Yop2D ist eine kostenlose 2D-Spiel-Engine ohne Code für Android. Die Logik eines Spiels baust du mit Knoten (visuellen Blöcken), die im Blueprint verbunden werden: Ereignisse starten eine Kette, danach folgen Aktionen und Bedingungen. Diese Seite beschreibt die 238 Knoten des Editors mit ihren Einstellungen (Eingänge) und Ausgängen.</p>
 <p><strong>Kategorien</strong></p>
 <nav class="sommaire"><a href="#c1-ereignisse">Ereignisse</a><a href="#c2-szene-hud">Szene &amp; HUD</a><a href="#c3-zeit">Zeit</a><a href="#c4-aussehen-objekte">Aussehen &amp; Objekte</a><a href="#c5-variablen-inventar">Variablen &amp; Inventar</a><a href="#c6-logik-bedingungen">Logik &amp; Bedingungen</a><a href="#c7-texte-dialoge">Texte &amp; Dialoge</a><a href="#c8-bewegung-ki">Bewegung &amp; KI</a><a href="#c9-raster-und-puzzles">Raster und Puzzles</a><a href="#c10-werte-grüne-kabel">Werte (grüne Kabel)</a><a href="#c11-übergänge">Übergänge</a><a href="#c12-animationen">Animationen</a><a href="#c13-audio">Audio</a><a href="#c14-geschichte-und-dialoge">Geschichte und Dialoge</a><a href="#c15-bildschirmfilter">Bildschirmfilter</a><a href="#c16-physik">Physik</a></nav>
 <h2 id="c1-ereignisse">Ereignisse</h2>
@@ -75,6 +75,10 @@
 <div class="fiche"><h3>Zurück-Taste gedrückt</h3>
 <p>Läuft, wenn der Spieler die Zurück-Taste seines Telefons drückt (Pfeil oder Wischgeste). Ideal, um ein Pausenmenü zu öffnen oder zum vorherigen Bildschirm zurückzukehren. Ohne diesen Knoten tut die Zurück-Taste im Spiel nichts.</p>
 <p class="exemple"><b>Beispiel:</b> Zurück → „Spiel pausieren“, dann ein Menü „Weiter / Beenden“ anzeigen.</p>
+</div>
+<div class="fiche"><h3>Handy geschüttelt</h3>
+<p>Benötigt Yop2D ab Version 1261 (die letzte Zahl der Versionsnummer, zum Beispiel 1.0.1261). Ist deine Version älter, aktualisiere Yop2D. Startet, wenn der Spieler sein Handy oder Tablet schüttelt. Ideal zum Mischen, Würfeln oder Umwerfen von Objekten. Es braucht zwei kurze, kräftige Stöße: eine einfache Bewegung reicht nicht.</p>
+<p class="exemple"><b>Beispiel:</b> Ein Würfel: „Handy geschüttelt“ → „Eigenschaft ändern“ für den Text des Würfels mit random(1, 6).</p>
 </div>
 <div class="fiche"><h3>Bei jeder neuen Szene</h3>
 <p>Startet jedes Mal, wenn eine neue Szene geöffnet wird. Gedacht für die „Globale Logik“ (die in allen Szenen läuft): zum Beispiel die gewählte Armee auf jeder Karte aufstellen. In einer normalen Szene reicht „Beim Start“.</p>
@@ -184,6 +188,10 @@
 <div class="schema"><b>Ausgang:</b> keiner (Ende des Skripts)</div>
 <p>Schließt das exportierte Spiel. Im Editor wird nichts geschlossen: nutze die Stopp-Taste.</p>
 <p class="exemple"><b>Beispiel:</b> eine Taste „Beenden“ im Hauptmenü.</p>
+</div>
+<div class="fiche"><h3>Neigung auf Null setzen</h3>
+<p>Benötigt Yop2D ab Version 1262 (die letzte Zahl der Versionsnummer, zum Beispiel 1.0.1262). Ist deine Version älter, aktualisiere Yop2D. Die Art, wie der Spieler das Handy gerade hält, wird zur „Null“ der Neigung: inclinaison.x und inclinaison.y sind 0, und mit „Neigen“ gesteuerte Objekte oder Murmeln bleiben ruhig. Praktisch, wenn der Spieler sich neu hinsetzt, oder zu Beginn eines Levels. Ohne diesen Knoten ist die Null die Handyhaltung beim Spielstart.</p>
+<p class="exemple"><b>Beispiel:</b> Ein Knopf „Neu ausrichten“ → dieser Knoten: Die Murmel beruhigt sich, auch wenn der Spieler seine Haltung geändert hat.</p>
 </div>
 <div class="fiche"><h3>Kurze Nachricht unten am Bildschirm</h3>
 <div class="schema"><b>Eingang:</b> Nachricht</div>

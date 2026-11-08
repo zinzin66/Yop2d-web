@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スマホの傾きと振る動作の使い方 | Yop2D ガイド</title>
+<meta name="description" content="Yop2D ではスマホでゲームを操作できます。傾きを式で読み取り、傾けてキャラを動かし、ビー玉を転がし、振る動作に反応させます。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/capteurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/capteurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/capteurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/capteurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/capteurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/capteurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/capteurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/capteurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/capteurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/capteurs.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/capteurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "スマホの傾きと振る動作の使い方",
+ "description": "Yop2D ではスマホでゲームを操作できます。傾きを式で読み取り、傾けてキャラを動かし、ビー玉を転がし、振る動作に反応させます。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "傾きを読み取る",
+   "text": "左パネルの「スマホを傾ける」グループ。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "キャラを動かす",
+   "text": "⚙ ふるまい → そうさ → 傾ける。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ビー玉を転がす",
+   "text": "リアルな物理 → 「ビー玉：スマホを傾けると転がる」のチェック。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "振る動作に反応する",
+   "text": "「スマホを振ったとき」イベント。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>スマホの傾きと振る動作の使い方</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../capteurs.html" hreflang="fr">Français</a> · <a href="../en/capteurs.html" hreflang="en">English</a> · <a href="../es/capteurs.html" hreflang="es">Español</a> · <a href="../de/capteurs.html" hreflang="de">Deutsch</a> · <a href="../it/capteurs.html" hreflang="it">Italiano</a> · <a href="../pt/capteurs.html" hreflang="pt">Português</a> · <a href="../ru/capteurs.html" hreflang="ru">Русский</a> · <a href="../zh/capteurs.html" hreflang="zh">中文</a> · <strong>日本語</strong> · <a href="../ar/capteurs.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ Yop2D のバージョン 1262 以降が必要です（バージョン番号の最後の数字。例：1.0.1262）。お使いのバージョンが古い場合は、Yop2D を更新してください。</p>
+<p>スマホは、傾けたり振ったりしたことがわかります。Yop2D なら<strong>コードを書かずに</strong>使えます。傾けると歩くキャラ、迷路を転がるビー玉、振ると出るサイコロなど。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>エディターで開いているプロジェクト。</li><li>スマホまたはタブレット（センサーは端末のものです）。</li></ul>
+</div>
+<h2>ステップ 1：式で傾きを読み取る</h2>
+<div class="method">
+<ol><li>式の入力欄があるノード（例：「プロパティを変更」）を開きます。</li><li>左パネルで「<strong>スマホを傾ける</strong>」グループを開きます。</li><li><strong>inclinaison.x</strong>（左右）か <strong>inclinaison.y</strong>（画面の上下）をタッチ。式が自動で書かれます。</li></ol>
+<div class="tip">👉 値は -1 から 1 までです。<strong>0</strong> はゲーム開始時の持ち方、<strong>1</strong> はいっぱいまで傾けた状態（約 30°）で、x は右、y は画面の下向きです。縦向きでも横向きでも動きます。</div>
+</div>
+<h2>ステップ 2：傾けると歩くキャラ</h2>
+<div class="method">
+<ol><li>キャラを選び、インスペクターで <strong>オブジェクトのふるまい</strong> をタッチします。</li><li>プラットフォーム型か、上から見る型のキャラを選びます。</li><li><strong>そうさ</strong> の行で <strong>傾ける</strong> をタッチします。</li><li><strong>感度</strong> を選びます（やさしい・ふつう・強い）。</li><li>プラットフォーム型にはジャンプボタンを足します。傾けてもジャンプはしません。</li></ol>
+</div>
+<p>テンプレート「傾けて動く」で、これがすべて用意されています。</p>
+<h2>ステップ 3：転がるビー玉</h2>
+<div class="method">
+<ol><li>丸いオブジェクト（ビー玉の画像か色つきの丸）を作ります。</li><li><strong>オブジェクトのふるまい</strong> をタッチして、<strong>リアルな物理</strong> を選びます。</li><li>「<strong>ビー玉：スマホを傾けると転がる</strong>」にチェック。丸い形・はずみ・重力は Yop2D が自動で整えます。</li><li>壁を置きます。同じふるまいのオブジェクトを<strong>固定</strong>にします。</li><li>ビー玉が速すぎる・遅すぎるときは <strong>感度</strong> を変えます。</li></ol>
+</div>
+<p>テンプレート「ビー玉の迷路」には、ビー玉・壁・やり直しになる黒い穴・めざす緑の丸が入っています。</p>
+<h2>ステップ 4：振る動作に反応する</h2>
+<div class="method">
+<ol><li>Blueprint にイベント 「スマホを振ったとき」 を追加します。</li><li>好きなものにつなぎます：シャッフル、サイコロ、物を落とすなど。</li><li>スマホを振ります。<strong>短く鋭い動きが2回</strong>必要です。ふつうに動かすだけでは反応せず、2回の振りの間には1秒の休みが入ります。</li></ol>
+</div>
+<p>テンプレート「振ってサイコロを振る」は、振るたびにサイコロの文字へランダムな数 random(1, 6) を書き込みます。</p>
+<h2>傾きをゼロに戻す</h2>
+<p>ゼロは、ゲーム開始時のスマホの姿勢です。やり直したいとき（持ち方が変わった、新しいステージ）は、ノード 「傾きをゼロに戻す」 を足します。</p>
+<ul><li><strong>画面は回りません：</strong>傾きを使うゲームでは、傾けて画面がひっくり返らないよう、開始時の向きのままになります。</li><li><strong>センサーのない端末：</strong>値はずっと 0 で、何も動きません。</li></ul>
+
+<div class="nav">
+<a href="../ja/atelier-personnage.html">← キャラクターを動かそう</a>
+<a href="../ja/interface-demarrage.html">次のガイド： 画像で見るスタート画面 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

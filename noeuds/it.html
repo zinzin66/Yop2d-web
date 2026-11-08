@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tutti i nodi di Yop2D (236) | Riferimento</title>
-<meta name="description" content="Elenco completo dei 236 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
+<title>Tutti i nodi di Yop2D (238) | Riferimento</title>
+<meta name="description" content="Elenco completo dei 238 nodi visivi di Yop2D, motore di gioco 2D senza codice per Android: ruolo, impostazioni, uscite e un esempio per ogni nodo.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/it.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <a href="en.html" hreflang="en">English</a> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 236 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
+<p>Yop2D è un motore di gioco 2D gratuito e senza codice per Android. La logica di un gioco si costruisce con nodi (blocchi visivi) collegati nel Blueprint: gli eventi avviano una catena, poi seguono azioni e condizioni. Questa pagina descrive i 238 nodi dell'editor, con le loro impostazioni (ingressi) e uscite.</p>
 <p><strong>Categorie</strong></p>
 <nav class="sommaire"><a href="#c1-eventi">Eventi</a><a href="#c2-scena-e-hud">Scena e HUD</a><a href="#c3-tempo">Tempo</a><a href="#c4-aspetto-e-oggetti">Aspetto e Oggetti</a><a href="#c5-variabili-e-inventario">Variabili e Inventario</a><a href="#c6-logica-e-condizioni">Logica e Condizioni</a><a href="#c7-testi-e-dialoghi">Testi e Dialoghi</a><a href="#c8-movimenti-e-ia">Movimenti e IA</a><a href="#c9-griglie-e-puzzle">Griglie e puzzle</a><a href="#c10-valori-fili-verdi">Valori (fili verdi)</a><a href="#c11-transizioni">Transizioni</a><a href="#c12-animazioni">Animazioni</a><a href="#c13-audio">Audio</a><a href="#c14-storia-e-dialoghi">Storia e dialoghi</a><a href="#c15-filtri-dello-schermo">Filtri dello schermo</a><a href="#c16-fisica">Fisica</a></nav>
 <h2 id="c1-eventi">Eventi</h2>
@@ -75,6 +75,10 @@
 <div class="fiche"><h3>Tasto indietro premuto</h3>
 <p>Parte quando il giocatore preme il tasto «indietro» del telefono (freccia o gesto). Ideale per aprire un menu di pausa o tornare alla schermata precedente. Senza questo nodo, il tasto indietro non fa nulla durante il gioco.</p>
 <p class="exemple"><b>Esempio:</b> indietro → «Metti in pausa il gioco», poi mostrare un menu «Riprendi / Esci».</p>
+</div>
+<div class="fiche"><h3>Telefono scosso</h3>
+<p>Richiede la versione 1261 di Yop2D o successiva (l'ultimo numero della versione, per esempio 1.0.1261). Se la tua versione è più vecchia, aggiorna Yop2D. Parte quando il giocatore scuote il telefono o il tablet. Ideale per mescolare, tirare un dado o far cadere oggetti. Servono due scosse rapide e secche: un semplice movimento non basta.</p>
+<p class="exemple"><b>Esempio:</b> Un dado: «Telefono scosso» → «Modifica una proprietà» del testo del dado con random(1, 6).</p>
 </div>
 <div class="fiche"><h3>A ogni nuova scena</h3>
 <p>Parte ogni volta che si apre una nuova scena. Pensato per la «Logica globale» (che funziona in tutte le scene): per esempio mettere l'esercito scelto su ogni mappa. In una scena normale basta «All'avvio».</p>
@@ -184,6 +188,10 @@
 <div class="schema"><b>Uscita:</b> nessuna (fine dello script)</div>
 <p>Chiude il gioco esportato. Nell'editor non chiude nulla: usa il pulsante stop.</p>
 <p class="exemple"><b>Esempio:</b> un pulsante «Esci» nel menu principale.</p>
+</div>
+<div class="fiche"><h3>Azzerare l'inclinazione</h3>
+<p>Richiede la versione 1262 di Yop2D o successiva (l'ultimo numero della versione, per esempio 1.0.1262). Se la tua versione è più vecchia, aggiorna Yop2D. Il modo in cui il giocatore tiene il telefono in questo momento diventa lo «zero» dell'inclinazione: inclinaison.x e inclinaison.y valgono 0, e gli oggetti controllati con «Inclinare» o le biglie restano fermi. Utile quando il giocatore si sistema o a inizio livello. Senza questo nodo, lo zero è la posizione del telefono all'avvio del gioco.</p>
+<p class="exemple"><b>Esempio:</b> Un pulsante «Ricentra» → questo nodo: la biglia si calma, anche se il giocatore ha cambiato posizione.</p>
 </div>
 <div class="fiche"><h3>Messaggio breve in fondo allo schermo</h3>
 <div class="schema"><b>Ingresso:</b> Messaggio</div>

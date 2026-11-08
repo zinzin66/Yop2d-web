@@ -26,7 +26,7 @@ import sys
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://zinzin66.github.io/Yop2d-web/"
-GUIDES = ["plateforme", "deplacer-personnage", "sauter", "comportements", "pieces-score", "vie-game-over", "casse-briques", "pong", "tower-defense", "jeu-tactique", "niveau-suivant", "particules-effets", "lumieres", "histoire-choix", "prefabs", "musique", "atelier-personnage", "interface-demarrage", "interface-editeur", "interface-assets", "interface-bibliotheque", "interface-comportement", "interface-mouvement", "interface-blueprint", "aide-ia"]
+GUIDES = ["plateforme", "deplacer-personnage", "sauter", "comportements", "pieces-score", "vie-game-over", "casse-briques", "pong", "tower-defense", "jeu-tactique", "niveau-suivant", "particules-effets", "lumieres", "histoire-choix", "prefabs", "musique", "atelier-personnage", "capteurs", "interface-demarrage", "interface-editeur", "interface-assets", "interface-bibliotheque", "interface-comportement", "interface-mouvement", "interface-blueprint", "aide-ia"]
 
 spec = importlib.util.spec_from_file_location("gen", os.path.join(RACINE, "outils", "generer_aide_noeuds.py"))
 gen = importlib.util.module_from_spec(spec)
@@ -115,6 +115,14 @@ TOUS = {
            "أدلة خطوة بخطوة لصنع لعبتك الأولى بـ Yop2D دون كتابة شيفرة. اتبعها بالترتيب: يبني كل دليل على ما تعلمته في السابق.",
            "اقرأ الدليل", "نزّل Yop2D"),
 }
+
+
+def bandeau_version(src, langue):
+    """Bandeau « Demande la version N ou plus récente » si le guide porte "depuis": N (build du premier build qui contient la fonction)."""
+    depuis = src.get("depuis")
+    if not depuis:
+        return ""
+    return f'<p class="depuis">ℹ️ {html.escape(gen.NOTICE[langue].format(v=depuis))}</p>\n'
 
 
 def chemin_tous(langue):
@@ -286,7 +294,7 @@ def page(guide, langue, src, sources, r):
 <p class="langues">{langues_liens}</p>
 </header>
 <main>
-{r.blocs(src["blocs"])}
+{bandeau_version(src, langue)}{r.blocs(src["blocs"])}
 
 <div class="nav">
 {chr(10).join(nav)}

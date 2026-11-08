@@ -1,0 +1,144 @@
+{
+  "depuis": 1262,
+  "titre_page": "Wie nutzt man Neigung und Schütteln des Handys? | Yop2D-Anleitung",
+  "description": "In Yop2D kann dein Handy das Spiel steuern: Neigung in einer Formel lesen, eine Figur durch Neigen bewegen, eine Murmel rollen lassen und auf Schütteln reagieren.",
+  "h1": "Wie nutzt man Neigung und Schütteln des Handys?",
+  "carte": [
+    "Neigen und schütteln",
+    "Bewege eine Figur, lass eine Murmel rollen oder würfle durch Schütteln."
+  ],
+  "etapes": [
+    [
+      "Neigung lesen",
+      "Gruppe „Handy neigen“ im linken Bereich."
+    ],
+    [
+      "Eine Figur bewegen",
+      "⚙ Verhalten → Steuerung → Neigen."
+    ],
+    [
+      "Eine Murmel rollen lassen",
+      "Realistische Physik → Kästchen „Murmel: rollt, wenn du das Handy neigst“."
+    ],
+    [
+      "Auf Schütteln reagieren",
+      "Ereignis „Handy geschüttelt“."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Dein Handy merkt, wenn du es neigst oder schüttelst. Yop2D lässt dich das **ohne Code** nutzen: eine Figur, die beim Neigen läuft, eine Murmel, die durch ein Labyrinth rollt, ein Würfel, der beim Schütteln fällt."
+    ],
+    [
+      "besoin",
+      [
+        "ein im Editor geöffnetes Projekt;",
+        "ein Handy oder Tablet: der Sensor gehört zum Gerät."
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 1: Neigung in einer Formel lesen"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Öffne einen Knoten mit einem Formelfeld, zum Beispiel [[modifier_propriete]].",
+            "Öffne im linken Bereich die Gruppe **Handy neigen**.",
+            "Tippe auf **inclinaison.x** (links-rechts) oder **inclinaison.y** (oben-unten auf dem Bildschirm): Die Formel schreibt sich selbst."
+          ]
+        ],
+        [
+          "tip",
+          "Die Werte gehen von -1 bis 1. **0** = so, wie du das Handy beim Spielstart gehalten hast; **1** = voll geneigt (etwa 30°) nach rechts bei x, zum unteren Bildschirmrand bei y. Es funktioniert im Hoch- und Querformat."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Schritt 2: eine Figur, die beim Neigen läuft"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Wähle deine Figur und tippe im Inspektor auf **Verhalten des Objekts**.",
+            "Wähle eine Plattform-Figur oder eine Figur in der Draufsicht.",
+            "Tippe in der Zeile **Steuerung** auf **Neigen**.",
+            "Stelle die **Empfindlichkeit** ein: sanft, normal oder stark.",
+            "Bei einer Plattform-Figur brauchst du einen Sprungknopf: Neigen lässt sie nicht springen."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "Die Vorlage „Durch Neigen bewegen“ zeigt das alles fertig."
+    ],
+    [
+      "h2",
+      "Schritt 3: eine rollende Murmel"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Erstelle ein rundes Objekt (ein Murmelbild oder einen farbigen Kreis).",
+            "Tippe auf **Verhalten des Objekts**, dann auf **Realistische Physik**.",
+            "Hake **Murmel: rollt, wenn du das Handy neigst** an. Yop2D stellt runde Form, Abprallen und Schwerkraft selbst ein.",
+            "Setze Wände: Objekte mit demselben Verhalten, auf **Fest** gestellt.",
+            "Ist die Murmel zu schnell oder zu langsam, ändere die **Empfindlichkeit**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "Die Vorlage „Murmel-Labyrinth“ enthält eine Murmel, Wände, schwarze Löcher, die neu starten, und einen grünen Kreis als Ziel."
+    ],
+    [
+      "h2",
+      "Schritt 4: auf Schütteln reagieren"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Füge im Blueprint das Ereignis [[lang:noeud_event_secousse]] hinzu.",
+            "Verbinde es mit dem, was du willst: mischen, würfeln, Objekte umwerfen…",
+            "Schüttle dein Handy: Es braucht **zwei kurze, kräftige Stöße**. Eine einfache Bewegung reicht nicht, und zwischen zwei Schüttelbewegungen liegt eine Sekunde Pause."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "Die Vorlage „Schütteln zum Würfeln“ schreibt bei jedem Schütteln eine Zufallszahl, random(1, 6), in den Text eines Würfels."
+    ],
+    [
+      "h2",
+      "Neigung auf Null setzen"
+    ],
+    [
+      "p",
+      "Die Null ist die Handyhaltung beim Spielstart. Um sie neu zu setzen (der Spieler ändert die Haltung, neues Level), füge den Knoten [[recalibrer_inclinaison]] hinzu."
+    ],
+    [
+      "ul",
+      [
+        "**Der Bildschirm dreht sich nicht:** Nutzt ein Spiel die Neigung, bleibt der Bildschirm in der Startlage, sonst würde er beim Neigen kippen.",
+        "**Gerät ohne Sensor:** Der Wert bleibt 0 und nichts bewegt sich."
+      ]
+    ]
+  ]
+}

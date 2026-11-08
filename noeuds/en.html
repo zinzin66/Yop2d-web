@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Yop2D nodes (236) | Reference</title>
-<meta name="description" content="Complete list of the 236 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
+<title>All Yop2D nodes (238) | Reference</title>
+<meta name="description" content="Complete list of the 238 visual nodes of Yop2D, the no-code 2D game engine for Android: role, settings, outputs and an example for each node.">
 <link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
 <link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/noeuds/fr.html">
 <link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/noeuds/en.html">
@@ -36,7 +36,7 @@
 <p class="langues"><a href="fr.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="es.html" hreflang="es">Español</a> · <a href="de.html" hreflang="de">Deutsch</a> · <a href="it.html" hreflang="it">Italiano</a> · <a href="pt.html" hreflang="pt">Português</a> · <a href="ru.html" hreflang="ru">Русский</a> · <a href="zh.html" hreflang="zh">中文</a> · <a href="ja.html" hreflang="ja">日本語</a></p>
 </header>
 <main>
-<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 236 nodes of the editor, with their settings (inputs) and outputs.</p>
+<p>Yop2D is a free, no-code 2D game engine for Android. A game's logic is built with nodes (visual blocks) linked together in the Blueprint: events start a chain, then actions and conditions follow. This page describes the 238 nodes of the editor, with their settings (inputs) and outputs.</p>
 <p><strong>Categories</strong></p>
 <nav class="sommaire"><a href="#c1-events">Events</a><a href="#c2-scene-hud">Scene &amp; HUD</a><a href="#c3-time">Time</a><a href="#c4-appearance-objects">Appearance &amp; Objects</a><a href="#c5-variables-inventory">Variables &amp; Inventory</a><a href="#c6-logic-conditions">Logic &amp; Conditions</a><a href="#c7-texts-dialogues">Texts &amp; Dialogues</a><a href="#c8-movements-ai">Movements &amp; AI</a><a href="#c9-grids-and-puzzles">Grids and puzzles</a><a href="#c10-values-green-wires">Values (green wires)</a><a href="#c11-transitions">Transitions</a><a href="#c12-animations">Animations</a><a href="#c13-audio">Audio</a><a href="#c14-story-and-dialogues">Story and dialogues</a><a href="#c15-screen-filters">Screen filters</a><a href="#c16-physics">Physics</a></nav>
 <h2 id="c1-events">Events</h2>
@@ -75,6 +75,10 @@
 <div class="fiche"><h3>Back button pressed</h3>
 <p>Runs when the player presses the Back button of their phone (arrow or swipe gesture). Great for opening a pause menu or going back to the previous screen. Without this node, the Back button does nothing during the game.</p>
 <p class="exemple"><b>Example:</b> Back → “Pause the game”, then show a “Resume / Quit” menu.</p>
+</div>
+<div class="fiche"><h3>Phone shaken</h3>
+<p>Needs Yop2D version 1261 or newer (the last number of the version, for example 1.0.1261). If your version is older, update Yop2D. Runs when the player shakes their phone or tablet. Great for shuffling, rolling a die or knocking objects down. It takes two quick, sharp jolts: a simple move is not enough.</p>
+<p class="exemple"><b>Example:</b> A die: “Phone shaken” → “Set a property” on the die's text with random(1, 6).</p>
 </div>
 <div class="fiche"><h3>On every new scene</h3>
 <p>Runs every time a new scene opens. Made for the "Global logic" (which runs in every scene): for example, placing the chosen army on each map. In an ordinary scene, "On start" is enough.</p>
@@ -184,6 +188,10 @@
 <div class="schema"><b>Output:</b> none (end of script)</div>
 <p>Closes the exported game. In the editor, nothing closes: use the stop button.</p>
 <p class="exemple"><b>Example:</b> a “Quit” button in the main menu.</p>
+</div>
+<div class="fiche"><h3>Reset the tilt to zero</h3>
+<p>Needs Yop2D version 1262 or newer (the last number of the version, for example 1.0.1262). If your version is older, update Yop2D. The way the player holds their phone right now becomes the “zero” of the tilt: inclinaison.x and inclinaison.y are 0, and objects driven by “Tilt” or marbles stay still. Handy when the player settles into a new position, or at the start of a level. Without this node, the zero is the phone position when the game starts.</p>
+<p class="exemple"><b>Example:</b> A “Recenter” button → this node: the marble calms down, even if the player changed position.</p>
 </div>
 <div class="fiche"><h3>Small message at the bottom of the screen</h3>
 <div class="schema"><b>Input:</b> Message</div>
