@@ -156,26 +156,36 @@ def schema(langue, cibles, reglages, sorties, tr):
     return ARRIVEE.join(morceaux)
 
 
+# « Version minimale » (08/11/2026, idée de l'utilisateur) : on publie la documentation d'une fonction dès qu'elle existe, avec le
+# numéro du PREMIER build qui la contient. Rien à modifier à la sortie : un utilisateur dont la version est plus récente voit
+# que la sienne est supérieure. {v} = dernier nombre de la version (1.0.1262 -> 1262).
 NOTICE = {
-    "fr": "Pas encore dans la version Google Play {v} : disponible dans la version de test (Discord), il arrive avec la prochaine mise à jour.",
-    "en": "Not in the Google Play version {v} yet: available in the test version (Discord), coming with the next update.",
-    "es": "Aún no está en la versión de Google Play {v}: disponible en la versión de prueba (Discord), llegará con la próxima actualización.",
-    "de": "Noch nicht in der Google-Play-Version {v}: in der Testversion (Discord) verfügbar, kommt mit dem nächsten Update.",
-    "it": "Non ancora nella versione Google Play {v}: disponibile nella versione di prova (Discord), arriva con il prossimo aggiornamento.",
-    "pt": "Ainda não está na versão do Google Play {v}: disponível na versão de teste (Discord), chega na próxima atualização.",
-    "ru": "Пока нет в версии Google Play {v}: доступно в тестовой версии (Discord), появится в следующем обновлении.",
-    "zh": "Google Play 版本 {v} 中还没有：测试版（Discord）可用，将随下次更新推出。",
-    "ja": "Google Play 版 {v} にはまだありません。テスト版（Discord）で使えて、次のアップデートで届きます。",
+    "fr": "Demande la version {v} de Yop2D ou plus récente (le dernier nombre du numéro de version, par exemple 1.0.{v}). Si ta version est plus ancienne, mets Yop2D à jour.",
+    "en": "Needs Yop2D version {v} or newer (the last number of the version, for example 1.0.{v}). If your version is older, update Yop2D.",
+    "es": "Requiere la versión {v} de Yop2D o una más reciente (el último número de la versión, por ejemplo 1.0.{v}). Si tu versión es anterior, actualiza Yop2D.",
+    "de": "Benötigt Yop2D ab Version {v} (die letzte Zahl der Versionsnummer, zum Beispiel 1.0.{v}). Ist deine Version älter, aktualisiere Yop2D.",
+    "it": "Richiede la versione {v} di Yop2D o successiva (l'ultimo numero della versione, per esempio 1.0.{v}). Se la tua versione è più vecchia, aggiorna Yop2D.",
+    "pt": "Exige a versão {v} do Yop2D ou mais recente (o último número da versão, por exemplo 1.0.{v}). Se a sua versão for mais antiga, atualize o Yop2D.",
+    "ru": "Требуется Yop2D версии {v} или новее (последнее число номера версии, например 1.0.{v}). Если у тебя версия старее, обнови Yop2D.",
+    "zh": "需要 Yop2D {v} 或更新的版本（版本号的最后一个数字，例如 1.0.{v}）。如果你的版本更旧，请更新 Yop2D。",
+    "ja": "Yop2D のバージョン {v} 以降が必要です（バージョン番号の最後の数字。例：1.0.{v}）。お使いのバージョンが古い場合は、Yop2D を更新してください。",
+    "ar": "يتطلب Yop2D بالإصدار {v} أو أحدث (الرقم الأخير من رقم الإصدار، مثلاً 1.0.{v}). إن كان إصدارك أقدم فحدّث Yop2D.",
 }
 
 
 def lire_nouveautes():
+    """Renvoie (build par défaut, {nom anglais du nœud: build minimal}).
+    nouveautes.json : "noms_en" = liste (tous au même build "depuis") ou dictionnaire {nom: build}."""
     chemin = os.path.join(RACINE, "aide", "source", "nouveautes.json")
     if not os.path.exists(chemin):
-        return "", set()
+        return "", {}
     with open(chemin, encoding="utf-8") as f:
         d = json.load(f)
-    return d.get("depuis", ""), set(d.get("noms_en", []))
+    depuis = str(d.get("depuis", ""))
+    noms = d.get("noms_en", {})
+    if isinstance(noms, list):
+        noms = {n: depuis for n in noms}
+    return depuis, {n: str(v) for n, v in noms.items()}
 
 
 def main():
@@ -245,8 +255,9 @@ def main():
                     if len(d) > 1 and d[1]:
                         entree["exemple"] = remplir(d[1], langue_texte, tr, noms_noeuds)
                 if nouveaux_en and tr.get(n["cle_nom"], "en") in nouveaux_en:
-                    entree["nouveau"] = depuis
-                    entree["role"] = NOTICE[l].format(v=depuis) + (" " + entree["role"] if entree.get("role") else "")
+                    version = nouveaux_en[tr.get(n["cle_nom"], "en")]
+                    entree["nouveau"] = version
+                    entree["role"] = NOTICE[l].format(v=version) + (" " + entree["role"] if entree.get("role") else "")
                 liste.append(entree)
             slug = re.sub(r"[^a-z0-9]+", "-", cat.replace("cat_", "")).strip("-")
             with open(os.path.join(dossier, f"{i:02d}-{slug}.json"), "w", encoding="utf-8") as f:

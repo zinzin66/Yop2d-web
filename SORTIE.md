@@ -35,3 +35,12 @@
 - [ ] Page itch.io et devlog ; annonce Discord (anglais) et Mastodon.
 - [ ] Console Google Play, 2 à 3 jours après : plantages, puis relever le déploiement à 100 %.
 - [ ] Tableau de bord PostHog : le construire quand les vrais événements arrivent (demander la recette).
+
+## Règle « version minimale » (08/11/2026, idée de l'utilisateur) : plus d'attente de la sortie pour publier une documentation
+- On PUBLIE tout de suite le guide, la carte de l'accueil et la description du nœud d'une fonction qui existe déjà dans un build de test, avec le **numéro du PREMIER build qui la contient** (dernier nombre de la version : build 1262 = version 1.0.1262).
+- Guide : `"depuis": 1262` dans `guides/source/<guide>/<langue>.json` (les 10 langues) → bandeau « Demande la version 1262 de Yop2D ou plus récente » (`gen.NOTICE`, `bandeau_version` de generer_guides.py).
+- Nœud : `aide/source/nouveautes.json`, `"noms_en": {"nom anglais du nœud": build}` → même phrase au début de sa description (aide, pages `noeuds/`, llms.txt « [from version N] »).
+- Accueil : une phrase « À partir de la version N » en fin de carte.
+- **Rien à modifier le jour de la sortie** : un utilisateur dont la version est plus récente voit que la sienne est supérieure. Ne PAS vider `nouveautes.json`.
+- Le numéro de build d'un test = `run_number` de l'action « Build Yop2D » (page Actions du dépôt privé), ou `versionName` dans l'APK de test.
+- Premiers cas : capteurs (inclinaison 1255, secousse 1261, « Remettre l'inclinaison à zéro » 1262 → guide et carte « à partir de 1262 »).

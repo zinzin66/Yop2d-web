@@ -117,6 +117,14 @@ TOUS = {
 }
 
 
+def bandeau_version(src, langue):
+    """Bandeau « Demande la version N ou plus récente » si le guide porte "depuis": N (build du premier build qui contient la fonction)."""
+    depuis = src.get("depuis")
+    if not depuis:
+        return ""
+    return f'<p class="depuis">ℹ️ {html.escape(gen.NOTICE[langue].format(v=depuis))}</p>\n'
+
+
 def chemin_tous(langue):
     return "guides/index.html" if langue == "fr" else f"guides/{langue}/index.html"
 
@@ -286,7 +294,7 @@ def page(guide, langue, src, sources, r):
 <p class="langues">{langues_liens}</p>
 </header>
 <main>
-{r.blocs(src["blocs"])}
+{bandeau_version(src, langue)}{r.blocs(src["blocs"])}
 
 <div class="nav">
 {chr(10).join(nav)}
