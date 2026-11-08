@@ -15,6 +15,7 @@
 <link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/ru/">
 <link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/zh/">
 <link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/ja/">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/ar/">
 <link rel="alternate" hreflang="x-default" href="https://zinzin66.github.io/Yop2d-web/">
 <link rel="icon" href="../logo_yop2d.png">
 <link rel="me" href="https://mastodon.social/@Yop2d">
@@ -53,7 +54,8 @@
   "pt",
   "ru",
   "zh",
-  "ja"
+  "ja",
+  "ar"
  ],
  "image": "https://zinzin66.github.io/Yop2d-web/interface_editeur.png",
  "description": "Yop2D は Android 用の無料ノーコード 2D ゲームエンジンです。タブレットやスマホで 236 個のビジュアルノード、物理演算、タイルマップ、アニメーションを使ってゲームを作り、オフラインで APK を書き出せます。広告なし、透かしなし。",
@@ -478,6 +480,13 @@ details.faq-item { background: white; padding: 1rem 1.25rem; border-radius: 8px;
 details.faq-item summary { font-weight: bold; font-size: 1.05rem; cursor: pointer; color: var(--secondary-color); list-style: none; }
 details.faq-item summary::-webkit-details-marker { display: none; }
 details.faq-item summary::before { content: '➕'; margin-right: 0.6rem; font-size: 0.85rem; opacity: 0.7; }
+html[dir="rtl"] .ia-box, html[dir="rtl"] .ia-box h2, html[dir="rtl"] .install-note, html[dir="rtl"] .showcase p, html[dir="rtl"] th, html[dir="rtl"] td { text-align: right; }
+html[dir="rtl"] .install-note, html[dir="rtl"] details.faq-item { border-left: 0; border-right: 4px solid var(--accent-color); }
+html[dir="rtl"] details.faq-item { border-right-color: var(--primary-color); }
+html[dir="rtl"] details.faq-item summary::before { margin-right: 0; margin-left: 0.6rem; }
+html[dir="rtl"] .deux ul { padding-left: 0; padding-right: 1.2rem; }
+html[dir="rtl"] .bloc[style*="border-left"] { border-left: 0 !important; border-right: 6px solid var(--accent-color); }
+html[dir="rtl"] code, html[dir="rtl"] .ia-box code { direction: ltr; unicode-bidi: embed; }
 details.faq-item[open] summary::before { content: '➖'; }
 details.faq-item p { margin: 0.75rem 0 0; }
 details.faq-item a { color: var(--primary-color); }
@@ -506,7 +515,7 @@ footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-<nav class="lang-bar" aria-label="言語">🌍 <a href="../index.html" hreflang="en" lang="en">English</a> <a href="../fr/" hreflang="fr" lang="fr">Français</a> <a href="../es/" hreflang="es" lang="es">Español</a> <a href="../de/" hreflang="de" lang="de">Deutsch</a> <a href="../it/" hreflang="it" lang="it">Italiano</a> <a href="../pt/" hreflang="pt" lang="pt">Português</a> <a href="../ru/" hreflang="ru" lang="ru">Русский</a> <a href="../zh/" hreflang="zh" lang="zh">中文</a> <strong>日本語</strong></nav>
+<nav class="lang-bar" aria-label="言語">🌍 <a href="../index.html" hreflang="en" lang="en">English</a> <a href="../fr/" hreflang="fr" lang="fr">Français</a> <a href="../es/" hreflang="es" lang="es">Español</a> <a href="../de/" hreflang="de" lang="de">Deutsch</a> <a href="../it/" hreflang="it" lang="it">Italiano</a> <a href="../pt/" hreflang="pt" lang="pt">Português</a> <a href="../ru/" hreflang="ru" lang="ru">Русский</a> <a href="../zh/" hreflang="zh" lang="zh">中文</a> <strong>日本語</strong> <a href="../ar/" hreflang="ar" lang="ar">العربية</a></nav>
 <div class="lang-suggest" id="lang-suggest"></div>
 <header>
 <img src="../logo_yop2d.png" alt="Yop2D のロゴ" class="logo" width="120" height="120">
@@ -1253,9 +1262,9 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <script>
 (function () {
   var CLE = 'yop2d-langue';
-  var LANGUES = ["en", "fr", "es", "de", "it", "pt", "ru", "zh", "ja"];
+  var LANGUES = ["en", "fr", "es", "de", "it", "pt", "ru", "zh", "ja", "ar"];
   var ICI = 'ja';
-  var SUGGESTIONS = {"fr": "Ce site existe en français", "es": "Este sitio está disponible en español", "de": "Diese Seite gibt es auch auf Deutsch", "it": "Questo sito è disponibile in italiano", "pt": "Este site está disponível em português", "ru": "Этот сайт есть на русском языке", "zh": "本网站提供中文版", "ja": "このサイトは日本語でもご覧いただけます"};
+  var SUGGESTIONS = {"fr": "Ce site existe en français", "es": "Este sitio está disponible en español", "de": "Diese Seite gibt es auch auf Deutsch", "it": "Questo sito è disponibile in italiano", "pt": "Este site está disponível em português", "ru": "Этот сайт есть на русском языке", "zh": "本网站提供中文版", "ja": "このサイトは日本語でもご覧いただけます", "ar": "هذا الموقع متوفر بالعربية"};
   function lire() { try { return localStorage.getItem(CLE); } catch (e) { return null; } }
   function ecrire(l) { try { localStorage.setItem(CLE, l); } catch (e) {} }
   document.querySelectorAll('.lang-bar a[hreflang]').forEach(function (a) {

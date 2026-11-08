@@ -31,10 +31,14 @@ GUIDES = ["plateforme", "deplacer-personnage", "sauter", "comportements", "piece
 spec = importlib.util.spec_from_file_location("gen", os.path.join(RACINE, "outils", "generer_aide_noeuds.py"))
 gen = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(gen)
+# Arabe (bêta, 08/11/2026) : ajouté ici seulement, les pages des nœuds restent en anglais pour l'arabe.
+gen.LANGUES.append("ar")
+gen.GUILLEMETS["ar"] = ("«", "»")
 LANGUES = gen.LANGUES
+RTL = ["ar"]
 
 NOMS_LANGUES = {"fr": "Français", "en": "English", "es": "Español", "de": "Deutsch", "it": "Italiano",
-                "pt": "Português", "ru": "Русский", "zh": "中文", "ja": "日本語"}
+                "pt": "Português", "ru": "Русский", "zh": "中文", "ja": "日本語", "ar": "العربية"}
 UI = {
     "fr": dict(noeuds="Référence des nœuds", sous_titre="Guide débutant · sans code", besoin="Il te faut :", precedent="←", suivant="Guide suivant :",
                tous="Tous les guides", pied="Yop2D, moteur de jeu 2D gratuit et sans code pour Android", site="Site officiel",
@@ -63,6 +67,9 @@ UI = {
     "ja": dict(noeuds="ノードリファレンス", sous_titre="初心者ガイド · コード不要", besoin="用意するもの：", precedent="←", suivant="次のガイド：",
                tous="すべてのガイド", pied="Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン", site="公式サイト",
                outil="Yop2D（Android 向けのコード不要 2D ゲームエンジン）"),
+    "ar": dict(noeuds="مرجع العقد", sous_titre="دليل للمبتدئين · بلا برمجة", besoin="ما تحتاجه:", precedent="→", suivant="الدليل التالي:",
+               tous="كل الأدلة", pied="Yop2D، محرك ألعاب ثنائية الأبعاد مجاني وبلا برمجة لأندرويد", site="الموقع الرسمي",
+               outil="Yop2D (محرك ألعاب ثنائية الأبعاد بلا برمجة لأندرويد)"),
 }
 
 # Page « Tous les guides » : titre (balise title), introduction, bouton de lecture, téléchargement
@@ -103,6 +110,10 @@ TOUS = {
            "Yop2D で、Android のタブレットやスマホを使ってコードなしで初めての 2D ゲームを作るためのステップごとのガイド：キャラクターの移動、ジャンプ、スコア、ライフ、レベル。",
            "コードを書かずに Yop2D で初めてのゲームを作るための、ステップごとのガイドです。順番に進めてください。どのガイドも前のガイドで学んだことを使います。",
            "ガイドを読む", "Yop2D をダウンロード"),
+    "ar": ("كل أدلة Yop2D للمبتدئين | اصنع لعبة بلا برمجة على أندرويد",
+           "أدلة خطوة بخطوة لصنع لعبتك ثنائية الأبعاد الأولى بـ Yop2D، بلا برمجة، على جهاز أندرويد لوحي أو هاتف: تحريك شخصية، قفز، نقاط، صحة، مستويات.",
+           "أدلة خطوة بخطوة لصنع لعبتك الأولى بـ Yop2D دون كتابة شيفرة. اتبعها بالترتيب: يبني كل دليل على ما تعلمته في السابق.",
+           "اقرأ الدليل", "نزّل Yop2D"),
 }
 
 
@@ -121,8 +132,8 @@ def lien_relatif(depuis_langue, guide, langue):
 
 
 class Rendu:
-    def __init__(self, langue, tr, noms_noeuds):
-        self.l, self.tr, self.noms = langue, tr, noms_noeuds
+    def __init__(self, langue, tr, noms_noeuds, sources=None):
+        self.l, self.tr, self.noms, self.sources = langue, tr, noms_noeuds, sources
 
     def nom(self, cle):
         v = self.tr.get(cle[5:], self.l) if cle.startswith("lang:") else self.noms.get(cle, {}).get(self.l)
@@ -145,7 +156,9 @@ class Rendu:
         def lien(m):
             cible = m.group(2)
             if cible.startswith("guide:"):
-                cible = lien_relatif(self.l, cible[6:], self.l)
+                guide = cible[6:]
+                # guide pas encore traduit dans cette langue (arabe) : on renvoie vers la version anglaise
+                cible = lien_relatif(self.l, guide, self.l if self.sources is None or (guide, self.l) in self.sources else "en")
             return f'<a href="{cible}">{m.group(1)}</a>'
         return re.sub(r"\[([^\]]+)\]\(([^)]+)\)", lien, t)
 
@@ -252,7 +265,7 @@ def page(guide, langue, src, sources, r):
     else:
         nav.append(f'<a href="index.html">{ui["tous"]} →</a>')
     return f"""<!DOCTYPE html>
-<html lang="{langue}">
+<html lang="{langue}"{' dir="rtl"' if langue in RTL else ""}>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -315,7 +328,7 @@ def page_tous(langue, sources):
     donnees = {"@context": "https://schema.org", "@type": "ItemList", "name": ui["tous"], "inLanguage": langue,
                "itemListElement": elements}
     return f"""<!DOCTYPE html>
-<html lang="{langue}">
+<html lang="{langue}"{' dir="rtl"' if langue in RTL else ""}>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -382,7 +395,7 @@ def main():
             if f.endswith(".json"):
                 os.remove(os.path.join(dossier, f))
     for (g, l), src in sources.items():
-        r = Rendu(l, tr, noms)
+        r = Rendu(l, tr, noms, sources)
         sortie = os.path.join(RACINE, chemin_page(g, l))
         os.makedirs(os.path.dirname(sortie), exist_ok=True)
         open(sortie, "w", encoding="utf-8").write(page(g, l, src, sources, r))

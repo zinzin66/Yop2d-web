@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كيف تجعل اللاعب يفقد صحته في Yop2D؟ | دليل Yop2D</title>
+<meta name="description" content="تعامل مع صحة اللاعب في Yop2D دون برمجة: متغير صحة وشريط صحة والعقد «إضافة إلى متغير» و«تحديد التقدم» و«شرط» و«إعادة المشهد».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ar/vie-game-over.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/vie-game-over.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/vie-game-over.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/vie-game-over.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/vie-game-over.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/vie-game-over.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/vie-game-over.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/vie-game-over.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/vie-game-over.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/vie-game-over.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/vie-game-over.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "كيف تجعل اللاعب يفقد صحته؟",
+ "description": "تعامل مع صحة اللاعب في Yop2D دون برمجة: متغير صحة وشريط صحة والعقد «إضافة إلى متغير» و«تحديد التقدم» و«شرط» و«إعادة المشهد».",
+ "inLanguage": "ar",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (محرك ألعاب ثنائية الأبعاد بلا برمجة لأندرويد)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "أنشئ متغير الصحة والشريط",
+   "text": "المتغير vie (عدد صحيح، 3) والشريط healthBar مع القيمة القصوى = 3."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "اخسر نقطة",
+   "text": "إذا لمس الكائن الوسم (player, danger) ← إضافة إلى متغير (vie, -1) ← تحديد التقدم (healthBar, =vie)."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "نهاية اللعبة",
+   "text": "شرط (=vie <= 0) ← صحيح ← إعادة المشهد."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ar/index.html">← Yop2D</a>
+<h1>كيف تجعل اللاعب يفقد صحته؟</h1>
+<p>دليل للمبتدئين · بلا برمجة</p>
+<p class="langues"><a href="../vie-game-over.html" hreflang="fr">Français</a> · <a href="../en/vie-game-over.html" hreflang="en">English</a> · <a href="../es/vie-game-over.html" hreflang="es">Español</a> · <a href="../de/vie-game-over.html" hreflang="de">Deutsch</a> · <a href="../it/vie-game-over.html" hreflang="it">Italiano</a> · <a href="../pt/vie-game-over.html" hreflang="pt">Português</a> · <a href="../ru/vie-game-over.html" hreflang="ru">Русский</a> · <a href="../zh/vie-game-over.html" hreflang="zh">中文</a> · <a href="../ja/vie-game-over.html" hreflang="ja">日本語</a> · <strong>العربية</strong></p>
+</header>
+<main>
+<p>يبدأ اللاعب بـ <strong>3 أرواح</strong>. في كل مرة يلمس خطراً (أشواك، عدو…) يفقد واحدة وينخفض <strong>شريط الصحة</strong>. عند 0 تنتهي اللعبة: يبدأ المستوى من جديد.</p>
+<div class="besoin">
+<b>ما تحتاجه:</b>
+<ul><li>شخصية اسمها <strong>player</strong> تستطيع التحرك (انظر <a href="../ar/deplacer-personnage.html">تحريك شخصية</a>)؛</li><li>خطر واحد أو أكثر، مثلاً مربعات حمراء اسمها <strong>spikes1</strong> و<strong>spikes2</strong>…؛</li><li>شريط صحة: كائن <strong>شريط_تقدم</strong> (شريط تقدم) اسمه <strong>healthBar</strong>، في أعلى الشاشة.</li></ul>
+</div>
+<h2>الخطوة 1: جهّز الأخطار والشريط</h2>
+<div class="method">
+<ol><li>حدّد كل خطر واكتب <strong>danger</strong> في حقل <strong>«الوسم (التسمية)»</strong> الخاص به.</li><li>حدّد <strong>healthBar</strong>. في قسم <strong>«شريط التقدم»</strong> في المفتش: <strong>القيمة الدنيا = 0</strong>، <strong>القيمة القصوى = 3</strong>، <strong>القيمة الحالية = 3</strong>.</li></ol>
+</div>
+<h2>الخطوة 2: أنشئ المتغير «vie»</h2>
+<div class="method">
+<ol><li>في اللوحة اليسرى، قسم <strong>المتغيرات</strong>، أنشئ متغيراً.</li><li>الاسم: <strong>vie</strong> (الصحة) · النطاق: <strong>محلي</strong> · النوع: <strong>عدد صحيح</strong> · القيمة الابتدائية: <strong>3</strong>.</li></ol>
+</div>
+<h2>الخطوة 3: افقد روحاً</h2>
+<div class="method">
+<ol><li>افتح <strong>Blueprint</strong> الخاص بالمشهد.</li><li>أضف الحدث <strong>«إذا لمس الكائن الوسم»</strong>: الهدف <strong>player</strong>، الوسم <strong>danger</strong>.</li><li>أضف <strong>«إضافة إلى متغير»</strong>: المتغير <strong>vie</strong>، <strong>القيمة المراد إضافتها = -1</strong> (بعلامة الناقص، للطرح).</li><li>أضف <strong>«تحديد التقدم»</strong>: الهدف <strong>healthBar</strong>، <strong>تقدم جديد</strong> = <code>=vie</code></li><li>اربط العقد الثلاث بالترتيب.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>إذا لمس الكائن الوسم</b><span>الهدف: player · الوسم: danger</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>إضافة إلى متغير</b><span>vie · - 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>تحديد التقدم</b><span>healthBar · =vie</span></div>
+</div>
+<div class="tip">👉 كتابة <code>=vie</code> في «تقدم جديد» تعني: «خذ قيمة المتغير vie». هكذا يتبع الشريط دائماً عدد الأرواح.</div>
+</div>
+<h2>الخطوة 4: نهاية اللعبة</h2>
+<div class="method">
+<ol><li>بعد «تحديد التقدم»، أضف العقدة <strong>«شرط»</strong> بـ <strong>شرط</strong> = <code>=vie &lt;= 0</code> («vie أصغر من أو تساوي 0»).</li><li>اربط مخرج <strong>صحيح</strong> فيها بعقدة <strong>«إعادة المشهد»</strong> (فئة المشهد وواجهة اللعبة).</li><li>احفظ، وابدأ اللعبة والمس خطراً ثلاث مرات.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>تحديد التقدم</b><span>healthBar</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>شرط</b><span>=vie &lt;= 0</span></div>
+<div class="fleche"><em>صحيح</em> →</div>
+<div class="noeud"><b>إعادة المشهد</b></div>
+</div>
+<div class="tip">👉 «إعادة المشهد» تعيد كل شيء كما كان: الكائنات في أماكنها، والمتغيرات <strong>محلي</strong> (أي vie = 3) إلى قيمتها الابتدائية.</div>
+<div class="tip">👉 <strong>تريد شاشة نهاية حقيقية؟</strong> بدل إعادة البدء فوراً، اربط مخرج صحيح بـ <strong>«تعديل النص»</strong> (نص «You lose!»)، ثم <strong>«انتظار»</strong> (ثانيتان)، ثم <strong>«إعادة المشهد»</strong>.</div>
+</div>
+<h2>مكافأة: السقوط في الفراغ</h2>
+<div class="method">
+<p>في لعبة منصات، ضع كائن <strong>منطقة</strong> في أسفل المشهد تماماً، اسمه <strong>fallZone</strong> (المنطقة غير مرئية أثناء اللعبة). ثم:</p>
+<div class="chaine">
+<div class="noeud evenement"><b>تصادم أ/ب</b><span>الكائن أ: player · الكائن ب: fallZone</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>إعادة المشهد</b></div>
+</div>
+</div>
+<h2>إذا لم يعمل</h2>
+<ul><li><strong>الصحة لا تنخفض:</strong> تأكد من وسم <strong>danger</strong> على كل خطر، ومن علامة الناقص في <strong>-1</strong>.</li><li><strong>الشريط لا يتحرك:</strong> يجب أن يكون هدف «تحديد التقدم» <strong>شريط تقدم</strong>، بحد أقصى 3.</li><li><strong>اللعبة لا تُعاد:</strong> يجب ربط الشرط عبر مخرج <strong>صحيح</strong>.</li></ul>
+
+<div class="nav">
+<a href="../ar/pieces-score.html">→ اجمع العملات وعدّ النقاط</a>
+<a href="index.html">كل الأدلة →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D، محرك ألعاب ثنائية الأبعاد مجاني وبلا برمجة لأندرويد · <a href="../../ar/index.html">الموقع الرسمي</a> · <a href="../../noeuds/ar.html">مرجع العقد</a></p>
+</footer>
+</body>
+</html>

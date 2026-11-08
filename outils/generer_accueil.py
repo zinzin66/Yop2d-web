@@ -19,9 +19,16 @@ import re
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://zinzin66.github.io/Yop2d-web/"
-LANGUES = ["en", "fr", "es", "de", "it", "pt", "ru", "zh", "ja"]
+LANGUES = ["en", "fr", "es", "de", "it", "pt", "ru", "zh", "ja", "ar"]
+# Arabe (bêta, 08/11/2026) : accueil + 6 guides débutants traduits ; pages des nœuds, exemples et autres guides en anglais.
+RTL = ["ar"]
+PAGES_EN = ["ar"]
+
+
+def langue_pages(langue):
+    return "en" if langue in PAGES_EN else langue
 NOMS_LANGUES = {"fr": "Français", "en": "English", "es": "Español", "de": "Deutsch", "it": "Italiano",
-                "pt": "Português", "ru": "Русский", "zh": "中文", "ja": "日本語"}
+                "pt": "Português", "ru": "Русский", "zh": "中文", "ja": "日本語", "ar": "العربية"}
 APK = "https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk"
 # False = le gros bouton « Télécharger l'APK » et la note d'installation sont cachés de l'accueil (Yop2D est public sur
 # Google Play depuis le 02/11/2026 : le magasin est la voie principale). Remettre True pour les montrer de nouveau.
@@ -131,6 +138,13 @@ details.faq-item { background: white; padding: 1rem 1.25rem; border-radius: 8px;
 details.faq-item summary { font-weight: bold; font-size: 1.05rem; cursor: pointer; color: var(--secondary-color); list-style: none; }
 details.faq-item summary::-webkit-details-marker { display: none; }
 details.faq-item summary::before { content: '➕'; margin-right: 0.6rem; font-size: 0.85rem; opacity: 0.7; }
+html[dir="rtl"] .ia-box, html[dir="rtl"] .ia-box h2, html[dir="rtl"] .install-note, html[dir="rtl"] .showcase p, html[dir="rtl"] th, html[dir="rtl"] td { text-align: right; }
+html[dir="rtl"] .install-note, html[dir="rtl"] details.faq-item { border-left: 0; border-right: 4px solid var(--accent-color); }
+html[dir="rtl"] details.faq-item { border-right-color: var(--primary-color); }
+html[dir="rtl"] details.faq-item summary::before { margin-right: 0; margin-left: 0.6rem; }
+html[dir="rtl"] .deux ul { padding-left: 0; padding-right: 1.2rem; }
+html[dir="rtl"] .bloc[style*="border-left"] { border-left: 0 !important; border-right: 6px solid var(--accent-color); }
+html[dir="rtl"] code, html[dir="rtl"] .ia-box code { direction: ltr; unicode-bidi: embed; }
 details.faq-item[open] summary::before { content: '➖'; }
 details.faq-item p { margin: 0.75rem 0 0; }
 details.faq-item a { color: var(--primary-color); }
@@ -390,7 +404,7 @@ def page(langue, t):
     bouton_apk = f'<a href="{APK}" class="btn btn-download">⬇️ {e(b["apk"])}</a>\n    ' if AFFICHER_APK else ""
     note_installation = f'<div class="install-note">{liens(t["note_installation"], base)}</div>' if AFFICHER_APK else ""
     return f"""<!DOCTYPE html>
-<html lang="{langue}">
+<html lang="{langue}"{' dir="rtl"' if langue in RTL else ""}>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -475,7 +489,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <h2>{e(t["noeuds"]["titre"])}</h2>
 <div class="bloc">
 <p>{liens(t["noeuds"]["texte"], base)}</p>
-<p><a href="{base}noeuds/{langue}.html"><strong>{e(t["noeuds"]["lien"])} →</strong></a></p>
+<p><a href="{base}noeuds/{langue_pages(langue)}.html"><strong>{e(t["noeuds"]["lien"])} →</strong></a></p>
 </div>
 </section>
 
@@ -636,7 +650,7 @@ def llms(t):
                   "(tick several, download, then \"Add to the scene\"). Own prefabs can be imported as a .zip (one scene) from the Resources panel. "
                   f"Step-by-step guide: {SITE}guides/en/prefabs.html")
     lignes += ["", "## Node reference", ""]
-    lignes += [f"- [All nodes, {NOMS_LANGUES[l]}]({SITE}noeuds/{l}.html)" for l in LANGUES]
+    lignes += [f"- [All nodes, {NOMS_LANGUES[l]}]({SITE}noeuds/{l}.html)" for l in LANGUES if l not in PAGES_EN]
     dossier = os.path.join(RACINE, "aide", "noeuds", "en")
     lignes += ["", "Node categories and node names (as shown in the English editor):", ""]
     depuis_nv = ""
