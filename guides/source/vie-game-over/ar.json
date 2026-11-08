@@ -1,0 +1,213 @@
+{
+  "titre_page": "كيف تجعل اللاعب يفقد صحته في Yop2D؟ | دليل Yop2D",
+  "description": "تعامل مع صحة اللاعب في Yop2D دون برمجة: متغير صحة وشريط صحة والعقد [[ajouter_variable]] و[[modifier_progression]] و[[condition]] و[[recommencer_scene]].",
+  "h1": "كيف تجعل اللاعب يفقد صحته؟",
+  "carte": [
+    "فقدان الصحة ونهاية اللعبة",
+    "متغير صحة وشريط صحة والعودة إلى البداية عندما تصل الصحة إلى 0."
+  ],
+  "etapes": [
+    [
+      "أنشئ متغير الصحة والشريط",
+      "المتغير vie ({{lang:var_type_entier}}، 3) والشريط healthBar مع {{lang:insp_label_prog_max}} = 3."
+    ],
+    [
+      "اخسر نقطة",
+      "{{NoeudEventCollisionTag}} (player, danger) ← {{ajouter_variable}} (vie, -1) ← {{modifier_progression}} (healthBar, =vie)."
+    ],
+    [
+      "نهاية اللعبة",
+      "{{condition}} (=vie <= 0) ← {{lang:port_vrai}} ← {{recommencer_scene}}."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "يبدأ اللاعب بـ **3 أرواح**. في كل مرة يلمس خطراً (أشواك، عدو…) يفقد واحدة وينخفض **شريط الصحة**. عند 0 تنتهي اللعبة: يبدأ المستوى من جديد."
+    ],
+    [
+      "besoin",
+      [
+        "شخصية اسمها **player** تستطيع التحرك (انظر [تحريك شخصية](guide:deplacer-personnage))؛",
+        "خطر واحد أو أكثر، مثلاً مربعات حمراء اسمها **spikes1** و**spikes2**…؛",
+        "شريط صحة: كائن **{{lang:obj_prefix_barre_progression}}** (شريط تقدم) اسمه **healthBar**، في أعلى الشاشة."
+      ]
+    ],
+    [
+      "h2",
+      "الخطوة 1: جهّز الأخطار والشريط"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "حدّد كل خطر واكتب **danger** في حقل **[[lang:insp_label_tag]]** الخاص به.",
+            "حدّد **healthBar**. في قسم **[[lang:insp_sep_progression]]** في المفتش: **{{lang:insp_label_prog_min}} = 0**، **{{lang:insp_label_prog_max}} = 3**، **{{lang:insp_label_prog_actuelle}} = 3**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "الخطوة 2: أنشئ المتغير « vie »"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "في اللوحة اليسرى، قسم **{{lang:panneau_ress_variables}}**، أنشئ متغيراً.",
+            "الاسم: **vie** (الصحة) · النطاق: **{{lang:var_scope_locale}}** · النوع: **{{lang:var_type_entier}}** · القيمة الابتدائية: **3**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "الخطوة 3: افقد روحاً"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "افتح **{{lang:titre_blueprint}}** الخاص بالمشهد.",
+            "أضف الحدث **[[NoeudEventCollisionTag]]**: الهدف **player**، {{lang:Tag}} **danger**.",
+            "أضف **[[ajouter_variable]]**: المتغير **vie**، **{{lang:ajouter_variable.valeur}} = -1** (بعلامة الناقص، للطرح).",
+            "أضف **[[modifier_progression]]**: الهدف **healthBar**، **{{lang:modifier_progression.valeur}}** = `=vie`",
+            "اربط العقد الثلاث بالترتيب."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionTag}}",
+              "الهدف: player · {{lang:Tag}}: danger"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{ajouter_variable}}",
+              "vie · - 1"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{modifier_progression}}",
+              "healthBar · =vie"
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "كتابة `=vie` في [[lang:modifier_progression.valeur]] تعني: « خذ قيمة المتغير vie ». هكذا يتبع الشريط دائماً عدد الأرواح."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "الخطوة 4: نهاية اللعبة"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "بعد [[modifier_progression]]، أضف العقدة **[[condition]]** بـ **{{lang:condition.condition}}** = `=vie <= 0` (« vie أصغر من أو تساوي 0 »).",
+            "اربط مخرج **{{lang:port_vrai}}** فيها بعقدة **[[recommencer_scene]]** (فئة {{lang:cat_scene_hud}}).",
+            "احفظ، وابدأ اللعبة والمس خطراً ثلاث مرات."
+          ]
+        ],
+        [
+          "chaine",
+          [
+            [
+              "n",
+              "{{modifier_progression}}",
+              "healthBar"
+            ],
+            [
+              "→"
+            ],
+            [
+              "cond",
+              "{{condition}}",
+              "=vie <= 0"
+            ],
+            [
+              "→",
+              "{{lang:port_vrai}}"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ],
+        [
+          "tip",
+          "[[recommencer_scene]] تعيد كل شيء كما كان: الكائنات في أماكنها، والمتغيرات **{{lang:var_scope_locale}}** (أي vie = 3) إلى قيمتها الابتدائية."
+        ],
+        [
+          "tip",
+          "**تريد شاشة نهاية حقيقية؟** بدل إعادة البدء فوراً، اربط مخرج {{lang:port_vrai}} بـ **[[modifier_texte]]** (نص « You lose! »)، ثم **[[attendre]]** (ثانيتان)، ثم **[[recommencer_scene]]**."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "مكافأة: السقوط في الفراغ"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "p",
+          "في لعبة منصات، ضع كائن **{{lang:obj_prefix_zone}}** في أسفل المشهد تماماً، اسمه **fallZone** (المنطقة غير مرئية أثناء اللعبة). ثم:"
+        ],
+        [
+          "chaine",
+          [
+            [
+              "ev",
+              "{{NoeudEventCollisionAB}}",
+              "{{lang:noeud_cible_objet_a}}: player · {{lang:noeud_cible_objet_b}}: fallZone"
+            ],
+            [
+              "→"
+            ],
+            [
+              "n",
+              "{{recommencer_scene}}",
+              ""
+            ]
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "إذا لم يعمل"
+    ],
+    [
+      "ul",
+      [
+        "**الصحة لا تنخفض:** تأكد من وسم **danger** على كل خطر، ومن علامة الناقص في **-1**.",
+        "**الشريط لا يتحرك:** يجب أن يكون هدف [[modifier_progression]] **شريط تقدم**، بحد أقصى 3.",
+        "**اللعبة لا تُعاد:** يجب ربط الشرط عبر مخرج **{{lang:port_vrai}}**."
+      ]
+    ]
+  ]
+}

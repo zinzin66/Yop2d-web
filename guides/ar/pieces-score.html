@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كيف تجمع العملات وتعدّ النقاط في Yop2D؟ | دليل Yop2D</title>
+<meta name="description" content="اجمع العملات واعرض النقاط في Yop2D دون برمجة: وسم ومتغير والعقد «إذا لمس الكائن الوسم» و«تدمير الكائن» و«إضافة إلى متغير» و«تعديل النص».">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ar/pieces-score.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/pieces-score.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/pieces-score.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/pieces-score.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/pieces-score.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/pieces-score.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/pieces-score.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/pieces-score.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/pieces-score.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/pieces-score.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/pieces-score.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "كيف تجمع العملات وتعدّ النقاط؟",
+ "description": "اجمع العملات واعرض النقاط في Yop2D دون برمجة: وسم ومتغير والعقد «إذا لمس الكائن الوسم» و«تدمير الكائن» و«إضافة إلى متغير» و«تعديل النص».",
+ "inLanguage": "ar",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (محرك ألعاب ثنائية الأبعاد بلا برمجة لأندرويد)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "أعطِ العملات وسماً",
+   "text": "اكتب piece في حقل الوسم (التسمية) لكل عملة."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "أنشئ متغير النقاط",
+   "text": "قسم المتغيرات: score، عدد صحيح، 0."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "اربط العقد",
+   "text": "إذا لمس الكائن الوسم (player, piece) ← تدمير الكائن ← إضافة إلى متغير (score, 1) ← تعديل النص (scoreText)."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ar/index.html">← Yop2D</a>
+<h1>كيف تجمع العملات وتعدّ النقاط؟</h1>
+<p>دليل للمبتدئين · بلا برمجة</p>
+<p class="langues"><a href="../pieces-score.html" hreflang="fr">Français</a> · <a href="../en/pieces-score.html" hreflang="en">English</a> · <a href="../es/pieces-score.html" hreflang="es">Español</a> · <a href="../de/pieces-score.html" hreflang="de">Deutsch</a> · <a href="../it/pieces-score.html" hreflang="it">Italiano</a> · <a href="../pt/pieces-score.html" hreflang="pt">Português</a> · <a href="../ru/pieces-score.html" hreflang="ru">Русский</a> · <a href="../zh/pieces-score.html" hreflang="zh">中文</a> · <a href="../ja/pieces-score.html" hreflang="ja">日本語</a> · <strong>العربية</strong></p>
+</header>
+<main>
+<p>عندما يلمس اللاعب عملة نريد ثلاثة أشياء: <strong>تختفي</strong> العملة، و<strong>ترتفع النقاط</strong> بمقدار 1، و<strong>تظهر</strong> النقاط الجديدة على الشاشة.</p>
+<div class="besoin">
+<b>ما تحتاجه:</b>
+<ul><li>شخصية اسمها <strong>player</strong> تستطيع التحرك (انظر <a href="../ar/deplacer-personnage.html">تحريك شخصية</a>)؛</li><li>بضع عملات: كائنات <strong>دائرة</strong> (أو صور)، مثلاً <strong>coin1</strong> و<strong>coin2</strong> و<strong>coin3</strong>؛</li><li>كائن <strong>نص</strong> اسمه <strong>scoreText</strong>، في أعلى الشاشة، بالنص «Score: 0».</li></ul>
+</div>
+<h2>الخطوة 1: أعطِ كل العملات الوسم نفسه</h2>
+<div class="method">
+<p><strong>الوسم</strong> علامة. بفضله يعمل جزء واحد من Blueprint لكل العملات، حتى لو أضفت 50 منها.</p>
+<ol><li>حدّد عملة.</li><li>في المفتش، حقل <strong>«الوسم (التسمية)»</strong>، اكتب <strong>piece</strong>.</li><li>افعل الشيء نفسه لكل عملة (يعرض زر <strong>«قائمة»</strong> بجانب الحقل الوسوم المستخدمة بالفعل).</li></ol>
+</div>
+<h2>الخطوة 2: أنشئ المتغير «score»</h2>
+<div class="method">
+<p><strong>المتغير</strong> صندوق يحفظ رقماً في الذاكرة أثناء اللعبة.</p>
+<ol><li>في اللوحة اليسرى، افتح قسم <strong>المتغيرات</strong> وأنشئ متغيراً.</li><li>الاسم: <strong>score</strong> · النطاق: <strong>محلي</strong> · النوع: <strong>عدد صحيح</strong> · القيمة الابتدائية: <strong>0</strong>.</li></ol>
+<div class="tip">👉 <strong>محلي</strong> = المتغير موجود في هذا المشهد فقط. اختر <strong>عام</strong> إن كان يجب أن تنتقل النقاط إلى المستوى التالي (انظر <a href="../en/niveau-suivant.html">الانتقال إلى المستوى التالي</a>).</div>
+</div>
+<h2>الخطوة 3: Blueprint</h2>
+<div class="method">
+<ol><li>افتح <strong>Blueprint</strong> الخاص بالمشهد.</li><li>أضف الحدث <strong>«إذا لمس الكائن الوسم»</strong>: الهدف <strong>player</strong>، الوسم <strong>piece</strong>.</li><li>أضف <strong>«تدمير الكائن»</strong>. اختر هدفاً له <strong>الكائن المعني بالحدث</strong>: إنها العملة التي لمسها اللاعب للتو.</li><li>أضف <strong>«إضافة إلى متغير»</strong>: المتغير <strong>score</strong>، <strong>القيمة المراد إضافتها = 1</strong>.</li><li>أضف <strong>«تعديل النص»</strong>: الهدف <strong>scoreText</strong>، <strong>نص جديد</strong> = <code>="Score: " + score</code></li><li>اربط العقد الأربع بالترتيب، من المخرج إلى المدخل.</li><li>احفظ، ثم ابدأ اللعبة واذهب والمس عملة.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>إذا لمس الكائن الوسم</b><span>الهدف: player · الوسم: piece</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>تدمير الكائن</b><span>الكائن المعني</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>إضافة إلى متغير</b><span>score · + 1</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>تعديل النص</b><span>scoreText</span></div>
+</div>
+<div class="tip">👉 <strong>علامة = في بداية النص</strong> تخبر Yop2D أن <strong>يحسب</strong> النص بدل كتابته كما هو. بدونها ستعرض الشاشة <code>"Score: " + score</code> حرفاً بحرف. تحيط علامتا الاقتباس بالجزء الذي لا يتغير.</div>
+<div class="tip">👉 لا يعمل الحدث إلا <strong>مرة واحدة لكل تلامس</strong>: البقاء على عملة لا يحتسب عدة نقاط.</div>
+</div>
+<h2>مكافأة: افز عندما تجمع كل العملات</h2>
+<div class="method">
+<ol><li>بعد «تعديل النص»، أضف العقدة <strong>«شرط»</strong> بـ <strong>شرط</strong> = <code>=score &gt;= 3</code> (3 = عدد العملات).</li><li>اربط مخرج <strong>صحيح</strong> فيها بعقدة <strong>«رسالة صغيرة أسفل الشاشة»</strong> برسالة <strong>You win!</strong>، أو بـ <strong>«المشهد التالي»</strong>.</li></ol>
+<div class="chaine">
+<div class="noeud"><b>تعديل النص</b><span>scoreText</span></div>
+<div class="fleche">→</div>
+<div class="noeud condition"><b>شرط</b><span>=score &gt;= 3</span></div>
+<div class="fleche"><em>صحيح</em> →</div>
+<div class="noeud"><b>رسالة صغيرة أسفل الشاشة</b><span>You win!</span></div>
+</div>
+</div>
+<h2>إذا لم يعمل</h2>
+<ul><li><strong>العملة لا تختفي:</strong> تأكد من أن الوسم مكتوب بالطريقة نفسها في كل مكان (piece) وأن هدف «تدمير الكائن» هو الكائن المعني.</li><li><strong>يعرض النص الصيغة:</strong> تنقص علامة <strong>=</strong> في البداية.</li><li><strong>تبقى النقاط 0:</strong> تأكد من أن «إضافة إلى متغير» تستهدف المتغير <strong>score</strong>.</li><li><strong>للمقارنة،</strong> افتح لعبة المثال <strong>«Platform»</strong> المرفقة مع Yop2D: تجمع العملات بهذه الطريقة بالضبط.</li></ul>
+
+<div class="nav">
+<a href="../ar/comportements.html">→ السلوكيات</a>
+<a href="../ar/vie-game-over.html">الدليل التالي: فقدان الصحة ونهاية اللعبة →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D، محرك ألعاب ثنائية الأبعاد مجاني وبلا برمجة لأندرويد · <a href="../../ar/index.html">الموقع الرسمي</a> · <a href="../../noeuds/ar.html">مرجع العقد</a></p>
+</footer>
+</body>
+</html>

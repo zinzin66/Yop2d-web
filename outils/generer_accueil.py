@@ -20,7 +20,7 @@ import re
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://zinzin66.github.io/Yop2d-web/"
 LANGUES = ["en", "fr", "es", "de", "it", "pt", "ru", "zh", "ja", "ar"]
-# Langues dont seul l'accueil est traduit (08/11/2026, arabe en bêta) : guides, aide et pages des nœuds restent en anglais.
+# Arabe (bêta, 08/11/2026) : accueil + 6 guides débutants traduits ; pages des nœuds, exemples et autres guides en anglais.
 RTL = ["ar"]
 PAGES_EN = ["ar"]
 
@@ -245,7 +245,7 @@ def nombre_exemples():
 
 
 def cartes_guides(langue):
-    dossier = os.path.join(RACINE, "aide", "guides", langue_pages(langue))
+    dossier = os.path.join(RACINE, "aide", "guides", langue)
     cartes = []
     for nom in sorted(os.listdir(dossier)):
         if nom.endswith(".json"):
@@ -482,7 +482,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <div class="grid">
 {guides}
 </div>
-<p style="text-align:center;margin-top:1.5rem"><a class="btn btn-download" href="{base}{"guides/index.html" if langue == "fr" else f"guides/{langue_pages(langue)}/index.html"}">📚 {e(t["guides"]["tous"])} →</a></p>
+<p style="text-align:center;margin-top:1.5rem"><a class="btn btn-download" href="{base}{"guides/index.html" if langue == "fr" else f"guides/{langue}/index.html"}">📚 {e(t["guides"]["tous"])} →</a></p>
 </section>
 
 <section id="nodes-dictionary">

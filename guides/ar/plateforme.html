@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كيف تصنع لعبة منصات في Yop2D: درس كامل دون برمجة | دليل Yop2D</title>
+<meta name="description" content="درس خطوة بخطوة لصنع لعبة منصات صغيرة دون برمجة بـ Yop2D: أرض، بطل يقفز، لآلئ للجمع، عدو يقوم بدورية ونقاط.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ar/plateforme.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/plateforme.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/plateforme.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/plateforme.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "لعبة المنصات الأولى",
+ "description": "درس خطوة بخطوة لصنع لعبة منصات صغيرة دون برمجة بـ Yop2D: أرض، بطل يقفز، لآلئ للجمع، عدو يقوم بدورية ونقاط.",
+ "inLanguage": "ar",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (محرك ألعاب ثنائية الأبعاد بلا برمجة لأندرويد)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "ضع الخلفية والأرض",
+   "text": "خلفية، وأرض بسلوك «أرض / جدار» وكتلة مرتفعة."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "أنشئ البطل",
+   "text": "شخصية متحركة بسلوك «شخصية منصات»، وعصا تحكم وزر قفز."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "أضف السلحفاة",
+   "text": "عدو بسلوك «دورية (ذهاب وإياب)» ووسم ennemi."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ضع اللآلئ الثلاث",
+   "text": "ثلاث لآلئ بالوسم piece."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "اعرض النقاط",
+   "text": "متغير نقاط ونص يعرضه."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "اربط العقد",
+   "text": "إذا لمس الكائن الوسم → تدمير الكائن → إضافة إلى متغير → تعديل النص."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "العب",
+   "text": "اجمع اللآلئ الثلاث لتفوز."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ar/index.html">← Yop2D</a>
+<h1>لعبة المنصات الأولى</h1>
+<p>دليل للمبتدئين · بلا برمجة</p>
+<p class="langues"><a href="../plateforme.html" hreflang="fr">Français</a> · <a href="../en/plateforme.html" hreflang="en">English</a> · <strong>العربية</strong></p>
+</header>
+<main>
+<p>في هذا الدرس تصنع <strong>لعبة منصات صغيرة</strong> في نحو نصف ساعة، دون كتابة أي شيفرة: بطل يركض ويقفز، و<strong>ثلاث لآلئ</strong> للجمع، و<strong>سلحفاة</strong> تذهب وتجيء على كتلة، و<strong>نقاط</strong>. إن تعثرت قارن مع <a href="https://zinzin66.github.io/Yop2d-web/tests/plateforme-tuto-test.zip">المشروع المنتهي</a> (استورده في Yop2D: عقده مرتبة بإطارات وملاحظات لاصقة تشرح كل شيء).</p>
+<figure class="capture"><a href="../img/plateforme_jeu.png"><img src="../img/plateforme_jeu.png" alt="لقطة شاشة للعبة المنصات: البطل واللآلئ وسلحفاة على كتلة والنقاط أعلى اليسار" loading="lazy"></a><figcaption>اللعبة المنتهية: النقاط في أعلى اليسار.</figcaption></figure>
+<div class="besoin">
+<b>ما تحتاجه:</b>
+<ul><li>لعبة فارغة بالوضع <strong>الأفقي</strong> (المس <strong>لعبة جديدة</strong> في الشاشة الرئيسية)؛</li><li>صور موضوع <strong>ما قبل التاريخ</strong> في <strong>مكتبة Yop2D</strong> (مجانية وبلا حقوق): الخلفية والأرض والبطل والسلحفاة واللؤلؤة؛</li><li>قليل من الوقت: كل خطوة قصيرة.</li></ul>
+</div>
+<div class="tip">👉 لقطات الشاشة بالإنجليزية. على جهازك تُكتب الأزرار نفسها بلغة Yop2D، في المكان نفسه.</div>
+<h2>الخطوة 1: الخلفية والأرض وكتلة</h2>
+<div class="method">
+<ol><li>المس <strong>كائن</strong> (أعلى اليسار)، ثم <strong>صورة</strong>. تُفتح <strong>مكتبة Yop2D</strong>: اختر موضوع <strong>ما قبل التاريخ</strong>، ومجلد <strong>خلفيات</strong>، ثم خلفية <strong>الأدغال</strong>. تضع نفسها خلف كل شيء.</li><li>افعل <strong>كائن ← صورة</strong> من جديد وخذ <strong>أرضاً عشبية</strong> من <strong>أرضيات ومنصات</strong>. ضعها في أسفل المشهد تماماً ومدّدها على عرض الشاشة. سمّها <strong>sol</strong> في المفتش.</li><li>المس <strong>⚙ سلوك</strong> (في المفتش) واختر <strong>أرض / جدار</strong>: سيمشي البطل عليها ولن يسقط عبرها.</li><li>أضف <strong>منصة عشبية</strong> صغيرة وضعها أعلى، على اليمين، نحو 150 بكسل فوق الأرض. أعطها سلوك <strong>أرض / جدار</strong> أيضاً. سمّها <strong>bloc</strong>.</li></ol>
+</div>
+<figure class="capture"><a href="../img/plateforme_comp_sol.png"><img src="../img/plateforme_comp_sol.png" alt="نافذة سلوك كائن الأرض مع تحديد «أرض / جدار»" loading="lazy"></a><figcaption>سلوك «أرض / جدار»: الكائن لا يتحرك، وتمشي عليه.</figcaption></figure>
+<div class="tip">👉 يقفز البطل نحو 200 بكسل: كتلة على ارتفاع 150 بكسل فوق الأرض سهلة المنال. إن وضعتها أعلى فستحتاج منصة أخرى للصعود.</div>
+<h2>الخطوة 2: البطل</h2>
+<div class="method">
+<ol><li><strong>كائن ← صورة ← المكتبة</strong>، موضوع <strong>ما قبل التاريخ</strong>، مجلد <strong>شخصيات</strong>. اختر رجل الكهف مع <strong>مع رسومه المتحركة</strong>: تُضاف الصورة والرسوم (سكون، مشي…) دفعة واحدة. ضعه على الأرض وسمّه <strong>player</strong>.</li><li><strong>⚙ سلوك ← شخصية منصات</strong>: يمشي ويقفز ويسقط.</li><li>أضف عصا_تحكم في أسفل اليسار و<strong>زراً</strong> دائرياً في أسفل اليمين للقفز. حدّد عصا التحكم واختر في المفتش <strong>player</strong> في حقل <strong>الكائن المراد تحريكه</strong>: دون هدف لا تعرف عصا التحكم من تحرّك. ثم في نافذة سلوك البطل، اختر الزر الدائري <strong>زر للقفز</strong>. يشرح دليل <a href="../ar/deplacer-personnage.html">تحريك شخصية</a> عصا التحكم والقفز.</li></ol>
+</div>
+<figure class="capture"><a href="../img/plateforme_comp_heros.png"><img src="../img/plateforme_comp_heros.png" alt="نافذة سلوك كائن اللاعب مع تحديد «شخصية منصات»" loading="lazy"></a><figcaption>سلوك «شخصية منصات» للبطل.</figcaption></figure>
+<figure class="capture"><a href="../img/plateforme_editeur.png"><img src="../img/plateforme_editeur.png" alt="محرر Yop2D مع علامات: زر كائن، قائمة الكائنات، بطاقة السلوك، زر التشغيل" loading="lazy"></a><figcaption>المحرر: 1 زر <strong>كائن</strong> لإضافة الأشياء، 2 <strong>قائمة الكائنات</strong> في المشهد، 3 بطاقة <strong>السلوك</strong> للكائن المحدد، 4 زر <strong>التشغيل</strong>.</figcaption></figure>
+<div class="tip">👉 المس <strong>التشغيل</strong> (4) للتجربة: يجب أن يمشي البطل ويقفز ويبقى على الأرض. المس ■ للعودة إلى المحرر.</div>
+<h2>الخطوة 3: السلحفاة التي تقوم بدورية</h2>
+<div class="method">
+<ol><li><strong>كائن ← صورة ← المكتبة</strong>، موضوع <strong>ما قبل التاريخ</strong>، مجلد <strong>وحوش</strong>: خذ <strong>السلحفاة</strong> وضعها <strong>على الكتلة</strong>. سمّها <strong>tortue</strong>.</li><li><strong>⚙ سلوك ← دورية (ذهاب وإياب)</strong>: تمشي وحدها في جهة ثم في الأخرى وتستدير عند حافة الكتلة. لا حاجة إلى عقدة.</li><li>في المفتش، قسم <strong>للعقد</strong>، اكتب الوسم <strong>ennemi</strong>. ستحتاجه في الخطوة 6.</li></ol>
+</div>
+<figure class="capture"><a href="../img/plateforme_comp_tortue.png"><img src="../img/plateforme_comp_tortue.png" alt="نافذة سلوك السلحفاة مع تحديد «دورية»" loading="lazy"></a><figcaption>سلوك «دورية (ذهاب وإياب)»: مثالي لعدو.</figcaption></figure>
+<div class="tip">👉 على الكتلة، اترك قليلاً من المساحة على جانبي السلحفاة: تستدير قبل الحافة مباشرة.</div>
+<h2>الخطوة 4: اللآلئ الثلاث</h2>
+<div class="method">
+<ol><li><strong>كائن ← صورة ← المكتبة</strong>، موضوع <strong>ما قبل التاريخ</strong>، مجلد <strong>أغراض</strong>: خذ <strong>اللؤلؤة الذهبية</strong>. ضعها في متناول القفز، مثلاً على الأرض. سمّها <strong>piece1</strong>.</li><li>في المفتش، قسم <strong>للعقد</strong>، اكتب الوسم <strong>piece</strong> (بلا تشكيل، بأحرف صغيرة).</li><li>المس <strong>نسخ</strong> (في الأعلى) مرتين: تظهر النسخ قرب الأصل. حرّكها: واحدة في الهواء فوق الأرض، والأخيرة <strong>فوق الكتلة</strong>، عالية بما يكفي كي لا تلمسها السلحفاة. تحتفظ بالوسم نفسه <strong>piece</strong>.</li></ol>
+</div>
+<figure class="capture"><a href="../img/plateforme_tag.png"><img src="../img/plateforme_tag.png" alt="مفتش اللؤلؤة piece1 يعرض الوسم piece" loading="lazy"></a><figcaption>الوسم <strong>piece</strong> على كل لؤلؤة: قاعدة واحدة تخدم الثلاث.</figcaption></figure>
+<div class="tip">👉 <strong>الوسم</strong> هو اسم عائلة. هنا تتشارك اللآلئ الثلاث الوسم نفسه، فتبني العقد مرة واحدة فقط.</div>
+<h2>الخطوة 5: النقاط</h2>
+<div class="method">
+<ol><li>في اللوحة اليسرى، قسم <strong>المتغيرات</strong>، المس <strong>+</strong> وأنشئ متغيراً <strong>score</strong>: النوع <strong>عدد صحيح</strong>، القيمة الابتدائية <strong>0</strong>، <strong>محلي</strong> للمشهد.</li><li><strong>كائن ← نص</strong>: اكتب <strong>Pièces : 0</strong>، ضعه أعلى اليسار وسمّه <strong>texteScore</strong>. ليبقى مقروءاً كبّره (حجم الخط 60 إلى 70)؛ وإن وضعت <strong>لوحة داكنة</strong> صغيرة خلفه فتأكد أن النص <strong>في الأمام</strong> (يجب أن يكون <strong>Z</strong> أعلى من Z اللوحة).</li></ol>
+</div>
+<figure class="capture"><a href="../img/plateforme_variable.png"><img src="../img/plateforme_variable.png" alt="اللوحة اليسرى للمحرر مع متغير النقاط وزر الزائد" loading="lazy"></a><figcaption>يُنشأ متغير <strong>score</strong> (1) بزر <strong>+</strong>.</figcaption></figure>
+<h2>الخطوة 6: العقد</h2>
+<p>الآن أخبر اللعبة بما يحدث عندما يلمس البطل شيئاً. المس <strong>Blueprint</strong> (أعلى اليمين): تُفتح شاشة العقد. لوضع عقدة افتح فئة على اليسار والمسها؛ ولربط عقدتين اسحب سلكاً من مخرج الأولى إلى مدخل التالية.</p>
+<div class="method">
+<ol><li><strong>عندما يلمس البطل لؤلؤة.</strong> ضع الحدث إذا لمس الكائن الوسم: <strong>الكائن A</strong> = <strong>player</strong>، <strong>الوسم</strong> = <strong>piece</strong>. اربط بالترتيب: تدمير الكائن (على <strong>الكائن المعني</strong>، أي اللؤلؤة التي لُمست للتو)، إضافة إلى متغير (المتغير <strong>score</strong>، القيمة <strong>1</strong>)، ثم تعديل النص (الكائن <strong>texteScore</strong>، نص مكتوب بالقيمة <code>="Pièces : " + score</code> التي تعرض النقاط).</li><li><strong>عندما تبلغ النقاط 3.</strong> أضف عقدة شرط بعدها بـ <code>=score &gt;= 3</code>. في مخرج <strong>صحيح</strong> اربط: تعديل النص (texteScore، النص <strong>BRAVO</strong>)، انتظار (6 ثوانٍ) ثم إعادة المشهد.</li><li><strong>عندما يلمس البطل السلحفاة.</strong> حدث ثانٍ إذا لمس الكائن الوسم: <strong>الكائن A</strong> = <strong>player</strong>، <strong>الوسم</strong> = <strong>ennemi</strong>. بعده: وميض الشاشة، رسالة صغيرة أسفل الشاشة (رسالة صغيرة «Ouch!»)، انتظار (ثانية واحدة) ثم إعادة المشهد.</li><li><strong>البقاء داخل الشاشة.</strong> حدث في كل إطار مرتبط بـ إبقاء داخل الشاشة (الكائن <strong>player</strong>) يمنع البطل من مغادرة المستوى.</li></ol>
+</div>
+<figure class="capture"><a href="../img/plateforme_noeud.png"><img src="../img/plateforme_noeud.png" alt="نافذة إعدادات عقدة «إذا لمس كائن وسماً»: الكائن A player، الوسم piece" loading="lazy"></a><figcaption>نافذة إعدادات الحدث: 1 الكائن الذي يلمس (<strong>player</strong>)، 2 الوسم الملموس (<strong>piece</strong>).</figcaption></figure>
+<figure class="capture"><a href="../img/plateforme_blueprint.png"><img src="../img/plateforme_blueprint.png" alt="شاشة Blueprint للعبة: ثلاث مجموعات من العقد في إطارات ملونة مع ملاحظات لاصقة" loading="lazy"></a><figcaption>Blueprint المنتهي: إطار لكل فكرة (اللآلئ، العدو، البقاء داخل الشاشة).</figcaption></figure>
+<div class="tip">👉 في نافذة العقدة لا تحتاج إلى كتابة أسماء الكائنات: المسها في القائمة اليسرى. تذكّر <strong>الحفظ</strong> (💾) قبل العودة إلى المحرر.</div>
+<h2>الخطوة 7: العب!</h2>
+<p>المس <strong>التشغيل</strong>. اركض واقفز واجمع اللآلئ: يعدّها النص أعلى اليسار. اصعد على الكتلة لتأخذ اللؤلؤة الأخيرة دون أن تلمس السلحفاة. بعد ثلاث لآلئ يظهر <strong>BRAVO</strong>، ثم تُعاد اللعبة.</p>
+<figure class="capture"><a href="../img/plateforme_bravo.png"><img src="../img/plateforme_bravo.png" alt="اللعبة بعد ثلاث لآلئ: النص BRAVO أعلى اليسار" loading="lazy"></a><figcaption>جُمعت ثلاث لآلئ: <strong>BRAVO</strong>.</figcaption></figure>
+<h2>للمتقدمين</h2>
+<ul><li>أضف لآلئ وسلاحف وكتلاً أخرى: تستمر العقد التي بنيتها في العمل بفضل <strong>الوسوم</strong>.</li><li>أضف <strong>أصواتاً</strong> (رنين لكل لؤلؤة) بعقدة تشغيل صوت، أو <strong>موسيقى</strong> خلفية.</li><li>امنح البطل <strong>أرواحاً</strong>: <a href="../ar/vie-game-over.html">فقدان الأرواح ونهاية اللعبة</a>.</li><li>انتقل إلى <strong>مستوى تالٍ</strong> عندما تفوز: <a href="../en/niveau-suivant.html">الانتقال إلى المستوى التالي</a>.</li></ul>
+
+<div class="nav">
+<a href="index.html">→ كل الأدلة</a>
+<a href="../ar/deplacer-personnage.html">الدليل التالي: حرّك شخصية →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D، محرك ألعاب ثنائية الأبعاد مجاني وبلا برمجة لأندرويد · <a href="../../ar/index.html">الموقع الرسمي</a> · <a href="../../noeuds/ar.html">مرجع العقد</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كيف تحرّك شخصية في Yop2D؟ | دليل Yop2D</title>
+<meta name="description" content="ثلاث طرق بسيطة لتحريك شخصية في Yop2D دون برمجة: أزرار على الشاشة، عصا تحكم افتراضية، أو السحب بإصبعك.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ar/deplacer-personnage.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/deplacer-personnage.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/deplacer-personnage.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/deplacer-personnage.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/deplacer-personnage.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/deplacer-personnage.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deplacer-personnage.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deplacer-personnage.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/deplacer-personnage.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deplacer-personnage.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/deplacer-personnage.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "كيف تحرّك شخصية؟",
+ "description": "ثلاث طرق بسيطة لتحريك شخصية في Yop2D دون برمجة: أزرار على الشاشة، عصا تحكم افتراضية، أو السحب بإصبعك.",
+ "inLanguage": "ar",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (محرك ألعاب ثنائية الأبعاد بلا برمجة لأندرويد)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "بأزرار على الشاشة",
+   "text": "اربط حدث الكائن مضغوط لكل زر بعقدة دفع الكائن مع إضافة س = -5 أو 5."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "بعصا تحكم افتراضية",
+   "text": "أضف كائن عصا_تحكم واختر الشخصية في الكائن المراد تحريكه. لا حاجة إلى عقدة."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "بسحبها بإصبعك",
+   "text": "في ⚙ سلوك الكائن، اختر «يُسحب بإصبع»."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ar/index.html">← Yop2D</a>
+<h1>كيف تحرّك شخصية؟</h1>
+<p>دليل للمبتدئين · بلا برمجة</p>
+<p class="langues"><a href="../deplacer-personnage.html" hreflang="fr">Français</a> · <a href="../en/deplacer-personnage.html" hreflang="en">English</a> · <a href="../es/deplacer-personnage.html" hreflang="es">Español</a> · <a href="../de/deplacer-personnage.html" hreflang="de">Deutsch</a> · <a href="../it/deplacer-personnage.html" hreflang="it">Italiano</a> · <a href="../pt/deplacer-personnage.html" hreflang="pt">Português</a> · <a href="../ru/deplacer-personnage.html" hreflang="ru">Русский</a> · <a href="../zh/deplacer-personnage.html" hreflang="zh">中文</a> · <a href="../ja/deplacer-personnage.html" hreflang="ja">日本語</a> · <strong>العربية</strong></p>
+</header>
+<main>
+<p>في Yop2D توجد ثلاث طرق بسيطة لتحريك شخصية دون كتابة شيفرة. اختر الأنسب للعبتك.</p>
+<h2>الطريقة 1: بأزرار على الشاشة (يسار / يمين)</h2>
+<div class="method">
+<p>ممتازة للعبة منصات، أو لعبة تتحرك فيها الشخصية على خط.</p>
+<ol><li>في مشهدك، أضف شخصيتك (<strong>مربع</strong> أو <strong>صورة</strong>) وسمّها <strong>player</strong>.</li><li>أضف كائنين لاستخدامهما كزرين، مثلاً كائنين <strong>زر</strong> (أو مربعين) اسماهما <strong>btnLeft</strong> و<strong>btnRight</strong>. ضعهما في أسفل الشاشة.</li><li>افتح <strong>Blueprint</strong> الخاص بالمشهد.</li><li>أضف الحدث <strong>«الكائن مضغوط»</strong> واختر <strong>btnLeft</strong> هدفاً له.</li><li>أضف عقدة <strong>«دفع الكائن»</strong>: الهدف <strong>player</strong>، <strong>إضافة س = -5</strong>، <strong>إضافة ص = 0</strong>.</li><li>اربط مخرج الحدث بمدخل «دفع الكائن».</li><li>افعل الشيء نفسه لـ <strong>btnRight</strong>، مع <strong>إضافة س = 5</strong>.</li><li>احفظ، ثم ابدأ اللعبة: ما دام إصبعك على زر تتحرك الشخصية.</li></ol>
+<div class="chaine">
+<div class="noeud evenement"><b>الكائن مضغوط</b><span>الهدف: btnLeft</span></div>
+<div class="fleche">→</div>
+<div class="noeud"><b>دفع الكائن</b><span>الهدف: player · إضافة س = -5</span></div>
+</div>
+<div class="tip">👉 يتكرر «الكائن مضغوط» في كل إطار ما دام الإصبع على الزر: لهذا تواصل الشخصية الحركة. لزيادة السرعة ارفع القيمة (مثلاً 8 أو 10).</div>
+</div>
+<h2>الطريقة 2: بعصا تحكم افتراضية</h2>
+<div class="method">
+<p>ممتازة للعبة بمنظر علوي، حيث تتحرك الشخصية في كل الاتجاهات. <strong>لا حاجة إلى عقدة.</strong></p>
+<ol><li>أضف كائن <strong>عصا_تحكم</strong> إلى مشهدك (فئة <strong>التفاعلات</strong>) وضعه في أسفل اليسار.</li><li>حدّد عصا التحكم. في المفتش، قسم <strong>«التحكم بعصا التحكم»</strong>، المس زر <strong>«الكائن المراد تحريكه»</strong> واختر شخصيتك.</li><li>احفظ، ثم ابدأ اللعبة: تتبع الشخصية عصا التحكم.</li></ol>
+<div class="tip">👉 <strong>اختصار:</strong> إذا أعطيت شخصيتك الوسم <strong>Player</strong> (أو <strong>Joueur</strong>)، فإن عصا التحكم تحرّكها تلقائياً، حتى لو لم يُختر شيء في «الكائن المراد تحريكه». انتبه: هذا الوسم يتغلب على اختيار المفتش.</div>
+<div class="tip">👉 <strong>للمتقدمين:</strong> الصيغتان <code>joystick.x</code> و<code>joystick.y</code> تعطيان الاتجاه (بين -1 و1). يمكنك استخدامهما في عقدة «دفع الكائن» مرتبطة بـ «في كل إطار»، مثلاً <code>=joystick.x * 5</code>. وللعقدة <strong>«إذا عصا التحكم»</strong> أيضاً مخارج أعلى وأسفل ويسار ويمين وراحة.</div>
+</div>
+<h2>الطريقة 3: اسحبها بإصبعك</h2>
+<div class="method">
+<p>ممتازة للغز أو لعبة ورق أو أي لعبة تحرّك فيها قطعاً.</p>
+<ol><li>حدّد كائنك في محرر المشاهد.</li><li>في المفتش، المس <strong>⚙ سلوك الكائن</strong> واختر <strong>يُسحب بإصبع</strong>.</li><li>ابدأ اللعبة: يمكنك سحب الكائن بإصبعك.</li></ol>
+<div class="tip">👉 للتفاعل عندما يترك اللاعب الكائن (مثلاً للتحقق من أنه في المكان الصحيح)، استخدم الحدث <strong>«نهاية السحب»</strong>.</div>
+<div class="tip">👉 للسماح بالسحب أو منعه أثناء اللعبة (قطعة لغز في مكانها الصحيح مثلاً)، استخدم العقدة <strong>«تغيير السلوك»</strong>.</div>
+</div>
+<h2>نصائح</h2>
+<ul><li><strong>لجعل الشخصية تقفز،</strong> اتبع دليل <a href="../ar/sauter.html">اجعل شخصية تقفز</a>.</li><li><strong>لعبة المثال «Platform»</strong> المرفقة مع Yop2D تستخدم الطريقة 1: افتحها لترى Blueprint كاملاً يعمل.</li><li><strong>سؤال؟</strong> تعال وتحدث عنه على <a href="https://discord.gg/nHqCcqHZNQ">Discord</a> أو <a href="https://t.me/+7PQ9WKw7n645Y2Zk">Telegram</a>.</li></ul>
+
+<div class="nav">
+<a href="../ar/plateforme.html">→ لعبة المنصات الأولى</a>
+<a href="../ar/sauter.html">الدليل التالي: اجعل شخصية تقفز →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D، محرك ألعاب ثنائية الأبعاد مجاني وبلا برمجة لأندرويد · <a href="../../ar/index.html">الموقع الرسمي</a> · <a href="../../noeuds/ar.html">مرجع العقد</a></p>
+</footer>
+</body>
+</html>
