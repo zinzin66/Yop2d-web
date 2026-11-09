@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como fazer um jogo para dois jogadores em um tablet? | Guia do Yop2D</title>
+<meta name="description" content="Faça um jogo para dois jogadores em um único tablet com o Yop2D, sem código: dois joysticks, cada um movendo seu personagem, graças ao multitoque.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deux-joueurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/deux-joueurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/deux-joueurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/deux-joueurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/deux-joueurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/deux-joueurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deux-joueurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deux-joueurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/deux-joueurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deux-joueurs.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/deux-joueurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Como fazer um jogo para dois jogadores em um tablet?",
+ "description": "Faça um jogo para dois jogadores em um único tablet com o Yop2D, sem código: dois joysticks, cada um movendo seu personagem, graças ao multitoque.",
+ "inLanguage": "pt",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de jogos 2D sem código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Dois personagens",
+   "text": "Comportamento “Personagem visto de cima”, Controles: Joystick."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Dois joysticks",
+   "text": "Um de cada lado da tela."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Um alvo cada um",
+   "text": "Campo “Alvo do joystick” do Inspetor."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Jogar juntos",
+   "text": "Um dedo em cada joystick."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../pt/index.html">← Yop2D</a>
+<h1>Como fazer um jogo para dois jogadores em um tablet?</h1>
+<p>Guia para iniciantes · sem código</p>
+<p class="langues"><a href="../deux-joueurs.html" hreflang="fr">Français</a> · <a href="../en/deux-joueurs.html" hreflang="en">English</a> · <a href="../es/deux-joueurs.html" hreflang="es">Español</a> · <a href="../de/deux-joueurs.html" hreflang="de">Deutsch</a> · <a href="../it/deux-joueurs.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="../ru/deux-joueurs.html" hreflang="ru">Русский</a> · <a href="../zh/deux-joueurs.html" hreflang="zh">中文</a> · <a href="../ja/deux-joueurs.html" hreflang="ja">日本語</a> · <a href="../ar/deux-joueurs.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ Exige a versão 1266 do Yop2D ou mais recente (o último número da versão, por exemplo 1.0.1266). Se a sua versão for mais antiga, atualize o Yop2D.</p>
+<p>Em um tablet, duas pessoas podem jogar ao mesmo tempo: <strong>cada jogador tem seu joystick</strong> e seu personagem. O Yop2D acompanha cada dedo separadamente (multitoque), então os dois personagens se movem juntos, <strong>sem nenhum nó</strong>.</p>
+<div class="besoin">
+<b>Você precisa de:</b>
+<ul><li>um projeto aberto no editor (na horizontal, de preferência em um tablet);</li><li>dois personagens, por exemplo <strong>player1</strong> e <strong>player2</strong> (dois objetos Imagem);</li><li>um chão ou um fundo, como quiser.</li></ul>
+</div>
+<h2>Passo 1: dois personagens que andam sozinhos</h2>
+<div class="method">
+<ol><li>Selecione <strong>player1</strong> e toque em <strong>⚙ Comportamento do objeto</strong> no Inspetor.</li><li>Escolha <strong>Personagem visto de cima</strong> (ou <strong>Personagem de plataforma</strong>).</li><li>Na linha <strong>Controles</strong>, deixe <strong>Joystick</strong>.</li><li>Faça o mesmo com <strong>player2</strong>.</li></ol>
+</div>
+<h2>Passo 2: dois joysticks</h2>
+<div class="method">
+<ol><li>Adicione um objeto <strong>Joystick</strong> à cena (categoria <strong>Interativos</strong>) e coloque-o embaixo à esquerda.</li><li>Adicione um segundo e coloque-o embaixo à direita.</li><li>Dê nomes claros a eles: <strong>joystick1</strong> e <strong>joystick2</strong> (a última parte explica por que isso ajuda).</li></ol>
+<div class="tip">👉 Uma cor diferente para cada joystick ajuda os jogadores: no Inspetor, mude a cor de cada um.</div>
+</div>
+<h2>Passo 3: um alvo para cada joystick</h2>
+<div class="method">
+<ol><li>Selecione <strong>joystick1</strong>. No Inspetor, seção <strong>“Controle Joystick”</strong>, toque no botão <strong>“Objeto a mover”</strong> e escolha <strong>player1</strong>.</li><li>Selecione <strong>joystick2</strong> e escolha <strong>player2</strong> do mesmo modo.</li><li>Salve e inicie o jogo.</li></ol>
+</div>
+<p>Coloque um dedo em cada joystick: <strong>os dois personagens se movem ao mesmo tempo</strong>, cada um com seu joystick. Levante um dedo e só esse personagem para.</p>
+<div class="tip">👉 Um dedo que segura um joystick o mantém até você levantá-lo, mesmo que saia do círculo. Ele não pode pegar o outro joystick.</div>
+<h2>Indo além: ler cada joystick em uma fórmula</h2>
+<p>O primeiro joystick mantém suas fórmulas de sempre: <code>joystick.x</code>, <code>joystick.y</code>, <code>joystick.force</code>, <code>joystick.angle</code>, <code>joystick.actif</code>. Para os outros, <strong>dê ao joystick um nome que comece com “joy”</strong> e use as mesmas palavras depois do nome: <code>joystick2.x</code>, <code>joystick2.y</code>, <code>joystick2.force</code>, <code>joystick2.angle</code>, <code>joystick2.actif</code>.</p>
+<p>Por exemplo, para mover com o segundo joystick um objeto que não é um personagem, use “Empurrar objeto” ligado a “A cada frame” com <code>=joystick2.x * 5</code> e <code>=joystick2.y * 5</code>.</p>
+<div class="tip">👉 Um joystick com esse nome não dá mais sua posição na tela com <code>.x</code> e <code>.y</code>: eles dão a direção empurrada (entre -1 e 1).</div>
+<h2>Um botão de pulo para cada jogador</h2>
+<p>Os personagens de plataforma também podem ter <strong>seu próprio botão de pulo</strong>: em ⚙ Comportamento do objeto, escolha um botão diferente para cada personagem em <strong>Botão de pular</strong>. O multitoque permite que os dois jogadores apertem ao mesmo tempo.</p>
+<p>O modelo “Dois jogadores” mostra tudo isso pronto para usar: dois ninjas, dois joysticks e nenhum nó.</p>
+<h2>Se não funcionar</h2>
+<div class="method">
+<ul><li><strong>Os dois personagens seguem o mesmo joystick:</strong> verifique se cada joystick tem seu <strong>próprio</strong> alvo em <strong>“Objeto a mover”</strong>.</li><li><strong>Um personagem não se move:</strong> seu comportamento deve ser <strong>Personagem visto de cima</strong> ou <strong>Personagem de plataforma</strong>, com <strong>Controles: Joystick</strong>.</li><li><strong>Um joystick não reage:</strong> verifique se ele está visível e não escondido atrás de outro objeto.</li><li><strong>Só um joystick funciona:</strong> verifique se você usa a versão 1266 ou mais recente do Yop2D.</li></ul>
+</div>
+
+<div class="nav">
+<a href="../pt/capteurs.html">← Incline e sacuda</a>
+<a href="../pt/interface-demarrage.html">Próximo guia: A tela inicial em imagens →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de jogos 2D gratuito e sem código para Android · <a href="../../pt/index.html">Site oficial</a> · <a href="../../noeuds/pt.html">Referência de nós</a></p>
+</footer>
+</body>
+</html>

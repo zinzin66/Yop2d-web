@@ -1,0 +1,152 @@
+{
+  "depuis": 1266,
+  "titre_page": "Come fare un gioco per due giocatori su un tablet? | Guida Yop2D",
+  "description": "Crea un gioco per due giocatori su un solo tablet con Yop2D, senza codice: due joystick, ognuno muove il suo personaggio, grazie al multitouch.",
+  "h1": "Come fare un gioco per due giocatori su un tablet?",
+  "carte": [
+    "Due giocatori, due joystick",
+    "Ogni giocatore usa il suo pollice: due joystick sullo stesso schermo, ognuno muove il suo personaggio."
+  ],
+  "etapes": [
+    [
+      "Due personaggi",
+      "Comportamento «Personaggio visto dall'alto», Comandi: Joystick."
+    ],
+    [
+      "Due joystick",
+      "Uno per lato dello schermo."
+    ],
+    [
+      "Un bersaglio ciascuno",
+      "Campo «Bersaglio del joystick» dell'Ispettore."
+    ],
+    [
+      "Giocare insieme",
+      "Un dito su ogni joystick."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Su un tablet due persone possono giocare insieme: **ogni giocatore ha il suo joystick** e il suo personaggio. Yop2D segue ogni dito separatamente (multitouch), quindi i due personaggi si muovono insieme, **senza alcun nodo**."
+    ],
+    [
+      "besoin",
+      [
+        "un progetto aperto nell'editor (in orizzontale, meglio su un tablet);",
+        "due personaggi, per esempio **player1** e **player2** (due oggetti {{lang:obj_prefix_image}});",
+        "un pavimento o uno sfondo, come preferisci."
+      ]
+    ],
+    [
+      "h2",
+      "Passo 1: due personaggi che camminano da soli"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Seleziona **player1**, poi tocca **⚙ Comportamento dell'oggetto** nell'Ispettore.",
+            "Scegli **Personaggio visto dall'alto** (o **Personaggio platform**).",
+            "Nella riga **Comandi**, lascia **Joystick**.",
+            "Fai lo stesso per **player2**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 2: due joystick"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Aggiungi un oggetto **{{lang:obj_prefix_joystick}}** alla scena (categoria **{{lang:cat_interactifs}}**) e mettilo in basso a sinistra.",
+            "Aggiungine un secondo e mettilo in basso a destra.",
+            "Dai loro nomi chiari: **joystick1** e **joystick2** (l'ultima parte spiega perché è utile)."
+          ]
+        ],
+        [
+          "tip",
+          "Un colore diverso per ogni joystick aiuta i giocatori: nell'Ispettore cambia il colore di ciascuno."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Passo 3: un bersaglio per ogni joystick"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Seleziona **joystick1**. Nell'Ispettore, sezione **[[lang:insp_sep_joystick]]**, tocca il pulsante **[[lang:insp_label_cible_joystick]]** e scegli **player1**.",
+            "Seleziona **joystick2** e scegli **player2** allo stesso modo.",
+            "Salva, poi avvia il gioco."
+          ]
+        ]
+      ]
+    ],
+    [
+      "p",
+      "Appoggia un dito su ogni joystick: **i due personaggi si muovono insieme**, ognuno col suo joystick. Alza un dito e si ferma solo quel personaggio."
+    ],
+    [
+      "tip",
+      "Un dito che tiene un joystick lo conserva finché non lo alzi, anche se esce dal cerchio. Non può prendere l'altro joystick."
+    ],
+    [
+      "h2",
+      "Per andare oltre: leggere ogni joystick in una formula"
+    ],
+    [
+      "p",
+      "Il primo joystick conserva le sue formule abituali: `joystick.x`, `joystick.y`, `joystick.force`, `joystick.angle`, `joystick.actif`. Per gli altri, **dai al joystick un nome che inizia con «joy»** e usa le stesse parole dopo il nome: `joystick2.x`, `joystick2.y`, `joystick2.force`, `joystick2.angle`, `joystick2.actif`."
+    ],
+    [
+      "p",
+      "Per esempio, per muovere con il secondo joystick un oggetto che non è un personaggio, usa [[pousser]] collegato a [[NoeudEventChaqueImage]] con `=joystick2.x * 5` e `=joystick2.y * 5`."
+    ],
+    [
+      "tip",
+      "Un joystick chiamato così non dà più la sua posizione sullo schermo con `.x` e `.y`: danno la direzione spinta (tra -1 e 1)."
+    ],
+    [
+      "h2",
+      "Un pulsante di salto per ogni giocatore"
+    ],
+    [
+      "p",
+      "Anche i personaggi platform possono avere **il proprio pulsante di salto**: in ⚙ Comportamento dell'oggetto, scegli un pulsante diverso per ogni personaggio in **Pulsante salto**. Il multitouch permette a entrambi i giocatori di premere insieme."
+    ],
+    [
+      "p",
+      "Il modello «Due giocatori» mostra tutto questo pronto all'uso: due ninja, due joystick e nessun nodo."
+    ],
+    [
+      "h2",
+      "Se non funziona"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ul",
+          [
+            "**I due personaggi seguono lo stesso joystick:** controlla che ogni joystick abbia il **proprio** bersaglio in **[[lang:insp_label_cible_joystick]]**.",
+            "**Un personaggio non si muove:** il suo comportamento deve essere **Personaggio visto dall'alto** o **Personaggio platform**, con **Comandi: Joystick**.",
+            "**Un joystick non reagisce:** controlla che sia visibile e non nascosto dietro un altro oggetto.",
+            "**Funziona un solo joystick:** controlla di usare la versione 1266 o più recente di Yop2D."
+          ]
+        ]
+      ]
+    ]
+  ]
+}

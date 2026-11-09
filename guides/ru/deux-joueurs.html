@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как сделать игру для двух игроков на одном планшете? | Руководство Yop2D</title>
+<meta name="description" content="Сделай игру для двух игроков на одном планшете в Yop2D без кода: два джойстика, каждый двигает своего персонажа, благодаря мультитачу.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deux-joueurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/deux-joueurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/deux-joueurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/deux-joueurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/deux-joueurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/deux-joueurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deux-joueurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deux-joueurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/deux-joueurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deux-joueurs.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/deux-joueurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Как сделать игру для двух игроков на одном планшете?",
+ "description": "Сделай игру для двух игроков на одном планшете в Yop2D без кода: два джойстика, каждый двигает своего персонажа, благодаря мультитачу.",
+ "inLanguage": "ru",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-движок без кода для Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Два персонажа",
+   "text": "Поведение «Персонаж (вид сверху)», Управление: Джойстик."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Два джойстика",
+   "text": "По одному с каждой стороны экрана."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "У каждого своя цель",
+   "text": "Поле «Цель джойстика» в инспекторе."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Играть вместе",
+   "text": "Палец на каждом джойстике."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ru/index.html">← Yop2D</a>
+<h1>Как сделать игру для двух игроков на одном планшете?</h1>
+<p>Руководство для новичков · без кода</p>
+<p class="langues"><a href="../deux-joueurs.html" hreflang="fr">Français</a> · <a href="../en/deux-joueurs.html" hreflang="en">English</a> · <a href="../es/deux-joueurs.html" hreflang="es">Español</a> · <a href="../de/deux-joueurs.html" hreflang="de">Deutsch</a> · <a href="../it/deux-joueurs.html" hreflang="it">Italiano</a> · <a href="../pt/deux-joueurs.html" hreflang="pt">Português</a> · <strong>Русский</strong> · <a href="../zh/deux-joueurs.html" hreflang="zh">中文</a> · <a href="../ja/deux-joueurs.html" hreflang="ja">日本語</a> · <a href="../ar/deux-joueurs.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ Требуется Yop2D версии 1266 или новее (последнее число номера версии, например 1.0.1266). Если у тебя версия старее, обнови Yop2D.</p>
+<p>На планшете двое могут играть одновременно: <strong>у каждого игрока свой джойстик</strong> и свой персонаж. Yop2D отслеживает каждый палец отдельно (мультитач), поэтому оба персонажа двигаются вместе, <strong>без единого узла</strong>.</p>
+<div class="besoin">
+<b>Тебе понадобится:</b>
+<ul><li>проект, открытый в редакторе (в горизонтальном положении, лучше на планшете);</li><li>два персонажа, например <strong>player1</strong> и <strong>player2</strong> (два объекта Изображение);</li><li>пол или фон — как хочешь.</li></ul>
+</div>
+<h2>Шаг 1: два персонажа, которые ходят сами</h2>
+<div class="method">
+<ol><li>Выбери <strong>player1</strong>, затем нажми <strong>⚙ Поведение объекта</strong> в инспекторе.</li><li>Выбери <strong>Персонаж (вид сверху)</strong> (или <strong>Персонаж платформера</strong>).</li><li>В строке <strong>Управление</strong> оставь <strong>Джойстик</strong>.</li><li>Сделай то же для <strong>player2</strong>.</li></ol>
+</div>
+<h2>Шаг 2: два джойстика</h2>
+<div class="method">
+<ol><li>Добавь на сцену объект <strong>Джойстик</strong> (категория <strong>Интерактивные</strong>) и поставь его внизу слева.</li><li>Добавь второй и поставь его внизу справа.</li><li>Дай им понятные имена: <strong>joystick1</strong> и <strong>joystick2</strong> (в последнем разделе объяснено, чем это полезно).</li></ol>
+<div class="tip">👉 Разный цвет у каждого джойстика помогает игрокам: в инспекторе измени цвет каждого.</div>
+</div>
+<h2>Шаг 3: своя цель для каждого джойстика</h2>
+<div class="method">
+<ol><li>Выбери <strong>joystick1</strong>. В инспекторе, в разделе <strong>«Джойстик»</strong>, нажми кнопку <strong>«Объект для движения»</strong> и выбери <strong>player1</strong>.</li><li>Выбери <strong>joystick2</strong> и так же выбери <strong>player2</strong>.</li><li>Сохрани, затем запусти игру.</li></ol>
+</div>
+<p>Положи по пальцу на каждый джойстик: <strong>оба персонажа двигаются одновременно</strong>, каждый со своим джойстиком. Подними один палец — остановится только этот персонаж.</p>
+<div class="tip">👉 Палец, который держит джойстик, остаётся на нём, пока ты его не поднимешь, даже если он выйдет за круг. Он не может захватить другой джойстик.</div>
+<h2>Идём дальше: читать каждый джойстик в формуле</h2>
+<p>Первый джойстик сохраняет привычные формулы: <code>joystick.x</code>, <code>joystick.y</code>, <code>joystick.force</code>, <code>joystick.angle</code>, <code>joystick.actif</code>. Для остальных <strong>дай джойстику имя, начинающееся с «joy»</strong>, и используй после имени те же слова: <code>joystick2.x</code>, <code>joystick2.y</code>, <code>joystick2.force</code>, <code>joystick2.angle</code>, <code>joystick2.actif</code>.</p>
+<p>Например, чтобы двигать вторым джойстиком объект, который не персонаж, используй «Толкнуть объект», связанный с «Каждый кадр», со значениями <code>=joystick2.x * 5</code> и <code>=joystick2.y * 5</code>.</p>
+<div class="tip">👉 Джойстик с таким именем больше не даёт свою позицию на экране через <code>.x</code> и <code>.y</code>: они дают направление, в котором он отклонён (от -1 до 1).</div>
+<h2>Кнопка прыжка для каждого игрока</h2>
+<p>У персонажей платформера может быть и <strong>своя кнопка прыжка</strong>: в ⚙ Поведение объекта выбери для каждого персонажа разную кнопку в <strong>Кнопка прыжка</strong>. Мультитач позволяет обоим игрокам нажимать одновременно.</p>
+<p>Шаблон «Два игрока» показывает всё это в готовом виде: два ниндзя, два джойстика и ни одного узла.</p>
+<h2>Если не получается</h2>
+<div class="method">
+<ul><li><strong>Оба персонажа следуют за одним джойстиком:</strong> проверь, что у каждого джойстика <strong>своя</strong> цель в <strong>«Объект для движения»</strong>.</li><li><strong>Персонаж не двигается:</strong> его поведение должно быть <strong>Персонаж (вид сверху)</strong> или <strong>Персонаж платформера</strong>, с <strong>Управление: Джойстик</strong>.</li><li><strong>Джойстик не реагирует:</strong> проверь, что он виден и не спрятан за другим объектом.</li><li><strong>Работает только один джойстик:</strong> проверь, что у тебя Yop2D версии 1266 или новее.</li></ul>
+</div>
+
+<div class="nav">
+<a href="../ru/capteurs.html">← Наклон и встряска</a>
+<a href="../ru/interface-demarrage.html">Следующее руководство: Стартовый экран в картинках →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D — бесплатный 2D-движок без кода для Android · <a href="../../ru/index.html">Официальный сайт</a> · <a href="../../noeuds/ru.html">Справочник узлов</a></p>
+</footer>
+</body>
+</html>
