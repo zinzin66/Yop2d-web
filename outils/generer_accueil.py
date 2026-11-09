@@ -33,7 +33,7 @@ APK = "https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk"
 # False = le gros bouton « Télécharger l'APK » et la note d'installation sont cachés de l'accueil (Yop2D est public sur
 # Google Play depuis le 02/11/2026 : le magasin est la voie principale). Remettre True pour les montrer de nouveau.
 # Nombre de modèles du moteur (hors guides) : à mettre à jour à chaque sortie (SORTIE.md). 59 au 05/11/2026.
-NB_MODELES = 63
+NB_MODELES = 64
 AFFICHER_APK = False
 PLAY = "https://play.google.com/store/apps/details?id=com.ludexa.moteur"
 ITCH = "https://yop2d-dev.itch.io/yop2d-no-code-game-engine"

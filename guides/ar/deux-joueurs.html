@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كيف تصنع لعبة لاعبين على جهاز لوحي واحد؟ | دليل Yop2D</title>
+<meta name="description" content="اصنع لعبة للاعبين على جهاز لوحي واحد بـ Yop2D دون برمجة: عصا تحكم لكل لاعب تحرّك شخصيته، بفضل اللمس المتعدد.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ar/deux-joueurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/deux-joueurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/deux-joueurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/deux-joueurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/deux-joueurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/deux-joueurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deux-joueurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deux-joueurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/deux-joueurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deux-joueurs.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/deux-joueurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "كيف تصنع لعبة لاعبين على جهاز لوحي واحد؟",
+ "description": "اصنع لعبة للاعبين على جهاز لوحي واحد بـ Yop2D دون برمجة: عصا تحكم لكل لاعب تحرّك شخصيته، بفضل اللمس المتعدد.",
+ "inLanguage": "ar",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (محرك ألعاب ثنائية الأبعاد بلا برمجة لأندرويد)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "شخصيتان",
+   "text": "سلوك «شخصية بمنظر علوي»، التحكم: عصا تحكم."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "عصا تحكم اثنتان",
+   "text": "واحدة على كل جانب من الشاشة."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "لكل واحدة هدف",
+   "text": "حقل «هدف عصا التحكم» في المفتش."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "العبا معاً",
+   "text": "إصبع على كل عصا تحكم."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ar/index.html">← Yop2D</a>
+<h1>كيف تصنع لعبة لاعبين على جهاز لوحي واحد؟</h1>
+<p>دليل للمبتدئين · بلا برمجة</p>
+<p class="langues"><a href="../deux-joueurs.html" hreflang="fr">Français</a> · <a href="../en/deux-joueurs.html" hreflang="en">English</a> · <a href="../es/deux-joueurs.html" hreflang="es">Español</a> · <a href="../de/deux-joueurs.html" hreflang="de">Deutsch</a> · <a href="../it/deux-joueurs.html" hreflang="it">Italiano</a> · <a href="../pt/deux-joueurs.html" hreflang="pt">Português</a> · <a href="../ru/deux-joueurs.html" hreflang="ru">Русский</a> · <a href="../zh/deux-joueurs.html" hreflang="zh">中文</a> · <a href="../ja/deux-joueurs.html" hreflang="ja">日本語</a> · <strong>العربية</strong></p>
+</header>
+<main>
+<p class="depuis">ℹ️ يتطلب Yop2D بالإصدار 1266 أو أحدث (الرقم الأخير من رقم الإصدار، مثلاً 1.0.1266). إن كان إصدارك أقدم فحدّث Yop2D.</p>
+<p>على جهاز لوحي يستطيع شخصان اللعب في الوقت نفسه: <strong>لكل لاعب عصا تحكمه</strong> وشخصيته. يتتبع Yop2D كل إصبع على حدة (اللمس المتعدد)، فتتحرك الشخصيتان معاً، <strong>دون أي عقدة</strong>.</p>
+<div class="besoin">
+<b>ما تحتاجه:</b>
+<ul><li>مشروع مفتوح في المحرر (بالوضع الأفقي، ويفضل على جهاز لوحي)؛</li><li>شخصيتان، مثلاً <strong>player1</strong> و<strong>player2</strong> (كائنان من نوع صورة)؛</li><li>أرض أو خلفية، كما تريد.</li></ul>
+</div>
+<h2>الخطوة 1: شخصيتان تمشيان وحدهما</h2>
+<div class="method">
+<ol><li>حدّد <strong>player1</strong>، ثم المس <strong>⚙ سلوك الكائن</strong> في المفتش.</li><li>اختر <strong>شخصية بمنظر علوي</strong> (أو <strong>شخصية منصات</strong>).</li><li>في سطر <strong>التحكم</strong> أبقِ <strong>عصا تحكم</strong>.</li><li>افعل الشيء نفسه لـ <strong>player2</strong>.</li></ol>
+</div>
+<h2>الخطوة 2: عصا تحكم اثنتان</h2>
+<div class="method">
+<ol><li>أضف كائن <strong>عصا_تحكم</strong> إلى المشهد (فئة <strong>التفاعلات</strong>) وضعه في أسفل اليسار.</li><li>أضف ثانياً وضعه في أسفل اليمين.</li><li>أعطهما اسمين واضحين: <strong>joystick1</strong> و<strong>joystick2</strong> (يشرح الجزء الأخير لماذا هذا مفيد).</li></ol>
+<div class="tip">👉 لون مختلف لكل عصا تحكم يساعد اللاعبين: في المفتش، غيّر لون كل واحدة.</div>
+</div>
+<h2>الخطوة 3: هدف لكل عصا تحكم</h2>
+<div class="method">
+<ol><li>حدّد <strong>joystick1</strong>. في المفتش، قسم <strong>«التحكم بعصا التحكم»</strong>، المس زر <strong>«الكائن المراد تحريكه»</strong> واختر <strong>player1</strong>.</li><li>حدّد <strong>joystick2</strong> واختر <strong>player2</strong> بالطريقة نفسها.</li><li>احفظ، ثم ابدأ اللعبة.</li></ol>
+</div>
+<p>ضع إصبعاً على كل عصا تحكم: <strong>تتحرك الشخصيتان في الوقت نفسه</strong>، كل واحدة بعصا تحكمها. ارفع إصبعاً فتتوقف تلك الشخصية فقط.</p>
+<div class="tip">👉 الإصبع الذي يمسك بعصا تحكم يحتفظ بها حتى ترفعه، حتى لو انزلق خارج الدائرة. ولا يمكنه أخذ عصا التحكم الأخرى.</div>
+<h2>للمتقدمين: اقرأ كل عصا تحكم في صيغة</h2>
+<p>تحتفظ عصا التحكم الأولى بصيغها المعتادة: <code>joystick.x</code> و<code>joystick.y</code> و<code>joystick.force</code> و<code>joystick.angle</code> و<code>joystick.actif</code>. أما الأخرى فـ<strong>أعطها اسماً يبدأ بـ «joy»</strong> ثم استخدم الكلمات نفسها بعد الاسم: <code>joystick2.x</code> و<code>joystick2.y</code> و<code>joystick2.force</code> و<code>joystick2.angle</code> و<code>joystick2.actif</code>.</p>
+<p>مثلاً، لتحريك كائن ليس شخصية بعصا التحكم الثانية، استخدم «دفع الكائن» مرتبطة بـ «في كل إطار» مع <code>=joystick2.x * 5</code> و<code>=joystick2.y * 5</code>.</p>
+<div class="tip">👉 عصا تحكم بهذا الاسم لم تعد تعطي موضعها على الشاشة بـ <code>.x</code> و<code>.y</code>: تعطيان الاتجاه المدفوع (بين -1 و1).</div>
+<h2>زر قفز لكل لاعب</h2>
+<p>يمكن أيضاً أن يكون لشخصيات المنصات <strong>زر قفز خاص بها</strong>: في ⚙ سلوك الكائن، اختر زراً مختلفاً لكل شخصية في <strong>زر القفز</strong>. يتيح اللمس المتعدد للاعبين الضغط في الوقت نفسه.</p>
+<p>يعرض نموذج «لاعبان» كل هذا جاهزاً للاستخدام: نينجا اثنان، عصا تحكم اثنتان، ولا عقدة.</p>
+<h2>إذا لم يعمل</h2>
+<div class="method">
+<ul><li><strong>الشخصيتان تتبعان عصا التحكم نفسها:</strong> تأكد من أن لكل عصا تحكم هدفاً <strong>خاصاً بها</strong> في <strong>«الكائن المراد تحريكه»</strong>.</li><li><strong>شخصية لا تتحرك:</strong> يجب أن يكون سلوكها <strong>شخصية بمنظر علوي</strong> أو <strong>شخصية منصات</strong>، مع <strong>التحكم: عصا تحكم</strong>.</li><li><strong>عصا تحكم لا تستجيب:</strong> تأكد من أنها ظاهرة وغير مخبأة خلف كائن آخر.</li><li><strong>تعمل عصا تحكم واحدة فقط:</strong> تأكد من أنك تستخدم الإصدار 1266 أو أحدث من Yop2D.</li></ul>
+</div>
+
+<div class="nav">
+<a href="../ar/capteurs.html">→ الإمالة والهز</a>
+<a href="index.html">كل الأدلة →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D، محرك ألعاب ثنائية الأبعاد مجاني وبلا برمجة لأندرويد · <a href="../../ar/index.html">الموقع الرسمي</a> · <a href="../../noeuds/ar.html">مرجع العقد</a></p>
+</footer>
+</body>
+</html>

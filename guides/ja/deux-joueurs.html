@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1台のタブレットで2人プレイのゲームを作るには？ | Yop2D ガイド</title>
+<meta name="description" content="Yop2D で、コードなしで1台のタブレットで遊べる2人プレイのゲームを作ります：ジョイスティックを2つ、それぞれが自分のキャラクターを動かします（マルチタッチのおかげです）。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deux-joueurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/deux-joueurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/deux-joueurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/deux-joueurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/deux-joueurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/deux-joueurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deux-joueurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deux-joueurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/deux-joueurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deux-joueurs.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/deux-joueurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "1台のタブレットで2人プレイのゲームを作るには？",
+ "description": "Yop2D で、コードなしで1台のタブレットで遊べる2人プレイのゲームを作ります：ジョイスティックを2つ、それぞれが自分のキャラクターを動かします（マルチタッチのおかげです）。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "キャラクター2人",
+   "text": "ふるまい「上から見たキャラ」、そうさ：ジョイスティック。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "ジョイスティック2つ",
+   "text": "画面の両側に1つずつ。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "それぞれの対象",
+   "text": "インスペクターの「ジョイスティックの対象」の欄。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "いっしょに遊ぶ",
+   "text": "それぞれのジョイスティックに指を1本ずつ。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>1台のタブレットで2人プレイのゲームを作るには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../deux-joueurs.html" hreflang="fr">Français</a> · <a href="../en/deux-joueurs.html" hreflang="en">English</a> · <a href="../es/deux-joueurs.html" hreflang="es">Español</a> · <a href="../de/deux-joueurs.html" hreflang="de">Deutsch</a> · <a href="../it/deux-joueurs.html" hreflang="it">Italiano</a> · <a href="../pt/deux-joueurs.html" hreflang="pt">Português</a> · <a href="../ru/deux-joueurs.html" hreflang="ru">Русский</a> · <a href="../zh/deux-joueurs.html" hreflang="zh">中文</a> · <strong>日本語</strong> · <a href="../ar/deux-joueurs.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ Yop2D のバージョン 1266 以降が必要です（バージョン番号の最後の数字。例：1.0.1266）。お使いのバージョンが古い場合は、Yop2D を更新してください。</p>
+<p>タブレットなら、2人で同時に遊べます：<strong>プレイヤーごとにジョイスティック</strong>とキャラクターがあります。Yop2D は指を1本ずつ別々に追いかける（マルチタッチ）ので、2人のキャラクターがいっしょに動きます。<strong>ノードは1つもいりません</strong>。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>エディターで開いたプロジェクト（横向き、できればタブレット）。</li><li>キャラクター2人、たとえば <strong>player1</strong> と <strong>player2</strong>（画像 オブジェクト2つ）。</li><li>床や背景は、好きなように。</li></ul>
+</div>
+<h2>ステップ1：自分で歩く2人のキャラクター</h2>
+<div class="method">
+<ol><li><strong>player1</strong> を選び、インスペクターで <strong>⚙ オブジェクトのふるまい</strong> をタップ。</li><li><strong>上から見たキャラ</strong>（または <strong>アクションゲームのキャラ</strong>）を選ぶ。</li><li><strong>そうさ</strong> の行は <strong>ジョイスティック</strong> のまま。</li><li><strong>player2</strong> も同じようにする。</li></ol>
+</div>
+<h2>ステップ2：ジョイスティックを2つ</h2>
+<div class="method">
+<ol><li>シーンに <strong>ジョイスティック</strong> オブジェクトを追加して（カテゴリー <strong>インタラクティブ</strong>）、左下に置く。</li><li>2つ目を追加して、右下に置く。</li><li>わかりやすい名前を付ける：<strong>joystick1</strong> と <strong>joystick2</strong>（最後の部分で理由を説明します）。</li></ol>
+<div class="tip">👉 ジョイスティックごとに色を変えると、プレイヤーが迷いません：インスペクターで、それぞれの色を変えましょう。</div>
+</div>
+<h2>ステップ3：ジョイスティックごとに対象を決める</h2>
+<div class="method">
+<ol><li><strong>joystick1</strong> を選ぶ。インスペクターの <strong>「ジョイスティック制御」</strong> セクションで <strong>「動かすオブジェクト」</strong> ボタンをタップし、<strong>player1</strong> を選ぶ。</li><li><strong>joystick2</strong> を選び、同じように <strong>player2</strong> を選ぶ。</li><li>保存して、ゲームを開始。</li></ol>
+</div>
+<p>それぞれのジョイスティックに指を置く：<strong>2人のキャラクターが同時に動き</strong>、それぞれ自分のジョイスティックで動きます。指を1本離すと、そのキャラクターだけが止まります。</p>
+<div class="tip">👉 ジョイスティックを持っている指は、円の外にすべっても、離すまでそのジョイスティックを持ち続けます。もう1つのジョイスティックは取れません。</div>
+<h2>もっと先へ：式でジョイスティックを読む</h2>
+<p>最初のジョイスティックはいつもの式のままです：<code>joystick.x</code>、<code>joystick.y</code>、<code>joystick.force</code>、<code>joystick.angle</code>、<code>joystick.actif</code>。ほかのジョイスティックは、<strong>名前を「joy」で始めて</strong>、名前のあとに同じ言葉を付けます：<code>joystick2.x</code>、<code>joystick2.y</code>、<code>joystick2.force</code>、<code>joystick2.angle</code>、<code>joystick2.actif</code>。</p>
+<p>たとえば、キャラクターではないオブジェクトを2つ目のジョイスティックで動かすには、「毎フレーム」 につないだ 「オブジェクトを押す」 で <code>=joystick2.x * 5</code> と <code>=joystick2.y * 5</code> を使います。</p>
+<div class="tip">👉 こうして名前を付けたジョイスティックは、<code>.x</code> と <code>.y</code> で画面の位置を返さなくなります：倒した方向（-1〜1）を返します。</div>
+<h2>プレイヤーごとのジャンプボタン</h2>
+<p>アクションゲームのキャラも <strong>自分専用のジャンプボタン</strong> を持てます：⚙ オブジェクトのふるまい で、キャラクターごとに <strong>ジャンプボタン</strong> で別のボタンを選びます。マルチタッチなので、2人が同時に押せます。</p>
+<p>「2人プレイ」テンプレートは、これをすぐ使える形で見せてくれます：忍者2人、ジョイスティック2つ、ノードはなし。</p>
+<h2>うまくいかないときは</h2>
+<div class="method">
+<ul><li><strong>2人のキャラクターが同じジョイスティックで動く：</strong> ジョイスティックごとに <strong>「動かすオブジェクト」</strong> で <strong>別々の</strong> 対象が選ばれているか確認。</li><li><strong>キャラクターが動かない：</strong> ふるまいが <strong>上から見たキャラ</strong> か <strong>アクションゲームのキャラ</strong> で、<strong>そうさ：ジョイスティック</strong> になっているか確認。</li><li><strong>ジョイスティックが反応しない：</strong> 見える状態で、ほかのオブジェクトの後ろにかくれていないか確認。</li><li><strong>ジョイスティックが1つしか動かない：</strong> Yop2D のバージョンが 1266 以上か確認。</li></ul>
+</div>
+
+<div class="nav">
+<a href="../ja/capteurs.html">← 傾ける・振る</a>
+<a href="../ja/interface-demarrage.html">次のガイド： 画像で見るスタート画面 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

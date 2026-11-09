@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Come fare un gioco per due giocatori su un tablet? | Guida Yop2D</title>
+<meta name="description" content="Crea un gioco per due giocatori su un solo tablet con Yop2D, senza codice: due joystick, ognuno muove il suo personaggio, grazie al multitouch.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/it/deux-joueurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/deux-joueurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/deux-joueurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/deux-joueurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/deux-joueurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/deux-joueurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deux-joueurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deux-joueurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/deux-joueurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deux-joueurs.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/deux-joueurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Come fare un gioco per due giocatori su un tablet?",
+ "description": "Crea un gioco per due giocatori su un solo tablet con Yop2D, senza codice: due joystick, ognuno muove il suo personaggio, grazie al multitouch.",
+ "inLanguage": "it",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motore di gioco 2D senza codice per Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Due personaggi",
+   "text": "Comportamento «Personaggio visto dall'alto», Comandi: Joystick."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Due joystick",
+   "text": "Uno per lato dello schermo."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Un bersaglio ciascuno",
+   "text": "Campo «Bersaglio del joystick» dell'Ispettore."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Giocare insieme",
+   "text": "Un dito su ogni joystick."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../it/index.html">← Yop2D</a>
+<h1>Come fare un gioco per due giocatori su un tablet?</h1>
+<p>Guida per principianti · senza codice</p>
+<p class="langues"><a href="../deux-joueurs.html" hreflang="fr">Français</a> · <a href="../en/deux-joueurs.html" hreflang="en">English</a> · <a href="../es/deux-joueurs.html" hreflang="es">Español</a> · <a href="../de/deux-joueurs.html" hreflang="de">Deutsch</a> · <strong>Italiano</strong> · <a href="../pt/deux-joueurs.html" hreflang="pt">Português</a> · <a href="../ru/deux-joueurs.html" hreflang="ru">Русский</a> · <a href="../zh/deux-joueurs.html" hreflang="zh">中文</a> · <a href="../ja/deux-joueurs.html" hreflang="ja">日本語</a> · <a href="../ar/deux-joueurs.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ Richiede la versione 1266 di Yop2D o successiva (l&#x27;ultimo numero della versione, per esempio 1.0.1266). Se la tua versione è più vecchia, aggiorna Yop2D.</p>
+<p>Su un tablet due persone possono giocare insieme: <strong>ogni giocatore ha il suo joystick</strong> e il suo personaggio. Yop2D segue ogni dito separatamente (multitouch), quindi i due personaggi si muovono insieme, <strong>senza alcun nodo</strong>.</p>
+<div class="besoin">
+<b>Ti serve:</b>
+<ul><li>un progetto aperto nell'editor (in orizzontale, meglio su un tablet);</li><li>due personaggi, per esempio <strong>player1</strong> e <strong>player2</strong> (due oggetti Immagine);</li><li>un pavimento o uno sfondo, come preferisci.</li></ul>
+</div>
+<h2>Passo 1: due personaggi che camminano da soli</h2>
+<div class="method">
+<ol><li>Seleziona <strong>player1</strong>, poi tocca <strong>⚙ Comportamento dell'oggetto</strong> nell'Ispettore.</li><li>Scegli <strong>Personaggio visto dall'alto</strong> (o <strong>Personaggio platform</strong>).</li><li>Nella riga <strong>Comandi</strong>, lascia <strong>Joystick</strong>.</li><li>Fai lo stesso per <strong>player2</strong>.</li></ol>
+</div>
+<h2>Passo 2: due joystick</h2>
+<div class="method">
+<ol><li>Aggiungi un oggetto <strong>Joystick</strong> alla scena (categoria <strong>Interattivi</strong>) e mettilo in basso a sinistra.</li><li>Aggiungine un secondo e mettilo in basso a destra.</li><li>Dai loro nomi chiari: <strong>joystick1</strong> e <strong>joystick2</strong> (l'ultima parte spiega perché è utile).</li></ol>
+<div class="tip">👉 Un colore diverso per ogni joystick aiuta i giocatori: nell'Ispettore cambia il colore di ciascuno.</div>
+</div>
+<h2>Passo 3: un bersaglio per ogni joystick</h2>
+<div class="method">
+<ol><li>Seleziona <strong>joystick1</strong>. Nell'Ispettore, sezione <strong>«Controllo Joystick»</strong>, tocca il pulsante <strong>«Oggetto da muovere»</strong> e scegli <strong>player1</strong>.</li><li>Seleziona <strong>joystick2</strong> e scegli <strong>player2</strong> allo stesso modo.</li><li>Salva, poi avvia il gioco.</li></ol>
+</div>
+<p>Appoggia un dito su ogni joystick: <strong>i due personaggi si muovono insieme</strong>, ognuno col suo joystick. Alza un dito e si ferma solo quel personaggio.</p>
+<div class="tip">👉 Un dito che tiene un joystick lo conserva finché non lo alzi, anche se esce dal cerchio. Non può prendere l'altro joystick.</div>
+<h2>Per andare oltre: leggere ogni joystick in una formula</h2>
+<p>Il primo joystick conserva le sue formule abituali: <code>joystick.x</code>, <code>joystick.y</code>, <code>joystick.force</code>, <code>joystick.angle</code>, <code>joystick.actif</code>. Per gli altri, <strong>dai al joystick un nome che inizia con «joy»</strong> e usa le stesse parole dopo il nome: <code>joystick2.x</code>, <code>joystick2.y</code>, <code>joystick2.force</code>, <code>joystick2.angle</code>, <code>joystick2.actif</code>.</p>
+<p>Per esempio, per muovere con il secondo joystick un oggetto che non è un personaggio, usa «Spingi l'oggetto» collegato a «Ogni frame» con <code>=joystick2.x * 5</code> e <code>=joystick2.y * 5</code>.</p>
+<div class="tip">👉 Un joystick chiamato così non dà più la sua posizione sullo schermo con <code>.x</code> e <code>.y</code>: danno la direzione spinta (tra -1 e 1).</div>
+<h2>Un pulsante di salto per ogni giocatore</h2>
+<p>Anche i personaggi platform possono avere <strong>il proprio pulsante di salto</strong>: in ⚙ Comportamento dell'oggetto, scegli un pulsante diverso per ogni personaggio in <strong>Pulsante salto</strong>. Il multitouch permette a entrambi i giocatori di premere insieme.</p>
+<p>Il modello «Due giocatori» mostra tutto questo pronto all'uso: due ninja, due joystick e nessun nodo.</p>
+<h2>Se non funziona</h2>
+<div class="method">
+<ul><li><strong>I due personaggi seguono lo stesso joystick:</strong> controlla che ogni joystick abbia il <strong>proprio</strong> bersaglio in <strong>«Oggetto da muovere»</strong>.</li><li><strong>Un personaggio non si muove:</strong> il suo comportamento deve essere <strong>Personaggio visto dall'alto</strong> o <strong>Personaggio platform</strong>, con <strong>Comandi: Joystick</strong>.</li><li><strong>Un joystick non reagisce:</strong> controlla che sia visibile e non nascosto dietro un altro oggetto.</li><li><strong>Funziona un solo joystick:</strong> controlla di usare la versione 1266 o più recente di Yop2D.</li></ul>
+</div>
+
+<div class="nav">
+<a href="../it/capteurs.html">← Inclina e scuoti</a>
+<a href="../it/interface-demarrage.html">Guida successiva: La schermata iniziale in immagini →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motore di gioco 2D gratuito e senza codice per Android · <a href="../../it/index.html">Sito ufficiale</a> · <a href="../../noeuds/it.html">Riferimento dei nodi</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie macht man ein Zwei-Spieler-Spiel auf einem Tablet? | Yop2D-Anleitung</title>
+<meta name="description" content="Mach mit Yop2D ein Spiel für zwei Spieler auf einem Tablet, ohne Code: zwei Joysticks, die jeweils ihre eigene Figur bewegen, dank Multitouch.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/de/deux-joueurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/deux-joueurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/deux-joueurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/deux-joueurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/deux-joueurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/deux-joueurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deux-joueurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deux-joueurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/deux-joueurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deux-joueurs.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/deux-joueurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Wie macht man ein Zwei-Spieler-Spiel auf einem Tablet?",
+ "description": "Mach mit Yop2D ein Spiel für zwei Spieler auf einem Tablet, ohne Code: zwei Joysticks, die jeweils ihre eigene Figur bewegen, dank Multitouch.",
+ "inLanguage": "de",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (2D-Spiel-Engine ohne Code für Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Zwei Figuren",
+   "text": "Verhalten „Figur von oben“, Steuerung: Joystick."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Zwei Joysticks",
+   "text": "Einer auf jeder Seite des Bildschirms."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Je ein Ziel",
+   "text": "Feld „Ziel des Joysticks“ im Inspektor."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Zusammen spielen",
+   "text": "Ein Finger auf jedem Joystick."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../de/index.html">← Yop2D</a>
+<h1>Wie macht man ein Zwei-Spieler-Spiel auf einem Tablet?</h1>
+<p>Anleitung für Einsteiger · ohne Code</p>
+<p class="langues"><a href="../deux-joueurs.html" hreflang="fr">Français</a> · <a href="../en/deux-joueurs.html" hreflang="en">English</a> · <a href="../es/deux-joueurs.html" hreflang="es">Español</a> · <strong>Deutsch</strong> · <a href="../it/deux-joueurs.html" hreflang="it">Italiano</a> · <a href="../pt/deux-joueurs.html" hreflang="pt">Português</a> · <a href="../ru/deux-joueurs.html" hreflang="ru">Русский</a> · <a href="../zh/deux-joueurs.html" hreflang="zh">中文</a> · <a href="../ja/deux-joueurs.html" hreflang="ja">日本語</a> · <a href="../ar/deux-joueurs.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ Benötigt Yop2D ab Version 1266 (die letzte Zahl der Versionsnummer, zum Beispiel 1.0.1266). Ist deine Version älter, aktualisiere Yop2D.</p>
+<p>Auf einem Tablet können zwei Personen gleichzeitig spielen: <strong>Jeder Spieler hat seinen eigenen Joystick</strong> und seine Figur. Yop2D verfolgt jeden Finger einzeln (Multitouch), also bewegen sich beide Figuren zusammen, <strong>ganz ohne Knoten</strong>.</p>
+<div class="besoin">
+<b>Du brauchst:</b>
+<ul><li>ein im Editor geöffnetes Projekt (im Querformat, am besten auf einem Tablet);</li><li>zwei Figuren, zum Beispiel <strong>player1</strong> und <strong>player2</strong> (zwei Bild-Objekte);</li><li>ein Boden oder ein Hintergrund, wie du möchtest.</li></ul>
+</div>
+<h2>Schritt 1: zwei Figuren, die von selbst laufen</h2>
+<div class="method">
+<ol><li>Wähle <strong>player1</strong> aus und tippe im Inspektor auf <strong>⚙ Verhalten des Objekts</strong>.</li><li>Wähle <strong>Figur von oben</strong> (oder <strong>Plattform-Figur</strong>).</li><li>Lass in der Zeile <strong>Steuerung</strong> den <strong>Joystick</strong> stehen.</li><li>Mach dasselbe mit <strong>player2</strong>.</li></ol>
+</div>
+<h2>Schritt 2: zwei Joysticks</h2>
+<div class="method">
+<ol><li>Füge der Szene ein <strong>Joystick</strong>-Objekt hinzu (Kategorie <strong>Interaktiv</strong>) und setze es nach unten links.</li><li>Füge ein zweites hinzu und setze es nach unten rechts.</li><li>Gib ihnen klare Namen: <strong>joystick1</strong> und <strong>joystick2</strong> (der letzte Abschnitt erklärt, warum das hilft).</li></ol>
+<div class="tip">👉 Eine andere Farbe für jeden Joystick hilft den Spielern: Ändere im Inspektor die Farbe von jedem.</div>
+</div>
+<h2>Schritt 3: ein Ziel für jeden Joystick</h2>
+<div class="method">
+<ol><li>Wähle <strong>joystick1</strong> aus. Tippe im Inspektor im Abschnitt <strong>„Joystick-Steuerung“</strong> auf den Knopf <strong>„Zu bewegendes Objekt“</strong> und wähle <strong>player1</strong>.</li><li>Wähle <strong>joystick2</strong> aus und wähle genauso <strong>player2</strong>.</li><li>Speichere und starte das Spiel.</li></ol>
+</div>
+<p>Lege auf jeden Joystick einen Finger: <strong>Beide Figuren bewegen sich gleichzeitig</strong>, jede mit ihrem Joystick. Hebe einen Finger, und nur diese Figur bleibt stehen.</p>
+<div class="tip">👉 Ein Finger, der einen Joystick hält, behält ihn, bis du ihn hebst, auch wenn er aus dem Kreis rutscht. Er kann den anderen Joystick nicht übernehmen.</div>
+<h2>Weiter gehen: jeden Joystick in einer Formel lesen</h2>
+<p>Der erste Joystick behält seine gewohnten Formeln: <code>joystick.x</code>, <code>joystick.y</code>, <code>joystick.force</code>, <code>joystick.angle</code>, <code>joystick.actif</code>. Für die anderen <strong>gib dem Joystick einen Namen, der mit „joy“ beginnt</strong>, und verwende nach dem Namen dieselben Wörter: <code>joystick2.x</code>, <code>joystick2.y</code>, <code>joystick2.force</code>, <code>joystick2.angle</code>, <code>joystick2.actif</code>.</p>
+<p>Um zum Beispiel ein Objekt, das keine Figur ist, mit dem zweiten Joystick zu bewegen, nimm „Objekt schieben“, verbunden mit „Jeden Frame“, mit <code>=joystick2.x * 5</code> und <code>=joystick2.y * 5</code>.</p>
+<div class="tip">👉 Ein so benannter Joystick gibt seine Bildschirmposition mit <code>.x</code> und <code>.y</code> nicht mehr aus: Sie geben die gedrückte Richtung an (zwischen -1 und 1).</div>
+<h2>Ein Sprungknopf für jeden Spieler</h2>
+<p>Plattform-Figuren können auch <strong>ihren eigenen Sprungknopf</strong> haben: Wähle in ⚙ Verhalten des Objekts für jede Figur bei <strong>Sprungknopf</strong> einen anderen Knopf. Dank Multitouch können beide Spieler gleichzeitig drücken.</p>
+<p>Die Vorlage „Zwei Spieler“ zeigt all das fertig: zwei Ninjas, zwei Joysticks und kein Knoten.</p>
+<h2>Wenn es nicht klappt</h2>
+<div class="method">
+<ul><li><strong>Beide Figuren folgen demselben Joystick:</strong> Prüfe, dass jeder Joystick sein <strong>eigenes</strong> Ziel in <strong>„Zu bewegendes Objekt“</strong> hat.</li><li><strong>Eine Figur bewegt sich nicht:</strong> Ihr Verhalten muss <strong>Figur von oben</strong> oder <strong>Plattform-Figur</strong> sein, mit <strong>Steuerung: Joystick</strong>.</li><li><strong>Ein Joystick reagiert nicht:</strong> Prüfe, dass er sichtbar ist und nicht hinter einem anderen Objekt versteckt.</li><li><strong>Nur ein Joystick funktioniert:</strong> Prüfe, dass du Yop2D in Version 1266 oder neuer verwendest.</li></ul>
+</div>
+
+<div class="nav">
+<a href="../de/capteurs.html">← Neigen und schütteln</a>
+<a href="../de/interface-demarrage.html">Nächste Anleitung: Der Startbildschirm in Bildern →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, kostenlose 2D-Spiel-Engine ohne Code für Android · <a href="../../de/index.html">Offizielle Website</a> · <a href="../../noeuds/de.html">Knotenreferenz</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to make a two-player game on one tablet? | Yop2D guide</title>
+<meta name="description" content="Make a two-player game on one tablet in Yop2D, without code: two joysticks, each one moving its own character, thanks to multi-touch.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/deux-joueurs.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/deux-joueurs.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/deux-joueurs.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/deux-joueurs.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/deux-joueurs.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/deux-joueurs.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/deux-joueurs.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/deux-joueurs.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/deux-joueurs.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/deux-joueurs.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/deux-joueurs.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to make a two-player game on one tablet?",
+ "description": "Make a two-player game on one tablet in Yop2D, without code: two joysticks, each one moving its own character, thanks to multi-touch.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Two characters",
+   "text": "“Top-down character” behavior, Controls: Joystick."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Two joysticks",
+   "text": "One on each side of the screen."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "One target each",
+   "text": "“Joystick target” field in the Inspector."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Play together",
+   "text": "A finger on each joystick."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to make a two-player game on one tablet?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../deux-joueurs.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/deux-joueurs.html" hreflang="es">Español</a> · <a href="../de/deux-joueurs.html" hreflang="de">Deutsch</a> · <a href="../it/deux-joueurs.html" hreflang="it">Italiano</a> · <a href="../pt/deux-joueurs.html" hreflang="pt">Português</a> · <a href="../ru/deux-joueurs.html" hreflang="ru">Русский</a> · <a href="../zh/deux-joueurs.html" hreflang="zh">中文</a> · <a href="../ja/deux-joueurs.html" hreflang="ja">日本語</a> · <a href="../ar/deux-joueurs.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ Needs Yop2D version 1266 or newer (the last number of the version, for example 1.0.1266). If your version is older, update Yop2D.</p>
+<p>On a tablet, two people can play at the same time: <strong>each player has their own joystick</strong> and their own character. Yop2D follows each finger separately (multi-touch), so both characters move together, <strong>without any node</strong>.</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a project open in the editor (landscape, ideally on a tablet);</li><li>two characters, for example <strong>player1</strong> and <strong>player2</strong> (two Image objects);</li><li>a floor or a background, as you like.</li></ul>
+</div>
+<h2>Step 1: two characters that walk by themselves</h2>
+<div class="method">
+<ol><li>Select <strong>player1</strong>, then tap <strong>⚙ Object behavior</strong> in the Inspector.</li><li>Choose <strong>Top-down character</strong> (or <strong>Platform character</strong>).</li><li>On the <strong>Controls</strong> line, keep <strong>Joystick</strong>.</li><li>Do the same for <strong>player2</strong>.</li></ol>
+</div>
+<h2>Step 2: two joysticks</h2>
+<div class="method">
+<ol><li>Add a <strong>Joystick</strong> object to the scene (category <strong>Interactives</strong>) and put it at the bottom left.</li><li>Add a second one and put it at the bottom right.</li><li>Give them clear names: <strong>joystick1</strong> and <strong>joystick2</strong> (the last step explains why this helps).</li></ol>
+<div class="tip">👉 A different color for each joystick helps the players: in the Inspector, change the color of each one.</div>
+</div>
+<h2>Step 3: one target for each joystick</h2>
+<div class="method">
+<ol><li>Select <strong>joystick1</strong>. In the Inspector, section <strong>“Joystick Control”</strong>, tap the <strong>“Object to move”</strong> button and choose <strong>player1</strong>.</li><li>Select <strong>joystick2</strong> and choose <strong>player2</strong> the same way.</li><li>Save, then start the game.</li></ol>
+</div>
+<p>Put one finger on each joystick: <strong>both characters move at the same time</strong>, each one with its own joystick. Lift one finger and only that character stops.</p>
+<div class="tip">👉 A finger that holds a joystick keeps it until you lift it, even if it slides outside the circle. It cannot take the other joystick.</div>
+<h2>Go further: read each joystick in a formula</h2>
+<p>The first joystick keeps its usual formulas: <code>joystick.x</code>, <code>joystick.y</code>, <code>joystick.force</code>, <code>joystick.angle</code>, <code>joystick.actif</code>. For the others, <strong>give the joystick a name that starts with “joy”</strong>, then use the same words after the name: <code>joystick2.x</code>, <code>joystick2.y</code>, <code>joystick2.force</code>, <code>joystick2.angle</code>, <code>joystick2.actif</code>.</p>
+<p>For example, to move an object that is not a character with the second joystick, use “Push object” linked to “Every frame” with <code>=joystick2.x * 5</code> and <code>=joystick2.y * 5</code>.</p>
+<div class="tip">👉 A joystick named like this no longer gives its screen position with <code>.x</code> and <code>.y</code>: they give the direction pushed (between -1 and 1).</div>
+<h2>Jump buttons for each player</h2>
+<p>Platform characters can also have <strong>their own jump button</strong>: in ⚙ Object behavior, choose a different button for each character in <strong>Jump button</strong>. Multi-touch lets both players press at the same time.</p>
+<p>The “Two players” template shows all this ready to use: two ninjas, two joysticks, and no node.</p>
+<h2>If it doesn't work</h2>
+<div class="method">
+<ul><li><strong>Both characters follow the same joystick:</strong> check that each joystick has its <strong>own</strong> target in <strong>“Object to move”</strong>.</li><li><strong>A character does not move:</strong> its behavior must be <strong>Top-down character</strong> or <strong>Platform character</strong>, with <strong>Controls: Joystick</strong>.</li><li><strong>A joystick does not react:</strong> make sure it is visible and not hidden behind another object.</li><li><strong>Only one joystick works:</strong> check that you are using version 1266 or newer of Yop2D.</li></ul>
+</div>
+
+<div class="nav">
+<a href="../en/capteurs.html">← Tilt and shake</a>
+<a href="../en/interface-demarrage.html">Next guide: The start screen in pictures →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>
