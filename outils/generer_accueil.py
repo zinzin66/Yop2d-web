@@ -389,6 +389,16 @@ def page(langue, t):
         classe = ' class="nous"' if i == 0 else ""
         lignes.append(f"<tr{classe}>{cellules}</tr>")
     limites = "\n".join(f"<li>{liens(x, base)}</li>" for x in comp["limites"])
+    inclus_html = ""
+    if comp.get("inclus"):
+        inclus_li = "\n".join(f"<li>{liens(x, base)}</li>" for x in comp["inclus"])
+        inclus_html = f'''<div class="bloc" style="margin-top:1.5rem">
+<h3 style="margin-top:0">{e(comp["inclus_titre"])}</h3>
+<ul>
+{inclus_li}
+</ul>
+<p class="note">{e(comp["inclus_note"])}</p>
+</div>'''
     choisir = "\n".join(f"<li>{liens(x, base)}</li>" for x in comp["choisir"])
     autres = "\n".join(f"<li>{liens(x, base)}</li>" for x in comp["autres"])
 
@@ -505,6 +515,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 </table>
 </div>
 <p class="note">{e(comp["note"])}</p>
+{inclus_html}
 <div class="deux">
 <div class="bloc">
 <h3>{e(comp["choisir_titre"])}</h3>
@@ -668,7 +679,10 @@ def llms(t):
     lignes += ["", "## Comparison with other engines", "", comp["intro"], ""]
     for ligne in comp["lignes"]:
         lignes.append(f"- {ligne[0]}: " + "; ".join(f"{c}: {v}" for c, v in zip(comp["colonnes"][1:], ligne[1:])))
-    lignes += ["", comp["note"], "", comp["limites_titre"] + ":", ""]
+    lignes += ["", comp["note"], ""]
+    if comp.get("inclus"):
+        lignes += [comp["inclus_titre"] + ":", ""] + [f"- {sans_balises(x)}" for x in comp["inclus"]] + ["", comp["inclus_note"], ""]
+    lignes += [comp["limites_titre"] + ":", ""]
     lignes += [f"- {sans_balises(x)}" for x in comp["limites"]]
     lignes += ["", comp["autres_titre"] + ":", ""]
     lignes += [f"- {sans_balises(x)}" for x in comp["autres"]]
