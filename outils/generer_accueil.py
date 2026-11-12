@@ -195,10 +195,11 @@ header .voir-jeu { display: inline-block; margin-top: 0.9rem; color: #fff; borde
 header .voir-jeu:hover { background: rgba(255,255,255,0.15); }
 #create { max-width: 1000px; margin: 0 auto 3rem; text-align: center; }
 #create .sous { color: #475569; margin: -0.5rem auto 1.4rem; max-width: 640px; }
-.types { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.9rem; }
+.types { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+@media (min-width: 700px) { .types { grid-template-columns: repeat(3, 1fr); } }
 .type { position: relative; display: block; border-radius: 14px; overflow: hidden; background: #0f172a; box-shadow: 0 2px 8px rgba(15,23,42,0.18); text-decoration: none; color: #fff; transition: transform .15s; }
 .type:hover, .type:focus { transform: translateY(-3px); }
-.type img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.type img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
 .type span { display: block; padding: 0.55rem 0.6rem; font-weight: 700; font-size: 0.95rem; text-align: start; }
 details.fold > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.6rem; }
 details.fold > summary::-webkit-details-marker { display: none; }
@@ -355,8 +356,8 @@ def bloc_ecole(ec, base):
 
 
 
-GUIDES_TYPES = [("platformer", "plateforme"), ("firefly_night", "histoire-choix"), ("tactics_demo", "jeu-tactique"),
-                ("space_1", None), ("candy_match", None), ("deux_joueurs", "deux-joueurs")]
+GUIDES_TYPES = [("accueil/histoire.jpg", "histoire-choix"), ("accueil/puzzle.jpg", None), ("exemples/crystal_breaker.png", "casse-briques"),
+                ("accueil/arcade.jpg", None), ("exemples/nuit_village.png", "plateforme"), ("exemples/dungeon_escape.png", None)]
 
 
 def lien_guide(langue, guide, base):
@@ -376,8 +377,7 @@ def bloc_types(langue, t, base):
             href = lien_guide(langue, guide, base)
         else:
             href = f"{base}exemples/{langue_pages(langue)}.html"
-        src = f"{base}guides/img/{image}.jpg" if image == "deux_joueurs" else f"{base}exemples/{image}.png"
-        cartes.append(f'<a class="type" href="{href}"><img src="{src}" alt="" loading="lazy" width="300" height="225"><span>{e(nom)}</span></a>')
+        cartes.append(f'<a class="type" href="{href}"><img src="{base}{image}" alt="" loading="lazy" width="800" height="500"><span>{e(nom)}</span></a>')
     return f"""<section id="create">
 <h2>{e(a2["creer_titre"])}</h2>
 <p class="sous">{e(a2["creer_sous"])}</p>
