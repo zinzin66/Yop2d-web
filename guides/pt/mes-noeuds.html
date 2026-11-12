@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como criar seus próprios nós (Meus nós)? | Guia Yop2D</title>
+<meta name="description" content="Agrupe vários nós em um só nó seu, com ajustes (número, texto, objeto), reutilizável em todo o seu jogo com o Yop2D, sem código.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/pt/mes-noeuds.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/mes-noeuds.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/mes-noeuds.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/mes-noeuds.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/mes-noeuds.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/mes-noeuds.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/mes-noeuds.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/mes-noeuds.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/mes-noeuds.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/mes-noeuds.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/mes-noeuds.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "Como criar seus próprios nós?",
+ "description": "Agrupe vários nós em um só nó seu, com ajustes (número, texto, objeto), reutilizável em todo o seu jogo com o Yop2D, sem código.",
+ "inLanguage": "pt",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de jogos 2D sem código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Criar",
+   "text": "Painel Recursos → Meus nós → +."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Preencher",
+   "text": "Construa como um Blueprint."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Ajustes",
+   "text": "Botão “Ajustes do meu nó”."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Usar",
+   "text": "Menu “Meus nós” do painel."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../pt/index.html">← Yop2D</a>
+<h1>Como criar seus próprios nós?</h1>
+<p>Guia para iniciantes · sem código</p>
+<p class="langues"><a href="../mes-noeuds.html" hreflang="fr">Français</a> · <a href="../en/mes-noeuds.html" hreflang="en">English</a> · <a href="../es/mes-noeuds.html" hreflang="es">Español</a> · <a href="../de/mes-noeuds.html" hreflang="de">Deutsch</a> · <a href="../it/mes-noeuds.html" hreflang="it">Italiano</a> · <strong>Português</strong> · <a href="../ru/mes-noeuds.html" hreflang="ru">Русский</a> · <a href="../zh/mes-noeuds.html" hreflang="zh">中文</a> · <a href="../ja/mes-noeuds.html" hreflang="ja">日本語</a> · <a href="../ar/mes-noeuds.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ Exige a versão 1281 do Yop2D ou mais recente (o último número da versão, por exemplo 1.0.1281). Se a sua versão for mais antiga, atualize o Yop2D.</p>
+<p>Quando você monta várias vezes a mesma série de nós (por exemplo: um inimigo que pisca, toca um som e perde vida), pode <strong>guardá-la em um só nó seu</strong>. Você a escreve uma vez e depois a <strong>executa</strong> onde quiser, com <strong>ajustes</strong> que mudam de um lugar para outro (a velocidade, a mensagem, o objeto alvo…).</p>
+<div class="besoin">
+<b>Você precisa de:</b>
+<ul><li>um projeto aberto no editor;</li><li>uma pequena série de nós que você quer reutilizar.</li></ul>
+</div>
+<h2>Passo 1: criar seu nó</h2>
+<div class="method">
+<ol><li>No editor, abra o painel <strong>Recursos</strong> e encontre <strong>Meus nós</strong>.</li><li>Toque em <strong>+</strong> e dê um nome, por exemplo <strong>Golpe_sofrido</strong>.</li><li>Selecione-o e toque no ícone do <strong>Blueprint</strong>: você chega a um Blueprint vazio reservado a este nó.</li><li>Monte sua série de nós como de costume e salve (💾). O título do Blueprint diz <strong>Meu nó: Golpe_sofrido</strong>.</li></ol>
+</div>
+<h2>Passo 2: dar ajustes a ele</h2>
+<div class="method">
+<ol><li>No Blueprint do seu nó, toque no botão <strong>Ajustes do meu nó</strong> (no topo).</li><li>Toque em <strong>+ Adicionar uma entrada</strong>: dê um nome (por exemplo <strong>velocidade</strong>), escolha o <strong>tipo</strong> e o <strong>valor inicial</strong>.</li><li>Nos nós do seu nó, escreva o nome da entrada em uma fórmula: <strong>=velocidade</strong>.</li><li>Uma entrada <strong>Número</strong> é um número; <strong>Texto</strong>, uma mensagem; <strong>Sim / não</strong>, um interruptor; <strong>Objeto</strong>, o nome de um objeto da cena.</li></ol>
+<div class="tip">👉 <strong>O tipo Objeto</strong>: quem executa seu nó escolhe em qual objeto ele age. Nos nós do seu nó, abra <strong>Sobre o quê?</strong>: um grupo <strong>Ajustes do meu nó</strong> oferece “Entrada … do meu nó”. O mesmo nó pode fazer piscar um inimigo, um baú ou o herói.</div>
+</div>
+<h2>Passo 3: colocá-lo em um Blueprint</h2>
+<div class="method">
+<ol><li>Abra o Blueprint de uma cena.</li><li>No painel de nós, a categoria <strong>Meus nós</strong> fica no topo da lista: toque no seu nó.</li><li>Chega um nó <strong>Usar um dos meus nós</strong> já ajustado para o seu, com uma linha por ajuste: preencha (um número, uma fórmula, um nome de objeto…).</li></ol>
+</div>
+<h2>Passo 4: compartilhar um nó</h2>
+<div class="method">
+<ol><li>Abra o Blueprint do seu nó, toque no botão de seleção <strong>⬚</strong> e selecione todos os nós (moldura no vazio).</li><li>Toque em <strong>⧉ Copiar</strong> e cole o resultado em uma mensagem para seu amigo.</li><li>Seu amigo cria um nó vazio, abre o Blueprint dele, toca em <strong>“{ }”</strong> e cola: a série aparece.</li></ol>
+<div class="tip">👉 O compartilhamento leva os <strong>nós</strong>, não as imagens nem os sons que eles usam: envie à parte. Os <strong>ajustes</strong> (entradas) são recriados com o botão <strong>Ajustes do meu nó</strong>.</div>
+</div>
+<h2>Se não funcionar</h2>
+<div class="method">
+<ul><li><strong>Meu nó não aparece no menu:</strong> ele precisa estar salvo; feche e reabra o Blueprint para atualizar a lista.</li><li><strong>Falta minha linha de ajuste:</strong> abra a janela do nó “Usar um dos meus nós”: as linhas se atualizam quando você troca de nó.</li><li><strong>Nada acontece:</strong> seu nó deve começar com um nó ligado ao resto, e o nó de chamada deve estar ligado a um evento.</li></ul>
+</div>
+
+<div class="nav">
+<a href="../pt/deux-joueurs.html">← Dois jogadores, dois joysticks</a>
+<a href="../pt/interface-demarrage.html">Próximo guia: A tela inicial em imagens →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de jogos 2D gratuito e sem código para Android · <a href="../../pt/index.html">Site oficial</a> · <a href="../../noeuds/pt.html">Referência de nós</a></p>
+</footer>
+</body>
+</html>

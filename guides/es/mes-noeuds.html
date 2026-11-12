@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Cómo crear tus propios nodos (Mis nodos)? | Guía Yop2D</title>
+<meta name="description" content="Agrupa varios nodos en un solo nodo tuyo, con ajustes (número, texto, objeto), reutilizable en todo tu juego con Yop2D, sin código.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/es/mes-noeuds.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/mes-noeuds.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/mes-noeuds.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/mes-noeuds.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/mes-noeuds.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/mes-noeuds.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/mes-noeuds.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/mes-noeuds.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/mes-noeuds.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/mes-noeuds.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/mes-noeuds.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "¿Cómo crear tus propios nodos?",
+ "description": "Agrupa varios nodos en un solo nodo tuyo, con ajustes (número, texto, objeto), reutilizable en todo tu juego con Yop2D, sin código.",
+ "inLanguage": "es",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (motor de juegos 2D sin código para Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Crear",
+   "text": "Panel Recursos → Mis nodos → +."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Rellenar",
+   "text": "Constrúyelo como un Blueprint."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Sus ajustes",
+   "text": "Botón «Ajustes de mi nodo»."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Usarlo",
+   "text": "Menú «Mis nodos» del panel."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../es/index.html">← Yop2D</a>
+<h1>¿Cómo crear tus propios nodos?</h1>
+<p>Guía para principiantes · sin código</p>
+<p class="langues"><a href="../mes-noeuds.html" hreflang="fr">Français</a> · <a href="../en/mes-noeuds.html" hreflang="en">English</a> · <strong>Español</strong> · <a href="../de/mes-noeuds.html" hreflang="de">Deutsch</a> · <a href="../it/mes-noeuds.html" hreflang="it">Italiano</a> · <a href="../pt/mes-noeuds.html" hreflang="pt">Português</a> · <a href="../ru/mes-noeuds.html" hreflang="ru">Русский</a> · <a href="../zh/mes-noeuds.html" hreflang="zh">中文</a> · <a href="../ja/mes-noeuds.html" hreflang="ja">日本語</a> · <a href="../ar/mes-noeuds.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ Requiere la versión 1281 de Yop2D o una más reciente (el último número de la versión, por ejemplo 1.0.1281). Si tu versión es anterior, actualiza Yop2D.</p>
+<p>Cuando haces varias veces la misma serie de nodos (por ejemplo: un enemigo que parpadea, suena y pierde vida), puedes <strong>guardarla en un solo nodo tuyo</strong>. La escribes una vez y luego la <strong>lanzas</strong> donde quieras, con <strong>ajustes</strong> que cambian de un sitio a otro (la velocidad, el mensaje, el objeto elegido…).</p>
+<div class="besoin">
+<b>Necesitas:</b>
+<ul><li>un proyecto abierto en el editor;</li><li>una pequeña serie de nodos que quieras reutilizar.</li></ul>
+</div>
+<h2>Paso 1: crear tu nodo</h2>
+<div class="method">
+<ol><li>En el editor, abre el panel <strong>Recursos</strong> y busca <strong>Mis nodos</strong>.</li><li>Toca <strong>+</strong> y ponle un nombre, por ejemplo <strong>Golpe_recibido</strong>.</li><li>Selecciónalo y toca el icono del <strong>Blueprint</strong>: llegas a un Blueprint vacío reservado para este nodo.</li><li>Construye tu serie de nodos como siempre y guarda (💾). El título del Blueprint dice <strong>Mi nodo: Golpe_recibido</strong>.</li></ol>
+</div>
+<h2>Paso 2: darle ajustes</h2>
+<div class="method">
+<ol><li>En el Blueprint de tu nodo, toca el botón <strong>Ajustes de mi nodo</strong> (arriba).</li><li>Toca <strong>+ Añadir una entrada</strong>: ponle un nombre (por ejemplo <strong>velocidad</strong>), elige su <strong>tipo</strong> y su <strong>valor inicial</strong>.</li><li>En los nodos de tu nodo, escribe el nombre de la entrada en una fórmula: <strong>=velocidad</strong>.</li><li>Una entrada <strong>Número</strong> es un número; <strong>Texto</strong>, un mensaje; <strong>Sí / no</strong>, un interruptor; <strong>Objeto</strong>, el nombre de un objeto de la escena.</li></ol>
+<div class="tip">👉 <strong>El tipo Objeto</strong>: quien lanza tu nodo elige sobre qué objeto actúa. En los nodos de tu nodo, abre <strong>¿Sobre qué?</strong>: un grupo <strong>Ajustes de mi nodo</strong> ofrece «Entrada … de mi nodo». Así el mismo nodo puede hacer parpadear a un enemigo, a un cofre o al héroe.</div>
+</div>
+<h2>Paso 3: ponerlo en un Blueprint</h2>
+<div class="method">
+<ol><li>Abre el Blueprint de una escena.</li><li>En el panel de nodos, la categoría <strong>Mis nodos</strong> está al principio de la lista: toca tu nodo.</li><li>Llega un nodo <strong>Usar uno de mis nodos</strong> ya ajustado al tuyo, con una línea por ajuste: rellénalas (un número, una fórmula, un nombre de objeto…).</li></ol>
+</div>
+<h2>Paso 4: compartir un nodo</h2>
+<div class="method">
+<ol><li>Abre el Blueprint de tu nodo y toca el botón de selección <strong>⬚</strong>, luego selecciona todos los nodos (marco en el vacío).</li><li>Toca <strong>⧉ Copiar</strong> y pega el resultado en un mensaje para tu amigo.</li><li>Tu amigo crea un nodo vacío, abre su Blueprint, toca <strong>«{ }»</strong> y pega: aparece la serie.</li></ol>
+<div class="tip">👉 Compartir lleva los <strong>nodos</strong>, no las imágenes ni los sonidos que usan: envíalos aparte. Los <strong>ajustes</strong> (entradas) se recrean con el botón <strong>Ajustes de mi nodo</strong>.</div>
+</div>
+<h2>Si no funciona</h2>
+<div class="method">
+<ul><li><strong>Mi nodo no aparece en el menú:</strong> debe estar guardado; cierra y reabre el Blueprint para actualizar la lista.</li><li><strong>Falta mi línea de ajuste:</strong> abre la ventana del nodo «Usar uno de mis nodos»: las líneas se actualizan al cambiar de nodo.</li><li><strong>No pasa nada:</strong> tu nodo debe empezar con un nodo enlazado al resto, y el nodo de llamada debe estar enlazado a un evento.</li></ul>
+</div>
+
+<div class="nav">
+<a href="../es/deux-joueurs.html">← Dos jugadores, dos joysticks</a>
+<a href="../es/interface-demarrage.html">Siguiente guía: La pantalla de inicio en imágenes →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, motor de juegos 2D gratuito y sin código para Android · <a href="../../es/index.html">Sitio oficial</a> · <a href="../../noeuds/es.html">Referencia de nodos</a></p>
+</footer>
+</body>
+</html>

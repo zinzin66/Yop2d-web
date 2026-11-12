@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>如何创建自己的节点（我的节点）？ | Yop2D 指南</title>
+<meta name="description" content="用 Yop2D 把多个节点合成一个属于你的节点，带有设置（数字、文字、对象），可在整个游戏中重复使用，无需代码。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/zh/mes-noeuds.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/mes-noeuds.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/mes-noeuds.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/mes-noeuds.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/mes-noeuds.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/mes-noeuds.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/mes-noeuds.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/mes-noeuds.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/mes-noeuds.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/mes-noeuds.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/mes-noeuds.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "如何创建自己的节点？",
+ "description": "用 Yop2D 把多个节点合成一个属于你的节点，带有设置（数字、文字、对象），可在整个游戏中重复使用，无需代码。",
+ "inLanguage": "zh",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（无需代码的 Android 2D 游戏引擎）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "创建",
+   "text": "资源面板 → 我的节点 → +。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "填充",
+   "text": "像 Blueprint 一样搭建。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "设置",
+   "text": "“我的节点的设置”按钮。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "使用",
+   "text": "面板里的“我的节点”菜单。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../zh/index.html">← Yop2D</a>
+<h1>如何创建自己的节点？</h1>
+<p>新手教程 · 无需代码</p>
+<p class="langues"><a href="../mes-noeuds.html" hreflang="fr">Français</a> · <a href="../en/mes-noeuds.html" hreflang="en">English</a> · <a href="../es/mes-noeuds.html" hreflang="es">Español</a> · <a href="../de/mes-noeuds.html" hreflang="de">Deutsch</a> · <a href="../it/mes-noeuds.html" hreflang="it">Italiano</a> · <a href="../pt/mes-noeuds.html" hreflang="pt">Português</a> · <a href="../ru/mes-noeuds.html" hreflang="ru">Русский</a> · <strong>中文</strong> · <a href="../ja/mes-noeuds.html" hreflang="ja">日本語</a> · <a href="../ar/mes-noeuds.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ 需要 Yop2D 1281 或更新的版本（版本号的最后一个数字，例如 1.0.1281）。如果你的版本更旧，请更新 Yop2D。</p>
+<p>当你多次搭建同一串节点（例如：敌人闪烁、播放声音并损失生命），可以把它<strong>收进一个属于你的节点</strong>。只写一次，然后在任何地方<strong>运行</strong>它，并用<strong>设置</strong>让每处不同（速度、消息、目标对象……）。</p>
+<div class="besoin">
+<b>你需要：</b>
+<ul><li>在编辑器中打开的项目；</li><li>一小串你想重复使用的节点。</li></ul>
+</div>
+<h2>第 1 步：创建你的节点</h2>
+<div class="method">
+<ol><li>在编辑器中打开<strong>资源</strong>面板，找到<strong>我的节点</strong>。</li><li>点 <strong>+</strong>，起个名字，例如 <strong>受到攻击</strong>。</li><li>选中它，点 <strong>Blueprint</strong> 图标：你会进入专属于这个节点的空 Blueprint。</li><li>像平常一样搭好节点并保存（💾）。Blueprint 标题显示 <strong>我的节点：受到攻击</strong>。</li></ol>
+</div>
+<h2>第 2 步：给它加设置</h2>
+<div class="method">
+<ol><li>在你的节点的 Blueprint 中，点顶部的<strong>我的节点的设置</strong>按钮。</li><li>点 <strong>+ 添加输入</strong>：起名字（例如 <strong>速度</strong>），选择<strong>类型</strong>和<strong>初始值</strong>。</li><li>在你的节点里的各个节点中，在公式里写输入的名字：<strong>=速度</strong>。</li><li><strong>数字</strong>输入是数字；<strong>文字</strong>是消息；<strong>是 / 否</strong>是开关；<strong>对象</strong>是场景中某个对象的名称。</li></ol>
+<div class="tip">👉 <strong>“对象”类型</strong>：运行你的节点的人来选择它作用于哪个对象。在你的节点里的节点中打开<strong>作用于什么？</strong>：<strong>我的节点的设置</strong>分组会提供“我的节点的输入……”。同一个节点就能让敌人、宝箱或主角闪烁。</div>
+</div>
+<h2>第 3 步：把它放进 Blueprint</h2>
+<div class="method">
+<ol><li>打开某个场景的 Blueprint。</li><li>在节点面板中，<strong>我的节点</strong>类别排在列表最前面：点你的节点。</li><li>会出现一个已经设置为你的节点的<strong>运行我的节点</strong>节点，每个设置一行：填写它们（数字、公式、对象名称……）。</li></ol>
+</div>
+<h2>第 4 步：分享节点</h2>
+<div class="method">
+<ol><li>打开你的节点的 Blueprint，点选择按钮 <strong>⬚</strong>，然后选中所有节点（在空白处拖出框）。</li><li>点 <strong>⧉ 复制</strong>，把结果粘贴到发给朋友的消息里。</li><li>朋友新建一个空节点，打开它的 Blueprint，点 <strong>“{ }”</strong> 并粘贴：这串节点就出现了。</li></ol>
+<div class="tip">👉 分享带走的是<strong>节点</strong>，不包括它们用到的图片和声音：请单独发送。<strong>设置</strong>（输入）用<strong>我的节点的设置</strong>按钮重新创建。</div>
+</div>
+<h2>如果不起作用</h2>
+<div class="method">
+<ul><li><strong>我的节点不在菜单里：</strong>它必须已保存；关闭并重新打开 Blueprint 以刷新列表。</li><li><strong>缺少我的设置行：</strong>打开“运行我的节点”的窗口：切换节点时这些行会更新。</li><li><strong>什么都没发生：</strong>你的节点必须以一个与后面相连的节点开头，调用节点必须连到某个事件。</li></ul>
+</div>
+
+<div class="nav">
+<a href="../zh/deux-joueurs.html">← 两名玩家，两个摇杆</a>
+<a href="../zh/interface-demarrage.html">下一篇： 图解启动界面 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D，免费、无需代码的 Android 2D 游戏引擎 · <a href="../../zh/index.html">官方网站</a> · <a href="../../noeuds/zh.html">节点参考</a></p>
+</footer>
+</body>
+</html>

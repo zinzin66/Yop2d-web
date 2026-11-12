@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to create your own nodes (My nodes)? | Yop2D guide</title>
+<meta name="description" content="Group several nodes into a single node of your own, with settings (number, text, object), reusable anywhere in your game with Yop2D, no code.">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/en/mes-noeuds.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/mes-noeuds.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/mes-noeuds.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/mes-noeuds.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/mes-noeuds.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/mes-noeuds.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/mes-noeuds.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/mes-noeuds.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/mes-noeuds.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/mes-noeuds.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/mes-noeuds.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "How to create your own nodes?",
+ "description": "Group several nodes into a single node of your own, with settings (number, text, object), reusable anywhere in your game with Yop2D, no code.",
+ "inLanguage": "en",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D (no-code 2D game engine for Android)"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "Create",
+   "text": "Resources panel → My nodes → +."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Fill it",
+   "text": "Build it like a Blueprint."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Its settings",
+   "text": "\"My node settings\" button."
+  },
+  {
+   "@type": "HowToStep",
+   "name": "Use it",
+   "text": "\"My nodes\" menu of the panel."
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../index.html">← Yop2D</a>
+<h1>How to create your own nodes?</h1>
+<p>Beginner guide · no code</p>
+<p class="langues"><a href="../mes-noeuds.html" hreflang="fr">Français</a> · <strong>English</strong> · <a href="../es/mes-noeuds.html" hreflang="es">Español</a> · <a href="../de/mes-noeuds.html" hreflang="de">Deutsch</a> · <a href="../it/mes-noeuds.html" hreflang="it">Italiano</a> · <a href="../pt/mes-noeuds.html" hreflang="pt">Português</a> · <a href="../ru/mes-noeuds.html" hreflang="ru">Русский</a> · <a href="../zh/mes-noeuds.html" hreflang="zh">中文</a> · <a href="../ja/mes-noeuds.html" hreflang="ja">日本語</a> · <a href="../ar/mes-noeuds.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ Needs Yop2D version 1281 or newer (the last number of the version, for example 1.0.1281). If your version is older, update Yop2D.</p>
+<p>When you build the same series of nodes several times (for example: an enemy that blinks, plays a sound and loses life), you can <strong>put it into a single node of your own</strong>. You write it once, then you <strong>run</strong> it anywhere, with <strong>settings</strong> that change from place to place (the speed, the message, the target object…).</p>
+<div class="besoin">
+<b>You need:</b>
+<ul><li>a project open in the editor;</li><li>a small series of nodes you would like to reuse.</li></ul>
+</div>
+<h2>Step 1: create your node</h2>
+<div class="method">
+<ol><li>In the editor, open the <strong>Resources</strong> panel and find <strong>My nodes</strong>.</li><li>Touch <strong>+</strong> and give it a name, for example <strong>Take_hit</strong>.</li><li>Select it and touch the <strong>Blueprint</strong> icon: you land on an empty Blueprint reserved for this node.</li><li>Build your series of nodes as usual, then save (💾). The Blueprint title says <strong>My node: Take_hit</strong>.</li></ol>
+</div>
+<h2>Step 2: give it settings</h2>
+<div class="method">
+<ol><li>In your node's Blueprint, touch the <strong>My node settings</strong> button (at the top).</li><li>Touch <strong>+ Add an input</strong>: give it a name (for example <strong>speed</strong>), choose its <strong>type</strong> and its <strong>starting value</strong>.</li><li>In the nodes of your node, write the input's name in a formula: <strong>=speed</strong>.</li><li>A <strong>Number</strong> input is a number; <strong>Text</strong>, a message; <strong>Yes / no</strong>, a switch; <strong>Object</strong>, the name of an object in the scene.</li></ol>
+<div class="tip">👉 <strong>The Object type</strong>: whoever runs your node chooses which object it acts on. In the nodes of your node, open <strong>On what?</strong>: a <strong>My node settings</strong> group offers "Input … of my node". The same node can then make an enemy, a chest or the hero blink.</div>
+</div>
+<h2>Step 3: place it in a Blueprint</h2>
+<div class="method">
+<ol><li>Open the Blueprint of a scene.</li><li>In the nodes panel, the <strong>My nodes</strong> category is at the top of the list: touch your node.</li><li>A <strong>Run one of my nodes</strong> node arrives already set to yours, with one line per setting: fill them in (a number, a formula, an object name…).</li></ol>
+</div>
+<h2>Step 4: share a node</h2>
+<div class="method">
+<ol><li>Open your node's Blueprint and touch the selection button <strong>⬚</strong>, then select all the nodes (draw a frame in the empty space).</li><li>Touch <strong>⧉ Copy</strong>, and paste the result in a message for your friend.</li><li>Your friend creates an empty node, opens its Blueprint, touches <strong>"{ }"</strong> and pastes: the series appears.</li></ol>
+<div class="tip">👉 Sharing carries the <strong>nodes</strong>, not the images or sounds they use: send those separately. The <strong>settings</strong> (inputs) are recreated with the <strong>My node settings</strong> button.</div>
+</div>
+<h2>If it does not work</h2>
+<div class="method">
+<ul><li><strong>My node is not in the menu:</strong> it must be saved; close and reopen the Blueprint to refresh the list.</li><li><strong>My setting line is missing:</strong> open the "Run one of my nodes" window: the lines update when you change node.</li><li><strong>Nothing happens:</strong> your node must start with a node linked to the rest, and the call node must be linked to an event.</li></ul>
+</div>
+
+<div class="nav">
+<a href="../en/deux-joueurs.html">← Two players, two joysticks</a>
+<a href="../en/interface-demarrage.html">Next guide: The start screen in pictures →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D, free no-code 2D game engine for Android · <a href="../../index.html">Official website</a> · <a href="../../noeuds/en.html">Node reference</a></p>
+</footer>
+</body>
+</html>

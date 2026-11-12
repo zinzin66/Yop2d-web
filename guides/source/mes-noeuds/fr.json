@@ -1,0 +1,136 @@
+{
+  "depuis": 1281,
+  "titre_page": "Comment créer ses propres nœuds (Mes nœuds) ? | Guide Yop2D",
+  "description": "Regroupe plusieurs nœuds en un seul nœud à toi, avec des réglages (nombre, texte, objet), réutilisable partout dans ton jeu avec Yop2D, sans code.",
+  "h1": "Comment créer ses propres nœuds ?",
+  "carte": [
+    "Crée tes propres nœuds",
+    "Range une série de nœuds dans un seul nœud à toi, avec ses réglages, et réutilise-le partout."
+  ],
+  "etapes": [
+    [
+      "Créer",
+      "Panneau Ressources → Mes nœuds → +."
+    ],
+    [
+      "Remplir",
+      "Construis-le comme un Blueprint."
+    ],
+    [
+      "Ses réglages",
+      "Bouton « Réglages de mon nœud »."
+    ],
+    [
+      "L'utiliser",
+      "Menu « Mes nœuds » du panneau."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "Quand tu fais plusieurs fois la même suite de nœuds (par exemple : un ennemi qui clignote, fait un son et perd de la vie), tu peux la **ranger dans un seul nœud à toi**. Tu l'écris une fois, puis tu le **lances** partout, avec des **réglages** qui changent d'un endroit à l'autre (la vitesse, le message, l'objet visé…)."
+    ],
+    [
+      "besoin",
+      [
+        "un projet ouvert dans l'éditeur ;",
+        "une petite suite de nœuds que tu aimerais réutiliser."
+      ]
+    ],
+    [
+      "h2",
+      "Étape 1 : créer ton nœud"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Dans l'éditeur, ouvre le panneau **Ressources** et trouve la partie **Mes nœuds**.",
+            "Touche **+** et donne-lui un nom, par exemple **Coup_subi**.",
+            "Sélectionne-le et touche l'icône du **Blueprint** : tu arrives sur un Blueprint vide, réservé à ce nœud.",
+            "Construis ta suite de nœuds comme d'habitude, puis enregistre (💾). Le titre du Blueprint indique **Mon nœud : Coup_subi**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 2 : lui donner des réglages"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Dans le Blueprint de ton nœud, touche le bouton **Réglages de mon nœud** (en haut).",
+            "Touche **+ Ajouter une entrée** : donne-lui un nom (par exemple **vitesse**), choisis son **type** et sa **valeur de départ**.",
+            "Dans les nœuds de ton nœud, écris le nom de l'entrée dans une formule : **=vitesse**.",
+            "Pour une entrée de type **Nombre**, c'est un nombre ; **Texte**, un message ; **Oui / non**, une case ; **Objet**, le nom d'un objet de la scène."
+          ]
+        ],
+        [
+          "tip",
+          "**Le type Objet** : celui qui lance ton nœud choisit sur quel objet il agit. Dans les nœuds de ton nœud, ouvre **Sur quoi ?** : un groupe **Réglages de mon nœud** propose « Entrée … de mon nœud ». Un même nœud peut ainsi faire clignoter un ennemi, un coffre ou le héros."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 3 : le poser dans un Blueprint"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Ouvre le Blueprint d'une scène.",
+            "Dans le panneau des nœuds, la catégorie **Mes nœuds** est en tête de la liste : touche ton nœud.",
+            "Un nœud **Lancer un de mes nœuds** arrive déjà réglé sur le tien, avec une ligne pour chaque réglage : remplis-les (un nombre, une formule, un nom d'objet…)."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Étape 4 : partager un nœud"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Ouvre le Blueprint de ton nœud et touche le bouton de sélection **⬚**, puis sélectionne tous les nœuds (cadre dans le vide).",
+            "Touche **⧉ Copier**, et colle le résultat dans un message pour ton ami.",
+            "Ton ami crée un nœud vide, ouvre son Blueprint, touche **« { } »** et colle : la suite apparaît."
+          ]
+        ],
+        [
+          "tip",
+          "Le partage emporte les **nœuds**, pas les images ni les sons qu'ils utilisent : envoie-les à part. Les **réglages** (entrées) se recréent avec le bouton **Réglages de mon nœud**."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Si ça ne marche pas"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ul",
+          [
+            "**Mon nœud n'apparaît pas dans le menu :** il faut qu'il soit enregistré ; ferme et rouvre le Blueprint pour rafraîchir la liste.",
+            "**Ma ligne de réglage est absente :** ouvre la fenêtre du nœud « Lancer un de mes nœuds » : les lignes se mettent à jour quand tu changes de nœud.",
+            "**Rien ne se passe :** ton nœud doit commencer par un nœud relié à la suite, et le nœud d'appel doit être relié à un événement."
+          ]
+        ]
+      ]
+    ]
+  ]
+}

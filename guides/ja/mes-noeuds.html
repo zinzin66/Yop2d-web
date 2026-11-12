@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自分のノードを作るには（マイノード）？ | Yop2D ガイド</title>
+<meta name="description" content="Yop2D で、いくつかのノードを設定（数・文字・オブジェクト）つきの自分だけのノード1つにまとめて、ゲームのどこでも使い回せます。コード不要。">
+<link rel="canonical" href="https://zinzin66.github.io/Yop2d-web/guides/ja/mes-noeuds.html">
+<link rel="alternate" hreflang="fr" href="https://zinzin66.github.io/Yop2d-web/guides/mes-noeuds.html">
+<link rel="alternate" hreflang="en" href="https://zinzin66.github.io/Yop2d-web/guides/en/mes-noeuds.html">
+<link rel="alternate" hreflang="es" href="https://zinzin66.github.io/Yop2d-web/guides/es/mes-noeuds.html">
+<link rel="alternate" hreflang="de" href="https://zinzin66.github.io/Yop2d-web/guides/de/mes-noeuds.html">
+<link rel="alternate" hreflang="it" href="https://zinzin66.github.io/Yop2d-web/guides/it/mes-noeuds.html">
+<link rel="alternate" hreflang="pt" href="https://zinzin66.github.io/Yop2d-web/guides/pt/mes-noeuds.html">
+<link rel="alternate" hreflang="ru" href="https://zinzin66.github.io/Yop2d-web/guides/ru/mes-noeuds.html">
+<link rel="alternate" hreflang="zh" href="https://zinzin66.github.io/Yop2d-web/guides/zh/mes-noeuds.html">
+<link rel="alternate" hreflang="ja" href="https://zinzin66.github.io/Yop2d-web/guides/ja/mes-noeuds.html">
+<link rel="alternate" hreflang="ar" href="https://zinzin66.github.io/Yop2d-web/guides/ar/mes-noeuds.html">
+<link rel="stylesheet" href="../guide.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "HowTo",
+ "name": "自分のノードを作るには？",
+ "description": "Yop2D で、いくつかのノードを設定（数・文字・オブジェクト）つきの自分だけのノード1つにまとめて、ゲームのどこでも使い回せます。コード不要。",
+ "inLanguage": "ja",
+ "tool": [
+  {
+   "@type": "HowToTool",
+   "name": "Yop2D（Android 向けのコード不要 2D ゲームエンジン）"
+  }
+ ],
+ "step": [
+  {
+   "@type": "HowToStep",
+   "name": "作る",
+   "text": "リソースパネル → マイノード → ＋。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "中身",
+   "text": "Blueprint のように組む。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "設定",
+   "text": "「マイノードの設定」ボタン。"
+  },
+  {
+   "@type": "HowToStep",
+   "name": "使う",
+   "text": "パネルの「マイノード」メニュー。"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header>
+<a href="../../ja/index.html">← Yop2D</a>
+<h1>自分のノードを作るには？</h1>
+<p>初心者ガイド · コード不要</p>
+<p class="langues"><a href="../mes-noeuds.html" hreflang="fr">Français</a> · <a href="../en/mes-noeuds.html" hreflang="en">English</a> · <a href="../es/mes-noeuds.html" hreflang="es">Español</a> · <a href="../de/mes-noeuds.html" hreflang="de">Deutsch</a> · <a href="../it/mes-noeuds.html" hreflang="it">Italiano</a> · <a href="../pt/mes-noeuds.html" hreflang="pt">Português</a> · <a href="../ru/mes-noeuds.html" hreflang="ru">Русский</a> · <a href="../zh/mes-noeuds.html" hreflang="zh">中文</a> · <strong>日本語</strong> · <a href="../ar/mes-noeuds.html" hreflang="ar">العربية</a></p>
+</header>
+<main>
+<p class="depuis">ℹ️ Yop2D のバージョン 1281 以降が必要です（バージョン番号の最後の数字。例：1.0.1281）。お使いのバージョンが古い場合は、Yop2D を更新してください。</p>
+<p>同じノードの並びを何度も作るとき（たとえば、敵が点滅して音が鳴り、体力が減る）は、それを<strong>自分のノード1つにまとめる</strong>ことができます。1回書けば、どこでも<strong>実行</strong>できます。<strong>設定</strong>を変えれば場所ごとに違う動きにできます（速さ、メッセージ、対象のオブジェクトなど）。</p>
+<div class="besoin">
+<b>用意するもの：</b>
+<ul><li>エディターで開いているプロジェクト</li><li>使い回したいノードの短い並び</li></ul>
+</div>
+<h2>ステップ1：ノードを作る</h2>
+<div class="method">
+<ol><li>エディターで<strong>リソース</strong>パネルを開き、<strong>マイノード</strong>を探します。</li><li><strong>＋</strong>を押して名前をつけます（例：<strong>ダメージを受ける</strong>）。</li><li>選んで<strong>Blueprint</strong>のアイコンを押すと、このノード専用の空の Blueprint が開きます。</li><li>いつもどおりノードを組み、保存（💾）します。Blueprint のタイトルは<strong>マイノード：ダメージを受ける</strong>になります。</li></ol>
+</div>
+<h2>ステップ2：設定をつける</h2>
+<div class="method">
+<ol><li>自分のノードの Blueprint で、上の<strong>マイノードの設定</strong>ボタンを押します。</li><li><strong>＋入力を追加</strong>を押し、名前（例：<strong>速さ</strong>）、<strong>種類</strong>、<strong>最初の値</strong>を決めます。</li><li>自分のノードの中のノードで、式に入力の名前を書きます：<strong>=速さ</strong>。</li><li><strong>数</strong>の入力は数、<strong>文字</strong>はメッセージ、<strong>はい／いいえ</strong>はスイッチ、<strong>オブジェクト</strong>はシーン内のオブジェクトの名前です。</li></ol>
+<div class="tip">👉 <strong>「オブジェクト」の種類</strong>：ノードを実行する人が、どのオブジェクトに働くかを選びます。自分のノードの中のノードで<strong>何に？</strong>を開くと、<strong>マイノードの設定</strong>グループに「マイノードの入力…」が出ます。同じノードで、敵・宝箱・主人公のどれでも点滅させられます。</div>
+</div>
+<h2>ステップ3：Blueprint に置く</h2>
+<div class="method">
+<ol><li>シーンの Blueprint を開きます。</li><li>ノードのパネルでは、<strong>マイノード</strong>カテゴリが一覧の先頭にあります。自分のノードを押します。</li><li>自分のノードに設定された<strong>マイノードを実行</strong>ノードが置かれ、設定ごとに1行出ます。数・式・オブジェクト名などを入れてください。</li></ol>
+</div>
+<h2>ステップ4：ノードを共有する</h2>
+<div class="method">
+<ol><li>自分のノードの Blueprint を開き、選択ボタン<strong>⬚</strong>を押して、すべてのノードを選びます（空いた場所で枠をドラッグ）。</li><li><strong>⧉ コピー</strong>を押して、友だちへのメッセージに貼り付けます。</li><li>友だちは空のノードを作り、その Blueprint を開いて<strong>「{ }」</strong>を押して貼り付けると、並びが現れます。</li></ol>
+<div class="tip">👉 共有されるのは<strong>ノード</strong>だけで、使っている画像や音は含まれません。別に送ってください。<strong>設定</strong>（入力）は<strong>マイノードの設定</strong>ボタンで作り直します。</div>
+</div>
+<h2>うまくいかないとき</h2>
+<div class="method">
+<ul><li><strong>メニューにマイノードが出ない：</strong>保存されている必要があります。Blueprint を閉じて開き直すと一覧が更新されます。</li><li><strong>設定の行がない：</strong>「マイノードを実行」ノードのウィンドウを開いてください。ノードを変えると行が更新されます。</li><li><strong>何も起きない：</strong>自分のノードは、後ろにつながったノードから始まり、呼び出しノードはイベントにつながっている必要があります。</li></ul>
+</div>
+
+<div class="nav">
+<a href="../ja/deux-joueurs.html">← 2人、ジョイスティック2つ</a>
+<a href="../ja/interface-demarrage.html">次のガイド： 画像で見るスタート画面 →</a>
+</div>
+</main>
+<footer>
+<p>Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン · <a href="../../ja/index.html">公式サイト</a> · <a href="../../noeuds/ja.html">ノードリファレンス</a></p>
+</footer>
+</body>
+</html>

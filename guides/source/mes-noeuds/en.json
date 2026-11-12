@@ -1,0 +1,136 @@
+{
+  "depuis": 1281,
+  "titre_page": "How to create your own nodes (My nodes)? | Yop2D guide",
+  "description": "Group several nodes into a single node of your own, with settings (number, text, object), reusable anywhere in your game with Yop2D, no code.",
+  "h1": "How to create your own nodes?",
+  "carte": [
+    "Create your own nodes",
+    "Put a series of nodes into a single node of your own, with its settings, and reuse it everywhere."
+  ],
+  "etapes": [
+    [
+      "Create",
+      "Resources panel → My nodes → +."
+    ],
+    [
+      "Fill it",
+      "Build it like a Blueprint."
+    ],
+    [
+      "Its settings",
+      "\"My node settings\" button."
+    ],
+    [
+      "Use it",
+      "\"My nodes\" menu of the panel."
+    ]
+  ],
+  "blocs": [
+    [
+      "p",
+      "When you build the same series of nodes several times (for example: an enemy that blinks, plays a sound and loses life), you can **put it into a single node of your own**. You write it once, then you **run** it anywhere, with **settings** that change from place to place (the speed, the message, the target object…)."
+    ],
+    [
+      "besoin",
+      [
+        "a project open in the editor;",
+        "a small series of nodes you would like to reuse."
+      ]
+    ],
+    [
+      "h2",
+      "Step 1: create your node"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "In the editor, open the **Resources** panel and find **My nodes**.",
+            "Touch **+** and give it a name, for example **Take_hit**.",
+            "Select it and touch the **Blueprint** icon: you land on an empty Blueprint reserved for this node.",
+            "Build your series of nodes as usual, then save (💾). The Blueprint title says **My node: Take_hit**."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 2: give it settings"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "In your node's Blueprint, touch the **My node settings** button (at the top).",
+            "Touch **+ Add an input**: give it a name (for example **speed**), choose its **type** and its **starting value**.",
+            "In the nodes of your node, write the input's name in a formula: **=speed**.",
+            "A **Number** input is a number; **Text**, a message; **Yes / no**, a switch; **Object**, the name of an object in the scene."
+          ]
+        ],
+        [
+          "tip",
+          "**The Object type**: whoever runs your node chooses which object it acts on. In the nodes of your node, open **On what?**: a **My node settings** group offers \"Input … of my node\". The same node can then make an enemy, a chest or the hero blink."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 3: place it in a Blueprint"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Open the Blueprint of a scene.",
+            "In the nodes panel, the **My nodes** category is at the top of the list: touch your node.",
+            "A **Run one of my nodes** node arrives already set to yours, with one line per setting: fill them in (a number, a formula, an object name…)."
+          ]
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "Step 4: share a node"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ol",
+          [
+            "Open your node's Blueprint and touch the selection button **⬚**, then select all the nodes (draw a frame in the empty space).",
+            "Touch **⧉ Copy**, and paste the result in a message for your friend.",
+            "Your friend creates an empty node, opens its Blueprint, touches **\"{ }\"** and pastes: the series appears."
+          ]
+        ],
+        [
+          "tip",
+          "Sharing carries the **nodes**, not the images or sounds they use: send those separately. The **settings** (inputs) are recreated with the **My node settings** button."
+        ]
+      ]
+    ],
+    [
+      "h2",
+      "If it does not work"
+    ],
+    [
+      "bloc",
+      [
+        [
+          "ul",
+          [
+            "**My node is not in the menu:** it must be saved; close and reopen the Blueprint to refresh the list.",
+            "**My setting line is missing:** open the \"Run one of my nodes\" window: the lines update when you change node.",
+            "**Nothing happens:** your node must start with a node linked to the rest, and the call node must be linked to an event."
+          ]
+        ]
+      ]
+    ]
+  ]
+}
