@@ -84,13 +84,13 @@ body { font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans", "PingFang
 .lang-bar strong { color: var(--accent-color); margin: 0 0.35rem; white-space: nowrap; }
 .lang-suggest { display: none; background: var(--accent-color); color: #0f172a; text-align: center; padding: 0.6rem 1rem; font-weight: bold; }
 .lang-suggest a { color: #0f172a; }
-header { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 3.5rem 1rem 4rem; text-align: center; }
-.logo { max-width: 120px; border-radius: 20%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-bottom: 1rem; }
-header h1 { font-size: 3rem; margin: 0 0 0.5rem 0; }
+header { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 2rem 1rem 2.5rem; text-align: center; }
+.logo { max-width: 84px; height: auto; border-radius: 20%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-bottom: 1rem; }
+header h1 { font-size: 1.6rem; margin: 0 0 0.3rem 0; opacity: 0.9; }
 header p { font-size: 1.25rem; max-width: 680px; margin: 0 auto; opacity: 0.95; }
 .points { list-style: none; padding: 0; margin: 1.5rem auto 0; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; max-width: 820px; }
 .points li { background: rgba(255,255,255,0.15); border-radius: 30px; padding: 0.3rem 0.9rem; font-size: 0.95rem; }
-.header-buttons, .community-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; margin-bottom: 1.5rem; }
+.header-buttons, .community-buttons { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; margin-top: 1.3rem; margin-bottom: 1rem; }
 .btn { display: inline-block; color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-size: 1.15rem; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; }
 .btn:hover { transform: translateY(-3px); }
 .btn-download { background: var(--accent-color); }
@@ -170,6 +170,56 @@ footer a:hover { text-decoration: underline; }
   html[lang="fr"] td::before { content: attr(data-label) " : "; }
   html[lang="zh"] td::before, html[lang="ja"] td::before { content: attr(data-label) "："; }
 }
+
+/* --- Nouvelle entrée de l'accueil (11/2026) : menu fixe, types de jeux, sections repliables --- */
+html { scroll-padding-top: 4.2rem; }
+.topnav { position: sticky; top: 0; z-index: 50; background: #0f172a; color: #e2e8f0; border-bottom: 1px solid #1e293b; }
+.topnav .barre { display: flex; align-items: center; gap: 0.9rem; max-width: 1100px; margin: 0 auto; padding: 0.5rem 1rem; }
+.topnav .marque { display: flex; align-items: center; gap: 0.5rem; color: #fff; font-weight: 700; text-decoration: none; margin-inline-end: auto; }
+.topnav .marque img { width: 30px; height: 30px; border-radius: 7px; }
+.topnav .liens a { color: #e2e8f0; text-decoration: none; margin: 0 0.55rem; font-size: 0.95rem; white-space: nowrap; }
+.topnav .liens a:hover { color: var(--accent-color); }
+.topnav .liens { display: none; }
+.topnav .play { background: #4cc9f0; color: #0b1220; font-weight: 700; text-decoration: none; padding: 0.4rem 0.9rem; border-radius: 999px; font-size: 0.9rem; white-space: nowrap; }
+.topnav details.menu { position: relative; }
+.topnav details.menu > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; padding: 0.4rem 0.8rem; border: 1px solid #334155; border-radius: 999px; font-weight: 600; font-size: 0.92rem; }
+.topnav details.menu > summary::-webkit-details-marker { display: none; }
+.topnav details.menu[open] > summary { border-color: #4cc9f0; color: #4cc9f0; }
+.topnav .trait { display: inline-block; width: 16px; height: 2px; background: currentColor; box-shadow: 0 5px 0 currentColor, 0 -5px 0 currentColor; }
+.topnav .liste { position: absolute; inset-inline-end: 0; top: calc(100% + 0.5rem); width: min(340px, 92vw); background: #1e2534; border: 1px solid #334155; border-radius: 14px; padding: 0.5rem; box-shadow: 0 12px 30px rgba(0,0,0,0.35); max-height: 80vh; overflow-y: auto; }
+.topnav .liste a { display: block; padding: 0.65rem 0.8rem; border-radius: 9px; color: #f1f5f9; text-decoration: none; font-weight: 600; }
+.topnav .liste a:hover, .topnav .liste a:focus { background: #243a56; color: #4cc9f0; }
+@media (min-width: 900px) { .topnav .liens { display: block; } }
+.accroche { font-size: clamp(1.7rem, 5vw, 2.6rem); line-height: 1.2; font-weight: 800; max-width: 760px; margin: 0.3rem auto 0.6rem; }
+header .voir-jeu { display: inline-block; margin-top: 0.9rem; color: #fff; border: 2px solid rgba(255,255,255,0.8); border-radius: 12px; padding: 0.55rem 1.2rem; text-decoration: none; font-weight: 700; }
+header .voir-jeu:hover { background: rgba(255,255,255,0.15); }
+#create { max-width: 1000px; margin: 0 auto 3rem; text-align: center; }
+#create .sous { color: #475569; margin: -0.5rem auto 1.4rem; max-width: 640px; }
+.types { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.9rem; }
+.type { position: relative; display: block; border-radius: 14px; overflow: hidden; background: #0f172a; box-shadow: 0 2px 8px rgba(15,23,42,0.18); text-decoration: none; color: #fff; transition: transform .15s; }
+.type:hover, .type:focus { transform: translateY(-3px); }
+.type img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.type span { display: block; padding: 0.55rem 0.6rem; font-weight: 700; font-size: 0.95rem; text-align: start; }
+details.fold > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.6rem; }
+details.fold > summary::-webkit-details-marker { display: none; }
+details.fold > summary h2 { display: inline; margin: 0; }
+details.fold > summary::before { content: "▸"; font-size: 1.4rem; color: var(--primary-color); transition: transform .15s; }
+details.fold[open] > summary::before { transform: rotate(90deg); }
+details.fold > summary { padding: 0.9rem 1.1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 1rem; }
+@media (max-width: 700px) {
+  header { padding: 1.2rem 1rem 1.6rem; }
+  header .logo { max-width: 52px; margin-bottom: 0.4rem; }
+  header h1 { font-size: 1.2rem; }
+  .accroche { font-size: 1.55rem; }
+  header p { font-size: 1.05rem; }
+  .points { margin-top: 0.9rem; gap: 0.35rem; }
+  .points li { font-size: 0.8rem; padding: 0.2rem 0.6rem; }
+  .header-buttons { margin-top: 0.9rem; }
+  .header-buttons .btn-itch, .header-buttons .btn-youtube { display: none; }
+  header .voir-jeu { margin-top: 0.3rem; }
+}
+html[dir="rtl"] details.fold > summary::before { content: "◂"; }
+html[dir="rtl"] details.fold[open] > summary::before { transform: rotate(-90deg); }
 """
 
 # Script commun : mémorise la langue choisie dans le menu (même clé que la
@@ -302,6 +352,62 @@ def bloc_ecole(ec, base):
 </div>
 </section>
 """
+
+
+
+GUIDES_TYPES = [("platformer", "plateforme"), ("firefly_night", "histoire-choix"), ("tactics_demo", "jeu-tactique"),
+                ("space_1", None), ("candy_match", None), ("deux_joueurs", "deux-joueurs")]
+
+
+def lien_guide(langue, guide, base):
+    """Lien vers un guide (même langue si la page existe, sinon anglais)."""
+    for l in (langue, "en"):
+        chemin = f"guides/{guide}.html" if l == "fr" else f"guides/{l}/{guide}.html"
+        if os.path.exists(os.path.join(RACINE, chemin)):
+            return base + chemin
+    return base + "guides/index.html"
+
+
+def bloc_types(langue, t, base):
+    a2 = t["accueil2"]
+    cartes = []
+    for (image, guide), nom in zip(GUIDES_TYPES, a2["types"]):
+        if guide:
+            href = lien_guide(langue, guide, base)
+        else:
+            href = f"{base}exemples/{langue_pages(langue)}.html"
+        src = f"{base}guides/img/{image}.jpg" if image == "deux_joueurs" else f"{base}exemples/{image}.png"
+        cartes.append(f'<a class="type" href="{href}"><img src="{src}" alt="" loading="lazy" width="300" height="225"><span>{e(nom)}</span></a>')
+    return f"""<section id="create">
+<h2>{e(a2["creer_titre"])}</h2>
+<p class="sous">{e(a2["creer_sous"])}</p>
+<div class="types">
+{chr(10).join(cartes)}
+</div>
+</section>"""
+
+
+def barre_haut(langue, t, base):
+    a2 = t["accueil2"]; m = a2["menu"]
+    exemples = f"{base}exemples/{langue_pages(langue)}.html"
+    noeuds = f"{base}noeuds/{langue_pages(langue)}.html"
+    guides_tous = f"{base}guides/index.html" if langue == "fr" else f"{base}guides/{langue}/index.html"
+    entrees = [("#create", m["creer"]), (exemples, m["exemples"]), ("#guides", m["guides"]), ("#features", m["editeur"]),
+               (noeuds, m["noeuds"]), ("#ia-box", m["ia"]), ("#faq", m["faq"]), ("#school", m["ecole"]),
+               ("#comparison", m["comparatif"]), ("#community", m["communaute"])]
+    liste = "\n".join(f'<a href="{h}">{e(n)}</a>' for h, n in entrees)
+    inline = "".join(f'<a href="{h}">{e(n)}</a>' for h, n in [("#create", m["creer"]), (exemples, m["exemples"]), ("#guides", m["guides"]), ("#faq", m["faq"])])
+    return f"""<nav class="topnav" aria-label="Yop2D">
+<div class="barre">
+<a class="marque" href="#top"><img src="{base}logo_yop2d.png" alt="" width="30" height="30">Yop2D</a>
+<div class="liens">{inline}</div>
+<a class="play" href="{PLAY}" target="_blank" rel="noopener">▶ Google Play</a>
+<details class="menu"><summary><span class="trait" aria-hidden="true"></span>{e(m["bouton"])}</summary>
+<div class="liste">
+{liste}
+</div></details>
+</div>
+</nav>"""
 
 
 def page(langue, t):
@@ -444,13 +550,15 @@ def page(langue, t):
 </script>
 <style>{CSS}</style>
 </head>
-<body>
+<body id="top">
 <nav class="lang-bar" aria-label="{e(t["menu_langue"])}">🌍 {menu}</nav>
 <div class="lang-suggest" id="lang-suggest"></div>
+{barre_haut(langue, t, base)}
 <header>
 <img src="{base}logo_yop2d.png" alt="{e(t["alt_logo"])}" class="logo" width="120" height="120">
 <h1>Yop2D</h1>
-<p>{e(t["slogan"])}</p>
+<p class="accroche">{e(t["accueil2"]["accroche"])}</p>
+<p>{e(t["accueil2"]["sous_accroche"])}</p>
 <ul class="points">
 {points}
 </ul>
@@ -460,6 +568,7 @@ def page(langue, t):
     <a href="{ITCH}" target="_blank" rel="noopener" class="btn btn-itch">🎮 {e(b["itch"])}</a>
     <a href="{YOUTUBE}" target="_blank" rel="noopener" class="btn btn-youtube">📺 {e(b["youtube"])}</a>
 </div>
+<a class="voir-jeu" href="{base}exemples/{langue_pages(langue)}.html">🎮 {e(t["accueil2"]["voir_jeu"])}</a>
 
 {bloc_ia(t["ia"])}
 
@@ -475,14 +584,16 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <div class="lang-badge">🌍 {e(t["langues_interface"])}</div>
 </header>
 <main>
+{bloc_types(langue, t, base)}
 {videos}
 {chr(10).join(vitrine)}
 
 <section id="features">
-<h2>{e(t["capacites"]["titre"])}</h2>
+<details class="fold"><summary><h2>{e(t["capacites"]["titre"])}</h2></summary>
 <div class="grid">
 {cartes}
 </div>
+</details>
 </section>
 
 {bloc_ecole(t["ecole"], base)}
@@ -496,15 +607,16 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 </section>
 
 <section id="nodes-dictionary">
-<h2>{e(t["noeuds"]["titre"])}</h2>
+<details class="fold"><summary><h2>{e(t["noeuds"]["titre"])}</h2></summary>
 <div class="bloc">
 <p>{liens(t["noeuds"]["texte"], base)}</p>
 <p><a href="{base}noeuds/{langue_pages(langue)}.html"><strong>{e(t["noeuds"]["lien"])} →</strong></a></p>
 </div>
+</details>
 </section>
 
 <section id="comparison">
-<h2>{e(comp["titre"])}</h2>
+<details class="fold"><summary><h2>{e(comp["titre"])}</h2></summary>
 <p>{liens(comp["intro"], base)}</p>
 <div class="table-wrap">
 <table>
@@ -536,6 +648,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 {autres}
 </ul>
 </div>
+</details>
 </section>
 
 <section id="faq">
@@ -567,6 +680,21 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <a href="{GITHUB}" target="_blank" rel="noopener">GitHub</a></p>
 </footer>
 <script>{script}</script>
+<script>
+(function(){{
+  function ouvrir(){{
+    var h=location.hash.slice(1); if(!h) return;
+    var el=document.getElementById(h); if(!el) return;
+    for(var n=el.parentNode;n;n=n.parentNode){{ if(n.tagName==="DETAILS") n.open=true; }}
+    var f=el.querySelector("details.fold"); if(f) f.open=true;
+  }}
+  window.addEventListener("hashchange",ouvrir); ouvrir();
+  document.addEventListener("click",function(ev){{
+    var a=ev.target.closest&&ev.target.closest(".topnav .liste a");
+    if(a){{ var d=a.closest("details"); if(d) d.open=false; }}
+  }});
+}})();
+</script>
 </body>
 </html>
 """

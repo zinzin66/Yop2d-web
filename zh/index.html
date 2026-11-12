@@ -428,13 +428,13 @@ body { font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans", "PingFang
 .lang-bar strong { color: var(--accent-color); margin: 0 0.35rem; white-space: nowrap; }
 .lang-suggest { display: none; background: var(--accent-color); color: #0f172a; text-align: center; padding: 0.6rem 1rem; font-weight: bold; }
 .lang-suggest a { color: #0f172a; }
-header { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 3.5rem 1rem 4rem; text-align: center; }
-.logo { max-width: 120px; border-radius: 20%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-bottom: 1rem; }
-header h1 { font-size: 3rem; margin: 0 0 0.5rem 0; }
+header { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 2rem 1rem 2.5rem; text-align: center; }
+.logo { max-width: 84px; height: auto; border-radius: 20%; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-bottom: 1rem; }
+header h1 { font-size: 1.6rem; margin: 0 0 0.3rem 0; opacity: 0.9; }
 header p { font-size: 1.25rem; max-width: 680px; margin: 0 auto; opacity: 0.95; }
 .points { list-style: none; padding: 0; margin: 1.5rem auto 0; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; max-width: 820px; }
 .points li { background: rgba(255,255,255,0.15); border-radius: 30px; padding: 0.3rem 0.9rem; font-size: 0.95rem; }
-.header-buttons, .community-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; margin-bottom: 1.5rem; }
+.header-buttons, .community-buttons { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; margin-top: 1.3rem; margin-bottom: 1rem; }
 .btn { display: inline-block; color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-size: 1.15rem; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; }
 .btn:hover { transform: translateY(-3px); }
 .btn-download { background: var(--accent-color); }
@@ -514,15 +514,86 @@ footer a:hover { text-decoration: underline; }
   html[lang="fr"] td::before { content: attr(data-label) " : "; }
   html[lang="zh"] td::before, html[lang="ja"] td::before { content: attr(data-label) "："; }
 }
+
+/* --- Nouvelle entrée de l'accueil (11/2026) : menu fixe, types de jeux, sections repliables --- */
+html { scroll-padding-top: 4.2rem; }
+.topnav { position: sticky; top: 0; z-index: 50; background: #0f172a; color: #e2e8f0; border-bottom: 1px solid #1e293b; }
+.topnav .barre { display: flex; align-items: center; gap: 0.9rem; max-width: 1100px; margin: 0 auto; padding: 0.5rem 1rem; }
+.topnav .marque { display: flex; align-items: center; gap: 0.5rem; color: #fff; font-weight: 700; text-decoration: none; margin-inline-end: auto; }
+.topnav .marque img { width: 30px; height: 30px; border-radius: 7px; }
+.topnav .liens a { color: #e2e8f0; text-decoration: none; margin: 0 0.55rem; font-size: 0.95rem; white-space: nowrap; }
+.topnav .liens a:hover { color: var(--accent-color); }
+.topnav .liens { display: none; }
+.topnav .play { background: #4cc9f0; color: #0b1220; font-weight: 700; text-decoration: none; padding: 0.4rem 0.9rem; border-radius: 999px; font-size: 0.9rem; white-space: nowrap; }
+.topnav details.menu { position: relative; }
+.topnav details.menu > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; padding: 0.4rem 0.8rem; border: 1px solid #334155; border-radius: 999px; font-weight: 600; font-size: 0.92rem; }
+.topnav details.menu > summary::-webkit-details-marker { display: none; }
+.topnav details.menu[open] > summary { border-color: #4cc9f0; color: #4cc9f0; }
+.topnav .trait { display: inline-block; width: 16px; height: 2px; background: currentColor; box-shadow: 0 5px 0 currentColor, 0 -5px 0 currentColor; }
+.topnav .liste { position: absolute; inset-inline-end: 0; top: calc(100% + 0.5rem); width: min(340px, 92vw); background: #1e2534; border: 1px solid #334155; border-radius: 14px; padding: 0.5rem; box-shadow: 0 12px 30px rgba(0,0,0,0.35); max-height: 80vh; overflow-y: auto; }
+.topnav .liste a { display: block; padding: 0.65rem 0.8rem; border-radius: 9px; color: #f1f5f9; text-decoration: none; font-weight: 600; }
+.topnav .liste a:hover, .topnav .liste a:focus { background: #243a56; color: #4cc9f0; }
+@media (min-width: 900px) { .topnav .liens { display: block; } }
+.accroche { font-size: clamp(1.7rem, 5vw, 2.6rem); line-height: 1.2; font-weight: 800; max-width: 760px; margin: 0.3rem auto 0.6rem; }
+header .voir-jeu { display: inline-block; margin-top: 0.9rem; color: #fff; border: 2px solid rgba(255,255,255,0.8); border-radius: 12px; padding: 0.55rem 1.2rem; text-decoration: none; font-weight: 700; }
+header .voir-jeu:hover { background: rgba(255,255,255,0.15); }
+#create { max-width: 1000px; margin: 0 auto 3rem; text-align: center; }
+#create .sous { color: #475569; margin: -0.5rem auto 1.4rem; max-width: 640px; }
+.types { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.9rem; }
+.type { position: relative; display: block; border-radius: 14px; overflow: hidden; background: #0f172a; box-shadow: 0 2px 8px rgba(15,23,42,0.18); text-decoration: none; color: #fff; transition: transform .15s; }
+.type:hover, .type:focus { transform: translateY(-3px); }
+.type img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.type span { display: block; padding: 0.55rem 0.6rem; font-weight: 700; font-size: 0.95rem; text-align: start; }
+details.fold > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.6rem; }
+details.fold > summary::-webkit-details-marker { display: none; }
+details.fold > summary h2 { display: inline; margin: 0; }
+details.fold > summary::before { content: "▸"; font-size: 1.4rem; color: var(--primary-color); transition: transform .15s; }
+details.fold[open] > summary::before { transform: rotate(90deg); }
+details.fold > summary { padding: 0.9rem 1.1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 1rem; }
+@media (max-width: 700px) {
+  header { padding: 1.2rem 1rem 1.6rem; }
+  header .logo { max-width: 52px; margin-bottom: 0.4rem; }
+  header h1 { font-size: 1.2rem; }
+  .accroche { font-size: 1.55rem; }
+  header p { font-size: 1.05rem; }
+  .points { margin-top: 0.9rem; gap: 0.35rem; }
+  .points li { font-size: 0.8rem; padding: 0.2rem 0.6rem; }
+  .header-buttons { margin-top: 0.9rem; }
+  .header-buttons .btn-itch, .header-buttons .btn-youtube { display: none; }
+  header .voir-jeu { margin-top: 0.3rem; }
+}
+html[dir="rtl"] details.fold > summary::before { content: "◂"; }
+html[dir="rtl"] details.fold[open] > summary::before { transform: rotate(-90deg); }
 </style>
 </head>
-<body>
+<body id="top">
 <nav class="lang-bar" aria-label="语言">🌍 <a href="../index.html" hreflang="en" lang="en">English</a> <a href="../fr/" hreflang="fr" lang="fr">Français</a> <a href="../es/" hreflang="es" lang="es">Español</a> <a href="../de/" hreflang="de" lang="de">Deutsch</a> <a href="../it/" hreflang="it" lang="it">Italiano</a> <a href="../pt/" hreflang="pt" lang="pt">Português</a> <a href="../ru/" hreflang="ru" lang="ru">Русский</a> <strong>中文</strong> <a href="../ja/" hreflang="ja" lang="ja">日本語</a> <a href="../ar/" hreflang="ar" lang="ar">العربية</a></nav>
 <div class="lang-suggest" id="lang-suggest"></div>
+<nav class="topnav" aria-label="Yop2D">
+<div class="barre">
+<a class="marque" href="#top"><img src="../logo_yop2d.png" alt="" width="30" height="30">Yop2D</a>
+<div class="liens"><a href="#create">制作游戏</a><a href="../exemples/zh.html">示例游戏</a><a href="#guides">分步指南</a><a href="#faq">常见问题</a></div>
+<a class="play" href="https://play.google.com/store/apps/details?id=com.ludexa.moteur" target="_blank" rel="noopener">▶ Google Play</a>
+<details class="menu"><summary><span class="trait" aria-hidden="true"></span>菜单</summary>
+<div class="liste">
+<a href="#create">制作游戏</a>
+<a href="../exemples/zh.html">示例游戏</a>
+<a href="#guides">分步指南</a>
+<a href="#features">编辑器功能</a>
+<a href="../noeuds/zh.html">节点参考</a>
+<a href="#ia-box">问 AI</a>
+<a href="#faq">常见问题</a>
+<a href="#school">学校与儿童</a>
+<a href="#comparison">Yop2D 对比</a>
+<a href="#community">社区</a>
+</div></details>
+</div>
+</nav>
 <header>
 <img src="../logo_yop2d.png" alt="Yop2D 标志" class="logo" width="120" height="120">
 <h1>Yop2D</h1>
-<p>免费的无代码 2D 游戏引擎，直接在安卓平板或手机上制作你的游戏。</p>
+<p class="accroche">在手机或平板上制作真正的游戏</p>
+<p>无需电脑，无需代码，完全免费。</p>
 <ul class="points">
 <li>完全免费</li>
 <li>永远没有广告</li>
@@ -537,6 +608,7 @@ footer a:hover { text-decoration: underline; }
     <a href="https://yop2d-dev.itch.io/yop2d-no-code-game-engine" target="_blank" rel="noopener" class="btn btn-itch">🎮 itch.io 上的 Yop2D</a>
     <a href="https://youtube.com/@yop2d" target="_blank" rel="noopener" class="btn btn-youtube">📺 YouTube 教程</a>
 </div>
+<a class="voir-jeu" href="../exemples/zh.html">🎮 看看用 Yop2D 做的游戏</a>
 
 <div class="ia-box" id="ia-box">
 <h2>🤖 想向 AI 询问 Yop2D？</h2>
@@ -565,6 +637,18 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <div class="lang-badge">🌍 界面、帮助和教程支持简体中文、英语、法语、西班牙语、德语、意大利语、葡萄牙语、俄语和日语</div>
 </header>
 <main>
+<section id="create">
+<h2>你想做什么？</h2>
+<p class="sous">点一种游戏类型：分步指南或示例会告诉你怎么做。</p>
+<div class="types">
+<a class="type" href="../guides/en/plateforme.html"><img src="../exemples/platformer.png" alt="" loading="lazy" width="300" height="225"><span>平台跳跃</span></a>
+<a class="type" href="../guides/zh/histoire-choix.html"><img src="../exemples/firefly_night.png" alt="" loading="lazy" width="300" height="225"><span>分支剧情</span></a>
+<a class="type" href="../guides/zh/jeu-tactique.html"><img src="../exemples/tactics_demo.png" alt="" loading="lazy" width="300" height="225"><span>回合制战棋</span></a>
+<a class="type" href="../exemples/zh.html"><img src="../exemples/space_1.png" alt="" loading="lazy" width="300" height="225"><span>太空射击</span></a>
+<a class="type" href="../exemples/zh.html"><img src="../exemples/candy_match.png" alt="" loading="lazy" width="300" height="225"><span>益智解谜</span></a>
+<a class="type" href="../guides/zh/deux-joueurs.html"><img src="../guides/img/deux_joueurs.jpg" alt="" loading="lazy" width="300" height="225"><span>双人游戏</span></a>
+</div>
+</section>
 <section class="showcase">
 <h2>在安卓上无需编程的屏幕滤镜与场景转场</h2>
 <div class="video-cadre"><iframe src="https://www.youtube-nocookie.com/embed/szUu6p-jNmY" title="在安卓上无需编程的屏幕滤镜与场景转场" loading="lazy" allowfullscreen allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"></iframe></div>
@@ -645,7 +729,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 </section>
 
 <section id="features">
-<h2>引擎功能</h2>
+<details class="fold"><summary><h2>引擎功能</h2></summary>
 <div class="grid">
 <div class="card">
 <h3>无代码可视化节点</h3>
@@ -916,6 +1000,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <p>多个摇杆同时工作，每个摇杆对应自己的手指和角色：两个人在同一屏幕上玩，不需要任何节点。“双人游戏”模板展示了这一点。需要 1266 或更新的版本。</p>
 </div>
 </div>
+</details>
 </section>
 
 <section id="school">
@@ -1082,15 +1167,16 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 </section>
 
 <section id="nodes-dictionary">
-<h2>节点参考</h2>
+<details class="fold"><summary><h2>节点参考</h2></summary>
 <div class="bloc">
 <p>Yop2D 的全部 238 个节点集中在一页：每个节点的作用、设置、输出和示例。名称与节点编辑器中完全一致。</p>
 <p><a href="../noeuds/zh.html"><strong>查看全部 238 个节点 →</strong></a></p>
 </div>
+</details>
 </section>
 
 <section id="comparison">
-<h2>Yop2D 与其他引擎的比较</h2>
+<details class="fold"><summary><h2>Yop2D 与其他引擎的比较</h2></summary>
 <p>市面上有很多优秀的游戏引擎。下面是一份坦诚的比较，帮助你做出选择，也包括 Yop2D 做不到的事情。</p>
 <div class="table-wrap">
 <table>
@@ -1147,6 +1233,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <li>你在电脑上写一部很长的视觉小说，想要功能非常全面、社区庞大的标杆工具：Ren'Py。</li>
 </ul>
 </div>
+</details>
 </section>
 
 <section id="faq">
@@ -1317,6 +1404,21 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
     b.querySelector('a').addEventListener('click', function () { ecrire(tel); });
     b.style.display = 'block';
   }
+})();
+</script>
+<script>
+(function(){
+  function ouvrir(){
+    var h=location.hash.slice(1); if(!h) return;
+    var el=document.getElementById(h); if(!el) return;
+    for(var n=el.parentNode;n;n=n.parentNode){ if(n.tagName==="DETAILS") n.open=true; }
+    var f=el.querySelector("details.fold"); if(f) f.open=true;
+  }
+  window.addEventListener("hashchange",ouvrir); ouvrir();
+  document.addEventListener("click",function(ev){
+    var a=ev.target.closest&&ev.target.closest(".topnav .liste a");
+    if(a){ var d=a.closest("details"); if(d) d.open=false; }
+  });
 })();
 </script>
 </body>
