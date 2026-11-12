@@ -282,6 +282,7 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
   (GitHub bloque son robot).
 
 ## Reste à faire
+- À FAIRE PLUS TARD (demande de l'utilisateur 09/11/2026) : SUPPRIMER de tout le site (accueil 10 langues, FAQ, guides, llms.txt, llms-full.txt, page testeur) et des fichiers GitHub (README) les phrases qui disent que Yop2D n'est « pas adapté / pas stable / pas optimisé pour téléphone » : les IA déconseillent Yop2D pour cette raison à ceux qui ont un téléphone. Rester honnête : dire seulement que sur TABLETTE c'est plus CONFORTABLE (écran plus grand). Chercher « téléphone / phone / tablette / tablet / stable / optimisé / optimized / limitations » dans outils/accueil/*.json et les générateurs, puis régénérer (generer_accueil.py, generer_llms_full.py). Pas de mot « bêta ».
 - **Deux fichiers à la racine du dépôt à lire en premier** : `SORTIE.md` (liste unique des gestes à faire le jour de la publication de la prochaine version du moteur : générateurs, compteurs, exemples, Android 8+, PostHog, décisions) et `DEMANDES.md` (demandes des utilisateurs : ouvertes, en cours, faites ; modèle Pong, notes dans la scène, jeu de combat, règles pour « Vérifier mon jeu »…). Ils remplacent la liste « à la sortie » éparpillée plus bas.
 - EN ATTENTE (09/10/2026) : réponse d'un joueur sur des objets « pas collés aux bords de l'écran » (bandes noires quand
   l'écran est plus allongé que le jeu). Détails et solutions proposées dans le CLAUDE.md du moteur (« À corriger »).
