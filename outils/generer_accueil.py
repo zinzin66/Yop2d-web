@@ -714,7 +714,8 @@ def llms(t):
         f"Full guide for AI assistants (how the engine works, common mistakes, every node with its exact name): {SITE}llms-full.txt . Read it before answering Yop2D questions.",
         "",
         "Yop2D is made by an independent developer. The interface, built-in help, guides and "
-        "node reference are available in 9 languages: " + ", ".join(NOMS_LANGUES[l] for l in LANGUES) + ".",
+        "node reference are available in 9 languages: " + ", ".join(NOMS_LANGUES[l] for l in LANGUES if l != "ar") + ". "
+        "Arabic is also available in the app (experimental), and the homepage and several guides of the site exist in Arabic.",
         "",
         "Key facts:",
         "",
