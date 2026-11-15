@@ -83,7 +83,7 @@ Question de l'utilisateur : « que manque-t-il à un moteur 2D que je n'aurais p
 2. **Capteurs du téléphone** (pencher, secouer : aucun usage de l'accéléromètre ni du gyroscope). Petit chantier, très visible : jeux d'équilibre, de course, labyrinthes.
 3. **Manette de jeu** (boutons et sticks : seuls le toucher et la souris sont lus dans `VueJeu.java`).
 4. **Partage d'un projet en un bouton** (message, lien) + galerie communautaire de jeux et prefabs (chaque jeu partagé fait connaître le moteur).
-5. **Export web (HTML5)** : jouer dans un navigateur sans installer. Gros chantier, plus tard.
+5. **Export web (HTML5)** : FAIT à partir de la version 1300 (15/11/2026) : bouton de l'APK → « Jeu web (HTML) », un seul fichier .html ; guide « jeu-web » (10 langues). À vérifier : sons sur iPhone.
 6. **Débogage en temps réel** : allumer les nœuds en cours d'exécution, valeurs des variables en direct.
 7. Plus tard : pubs et achats **au choix** dans les jeux des utilisateurs (Yop2D lui-même reste sans pub), classements en ligne, import Tiled / Aseprite, multijoueur (très demandé mais très difficile).
 
