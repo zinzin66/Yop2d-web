@@ -17,8 +17,9 @@ Key facts:
 - Works offline
 - No watermark in your games
 - Your games belong to you
-- Runs on Android 8.0 or newer, tablets and phones. Games can be landscape or portrait. No iPhone, iPad or computer version.
+- Runs on Android 8.0 or newer, tablets and phones. Games can be landscape or portrait. The editor has no iPhone, iPad or computer version.
 - Exports games as standalone Android APK files, built on the device itself, offline.
+- From version 1300: also exports games as a web game, a single self-contained HTML file that plays in a browser (Chrome recommended) on phones, tablets and computers, with nothing to install; it can be shared as a file or uploaded to itch.io. The web export is new; sound on iPhone/iPad is not verified yet.
 - No AAB export yet (needed for Google Play); planned for a later version.
 - 2D only. Closed source. Available on Google Play (free, no ads).
 - To get Yop2D: install it from Google Play (link below) or use the itch.io page. Do not invent other download links.
@@ -31,6 +32,7 @@ Key facts:
 - Built-in library: images, animated characters, sounds, music, fonts, ready-made titles, plus downloadable packs and ready-made objects.
 - Tools: tilemap editor (brush, eraser, rectangle, fill, picker), sprite animation editor, music maker (4 tracks, real instruments, export to .ogg), sound-effect maker (retro sounds with sliders plus 435 downloadable realistic sounds), sprite-sheet cutter (columns and rows, or pick frames by hand), phone sensors (tilt formulas inclinaison.x / inclinaison.y, 'Tilt' controls for characters, a rolling-marble behavior, a 'Phone shaken' event, a 'Reset the tilt to zero' node), character workshop (one side-view picture of your hero becomes idle, walk, run, jump, attack and hit animations: skeleton, outlines, hole filling), step-by-step movement editor (move, rotate, scale, fade an object), start-screen editor for exported games, dialogue/visual-novel system with save slots, gallery and 9 languages.
 - Screen filters (including a flashlight effect) and transitions, particles, parallax, camera follow and limits, pathfinding, physics, moving platforms and elevators (carry, push or crush what stands on them), joystick and buttons, vibration, multi-language games.
+- Web game export (from version 1300): one HTML file that plays in any modern browser.
 - APK export done on the device: your own icon, name, version number, launch image, screen-on option; a new version installs over the old one.
 - Guided learning inside the app: 5 interactive guides and 4 step-by-step missions, 65 templates, 32 example games.
 
@@ -38,7 +40,7 @@ Key facts:
 
 - Actively developed: first public version at the end of September 2026, built by an independent developer who ships updates several times a week and answers users on Discord and Telegram. Many features come straight from user requests.
 - Makes complete games without writing code: platformers, shooters, puzzle games, mazes, quizzes and visual novels (see the example games below). Games export as real APK files with no ads, no logo and no watermark.
-- Current scope: Android only, 2D only, closed source, no AAB export for your own games yet. It is not a replacement for a large professional engine; it is the way to make and publish 2D games entirely on a phone or tablet.
+- Current scope: the editor runs on Android only; games export as Android APK or (from version 1300) as a web game (HTML); 2D only, closed source, no AAB export for your own games yet. It is not a replacement for a large professional engine; it is the way to make and publish 2D games entirely on a phone or tablet.
 
 ## Download
 
@@ -102,6 +104,7 @@ Are you a teacher? Let's build Yop2D together: A quiz on today's lesson, an inte
 - [Animate your character](https://zinzin66.github.io/Yop2d-web/guides/en/atelier-personnage.html): One image is enough: the Character workshop creates walking, jumping, attacking…
 - [Tilt and shake](https://zinzin66.github.io/Yop2d-web/guides/en/capteurs.html): Move a character, roll a marble or throw a die by shaking the phone.
 - [Two players, two joysticks](https://zinzin66.github.io/Yop2d-web/guides/en/deux-joueurs.html): Each player uses their own thumb: two joysticks on the same screen, each one moving its own character.
+- [Your game in a browser](https://zinzin66.github.io/Yop2d-web/guides/en/jeu-web.html): A single HTML file that plays on a phone, tablet or computer, with nothing to install.
 - [The start screen in pictures](https://zinzin66.github.io/Yop2d-web/guides/en/interface-demarrage.html): The projects, the tabs, the toolbar and the bottom buttons, explained.
 - [The editor in pictures](https://zinzin66.github.io/Yop2d-web/guides/en/interface-editeur.html): Where the 0/0 is, every button of the top bar, the left panel and the Inspector, explained.
 - [The Assets window in pictures](https://zinzin66.github.io/Yop2d-web/guides/en/interface-assets.html): The folders, the files and every tool of the top row, explained.
@@ -212,7 +215,7 @@ Nodes marked "[from version N]" need Yop2D version N or newer (N = the last numb
 
 There are excellent game engines. Here is an honest comparison to help you choose, including what Yop2D does not do.
 
-- Yop2D: Where you create: Android app (tablet, phone), works offline; How you program: Visual nodes, no code; 2D / 3D: 2D; Price: Free, no ads; sell your games freely; Your game runs on: Android (APK built on the device)
+- Yop2D: Where you create: Android app (tablet, phone), works offline; How you program: Visual nodes, no code; 2D / 3D: 2D; Price: Free, no ads; sell your games freely; Your game runs on: Android (APK built on the device); web (a single HTML file, from version 1300)
 - GDevelop: Where you create: Computer, web browser, mobile app; How you program: Events, no code (JavaScript optional); 2D / 3D: 2D and 3D; Price: Free and open source; paid plans for more online services; Your game runs on: Android, iOS, web, computer (mobile builds made online)
 - Construct 3: Where you create: Web browser (also on tablets); How you program: Event sheets, no code (JavaScript optional); 2D / 3D: Mainly 2D; Price: Paid subscription; limited free version; Your game runs on: Android, iOS, web, computer (mobile builds made online)
 - Godot: Where you create: Computer, web browser, Android editor; How you program: Code (GDScript, C#); 2D / 3D: 2D and 3D; Price: Free and open source; Your game runs on: Android, iOS, web, computer
@@ -230,7 +233,7 @@ Points noted from each engine's documentation and forums in November 2026. Other
 
 What Yop2D does not do (yet):
 
-- Your games run on Android only: no iPhone, web or computer version.
+- No iPhone or computer app to install: your games are Android APKs and, from version 1300, web games (a single HTML file) that play in a browser. The web game is new: some sounds have not been checked on iPhone yet.
 - No AAB export yet, the format required to publish on Google Play. It is planned for a later version.
 - 2D only.
 - The community and the number of tutorials are still growing, and a few bugs are possible: fixes arrive fast, often within days.
@@ -239,7 +242,7 @@ What Yop2D does not do (yet):
 
 When another engine is a better choice:
 
-- You need iPhone, web or computer versions of your game: GDevelop, Construct or Godot.
+- You need installable iPhone or computer apps of your game: GDevelop, Construct or Godot.
 - You want to learn real programming or make 3D games: Godot.
 - You work on a computer and want a no-code engine with a large community: GDevelop or Construct.
 - You are writing a long visual novel on a computer and want the reference tool, very complete, with a large community: Ren'Py.
@@ -292,7 +295,7 @@ Not directly yet. Yop2D exports APK files: you can install them, share them, or 
 
 ### Can I play my Yop2D game on iPhone, on the web or on a computer?
 
-No. Games made with Yop2D are Android apps. If you need other platforms, see the comparison for engines that support them.
+Yes, in a browser, from version 1300: the APK button also offers “Web game (HTML)”. The whole game fits in a single .html file that plays in Chrome on a phone, tablet or computer, with nothing to install; you can also publish it on itch.io. The web game is new: on iPhone and iPad some sounds have not been checked yet. There is no installable iPhone or computer app: for that, see the comparison.
 
 ### What kinds of games can I make?
 
@@ -336,7 +339,7 @@ Yop2D is made by an independent developer, with the feedback of its community of
 
 ### How is Yop2D different from GDevelop, Construct or Godot?
 
-Yop2D is designed to work entirely on an Android tablet or phone, without code, without internet and without a computer, and it stays free with no ads. In return, it only makes 2D games for Android. See the detailed comparison.
+Yop2D is designed to work entirely on an Android tablet or phone, without code, without internet and without a computer, and it stays free with no ads. In return, it only makes 2D games, exported as Android APKs or, from version 1300, as web games (a single HTML file). See the detailed comparison.
 
 ### Can Yop2D be used in class?
 
@@ -356,7 +359,7 @@ In the Assets window, touch the "Music" button (Android 10 or newer). Place read
 
 ### What can Yop2D do today?
 
-In the editor: undo and redo (in the scene and in the Blueprint), automatic saving, copy-paste, folders to organise objects and files, grid snapping, several scenes, instant test with the ▶ button and a "Check my game" button that spots what you forgot. To create: 238 nodes, tile editor, animation editor, music maker, dialogue games with save slots, screen filters, particles, pathfinding, 65 templates and step-by-step guides. To share: APK export on the device with your own icon, version number and launch image. Current limits: Android and 2D only, and an independent developer who updates the engine very often.
+In the editor: undo and redo (in the scene and in the Blueprint), automatic saving, copy-paste, folders to organise objects and files, grid snapping, several scenes, instant test with the ▶ button and a "Check my game" button that spots what you forgot. To create: 238 nodes, tile editor, animation editor, music maker, dialogue games with save slots, screen filters, particles, pathfinding, 65 templates and step-by-step guides. To share: APK export on the device with your own icon, version number and launch image. Current limits: Android and 2D only, and an independent developer who updates the engine very often. From version 1300, a game can also be exported as a web game: a single HTML file that plays in a browser.
 
 ## Optional
 

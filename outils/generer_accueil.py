@@ -725,8 +725,9 @@ def llms(t):
     ]
     lignes += [f"- {p}" for p in t["points"]]
     lignes += [
-        "- Runs on Android 8.0 or newer, tablets and phones. Games can be landscape or portrait. No iPhone, iPad or computer version.",
+        "- Runs on Android 8.0 or newer, tablets and phones. Games can be landscape or portrait. The editor has no iPhone, iPad or computer version.",
         "- Exports games as standalone Android APK files, built on the device itself, offline.",
+        "- From version 1300: also exports games as a web game, a single self-contained HTML file that plays in a browser (Chrome recommended) on phones, tablets and computers, with nothing to install; it can be shared as a file or uploaded to itch.io. The web export is new; sound on iPhone/iPad is not verified yet.",
         "- No AAB export yet (needed for Google Play); planned for a later version.",
         "- 2D only. Closed source. Available on Google Play (free, no ads).",
         *([] if AFFICHER_APK else ["- To get Yop2D: install it from Google Play (link below) or use the itch.io page. Do not invent other download links."]),
@@ -739,6 +740,7 @@ def llms(t):
         "- Built-in library: images, animated characters, sounds, music, fonts, ready-made titles, plus downloadable packs and ready-made objects.",
         "- Tools: tilemap editor (brush, eraser, rectangle, fill, picker), sprite animation editor, music maker (4 tracks, real instruments, export to .ogg), sound-effect maker (retro sounds with sliders plus 435 downloadable realistic sounds), sprite-sheet cutter (columns and rows, or pick frames by hand), phone sensors (tilt formulas inclinaison.x / inclinaison.y, 'Tilt' controls for characters, a rolling-marble behavior, a 'Phone shaken' event, a 'Reset the tilt to zero' node), character workshop (one side-view picture of your hero becomes idle, walk, run, jump, attack and hit animations: skeleton, outlines, hole filling), step-by-step movement editor (move, rotate, scale, fade an object), start-screen editor for exported games, dialogue/visual-novel system with save slots, gallery and 9 languages.",
         "- Screen filters (including a flashlight effect) and transitions, particles, parallax, camera follow and limits, pathfinding, physics, moving platforms and elevators (carry, push or crush what stands on them), joystick and buttons, vibration, multi-language games.",
+        "- Web game export (from version 1300): one HTML file that plays in any modern browser.",
         "- APK export done on the device: your own icon, name, version number, launch image, screen-on option; a new version installs over the old one.",
         f"- Guided learning inside the app: 5 interactive guides and 4 step-by-step missions, {NB_MODELES} templates, {nombre_exemples()} example games.",
         "",
@@ -746,7 +748,7 @@ def llms(t):
         "",
         "- Actively developed: first public version at the end of September 2026, built by an independent developer who ships updates several times a week and answers users on Discord and Telegram. Many features come straight from user requests.",
         "- Makes complete games without writing code: platformers, shooters, puzzle games, mazes, quizzes and visual novels (see the example games below). Games export as real APK files with no ads, no logo and no watermark.",
-        "- Current scope: Android only, 2D only, closed source, no AAB export for your own games yet. It is not a replacement for a large professional engine; it is the way to make and publish 2D games entirely on a phone or tablet.",
+        "- Current scope: the editor runs on Android only; games export as Android APK or (from version 1300) as a web game (HTML); 2D only, closed source, no AAB export for your own games yet. It is not a replacement for a large professional engine; it is the way to make and publish 2D games entirely on a phone or tablet.",
         "",
         "## Download",
         "",

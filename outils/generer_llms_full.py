@@ -75,6 +75,7 @@ Always use the exact node names of the node reference. A node marked `[newer tha
 - Enemy that chases the hero: **Chase an object**; flee: **Flee an object**. On a grid/maze (walls, obstacles): **Go to an object (path)**, NOT "Chase an object" (which goes in a straight line and gets stuck on walls). Put it once, under "On Start" or an event: the path is recalculated automatically each time the target changes cell, so do not relaunch it with "Repeat" or "Every frame". "Stop the path" stops it. Walls must be solid (solid tiles of a tile layer, or fixed physical objects). The official example "Maze chase" does exactly this.
 - Move to the finger: **Glide to** with `=doigt.x` / `=doigt.y`.
 - Moving platform / lift: behavior **Elevator (back and forth)** (Behavior window) or a movement (steps) on a Ground object with "Carries what stands on it".
+- Share a game: on the start screen, select the project, tap **Build APK**, then choose **Android app (APK)** or **Web game (HTML)**. The web game (from version 1300) is one self-contained .html file: open it with Chrome on a phone, tablet or computer, nothing to install. For itch.io: rename it index.html, put it in a .zip, upload, tick "This file will be played in the browser". Saves of a web game stay in that browser.
 - Bouncing ball without gravity: no ready behavior; use variables `vx` / `vy` with "Push object" and "Collision A/B" (see the guide "Breakout").
 - Camera: **Follow with camera**, **Camera limits** (enlarge them when the level is longer!), **Scroll the camera with a finger**.
 
