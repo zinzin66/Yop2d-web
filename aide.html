@@ -53,6 +53,9 @@ header { position: relative; }
 .langue select { background: var(--card); color: var(--text); border: 1px solid var(--bordure); border-radius: 6px; padding: 0.3rem 0.4rem; font-size: 0.9rem; }
 .langue option { color: var(--text); background: var(--card); }
 @media (max-width: 480px) { header { padding-top: 2.6rem; } }
+/* Arabe : lecture de droite à gauche (le menu de langue passe à gauche) */
+html[dir="rtl"] .langue { right: auto; left: 0.6rem; }
+html[dir="rtl"] .schema { direction: rtl; }
 </style>
 </head>
 <body>
@@ -68,6 +71,7 @@ header { position: relative; }
 <option value="ru">🇷🇺 Русский</option>
 <option value="zh">🇨🇳 中文</option>
 <option value="ja">🇯🇵 日本語</option>
+<option value="ar">العربية</option>
 </select>
 </div>
 <h1 id="txt-titre">Aide Yop2D</h1>
@@ -97,7 +101,7 @@ header { position: relative; }
 
 <script>
 const DEPOT = "zinzin66/Yop2d-web";
-const LANGUES = ["fr", "en", "es", "de", "it", "pt", "ru", "zh", "ja"];
+const LANGUES = ["fr", "en", "es", "de", "it", "pt", "ru", "zh", "ja", "ar"];
 
 // Textes de la page dans chaque langue
 const TEXTES = {
@@ -136,7 +140,11 @@ const TEXTES = {
   ja: { reference: "すべてのノードを 1 ページで見る", titre: "Yop2D ヘルプ", sousTitre: "ノードの説明とガイド", noeuds: "ノード", guides: "ガイド",
         intro: "各ノードは Blueprint につなげるブロックです。<b>入力</b>は前もって設定・接続するもの、<b>出力</b>はアクションの続きです。",
         chargement: "読み込み中...", exemple: "例：", aucunNoeud: "まだ説明はありません。", aucunGuide: "まだガイドはありません。",
-        erreurNoeuds: "説明を読み込めませんでした。インターネット接続を確認してください。", erreurGuides: "ガイドを読み込めませんでした。インターネット接続を確認してください。", site: "公式サイト" }
+        erreurNoeuds: "説明を読み込めませんでした。インターネット接続を確認してください。", erreurGuides: "ガイドを読み込めませんでした。インターネット接続を確認してください。", site: "公式サイト" },
+  ar: { reference: "عرض كل العقد في صفحة واحدة", titre: "مساعدة Yop2D", sousTitre: "شرح العقد والأدلة", noeuds: "العقد", guides: "الأدلة",
+        intro: "كل عقدة هي قطعة يمكنك ربطها في الـ Blueprint. <b>المدخلات</b> هي ما تضبطه أو تربطه قبلها، و<b>المخرج</b> هو ما يحدث بعد ذلك.",
+        chargement: "جارٍ التحميل...", exemple: "مثال:", aucunNoeud: "لا يوجد شرح بعد.", aucunGuide: "لا توجد أدلة بعد.",
+        erreurNoeuds: "تعذّر تحميل الشرح. تحقّق من اتصالك بالإنترنت.", erreurGuides: "تعذّر تحميل الأدلة. تحقّق من اتصالك بالإنترنت.", site: "الموقع الرسمي" }
 };
 
 // Choix de la langue : 1) ?lang= dans l'adresse (envoyé par le moteur), 2) dernier choix, 3) langue du téléphone, 4) français
@@ -166,6 +174,8 @@ function changerLangue(nouvelle) {
 
 function traduirePage() {
   document.documentElement.lang = langue;
+  // L'arabe se lit de droite à gauche
+  document.documentElement.dir = (langue === 'ar') ? 'rtl' : 'ltr';
   document.title = t('titre');
   document.getElementById('choix-langue').value = langue;
   document.getElementById('txt-titre').textContent = t('titre');

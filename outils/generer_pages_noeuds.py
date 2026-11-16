@@ -14,9 +14,9 @@ import re
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://zinzin66.github.io/Yop2d-web/"
-LANGUES = ["fr", "en", "es", "de", "it", "pt", "ru", "zh", "ja"]
+LANGUES = ["fr", "en", "es", "de", "it", "pt", "ru", "zh", "ja", "ar"]
 NOMS_LANGUES = {"fr": "Français", "en": "English", "es": "Español", "de": "Deutsch", "it": "Italiano",
-                "pt": "Português", "ru": "Русский", "zh": "中文", "ja": "日本語"}
+                "pt": "Português", "ru": "Русский", "zh": "中文", "ja": "日本語", "ar": "العربية"}
 UI = {
  "fr": dict(titre="Tous les nœuds de Yop2D ({n}) | Référence", h1="Référence des nœuds de Yop2D",
    intro="Yop2D est un moteur de jeu 2D gratuit et sans code pour Android. La logique d'un jeu se construit avec des nœuds (blocs visuels) reliés entre eux dans le Blueprint : les événements lancent une chaîne, les actions et conditions s'enchaînent. Cette page décrit les {n} nœuds de l'éditeur, avec leurs réglages (entrées) et leurs sorties.",
@@ -63,7 +63,14 @@ UI = {
    sommaire="カテゴリー", exemple="例：", guides="初心者ガイド", telecharger="Yop2D をダウンロード",
    desc="Android 向けコード不要 2D ゲームエンジン Yop2D の {n} 個のビジュアルノードの一覧：各ノードの役割、設定、出力、使用例。",
    pied="Yop2D、Android 向けの無料・コード不要の 2D ゲームエンジン", site="公式サイト"),
+ "ar": dict(titre="كل عقد Yop2D ({n}) | المرجع", h1="مرجع عقد Yop2D",
+   intro="Yop2D محرك ألعاب ثنائي الأبعاد مجاني ومن دون برمجة لأندرويد. يُبنى منطق اللعبة بعقد (قطع مرئية) تُربط معاً في الـ Blueprint: الأحداث تبدأ سلسلة، ثم تتبعها الأفعال والشروط. تشرح هذه الصفحة عقد المحرر الـ {n}، مع إعداداتها (المدخلات) ومخارجها.",
+   sommaire="الفئات", exemple="مثال:", guides="أدلة للمبتدئين", telecharger="تنزيل Yop2D",
+   desc="القائمة الكاملة لعقد Yop2D المرئية الـ {n}، محرك الألعاب ثنائي الأبعاد من دون برمجة لأندرويد: دور كل عقدة وإعداداتها ومخارجها ومثال عنها.",
+   pied="Yop2D، محرك ألعاب ثنائي الأبعاد مجاني ومن دون برمجة لأندرويد", site="الموقع الرسمي"),
 }
+# Langues lues de droite à gauche
+RTL = {"ar"}
 CSS = """
 .sommaire { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0; }
 .sommaire a { background: var(--card); border: 1px solid var(--bordure); border-radius: 20px; padding: 0.2rem 0.8rem; text-decoration: none; font-size: 0.9rem; }
@@ -109,7 +116,7 @@ def page(l, categories):
     accueil = "../" + ("index.html" if l == "en" else f"{l}/index.html")
     guides = "../guides/deplacer-personnage.html" if l == "fr" else f"../guides/{l}/deplacer-personnage.html"
     return f"""<!DOCTYPE html>
-<html lang="{l}">
+<html lang="{l}"{' dir="rtl"' if l in RTL else ''}>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -122,7 +129,7 @@ def page(l, categories):
 </head>
 <body>
 <header>
-<a href="{accueil}">← Yop2D</a>
+<a href="{accueil}">{"→" if l in RTL else "←"} Yop2D</a>
 <h1>{e(ui["h1"])}</h1>
 <p class="langues">{langues}</p>
 </header>
@@ -132,7 +139,7 @@ def page(l, categories):
 <nav class="sommaire">{"".join(ancres)}</nav>
 {chr(10).join(blocs)}
 <div class="liens-bas">
-<a href="{guides}">{e(ui["guides"])} →</a>
+<a href="{guides}">{e(ui["guides"])} {"←" if l in RTL else "→"}</a>
 <a href="https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk">⬇️ {e(ui["telecharger"])}</a>
 </div>
 </main>

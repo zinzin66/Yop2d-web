@@ -27,6 +27,11 @@ PAGES_EN = ["ar"]
 
 def langue_pages(langue):
     return "en" if langue in PAGES_EN else langue
+
+
+def langue_noeuds(langue):
+    """Langue de la page « tous les nœuds » : celle de l'accueil si noeuds/<langue>.html existe (arabe depuis le 16/11/2026), sinon anglais."""
+    return langue if os.path.exists(os.path.join(RACINE, "noeuds", f"{langue}.html")) else "en"
 NOMS_LANGUES = {"fr": "Français", "en": "English", "es": "Español", "de": "Deutsch", "it": "Italiano",
                 "pt": "Português", "ru": "Русский", "zh": "中文", "ja": "日本語", "ar": "العربية"}
 APK = "https://github.com/zinzin66/yop2d/releases/latest/download/Yop2D.apk"
@@ -390,7 +395,7 @@ def bloc_types(langue, t, base):
 def barre_haut(langue, t, base):
     a2 = t["accueil2"]; m = a2["menu"]
     exemples = f"{base}exemples/{langue_pages(langue)}.html"
-    noeuds = f"{base}noeuds/{langue_pages(langue)}.html"
+    noeuds = f"{base}noeuds/{langue_noeuds(langue)}.html"
     guides_tous = f"{base}guides/index.html" if langue == "fr" else f"{base}guides/{langue}/index.html"
     entrees = [("#create", m["creer"]), (exemples, m["exemples"]), ("#guides", m["guides"]), ("#features", m["editeur"]),
                (noeuds, m["noeuds"]), ("#ia-box", m["ia"]), ("#faq", m["faq"]), ("#school", m["ecole"]),
@@ -610,7 +615,7 @@ fetch("https://api.github.com/repos/zinzin66/yop2d/releases?per_page=100").then(
 <details class="fold"><summary><h2>{e(t["noeuds"]["titre"])}</h2></summary>
 <div class="bloc">
 <p>{liens(t["noeuds"]["texte"], base)}</p>
-<p><a href="{base}noeuds/{langue_pages(langue)}.html"><strong>{e(t["noeuds"]["lien"])} →</strong></a></p>
+<p><a href="{base}noeuds/{langue_noeuds(langue)}.html"><strong>{e(t["noeuds"]["lien"])} →</strong></a></p>
 </div>
 </details>
 </section>
@@ -792,7 +797,7 @@ def llms(t):
                   "(tick several, download, then \"Add to the scene\"). Own prefabs can be imported as a .zip (one scene) from the Resources panel. "
                   f"Step-by-step guide: {SITE}guides/en/prefabs.html")
     lignes += ["", "## Node reference", ""]
-    lignes += [f"- [All nodes, {NOMS_LANGUES[l]}]({SITE}noeuds/{l}.html)" for l in LANGUES if l not in PAGES_EN]
+    lignes += [f"- [All nodes, {NOMS_LANGUES[l]}]({SITE}noeuds/{l}.html)" for l in LANGUES if langue_noeuds(l) == l]
     dossier = os.path.join(RACINE, "aide", "noeuds", "en")
     lignes += ["", "Node categories and node names (as shown in the English editor):", ""]
     chemin_nv = os.path.join(RACINE, "aide", "source", "nouveautes.json")
