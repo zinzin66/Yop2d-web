@@ -88,3 +88,13 @@ Question de l'utilisateur : « que manque-t-il à un moteur 2D que je n'aurais p
 7. Plus tard : pubs et achats **au choix** dans les jeux des utilisateurs (Yop2D lui-même reste sans pub), classements en ligne, import Tiled / Aseprite, multijoueur (très demandé mais très difficile).
 
 Prochaine étape proposée : commencer par les capteurs (le plus petit pour l'effet obtenu), puis l'AAB.
+
+## Avis : formats standards conseillés par des développeurs (16/11/2026)
+L'utilisateur a discuté avec des développeurs (conseil : « ne pas réinventer la roue, adapter »). Ils citaient Spine, DragonBones, Tiled et Box2D. Avis de Claude, à garder en tête : **les utilisateurs de Yop2D créent sur tablette ou téléphone, ces 4 outils sont faits pour ordinateur**. Adapter = surtout **lire les fichiers que les gens ont déjà**, pas remplacer ce que Yop2D fait bien au doigt.
+
+| Outil | Avis | Pourquoi |
+|---|---|---|
+| **Tiled** (niveaux en cases, .tmx / .json) | ✅ À faire en premier | Gratuit, open source, format simple (grille de numéros). Des milliers de décors gratuits (itch.io, OpenGameArt) sont livrés avec des niveaux Tiled. S'ajoute à l'éditeur de tuiles de Yop2D, ne le remplace pas. Chantier raisonnable : cases, zones de contact, points d'apparition (Tiled gère aussi l'isométrique). Rejoint « import Tiled / Aseprite » (point 7 ci-dessus), à remonter dans les priorités. |
+| **Box2D** (physique d'Angry Birds) | ⏸ Pas maintenant | Yop2D a déjà une physique complète + physique pilotée. Changer de moteur physique risquerait de casser les jeux et exemples existants. Seulement si un vrai problème apparaît (piles d'objets qui tremblent, jeu type Angry Birds) : JBox2D (Java, gratuit) proposé comme **comportement en plus**, sans remplacer l'existant. |
+| **Spine** (animation par squelette) | ❌ Non | Payant (≈ 70 € à 300 €+), licence qui exige que le créateur ait acheté Spine, ordinateur seulement. L'**Atelier personnage** fait déjà un squelette depuis une seule image, sur tablette (avantage cité face à GDevelop dans llms.txt). |
+| **DragonBones** (concurrent gratuit de Spine) | ❌ Non | Presque plus mis à jour depuis des années, ordinateur seulement, doublon de l'Atelier personnage. |
