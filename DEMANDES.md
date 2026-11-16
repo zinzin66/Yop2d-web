@@ -95,6 +95,26 @@ L'utilisateur a discuté avec des développeurs (conseil : « ne pas réinventer
 | Outil | Avis | Pourquoi |
 |---|---|---|
 | **Tiled** (niveaux en cases, .tmx / .json) | ✅ À faire en premier | Gratuit, open source, format simple (grille de numéros). Des milliers de décors gratuits (itch.io, OpenGameArt) sont livrés avec des niveaux Tiled. S'ajoute à l'éditeur de tuiles de Yop2D, ne le remplace pas. Chantier raisonnable : cases, zones de contact, points d'apparition (Tiled gère aussi l'isométrique). Rejoint « import Tiled / Aseprite » (point 7 ci-dessus), à remonter dans les priorités. |
-| **Box2D** (physique d'Angry Birds) | ⏸ Pas maintenant | Yop2D a déjà une physique complète + physique pilotée. Changer de moteur physique risquerait de casser les jeux et exemples existants. Seulement si un vrai problème apparaît (piles d'objets qui tremblent, jeu type Angry Birds) : JBox2D (Java, gratuit) proposé comme **comportement en plus**, sans remplacer l'existant. |
+| **Box2D** (physique d'Angry Birds) | ✅ DÉJÀ FAIT | Vérifié dans le code du moteur le 16/11/2026 : Yop2D utilise DÉJÀ Box2D (JBox2D 2.2.1.1 dans `app/build.gradle`, `PhysiqueReelle.java`) et le jeu web utilise planck.js (Box2D en JavaScript, MIT). Rien à faire. |
 | **Spine** (animation par squelette) | ❌ Non | Payant (≈ 70 € à 300 €+), licence qui exige que le créateur ait acheté Spine, ordinateur seulement. L'**Atelier personnage** fait déjà un squelette depuis une seule image, sur tablette (avantage cité face à GDevelop dans llms.txt). |
 | **DragonBones** (concurrent gratuit de Spine) | ❌ Non | Presque plus mis à jour depuis des années, ordinateur seulement, doublon de l'Atelier personnage. |
+
+## Réflexion : « refaire un Yop2D » pour PC, Android et le reste (16/11/2026)
+Idée de l'utilisateur : refaire Yop2D (« nouveau Yop2D ») en rassemblant des outils existants à licence libre, pour un outil débutant utilisable sur PC, Android et ailleurs, en gardant les **nœuds et connexions** (le cœur de Yop2D, que l'utilisateur aime beaucoup). Il avait pensé à partir de Godot, avec la peur que « le projet ne soit jamais entièrement à lui », et parce que c'est très gros.
+
+**Avis de Claude :**
+- **Godot** : licence MIT = on peut le modifier, fermer le code, le renommer, le vendre ; seule obligation : le citer dans les crédits (ex. Pixelorama). Le projet SERAIT à l'utilisateur. Vrai problème : la taille (C++, millions de lignes), tout Yop2D à refaire (nœuds, Atelier personnage, modèles, exemples). Déconseillé.
+- **Tout recommencer à zéro** : déconseillé (des mois sans nouveauté pour les utilisateurs ; beaucoup de projets meurent ainsi). Améliorer morceau par morceau, comme une maison qu'on ne démolit pas pour changer la cuisine.
+- Piste proposée d'abord : **libGDX** (Apache 2.0, Java, Android + PC + web, contient Box2D, lecture Tiled et Spine).
+
+**Ce que montre le code du moteur (lu le 16/11/2026, branche `claude/engine-html-export-compat-wzk0ms`, la plus récente) :**
+- 316 fichiers Java, environ 95 000 lignes ; environ 40 000 lignes = fenêtres et écrans de l'éditeur (Android).
+- **Le lecteur de jeux existe DÉJÀ en version web** : `yop2d.js` (copie de VueJeu, MoteurLogique, Evaluateur, physique…) + planck.js. Il lit les mêmes fichiers que l'APK, TOUS les nœuds du catalogue sont pris en charge, les 64 modèles + 32 exemples tournent dans Chromium sans erreur. Donc **les JEUX tournent déjà sur PC, Android, iPhone** (navigateur).
+- Box2D est déjà là (voir plus haut). Les projets sont des zip + JSON : un format simple, facile à relire ailleurs.
+- **Ce qui reste Android seulement, c'est l'ÉDITEUR** (là où l'on crée le jeu).
+
+**Conclusion révisée :** le « nouveau Yop2D » est déjà à moitié fait (le lecteur de jeux est multiplateforme). Passer à libGDX ou Godot n'apporterait presque rien pour les jeux. La vraie question est : **comment avoir l'éditeur sur PC ?** Pistes, de la plus simple à la plus lourde :
+1. Faire tourner l'éditeur Android sur PC tel quel (Google Play Jeux sur PC, émulateurs, ChromeOS) : à tester, aucun code.
+2. Un éditeur web progressif : commencer par un **éditeur de nœuds dans le navigateur** qui ouvre un projet zip, réutilise `yop2d.js` pour « Jouer », puis ajouter les autres écrans un par un. Le Yop2D Android continue pendant ce temps.
+3. Réécrire tout l'éditeur avec libGDX (Java, Android + PC) : gros chantier, seulement si la piste 2 ne convient pas.
+Décision à prendre par l'utilisateur. Rien n'est commencé.
