@@ -16,7 +16,7 @@ import os
 import re
 import sys
 
-LANGUES = ["fr", "en", "es", "de", "it", "pt", "ru", "zh", "ja"]
+LANGUES = ["fr", "en", "es", "de", "it", "pt", "ru", "zh", "ja", "ar"]
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Événements écrits en Java : même ordre que RegistreNoeuds.java (clé de nom, classe).
@@ -65,11 +65,13 @@ ETIQUETTES = {
     "ru": ("Вход:", "Входы:", "Выход:", "Выходы:", "нет (конец скрипта)"),
     "zh": ("输入：", "输入：", "输出：", "输出：", "无（脚本结束）"),
     "ja": ("入力：", "入力：", "出力：", "出力：", "なし（スクリプト終了）"),
+    "ar": ("المدخل:", "المدخلات:", "المخرج:", "المخرجات:", "لا شيء (نهاية السكريبت)"),
 }
 ARRIVEE = " &nbsp;→&nbsp; "
 # Guillemets de chaque langue (les descriptions sont écrites avec « »).
 GUILLEMETS = {"fr": ("« ", " »"), "en": ("“", "”"), "es": ("«", "»"), "de": ("„", "“"), "it": ("«", "»"),
-              "pt": ("“", "”"), "ru": ("«", "»"), "zh": ("“", "”"), "ja": ("「", "」")}
+              "pt": ("“", "”"), "ru": ("«", "»"), "zh": ("“", "”"), "ja": ("「", "」"),
+              "ar": ("«", "»")}
 
 
 def lire_json(chemin):
@@ -153,7 +155,8 @@ def schema(langue, cibles, reglages, sorties, tr):
             morceaux.append(f"<b>{s2 if len(sorties) > 1 else s1}</b> " + " / ".join(echapper(x) for x in sorties))
         else:
             morceaux.append(f"<b>{s1}</b> {aucune}")
-    return ARRIVEE.join(morceaux)
+    # En arabe (lu de droite à gauche), la flèche pointe vers la gauche.
+    return (ARRIVEE.replace("→", "←") if langue == "ar" else ARRIVEE).join(morceaux)
 
 
 # « Version minimale » (08/11/2026, idée de l'utilisateur) : on publie la documentation d'une fonction dès qu'elle existe, avec le

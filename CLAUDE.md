@@ -90,7 +90,7 @@ du moteur lisent ses Releases. Ne jamais y mettre de code (depuis le 29/09/2026)
 
 ## Aide (aide.html)
 - Deux onglets : **Nœuds** et **Guides**.
-- Contenu en JSON, un dossier par langue (fr, en, es, de, it, pt, ru, zh, ja) :
+- Contenu en JSON, un dossier par langue (fr, en, es, de, it, pt, ru, zh, ja, ar ; arabe = droite à gauche) :
   - `aide/noeuds/<langue>/NN-categorie.json` → `{ "categorie", "noeuds": [ { "nom", "schema", "role", "exemple" } ] }`
     **généré, ne pas modifier à la main** (voir plus bas) ;
   - `aide/guides/<langue>/NN-nom.json` → `{ "titre", "description", "lien" }` (écrit à la main).
@@ -349,3 +349,14 @@ les fichiers locaux, puis envoyer des captures à l'utilisateur.
 - 08/11/2026 (nuit) : RÈGLE « VERSION MINIMALE » (idée de l'utilisateur : « à partir de la version 1264 », pas besoin de modifier le site à la sortie). Voir `SORTIE.md` (section dédiée) : `"depuis": N` dans les sources de guide (bandeau `.depuis`), `aide/source/nouveautes.json` en dictionnaire {nom anglais: build} (ne plus le vider), phrase en fin de carte d'accueil. NOTICE de generer_aide_noeuds.py réécrite en 10 langues. Le nombre de nœuds de l'accueil compte maintenant TOUS les nœuds. Guide « capteurs » : arabe ajouté (10 langues), `depuis` 1262.
 - 09/11/2026 : GUIDE « deux-joueurs » (10 langues, `depuis` 1266 = build de test qui contient les PLUSIEURS JOYSTICKS ; modèle « Deux joueurs » du moteur, 64 modèles : NB_MODELES = 64), carte d'accueil « Deux joueurs sur une tablette » (10 langues), sitemap. Premier guide écrit directement dans les 10 langues (règle de l'utilisateur) avec la règle « version minimale ».
 - 15/11/2026 : JEU WEB (export HTML du moteur, à partir de la version 1300) : guide « jeu-web » (10 langues, `depuis` 1300, après « deux-joueurs »), carte d'accueil « Votre jeu en jeu web (HTML) », comparatif (« Le jeu fonctionne sur »), limites, « autres moteurs », FAQ 11 / 22 / 27 réécrites (10 langues), llms.txt et llms-full.txt (partage d'un jeu), sitemap, DEMANDES.md. Les phrases « vos jeux fonctionnent seulement sur Android » sont FAUSSES depuis la 1300 : ne plus les écrire. Reste vrai : l'ÉDITEUR n'existe que sur Android ; sons sur iPhone pas vérifiés.
+- 16/11/2026 : ARABE, ÉTAPE 3 = AIDE DES NŒUDS. `aide/source/descriptions/ar.json` (rôles = `descriptions_noeuds/ar.json` du moteur, sauf 7 réécrits pour coller
+  au site : sauvegarder/charger_variables, lumiere_ambiance/source/eteindre, couleur_equipe, tourner_continu ; 238 exemples traduits par Claude ; formules
+  isolées par les caractères invisibles U+2066 … U+2069 pour ne pas être mélangées au texte arabe). `aide/noeuds/ar/`, `noeuds/ar.html` (droite à gauche),
+  `aide.html` (menu « العربية », textes `TEXTES.ar`, `dir="rtl"` : l'onglet Guides arabe s'affiche enfin), accueil arabe → `noeuds/ar.html`
+  (`langue_noeuds()` de generer_accueil.py), llms.txt, sitemap. `lang_ar.json` n'existe que sur les branches récentes du moteur
+  (`claude/engine-html-export-compat-wzk0ms`, PAS sur `mise-a-jour-1-0`). ATTENTION : cette branche contient des nœuds PAS ENCORE PUBLIÉS
+  (zone_de_coup, poser_corps, forme_grille, changer_police, supprimer_sauvegarde, si_sauvegarde_existe) et le réglage « Aussi les variables des objets »
+  de sauvegarder/charger_variables : pour cette mise à jour, ils ont été retirés d'une COPIE du catalogue (dossier temporaire) afin que l'aide reste
+  identique dans les 9 autres langues. À la sortie de ces nœuds : décrire les 6 nœuds dans les 10 fichiers de descriptions, les ajouter à
+  nouveautes.json avec leur build, puis lancer les générateurs sur le vrai clone du moteur.
+  Reste en anglais pour l'arabe : 18 guides, page Exemples, confidentialité.
